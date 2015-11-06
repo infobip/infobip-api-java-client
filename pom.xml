@@ -6,7 +6,80 @@
 
     <groupId>com.infobip.api.http</groupId>
     <artifactId>java-http-client</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
+    <name>Infobip API Java Client</name>
+    <description>
+        API client in Java for Infobip's API (http://dev.infobip.com/).
+    </description>
+    <url>http://dev.infobip.com/v1/page/downloads#libraries</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>nmaric</id>
+            <name>Nikola Maric</name>
+            <email>nikola.maric@infobip.org</email>
+            <organization>Infobip Ltd.</organization>
+            <organizationUrl>https://infobip.com</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>mmilakovic</id>
+            <name>Milos Milakovic</name>
+            <email>milos.milakovic@infobip.org</email>
+            <organization>Infobip Ltd.</organization>
+            <organizationUrl>https://infobip.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>nmenkovic</id>
+            <name>Nevena Menkovic</name>
+            <email>nevena.menkovic@infobip.org</email>
+            <organization>Infobip Ltd.</organization>
+            <organizationUrl>https://infobip.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>amarjanovic</id>
+            <name>Ana Marjanovic</name>
+            <email>ana.marjanovic@infobip.org</email>
+            <organization>Infobip Ltd.</organization>
+            <organizationUrl>https://infobip.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>akomarica</id>
+            <name>Aleksandar Komarica</name>
+            <email>aleksandar.komarica@infobip.org</email>
+            <organization>Infobip Ltd.</organization>
+            <organizationUrl>https://infobip.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

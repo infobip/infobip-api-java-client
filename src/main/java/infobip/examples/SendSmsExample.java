@@ -6,8 +6,7 @@ import infobip.api.model.sms.mt.send.SMSResponse;
 import infobip.api.model.sms.mt.send.SMSResponseDetails;
 import infobip.api.model.sms.mt.send.textual.SMSTextualRequest;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 
 /**
  * Created by milosmilakovic on 9/23/15.
@@ -15,11 +14,11 @@ import java.util.Collections;
 public class SendSmsExample extends Example {
 
     public static void main(String[] args) {
-        SendSingleTextualSms client = new SendSingleTextualSms(new BasicAuthConfiguration(BASE_URL, USERNAME, PASSWORD));
+        SendSingleTextualSms client = new SendSingleTextualSms(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         SMSTextualRequest requestBody = new SMSTextualRequest();
         requestBody.setFrom(FROM);
-        requestBody.setTo(new ArrayList<>(Collections.singletonList("41793026731")));
+        requestBody.setTo(Arrays.asList("41793026731", "41793026727"));
         requestBody.setText(MESSAGE_TEXT);
 
         SMSResponse response = client.execute(requestBody);

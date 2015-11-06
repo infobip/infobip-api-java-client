@@ -11,7 +11,7 @@ import infobip.api.model.sms.mo.logs.MOLogsResponse;
 public class GetInboxLogsExample extends Example {
 
     public static void main(String[] args) {
-        GetReceivedSmsLogs client = new GetReceivedSmsLogs(new BasicAuthConfiguration(BASE_URL, USERNAME, PASSWORD));
+        GetReceivedSmsLogs client = new GetReceivedSmsLogs(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         MOLogsResponse response = client.execute(null, null, null, 10, null);
 

@@ -4,20 +4,21 @@ Infobip API Java client
 Running examples
 ----------------
 
-First, setup your username and password in `examples.Example`. Then, you can run provided examples in `examples` package
+First, setup your username and password in `infobip.examples.Example`. Then, you can run provided examples in 
+`infobip.examples` package
 
 Basic messaging example
 -----------------------
 
 First, initialize the messaging client using your username and password:
 
-    SendSingleTextualSms client = new SendSingleTextualSms(new BasicAuthConfiguration(BASE_URL, USERNAME, PASSWORD));
+    SendSingleTextualSms client = new SendSingleTextualSms(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
 Prepare the message:
 
     SMSTextualRequest requestBody = new SMSTextualRequest();
     requestBody.setFrom(FROM);
-    requestBody.setTo(new ArrayList<>(Collections.singletonList("xxxxxxxx")));
+    requestBody.setTo(Arrays.asList("xxxxxxxx", "yyyyyyyy"));
     requestBody.setText("This is an example message");
 
 Send the message:
@@ -26,7 +27,7 @@ Send the message:
 
 Later you can query for the delivery status of the message:
 
-     GetSentSmsDeliveryReports client = new GetSentSmsDeliveryReports(new BasicAuthConfiguration(BASE_URL, USERNAME, PASSWORD));
+     GetSentSmsDeliveryReports client = new GetSentSmsDeliveryReports(new BasicAuthConfiguration(USERNAME, PASSWORD));
      SMSReportResponse response = client.execute(BULK_ID, MESSAGE_ID, LIMIT);
 
 Messaging with delivery report push to notification URL example
@@ -34,7 +35,7 @@ Messaging with delivery report push to notification URL example
 
 Similar to standard messaging example, but when preparing your message, use `SMSAdvancedTextualRequest`:
 
-    SendMultipleTextualSmsAdvanced client = new SendMultipleTextualSmsAdvanced(new BasicAuthConfiguration(BASE_URL, USERNAME, PASSWORD));
+    SendMultipleTextualSmsAdvanced client = new SendMultipleTextualSmsAdvanced(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
     Destination destination = new Destination();
     destination.setTo("xxxxxxxx");
@@ -53,7 +54,7 @@ Similar to standard messaging example, but when preparing your message, use `SMS
 
 When the delivery notification is pushed to your server as a HTTP POST request, you can process the body of the message with the following code:
 
-    SMSReportResponse smsReportResponse = gson.fromJson(responseBody, SMSReportResponse.class);
+    SMSReportResponse smsReportResponse = gson.fromJson(requestBody, SMSReportResponse.class);
 
 License
 -------

@@ -15,7 +15,7 @@ import java.util.Collections;
 public class NumberContextQueryExample extends Example {
 
     public static void main(String[] args) {
-        NumberContextQuery client = new NumberContextQuery(new BasicAuthConfiguration(BASE_URL, USERNAME, PASSWORD));
+        NumberContextQuery client = new NumberContextQuery(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         NumberContextRequest requestBody = new NumberContextRequest();
         requestBody.setTo(new ArrayList<>(Collections.singletonList("41793026731")));

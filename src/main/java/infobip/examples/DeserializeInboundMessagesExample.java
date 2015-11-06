@@ -12,7 +12,7 @@ public class DeserializeInboundMessagesExample {
 
     public static void main(String[] args) {
 
-        String responseBody = "{\n" +
+        String requestBody = "{\n" +
                 "   \"results\":[\n" +
                 "      {\n" +
                 "         \"messageId\":\"ff4804ef-6ab6-4abd-984d-ab3b1387e823\",\n" +
@@ -28,7 +28,7 @@ public class DeserializeInboundMessagesExample {
                 "}";
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-        MOReportResponse moReportResponse = gson.fromJson(responseBody, MOReportResponse.class);
+        MOReportResponse moReportResponse = gson.fromJson(requestBody, MOReportResponse.class);
 
         MOReport result = moReportResponse.getResults().get(0);
         System.out.println("Message ID: " + result.getMessageId());

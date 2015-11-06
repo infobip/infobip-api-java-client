@@ -1,7 +1,8 @@
 package infobip.api.model.sms.mt.send.textual;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * This is a generated class and is not intended for modification!
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class SMSTextualRequest {
     private String campaignId;
     private String from;
-    private ArrayList<String> to = new ArrayList<String>();
+    private List<String> to = new ArrayList<String>();
     private String text;
     private String transliteration;
 
@@ -38,11 +39,11 @@ public class SMSTextualRequest {
     }
 
 
-    public ArrayList<String> getTo() {
+    public List<String> getTo() {
         return this.to;
     }
 
-    public SMSTextualRequest setTo(ArrayList<String> to) {
+    public SMSTextualRequest setTo(List<String> to) {
         this.to = to;
         return this;
     }
@@ -86,37 +87,37 @@ public class SMSTextualRequest {
             return false;
         }
 
-        SMSTextualRequest o = (SMSTextualRequest)obj;
+        SMSTextualRequest o = (SMSTextualRequest) obj;
         if (this.campaignId == null) {
-            if (o.campaignId != null){
+            if (o.campaignId != null) {
                 return false;
             }
         } else if (!this.campaignId.equals(o.campaignId)) {
             return false;
         }
         if (this.from == null) {
-            if (o.from != null){
+            if (o.from != null) {
                 return false;
             }
         } else if (!this.from.equals(o.from)) {
             return false;
         }
         if (this.to == null) {
-            if (o.to != null){
+            if (o.to != null) {
                 return false;
             }
         } else if (!this.to.equals(o.to)) {
             return false;
         }
         if (this.text == null) {
-            if (o.text != null){
+            if (o.text != null) {
                 return false;
             }
         } else if (!this.text.equals(o.text)) {
             return false;
         }
         if (this.transliteration == null) {
-            if (o.transliteration != null){
+            if (o.transliteration != null) {
                 return false;
             }
         } else if (!this.transliteration.equals(o.transliteration)) {
@@ -129,15 +130,15 @@ public class SMSTextualRequest {
     @Override
     public String toString() {
         return "SMSTextualRequest{" +
-            "campaignId='" + campaignId + "'" +
+                "campaignId='" + campaignId + "'" +
 
-            ", from='" + from + "'" +
+                ", from='" + from + "'" +
 
-            ", to=" + (to == null?"null":Arrays.toString(to.toArray())) +
+                ", to=" + (to == null ? "null" : Arrays.toString(to.toArray())) +
 
-            ", text='" + text + "'" +
+                ", text='" + text + "'" +
 
-            ", transliteration='" + transliteration + "'" +
-            '}';
+                ", transliteration='" + transliteration + "'" +
+                '}';
     }
 }

@@ -8,10 +8,10 @@ import infobip.api.model.sms.mt.logs.SMSLogsResponse;
 /**
  * Created by milosmilakovic on 9/24/15.
  */
-public class GetSentLogsExample extends Example{
+public class GetSentLogsExample extends Example {
 
     public static void main(String[] args) {
-        GetSentSmsLogs client = new GetSentSmsLogs(new BasicAuthConfiguration(BASE_URL, USERNAME, PASSWORD));
+        GetSentSmsLogs client = new GetSentSmsLogs(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         SMSLogsResponse response = client.execute(null, null, null, null, null, null, null, 10, null, null);
 

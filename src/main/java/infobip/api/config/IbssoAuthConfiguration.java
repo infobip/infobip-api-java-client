@@ -12,6 +12,11 @@ public class IbssoAuthConfiguration extends Configuration {
         this.ibssoToken = ibssoToken;
     }
 
+    public IbssoAuthConfiguration(String ibssoToken) {
+        this.baseUrl = "https://api.infobip.com";
+        this.ibssoToken = ibssoToken;
+    }
+
     @Override
     public String getAuthorizationHeader() {
         return "IBSSO " + ibssoToken;

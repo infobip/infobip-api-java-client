@@ -11,7 +11,7 @@ import infobip.api.model.sms.mt.reports.SMSReportResponse;
 public class PullSentDeliveryReportsExample extends Example {
 
     public static void main(String[] args) {
-        GetSentSmsDeliveryReports client = new GetSentSmsDeliveryReports(new BasicAuthConfiguration(BASE_URL, USERNAME, PASSWORD));
+        GetSentSmsDeliveryReports client = new GetSentSmsDeliveryReports(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         SMSReportResponse response = client.execute(null, null, 10);
 

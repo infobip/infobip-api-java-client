@@ -15,7 +15,7 @@ import java.util.Collections;
 public class NumberContextNotifyExample extends Example {
 
     public static void main(String[] args) {
-        NumberContextNotify client = new NumberContextNotify(new BasicAuthConfiguration(BASE_URL, USERNAME, PASSWORD));
+        NumberContextNotify client = new NumberContextNotify(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         NumberContextRequest requestBody = new NumberContextRequest();
         requestBody.setTo(new ArrayList<>(Collections.singletonList("41793026731")));

@@ -12,7 +12,7 @@ public class DeserializeDeliveryReportExample {
 
     public static void main(String[] args) {
 
-         String responseBody = "{\n" +
+         String requestBody = "{\n" +
                 "  \"results\": [\n" +
                 "    {\n" +
                 "      \"bulkId\": \"BULK-ID-123-xyz\",\n" +
@@ -45,7 +45,7 @@ public class DeserializeDeliveryReportExample {
                 "}";
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-        SMSReportResponse smsReportResponse = gson.fromJson(responseBody, SMSReportResponse.class);
+        SMSReportResponse smsReportResponse = gson.fromJson(requestBody, SMSReportResponse.class);
 
         for (int i = 0; i < smsReportResponse.getResults().size(); ++i) {
             SMSReport result = smsReportResponse.getResults().get(i);

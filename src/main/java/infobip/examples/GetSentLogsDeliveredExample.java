@@ -11,7 +11,7 @@ import infobip.api.model.sms.mt.logs.SMSLogsResponse;
 public class GetSentLogsDeliveredExample extends Example {
 
     public static void main(String[] args) {
-        GetSentSmsLogs client = new GetSentSmsLogs(new BasicAuthConfiguration(BASE_URL, USERNAME, PASSWORD));
+        GetSentSmsLogs client = new GetSentSmsLogs(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         SMSLogsResponse response = client.execute(null, null, null, null, "DELIVERED", null, null, 10, null, null);
 

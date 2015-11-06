@@ -18,7 +18,7 @@ public class SendSmsFlashExample extends Example {
 
     public static void main(String[] args) {
         SendMultipleTextualSmsAdvanced client = new SendMultipleTextualSmsAdvanced(new BasicAuthConfiguration
-                (BASE_URL, USERNAME, PASSWORD));
+                (USERNAME, PASSWORD));
         Destination destination = new Destination();
         destination.setTo("41793026731");
 

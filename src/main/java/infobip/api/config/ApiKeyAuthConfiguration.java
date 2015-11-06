@@ -12,6 +12,11 @@ public class ApiKeyAuthConfiguration extends Configuration {
         this.apiKey = apiKey;
     }
 
+    public ApiKeyAuthConfiguration(String apiKey) {
+        this.baseUrl = "https://api.infobip.com";
+        this.apiKey = apiKey;
+    }
+
     @Override
     public String getAuthorizationHeader() {
         return "Api " + apiKey;

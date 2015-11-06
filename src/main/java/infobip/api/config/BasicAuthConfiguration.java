@@ -16,6 +16,12 @@ public class BasicAuthConfiguration extends Configuration {
         this.password = password;
     }
 
+    public BasicAuthConfiguration(String username, String password) {
+        this.baseUrl = "https://api.infobip.com";
+        this.username = username;
+        this.password = password;
+    }
+
     @Override
     public String getAuthorizationHeader() {
         return "Basic " + encodeBase64();

@@ -13,7 +13,7 @@ public class DeserializeNumberContextExample {
 
     public static void main(String[] args) {
 
-        String responseBody = "{\n" +
+        String requestBody = "{\n" +
                 "   \"results\":[\n" +
                 "      {\n" +
                 "         \"to\":\"41793026727\",\n" +
@@ -44,7 +44,7 @@ public class DeserializeNumberContextExample {
                 "}";
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-        NumberContextResponse numberContextResponse = gson.fromJson(responseBody, NumberContextResponse.class);
+        NumberContextResponse numberContextResponse = gson.fromJson(requestBody, NumberContextResponse.class);
 
         NumberContextResponseDetails result = numberContextResponse.getResults().get(0);
         System.out.println("Phone number: " + result.getTo());
