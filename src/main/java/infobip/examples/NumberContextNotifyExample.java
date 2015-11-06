@@ -6,7 +6,6 @@ import infobip.api.model.nc.notify.NumberContextRequest;
 import infobip.api.model.nc.notify.NumberContextResponse;
 import infobip.api.model.nc.notify.NumberContextResponseDetails;
 
-import java.util.ArrayList;
 import java.util.Collections;
 
 /**
@@ -18,7 +17,7 @@ public class NumberContextNotifyExample extends Example {
         NumberContextNotify client = new NumberContextNotify(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         NumberContextRequest requestBody = new NumberContextRequest();
-        requestBody.setTo(new ArrayList<>(Collections.singletonList("41793026731")));
+        requestBody.setTo(Collections.singletonList("41793026731"));
         requestBody.setNotifyUrl(NOTIFY_URL);
 
         NumberContextResponse response = client.execute(requestBody);

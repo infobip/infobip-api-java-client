@@ -1,8 +1,9 @@
 package infobip.api.model.sms.mt.send.binary;
 
 import infobip.api.model.sms.mt.send.Message;
+
 import java.util.Arrays;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a generated class and is not intended for modification!
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  */
 public class SMSMultiBinaryRequest {
     private String bulkId;
-    private ArrayList<Message> messages = new ArrayList<Message>();
+    private List<Message> messages;
 
     public SMSMultiBinaryRequest() {
     }
@@ -26,11 +27,11 @@ public class SMSMultiBinaryRequest {
     }
 
 
-    public ArrayList<Message> getMessages() {
+    public List<Message> getMessages() {
         return this.messages;
     }
 
-    public SMSMultiBinaryRequest setMessages(ArrayList<Message> messages) {
+    public SMSMultiBinaryRequest setMessages(List<Message> messages) {
         this.messages = messages;
         return this;
     }
@@ -54,16 +55,16 @@ public class SMSMultiBinaryRequest {
             return false;
         }
 
-        SMSMultiBinaryRequest o = (SMSMultiBinaryRequest)obj;
+        SMSMultiBinaryRequest o = (SMSMultiBinaryRequest) obj;
         if (this.bulkId == null) {
-            if (o.bulkId != null){
+            if (o.bulkId != null) {
                 return false;
             }
         } else if (!this.bulkId.equals(o.bulkId)) {
             return false;
         }
         if (this.messages == null) {
-            if (o.messages != null){
+            if (o.messages != null) {
                 return false;
             }
         } else if (!this.messages.equals(o.messages)) {
@@ -76,9 +77,9 @@ public class SMSMultiBinaryRequest {
     @Override
     public String toString() {
         return "SMSMultiBinaryRequest{" +
-            "bulkId='" + bulkId + "'" +
+                "bulkId='" + bulkId + "'" +
 
-            ", messages=" + (messages == null?"null":Arrays.toString(messages.toArray())) +
-            '}';
+                ", messages=" + (messages == null ? "null" : Arrays.toString(messages.toArray())) +
+                '}';
     }
 }

@@ -1,24 +1,25 @@
 package infobip.api.model.nc.logs;
 
 import java.util.Arrays;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a generated class and is not intended for modification!
  * TODO: Point to Github contribution instructions
  */
 public class NumberContextLogsResponse {
-    private ArrayList<NumberContextLog> results = new ArrayList<NumberContextLog>();
+
+    private List<NumberContextLog> results;
 
     public NumberContextLogsResponse() {
     }
 
 
-    public ArrayList<NumberContextLog> getResults() {
+    public List<NumberContextLog> getResults() {
         return this.results;
     }
 
-    public NumberContextLogsResponse setResults(ArrayList<NumberContextLog> results) {
+    public NumberContextLogsResponse setResults(List<NumberContextLog> results) {
         this.results = results;
         return this;
     }
@@ -42,9 +43,9 @@ public class NumberContextLogsResponse {
             return false;
         }
 
-        NumberContextLogsResponse o = (NumberContextLogsResponse)obj;
+        NumberContextLogsResponse o = (NumberContextLogsResponse) obj;
         if (this.results == null) {
-            if (o.results != null){
+            if (o.results != null) {
                 return false;
             }
         } else if (!this.results.equals(o.results)) {
@@ -57,7 +58,7 @@ public class NumberContextLogsResponse {
     @Override
     public String toString() {
         return "NumberContextLogsResponse{" +
-            "results=" + (results == null?"null":Arrays.toString(results.toArray())) +
-            '}';
+                "results=" + (results == null ? "null" : Arrays.toString(results.toArray())) +
+                '}';
     }
 }

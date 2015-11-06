@@ -1,8 +1,9 @@
 package infobip.api.model.sms.mt.send.binary;
 
 import infobip.api.model.sms.mt.send.Message;
+
 import java.util.Arrays;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a generated class and is not intended for modification!
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  */
 public class SMSAdvancedBinaryRequest {
     private String bulkId;
-    private ArrayList<Message> messages = new ArrayList<Message>();
+    private List<Message> messages;
     private String tracking;
 
     public SMSAdvancedBinaryRequest() {
@@ -27,11 +28,11 @@ public class SMSAdvancedBinaryRequest {
     }
 
 
-    public ArrayList<Message> getMessages() {
+    public List<Message> getMessages() {
         return this.messages;
     }
 
-    public SMSAdvancedBinaryRequest setMessages(ArrayList<Message> messages) {
+    public SMSAdvancedBinaryRequest setMessages(List<Message> messages) {
         this.messages = messages;
         return this;
     }
@@ -65,23 +66,23 @@ public class SMSAdvancedBinaryRequest {
             return false;
         }
 
-        SMSAdvancedBinaryRequest o = (SMSAdvancedBinaryRequest)obj;
+        SMSAdvancedBinaryRequest o = (SMSAdvancedBinaryRequest) obj;
         if (this.bulkId == null) {
-            if (o.bulkId != null){
+            if (o.bulkId != null) {
                 return false;
             }
         } else if (!this.bulkId.equals(o.bulkId)) {
             return false;
         }
         if (this.messages == null) {
-            if (o.messages != null){
+            if (o.messages != null) {
                 return false;
             }
         } else if (!this.messages.equals(o.messages)) {
             return false;
         }
         if (this.tracking == null) {
-            if (o.tracking != null){
+            if (o.tracking != null) {
                 return false;
             }
         } else if (!this.tracking.equals(o.tracking)) {
@@ -94,11 +95,11 @@ public class SMSAdvancedBinaryRequest {
     @Override
     public String toString() {
         return "SMSAdvancedBinaryRequest{" +
-            "bulkId='" + bulkId + "'" +
+                "bulkId='" + bulkId + "'" +
 
-            ", messages=" + (messages == null?"null":Arrays.toString(messages.toArray())) +
+                ", messages=" + (messages == null ? "null" : Arrays.toString(messages.toArray())) +
 
-            ", tracking='" + tracking + "'" +
-            '}';
+                ", tracking='" + tracking + "'" +
+                '}';
     }
 }

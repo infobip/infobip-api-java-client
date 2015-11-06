@@ -1,7 +1,7 @@
 package infobip.api.model.nc.query;
 
 import java.util.Arrays;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a generated class and is not intended for modification!
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class NumberContextResponse {
     private String bulkId;
-    private ArrayList<NumberContextResponseDetails> results = new ArrayList<NumberContextResponseDetails>();
+    private List<NumberContextResponseDetails> results;
 
     public NumberContextResponse() {
     }
@@ -25,11 +25,11 @@ public class NumberContextResponse {
     }
 
 
-    public ArrayList<NumberContextResponseDetails> getResults() {
+    public List<NumberContextResponseDetails> getResults() {
         return this.results;
     }
 
-    public NumberContextResponse setResults(ArrayList<NumberContextResponseDetails> results) {
+    public NumberContextResponse setResults(List<NumberContextResponseDetails> results) {
         this.results = results;
         return this;
     }
@@ -53,16 +53,16 @@ public class NumberContextResponse {
             return false;
         }
 
-        NumberContextResponse o = (NumberContextResponse)obj;
+        NumberContextResponse o = (NumberContextResponse) obj;
         if (this.bulkId == null) {
-            if (o.bulkId != null){
+            if (o.bulkId != null) {
                 return false;
             }
         } else if (!this.bulkId.equals(o.bulkId)) {
             return false;
         }
         if (this.results == null) {
-            if (o.results != null){
+            if (o.results != null) {
                 return false;
             }
         } else if (!this.results.equals(o.results)) {
@@ -75,9 +75,9 @@ public class NumberContextResponse {
     @Override
     public String toString() {
         return "NumberContextResponse{" +
-            "bulkId='" + bulkId + "'" +
+                "bulkId='" + bulkId + "'" +
 
-            ", results=" + (results == null?"null":Arrays.toString(results.toArray())) +
-            '}';
+                ", results=" + (results == null ? "null" : Arrays.toString(results.toArray())) +
+                '}';
     }
 }

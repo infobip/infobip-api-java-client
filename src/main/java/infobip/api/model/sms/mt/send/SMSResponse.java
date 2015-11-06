@@ -1,7 +1,7 @@
 package infobip.api.model.sms.mt.send;
 
 import java.util.Arrays;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a generated class and is not intended for modification!
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class SMSResponse {
     private String bulkId;
-    private ArrayList<SMSResponseDetails> messages = new ArrayList<SMSResponseDetails>();
+    private List<SMSResponseDetails> messages;
 
     public SMSResponse() {
     }
@@ -25,11 +25,11 @@ public class SMSResponse {
     }
 
 
-    public ArrayList<SMSResponseDetails> getMessages() {
+    public List<SMSResponseDetails> getMessages() {
         return this.messages;
     }
 
-    public SMSResponse setMessages(ArrayList<SMSResponseDetails> messages) {
+    public SMSResponse setMessages(List<SMSResponseDetails> messages) {
         this.messages = messages;
         return this;
     }
@@ -53,16 +53,16 @@ public class SMSResponse {
             return false;
         }
 
-        SMSResponse o = (SMSResponse)obj;
+        SMSResponse o = (SMSResponse) obj;
         if (this.bulkId == null) {
-            if (o.bulkId != null){
+            if (o.bulkId != null) {
                 return false;
             }
         } else if (!this.bulkId.equals(o.bulkId)) {
             return false;
         }
         if (this.messages == null) {
-            if (o.messages != null){
+            if (o.messages != null) {
                 return false;
             }
         } else if (!this.messages.equals(o.messages)) {
@@ -75,9 +75,9 @@ public class SMSResponse {
     @Override
     public String toString() {
         return "SMSResponse{" +
-            "bulkId='" + bulkId + "'" +
+                "bulkId='" + bulkId + "'" +
 
-            ", messages=" + (messages == null?"null":Arrays.toString(messages.toArray())) +
-            '}';
+                ", messages=" + (messages == null ? "null" : Arrays.toString(messages.toArray())) +
+                '}';
     }
 }

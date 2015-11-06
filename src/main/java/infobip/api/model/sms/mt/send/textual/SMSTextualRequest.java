@@ -1,6 +1,5 @@
 package infobip.api.model.sms.mt.send.textual;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import java.util.List;
 public class SMSTextualRequest {
     private String campaignId;
     private String from;
-    private List<String> to = new ArrayList<String>();
+    private List<String> to;
     private String text;
     private String transliteration;
 

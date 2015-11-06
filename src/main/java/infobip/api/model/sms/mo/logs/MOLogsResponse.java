@@ -1,24 +1,24 @@
 package infobip.api.model.sms.mo.logs;
 
 import java.util.Arrays;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a generated class and is not intended for modification!
  * TODO: Point to Github contribution instructions
  */
 public class MOLogsResponse {
-    private ArrayList<MOLog> results = new ArrayList<MOLog>();
+    private List<MOLog> results;
 
     public MOLogsResponse() {
     }
 
 
-    public ArrayList<MOLog> getResults() {
+    public List<MOLog> getResults() {
         return this.results;
     }
 
-    public MOLogsResponse setResults(ArrayList<MOLog> results) {
+    public MOLogsResponse setResults(List<MOLog> results) {
         this.results = results;
         return this;
     }
@@ -42,9 +42,9 @@ public class MOLogsResponse {
             return false;
         }
 
-        MOLogsResponse o = (MOLogsResponse)obj;
+        MOLogsResponse o = (MOLogsResponse) obj;
         if (this.results == null) {
-            if (o.results != null){
+            if (o.results != null) {
                 return false;
             }
         } else if (!this.results.equals(o.results)) {
@@ -57,7 +57,7 @@ public class MOLogsResponse {
     @Override
     public String toString() {
         return "MOLogsResponse{" +
-            "results=" + (results == null?"null":Arrays.toString(results.toArray())) +
-            '}';
+                "results=" + (results == null ? "null" : Arrays.toString(results.toArray())) +
+                '}';
     }
 }

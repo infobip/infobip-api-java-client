@@ -42,12 +42,12 @@ Similar to standard messaging example, but when preparing your message, use `SMS
 
     Message message = new Message();
     message.setFrom(FROM);
-    message.setDestinations(new ArrayList(Collections.singletonList(destination)));
+    message.setDestinations(Collections.singletonList(destination));
     message.setText(MESSAGE_TEXT);
     message.setNotifyUrl("NOTIFY_URL");
 
     SMSAdvancedTextualRequest requestBody = new SMSAdvancedTextualRequest();
-    requestBody.setMessages(new ArrayList(Collections.singletonList(message)));
+    requestBody.setMessages(Collections.singletonList(message));
 
     SMSResponse response = client.execute(requestBody);
 

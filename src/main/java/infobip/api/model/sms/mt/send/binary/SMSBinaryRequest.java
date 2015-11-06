@@ -1,7 +1,7 @@
 package infobip.api.model.sms.mt.send.binary;
 
 import java.util.Arrays;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a generated class and is not intended for modification!
@@ -11,7 +11,7 @@ public class SMSBinaryRequest {
     private String campaignId;
     private BinaryContent binary;
     private String from;
-    private ArrayList<String> to = new ArrayList<String>();
+    private List<String> to;
 
     public SMSBinaryRequest() {
     }
@@ -47,11 +47,11 @@ public class SMSBinaryRequest {
     }
 
 
-    public ArrayList<String> getTo() {
+    public List<String> getTo() {
         return this.to;
     }
 
-    public SMSBinaryRequest setTo(ArrayList<String> to) {
+    public SMSBinaryRequest setTo(List<String> to) {
         this.to = to;
         return this;
     }
@@ -75,30 +75,30 @@ public class SMSBinaryRequest {
             return false;
         }
 
-        SMSBinaryRequest o = (SMSBinaryRequest)obj;
+        SMSBinaryRequest o = (SMSBinaryRequest) obj;
         if (this.campaignId == null) {
-            if (o.campaignId != null){
+            if (o.campaignId != null) {
                 return false;
             }
         } else if (!this.campaignId.equals(o.campaignId)) {
             return false;
         }
         if (this.binary == null) {
-            if (o.binary != null){
+            if (o.binary != null) {
                 return false;
             }
         } else if (!this.binary.equals(o.binary)) {
             return false;
         }
         if (this.from == null) {
-            if (o.from != null){
+            if (o.from != null) {
                 return false;
             }
         } else if (!this.from.equals(o.from)) {
             return false;
         }
         if (this.to == null) {
-            if (o.to != null){
+            if (o.to != null) {
                 return false;
             }
         } else if (!this.to.equals(o.to)) {
@@ -111,13 +111,13 @@ public class SMSBinaryRequest {
     @Override
     public String toString() {
         return "SMSBinaryRequest{" +
-            "campaignId='" + campaignId + "'" +
+                "campaignId='" + campaignId + "'" +
 
-            ", binary='" + binary + "'" +
+                ", binary='" + binary + "'" +
 
-            ", from='" + from + "'" +
+                ", from='" + from + "'" +
 
-            ", to=" + (to == null?"null":Arrays.toString(to.toArray())) +
-            '}';
+                ", to=" + (to == null ? "null" : Arrays.toString(to.toArray())) +
+                '}';
     }
 }

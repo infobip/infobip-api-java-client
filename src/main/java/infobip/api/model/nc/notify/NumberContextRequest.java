@@ -1,7 +1,7 @@
 package infobip.api.model.nc.notify;
 
 import java.util.Arrays;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a generated class and is not intended for modification!
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class NumberContextRequest {
     private String notifyUrl;
-    private ArrayList<String> to = new ArrayList<String>();
+    private List<String> to;
     private String notifyContentType;
 
     public NumberContextRequest() {
@@ -26,11 +26,11 @@ public class NumberContextRequest {
     }
 
 
-    public ArrayList<String> getTo() {
+    public List<String> getTo() {
         return this.to;
     }
 
-    public NumberContextRequest setTo(ArrayList<String> to) {
+    public NumberContextRequest setTo(List<String> to) {
         this.to = to;
         return this;
     }
@@ -64,23 +64,23 @@ public class NumberContextRequest {
             return false;
         }
 
-        NumberContextRequest o = (NumberContextRequest)obj;
+        NumberContextRequest o = (NumberContextRequest) obj;
         if (this.notifyUrl == null) {
-            if (o.notifyUrl != null){
+            if (o.notifyUrl != null) {
                 return false;
             }
         } else if (!this.notifyUrl.equals(o.notifyUrl)) {
             return false;
         }
         if (this.to == null) {
-            if (o.to != null){
+            if (o.to != null) {
                 return false;
             }
         } else if (!this.to.equals(o.to)) {
             return false;
         }
         if (this.notifyContentType == null) {
-            if (o.notifyContentType != null){
+            if (o.notifyContentType != null) {
                 return false;
             }
         } else if (!this.notifyContentType.equals(o.notifyContentType)) {
@@ -93,11 +93,11 @@ public class NumberContextRequest {
     @Override
     public String toString() {
         return "NumberContextRequest{" +
-            "notifyUrl='" + notifyUrl + "'" +
+                "notifyUrl='" + notifyUrl + "'" +
 
-            ", to=" + (to == null?"null":Arrays.toString(to.toArray())) +
+                ", to=" + (to == null ? "null" : Arrays.toString(to.toArray())) +
 
-            ", notifyContentType='" + notifyContentType + "'" +
-            '}';
+                ", notifyContentType='" + notifyContentType + "'" +
+                '}';
     }
 }

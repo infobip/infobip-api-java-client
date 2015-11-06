@@ -6,7 +6,6 @@ import infobip.api.model.nc.query.NumberContextRequest;
 import infobip.api.model.nc.query.NumberContextResponse;
 import infobip.api.model.nc.query.NumberContextResponseDetails;
 
-import java.util.ArrayList;
 import java.util.Collections;
 
 /**
@@ -18,7 +17,7 @@ public class NumberContextQueryExample extends Example {
         NumberContextQuery client = new NumberContextQuery(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         NumberContextRequest requestBody = new NumberContextRequest();
-        requestBody.setTo(new ArrayList<>(Collections.singletonList("41793026731")));
+        requestBody.setTo(Collections.singletonList("41793026731"));
 
         NumberContextResponse response = client.execute(requestBody);
 

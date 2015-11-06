@@ -3,9 +3,9 @@ package infobip.api.model.sms.mt.send;
 import infobip.api.model.Destination;
 import infobip.api.model.sms.mt.send.binary.BinaryContent;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  * This is a generated class and is not intended for modification!
@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Message {
     private String campaignId;
-    private ArrayList<Destination> destinations = new ArrayList<Destination>();
+    private List<Destination> destinations;
     private Language language;
     private Boolean notify;
     private String notifyContentType;
@@ -22,7 +22,7 @@ public class Message {
     private String callbackData;
     private String notifyUrl;
     private String from;
-    private ArrayList<String> to = new ArrayList<String>();
+    private List<String> to;
     private String text;
     private Date sendAt;
     private String transliteration;
@@ -43,11 +43,11 @@ public class Message {
     }
 
 
-    public ArrayList<Destination> getDestinations() {
+    public List<Destination> getDestinations() {
         return this.destinations;
     }
 
-    public Message setDestinations(ArrayList<Destination> destinations) {
+    public Message setDestinations(List<Destination> destinations) {
         this.destinations = destinations;
         return this;
     }
@@ -143,11 +143,11 @@ public class Message {
     }
 
 
-    public ArrayList<String> getTo() {
+    public List<String> getTo() {
         return this.to;
     }
 
-    public Message setTo(ArrayList<String> to) {
+    public Message setTo(List<String> to) {
         this.to = to;
         return this;
     }
@@ -221,114 +221,114 @@ public class Message {
             return false;
         }
 
-        Message o = (Message)obj;
+        Message o = (Message) obj;
         if (this.campaignId == null) {
-            if (o.campaignId != null){
+            if (o.campaignId != null) {
                 return false;
             }
         } else if (!this.campaignId.equals(o.campaignId)) {
             return false;
         }
         if (this.destinations == null) {
-            if (o.destinations != null){
+            if (o.destinations != null) {
                 return false;
             }
         } else if (!this.destinations.equals(o.destinations)) {
             return false;
         }
         if (this.language == null) {
-            if (o.language != null){
+            if (o.language != null) {
                 return false;
             }
         } else if (!this.language.equals(o.language)) {
             return false;
         }
         if (this.notify == null) {
-            if (o.notify != null){
+            if (o.notify != null) {
                 return false;
             }
         } else if (!this.notify.equals(o.notify)) {
             return false;
         }
         if (this.notifyContentType == null) {
-            if (o.notifyContentType != null){
+            if (o.notifyContentType != null) {
                 return false;
             }
         } else if (!this.notifyContentType.equals(o.notifyContentType)) {
             return false;
         }
         if (this.validityPeriod == null) {
-            if (o.validityPeriod != null){
+            if (o.validityPeriod != null) {
                 return false;
             }
         } else if (!this.validityPeriod.equals(o.validityPeriod)) {
             return false;
         }
         if (this.binary == null) {
-            if (o.binary != null){
+            if (o.binary != null) {
                 return false;
             }
         } else if (!this.binary.equals(o.binary)) {
             return false;
         }
         if (this.callbackData == null) {
-            if (o.callbackData != null){
+            if (o.callbackData != null) {
                 return false;
             }
         } else if (!this.callbackData.equals(o.callbackData)) {
             return false;
         }
         if (this.notifyUrl == null) {
-            if (o.notifyUrl != null){
+            if (o.notifyUrl != null) {
                 return false;
             }
         } else if (!this.notifyUrl.equals(o.notifyUrl)) {
             return false;
         }
         if (this.from == null) {
-            if (o.from != null){
+            if (o.from != null) {
                 return false;
             }
         } else if (!this.from.equals(o.from)) {
             return false;
         }
         if (this.to == null) {
-            if (o.to != null){
+            if (o.to != null) {
                 return false;
             }
         } else if (!this.to.equals(o.to)) {
             return false;
         }
         if (this.text == null) {
-            if (o.text != null){
+            if (o.text != null) {
                 return false;
             }
         } else if (!this.text.equals(o.text)) {
             return false;
         }
         if (this.sendAt == null) {
-            if (o.sendAt != null){
+            if (o.sendAt != null) {
                 return false;
             }
         } else if (!this.sendAt.equals(o.sendAt)) {
             return false;
         }
         if (this.transliteration == null) {
-            if (o.transliteration != null){
+            if (o.transliteration != null) {
                 return false;
             }
         } else if (!this.transliteration.equals(o.transliteration)) {
             return false;
         }
         if (this.isFlash == null) {
-            if (o.isFlash != null){
+            if (o.isFlash != null) {
                 return false;
             }
         } else if (!this.isFlash.equals(o.isFlash)) {
             return false;
         }
         if (this.intermediateReport == null) {
-            if (o.intermediateReport != null){
+            if (o.intermediateReport != null) {
                 return false;
             }
         } else if (!this.intermediateReport.equals(o.intermediateReport)) {
@@ -341,37 +341,37 @@ public class Message {
     @Override
     public String toString() {
         return "Message{" +
-            "campaignId='" + campaignId + "'" +
+                "campaignId='" + campaignId + "'" +
 
-            ", destinations=" + (destinations == null?"null":Arrays.toString(destinations.toArray())) +
+                ", destinations=" + (destinations == null ? "null" : Arrays.toString(destinations.toArray())) +
 
-            ", language='" + language + "'" +
+                ", language='" + language + "'" +
 
-            ", notify='" + notify + "'" +
+                ", notify='" + notify + "'" +
 
-            ", notifyContentType='" + notifyContentType + "'" +
+                ", notifyContentType='" + notifyContentType + "'" +
 
-            ", validityPeriod='" + validityPeriod + "'" +
+                ", validityPeriod='" + validityPeriod + "'" +
 
-            ", binary='" + binary + "'" +
+                ", binary='" + binary + "'" +
 
-            ", callbackData='" + callbackData + "'" +
+                ", callbackData='" + callbackData + "'" +
 
-            ", notifyUrl='" + notifyUrl + "'" +
+                ", notifyUrl='" + notifyUrl + "'" +
 
-            ", from='" + from + "'" +
+                ", from='" + from + "'" +
 
-            ", to=" + (to == null?"null":Arrays.toString(to.toArray())) +
+                ", to=" + (to == null ? "null" : Arrays.toString(to.toArray())) +
 
-            ", text='" + text + "'" +
+                ", text='" + text + "'" +
 
-            ", sendAt='" + sendAt + "'" +
+                ", sendAt='" + sendAt + "'" +
 
-            ", transliteration='" + transliteration + "'" +
+                ", transliteration='" + transliteration + "'" +
 
-            ", isFlash='" + isFlash + "'" +
+                ", isFlash='" + isFlash + "'" +
 
-            ", intermediateReport='" + intermediateReport + "'" +
-            '}';
+                ", intermediateReport='" + intermediateReport + "'" +
+                '}';
     }
 }
