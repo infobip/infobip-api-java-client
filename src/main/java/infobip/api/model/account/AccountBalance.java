@@ -13,7 +13,6 @@ public class AccountBalance {
     public AccountBalance() {
     }
 
-
     public Double getAmount() {
         return this.amount;
     }
@@ -22,7 +21,6 @@ public class AccountBalance {
         this.amount = amount;
         return this;
     }
-
 
     public Double getBalance() {
         return this.balance;
@@ -33,7 +31,6 @@ public class AccountBalance {
         return this;
     }
 
-
     public String getCurrency() {
         return this.currency;
     }
@@ -42,7 +39,6 @@ public class AccountBalance {
         this.currency = currency;
         return this;
     }
-
 
     public Integer getCurrencyId() {
         return this.currencyId;
@@ -99,11 +95,8 @@ public class AccountBalance {
     public String toString() {
         return "AccountBalance{" +
             "amount='" + amount + "'" +
-
             ", balance='" + balance + "'" +
-
             ", currency='" + currency + "'" +
-
             ", currencyId='" + currencyId + "'" +
             '}';
     }

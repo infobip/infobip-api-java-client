@@ -14,7 +14,6 @@ public class NumberContextResponse {
     public NumberContextResponse() {
     }
 
-
     public String getBulkId() {
         return this.bulkId;
     }

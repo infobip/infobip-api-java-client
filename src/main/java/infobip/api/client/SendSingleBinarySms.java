@@ -25,14 +25,13 @@ public class SendSingleBinarySms {
         @POST("/sms/1/binary/single")
         SMSResponse execute(@Body SMSBinaryRequest bodyObject);
     }
-
     public SMSResponse execute(SMSBinaryRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
                 .setConverter(new GsonConverter(new GsonBuilder()
-                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-                        .create()))
+                						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+                						.create()))
                 .build();
         SendSingleBinarySmsService service = restAdapter.create(SendSingleBinarySmsService.class);
         return service.execute(bodyObject);

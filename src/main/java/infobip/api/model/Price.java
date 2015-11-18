@@ -14,7 +14,6 @@ public class Price {
     public Price() {
     }
 
-
     public BigDecimal getPricePerLookup() {
         return this.pricePerLookup;
     }
@@ -24,7 +23,6 @@ public class Price {
         return this;
     }
 
-
     public BigDecimal getPricePerMessage() {
         return this.pricePerMessage;
     }
@@ -33,7 +31,6 @@ public class Price {
         this.pricePerMessage = pricePerMessage;
         return this;
     }
-
 
     public String getCurrency() {
         return this.currency;
@@ -83,9 +80,7 @@ public class Price {
     public String toString() {
         return "Price{" +
             "pricePerLookup='" + pricePerLookup + "'" +
-
             ", pricePerMessage='" + pricePerMessage + "'" +
-
             ", currency='" + currency + "'" +
             '}';
     }

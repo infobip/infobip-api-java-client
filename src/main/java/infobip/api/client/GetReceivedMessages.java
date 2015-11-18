@@ -24,14 +24,13 @@ public class GetReceivedMessages {
         @GET("/sms/1/inbox/reports")
         MOReportResponse execute(@Query("limit") java.lang.Integer limit);
     }
-
     public MOReportResponse execute(java.lang.Integer limit) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
                 .setConverter(new GsonConverter(new GsonBuilder()
-                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-                        .create()))
+                						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+                						.create()))
                 .build();
         GetReceivedMessagesService service = restAdapter.create(GetReceivedMessagesService.class);
         return service.execute(limit);

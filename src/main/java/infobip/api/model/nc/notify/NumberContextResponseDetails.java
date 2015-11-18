@@ -14,7 +14,6 @@ public class NumberContextResponseDetails {
     public NumberContextResponseDetails() {
     }
 
-
     public String getMessageId() {
         return this.messageId;
     }
@@ -24,7 +23,6 @@ public class NumberContextResponseDetails {
         return this;
     }
 
-
     public String getTo() {
         return this.to;
     }
@@ -33,7 +31,6 @@ public class NumberContextResponseDetails {
         this.to = to;
         return this;
     }
-
 
     public Status getStatus() {
         return this.status;
@@ -83,9 +80,7 @@ public class NumberContextResponseDetails {
     public String toString() {
         return "NumberContextResponseDetails{" +
             "messageId='" + messageId + "'" +
-
             ", to='" + to + "'" +
-
             ", status='" + status + "'" +
             '}';
     }

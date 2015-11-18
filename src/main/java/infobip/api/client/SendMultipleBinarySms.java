@@ -25,14 +25,13 @@ public class SendMultipleBinarySms {
         @POST("/sms/1/binary/multi")
         SMSResponse execute(@Body SMSMultiBinaryRequest bodyObject);
     }
-
     public SMSResponse execute(SMSMultiBinaryRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
                 .setConverter(new GsonConverter(new GsonBuilder()
-                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-                        .create()))
+                						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+                						.create()))
                 .build();
         SendMultipleBinarySmsService service = restAdapter.create(SendMultipleBinarySmsService.class);
         return service.execute(bodyObject);

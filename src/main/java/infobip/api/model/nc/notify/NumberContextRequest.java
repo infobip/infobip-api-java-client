@@ -14,8 +14,7 @@ public class NumberContextRequest {
 
     public NumberContextRequest() {
     }
-
-
+    
     public String getNotifyUrl() {
         return this.notifyUrl;
     }
@@ -44,7 +43,6 @@ public class NumberContextRequest {
         this.to.removeAll(Arrays.asList(to));
         return this;
     }
-
 
     public String getNotifyContentType() {
         return this.notifyContentType;

@@ -15,7 +15,6 @@ public class Error {
     public Error() {
     }
 
-
     public String getGroupName() {
         return this.groupName;
     }
@@ -24,7 +23,6 @@ public class Error {
         this.groupName = groupName;
         return this;
     }
-
 
     public Boolean getPermanent() {
         return this.permanent;
@@ -35,7 +33,6 @@ public class Error {
         return this;
     }
 
-
     public Integer getGroupId() {
         return this.groupId;
     }
@@ -44,7 +41,6 @@ public class Error {
         this.groupId = groupId;
         return this;
     }
-
 
     public String getName() {
         return this.name;
@@ -55,7 +51,6 @@ public class Error {
         return this;
     }
 
-
     public String getDescription() {
         return this.description;
     }
@@ -64,7 +59,6 @@ public class Error {
         this.description = description;
         return this;
     }
-
 
     public Integer getId() {
         return this.id;
@@ -135,15 +129,10 @@ public class Error {
     public String toString() {
         return "Error{" +
             "groupName='" + groupName + "'" +
-
             ", permanent='" + permanent + "'" +
-
             ", groupId='" + groupId + "'" +
-
             ", name='" + name + "'" +
-
             ", description='" + description + "'" +
-
             ", id='" + id + "'" +
             '}';
     }

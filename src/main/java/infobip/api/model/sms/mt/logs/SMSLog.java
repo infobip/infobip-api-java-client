@@ -26,7 +26,6 @@ public class SMSLog {
     public SMSLog() {
     }
 
-
     public Date getDoneAt() {
         return this.doneAt;
     }
@@ -35,7 +34,6 @@ public class SMSLog {
         this.doneAt = doneAt;
         return this;
     }
-
 
     public String getBulkId() {
         return this.bulkId;
@@ -46,7 +44,6 @@ public class SMSLog {
         return this;
     }
 
-
     public String getMccMnc() {
         return this.mccMnc;
     }
@@ -55,7 +52,6 @@ public class SMSLog {
         this.mccMnc = mccMnc;
         return this;
     }
-
 
     public Integer getSmsCount() {
         return this.smsCount;
@@ -66,7 +62,6 @@ public class SMSLog {
         return this;
     }
 
-
     public Price getPrice() {
         return this.price;
     }
@@ -75,7 +70,6 @@ public class SMSLog {
         this.price = price;
         return this;
     }
-
 
     public String getMessageId() {
         return this.messageId;
@@ -86,7 +80,6 @@ public class SMSLog {
         return this;
     }
 
-
     public String getFrom() {
         return this.from;
     }
@@ -95,7 +88,6 @@ public class SMSLog {
         this.from = from;
         return this;
     }
-
 
     public String getTo() {
         return this.to;
@@ -106,7 +98,6 @@ public class SMSLog {
         return this;
     }
 
-
     public String getText() {
         return this.text;
     }
@@ -115,7 +106,6 @@ public class SMSLog {
         this.text = text;
         return this;
     }
-
 
     public Date getSentAt() {
         return this.sentAt;
@@ -126,7 +116,6 @@ public class SMSLog {
         return this;
     }
 
-
     public Error getError() {
         return this.error;
     }
@@ -135,7 +124,6 @@ public class SMSLog {
         this.error = error;
         return this;
     }
-
 
     public Status getStatus() {
         return this.status;
@@ -248,27 +236,16 @@ public class SMSLog {
     public String toString() {
         return "SMSLog{" +
             "doneAt='" + doneAt + "'" +
-
             ", bulkId='" + bulkId + "'" +
-
             ", mccMnc='" + mccMnc + "'" +
-
             ", smsCount='" + smsCount + "'" +
-
             ", price='" + price + "'" +
-
             ", messageId='" + messageId + "'" +
-
             ", from='" + from + "'" +
-
             ", to='" + to + "'" +
-
             ", text='" + text + "'" +
-
             ", sentAt='" + sentAt + "'" +
-
             ", error='" + error + "'" +
-
             ", status='" + status + "'" +
             '}';
     }

@@ -24,7 +24,6 @@ public class NumberContextResponseDetails {
     public NumberContextResponseDetails() {
     }
 
-
     public Boolean getPorted() {
         return this.ported;
     }
@@ -33,7 +32,6 @@ public class NumberContextResponseDetails {
         this.ported = ported;
         return this;
     }
-
 
     public Boolean getRoaming() {
         return this.roaming;
@@ -44,7 +42,6 @@ public class NumberContextResponseDetails {
         return this;
     }
 
-
     public String getMccMnc() {
         return this.mccMnc;
     }
@@ -53,7 +50,6 @@ public class NumberContextResponseDetails {
         this.mccMnc = mccMnc;
         return this;
     }
-
 
     public Network getRoamingNetwork() {
         return this.roamingNetwork;
@@ -64,7 +60,6 @@ public class NumberContextResponseDetails {
         return this;
     }
 
-
     public Network getPortedNetwork() {
         return this.portedNetwork;
     }
@@ -73,7 +68,6 @@ public class NumberContextResponseDetails {
         this.portedNetwork = portedNetwork;
         return this;
     }
-
 
     public String getTo() {
         return this.to;
@@ -84,7 +78,6 @@ public class NumberContextResponseDetails {
         return this;
     }
 
-
     public String getImsi() {
         return this.imsi;
     }
@@ -93,7 +86,6 @@ public class NumberContextResponseDetails {
         this.imsi = imsi;
         return this;
     }
-
 
     public String getServingMSC() {
         return this.servingMSC;
@@ -104,7 +96,6 @@ public class NumberContextResponseDetails {
         return this;
     }
 
-
     public Error getError() {
         return this.error;
     }
@@ -114,7 +105,6 @@ public class NumberContextResponseDetails {
         return this;
     }
 
-
     public Network getOriginalNetwork() {
         return this.originalNetwork;
     }
@@ -123,7 +113,6 @@ public class NumberContextResponseDetails {
         this.originalNetwork = originalNetwork;
         return this;
     }
-
 
     public Status getStatus() {
         return this.status;
@@ -229,25 +218,15 @@ public class NumberContextResponseDetails {
     public String toString() {
         return "NumberContextResponseDetails{" +
             "ported='" + ported + "'" +
-
             ", roaming='" + roaming + "'" +
-
             ", mccMnc='" + mccMnc + "'" +
-
             ", roamingNetwork='" + roamingNetwork + "'" +
-
             ", portedNetwork='" + portedNetwork + "'" +
-
             ", to='" + to + "'" +
-
             ", imsi='" + imsi + "'" +
-
             ", servingMSC='" + servingMSC + "'" +
-
             ", error='" + error + "'" +
-
             ", originalNetwork='" + originalNetwork + "'" +
-
             ", status='" + status + "'" +
             '}';
     }

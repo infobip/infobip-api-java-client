@@ -25,14 +25,13 @@ public class NumberContextQuery {
         @POST("/number/1/query")
         NumberContextResponse execute(@Body NumberContextRequest bodyObject);
     }
-
     public NumberContextResponse execute(NumberContextRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
                 .setConverter(new GsonConverter(new GsonBuilder()
-                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-                        .create()))
+                						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+                						.create()))
                 .build();
         NumberContextQueryService service = restAdapter.create(NumberContextQueryService.class);
         return service.execute(bodyObject);

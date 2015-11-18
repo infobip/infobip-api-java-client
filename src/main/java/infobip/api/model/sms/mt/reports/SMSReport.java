@@ -27,7 +27,6 @@ public class SMSReport {
     public SMSReport() {
     }
 
-
     public Date getDoneAt() {
         return this.doneAt;
     }
@@ -36,7 +35,6 @@ public class SMSReport {
         this.doneAt = doneAt;
         return this;
     }
-
 
     public Integer getSmsCount() {
         return this.smsCount;
@@ -47,7 +45,6 @@ public class SMSReport {
         return this;
     }
 
-
     public String getMessageId() {
         return this.messageId;
     }
@@ -56,7 +53,6 @@ public class SMSReport {
         this.messageId = messageId;
         return this;
     }
-
 
     public Date getSentAt() {
         return this.sentAt;
@@ -67,7 +63,6 @@ public class SMSReport {
         return this;
     }
 
-
     public Error getError() {
         return this.error;
     }
@@ -76,7 +71,6 @@ public class SMSReport {
         this.error = error;
         return this;
     }
-
 
     public String getBulkId() {
         return this.bulkId;
@@ -87,7 +81,6 @@ public class SMSReport {
         return this;
     }
 
-
     public String getMccMnc() {
         return this.mccMnc;
     }
@@ -96,7 +89,6 @@ public class SMSReport {
         this.mccMnc = mccMnc;
         return this;
     }
-
 
     public Price getPrice() {
         return this.price;
@@ -107,7 +99,6 @@ public class SMSReport {
         return this;
     }
 
-
     public String getCallbackData() {
         return this.callbackData;
     }
@@ -116,7 +107,6 @@ public class SMSReport {
         this.callbackData = callbackData;
         return this;
     }
-
 
     public String getFrom() {
         return this.from;
@@ -127,7 +117,6 @@ public class SMSReport {
         return this;
     }
 
-
     public String getTo() {
         return this.to;
     }
@@ -137,7 +126,6 @@ public class SMSReport {
         return this;
     }
 
-
     public String getText() {
         return this.text;
     }
@@ -146,7 +134,6 @@ public class SMSReport {
         this.text = text;
         return this;
     }
-
 
     public Status getStatus() {
         return this.status;
@@ -266,29 +253,17 @@ public class SMSReport {
     public String toString() {
         return "SMSReport{" +
             "doneAt='" + doneAt + "'" +
-
             ", smsCount='" + smsCount + "'" +
-
             ", messageId='" + messageId + "'" +
-
             ", sentAt='" + sentAt + "'" +
-
             ", error='" + error + "'" +
-
             ", bulkId='" + bulkId + "'" +
-
             ", mccMnc='" + mccMnc + "'" +
-
             ", price='" + price + "'" +
-
             ", callbackData='" + callbackData + "'" +
-
             ", from='" + from + "'" +
-
             ", to='" + to + "'" +
-
             ", text='" + text + "'" +
-
             ", status='" + status + "'" +
             '}';
     }

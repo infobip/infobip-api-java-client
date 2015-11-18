@@ -25,14 +25,13 @@ public class SendMultipleSmsTextual {
         @POST("/sms/1/text/multi")
         SMSResponse execute(@Body SMSMultiTextualRequest bodyObject);
     }
-
     public SMSResponse execute(SMSMultiTextualRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
                 .setConverter(new GsonConverter(new GsonBuilder()
-                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-                        .create()))
+                						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+                						.create()))
                 .build();
         SendMultipleSmsTextualService service = restAdapter.create(SendMultipleSmsTextualService.class);
         return service.execute(bodyObject);

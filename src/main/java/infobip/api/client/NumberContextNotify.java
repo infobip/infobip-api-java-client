@@ -25,14 +25,13 @@ public class NumberContextNotify {
         @POST("/number/1/notify")
         NumberContextResponse execute(@Body NumberContextRequest bodyObject);
     }
-
     public NumberContextResponse execute(NumberContextRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
                 .setConverter(new GsonConverter(new GsonBuilder()
-                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-                        .create()))
+                						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+                						.create()))
                 .build();
         NumberContextNotifyService service = restAdapter.create(NumberContextNotifyService.class);
         return service.execute(bodyObject);

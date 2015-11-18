@@ -19,7 +19,6 @@ public class MOLog {
     public MOLog() {
     }
 
-
     public String getCleanText() {
         return this.cleanText;
     }
@@ -28,7 +27,6 @@ public class MOLog {
         this.cleanText = cleanText;
         return this;
     }
-
 
     public Integer getSmsCount() {
         return this.smsCount;
@@ -39,7 +37,6 @@ public class MOLog {
         return this;
     }
 
-
     public String getMessageId() {
         return this.messageId;
     }
@@ -48,7 +45,6 @@ public class MOLog {
         this.messageId = messageId;
         return this;
     }
-
 
     public String getFrom() {
         return this.from;
@@ -59,7 +55,6 @@ public class MOLog {
         return this;
     }
 
-
     public String getTo() {
         return this.to;
     }
@@ -68,7 +63,6 @@ public class MOLog {
         this.to = to;
         return this;
     }
-
 
     public String getText() {
         return this.text;
@@ -79,7 +73,6 @@ public class MOLog {
         return this;
     }
 
-
     public String getKeyword() {
         return this.keyword;
     }
@@ -88,7 +81,6 @@ public class MOLog {
         this.keyword = keyword;
         return this;
     }
-
 
     public Date getReceivedAt() {
         return this.receivedAt;
@@ -173,19 +165,12 @@ public class MOLog {
     public String toString() {
         return "MOLog{" +
             "cleanText='" + cleanText + "'" +
-
             ", smsCount='" + smsCount + "'" +
-
             ", messageId='" + messageId + "'" +
-
             ", from='" + from + "'" +
-
             ", to='" + to + "'" +
-
             ", text='" + text + "'" +
-
             ", keyword='" + keyword + "'" +
-
             ", receivedAt='" + receivedAt + "'" +
             '}';
     }

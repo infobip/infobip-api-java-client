@@ -22,17 +22,15 @@ public class GetSentSmsDeliveryReports {
 
     interface GetSentSmsDeliveryReportsService {
         @GET("/sms/1/reports")
-        SMSReportResponse execute(@Query("bulkId") java.lang.String bulkId, @Query("messageId") java.lang.String
-                messageId, @Query("limit") java.lang.Integer limit);
+        SMSReportResponse execute(@Query("bulkId") java.lang.String bulkId, @Query("messageId") java.lang.String messageId, @Query("limit") java.lang.Integer limit);
     }
-
     public SMSReportResponse execute(java.lang.String bulkId, java.lang.String messageId, java.lang.Integer limit) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
                 .setConverter(new GsonConverter(new GsonBuilder()
-                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-                        .create()))
+                						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+                						.create()))
                 .build();
         GetSentSmsDeliveryReportsService service = restAdapter.create(GetSentSmsDeliveryReportsService.class);
         return service.execute(bulkId, messageId, limit);

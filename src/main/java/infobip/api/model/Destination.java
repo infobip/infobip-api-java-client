@@ -11,7 +11,6 @@ public class Destination {
     public Destination() {
     }
 
-
     public String getMessageId() {
         return this.messageId;
     }
@@ -20,7 +19,6 @@ public class Destination {
         this.messageId = messageId;
         return this;
     }
-
 
     public String getTo() {
         return this.to;

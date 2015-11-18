@@ -23,7 +23,6 @@ public class NumberContextLog {
     public NumberContextLog() {
     }
 
-
     public Date getDoneAt() {
         return this.doneAt;
     }
@@ -32,7 +31,6 @@ public class NumberContextLog {
         this.doneAt = doneAt;
         return this;
     }
-
 
     public String getBulkId() {
         return this.bulkId;
@@ -43,7 +41,6 @@ public class NumberContextLog {
         return this;
     }
 
-
     public String getMccMnc() {
         return this.mccMnc;
     }
@@ -52,7 +49,6 @@ public class NumberContextLog {
         this.mccMnc = mccMnc;
         return this;
     }
-
 
     public Price getPrice() {
         return this.price;
@@ -63,7 +59,6 @@ public class NumberContextLog {
         return this;
     }
 
-
     public String getMessageId() {
         return this.messageId;
     }
@@ -72,7 +67,6 @@ public class NumberContextLog {
         this.messageId = messageId;
         return this;
     }
-
 
     public String getTo() {
         return this.to;
@@ -83,7 +77,6 @@ public class NumberContextLog {
         return this;
     }
 
-
     public Date getSentAt() {
         return this.sentAt;
     }
@@ -93,7 +86,6 @@ public class NumberContextLog {
         return this;
     }
 
-
     public Error getError() {
         return this.error;
     }
@@ -102,7 +94,6 @@ public class NumberContextLog {
         this.error = error;
         return this;
     }
-
 
     public Status getStatus() {
         return this.status;
@@ -194,21 +185,13 @@ public class NumberContextLog {
     public String toString() {
         return "NumberContextLog{" +
             "doneAt='" + doneAt + "'" +
-
             ", bulkId='" + bulkId + "'" +
-
             ", mccMnc='" + mccMnc + "'" +
-
             ", price='" + price + "'" +
-
             ", messageId='" + messageId + "'" +
-
             ", to='" + to + "'" +
-
             ", sentAt='" + sentAt + "'" +
-
             ", error='" + error + "'" +
-
             ", status='" + status + "'" +
             '}';
     }

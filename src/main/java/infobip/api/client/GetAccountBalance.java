@@ -1,9 +1,11 @@
 package infobip.api.client;
 
+import com.google.gson.GsonBuilder;
 import infobip.api.config.Configuration;
 import infobip.api.model.account.AccountBalance;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
+import retrofit.converter.GsonConverter;
 import retrofit.http.GET;
 
 /**
@@ -21,11 +23,13 @@ public class GetAccountBalance {
         @GET("/account/1/balance")
         AccountBalance execute();
     }
-
     public AccountBalance execute() {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
+                .setConverter(new GsonConverter(new GsonBuilder()
+                						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+                						.create()))
                 .build();
         GetAccountBalanceService service = restAdapter.create(GetAccountBalanceService.class);
         return service.execute();

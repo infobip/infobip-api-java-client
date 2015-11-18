@@ -13,7 +13,6 @@ public class Network {
     public Network() {
     }
 
-
     public String getCountryPrefix() {
         return this.countryPrefix;
     }
@@ -22,7 +21,6 @@ public class Network {
         this.countryPrefix = countryPrefix;
         return this;
     }
-
 
     public String getNetworkName() {
         return this.networkName;
@@ -33,7 +31,6 @@ public class Network {
         return this;
     }
 
-
     public String getCountryName() {
         return this.countryName;
     }
@@ -42,7 +39,6 @@ public class Network {
         this.countryName = countryName;
         return this;
     }
-
 
     public String getNetworkPrefix() {
         return this.networkPrefix;
@@ -99,11 +95,8 @@ public class Network {
     public String toString() {
         return "Network{" +
             "countryPrefix='" + countryPrefix + "'" +
-
             ", networkName='" + networkName + "'" +
-
             ", countryName='" + countryName + "'" +
-
             ", networkPrefix='" + networkPrefix + "'" +
             '}';
     }

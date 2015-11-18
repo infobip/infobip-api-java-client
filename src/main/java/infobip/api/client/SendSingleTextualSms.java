@@ -25,14 +25,13 @@ public class SendSingleTextualSms {
         @POST("/sms/1/text/single")
         SMSResponse execute(@Body SMSTextualRequest bodyObject);
     }
-
     public SMSResponse execute(SMSTextualRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
                 .setConverter(new GsonConverter(new GsonBuilder()
-                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-                        .create()))
+                						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+                						.create()))
                 .build();
         SendSingleTextualSmsService service = restAdapter.create(SendSingleTextualSmsService.class);
         return service.execute(bodyObject);
