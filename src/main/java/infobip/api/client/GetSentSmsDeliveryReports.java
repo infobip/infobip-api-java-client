@@ -42,6 +42,7 @@ public class GetSentSmsDeliveryReports {
             public void intercept(RequestFacade request) {
                 if (configuration != null && configuration.getAuthorizationHeader() != null) {
                     request.addHeader("Authorization", configuration.getAuthorizationHeader());
+                    request.addHeader("User-Agent", "Java-Client-Library");
                 }
             }
         };
