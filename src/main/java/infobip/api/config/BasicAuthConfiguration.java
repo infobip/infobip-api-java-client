@@ -1,6 +1,6 @@
 package infobip.api.config;
 
-import java.util.Base64;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  * Created by denis on 13.07.15..
@@ -29,7 +29,7 @@ public class BasicAuthConfiguration extends Configuration {
 
     private String encodeBase64() {
         String userPass = username + ":" + password;
-        return Base64.getEncoder().encodeToString(userPass.getBytes());
+        return DatatypeConverter.printBase64Binary(userPass.getBytes());
     }
 
     public String getUsername() {
