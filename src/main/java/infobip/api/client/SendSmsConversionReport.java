@@ -1,8 +1,7 @@
 package infobip.api.client;
 
 import infobip.api.config.Configuration;
-import infobip.api.model.sms.mt.send.SMSResponse;
-import infobip.api.model.sms.mt.send.textual.SMSAdvancedTextualRequest;
+import infobip.api.model.sms.mt.conversion.ConversionRateSubmision;
 
 import java.util.concurrent.TimeUnit;
 
@@ -14,26 +13,28 @@ import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 import retrofit.http.Body;
+import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.Path;
 
 /**
- * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
+ * 
+ * @author SHIN DAE YONG
  */
-public class SendMultipleTextualSmsAdvanced {
+public class SendSmsConversionReport {
     private final Configuration configuration;
 
-    public SendMultipleTextualSmsAdvanced(Configuration configuration) {
+    public SendSmsConversionReport(Configuration configuration) {
         this.configuration = configuration;
     }
 
-    interface SendMultipleTextualSmsAdvancedService {
-        @POST("/sms/1/text/advanced")
-        SMSResponse execute(@Body SMSAdvancedTextualRequest bodyObject);
+    interface SendSmsConversionReportService {
+        @POST("/ct/1/log/end/{messageId}")
+        ConversionRateSubmision execute(@Path("messageId") String messageId,@Body String body);
     }
-    public SMSResponse execute(SMSAdvancedTextualRequest bodyObject) {
+    public ConversionRateSubmision execute(String messageId) {
     	final OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.setReadTimeout(4, TimeUnit.SECONDS);
+        okHttpClient.setReadTimeout(2, TimeUnit.SECONDS);
         okHttpClient.setConnectTimeout(2, TimeUnit.SECONDS);
       
         
@@ -45,8 +46,8 @@ public class SendMultipleTextualSmsAdvanced {
                 						.create()))
                 .setClient(new OkClient(okHttpClient))
                 .build();
-        SendMultipleTextualSmsAdvancedService service = restAdapter.create(SendMultipleTextualSmsAdvancedService.class);
-        return service.execute(bodyObject);
+        SendSmsConversionReportService service = restAdapter.create(SendSmsConversionReportService.class);
+        return service.execute(messageId,"");
     }
 
     private RequestInterceptor getRequestInterceptor() {
