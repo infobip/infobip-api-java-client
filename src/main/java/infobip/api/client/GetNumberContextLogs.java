@@ -1,8 +1,10 @@
 package infobip.api.client;
 
 import com.google.gson.GsonBuilder;
+
 import infobip.api.config.Configuration;
 import infobip.api.config.FormattedDate;
+import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.nc.logs.NumberContextLogsResponse;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -32,6 +34,7 @@ public class GetNumberContextLogs {
                 .setConverter(new GsonConverter(new GsonBuilder()
                 						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
                 						.create()))
+                .setClient(new TimeoutClientProvider(configuration))
                 .build();
         GetNumberContextLogsService service = restAdapter.create(GetNumberContextLogsService.class);
         return service.execute(to, bulkId, messageId, generalStatus, sentSince, sentUntil, limit, mcc, mnc);

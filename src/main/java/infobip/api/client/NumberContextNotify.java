@@ -1,9 +1,12 @@
 package infobip.api.client;
 
 import infobip.api.config.Configuration;
+import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.nc.notify.NumberContextRequest;
 import infobip.api.model.nc.notify.NumberContextResponse;
+
 import com.google.gson.GsonBuilder;
+
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
@@ -32,6 +35,7 @@ public class NumberContextNotify {
                 .setConverter(new GsonConverter(new GsonBuilder()
                 						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
                 						.create()))
+                .setClient(new TimeoutClientProvider(configuration))
                 .build();
         NumberContextNotifyService service = restAdapter.create(NumberContextNotifyService.class);
         return service.execute(bodyObject);

@@ -87,30 +87,16 @@
 		<maven-jar-plugin.version>2.6</maven-jar-plugin.version>
 	</properties>
 
-<!-- 	<distributionManagement> -->
-<!-- 		<repository> -->
-<!-- 			<id>ossrh-releases</id> -->
-<!-- 			<name>SonatypeReleases</name> -->
-<!-- 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url> -->
-<!-- 		</repository> -->
-<!-- 		<snapshotRepository> -->
-<!-- 			<id>ossrh-snapshots</id> -->
-<!-- 			<name>SonatypeSnapshots</name> -->
-<!-- 			<url>https://oss.sonatype.org/content/repositories/snapshots</url> -->
-<!-- 		</snapshotRepository> -->
-<!-- 	</distributionManagement> -->
 	<distributionManagement>
 		<repository>
-			<id>band.release.repository</id>
-			<name>band.us.release</name>
-			<url>http://maven.band.us/nexus/content/repositories/releases</url>
-			<layout>default</layout>
+			<id>ossrh-releases</id>
+			<name>SonatypeReleases</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
 		<snapshotRepository>
-			<id>band.snapshot.repository</id>
-			<name>band.us.snapshot</name>
-			<url>http://maven.band.us/nexus/content/repositories/snapshots</url>
-			<layout>default</layout>
+			<id>ossrh-snapshots</id>
+			<name>SonatypeSnapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
