@@ -18,15 +18,15 @@
             <outputDirectory>/</outputDirectory>
             <destName>${project.artifactId}-${project.version}-sources.jar</destName>
         </file>
-<!--         <file> -->
-<!--             <source>target/${project.artifactId}-${project.version}-tests.jar</source> -->
-<!--             <outputDirectory>/</outputDirectory> -->
-<!--             <destName>${project.artifactId}-${project.version}-tests.jar</destName> -->
-<!--         </file> -->
-<!--         <file> -->
-<!--             <source>target/${project.artifactId}-${project.version}-jar-with-dependencies.jar</source> -->
-<!--             <outputDirectory>/</outputDirectory> -->
-<!--             <destName>${project.artifactId}-${project.version}-jar-with-dependencies.jar</destName> -->
-<!--         </file> -->
+        <file>
+            <source>target/${project.artifactId}-${project.version}-tests.jar</source>
+            <outputDirectory>/</outputDirectory>
+            <destName>${project.artifactId}-${project.version}-tests.jar</destName>
+        </file>
+        <file>
+            <source>target/${project.artifactId}-${project.version}-jar-with-dependencies.jar</source>
+            <outputDirectory>/</outputDirectory>
+            <destName>${project.artifactId}-${project.version}-jar-with-dependencies.jar</destName>
+        </file>
     </files>
 </assembly>
