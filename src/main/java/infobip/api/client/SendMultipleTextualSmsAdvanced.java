@@ -1,6 +1,7 @@
 package infobip.api.client;
 
 import infobip.api.config.Configuration;
+import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.sms.mt.send.SMSResponse;
 import infobip.api.model.sms.mt.send.textual.SMSAdvancedTextualRequest;
 
@@ -11,6 +12,7 @@ import com.squareup.okhttp.OkHttpClient;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
+import retrofit.client.Client;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 import retrofit.http.Body;
@@ -32,18 +34,13 @@ public class SendMultipleTextualSmsAdvanced {
         SMSResponse execute(@Body SMSAdvancedTextualRequest bodyObject);
     }
     public SMSResponse execute(SMSAdvancedTextualRequest bodyObject) {
-    	final OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.setReadTimeout(4, TimeUnit.SECONDS);
-        okHttpClient.setConnectTimeout(2, TimeUnit.SECONDS);
-      
-        
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
                 .setConverter(new GsonConverter(new GsonBuilder()
                 						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
                 						.create()))
-                .setClient(new OkClient(okHttpClient))
+                .setClient(new TimeoutClientProvider(configuration))
                 .build();
         SendMultipleTextualSmsAdvancedService service = restAdapter.create(SendMultipleTextualSmsAdvancedService.class);
         return service.execute(bodyObject);

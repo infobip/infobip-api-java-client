@@ -1,8 +1,10 @@
 package infobip.api.client;
 
 import com.google.gson.GsonBuilder;
+
 import infobip.api.config.Configuration;
 import infobip.api.config.FormattedDate;
+import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.sms.mt.logs.SMSLogsResponse;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -32,6 +34,7 @@ public class GetSentSmsLogs {
                 .setConverter(new GsonConverter(new GsonBuilder()
                 						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
                 						.create()))
+                .setClient(new TimeoutClientProvider(configuration))
                 .build();
         GetSentSmsLogsService service = restAdapter.create(GetSentSmsLogsService.class);
         return service.execute(from, to, bulkId, messageId, generalStatus, sentSince, sentUntil, limit, mcc, mnc);
