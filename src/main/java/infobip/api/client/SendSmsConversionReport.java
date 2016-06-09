@@ -1,33 +1,34 @@
 package infobip.api.client;
 
+import infobip.api.config.Configuration;
+import infobip.api.config.TimeoutClientProvider;
+import infobip.api.model.sms.mt.conversion.ConversionRateSubmision;
+
 import com.google.gson.GsonBuilder;
 
-import infobip.api.config.Configuration;
-import infobip.api.config.FormattedDate;
-import infobip.api.config.TimeoutClientProvider;
-import infobip.api.model.sms.mo.logs.MOLogsResponse;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
-import retrofit.http.GET;
-import retrofit.http.Query;
+import retrofit.http.Body;
+import retrofit.http.POST;
+import retrofit.http.Path;
 
 /**
- * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
+ * 
+ * @author SHIN DAE YONG
  */
-public class GetReceivedSmsLogs {
+public class SendSmsConversionReport {
     private final Configuration configuration;
 
-    public GetReceivedSmsLogs(Configuration configuration) {
+    public SendSmsConversionReport(Configuration configuration) {
         this.configuration = configuration;
     }
 
-    interface GetReceivedSmsLogsService {
-        @GET("/sms/1/inbox/logs")
-        MOLogsResponse execute(@Query("to") java.lang.String to, @Query("receivedSince") FormattedDate receivedSince, @Query("receivedUntil") FormattedDate receivedUntil, @Query("limit") java.lang.Integer limit, @Query("keyword") java.lang.String keyword);
+    interface SendSmsConversionReportService {
+        @POST("/ct/1/log/end/{messageId}")
+        ConversionRateSubmision execute(@Path("messageId") String messageId,@Body String body);
     }
-    public MOLogsResponse execute(java.lang.String to, FormattedDate receivedSince, FormattedDate receivedUntil, java.lang.Integer limit, java.lang.String keyword) {
+    public ConversionRateSubmision execute(String messageId) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
@@ -36,8 +37,8 @@ public class GetReceivedSmsLogs {
                 						.create()))
                 .setClient(new TimeoutClientProvider(configuration))
                 .build();
-        GetReceivedSmsLogsService service = restAdapter.create(GetReceivedSmsLogsService.class);
-        return service.execute(to, receivedSince, receivedUntil, limit, keyword);
+        SendSmsConversionReportService service = restAdapter.create(SendSmsConversionReportService.class);
+        return service.execute(messageId,"");
     }
 
     private RequestInterceptor getRequestInterceptor() {

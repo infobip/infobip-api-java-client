@@ -1,9 +1,12 @@
 package infobip.api.client;
 
 import infobip.api.config.Configuration;
+import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.sms.mt.send.SMSResponse;
 import infobip.api.model.sms.mt.send.textual.SMSMultiTextualRequest;
+
 import com.google.gson.GsonBuilder;
+
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
@@ -32,6 +35,7 @@ public class SendMultipleSmsTextual {
                 .setConverter(new GsonConverter(new GsonBuilder()
                 						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
                 						.create()))
+                .setClient(new TimeoutClientProvider(configuration))
                 .build();
         SendMultipleSmsTextualService service = restAdapter.create(SendMultipleSmsTextualService.class);
         return service.execute(bodyObject);

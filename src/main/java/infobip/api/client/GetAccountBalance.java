@@ -1,7 +1,9 @@
 package infobip.api.client;
 
 import com.google.gson.GsonBuilder;
+
 import infobip.api.config.Configuration;
+import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.account.AccountBalance;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -30,6 +32,7 @@ public class GetAccountBalance {
                 .setConverter(new GsonConverter(new GsonBuilder()
                 						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
                 						.create()))
+                .setClient(new TimeoutClientProvider(configuration))
                 .build();
         GetAccountBalanceService service = restAdapter.create(GetAccountBalanceService.class);
         return service.execute();

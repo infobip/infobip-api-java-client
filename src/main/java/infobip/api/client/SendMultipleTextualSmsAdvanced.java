@@ -1,11 +1,19 @@
 package infobip.api.client;
 
 import infobip.api.config.Configuration;
+import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.sms.mt.send.SMSResponse;
 import infobip.api.model.sms.mt.send.textual.SMSAdvancedTextualRequest;
+
+import java.util.concurrent.TimeUnit;
+
 import com.google.gson.GsonBuilder;
+import com.squareup.okhttp.OkHttpClient;
+
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
+import retrofit.client.Client;
+import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 import retrofit.http.Body;
 import retrofit.http.POST;
@@ -32,6 +40,7 @@ public class SendMultipleTextualSmsAdvanced {
                 .setConverter(new GsonConverter(new GsonBuilder()
                 						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
                 						.create()))
+                .setClient(new TimeoutClientProvider(configuration))
                 .build();
         SendMultipleTextualSmsAdvancedService service = restAdapter.create(SendMultipleTextualSmsAdvancedService.class);
         return service.execute(bodyObject);
