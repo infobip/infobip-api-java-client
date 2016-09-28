@@ -1,21 +1,19 @@
 package infobip.api.model.sms.mt.send.textual;
 
 import infobip.api.model.sms.mt.send.Message;
-
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class SMSMultiTextualRequest {
     private String bulkId;
-    private List<Message> messages;
+    private List<Message> messages = new ArrayList<Message>();
 
     public SMSMultiTextualRequest() {
     }
-
 
     public String getBulkId() {
         return this.bulkId;
@@ -25,7 +23,6 @@ public class SMSMultiTextualRequest {
         this.bulkId = bulkId;
         return this;
     }
-
 
     public List<Message> getMessages() {
         return this.messages;
@@ -55,16 +52,16 @@ public class SMSMultiTextualRequest {
             return false;
         }
 
-        SMSMultiTextualRequest o = (SMSMultiTextualRequest) obj;
+        SMSMultiTextualRequest o = (SMSMultiTextualRequest)obj;
         if (this.bulkId == null) {
-            if (o.bulkId != null) {
+            if (o.bulkId != null){
                 return false;
             }
         } else if (!this.bulkId.equals(o.bulkId)) {
             return false;
         }
         if (this.messages == null) {
-            if (o.messages != null) {
+            if (o.messages != null){
                 return false;
             }
         } else if (!this.messages.equals(o.messages)) {
@@ -77,9 +74,8 @@ public class SMSMultiTextualRequest {
     @Override
     public String toString() {
         return "SMSMultiTextualRequest{" +
-                "bulkId='" + bulkId + "'" +
-
-                ", messages=" + (messages == null ? "null" : Arrays.toString(messages.toArray())) +
-                '}';
+            "bulkId='" + bulkId + "'" +
+            ", messages=" + (messages == null?"null":Arrays.toString(messages.toArray())) +
+            '}';
     }
 }

@@ -2,7 +2,6 @@ package infobip.api.model.sms.mt.send.binary;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class BinaryContent {
     private Integer dataCoding;
@@ -11,7 +10,6 @@ public class BinaryContent {
 
     public BinaryContent() {
     }
-
 
     public Integer getDataCoding() {
         return this.dataCoding;
@@ -22,7 +20,6 @@ public class BinaryContent {
         return this;
     }
 
-
     public String getHex() {
         return this.hex;
     }
@@ -31,7 +28,6 @@ public class BinaryContent {
         this.hex = hex;
         return this;
     }
-
 
     public Integer getEsmClass() {
         return this.esmClass;
@@ -81,9 +77,7 @@ public class BinaryContent {
     public String toString() {
         return "BinaryContent{" +
             "dataCoding='" + dataCoding + "'" +
-
             ", hex='" + hex + "'" +
-
             ", esmClass='" + esmClass + "'" +
             '}';
     }

@@ -1,23 +1,21 @@
 package infobip.api.model.sms.mt.send.textual;
 
 import infobip.api.model.sms.mt.send.Message;
-import infobip.api.model.sms.mt.send.Tracking;
-
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import infobip.api.model.sms.mt.send.Tracking;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class SMSAdvancedTextualRequest {
     private String bulkId;
-    private List<Message> messages;
+    private List<Message> messages = new ArrayList<Message>();
     private Tracking tracking;
 
     public SMSAdvancedTextualRequest() {
     }
-
 
     public String getBulkId() {
         return this.bulkId;
@@ -27,7 +25,6 @@ public class SMSAdvancedTextualRequest {
         this.bulkId = bulkId;
         return this;
     }
-
 
     public List<Message> getMessages() {
         return this.messages;
@@ -48,7 +45,6 @@ public class SMSAdvancedTextualRequest {
         return this;
     }
 
-
     public Tracking getTracking() {
         return this.tracking;
     }
@@ -67,23 +63,23 @@ public class SMSAdvancedTextualRequest {
             return false;
         }
 
-        SMSAdvancedTextualRequest o = (SMSAdvancedTextualRequest) obj;
+        SMSAdvancedTextualRequest o = (SMSAdvancedTextualRequest)obj;
         if (this.bulkId == null) {
-            if (o.bulkId != null) {
+            if (o.bulkId != null){
                 return false;
             }
         } else if (!this.bulkId.equals(o.bulkId)) {
             return false;
         }
         if (this.messages == null) {
-            if (o.messages != null) {
+            if (o.messages != null){
                 return false;
             }
         } else if (!this.messages.equals(o.messages)) {
             return false;
         }
         if (this.tracking == null) {
-            if (o.tracking != null) {
+            if (o.tracking != null){
                 return false;
             }
         } else if (!this.tracking.equals(o.tracking)) {
@@ -96,11 +92,9 @@ public class SMSAdvancedTextualRequest {
     @Override
     public String toString() {
         return "SMSAdvancedTextualRequest{" +
-                "bulkId='" + bulkId + "'" +
-
-                ", messages=" + (messages == null ? "null" : Arrays.toString(messages.toArray())) +
-
-                ", tracking='" + tracking + "'" +
-                '}';
+            "bulkId='" + bulkId + "'" +
+            ", messages=" + (messages == null?"null":Arrays.toString(messages.toArray())) +
+            ", tracking='" + tracking + "'" +
+            '}';
     }
 }

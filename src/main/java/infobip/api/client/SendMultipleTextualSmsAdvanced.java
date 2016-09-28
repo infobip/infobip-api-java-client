@@ -1,26 +1,16 @@
 package infobip.api.client;
 
 import infobip.api.config.Configuration;
+import retrofit.*;
+import retrofit.http.*;
+import com.google.gson.GsonBuilder;
+import retrofit.converter.GsonConverter;
 import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.sms.mt.send.SMSResponse;
 import infobip.api.model.sms.mt.send.textual.SMSAdvancedTextualRequest;
 
-import java.util.concurrent.TimeUnit;
-
-import com.google.gson.GsonBuilder;
-import com.squareup.okhttp.OkHttpClient;
-
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.client.Client;
-import retrofit.client.OkClient;
-import retrofit.converter.GsonConverter;
-import retrofit.http.Body;
-import retrofit.http.POST;
-
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class SendMultipleTextualSmsAdvanced {
     private final Configuration configuration;
@@ -31,7 +21,7 @@ public class SendMultipleTextualSmsAdvanced {
 
     interface SendMultipleTextualSmsAdvancedService {
         @POST("/sms/1/text/advanced")
-        SMSResponse execute(@Body SMSAdvancedTextualRequest bodyObject);
+        SMSResponse execute( @Body SMSAdvancedTextualRequest bodyObject);
     }
     public SMSResponse execute(SMSAdvancedTextualRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()

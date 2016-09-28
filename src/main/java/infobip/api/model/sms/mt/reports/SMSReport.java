@@ -7,7 +7,6 @@ import infobip.api.model.Status;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class SMSReport {
     private Date doneAt;

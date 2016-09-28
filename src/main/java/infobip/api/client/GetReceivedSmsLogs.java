@@ -1,20 +1,16 @@
 package infobip.api.client;
 
-import com.google.gson.GsonBuilder;
-
 import infobip.api.config.Configuration;
-import infobip.api.config.FormattedDate;
+import retrofit.*;
+import retrofit.http.*;
+import com.google.gson.GsonBuilder;
+import retrofit.converter.GsonConverter;
 import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.sms.mo.logs.MOLogsResponse;
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
-import retrofit.http.GET;
-import retrofit.http.Query;
+import infobip.api.config.FormattedDate;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class GetReceivedSmsLogs {
     private final Configuration configuration;
@@ -25,9 +21,9 @@ public class GetReceivedSmsLogs {
 
     interface GetReceivedSmsLogsService {
         @GET("/sms/1/inbox/logs")
-        MOLogsResponse execute(@Query("to") java.lang.String to, @Query("receivedSince") FormattedDate receivedSince, @Query("receivedUntil") FormattedDate receivedUntil, @Query("limit") java.lang.Integer limit, @Query("keyword") java.lang.String keyword);
+        MOLogsResponse execute(@Query("to") String to, @Query("receivedSince") FormattedDate receivedSince, @Query("receivedUntil") FormattedDate receivedUntil, @Query("limit") Integer limit, @Query("keyword") String keyword);
     }
-    public MOLogsResponse execute(java.lang.String to, FormattedDate receivedSince, FormattedDate receivedUntil, java.lang.Integer limit, java.lang.String keyword) {
+    public MOLogsResponse execute(String to, FormattedDate receivedSince, FormattedDate receivedUntil, Integer limit, String keyword) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())

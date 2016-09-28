@@ -1,21 +1,16 @@
 package infobip.api.client;
 
 import infobip.api.config.Configuration;
+import retrofit.*;
+import retrofit.http.*;
+import com.google.gson.GsonBuilder;
+import retrofit.converter.GsonConverter;
 import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.sms.mt.send.SMSResponse;
 import infobip.api.model.sms.mt.send.textual.SMSTextualRequest;
 
-import com.google.gson.GsonBuilder;
-
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
-import retrofit.http.Body;
-import retrofit.http.POST;
-
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class SendSingleTextualSms {
     private final Configuration configuration;
@@ -26,7 +21,7 @@ public class SendSingleTextualSms {
 
     interface SendSingleTextualSmsService {
         @POST("/sms/1/text/single")
-        SMSResponse execute(@Body SMSTextualRequest bodyObject);
+        SMSResponse execute( @Body SMSTextualRequest bodyObject);
     }
     public SMSResponse execute(SMSTextualRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()

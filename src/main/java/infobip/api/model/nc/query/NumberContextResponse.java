@@ -1,19 +1,19 @@
 package infobip.api.model.nc.query;
 
+import infobip.api.model.nc.query.NumberContextResponseDetails;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class NumberContextResponse {
     private String bulkId;
-    private List<NumberContextResponseDetails> results;
+    private List<NumberContextResponseDetails> results = new ArrayList<NumberContextResponseDetails>();
 
     public NumberContextResponse() {
     }
-
 
     public String getBulkId() {
         return this.bulkId;
@@ -23,7 +23,6 @@ public class NumberContextResponse {
         this.bulkId = bulkId;
         return this;
     }
-
 
     public List<NumberContextResponseDetails> getResults() {
         return this.results;
@@ -53,16 +52,16 @@ public class NumberContextResponse {
             return false;
         }
 
-        NumberContextResponse o = (NumberContextResponse) obj;
+        NumberContextResponse o = (NumberContextResponse)obj;
         if (this.bulkId == null) {
-            if (o.bulkId != null) {
+            if (o.bulkId != null){
                 return false;
             }
         } else if (!this.bulkId.equals(o.bulkId)) {
             return false;
         }
         if (this.results == null) {
-            if (o.results != null) {
+            if (o.results != null){
                 return false;
             }
         } else if (!this.results.equals(o.results)) {
@@ -75,9 +74,8 @@ public class NumberContextResponse {
     @Override
     public String toString() {
         return "NumberContextResponse{" +
-                "bulkId='" + bulkId + "'" +
-
-                ", results=" + (results == null ? "null" : Arrays.toString(results.toArray())) +
-                '}';
+            "bulkId='" + bulkId + "'" +
+            ", results=" + (results == null?"null":Arrays.toString(results.toArray())) +
+            '}';
     }
 }

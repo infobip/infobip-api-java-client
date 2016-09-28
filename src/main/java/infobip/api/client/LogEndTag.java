@@ -1,34 +1,28 @@
 package infobip.api.client;
 
 import infobip.api.config.Configuration;
-import infobip.api.config.TimeoutClientProvider;
-import infobip.api.model.sms.mt.conversion.ConversionRateSubmision;
-
+import retrofit.*;
+import retrofit.http.*;
 import com.google.gson.GsonBuilder;
-
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
-import retrofit.http.Body;
-import retrofit.http.POST;
-import retrofit.http.Path;
+import infobip.api.config.TimeoutClientProvider;
+import infobip.api.model.conversion.EndTagResponse;
 
 /**
- * 
- * @author SHIN DAE YONG
+ * This is a generated class and is not intended for modification!
  */
-public class SendSmsConversionReport {
+public class LogEndTag {
     private final Configuration configuration;
 
-    public SendSmsConversionReport(Configuration configuration) {
+    public LogEndTag(Configuration configuration) {
         this.configuration = configuration;
     }
 
-    interface SendSmsConversionReportService {
+    interface LogEndTagService {
         @POST("/ct/1/log/end/{messageId}")
-        ConversionRateSubmision execute(@Path("messageId") String messageId,@Body String body);
+        EndTagResponse execute(@Path("messageId") String messageId);
     }
-    public ConversionRateSubmision execute(String messageId) {
+    public EndTagResponse execute(String messageId) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
@@ -37,8 +31,8 @@ public class SendSmsConversionReport {
                 						.create()))
                 .setClient(new TimeoutClientProvider(configuration))
                 .build();
-        SendSmsConversionReportService service = restAdapter.create(SendSmsConversionReportService.class);
-        return service.execute(messageId,"");
+        LogEndTagService service = restAdapter.create(LogEndTagService.class);
+        return service.execute(messageId);
     }
 
     private RequestInterceptor getRequestInterceptor() {

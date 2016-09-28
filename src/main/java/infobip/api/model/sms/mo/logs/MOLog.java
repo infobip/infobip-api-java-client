@@ -4,7 +4,6 @@ import java.util.Date;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class MOLog {
     private String cleanText;

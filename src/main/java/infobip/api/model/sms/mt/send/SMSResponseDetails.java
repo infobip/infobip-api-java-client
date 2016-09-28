@@ -4,7 +4,6 @@ import infobip.api.model.Status;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class SMSResponseDetails {
     private Integer smsCount;
@@ -15,7 +14,6 @@ public class SMSResponseDetails {
     public SMSResponseDetails() {
     }
 
-
     public Integer getSmsCount() {
         return this.smsCount;
     }
@@ -24,7 +22,6 @@ public class SMSResponseDetails {
         this.smsCount = smsCount;
         return this;
     }
-
 
     public String getMessageId() {
         return this.messageId;
@@ -35,7 +32,6 @@ public class SMSResponseDetails {
         return this;
     }
 
-
     public String getTo() {
         return this.to;
     }
@@ -44,7 +40,6 @@ public class SMSResponseDetails {
         this.to = to;
         return this;
     }
-
 
     public Status getStatus() {
         return this.status;
@@ -101,11 +96,8 @@ public class SMSResponseDetails {
     public String toString() {
         return "SMSResponseDetails{" +
             "smsCount='" + smsCount + "'" +
-
             ", messageId='" + messageId + "'" +
-
             ", to='" + to + "'" +
-
             ", status='" + status + "'" +
             '}';
     }
