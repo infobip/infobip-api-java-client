@@ -1,20 +1,22 @@
 package infobip.api.model.account;
 
+import java.math.BigDecimal;
+
 /**
  * This is a generated class and is not intended for modification!
  */
 public class AccountBalance {
-    private Double balance;
+    private BigDecimal balance;
     private String currency;
 
     public AccountBalance() {
     }
 
-    public Double getBalance() {
+    public BigDecimal getBalance() {
         return this.balance;
     }
 
-    public AccountBalance setBalance(Double balance) {
+    public AccountBalance setBalance(BigDecimal balance) {
         this.balance = balance;
         return this;
     }
