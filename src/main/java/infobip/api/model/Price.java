@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class Price {
     private BigDecimal pricePerLookup;

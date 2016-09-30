@@ -2,9 +2,6 @@ package infobip.api.config;
 
 import javax.xml.bind.DatatypeConverter;
 
-/**
- * Created by denis on 13.07.15..
- */
 public class BasicAuthConfiguration extends Configuration {
 
     private final String username;

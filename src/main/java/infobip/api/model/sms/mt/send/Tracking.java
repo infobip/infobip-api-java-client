@@ -2,7 +2,6 @@ package infobip.api.model.sms.mt.send;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class Tracking {
     private String processKey;
@@ -11,7 +10,6 @@ public class Tracking {
 
     public Tracking() {
     }
-
 
     public String getProcessKey() {
         return this.processKey;
@@ -22,7 +20,6 @@ public class Tracking {
         return this;
     }
 
-
     public String getTrack() {
         return this.track;
     }
@@ -31,7 +28,6 @@ public class Tracking {
         this.track = track;
         return this;
     }
-
 
     public String getType() {
         return this.type;
@@ -81,9 +77,7 @@ public class Tracking {
     public String toString() {
         return "Tracking{" +
             "processKey='" + processKey + "'" +
-
             ", track='" + track + "'" +
-
             ", type='" + type + "'" +
             '}';
     }

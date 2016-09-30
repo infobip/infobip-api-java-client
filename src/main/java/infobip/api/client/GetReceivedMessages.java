@@ -1,20 +1,15 @@
 package infobip.api.client;
 
 import infobip.api.config.Configuration;
+import retrofit.*;
+import retrofit.http.*;
+import com.google.gson.GsonBuilder;
+import retrofit.converter.GsonConverter;
 import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.sms.mo.reports.MOReportResponse;
 
-import com.google.gson.GsonBuilder;
-
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
-import retrofit.http.GET;
-import retrofit.http.Query;
-
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class GetReceivedMessages {
     private final Configuration configuration;
@@ -25,9 +20,9 @@ public class GetReceivedMessages {
 
     interface GetReceivedMessagesService {
         @GET("/sms/1/inbox/reports")
-        MOReportResponse execute(@Query("limit") java.lang.Integer limit);
+        MOReportResponse execute(@Query("limit") Integer limit);
     }
-    public MOReportResponse execute(java.lang.Integer limit) {
+    public MOReportResponse execute(Integer limit) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())

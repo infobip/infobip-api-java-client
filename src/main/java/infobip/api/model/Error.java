@@ -2,7 +2,6 @@ package infobip.api.model;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class Error {
     private String groupName;

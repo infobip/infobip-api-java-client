@@ -25,7 +25,7 @@ public class SendSmsFlashExample extends Example {
         message.setFrom(FROM);
         message.setDestinations(Collections.singletonList(destination));
         message.setText("Flash text");
-        message.setIsFlash(true);
+        message.setFlash(true);
 
         SMSAdvancedTextualRequest requestBody = new SMSAdvancedTextualRequest();
         requestBody.setMessages(Collections.singletonList(message));

@@ -2,7 +2,6 @@ package infobip.api.model;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class Destination {
     private String messageId;
@@ -38,16 +37,16 @@ public class Destination {
             return false;
         }
 
-        Destination o = (Destination) obj;
+        Destination o = (Destination)obj;
         if (this.messageId == null) {
-            if (o.messageId != null) {
+            if (o.messageId != null){
                 return false;
             }
         } else if (!this.messageId.equals(o.messageId)) {
             return false;
         }
         if (this.to == null) {
-            if (o.to != null) {
+            if (o.to != null){
                 return false;
             }
         } else if (!this.to.equals(o.to)) {
@@ -60,9 +59,8 @@ public class Destination {
     @Override
     public String toString() {
         return "Destination{" +
-                "messageId='" + messageId + "'" +
-
-                ", to='" + to + "'" +
-                '}';
+            "messageId='" + messageId + "'" +
+            ", to='" + to + "'" +
+            '}';
     }
 }

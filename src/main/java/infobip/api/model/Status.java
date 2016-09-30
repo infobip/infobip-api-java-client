@@ -2,7 +2,6 @@ package infobip.api.model;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class Status {
     private String groupName;
@@ -15,7 +14,6 @@ public class Status {
     public Status() {
     }
 
-
     public String getGroupName() {
         return this.groupName;
     }
@@ -24,7 +22,6 @@ public class Status {
         this.groupName = groupName;
         return this;
     }
-
 
     public Integer getGroupId() {
         return this.groupId;
@@ -35,7 +32,6 @@ public class Status {
         return this;
     }
 
-
     public String getName() {
         return this.name;
     }
@@ -44,7 +40,6 @@ public class Status {
         this.name = name;
         return this;
     }
-
 
     public String getDescription() {
         return this.description;
@@ -55,7 +50,6 @@ public class Status {
         return this;
     }
 
-
     public String getAction() {
         return this.action;
     }
@@ -64,7 +58,6 @@ public class Status {
         this.action = action;
         return this;
     }
-
 
     public Integer getId() {
         return this.id;
@@ -135,15 +128,10 @@ public class Status {
     public String toString() {
         return "Status{" +
             "groupName='" + groupName + "'" +
-
             ", groupId='" + groupId + "'" +
-
             ", name='" + name + "'" +
-
             ", description='" + description + "'" +
-
             ", action='" + action + "'" +
-
             ", id='" + id + "'" +
             '}';
     }

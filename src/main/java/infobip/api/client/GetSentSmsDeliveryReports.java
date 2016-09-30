@@ -1,20 +1,15 @@
 package infobip.api.client;
 
 import infobip.api.config.Configuration;
+import retrofit.*;
+import retrofit.http.*;
+import com.google.gson.GsonBuilder;
+import retrofit.converter.GsonConverter;
 import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.sms.mt.reports.SMSReportResponse;
 
-import com.google.gson.GsonBuilder;
-
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
-import retrofit.http.GET;
-import retrofit.http.Query;
-
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class GetSentSmsDeliveryReports {
     private final Configuration configuration;
@@ -25,9 +20,9 @@ public class GetSentSmsDeliveryReports {
 
     interface GetSentSmsDeliveryReportsService {
         @GET("/sms/1/reports")
-        SMSReportResponse execute(@Query("bulkId") java.lang.String bulkId, @Query("messageId") java.lang.String messageId, @Query("limit") java.lang.Integer limit);
+        SMSReportResponse execute(@Query("bulkId") String bulkId, @Query("messageId") String messageId, @Query("limit") Integer limit);
     }
-    public SMSReportResponse execute(java.lang.String bulkId, java.lang.String messageId, java.lang.Integer limit) {
+    public SMSReportResponse execute(String bulkId, String messageId, Integer limit) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())

@@ -2,7 +2,6 @@ package infobip.api.model.sms.mt.send;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class Language {
     private Boolean lockingShift;
@@ -11,7 +10,6 @@ public class Language {
 
     public Language() {
     }
-
 
     public Boolean getLockingShift() {
         return this.lockingShift;
@@ -22,7 +20,6 @@ public class Language {
         return this;
     }
 
-
     public Boolean getSingleShift() {
         return this.singleShift;
     }
@@ -31,7 +28,6 @@ public class Language {
         this.singleShift = singleShift;
         return this;
     }
-
 
     public String getLanguageCode() {
         return this.languageCode;
@@ -81,9 +77,7 @@ public class Language {
     public String toString() {
         return "Language{" +
             "lockingShift='" + lockingShift + "'" +
-
             ", singleShift='" + singleShift + "'" +
-
             ", languageCode='" + languageCode + "'" +
             '}';
     }

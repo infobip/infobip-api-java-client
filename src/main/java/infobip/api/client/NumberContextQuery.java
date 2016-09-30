@@ -1,21 +1,16 @@
 package infobip.api.client;
 
 import infobip.api.config.Configuration;
-import infobip.api.config.TimeoutClientProvider;
-import infobip.api.model.nc.query.NumberContextRequest;
-import infobip.api.model.nc.query.NumberContextResponse;
-
+import retrofit.*;
+import retrofit.http.*;
 import com.google.gson.GsonBuilder;
-
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
-import retrofit.http.Body;
-import retrofit.http.POST;
+import infobip.api.config.TimeoutClientProvider;
+import infobip.api.model.nc.query.NumberContextResponse;
+import infobip.api.model.nc.query.NumberContextRequest;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class NumberContextQuery {
     private final Configuration configuration;
@@ -26,7 +21,7 @@ public class NumberContextQuery {
 
     interface NumberContextQueryService {
         @POST("/number/1/query")
-        NumberContextResponse execute(@Body NumberContextRequest bodyObject);
+        NumberContextResponse execute( @Body NumberContextRequest bodyObject);
     }
     public NumberContextResponse execute(NumberContextRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()

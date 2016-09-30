@@ -1,8 +1,5 @@
 package infobip.api.config;
 
-/**
- * Created by denis on 13.07.15..
- */
 public class ApiKeyAuthConfiguration extends Configuration {
 
     private final String apiKey;

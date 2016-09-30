@@ -1,18 +1,15 @@
 package infobip.api.client;
 
-import com.google.gson.GsonBuilder;
-
 import infobip.api.config.Configuration;
+import retrofit.*;
+import retrofit.http.*;
+import com.google.gson.GsonBuilder;
+import retrofit.converter.GsonConverter;
 import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.account.AccountBalance;
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
-import retrofit.http.GET;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class GetAccountBalance {
     private final Configuration configuration;

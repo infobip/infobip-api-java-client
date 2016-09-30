@@ -4,7 +4,6 @@ import java.util.Date;
 
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class MOReport {
     private String cleanText;
@@ -100,9 +99,9 @@ public class MOReport {
             return false;
         }
 
-        MOReport o = (MOReport) obj;
+        MOReport o = (MOReport)obj;
         if (this.cleanText == null) {
-            if (o.cleanText != null) {
+            if (o.cleanText != null){
                 return false;
             }
         } else if (!this.cleanText.equals(o.cleanText)) {
@@ -112,42 +111,42 @@ public class MOReport {
             return false;
         }
         if (this.messageId == null) {
-            if (o.messageId != null) {
+            if (o.messageId != null){
                 return false;
             }
         } else if (!this.messageId.equals(o.messageId)) {
             return false;
         }
         if (this.from == null) {
-            if (o.from != null) {
+            if (o.from != null){
                 return false;
             }
         } else if (!this.from.equals(o.from)) {
             return false;
         }
         if (this.to == null) {
-            if (o.to != null) {
+            if (o.to != null){
                 return false;
             }
         } else if (!this.to.equals(o.to)) {
             return false;
         }
         if (this.text == null) {
-            if (o.text != null) {
+            if (o.text != null){
                 return false;
             }
         } else if (!this.text.equals(o.text)) {
             return false;
         }
         if (this.keyword == null) {
-            if (o.keyword != null) {
+            if (o.keyword != null){
                 return false;
             }
         } else if (!this.keyword.equals(o.keyword)) {
             return false;
         }
         if (this.receivedAt == null) {
-            if (o.receivedAt != null) {
+            if (o.receivedAt != null){
                 return false;
             }
         } else if (!this.receivedAt.equals(o.receivedAt)) {
@@ -160,14 +159,14 @@ public class MOReport {
     @Override
     public String toString() {
         return "MOReport{" +
-                "cleanText='" + cleanText + "'" +
-                ", smsCount=" + smsCount +
-                ", messageId='" + messageId + "'" +
-                ", from='" + from + "'" +
-                ", to='" + to + "'" +
-                ", text='" + text + "'" +
-                ", keyword='" + keyword + "'" +
-                ", receivedAt='" + receivedAt + "'" +
-                '}';
+            "cleanText='" + cleanText + "'" +
+            ", smsCount=" + smsCount +
+            ", messageId='" + messageId + "'" +
+            ", from='" + from + "'" +
+            ", to='" + to + "'" +
+            ", text='" + text + "'" +
+            ", keyword='" + keyword + "'" +
+            ", receivedAt='" + receivedAt + "'" +
+            '}';
     }
 }

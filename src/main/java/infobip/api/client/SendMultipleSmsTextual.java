@@ -1,21 +1,16 @@
 package infobip.api.client;
 
 import infobip.api.config.Configuration;
+import retrofit.*;
+import retrofit.http.*;
+import com.google.gson.GsonBuilder;
+import retrofit.converter.GsonConverter;
 import infobip.api.config.TimeoutClientProvider;
 import infobip.api.model.sms.mt.send.SMSResponse;
 import infobip.api.model.sms.mt.send.textual.SMSMultiTextualRequest;
 
-import com.google.gson.GsonBuilder;
-
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
-import retrofit.http.Body;
-import retrofit.http.POST;
-
 /**
  * This is a generated class and is not intended for modification!
- * TODO: Point to Github contribution instructions
  */
 public class SendMultipleSmsTextual {
     private final Configuration configuration;
@@ -26,7 +21,7 @@ public class SendMultipleSmsTextual {
 
     interface SendMultipleSmsTextualService {
         @POST("/sms/1/text/multi")
-        SMSResponse execute(@Body SMSMultiTextualRequest bodyObject);
+        SMSResponse execute( @Body SMSMultiTextualRequest bodyObject);
     }
     public SMSResponse execute(SMSMultiTextualRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()
