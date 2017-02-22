@@ -1,6 +1,39 @@
 Infobip API Java client
 ============================
 
+Installation
+-----------
+
+It is recommended that you use a dependency management system to get started with using Infobip Java API client in your 
+project.
+You can choose between [Maven](https://maven.apache.org/) and  [Gradle](https://gradle.org/). Depending on your 
+choice find the appropriate configuration below.
+
+### Maven configuration
+For using the API client in your maven project add the following snippet to the <code>\<dependencies></code> section 
+of your <code>pom.xml</code> file:
+```
+<dependency>
+    <groupId>com.infobip</groupId>
+    <artifactId>infobip-api-java-client</artifactId>
+    <version>2.0.0</version>
+</dependency>
+```
+
+### Gradle configuration
+For adding the API client to your gradle project add the following line to the <code>dependencies</code> section 
+of your <code>build.gradle</code> file:
+```
+compile "com.infobip:infobip-api-java-client:2.0.0"
+```
+
+###Manual dependency management
+If you choose not to use any tool for dependency management you can still use the Infobip API client. A <code>
+.jar</code>
+ with the API client and all of its dependencies can be found at [maven central repository](https://search.maven.org/#search%7Cga%7C1%7Cinfobip-api-java-client).  
+From the list there click on <code>jar-with-dependencies.jar</code> link to download the <code>.jar</code> file that you
+ can manually integrate into your project.
+
 Running examples
 ----------------
 
