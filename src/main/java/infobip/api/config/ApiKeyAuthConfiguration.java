@@ -16,7 +16,7 @@ public class ApiKeyAuthConfiguration extends Configuration {
 
     @Override
     public String getAuthorizationHeader() {
-        return "Api " + apiKey;
+        return "App " + apiKey;
     }
 
     public String getApiKey() {
