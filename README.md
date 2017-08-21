@@ -32,7 +32,7 @@ of your <code>build.gradle</code> file:
 compile "com.infobip:infobip-api-java-client:2.0.0"
 ```
 
-###Manual dependency management
+### Manual dependency management
 If you choose not to use any tool for dependency management you can still use the Infobip API client. A <code>
 .jar</code>
  with the API client and all of its dependencies can be found at [maven central repository](https://search.maven.org/#search%7Cga%7C1%7Cinfobip-api-java-client).  
