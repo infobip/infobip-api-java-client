@@ -15,7 +15,7 @@ public class NumberContextQueryExample extends Example {
         NumberContextQuery client = new NumberContextQuery(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         NumberContextRequest requestBody = new NumberContextRequest();
-        requestBody.setTo(Collections.singletonList("41793026731"));
+        requestBody.setTo(Collections.singletonList(TO));
 
         NumberContextResponse response = client.execute(requestBody);
 

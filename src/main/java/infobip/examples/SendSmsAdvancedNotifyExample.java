@@ -17,7 +17,7 @@ public class SendSmsAdvancedNotifyExample extends Example {
         SendMultipleTextualSmsAdvanced client = new SendMultipleTextualSmsAdvanced(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         Destination destination = new Destination();
-        destination.setTo("41793026731");
+        destination.setTo(TO);
 
         Message message = new Message();
         message.setFrom(FROM);

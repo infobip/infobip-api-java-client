@@ -16,7 +16,7 @@ public class SendSmsExample extends Example {
 
         SMSTextualRequest requestBody = new SMSTextualRequest();
         requestBody.setFrom(FROM);
-        requestBody.setTo(Arrays.asList("41793026731", "41793026727"));
+        requestBody.setTo(Arrays.asList(TO, TO_2));
         requestBody.setText(MESSAGE_TEXT);
 
         SMSResponse response = client.execute(requestBody);

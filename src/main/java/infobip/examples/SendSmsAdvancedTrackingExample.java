@@ -18,7 +18,7 @@ public class SendSmsAdvancedTrackingExample extends Example {
         SendMultipleTextualSmsAdvanced client = new SendMultipleTextualSmsAdvanced(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         Destination destination = new Destination();
-        destination.setTo("41793026731");
+        destination.setTo(TO);
         destination.setMessageId("MESSAGE_ID");
 
         Message message = new Message();

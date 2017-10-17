@@ -15,7 +15,7 @@ public class NumberContextNotifyExample extends Example {
         NumberContextNotify client = new NumberContextNotify(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         NumberContextRequest requestBody = new NumberContextRequest();
-        requestBody.setTo(Collections.singletonList("41793026731"));
+        requestBody.setTo(Collections.singletonList(TO));
         requestBody.setNotifyUrl(NOTIFY_URL);
 
         NumberContextResponse response = client.execute(requestBody);
