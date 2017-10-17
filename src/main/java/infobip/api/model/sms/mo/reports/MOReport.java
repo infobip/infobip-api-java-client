@@ -1,5 +1,6 @@
 package infobip.api.model.sms.mo.reports;
 
+import infobip.api.model.Price;
 import java.util.Date;
 
 /**
@@ -8,6 +9,8 @@ import java.util.Date;
 public class MOReport {
     private String cleanText;
     private int smsCount;
+    private Price price;
+    private String callbackData;
     private String messageId;
     private String from;
     private String to;
@@ -33,6 +36,24 @@ public class MOReport {
 
     public MOReport setSmsCount(int smsCount) {
         this.smsCount = smsCount;
+        return this;
+    }
+
+    public Price getPrice() {
+        return this.price;
+    }
+
+    public MOReport setPrice(Price price) {
+        this.price = price;
+        return this;
+    }
+
+    public String getCallbackData() {
+        return this.callbackData;
+    }
+
+    public MOReport setCallbackData(String callbackData) {
+        this.callbackData = callbackData;
         return this;
     }
 
@@ -110,6 +131,20 @@ public class MOReport {
         if (this.smsCount != o.smsCount) {
             return false;
         }
+        if (this.price == null) {
+            if (o.price != null){
+                return false;
+            }
+        } else if (!this.price.equals(o.price)) {
+            return false;
+        }
+        if (this.callbackData == null) {
+            if (o.callbackData != null){
+                return false;
+            }
+        } else if (!this.callbackData.equals(o.callbackData)) {
+            return false;
+        }
         if (this.messageId == null) {
             if (o.messageId != null){
                 return false;
@@ -161,6 +196,8 @@ public class MOReport {
         return "MOReport{" +
             "cleanText='" + cleanText + "'" +
             ", smsCount=" + smsCount +
+            ", price='" + price + "'" +
+            ", callbackData='" + callbackData + "'" +
             ", messageId='" + messageId + "'" +
             ", from='" + from + "'" +
             ", to='" + to + "'" +
