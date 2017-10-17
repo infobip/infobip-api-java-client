@@ -37,6 +37,7 @@ public class DeserializeInboundMessagesExample {
             System.out.println("Keyword: " + result.getKeyword());
             System.out.println("Clean text: " + result.getCleanText());
             System.out.println("Sms Count: " + result.getSmsCount());
+            System.out.println("------------------------------------------------");
         }
     }
 }

@@ -25,6 +25,7 @@ public class NumberContextQueryExample extends Example {
             System.out.println("Original country prefix: " + sentRequestInfo.getOriginalNetwork().getCountryPrefix());
             System.out.println("Original network prefix: " + sentRequestInfo.getOriginalNetwork().getNetworkPrefix());
             System.out.println("Serving MSC: " + sentRequestInfo.getServingMSC());
+            System.out.println("------------------------------------------------");
         }
     }
 }

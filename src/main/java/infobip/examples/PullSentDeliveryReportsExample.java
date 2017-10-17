@@ -19,6 +19,7 @@ public class PullSentDeliveryReportsExample extends Example {
             System.out.println("Receiver: " + result.getTo());
             System.out.println("Status: " + result.getStatus().getName());
             System.out.println("Price: " + result.getPrice().getPricePerMessage() + " " + result.getPrice().getCurrency());
+            System.out.println("------------------------------------------------");
         }
     }
 }

@@ -19,6 +19,7 @@ public class GetInboxLogsExample extends Example {
             System.out.println("Sender: " + result.getFrom());
             System.out.println("Receiver: " + result.getTo());
             System.out.println("Message text: " + result.getText());
+            System.out.println("------------------------------------------------");
         }
     }
 }

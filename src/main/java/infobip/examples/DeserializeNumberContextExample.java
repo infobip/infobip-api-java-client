@@ -49,6 +49,7 @@ public class DeserializeNumberContextExample {
             System.out.println("Original country prefix: " + result.getOriginalNetwork().getCountryPrefix());
             System.out.println("Original network prefix: " + result.getOriginalNetwork().getNetworkPrefix());
             System.out.println("Serving MSC: " + result.getServingMSC());
+            System.out.println("------------------------------------------------");
         }
     }
 }

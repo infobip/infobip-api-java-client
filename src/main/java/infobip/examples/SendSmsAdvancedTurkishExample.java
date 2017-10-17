@@ -41,6 +41,7 @@ public class SendSmsAdvancedTurkishExample extends Example {
             System.out.println("Message ID: " + sentMessageInfo.getMessageId());
             System.out.println("Receiver: " + sentMessageInfo.getTo());
             System.out.println("Message status: " + sentMessageInfo.getStatus().getName());
+            System.out.println("------------------------------------------------");
         }
     }
 }

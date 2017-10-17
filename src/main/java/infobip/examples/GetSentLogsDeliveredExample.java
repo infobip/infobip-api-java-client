@@ -21,6 +21,7 @@ public class GetSentLogsDeliveredExample extends Example {
             System.out.println("Message text: " + result.getText());
             System.out.println("Status: " + result.getStatus().getName());
             System.out.println("Price: " + result.getPrice().getPricePerMessage() + " " + result.getPrice().getCurrency());
+            System.out.println("------------------------------------------------");
         }
     }
 }

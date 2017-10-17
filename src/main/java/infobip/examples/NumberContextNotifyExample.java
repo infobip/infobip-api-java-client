@@ -24,6 +24,7 @@ public class NumberContextNotifyExample extends Example {
             System.out.println("Message ID: " + sentRequestInfo.getMessageId());
             System.out.println("Phone number:: " + sentRequestInfo.getTo());
             System.out.println("Message status: " + sentRequestInfo.getStatus().getName());
+            System.out.println("------------------------------------------------");
         }
     }
 }
