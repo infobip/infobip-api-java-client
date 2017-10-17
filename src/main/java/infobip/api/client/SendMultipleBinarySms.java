@@ -21,7 +21,7 @@ public class SendMultipleBinarySms {
 
     interface SendMultipleBinarySmsService {
         @POST("/sms/1/binary/multi")
-        SMSResponse execute( @Body SMSMultiBinaryRequest bodyObject);
+        SMSResponse execute(@Body SMSMultiBinaryRequest bodyObject);
     }
     public SMSResponse execute(SMSMultiBinaryRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()

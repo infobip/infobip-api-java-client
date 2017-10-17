@@ -21,7 +21,7 @@ public class SendSingleBinarySms {
 
     interface SendSingleBinarySmsService {
         @POST("/sms/1/binary/single")
-        SMSResponse execute( @Body SMSBinaryRequest bodyObject);
+        SMSResponse execute(@Body SMSBinaryRequest bodyObject);
     }
     public SMSResponse execute(SMSBinaryRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()

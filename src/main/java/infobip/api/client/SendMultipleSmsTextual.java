@@ -21,7 +21,7 @@ public class SendMultipleSmsTextual {
 
     interface SendMultipleSmsTextualService {
         @POST("/sms/1/text/multi")
-        SMSResponse execute( @Body SMSMultiTextualRequest bodyObject);
+        SMSResponse execute(@Body SMSMultiTextualRequest bodyObject);
     }
     public SMSResponse execute(SMSMultiTextualRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()

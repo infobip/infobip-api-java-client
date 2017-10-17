@@ -21,7 +21,7 @@ public class NumberContextQuery {
 
     interface NumberContextQueryService {
         @POST("/number/1/query")
-        NumberContextResponse execute( @Body NumberContextRequest bodyObject);
+        NumberContextResponse execute(@Body NumberContextRequest bodyObject);
     }
     public NumberContextResponse execute(NumberContextRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()
