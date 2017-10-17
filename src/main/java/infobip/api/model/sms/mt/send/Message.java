@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import infobip.api.model.sms.mt.send.Language;
+import infobip.api.model.sms.mt.send.DeliveryTimeWindow;
 import infobip.api.model.sms.mt.send.binary.BinaryContent;
 import java.util.Date;
 
@@ -15,6 +16,7 @@ public class Message {
     private String campaignId;
     private List<Destination> destinations = new ArrayList<Destination>();
     private Language language;
+    private DeliveryTimeWindow deliveryTimeWindow;
     private Boolean notify;
     private String notifyContentType;
     private Long validityPeriod;
@@ -67,6 +69,15 @@ public class Message {
 
     public Message setLanguage(Language language) {
         this.language = language;
+        return this;
+    }
+
+    public DeliveryTimeWindow getDeliveryTimeWindow() {
+        return this.deliveryTimeWindow;
+    }
+
+    public Message setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
+        this.deliveryTimeWindow = deliveryTimeWindow;
         return this;
     }
 
@@ -237,6 +248,13 @@ public class Message {
         } else if (!this.language.equals(o.language)) {
             return false;
         }
+        if (this.deliveryTimeWindow == null) {
+            if (o.deliveryTimeWindow != null){
+                return false;
+            }
+        } else if (!this.deliveryTimeWindow.equals(o.deliveryTimeWindow)) {
+            return false;
+        }
         if (this.notify == null) {
             if (o.notify != null){
                 return false;
@@ -345,6 +363,7 @@ public class Message {
             "campaignId='" + campaignId + "'" +
             ", destinations=" + (destinations == null?"null":Arrays.toString(destinations.toArray())) +
             ", language='" + language + "'" +
+            ", deliveryTimeWindow='" + deliveryTimeWindow + "'" +
             ", notify='" + notify + "'" +
             ", notifyContentType='" + notifyContentType + "'" +
             ", validityPeriod='" + validityPeriod + "'" +
