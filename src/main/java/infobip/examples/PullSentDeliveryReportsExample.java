@@ -5,18 +5,15 @@ import infobip.api.config.BasicAuthConfiguration;
 import infobip.api.model.sms.mt.reports.SMSReport;
 import infobip.api.model.sms.mt.reports.SMSReportResponse;
 
-/**
- * Created by milosmilakovic on 9/24/15.
- */
 public class PullSentDeliveryReportsExample extends Example {
 
     public static void main(String[] args) {
+
         GetSentSmsDeliveryReports client = new GetSentSmsDeliveryReports(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         SMSReportResponse response = client.execute(null, null, 10);
 
-        for (int i = 0; i < response.getResults().size(); ++i) {
-            SMSReport result = response.getResults().get(i);
+        for (SMSReport result : response.getResults()) {
             System.out.println("Message ID: " + result.getMessageId());
             System.out.println("Sent at: " + result.getSentAt());
             System.out.println("Receiver: " + result.getTo());

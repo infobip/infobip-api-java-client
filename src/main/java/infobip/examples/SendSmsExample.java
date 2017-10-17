@@ -8,12 +8,10 @@ import infobip.api.model.sms.mt.send.textual.SMSTextualRequest;
 
 import java.util.Arrays;
 
-/**
- * Created by milosmilakovic on 9/23/15.
- */
 public class SendSmsExample extends Example {
 
     public static void main(String[] args) {
+
         SendSingleTextualSms client = new SendSingleTextualSms(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         SMSTextualRequest requestBody = new SMSTextualRequest();
@@ -23,9 +21,10 @@ public class SendSmsExample extends Example {
 
         SMSResponse response = client.execute(requestBody);
 
-        SMSResponseDetails sentMessageInfo = response.getMessages().get(0);
-        System.out.println("Message ID: " + sentMessageInfo.getMessageId());
-        System.out.println("Receiver: " + sentMessageInfo.getTo());
-        System.out.println("Message status: " + sentMessageInfo.getStatus().getName());
+        for (SMSResponseDetails sentMessageInfo : response.getMessages()) {
+            System.out.println("Message ID: " + sentMessageInfo.getMessageId());
+            System.out.println("Receiver: " + sentMessageInfo.getTo());
+            System.out.println("Message status: " + sentMessageInfo.getStatus().getName());
+        }
     }
 }

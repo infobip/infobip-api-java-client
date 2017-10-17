@@ -5,18 +5,15 @@ import infobip.api.config.BasicAuthConfiguration;
 import infobip.api.model.sms.mo.logs.MOLog;
 import infobip.api.model.sms.mo.logs.MOLogsResponse;
 
-/**
- * Created by milosmilakovic on 9/23/15.
- */
 public class GetInboxLogsExample extends Example {
 
     public static void main(String[] args) {
+
         GetReceivedSmsLogs client = new GetReceivedSmsLogs(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         MOLogsResponse response = client.execute(null, null, null, 10, null);
 
-        for (int i = 0; i < response.getResults().size(); ++i) {
-            MOLog result = response.getResults().get(i);
+        for (MOLog result : response.getResults()) {
             System.out.println("Message ID: " + result.getMessageId());
             System.out.println("Received at: " + result.getReceivedAt());
             System.out.println("Sender: " + result.getFrom());

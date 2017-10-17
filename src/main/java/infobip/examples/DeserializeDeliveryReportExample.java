@@ -5,14 +5,12 @@ import infobip.api.model.sms.mt.reports.SMSReportResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-/**
- * Created by milosmilakovic on 9/24/15.
- */
 public class DeserializeDeliveryReportExample {
 
     public static void main(String[] args) {
 
-         String requestBody = "{\n" +
+         String responseBody =
+                 "{\n" +
                 "  \"results\": [\n" +
                 "    {\n" +
                 "      \"bulkId\": \"BULK-ID-123-xyz\",\n" +
@@ -45,12 +43,12 @@ public class DeserializeDeliveryReportExample {
                 "}";
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-        SMSReportResponse smsReportResponse = gson.fromJson(requestBody, SMSReportResponse.class);
+        SMSReportResponse smsReportResponse = gson.fromJson(responseBody, SMSReportResponse.class);
 
-        for (int i = 0; i < smsReportResponse.getResults().size(); ++i) {
-            SMSReport result = smsReportResponse.getResults().get(i);
+        for (SMSReport result : smsReportResponse.getResults()) {
             System.out.println("Message ID: " + result.getMessageId());
             System.out.println("Sent at: " + result.getSentAt());
+            System.out.println("Done at: " + result.getDoneAt());
             System.out.println("Sender: " + result.getFrom());
             System.out.println("Receiver: " + result.getTo());
             System.out.println("Message text: " + result.getText());

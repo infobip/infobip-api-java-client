@@ -10,14 +10,12 @@ import infobip.api.model.sms.mt.send.textual.SMSAdvancedTextualRequest;
 
 import java.util.Collections;
 
-/**
- * Created by milosmilakovic on 9/23/15.
- */
 public class SendSmsAdvancedNotifyExample extends Example {
 
     public static void main(String[] args) {
-        SendMultipleTextualSmsAdvanced client = new SendMultipleTextualSmsAdvanced(
-                new BasicAuthConfiguration(USERNAME, PASSWORD));
+
+        SendMultipleTextualSmsAdvanced client = new SendMultipleTextualSmsAdvanced(new BasicAuthConfiguration(USERNAME, PASSWORD));
+
         Destination destination = new Destination();
         destination.setTo("41793026731");
 
@@ -32,9 +30,10 @@ public class SendSmsAdvancedNotifyExample extends Example {
 
         SMSResponse response = client.execute(requestBody);
 
-        SMSResponseDetails sentMessageInfo = response.getMessages().get(0);
-        System.out.println("Message ID: " + sentMessageInfo.getMessageId());
-        System.out.println("Receiver: " + sentMessageInfo.getTo());
-        System.out.println("Message status: " + sentMessageInfo.getStatus().getName());
+        for (SMSResponseDetails sentMessageInfo : response.getMessages()) {
+            System.out.println("Message ID: " + sentMessageInfo.getMessageId());
+            System.out.println("Receiver: " + sentMessageInfo.getTo());
+            System.out.println("Message status: " + sentMessageInfo.getStatus().getName());
+        }
     }
 }
