@@ -21,7 +21,7 @@ of your <code>pom.xml</code> file:
 <dependency>
     <groupId>com.infobip</groupId>
     <artifactId>infobip-api-java-client</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 
@@ -29,7 +29,7 @@ of your <code>pom.xml</code> file:
 For adding the API client to your gradle project add the following line to the <code>dependencies</code> section 
 of your <code>build.gradle</code> file:
 ```
-compile "com.infobip:infobip-api-java-client:2.0.0"
+compile "com.infobip:infobip-api-java-client:2.1.0"
 ```
 
 ### Manual dependency management
