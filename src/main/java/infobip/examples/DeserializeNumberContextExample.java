@@ -5,15 +5,12 @@ import infobip.api.model.nc.query.NumberContextResponseDetails;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
-/**
- * Created by milosmilakovic on 9/24/15.
- */
 public class DeserializeNumberContextExample {
 
     public static void main(String[] args) {
 
-        String requestBody = "{\n" +
+        String responseBody =
+                "{\n" +
                 "   \"results\":[\n" +
                 "      {\n" +
                 "         \"to\":\"41793026727\",\n" +
@@ -44,13 +41,15 @@ public class DeserializeNumberContextExample {
                 "}";
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-        NumberContextResponse numberContextResponse = gson.fromJson(requestBody, NumberContextResponse.class);
+        NumberContextResponse numberContextResponse = gson.fromJson(responseBody, NumberContextResponse.class);
 
-        NumberContextResponseDetails result = numberContextResponse.getResults().get(0);
-        System.out.println("Phone number: " + result.getTo());
-        System.out.println("MccMnc: " + result.getMccMnc());
-        System.out.println("Original country prefix: " + result.getOriginalNetwork().getCountryPrefix());
-        System.out.println("Original network prefix: " + result.getOriginalNetwork().getNetworkPrefix());
-        System.out.println("Serving MSC: " + result.getServingMSC());
+        for (NumberContextResponseDetails result : numberContextResponse.getResults()) {
+            System.out.println("Phone number: " + result.getTo());
+            System.out.println("MccMnc: " + result.getMccMnc());
+            System.out.println("Original country prefix: " + result.getOriginalNetwork().getCountryPrefix());
+            System.out.println("Original network prefix: " + result.getOriginalNetwork().getNetworkPrefix());
+            System.out.println("Serving MSC: " + result.getServingMSC());
+            System.out.println("------------------------------------------------");
+        }
     }
 }

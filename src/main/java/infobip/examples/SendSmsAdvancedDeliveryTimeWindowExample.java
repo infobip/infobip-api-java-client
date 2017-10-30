@@ -3,14 +3,14 @@ package infobip.examples;
 import infobip.api.client.SendMultipleTextualSmsAdvanced;
 import infobip.api.config.BasicAuthConfiguration;
 import infobip.api.model.Destination;
-import infobip.api.model.sms.mt.send.Message;
-import infobip.api.model.sms.mt.send.SMSResponse;
-import infobip.api.model.sms.mt.send.SMSResponseDetails;
+import infobip.api.model.sms.mt.send.*;
 import infobip.api.model.sms.mt.send.textual.SMSAdvancedTextualRequest;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
-public class SendSmsAdvancedNotifyExample extends Example {
+public class SendSmsAdvancedDeliveryTimeWindowExample extends Example {
 
     public static void main(String[] args) {
 
@@ -23,7 +23,7 @@ public class SendSmsAdvancedNotifyExample extends Example {
         message.setFrom(FROM);
         message.setDestinations(Collections.singletonList(destination));
         message.setText(MESSAGE_TEXT);
-        message.setNotifyUrl(NOTIFY_URL);
+        message.setDeliveryTimeWindow(generateDeliveryTimeWindow());
 
         SMSAdvancedTextualRequest requestBody = new SMSAdvancedTextualRequest();
         requestBody.setMessages(Collections.singletonList(message));
@@ -36,5 +36,32 @@ public class SendSmsAdvancedNotifyExample extends Example {
             System.out.println("Message status: " + sentMessageInfo.getStatus().getName());
             System.out.println("------------------------------------------------");
         }
+    }
+
+    private static DeliveryTimeWindow generateDeliveryTimeWindow() {
+
+        DeliveryTime deliveryTimeFrom = new DeliveryTime();
+        deliveryTimeFrom.setHour(9);
+        deliveryTimeFrom.setMinute(30);
+
+        DeliveryTime deliveryTimeTo = new DeliveryTime();
+        deliveryTimeTo.setHour(19);
+        deliveryTimeTo.setMinute(30);
+
+        List<DeliveryDay> deliveryDayList = Arrays.asList(
+                DeliveryDay.MONDAY,
+                DeliveryDay.TUESDAY,
+                DeliveryDay.WEDNESDAY,
+                DeliveryDay.THURSDAY,
+                DeliveryDay.FRIDAY,
+                DeliveryDay.SATURDAY,
+                DeliveryDay.SUNDAY
+        );
+
+        DeliveryTimeWindow deliveryTimeWindow = new DeliveryTimeWindow();
+        deliveryTimeWindow.setFrom(deliveryTimeFrom);
+        deliveryTimeWindow.setTo(deliveryTimeTo);
+        deliveryTimeWindow.setDays(deliveryDayList);
+        return deliveryTimeWindow;
     }
 }

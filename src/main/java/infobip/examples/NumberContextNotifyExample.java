@@ -8,23 +8,23 @@ import infobip.api.model.nc.notify.NumberContextResponseDetails;
 
 import java.util.Collections;
 
-/**
- * Created by milosmilakovic on 9/24/15.
- */
 public class NumberContextNotifyExample extends Example {
 
     public static void main(String[] args) {
+
         NumberContextNotify client = new NumberContextNotify(new BasicAuthConfiguration(USERNAME, PASSWORD));
 
         NumberContextRequest requestBody = new NumberContextRequest();
-        requestBody.setTo(Collections.singletonList("41793026731"));
+        requestBody.setTo(Collections.singletonList(TO));
         requestBody.setNotifyUrl(NOTIFY_URL);
 
         NumberContextResponse response = client.execute(requestBody);
 
-        NumberContextResponseDetails sentRequestInfo = response.getResults().get(0);
-        System.out.println("Message ID: " + sentRequestInfo.getMessageId());
-        System.out.println("Phone number:: " + sentRequestInfo.getTo());
-        System.out.println("Message status: " + sentRequestInfo.getStatus().getName());
+        for (NumberContextResponseDetails sentRequestInfo : response.getResults()) {
+            System.out.println("Message ID: " + sentRequestInfo.getMessageId());
+            System.out.println("Phone number:: " + sentRequestInfo.getTo());
+            System.out.println("Message status: " + sentRequestInfo.getStatus().getName());
+            System.out.println("------------------------------------------------");
+        }
     }
 }

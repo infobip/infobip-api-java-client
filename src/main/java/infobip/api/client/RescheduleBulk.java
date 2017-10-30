@@ -6,24 +6,24 @@ import retrofit.http.*;
 import com.google.gson.GsonBuilder;
 import retrofit.converter.GsonConverter;
 import infobip.api.config.TimeoutClientProvider;
-import infobip.api.model.nc.query.NumberContextResponse;
-import infobip.api.model.nc.query.NumberContextRequest;
+import infobip.api.model.sms.mt.bulks.BulkResponse;
+import infobip.api.model.sms.mt.bulks.BulkRequest;
 
 /**
  * This is a generated class and is not intended for modification!
  */
-public class NumberContextQuery {
+public class RescheduleBulk {
     private final Configuration configuration;
 
-    public NumberContextQuery(Configuration configuration) {
+    public RescheduleBulk(Configuration configuration) {
         this.configuration = configuration;
     }
 
-    interface NumberContextQueryService {
-        @POST("/number/1/query")
-        NumberContextResponse execute(@Body NumberContextRequest bodyObject);
+    interface RescheduleBulkService {
+        @PUT("/sms/1/bulks")
+        BulkResponse execute(@Query("bulkId") String bulkId, @Body BulkRequest bodyObject);
     }
-    public NumberContextResponse execute(NumberContextRequest bodyObject) {
+    public BulkResponse execute(String bulkId,BulkRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
@@ -32,8 +32,8 @@ public class NumberContextQuery {
                 						.create()))
                 .setClient(new TimeoutClientProvider(configuration))
                 .build();
-        NumberContextQueryService service = restAdapter.create(NumberContextQueryService.class);
-        return service.execute(bodyObject);
+        RescheduleBulkService service = restAdapter.create(RescheduleBulkService.class);
+        return service.execute(bulkId, bodyObject);
     }
 
     private RequestInterceptor getRequestInterceptor() {

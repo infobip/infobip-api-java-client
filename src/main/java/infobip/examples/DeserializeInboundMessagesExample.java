@@ -5,14 +5,12 @@ import infobip.api.model.sms.mo.reports.MOReportResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-/**
- * Created by milosmilakovic on 9/24/15.
- */
 public class DeserializeInboundMessagesExample {
 
     public static void main(String[] args) {
 
-        String requestBody = "{\n" +
+        String responseBody =
+                "{\n" +
                 "   \"results\":[\n" +
                 "      {\n" +
                 "         \"messageId\":\"ff4804ef-6ab6-4abd-984d-ab3b1387e823\",\n" +
@@ -28,16 +26,18 @@ public class DeserializeInboundMessagesExample {
                 "}";
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-        MOReportResponse moReportResponse = gson.fromJson(requestBody, MOReportResponse.class);
+        MOReportResponse moReportResponse = gson.fromJson(responseBody, MOReportResponse.class);
 
-        MOReport result = moReportResponse.getResults().get(0);
-        System.out.println("Message ID: " + result.getMessageId());
-        System.out.println("Received at: " + result.getReceivedAt());
-        System.out.println("Sender: " + result.getFrom());
-        System.out.println("Receiver: " + result.getTo());
-        System.out.println("Message text: " + result.getText());
-        System.out.println("Keyword: " + result.getKeyword());
-        System.out.println("Clean text: " + result.getCleanText());
-        System.out.println("Sms Count: " + result.getSmsCount());
+        for (MOReport result : moReportResponse.getResults()) {
+            System.out.println("Message ID: " + result.getMessageId());
+            System.out.println("Received at: " + result.getReceivedAt());
+            System.out.println("Sender: " + result.getFrom());
+            System.out.println("Receiver: " + result.getTo());
+            System.out.println("Message text: " + result.getText());
+            System.out.println("Keyword: " + result.getKeyword());
+            System.out.println("Clean text: " + result.getCleanText());
+            System.out.println("Sms Count: " + result.getSmsCount());
+            System.out.println("------------------------------------------------");
+        }
     }
 }

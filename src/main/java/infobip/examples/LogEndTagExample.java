@@ -16,5 +16,4 @@ public class LogEndTagExample extends Example {
 
         System.out.println("processKey: " + response.getProcessKey());
     }
-
 }

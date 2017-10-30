@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class SMSResponse {
     private String bulkId;
+    private String trackingProcessKey;
     private List<SMSResponseDetails> messages = new ArrayList<SMSResponseDetails>();
 
     public SMSResponse() {
@@ -21,6 +22,15 @@ public class SMSResponse {
 
     public SMSResponse setBulkId(String bulkId) {
         this.bulkId = bulkId;
+        return this;
+    }
+
+    public String getTrackingProcessKey() {
+        return this.trackingProcessKey;
+    }
+
+    public SMSResponse setTrackingProcessKey(String trackingProcessKey) {
+        this.trackingProcessKey = trackingProcessKey;
         return this;
     }
 
@@ -60,6 +70,13 @@ public class SMSResponse {
         } else if (!this.bulkId.equals(o.bulkId)) {
             return false;
         }
+        if (this.trackingProcessKey == null) {
+            if (o.trackingProcessKey != null){
+                return false;
+            }
+        } else if (!this.trackingProcessKey.equals(o.trackingProcessKey)) {
+            return false;
+        }
         if (this.messages == null) {
             if (o.messages != null){
                 return false;
@@ -75,6 +92,7 @@ public class SMSResponse {
     public String toString() {
         return "SMSResponse{" +
             "bulkId='" + bulkId + "'" +
+            ", trackingProcessKey='" + trackingProcessKey + "'" +
             ", messages=" + (messages == null?"null":Arrays.toString(messages.toArray())) +
             '}';
     }

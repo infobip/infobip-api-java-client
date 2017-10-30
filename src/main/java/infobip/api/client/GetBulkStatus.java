@@ -6,24 +6,23 @@ import retrofit.http.*;
 import com.google.gson.GsonBuilder;
 import retrofit.converter.GsonConverter;
 import infobip.api.config.TimeoutClientProvider;
-import infobip.api.model.nc.query.NumberContextResponse;
-import infobip.api.model.nc.query.NumberContextRequest;
+import infobip.api.model.sms.mt.bulks.status.BulkStatusResponse;
 
 /**
  * This is a generated class and is not intended for modification!
  */
-public class NumberContextQuery {
+public class GetBulkStatus {
     private final Configuration configuration;
 
-    public NumberContextQuery(Configuration configuration) {
+    public GetBulkStatus(Configuration configuration) {
         this.configuration = configuration;
     }
 
-    interface NumberContextQueryService {
-        @POST("/number/1/query")
-        NumberContextResponse execute(@Body NumberContextRequest bodyObject);
+    interface GetBulkStatusService {
+        @GET("/sms/1/bulks/status")
+        BulkStatusResponse execute(@Query("bulkId") String bulkId);
     }
-    public NumberContextResponse execute(NumberContextRequest bodyObject) {
+    public BulkStatusResponse execute(String bulkId) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(configuration.getBaseUrl())
                 .setRequestInterceptor(getRequestInterceptor())
@@ -32,8 +31,8 @@ public class NumberContextQuery {
                 						.create()))
                 .setClient(new TimeoutClientProvider(configuration))
                 .build();
-        NumberContextQueryService service = restAdapter.create(NumberContextQueryService.class);
-        return service.execute(bodyObject);
+        GetBulkStatusService service = restAdapter.create(GetBulkStatusService.class);
+        return service.execute(bulkId);
     }
 
     private RequestInterceptor getRequestInterceptor() {

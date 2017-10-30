@@ -21,7 +21,7 @@ public class NumberContextNotify {
 
     interface NumberContextNotifyService {
         @POST("/number/1/notify")
-        NumberContextResponse execute( @Body NumberContextRequest bodyObject);
+        NumberContextResponse execute(@Body NumberContextRequest bodyObject);
     }
     public NumberContextResponse execute(NumberContextRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()

@@ -21,7 +21,7 @@ public class SendMultipleTextualSmsAdvanced {
 
     interface SendMultipleTextualSmsAdvancedService {
         @POST("/sms/1/text/advanced")
-        SMSResponse execute( @Body SMSAdvancedTextualRequest bodyObject);
+        SMSResponse execute(@Body SMSAdvancedTextualRequest bodyObject);
     }
     public SMSResponse execute(SMSAdvancedTextualRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()

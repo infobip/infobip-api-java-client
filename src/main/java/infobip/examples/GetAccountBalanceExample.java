@@ -4,9 +4,6 @@ import infobip.api.client.GetAccountBalance;
 import infobip.api.config.BasicAuthConfiguration;
 import infobip.api.model.account.AccountBalance;
 
-/**
- * Created by amarjanovic on 2.11.2015.
- */
 public class GetAccountBalanceExample extends Example {
 
     public static void main(String[] args) {

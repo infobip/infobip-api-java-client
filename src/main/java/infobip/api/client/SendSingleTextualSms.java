@@ -21,7 +21,7 @@ public class SendSingleTextualSms {
 
     interface SendSingleTextualSmsService {
         @POST("/sms/1/text/single")
-        SMSResponse execute( @Body SMSTextualRequest bodyObject);
+        SMSResponse execute(@Body SMSTextualRequest bodyObject);
     }
     public SMSResponse execute(SMSTextualRequest bodyObject) {
         RestAdapter restAdapter = new RestAdapter.Builder()
