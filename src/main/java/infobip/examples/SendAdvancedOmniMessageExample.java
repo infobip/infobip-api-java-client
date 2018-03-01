@@ -14,7 +14,7 @@ public class SendAdvancedOmniMessageExample extends Example {
     public static void main(String[] args) {
         OmniAdvancedRequest omniAdvancedRequest = new OmniAdvancedRequest();
         omniAdvancedRequest.setDestinations(getDestinations());
-        omniAdvancedRequest.setScenarioKey("086527E3191EF2FDDCE3F039A8099485"); //Your-scenario-key
+        omniAdvancedRequest.setScenarioKey("Your-scenario-key");
         omniAdvancedRequest.setSms(getSmsData());
         omniAdvancedRequest.setViber(getViberData());
 
