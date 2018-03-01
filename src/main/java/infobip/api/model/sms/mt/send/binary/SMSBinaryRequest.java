@@ -1,48 +1,20 @@
 package infobip.api.model.sms.mt.send.binary;
 
-import infobip.api.model.sms.mt.send.binary.BinaryContent;
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
+import infobip.api.model.sms.mt.send.binary.BinaryContent;
 
 /**
  * This is a generated class and is not intended for modification!
  */
 public class SMSBinaryRequest {
-    private String operatorClientId;
-    private String campaignId;
-    private BinaryContent binary;
     private String from;
-    private List<String> to = new ArrayList<String>();
+    private List<String> to = new ArrayList<>();
+    private BinaryContent binary;
+    private String campaignId;
+    private String operatorClientId;
 
     public SMSBinaryRequest() {
-    }
-
-    public String getOperatorClientId() {
-        return this.operatorClientId;
-    }
-
-    public SMSBinaryRequest setOperatorClientId(String operatorClientId) {
-        this.operatorClientId = operatorClientId;
-        return this;
-    }
-
-    public String getCampaignId() {
-        return this.campaignId;
-    }
-
-    public SMSBinaryRequest setCampaignId(String campaignId) {
-        this.campaignId = campaignId;
-        return this;
-    }
-
-    public BinaryContent getBinary() {
-        return this.binary;
-    }
-
-    public SMSBinaryRequest setBinary(BinaryContent binary) {
-        this.binary = binary;
-        return this;
     }
 
     public String getFrom() {
@@ -63,13 +35,30 @@ public class SMSBinaryRequest {
         return this;
     }
 
-    public SMSBinaryRequest addTo(String... to) {
-        this.to.addAll(Arrays.asList(to));
+    public BinaryContent getBinary() {
+        return this.binary;
+    }
+
+    public SMSBinaryRequest setBinary(BinaryContent binary) {
+        this.binary = binary;
         return this;
     }
 
-    public SMSBinaryRequest removeTo(String... to) {
-        this.to.removeAll(Arrays.asList(to));
+    public String getCampaignId() {
+        return this.campaignId;
+    }
+
+    public SMSBinaryRequest setCampaignId(String campaignId) {
+        this.campaignId = campaignId;
+        return this;
+    }
+
+    public String getOperatorClientId() {
+        return this.operatorClientId;
+    }
+
+    public SMSBinaryRequest setOperatorClientId(String operatorClientId) {
+        this.operatorClientId = operatorClientId;
         return this;
     }
 
@@ -83,27 +72,6 @@ public class SMSBinaryRequest {
         }
 
         SMSBinaryRequest o = (SMSBinaryRequest)obj;
-        if (this.operatorClientId == null) {
-            if (o.operatorClientId != null){
-                return false;
-            }
-        } else if (!this.operatorClientId.equals(o.operatorClientId)) {
-            return false;
-        }
-        if (this.campaignId == null) {
-            if (o.campaignId != null){
-                return false;
-            }
-        } else if (!this.campaignId.equals(o.campaignId)) {
-            return false;
-        }
-        if (this.binary == null) {
-            if (o.binary != null){
-                return false;
-            }
-        } else if (!this.binary.equals(o.binary)) {
-            return false;
-        }
         if (this.from == null) {
             if (o.from != null){
                 return false;
@@ -118,6 +86,27 @@ public class SMSBinaryRequest {
         } else if (!this.to.equals(o.to)) {
             return false;
         }
+        if (this.binary == null) {
+            if (o.binary != null){
+                return false;
+            }
+        } else if (!this.binary.equals(o.binary)) {
+            return false;
+        }
+        if (this.campaignId == null) {
+            if (o.campaignId != null){
+                return false;
+            }
+        } else if (!this.campaignId.equals(o.campaignId)) {
+            return false;
+        }
+        if (this.operatorClientId == null) {
+            if (o.operatorClientId != null){
+                return false;
+            }
+        } else if (!this.operatorClientId.equals(o.operatorClientId)) {
+            return false;
+        }
 
         return true;
     }
@@ -125,11 +114,11 @@ public class SMSBinaryRequest {
     @Override
     public String toString() {
         return "SMSBinaryRequest{" +
-            "operatorClientId='" + operatorClientId + "'" +
-            ", campaignId='" + campaignId + "'" +
+            "from='" + from + "'" +
+            ", to='" + to + "'" +
             ", binary='" + binary + "'" +
-            ", from='" + from + "'" +
-            ", to=" + (to == null?"null":Arrays.toString(to.toArray())) +
+            ", campaignId='" + campaignId + "'" +
+            ", operatorClientId='" + operatorClientId + "'" +
             '}';
     }
 }

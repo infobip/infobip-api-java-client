@@ -4,20 +4,11 @@ package infobip.api.model.sms.mt.send;
  * This is a generated class and is not intended for modification!
  */
 public class Language {
-    private Boolean lockingShift;
     private Boolean singleShift;
+    private Boolean lockingShift;
     private String languageCode;
 
     public Language() {
-    }
-
-    public Boolean getLockingShift() {
-        return this.lockingShift;
-    }
-
-    public Language setLockingShift(Boolean lockingShift) {
-        this.lockingShift = lockingShift;
-        return this;
     }
 
     public Boolean getSingleShift() {
@@ -26,6 +17,15 @@ public class Language {
 
     public Language setSingleShift(Boolean singleShift) {
         this.singleShift = singleShift;
+        return this;
+    }
+
+    public Boolean getLockingShift() {
+        return this.lockingShift;
+    }
+
+    public Language setLockingShift(Boolean lockingShift) {
+        this.lockingShift = lockingShift;
         return this;
     }
 
@@ -48,18 +48,18 @@ public class Language {
         }
 
         Language o = (Language)obj;
-        if (this.lockingShift == null) {
-            if (o.lockingShift != null){
-                return false;
-            }
-        } else if (!this.lockingShift.equals(o.lockingShift)) {
-            return false;
-        }
         if (this.singleShift == null) {
             if (o.singleShift != null){
                 return false;
             }
         } else if (!this.singleShift.equals(o.singleShift)) {
+            return false;
+        }
+        if (this.lockingShift == null) {
+            if (o.lockingShift != null){
+                return false;
+            }
+        } else if (!this.lockingShift.equals(o.lockingShift)) {
             return false;
         }
         if (this.languageCode == null) {
@@ -76,8 +76,8 @@ public class Language {
     @Override
     public String toString() {
         return "Language{" +
-            "lockingShift='" + lockingShift + "'" +
-            ", singleShift='" + singleShift + "'" +
+            "singleShift='" + singleShift + "'" +
+            ", lockingShift='" + lockingShift + "'" +
             ", languageCode='" + languageCode + "'" +
             '}';
     }

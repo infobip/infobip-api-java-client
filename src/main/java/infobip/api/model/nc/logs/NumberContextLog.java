@@ -2,33 +2,24 @@ package infobip.api.model.nc.logs;
 
 import java.util.Date;
 import infobip.api.model.Price;
-import infobip.api.model.Error;
 import infobip.api.model.Status;
+import infobip.api.model.Error;
 
 /**
  * This is a generated class and is not intended for modification!
  */
 public class NumberContextLog {
-    private Date doneAt;
     private String bulkId;
-    private String mccMnc;
-    private Price price;
     private String messageId;
     private String to;
     private Date sentAt;
-    private Error error;
+    private Date doneAt;
+    private String mccMnc;
+    private Price price;
     private Status status;
+    private Error error;
 
     public NumberContextLog() {
-    }
-
-    public Date getDoneAt() {
-        return this.doneAt;
-    }
-
-    public NumberContextLog setDoneAt(Date doneAt) {
-        this.doneAt = doneAt;
-        return this;
     }
 
     public String getBulkId() {
@@ -37,24 +28,6 @@ public class NumberContextLog {
 
     public NumberContextLog setBulkId(String bulkId) {
         this.bulkId = bulkId;
-        return this;
-    }
-
-    public String getMccMnc() {
-        return this.mccMnc;
-    }
-
-    public NumberContextLog setMccMnc(String mccMnc) {
-        this.mccMnc = mccMnc;
-        return this;
-    }
-
-    public Price getPrice() {
-        return this.price;
-    }
-
-    public NumberContextLog setPrice(Price price) {
-        this.price = price;
         return this;
     }
 
@@ -85,12 +58,30 @@ public class NumberContextLog {
         return this;
     }
 
-    public Error getError() {
-        return this.error;
+    public Date getDoneAt() {
+        return this.doneAt;
     }
 
-    public NumberContextLog setError(Error error) {
-        this.error = error;
+    public NumberContextLog setDoneAt(Date doneAt) {
+        this.doneAt = doneAt;
+        return this;
+    }
+
+    public String getMccMnc() {
+        return this.mccMnc;
+    }
+
+    public NumberContextLog setMccMnc(String mccMnc) {
+        this.mccMnc = mccMnc;
+        return this;
+    }
+
+    public Price getPrice() {
+        return this.price;
+    }
+
+    public NumberContextLog setPrice(Price price) {
+        this.price = price;
         return this;
     }
 
@@ -100,6 +91,15 @@ public class NumberContextLog {
 
     public NumberContextLog setStatus(Status status) {
         this.status = status;
+        return this;
+    }
+
+    public Error getError() {
+        return this.error;
+    }
+
+    public NumberContextLog setError(Error error) {
+        this.error = error;
         return this;
     }
 
@@ -113,32 +113,11 @@ public class NumberContextLog {
         }
 
         NumberContextLog o = (NumberContextLog)obj;
-        if (this.doneAt == null) {
-            if (o.doneAt != null){
-                return false;
-            }
-        } else if (!this.doneAt.equals(o.doneAt)) {
-            return false;
-        }
         if (this.bulkId == null) {
             if (o.bulkId != null){
                 return false;
             }
         } else if (!this.bulkId.equals(o.bulkId)) {
-            return false;
-        }
-        if (this.mccMnc == null) {
-            if (o.mccMnc != null){
-                return false;
-            }
-        } else if (!this.mccMnc.equals(o.mccMnc)) {
-            return false;
-        }
-        if (this.price == null) {
-            if (o.price != null){
-                return false;
-            }
-        } else if (!this.price.equals(o.price)) {
             return false;
         }
         if (this.messageId == null) {
@@ -162,11 +141,25 @@ public class NumberContextLog {
         } else if (!this.sentAt.equals(o.sentAt)) {
             return false;
         }
-        if (this.error == null) {
-            if (o.error != null){
+        if (this.doneAt == null) {
+            if (o.doneAt != null){
                 return false;
             }
-        } else if (!this.error.equals(o.error)) {
+        } else if (!this.doneAt.equals(o.doneAt)) {
+            return false;
+        }
+        if (this.mccMnc == null) {
+            if (o.mccMnc != null){
+                return false;
+            }
+        } else if (!this.mccMnc.equals(o.mccMnc)) {
+            return false;
+        }
+        if (this.price == null) {
+            if (o.price != null){
+                return false;
+            }
+        } else if (!this.price.equals(o.price)) {
             return false;
         }
         if (this.status == null) {
@@ -176,6 +169,13 @@ public class NumberContextLog {
         } else if (!this.status.equals(o.status)) {
             return false;
         }
+        if (this.error == null) {
+            if (o.error != null){
+                return false;
+            }
+        } else if (!this.error.equals(o.error)) {
+            return false;
+        }
 
         return true;
     }
@@ -183,15 +183,15 @@ public class NumberContextLog {
     @Override
     public String toString() {
         return "NumberContextLog{" +
-            "doneAt='" + doneAt + "'" +
-            ", bulkId='" + bulkId + "'" +
-            ", mccMnc='" + mccMnc + "'" +
-            ", price='" + price + "'" +
+            "bulkId='" + bulkId + "'" +
             ", messageId='" + messageId + "'" +
             ", to='" + to + "'" +
             ", sentAt='" + sentAt + "'" +
-            ", error='" + error + "'" +
+            ", doneAt='" + doneAt + "'" +
+            ", mccMnc='" + mccMnc + "'" +
+            ", price='" + price + "'" +
             ", status='" + status + "'" +
+            ", error='" + error + "'" +
             '}';
     }
 }

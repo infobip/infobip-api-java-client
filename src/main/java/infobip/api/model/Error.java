@@ -4,14 +4,23 @@ package infobip.api.model;
  * This is a generated class and is not intended for modification!
  */
 public class Error {
-    private String groupName;
-    private Boolean permanent;
     private Integer groupId;
+    private String groupName;
+    private Integer id;
     private String name;
     private String description;
-    private Integer id;
+    private Boolean permanent;
 
     public Error() {
+    }
+
+    public Integer getGroupId() {
+        return this.groupId;
+    }
+
+    public Error setGroupId(Integer groupId) {
+        this.groupId = groupId;
+        return this;
     }
 
     public String getGroupName() {
@@ -23,21 +32,12 @@ public class Error {
         return this;
     }
 
-    public Boolean getPermanent() {
-        return this.permanent;
+    public Integer getId() {
+        return this.id;
     }
 
-    public Error setPermanent(Boolean permanent) {
-        this.permanent = permanent;
-        return this;
-    }
-
-    public Integer getGroupId() {
-        return this.groupId;
-    }
-
-    public Error setGroupId(Integer groupId) {
-        this.groupId = groupId;
+    public Error setId(Integer id) {
+        this.id = id;
         return this;
     }
 
@@ -59,12 +59,12 @@ public class Error {
         return this;
     }
 
-    public Integer getId() {
-        return this.id;
+    public Boolean getPermanent() {
+        return this.permanent;
     }
 
-    public Error setId(Integer id) {
-        this.id = id;
+    public Error setPermanent(Boolean permanent) {
+        this.permanent = permanent;
         return this;
     }
 
@@ -78,6 +78,13 @@ public class Error {
         }
 
         Error o = (Error)obj;
+        if (this.groupId == null) {
+            if (o.groupId != null){
+                return false;
+            }
+        } else if (!this.groupId.equals(o.groupId)) {
+            return false;
+        }
         if (this.groupName == null) {
             if (o.groupName != null){
                 return false;
@@ -85,18 +92,11 @@ public class Error {
         } else if (!this.groupName.equals(o.groupName)) {
             return false;
         }
-        if (this.permanent == null) {
-            if (o.permanent != null){
+        if (this.id == null) {
+            if (o.id != null){
                 return false;
             }
-        } else if (!this.permanent.equals(o.permanent)) {
-            return false;
-        }
-        if (this.groupId == null) {
-            if (o.groupId != null){
-                return false;
-            }
-        } else if (!this.groupId.equals(o.groupId)) {
+        } else if (!this.id.equals(o.id)) {
             return false;
         }
         if (this.name == null) {
@@ -113,11 +113,11 @@ public class Error {
         } else if (!this.description.equals(o.description)) {
             return false;
         }
-        if (this.id == null) {
-            if (o.id != null){
+        if (this.permanent == null) {
+            if (o.permanent != null){
                 return false;
             }
-        } else if (!this.id.equals(o.id)) {
+        } else if (!this.permanent.equals(o.permanent)) {
             return false;
         }
 
@@ -127,12 +127,12 @@ public class Error {
     @Override
     public String toString() {
         return "Error{" +
-            "groupName='" + groupName + "'" +
-            ", permanent='" + permanent + "'" +
-            ", groupId='" + groupId + "'" +
+            "groupId='" + groupId + "'" +
+            ", groupName='" + groupName + "'" +
+            ", id='" + id + "'" +
             ", name='" + name + "'" +
             ", description='" + description + "'" +
-            ", id='" + id + "'" +
+            ", permanent='" + permanent + "'" +
             '}';
     }
 }

@@ -4,14 +4,23 @@ package infobip.api.model;
  * This is a generated class and is not intended for modification!
  */
 public class Status {
-    private String groupName;
     private Integer groupId;
+    private String groupName;
+    private Integer id;
     private String name;
     private String description;
     private String action;
-    private Integer id;
 
     public Status() {
+    }
+
+    public Integer getGroupId() {
+        return this.groupId;
+    }
+
+    public Status setGroupId(Integer groupId) {
+        this.groupId = groupId;
+        return this;
     }
 
     public String getGroupName() {
@@ -23,12 +32,12 @@ public class Status {
         return this;
     }
 
-    public Integer getGroupId() {
-        return this.groupId;
+    public Integer getId() {
+        return this.id;
     }
 
-    public Status setGroupId(Integer groupId) {
-        this.groupId = groupId;
+    public Status setId(Integer id) {
+        this.id = id;
         return this;
     }
 
@@ -59,15 +68,6 @@ public class Status {
         return this;
     }
 
-    public Integer getId() {
-        return this.id;
-    }
-
-    public Status setId(Integer id) {
-        this.id = id;
-        return this;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -78,6 +78,13 @@ public class Status {
         }
 
         Status o = (Status)obj;
+        if (this.groupId == null) {
+            if (o.groupId != null){
+                return false;
+            }
+        } else if (!this.groupId.equals(o.groupId)) {
+            return false;
+        }
         if (this.groupName == null) {
             if (o.groupName != null){
                 return false;
@@ -85,11 +92,11 @@ public class Status {
         } else if (!this.groupName.equals(o.groupName)) {
             return false;
         }
-        if (this.groupId == null) {
-            if (o.groupId != null){
+        if (this.id == null) {
+            if (o.id != null){
                 return false;
             }
-        } else if (!this.groupId.equals(o.groupId)) {
+        } else if (!this.id.equals(o.id)) {
             return false;
         }
         if (this.name == null) {
@@ -113,13 +120,6 @@ public class Status {
         } else if (!this.action.equals(o.action)) {
             return false;
         }
-        if (this.id == null) {
-            if (o.id != null){
-                return false;
-            }
-        } else if (!this.id.equals(o.id)) {
-            return false;
-        }
 
         return true;
     }
@@ -127,12 +127,12 @@ public class Status {
     @Override
     public String toString() {
         return "Status{" +
-            "groupName='" + groupName + "'" +
-            ", groupId='" + groupId + "'" +
+            "groupId='" + groupId + "'" +
+            ", groupName='" + groupName + "'" +
+            ", id='" + id + "'" +
             ", name='" + name + "'" +
             ", description='" + description + "'" +
             ", action='" + action + "'" +
-            ", id='" + id + "'" +
             '}';
     }
 }

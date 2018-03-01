@@ -1,6 +1,5 @@
 package infobip.api.model.nc.notify;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,20 +7,11 @@ import java.util.List;
  * This is a generated class and is not intended for modification!
  */
 public class NumberContextRequest {
+    private List<String> to = new ArrayList<>();
     private String notifyUrl;
-    private List<String> to = new ArrayList<String>();
     private String notifyContentType;
 
     public NumberContextRequest() {
-    }
-
-    public String getNotifyUrl() {
-        return this.notifyUrl;
-    }
-
-    public NumberContextRequest setNotifyUrl(String notifyUrl) {
-        this.notifyUrl = notifyUrl;
-        return this;
     }
 
     public List<String> getTo() {
@@ -33,13 +23,12 @@ public class NumberContextRequest {
         return this;
     }
 
-    public NumberContextRequest addTo(String... to) {
-        this.to.addAll(Arrays.asList(to));
-        return this;
+    public String getNotifyUrl() {
+        return this.notifyUrl;
     }
 
-    public NumberContextRequest removeTo(String... to) {
-        this.to.removeAll(Arrays.asList(to));
+    public NumberContextRequest setNotifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
         return this;
     }
 
@@ -62,18 +51,18 @@ public class NumberContextRequest {
         }
 
         NumberContextRequest o = (NumberContextRequest)obj;
-        if (this.notifyUrl == null) {
-            if (o.notifyUrl != null){
-                return false;
-            }
-        } else if (!this.notifyUrl.equals(o.notifyUrl)) {
-            return false;
-        }
         if (this.to == null) {
             if (o.to != null){
                 return false;
             }
         } else if (!this.to.equals(o.to)) {
+            return false;
+        }
+        if (this.notifyUrl == null) {
+            if (o.notifyUrl != null){
+                return false;
+            }
+        } else if (!this.notifyUrl.equals(o.notifyUrl)) {
             return false;
         }
         if (this.notifyContentType == null) {
@@ -90,8 +79,8 @@ public class NumberContextRequest {
     @Override
     public String toString() {
         return "NumberContextRequest{" +
-            "notifyUrl='" + notifyUrl + "'" +
-            ", to=" + (to == null?"null":Arrays.toString(to.toArray())) +
+            "to='" + to + "'" +
+            ", notifyUrl='" + notifyUrl + "'" +
             ", notifyContentType='" + notifyContentType + "'" +
             '}';
     }

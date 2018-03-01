@@ -4,19 +4,10 @@ package infobip.api.model;
  * This is a generated class and is not intended for modification!
  */
 public class Destination {
-    private String messageId;
     private String to;
+    private String messageId;
 
     public Destination() {
-    }
-
-    public String getMessageId() {
-        return this.messageId;
-    }
-
-    public Destination setMessageId(String messageId) {
-        this.messageId = messageId;
-        return this;
     }
 
     public String getTo() {
@@ -25,6 +16,15 @@ public class Destination {
 
     public Destination setTo(String to) {
         this.to = to;
+        return this;
+    }
+
+    public String getMessageId() {
+        return this.messageId;
+    }
+
+    public Destination setMessageId(String messageId) {
+        this.messageId = messageId;
         return this;
     }
 
@@ -38,18 +38,18 @@ public class Destination {
         }
 
         Destination o = (Destination)obj;
-        if (this.messageId == null) {
-            if (o.messageId != null){
-                return false;
-            }
-        } else if (!this.messageId.equals(o.messageId)) {
-            return false;
-        }
         if (this.to == null) {
             if (o.to != null){
                 return false;
             }
         } else if (!this.to.equals(o.to)) {
+            return false;
+        }
+        if (this.messageId == null) {
+            if (o.messageId != null){
+                return false;
+            }
+        } else if (!this.messageId.equals(o.messageId)) {
             return false;
         }
 
@@ -59,8 +59,8 @@ public class Destination {
     @Override
     public String toString() {
         return "Destination{" +
-            "messageId='" + messageId + "'" +
-            ", to='" + to + "'" +
+            "to='" + to + "'" +
+            ", messageId='" + messageId + "'" +
             '}';
     }
 }

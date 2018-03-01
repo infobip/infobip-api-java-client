@@ -8,8 +8,8 @@ import infobip.api.model.sms.mt.send.preview.Configuration;
 public class Preview {
     private String textPreview;
     private Integer messageCount;
-    private Configuration configuration;
     private Integer charactersRemaining;
+    private Configuration configuration;
 
     public Preview() {
     }
@@ -32,21 +32,21 @@ public class Preview {
         return this;
     }
 
-    public Configuration getConfiguration() {
-        return this.configuration;
-    }
-
-    public Preview setConfiguration(Configuration configuration) {
-        this.configuration = configuration;
-        return this;
-    }
-
     public Integer getCharactersRemaining() {
         return this.charactersRemaining;
     }
 
     public Preview setCharactersRemaining(Integer charactersRemaining) {
         this.charactersRemaining = charactersRemaining;
+        return this;
+    }
+
+    public Configuration getConfiguration() {
+        return this.configuration;
+    }
+
+    public Preview setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
         return this;
     }
 
@@ -74,18 +74,18 @@ public class Preview {
         } else if (!this.messageCount.equals(o.messageCount)) {
             return false;
         }
-        if (this.configuration == null) {
-            if (o.configuration != null){
-                return false;
-            }
-        } else if (!this.configuration.equals(o.configuration)) {
-            return false;
-        }
         if (this.charactersRemaining == null) {
             if (o.charactersRemaining != null){
                 return false;
             }
         } else if (!this.charactersRemaining.equals(o.charactersRemaining)) {
+            return false;
+        }
+        if (this.configuration == null) {
+            if (o.configuration != null){
+                return false;
+            }
+        } else if (!this.configuration.equals(o.configuration)) {
             return false;
         }
 
@@ -97,8 +97,8 @@ public class Preview {
         return "Preview{" +
             "textPreview='" + textPreview + "'" +
             ", messageCount='" + messageCount + "'" +
-            ", configuration='" + configuration + "'" +
             ", charactersRemaining='" + charactersRemaining + "'" +
+            ", configuration='" + configuration + "'" +
             '}';
     }
 }

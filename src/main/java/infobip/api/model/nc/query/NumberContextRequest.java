@@ -1,14 +1,13 @@
 package infobip.api.model.nc.query;
 
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This is a generated class and is not intended for modification!
  */
 public class NumberContextRequest {
-    private List<String> to = new ArrayList<String>();
+    private List<String> to = new ArrayList<>();
 
     public NumberContextRequest() {
     }
@@ -19,16 +18,6 @@ public class NumberContextRequest {
 
     public NumberContextRequest setTo(List<String> to) {
         this.to = to;
-        return this;
-    }
-
-    public NumberContextRequest addTo(String... to) {
-        this.to.addAll(Arrays.asList(to));
-        return this;
-    }
-
-    public NumberContextRequest removeTo(String... to) {
-        this.to.removeAll(Arrays.asList(to));
         return this;
     }
 
@@ -56,7 +45,7 @@ public class NumberContextRequest {
     @Override
     public String toString() {
         return "NumberContextRequest{" +
-            "to=" + (to == null?"null":Arrays.toString(to.toArray())) +
+            "to='" + to + "'" +
             '}';
     }
 }
