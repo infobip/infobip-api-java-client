@@ -1,28 +1,27 @@
 package infobip.api.model.sms.mt.send.binary;
 
-import infobip.api.model.sms.mt.send.Message;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
 import infobip.api.model.sms.mt.send.Tracking;
+import infobip.api.model.sms.mt.send.Message;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This is a generated class and is not intended for modification!
  */
 public class SMSAdvancedBinaryRequest {
-    private String bulkId;
-    private List<Message> messages = new ArrayList<Message>();
     private Tracking tracking;
+    private List<Message> messages = new ArrayList<>();
+    private String bulkId;
 
     public SMSAdvancedBinaryRequest() {
     }
 
-    public String getBulkId() {
-        return this.bulkId;
+    public Tracking getTracking() {
+        return this.tracking;
     }
 
-    public SMSAdvancedBinaryRequest setBulkId(String bulkId) {
-        this.bulkId = bulkId;
+    public SMSAdvancedBinaryRequest setTracking(Tracking tracking) {
+        this.tracking = tracking;
         return this;
     }
 
@@ -35,22 +34,12 @@ public class SMSAdvancedBinaryRequest {
         return this;
     }
 
-    public SMSAdvancedBinaryRequest addMessages(Message... messages) {
-        this.messages.addAll(Arrays.asList(messages));
-        return this;
+    public String getBulkId() {
+        return this.bulkId;
     }
 
-    public SMSAdvancedBinaryRequest removeMessages(Message... messages) {
-        this.messages.removeAll(Arrays.asList(messages));
-        return this;
-    }
-
-    public Tracking getTracking() {
-        return this.tracking;
-    }
-
-    public SMSAdvancedBinaryRequest setTracking(Tracking tracking) {
-        this.tracking = tracking;
+    public SMSAdvancedBinaryRequest setBulkId(String bulkId) {
+        this.bulkId = bulkId;
         return this;
     }
 
@@ -64,11 +53,11 @@ public class SMSAdvancedBinaryRequest {
         }
 
         SMSAdvancedBinaryRequest o = (SMSAdvancedBinaryRequest)obj;
-        if (this.bulkId == null) {
-            if (o.bulkId != null){
+        if (this.tracking == null) {
+            if (o.tracking != null){
                 return false;
             }
-        } else if (!this.bulkId.equals(o.bulkId)) {
+        } else if (!this.tracking.equals(o.tracking)) {
             return false;
         }
         if (this.messages == null) {
@@ -78,11 +67,11 @@ public class SMSAdvancedBinaryRequest {
         } else if (!this.messages.equals(o.messages)) {
             return false;
         }
-        if (this.tracking == null) {
-            if (o.tracking != null){
+        if (this.bulkId == null) {
+            if (o.bulkId != null){
                 return false;
             }
-        } else if (!this.tracking.equals(o.tracking)) {
+        } else if (!this.bulkId.equals(o.bulkId)) {
             return false;
         }
 
@@ -92,9 +81,9 @@ public class SMSAdvancedBinaryRequest {
     @Override
     public String toString() {
         return "SMSAdvancedBinaryRequest{" +
-            "bulkId='" + bulkId + "'" +
-            ", messages=" + (messages == null?"null":Arrays.toString(messages.toArray())) +
-            ", tracking='" + tracking + "'" +
+            "tracking='" + tracking + "'" +
+            ", messages='" + messages + "'" +
+            ", bulkId='" + bulkId + "'" +
             '}';
     }
 }

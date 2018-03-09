@@ -6,20 +6,11 @@ import java.math.BigDecimal;
  * This is a generated class and is not intended for modification!
  */
 public class Price {
-    private BigDecimal pricePerLookup;
     private BigDecimal pricePerMessage;
+    private BigDecimal pricePerLookup;
     private String currency;
 
     public Price() {
-    }
-
-    public BigDecimal getPricePerLookup() {
-        return this.pricePerLookup;
-    }
-
-    public Price setPricePerLookup(BigDecimal pricePerLookup) {
-        this.pricePerLookup = pricePerLookup;
-        return this;
     }
 
     public BigDecimal getPricePerMessage() {
@@ -28,6 +19,15 @@ public class Price {
 
     public Price setPricePerMessage(BigDecimal pricePerMessage) {
         this.pricePerMessage = pricePerMessage;
+        return this;
+    }
+
+    public BigDecimal getPricePerLookup() {
+        return this.pricePerLookup;
+    }
+
+    public Price setPricePerLookup(BigDecimal pricePerLookup) {
+        this.pricePerLookup = pricePerLookup;
         return this;
     }
 
@@ -50,18 +50,18 @@ public class Price {
         }
 
         Price o = (Price)obj;
-        if (this.pricePerLookup == null) {
-            if (o.pricePerLookup != null){
-                return false;
-            }
-        } else if (!this.pricePerLookup.equals(o.pricePerLookup)) {
-            return false;
-        }
         if (this.pricePerMessage == null) {
             if (o.pricePerMessage != null){
                 return false;
             }
         } else if (!this.pricePerMessage.equals(o.pricePerMessage)) {
+            return false;
+        }
+        if (this.pricePerLookup == null) {
+            if (o.pricePerLookup != null){
+                return false;
+            }
+        } else if (!this.pricePerLookup.equals(o.pricePerLookup)) {
             return false;
         }
         if (this.currency == null) {
@@ -78,8 +78,8 @@ public class Price {
     @Override
     public String toString() {
         return "Price{" +
-            "pricePerLookup='" + pricePerLookup + "'" +
-            ", pricePerMessage='" + pricePerMessage + "'" +
+            "pricePerMessage='" + pricePerMessage + "'" +
+            ", pricePerLookup='" + pricePerLookup + "'" +
             ", currency='" + currency + "'" +
             '}';
     }

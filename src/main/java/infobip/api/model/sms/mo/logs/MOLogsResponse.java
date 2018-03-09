@@ -1,7 +1,6 @@
 package infobip.api.model.sms.mo.logs;
 
 import infobip.api.model.sms.mo.logs.MOLog;
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,7 @@ import java.util.List;
  * This is a generated class and is not intended for modification!
  */
 public class MOLogsResponse {
-    private List<MOLog> results = new ArrayList<MOLog>();
+    private List<MOLog> results = new ArrayList<>();
 
     public MOLogsResponse() {
     }
@@ -20,16 +19,6 @@ public class MOLogsResponse {
 
     public MOLogsResponse setResults(List<MOLog> results) {
         this.results = results;
-        return this;
-    }
-
-    public MOLogsResponse addResults(MOLog... results) {
-        this.results.addAll(Arrays.asList(results));
-        return this;
-    }
-
-    public MOLogsResponse removeResults(MOLog... results) {
-        this.results.removeAll(Arrays.asList(results));
         return this;
     }
 
@@ -57,7 +46,7 @@ public class MOLogsResponse {
     @Override
     public String toString() {
         return "MOLogsResponse{" +
-            "results=" + (results == null?"null":Arrays.toString(results.toArray())) +
+            "results='" + results + "'" +
             '}';
     }
 }

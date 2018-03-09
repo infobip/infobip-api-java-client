@@ -1,16 +1,15 @@
 package infobip.api.model.sms.mt.send.preview;
 
 import infobip.api.model.sms.mt.send.preview.Preview;
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This is a generated class and is not intended for modification!
  */
 public class PreviewResponse {
     private String originalText;
-    private List<Preview> previews = new ArrayList<Preview>();
+    private List<Preview> previews = new ArrayList<>();
 
     public PreviewResponse() {
     }
@@ -30,16 +29,6 @@ public class PreviewResponse {
 
     public PreviewResponse setPreviews(List<Preview> previews) {
         this.previews = previews;
-        return this;
-    }
-
-    public PreviewResponse addPreviews(Preview... previews) {
-        this.previews.addAll(Arrays.asList(previews));
-        return this;
-    }
-
-    public PreviewResponse removePreviews(Preview... previews) {
-        this.previews.removeAll(Arrays.asList(previews));
         return this;
     }
 
@@ -75,7 +64,7 @@ public class PreviewResponse {
     public String toString() {
         return "PreviewResponse{" +
             "originalText='" + originalText + "'" +
-            ", previews=" + (previews == null?"null":Arrays.toString(previews.toArray())) +
+            ", previews='" + previews + "'" +
             '}';
     }
 }

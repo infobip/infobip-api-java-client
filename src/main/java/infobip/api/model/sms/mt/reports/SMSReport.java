@@ -1,29 +1,83 @@
 package infobip.api.model.sms.mt.reports;
 
 import java.util.Date;
-import infobip.api.model.Error;
 import infobip.api.model.Price;
 import infobip.api.model.Status;
+import infobip.api.model.Error;
 
 /**
  * This is a generated class and is not intended for modification!
  */
 public class SMSReport {
+    private String bulkId;
+    private String messageId;
+    private String to;
+    private String from;
+    private String text;
+    private Date sentAt;
     private Date doneAt;
     private Integer smsCount;
-    private String messageId;
-    private Date sentAt;
-    private Error error;
-    private String bulkId;
     private String mccMnc;
     private Price price;
-    private String callbackData;
-    private String from;
-    private String to;
-    private String text;
     private Status status;
+    private Error error;
+    private String callbackData;
 
     public SMSReport() {
+    }
+
+    public String getBulkId() {
+        return this.bulkId;
+    }
+
+    public SMSReport setBulkId(String bulkId) {
+        this.bulkId = bulkId;
+        return this;
+    }
+
+    public String getMessageId() {
+        return this.messageId;
+    }
+
+    public SMSReport setMessageId(String messageId) {
+        this.messageId = messageId;
+        return this;
+    }
+
+    public String getTo() {
+        return this.to;
+    }
+
+    public SMSReport setTo(String to) {
+        this.to = to;
+        return this;
+    }
+
+    public String getFrom() {
+        return this.from;
+    }
+
+    public SMSReport setFrom(String from) {
+        this.from = from;
+        return this;
+    }
+
+    public String getText() {
+        return this.text;
+    }
+
+    public SMSReport setText(String text) {
+        this.text = text;
+        return this;
+    }
+
+    public Date getSentAt() {
+        return this.sentAt;
+    }
+
+    public SMSReport setSentAt(Date sentAt) {
+        this.sentAt = sentAt;
+        return this;
     }
 
     public Date getDoneAt() {
@@ -41,42 +95,6 @@ public class SMSReport {
 
     public SMSReport setSmsCount(Integer smsCount) {
         this.smsCount = smsCount;
-        return this;
-    }
-
-    public String getMessageId() {
-        return this.messageId;
-    }
-
-    public SMSReport setMessageId(String messageId) {
-        this.messageId = messageId;
-        return this;
-    }
-
-    public Date getSentAt() {
-        return this.sentAt;
-    }
-
-    public SMSReport setSentAt(Date sentAt) {
-        this.sentAt = sentAt;
-        return this;
-    }
-
-    public Error getError() {
-        return this.error;
-    }
-
-    public SMSReport setError(Error error) {
-        this.error = error;
-        return this;
-    }
-
-    public String getBulkId() {
-        return this.bulkId;
-    }
-
-    public SMSReport setBulkId(String bulkId) {
-        this.bulkId = bulkId;
         return this;
     }
 
@@ -98,48 +116,30 @@ public class SMSReport {
         return this;
     }
 
-    public String getCallbackData() {
-        return this.callbackData;
-    }
-
-    public SMSReport setCallbackData(String callbackData) {
-        this.callbackData = callbackData;
-        return this;
-    }
-
-    public String getFrom() {
-        return this.from;
-    }
-
-    public SMSReport setFrom(String from) {
-        this.from = from;
-        return this;
-    }
-
-    public String getTo() {
-        return this.to;
-    }
-
-    public SMSReport setTo(String to) {
-        this.to = to;
-        return this;
-    }
-
-    public String getText() {
-        return this.text;
-    }
-
-    public SMSReport setText(String text) {
-        this.text = text;
-        return this;
-    }
-
     public Status getStatus() {
         return this.status;
     }
 
     public SMSReport setStatus(Status status) {
         this.status = status;
+        return this;
+    }
+
+    public Error getError() {
+        return this.error;
+    }
+
+    public SMSReport setError(Error error) {
+        this.error = error;
+        return this;
+    }
+
+    public String getCallbackData() {
+        return this.callbackData;
+    }
+
+    public SMSReport setCallbackData(String callbackData) {
+        this.callbackData = callbackData;
         return this;
     }
 
@@ -153,6 +153,48 @@ public class SMSReport {
         }
 
         SMSReport o = (SMSReport)obj;
+        if (this.bulkId == null) {
+            if (o.bulkId != null){
+                return false;
+            }
+        } else if (!this.bulkId.equals(o.bulkId)) {
+            return false;
+        }
+        if (this.messageId == null) {
+            if (o.messageId != null){
+                return false;
+            }
+        } else if (!this.messageId.equals(o.messageId)) {
+            return false;
+        }
+        if (this.to == null) {
+            if (o.to != null){
+                return false;
+            }
+        } else if (!this.to.equals(o.to)) {
+            return false;
+        }
+        if (this.from == null) {
+            if (o.from != null){
+                return false;
+            }
+        } else if (!this.from.equals(o.from)) {
+            return false;
+        }
+        if (this.text == null) {
+            if (o.text != null){
+                return false;
+            }
+        } else if (!this.text.equals(o.text)) {
+            return false;
+        }
+        if (this.sentAt == null) {
+            if (o.sentAt != null){
+                return false;
+            }
+        } else if (!this.sentAt.equals(o.sentAt)) {
+            return false;
+        }
         if (this.doneAt == null) {
             if (o.doneAt != null){
                 return false;
@@ -165,34 +207,6 @@ public class SMSReport {
                 return false;
             }
         } else if (!this.smsCount.equals(o.smsCount)) {
-            return false;
-        }
-        if (this.messageId == null) {
-            if (o.messageId != null){
-                return false;
-            }
-        } else if (!this.messageId.equals(o.messageId)) {
-            return false;
-        }
-        if (this.sentAt == null) {
-            if (o.sentAt != null){
-                return false;
-            }
-        } else if (!this.sentAt.equals(o.sentAt)) {
-            return false;
-        }
-        if (this.error == null) {
-            if (o.error != null){
-                return false;
-            }
-        } else if (!this.error.equals(o.error)) {
-            return false;
-        }
-        if (this.bulkId == null) {
-            if (o.bulkId != null){
-                return false;
-            }
-        } else if (!this.bulkId.equals(o.bulkId)) {
             return false;
         }
         if (this.mccMnc == null) {
@@ -209,39 +223,25 @@ public class SMSReport {
         } else if (!this.price.equals(o.price)) {
             return false;
         }
-        if (this.callbackData == null) {
-            if (o.callbackData != null){
-                return false;
-            }
-        } else if (!this.callbackData.equals(o.callbackData)) {
-            return false;
-        }
-        if (this.from == null) {
-            if (o.from != null){
-                return false;
-            }
-        } else if (!this.from.equals(o.from)) {
-            return false;
-        }
-        if (this.to == null) {
-            if (o.to != null){
-                return false;
-            }
-        } else if (!this.to.equals(o.to)) {
-            return false;
-        }
-        if (this.text == null) {
-            if (o.text != null){
-                return false;
-            }
-        } else if (!this.text.equals(o.text)) {
-            return false;
-        }
         if (this.status == null) {
             if (o.status != null){
                 return false;
             }
         } else if (!this.status.equals(o.status)) {
+            return false;
+        }
+        if (this.error == null) {
+            if (o.error != null){
+                return false;
+            }
+        } else if (!this.error.equals(o.error)) {
+            return false;
+        }
+        if (this.callbackData == null) {
+            if (o.callbackData != null){
+                return false;
+            }
+        } else if (!this.callbackData.equals(o.callbackData)) {
             return false;
         }
 
@@ -251,19 +251,19 @@ public class SMSReport {
     @Override
     public String toString() {
         return "SMSReport{" +
-            "doneAt='" + doneAt + "'" +
-            ", smsCount='" + smsCount + "'" +
+            "bulkId='" + bulkId + "'" +
             ", messageId='" + messageId + "'" +
+            ", to='" + to + "'" +
+            ", from='" + from + "'" +
+            ", text='" + text + "'" +
             ", sentAt='" + sentAt + "'" +
-            ", error='" + error + "'" +
-            ", bulkId='" + bulkId + "'" +
+            ", doneAt='" + doneAt + "'" +
+            ", smsCount='" + smsCount + "'" +
             ", mccMnc='" + mccMnc + "'" +
             ", price='" + price + "'" +
-            ", callbackData='" + callbackData + "'" +
-            ", from='" + from + "'" +
-            ", to='" + to + "'" +
-            ", text='" + text + "'" +
             ", status='" + status + "'" +
+            ", error='" + error + "'" +
+            ", callbackData='" + callbackData + "'" +
             '}';
     }
 }

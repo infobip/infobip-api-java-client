@@ -1,6 +1,5 @@
 package infobip.api.model.sms.mt.send.textual;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,32 +7,14 @@ import java.util.List;
  * This is a generated class and is not intended for modification!
  */
 public class SMSTextualRequest {
-    private String operatorClientId;
-    private String campaignId;
     private String from;
-    private List<String> to = new ArrayList<String>();
+    private List<String> to = new ArrayList<>();
     private String text;
+    private String campaignId;
+    private String operatorClientId;
     private String transliteration;
 
     public SMSTextualRequest() {
-    }
-
-    public String getOperatorClientId() {
-        return this.operatorClientId;
-    }
-
-    public SMSTextualRequest setOperatorClientId(String operatorClientId) {
-        this.operatorClientId = operatorClientId;
-        return this;
-    }
-
-    public String getCampaignId() {
-        return this.campaignId;
-    }
-
-    public SMSTextualRequest setCampaignId(String campaignId) {
-        this.campaignId = campaignId;
-        return this;
     }
 
     public String getFrom() {
@@ -54,22 +35,30 @@ public class SMSTextualRequest {
         return this;
     }
 
-    public SMSTextualRequest addTo(String... to) {
-        this.to.addAll(Arrays.asList(to));
-        return this;
-    }
-
-    public SMSTextualRequest removeTo(String... to) {
-        this.to.removeAll(Arrays.asList(to));
-        return this;
-    }
-
     public String getText() {
         return this.text;
     }
 
     public SMSTextualRequest setText(String text) {
         this.text = text;
+        return this;
+    }
+
+    public String getCampaignId() {
+        return this.campaignId;
+    }
+
+    public SMSTextualRequest setCampaignId(String campaignId) {
+        this.campaignId = campaignId;
+        return this;
+    }
+
+    public String getOperatorClientId() {
+        return this.operatorClientId;
+    }
+
+    public SMSTextualRequest setOperatorClientId(String operatorClientId) {
+        this.operatorClientId = operatorClientId;
         return this;
     }
 
@@ -92,20 +81,6 @@ public class SMSTextualRequest {
         }
 
         SMSTextualRequest o = (SMSTextualRequest)obj;
-        if (this.operatorClientId == null) {
-            if (o.operatorClientId != null){
-                return false;
-            }
-        } else if (!this.operatorClientId.equals(o.operatorClientId)) {
-            return false;
-        }
-        if (this.campaignId == null) {
-            if (o.campaignId != null){
-                return false;
-            }
-        } else if (!this.campaignId.equals(o.campaignId)) {
-            return false;
-        }
         if (this.from == null) {
             if (o.from != null){
                 return false;
@@ -127,6 +102,20 @@ public class SMSTextualRequest {
         } else if (!this.text.equals(o.text)) {
             return false;
         }
+        if (this.campaignId == null) {
+            if (o.campaignId != null){
+                return false;
+            }
+        } else if (!this.campaignId.equals(o.campaignId)) {
+            return false;
+        }
+        if (this.operatorClientId == null) {
+            if (o.operatorClientId != null){
+                return false;
+            }
+        } else if (!this.operatorClientId.equals(o.operatorClientId)) {
+            return false;
+        }
         if (this.transliteration == null) {
             if (o.transliteration != null){
                 return false;
@@ -141,11 +130,11 @@ public class SMSTextualRequest {
     @Override
     public String toString() {
         return "SMSTextualRequest{" +
-            "operatorClientId='" + operatorClientId + "'" +
-            ", campaignId='" + campaignId + "'" +
-            ", from='" + from + "'" +
-            ", to=" + (to == null?"null":Arrays.toString(to.toArray())) +
+            "from='" + from + "'" +
+            ", to='" + to + "'" +
             ", text='" + text + "'" +
+            ", campaignId='" + campaignId + "'" +
+            ", operatorClientId='" + operatorClientId + "'" +
             ", transliteration='" + transliteration + "'" +
             '}';
     }

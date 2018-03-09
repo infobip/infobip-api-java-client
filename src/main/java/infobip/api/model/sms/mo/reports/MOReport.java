@@ -1,60 +1,24 @@
 package infobip.api.model.sms.mo.reports;
 
-import infobip.api.model.Price;
 import java.util.Date;
+import infobip.api.model.Price;
 
 /**
  * This is a generated class and is not intended for modification!
  */
 public class MOReport {
-    private String cleanText;
-    private int smsCount;
-    private Price price;
-    private String callbackData;
     private String messageId;
     private String from;
     private String to;
     private String text;
+    private String cleanText;
     private String keyword;
     private Date receivedAt;
+    private int smsCount;
+    private Price price;
+    private String callbackData;
 
     public MOReport() {
-    }
-
-    public String getCleanText() {
-        return this.cleanText;
-    }
-
-    public MOReport setCleanText(String cleanText) {
-        this.cleanText = cleanText;
-        return this;
-    }
-
-    public int getSmsCount() {
-        return this.smsCount;
-    }
-
-    public MOReport setSmsCount(int smsCount) {
-        this.smsCount = smsCount;
-        return this;
-    }
-
-    public Price getPrice() {
-        return this.price;
-    }
-
-    public MOReport setPrice(Price price) {
-        this.price = price;
-        return this;
-    }
-
-    public String getCallbackData() {
-        return this.callbackData;
-    }
-
-    public MOReport setCallbackData(String callbackData) {
-        this.callbackData = callbackData;
-        return this;
     }
 
     public String getMessageId() {
@@ -93,6 +57,15 @@ public class MOReport {
         return this;
     }
 
+    public String getCleanText() {
+        return this.cleanText;
+    }
+
+    public MOReport setCleanText(String cleanText) {
+        this.cleanText = cleanText;
+        return this;
+    }
+
     public String getKeyword() {
         return this.keyword;
     }
@@ -111,6 +84,33 @@ public class MOReport {
         return this;
     }
 
+    public int getSmsCount() {
+        return this.smsCount;
+    }
+
+    public MOReport setSmsCount(int smsCount) {
+        this.smsCount = smsCount;
+        return this;
+    }
+
+    public Price getPrice() {
+        return this.price;
+    }
+
+    public MOReport setPrice(Price price) {
+        this.price = price;
+        return this;
+    }
+
+    public String getCallbackData() {
+        return this.callbackData;
+    }
+
+    public MOReport setCallbackData(String callbackData) {
+        this.callbackData = callbackData;
+        return this;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -121,30 +121,6 @@ public class MOReport {
         }
 
         MOReport o = (MOReport)obj;
-        if (this.cleanText == null) {
-            if (o.cleanText != null){
-                return false;
-            }
-        } else if (!this.cleanText.equals(o.cleanText)) {
-            return false;
-        }
-        if (this.smsCount != o.smsCount) {
-            return false;
-        }
-        if (this.price == null) {
-            if (o.price != null){
-                return false;
-            }
-        } else if (!this.price.equals(o.price)) {
-            return false;
-        }
-        if (this.callbackData == null) {
-            if (o.callbackData != null){
-                return false;
-            }
-        } else if (!this.callbackData.equals(o.callbackData)) {
-            return false;
-        }
         if (this.messageId == null) {
             if (o.messageId != null){
                 return false;
@@ -173,6 +149,13 @@ public class MOReport {
         } else if (!this.text.equals(o.text)) {
             return false;
         }
+        if (this.cleanText == null) {
+            if (o.cleanText != null){
+                return false;
+            }
+        } else if (!this.cleanText.equals(o.cleanText)) {
+            return false;
+        }
         if (this.keyword == null) {
             if (o.keyword != null){
                 return false;
@@ -187,6 +170,23 @@ public class MOReport {
         } else if (!this.receivedAt.equals(o.receivedAt)) {
             return false;
         }
+        if (this.smsCount != o.smsCount) {
+            return false;
+        }
+        if (this.price == null) {
+            if (o.price != null){
+                return false;
+            }
+        } else if (!this.price.equals(o.price)) {
+            return false;
+        }
+        if (this.callbackData == null) {
+            if (o.callbackData != null){
+                return false;
+            }
+        } else if (!this.callbackData.equals(o.callbackData)) {
+            return false;
+        }
 
         return true;
     }
@@ -194,16 +194,16 @@ public class MOReport {
     @Override
     public String toString() {
         return "MOReport{" +
-            "cleanText='" + cleanText + "'" +
-            ", smsCount=" + smsCount +
-            ", price='" + price + "'" +
-            ", callbackData='" + callbackData + "'" +
-            ", messageId='" + messageId + "'" +
+            "messageId='" + messageId + "'" +
             ", from='" + from + "'" +
             ", to='" + to + "'" +
             ", text='" + text + "'" +
+            ", cleanText='" + cleanText + "'" +
             ", keyword='" + keyword + "'" +
             ", receivedAt='" + receivedAt + "'" +
+            ", smsCount=" + smsCount +
+            ", price='" + price + "'" +
+            ", callbackData='" + callbackData + "'" +
             '}';
     }
 }

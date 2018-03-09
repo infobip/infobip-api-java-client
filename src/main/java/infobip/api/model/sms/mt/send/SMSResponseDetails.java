@@ -6,30 +6,12 @@ import infobip.api.model.Status;
  * This is a generated class and is not intended for modification!
  */
 public class SMSResponseDetails {
-    private Integer smsCount;
-    private String messageId;
     private String to;
     private Status status;
+    private Integer smsCount;
+    private String messageId;
 
     public SMSResponseDetails() {
-    }
-
-    public Integer getSmsCount() {
-        return this.smsCount;
-    }
-
-    public SMSResponseDetails setSmsCount(Integer smsCount) {
-        this.smsCount = smsCount;
-        return this;
-    }
-
-    public String getMessageId() {
-        return this.messageId;
-    }
-
-    public SMSResponseDetails setMessageId(String messageId) {
-        this.messageId = messageId;
-        return this;
     }
 
     public String getTo() {
@@ -50,6 +32,24 @@ public class SMSResponseDetails {
         return this;
     }
 
+    public Integer getSmsCount() {
+        return this.smsCount;
+    }
+
+    public SMSResponseDetails setSmsCount(Integer smsCount) {
+        this.smsCount = smsCount;
+        return this;
+    }
+
+    public String getMessageId() {
+        return this.messageId;
+    }
+
+    public SMSResponseDetails setMessageId(String messageId) {
+        this.messageId = messageId;
+        return this;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -60,20 +60,6 @@ public class SMSResponseDetails {
         }
 
         SMSResponseDetails o = (SMSResponseDetails)obj;
-        if (this.smsCount == null) {
-            if (o.smsCount != null){
-                return false;
-            }
-        } else if (!this.smsCount.equals(o.smsCount)) {
-            return false;
-        }
-        if (this.messageId == null) {
-            if (o.messageId != null){
-                return false;
-            }
-        } else if (!this.messageId.equals(o.messageId)) {
-            return false;
-        }
         if (this.to == null) {
             if (o.to != null){
                 return false;
@@ -88,6 +74,20 @@ public class SMSResponseDetails {
         } else if (!this.status.equals(o.status)) {
             return false;
         }
+        if (this.smsCount == null) {
+            if (o.smsCount != null){
+                return false;
+            }
+        } else if (!this.smsCount.equals(o.smsCount)) {
+            return false;
+        }
+        if (this.messageId == null) {
+            if (o.messageId != null){
+                return false;
+            }
+        } else if (!this.messageId.equals(o.messageId)) {
+            return false;
+        }
 
         return true;
     }
@@ -95,10 +95,10 @@ public class SMSResponseDetails {
     @Override
     public String toString() {
         return "SMSResponseDetails{" +
-            "smsCount='" + smsCount + "'" +
-            ", messageId='" + messageId + "'" +
-            ", to='" + to + "'" +
+            "to='" + to + "'" +
             ", status='" + status + "'" +
+            ", smsCount='" + smsCount + "'" +
+            ", messageId='" + messageId + "'" +
             '}';
     }
 }

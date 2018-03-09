@@ -1,7 +1,6 @@
 package infobip.api.model.sms.mt.logs;
 
 import infobip.api.model.sms.mt.logs.SMSLog;
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,7 @@ import java.util.List;
  * This is a generated class and is not intended for modification!
  */
 public class SMSLogsResponse {
-    private List<SMSLog> results = new ArrayList<SMSLog>();
+    private List<SMSLog> results = new ArrayList<>();
 
     public SMSLogsResponse() {
     }
@@ -20,16 +19,6 @@ public class SMSLogsResponse {
 
     public SMSLogsResponse setResults(List<SMSLog> results) {
         this.results = results;
-        return this;
-    }
-
-    public SMSLogsResponse addResults(SMSLog... results) {
-        this.results.addAll(Arrays.asList(results));
-        return this;
-    }
-
-    public SMSLogsResponse removeResults(SMSLog... results) {
-        this.results.removeAll(Arrays.asList(results));
         return this;
     }
 
@@ -57,7 +46,7 @@ public class SMSLogsResponse {
     @Override
     public String toString() {
         return "SMSLogsResponse{" +
-            "results=" + (results == null?"null":Arrays.toString(results.toArray())) +
+            "results='" + results + "'" +
             '}';
     }
 }

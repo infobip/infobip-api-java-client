@@ -6,20 +6,11 @@ import infobip.api.model.Status;
  * This is a generated class and is not intended for modification!
  */
 public class NumberContextResponseDetails {
-    private String messageId;
     private String to;
     private Status status;
+    private String messageId;
 
     public NumberContextResponseDetails() {
-    }
-
-    public String getMessageId() {
-        return this.messageId;
-    }
-
-    public NumberContextResponseDetails setMessageId(String messageId) {
-        this.messageId = messageId;
-        return this;
     }
 
     public String getTo() {
@@ -40,6 +31,15 @@ public class NumberContextResponseDetails {
         return this;
     }
 
+    public String getMessageId() {
+        return this.messageId;
+    }
+
+    public NumberContextResponseDetails setMessageId(String messageId) {
+        this.messageId = messageId;
+        return this;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -50,13 +50,6 @@ public class NumberContextResponseDetails {
         }
 
         NumberContextResponseDetails o = (NumberContextResponseDetails)obj;
-        if (this.messageId == null) {
-            if (o.messageId != null){
-                return false;
-            }
-        } else if (!this.messageId.equals(o.messageId)) {
-            return false;
-        }
         if (this.to == null) {
             if (o.to != null){
                 return false;
@@ -71,6 +64,13 @@ public class NumberContextResponseDetails {
         } else if (!this.status.equals(o.status)) {
             return false;
         }
+        if (this.messageId == null) {
+            if (o.messageId != null){
+                return false;
+            }
+        } else if (!this.messageId.equals(o.messageId)) {
+            return false;
+        }
 
         return true;
     }
@@ -78,9 +78,9 @@ public class NumberContextResponseDetails {
     @Override
     public String toString() {
         return "NumberContextResponseDetails{" +
-            "messageId='" + messageId + "'" +
-            ", to='" + to + "'" +
+            "to='" + to + "'" +
             ", status='" + status + "'" +
+            ", messageId='" + messageId + "'" +
             '}';
     }
 }

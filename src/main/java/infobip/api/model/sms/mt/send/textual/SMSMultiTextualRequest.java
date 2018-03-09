@@ -1,27 +1,17 @@
 package infobip.api.model.sms.mt.send.textual;
 
 import infobip.api.model.sms.mt.send.Message;
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This is a generated class and is not intended for modification!
  */
 public class SMSMultiTextualRequest {
+    private List<Message> messages = new ArrayList<>();
     private String bulkId;
-    private List<Message> messages = new ArrayList<Message>();
 
     public SMSMultiTextualRequest() {
-    }
-
-    public String getBulkId() {
-        return this.bulkId;
-    }
-
-    public SMSMultiTextualRequest setBulkId(String bulkId) {
-        this.bulkId = bulkId;
-        return this;
     }
 
     public List<Message> getMessages() {
@@ -33,13 +23,12 @@ public class SMSMultiTextualRequest {
         return this;
     }
 
-    public SMSMultiTextualRequest addMessages(Message... messages) {
-        this.messages.addAll(Arrays.asList(messages));
-        return this;
+    public String getBulkId() {
+        return this.bulkId;
     }
 
-    public SMSMultiTextualRequest removeMessages(Message... messages) {
-        this.messages.removeAll(Arrays.asList(messages));
+    public SMSMultiTextualRequest setBulkId(String bulkId) {
+        this.bulkId = bulkId;
         return this;
     }
 
@@ -53,18 +42,18 @@ public class SMSMultiTextualRequest {
         }
 
         SMSMultiTextualRequest o = (SMSMultiTextualRequest)obj;
-        if (this.bulkId == null) {
-            if (o.bulkId != null){
-                return false;
-            }
-        } else if (!this.bulkId.equals(o.bulkId)) {
-            return false;
-        }
         if (this.messages == null) {
             if (o.messages != null){
                 return false;
             }
         } else if (!this.messages.equals(o.messages)) {
+            return false;
+        }
+        if (this.bulkId == null) {
+            if (o.bulkId != null){
+                return false;
+            }
+        } else if (!this.bulkId.equals(o.bulkId)) {
             return false;
         }
 
@@ -74,8 +63,8 @@ public class SMSMultiTextualRequest {
     @Override
     public String toString() {
         return "SMSMultiTextualRequest{" +
-            "bulkId='" + bulkId + "'" +
-            ", messages=" + (messages == null?"null":Arrays.toString(messages.toArray())) +
+            "messages='" + messages + "'" +
+            ", bulkId='" + bulkId + "'" +
             '}';
     }
 }

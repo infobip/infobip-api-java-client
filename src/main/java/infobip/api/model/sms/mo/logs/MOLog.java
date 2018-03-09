@@ -6,34 +6,16 @@ import java.util.Date;
  * This is a generated class and is not intended for modification!
  */
 public class MOLog {
-    private String cleanText;
-    private Integer smsCount;
     private String messageId;
     private String from;
     private String to;
     private String text;
+    private String cleanText;
     private String keyword;
     private Date receivedAt;
+    private Integer smsCount;
 
     public MOLog() {
-    }
-
-    public String getCleanText() {
-        return this.cleanText;
-    }
-
-    public MOLog setCleanText(String cleanText) {
-        this.cleanText = cleanText;
-        return this;
-    }
-
-    public Integer getSmsCount() {
-        return this.smsCount;
-    }
-
-    public MOLog setSmsCount(Integer smsCount) {
-        this.smsCount = smsCount;
-        return this;
     }
 
     public String getMessageId() {
@@ -72,6 +54,15 @@ public class MOLog {
         return this;
     }
 
+    public String getCleanText() {
+        return this.cleanText;
+    }
+
+    public MOLog setCleanText(String cleanText) {
+        this.cleanText = cleanText;
+        return this;
+    }
+
     public String getKeyword() {
         return this.keyword;
     }
@@ -90,6 +81,15 @@ public class MOLog {
         return this;
     }
 
+    public Integer getSmsCount() {
+        return this.smsCount;
+    }
+
+    public MOLog setSmsCount(Integer smsCount) {
+        this.smsCount = smsCount;
+        return this;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -100,20 +100,6 @@ public class MOLog {
         }
 
         MOLog o = (MOLog)obj;
-        if (this.cleanText == null) {
-            if (o.cleanText != null){
-                return false;
-            }
-        } else if (!this.cleanText.equals(o.cleanText)) {
-            return false;
-        }
-        if (this.smsCount == null) {
-            if (o.smsCount != null){
-                return false;
-            }
-        } else if (!this.smsCount.equals(o.smsCount)) {
-            return false;
-        }
         if (this.messageId == null) {
             if (o.messageId != null){
                 return false;
@@ -142,6 +128,13 @@ public class MOLog {
         } else if (!this.text.equals(o.text)) {
             return false;
         }
+        if (this.cleanText == null) {
+            if (o.cleanText != null){
+                return false;
+            }
+        } else if (!this.cleanText.equals(o.cleanText)) {
+            return false;
+        }
         if (this.keyword == null) {
             if (o.keyword != null){
                 return false;
@@ -156,6 +149,13 @@ public class MOLog {
         } else if (!this.receivedAt.equals(o.receivedAt)) {
             return false;
         }
+        if (this.smsCount == null) {
+            if (o.smsCount != null){
+                return false;
+            }
+        } else if (!this.smsCount.equals(o.smsCount)) {
+            return false;
+        }
 
         return true;
     }
@@ -163,14 +163,14 @@ public class MOLog {
     @Override
     public String toString() {
         return "MOLog{" +
-            "cleanText='" + cleanText + "'" +
-            ", smsCount='" + smsCount + "'" +
-            ", messageId='" + messageId + "'" +
+            "messageId='" + messageId + "'" +
             ", from='" + from + "'" +
             ", to='" + to + "'" +
             ", text='" + text + "'" +
+            ", cleanText='" + cleanText + "'" +
             ", keyword='" + keyword + "'" +
             ", receivedAt='" + receivedAt + "'" +
+            ", smsCount='" + smsCount + "'" +
             '}';
     }
 }
