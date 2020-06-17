@@ -8,5 +8,6 @@ public enum LineDataType {
     IMAGE,
     VIDEO,
     AUDIO,
-    STICKER
+    STICKER,
+    FLEX
 }
