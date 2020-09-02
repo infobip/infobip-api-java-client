@@ -2,6 +2,7 @@ package infobip.api.model.sms.mt.send.textual;
 
 import java.util.ArrayList;
 import java.util.List;
+import infobip.api.model.sms.mt.send.RegionalOptions;
 
 /**
  * This is a generated class and is not intended for modification!
@@ -13,6 +14,7 @@ public class SMSTextualRequest {
     private String campaignId;
     private String operatorClientId;
     private String transliteration;
+    private RegionalOptions regional;
 
     public SMSTextualRequest() {
     }
@@ -71,6 +73,15 @@ public class SMSTextualRequest {
         return this;
     }
 
+    public RegionalOptions getRegional() {
+        return this.regional;
+    }
+
+    public SMSTextualRequest setRegional(RegionalOptions regional) {
+        this.regional = regional;
+        return this;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -123,6 +134,13 @@ public class SMSTextualRequest {
         } else if (!this.transliteration.equals(o.transliteration)) {
             return false;
         }
+        if (this.regional == null) {
+            if (o.regional != null){
+                return false;
+            }
+        } else if (!this.regional.equals(o.regional)) {
+            return false;
+        }
 
         return true;
     }
@@ -136,6 +154,7 @@ public class SMSTextualRequest {
             ", campaignId='" + campaignId + "'" +
             ", operatorClientId='" + operatorClientId + "'" +
             ", transliteration='" + transliteration + "'" +
+            ", regional='" + regional + "'" +
             '}';
     }
 }

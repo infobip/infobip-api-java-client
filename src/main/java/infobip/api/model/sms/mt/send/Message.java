@@ -7,6 +7,7 @@ import infobip.api.model.sms.mt.send.binary.BinaryContent;
 import infobip.api.model.sms.mt.send.Language;
 import java.util.Date;
 import infobip.api.model.sms.mt.send.DeliveryTimeWindow;
+import infobip.api.model.sms.mt.send.RegionalOptions;
 
 /**
  * This is a generated class and is not intended for modification!
@@ -30,6 +31,7 @@ public class Message {
     private DeliveryTimeWindow deliveryTimeWindow;
     private String campaignId;
     private String operatorClientId;
+    private RegionalOptions regional;
 
     public Message() {
     }
@@ -196,6 +198,15 @@ public class Message {
         return this;
     }
 
+    public RegionalOptions getRegional() {
+        return this.regional;
+    }
+
+    public Message setRegional(RegionalOptions regional) {
+        this.regional = regional;
+        return this;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -332,6 +343,13 @@ public class Message {
         } else if (!this.operatorClientId.equals(o.operatorClientId)) {
             return false;
         }
+        if (this.regional == null) {
+            if (o.regional != null){
+                return false;
+            }
+        } else if (!this.regional.equals(o.regional)) {
+            return false;
+        }
 
         return true;
     }
@@ -357,6 +375,7 @@ public class Message {
             ", deliveryTimeWindow='" + deliveryTimeWindow + "'" +
             ", campaignId='" + campaignId + "'" +
             ", operatorClientId='" + operatorClientId + "'" +
+            ", regional='" + regional + "'" +
             '}';
     }
 }
