@@ -3,6 +3,7 @@ package infobip.api.model.sms.mt.send.binary;
 import java.util.ArrayList;
 import java.util.List;
 import infobip.api.model.sms.mt.send.binary.BinaryContent;
+import infobip.api.model.sms.mt.send.RegionalOptions;
 
 /**
  * This is a generated class and is not intended for modification!
@@ -13,6 +14,7 @@ public class SMSBinaryRequest {
     private BinaryContent binary;
     private String campaignId;
     private String operatorClientId;
+    private RegionalOptions regional;
 
     public SMSBinaryRequest() {
     }
@@ -62,6 +64,15 @@ public class SMSBinaryRequest {
         return this;
     }
 
+    public RegionalOptions getRegional() {
+        return this.regional;
+    }
+
+    public SMSBinaryRequest setRegional(RegionalOptions regional) {
+        this.regional = regional;
+        return this;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -107,6 +118,13 @@ public class SMSBinaryRequest {
         } else if (!this.operatorClientId.equals(o.operatorClientId)) {
             return false;
         }
+        if (this.regional == null) {
+            if (o.regional != null){
+                return false;
+            }
+        } else if (!this.regional.equals(o.regional)) {
+            return false;
+        }
 
         return true;
     }
@@ -119,6 +137,7 @@ public class SMSBinaryRequest {
             ", binary='" + binary + "'" +
             ", campaignId='" + campaignId + "'" +
             ", operatorClientId='" + operatorClientId + "'" +
+            ", regional='" + regional + "'" +
             '}';
     }
 }
