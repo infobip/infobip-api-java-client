@@ -1,31 +1,24 @@
 # Infobip API Java Client
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.infobip/infobip-api-java-client.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.infobip%22%20AND%20a:%22infobip-api-java-client%22)
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 This right here is a Java Client for Infobip API and you can use it as a dependency to add [Infobip APIs][apidocs] to your application.
 To use this, you'll need an Infobip account. If not already having one, you can create a [free trial][freetrial] account [here][signup].
 
 <img src="https://udesigncss.com/wp-content/uploads/2020/01/Infobip-logo-transparent.png" height="124px" alt="Infobip" />
 
 #### Table of contents:
-* [Quality Check](#quality-check)
 * [Documentation](#documentation)
 * [General Info](#general-info)
 * [Installation](#installation)
 * [Quickstart](#quickstart)
 * [Ask for help](#ask-for-help)
 
-## Quality Check
-[![Maven Central](https://img.shields.io/maven-central/v/com.infobip.api/client.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.infobip.api%22%20AND%20a:%22client%22)
-[![Travis CI](https://travis-ci.com/kiselica-aldin/java-travis-playground.svg?branch=main&status=passed)](https://travis-ci.com/github/kiselica-aldin/java-travis-playground)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.aldin.kiselica%3Ajava-travis-playground&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.aldin.kiselica%3Ajava-travis-playground)
-[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=com.aldin.kiselica%3Ajava-travis-playground)
-
 ## Documentation
 
 Infobip API Documentation can be found [here][apidocs].
 
-Java API Client Documentation can be found [here][libdocs].
 ## General Info
 For `infobip-api-java-client` versioning we use [Semantic Versioning][semver] scheme.
 
@@ -41,7 +34,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
       <groupId>com.infobip</groupId>
       <artifactId>infobip-api-java-client</artifactId>
-      <version>3.0.0-SNAPSHOT</version>
+      <version>3.0.0</version>
 </dependency>
 ```
 
@@ -156,8 +149,8 @@ Infobip API supports Unicode characters and automatically detects encoding. Unic
 ```
 
 #### Receive incoming SMS
-If you want to receive SMS messages from your subscribers we can have them delivered to you in real time. When you buy and configure a number capable of receiving SMS, specify your endpoint as explained [here]().
-e.g. `https://{yourDomain}/incoming-sms`
+If you want to receive SMS messages from your subscribers we can have them delivered to you in real time. When you buy and configure a number capable of receiving SMS, specify your endpoint as explained [here](https://www.infobip.com/docs/api#channels/sms/receive-inbound-sms-messages).
+e.g. `https://{yourDomain}/incoming-sms`.
 
 Example of webhook implementation with Spring Web framework:
 
@@ -170,21 +163,17 @@ Example of webhook implementation with Spring Web framework:
     }
 ```
 #### Two-Factor Authentication (2FA)
-For 2FA quick start guide please check [these examples](two-factor-authentication.md)
-
-## Demo project
-Full code samples can be found on GitHub here: [infobip-api-java-client-demo](http://github.com/infobip/infobip-api-java-client-demo)
+For 2FA quick start guide please check [these examples](two-factor-authentication.md).
 
 ## Ask for help
 
 Feel free to open issues on the repository for any issue or feature request. As per pull requests, for details check the `CONTRIBUTING` [file][contributing] related to it - in short, we will not merge any pull requests, this code is auto-generated.
 
-If it is, however, something that requires our imminent attention feel free to contact us @ [support@infobip.com](mailto:support@infobip.com)
+If it is, however, something that requires our imminent attention feel free to contact us @ [support@infobip.com](mailto:support@infobip.com).
 
 [apidocs]: https://www.infobip.com/docs/api
-[libdocs]: https://www.infobip.com/docs/sdk
 [freetrial]: https://www.infobip.com/docs/freetrial
 [signup]: https://www.infobip.com/signup
 [semver]: https://semver.org
-[license]: LICENSE`
+[license]: LICENSE
 [contributing]: CONTRIBUTING.md
