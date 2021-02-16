@@ -16,16 +16,6 @@ import java.util.Objects;
 
 /** TfaVerification */
 public class TfaVerification {
-  public static final String SERIALIZED_NAME_MSISDN = "msisdn";
-
-  @SerializedName(SERIALIZED_NAME_MSISDN)
-  private String msisdn;
-
-  public static final String SERIALIZED_NAME_VERIFIED = "verified";
-
-  @SerializedName(SERIALIZED_NAME_VERIFIED)
-  private Boolean verified;
-
   public static final String SERIALIZED_NAME_VERIFIED_AT = "verifiedAt";
 
   @SerializedName(SERIALIZED_NAME_VERIFIED_AT)
@@ -36,23 +26,15 @@ public class TfaVerification {
   @SerializedName(SERIALIZED_NAME_SENT_AT)
   private Long sentAt;
 
-  /**
-   * Phone number (MSISDN) for which verification status is checked.
-   *
-   * @return msisdn
-   */
-  public String getMsisdn() {
-    return msisdn;
-  }
+  public static final String SERIALIZED_NAME_VERIFIED = "verified";
 
-  /**
-   * Indicates if the phone number (MSISDN) is already verified for 2FA application with given ID.
-   *
-   * @return verified
-   */
-  public Boolean getVerified() {
-    return verified;
-  }
+  @SerializedName(SERIALIZED_NAME_VERIFIED)
+  private Boolean verified;
+
+  public static final String SERIALIZED_NAME_MSISDN = "msisdn";
+
+  @SerializedName(SERIALIZED_NAME_MSISDN)
+  private String msisdn;
 
   /**
    * Verification UNIX timestamp (in millis), if the phone number (MSISDN) is verified.
@@ -72,6 +54,24 @@ public class TfaVerification {
     return sentAt;
   }
 
+  /**
+   * Indicates if the phone number (MSISDN) is already verified for 2FA application with given ID.
+   *
+   * @return verified
+   */
+  public Boolean getVerified() {
+    return verified;
+  }
+
+  /**
+   * Phone number (MSISDN) for which verification status is checked.
+   *
+   * @return msisdn
+   */
+  public String getMsisdn() {
+    return msisdn;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -81,25 +81,25 @@ public class TfaVerification {
       return false;
     }
     TfaVerification tfaVerification = (TfaVerification) o;
-    return Objects.equals(this.msisdn, tfaVerification.msisdn)
+    return Objects.equals(this.verifiedAt, tfaVerification.verifiedAt)
+        && Objects.equals(this.sentAt, tfaVerification.sentAt)
         && Objects.equals(this.verified, tfaVerification.verified)
-        && Objects.equals(this.verifiedAt, tfaVerification.verifiedAt)
-        && Objects.equals(this.sentAt, tfaVerification.sentAt);
+        && Objects.equals(this.msisdn, tfaVerification.msisdn);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(msisdn, verified, verifiedAt, sentAt);
+    return Objects.hash(verifiedAt, sentAt, verified, msisdn);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TfaVerification {\n");
-    sb.append("    msisdn: ").append(toIndentedString(msisdn)).append("\n");
-    sb.append("    verified: ").append(toIndentedString(verified)).append("\n");
     sb.append("    verifiedAt: ").append(toIndentedString(verifiedAt)).append("\n");
     sb.append("    sentAt: ").append(toIndentedString(sentAt)).append("\n");
+    sb.append("    verified: ").append(toIndentedString(verified)).append("\n");
+    sb.append("    msisdn: ").append(toIndentedString(msisdn)).append("\n");
     sb.append("}");
     return sb.toString();
   }

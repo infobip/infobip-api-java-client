@@ -16,11 +16,6 @@ import java.util.Objects;
 
 /** TfaApplicationResponse */
 public class TfaApplicationResponse {
-  public static final String SERIALIZED_NAME_CONFIGURATION = "configuration";
-
-  @SerializedName(SERIALIZED_NAME_CONFIGURATION)
-  private TfaApplicationConfiguration _configuration = null;
-
   public static final String SERIALIZED_NAME_APPLICATION_ID = "applicationId";
 
   @SerializedName(SERIALIZED_NAME_APPLICATION_ID)
@@ -31,19 +26,15 @@ public class TfaApplicationResponse {
   @SerializedName(SERIALIZED_NAME_ENABLED)
   private Boolean enabled;
 
+  public static final String SERIALIZED_NAME_CONFIGURATION = "configuration";
+
+  @SerializedName(SERIALIZED_NAME_CONFIGURATION)
+  private TfaApplicationConfiguration _configuration = null;
+
   public static final String SERIALIZED_NAME_NAME = "name";
 
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
-
-  /**
-   * Created 2FA application configuration.
-   *
-   * @return _configuration
-   */
-  public TfaApplicationConfiguration getConfiguration() {
-    return _configuration;
-  }
 
   /**
    * 2FA application ID.
@@ -64,6 +55,15 @@ public class TfaApplicationResponse {
   }
 
   /**
+   * Created 2FA application configuration.
+   *
+   * @return _configuration
+   */
+  public TfaApplicationConfiguration getConfiguration() {
+    return _configuration;
+  }
+
+  /**
    * 2FA application name.
    *
    * @return name
@@ -81,24 +81,24 @@ public class TfaApplicationResponse {
       return false;
     }
     TfaApplicationResponse tfaApplicationResponse = (TfaApplicationResponse) o;
-    return Objects.equals(this._configuration, tfaApplicationResponse._configuration)
-        && Objects.equals(this.applicationId, tfaApplicationResponse.applicationId)
+    return Objects.equals(this.applicationId, tfaApplicationResponse.applicationId)
         && Objects.equals(this.enabled, tfaApplicationResponse.enabled)
+        && Objects.equals(this._configuration, tfaApplicationResponse._configuration)
         && Objects.equals(this.name, tfaApplicationResponse.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(_configuration, applicationId, enabled, name);
+    return Objects.hash(applicationId, enabled, _configuration, name);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TfaApplicationResponse {\n");
-    sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
     sb.append("    applicationId: ").append(toIndentedString(applicationId)).append("\n");
     sb.append("    enabled: ").append(toIndentedString(enabled)).append("\n");
+    sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();

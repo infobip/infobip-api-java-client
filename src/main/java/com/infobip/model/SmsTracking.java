@@ -16,11 +16,6 @@ import java.util.Objects;
 
 /** SmsTracking */
 public class SmsTracking {
-  public static final String SERIALIZED_NAME_TRACK = "track";
-
-  @SerializedName(SERIALIZED_NAME_TRACK)
-  private String track;
-
   public static final String SERIALIZED_NAME_TYPE = "type";
 
   @SerializedName(SERIALIZED_NAME_TYPE)
@@ -31,30 +26,15 @@ public class SmsTracking {
   @SerializedName(SERIALIZED_NAME_PROCESS_KEY)
   private String processKey;
 
+  public static final String SERIALIZED_NAME_TRACK = "track";
+
+  @SerializedName(SERIALIZED_NAME_TRACK)
+  private String track;
+
   public static final String SERIALIZED_NAME_BASE_URL = "baseUrl";
 
   @SerializedName(SERIALIZED_NAME_BASE_URL)
   private String baseUrl;
-
-  public SmsTracking track(String track) {
-
-    this.track = track;
-    return this;
-  }
-
-  /**
-   * Indicates if the message has to be tracked for Conversion rates. Possible values:
-   * &#x60;SMS&#x60; and &#x60;URL&#x60;
-   *
-   * @return track
-   */
-  public String getTrack() {
-    return track;
-  }
-
-  public void setTrack(String track) {
-    this.track = track;
-  }
 
   public SmsTracking type(String type) {
 
@@ -95,6 +75,26 @@ public class SmsTracking {
     this.processKey = processKey;
   }
 
+  public SmsTracking track(String track) {
+
+    this.track = track;
+    return this;
+  }
+
+  /**
+   * Indicates if the message has to be tracked for Conversion rates. Possible values:
+   * &#x60;SMS&#x60; and &#x60;URL&#x60;
+   *
+   * @return track
+   */
+  public String getTrack() {
+    return track;
+  }
+
+  public void setTrack(String track) {
+    this.track = track;
+  }
+
   public SmsTracking baseUrl(String baseUrl) {
 
     this.baseUrl = baseUrl;
@@ -124,24 +124,24 @@ public class SmsTracking {
       return false;
     }
     SmsTracking smsTracking = (SmsTracking) o;
-    return Objects.equals(this.track, smsTracking.track)
-        && Objects.equals(this.type, smsTracking.type)
+    return Objects.equals(this.type, smsTracking.type)
         && Objects.equals(this.processKey, smsTracking.processKey)
+        && Objects.equals(this.track, smsTracking.track)
         && Objects.equals(this.baseUrl, smsTracking.baseUrl);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(track, type, processKey, baseUrl);
+    return Objects.hash(type, processKey, track, baseUrl);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsTracking {\n");
-    sb.append("    track: ").append(toIndentedString(track)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    processKey: ").append(toIndentedString(processKey)).append("\n");
+    sb.append("    track: ").append(toIndentedString(track)).append("\n");
     sb.append("    baseUrl: ").append(toIndentedString(baseUrl)).append("\n");
     sb.append("}");
     return sb.toString();

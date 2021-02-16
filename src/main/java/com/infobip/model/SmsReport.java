@@ -17,20 +17,10 @@ import java.util.Objects;
 
 /** SmsReport */
 public class SmsReport {
-  public static final String SERIALIZED_NAME_TO = "to";
+  public static final String SERIALIZED_NAME_SMS_COUNT = "smsCount";
 
-  @SerializedName(SERIALIZED_NAME_TO)
-  private String to;
-
-  public static final String SERIALIZED_NAME_PRICE = "price";
-
-  @SerializedName(SERIALIZED_NAME_PRICE)
-  private SmsPrice price = null;
-
-  public static final String SERIALIZED_NAME_SENT_AT = "sentAt";
-
-  @SerializedName(SERIALIZED_NAME_SENT_AT)
-  private OffsetDateTime sentAt;
+  @SerializedName(SERIALIZED_NAME_SMS_COUNT)
+  private Integer smsCount;
 
   public static final String SERIALIZED_NAME_MCC_MNC = "mccMnc";
 
@@ -42,20 +32,20 @@ public class SmsReport {
   @SerializedName(SERIALIZED_NAME_BULK_ID)
   private String bulkId;
 
-  public static final String SERIALIZED_NAME_FROM = "from";
+  public static final String SERIALIZED_NAME_ERROR = "error";
 
-  @SerializedName(SERIALIZED_NAME_FROM)
-  private String from;
+  @SerializedName(SERIALIZED_NAME_ERROR)
+  private SmsError error = null;
 
-  public static final String SERIALIZED_NAME_CALLBACK_DATA = "callbackData";
+  public static final String SERIALIZED_NAME_TO = "to";
 
-  @SerializedName(SERIALIZED_NAME_CALLBACK_DATA)
-  private String callbackData;
+  @SerializedName(SERIALIZED_NAME_TO)
+  private String to;
 
-  public static final String SERIALIZED_NAME_SMS_COUNT = "smsCount";
+  public static final String SERIALIZED_NAME_SENT_AT = "sentAt";
 
-  @SerializedName(SERIALIZED_NAME_SMS_COUNT)
-  private Integer smsCount;
+  @SerializedName(SERIALIZED_NAME_SENT_AT)
+  private OffsetDateTime sentAt;
 
   public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
 
@@ -72,37 +62,28 @@ public class SmsReport {
   @SerializedName(SERIALIZED_NAME_STATUS)
   private SmsStatus status = null;
 
-  public static final String SERIALIZED_NAME_ERROR = "error";
+  public static final String SERIALIZED_NAME_FROM = "from";
 
-  @SerializedName(SERIALIZED_NAME_ERROR)
-  private SmsError error = null;
+  @SerializedName(SERIALIZED_NAME_FROM)
+  private String from;
 
-  /**
-   * Destination address.
-   *
-   * @return to
-   */
-  public String getTo() {
-    return to;
-  }
+  public static final String SERIALIZED_NAME_CALLBACK_DATA = "callbackData";
 
-  /**
-   * Sent SMS price.
-   *
-   * @return price
-   */
-  public SmsPrice getPrice() {
-    return price;
-  }
+  @SerializedName(SERIALIZED_NAME_CALLBACK_DATA)
+  private String callbackData;
+
+  public static final String SERIALIZED_NAME_PRICE = "price";
+
+  @SerializedName(SERIALIZED_NAME_PRICE)
+  private SmsPrice price = null;
 
   /**
-   * Tells when the SMS was sent. Has the following format:
-   * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+   * The number of parts the sent SMS was split into.
    *
-   * @return sentAt
+   * @return smsCount
    */
-  public OffsetDateTime getSentAt() {
-    return sentAt;
+  public Integer getSmsCount() {
+    return smsCount;
   }
 
   /**
@@ -124,30 +105,31 @@ public class SmsReport {
   }
 
   /**
-   * Sender ID that can be alphanumeric or numeric.
+   * Indicates whether the error occurred during the query execution.
    *
-   * @return from
+   * @return error
    */
-  public String getFrom() {
-    return from;
+  public SmsError getError() {
+    return error;
   }
 
   /**
-   * Callback data sent through &#x60;callbackData&#x60; field in fully featured SMS message.
+   * Destination address.
    *
-   * @return callbackData
+   * @return to
    */
-  public String getCallbackData() {
-    return callbackData;
+  public String getTo() {
+    return to;
   }
 
   /**
-   * The number of parts the sent SMS was split into.
+   * Tells when the SMS was sent. Has the following format:
+   * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
    *
-   * @return smsCount
+   * @return sentAt
    */
-  public Integer getSmsCount() {
-    return smsCount;
+  public OffsetDateTime getSentAt() {
+    return sentAt;
   }
 
   /**
@@ -181,12 +163,30 @@ public class SmsReport {
   }
 
   /**
-   * Indicates whether the error occurred during the query execution.
+   * Sender ID that can be alphanumeric or numeric.
    *
-   * @return error
+   * @return from
    */
-  public SmsError getError() {
-    return error;
+  public String getFrom() {
+    return from;
+  }
+
+  /**
+   * Callback data sent through &#x60;callbackData&#x60; field in fully featured SMS message.
+   *
+   * @return callbackData
+   */
+  public String getCallbackData() {
+    return callbackData;
+  }
+
+  /**
+   * Sent SMS price.
+   *
+   * @return price
+   */
+  public SmsPrice getPrice() {
+    return price;
   }
 
   @Override
@@ -198,53 +198,53 @@ public class SmsReport {
       return false;
     }
     SmsReport smsReport = (SmsReport) o;
-    return Objects.equals(this.to, smsReport.to)
-        && Objects.equals(this.price, smsReport.price)
-        && Objects.equals(this.sentAt, smsReport.sentAt)
+    return Objects.equals(this.smsCount, smsReport.smsCount)
         && Objects.equals(this.mccMnc, smsReport.mccMnc)
         && Objects.equals(this.bulkId, smsReport.bulkId)
-        && Objects.equals(this.from, smsReport.from)
-        && Objects.equals(this.callbackData, smsReport.callbackData)
-        && Objects.equals(this.smsCount, smsReport.smsCount)
+        && Objects.equals(this.error, smsReport.error)
+        && Objects.equals(this.to, smsReport.to)
+        && Objects.equals(this.sentAt, smsReport.sentAt)
         && Objects.equals(this.messageId, smsReport.messageId)
         && Objects.equals(this.doneAt, smsReport.doneAt)
         && Objects.equals(this.status, smsReport.status)
-        && Objects.equals(this.error, smsReport.error);
+        && Objects.equals(this.from, smsReport.from)
+        && Objects.equals(this.callbackData, smsReport.callbackData)
+        && Objects.equals(this.price, smsReport.price);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        to,
-        price,
-        sentAt,
+        smsCount,
         mccMnc,
         bulkId,
-        from,
-        callbackData,
-        smsCount,
+        error,
+        to,
+        sentAt,
         messageId,
         doneAt,
         status,
-        error);
+        from,
+        callbackData,
+        price);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsReport {\n");
-    sb.append("    to: ").append(toIndentedString(to)).append("\n");
-    sb.append("    price: ").append(toIndentedString(price)).append("\n");
-    sb.append("    sentAt: ").append(toIndentedString(sentAt)).append("\n");
+    sb.append("    smsCount: ").append(toIndentedString(smsCount)).append("\n");
     sb.append("    mccMnc: ").append(toIndentedString(mccMnc)).append("\n");
     sb.append("    bulkId: ").append(toIndentedString(bulkId)).append("\n");
-    sb.append("    from: ").append(toIndentedString(from)).append("\n");
-    sb.append("    callbackData: ").append(toIndentedString(callbackData)).append("\n");
-    sb.append("    smsCount: ").append(toIndentedString(smsCount)).append("\n");
+    sb.append("    error: ").append(toIndentedString(error)).append("\n");
+    sb.append("    to: ").append(toIndentedString(to)).append("\n");
+    sb.append("    sentAt: ").append(toIndentedString(sentAt)).append("\n");
     sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
     sb.append("    doneAt: ").append(toIndentedString(doneAt)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
-    sb.append("    error: ").append(toIndentedString(error)).append("\n");
+    sb.append("    from: ").append(toIndentedString(from)).append("\n");
+    sb.append("    callbackData: ").append(toIndentedString(callbackData)).append("\n");
+    sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("}");
     return sb.toString();
   }

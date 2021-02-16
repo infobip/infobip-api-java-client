@@ -16,6 +16,11 @@ import java.util.Objects;
 
 /** SmsStatus */
 public class SmsStatus {
+  public static final String SERIALIZED_NAME_ID = "id";
+
+  @SerializedName(SERIALIZED_NAME_ID)
+  private Integer id;
+
   public static final String SERIALIZED_NAME_GROUP_NAME = "groupName";
 
   @SerializedName(SERIALIZED_NAME_GROUP_NAME)
@@ -26,25 +31,29 @@ public class SmsStatus {
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
   private String description;
 
-  public static final String SERIALIZED_NAME_ID = "id";
+  public static final String SERIALIZED_NAME_ACTION = "action";
 
-  @SerializedName(SERIALIZED_NAME_ID)
-  private Integer id;
+  @SerializedName(SERIALIZED_NAME_ACTION)
+  private String action;
 
   public static final String SERIALIZED_NAME_NAME = "name";
 
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String SERIALIZED_NAME_ACTION = "action";
-
-  @SerializedName(SERIALIZED_NAME_ACTION)
-  private String action;
-
   public static final String SERIALIZED_NAME_GROUP_ID = "groupId";
 
   @SerializedName(SERIALIZED_NAME_GROUP_ID)
   private Integer groupId;
+
+  /**
+   * Status ID.
+   *
+   * @return id
+   */
+  public Integer getId() {
+    return id;
+  }
 
   /**
    * Status group name.
@@ -65,12 +74,12 @@ public class SmsStatus {
   }
 
   /**
-   * Status ID.
+   * Action that should be taken to eliminate the error.
    *
-   * @return id
+   * @return action
    */
-  public Integer getId() {
-    return id;
+  public String getAction() {
+    return action;
   }
 
   /**
@@ -80,15 +89,6 @@ public class SmsStatus {
    */
   public String getName() {
     return name;
-  }
-
-  /**
-   * Action that should be taken to eliminate the error.
-   *
-   * @return action
-   */
-  public String getAction() {
-    return action;
   }
 
   /**
@@ -109,28 +109,28 @@ public class SmsStatus {
       return false;
     }
     SmsStatus smsStatus = (SmsStatus) o;
-    return Objects.equals(this.groupName, smsStatus.groupName)
+    return Objects.equals(this.id, smsStatus.id)
+        && Objects.equals(this.groupName, smsStatus.groupName)
         && Objects.equals(this.description, smsStatus.description)
-        && Objects.equals(this.id, smsStatus.id)
-        && Objects.equals(this.name, smsStatus.name)
         && Objects.equals(this.action, smsStatus.action)
+        && Objects.equals(this.name, smsStatus.name)
         && Objects.equals(this.groupId, smsStatus.groupId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(groupName, description, id, name, action, groupId);
+    return Objects.hash(id, groupName, description, action, name, groupId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsStatus {\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    groupName: ").append(toIndentedString(groupName)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    action: ").append(toIndentedString(action)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    groupId: ").append(toIndentedString(groupId)).append("\n");
     sb.append("}");
     return sb.toString();

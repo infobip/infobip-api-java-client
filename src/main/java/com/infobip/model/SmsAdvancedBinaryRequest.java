@@ -23,15 +23,15 @@ public class SmsAdvancedBinaryRequest {
   @SerializedName(SERIALIZED_NAME_BULK_ID)
   private String bulkId;
 
+  public static final String SERIALIZED_NAME_MESSAGES = "messages";
+
+  @SerializedName(SERIALIZED_NAME_MESSAGES)
+  private List<SmsBinaryMessage> messages = new ArrayList<>();
+
   public static final String SERIALIZED_NAME_SENDING_SPEED_LIMIT = "sendingSpeedLimit";
 
   @SerializedName(SERIALIZED_NAME_SENDING_SPEED_LIMIT)
   private SmsSendingSpeedLimit sendingSpeedLimit = null;
-
-  public static final String SERIALIZED_NAME_MESSAGES = "messages";
-
-  @SerializedName(SERIALIZED_NAME_MESSAGES)
-  private List<SmsBinaryMessage> messages = null;
 
   public SmsAdvancedBinaryRequest bulkId(String bulkId) {
 
@@ -51,6 +51,30 @@ public class SmsAdvancedBinaryRequest {
 
   public void setBulkId(String bulkId) {
     this.bulkId = bulkId;
+  }
+
+  public SmsAdvancedBinaryRequest messages(List<SmsBinaryMessage> messages) {
+
+    this.messages = messages;
+    return this;
+  }
+
+  public SmsAdvancedBinaryRequest addMessagesItem(SmsBinaryMessage messagesItem) {
+    this.messages.add(messagesItem);
+    return this;
+  }
+
+  /**
+   * Get messages
+   *
+   * @return messages
+   */
+  public List<SmsBinaryMessage> getMessages() {
+    return messages;
+  }
+
+  public void setMessages(List<SmsBinaryMessage> messages) {
+    this.messages = messages;
   }
 
   public SmsAdvancedBinaryRequest sendingSpeedLimit(SmsSendingSpeedLimit sendingSpeedLimit) {
@@ -77,33 +101,6 @@ public class SmsAdvancedBinaryRequest {
     this.sendingSpeedLimit = sendingSpeedLimit;
   }
 
-  public SmsAdvancedBinaryRequest messages(List<SmsBinaryMessage> messages) {
-
-    this.messages = messages;
-    return this;
-  }
-
-  public SmsAdvancedBinaryRequest addMessagesItem(SmsBinaryMessage messagesItem) {
-    if (this.messages == null) {
-      this.messages = new ArrayList<>();
-    }
-    this.messages.add(messagesItem);
-    return this;
-  }
-
-  /**
-   * Get messages
-   *
-   * @return messages
-   */
-  public List<SmsBinaryMessage> getMessages() {
-    return messages;
-  }
-
-  public void setMessages(List<SmsBinaryMessage> messages) {
-    this.messages = messages;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -114,13 +111,13 @@ public class SmsAdvancedBinaryRequest {
     }
     SmsAdvancedBinaryRequest smsAdvancedBinaryRequest = (SmsAdvancedBinaryRequest) o;
     return Objects.equals(this.bulkId, smsAdvancedBinaryRequest.bulkId)
-        && Objects.equals(this.sendingSpeedLimit, smsAdvancedBinaryRequest.sendingSpeedLimit)
-        && Objects.equals(this.messages, smsAdvancedBinaryRequest.messages);
+        && Objects.equals(this.messages, smsAdvancedBinaryRequest.messages)
+        && Objects.equals(this.sendingSpeedLimit, smsAdvancedBinaryRequest.sendingSpeedLimit);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bulkId, sendingSpeedLimit, messages);
+    return Objects.hash(bulkId, messages, sendingSpeedLimit);
   }
 
   @Override
@@ -128,8 +125,8 @@ public class SmsAdvancedBinaryRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsAdvancedBinaryRequest {\n");
     sb.append("    bulkId: ").append(toIndentedString(bulkId)).append("\n");
-    sb.append("    sendingSpeedLimit: ").append(toIndentedString(sendingSpeedLimit)).append("\n");
     sb.append("    messages: ").append(toIndentedString(messages)).append("\n");
+    sb.append("    sendingSpeedLimit: ").append(toIndentedString(sendingSpeedLimit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

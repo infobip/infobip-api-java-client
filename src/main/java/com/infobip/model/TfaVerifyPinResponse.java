@@ -16,38 +16,38 @@ import java.util.Objects;
 
 /** TfaVerifyPinResponse */
 public class TfaVerifyPinResponse {
-  public static final String SERIALIZED_NAME_PIN_ID = "pinId";
+  public static final String SERIALIZED_NAME_PIN_ERROR = "pinError";
 
-  @SerializedName(SERIALIZED_NAME_PIN_ID)
-  private String pinId;
+  @SerializedName(SERIALIZED_NAME_PIN_ERROR)
+  private String pinError;
 
   public static final String SERIALIZED_NAME_MSISDN = "msisdn";
 
   @SerializedName(SERIALIZED_NAME_MSISDN)
   private String msisdn;
 
-  public static final String SERIALIZED_NAME_VERIFIED = "verified";
-
-  @SerializedName(SERIALIZED_NAME_VERIFIED)
-  private Boolean verified;
-
   public static final String SERIALIZED_NAME_ATTEMPTS_REMAINING = "attemptsRemaining";
 
   @SerializedName(SERIALIZED_NAME_ATTEMPTS_REMAINING)
   private Integer attemptsRemaining;
 
-  public static final String SERIALIZED_NAME_PIN_ERROR = "pinError";
+  public static final String SERIALIZED_NAME_VERIFIED = "verified";
 
-  @SerializedName(SERIALIZED_NAME_PIN_ERROR)
-  private String pinError;
+  @SerializedName(SERIALIZED_NAME_VERIFIED)
+  private Boolean verified;
+
+  public static final String SERIALIZED_NAME_PIN_ID = "pinId";
+
+  @SerializedName(SERIALIZED_NAME_PIN_ID)
+  private String pinId;
 
   /**
-   * Sent PIN code ID.
+   * Indicates if any error occurs during PIN verification.
    *
-   * @return pinId
+   * @return pinError
    */
-  public String getPinId() {
-    return pinId;
+  public String getPinError() {
+    return pinError;
   }
 
   /**
@@ -60,15 +60,6 @@ public class TfaVerifyPinResponse {
   }
 
   /**
-   * Indicates if the phone number (&#x60;MSISDN&#x60;) was successfully verified.
-   *
-   * @return verified
-   */
-  public Boolean getVerified() {
-    return verified;
-  }
-
-  /**
    * Number of remaining PIN attempts.
    *
    * @return attemptsRemaining
@@ -78,12 +69,21 @@ public class TfaVerifyPinResponse {
   }
 
   /**
-   * Indicates if any error occurs during PIN verification.
+   * Indicates if the phone number (&#x60;MSISDN&#x60;) was successfully verified.
    *
-   * @return pinError
+   * @return verified
    */
-  public String getPinError() {
-    return pinError;
+  public Boolean getVerified() {
+    return verified;
+  }
+
+  /**
+   * Sent PIN code ID.
+   *
+   * @return pinId
+   */
+  public String getPinId() {
+    return pinId;
   }
 
   @Override
@@ -95,27 +95,27 @@ public class TfaVerifyPinResponse {
       return false;
     }
     TfaVerifyPinResponse tfaVerifyPinResponse = (TfaVerifyPinResponse) o;
-    return Objects.equals(this.pinId, tfaVerifyPinResponse.pinId)
+    return Objects.equals(this.pinError, tfaVerifyPinResponse.pinError)
         && Objects.equals(this.msisdn, tfaVerifyPinResponse.msisdn)
-        && Objects.equals(this.verified, tfaVerifyPinResponse.verified)
         && Objects.equals(this.attemptsRemaining, tfaVerifyPinResponse.attemptsRemaining)
-        && Objects.equals(this.pinError, tfaVerifyPinResponse.pinError);
+        && Objects.equals(this.verified, tfaVerifyPinResponse.verified)
+        && Objects.equals(this.pinId, tfaVerifyPinResponse.pinId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(pinId, msisdn, verified, attemptsRemaining, pinError);
+    return Objects.hash(pinError, msisdn, attemptsRemaining, verified, pinId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TfaVerifyPinResponse {\n");
-    sb.append("    pinId: ").append(toIndentedString(pinId)).append("\n");
-    sb.append("    msisdn: ").append(toIndentedString(msisdn)).append("\n");
-    sb.append("    verified: ").append(toIndentedString(verified)).append("\n");
-    sb.append("    attemptsRemaining: ").append(toIndentedString(attemptsRemaining)).append("\n");
     sb.append("    pinError: ").append(toIndentedString(pinError)).append("\n");
+    sb.append("    msisdn: ").append(toIndentedString(msisdn)).append("\n");
+    sb.append("    attemptsRemaining: ").append(toIndentedString(attemptsRemaining)).append("\n");
+    sb.append("    verified: ").append(toIndentedString(verified)).append("\n");
+    sb.append("    pinId: ").append(toIndentedString(pinId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

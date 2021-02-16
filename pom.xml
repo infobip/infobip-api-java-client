@@ -5,7 +5,7 @@
     <artifactId>infobip-api-java-client</artifactId>
     <packaging>jar</packaging>
     <name>infobip-api-java-client</name>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <url>https://github.com/openapitools/openapi-generator</url>
     <description>OpenAPI Java</description>
     <scm>
@@ -232,12 +232,6 @@
     </profiles>
 
     <dependencies>
-        <!-- @Nullable annotation -->
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>3.0.2</version>
-        </dependency>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>

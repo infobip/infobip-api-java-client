@@ -17,24 +17,15 @@ import java.util.Objects;
 
 /** SmsPreviewResponse */
 public class SmsPreviewResponse {
-  public static final String SERIALIZED_NAME_PREVIEWS = "previews";
-
-  @SerializedName(SERIALIZED_NAME_PREVIEWS)
-  private List<SmsPreview> previews = null;
-
   public static final String SERIALIZED_NAME_ORIGINAL_TEXT = "originalText";
 
   @SerializedName(SERIALIZED_NAME_ORIGINAL_TEXT)
   private String originalText;
 
-  /**
-   * Previews of applying different configurations to the original text.
-   *
-   * @return previews
-   */
-  public List<SmsPreview> getPreviews() {
-    return previews;
-  }
+  public static final String SERIALIZED_NAME_PREVIEWS = "previews";
+
+  @SerializedName(SERIALIZED_NAME_PREVIEWS)
+  private List<SmsPreview> previews = null;
 
   /**
    * Text supplied in the request.
@@ -43,6 +34,15 @@ public class SmsPreviewResponse {
    */
   public String getOriginalText() {
     return originalText;
+  }
+
+  /**
+   * Previews of applying different configurations to the original text.
+   *
+   * @return previews
+   */
+  public List<SmsPreview> getPreviews() {
+    return previews;
   }
 
   @Override
@@ -54,21 +54,21 @@ public class SmsPreviewResponse {
       return false;
     }
     SmsPreviewResponse smsPreviewResponse = (SmsPreviewResponse) o;
-    return Objects.equals(this.previews, smsPreviewResponse.previews)
-        && Objects.equals(this.originalText, smsPreviewResponse.originalText);
+    return Objects.equals(this.originalText, smsPreviewResponse.originalText)
+        && Objects.equals(this.previews, smsPreviewResponse.previews);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(previews, originalText);
+    return Objects.hash(originalText, previews);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsPreviewResponse {\n");
-    sb.append("    previews: ").append(toIndentedString(previews)).append("\n");
     sb.append("    originalText: ").append(toIndentedString(originalText)).append("\n");
+    sb.append("    previews: ").append(toIndentedString(previews)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -16,41 +16,20 @@ import java.util.Objects;
 
 /** SmsPreviewRequest */
 public class SmsPreviewRequest {
-  public static final String SERIALIZED_NAME_TRANSLITERATION = "transliteration";
-
-  @SerializedName(SERIALIZED_NAME_TRANSLITERATION)
-  private String transliteration;
-
   public static final String SERIALIZED_NAME_LANGUAGE_CODE = "languageCode";
 
   @SerializedName(SERIALIZED_NAME_LANGUAGE_CODE)
   private String languageCode;
 
+  public static final String SERIALIZED_NAME_TRANSLITERATION = "transliteration";
+
+  @SerializedName(SERIALIZED_NAME_TRANSLITERATION)
+  private String transliteration;
+
   public static final String SERIALIZED_NAME_TEXT = "text";
 
   @SerializedName(SERIALIZED_NAME_TEXT)
   private String text;
-
-  public SmsPreviewRequest transliteration(String transliteration) {
-
-    this.transliteration = transliteration;
-    return this;
-  }
-
-  /**
-   * Conversion of a message text from one script to another. Possible values: &#x60;TURKISH&#x60;,
-   * &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;, &#x60;SERBIAN_CYRILLIC&#x60;,
-   * &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60; and &#x60;NON_UNICODE&#x60;.
-   *
-   * @return transliteration
-   */
-  public String getTransliteration() {
-    return transliteration;
-  }
-
-  public void setTransliteration(String transliteration) {
-    this.transliteration = transliteration;
-  }
 
   public SmsPreviewRequest languageCode(String languageCode) {
 
@@ -71,6 +50,27 @@ public class SmsPreviewRequest {
 
   public void setLanguageCode(String languageCode) {
     this.languageCode = languageCode;
+  }
+
+  public SmsPreviewRequest transliteration(String transliteration) {
+
+    this.transliteration = transliteration;
+    return this;
+  }
+
+  /**
+   * Conversion of a message text from one script to another. Possible values: &#x60;TURKISH&#x60;,
+   * &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;, &#x60;SERBIAN_CYRILLIC&#x60;,
+   * &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60; and &#x60;NON_UNICODE&#x60;.
+   *
+   * @return transliteration
+   */
+  public String getTransliteration() {
+    return transliteration;
+  }
+
+  public void setTransliteration(String transliteration) {
+    this.transliteration = transliteration;
   }
 
   public SmsPreviewRequest text(String text) {
@@ -101,22 +101,22 @@ public class SmsPreviewRequest {
       return false;
     }
     SmsPreviewRequest smsPreviewRequest = (SmsPreviewRequest) o;
-    return Objects.equals(this.transliteration, smsPreviewRequest.transliteration)
-        && Objects.equals(this.languageCode, smsPreviewRequest.languageCode)
+    return Objects.equals(this.languageCode, smsPreviewRequest.languageCode)
+        && Objects.equals(this.transliteration, smsPreviewRequest.transliteration)
         && Objects.equals(this.text, smsPreviewRequest.text);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(transliteration, languageCode, text);
+    return Objects.hash(languageCode, transliteration, text);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsPreviewRequest {\n");
-    sb.append("    transliteration: ").append(toIndentedString(transliteration)).append("\n");
     sb.append("    languageCode: ").append(toIndentedString(languageCode)).append("\n");
+    sb.append("    transliteration: ").append(toIndentedString(transliteration)).append("\n");
     sb.append("    text: ").append(toIndentedString(text)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -16,30 +16,49 @@ import java.util.Objects;
 
 /** TfaStartAuthenticationResponse */
 public class TfaStartAuthenticationResponse {
-  public static final String SERIALIZED_NAME_NC_STATUS = "ncStatus";
-
-  @SerializedName(SERIALIZED_NAME_NC_STATUS)
-  private String ncStatus;
-
   public static final String SERIALIZED_NAME_TO = "to";
 
   @SerializedName(SERIALIZED_NAME_TO)
   private String to;
 
-  public static final String SERIALIZED_NAME_SMS_STATUS = "smsStatus";
+  public static final String SERIALIZED_NAME_NC_STATUS = "ncStatus";
 
-  @SerializedName(SERIALIZED_NAME_SMS_STATUS)
-  private String smsStatus;
+  @SerializedName(SERIALIZED_NAME_NC_STATUS)
+  private String ncStatus;
 
   public static final String SERIALIZED_NAME_CALL_STATUS = "callStatus";
 
   @SerializedName(SERIALIZED_NAME_CALL_STATUS)
   private String callStatus;
 
+  public static final String SERIALIZED_NAME_SMS_STATUS = "smsStatus";
+
+  @SerializedName(SERIALIZED_NAME_SMS_STATUS)
+  private String smsStatus;
+
   public static final String SERIALIZED_NAME_PIN_ID = "pinId";
 
   @SerializedName(SERIALIZED_NAME_PIN_ID)
   private String pinId;
+
+  public TfaStartAuthenticationResponse to(String to) {
+
+    this.to = to;
+    return this;
+  }
+
+  /**
+   * Phone number to which the 2FA message will be sent. Example: &#x60;41793026727&#x60;.
+   *
+   * @return to
+   */
+  public String getTo() {
+    return to;
+  }
+
+  public void setTo(String to) {
+    this.to = to;
+  }
 
   public TfaStartAuthenticationResponse ncStatus(String ncStatus) {
 
@@ -64,23 +83,23 @@ public class TfaStartAuthenticationResponse {
     this.ncStatus = ncStatus;
   }
 
-  public TfaStartAuthenticationResponse to(String to) {
+  public TfaStartAuthenticationResponse callStatus(String callStatus) {
 
-    this.to = to;
+    this.callStatus = callStatus;
     return this;
   }
 
   /**
-   * Phone number to which the 2FA message will be sent. Example: &#x60;41793026727&#x60;.
+   * Call status.
    *
-   * @return to
+   * @return callStatus
    */
-  public String getTo() {
-    return to;
+  public String getCallStatus() {
+    return callStatus;
   }
 
-  public void setTo(String to) {
-    this.to = to;
+  public void setCallStatus(String callStatus) {
+    this.callStatus = callStatus;
   }
 
   public TfaStartAuthenticationResponse smsStatus(String smsStatus) {
@@ -101,25 +120,6 @@ public class TfaStartAuthenticationResponse {
 
   public void setSmsStatus(String smsStatus) {
     this.smsStatus = smsStatus;
-  }
-
-  public TfaStartAuthenticationResponse callStatus(String callStatus) {
-
-    this.callStatus = callStatus;
-    return this;
-  }
-
-  /**
-   * Call status.
-   *
-   * @return callStatus
-   */
-  public String getCallStatus() {
-    return callStatus;
-  }
-
-  public void setCallStatus(String callStatus) {
-    this.callStatus = callStatus;
   }
 
   public TfaStartAuthenticationResponse pinId(String pinId) {
@@ -151,26 +151,26 @@ public class TfaStartAuthenticationResponse {
     }
     TfaStartAuthenticationResponse tfaStartAuthenticationResponse =
         (TfaStartAuthenticationResponse) o;
-    return Objects.equals(this.ncStatus, tfaStartAuthenticationResponse.ncStatus)
-        && Objects.equals(this.to, tfaStartAuthenticationResponse.to)
-        && Objects.equals(this.smsStatus, tfaStartAuthenticationResponse.smsStatus)
+    return Objects.equals(this.to, tfaStartAuthenticationResponse.to)
+        && Objects.equals(this.ncStatus, tfaStartAuthenticationResponse.ncStatus)
         && Objects.equals(this.callStatus, tfaStartAuthenticationResponse.callStatus)
+        && Objects.equals(this.smsStatus, tfaStartAuthenticationResponse.smsStatus)
         && Objects.equals(this.pinId, tfaStartAuthenticationResponse.pinId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(ncStatus, to, smsStatus, callStatus, pinId);
+    return Objects.hash(to, ncStatus, callStatus, smsStatus, pinId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TfaStartAuthenticationResponse {\n");
-    sb.append("    ncStatus: ").append(toIndentedString(ncStatus)).append("\n");
     sb.append("    to: ").append(toIndentedString(to)).append("\n");
-    sb.append("    smsStatus: ").append(toIndentedString(smsStatus)).append("\n");
+    sb.append("    ncStatus: ").append(toIndentedString(ncStatus)).append("\n");
     sb.append("    callStatus: ").append(toIndentedString(callStatus)).append("\n");
+    sb.append("    smsStatus: ").append(toIndentedString(smsStatus)).append("\n");
     sb.append("    pinId: ").append(toIndentedString(pinId)).append("\n");
     sb.append("}");
     return sb.toString();

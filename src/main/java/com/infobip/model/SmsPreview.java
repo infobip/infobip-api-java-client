@@ -16,20 +16,20 @@ import java.util.Objects;
 
 /** SmsPreview */
 public class SmsPreview {
-  public static final String SERIALIZED_NAME_CHARACTERS_REMAINING = "charactersRemaining";
+  public static final String SERIALIZED_NAME_TEXT_PREVIEW = "textPreview";
 
-  @SerializedName(SERIALIZED_NAME_CHARACTERS_REMAINING)
-  private Integer charactersRemaining;
+  @SerializedName(SERIALIZED_NAME_TEXT_PREVIEW)
+  private String textPreview;
 
   public static final String SERIALIZED_NAME_CONFIGURATION = "configuration";
 
   @SerializedName(SERIALIZED_NAME_CONFIGURATION)
   private SmsLanguageConfiguration _configuration = null;
 
-  public static final String SERIALIZED_NAME_TEXT_PREVIEW = "textPreview";
+  public static final String SERIALIZED_NAME_CHARACTERS_REMAINING = "charactersRemaining";
 
-  @SerializedName(SERIALIZED_NAME_TEXT_PREVIEW)
-  private String textPreview;
+  @SerializedName(SERIALIZED_NAME_CHARACTERS_REMAINING)
+  private Integer charactersRemaining;
 
   public static final String SERIALIZED_NAME_MESSAGE_COUNT = "messageCount";
 
@@ -37,12 +37,12 @@ public class SmsPreview {
   private Integer messageCount;
 
   /**
-   * Number of remaining characters in the last SMS part.
+   * Preview of the text as it should appear on the recipient’s device.
    *
-   * @return charactersRemaining
+   * @return textPreview
    */
-  public Integer getCharactersRemaining() {
-    return charactersRemaining;
+  public String getTextPreview() {
+    return textPreview;
   }
 
   /**
@@ -55,12 +55,12 @@ public class SmsPreview {
   }
 
   /**
-   * Preview of the text as it should appear on the recipient’s device.
+   * Number of remaining characters in the last SMS part.
    *
-   * @return textPreview
+   * @return charactersRemaining
    */
-  public String getTextPreview() {
-    return textPreview;
+  public Integer getCharactersRemaining() {
+    return charactersRemaining;
   }
 
   /**
@@ -81,26 +81,26 @@ public class SmsPreview {
       return false;
     }
     SmsPreview smsPreview = (SmsPreview) o;
-    return Objects.equals(this.charactersRemaining, smsPreview.charactersRemaining)
+    return Objects.equals(this.textPreview, smsPreview.textPreview)
         && Objects.equals(this._configuration, smsPreview._configuration)
-        && Objects.equals(this.textPreview, smsPreview.textPreview)
+        && Objects.equals(this.charactersRemaining, smsPreview.charactersRemaining)
         && Objects.equals(this.messageCount, smsPreview.messageCount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(charactersRemaining, _configuration, textPreview, messageCount);
+    return Objects.hash(textPreview, _configuration, charactersRemaining, messageCount);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsPreview {\n");
+    sb.append("    textPreview: ").append(toIndentedString(textPreview)).append("\n");
+    sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
     sb.append("    charactersRemaining: ")
         .append(toIndentedString(charactersRemaining))
         .append("\n");
-    sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
-    sb.append("    textPreview: ").append(toIndentedString(textPreview)).append("\n");
     sb.append("    messageCount: ").append(toIndentedString(messageCount)).append("\n");
     sb.append("}");
     return sb.toString();

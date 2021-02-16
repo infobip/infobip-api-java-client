@@ -179,13 +179,21 @@ public class JSON {
     }
   }
 
-  /** Gson TypeAdapter for JSR310 OffsetDateTime type */
+  /**
+   * Gson TypeAdapter for JSR310 OffsetDateTime type.
+   *
+   * <p>Please explore supported date formats in <a
+   * href="https://www.infobip.com/docs/essentials/integration-best-practices#date-formats">Integration
+   * Best Practices</a>.
+   */
   public static class OffsetDateTimeTypeAdapter extends TypeAdapter<OffsetDateTime> {
+
+    private static final String DEFAULT_DATE_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
 
     private DateTimeFormatter formatter;
 
     public OffsetDateTimeTypeAdapter() {
-      this(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+      this(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_PATTERN));
     }
 
     public OffsetDateTimeTypeAdapter(DateTimeFormatter formatter) {
@@ -213,9 +221,6 @@ public class JSON {
           return null;
         default:
           String date = in.nextString();
-          if (date.endsWith("+0000")) {
-            date = date.substring(0, date.length() - 5) + "Z";
-          }
           return OffsetDateTime.parse(date, formatter);
       }
     }

@@ -23,11 +23,6 @@ public class SmsAdvancedTextualRequest {
   @SerializedName(SERIALIZED_NAME_SENDING_SPEED_LIMIT)
   private SmsSendingSpeedLimit sendingSpeedLimit = null;
 
-  public static final String SERIALIZED_NAME_BULK_ID = "bulkId";
-
-  @SerializedName(SERIALIZED_NAME_BULK_ID)
-  private String bulkId;
-
   public static final String SERIALIZED_NAME_TRACKING = "tracking";
 
   @SerializedName(SERIALIZED_NAME_TRACKING)
@@ -37,6 +32,11 @@ public class SmsAdvancedTextualRequest {
 
   @SerializedName(SERIALIZED_NAME_MESSAGES)
   private List<SmsTextualMessage> messages = null;
+
+  public static final String SERIALIZED_NAME_BULK_ID = "bulkId";
+
+  @SerializedName(SERIALIZED_NAME_BULK_ID)
+  private String bulkId;
 
   public SmsAdvancedTextualRequest sendingSpeedLimit(SmsSendingSpeedLimit sendingSpeedLimit) {
 
@@ -60,26 +60,6 @@ public class SmsAdvancedTextualRequest {
 
   public void setSendingSpeedLimit(SmsSendingSpeedLimit sendingSpeedLimit) {
     this.sendingSpeedLimit = sendingSpeedLimit;
-  }
-
-  public SmsAdvancedTextualRequest bulkId(String bulkId) {
-
-    this.bulkId = bulkId;
-    return this;
-  }
-
-  /**
-   * The ID which uniquely identifies the request. Bulk ID will be received only when you send a
-   * message to more than one destination address.
-   *
-   * @return bulkId
-   */
-  public String getBulkId() {
-    return bulkId;
-  }
-
-  public void setBulkId(String bulkId) {
-    this.bulkId = bulkId;
   }
 
   public SmsAdvancedTextualRequest tracking(SmsTracking tracking) {
@@ -128,6 +108,26 @@ public class SmsAdvancedTextualRequest {
     this.messages = messages;
   }
 
+  public SmsAdvancedTextualRequest bulkId(String bulkId) {
+
+    this.bulkId = bulkId;
+    return this;
+  }
+
+  /**
+   * The ID which uniquely identifies the request. Bulk ID will be received only when you send a
+   * message to more than one destination address.
+   *
+   * @return bulkId
+   */
+  public String getBulkId() {
+    return bulkId;
+  }
+
+  public void setBulkId(String bulkId) {
+    this.bulkId = bulkId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -138,14 +138,14 @@ public class SmsAdvancedTextualRequest {
     }
     SmsAdvancedTextualRequest smsAdvancedTextualRequest = (SmsAdvancedTextualRequest) o;
     return Objects.equals(this.sendingSpeedLimit, smsAdvancedTextualRequest.sendingSpeedLimit)
-        && Objects.equals(this.bulkId, smsAdvancedTextualRequest.bulkId)
         && Objects.equals(this.tracking, smsAdvancedTextualRequest.tracking)
-        && Objects.equals(this.messages, smsAdvancedTextualRequest.messages);
+        && Objects.equals(this.messages, smsAdvancedTextualRequest.messages)
+        && Objects.equals(this.bulkId, smsAdvancedTextualRequest.bulkId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(sendingSpeedLimit, bulkId, tracking, messages);
+    return Objects.hash(sendingSpeedLimit, tracking, messages, bulkId);
   }
 
   @Override
@@ -153,9 +153,9 @@ public class SmsAdvancedTextualRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsAdvancedTextualRequest {\n");
     sb.append("    sendingSpeedLimit: ").append(toIndentedString(sendingSpeedLimit)).append("\n");
-    sb.append("    bulkId: ").append(toIndentedString(bulkId)).append("\n");
     sb.append("    tracking: ").append(toIndentedString(tracking)).append("\n");
     sb.append("    messages: ").append(toIndentedString(messages)).append("\n");
+    sb.append("    bulkId: ").append(toIndentedString(bulkId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

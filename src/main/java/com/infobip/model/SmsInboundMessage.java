@@ -17,35 +17,10 @@ import java.util.Objects;
 
 /** SmsInboundMessage */
 public class SmsInboundMessage {
-  public static final String SERIALIZED_NAME_TEXT = "text";
+  public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
 
-  @SerializedName(SERIALIZED_NAME_TEXT)
-  private String text;
-
-  public static final String SERIALIZED_NAME_CLEAN_TEXT = "cleanText";
-
-  @SerializedName(SERIALIZED_NAME_CLEAN_TEXT)
-  private String cleanText;
-
-  public static final String SERIALIZED_NAME_SMS_COUNT = "smsCount";
-
-  @SerializedName(SERIALIZED_NAME_SMS_COUNT)
-  private Integer smsCount;
-
-  public static final String SERIALIZED_NAME_RECEIVED_AT = "receivedAt";
-
-  @SerializedName(SERIALIZED_NAME_RECEIVED_AT)
-  private OffsetDateTime receivedAt;
-
-  public static final String SERIALIZED_NAME_CALLBACK_DATA = "callbackData";
-
-  @SerializedName(SERIALIZED_NAME_CALLBACK_DATA)
-  private String callbackData;
-
-  public static final String SERIALIZED_NAME_TO = "to";
-
-  @SerializedName(SERIALIZED_NAME_TO)
-  private String to;
+  @SerializedName(SERIALIZED_NAME_MESSAGE_ID)
+  private String messageId;
 
   public static final String SERIALIZED_NAME_KEYWORD = "keyword";
 
@@ -57,69 +32,48 @@ public class SmsInboundMessage {
   @SerializedName(SERIALIZED_NAME_PRICE)
   private SmsPrice price = null;
 
-  public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
+  public static final String SERIALIZED_NAME_TO = "to";
 
-  @SerializedName(SERIALIZED_NAME_MESSAGE_ID)
-  private String messageId;
+  @SerializedName(SERIALIZED_NAME_TO)
+  private String to;
+
+  public static final String SERIALIZED_NAME_CALLBACK_DATA = "callbackData";
+
+  @SerializedName(SERIALIZED_NAME_CALLBACK_DATA)
+  private String callbackData;
+
+  public static final String SERIALIZED_NAME_RECEIVED_AT = "receivedAt";
+
+  @SerializedName(SERIALIZED_NAME_RECEIVED_AT)
+  private OffsetDateTime receivedAt;
+
+  public static final String SERIALIZED_NAME_TEXT = "text";
+
+  @SerializedName(SERIALIZED_NAME_TEXT)
+  private String text;
+
+  public static final String SERIALIZED_NAME_CLEAN_TEXT = "cleanText";
+
+  @SerializedName(SERIALIZED_NAME_CLEAN_TEXT)
+  private String cleanText;
 
   public static final String SERIALIZED_NAME_FROM = "from";
 
   @SerializedName(SERIALIZED_NAME_FROM)
   private String from;
 
-  /**
-   * Full text of the received message.
-   *
-   * @return text
-   */
-  public String getText() {
-    return text;
-  }
+  public static final String SERIALIZED_NAME_SMS_COUNT = "smsCount";
+
+  @SerializedName(SERIALIZED_NAME_SMS_COUNT)
+  private Integer smsCount;
 
   /**
-   * Text of received message without a keyword (if a keyword was sent).
+   * The ID that uniquely identifies the received message.
    *
-   * @return cleanText
+   * @return messageId
    */
-  public String getCleanText() {
-    return cleanText;
-  }
-
-  /**
-   * The number of sent message segments.
-   *
-   * @return smsCount
-   */
-  public Integer getSmsCount() {
-    return smsCount;
-  }
-
-  /**
-   * Tells when Infobip platform received the message. It has the following format:
-   * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
-   *
-   * @return receivedAt
-   */
-  public OffsetDateTime getReceivedAt() {
-    return receivedAt;
-  }
-
-  /**
-   * Custom callback data can be inserted during the setup phase.
-   *
-   * @return callbackData
-   */
-  public String getCallbackData() {
-    return callbackData;
-  }
-
-  /**
-   * The message destination address.
-   *
-   * @return to
-   */
-  public String getTo() {
-    return to;
+  public String getMessageId() {
+    return messageId;
   }
 
   /**
@@ -151,12 +105,49 @@ public class SmsInboundMessage {
   }
 
   /**
-   * The ID that uniquely identifies the received message.
+   * The message destination address.
    *
-   * @return messageId
+   * @return to
    */
-  public String getMessageId() {
-    return messageId;
+  public String getTo() {
+    return to;
+  }
+
+  /**
+   * Custom callback data can be inserted during the setup phase.
+   *
+   * @return callbackData
+   */
+  public String getCallbackData() {
+    return callbackData;
+  }
+
+  /**
+   * Tells when Infobip platform received the message. It has the following format:
+   * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+   *
+   * @return receivedAt
+   */
+  public OffsetDateTime getReceivedAt() {
+    return receivedAt;
+  }
+
+  /**
+   * Full text of the received message.
+   *
+   * @return text
+   */
+  public String getText() {
+    return text;
+  }
+
+  /**
+   * Text of received message without a keyword (if a keyword was sent).
+   *
+   * @return cleanText
+   */
+  public String getCleanText() {
+    return cleanText;
   }
 
   /**
@@ -168,6 +159,15 @@ public class SmsInboundMessage {
     return from;
   }
 
+  /**
+   * The number of sent message segments.
+   *
+   * @return smsCount
+   */
+  public Integer getSmsCount() {
+    return smsCount;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -177,38 +177,38 @@ public class SmsInboundMessage {
       return false;
     }
     SmsInboundMessage smsInboundMessage = (SmsInboundMessage) o;
-    return Objects.equals(this.text, smsInboundMessage.text)
-        && Objects.equals(this.cleanText, smsInboundMessage.cleanText)
-        && Objects.equals(this.smsCount, smsInboundMessage.smsCount)
-        && Objects.equals(this.receivedAt, smsInboundMessage.receivedAt)
-        && Objects.equals(this.callbackData, smsInboundMessage.callbackData)
-        && Objects.equals(this.to, smsInboundMessage.to)
+    return Objects.equals(this.messageId, smsInboundMessage.messageId)
         && Objects.equals(this.keyword, smsInboundMessage.keyword)
         && Objects.equals(this.price, smsInboundMessage.price)
-        && Objects.equals(this.messageId, smsInboundMessage.messageId)
-        && Objects.equals(this.from, smsInboundMessage.from);
+        && Objects.equals(this.to, smsInboundMessage.to)
+        && Objects.equals(this.callbackData, smsInboundMessage.callbackData)
+        && Objects.equals(this.receivedAt, smsInboundMessage.receivedAt)
+        && Objects.equals(this.text, smsInboundMessage.text)
+        && Objects.equals(this.cleanText, smsInboundMessage.cleanText)
+        && Objects.equals(this.from, smsInboundMessage.from)
+        && Objects.equals(this.smsCount, smsInboundMessage.smsCount);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        text, cleanText, smsCount, receivedAt, callbackData, to, keyword, price, messageId, from);
+        messageId, keyword, price, to, callbackData, receivedAt, text, cleanText, from, smsCount);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsInboundMessage {\n");
-    sb.append("    text: ").append(toIndentedString(text)).append("\n");
-    sb.append("    cleanText: ").append(toIndentedString(cleanText)).append("\n");
-    sb.append("    smsCount: ").append(toIndentedString(smsCount)).append("\n");
-    sb.append("    receivedAt: ").append(toIndentedString(receivedAt)).append("\n");
-    sb.append("    callbackData: ").append(toIndentedString(callbackData)).append("\n");
-    sb.append("    to: ").append(toIndentedString(to)).append("\n");
+    sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
     sb.append("    keyword: ").append(toIndentedString(keyword)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
-    sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
+    sb.append("    to: ").append(toIndentedString(to)).append("\n");
+    sb.append("    callbackData: ").append(toIndentedString(callbackData)).append("\n");
+    sb.append("    receivedAt: ").append(toIndentedString(receivedAt)).append("\n");
+    sb.append("    text: ").append(toIndentedString(text)).append("\n");
+    sb.append("    cleanText: ").append(toIndentedString(cleanText)).append("\n");
     sb.append("    from: ").append(toIndentedString(from)).append("\n");
+    sb.append("    smsCount: ").append(toIndentedString(smsCount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

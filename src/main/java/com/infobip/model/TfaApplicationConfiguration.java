@@ -16,6 +16,18 @@ import java.util.Objects;
 
 /** TfaApplicationConfiguration */
 public class TfaApplicationConfiguration {
+  public static final String SERIALIZED_NAME_ALLOW_MULTIPLE_PIN_VERIFICATIONS =
+      "allowMultiplePinVerifications";
+
+  @SerializedName(SERIALIZED_NAME_ALLOW_MULTIPLE_PIN_VERIFICATIONS)
+  private Boolean allowMultiplePinVerifications = true;
+
+  public static final String SERIALIZED_NAME_SEND_PIN_PER_APPLICATION_LIMIT =
+      "sendPinPerApplicationLimit";
+
+  @SerializedName(SERIALIZED_NAME_SEND_PIN_PER_APPLICATION_LIMIT)
+  private String sendPinPerApplicationLimit = "10000/1d";
+
   public static final String SERIALIZED_NAME_VERIFY_PIN_LIMIT = "verifyPinLimit";
 
   @SerializedName(SERIALIZED_NAME_VERIFY_PIN_LIMIT)
@@ -37,17 +49,45 @@ public class TfaApplicationConfiguration {
   @SerializedName(SERIALIZED_NAME_SEND_PIN_PER_PHONE_NUMBER_LIMIT)
   private String sendPinPerPhoneNumberLimit = "3/1d";
 
-  public static final String SERIALIZED_NAME_ALLOW_MULTIPLE_PIN_VERIFICATIONS =
-      "allowMultiplePinVerifications";
+  public TfaApplicationConfiguration allowMultiplePinVerifications(
+      Boolean allowMultiplePinVerifications) {
 
-  @SerializedName(SERIALIZED_NAME_ALLOW_MULTIPLE_PIN_VERIFICATIONS)
-  private Boolean allowMultiplePinVerifications = true;
+    this.allowMultiplePinVerifications = allowMultiplePinVerifications;
+    return this;
+  }
 
-  public static final String SERIALIZED_NAME_SEND_PIN_PER_APPLICATION_LIMIT =
-      "sendPinPerApplicationLimit";
+  /**
+   * Tells if multiple PIN verifications are allowed.
+   *
+   * @return allowMultiplePinVerifications
+   */
+  public Boolean getAllowMultiplePinVerifications() {
+    return allowMultiplePinVerifications;
+  }
 
-  @SerializedName(SERIALIZED_NAME_SEND_PIN_PER_APPLICATION_LIMIT)
-  private String sendPinPerApplicationLimit = "10000/1d";
+  public void setAllowMultiplePinVerifications(Boolean allowMultiplePinVerifications) {
+    this.allowMultiplePinVerifications = allowMultiplePinVerifications;
+  }
+
+  public TfaApplicationConfiguration sendPinPerApplicationLimit(String sendPinPerApplicationLimit) {
+
+    this.sendPinPerApplicationLimit = sendPinPerApplicationLimit;
+    return this;
+  }
+
+  /**
+   * Overall number of requests in time interval for generating a PIN and sending an SMS using
+   * single application.
+   *
+   * @return sendPinPerApplicationLimit
+   */
+  public String getSendPinPerApplicationLimit() {
+    return sendPinPerApplicationLimit;
+  }
+
+  public void setSendPinPerApplicationLimit(String sendPinPerApplicationLimit) {
+    this.sendPinPerApplicationLimit = sendPinPerApplicationLimit;
+  }
 
   public TfaApplicationConfiguration verifyPinLimit(String verifyPinLimit) {
 
@@ -126,46 +166,6 @@ public class TfaApplicationConfiguration {
     this.sendPinPerPhoneNumberLimit = sendPinPerPhoneNumberLimit;
   }
 
-  public TfaApplicationConfiguration allowMultiplePinVerifications(
-      Boolean allowMultiplePinVerifications) {
-
-    this.allowMultiplePinVerifications = allowMultiplePinVerifications;
-    return this;
-  }
-
-  /**
-   * Tells if multiple PIN verifications are allowed.
-   *
-   * @return allowMultiplePinVerifications
-   */
-  public Boolean getAllowMultiplePinVerifications() {
-    return allowMultiplePinVerifications;
-  }
-
-  public void setAllowMultiplePinVerifications(Boolean allowMultiplePinVerifications) {
-    this.allowMultiplePinVerifications = allowMultiplePinVerifications;
-  }
-
-  public TfaApplicationConfiguration sendPinPerApplicationLimit(String sendPinPerApplicationLimit) {
-
-    this.sendPinPerApplicationLimit = sendPinPerApplicationLimit;
-    return this;
-  }
-
-  /**
-   * Overall number of requests in time interval for generating a PIN and sending an SMS using
-   * single application.
-   *
-   * @return sendPinPerApplicationLimit
-   */
-  public String getSendPinPerApplicationLimit() {
-    return sendPinPerApplicationLimit;
-  }
-
-  public void setSendPinPerApplicationLimit(String sendPinPerApplicationLimit) {
-    this.sendPinPerApplicationLimit = sendPinPerApplicationLimit;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -175,45 +175,45 @@ public class TfaApplicationConfiguration {
       return false;
     }
     TfaApplicationConfiguration tfaApplicationConfiguration = (TfaApplicationConfiguration) o;
-    return Objects.equals(this.verifyPinLimit, tfaApplicationConfiguration.verifyPinLimit)
-        && Objects.equals(this.pinAttempts, tfaApplicationConfiguration.pinAttempts)
-        && Objects.equals(this.pinTimeToLive, tfaApplicationConfiguration.pinTimeToLive)
-        && Objects.equals(
-            this.sendPinPerPhoneNumberLimit, tfaApplicationConfiguration.sendPinPerPhoneNumberLimit)
-        && Objects.equals(
+    return Objects.equals(
             this.allowMultiplePinVerifications,
             tfaApplicationConfiguration.allowMultiplePinVerifications)
         && Objects.equals(
-            this.sendPinPerApplicationLimit,
-            tfaApplicationConfiguration.sendPinPerApplicationLimit);
+            this.sendPinPerApplicationLimit, tfaApplicationConfiguration.sendPinPerApplicationLimit)
+        && Objects.equals(this.verifyPinLimit, tfaApplicationConfiguration.verifyPinLimit)
+        && Objects.equals(this.pinAttempts, tfaApplicationConfiguration.pinAttempts)
+        && Objects.equals(this.pinTimeToLive, tfaApplicationConfiguration.pinTimeToLive)
+        && Objects.equals(
+            this.sendPinPerPhoneNumberLimit,
+            tfaApplicationConfiguration.sendPinPerPhoneNumberLimit);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
+        allowMultiplePinVerifications,
+        sendPinPerApplicationLimit,
         verifyPinLimit,
         pinAttempts,
         pinTimeToLive,
-        sendPinPerPhoneNumberLimit,
-        allowMultiplePinVerifications,
-        sendPinPerApplicationLimit);
+        sendPinPerPhoneNumberLimit);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TfaApplicationConfiguration {\n");
-    sb.append("    verifyPinLimit: ").append(toIndentedString(verifyPinLimit)).append("\n");
-    sb.append("    pinAttempts: ").append(toIndentedString(pinAttempts)).append("\n");
-    sb.append("    pinTimeToLive: ").append(toIndentedString(pinTimeToLive)).append("\n");
-    sb.append("    sendPinPerPhoneNumberLimit: ")
-        .append(toIndentedString(sendPinPerPhoneNumberLimit))
-        .append("\n");
     sb.append("    allowMultiplePinVerifications: ")
         .append(toIndentedString(allowMultiplePinVerifications))
         .append("\n");
     sb.append("    sendPinPerApplicationLimit: ")
         .append(toIndentedString(sendPinPerApplicationLimit))
+        .append("\n");
+    sb.append("    verifyPinLimit: ").append(toIndentedString(verifyPinLimit)).append("\n");
+    sb.append("    pinAttempts: ").append(toIndentedString(pinAttempts)).append("\n");
+    sb.append("    pinTimeToLive: ").append(toIndentedString(pinTimeToLive)).append("\n");
+    sb.append("    sendPinPerPhoneNumberLimit: ")
+        .append(toIndentedString(sendPinPerPhoneNumberLimit))
         .append("\n");
     sb.append("}");
     return sb.toString();

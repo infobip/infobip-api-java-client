@@ -18,6 +18,11 @@ import java.util.Objects;
 
 /** SmsInboundMessageResult */
 public class SmsInboundMessageResult {
+  public static final String SERIALIZED_NAME_RESULTS = "results";
+
+  @SerializedName(SERIALIZED_NAME_RESULTS)
+  private List<SmsInboundMessage> results = null;
+
   public static final String SERIALIZED_NAME_PENDING_MESSAGE_COUNT = "pendingMessageCount";
 
   @SerializedName(SERIALIZED_NAME_PENDING_MESSAGE_COUNT)
@@ -28,10 +33,32 @@ public class SmsInboundMessageResult {
   @SerializedName(SERIALIZED_NAME_MESSAGE_COUNT)
   private Integer messageCount;
 
-  public static final String SERIALIZED_NAME_RESULTS = "results";
+  public SmsInboundMessageResult results(List<SmsInboundMessage> results) {
 
-  @SerializedName(SERIALIZED_NAME_RESULTS)
-  private List<SmsInboundMessage> results = null;
+    this.results = results;
+    return this;
+  }
+
+  public SmsInboundMessageResult addResultsItem(SmsInboundMessage resultsItem) {
+    if (this.results == null) {
+      this.results = new ArrayList<>();
+    }
+    this.results.add(resultsItem);
+    return this;
+  }
+
+  /**
+   * Get results
+   *
+   * @return results
+   */
+  public List<SmsInboundMessage> getResults() {
+    return results;
+  }
+
+  public void setResults(List<SmsInboundMessage> results) {
+    this.results = results;
+  }
 
   public SmsInboundMessageResult pendingMessageCount(Integer pendingMessageCount) {
 
@@ -71,33 +98,6 @@ public class SmsInboundMessageResult {
     this.messageCount = messageCount;
   }
 
-  public SmsInboundMessageResult results(List<SmsInboundMessage> results) {
-
-    this.results = results;
-    return this;
-  }
-
-  public SmsInboundMessageResult addResultsItem(SmsInboundMessage resultsItem) {
-    if (this.results == null) {
-      this.results = new ArrayList<>();
-    }
-    this.results.add(resultsItem);
-    return this;
-  }
-
-  /**
-   * Get results
-   *
-   * @return results
-   */
-  public List<SmsInboundMessage> getResults() {
-    return results;
-  }
-
-  public void setResults(List<SmsInboundMessage> results) {
-    this.results = results;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -107,25 +107,25 @@ public class SmsInboundMessageResult {
       return false;
     }
     SmsInboundMessageResult smsInboundMessageResult = (SmsInboundMessageResult) o;
-    return Objects.equals(this.pendingMessageCount, smsInboundMessageResult.pendingMessageCount)
-        && Objects.equals(this.messageCount, smsInboundMessageResult.messageCount)
-        && Objects.equals(this.results, smsInboundMessageResult.results);
+    return Objects.equals(this.results, smsInboundMessageResult.results)
+        && Objects.equals(this.pendingMessageCount, smsInboundMessageResult.pendingMessageCount)
+        && Objects.equals(this.messageCount, smsInboundMessageResult.messageCount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(pendingMessageCount, messageCount, results);
+    return Objects.hash(results, pendingMessageCount, messageCount);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsInboundMessageResult {\n");
+    sb.append("    results: ").append(toIndentedString(results)).append("\n");
     sb.append("    pendingMessageCount: ")
         .append(toIndentedString(pendingMessageCount))
         .append("\n");
     sb.append("    messageCount: ").append(toIndentedString(messageCount)).append("\n");
-    sb.append("    results: ").append(toIndentedString(results)).append("\n");
     sb.append("}");
     return sb.toString();
   }

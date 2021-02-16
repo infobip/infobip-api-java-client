@@ -34,7 +34,7 @@ public class SmsDeliveryTime {
 
   /**
    * Hour when the time window opens when used in from property or closes when used into the
-   * property.
+   * property. minimum: 0 maximum: 23
    *
    * @return hour
    */
@@ -54,7 +54,7 @@ public class SmsDeliveryTime {
 
   /**
    * Minute when the time window opens when used in from property or closes when used into the
-   * property.
+   * property. minimum: 0 maximum: 59
    *
    * @return minute
    */

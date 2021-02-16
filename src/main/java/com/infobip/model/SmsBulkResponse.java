@@ -17,34 +17,15 @@ import java.util.Objects;
 
 /** SmsBulkResponse */
 public class SmsBulkResponse {
-  public static final String SERIALIZED_NAME_BULK_ID = "bulkId";
-
-  @SerializedName(SERIALIZED_NAME_BULK_ID)
-  private String bulkId;
-
   public static final String SERIALIZED_NAME_SEND_AT = "sendAt";
 
   @SerializedName(SERIALIZED_NAME_SEND_AT)
   private OffsetDateTime sendAt;
 
-  public SmsBulkResponse bulkId(String bulkId) {
+  public static final String SERIALIZED_NAME_BULK_ID = "bulkId";
 
-    this.bulkId = bulkId;
-    return this;
-  }
-
-  /**
-   * Get bulkId
-   *
-   * @return bulkId
-   */
-  public String getBulkId() {
-    return bulkId;
-  }
-
-  public void setBulkId(String bulkId) {
-    this.bulkId = bulkId;
-  }
+  @SerializedName(SERIALIZED_NAME_BULK_ID)
+  private String bulkId;
 
   public SmsBulkResponse sendAt(OffsetDateTime sendAt) {
 
@@ -65,6 +46,25 @@ public class SmsBulkResponse {
     this.sendAt = sendAt;
   }
 
+  public SmsBulkResponse bulkId(String bulkId) {
+
+    this.bulkId = bulkId;
+    return this;
+  }
+
+  /**
+   * Get bulkId
+   *
+   * @return bulkId
+   */
+  public String getBulkId() {
+    return bulkId;
+  }
+
+  public void setBulkId(String bulkId) {
+    this.bulkId = bulkId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -74,21 +74,21 @@ public class SmsBulkResponse {
       return false;
     }
     SmsBulkResponse smsBulkResponse = (SmsBulkResponse) o;
-    return Objects.equals(this.bulkId, smsBulkResponse.bulkId)
-        && Objects.equals(this.sendAt, smsBulkResponse.sendAt);
+    return Objects.equals(this.sendAt, smsBulkResponse.sendAt)
+        && Objects.equals(this.bulkId, smsBulkResponse.bulkId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bulkId, sendAt);
+    return Objects.hash(sendAt, bulkId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsBulkResponse {\n");
-    sb.append("    bulkId: ").append(toIndentedString(bulkId)).append("\n");
     sb.append("    sendAt: ").append(toIndentedString(sendAt)).append("\n");
+    sb.append("    bulkId: ").append(toIndentedString(bulkId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

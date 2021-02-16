@@ -18,39 +18,45 @@ import java.util.Objects;
 
 /** SmsDeliveryTimeWindow */
 public class SmsDeliveryTimeWindow {
-  public static final String SERIALIZED_NAME_TO = "to";
+  public static final String SERIALIZED_NAME_DAYS = "days";
 
-  @SerializedName(SERIALIZED_NAME_TO)
-  private SmsDeliveryTime to = null;
+  @SerializedName(SERIALIZED_NAME_DAYS)
+  private List<SmsDeliveryDay> days = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_FROM = "from";
 
   @SerializedName(SERIALIZED_NAME_FROM)
   private SmsDeliveryTime from = null;
 
-  public static final String SERIALIZED_NAME_DAYS = "days";
+  public static final String SERIALIZED_NAME_TO = "to";
 
-  @SerializedName(SERIALIZED_NAME_DAYS)
-  private List<SmsDeliveryDay> days = null;
+  @SerializedName(SERIALIZED_NAME_TO)
+  private SmsDeliveryTime to = null;
 
-  public SmsDeliveryTimeWindow to(SmsDeliveryTime to) {
+  public SmsDeliveryTimeWindow days(List<SmsDeliveryDay> days) {
 
-    this.to = to;
+    this.days = days;
+    return this;
+  }
+
+  public SmsDeliveryTimeWindow addDaysItem(SmsDeliveryDay daysItem) {
+    this.days.add(daysItem);
     return this;
   }
 
   /**
-   * Exact time of day in which the sending will end. Consists of an hour and minute properties,
-   * both mandatory. Time is expressed in the UTC time zone.
+   * Days which are included in the delivery time window. Values are: &#x60;MONDAY&#x60;,
+   * &#x60;TUESDAY&#x60;, &#x60;WEDNESDAY&#x60;, &#x60;THURSDAY&#x60;, &#x60;FRIDAY&#x60;,
+   * &#x60;SATURDAY&#x60;, &#x60;SUNDAY&#x60;. At least one day must be stated.
    *
-   * @return to
+   * @return days
    */
-  public SmsDeliveryTime getTo() {
-    return to;
+  public List<SmsDeliveryDay> getDays() {
+    return days;
   }
 
-  public void setTo(SmsDeliveryTime to) {
-    this.to = to;
+  public void setDays(List<SmsDeliveryDay> days) {
+    this.days = days;
   }
 
   public SmsDeliveryTimeWindow from(SmsDeliveryTime from) {
@@ -73,33 +79,24 @@ public class SmsDeliveryTimeWindow {
     this.from = from;
   }
 
-  public SmsDeliveryTimeWindow days(List<SmsDeliveryDay> days) {
+  public SmsDeliveryTimeWindow to(SmsDeliveryTime to) {
 
-    this.days = days;
-    return this;
-  }
-
-  public SmsDeliveryTimeWindow addDaysItem(SmsDeliveryDay daysItem) {
-    if (this.days == null) {
-      this.days = new ArrayList<>();
-    }
-    this.days.add(daysItem);
+    this.to = to;
     return this;
   }
 
   /**
-   * Days which are included in the delivery time window. Values are: &#x60;MONDAY&#x60;,
-   * &#x60;TUESDAY&#x60;, &#x60;WEDNESDAY&#x60;, &#x60;THURSDAY&#x60;, &#x60;FRIDAY&#x60;,
-   * &#x60;SATURDAY&#x60;, &#x60;SUNDAY&#x60;. At least one day must be stated.
+   * Exact time of day in which the sending will end. Consists of an hour and minute properties,
+   * both mandatory. Time is expressed in the UTC time zone.
    *
-   * @return days
+   * @return to
    */
-  public List<SmsDeliveryDay> getDays() {
-    return days;
+  public SmsDeliveryTime getTo() {
+    return to;
   }
 
-  public void setDays(List<SmsDeliveryDay> days) {
-    this.days = days;
+  public void setTo(SmsDeliveryTime to) {
+    this.to = to;
   }
 
   @Override
@@ -111,23 +108,23 @@ public class SmsDeliveryTimeWindow {
       return false;
     }
     SmsDeliveryTimeWindow smsDeliveryTimeWindow = (SmsDeliveryTimeWindow) o;
-    return Objects.equals(this.to, smsDeliveryTimeWindow.to)
+    return Objects.equals(this.days, smsDeliveryTimeWindow.days)
         && Objects.equals(this.from, smsDeliveryTimeWindow.from)
-        && Objects.equals(this.days, smsDeliveryTimeWindow.days);
+        && Objects.equals(this.to, smsDeliveryTimeWindow.to);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(to, from, days);
+    return Objects.hash(days, from, to);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsDeliveryTimeWindow {\n");
-    sb.append("    to: ").append(toIndentedString(to)).append("\n");
-    sb.append("    from: ").append(toIndentedString(from)).append("\n");
     sb.append("    days: ").append(toIndentedString(days)).append("\n");
+    sb.append("    from: ").append(toIndentedString(from)).append("\n");
+    sb.append("    to: ").append(toIndentedString(to)).append("\n");
     sb.append("}");
     return sb.toString();
   }

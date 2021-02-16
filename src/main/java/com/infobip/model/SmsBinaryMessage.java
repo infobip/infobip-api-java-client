@@ -19,104 +19,83 @@ import java.util.Objects;
 
 /** SmsBinaryMessage */
 public class SmsBinaryMessage {
-  public static final String SERIALIZED_NAME_FLASH = "flash";
+  public static final String SERIALIZED_NAME_NOTIFY_URL = "notifyUrl";
 
-  @SerializedName(SERIALIZED_NAME_FLASH)
-  private Boolean flash;
-
-  public static final String SERIALIZED_NAME_INTERMEDIATE_REPORT = "intermediateReport";
-
-  @SerializedName(SERIALIZED_NAME_INTERMEDIATE_REPORT)
-  private Boolean intermediateReport;
+  @SerializedName(SERIALIZED_NAME_NOTIFY_URL)
+  private String notifyUrl;
 
   public static final String SERIALIZED_NAME_SEND_AT = "sendAt";
 
   @SerializedName(SERIALIZED_NAME_SEND_AT)
   private OffsetDateTime sendAt;
 
-  public static final String SERIALIZED_NAME_BINARY = "binary";
+  public static final String SERIALIZED_NAME_FLASH = "flash";
 
-  @SerializedName(SERIALIZED_NAME_BINARY)
-  private SmsBinaryContent binary = null;
-
-  public static final String SERIALIZED_NAME_DELIVERY_TIME_WINDOW = "deliveryTimeWindow";
-
-  @SerializedName(SERIALIZED_NAME_DELIVERY_TIME_WINDOW)
-  private SmsDeliveryTimeWindow deliveryTimeWindow = null;
+  @SerializedName(SERIALIZED_NAME_FLASH)
+  private Boolean flash;
 
   public static final String SERIALIZED_NAME_DESTINATIONS = "destinations";
 
   @SerializedName(SERIALIZED_NAME_DESTINATIONS)
   private List<SmsDestination> destinations = null;
 
-  public static final String SERIALIZED_NAME_VALIDITY_PERIOD = "validityPeriod";
+  public static final String SERIALIZED_NAME_INTERMEDIATE_REPORT = "intermediateReport";
 
-  @SerializedName(SERIALIZED_NAME_VALIDITY_PERIOD)
-  private Long validityPeriod;
-
-  public static final String SERIALIZED_NAME_CALLBACK_DATA = "callbackData";
-
-  @SerializedName(SERIALIZED_NAME_CALLBACK_DATA)
-  private String callbackData;
-
-  public static final String SERIALIZED_NAME_NOTIFY_CONTENT_TYPE = "notifyContentType";
-
-  @SerializedName(SERIALIZED_NAME_NOTIFY_CONTENT_TYPE)
-  private String notifyContentType;
-
-  public static final String SERIALIZED_NAME_NOTIFY_URL = "notifyUrl";
-
-  @SerializedName(SERIALIZED_NAME_NOTIFY_URL)
-  private String notifyUrl;
+  @SerializedName(SERIALIZED_NAME_INTERMEDIATE_REPORT)
+  private Boolean intermediateReport;
 
   public static final String SERIALIZED_NAME_FROM = "from";
 
   @SerializedName(SERIALIZED_NAME_FROM)
   private String from;
 
+  public static final String SERIALIZED_NAME_NOTIFY_CONTENT_TYPE = "notifyContentType";
+
+  @SerializedName(SERIALIZED_NAME_NOTIFY_CONTENT_TYPE)
+  private String notifyContentType;
+
+  public static final String SERIALIZED_NAME_VALIDITY_PERIOD = "validityPeriod";
+
+  @SerializedName(SERIALIZED_NAME_VALIDITY_PERIOD)
+  private Long validityPeriod;
+
+  public static final String SERIALIZED_NAME_BINARY = "binary";
+
+  @SerializedName(SERIALIZED_NAME_BINARY)
+  private SmsBinaryContent binary = null;
+
+  public static final String SERIALIZED_NAME_CALLBACK_DATA = "callbackData";
+
+  @SerializedName(SERIALIZED_NAME_CALLBACK_DATA)
+  private String callbackData;
+
+  public static final String SERIALIZED_NAME_DELIVERY_TIME_WINDOW = "deliveryTimeWindow";
+
+  @SerializedName(SERIALIZED_NAME_DELIVERY_TIME_WINDOW)
+  private SmsDeliveryTimeWindow deliveryTimeWindow = null;
+
   public static final String SERIALIZED_NAME_REGIONAL = "regional";
 
   @SerializedName(SERIALIZED_NAME_REGIONAL)
   private SmsRegionalOptions regional = null;
 
-  public SmsBinaryMessage flash(Boolean flash) {
+  public SmsBinaryMessage notifyUrl(String notifyUrl) {
 
-    this.flash = flash;
+    this.notifyUrl = notifyUrl;
     return this;
   }
 
   /**
-   * Can be &#x60;true&#x60; or &#x60;false&#x60;. If the value is set to &#x60;true&#x60;, a flash
-   * SMS will be sent. Otherwise, a normal SMS will be sent. The default value is &#x60;false&#x60;.
+   * The URL on your call back server on which the Delivery report will be sent.
    *
-   * @return flash
+   * @return notifyUrl
    */
-  public Boolean getFlash() {
-    return flash;
+  public String getNotifyUrl() {
+    return notifyUrl;
   }
 
-  public void setFlash(Boolean flash) {
-    this.flash = flash;
-  }
-
-  public SmsBinaryMessage intermediateReport(Boolean intermediateReport) {
-
-    this.intermediateReport = intermediateReport;
-    return this;
-  }
-
-  /**
-   * The real-time Intermediate delivery report that will be sent on your callback server. Can be
-   * &#x60;true&#x60; or &#x60;false&#x60;.
-   *
-   * @return intermediateReport
-   */
-  public Boolean getIntermediateReport() {
-    return intermediateReport;
-  }
-
-  public void setIntermediateReport(Boolean intermediateReport) {
-    this.intermediateReport = intermediateReport;
+  public void setNotifyUrl(String notifyUrl) {
+    this.notifyUrl = notifyUrl;
   }
 
   public SmsBinaryMessage sendAt(OffsetDateTime sendAt) {
@@ -140,46 +119,24 @@ public class SmsBinaryMessage {
     this.sendAt = sendAt;
   }
 
-  public SmsBinaryMessage binary(SmsBinaryContent binary) {
+  public SmsBinaryMessage flash(Boolean flash) {
 
-    this.binary = binary;
+    this.flash = flash;
     return this;
   }
 
   /**
-   * Get binary
+   * Can be &#x60;true&#x60; or &#x60;false&#x60;. If the value is set to &#x60;true&#x60;, a flash
+   * SMS will be sent. Otherwise, a normal SMS will be sent. The default value is &#x60;false&#x60;.
    *
-   * @return binary
+   * @return flash
    */
-  public SmsBinaryContent getBinary() {
-    return binary;
+  public Boolean getFlash() {
+    return flash;
   }
 
-  public void setBinary(SmsBinaryContent binary) {
-    this.binary = binary;
-  }
-
-  public SmsBinaryMessage deliveryTimeWindow(SmsDeliveryTimeWindow deliveryTimeWindow) {
-
-    this.deliveryTimeWindow = deliveryTimeWindow;
-    return this;
-  }
-
-  /**
-   * Scheduling object that allows setting up detailed time windows in which the message can be
-   * sent. Consists of &#x60;from&#x60;, &#x60;to&#x60; and &#x60;days&#x60; properties.
-   * &#x60;Days&#x60; property is mandatory. &#x60;From&#x60; and &#x60;to&#x60; properties should
-   * be either both included, to allow finer time window granulation or both omitted, to include
-   * whole days in the delivery time window.
-   *
-   * @return deliveryTimeWindow
-   */
-  public SmsDeliveryTimeWindow getDeliveryTimeWindow() {
-    return deliveryTimeWindow;
-  }
-
-  public void setDeliveryTimeWindow(SmsDeliveryTimeWindow deliveryTimeWindow) {
-    this.deliveryTimeWindow = deliveryTimeWindow;
+  public void setFlash(Boolean flash) {
+    this.flash = flash;
   }
 
   public SmsBinaryMessage destinations(List<SmsDestination> destinations) {
@@ -209,45 +166,45 @@ public class SmsBinaryMessage {
     this.destinations = destinations;
   }
 
-  public SmsBinaryMessage validityPeriod(Long validityPeriod) {
+  public SmsBinaryMessage intermediateReport(Boolean intermediateReport) {
 
-    this.validityPeriod = validityPeriod;
+    this.intermediateReport = intermediateReport;
     return this;
   }
 
   /**
-   * The message validity period in minutes. When the period expires, it will not be allowed for the
-   * message to be sent. Validity period longer than 48h is not supported (in this case, it will be
-   * automatically set to 48h).
+   * The real-time Intermediate delivery report that will be sent on your callback server. Can be
+   * &#x60;true&#x60; or &#x60;false&#x60;.
    *
-   * @return validityPeriod
+   * @return intermediateReport
    */
-  public Long getValidityPeriod() {
-    return validityPeriod;
+  public Boolean getIntermediateReport() {
+    return intermediateReport;
   }
 
-  public void setValidityPeriod(Long validityPeriod) {
-    this.validityPeriod = validityPeriod;
+  public void setIntermediateReport(Boolean intermediateReport) {
+    this.intermediateReport = intermediateReport;
   }
 
-  public SmsBinaryMessage callbackData(String callbackData) {
+  public SmsBinaryMessage from(String from) {
 
-    this.callbackData = callbackData;
+    this.from = from;
     return this;
   }
 
   /**
-   * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 200
-   * characters.
+   * Represents a sender ID which can be alphanumeric or numeric. Alphanumeric sender ID length
+   * should be between 3 and 11 characters (Example: &#x60;CompanyName&#x60;). Numeric sender ID
+   * length should be between 3 and 14 characters.
    *
-   * @return callbackData
+   * @return from
    */
-  public String getCallbackData() {
-    return callbackData;
+  public String getFrom() {
+    return from;
   }
 
-  public void setCallbackData(String callbackData) {
-    this.callbackData = callbackData;
+  public void setFrom(String from) {
+    this.from = from;
   }
 
   public SmsBinaryMessage notifyContentType(String notifyContentType) {
@@ -270,44 +227,87 @@ public class SmsBinaryMessage {
     this.notifyContentType = notifyContentType;
   }
 
-  public SmsBinaryMessage notifyUrl(String notifyUrl) {
+  public SmsBinaryMessage validityPeriod(Long validityPeriod) {
 
-    this.notifyUrl = notifyUrl;
+    this.validityPeriod = validityPeriod;
     return this;
   }
 
   /**
-   * The URL on your call back server on which the Delivery report will be sent.
+   * The message validity period in minutes. When the period expires, it will not be allowed for the
+   * message to be sent. Validity period longer than 48h is not supported (in this case, it will be
+   * automatically set to 48h).
    *
-   * @return notifyUrl
+   * @return validityPeriod
    */
-  public String getNotifyUrl() {
-    return notifyUrl;
+  public Long getValidityPeriod() {
+    return validityPeriod;
   }
 
-  public void setNotifyUrl(String notifyUrl) {
-    this.notifyUrl = notifyUrl;
+  public void setValidityPeriod(Long validityPeriod) {
+    this.validityPeriod = validityPeriod;
   }
 
-  public SmsBinaryMessage from(String from) {
+  public SmsBinaryMessage binary(SmsBinaryContent binary) {
 
-    this.from = from;
+    this.binary = binary;
     return this;
   }
 
   /**
-   * Represents a sender ID which can be alphanumeric or numeric. Alphanumeric sender ID length
-   * should be between 3 and 11 characters (Example: &#x60;CompanyName&#x60;). Numeric sender ID
-   * length should be between 3 and 14 characters.
+   * Get binary
    *
-   * @return from
+   * @return binary
    */
-  public String getFrom() {
-    return from;
+  public SmsBinaryContent getBinary() {
+    return binary;
   }
 
-  public void setFrom(String from) {
-    this.from = from;
+  public void setBinary(SmsBinaryContent binary) {
+    this.binary = binary;
+  }
+
+  public SmsBinaryMessage callbackData(String callbackData) {
+
+    this.callbackData = callbackData;
+    return this;
+  }
+
+  /**
+   * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 200
+   * characters.
+   *
+   * @return callbackData
+   */
+  public String getCallbackData() {
+    return callbackData;
+  }
+
+  public void setCallbackData(String callbackData) {
+    this.callbackData = callbackData;
+  }
+
+  public SmsBinaryMessage deliveryTimeWindow(SmsDeliveryTimeWindow deliveryTimeWindow) {
+
+    this.deliveryTimeWindow = deliveryTimeWindow;
+    return this;
+  }
+
+  /**
+   * Scheduling object that allows setting up detailed time windows in which the message can be
+   * sent. Consists of &#x60;from&#x60;, &#x60;to&#x60; and &#x60;days&#x60; properties.
+   * &#x60;Days&#x60; property is mandatory. &#x60;From&#x60; and &#x60;to&#x60; properties should
+   * be either both included, to allow finer time window granulation or both omitted, to include
+   * whole days in the delivery time window.
+   *
+   * @return deliveryTimeWindow
+   */
+  public SmsDeliveryTimeWindow getDeliveryTimeWindow() {
+    return deliveryTimeWindow;
+  }
+
+  public void setDeliveryTimeWindow(SmsDeliveryTimeWindow deliveryTimeWindow) {
+    this.deliveryTimeWindow = deliveryTimeWindow;
   }
 
   public SmsBinaryMessage regional(SmsRegionalOptions regional) {
@@ -339,34 +339,34 @@ public class SmsBinaryMessage {
       return false;
     }
     SmsBinaryMessage smsBinaryMessage = (SmsBinaryMessage) o;
-    return Objects.equals(this.flash, smsBinaryMessage.flash)
-        && Objects.equals(this.intermediateReport, smsBinaryMessage.intermediateReport)
+    return Objects.equals(this.notifyUrl, smsBinaryMessage.notifyUrl)
         && Objects.equals(this.sendAt, smsBinaryMessage.sendAt)
-        && Objects.equals(this.binary, smsBinaryMessage.binary)
-        && Objects.equals(this.deliveryTimeWindow, smsBinaryMessage.deliveryTimeWindow)
+        && Objects.equals(this.flash, smsBinaryMessage.flash)
         && Objects.equals(this.destinations, smsBinaryMessage.destinations)
-        && Objects.equals(this.validityPeriod, smsBinaryMessage.validityPeriod)
-        && Objects.equals(this.callbackData, smsBinaryMessage.callbackData)
-        && Objects.equals(this.notifyContentType, smsBinaryMessage.notifyContentType)
-        && Objects.equals(this.notifyUrl, smsBinaryMessage.notifyUrl)
+        && Objects.equals(this.intermediateReport, smsBinaryMessage.intermediateReport)
         && Objects.equals(this.from, smsBinaryMessage.from)
+        && Objects.equals(this.notifyContentType, smsBinaryMessage.notifyContentType)
+        && Objects.equals(this.validityPeriod, smsBinaryMessage.validityPeriod)
+        && Objects.equals(this.binary, smsBinaryMessage.binary)
+        && Objects.equals(this.callbackData, smsBinaryMessage.callbackData)
+        && Objects.equals(this.deliveryTimeWindow, smsBinaryMessage.deliveryTimeWindow)
         && Objects.equals(this.regional, smsBinaryMessage.regional);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        flash,
-        intermediateReport,
-        sendAt,
-        binary,
-        deliveryTimeWindow,
-        destinations,
-        validityPeriod,
-        callbackData,
-        notifyContentType,
         notifyUrl,
+        sendAt,
+        flash,
+        destinations,
+        intermediateReport,
         from,
+        notifyContentType,
+        validityPeriod,
+        binary,
+        callbackData,
+        deliveryTimeWindow,
         regional);
   }
 
@@ -374,17 +374,17 @@ public class SmsBinaryMessage {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsBinaryMessage {\n");
-    sb.append("    flash: ").append(toIndentedString(flash)).append("\n");
-    sb.append("    intermediateReport: ").append(toIndentedString(intermediateReport)).append("\n");
-    sb.append("    sendAt: ").append(toIndentedString(sendAt)).append("\n");
-    sb.append("    binary: ").append(toIndentedString(binary)).append("\n");
-    sb.append("    deliveryTimeWindow: ").append(toIndentedString(deliveryTimeWindow)).append("\n");
-    sb.append("    destinations: ").append(toIndentedString(destinations)).append("\n");
-    sb.append("    validityPeriod: ").append(toIndentedString(validityPeriod)).append("\n");
-    sb.append("    callbackData: ").append(toIndentedString(callbackData)).append("\n");
-    sb.append("    notifyContentType: ").append(toIndentedString(notifyContentType)).append("\n");
     sb.append("    notifyUrl: ").append(toIndentedString(notifyUrl)).append("\n");
+    sb.append("    sendAt: ").append(toIndentedString(sendAt)).append("\n");
+    sb.append("    flash: ").append(toIndentedString(flash)).append("\n");
+    sb.append("    destinations: ").append(toIndentedString(destinations)).append("\n");
+    sb.append("    intermediateReport: ").append(toIndentedString(intermediateReport)).append("\n");
     sb.append("    from: ").append(toIndentedString(from)).append("\n");
+    sb.append("    notifyContentType: ").append(toIndentedString(notifyContentType)).append("\n");
+    sb.append("    validityPeriod: ").append(toIndentedString(validityPeriod)).append("\n");
+    sb.append("    binary: ").append(toIndentedString(binary)).append("\n");
+    sb.append("    callbackData: ").append(toIndentedString(callbackData)).append("\n");
+    sb.append("    deliveryTimeWindow: ").append(toIndentedString(deliveryTimeWindow)).append("\n");
     sb.append("    regional: ").append(toIndentedString(regional)).append("\n");
     sb.append("}");
     return sb.toString();

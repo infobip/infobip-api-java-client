@@ -16,118 +16,78 @@ import java.util.Objects;
 
 /** TfaMessage */
 public class TfaMessage {
-  public static final String SERIALIZED_NAME_SPEECH_RATE = "speechRate";
+  public static final String SERIALIZED_NAME_SENDER_ID = "senderId";
 
-  @SerializedName(SERIALIZED_NAME_SPEECH_RATE)
-  private Double speechRate;
-
-  public static final String SERIALIZED_NAME_PIN_TYPE = "pinType";
-
-  @SerializedName(SERIALIZED_NAME_PIN_TYPE)
-  private TfaPinType pinType = null;
-
-  public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
-
-  @SerializedName(SERIALIZED_NAME_MESSAGE_ID)
-  private String messageId;
+  @SerializedName(SERIALIZED_NAME_SENDER_ID)
+  private String senderId;
 
   public static final String SERIALIZED_NAME_MESSAGE_TEXT = "messageText";
 
   @SerializedName(SERIALIZED_NAME_MESSAGE_TEXT)
   private String messageText;
 
-  public static final String SERIALIZED_NAME_APPLICATION_ID = "applicationId";
+  public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
 
-  @SerializedName(SERIALIZED_NAME_APPLICATION_ID)
-  private String applicationId;
+  @SerializedName(SERIALIZED_NAME_MESSAGE_ID)
+  private String messageId;
 
-  public static final String SERIALIZED_NAME_PIN_LENGTH = "pinLength";
+  public static final String SERIALIZED_NAME_SPEECH_RATE = "speechRate";
 
-  @SerializedName(SERIALIZED_NAME_PIN_LENGTH)
-  private Integer pinLength;
-
-  public static final String SERIALIZED_NAME_SENDER_ID = "senderId";
-
-  @SerializedName(SERIALIZED_NAME_SENDER_ID)
-  private String senderId;
-
-  public static final String SERIALIZED_NAME_REPEAT_D_T_M_F = "repeatDTMF";
-
-  @SerializedName(SERIALIZED_NAME_REPEAT_D_T_M_F)
-  private String repeatDTMF;
+  @SerializedName(SERIALIZED_NAME_SPEECH_RATE)
+  private Double speechRate;
 
   public static final String SERIALIZED_NAME_REGIONAL = "regional";
 
   @SerializedName(SERIALIZED_NAME_REGIONAL)
   private TfaRegionalOptions regional = null;
 
+  public static final String SERIALIZED_NAME_REPEAT_D_T_M_F = "repeatDTMF";
+
+  @SerializedName(SERIALIZED_NAME_REPEAT_D_T_M_F)
+  private String repeatDTMF;
+
+  public static final String SERIALIZED_NAME_PIN_TYPE = "pinType";
+
+  @SerializedName(SERIALIZED_NAME_PIN_TYPE)
+  private TfaPinType pinType = null;
+
+  public static final String SERIALIZED_NAME_APPLICATION_ID = "applicationId";
+
+  @SerializedName(SERIALIZED_NAME_APPLICATION_ID)
+  private String applicationId;
+
   public static final String SERIALIZED_NAME_PIN_PLACEHOLDER = "pinPlaceholder";
 
   @SerializedName(SERIALIZED_NAME_PIN_PLACEHOLDER)
   private String pinPlaceholder;
+
+  public static final String SERIALIZED_NAME_PIN_LENGTH = "pinLength";
+
+  @SerializedName(SERIALIZED_NAME_PIN_LENGTH)
+  private Integer pinLength;
 
   public static final String SERIALIZED_NAME_LANGUAGE = "language";
 
   @SerializedName(SERIALIZED_NAME_LANGUAGE)
   private TfaLanguage language = null;
 
-  public TfaMessage speechRate(Double speechRate) {
+  public TfaMessage senderId(String senderId) {
 
-    this.speechRate = speechRate;
+    this.senderId = senderId;
     return this;
   }
 
   /**
-   * In case PIN message is sent by Voice, the speed of speech can be set for the message. Supported
-   * range is from &#x60;0.5&#x60; to &#x60;2&#x60;.
+   * The name that will appear as the sender of the 2FA message (Example: CompanyName).
    *
-   * @return speechRate
+   * @return senderId
    */
-  public Double getSpeechRate() {
-    return speechRate;
+  public String getSenderId() {
+    return senderId;
   }
 
-  public void setSpeechRate(Double speechRate) {
-    this.speechRate = speechRate;
-  }
-
-  public TfaMessage pinType(TfaPinType pinType) {
-
-    this.pinType = pinType;
-    return this;
-  }
-
-  /**
-   * Type of PIN code that will be generated and sent as part of 2FA message. You can set PIN type
-   * to numeric, alpha, alphanumeric or hex.
-   *
-   * @return pinType
-   */
-  public TfaPinType getPinType() {
-    return pinType;
-  }
-
-  public void setPinType(TfaPinType pinType) {
-    this.pinType = pinType;
-  }
-
-  public TfaMessage messageId(String messageId) {
-
-    this.messageId = messageId;
-    return this;
-  }
-
-  /**
-   * Message template ID.
-   *
-   * @return messageId
-   */
-  public String getMessageId() {
-    return messageId;
-  }
-
-  public void setMessageId(String messageId) {
-    this.messageId = messageId;
+  public void setSenderId(String senderId) {
+    this.senderId = senderId;
   }
 
   public TfaMessage messageText(String messageText) {
@@ -149,80 +109,43 @@ public class TfaMessage {
     this.messageText = messageText;
   }
 
-  public TfaMessage applicationId(String applicationId) {
+  public TfaMessage messageId(String messageId) {
 
-    this.applicationId = applicationId;
+    this.messageId = messageId;
     return this;
   }
 
   /**
-   * 2FA application ID for which the requested message is created.
+   * Message template ID.
    *
-   * @return applicationId
+   * @return messageId
    */
-  public String getApplicationId() {
-    return applicationId;
+  public String getMessageId() {
+    return messageId;
   }
 
-  public void setApplicationId(String applicationId) {
-    this.applicationId = applicationId;
+  public void setMessageId(String messageId) {
+    this.messageId = messageId;
   }
 
-  public TfaMessage pinLength(Integer pinLength) {
+  public TfaMessage speechRate(Double speechRate) {
 
-    this.pinLength = pinLength;
+    this.speechRate = speechRate;
     return this;
   }
 
   /**
-   * PIN code length.
+   * In case PIN message is sent by Voice, the speed of speech can be set for the message. Supported
+   * range is from &#x60;0.5&#x60; to &#x60;2&#x60;.
    *
-   * @return pinLength
+   * @return speechRate
    */
-  public Integer getPinLength() {
-    return pinLength;
+  public Double getSpeechRate() {
+    return speechRate;
   }
 
-  public void setPinLength(Integer pinLength) {
-    this.pinLength = pinLength;
-  }
-
-  public TfaMessage senderId(String senderId) {
-
-    this.senderId = senderId;
-    return this;
-  }
-
-  /**
-   * The name that will appear as the sender of the 2FA message (Example: CompanyName).
-   *
-   * @return senderId
-   */
-  public String getSenderId() {
-    return senderId;
-  }
-
-  public void setSenderId(String senderId) {
-    this.senderId = senderId;
-  }
-
-  public TfaMessage repeatDTMF(String repeatDTMF) {
-
-    this.repeatDTMF = repeatDTMF;
-    return this;
-  }
-
-  /**
-   * In case PIN message is sent by Voice, DTMF code will enable replaying the message.
-   *
-   * @return repeatDTMF
-   */
-  public String getRepeatDTMF() {
-    return repeatDTMF;
-  }
-
-  public void setRepeatDTMF(String repeatDTMF) {
-    this.repeatDTMF = repeatDTMF;
+  public void setSpeechRate(Double speechRate) {
+    this.speechRate = speechRate;
   }
 
   public TfaMessage regional(TfaRegionalOptions regional) {
@@ -245,6 +168,64 @@ public class TfaMessage {
     this.regional = regional;
   }
 
+  public TfaMessage repeatDTMF(String repeatDTMF) {
+
+    this.repeatDTMF = repeatDTMF;
+    return this;
+  }
+
+  /**
+   * In case PIN message is sent by Voice, DTMF code will enable replaying the message.
+   *
+   * @return repeatDTMF
+   */
+  public String getRepeatDTMF() {
+    return repeatDTMF;
+  }
+
+  public void setRepeatDTMF(String repeatDTMF) {
+    this.repeatDTMF = repeatDTMF;
+  }
+
+  public TfaMessage pinType(TfaPinType pinType) {
+
+    this.pinType = pinType;
+    return this;
+  }
+
+  /**
+   * Type of PIN code that will be generated and sent as part of 2FA message. You can set PIN type
+   * to numeric, alpha, alphanumeric or hex.
+   *
+   * @return pinType
+   */
+  public TfaPinType getPinType() {
+    return pinType;
+  }
+
+  public void setPinType(TfaPinType pinType) {
+    this.pinType = pinType;
+  }
+
+  public TfaMessage applicationId(String applicationId) {
+
+    this.applicationId = applicationId;
+    return this;
+  }
+
+  /**
+   * 2FA application ID for which the requested message is created.
+   *
+   * @return applicationId
+   */
+  public String getApplicationId() {
+    return applicationId;
+  }
+
+  public void setApplicationId(String applicationId) {
+    this.applicationId = applicationId;
+  }
+
   public TfaMessage pinPlaceholder(String pinPlaceholder) {
 
     this.pinPlaceholder = pinPlaceholder;
@@ -262,6 +243,25 @@ public class TfaMessage {
 
   public void setPinPlaceholder(String pinPlaceholder) {
     this.pinPlaceholder = pinPlaceholder;
+  }
+
+  public TfaMessage pinLength(Integer pinLength) {
+
+    this.pinLength = pinLength;
+    return this;
+  }
+
+  /**
+   * PIN code length.
+   *
+   * @return pinLength
+   */
+  public Integer getPinLength() {
+    return pinLength;
+  }
+
+  public void setPinLength(Integer pinLength) {
+    this.pinLength = pinLength;
   }
 
   public TfaMessage language(TfaLanguage language) {
@@ -293,32 +293,32 @@ public class TfaMessage {
       return false;
     }
     TfaMessage tfaMessage = (TfaMessage) o;
-    return Objects.equals(this.speechRate, tfaMessage.speechRate)
-        && Objects.equals(this.pinType, tfaMessage.pinType)
-        && Objects.equals(this.messageId, tfaMessage.messageId)
+    return Objects.equals(this.senderId, tfaMessage.senderId)
         && Objects.equals(this.messageText, tfaMessage.messageText)
-        && Objects.equals(this.applicationId, tfaMessage.applicationId)
-        && Objects.equals(this.pinLength, tfaMessage.pinLength)
-        && Objects.equals(this.senderId, tfaMessage.senderId)
-        && Objects.equals(this.repeatDTMF, tfaMessage.repeatDTMF)
+        && Objects.equals(this.messageId, tfaMessage.messageId)
+        && Objects.equals(this.speechRate, tfaMessage.speechRate)
         && Objects.equals(this.regional, tfaMessage.regional)
+        && Objects.equals(this.repeatDTMF, tfaMessage.repeatDTMF)
+        && Objects.equals(this.pinType, tfaMessage.pinType)
+        && Objects.equals(this.applicationId, tfaMessage.applicationId)
         && Objects.equals(this.pinPlaceholder, tfaMessage.pinPlaceholder)
+        && Objects.equals(this.pinLength, tfaMessage.pinLength)
         && Objects.equals(this.language, tfaMessage.language);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        speechRate,
-        pinType,
-        messageId,
-        messageText,
-        applicationId,
-        pinLength,
         senderId,
-        repeatDTMF,
+        messageText,
+        messageId,
+        speechRate,
         regional,
+        repeatDTMF,
+        pinType,
+        applicationId,
         pinPlaceholder,
+        pinLength,
         language);
   }
 
@@ -326,16 +326,16 @@ public class TfaMessage {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TfaMessage {\n");
-    sb.append("    speechRate: ").append(toIndentedString(speechRate)).append("\n");
-    sb.append("    pinType: ").append(toIndentedString(pinType)).append("\n");
-    sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
-    sb.append("    messageText: ").append(toIndentedString(messageText)).append("\n");
-    sb.append("    applicationId: ").append(toIndentedString(applicationId)).append("\n");
-    sb.append("    pinLength: ").append(toIndentedString(pinLength)).append("\n");
     sb.append("    senderId: ").append(toIndentedString(senderId)).append("\n");
-    sb.append("    repeatDTMF: ").append(toIndentedString(repeatDTMF)).append("\n");
+    sb.append("    messageText: ").append(toIndentedString(messageText)).append("\n");
+    sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
+    sb.append("    speechRate: ").append(toIndentedString(speechRate)).append("\n");
     sb.append("    regional: ").append(toIndentedString(regional)).append("\n");
+    sb.append("    repeatDTMF: ").append(toIndentedString(repeatDTMF)).append("\n");
+    sb.append("    pinType: ").append(toIndentedString(pinType)).append("\n");
+    sb.append("    applicationId: ").append(toIndentedString(applicationId)).append("\n");
     sb.append("    pinPlaceholder: ").append(toIndentedString(pinPlaceholder)).append("\n");
+    sb.append("    pinLength: ").append(toIndentedString(pinLength)).append("\n");
     sb.append("    language: ").append(toIndentedString(language)).append("\n");
     sb.append("}");
     return sb.toString();
