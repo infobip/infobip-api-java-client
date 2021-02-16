@@ -64,7 +64,7 @@ If you want to build your own .jar, execute the following from within the cloned
 
 We support multiple authentication methods, e.g. you can use [API Key Header](https://www.infobip.com/docs/essentials/api-authentication#api-key-header), in this case, API_KEY_PREFIX will be "App".
 
-To see your base URL, log in to the [Infobip API Resource] (https://www.infobip.com/docs/api) hub with your Infobip credentials.
+To see your base URL, log in to the [Infobip API Resource][apidocs] hub with your Infobip credentials.
 
 ```java
     ApiClient apiClient = new ApiClient();
