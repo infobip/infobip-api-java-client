@@ -16,20 +16,29 @@ import java.util.Objects;
 
 /** SmsResponseDetails */
 public class SmsResponseDetails {
-  public static final String SERIALIZED_NAME_STATUS = "status";
-
-  @SerializedName(SERIALIZED_NAME_STATUS)
-  private SmsStatus status = null;
-
   public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
 
   @SerializedName(SERIALIZED_NAME_MESSAGE_ID)
   private String messageId;
 
+  public static final String SERIALIZED_NAME_STATUS = "status";
+
+  @SerializedName(SERIALIZED_NAME_STATUS)
+  private SmsStatus status = null;
+
   public static final String SERIALIZED_NAME_TO = "to";
 
   @SerializedName(SERIALIZED_NAME_TO)
   private String to;
+
+  /**
+   * The ID that uniquely identifies the message sent.
+   *
+   * @return messageId
+   */
+  public String getMessageId() {
+    return messageId;
+  }
 
   /**
    * Indicates whether the message is successfully sent, not sent, delivered, not delivered, waiting
@@ -39,15 +48,6 @@ public class SmsResponseDetails {
    */
   public SmsStatus getStatus() {
     return status;
-  }
-
-  /**
-   * The ID that uniquely identifies the message sent.
-   *
-   * @return messageId
-   */
-  public String getMessageId() {
-    return messageId;
   }
 
   /**
@@ -68,22 +68,22 @@ public class SmsResponseDetails {
       return false;
     }
     SmsResponseDetails smsResponseDetails = (SmsResponseDetails) o;
-    return Objects.equals(this.status, smsResponseDetails.status)
-        && Objects.equals(this.messageId, smsResponseDetails.messageId)
+    return Objects.equals(this.messageId, smsResponseDetails.messageId)
+        && Objects.equals(this.status, smsResponseDetails.status)
         && Objects.equals(this.to, smsResponseDetails.to);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(status, messageId, to);
+    return Objects.hash(messageId, status, to);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsResponseDetails {\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    to: ").append(toIndentedString(to)).append("\n");
     sb.append("}");
     return sb.toString();

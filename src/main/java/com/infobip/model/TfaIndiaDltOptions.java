@@ -16,34 +16,15 @@ import java.util.Objects;
 
 /** TfaIndiaDltOptions */
 public class TfaIndiaDltOptions {
-  public static final String SERIALIZED_NAME_PRINCIPAL_ENTITY_ID = "principalEntityId";
-
-  @SerializedName(SERIALIZED_NAME_PRINCIPAL_ENTITY_ID)
-  private String principalEntityId;
-
   public static final String SERIALIZED_NAME_CONTENT_TEMPLATE_ID = "contentTemplateId";
 
   @SerializedName(SERIALIZED_NAME_CONTENT_TEMPLATE_ID)
   private String contentTemplateId;
 
-  public TfaIndiaDltOptions principalEntityId(String principalEntityId) {
+  public static final String SERIALIZED_NAME_PRINCIPAL_ENTITY_ID = "principalEntityId";
 
-    this.principalEntityId = principalEntityId;
-    return this;
-  }
-
-  /**
-   * Your assigned DTL principal entity id.
-   *
-   * @return principalEntityId
-   */
-  public String getPrincipalEntityId() {
-    return principalEntityId;
-  }
-
-  public void setPrincipalEntityId(String principalEntityId) {
-    this.principalEntityId = principalEntityId;
-  }
+  @SerializedName(SERIALIZED_NAME_PRINCIPAL_ENTITY_ID)
+  private String principalEntityId;
 
   public TfaIndiaDltOptions contentTemplateId(String contentTemplateId) {
 
@@ -64,6 +45,25 @@ public class TfaIndiaDltOptions {
     this.contentTemplateId = contentTemplateId;
   }
 
+  public TfaIndiaDltOptions principalEntityId(String principalEntityId) {
+
+    this.principalEntityId = principalEntityId;
+    return this;
+  }
+
+  /**
+   * Your assigned DTL principal entity id.
+   *
+   * @return principalEntityId
+   */
+  public String getPrincipalEntityId() {
+    return principalEntityId;
+  }
+
+  public void setPrincipalEntityId(String principalEntityId) {
+    this.principalEntityId = principalEntityId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -73,21 +73,21 @@ public class TfaIndiaDltOptions {
       return false;
     }
     TfaIndiaDltOptions tfaIndiaDltOptions = (TfaIndiaDltOptions) o;
-    return Objects.equals(this.principalEntityId, tfaIndiaDltOptions.principalEntityId)
-        && Objects.equals(this.contentTemplateId, tfaIndiaDltOptions.contentTemplateId);
+    return Objects.equals(this.contentTemplateId, tfaIndiaDltOptions.contentTemplateId)
+        && Objects.equals(this.principalEntityId, tfaIndiaDltOptions.principalEntityId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(principalEntityId, contentTemplateId);
+    return Objects.hash(contentTemplateId, principalEntityId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TfaIndiaDltOptions {\n");
-    sb.append("    principalEntityId: ").append(toIndentedString(principalEntityId)).append("\n");
     sb.append("    contentTemplateId: ").append(toIndentedString(contentTemplateId)).append("\n");
+    sb.append("    principalEntityId: ").append(toIndentedString(principalEntityId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

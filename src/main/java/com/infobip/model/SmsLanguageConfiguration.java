@@ -16,26 +16,15 @@ import java.util.Objects;
 
 /** SmsLanguageConfiguration */
 public class SmsLanguageConfiguration {
-  public static final String SERIALIZED_NAME_TRANSLITERATION = "transliteration";
-
-  @SerializedName(SERIALIZED_NAME_TRANSLITERATION)
-  private String transliteration;
-
   public static final String SERIALIZED_NAME_LANGUAGE = "language";
 
   @SerializedName(SERIALIZED_NAME_LANGUAGE)
   private SmsLanguage language = null;
 
-  /**
-   * Conversion of a message text from one script to another. Possible values: &#x60;TURKISH&#x60;,
-   * &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;, &#x60;SERBIAN_CYRILLIC&#x60;,
-   * &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60; and &#x60;NON_UNICODE&#x60;.
-   *
-   * @return transliteration
-   */
-  public String getTransliteration() {
-    return transliteration;
-  }
+  public static final String SERIALIZED_NAME_TRANSLITERATION = "transliteration";
+
+  @SerializedName(SERIALIZED_NAME_TRANSLITERATION)
+  private String transliteration;
 
   public SmsLanguageConfiguration language(SmsLanguage language) {
 
@@ -56,6 +45,17 @@ public class SmsLanguageConfiguration {
     this.language = language;
   }
 
+  /**
+   * Conversion of a message text from one script to another. Possible values: &#x60;TURKISH&#x60;,
+   * &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;, &#x60;SERBIAN_CYRILLIC&#x60;,
+   * &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60; and &#x60;NON_UNICODE&#x60;.
+   *
+   * @return transliteration
+   */
+  public String getTransliteration() {
+    return transliteration;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -65,21 +65,21 @@ public class SmsLanguageConfiguration {
       return false;
     }
     SmsLanguageConfiguration smsLanguageConfiguration = (SmsLanguageConfiguration) o;
-    return Objects.equals(this.transliteration, smsLanguageConfiguration.transliteration)
-        && Objects.equals(this.language, smsLanguageConfiguration.language);
+    return Objects.equals(this.language, smsLanguageConfiguration.language)
+        && Objects.equals(this.transliteration, smsLanguageConfiguration.transliteration);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(transliteration, language);
+    return Objects.hash(language, transliteration);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsLanguageConfiguration {\n");
-    sb.append("    transliteration: ").append(toIndentedString(transliteration)).append("\n");
     sb.append("    language: ").append(toIndentedString(language)).append("\n");
+    sb.append("    transliteration: ").append(toIndentedString(transliteration)).append("\n");
     sb.append("}");
     return sb.toString();
   }

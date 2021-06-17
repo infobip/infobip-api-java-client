@@ -15,8 +15,8 @@ import com.google.gson.annotations.SerializedName;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
-/** SmsBulkResponse */
-public class SmsBulkResponse {
+/** EmailBulkInfo */
+public class EmailBulkInfo {
   public static final String SERIALIZED_NAME_BULK_ID = "bulkId";
 
   @SerializedName(SERIALIZED_NAME_BULK_ID)
@@ -27,7 +27,7 @@ public class SmsBulkResponse {
   @SerializedName(SERIALIZED_NAME_SEND_AT)
   private OffsetDateTime sendAt;
 
-  public SmsBulkResponse bulkId(String bulkId) {
+  public EmailBulkInfo bulkId(String bulkId) {
 
     this.bulkId = bulkId;
     return this;
@@ -46,7 +46,7 @@ public class SmsBulkResponse {
     this.bulkId = bulkId;
   }
 
-  public SmsBulkResponse sendAt(OffsetDateTime sendAt) {
+  public EmailBulkInfo sendAt(OffsetDateTime sendAt) {
 
     this.sendAt = sendAt;
     return this;
@@ -73,9 +73,9 @@ public class SmsBulkResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SmsBulkResponse smsBulkResponse = (SmsBulkResponse) o;
-    return Objects.equals(this.bulkId, smsBulkResponse.bulkId)
-        && Objects.equals(this.sendAt, smsBulkResponse.sendAt);
+    EmailBulkInfo emailBulkInfo = (EmailBulkInfo) o;
+    return Objects.equals(this.bulkId, emailBulkInfo.bulkId)
+        && Objects.equals(this.sendAt, emailBulkInfo.sendAt);
   }
 
   @Override
@@ -86,7 +86,7 @@ public class SmsBulkResponse {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SmsBulkResponse {\n");
+    sb.append("class EmailBulkInfo {\n");
     sb.append("    bulkId: ").append(toIndentedString(bulkId)).append("\n");
     sb.append("    sendAt: ").append(toIndentedString(sendAt)).append("\n");
     sb.append("}");

@@ -14,26 +14,55 @@ package com.infobip.model;
 import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
-/** SmsDestination */
-public class SmsDestination {
+/** EmailMessageInfo */
+public class EmailMessageInfo {
+  public static final String SERIALIZED_NAME_MESSAGE_COUNT = "messageCount";
+
+  @SerializedName(SERIALIZED_NAME_MESSAGE_COUNT)
+  private Integer messageCount;
+
   public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
 
   @SerializedName(SERIALIZED_NAME_MESSAGE_ID)
   private String messageId;
+
+  public static final String SERIALIZED_NAME_STATUS = "status";
+
+  @SerializedName(SERIALIZED_NAME_STATUS)
+  private EmailMessageStatus status = null;
 
   public static final String SERIALIZED_NAME_TO = "to";
 
   @SerializedName(SERIALIZED_NAME_TO)
   private String to;
 
-  public SmsDestination messageId(String messageId) {
+  public EmailMessageInfo messageCount(Integer messageCount) {
+
+    this.messageCount = messageCount;
+    return this;
+  }
+
+  /**
+   * Get messageCount
+   *
+   * @return messageCount
+   */
+  public Integer getMessageCount() {
+    return messageCount;
+  }
+
+  public void setMessageCount(Integer messageCount) {
+    this.messageCount = messageCount;
+  }
+
+  public EmailMessageInfo messageId(String messageId) {
 
     this.messageId = messageId;
     return this;
   }
 
   /**
-   * The ID that uniquely identifies the message sent.
+   * Get messageId
    *
    * @return messageId
    */
@@ -45,15 +74,33 @@ public class SmsDestination {
     this.messageId = messageId;
   }
 
-  public SmsDestination to(String to) {
+  public EmailMessageInfo status(EmailMessageStatus status) {
+
+    this.status = status;
+    return this;
+  }
+
+  /**
+   * Get status
+   *
+   * @return status
+   */
+  public EmailMessageStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(EmailMessageStatus status) {
+    this.status = status;
+  }
+
+  public EmailMessageInfo to(String to) {
 
     this.to = to;
     return this;
   }
 
   /**
-   * Message destination address. Addresses must be in international format (Example:
-   * &#x60;41793026727&#x60;).
+   * Get to
    *
    * @return to
    */
@@ -73,21 +120,25 @@ public class SmsDestination {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SmsDestination smsDestination = (SmsDestination) o;
-    return Objects.equals(this.messageId, smsDestination.messageId)
-        && Objects.equals(this.to, smsDestination.to);
+    EmailMessageInfo emailMessageInfo = (EmailMessageInfo) o;
+    return Objects.equals(this.messageCount, emailMessageInfo.messageCount)
+        && Objects.equals(this.messageId, emailMessageInfo.messageId)
+        && Objects.equals(this.status, emailMessageInfo.status)
+        && Objects.equals(this.to, emailMessageInfo.to);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(messageId, to);
+    return Objects.hash(messageCount, messageId, status, to);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SmsDestination {\n");
+    sb.append("class EmailMessageInfo {\n");
+    sb.append("    messageCount: ").append(toIndentedString(messageCount)).append("\n");
     sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    to: ").append(toIndentedString(to)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -12,22 +12,21 @@
 package com.infobip.model;
 
 import com.google.gson.annotations.SerializedName;
-import java.time.OffsetDateTime;
 import java.util.Objects;
 
-/** SmsBulkResponse */
-public class SmsBulkResponse {
+/** EmailBulkUpdateStatusResponse */
+public class EmailBulkUpdateStatusResponse {
   public static final String SERIALIZED_NAME_BULK_ID = "bulkId";
 
   @SerializedName(SERIALIZED_NAME_BULK_ID)
   private String bulkId;
 
-  public static final String SERIALIZED_NAME_SEND_AT = "sendAt";
+  public static final String SERIALIZED_NAME_STATUS = "status";
 
-  @SerializedName(SERIALIZED_NAME_SEND_AT)
-  private OffsetDateTime sendAt;
+  @SerializedName(SERIALIZED_NAME_STATUS)
+  private EmailBulkStatus status = null;
 
-  public SmsBulkResponse bulkId(String bulkId) {
+  public EmailBulkUpdateStatusResponse bulkId(String bulkId) {
 
     this.bulkId = bulkId;
     return this;
@@ -46,23 +45,23 @@ public class SmsBulkResponse {
     this.bulkId = bulkId;
   }
 
-  public SmsBulkResponse sendAt(OffsetDateTime sendAt) {
+  public EmailBulkUpdateStatusResponse status(EmailBulkStatus status) {
 
-    this.sendAt = sendAt;
+    this.status = status;
     return this;
   }
 
   /**
-   * Get sendAt
+   * Get status
    *
-   * @return sendAt
+   * @return status
    */
-  public OffsetDateTime getSendAt() {
-    return sendAt;
+  public EmailBulkStatus getStatus() {
+    return status;
   }
 
-  public void setSendAt(OffsetDateTime sendAt) {
-    this.sendAt = sendAt;
+  public void setStatus(EmailBulkStatus status) {
+    this.status = status;
   }
 
   @Override
@@ -73,22 +72,22 @@ public class SmsBulkResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SmsBulkResponse smsBulkResponse = (SmsBulkResponse) o;
-    return Objects.equals(this.bulkId, smsBulkResponse.bulkId)
-        && Objects.equals(this.sendAt, smsBulkResponse.sendAt);
+    EmailBulkUpdateStatusResponse emailBulkUpdateStatusResponse = (EmailBulkUpdateStatusResponse) o;
+    return Objects.equals(this.bulkId, emailBulkUpdateStatusResponse.bulkId)
+        && Objects.equals(this.status, emailBulkUpdateStatusResponse.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bulkId, sendAt);
+    return Objects.hash(bulkId, status);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SmsBulkResponse {\n");
+    sb.append("class EmailBulkUpdateStatusResponse {\n");
     sb.append("    bulkId: ").append(toIndentedString(bulkId)).append("\n");
-    sb.append("    sendAt: ").append(toIndentedString(sendAt)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }

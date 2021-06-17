@@ -18,21 +18,22 @@ import com.infobip.ApiException;
 import com.infobip.ApiResponse;
 import com.infobip.Configuration;
 import com.infobip.Pair;
-import com.infobip.model.SmsInboundMessageResult;
+import com.infobip.model.EmailValidationRequest;
+import com.infobip.model.EmailValidationResponse;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ReceiveSmsApi {
+public class EmailValidationApi {
   private ApiClient localVarApiClient;
 
-  public ReceiveSmsApi() {
+  public EmailValidationApi() {
     this(Configuration.getDefaultApiClient());
   }
 
-  public ReceiveSmsApi(ApiClient apiClient) {
+  public EmailValidationApi(ApiClient apiClient) {
     this.localVarApiClient = apiClient;
   }
 
@@ -45,26 +46,25 @@ public class ReceiveSmsApi {
   }
 
   /**
-   * Build call for getInboundSmsMessages.
+   * Build call for validateEmailAddresses.
    *
-   * @param limit Maximal number of received messages that will be returned. (optional)
+   * @param emailValidationRequest (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
+   * @see <a href="https://www.infobip.com/docs/email/validation">Learn more about email validation
+   *     and use cases</a>
    */
-  public okhttp3.Call getInboundSmsMessagesCall(Integer limit, final ApiCallback _callback)
+  public okhttp3.Call validateEmailAddressesCall(
+      EmailValidationRequest emailValidationRequest, final ApiCallback _callback)
       throws ApiException {
-    Object localVarPostBody = null;
+    Object localVarPostBody = emailValidationRequest;
 
     // create path and map variables
-    String localVarPath = "/sms/1/inbox/reports";
+    String localVarPath = "/email/2/validation";
 
     List<Pair> localVarQueryParams = new ArrayList<Pair>();
     List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-    if (limit != null) {
-      localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
-    }
-
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
     Map<String, String> localVarCookieParams = new HashMap<String, String>();
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
@@ -74,8 +74,7 @@ public class ReceiveSmsApi {
       localVarHeaderParams.put("Accept", localVarAccept);
     }
 
-    final String[] localVarContentTypes = {};
-
+    final String[] localVarContentTypes = {"application/json", "application/xml"};
     final String localVarContentType =
         localVarApiClient.selectHeaderContentType(localVarContentTypes);
     localVarHeaderParams.put("Content-Type", localVarContentType);
@@ -84,7 +83,7 @@ public class ReceiveSmsApi {
         new String[] {"APIKeyHeader", "Basic", "IBSSOTokenHeader", "OAuth2"};
     return localVarApiClient.buildCall(
         localVarPath,
-        "GET",
+        "POST",
         localVarQueryParams,
         localVarCollectionQueryParams,
         localVarPostBody,
@@ -96,63 +95,70 @@ public class ReceiveSmsApi {
   }
 
   @SuppressWarnings("rawtypes")
-  private okhttp3.Call getInboundSmsMessagesValidateBeforeCall(
-      Integer limit, final ApiCallback _callback) throws ApiException {
+  private okhttp3.Call validateEmailAddressesValidateBeforeCall(
+      EmailValidationRequest emailValidationRequest, final ApiCallback _callback)
+      throws ApiException {
 
-    okhttp3.Call localVarCall = getInboundSmsMessagesCall(limit, _callback);
+    okhttp3.Call localVarCall = validateEmailAddressesCall(emailValidationRequest, _callback);
     return localVarCall;
   }
 
   /**
-   * Get inbound SMS messages. If for some reason you are unable to receive incoming SMS at the
-   * endpoint of your choice in real time, you can use this API call to fetch messages. Each request
-   * will return a batch of received messages - only once. The following API request will return
-   * only new messages that arrived since the last API request.
+   * Validate email addresses. Run validation to identify poor quality emails to clean up your
+   * recipient list.
    *
-   * @param limit Maximal number of received messages that will be returned. (optional)
-   * @return SmsInboundMessageResult
+   * @param emailValidationRequest (optional)
+   * @return EmailValidationResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
+   * @see <a href="https://www.infobip.com/docs/email/validation">Learn more about email validation
+   *     and use cases</a>
    */
-  public SmsInboundMessageResult getInboundSmsMessages(Integer limit) throws ApiException {
-    ApiResponse<SmsInboundMessageResult> localVarResp = getInboundSmsMessagesWithHttpInfo(limit);
+  public EmailValidationResponse validateEmailAddresses(
+      EmailValidationRequest emailValidationRequest) throws ApiException {
+    ApiResponse<EmailValidationResponse> localVarResp =
+        validateEmailAddressesWithHttpInfo(emailValidationRequest);
     return localVarResp.getData();
   }
 
   /**
-   * Get inbound SMS messages. If for some reason you are unable to receive incoming SMS at the
-   * endpoint of your choice in real time, you can use this API call to fetch messages. Each request
-   * will return a batch of received messages - only once. The following API request will return
-   * only new messages that arrived since the last API request.
+   * Validate email addresses. Run validation to identify poor quality emails to clean up your
+   * recipient list.
    *
-   * @param limit Maximal number of received messages that will be returned. (optional)
-   * @return ApiResponse&lt;SmsInboundMessageResult&gt;
+   * @param emailValidationRequest (optional)
+   * @return ApiResponse&lt;EmailValidationResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
+   * @see <a href="https://www.infobip.com/docs/email/validation">Learn more about email validation
+   *     and use cases</a>
    */
-  public ApiResponse<SmsInboundMessageResult> getInboundSmsMessagesWithHttpInfo(Integer limit)
-      throws ApiException {
-    okhttp3.Call localVarCall = getInboundSmsMessagesValidateBeforeCall(limit, null);
-    Type localVarReturnType = new TypeToken<SmsInboundMessageResult>() {}.getType();
+  public ApiResponse<EmailValidationResponse> validateEmailAddressesWithHttpInfo(
+      EmailValidationRequest emailValidationRequest) throws ApiException {
+    okhttp3.Call localVarCall =
+        validateEmailAddressesValidateBeforeCall(emailValidationRequest, null);
+    Type localVarReturnType = new TypeToken<EmailValidationResponse>() {}.getType();
     return localVarApiClient.execute(localVarCall, localVarReturnType);
   }
 
   /**
-   * Get inbound SMS messages (asynchronously). If for some reason you are unable to receive
-   * incoming SMS at the endpoint of your choice in real time, you can use this API call to fetch
-   * messages. Each request will return a batch of received messages - only once. The following API
-   * request will return only new messages that arrived since the last API request.
+   * Validate email addresses (asynchronously). Run validation to identify poor quality emails to
+   * clean up your recipient list.
    *
-   * @param limit Maximal number of received messages that will be returned. (optional)
+   * @param emailValidationRequest (optional)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+   * @see <a href="https://www.infobip.com/docs/email/validation">Learn more about email validation
+   *     and use cases</a>
    */
-  public okhttp3.Call getInboundSmsMessagesAsync(
-      Integer limit, final ApiCallback<SmsInboundMessageResult> _callback) throws ApiException {
+  public okhttp3.Call validateEmailAddressesAsync(
+      EmailValidationRequest emailValidationRequest,
+      final ApiCallback<EmailValidationResponse> _callback)
+      throws ApiException {
 
-    okhttp3.Call localVarCall = getInboundSmsMessagesValidateBeforeCall(limit, _callback);
-    Type localVarReturnType = new TypeToken<SmsInboundMessageResult>() {}.getType();
+    okhttp3.Call localVarCall =
+        validateEmailAddressesValidateBeforeCall(emailValidationRequest, _callback);
+    Type localVarReturnType = new TypeToken<EmailValidationResponse>() {}.getType();
     localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     return localVarCall;
   }

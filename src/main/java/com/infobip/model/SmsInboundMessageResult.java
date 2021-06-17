@@ -18,20 +18,58 @@ import java.util.Objects;
 
 /** SmsInboundMessageResult */
 public class SmsInboundMessageResult {
-  public static final String SERIALIZED_NAME_RESULTS = "results";
+  public static final String SERIALIZED_NAME_MESSAGE_COUNT = "messageCount";
 
-  @SerializedName(SERIALIZED_NAME_RESULTS)
-  private List<SmsInboundMessage> results = null;
+  @SerializedName(SERIALIZED_NAME_MESSAGE_COUNT)
+  private Integer messageCount;
 
   public static final String SERIALIZED_NAME_PENDING_MESSAGE_COUNT = "pendingMessageCount";
 
   @SerializedName(SERIALIZED_NAME_PENDING_MESSAGE_COUNT)
   private Integer pendingMessageCount;
 
-  public static final String SERIALIZED_NAME_MESSAGE_COUNT = "messageCount";
+  public static final String SERIALIZED_NAME_RESULTS = "results";
 
-  @SerializedName(SERIALIZED_NAME_MESSAGE_COUNT)
-  private Integer messageCount;
+  @SerializedName(SERIALIZED_NAME_RESULTS)
+  private List<SmsInboundMessage> results = null;
+
+  public SmsInboundMessageResult messageCount(Integer messageCount) {
+
+    this.messageCount = messageCount;
+    return this;
+  }
+
+  /**
+   * Get messageCount
+   *
+   * @return messageCount
+   */
+  public Integer getMessageCount() {
+    return messageCount;
+  }
+
+  public void setMessageCount(Integer messageCount) {
+    this.messageCount = messageCount;
+  }
+
+  public SmsInboundMessageResult pendingMessageCount(Integer pendingMessageCount) {
+
+    this.pendingMessageCount = pendingMessageCount;
+    return this;
+  }
+
+  /**
+   * Get pendingMessageCount
+   *
+   * @return pendingMessageCount
+   */
+  public Integer getPendingMessageCount() {
+    return pendingMessageCount;
+  }
+
+  public void setPendingMessageCount(Integer pendingMessageCount) {
+    this.pendingMessageCount = pendingMessageCount;
+  }
 
   public SmsInboundMessageResult results(List<SmsInboundMessage> results) {
 
@@ -60,44 +98,6 @@ public class SmsInboundMessageResult {
     this.results = results;
   }
 
-  public SmsInboundMessageResult pendingMessageCount(Integer pendingMessageCount) {
-
-    this.pendingMessageCount = pendingMessageCount;
-    return this;
-  }
-
-  /**
-   * Get pendingMessageCount
-   *
-   * @return pendingMessageCount
-   */
-  public Integer getPendingMessageCount() {
-    return pendingMessageCount;
-  }
-
-  public void setPendingMessageCount(Integer pendingMessageCount) {
-    this.pendingMessageCount = pendingMessageCount;
-  }
-
-  public SmsInboundMessageResult messageCount(Integer messageCount) {
-
-    this.messageCount = messageCount;
-    return this;
-  }
-
-  /**
-   * Get messageCount
-   *
-   * @return messageCount
-   */
-  public Integer getMessageCount() {
-    return messageCount;
-  }
-
-  public void setMessageCount(Integer messageCount) {
-    this.messageCount = messageCount;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -107,25 +107,25 @@ public class SmsInboundMessageResult {
       return false;
     }
     SmsInboundMessageResult smsInboundMessageResult = (SmsInboundMessageResult) o;
-    return Objects.equals(this.results, smsInboundMessageResult.results)
+    return Objects.equals(this.messageCount, smsInboundMessageResult.messageCount)
         && Objects.equals(this.pendingMessageCount, smsInboundMessageResult.pendingMessageCount)
-        && Objects.equals(this.messageCount, smsInboundMessageResult.messageCount);
+        && Objects.equals(this.results, smsInboundMessageResult.results);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(results, pendingMessageCount, messageCount);
+    return Objects.hash(messageCount, pendingMessageCount, results);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsInboundMessageResult {\n");
-    sb.append("    results: ").append(toIndentedString(results)).append("\n");
+    sb.append("    messageCount: ").append(toIndentedString(messageCount)).append("\n");
     sb.append("    pendingMessageCount: ")
         .append(toIndentedString(pendingMessageCount))
         .append("\n");
-    sb.append("    messageCount: ").append(toIndentedString(messageCount)).append("\n");
+    sb.append("    results: ").append(toIndentedString(results)).append("\n");
     sb.append("}");
     return sb.toString();
   }

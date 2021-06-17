@@ -52,7 +52,7 @@ public class SendSmsApi {
   }
 
   /**
-   * Build call for getOutboundSmsMessageDeliveryReports
+   * Build call for getOutboundSmsMessageDeliveryReports.
    *
    * @param bulkId ID of bulk which delivery report is requested. (optional)
    * @param messageId ID of SMS which delivery report is requested. (optional)
@@ -60,9 +60,7 @@ public class SendSmsApi {
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Get outbound SMS message delivery reports
-   *     Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public okhttp3.Call getOutboundSmsMessageDeliveryReportsCall(
       String bulkId, String messageId, Integer limit, final ApiCallback _callback)
@@ -127,11 +125,11 @@ public class SendSmsApi {
   }
 
   /**
-   * Get outbound SMS message delivery reports If you are for any reason unable to receive real time
-   * delivery reports on your endpoint, you can use this API method to learn if and when the message
-   * has been delivered to the recipient. Each request will return a batch of delivery reports -
-   * only once. The following API request will return only new reports that arrived since the last
-   * API request.
+   * Get outbound SMS message delivery reports. If you are for any reason unable to receive real
+   * time delivery reports on your endpoint, you can use this API method to learn if and when the
+   * message has been delivered to the recipient. Each request will return a batch of delivery
+   * reports - only once. The following API request will return only new reports that arrived since
+   * the last API request.
    *
    * @param bulkId ID of bulk which delivery report is requested. (optional)
    * @param messageId ID of SMS which delivery report is requested. (optional)
@@ -139,9 +137,7 @@ public class SendSmsApi {
    * @return SmsDeliveryResult
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Get outbound SMS message delivery reports
-   *     Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public SmsDeliveryResult getOutboundSmsMessageDeliveryReports(
       String bulkId, String messageId, Integer limit) throws ApiException {
@@ -151,11 +147,11 @@ public class SendSmsApi {
   }
 
   /**
-   * Get outbound SMS message delivery reports If you are for any reason unable to receive real time
-   * delivery reports on your endpoint, you can use this API method to learn if and when the message
-   * has been delivered to the recipient. Each request will return a batch of delivery reports -
-   * only once. The following API request will return only new reports that arrived since the last
-   * API request.
+   * Get outbound SMS message delivery reports. If you are for any reason unable to receive real
+   * time delivery reports on your endpoint, you can use this API method to learn if and when the
+   * message has been delivered to the recipient. Each request will return a batch of delivery
+   * reports - only once. The following API request will return only new reports that arrived since
+   * the last API request.
    *
    * @param bulkId ID of bulk which delivery report is requested. (optional)
    * @param messageId ID of SMS which delivery report is requested. (optional)
@@ -163,9 +159,7 @@ public class SendSmsApi {
    * @return ApiResponse&lt;SmsDeliveryResult&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Get outbound SMS message delivery reports
-   *     Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public ApiResponse<SmsDeliveryResult> getOutboundSmsMessageDeliveryReportsWithHttpInfo(
       String bulkId, String messageId, Integer limit) throws ApiException {
@@ -176,7 +170,7 @@ public class SendSmsApi {
   }
 
   /**
-   * Get outbound SMS message delivery reports (asynchronously) If you are for any reason unable to
+   * Get outbound SMS message delivery reports (asynchronously). If you are for any reason unable to
    * receive real time delivery reports on your endpoint, you can use this API method to learn if
    * and when the message has been delivered to the recipient. Each request will return a batch of
    * delivery reports - only once. The following API request will return only new reports that
@@ -188,9 +182,7 @@ public class SendSmsApi {
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Get outbound SMS message delivery reports
-   *     Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public okhttp3.Call getOutboundSmsMessageDeliveryReportsAsync(
       String bulkId,
@@ -206,7 +198,7 @@ public class SendSmsApi {
     return localVarCall;
   }
   /**
-   * Build call for getOutboundSmsMessageLogs
+   * Build call for getOutboundSmsMessageLogs.
    *
    * @param from Sender address. (optional)
    * @param to Destination address. (optional)
@@ -226,8 +218,7 @@ public class SendSmsApi {
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Get outbound SMS message logs Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public okhttp3.Call getOutboundSmsMessageLogsCall(
       String from,
@@ -353,10 +344,10 @@ public class SendSmsApi {
   }
 
   /**
-   * Get outbound SMS message logs You should use this method for displaying logs in the user
+   * Get outbound SMS message logs. You should use this method for displaying logs in the user
    * interface or for some other less frequent usage. See [message delivery
-   * reports](#communication-channels/sms/get-sent-sms-delivery-reports) if your use case is to
-   * verify message delivery.
+   * reports](#channels/sms/get-outbound-sms-message-delivery-reports) if your use case is to verify
+   * message delivery.
    *
    * @param from Sender address. (optional)
    * @param to Destination address. (optional)
@@ -376,8 +367,7 @@ public class SendSmsApi {
    * @return SmsLogsResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Get outbound SMS message logs Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public SmsLogsResponse getOutboundSmsMessageLogs(
       String from,
@@ -398,10 +388,10 @@ public class SendSmsApi {
   }
 
   /**
-   * Get outbound SMS message logs You should use this method for displaying logs in the user
+   * Get outbound SMS message logs. You should use this method for displaying logs in the user
    * interface or for some other less frequent usage. See [message delivery
-   * reports](#communication-channels/sms/get-sent-sms-delivery-reports) if your use case is to
-   * verify message delivery.
+   * reports](#channels/sms/get-outbound-sms-message-delivery-reports) if your use case is to verify
+   * message delivery.
    *
    * @param from Sender address. (optional)
    * @param to Destination address. (optional)
@@ -421,8 +411,7 @@ public class SendSmsApi {
    * @return ApiResponse&lt;SmsLogsResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Get outbound SMS message logs Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public ApiResponse<SmsLogsResponse> getOutboundSmsMessageLogsWithHttpInfo(
       String from,
@@ -454,10 +443,10 @@ public class SendSmsApi {
   }
 
   /**
-   * Get outbound SMS message logs (asynchronously) You should use this method for displaying logs
+   * Get outbound SMS message logs (asynchronously). You should use this method for displaying logs
    * in the user interface or for some other less frequent usage. See [message delivery
-   * reports](#communication-channels/sms/get-sent-sms-delivery-reports) if your use case is to
-   * verify message delivery.
+   * reports](#channels/sms/get-outbound-sms-message-delivery-reports) if your use case is to verify
+   * message delivery.
    *
    * @param from Sender address. (optional)
    * @param to Destination address. (optional)
@@ -477,8 +466,7 @@ public class SendSmsApi {
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Get outbound SMS message logs Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public okhttp3.Call getOutboundSmsMessageLogsAsync(
       String from,
@@ -512,14 +500,13 @@ public class SendSmsApi {
     return localVarCall;
   }
   /**
-   * Build call for previewSmsMessage
+   * Build call for previewSmsMessage.
    *
    * @param smsPreviewRequest (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Preview SMS message Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public okhttp3.Call previewSmsMessageCall(
       SmsPreviewRequest smsPreviewRequest, final ApiCallback _callback) throws ApiException {
@@ -568,15 +555,14 @@ public class SendSmsApi {
   }
 
   /**
-   * Preview SMS message Avoid unpleasant surprises and check how different message configurations
+   * Preview SMS message. Avoid unpleasant surprises and check how different message configurations
    * will affect your message text, number of characters and message parts.
    *
    * @param smsPreviewRequest (optional)
    * @return SmsPreviewResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Preview SMS message Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public SmsPreviewResponse previewSmsMessage(SmsPreviewRequest smsPreviewRequest)
       throws ApiException {
@@ -585,15 +571,14 @@ public class SendSmsApi {
   }
 
   /**
-   * Preview SMS message Avoid unpleasant surprises and check how different message configurations
+   * Preview SMS message. Avoid unpleasant surprises and check how different message configurations
    * will affect your message text, number of characters and message parts.
    *
    * @param smsPreviewRequest (optional)
    * @return ApiResponse&lt;SmsPreviewResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Preview SMS message Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public ApiResponse<SmsPreviewResponse> previewSmsMessageWithHttpInfo(
       SmsPreviewRequest smsPreviewRequest) throws ApiException {
@@ -603,15 +588,14 @@ public class SendSmsApi {
   }
 
   /**
-   * Preview SMS message (asynchronously) Avoid unpleasant surprises and check how different message
-   * configurations will affect your message text, number of characters and message parts.
+   * Preview SMS message (asynchronously). Avoid unpleasant surprises and check how different
+   * message configurations will affect your message text, number of characters and message parts.
    *
    * @param smsPreviewRequest (optional)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Preview SMS message Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public okhttp3.Call previewSmsMessageAsync(
       SmsPreviewRequest smsPreviewRequest, final ApiCallback<SmsPreviewResponse> _callback)
@@ -623,14 +607,13 @@ public class SendSmsApi {
     return localVarCall;
   }
   /**
-   * Build call for sendBinarySmsMessage
+   * Build call for sendBinarySmsMessage.
    *
    * @param smsAdvancedBinaryRequest (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Send binary SMS message Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public okhttp3.Call sendBinarySmsMessageCall(
       SmsAdvancedBinaryRequest smsAdvancedBinaryRequest, final ApiCallback _callback)
@@ -681,15 +664,14 @@ public class SendSmsApi {
   }
 
   /**
-   * Send binary SMS message Send single or multiple binary messages to one or more destination
+   * Send binary SMS message. Send single or multiple binary messages to one or more destination
    * address.
    *
    * @param smsAdvancedBinaryRequest (optional)
    * @return SmsResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Send binary SMS message Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public SmsResponse sendBinarySmsMessage(SmsAdvancedBinaryRequest smsAdvancedBinaryRequest)
       throws ApiException {
@@ -699,15 +681,14 @@ public class SendSmsApi {
   }
 
   /**
-   * Send binary SMS message Send single or multiple binary messages to one or more destination
+   * Send binary SMS message. Send single or multiple binary messages to one or more destination
    * address.
    *
    * @param smsAdvancedBinaryRequest (optional)
    * @return ApiResponse&lt;SmsResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Send binary SMS message Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public ApiResponse<SmsResponse> sendBinarySmsMessageWithHttpInfo(
       SmsAdvancedBinaryRequest smsAdvancedBinaryRequest) throws ApiException {
@@ -718,15 +699,14 @@ public class SendSmsApi {
   }
 
   /**
-   * Send binary SMS message (asynchronously) Send single or multiple binary messages to one or more
-   * destination address.
+   * Send binary SMS message (asynchronously). Send single or multiple binary messages to one or
+   * more destination address.
    *
    * @param smsAdvancedBinaryRequest (optional)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Send binary SMS message Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public okhttp3.Call sendBinarySmsMessageAsync(
       SmsAdvancedBinaryRequest smsAdvancedBinaryRequest, final ApiCallback<SmsResponse> _callback)
@@ -739,14 +719,13 @@ public class SendSmsApi {
     return localVarCall;
   }
   /**
-   * Build call for sendSmsMessage
+   * Build call for sendSmsMessage.
    *
    * @param smsAdvancedTextualRequest (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Send SMS message Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public okhttp3.Call sendSmsMessageCall(
       SmsAdvancedTextualRequest smsAdvancedTextualRequest, final ApiCallback _callback)
@@ -797,17 +776,16 @@ public class SendSmsApi {
   }
 
   /**
-   * Send SMS message 99% of all use cases can be achieved by using this API method. Everything from
-   * sending a simple single message to a single destination, up to batch sending of personalized
-   * messages to the thousands of recipients with a single API request. Language, transliteration,
-   * scheduling and every advanced feature you can think of is supported.
+   * Send SMS message. 99% of all use cases can be achieved by using this API method. Everything
+   * from sending a simple single message to a single destination, up to batch sending of
+   * personalized messages to the thousands of recipients with a single API request. Language,
+   * transliteration, scheduling and every advanced feature you can think of is supported.
    *
    * @param smsAdvancedTextualRequest (optional)
    * @return SmsResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Send SMS message Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public SmsResponse sendSmsMessage(SmsAdvancedTextualRequest smsAdvancedTextualRequest)
       throws ApiException {
@@ -816,17 +794,16 @@ public class SendSmsApi {
   }
 
   /**
-   * Send SMS message 99% of all use cases can be achieved by using this API method. Everything from
-   * sending a simple single message to a single destination, up to batch sending of personalized
-   * messages to the thousands of recipients with a single API request. Language, transliteration,
-   * scheduling and every advanced feature you can think of is supported.
+   * Send SMS message. 99% of all use cases can be achieved by using this API method. Everything
+   * from sending a simple single message to a single destination, up to batch sending of
+   * personalized messages to the thousands of recipients with a single API request. Language,
+   * transliteration, scheduling and every advanced feature you can think of is supported.
    *
    * @param smsAdvancedTextualRequest (optional)
    * @return ApiResponse&lt;SmsResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Send SMS message Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public ApiResponse<SmsResponse> sendSmsMessageWithHttpInfo(
       SmsAdvancedTextualRequest smsAdvancedTextualRequest) throws ApiException {
@@ -836,7 +813,7 @@ public class SendSmsApi {
   }
 
   /**
-   * Send SMS message (asynchronously) 99% of all use cases can be achieved by using this API
+   * Send SMS message (asynchronously). 99% of all use cases can be achieved by using this API
    * method. Everything from sending a simple single message to a single destination, up to batch
    * sending of personalized messages to the thousands of recipients with a single API request.
    * Language, transliteration, scheduling and every advanced feature you can think of is supported.
@@ -845,8 +822,7 @@ public class SendSmsApi {
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Learn more about SMS channel and use cases
-   * @see <a href="https://www.infobip.com/docs/sms">Send SMS message Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
    */
   public okhttp3.Call sendSmsMessageAsync(
       SmsAdvancedTextualRequest smsAdvancedTextualRequest, final ApiCallback<SmsResponse> _callback)

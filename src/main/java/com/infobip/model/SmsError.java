@@ -21,16 +21,6 @@ public class SmsError {
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
   private String description;
 
-  public static final String SERIALIZED_NAME_PERMANENT = "permanent";
-
-  @SerializedName(SERIALIZED_NAME_PERMANENT)
-  private Boolean permanent;
-
-  public static final String SERIALIZED_NAME_ID = "id";
-
-  @SerializedName(SERIALIZED_NAME_ID)
-  private Integer id;
-
   public static final String SERIALIZED_NAME_GROUP_ID = "groupId";
 
   @SerializedName(SERIALIZED_NAME_GROUP_ID)
@@ -41,10 +31,20 @@ public class SmsError {
   @SerializedName(SERIALIZED_NAME_GROUP_NAME)
   private String groupName;
 
+  public static final String SERIALIZED_NAME_ID = "id";
+
+  @SerializedName(SERIALIZED_NAME_ID)
+  private Integer id;
+
   public static final String SERIALIZED_NAME_NAME = "name";
 
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
+
+  public static final String SERIALIZED_NAME_PERMANENT = "permanent";
+
+  @SerializedName(SERIALIZED_NAME_PERMANENT)
+  private Boolean permanent;
 
   /**
    * Human-readable description of the error..
@@ -53,24 +53,6 @@ public class SmsError {
    */
   public String getDescription() {
     return description;
-  }
-
-  /**
-   * Tells if the error is permanent.
-   *
-   * @return permanent
-   */
-  public Boolean getPermanent() {
-    return permanent;
-  }
-
-  /**
-   * Error ID.
-   *
-   * @return id
-   */
-  public Integer getId() {
-    return id;
   }
 
   /**
@@ -92,12 +74,30 @@ public class SmsError {
   }
 
   /**
+   * Error ID.
+   *
+   * @return id
+   */
+  public Integer getId() {
+    return id;
+  }
+
+  /**
    * Error name.
    *
    * @return name
    */
   public String getName() {
     return name;
+  }
+
+  /**
+   * Tells if the error is permanent.
+   *
+   * @return permanent
+   */
+  public Boolean getPermanent() {
+    return permanent;
   }
 
   @Override
@@ -110,16 +110,16 @@ public class SmsError {
     }
     SmsError smsError = (SmsError) o;
     return Objects.equals(this.description, smsError.description)
-        && Objects.equals(this.permanent, smsError.permanent)
-        && Objects.equals(this.id, smsError.id)
         && Objects.equals(this.groupId, smsError.groupId)
         && Objects.equals(this.groupName, smsError.groupName)
-        && Objects.equals(this.name, smsError.name);
+        && Objects.equals(this.id, smsError.id)
+        && Objects.equals(this.name, smsError.name)
+        && Objects.equals(this.permanent, smsError.permanent);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(description, permanent, id, groupId, groupName, name);
+    return Objects.hash(description, groupId, groupName, id, name, permanent);
   }
 
   @Override
@@ -127,11 +127,11 @@ public class SmsError {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsError {\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    permanent: ").append(toIndentedString(permanent)).append("\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    groupId: ").append(toIndentedString(groupId)).append("\n");
     sb.append("    groupName: ").append(toIndentedString(groupName)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    permanent: ").append(toIndentedString(permanent)).append("\n");
     sb.append("}");
     return sb.toString();
   }

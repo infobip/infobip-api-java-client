@@ -15,8 +15,8 @@ import com.google.gson.annotations.SerializedName;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
-/** SmsLog */
-public class SmsLog {
+/** EmailReport */
+public class EmailReport {
   public static final String SERIALIZED_NAME_BULK_ID = "bulkId";
 
   @SerializedName(SERIALIZED_NAME_BULK_ID)
@@ -30,17 +30,17 @@ public class SmsLog {
   public static final String SERIALIZED_NAME_ERROR = "error";
 
   @SerializedName(SERIALIZED_NAME_ERROR)
-  private SmsError error = null;
-
-  public static final String SERIALIZED_NAME_FROM = "from";
-
-  @SerializedName(SERIALIZED_NAME_FROM)
-  private String from;
+  private EmailError error = null;
 
   public static final String SERIALIZED_NAME_MCC_MNC = "mccMnc";
 
   @SerializedName(SERIALIZED_NAME_MCC_MNC)
   private String mccMnc;
+
+  public static final String SERIALIZED_NAME_MESSAGE_COUNT = "messageCount";
+
+  @SerializedName(SERIALIZED_NAME_MESSAGE_COUNT)
+  private Integer messageCount;
 
   public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
 
@@ -50,35 +50,31 @@ public class SmsLog {
   public static final String SERIALIZED_NAME_PRICE = "price";
 
   @SerializedName(SERIALIZED_NAME_PRICE)
-  private SmsPrice price = null;
+  private EmailPrice price = null;
 
   public static final String SERIALIZED_NAME_SENT_AT = "sentAt";
 
   @SerializedName(SERIALIZED_NAME_SENT_AT)
   private OffsetDateTime sentAt;
 
-  public static final String SERIALIZED_NAME_SMS_COUNT = "smsCount";
-
-  @SerializedName(SERIALIZED_NAME_SMS_COUNT)
-  private Integer smsCount;
-
   public static final String SERIALIZED_NAME_STATUS = "status";
 
   @SerializedName(SERIALIZED_NAME_STATUS)
-  private SmsStatus status = null;
-
-  public static final String SERIALIZED_NAME_TEXT = "text";
-
-  @SerializedName(SERIALIZED_NAME_TEXT)
-  private String text;
+  private EmailStatus status = null;
 
   public static final String SERIALIZED_NAME_TO = "to";
 
   @SerializedName(SERIALIZED_NAME_TO)
   private String to;
 
+  public EmailReport bulkId(String bulkId) {
+
+    this.bulkId = bulkId;
+    return this;
+  }
+
   /**
-   * The ID that uniquely identifies the request.
+   * Get bulkId
    *
    * @return bulkId
    */
@@ -86,10 +82,18 @@ public class SmsLog {
     return bulkId;
   }
 
+  public void setBulkId(String bulkId) {
+    this.bulkId = bulkId;
+  }
+
+  public EmailReport doneAt(OffsetDateTime doneAt) {
+
+    this.doneAt = doneAt;
+    return this;
+  }
+
   /**
-   * Tells when the SMS was finished processing by Infobip (i.e. delivered to the destination,
-   * delivered to the destination network, etc.). Has the following format:
-   * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+   * Get doneAt
    *
    * @return doneAt
    */
@@ -97,7 +101,11 @@ public class SmsLog {
     return doneAt;
   }
 
-  public SmsLog error(SmsError error) {
+  public void setDoneAt(OffsetDateTime doneAt) {
+    this.doneAt = doneAt;
+  }
+
+  public EmailReport error(EmailError error) {
 
     this.error = error;
     return this;
@@ -108,25 +116,22 @@ public class SmsLog {
    *
    * @return error
    */
-  public SmsError getError() {
+  public EmailError getError() {
     return error;
   }
 
-  public void setError(SmsError error) {
+  public void setError(EmailError error) {
     this.error = error;
   }
 
-  /**
-   * Sender ID that can be alphanumeric or numeric.
-   *
-   * @return from
-   */
-  public String getFrom() {
-    return from;
+  public EmailReport mccMnc(String mccMnc) {
+
+    this.mccMnc = mccMnc;
+    return this;
   }
 
   /**
-   * Mobile country and network codes.
+   * Get mccMnc
    *
    * @return mccMnc
    */
@@ -134,8 +139,37 @@ public class SmsLog {
     return mccMnc;
   }
 
+  public void setMccMnc(String mccMnc) {
+    this.mccMnc = mccMnc;
+  }
+
+  public EmailReport messageCount(Integer messageCount) {
+
+    this.messageCount = messageCount;
+    return this;
+  }
+
   /**
-   * The ID that uniquely identifies the message sent.
+   * Get messageCount
+   *
+   * @return messageCount
+   */
+  public Integer getMessageCount() {
+    return messageCount;
+  }
+
+  public void setMessageCount(Integer messageCount) {
+    this.messageCount = messageCount;
+  }
+
+  public EmailReport messageId(String messageId) {
+
+    this.messageId = messageId;
+    return this;
+  }
+
+  /**
+   * Get messageId
    *
    * @return messageId
    */
@@ -143,7 +177,11 @@ public class SmsLog {
     return messageId;
   }
 
-  public SmsLog price(SmsPrice price) {
+  public void setMessageId(String messageId) {
+    this.messageId = messageId;
+  }
+
+  public EmailReport price(EmailPrice price) {
 
     this.price = price;
     return this;
@@ -154,17 +192,22 @@ public class SmsLog {
    *
    * @return price
    */
-  public SmsPrice getPrice() {
+  public EmailPrice getPrice() {
     return price;
   }
 
-  public void setPrice(SmsPrice price) {
+  public void setPrice(EmailPrice price) {
     this.price = price;
   }
 
+  public EmailReport sentAt(OffsetDateTime sentAt) {
+
+    this.sentAt = sentAt;
+    return this;
+  }
+
   /**
-   * Tells when the SMS was sent. Has the following format:
-   * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+   * Get sentAt
    *
    * @return sentAt
    */
@@ -172,16 +215,11 @@ public class SmsLog {
     return sentAt;
   }
 
-  /**
-   * The number of sent message segments.
-   *
-   * @return smsCount
-   */
-  public Integer getSmsCount() {
-    return smsCount;
+  public void setSentAt(OffsetDateTime sentAt) {
+    this.sentAt = sentAt;
   }
 
-  public SmsLog status(SmsStatus status) {
+  public EmailReport status(EmailStatus status) {
 
     this.status = status;
     return this;
@@ -192,30 +230,31 @@ public class SmsLog {
    *
    * @return status
    */
-  public SmsStatus getStatus() {
+  public EmailStatus getStatus() {
     return status;
   }
 
-  public void setStatus(SmsStatus status) {
+  public void setStatus(EmailStatus status) {
     this.status = status;
   }
 
-  /**
-   * Text of the message that was sent.
-   *
-   * @return text
-   */
-  public String getText() {
-    return text;
+  public EmailReport to(String to) {
+
+    this.to = to;
+    return this;
   }
 
   /**
-   * The message destination address.
+   * Get to
    *
    * @return to
    */
   public String getTo() {
     return to;
+  }
+
+  public void setTo(String to) {
+    this.to = to;
   }
 
   @Override
@@ -226,42 +265,38 @@ public class SmsLog {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SmsLog smsLog = (SmsLog) o;
-    return Objects.equals(this.bulkId, smsLog.bulkId)
-        && Objects.equals(this.doneAt, smsLog.doneAt)
-        && Objects.equals(this.error, smsLog.error)
-        && Objects.equals(this.from, smsLog.from)
-        && Objects.equals(this.mccMnc, smsLog.mccMnc)
-        && Objects.equals(this.messageId, smsLog.messageId)
-        && Objects.equals(this.price, smsLog.price)
-        && Objects.equals(this.sentAt, smsLog.sentAt)
-        && Objects.equals(this.smsCount, smsLog.smsCount)
-        && Objects.equals(this.status, smsLog.status)
-        && Objects.equals(this.text, smsLog.text)
-        && Objects.equals(this.to, smsLog.to);
+    EmailReport emailReport = (EmailReport) o;
+    return Objects.equals(this.bulkId, emailReport.bulkId)
+        && Objects.equals(this.doneAt, emailReport.doneAt)
+        && Objects.equals(this.error, emailReport.error)
+        && Objects.equals(this.mccMnc, emailReport.mccMnc)
+        && Objects.equals(this.messageCount, emailReport.messageCount)
+        && Objects.equals(this.messageId, emailReport.messageId)
+        && Objects.equals(this.price, emailReport.price)
+        && Objects.equals(this.sentAt, emailReport.sentAt)
+        && Objects.equals(this.status, emailReport.status)
+        && Objects.equals(this.to, emailReport.to);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        bulkId, doneAt, error, from, mccMnc, messageId, price, sentAt, smsCount, status, text, to);
+        bulkId, doneAt, error, mccMnc, messageCount, messageId, price, sentAt, status, to);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SmsLog {\n");
+    sb.append("class EmailReport {\n");
     sb.append("    bulkId: ").append(toIndentedString(bulkId)).append("\n");
     sb.append("    doneAt: ").append(toIndentedString(doneAt)).append("\n");
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
-    sb.append("    from: ").append(toIndentedString(from)).append("\n");
     sb.append("    mccMnc: ").append(toIndentedString(mccMnc)).append("\n");
+    sb.append("    messageCount: ").append(toIndentedString(messageCount)).append("\n");
     sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    sentAt: ").append(toIndentedString(sentAt)).append("\n");
-    sb.append("    smsCount: ").append(toIndentedString(smsCount)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
-    sb.append("    text: ").append(toIndentedString(text)).append("\n");
     sb.append("    to: ").append(toIndentedString(to)).append("\n");
     sb.append("}");
     return sb.toString();

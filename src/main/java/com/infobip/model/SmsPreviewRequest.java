@@ -21,15 +21,15 @@ public class SmsPreviewRequest {
   @SerializedName(SERIALIZED_NAME_LANGUAGE_CODE)
   private String languageCode;
 
-  public static final String SERIALIZED_NAME_TRANSLITERATION = "transliteration";
-
-  @SerializedName(SERIALIZED_NAME_TRANSLITERATION)
-  private String transliteration;
-
   public static final String SERIALIZED_NAME_TEXT = "text";
 
   @SerializedName(SERIALIZED_NAME_TEXT)
   private String text;
+
+  public static final String SERIALIZED_NAME_TRANSLITERATION = "transliteration";
+
+  @SerializedName(SERIALIZED_NAME_TRANSLITERATION)
+  private String transliteration;
 
   public SmsPreviewRequest languageCode(String languageCode) {
 
@@ -50,6 +50,25 @@ public class SmsPreviewRequest {
 
   public void setLanguageCode(String languageCode) {
     this.languageCode = languageCode;
+  }
+
+  public SmsPreviewRequest text(String text) {
+
+    this.text = text;
+    return this;
+  }
+
+  /**
+   * Message text to preview.
+   *
+   * @return text
+   */
+  public String getText() {
+    return text;
+  }
+
+  public void setText(String text) {
+    this.text = text;
   }
 
   public SmsPreviewRequest transliteration(String transliteration) {
@@ -73,25 +92,6 @@ public class SmsPreviewRequest {
     this.transliteration = transliteration;
   }
 
-  public SmsPreviewRequest text(String text) {
-
-    this.text = text;
-    return this;
-  }
-
-  /**
-   * Message text to preview.
-   *
-   * @return text
-   */
-  public String getText() {
-    return text;
-  }
-
-  public void setText(String text) {
-    this.text = text;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -102,13 +102,13 @@ public class SmsPreviewRequest {
     }
     SmsPreviewRequest smsPreviewRequest = (SmsPreviewRequest) o;
     return Objects.equals(this.languageCode, smsPreviewRequest.languageCode)
-        && Objects.equals(this.transliteration, smsPreviewRequest.transliteration)
-        && Objects.equals(this.text, smsPreviewRequest.text);
+        && Objects.equals(this.text, smsPreviewRequest.text)
+        && Objects.equals(this.transliteration, smsPreviewRequest.transliteration);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(languageCode, transliteration, text);
+    return Objects.hash(languageCode, text, transliteration);
   }
 
   @Override
@@ -116,8 +116,8 @@ public class SmsPreviewRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsPreviewRequest {\n");
     sb.append("    languageCode: ").append(toIndentedString(languageCode)).append("\n");
-    sb.append("    transliteration: ").append(toIndentedString(transliteration)).append("\n");
     sb.append("    text: ").append(toIndentedString(text)).append("\n");
+    sb.append("    transliteration: ").append(toIndentedString(transliteration)).append("\n");
     sb.append("}");
     return sb.toString();
   }

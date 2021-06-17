@@ -16,82 +16,64 @@ import java.util.Objects;
 
 /** TfaUpdateMessageRequest */
 public class TfaUpdateMessageRequest {
-  public static final String SERIALIZED_NAME_PIN_LENGTH = "pinLength";
+  public static final String SERIALIZED_NAME_LANGUAGE = "language";
 
-  @SerializedName(SERIALIZED_NAME_PIN_LENGTH)
-  private Integer pinLength;
-
-  public static final String SERIALIZED_NAME_SENDER_ID = "senderId";
-
-  @SerializedName(SERIALIZED_NAME_SENDER_ID)
-  private String senderId;
+  @SerializedName(SERIALIZED_NAME_LANGUAGE)
+  private TfaLanguage language = null;
 
   public static final String SERIALIZED_NAME_MESSAGE_TEXT = "messageText";
 
   @SerializedName(SERIALIZED_NAME_MESSAGE_TEXT)
   private String messageText;
 
+  public static final String SERIALIZED_NAME_PIN_LENGTH = "pinLength";
+
+  @SerializedName(SERIALIZED_NAME_PIN_LENGTH)
+  private Integer pinLength;
+
   public static final String SERIALIZED_NAME_PIN_TYPE = "pinType";
 
   @SerializedName(SERIALIZED_NAME_PIN_TYPE)
   private TfaPinType pinType = null;
-
-  public static final String SERIALIZED_NAME_LANGUAGE = "language";
-
-  @SerializedName(SERIALIZED_NAME_LANGUAGE)
-  private TfaLanguage language = null;
-
-  public static final String SERIALIZED_NAME_SPEECH_RATE = "speechRate";
-
-  @SerializedName(SERIALIZED_NAME_SPEECH_RATE)
-  private Double speechRate;
-
-  public static final String SERIALIZED_NAME_REPEAT_D_T_M_F = "repeatDTMF";
-
-  @SerializedName(SERIALIZED_NAME_REPEAT_D_T_M_F)
-  private String repeatDTMF;
 
   public static final String SERIALIZED_NAME_REGIONAL = "regional";
 
   @SerializedName(SERIALIZED_NAME_REGIONAL)
   private TfaRegionalOptions regional = null;
 
-  public TfaUpdateMessageRequest pinLength(Integer pinLength) {
+  public static final String SERIALIZED_NAME_REPEAT_D_T_M_F = "repeatDTMF";
 
-    this.pinLength = pinLength;
+  @SerializedName(SERIALIZED_NAME_REPEAT_D_T_M_F)
+  private String repeatDTMF;
+
+  public static final String SERIALIZED_NAME_SENDER_ID = "senderId";
+
+  @SerializedName(SERIALIZED_NAME_SENDER_ID)
+  private String senderId;
+
+  public static final String SERIALIZED_NAME_SPEECH_RATE = "speechRate";
+
+  @SerializedName(SERIALIZED_NAME_SPEECH_RATE)
+  private Double speechRate;
+
+  public TfaUpdateMessageRequest language(TfaLanguage language) {
+
+    this.language = language;
     return this;
   }
 
   /**
-   * PIN code length.
+   * Language code of language in which message text is written. It is used for reading the message
+   * when it is sent via voice. If no language is set, message will be read in &#x60;English&#x60;.
    *
-   * @return pinLength
+   * @return language
    */
-  public Integer getPinLength() {
-    return pinLength;
+  public TfaLanguage getLanguage() {
+    return language;
   }
 
-  public void setPinLength(Integer pinLength) {
-    this.pinLength = pinLength;
-  }
-
-  public TfaUpdateMessageRequest senderId(String senderId) {
-
-    this.senderId = senderId;
-    return this;
-  }
-
-  /**
-   * The name that will appear as the sender of the 2FA message (Example: CompanyName).
-   *
-   * @return senderId
-   */
-  public String getSenderId() {
-    return senderId;
-  }
-
-  public void setSenderId(String senderId) {
-    this.senderId = senderId;
+  public void setLanguage(TfaLanguage language) {
+    this.language = language;
   }
 
   public TfaUpdateMessageRequest messageText(String messageText) {
@@ -111,6 +93,25 @@ public class TfaUpdateMessageRequest {
 
   public void setMessageText(String messageText) {
     this.messageText = messageText;
+  }
+
+  public TfaUpdateMessageRequest pinLength(Integer pinLength) {
+
+    this.pinLength = pinLength;
+    return this;
+  }
+
+  /**
+   * PIN code length.
+   *
+   * @return pinLength
+   */
+  public Integer getPinLength() {
+    return pinLength;
+  }
+
+  public void setPinLength(Integer pinLength) {
+    this.pinLength = pinLength;
   }
 
   public TfaUpdateMessageRequest pinType(TfaPinType pinType) {
@@ -133,24 +134,62 @@ public class TfaUpdateMessageRequest {
     this.pinType = pinType;
   }
 
-  public TfaUpdateMessageRequest language(TfaLanguage language) {
+  public TfaUpdateMessageRequest regional(TfaRegionalOptions regional) {
 
-    this.language = language;
+    this.regional = regional;
     return this;
   }
 
   /**
-   * Language code of language in which message text is written. It is used for reading the message
-   * when it is sent via voice. If no language is set, message will be read in &#x60;English&#x60;.
+   * Region specific parameters, often specified by local laws. Use this if country or region that
+   * you are sending SMS to requires some extra parameters.
    *
-   * @return language
+   * @return regional
    */
-  public TfaLanguage getLanguage() {
-    return language;
+  public TfaRegionalOptions getRegional() {
+    return regional;
   }
 
-  public void setLanguage(TfaLanguage language) {
-    this.language = language;
+  public void setRegional(TfaRegionalOptions regional) {
+    this.regional = regional;
+  }
+
+  public TfaUpdateMessageRequest repeatDTMF(String repeatDTMF) {
+
+    this.repeatDTMF = repeatDTMF;
+    return this;
+  }
+
+  /**
+   * In case PIN message is sent by Voice, DTMF code will enable replaying the message.
+   *
+   * @return repeatDTMF
+   */
+  public String getRepeatDTMF() {
+    return repeatDTMF;
+  }
+
+  public void setRepeatDTMF(String repeatDTMF) {
+    this.repeatDTMF = repeatDTMF;
+  }
+
+  public TfaUpdateMessageRequest senderId(String senderId) {
+
+    this.senderId = senderId;
+    return this;
+  }
+
+  /**
+   * The name that will appear as the sender of the 2FA message (Example: CompanyName).
+   *
+   * @return senderId
+   */
+  public String getSenderId() {
+    return senderId;
+  }
+
+  public void setSenderId(String senderId) {
+    this.senderId = senderId;
   }
 
   public TfaUpdateMessageRequest speechRate(Double speechRate) {
@@ -173,45 +212,6 @@ public class TfaUpdateMessageRequest {
     this.speechRate = speechRate;
   }
 
-  public TfaUpdateMessageRequest repeatDTMF(String repeatDTMF) {
-
-    this.repeatDTMF = repeatDTMF;
-    return this;
-  }
-
-  /**
-   * In case PIN message is sent by Voice, DTMF code will enable replaying the message.
-   *
-   * @return repeatDTMF
-   */
-  public String getRepeatDTMF() {
-    return repeatDTMF;
-  }
-
-  public void setRepeatDTMF(String repeatDTMF) {
-    this.repeatDTMF = repeatDTMF;
-  }
-
-  public TfaUpdateMessageRequest regional(TfaRegionalOptions regional) {
-
-    this.regional = regional;
-    return this;
-  }
-
-  /**
-   * Region specific parameters, often specified by local laws. Use this if country or region that
-   * you are sending SMS to requires some extra parameters.
-   *
-   * @return regional
-   */
-  public TfaRegionalOptions getRegional() {
-    return regional;
-  }
-
-  public void setRegional(TfaRegionalOptions regional) {
-    this.regional = regional;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -221,34 +221,34 @@ public class TfaUpdateMessageRequest {
       return false;
     }
     TfaUpdateMessageRequest tfaUpdateMessageRequest = (TfaUpdateMessageRequest) o;
-    return Objects.equals(this.pinLength, tfaUpdateMessageRequest.pinLength)
-        && Objects.equals(this.senderId, tfaUpdateMessageRequest.senderId)
+    return Objects.equals(this.language, tfaUpdateMessageRequest.language)
         && Objects.equals(this.messageText, tfaUpdateMessageRequest.messageText)
+        && Objects.equals(this.pinLength, tfaUpdateMessageRequest.pinLength)
         && Objects.equals(this.pinType, tfaUpdateMessageRequest.pinType)
-        && Objects.equals(this.language, tfaUpdateMessageRequest.language)
-        && Objects.equals(this.speechRate, tfaUpdateMessageRequest.speechRate)
+        && Objects.equals(this.regional, tfaUpdateMessageRequest.regional)
         && Objects.equals(this.repeatDTMF, tfaUpdateMessageRequest.repeatDTMF)
-        && Objects.equals(this.regional, tfaUpdateMessageRequest.regional);
+        && Objects.equals(this.senderId, tfaUpdateMessageRequest.senderId)
+        && Objects.equals(this.speechRate, tfaUpdateMessageRequest.speechRate);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        pinLength, senderId, messageText, pinType, language, speechRate, repeatDTMF, regional);
+        language, messageText, pinLength, pinType, regional, repeatDTMF, senderId, speechRate);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TfaUpdateMessageRequest {\n");
-    sb.append("    pinLength: ").append(toIndentedString(pinLength)).append("\n");
-    sb.append("    senderId: ").append(toIndentedString(senderId)).append("\n");
-    sb.append("    messageText: ").append(toIndentedString(messageText)).append("\n");
-    sb.append("    pinType: ").append(toIndentedString(pinType)).append("\n");
     sb.append("    language: ").append(toIndentedString(language)).append("\n");
-    sb.append("    speechRate: ").append(toIndentedString(speechRate)).append("\n");
-    sb.append("    repeatDTMF: ").append(toIndentedString(repeatDTMF)).append("\n");
+    sb.append("    messageText: ").append(toIndentedString(messageText)).append("\n");
+    sb.append("    pinLength: ").append(toIndentedString(pinLength)).append("\n");
+    sb.append("    pinType: ").append(toIndentedString(pinType)).append("\n");
     sb.append("    regional: ").append(toIndentedString(regional)).append("\n");
+    sb.append("    repeatDTMF: ").append(toIndentedString(repeatDTMF)).append("\n");
+    sb.append("    senderId: ").append(toIndentedString(senderId)).append("\n");
+    sb.append("    speechRate: ").append(toIndentedString(speechRate)).append("\n");
     sb.append("}");
     return sb.toString();
   }

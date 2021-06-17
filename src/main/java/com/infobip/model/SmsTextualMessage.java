@@ -19,95 +19,117 @@ import java.util.Objects;
 
 /** SmsTextualMessage */
 public class SmsTextualMessage {
-  public static final String SERIALIZED_NAME_TRANSLITERATION = "transliteration";
+  public static final String SERIALIZED_NAME_CALLBACK_DATA = "callbackData";
 
-  @SerializedName(SERIALIZED_NAME_TRANSLITERATION)
-  private String transliteration;
-
-  public static final String SERIALIZED_NAME_DESTINATIONS = "destinations";
-
-  @SerializedName(SERIALIZED_NAME_DESTINATIONS)
-  private List<SmsDestination> destinations = null;
-
-  public static final String SERIALIZED_NAME_INTERMEDIATE_REPORT = "intermediateReport";
-
-  @SerializedName(SERIALIZED_NAME_INTERMEDIATE_REPORT)
-  private Boolean intermediateReport;
+  @SerializedName(SERIALIZED_NAME_CALLBACK_DATA)
+  private String callbackData;
 
   public static final String SERIALIZED_NAME_DELIVERY_TIME_WINDOW = "deliveryTimeWindow";
 
   @SerializedName(SERIALIZED_NAME_DELIVERY_TIME_WINDOW)
   private SmsDeliveryTimeWindow deliveryTimeWindow = null;
 
-  public static final String SERIALIZED_NAME_REGIONAL = "regional";
+  public static final String SERIALIZED_NAME_DESTINATIONS = "destinations";
 
-  @SerializedName(SERIALIZED_NAME_REGIONAL)
-  private SmsRegionalOptions regional = null;
-
-  public static final String SERIALIZED_NAME_LANGUAGE = "language";
-
-  @SerializedName(SERIALIZED_NAME_LANGUAGE)
-  private SmsLanguage language = null;
-
-  public static final String SERIALIZED_NAME_CALLBACK_DATA = "callbackData";
-
-  @SerializedName(SERIALIZED_NAME_CALLBACK_DATA)
-  private String callbackData;
-
-  public static final String SERIALIZED_NAME_VALIDITY_PERIOD = "validityPeriod";
-
-  @SerializedName(SERIALIZED_NAME_VALIDITY_PERIOD)
-  private Long validityPeriod;
-
-  public static final String SERIALIZED_NAME_NOTIFY_URL = "notifyUrl";
-
-  @SerializedName(SERIALIZED_NAME_NOTIFY_URL)
-  private String notifyUrl;
+  @SerializedName(SERIALIZED_NAME_DESTINATIONS)
+  private List<SmsDestination> destinations = null;
 
   public static final String SERIALIZED_NAME_FLASH = "flash";
 
   @SerializedName(SERIALIZED_NAME_FLASH)
   private Boolean flash;
 
-  public static final String SERIALIZED_NAME_SEND_AT = "sendAt";
+  public static final String SERIALIZED_NAME_FROM = "from";
 
-  @SerializedName(SERIALIZED_NAME_SEND_AT)
-  private OffsetDateTime sendAt;
+  @SerializedName(SERIALIZED_NAME_FROM)
+  private String from;
+
+  public static final String SERIALIZED_NAME_INTERMEDIATE_REPORT = "intermediateReport";
+
+  @SerializedName(SERIALIZED_NAME_INTERMEDIATE_REPORT)
+  private Boolean intermediateReport;
+
+  public static final String SERIALIZED_NAME_LANGUAGE = "language";
+
+  @SerializedName(SERIALIZED_NAME_LANGUAGE)
+  private SmsLanguage language = null;
 
   public static final String SERIALIZED_NAME_NOTIFY_CONTENT_TYPE = "notifyContentType";
 
   @SerializedName(SERIALIZED_NAME_NOTIFY_CONTENT_TYPE)
   private String notifyContentType;
 
-  public static final String SERIALIZED_NAME_FROM = "from";
+  public static final String SERIALIZED_NAME_NOTIFY_URL = "notifyUrl";
 
-  @SerializedName(SERIALIZED_NAME_FROM)
-  private String from;
+  @SerializedName(SERIALIZED_NAME_NOTIFY_URL)
+  private String notifyUrl;
+
+  public static final String SERIALIZED_NAME_REGIONAL = "regional";
+
+  @SerializedName(SERIALIZED_NAME_REGIONAL)
+  private SmsRegionalOptions regional = null;
+
+  public static final String SERIALIZED_NAME_SEND_AT = "sendAt";
+
+  @SerializedName(SERIALIZED_NAME_SEND_AT)
+  private OffsetDateTime sendAt;
 
   public static final String SERIALIZED_NAME_TEXT = "text";
 
   @SerializedName(SERIALIZED_NAME_TEXT)
   private String text;
 
-  public SmsTextualMessage transliteration(String transliteration) {
+  public static final String SERIALIZED_NAME_TRANSLITERATION = "transliteration";
 
-    this.transliteration = transliteration;
+  @SerializedName(SERIALIZED_NAME_TRANSLITERATION)
+  private String transliteration;
+
+  public static final String SERIALIZED_NAME_VALIDITY_PERIOD = "validityPeriod";
+
+  @SerializedName(SERIALIZED_NAME_VALIDITY_PERIOD)
+  private Long validityPeriod;
+
+  public SmsTextualMessage callbackData(String callbackData) {
+
+    this.callbackData = callbackData;
     return this;
   }
 
   /**
-   * Conversion of a message text from one script to another. Possible values: &#x60;TURKISH&#x60;,
-   * &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;, &#x60;SERBIAN_CYRILLIC&#x60;,
-   * &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60; and &#x60;NON_UNICODE&#x60;.
+   * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 200
+   * characters.
    *
-   * @return transliteration
+   * @return callbackData
    */
-  public String getTransliteration() {
-    return transliteration;
+  public String getCallbackData() {
+    return callbackData;
   }
 
-  public void setTransliteration(String transliteration) {
-    this.transliteration = transliteration;
+  public void setCallbackData(String callbackData) {
+    this.callbackData = callbackData;
+  }
+
+  public SmsTextualMessage deliveryTimeWindow(SmsDeliveryTimeWindow deliveryTimeWindow) {
+
+    this.deliveryTimeWindow = deliveryTimeWindow;
+    return this;
+  }
+
+  /**
+   * Scheduling object that allows setting up detailed time windows in which the message can be
+   * sent. Consists of &#x60;from&#x60;, &#x60;to&#x60; and &#x60;days&#x60; properties.
+   * &#x60;Days&#x60; property is mandatory. &#x60;From&#x60; and &#x60;to&#x60; properties should
+   * be either both included, to allow finer time window granulation or both omitted, to include
+   * whole days in the delivery time window.
+   *
+   * @return deliveryTimeWindow
+   */
+  public SmsDeliveryTimeWindow getDeliveryTimeWindow() {
+    return deliveryTimeWindow;
+  }
+
+  public void setDeliveryTimeWindow(SmsDeliveryTimeWindow deliveryTimeWindow) {
+    this.deliveryTimeWindow = deliveryTimeWindow;
   }
 
   public SmsTextualMessage destinations(List<SmsDestination> destinations) {
@@ -137,148 +159,6 @@ public class SmsTextualMessage {
     this.destinations = destinations;
   }
 
-  public SmsTextualMessage intermediateReport(Boolean intermediateReport) {
-
-    this.intermediateReport = intermediateReport;
-    return this;
-  }
-
-  /**
-   * The real-time Intermediate delivery report that will be sent on your callback server. Can be
-   * &#x60;true&#x60; or &#x60;false&#x60;.
-   *
-   * @return intermediateReport
-   */
-  public Boolean getIntermediateReport() {
-    return intermediateReport;
-  }
-
-  public void setIntermediateReport(Boolean intermediateReport) {
-    this.intermediateReport = intermediateReport;
-  }
-
-  public SmsTextualMessage deliveryTimeWindow(SmsDeliveryTimeWindow deliveryTimeWindow) {
-
-    this.deliveryTimeWindow = deliveryTimeWindow;
-    return this;
-  }
-
-  /**
-   * Scheduling object that allows setting up detailed time windows in which the message can be
-   * sent. Consists of &#x60;from&#x60;, &#x60;to&#x60; and &#x60;days&#x60; properties.
-   * &#x60;Days&#x60; property is mandatory. &#x60;From&#x60; and &#x60;to&#x60; properties should
-   * be either both included, to allow finer time window granulation or both omitted, to include
-   * whole days in the delivery time window.
-   *
-   * @return deliveryTimeWindow
-   */
-  public SmsDeliveryTimeWindow getDeliveryTimeWindow() {
-    return deliveryTimeWindow;
-  }
-
-  public void setDeliveryTimeWindow(SmsDeliveryTimeWindow deliveryTimeWindow) {
-    this.deliveryTimeWindow = deliveryTimeWindow;
-  }
-
-  public SmsTextualMessage regional(SmsRegionalOptions regional) {
-
-    this.regional = regional;
-    return this;
-  }
-
-  /**
-   * Region specific parameters, often specified by local laws. Use this if country or region that
-   * you are sending SMS to requires some extra parameters.
-   *
-   * @return regional
-   */
-  public SmsRegionalOptions getRegional() {
-    return regional;
-  }
-
-  public void setRegional(SmsRegionalOptions regional) {
-    this.regional = regional;
-  }
-
-  public SmsTextualMessage language(SmsLanguage language) {
-
-    this.language = language;
-    return this;
-  }
-
-  /**
-   * Get language
-   *
-   * @return language
-   */
-  public SmsLanguage getLanguage() {
-    return language;
-  }
-
-  public void setLanguage(SmsLanguage language) {
-    this.language = language;
-  }
-
-  public SmsTextualMessage callbackData(String callbackData) {
-
-    this.callbackData = callbackData;
-    return this;
-  }
-
-  /**
-   * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 200
-   * characters.
-   *
-   * @return callbackData
-   */
-  public String getCallbackData() {
-    return callbackData;
-  }
-
-  public void setCallbackData(String callbackData) {
-    this.callbackData = callbackData;
-  }
-
-  public SmsTextualMessage validityPeriod(Long validityPeriod) {
-
-    this.validityPeriod = validityPeriod;
-    return this;
-  }
-
-  /**
-   * The message validity period in minutes. When the period expires, it will not be allowed for the
-   * message to be sent. Validity period longer than 48h is not supported (in this case, it will be
-   * automatically set to 48h).
-   *
-   * @return validityPeriod
-   */
-  public Long getValidityPeriod() {
-    return validityPeriod;
-  }
-
-  public void setValidityPeriod(Long validityPeriod) {
-    this.validityPeriod = validityPeriod;
-  }
-
-  public SmsTextualMessage notifyUrl(String notifyUrl) {
-
-    this.notifyUrl = notifyUrl;
-    return this;
-  }
-
-  /**
-   * The URL on your call back server on which the Delivery report will be sent.
-   *
-   * @return notifyUrl
-   */
-  public String getNotifyUrl() {
-    return notifyUrl;
-  }
-
-  public void setNotifyUrl(String notifyUrl) {
-    this.notifyUrl = notifyUrl;
-  }
-
   public SmsTextualMessage flash(Boolean flash) {
 
     this.flash = flash;
@@ -297,47 +177,6 @@ public class SmsTextualMessage {
 
   public void setFlash(Boolean flash) {
     this.flash = flash;
-  }
-
-  public SmsTextualMessage sendAt(OffsetDateTime sendAt) {
-
-    this.sendAt = sendAt;
-    return this;
-  }
-
-  /**
-   * Date and time when the message is to be sent. Used for scheduled SMS (SMS not sent immediately,
-   * but at the scheduled time). Has the following format:
-   * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
-   *
-   * @return sendAt
-   */
-  public OffsetDateTime getSendAt() {
-    return sendAt;
-  }
-
-  public void setSendAt(OffsetDateTime sendAt) {
-    this.sendAt = sendAt;
-  }
-
-  public SmsTextualMessage notifyContentType(String notifyContentType) {
-
-    this.notifyContentType = notifyContentType;
-    return this;
-  }
-
-  /**
-   * Preferred Delivery report content type. Can be &#x60;application/json&#x60; or
-   * &#x60;application/xml&#x60;.
-   *
-   * @return notifyContentType
-   */
-  public String getNotifyContentType() {
-    return notifyContentType;
-  }
-
-  public void setNotifyContentType(String notifyContentType) {
-    this.notifyContentType = notifyContentType;
   }
 
   public SmsTextualMessage from(String from) {
@@ -361,6 +200,125 @@ public class SmsTextualMessage {
     this.from = from;
   }
 
+  public SmsTextualMessage intermediateReport(Boolean intermediateReport) {
+
+    this.intermediateReport = intermediateReport;
+    return this;
+  }
+
+  /**
+   * The real-time Intermediate delivery report that will be sent on your callback server. Can be
+   * &#x60;true&#x60; or &#x60;false&#x60;.
+   *
+   * @return intermediateReport
+   */
+  public Boolean getIntermediateReport() {
+    return intermediateReport;
+  }
+
+  public void setIntermediateReport(Boolean intermediateReport) {
+    this.intermediateReport = intermediateReport;
+  }
+
+  public SmsTextualMessage language(SmsLanguage language) {
+
+    this.language = language;
+    return this;
+  }
+
+  /**
+   * Get language
+   *
+   * @return language
+   */
+  public SmsLanguage getLanguage() {
+    return language;
+  }
+
+  public void setLanguage(SmsLanguage language) {
+    this.language = language;
+  }
+
+  public SmsTextualMessage notifyContentType(String notifyContentType) {
+
+    this.notifyContentType = notifyContentType;
+    return this;
+  }
+
+  /**
+   * Preferred Delivery report content type. Can be &#x60;application/json&#x60; or
+   * &#x60;application/xml&#x60;.
+   *
+   * @return notifyContentType
+   */
+  public String getNotifyContentType() {
+    return notifyContentType;
+  }
+
+  public void setNotifyContentType(String notifyContentType) {
+    this.notifyContentType = notifyContentType;
+  }
+
+  public SmsTextualMessage notifyUrl(String notifyUrl) {
+
+    this.notifyUrl = notifyUrl;
+    return this;
+  }
+
+  /**
+   * The URL on your call back server on which the Delivery report will be sent.
+   *
+   * @return notifyUrl
+   */
+  public String getNotifyUrl() {
+    return notifyUrl;
+  }
+
+  public void setNotifyUrl(String notifyUrl) {
+    this.notifyUrl = notifyUrl;
+  }
+
+  public SmsTextualMessage regional(SmsRegionalOptions regional) {
+
+    this.regional = regional;
+    return this;
+  }
+
+  /**
+   * Region specific parameters, often specified by local laws. Use this if country or region that
+   * you are sending SMS to requires some extra parameters.
+   *
+   * @return regional
+   */
+  public SmsRegionalOptions getRegional() {
+    return regional;
+  }
+
+  public void setRegional(SmsRegionalOptions regional) {
+    this.regional = regional;
+  }
+
+  public SmsTextualMessage sendAt(OffsetDateTime sendAt) {
+
+    this.sendAt = sendAt;
+    return this;
+  }
+
+  /**
+   * Date and time when the message is to be sent. Used for scheduled SMS (SMS not sent immediately,
+   * but at the scheduled time). Has the following format:
+   * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+   *
+   * @return sendAt
+   */
+  public OffsetDateTime getSendAt() {
+    return sendAt;
+  }
+
+  public void setSendAt(OffsetDateTime sendAt) {
+    this.sendAt = sendAt;
+  }
+
   public SmsTextualMessage text(String text) {
 
     this.text = text;
@@ -380,6 +338,48 @@ public class SmsTextualMessage {
     this.text = text;
   }
 
+  public SmsTextualMessage transliteration(String transliteration) {
+
+    this.transliteration = transliteration;
+    return this;
+  }
+
+  /**
+   * Conversion of a message text from one script to another. Possible values: &#x60;TURKISH&#x60;,
+   * &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;, &#x60;SERBIAN_CYRILLIC&#x60;,
+   * &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60; and &#x60;NON_UNICODE&#x60;.
+   *
+   * @return transliteration
+   */
+  public String getTransliteration() {
+    return transliteration;
+  }
+
+  public void setTransliteration(String transliteration) {
+    this.transliteration = transliteration;
+  }
+
+  public SmsTextualMessage validityPeriod(Long validityPeriod) {
+
+    this.validityPeriod = validityPeriod;
+    return this;
+  }
+
+  /**
+   * The message validity period in minutes. When the period expires, it will not be allowed for the
+   * message to be sent. Validity period longer than 48h is not supported (in this case, it will be
+   * automatically set to 48h).
+   *
+   * @return validityPeriod
+   */
+  public Long getValidityPeriod() {
+    return validityPeriod;
+  }
+
+  public void setValidityPeriod(Long validityPeriod) {
+    this.validityPeriod = validityPeriod;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -389,59 +389,59 @@ public class SmsTextualMessage {
       return false;
     }
     SmsTextualMessage smsTextualMessage = (SmsTextualMessage) o;
-    return Objects.equals(this.transliteration, smsTextualMessage.transliteration)
-        && Objects.equals(this.destinations, smsTextualMessage.destinations)
-        && Objects.equals(this.intermediateReport, smsTextualMessage.intermediateReport)
+    return Objects.equals(this.callbackData, smsTextualMessage.callbackData)
         && Objects.equals(this.deliveryTimeWindow, smsTextualMessage.deliveryTimeWindow)
-        && Objects.equals(this.regional, smsTextualMessage.regional)
-        && Objects.equals(this.language, smsTextualMessage.language)
-        && Objects.equals(this.callbackData, smsTextualMessage.callbackData)
-        && Objects.equals(this.validityPeriod, smsTextualMessage.validityPeriod)
-        && Objects.equals(this.notifyUrl, smsTextualMessage.notifyUrl)
+        && Objects.equals(this.destinations, smsTextualMessage.destinations)
         && Objects.equals(this.flash, smsTextualMessage.flash)
-        && Objects.equals(this.sendAt, smsTextualMessage.sendAt)
-        && Objects.equals(this.notifyContentType, smsTextualMessage.notifyContentType)
         && Objects.equals(this.from, smsTextualMessage.from)
-        && Objects.equals(this.text, smsTextualMessage.text);
+        && Objects.equals(this.intermediateReport, smsTextualMessage.intermediateReport)
+        && Objects.equals(this.language, smsTextualMessage.language)
+        && Objects.equals(this.notifyContentType, smsTextualMessage.notifyContentType)
+        && Objects.equals(this.notifyUrl, smsTextualMessage.notifyUrl)
+        && Objects.equals(this.regional, smsTextualMessage.regional)
+        && Objects.equals(this.sendAt, smsTextualMessage.sendAt)
+        && Objects.equals(this.text, smsTextualMessage.text)
+        && Objects.equals(this.transliteration, smsTextualMessage.transliteration)
+        && Objects.equals(this.validityPeriod, smsTextualMessage.validityPeriod);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        transliteration,
-        destinations,
-        intermediateReport,
-        deliveryTimeWindow,
-        regional,
-        language,
         callbackData,
-        validityPeriod,
-        notifyUrl,
+        deliveryTimeWindow,
+        destinations,
         flash,
-        sendAt,
-        notifyContentType,
         from,
-        text);
+        intermediateReport,
+        language,
+        notifyContentType,
+        notifyUrl,
+        regional,
+        sendAt,
+        text,
+        transliteration,
+        validityPeriod);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsTextualMessage {\n");
-    sb.append("    transliteration: ").append(toIndentedString(transliteration)).append("\n");
-    sb.append("    destinations: ").append(toIndentedString(destinations)).append("\n");
-    sb.append("    intermediateReport: ").append(toIndentedString(intermediateReport)).append("\n");
-    sb.append("    deliveryTimeWindow: ").append(toIndentedString(deliveryTimeWindow)).append("\n");
-    sb.append("    regional: ").append(toIndentedString(regional)).append("\n");
-    sb.append("    language: ").append(toIndentedString(language)).append("\n");
     sb.append("    callbackData: ").append(toIndentedString(callbackData)).append("\n");
-    sb.append("    validityPeriod: ").append(toIndentedString(validityPeriod)).append("\n");
-    sb.append("    notifyUrl: ").append(toIndentedString(notifyUrl)).append("\n");
+    sb.append("    deliveryTimeWindow: ").append(toIndentedString(deliveryTimeWindow)).append("\n");
+    sb.append("    destinations: ").append(toIndentedString(destinations)).append("\n");
     sb.append("    flash: ").append(toIndentedString(flash)).append("\n");
-    sb.append("    sendAt: ").append(toIndentedString(sendAt)).append("\n");
-    sb.append("    notifyContentType: ").append(toIndentedString(notifyContentType)).append("\n");
     sb.append("    from: ").append(toIndentedString(from)).append("\n");
+    sb.append("    intermediateReport: ").append(toIndentedString(intermediateReport)).append("\n");
+    sb.append("    language: ").append(toIndentedString(language)).append("\n");
+    sb.append("    notifyContentType: ").append(toIndentedString(notifyContentType)).append("\n");
+    sb.append("    notifyUrl: ").append(toIndentedString(notifyUrl)).append("\n");
+    sb.append("    regional: ").append(toIndentedString(regional)).append("\n");
+    sb.append("    sendAt: ").append(toIndentedString(sendAt)).append("\n");
     sb.append("    text: ").append(toIndentedString(text)).append("\n");
+    sb.append("    transliteration: ").append(toIndentedString(transliteration)).append("\n");
+    sb.append("    validityPeriod: ").append(toIndentedString(validityPeriod)).append("\n");
     sb.append("}");
     return sb.toString();
   }

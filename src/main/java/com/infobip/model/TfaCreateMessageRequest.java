@@ -16,6 +16,26 @@ import java.util.Objects;
 
 /** TfaCreateMessageRequest */
 public class TfaCreateMessageRequest {
+  public static final String SERIALIZED_NAME_LANGUAGE = "language";
+
+  @SerializedName(SERIALIZED_NAME_LANGUAGE)
+  private TfaLanguage language = null;
+
+  public static final String SERIALIZED_NAME_MESSAGE_TEXT = "messageText";
+
+  @SerializedName(SERIALIZED_NAME_MESSAGE_TEXT)
+  private String messageText;
+
+  public static final String SERIALIZED_NAME_PIN_LENGTH = "pinLength";
+
+  @SerializedName(SERIALIZED_NAME_PIN_LENGTH)
+  private Integer pinLength;
+
+  public static final String SERIALIZED_NAME_PIN_TYPE = "pinType";
+
+  @SerializedName(SERIALIZED_NAME_PIN_TYPE)
+  private TfaPinType pinType = null;
+
   public static final String SERIALIZED_NAME_REGIONAL = "regional";
 
   @SerializedName(SERIALIZED_NAME_REGIONAL)
@@ -26,35 +46,94 @@ public class TfaCreateMessageRequest {
   @SerializedName(SERIALIZED_NAME_REPEAT_D_T_M_F)
   private String repeatDTMF;
 
-  public static final String SERIALIZED_NAME_SPEECH_RATE = "speechRate";
-
-  @SerializedName(SERIALIZED_NAME_SPEECH_RATE)
-  private Double speechRate;
-
-  public static final String SERIALIZED_NAME_MESSAGE_TEXT = "messageText";
-
-  @SerializedName(SERIALIZED_NAME_MESSAGE_TEXT)
-  private String messageText;
-
-  public static final String SERIALIZED_NAME_LANGUAGE = "language";
-
-  @SerializedName(SERIALIZED_NAME_LANGUAGE)
-  private TfaLanguage language = null;
-
-  public static final String SERIALIZED_NAME_PIN_LENGTH = "pinLength";
-
-  @SerializedName(SERIALIZED_NAME_PIN_LENGTH)
-  private Integer pinLength;
-
   public static final String SERIALIZED_NAME_SENDER_ID = "senderId";
 
   @SerializedName(SERIALIZED_NAME_SENDER_ID)
   private String senderId;
 
-  public static final String SERIALIZED_NAME_PIN_TYPE = "pinType";
+  public static final String SERIALIZED_NAME_SPEECH_RATE = "speechRate";
 
-  @SerializedName(SERIALIZED_NAME_PIN_TYPE)
-  private TfaPinType pinType = null;
+  @SerializedName(SERIALIZED_NAME_SPEECH_RATE)
+  private Double speechRate;
+
+  public TfaCreateMessageRequest language(TfaLanguage language) {
+
+    this.language = language;
+    return this;
+  }
+
+  /**
+   * Language code of language in which message text is written. It is used for reading the message
+   * when it is sent via voice. If no language is set, message will be read in &#x60;English&#x60;.
+   *
+   * @return language
+   */
+  public TfaLanguage getLanguage() {
+    return language;
+  }
+
+  public void setLanguage(TfaLanguage language) {
+    this.language = language;
+  }
+
+  public TfaCreateMessageRequest messageText(String messageText) {
+
+    this.messageText = messageText;
+    return this;
+  }
+
+  /**
+   * Text of a message that will be sent. It can contain placeholders that will be replaced upon
+   * sending. Placeholder format is &#x60;{{placeholderName}}&#x60;. Message text must contain
+   * &#x60;{{pin}}&#x60; placeholder.
+   *
+   * @return messageText
+   */
+  public String getMessageText() {
+    return messageText;
+  }
+
+  public void setMessageText(String messageText) {
+    this.messageText = messageText;
+  }
+
+  public TfaCreateMessageRequest pinLength(Integer pinLength) {
+
+    this.pinLength = pinLength;
+    return this;
+  }
+
+  /**
+   * PIN code length.
+   *
+   * @return pinLength
+   */
+  public Integer getPinLength() {
+    return pinLength;
+  }
+
+  public void setPinLength(Integer pinLength) {
+    this.pinLength = pinLength;
+  }
+
+  public TfaCreateMessageRequest pinType(TfaPinType pinType) {
+
+    this.pinType = pinType;
+    return this;
+  }
+
+  /**
+   * Type of PIN code that will be generated and sent as part of 2FA message.
+   *
+   * @return pinType
+   */
+  public TfaPinType getPinType() {
+    return pinType;
+  }
+
+  public void setPinType(TfaPinType pinType) {
+    this.pinType = pinType;
+  }
 
   public TfaCreateMessageRequest regional(TfaRegionalOptions regional) {
 
@@ -95,6 +174,25 @@ public class TfaCreateMessageRequest {
     this.repeatDTMF = repeatDTMF;
   }
 
+  public TfaCreateMessageRequest senderId(String senderId) {
+
+    this.senderId = senderId;
+    return this;
+  }
+
+  /**
+   * The name that will appear as the sender of the 2FA message (Example: CompanyName).
+   *
+   * @return senderId
+   */
+  public String getSenderId() {
+    return senderId;
+  }
+
+  public void setSenderId(String senderId) {
+    this.senderId = senderId;
+  }
+
   public TfaCreateMessageRequest speechRate(Double speechRate) {
 
     this.speechRate = speechRate;
@@ -115,104 +213,6 @@ public class TfaCreateMessageRequest {
     this.speechRate = speechRate;
   }
 
-  public TfaCreateMessageRequest messageText(String messageText) {
-
-    this.messageText = messageText;
-    return this;
-  }
-
-  /**
-   * Text of a message that will be sent. It can contain placeholders that will be replaced upon
-   * sending. Placeholder format is &#x60;{{placeholderName}}&#x60;. Message text must contain
-   * &#x60;{{pin}}&#x60; placeholder.
-   *
-   * @return messageText
-   */
-  public String getMessageText() {
-    return messageText;
-  }
-
-  public void setMessageText(String messageText) {
-    this.messageText = messageText;
-  }
-
-  public TfaCreateMessageRequest language(TfaLanguage language) {
-
-    this.language = language;
-    return this;
-  }
-
-  /**
-   * Language code of language in which message text is written. It is used for reading the message
-   * when it is sent via voice. If no language is set, message will be read in &#x60;English&#x60;.
-   *
-   * @return language
-   */
-  public TfaLanguage getLanguage() {
-    return language;
-  }
-
-  public void setLanguage(TfaLanguage language) {
-    this.language = language;
-  }
-
-  public TfaCreateMessageRequest pinLength(Integer pinLength) {
-
-    this.pinLength = pinLength;
-    return this;
-  }
-
-  /**
-   * PIN code length.
-   *
-   * @return pinLength
-   */
-  public Integer getPinLength() {
-    return pinLength;
-  }
-
-  public void setPinLength(Integer pinLength) {
-    this.pinLength = pinLength;
-  }
-
-  public TfaCreateMessageRequest senderId(String senderId) {
-
-    this.senderId = senderId;
-    return this;
-  }
-
-  /**
-   * The name that will appear as the sender of the 2FA message (Example: CompanyName).
-   *
-   * @return senderId
-   */
-  public String getSenderId() {
-    return senderId;
-  }
-
-  public void setSenderId(String senderId) {
-    this.senderId = senderId;
-  }
-
-  public TfaCreateMessageRequest pinType(TfaPinType pinType) {
-
-    this.pinType = pinType;
-    return this;
-  }
-
-  /**
-   * Type of PIN code that will be generated and sent as part of 2FA message.
-   *
-   * @return pinType
-   */
-  public TfaPinType getPinType() {
-    return pinType;
-  }
-
-  public void setPinType(TfaPinType pinType) {
-    this.pinType = pinType;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -222,34 +222,34 @@ public class TfaCreateMessageRequest {
       return false;
     }
     TfaCreateMessageRequest tfaCreateMessageRequest = (TfaCreateMessageRequest) o;
-    return Objects.equals(this.regional, tfaCreateMessageRequest.regional)
-        && Objects.equals(this.repeatDTMF, tfaCreateMessageRequest.repeatDTMF)
-        && Objects.equals(this.speechRate, tfaCreateMessageRequest.speechRate)
+    return Objects.equals(this.language, tfaCreateMessageRequest.language)
         && Objects.equals(this.messageText, tfaCreateMessageRequest.messageText)
-        && Objects.equals(this.language, tfaCreateMessageRequest.language)
         && Objects.equals(this.pinLength, tfaCreateMessageRequest.pinLength)
+        && Objects.equals(this.pinType, tfaCreateMessageRequest.pinType)
+        && Objects.equals(this.regional, tfaCreateMessageRequest.regional)
+        && Objects.equals(this.repeatDTMF, tfaCreateMessageRequest.repeatDTMF)
         && Objects.equals(this.senderId, tfaCreateMessageRequest.senderId)
-        && Objects.equals(this.pinType, tfaCreateMessageRequest.pinType);
+        && Objects.equals(this.speechRate, tfaCreateMessageRequest.speechRate);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        regional, repeatDTMF, speechRate, messageText, language, pinLength, senderId, pinType);
+        language, messageText, pinLength, pinType, regional, repeatDTMF, senderId, speechRate);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TfaCreateMessageRequest {\n");
+    sb.append("    language: ").append(toIndentedString(language)).append("\n");
+    sb.append("    messageText: ").append(toIndentedString(messageText)).append("\n");
+    sb.append("    pinLength: ").append(toIndentedString(pinLength)).append("\n");
+    sb.append("    pinType: ").append(toIndentedString(pinType)).append("\n");
     sb.append("    regional: ").append(toIndentedString(regional)).append("\n");
     sb.append("    repeatDTMF: ").append(toIndentedString(repeatDTMF)).append("\n");
-    sb.append("    speechRate: ").append(toIndentedString(speechRate)).append("\n");
-    sb.append("    messageText: ").append(toIndentedString(messageText)).append("\n");
-    sb.append("    language: ").append(toIndentedString(language)).append("\n");
-    sb.append("    pinLength: ").append(toIndentedString(pinLength)).append("\n");
     sb.append("    senderId: ").append(toIndentedString(senderId)).append("\n");
-    sb.append("    pinType: ").append(toIndentedString(pinType)).append("\n");
+    sb.append("    speechRate: ").append(toIndentedString(speechRate)).append("\n");
     sb.append("}");
     return sb.toString();
   }

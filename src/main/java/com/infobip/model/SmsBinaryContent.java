@@ -16,40 +16,39 @@ import java.util.Objects;
 
 /** SmsBinaryContent */
 public class SmsBinaryContent {
-  public static final String SERIALIZED_NAME_HEX = "hex";
+  public static final String SERIALIZED_NAME_DATA_CODING = "dataCoding";
 
-  @SerializedName(SERIALIZED_NAME_HEX)
-  private String hex;
+  @SerializedName(SERIALIZED_NAME_DATA_CODING)
+  private Integer dataCoding;
 
   public static final String SERIALIZED_NAME_ESM_CLASS = "esmClass";
 
   @SerializedName(SERIALIZED_NAME_ESM_CLASS)
   private Integer esmClass;
 
-  public static final String SERIALIZED_NAME_DATA_CODING = "dataCoding";
+  public static final String SERIALIZED_NAME_HEX = "hex";
 
-  @SerializedName(SERIALIZED_NAME_DATA_CODING)
-  private Integer dataCoding;
+  @SerializedName(SERIALIZED_NAME_HEX)
+  private String hex;
 
-  public SmsBinaryContent hex(String hex) {
+  public SmsBinaryContent dataCoding(Integer dataCoding) {
 
-    this.hex = hex;
+    this.dataCoding = dataCoding;
     return this;
   }
 
   /**
-   * Hexadecimal string. This is the representation of your binary data. Two hex digits represent
-   * one byte. They should be separated by the space character (Example: &#x60;0f c2 4a bf 34 13
-   * ba&#x60;).
+   * Binary content data coding. The default value is (&#x60;0&#x60;) for GSM7. Example:
+   * (&#x60;8&#x60;) for Unicode data.
    *
-   * @return hex
+   * @return dataCoding
    */
-  public String getHex() {
-    return hex;
+  public Integer getDataCoding() {
+    return dataCoding;
   }
 
-  public void setHex(String hex) {
-    this.hex = hex;
+  public void setDataCoding(Integer dataCoding) {
+    this.dataCoding = dataCoding;
   }
 
   public SmsBinaryContent esmClass(Integer esmClass) {
@@ -72,24 +71,25 @@ public class SmsBinaryContent {
     this.esmClass = esmClass;
   }
 
-  public SmsBinaryContent dataCoding(Integer dataCoding) {
+  public SmsBinaryContent hex(String hex) {
 
-    this.dataCoding = dataCoding;
+    this.hex = hex;
     return this;
   }
 
   /**
-   * Binary content data coding. The default value is (&#x60;0&#x60;) for GSM7. Example:
-   * (&#x60;8&#x60;) for Unicode data.
+   * Hexadecimal string. This is the representation of your binary data. Two hex digits represent
+   * one byte. They should be separated by the space character (Example: &#x60;0f c2 4a bf 34 13
+   * ba&#x60;).
    *
-   * @return dataCoding
+   * @return hex
    */
-  public Integer getDataCoding() {
-    return dataCoding;
+  public String getHex() {
+    return hex;
   }
 
-  public void setDataCoding(Integer dataCoding) {
-    this.dataCoding = dataCoding;
+  public void setHex(String hex) {
+    this.hex = hex;
   }
 
   @Override
@@ -101,23 +101,23 @@ public class SmsBinaryContent {
       return false;
     }
     SmsBinaryContent smsBinaryContent = (SmsBinaryContent) o;
-    return Objects.equals(this.hex, smsBinaryContent.hex)
+    return Objects.equals(this.dataCoding, smsBinaryContent.dataCoding)
         && Objects.equals(this.esmClass, smsBinaryContent.esmClass)
-        && Objects.equals(this.dataCoding, smsBinaryContent.dataCoding);
+        && Objects.equals(this.hex, smsBinaryContent.hex);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(hex, esmClass, dataCoding);
+    return Objects.hash(dataCoding, esmClass, hex);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsBinaryContent {\n");
-    sb.append("    hex: ").append(toIndentedString(hex)).append("\n");
-    sb.append("    esmClass: ").append(toIndentedString(esmClass)).append("\n");
     sb.append("    dataCoding: ").append(toIndentedString(dataCoding)).append("\n");
+    sb.append("    esmClass: ").append(toIndentedString(esmClass)).append("\n");
+    sb.append("    hex: ").append(toIndentedString(hex)).append("\n");
     sb.append("}");
     return sb.toString();
   }

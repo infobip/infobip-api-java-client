@@ -15,38 +15,14 @@ import com.google.gson.annotations.SerializedName;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
-/** SmsBulkResponse */
-public class SmsBulkResponse {
-  public static final String SERIALIZED_NAME_BULK_ID = "bulkId";
-
-  @SerializedName(SERIALIZED_NAME_BULK_ID)
-  private String bulkId;
-
+/** EmailBulkRescheduleRequest */
+public class EmailBulkRescheduleRequest {
   public static final String SERIALIZED_NAME_SEND_AT = "sendAt";
 
   @SerializedName(SERIALIZED_NAME_SEND_AT)
   private OffsetDateTime sendAt;
 
-  public SmsBulkResponse bulkId(String bulkId) {
-
-    this.bulkId = bulkId;
-    return this;
-  }
-
-  /**
-   * Get bulkId
-   *
-   * @return bulkId
-   */
-  public String getBulkId() {
-    return bulkId;
-  }
-
-  public void setBulkId(String bulkId) {
-    this.bulkId = bulkId;
-  }
-
-  public SmsBulkResponse sendAt(OffsetDateTime sendAt) {
+  public EmailBulkRescheduleRequest sendAt(OffsetDateTime sendAt) {
 
     this.sendAt = sendAt;
     return this;
@@ -73,21 +49,19 @@ public class SmsBulkResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SmsBulkResponse smsBulkResponse = (SmsBulkResponse) o;
-    return Objects.equals(this.bulkId, smsBulkResponse.bulkId)
-        && Objects.equals(this.sendAt, smsBulkResponse.sendAt);
+    EmailBulkRescheduleRequest emailBulkRescheduleRequest = (EmailBulkRescheduleRequest) o;
+    return Objects.equals(this.sendAt, emailBulkRescheduleRequest.sendAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bulkId, sendAt);
+    return Objects.hash(sendAt);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SmsBulkResponse {\n");
-    sb.append("    bulkId: ").append(toIndentedString(bulkId)).append("\n");
+    sb.append("class EmailBulkRescheduleRequest {\n");
     sb.append("    sendAt: ").append(toIndentedString(sendAt)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -16,38 +16,38 @@ import java.util.Objects;
 
 /** TfaApplicationRequest */
 public class TfaApplicationRequest {
-  public static final String SERIALIZED_NAME_NAME = "name";
+  public static final String SERIALIZED_NAME_CONFIGURATION = "configuration";
 
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
+  @SerializedName(SERIALIZED_NAME_CONFIGURATION)
+  private TfaApplicationConfiguration _configuration = null;
 
   public static final String SERIALIZED_NAME_ENABLED = "enabled";
 
   @SerializedName(SERIALIZED_NAME_ENABLED)
   private Boolean enabled;
 
-  public static final String SERIALIZED_NAME_CONFIGURATION = "configuration";
+  public static final String SERIALIZED_NAME_NAME = "name";
 
-  @SerializedName(SERIALIZED_NAME_CONFIGURATION)
-  private TfaApplicationConfiguration _configuration = null;
+  @SerializedName(SERIALIZED_NAME_NAME)
+  private String name;
 
-  public TfaApplicationRequest name(String name) {
+  public TfaApplicationRequest _configuration(TfaApplicationConfiguration _configuration) {
 
-    this.name = name;
+    this._configuration = _configuration;
     return this;
   }
 
   /**
-   * 2FA application name.
+   * Created 2FA application configuration.
    *
-   * @return name
+   * @return _configuration
    */
-  public String getName() {
-    return name;
+  public TfaApplicationConfiguration getConfiguration() {
+    return _configuration;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setConfiguration(TfaApplicationConfiguration _configuration) {
+    this._configuration = _configuration;
   }
 
   public TfaApplicationRequest enabled(Boolean enabled) {
@@ -69,23 +69,23 @@ public class TfaApplicationRequest {
     this.enabled = enabled;
   }
 
-  public TfaApplicationRequest _configuration(TfaApplicationConfiguration _configuration) {
+  public TfaApplicationRequest name(String name) {
 
-    this._configuration = _configuration;
+    this.name = name;
     return this;
   }
 
   /**
-   * Created 2FA application configuration.
+   * 2FA application name.
    *
-   * @return _configuration
+   * @return name
    */
-  public TfaApplicationConfiguration getConfiguration() {
-    return _configuration;
+  public String getName() {
+    return name;
   }
 
-  public void setConfiguration(TfaApplicationConfiguration _configuration) {
-    this._configuration = _configuration;
+  public void setName(String name) {
+    this.name = name;
   }
 
   @Override
@@ -97,23 +97,23 @@ public class TfaApplicationRequest {
       return false;
     }
     TfaApplicationRequest tfaApplicationRequest = (TfaApplicationRequest) o;
-    return Objects.equals(this.name, tfaApplicationRequest.name)
+    return Objects.equals(this._configuration, tfaApplicationRequest._configuration)
         && Objects.equals(this.enabled, tfaApplicationRequest.enabled)
-        && Objects.equals(this._configuration, tfaApplicationRequest._configuration);
+        && Objects.equals(this.name, tfaApplicationRequest.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, enabled, _configuration);
+    return Objects.hash(_configuration, enabled, name);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TfaApplicationRequest {\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    enabled: ").append(toIndentedString(enabled)).append("\n");
     sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
+    sb.append("    enabled: ").append(toIndentedString(enabled)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

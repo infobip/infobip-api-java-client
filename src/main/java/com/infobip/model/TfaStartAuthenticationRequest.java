@@ -18,6 +18,21 @@ import java.util.Objects;
 
 /** TfaStartAuthenticationRequest */
 public class TfaStartAuthenticationRequest {
+  public static final String SERIALIZED_NAME_APPLICATION_ID = "applicationId";
+
+  @SerializedName(SERIALIZED_NAME_APPLICATION_ID)
+  private String applicationId;
+
+  public static final String SERIALIZED_NAME_FROM = "from";
+
+  @SerializedName(SERIALIZED_NAME_FROM)
+  private String from;
+
+  public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
+
+  @SerializedName(SERIALIZED_NAME_MESSAGE_ID)
+  private String messageId;
+
   public static final String SERIALIZED_NAME_PLACEHOLDERS = "placeholders";
 
   @SerializedName(SERIALIZED_NAME_PLACEHOLDERS)
@@ -28,20 +43,64 @@ public class TfaStartAuthenticationRequest {
   @SerializedName(SERIALIZED_NAME_TO)
   private String to;
 
-  public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
+  public TfaStartAuthenticationRequest applicationId(String applicationId) {
 
-  @SerializedName(SERIALIZED_NAME_MESSAGE_ID)
-  private String messageId;
+    this.applicationId = applicationId;
+    return this;
+  }
 
-  public static final String SERIALIZED_NAME_APPLICATION_ID = "applicationId";
+  /**
+   * 2FA application ID.
+   *
+   * @return applicationId
+   */
+  public String getApplicationId() {
+    return applicationId;
+  }
 
-  @SerializedName(SERIALIZED_NAME_APPLICATION_ID)
-  private String applicationId;
+  public void setApplicationId(String applicationId) {
+    this.applicationId = applicationId;
+  }
 
-  public static final String SERIALIZED_NAME_FROM = "from";
+  public TfaStartAuthenticationRequest from(String from) {
 
-  @SerializedName(SERIALIZED_NAME_FROM)
-  private String from;
+    this.from = from;
+    return this;
+  }
+
+  /**
+   * Use this parameter if you wish to override the sender ID from the
+   * [created](#channels/sms/create-2fa-message-template) message template parameter
+   * &#x60;senderId&#x60;.
+   *
+   * @return from
+   */
+  public String getFrom() {
+    return from;
+  }
+
+  public void setFrom(String from) {
+    this.from = from;
+  }
+
+  public TfaStartAuthenticationRequest messageId(String messageId) {
+
+    this.messageId = messageId;
+    return this;
+  }
+
+  /**
+   * Message template ID that will be sent to phone number.
+   *
+   * @return messageId
+   */
+  public String getMessageId() {
+    return messageId;
+  }
+
+  public void setMessageId(String messageId) {
+    this.messageId = messageId;
+  }
 
   public TfaStartAuthenticationRequest placeholders(Map<String, String> placeholders) {
 
@@ -91,65 +150,6 @@ public class TfaStartAuthenticationRequest {
     this.to = to;
   }
 
-  public TfaStartAuthenticationRequest messageId(String messageId) {
-
-    this.messageId = messageId;
-    return this;
-  }
-
-  /**
-   * Message template ID that will be sent to phone number.
-   *
-   * @return messageId
-   */
-  public String getMessageId() {
-    return messageId;
-  }
-
-  public void setMessageId(String messageId) {
-    this.messageId = messageId;
-  }
-
-  public TfaStartAuthenticationRequest applicationId(String applicationId) {
-
-    this.applicationId = applicationId;
-    return this;
-  }
-
-  /**
-   * 2FA application ID.
-   *
-   * @return applicationId
-   */
-  public String getApplicationId() {
-    return applicationId;
-  }
-
-  public void setApplicationId(String applicationId) {
-    this.applicationId = applicationId;
-  }
-
-  public TfaStartAuthenticationRequest from(String from) {
-
-    this.from = from;
-    return this;
-  }
-
-  /**
-   * Use this parameter if you wish to override the sender ID from the
-   * [created](#channels/sms/create-2fa-message-template) message template parameter
-   * &#x60;senderId&#x60;.
-   *
-   * @return from
-   */
-  public String getFrom() {
-    return from;
-  }
-
-  public void setFrom(String from) {
-    this.from = from;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -159,27 +159,27 @@ public class TfaStartAuthenticationRequest {
       return false;
     }
     TfaStartAuthenticationRequest tfaStartAuthenticationRequest = (TfaStartAuthenticationRequest) o;
-    return Objects.equals(this.placeholders, tfaStartAuthenticationRequest.placeholders)
-        && Objects.equals(this.to, tfaStartAuthenticationRequest.to)
+    return Objects.equals(this.applicationId, tfaStartAuthenticationRequest.applicationId)
+        && Objects.equals(this.from, tfaStartAuthenticationRequest.from)
         && Objects.equals(this.messageId, tfaStartAuthenticationRequest.messageId)
-        && Objects.equals(this.applicationId, tfaStartAuthenticationRequest.applicationId)
-        && Objects.equals(this.from, tfaStartAuthenticationRequest.from);
+        && Objects.equals(this.placeholders, tfaStartAuthenticationRequest.placeholders)
+        && Objects.equals(this.to, tfaStartAuthenticationRequest.to);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(placeholders, to, messageId, applicationId, from);
+    return Objects.hash(applicationId, from, messageId, placeholders, to);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class TfaStartAuthenticationRequest {\n");
-    sb.append("    placeholders: ").append(toIndentedString(placeholders)).append("\n");
-    sb.append("    to: ").append(toIndentedString(to)).append("\n");
-    sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
     sb.append("    applicationId: ").append(toIndentedString(applicationId)).append("\n");
     sb.append("    from: ").append(toIndentedString(from)).append("\n");
+    sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
+    sb.append("    placeholders: ").append(toIndentedString(placeholders)).append("\n");
+    sb.append("    to: ").append(toIndentedString(to)).append("\n");
     sb.append("}");
     return sb.toString();
   }

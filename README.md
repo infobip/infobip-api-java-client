@@ -36,7 +36,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
       <groupId>com.infobip</groupId>
       <artifactId>infobip-api-java-client</artifactId>
-      <version>3.0.1</version>
+      <version>3.1.0</version>
 </dependency>
 ```
 
@@ -181,6 +181,9 @@ Example of webhook implementation with Spring Web framework:
 ```
 #### Two-Factor Authentication (2FA)
 For 2FA quick start guide please check [these examples](two-factor-authentication.md).
+
+#### Email
+For Email quick start guide please check [these examples](email.md).
 
 ## Ask for help
 

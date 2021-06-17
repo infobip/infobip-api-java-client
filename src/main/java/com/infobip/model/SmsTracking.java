@@ -16,10 +16,10 @@ import java.util.Objects;
 
 /** SmsTracking */
 public class SmsTracking {
-  public static final String SERIALIZED_NAME_TYPE = "type";
+  public static final String SERIALIZED_NAME_BASE_URL = "baseUrl";
 
-  @SerializedName(SERIALIZED_NAME_TYPE)
-  private String type;
+  @SerializedName(SERIALIZED_NAME_BASE_URL)
+  private String baseUrl;
 
   public static final String SERIALIZED_NAME_PROCESS_KEY = "processKey";
 
@@ -31,29 +31,29 @@ public class SmsTracking {
   @SerializedName(SERIALIZED_NAME_TRACK)
   private String track;
 
-  public static final String SERIALIZED_NAME_BASE_URL = "baseUrl";
+  public static final String SERIALIZED_NAME_TYPE = "type";
 
-  @SerializedName(SERIALIZED_NAME_BASE_URL)
-  private String baseUrl;
+  @SerializedName(SERIALIZED_NAME_TYPE)
+  private String type;
 
-  public SmsTracking type(String type) {
+  public SmsTracking baseUrl(String baseUrl) {
 
-    this.type = type;
+    this.baseUrl = baseUrl;
     return this;
   }
 
   /**
-   * User-defined type of the Conversion tracking process or flow type or message type, etc.
-   * Example: &#x60;ONE_TIME_PIN or SOCIAL_INVITES&#x60;.
+   * Custom base url used for shortening links from SMS text in &#x60;URL&#x60; Conversion rate
+   * tracking use-case.
    *
-   * @return type
+   * @return baseUrl
    */
-  public String getType() {
-    return type;
+  public String getBaseUrl() {
+    return baseUrl;
   }
 
-  public void setType(String type) {
-    this.type = type;
+  public void setBaseUrl(String baseUrl) {
+    this.baseUrl = baseUrl;
   }
 
   public SmsTracking processKey(String processKey) {
@@ -95,24 +95,24 @@ public class SmsTracking {
     this.track = track;
   }
 
-  public SmsTracking baseUrl(String baseUrl) {
+  public SmsTracking type(String type) {
 
-    this.baseUrl = baseUrl;
+    this.type = type;
     return this;
   }
 
   /**
-   * Custom base url used for shortening links from SMS text in &#x60;URL&#x60; Conversion rate
-   * tracking use-case.
+   * User-defined type of the Conversion tracking process or flow type or message type, etc.
+   * Example: &#x60;ONE_TIME_PIN or SOCIAL_INVITES&#x60;.
    *
-   * @return baseUrl
+   * @return type
    */
-  public String getBaseUrl() {
-    return baseUrl;
+  public String getType() {
+    return type;
   }
 
-  public void setBaseUrl(String baseUrl) {
-    this.baseUrl = baseUrl;
+  public void setType(String type) {
+    this.type = type;
   }
 
   @Override
@@ -124,25 +124,25 @@ public class SmsTracking {
       return false;
     }
     SmsTracking smsTracking = (SmsTracking) o;
-    return Objects.equals(this.type, smsTracking.type)
+    return Objects.equals(this.baseUrl, smsTracking.baseUrl)
         && Objects.equals(this.processKey, smsTracking.processKey)
         && Objects.equals(this.track, smsTracking.track)
-        && Objects.equals(this.baseUrl, smsTracking.baseUrl);
+        && Objects.equals(this.type, smsTracking.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, processKey, track, baseUrl);
+    return Objects.hash(baseUrl, processKey, track, type);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SmsTracking {\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    baseUrl: ").append(toIndentedString(baseUrl)).append("\n");
     sb.append("    processKey: ").append(toIndentedString(processKey)).append("\n");
     sb.append("    track: ").append(toIndentedString(track)).append("\n");
-    sb.append("    baseUrl: ").append(toIndentedString(baseUrl)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }

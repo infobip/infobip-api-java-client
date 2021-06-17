@@ -14,38 +14,14 @@ package com.infobip.model;
 import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
-/** SmsBulkStatusResponse */
-public class SmsBulkStatusResponse {
-  public static final String SERIALIZED_NAME_BULK_ID = "bulkId";
-
-  @SerializedName(SERIALIZED_NAME_BULK_ID)
-  private String bulkId;
-
+/** EmailBulkUpdateStatusRequest */
+public class EmailBulkUpdateStatusRequest {
   public static final String SERIALIZED_NAME_STATUS = "status";
 
   @SerializedName(SERIALIZED_NAME_STATUS)
-  private SmsBulkStatus status = null;
+  private EmailBulkStatus status = null;
 
-  public SmsBulkStatusResponse bulkId(String bulkId) {
-
-    this.bulkId = bulkId;
-    return this;
-  }
-
-  /**
-   * Get bulkId
-   *
-   * @return bulkId
-   */
-  public String getBulkId() {
-    return bulkId;
-  }
-
-  public void setBulkId(String bulkId) {
-    this.bulkId = bulkId;
-  }
-
-  public SmsBulkStatusResponse status(SmsBulkStatus status) {
+  public EmailBulkUpdateStatusRequest status(EmailBulkStatus status) {
 
     this.status = status;
     return this;
@@ -56,11 +32,11 @@ public class SmsBulkStatusResponse {
    *
    * @return status
    */
-  public SmsBulkStatus getStatus() {
+  public EmailBulkStatus getStatus() {
     return status;
   }
 
-  public void setStatus(SmsBulkStatus status) {
+  public void setStatus(EmailBulkStatus status) {
     this.status = status;
   }
 
@@ -72,21 +48,19 @@ public class SmsBulkStatusResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SmsBulkStatusResponse smsBulkStatusResponse = (SmsBulkStatusResponse) o;
-    return Objects.equals(this.bulkId, smsBulkStatusResponse.bulkId)
-        && Objects.equals(this.status, smsBulkStatusResponse.status);
+    EmailBulkUpdateStatusRequest emailBulkUpdateStatusRequest = (EmailBulkUpdateStatusRequest) o;
+    return Objects.equals(this.status, emailBulkUpdateStatusRequest.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bulkId, status);
+    return Objects.hash(status);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SmsBulkStatusResponse {\n");
-    sb.append("    bulkId: ").append(toIndentedString(bulkId)).append("\n");
+    sb.append("class EmailBulkUpdateStatusRequest {\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();

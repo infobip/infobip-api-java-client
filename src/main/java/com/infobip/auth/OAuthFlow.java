@@ -12,8 +12,8 @@
 package com.infobip.auth;
 
 public enum OAuthFlow {
-  accessCode,
+  accessCode, // called authorizationCode  in OpenAPI 3.0
   implicit,
   password,
-  application
+  application // called clientCredentials in OpenAPI 3.0
 }

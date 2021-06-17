@@ -14,8 +14,8 @@ package com.infobip.model;
 import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
-/** SmsStatus */
-public class SmsStatus {
+/** EmailStatus */
+public class EmailStatus {
   public static final String SERIALIZED_NAME_ACTION = "action";
 
   @SerializedName(SERIALIZED_NAME_ACTION)
@@ -46,8 +46,14 @@ public class SmsStatus {
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
+  public EmailStatus action(String action) {
+
+    this.action = action;
+    return this;
+  }
+
   /**
-   * Action that should be taken to eliminate the error.
+   * Get action
    *
    * @return action
    */
@@ -55,8 +61,18 @@ public class SmsStatus {
     return action;
   }
 
+  public void setAction(String action) {
+    this.action = action;
+  }
+
+  public EmailStatus description(String description) {
+
+    this.description = description;
+    return this;
+  }
+
   /**
-   * Human-readable description of the status.
+   * Get description
    *
    * @return description
    */
@@ -64,8 +80,18 @@ public class SmsStatus {
     return description;
   }
 
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public EmailStatus groupId(Integer groupId) {
+
+    this.groupId = groupId;
+    return this;
+  }
+
   /**
-   * Status group ID.
+   * Get groupId
    *
    * @return groupId
    */
@@ -73,8 +99,18 @@ public class SmsStatus {
     return groupId;
   }
 
+  public void setGroupId(Integer groupId) {
+    this.groupId = groupId;
+  }
+
+  public EmailStatus groupName(String groupName) {
+
+    this.groupName = groupName;
+    return this;
+  }
+
   /**
-   * Status group name.
+   * Get groupName
    *
    * @return groupName
    */
@@ -82,8 +118,18 @@ public class SmsStatus {
     return groupName;
   }
 
+  public void setGroupName(String groupName) {
+    this.groupName = groupName;
+  }
+
+  public EmailStatus id(Integer id) {
+
+    this.id = id;
+    return this;
+  }
+
   /**
-   * Status ID.
+   * Get id
    *
    * @return id
    */
@@ -91,13 +137,27 @@ public class SmsStatus {
     return id;
   }
 
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public EmailStatus name(String name) {
+
+    this.name = name;
+    return this;
+  }
+
   /**
-   * Status name.
+   * Get name
    *
    * @return name
    */
   public String getName() {
     return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   @Override
@@ -108,13 +168,13 @@ public class SmsStatus {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SmsStatus smsStatus = (SmsStatus) o;
-    return Objects.equals(this.action, smsStatus.action)
-        && Objects.equals(this.description, smsStatus.description)
-        && Objects.equals(this.groupId, smsStatus.groupId)
-        && Objects.equals(this.groupName, smsStatus.groupName)
-        && Objects.equals(this.id, smsStatus.id)
-        && Objects.equals(this.name, smsStatus.name);
+    EmailStatus emailStatus = (EmailStatus) o;
+    return Objects.equals(this.action, emailStatus.action)
+        && Objects.equals(this.description, emailStatus.description)
+        && Objects.equals(this.groupId, emailStatus.groupId)
+        && Objects.equals(this.groupName, emailStatus.groupName)
+        && Objects.equals(this.id, emailStatus.id)
+        && Objects.equals(this.name, emailStatus.name);
   }
 
   @Override
@@ -125,7 +185,7 @@ public class SmsStatus {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SmsStatus {\n");
+    sb.append("class EmailStatus {\n");
     sb.append("    action: ").append(toIndentedString(action)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    groupId: ").append(toIndentedString(groupId)).append("\n");

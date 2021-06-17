@@ -55,15 +55,14 @@ public class TfaApi {
   }
 
   /**
-   * Build call for createTfaApplication
+   * Build call for createTfaApplication.
    *
    * @param tfaApplicationRequest (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Create
-   *     2FA application Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call createTfaApplicationCall(
       TfaApplicationRequest tfaApplicationRequest, final ApiCallback _callback)
@@ -114,15 +113,14 @@ public class TfaApi {
   }
 
   /**
-   * Create 2FA application Create and configure a new 2FA application.
+   * Create 2FA application. Create and configure a new 2FA application.
    *
    * @param tfaApplicationRequest (optional)
    * @return TfaApplicationResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Create
-   *     2FA application Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public TfaApplicationResponse createTfaApplication(TfaApplicationRequest tfaApplicationRequest)
       throws ApiException {
@@ -132,15 +130,14 @@ public class TfaApi {
   }
 
   /**
-   * Create 2FA application Create and configure a new 2FA application.
+   * Create 2FA application. Create and configure a new 2FA application.
    *
    * @param tfaApplicationRequest (optional)
    * @return ApiResponse&lt;TfaApplicationResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Create
-   *     2FA application Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<TfaApplicationResponse> createTfaApplicationWithHttpInfo(
       TfaApplicationRequest tfaApplicationRequest) throws ApiException {
@@ -150,15 +147,14 @@ public class TfaApi {
   }
 
   /**
-   * Create 2FA application (asynchronously) Create and configure a new 2FA application.
+   * Create 2FA application (asynchronously). Create and configure a new 2FA application.
    *
    * @param tfaApplicationRequest (optional)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Create
-   *     2FA application Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call createTfaApplicationAsync(
       TfaApplicationRequest tfaApplicationRequest,
@@ -172,16 +168,15 @@ public class TfaApi {
     return localVarCall;
   }
   /**
-   * Build call for createTfaMessageTemplate
+   * Build call for createTfaMessageTemplate.
    *
    * @param appId ID of application for which requested message was created. (required)
    * @param tfaCreateMessageRequest (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Create
-   *     2FA message template Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call createTfaMessageTemplateCall(
       String appId, TfaCreateMessageRequest tfaCreateMessageRequest, final ApiCallback _callback)
@@ -241,18 +236,17 @@ public class TfaApi {
   }
 
   /**
-   * Create 2FA message template Once you have your [2FA
-   * application](#communication-channels/sms/create-2fa-application), create one or more message
-   * templates where your PIN will be dynamically included when you send the PIN message.
+   * Create 2FA message template. Once you have your [2FA
+   * application](#channels/sms/create-2fa-message-template), create one or more message templates
+   * where your PIN will be dynamically included when you send the PIN message.
    *
    * @param appId ID of application for which requested message was created. (required)
    * @param tfaCreateMessageRequest (optional)
    * @return TfaMessage
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Create
-   *     2FA message template Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public TfaMessage createTfaMessageTemplate(
       String appId, TfaCreateMessageRequest tfaCreateMessageRequest) throws ApiException {
@@ -262,18 +256,17 @@ public class TfaApi {
   }
 
   /**
-   * Create 2FA message template Once you have your [2FA
-   * application](#communication-channels/sms/create-2fa-application), create one or more message
-   * templates where your PIN will be dynamically included when you send the PIN message.
+   * Create 2FA message template. Once you have your [2FA
+   * application](#channels/sms/create-2fa-message-template), create one or more message templates
+   * where your PIN will be dynamically included when you send the PIN message.
    *
    * @param appId ID of application for which requested message was created. (required)
    * @param tfaCreateMessageRequest (optional)
    * @return ApiResponse&lt;TfaMessage&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Create
-   *     2FA message template Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<TfaMessage> createTfaMessageTemplateWithHttpInfo(
       String appId, TfaCreateMessageRequest tfaCreateMessageRequest) throws ApiException {
@@ -284,18 +277,17 @@ public class TfaApi {
   }
 
   /**
-   * Create 2FA message template (asynchronously) Once you have your [2FA
-   * application](#communication-channels/sms/create-2fa-application), create one or more message
-   * templates where your PIN will be dynamically included when you send the PIN message.
+   * Create 2FA message template (asynchronously). Once you have your [2FA
+   * application](#channels/sms/create-2fa-message-template), create one or more message templates
+   * where your PIN will be dynamically included when you send the PIN message.
    *
    * @param appId ID of application for which requested message was created. (required)
    * @param tfaCreateMessageRequest (optional)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Create
-   *     2FA message template Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call createTfaMessageTemplateAsync(
       String appId,
@@ -310,15 +302,14 @@ public class TfaApi {
     return localVarCall;
   }
   /**
-   * Build call for getTfaApplication
+   * Build call for getTfaApplication.
    *
    * @param appId Requested application ID. (required)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA application Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call getTfaApplicationCall(String appId, final ApiCallback _callback)
       throws ApiException {
@@ -376,15 +367,14 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA application Get a single 2FA application to see its configuration details.
+   * Get 2FA application. Get a single 2FA application to see its configuration details.
    *
    * @param appId Requested application ID. (required)
    * @return TfaApplicationResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA application Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public TfaApplicationResponse getTfaApplication(String appId) throws ApiException {
     ApiResponse<TfaApplicationResponse> localVarResp = getTfaApplicationWithHttpInfo(appId);
@@ -392,15 +382,14 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA application Get a single 2FA application to see its configuration details.
+   * Get 2FA application. Get a single 2FA application to see its configuration details.
    *
    * @param appId Requested application ID. (required)
    * @return ApiResponse&lt;TfaApplicationResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA application Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<TfaApplicationResponse> getTfaApplicationWithHttpInfo(String appId)
       throws ApiException {
@@ -410,16 +399,15 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA application (asynchronously) Get a single 2FA application to see its configuration
+   * Get 2FA application (asynchronously). Get a single 2FA application to see its configuration
    * details.
    *
    * @param appId Requested application ID. (required)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA application Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call getTfaApplicationAsync(
       String appId, final ApiCallback<TfaApplicationResponse> _callback) throws ApiException {
@@ -430,14 +418,13 @@ public class TfaApi {
     return localVarCall;
   }
   /**
-   * Build call for getTfaApplications
+   * Build call for getTfaApplications.
    *
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA applications Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call getTfaApplicationsCall(final ApiCallback _callback) throws ApiException {
     Object localVarPostBody = null;
@@ -486,15 +473,14 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA applications An application is a container for 2FA message templates. Use this method
+   * Get 2FA applications. An application is a container for 2FA message templates. Use this method
    * to list your applications.
    *
    * @return List&lt;TfaApplicationResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA applications Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public List<TfaApplicationResponse> getTfaApplications() throws ApiException {
     ApiResponse<List<TfaApplicationResponse>> localVarResp = getTfaApplicationsWithHttpInfo();
@@ -502,15 +488,14 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA applications An application is a container for 2FA message templates. Use this method
+   * Get 2FA applications. An application is a container for 2FA message templates. Use this method
    * to list your applications.
    *
    * @return ApiResponse&lt;List&lt;TfaApplicationResponse&gt;&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA applications Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<List<TfaApplicationResponse>> getTfaApplicationsWithHttpInfo()
       throws ApiException {
@@ -520,15 +505,14 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA applications (asynchronously) An application is a container for 2FA message templates.
+   * Get 2FA applications (asynchronously). An application is a container for 2FA message templates.
    * Use this method to list your applications.
    *
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA applications Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call getTfaApplicationsAsync(
       final ApiCallback<List<TfaApplicationResponse>> _callback) throws ApiException {
@@ -539,16 +523,15 @@ public class TfaApi {
     return localVarCall;
   }
   /**
-   * Build call for getTfaMessageTemplate
+   * Build call for getTfaMessageTemplate.
    *
    * @param appId ID of application for which requested message was created. (required)
    * @param msgId Requested message ID. (required)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA message template Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call getTfaMessageTemplateCall(
       String appId, String msgId, final ApiCallback _callback) throws ApiException {
@@ -613,7 +596,7 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA message template Get a single 2FA message template from an application to see its
+   * Get 2FA message template. Get a single 2FA message template from an application to see its
    * configuration details.
    *
    * @param appId ID of application for which requested message was created. (required)
@@ -621,9 +604,8 @@ public class TfaApi {
    * @return TfaMessage
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA message template Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public TfaMessage getTfaMessageTemplate(String appId, String msgId) throws ApiException {
     ApiResponse<TfaMessage> localVarResp = getTfaMessageTemplateWithHttpInfo(appId, msgId);
@@ -631,7 +613,7 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA message template Get a single 2FA message template from an application to see its
+   * Get 2FA message template. Get a single 2FA message template from an application to see its
    * configuration details.
    *
    * @param appId ID of application for which requested message was created. (required)
@@ -639,9 +621,8 @@ public class TfaApi {
    * @return ApiResponse&lt;TfaMessage&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA message template Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<TfaMessage> getTfaMessageTemplateWithHttpInfo(String appId, String msgId)
       throws ApiException {
@@ -651,17 +632,16 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA message template (asynchronously) Get a single 2FA message template from an application
-   * to see its configuration details.
+   * Get 2FA message template (asynchronously). Get a single 2FA message template from an
+   * application to see its configuration details.
    *
    * @param appId ID of application for which requested message was created. (required)
    * @param msgId Requested message ID. (required)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA message template Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call getTfaMessageTemplateAsync(
       String appId, String msgId, final ApiCallback<TfaMessage> _callback) throws ApiException {
@@ -672,15 +652,14 @@ public class TfaApi {
     return localVarCall;
   }
   /**
-   * Build call for getTfaMessageTemplates
+   * Build call for getTfaMessageTemplates.
    *
    * @param appId ID of application for which requested message was created. (required)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA message templates Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call getTfaMessageTemplatesCall(String appId, final ApiCallback _callback)
       throws ApiException {
@@ -738,15 +717,14 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA message templates List all message templates in a 2FA application.
+   * Get 2FA message templates. List all message templates in a 2FA application.
    *
    * @param appId ID of application for which requested message was created. (required)
    * @return List&lt;TfaMessage&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA message templates Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public List<TfaMessage> getTfaMessageTemplates(String appId) throws ApiException {
     ApiResponse<List<TfaMessage>> localVarResp = getTfaMessageTemplatesWithHttpInfo(appId);
@@ -754,15 +732,14 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA message templates List all message templates in a 2FA application.
+   * Get 2FA message templates. List all message templates in a 2FA application.
    *
    * @param appId ID of application for which requested message was created. (required)
    * @return ApiResponse&lt;List&lt;TfaMessage&gt;&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA message templates Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<List<TfaMessage>> getTfaMessageTemplatesWithHttpInfo(String appId)
       throws ApiException {
@@ -772,15 +749,14 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA message templates (asynchronously) List all message templates in a 2FA application.
+   * Get 2FA message templates (asynchronously). List all message templates in a 2FA application.
    *
    * @param appId ID of application for which requested message was created. (required)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA message templates Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call getTfaMessageTemplatesAsync(
       String appId, final ApiCallback<List<TfaMessage>> _callback) throws ApiException {
@@ -791,7 +767,7 @@ public class TfaApi {
     return localVarCall;
   }
   /**
-   * Build call for getTfaVerificationStatus
+   * Build call for getTfaVerificationStatus.
    *
    * @param msisdn Filter by msisdn (phone number) for which verification status is checked.
    *     (required)
@@ -802,9 +778,8 @@ public class TfaApi {
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA verification status Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call getTfaVerificationStatusCall(
       String msisdn, String appId, Boolean verified, Boolean sent, final ApiCallback _callback)
@@ -883,7 +858,7 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA verification status Check if a phone number is already verified for a specific 2FA
+   * Get 2FA verification status. Check if a phone number is already verified for a specific 2FA
    * application.
    *
    * @param msisdn Filter by msisdn (phone number) for which verification status is checked.
@@ -895,9 +870,8 @@ public class TfaApi {
    * @return TfaVerificationResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA verification status Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public TfaVerificationResponse getTfaVerificationStatus(
       String msisdn, String appId, Boolean verified, Boolean sent) throws ApiException {
@@ -907,7 +881,7 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA verification status Check if a phone number is already verified for a specific 2FA
+   * Get 2FA verification status. Check if a phone number is already verified for a specific 2FA
    * application.
    *
    * @param msisdn Filter by msisdn (phone number) for which verification status is checked.
@@ -919,9 +893,8 @@ public class TfaApi {
    * @return ApiResponse&lt;TfaVerificationResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA verification status Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<TfaVerificationResponse> getTfaVerificationStatusWithHttpInfo(
       String msisdn, String appId, Boolean verified, Boolean sent) throws ApiException {
@@ -932,7 +905,7 @@ public class TfaApi {
   }
 
   /**
-   * Get 2FA verification status (asynchronously) Check if a phone number is already verified for a
+   * Get 2FA verification status (asynchronously). Check if a phone number is already verified for a
    * specific 2FA application.
    *
    * @param msisdn Filter by msisdn (phone number) for which verification status is checked.
@@ -944,9 +917,8 @@ public class TfaApi {
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Get
-   *     2FA verification status Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call getTfaVerificationStatusAsync(
       String msisdn,
@@ -963,16 +935,15 @@ public class TfaApi {
     return localVarCall;
   }
   /**
-   * Build call for resendTfaPinCodeOverSms
+   * Build call for resendTfaPinCodeOverSms.
    *
    * @param pinId ID of the pin code that has to be verified. (required)
    * @param tfaResendPinRequest (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Resend
-   *     2FA PIN code over SMS Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call resendTfaPinCodeOverSmsCall(
       String pinId, TfaResendPinRequest tfaResendPinRequest, final ApiCallback _callback)
@@ -1031,17 +1002,16 @@ public class TfaApi {
   }
 
   /**
-   * Resend 2FA PIN code over SMS If needed, you can resend the same (previously sent) PIN code over
-   * SMS.
+   * Resend 2FA PIN code over SMS. If needed, you can resend the same (previously sent) PIN code
+   * over SMS.
    *
    * @param pinId ID of the pin code that has to be verified. (required)
    * @param tfaResendPinRequest (optional)
    * @return TfaStartAuthenticationResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Resend
-   *     2FA PIN code over SMS Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public TfaStartAuthenticationResponse resendTfaPinCodeOverSms(
       String pinId, TfaResendPinRequest tfaResendPinRequest) throws ApiException {
@@ -1051,17 +1021,16 @@ public class TfaApi {
   }
 
   /**
-   * Resend 2FA PIN code over SMS If needed, you can resend the same (previously sent) PIN code over
-   * SMS.
+   * Resend 2FA PIN code over SMS. If needed, you can resend the same (previously sent) PIN code
+   * over SMS.
    *
    * @param pinId ID of the pin code that has to be verified. (required)
    * @param tfaResendPinRequest (optional)
    * @return ApiResponse&lt;TfaStartAuthenticationResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Resend
-   *     2FA PIN code over SMS Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<TfaStartAuthenticationResponse> resendTfaPinCodeOverSmsWithHttpInfo(
       String pinId, TfaResendPinRequest tfaResendPinRequest) throws ApiException {
@@ -1072,7 +1041,7 @@ public class TfaApi {
   }
 
   /**
-   * Resend 2FA PIN code over SMS (asynchronously) If needed, you can resend the same (previously
+   * Resend 2FA PIN code over SMS (asynchronously). If needed, you can resend the same (previously
    * sent) PIN code over SMS.
    *
    * @param pinId ID of the pin code that has to be verified. (required)
@@ -1080,9 +1049,8 @@ public class TfaApi {
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Resend
-   *     2FA PIN code over SMS Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call resendTfaPinCodeOverSmsAsync(
       String pinId,
@@ -1097,16 +1065,15 @@ public class TfaApi {
     return localVarCall;
   }
   /**
-   * Build call for resendTfaPinCodeOverVoice
+   * Build call for resendTfaPinCodeOverVoice.
    *
    * @param pinId ID of the pin code that has to be verified. (required)
    * @param tfaResendPinRequest (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Resend
-   *     2FA PIN code over Voice Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call resendTfaPinCodeOverVoiceCall(
       String pinId, TfaResendPinRequest tfaResendPinRequest, final ApiCallback _callback)
@@ -1166,7 +1133,7 @@ public class TfaApi {
   }
 
   /**
-   * Resend 2FA PIN code over Voice If needed, you can resend the same (previously sent) PIN code
+   * Resend 2FA PIN code over Voice. If needed, you can resend the same (previously sent) PIN code
    * over Voice.
    *
    * @param pinId ID of the pin code that has to be verified. (required)
@@ -1174,9 +1141,8 @@ public class TfaApi {
    * @return TfaStartAuthenticationResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Resend
-   *     2FA PIN code over Voice Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public TfaStartAuthenticationResponse resendTfaPinCodeOverVoice(
       String pinId, TfaResendPinRequest tfaResendPinRequest) throws ApiException {
@@ -1186,7 +1152,7 @@ public class TfaApi {
   }
 
   /**
-   * Resend 2FA PIN code over Voice If needed, you can resend the same (previously sent) PIN code
+   * Resend 2FA PIN code over Voice. If needed, you can resend the same (previously sent) PIN code
    * over Voice.
    *
    * @param pinId ID of the pin code that has to be verified. (required)
@@ -1194,9 +1160,8 @@ public class TfaApi {
    * @return ApiResponse&lt;TfaStartAuthenticationResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Resend
-   *     2FA PIN code over Voice Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<TfaStartAuthenticationResponse> resendTfaPinCodeOverVoiceWithHttpInfo(
       String pinId, TfaResendPinRequest tfaResendPinRequest) throws ApiException {
@@ -1207,7 +1172,7 @@ public class TfaApi {
   }
 
   /**
-   * Resend 2FA PIN code over Voice (asynchronously) If needed, you can resend the same (previously
+   * Resend 2FA PIN code over Voice (asynchronously). If needed, you can resend the same (previously
    * sent) PIN code over Voice.
    *
    * @param pinId ID of the pin code that has to be verified. (required)
@@ -1215,9 +1180,8 @@ public class TfaApi {
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Resend
-   *     2FA PIN code over Voice Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call resendTfaPinCodeOverVoiceAsync(
       String pinId,
@@ -1232,7 +1196,7 @@ public class TfaApi {
     return localVarCall;
   }
   /**
-   * Build call for sendTfaPinCodeOverSms
+   * Build call for sendTfaPinCodeOverSms.
    *
    * @param ncNeeded Indicates if Number Lookup is needed before sending the 2FA message. If the
    *     parameter value is true, Number Lookup will be requested before sending the SMS. If the
@@ -1242,9 +1206,8 @@ public class TfaApi {
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Send
-   *     2FA PIN code over SMS Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call sendTfaPinCodeOverSmsCall(
       Boolean ncNeeded,
@@ -1304,8 +1267,8 @@ public class TfaApi {
   }
 
   /**
-   * Send 2FA PIN code over SMS Send a PIN code over SMS using a previously created [message
-   * template](#communication-channels/sms/create-new-2fa-message-template).
+   * Send 2FA PIN code over SMS. Send a PIN code over SMS using a previously created [message
+   * template](#channels/sms/create-2fa-message-template).
    *
    * @param ncNeeded Indicates if Number Lookup is needed before sending the 2FA message. If the
    *     parameter value is true, Number Lookup will be requested before sending the SMS. If the
@@ -1315,9 +1278,8 @@ public class TfaApi {
    * @return TfaStartAuthenticationResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Send
-   *     2FA PIN code over SMS Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public TfaStartAuthenticationResponse sendTfaPinCodeOverSms(
       Boolean ncNeeded, TfaStartAuthenticationRequest tfaStartAuthenticationRequest)
@@ -1328,8 +1290,8 @@ public class TfaApi {
   }
 
   /**
-   * Send 2FA PIN code over SMS Send a PIN code over SMS using a previously created [message
-   * template](#communication-channels/sms/create-new-2fa-message-template).
+   * Send 2FA PIN code over SMS. Send a PIN code over SMS using a previously created [message
+   * template](#channels/sms/create-2fa-message-template).
    *
    * @param ncNeeded Indicates if Number Lookup is needed before sending the 2FA message. If the
    *     parameter value is true, Number Lookup will be requested before sending the SMS. If the
@@ -1339,9 +1301,8 @@ public class TfaApi {
    * @return ApiResponse&lt;TfaStartAuthenticationResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Send
-   *     2FA PIN code over SMS Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<TfaStartAuthenticationResponse> sendTfaPinCodeOverSmsWithHttpInfo(
       Boolean ncNeeded, TfaStartAuthenticationRequest tfaStartAuthenticationRequest)
@@ -1353,8 +1314,8 @@ public class TfaApi {
   }
 
   /**
-   * Send 2FA PIN code over SMS (asynchronously) Send a PIN code over SMS using a previously created
-   * [message template](#communication-channels/sms/create-new-2fa-message-template).
+   * Send 2FA PIN code over SMS (asynchronously). Send a PIN code over SMS using a previously
+   * created [message template](#channels/sms/create-2fa-message-template).
    *
    * @param ncNeeded Indicates if Number Lookup is needed before sending the 2FA message. If the
    *     parameter value is true, Number Lookup will be requested before sending the SMS. If the
@@ -1364,9 +1325,8 @@ public class TfaApi {
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Send
-   *     2FA PIN code over SMS Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call sendTfaPinCodeOverSmsAsync(
       Boolean ncNeeded,
@@ -1381,15 +1341,14 @@ public class TfaApi {
     return localVarCall;
   }
   /**
-   * Build call for sendTfaPinCodeOverVoice
+   * Build call for sendTfaPinCodeOverVoice.
    *
    * @param tfaStartAuthenticationRequest (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Send
-   *     2FA PIN code over Voice Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call sendTfaPinCodeOverVoiceCall(
       TfaStartAuthenticationRequest tfaStartAuthenticationRequest, final ApiCallback _callback)
@@ -1441,16 +1400,15 @@ public class TfaApi {
   }
 
   /**
-   * Send 2FA PIN code over Voice Send a PIN code over Voice using previously created [message
-   * template](#communication-channels/sms/create-new-2fa-message-template).
+   * Send 2FA PIN code over Voice. Send a PIN code over Voice using previously created [message
+   * template](#channels/sms/create-2fa-message-template).
    *
    * @param tfaStartAuthenticationRequest (optional)
    * @return TfaStartAuthenticationResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Send
-   *     2FA PIN code over Voice Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public TfaStartAuthenticationResponse sendTfaPinCodeOverVoice(
       TfaStartAuthenticationRequest tfaStartAuthenticationRequest) throws ApiException {
@@ -1460,16 +1418,15 @@ public class TfaApi {
   }
 
   /**
-   * Send 2FA PIN code over Voice Send a PIN code over Voice using previously created [message
-   * template](#communication-channels/sms/create-new-2fa-message-template).
+   * Send 2FA PIN code over Voice. Send a PIN code over Voice using previously created [message
+   * template](#channels/sms/create-2fa-message-template).
    *
    * @param tfaStartAuthenticationRequest (optional)
    * @return ApiResponse&lt;TfaStartAuthenticationResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Send
-   *     2FA PIN code over Voice Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<TfaStartAuthenticationResponse> sendTfaPinCodeOverVoiceWithHttpInfo(
       TfaStartAuthenticationRequest tfaStartAuthenticationRequest) throws ApiException {
@@ -1480,16 +1437,15 @@ public class TfaApi {
   }
 
   /**
-   * Send 2FA PIN code over Voice (asynchronously) Send a PIN code over Voice using previously
-   * created [message template](#communication-channels/sms/create-new-2fa-message-template).
+   * Send 2FA PIN code over Voice (asynchronously). Send a PIN code over Voice using previously
+   * created [message template](#channels/sms/create-2fa-message-template).
    *
    * @param tfaStartAuthenticationRequest (optional)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Send
-   *     2FA PIN code over Voice Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call sendTfaPinCodeOverVoiceAsync(
       TfaStartAuthenticationRequest tfaStartAuthenticationRequest,
@@ -1503,16 +1459,15 @@ public class TfaApi {
     return localVarCall;
   }
   /**
-   * Build call for updateTfaApplication
+   * Build call for updateTfaApplication.
    *
    * @param appId ID of application that should be updated. (required)
    * @param tfaApplicationRequest (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Update
-   *     2FA application Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call updateTfaApplicationCall(
       String appId, TfaApplicationRequest tfaApplicationRequest, final ApiCallback _callback)
@@ -1571,16 +1526,15 @@ public class TfaApi {
   }
 
   /**
-   * Update 2FA application Change configuration options for your existing 2FA application.
+   * Update 2FA application. Change configuration options for your existing 2FA application.
    *
    * @param appId ID of application that should be updated. (required)
    * @param tfaApplicationRequest (optional)
    * @return TfaApplicationResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Update
-   *     2FA application Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public TfaApplicationResponse updateTfaApplication(
       String appId, TfaApplicationRequest tfaApplicationRequest) throws ApiException {
@@ -1590,16 +1544,15 @@ public class TfaApi {
   }
 
   /**
-   * Update 2FA application Change configuration options for your existing 2FA application.
+   * Update 2FA application. Change configuration options for your existing 2FA application.
    *
    * @param appId ID of application that should be updated. (required)
    * @param tfaApplicationRequest (optional)
    * @return ApiResponse&lt;TfaApplicationResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Update
-   *     2FA application Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<TfaApplicationResponse> updateTfaApplicationWithHttpInfo(
       String appId, TfaApplicationRequest tfaApplicationRequest) throws ApiException {
@@ -1610,7 +1563,7 @@ public class TfaApi {
   }
 
   /**
-   * Update 2FA application (asynchronously) Change configuration options for your existing 2FA
+   * Update 2FA application (asynchronously). Change configuration options for your existing 2FA
    * application.
    *
    * @param appId ID of application that should be updated. (required)
@@ -1618,9 +1571,8 @@ public class TfaApi {
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Update
-   *     2FA application Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call updateTfaApplicationAsync(
       String appId,
@@ -1635,7 +1587,7 @@ public class TfaApi {
     return localVarCall;
   }
   /**
-   * Build call for updateTfaMessageTemplate
+   * Build call for updateTfaMessageTemplate.
    *
    * @param appId ID of application for which requested message was created. (required)
    * @param msgId Requested message ID. (required)
@@ -1643,9 +1595,8 @@ public class TfaApi {
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Update
-   *     2FA message template Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call updateTfaMessageTemplateCall(
       String appId,
@@ -1718,7 +1669,7 @@ public class TfaApi {
   }
 
   /**
-   * Update 2FA message template Change configuration options for your existing 2FA application
+   * Update 2FA message template. Change configuration options for your existing 2FA application
    * message template.
    *
    * @param appId ID of application for which requested message was created. (required)
@@ -1727,9 +1678,8 @@ public class TfaApi {
    * @return TfaMessage
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Update
-   *     2FA message template Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public TfaMessage updateTfaMessageTemplate(
       String appId, String msgId, TfaUpdateMessageRequest tfaUpdateMessageRequest)
@@ -1740,7 +1690,7 @@ public class TfaApi {
   }
 
   /**
-   * Update 2FA message template Change configuration options for your existing 2FA application
+   * Update 2FA message template. Change configuration options for your existing 2FA application
    * message template.
    *
    * @param appId ID of application for which requested message was created. (required)
@@ -1749,9 +1699,8 @@ public class TfaApi {
    * @return ApiResponse&lt;TfaMessage&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Update
-   *     2FA message template Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<TfaMessage> updateTfaMessageTemplateWithHttpInfo(
       String appId, String msgId, TfaUpdateMessageRequest tfaUpdateMessageRequest)
@@ -1763,8 +1712,8 @@ public class TfaApi {
   }
 
   /**
-   * Update 2FA message template (asynchronously) Change configuration options for your existing 2FA
-   * application message template.
+   * Update 2FA message template (asynchronously). Change configuration options for your existing
+   * 2FA application message template.
    *
    * @param appId ID of application for which requested message was created. (required)
    * @param msgId Requested message ID. (required)
@@ -1772,9 +1721,8 @@ public class TfaApi {
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Update
-   *     2FA message template Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call updateTfaMessageTemplateAsync(
       String appId,
@@ -1791,16 +1739,15 @@ public class TfaApi {
     return localVarCall;
   }
   /**
-   * Build call for verifyTfaPhoneNumber
+   * Build call for verifyTfaPhoneNumber.
    *
    * @param pinId ID of the pin code that has to be verified. (required)
    * @param tfaVerifyPinRequest (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Verify
-   *     phone number Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call verifyTfaPhoneNumberCall(
       String pinId, TfaVerifyPinRequest tfaVerifyPinRequest, final ApiCallback _callback)
@@ -1859,16 +1806,15 @@ public class TfaApi {
   }
 
   /**
-   * Verify phone number Verify a phone number to confirm successful 2FA authentication.
+   * Verify phone number. Verify a phone number to confirm successful 2FA authentication.
    *
    * @param pinId ID of the pin code that has to be verified. (required)
    * @param tfaVerifyPinRequest (optional)
    * @return TfaVerifyPinResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Verify
-   *     phone number Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public TfaVerifyPinResponse verifyTfaPhoneNumber(
       String pinId, TfaVerifyPinRequest tfaVerifyPinRequest) throws ApiException {
@@ -1878,16 +1824,15 @@ public class TfaApi {
   }
 
   /**
-   * Verify phone number Verify a phone number to confirm successful 2FA authentication.
+   * Verify phone number. Verify a phone number to confirm successful 2FA authentication.
    *
    * @param pinId ID of the pin code that has to be verified. (required)
    * @param tfaVerifyPinRequest (optional)
    * @return ApiResponse&lt;TfaVerifyPinResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Verify
-   *     phone number Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public ApiResponse<TfaVerifyPinResponse> verifyTfaPhoneNumberWithHttpInfo(
       String pinId, TfaVerifyPinRequest tfaVerifyPinRequest) throws ApiException {
@@ -1898,7 +1843,7 @@ public class TfaApi {
   }
 
   /**
-   * Verify phone number (asynchronously) Verify a phone number to confirm successful 2FA
+   * Verify phone number (asynchronously). Verify a phone number to confirm successful 2FA
    * authentication.
    *
    * @param pinId ID of the pin code that has to be verified. (required)
@@ -1906,9 +1851,8 @@ public class TfaApi {
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   *     <p>Read me first: Introduction and use cases
-   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Verify
-   *     phone number Documentation</a>
+   * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read
+   *     me first: Introduction and use cases</a>
    */
   public okhttp3.Call verifyTfaPhoneNumberAsync(
       String pinId,

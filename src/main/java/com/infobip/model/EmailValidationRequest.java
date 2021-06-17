@@ -14,46 +14,21 @@ package com.infobip.model;
 import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
-/** SmsDestination */
-public class SmsDestination {
-  public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
-
-  @SerializedName(SERIALIZED_NAME_MESSAGE_ID)
-  private String messageId;
-
+/** EmailValidationRequest */
+public class EmailValidationRequest {
   public static final String SERIALIZED_NAME_TO = "to";
 
   @SerializedName(SERIALIZED_NAME_TO)
   private String to;
 
-  public SmsDestination messageId(String messageId) {
-
-    this.messageId = messageId;
-    return this;
-  }
-
-  /**
-   * The ID that uniquely identifies the message sent.
-   *
-   * @return messageId
-   */
-  public String getMessageId() {
-    return messageId;
-  }
-
-  public void setMessageId(String messageId) {
-    this.messageId = messageId;
-  }
-
-  public SmsDestination to(String to) {
+  public EmailValidationRequest to(String to) {
 
     this.to = to;
     return this;
   }
 
   /**
-   * Message destination address. Addresses must be in international format (Example:
-   * &#x60;41793026727&#x60;).
+   * Get to
    *
    * @return to
    */
@@ -73,21 +48,19 @@ public class SmsDestination {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SmsDestination smsDestination = (SmsDestination) o;
-    return Objects.equals(this.messageId, smsDestination.messageId)
-        && Objects.equals(this.to, smsDestination.to);
+    EmailValidationRequest emailValidationRequest = (EmailValidationRequest) o;
+    return Objects.equals(this.to, emailValidationRequest.to);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(messageId, to);
+    return Objects.hash(to);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SmsDestination {\n");
-    sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
+    sb.append("class EmailValidationRequest {\n");
     sb.append("    to: ").append(toIndentedString(to)).append("\n");
     sb.append("}");
     return sb.toString();
