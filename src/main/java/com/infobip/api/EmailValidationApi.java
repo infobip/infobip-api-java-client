@@ -52,8 +52,6 @@ public class EmailValidationApi {
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   * @see <a href="https://www.infobip.com/docs/email/validation">Learn more about email validation
-   *     and use cases</a>
    */
   public okhttp3.Call validateEmailAddressesCall(
       EmailValidationRequest emailValidationRequest, final ApiCallback _callback)
@@ -74,7 +72,7 @@ public class EmailValidationApi {
       localVarHeaderParams.put("Accept", localVarAccept);
     }
 
-    final String[] localVarContentTypes = {"application/json", "application/xml"};
+    final String[] localVarContentTypes = {"application/json", "application/x-www-form-urlencoded"};
     final String localVarContentType =
         localVarApiClient.selectHeaderContentType(localVarContentTypes);
     localVarHeaderParams.put("Content-Type", localVarContentType);
@@ -111,8 +109,6 @@ public class EmailValidationApi {
    * @return EmailValidationResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email/validation">Learn more about email validation
-   *     and use cases</a>
    */
   public EmailValidationResponse validateEmailAddresses(
       EmailValidationRequest emailValidationRequest) throws ApiException {
@@ -129,8 +125,6 @@ public class EmailValidationApi {
    * @return ApiResponse&lt;EmailValidationResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email/validation">Learn more about email validation
-   *     and use cases</a>
    */
   public ApiResponse<EmailValidationResponse> validateEmailAddressesWithHttpInfo(
       EmailValidationRequest emailValidationRequest) throws ApiException {
@@ -148,8 +142,6 @@ public class EmailValidationApi {
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   * @see <a href="https://www.infobip.com/docs/email/validation">Learn more about email validation
-   *     and use cases</a>
    */
   public okhttp3.Call validateEmailAddressesAsync(
       EmailValidationRequest emailValidationRequest,

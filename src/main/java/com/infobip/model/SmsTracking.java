@@ -43,8 +43,7 @@ public class SmsTracking {
   }
 
   /**
-   * Custom base url used for shortening links from SMS text in &#x60;URL&#x60; Conversion rate
-   * tracking use-case.
+   * Custom base URL for shortened links in messages when tracking URL conversions.
    *
    * @return baseUrl
    */
@@ -63,7 +62,7 @@ public class SmsTracking {
   }
 
   /**
-   * Key that uniquely identifies Conversion tracking process.
+   * The process key which uniquely identifies conversion tracking.
    *
    * @return processKey
    */
@@ -82,8 +81,8 @@ public class SmsTracking {
   }
 
   /**
-   * Indicates if the message has to be tracked for Conversion rates. Possible values:
-   * &#x60;SMS&#x60; and &#x60;URL&#x60;
+   * Indicates if a message has to be tracked for conversion rates. Values are: &#x60;SMS&#x60; and
+   * &#x60;URL&#x60;.
    *
    * @return track
    */
@@ -102,8 +101,8 @@ public class SmsTracking {
   }
 
   /**
-   * User-defined type of the Conversion tracking process or flow type or message type, etc.
-   * Example: &#x60;ONE_TIME_PIN or SOCIAL_INVITES&#x60;.
+   * Sets a custom conversion type naming convention, e.g. &#x60;ONE_TIME_PIN&#x60; or
+   * &#x60;SOCIAL_INVITES&#x60;.
    *
    * @return type
    */

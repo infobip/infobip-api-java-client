@@ -12,42 +12,32 @@
 package com.infobip.model;
 
 import com.google.gson.annotations.SerializedName;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-/** EmailLogsResult */
-public class EmailLogsResult {
-  public static final String SERIALIZED_NAME_RESULTS = "results";
+/** WhatsAppTextHeaderApiData */
+public class WhatsAppTextHeaderApiData extends WhatsAppHeaderApiData {
+  public static final String SERIALIZED_NAME_TEXT = "text";
 
-  @SerializedName(SERIALIZED_NAME_RESULTS)
-  private List<EmailLog> results = null;
+  @SerializedName(SERIALIZED_NAME_TEXT)
+  private String text;
 
-  public EmailLogsResult results(List<EmailLog> results) {
+  public WhatsAppTextHeaderApiData text(String text) {
 
-    this.results = results;
-    return this;
-  }
-
-  public EmailLogsResult addResultsItem(EmailLog resultsItem) {
-    if (this.results == null) {
-      this.results = new ArrayList<>();
-    }
-    this.results.add(resultsItem);
+    this.text = text;
     return this;
   }
 
   /**
-   * Get results
+   * Template header text. Can contain up to 60 characters, with one placeholder {{1}}.
    *
-   * @return results
+   * @return text
    */
-  public List<EmailLog> getResults() {
-    return results;
+  public String getText() {
+    return text;
   }
 
-  public void setResults(List<EmailLog> results) {
-    this.results = results;
+  public void setText(String text) {
+    this.text = text;
   }
 
   @Override
@@ -58,20 +48,21 @@ public class EmailLogsResult {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EmailLogsResult emailLogsResult = (EmailLogsResult) o;
-    return Objects.equals(this.results, emailLogsResult.results);
+    WhatsAppTextHeaderApiData whatsAppTextHeaderApiData = (WhatsAppTextHeaderApiData) o;
+    return Objects.equals(this.text, whatsAppTextHeaderApiData.text) && super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(results);
+    return Objects.hash(text, super.hashCode());
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class EmailLogsResult {\n");
-    sb.append("    results: ").append(toIndentedString(results)).append("\n");
+    sb.append("class WhatsAppTextHeaderApiData {\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    text: ").append(toIndentedString(text)).append("\n");
     sb.append("}");
     return sb.toString();
   }

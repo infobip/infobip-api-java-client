@@ -15,99 +15,94 @@ import com.google.gson.annotations.SerializedName;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
-/** EmailLog */
+/** Array of email logs, one object per each email request. */
 public class EmailLog {
-  public static final String SERIALIZED_NAME_BULK_ID = "bulkId";
-
-  @SerializedName(SERIALIZED_NAME_BULK_ID)
-  private String bulkId;
-
-  public static final String SERIALIZED_NAME_DONE_AT = "doneAt";
-
-  @SerializedName(SERIALIZED_NAME_DONE_AT)
-  private OffsetDateTime doneAt;
-
-  public static final String SERIALIZED_NAME_FROM = "from";
-
-  @SerializedName(SERIALIZED_NAME_FROM)
-  private String from;
-
-  public static final String SERIALIZED_NAME_MCC_MNC = "mccMnc";
-
-  @SerializedName(SERIALIZED_NAME_MCC_MNC)
-  private String mccMnc;
-
-  public static final String SERIALIZED_NAME_MESSAGE_COUNT = "messageCount";
-
-  @SerializedName(SERIALIZED_NAME_MESSAGE_COUNT)
-  private Integer messageCount;
-
   public static final String SERIALIZED_NAME_MESSAGE_ID = "messageId";
 
   @SerializedName(SERIALIZED_NAME_MESSAGE_ID)
   private String messageId;
-
-  public static final String SERIALIZED_NAME_PRICE = "price";
-
-  @SerializedName(SERIALIZED_NAME_PRICE)
-  private EmailPrice price = null;
-
-  public static final String SERIALIZED_NAME_SENT_AT = "sentAt";
-
-  @SerializedName(SERIALIZED_NAME_SENT_AT)
-  private OffsetDateTime sentAt;
-
-  public static final String SERIALIZED_NAME_STATUS = "status";
-
-  @SerializedName(SERIALIZED_NAME_STATUS)
-  private EmailStatus status = null;
-
-  public static final String SERIALIZED_NAME_TEXT = "text";
-
-  @SerializedName(SERIALIZED_NAME_TEXT)
-  private String text;
 
   public static final String SERIALIZED_NAME_TO = "to";
 
   @SerializedName(SERIALIZED_NAME_TO)
   private String to;
 
-  public EmailLog bulkId(String bulkId) {
+  public static final String SERIALIZED_NAME_FROM = "from";
 
-    this.bulkId = bulkId;
+  @SerializedName(SERIALIZED_NAME_FROM)
+  private String from;
+
+  public static final String SERIALIZED_NAME_TEXT = "text";
+
+  @SerializedName(SERIALIZED_NAME_TEXT)
+  private String text;
+
+  public static final String SERIALIZED_NAME_SENT_AT = "sentAt";
+
+  @SerializedName(SERIALIZED_NAME_SENT_AT)
+  private OffsetDateTime sentAt;
+
+  public static final String SERIALIZED_NAME_DONE_AT = "doneAt";
+
+  @SerializedName(SERIALIZED_NAME_DONE_AT)
+  private OffsetDateTime doneAt;
+
+  public static final String SERIALIZED_NAME_MESSAGE_COUNT = "messageCount";
+
+  @SerializedName(SERIALIZED_NAME_MESSAGE_COUNT)
+  private Integer messageCount;
+
+  public static final String SERIALIZED_NAME_PRICE = "price";
+
+  @SerializedName(SERIALIZED_NAME_PRICE)
+  private EmailPrice price;
+
+  public static final String SERIALIZED_NAME_STATUS = "status";
+
+  @SerializedName(SERIALIZED_NAME_STATUS)
+  private EmailStatus status;
+
+  public static final String SERIALIZED_NAME_BULK_ID = "bulkId";
+
+  @SerializedName(SERIALIZED_NAME_BULK_ID)
+  private String bulkId;
+
+  public EmailLog messageId(String messageId) {
+
+    this.messageId = messageId;
     return this;
   }
 
   /**
-   * Get bulkId
+   * The ID that uniquely identifies the sent email request.
    *
-   * @return bulkId
+   * @return messageId
    */
-  public String getBulkId() {
-    return bulkId;
+  public String getMessageId() {
+    return messageId;
   }
 
-  public void setBulkId(String bulkId) {
-    this.bulkId = bulkId;
+  public void setMessageId(String messageId) {
+    this.messageId = messageId;
   }
 
-  public EmailLog doneAt(OffsetDateTime doneAt) {
+  public EmailLog to(String to) {
 
-    this.doneAt = doneAt;
+    this.to = to;
     return this;
   }
 
   /**
-   * Get doneAt
+   * The recipient email address.
    *
-   * @return doneAt
+   * @return to
    */
-  public OffsetDateTime getDoneAt() {
-    return doneAt;
+  public String getTo() {
+    return to;
   }
 
-  public void setDoneAt(OffsetDateTime doneAt) {
-    this.doneAt = doneAt;
+  public void setTo(String to) {
+    this.to = to;
   }
 
   public EmailLog from(String from) {
@@ -117,7 +112,7 @@ public class EmailLog {
   }
 
   /**
-   * Get from
+   * From email address.
    *
    * @return from
    */
@@ -129,23 +124,62 @@ public class EmailLog {
     this.from = from;
   }
 
-  public EmailLog mccMnc(String mccMnc) {
+  public EmailLog text(String text) {
 
-    this.mccMnc = mccMnc;
+    this.text = text;
     return this;
   }
 
   /**
-   * Get mccMnc
+   * The text from email body.
    *
-   * @return mccMnc
+   * @return text
    */
-  public String getMccMnc() {
-    return mccMnc;
+  public String getText() {
+    return text;
   }
 
-  public void setMccMnc(String mccMnc) {
-    this.mccMnc = mccMnc;
+  public void setText(String text) {
+    this.text = text;
+  }
+
+  public EmailLog sentAt(OffsetDateTime sentAt) {
+
+    this.sentAt = sentAt;
+    return this;
+  }
+
+  /**
+   * Tells when the email was initiated. Has the following format:
+   * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+   *
+   * @return sentAt
+   */
+  public OffsetDateTime getSentAt() {
+    return sentAt;
+  }
+
+  public void setSentAt(OffsetDateTime sentAt) {
+    this.sentAt = sentAt;
+  }
+
+  public EmailLog doneAt(OffsetDateTime doneAt) {
+
+    this.doneAt = doneAt;
+    return this;
+  }
+
+  /**
+   * Tells when the email request was processed by Infobip
+   *
+   * @return doneAt
+   */
+  public OffsetDateTime getDoneAt() {
+    return doneAt;
+  }
+
+  public void setDoneAt(OffsetDateTime doneAt) {
+    this.doneAt = doneAt;
   }
 
   public EmailLog messageCount(Integer messageCount) {
@@ -155,7 +189,7 @@ public class EmailLog {
   }
 
   /**
-   * Get messageCount
+   * Email request count.
    *
    * @return messageCount
    */
@@ -165,25 +199,6 @@ public class EmailLog {
 
   public void setMessageCount(Integer messageCount) {
     this.messageCount = messageCount;
-  }
-
-  public EmailLog messageId(String messageId) {
-
-    this.messageId = messageId;
-    return this;
-  }
-
-  /**
-   * Get messageId
-   *
-   * @return messageId
-   */
-  public String getMessageId() {
-    return messageId;
-  }
-
-  public void setMessageId(String messageId) {
-    this.messageId = messageId;
   }
 
   public EmailLog price(EmailPrice price) {
@@ -205,25 +220,6 @@ public class EmailLog {
     this.price = price;
   }
 
-  public EmailLog sentAt(OffsetDateTime sentAt) {
-
-    this.sentAt = sentAt;
-    return this;
-  }
-
-  /**
-   * Get sentAt
-   *
-   * @return sentAt
-   */
-  public OffsetDateTime getSentAt() {
-    return sentAt;
-  }
-
-  public void setSentAt(OffsetDateTime sentAt) {
-    this.sentAt = sentAt;
-  }
-
   public EmailLog status(EmailStatus status) {
 
     this.status = status;
@@ -243,42 +239,23 @@ public class EmailLog {
     this.status = status;
   }
 
-  public EmailLog text(String text) {
+  public EmailLog bulkId(String bulkId) {
 
-    this.text = text;
+    this.bulkId = bulkId;
     return this;
   }
 
   /**
-   * Get text
+   * The ID that uniquely identifies the request.
    *
-   * @return text
+   * @return bulkId
    */
-  public String getText() {
-    return text;
+  public String getBulkId() {
+    return bulkId;
   }
 
-  public void setText(String text) {
-    this.text = text;
-  }
-
-  public EmailLog to(String to) {
-
-    this.to = to;
-    return this;
-  }
-
-  /**
-   * Get to
-   *
-   * @return to
-   */
-  public String getTo() {
-    return to;
-  }
-
-  public void setTo(String to) {
-    this.to = to;
+  public void setBulkId(String bulkId) {
+    this.bulkId = bulkId;
   }
 
   @Override
@@ -290,40 +267,38 @@ public class EmailLog {
       return false;
     }
     EmailLog emailLog = (EmailLog) o;
-    return Objects.equals(this.bulkId, emailLog.bulkId)
-        && Objects.equals(this.doneAt, emailLog.doneAt)
+    return Objects.equals(this.messageId, emailLog.messageId)
+        && Objects.equals(this.to, emailLog.to)
         && Objects.equals(this.from, emailLog.from)
-        && Objects.equals(this.mccMnc, emailLog.mccMnc)
-        && Objects.equals(this.messageCount, emailLog.messageCount)
-        && Objects.equals(this.messageId, emailLog.messageId)
-        && Objects.equals(this.price, emailLog.price)
-        && Objects.equals(this.sentAt, emailLog.sentAt)
-        && Objects.equals(this.status, emailLog.status)
         && Objects.equals(this.text, emailLog.text)
-        && Objects.equals(this.to, emailLog.to);
+        && Objects.equals(this.sentAt, emailLog.sentAt)
+        && Objects.equals(this.doneAt, emailLog.doneAt)
+        && Objects.equals(this.messageCount, emailLog.messageCount)
+        && Objects.equals(this.price, emailLog.price)
+        && Objects.equals(this.status, emailLog.status)
+        && Objects.equals(this.bulkId, emailLog.bulkId);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        bulkId, doneAt, from, mccMnc, messageCount, messageId, price, sentAt, status, text, to);
+        messageId, to, from, text, sentAt, doneAt, messageCount, price, status, bulkId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class EmailLog {\n");
-    sb.append("    bulkId: ").append(toIndentedString(bulkId)).append("\n");
-    sb.append("    doneAt: ").append(toIndentedString(doneAt)).append("\n");
-    sb.append("    from: ").append(toIndentedString(from)).append("\n");
-    sb.append("    mccMnc: ").append(toIndentedString(mccMnc)).append("\n");
-    sb.append("    messageCount: ").append(toIndentedString(messageCount)).append("\n");
     sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
-    sb.append("    price: ").append(toIndentedString(price)).append("\n");
-    sb.append("    sentAt: ").append(toIndentedString(sentAt)).append("\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
-    sb.append("    text: ").append(toIndentedString(text)).append("\n");
     sb.append("    to: ").append(toIndentedString(to)).append("\n");
+    sb.append("    from: ").append(toIndentedString(from)).append("\n");
+    sb.append("    text: ").append(toIndentedString(text)).append("\n");
+    sb.append("    sentAt: ").append(toIndentedString(sentAt)).append("\n");
+    sb.append("    doneAt: ").append(toIndentedString(doneAt)).append("\n");
+    sb.append("    messageCount: ").append(toIndentedString(messageCount)).append("\n");
+    sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    bulkId: ").append(toIndentedString(bulkId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

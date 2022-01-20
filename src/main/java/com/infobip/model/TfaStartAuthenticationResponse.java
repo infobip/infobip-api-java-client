@@ -48,7 +48,7 @@ public class TfaStartAuthenticationResponse {
   }
 
   /**
-   * Call status.
+   * Call status, e.g. &#x60;PENDING_ACCEPTED&#x60;.
    *
    * @return callStatus
    */
@@ -67,11 +67,12 @@ public class TfaStartAuthenticationResponse {
   }
 
   /**
-   * Status of sent Number Lookup. Number Lookup status can have one of the following values:
-   * &#x60;NC_DESTINATION_UNKNOWN&#x60;, &#x60;NC_DESTINATION_REACHABLE&#x60;,
-   * &#x60;NC_DESTINATION_NOT_REACHABLE&#x60;, &#x60;NC_NOT_CONFIGURED&#x60;. If you get the
-   * &#x60;NC_NOT_CONFIGURED&#x60; status, you should contact your Account Manager. SMS will not be
-   * sent only if Number Lookup status is &#x60;NC_NOT_REACHABLE&#x60;.
+   * Status of sent [Number Lookup](https://www.infobip.com/docs/number-lookup). Number Lookup
+   * status can have one of the following values: &#x60;NC_DESTINATION_UNKNOWN&#x60;,
+   * &#x60;NC_DESTINATION_REACHABLE&#x60;, &#x60;NC_DESTINATION_NOT_REACHABLE&#x60;,
+   * &#x60;NC_NOT_CONFIGURED&#x60;. Contact your Account Manager, if you get the
+   * &#x60;NC_NOT_CONFIGURED&#x60; status. SMS will not be sent only if Number Lookup status is
+   * &#x60;NC_NOT_REACHABLE&#x60;.
    *
    * @return ncStatus
    */

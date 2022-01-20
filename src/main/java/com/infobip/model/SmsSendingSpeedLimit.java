@@ -33,10 +33,9 @@ public class SmsSendingSpeedLimit {
   }
 
   /**
-   * The number of messages to send per time unit. By default, Infobip sends your messages as fast
-   * as the infrastructure allows. Use this parameter to reduce the traffic if you find the default
-   * sending speed too fast for your use case. Note that boosting this parameter will not result in
-   * faster sending speeds beyond infrastructure capabilities.
+   * The number of messages to be sent per timeUnit. By default, the system sends messages as fast
+   * as the infrastructure allows. Use this parameter to adapt sending capacity to your needs. The
+   * system is only able to work against its maximum capacity for ambitious message batches.
    *
    * @return amount
    */
@@ -55,8 +54,7 @@ public class SmsSendingSpeedLimit {
   }
 
   /**
-   * The time unit in which the defined message amount will be sent. The default value is
-   * &#x60;MINUTE&#x60;.
+   * The time unit to define when setting a messaging speed limit. Defaults to &#x60;MINUTE&#x60;.
    *
    * @return timeUnit
    */

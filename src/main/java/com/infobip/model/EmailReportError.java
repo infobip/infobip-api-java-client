@@ -14,13 +14,8 @@ package com.infobip.model;
 import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
-/** EmailError */
-public class EmailError {
-  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
-
-  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
-  private String description;
-
+/** EmailReportError */
+public class EmailReportError {
   public static final String SERIALIZED_NAME_GROUP_ID = "groupId";
 
   @SerializedName(SERIALIZED_NAME_GROUP_ID)
@@ -41,31 +36,17 @@ public class EmailError {
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
+  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
+
+  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  private String description;
+
   public static final String SERIALIZED_NAME_PERMANENT = "permanent";
 
   @SerializedName(SERIALIZED_NAME_PERMANENT)
   private Boolean permanent;
 
-  public EmailError description(String description) {
-
-    this.description = description;
-    return this;
-  }
-
-  /**
-   * Get description
-   *
-   * @return description
-   */
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public EmailError groupId(Integer groupId) {
+  public EmailReportError groupId(Integer groupId) {
 
     this.groupId = groupId;
     return this;
@@ -84,7 +65,7 @@ public class EmailError {
     this.groupId = groupId;
   }
 
-  public EmailError groupName(String groupName) {
+  public EmailReportError groupName(String groupName) {
 
     this.groupName = groupName;
     return this;
@@ -103,7 +84,7 @@ public class EmailError {
     this.groupName = groupName;
   }
 
-  public EmailError id(Integer id) {
+  public EmailReportError id(Integer id) {
 
     this.id = id;
     return this;
@@ -122,7 +103,7 @@ public class EmailError {
     this.id = id;
   }
 
-  public EmailError name(String name) {
+  public EmailReportError name(String name) {
 
     this.name = name;
     return this;
@@ -141,7 +122,26 @@ public class EmailError {
     this.name = name;
   }
 
-  public EmailError permanent(Boolean permanent) {
+  public EmailReportError description(String description) {
+
+    this.description = description;
+    return this;
+  }
+
+  /**
+   * Get description
+   *
+   * @return description
+   */
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public EmailReportError permanent(Boolean permanent) {
 
     this.permanent = permanent;
     return this;
@@ -168,29 +168,29 @@ public class EmailError {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EmailError emailError = (EmailError) o;
-    return Objects.equals(this.description, emailError.description)
-        && Objects.equals(this.groupId, emailError.groupId)
-        && Objects.equals(this.groupName, emailError.groupName)
-        && Objects.equals(this.id, emailError.id)
-        && Objects.equals(this.name, emailError.name)
-        && Objects.equals(this.permanent, emailError.permanent);
+    EmailReportError emailReportError = (EmailReportError) o;
+    return Objects.equals(this.groupId, emailReportError.groupId)
+        && Objects.equals(this.groupName, emailReportError.groupName)
+        && Objects.equals(this.id, emailReportError.id)
+        && Objects.equals(this.name, emailReportError.name)
+        && Objects.equals(this.description, emailReportError.description)
+        && Objects.equals(this.permanent, emailReportError.permanent);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(description, groupId, groupName, id, name, permanent);
+    return Objects.hash(groupId, groupName, id, name, description, permanent);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class EmailError {\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("class EmailReportError {\n");
     sb.append("    groupId: ").append(toIndentedString(groupId)).append("\n");
     sb.append("    groupName: ").append(toIndentedString(groupName)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    permanent: ").append(toIndentedString(permanent)).append("\n");
     sb.append("}");
     return sb.toString();

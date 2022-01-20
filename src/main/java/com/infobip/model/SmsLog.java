@@ -78,7 +78,8 @@ public class SmsLog {
   private String to;
 
   /**
-   * The ID that uniquely identifies the request.
+   * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages
+   * via a single API request.
    *
    * @return bulkId
    */
@@ -87,8 +88,8 @@ public class SmsLog {
   }
 
   /**
-   * Tells when the SMS was finished processing by Infobip (i.e. delivered to the destination,
-   * delivered to the destination network, etc.). Has the following format:
+   * Date and time when the Infobip services finished processing the message (i.e. delivered to the
+   * destination, delivered to the destination network, etc.). Has the following format:
    * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
    *
    * @return doneAt
@@ -135,7 +136,7 @@ public class SmsLog {
   }
 
   /**
-   * The ID that uniquely identifies the message sent.
+   * Unique message ID.
    *
    * @return messageId
    */
@@ -163,8 +164,9 @@ public class SmsLog {
   }
 
   /**
-   * Tells when the SMS was sent. Has the following format:
-   * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+   * Date and time when the message was
+   * [scheduled](https://www.infobip.com/docs/api#channels/sms/get-scheduled-sms-messages) to be
+   * sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
    *
    * @return sentAt
    */
@@ -173,7 +175,7 @@ public class SmsLog {
   }
 
   /**
-   * The number of sent message segments.
+   * The number of parts the message content was split into.
    *
    * @return smsCount
    */
@@ -201,7 +203,7 @@ public class SmsLog {
   }
 
   /**
-   * Text of the message that was sent.
+   * Content of the message being sent.
    *
    * @return text
    */
@@ -210,7 +212,7 @@ public class SmsLog {
   }
 
   /**
-   * The message destination address.
+   * The destination address of the message.
    *
    * @return to
    */

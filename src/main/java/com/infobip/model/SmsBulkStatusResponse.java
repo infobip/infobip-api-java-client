@@ -26,14 +26,9 @@ public class SmsBulkStatusResponse {
   @SerializedName(SERIALIZED_NAME_STATUS)
   private SmsBulkStatus status = null;
 
-  public SmsBulkStatusResponse bulkId(String bulkId) {
-
-    this.bulkId = bulkId;
-    return this;
-  }
-
   /**
-   * Get bulkId
+   * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages
+   * via a single API request.
    *
    * @return bulkId
    */
@@ -41,27 +36,13 @@ public class SmsBulkStatusResponse {
     return bulkId;
   }
 
-  public void setBulkId(String bulkId) {
-    this.bulkId = bulkId;
-  }
-
-  public SmsBulkStatusResponse status(SmsBulkStatus status) {
-
-    this.status = status;
-    return this;
-  }
-
   /**
-   * Get status
+   * The status of the message(s).
    *
    * @return status
    */
   public SmsBulkStatus getStatus() {
     return status;
-  }
-
-  public void setStatus(SmsBulkStatus status) {
-    this.status = status;
   }
 
   @Override

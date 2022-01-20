@@ -16,6 +16,21 @@ import java.util.Objects;
 
 /** EmailValidationResponse */
 public class EmailValidationResponse {
+  public static final String SERIALIZED_NAME_TO = "to";
+
+  @SerializedName(SERIALIZED_NAME_TO)
+  private String to;
+
+  public static final String SERIALIZED_NAME_VALID_MAILBOX = "validMailbox";
+
+  @SerializedName(SERIALIZED_NAME_VALID_MAILBOX)
+  private String validMailbox;
+
+  public static final String SERIALIZED_NAME_VALID_SYNTAX = "validSyntax";
+
+  @SerializedName(SERIALIZED_NAME_VALID_SYNTAX)
+  private Boolean validSyntax;
+
   public static final String SERIALIZED_NAME_CATCH_ALL = "catchAll";
 
   @SerializedName(SERIALIZED_NAME_CATCH_ALL)
@@ -36,20 +51,62 @@ public class EmailValidationResponse {
   @SerializedName(SERIALIZED_NAME_ROLE_BASED)
   private Boolean roleBased;
 
-  public static final String SERIALIZED_NAME_TO = "to";
+  public EmailValidationResponse to(String to) {
 
-  @SerializedName(SERIALIZED_NAME_TO)
-  private String to;
+    this.to = to;
+    return this;
+  }
 
-  public static final String SERIALIZED_NAME_VALID_MAILBOX = "validMailbox";
+  /**
+   * Get to
+   *
+   * @return to
+   */
+  public String getTo() {
+    return to;
+  }
 
-  @SerializedName(SERIALIZED_NAME_VALID_MAILBOX)
-  private String validMailbox;
+  public void setTo(String to) {
+    this.to = to;
+  }
 
-  public static final String SERIALIZED_NAME_VALID_SYNTAX = "validSyntax";
+  public EmailValidationResponse validMailbox(String validMailbox) {
 
-  @SerializedName(SERIALIZED_NAME_VALID_SYNTAX)
-  private Boolean validSyntax;
+    this.validMailbox = validMailbox;
+    return this;
+  }
+
+  /**
+   * Get validMailbox
+   *
+   * @return validMailbox
+   */
+  public String getValidMailbox() {
+    return validMailbox;
+  }
+
+  public void setValidMailbox(String validMailbox) {
+    this.validMailbox = validMailbox;
+  }
+
+  public EmailValidationResponse validSyntax(Boolean validSyntax) {
+
+    this.validSyntax = validSyntax;
+    return this;
+  }
+
+  /**
+   * Get validSyntax
+   *
+   * @return validSyntax
+   */
+  public Boolean getValidSyntax() {
+    return validSyntax;
+  }
+
+  public void setValidSyntax(Boolean validSyntax) {
+    this.validSyntax = validSyntax;
+  }
 
   public EmailValidationResponse catchAll(Boolean catchAll) {
 
@@ -127,63 +184,6 @@ public class EmailValidationResponse {
     this.roleBased = roleBased;
   }
 
-  public EmailValidationResponse to(String to) {
-
-    this.to = to;
-    return this;
-  }
-
-  /**
-   * Get to
-   *
-   * @return to
-   */
-  public String getTo() {
-    return to;
-  }
-
-  public void setTo(String to) {
-    this.to = to;
-  }
-
-  public EmailValidationResponse validMailbox(String validMailbox) {
-
-    this.validMailbox = validMailbox;
-    return this;
-  }
-
-  /**
-   * Get validMailbox
-   *
-   * @return validMailbox
-   */
-  public String getValidMailbox() {
-    return validMailbox;
-  }
-
-  public void setValidMailbox(String validMailbox) {
-    this.validMailbox = validMailbox;
-  }
-
-  public EmailValidationResponse validSyntax(Boolean validSyntax) {
-
-    this.validSyntax = validSyntax;
-    return this;
-  }
-
-  /**
-   * Get validSyntax
-   *
-   * @return validSyntax
-   */
-  public Boolean getValidSyntax() {
-    return validSyntax;
-  }
-
-  public void setValidSyntax(Boolean validSyntax) {
-    this.validSyntax = validSyntax;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -193,31 +193,31 @@ public class EmailValidationResponse {
       return false;
     }
     EmailValidationResponse emailValidationResponse = (EmailValidationResponse) o;
-    return Objects.equals(this.catchAll, emailValidationResponse.catchAll)
+    return Objects.equals(this.to, emailValidationResponse.to)
+        && Objects.equals(this.validMailbox, emailValidationResponse.validMailbox)
+        && Objects.equals(this.validSyntax, emailValidationResponse.validSyntax)
+        && Objects.equals(this.catchAll, emailValidationResponse.catchAll)
         && Objects.equals(this.didYouMean, emailValidationResponse.didYouMean)
         && Objects.equals(this.disposable, emailValidationResponse.disposable)
-        && Objects.equals(this.roleBased, emailValidationResponse.roleBased)
-        && Objects.equals(this.to, emailValidationResponse.to)
-        && Objects.equals(this.validMailbox, emailValidationResponse.validMailbox)
-        && Objects.equals(this.validSyntax, emailValidationResponse.validSyntax);
+        && Objects.equals(this.roleBased, emailValidationResponse.roleBased);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(catchAll, didYouMean, disposable, roleBased, to, validMailbox, validSyntax);
+    return Objects.hash(to, validMailbox, validSyntax, catchAll, didYouMean, disposable, roleBased);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class EmailValidationResponse {\n");
+    sb.append("    to: ").append(toIndentedString(to)).append("\n");
+    sb.append("    validMailbox: ").append(toIndentedString(validMailbox)).append("\n");
+    sb.append("    validSyntax: ").append(toIndentedString(validSyntax)).append("\n");
     sb.append("    catchAll: ").append(toIndentedString(catchAll)).append("\n");
     sb.append("    didYouMean: ").append(toIndentedString(didYouMean)).append("\n");
     sb.append("    disposable: ").append(toIndentedString(disposable)).append("\n");
     sb.append("    roleBased: ").append(toIndentedString(roleBased)).append("\n");
-    sb.append("    to: ").append(toIndentedString(to)).append("\n");
-    sb.append("    validMailbox: ").append(toIndentedString(validMailbox)).append("\n");
-    sb.append("    validSyntax: ").append(toIndentedString(validSyntax)).append("\n");
     sb.append("}");
     return sb.toString();
   }

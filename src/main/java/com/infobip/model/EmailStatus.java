@@ -14,18 +14,11 @@ package com.infobip.model;
 import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
-/** EmailStatus */
+/**
+ * Indicates whether the initiated email has been successfully sent, not sent, delivered, not
+ * delivered, waiting for delivery or any other possible status.
+ */
 public class EmailStatus {
-  public static final String SERIALIZED_NAME_ACTION = "action";
-
-  @SerializedName(SERIALIZED_NAME_ACTION)
-  private String action;
-
-  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
-
-  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
-  private String description;
-
   public static final String SERIALIZED_NAME_GROUP_ID = "groupId";
 
   @SerializedName(SERIALIZED_NAME_GROUP_ID)
@@ -46,43 +39,15 @@ public class EmailStatus {
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public EmailStatus action(String action) {
+  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
 
-    this.action = action;
-    return this;
-  }
+  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  private String description;
 
-  /**
-   * Get action
-   *
-   * @return action
-   */
-  public String getAction() {
-    return action;
-  }
+  public static final String SERIALIZED_NAME_ACTION = "action";
 
-  public void setAction(String action) {
-    this.action = action;
-  }
-
-  public EmailStatus description(String description) {
-
-    this.description = description;
-    return this;
-  }
-
-  /**
-   * Get description
-   *
-   * @return description
-   */
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
+  @SerializedName(SERIALIZED_NAME_ACTION)
+  private String action;
 
   public EmailStatus groupId(Integer groupId) {
 
@@ -91,7 +56,7 @@ public class EmailStatus {
   }
 
   /**
-   * Get groupId
+   * Status group ID.
    *
    * @return groupId
    */
@@ -110,7 +75,7 @@ public class EmailStatus {
   }
 
   /**
-   * Get groupName
+   * Status group name.
    *
    * @return groupName
    */
@@ -129,7 +94,7 @@ public class EmailStatus {
   }
 
   /**
-   * Get id
+   * Status ID.
    *
    * @return id
    */
@@ -148,7 +113,7 @@ public class EmailStatus {
   }
 
   /**
-   * Get name
+   * Status name.
    *
    * @return name
    */
@@ -160,6 +125,44 @@ public class EmailStatus {
     this.name = name;
   }
 
+  public EmailStatus description(String description) {
+
+    this.description = description;
+    return this;
+  }
+
+  /**
+   * Human-readable description of the status.
+   *
+   * @return description
+   */
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public EmailStatus action(String action) {
+
+    this.action = action;
+    return this;
+  }
+
+  /**
+   * Action name.
+   *
+   * @return action
+   */
+  public String getAction() {
+    return action;
+  }
+
+  public void setAction(String action) {
+    this.action = action;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -169,29 +172,29 @@ public class EmailStatus {
       return false;
     }
     EmailStatus emailStatus = (EmailStatus) o;
-    return Objects.equals(this.action, emailStatus.action)
-        && Objects.equals(this.description, emailStatus.description)
-        && Objects.equals(this.groupId, emailStatus.groupId)
+    return Objects.equals(this.groupId, emailStatus.groupId)
         && Objects.equals(this.groupName, emailStatus.groupName)
         && Objects.equals(this.id, emailStatus.id)
-        && Objects.equals(this.name, emailStatus.name);
+        && Objects.equals(this.name, emailStatus.name)
+        && Objects.equals(this.description, emailStatus.description)
+        && Objects.equals(this.action, emailStatus.action);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(action, description, groupId, groupName, id, name);
+    return Objects.hash(groupId, groupName, id, name, description, action);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class EmailStatus {\n");
-    sb.append("    action: ").append(toIndentedString(action)).append("\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    groupId: ").append(toIndentedString(groupId)).append("\n");
     sb.append("    groupName: ").append(toIndentedString(groupName)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    action: ").append(toIndentedString(action)).append("\n");
     sb.append("}");
     return sb.toString();
   }

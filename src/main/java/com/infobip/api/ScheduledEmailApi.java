@@ -56,8 +56,6 @@ public class ScheduledEmailApi {
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public okhttp3.Call getScheduledEmailStatusesCall(String bulkId, final ApiCallback _callback)
       throws ApiException {
@@ -75,7 +73,7 @@ public class ScheduledEmailApi {
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
     Map<String, String> localVarCookieParams = new HashMap<String, String>();
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-    final String[] localVarAccepts = {"application/json", "application/xml"};
+    final String[] localVarAccepts = {"application/json"};
     final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
     if (localVarAccept != null) {
       localVarHeaderParams.put("Accept", localVarAccept);
@@ -117,14 +115,12 @@ public class ScheduledEmailApi {
   }
 
   /**
-   * Get sent email bulks status. This method allows you to get scheduled Email bulks.
+   * Get sent email bulks status. See the status of scheduled email messages.
    *
    * @param bulkId (required)
    * @return EmailBulkStatusResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public EmailBulkStatusResponse getScheduledEmailStatuses(String bulkId) throws ApiException {
     ApiResponse<EmailBulkStatusResponse> localVarResp =
@@ -133,14 +129,12 @@ public class ScheduledEmailApi {
   }
 
   /**
-   * Get sent email bulks status. This method allows you to get scheduled Email bulks.
+   * Get sent email bulks status. See the status of scheduled email messages.
    *
    * @param bulkId (required)
    * @return ApiResponse&lt;EmailBulkStatusResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public ApiResponse<EmailBulkStatusResponse> getScheduledEmailStatusesWithHttpInfo(String bulkId)
       throws ApiException {
@@ -150,15 +144,12 @@ public class ScheduledEmailApi {
   }
 
   /**
-   * Get sent email bulks status (asynchronously). This method allows you to get scheduled Email
-   * bulks.
+   * Get sent email bulks status (asynchronously). See the status of scheduled email messages.
    *
    * @param bulkId (required)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public okhttp3.Call getScheduledEmailStatusesAsync(
       String bulkId, final ApiCallback<EmailBulkStatusResponse> _callback) throws ApiException {
@@ -171,13 +162,10 @@ public class ScheduledEmailApi {
   /**
    * Build call for getScheduledEmails.
    *
-   * @param bulkId This ID allows you to return all emails in bulk associated with that ID.
-   *     (required)
+   * @param bulkId (required)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public okhttp3.Call getScheduledEmailsCall(String bulkId, final ApiCallback _callback)
       throws ApiException {
@@ -195,7 +183,7 @@ public class ScheduledEmailApi {
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
     Map<String, String> localVarCookieParams = new HashMap<String, String>();
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-    final String[] localVarAccepts = {"application/json", "application/xml"};
+    final String[] localVarAccepts = {"application/json"};
     final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
     if (localVarAccept != null) {
       localVarHeaderParams.put("Accept", localVarAccept);
@@ -237,15 +225,12 @@ public class ScheduledEmailApi {
   }
 
   /**
-   * Get sent email bulks. Get all scheduled emails in bulk.
+   * Get sent email bulks. See the scheduled time of your Email messages.
    *
-   * @param bulkId This ID allows you to return all emails in bulk associated with that ID.
-   *     (required)
+   * @param bulkId (required)
    * @return EmailBulkScheduleResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public EmailBulkScheduleResponse getScheduledEmails(String bulkId) throws ApiException {
     ApiResponse<EmailBulkScheduleResponse> localVarResp = getScheduledEmailsWithHttpInfo(bulkId);
@@ -253,15 +238,12 @@ public class ScheduledEmailApi {
   }
 
   /**
-   * Get sent email bulks. Get all scheduled emails in bulk.
+   * Get sent email bulks. See the scheduled time of your Email messages.
    *
-   * @param bulkId This ID allows you to return all emails in bulk associated with that ID.
-   *     (required)
+   * @param bulkId (required)
    * @return ApiResponse&lt;EmailBulkScheduleResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public ApiResponse<EmailBulkScheduleResponse> getScheduledEmailsWithHttpInfo(String bulkId)
       throws ApiException {
@@ -271,15 +253,12 @@ public class ScheduledEmailApi {
   }
 
   /**
-   * Get sent email bulks (asynchronously). Get all scheduled emails in bulk.
+   * Get sent email bulks (asynchronously). See the scheduled time of your Email messages.
    *
-   * @param bulkId This ID allows you to return all emails in bulk associated with that ID.
-   *     (required)
+   * @param bulkId (required)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public okhttp3.Call getScheduledEmailsAsync(
       String bulkId, final ApiCallback<EmailBulkScheduleResponse> _callback) throws ApiException {
@@ -292,13 +271,11 @@ public class ScheduledEmailApi {
   /**
    * Build call for rescheduleEmails.
    *
-   * @param bulkId This ID associated to a bulk group of emails. (required)
-   * @param emailBulkRescheduleRequest (optional)
+   * @param bulkId (required)
+   * @param emailBulkRescheduleRequest (required)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public okhttp3.Call rescheduleEmailsCall(
       String bulkId,
@@ -319,13 +296,13 @@ public class ScheduledEmailApi {
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
     Map<String, String> localVarCookieParams = new HashMap<String, String>();
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-    final String[] localVarAccepts = {"application/json", "application/xml"};
+    final String[] localVarAccepts = {"application/json"};
     final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
     if (localVarAccept != null) {
       localVarHeaderParams.put("Accept", localVarAccept);
     }
 
-    final String[] localVarContentTypes = {"application/json", "application/xml"};
+    final String[] localVarContentTypes = {"application/json"};
     final String localVarContentType =
         localVarApiClient.selectHeaderContentType(localVarContentTypes);
     localVarHeaderParams.put("Content-Type", localVarContentType);
@@ -358,20 +335,25 @@ public class ScheduledEmailApi {
           "Missing the required parameter 'bulkId' when calling rescheduleEmails(Async)");
     }
 
+    // verify the required parameter 'emailBulkRescheduleRequest' is set
+    if (emailBulkRescheduleRequest == null) {
+      throw new ApiException(
+          "Missing the required parameter 'emailBulkRescheduleRequest' when calling"
+              + " rescheduleEmails(Async)");
+    }
+
     okhttp3.Call localVarCall = rescheduleEmailsCall(bulkId, emailBulkRescheduleRequest, _callback);
     return localVarCall;
   }
 
   /**
-   * Reschedule sent bulk. Reschedule all scheduled emails in bulk.
+   * Reschedule Email messages. Change the date and time for sending scheduled messages.
    *
-   * @param bulkId This ID associated to a bulk group of emails. (required)
-   * @param emailBulkRescheduleRequest (optional)
+   * @param bulkId (required)
+   * @param emailBulkRescheduleRequest (required)
    * @return EmailBulkRescheduleResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public EmailBulkRescheduleResponse rescheduleEmails(
       String bulkId, EmailBulkRescheduleRequest emailBulkRescheduleRequest) throws ApiException {
@@ -381,15 +363,13 @@ public class ScheduledEmailApi {
   }
 
   /**
-   * Reschedule sent bulk. Reschedule all scheduled emails in bulk.
+   * Reschedule Email messages. Change the date and time for sending scheduled messages.
    *
-   * @param bulkId This ID associated to a bulk group of emails. (required)
-   * @param emailBulkRescheduleRequest (optional)
+   * @param bulkId (required)
+   * @param emailBulkRescheduleRequest (required)
    * @return ApiResponse&lt;EmailBulkRescheduleResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public ApiResponse<EmailBulkRescheduleResponse> rescheduleEmailsWithHttpInfo(
       String bulkId, EmailBulkRescheduleRequest emailBulkRescheduleRequest) throws ApiException {
@@ -400,15 +380,14 @@ public class ScheduledEmailApi {
   }
 
   /**
-   * Reschedule sent bulk (asynchronously). Reschedule all scheduled emails in bulk.
+   * Reschedule Email messages (asynchronously). Change the date and time for sending scheduled
+   * messages.
    *
-   * @param bulkId This ID associated to a bulk group of emails. (required)
-   * @param emailBulkRescheduleRequest (optional)
+   * @param bulkId (required)
+   * @param emailBulkRescheduleRequest (required)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public okhttp3.Call rescheduleEmailsAsync(
       String bulkId,
@@ -425,13 +404,11 @@ public class ScheduledEmailApi {
   /**
    * Build call for updateScheduledEmailStatuses.
    *
-   * @param bulkId This ID associated to a bulk group of emails. (required)
-   * @param emailBulkUpdateStatusRequest (optional)
+   * @param bulkId (required)
+   * @param emailBulkUpdateStatusRequest (required)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public okhttp3.Call updateScheduledEmailStatusesCall(
       String bulkId,
@@ -452,13 +429,13 @@ public class ScheduledEmailApi {
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
     Map<String, String> localVarCookieParams = new HashMap<String, String>();
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-    final String[] localVarAccepts = {"application/json", "application/xml"};
+    final String[] localVarAccepts = {"application/json"};
     final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
     if (localVarAccept != null) {
       localVarHeaderParams.put("Accept", localVarAccept);
     }
 
-    final String[] localVarContentTypes = {"application/json", "application/xml"};
+    final String[] localVarContentTypes = {"application/json"};
     final String localVarContentType =
         localVarApiClient.selectHeaderContentType(localVarContentTypes);
     localVarHeaderParams.put("Content-Type", localVarContentType);
@@ -492,21 +469,27 @@ public class ScheduledEmailApi {
               + " updateScheduledEmailStatuses(Async)");
     }
 
+    // verify the required parameter 'emailBulkUpdateStatusRequest' is set
+    if (emailBulkUpdateStatusRequest == null) {
+      throw new ApiException(
+          "Missing the required parameter 'emailBulkUpdateStatusRequest' when calling"
+              + " updateScheduledEmailStatuses(Async)");
+    }
+
     okhttp3.Call localVarCall =
         updateScheduledEmailStatusesCall(bulkId, emailBulkUpdateStatusRequest, _callback);
     return localVarCall;
   }
 
   /**
-   * Manage sent bulk&#39;s status. Manage all the statuses in bulk for sent emails.
+   * Update scheduled Email messages status. Change status or completely cancel sending of scheduled
+   * messages.
    *
-   * @param bulkId This ID associated to a bulk group of emails. (required)
-   * @param emailBulkUpdateStatusRequest (optional)
+   * @param bulkId (required)
+   * @param emailBulkUpdateStatusRequest (required)
    * @return EmailBulkUpdateStatusResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public EmailBulkUpdateStatusResponse updateScheduledEmailStatuses(
       String bulkId, EmailBulkUpdateStatusRequest emailBulkUpdateStatusRequest)
@@ -517,15 +500,14 @@ public class ScheduledEmailApi {
   }
 
   /**
-   * Manage sent bulk&#39;s status. Manage all the statuses in bulk for sent emails.
+   * Update scheduled Email messages status. Change status or completely cancel sending of scheduled
+   * messages.
    *
-   * @param bulkId This ID associated to a bulk group of emails. (required)
-   * @param emailBulkUpdateStatusRequest (optional)
+   * @param bulkId (required)
+   * @param emailBulkUpdateStatusRequest (required)
    * @return ApiResponse&lt;EmailBulkUpdateStatusResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public ApiResponse<EmailBulkUpdateStatusResponse> updateScheduledEmailStatusesWithHttpInfo(
       String bulkId, EmailBulkUpdateStatusRequest emailBulkUpdateStatusRequest)
@@ -537,16 +519,14 @@ public class ScheduledEmailApi {
   }
 
   /**
-   * Manage sent bulk&#39;s status (asynchronously). Manage all the statuses in bulk for sent
-   * emails.
+   * Update scheduled Email messages status (asynchronously). Change status or completely cancel
+   * sending of scheduled messages.
    *
-   * @param bulkId This ID associated to a bulk group of emails. (required)
-   * @param emailBulkUpdateStatusRequest (optional)
+   * @param bulkId (required)
+   * @param emailBulkUpdateStatusRequest (required)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use
-   *     cases</a>
    */
   public okhttp3.Call updateScheduledEmailStatusesAsync(
       String bulkId,

@@ -57,7 +57,7 @@ public class TfaApplicationConfiguration {
   }
 
   /**
-   * Tells if multiple PIN verifications are allowed.
+   * Indicates whether multiple PIN verification is allowed.
    *
    * @return allowMultiplePinVerifications
    */
@@ -95,7 +95,11 @@ public class TfaApplicationConfiguration {
   }
 
   /**
-   * PIN time to live.
+   * Validity period of PIN in specified time unit. Required format:
+   * &#x60;{timeLength}{timeUnit}&#x60;. &#x60;timeLength&#x60; is optional with a default value of
+   * 1. &#x60;timeUnit&#x60; can be set to: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;,
+   * &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days
+   * respectively. Must not exceed one year, although much lower value is recommended.
    *
    * @return pinTimeToLive
    */
@@ -114,8 +118,12 @@ public class TfaApplicationConfiguration {
   }
 
   /**
-   * Overall number of requests in time interval for generating a PIN and sending an SMS using
-   * single application.
+   * Overall number of requests over a specififed time period for generating a PIN and sending an
+   * SMS using a single application. Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;.
+   * &#x60;attempts&#x60; is mandatory and &#x60;timeLength&#x60; is optional with a default value
+   * of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;,
+   * &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days
+   * respectively. Must not exceed one year, although much lower value is recommended.
    *
    * @return sendPinPerApplicationLimit
    */
@@ -134,8 +142,12 @@ public class TfaApplicationConfiguration {
   }
 
   /**
-   * Number of requests in time interval for generating a PIN and sending an SMS to one phone number
-   * (MSISDN).
+   * Number of requests over a specififed time period for generating a PIN and sending an SMS to one
+   * phone number (MSISDN). Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;.
+   * &#x60;attempts&#x60; is mandatory and &#x60;timeLength&#x60; is optional with a default value
+   * of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;,
+   * &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days
+   * respectively. Must not exceed one year, although much lower value is recommended.
    *
    * @return sendPinPerPhoneNumberLimit
    */
@@ -154,7 +166,12 @@ public class TfaApplicationConfiguration {
   }
 
   /**
-   * Number of PIN verification requests in time interval from one phone number (MSISDN).
+   * The number of PIN verification requests over a specififed time period from one phone number
+   * (MSISDN). Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;. &#x60;attempts&#x60;
+   * is mandatory and &#x60;timeLength&#x60; is optional with a default value of 1.
+   * &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;, &#x60;h&#x60; or
+   * &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days respectively. Must
+   * not exceed one day, although much lower value is recommended.
    *
    * @return verifyPinLimit
    */

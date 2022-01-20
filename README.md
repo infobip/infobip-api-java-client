@@ -3,12 +3,12 @@
 [![Maven Central](https://badgen.net/maven/v/maven-central/com.infobip/infobip-api-java-client?icon=maven)](https://search.maven.org/artifact/com.infobip/infobip-api-java-client)
 [![MIT License](https://badgen.net/github/license/infobip/infobip-api-java-client)](https://opensource.org/licenses/MIT)
 
-This is a Java Client for Infobip API and you can use it as a dependency to add [Infobip APIs][apidocs] to your application.
-To use this, you'll need an Infobip account. If not already having one, you can create a [free trial][freetrial] account [here][signup].
+This is a Java Client for Infobip API and you can use it as a dependency when you want to consume [Infobip APIs][apidocs] in your application.
+To use this, you'll need an Infobip account. You can create a [free trial][freetrial] account [here][signup].
 
-Built on top of [OpenAPI Specification](https://swagger.io/specification/), powered by [OpenAPI Generator](https://openapi-generator.tech/).
+`infobip-api-java-client` is built on top of [OpenAPI Specification](https://swagger.io/specification/), powered by [OpenAPI Generator](https://openapi-generator.tech/).
 
-<img src="https://udesigncss.com/wp-content/uploads/2020/01/Infobip-logo-transparent.png" height="124px" alt="Infobip" />
+<img src="https://udesigncss.com/wp-content/uploads/2020/01/Infobip-logo-transparent.png" height="48px" alt="Infobip" />
 
 #### Table of contents:
 * [Documentation](#documentation)
@@ -19,7 +19,7 @@ Built on top of [OpenAPI Specification](https://swagger.io/specification/), powe
 
 ## Documentation
 
-Infobip API Documentation can be found [here][apidocs].
+Detailed documentation about Infobip API can be found [here][apidocs].
 
 ## General Info
 For `infobip-api-java-client` versioning we use [Semantic Versioning][semver] scheme.
@@ -36,7 +36,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
       <groupId>com.infobip</groupId>
       <artifactId>infobip-api-java-client</artifactId>
-      <version>3.1.0</version>
+      <version>3.2.0</version>
 </dependency>
 ```
 
@@ -45,7 +45,7 @@ If you decide to take a manual approach, you need the following installed and av
 - Java 8
 - [Apache Maven v3.3.4 or greater](https://maven.apache.org/download.cgi)
 
-If you want to compile it yourself, here's how you can achieve that:
+To compile it proceed with following:
 
     $ git clone git@github.com:infobip/infobip-api-java-client
     $ cd infobip-api-java-client
@@ -184,6 +184,9 @@ For 2FA quick start guide please check [these examples](two-factor-authenticatio
 
 #### Email
 For Email quick start guide please check [these examples](email.md).
+
+#### WhatsApp
+For WhatsApp quick start guide please check [these examples](whatsapp.md).
 
 ## Ask for help
 

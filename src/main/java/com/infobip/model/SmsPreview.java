@@ -37,7 +37,7 @@ public class SmsPreview {
   private String textPreview;
 
   /**
-   * Number of remaining characters in the last SMS part.
+   * Number of remaining characters in the last part of the SMS.
    *
    * @return charactersRemaining
    */
@@ -46,7 +46,8 @@ public class SmsPreview {
   }
 
   /**
-   * Configuration that, when sent with the original text, results in this preview.
+   * Sets up additional configuration that changes the original message content you can preview with
+   * this call.
    *
    * @return _configuration
    */
@@ -64,7 +65,7 @@ public class SmsPreview {
   }
 
   /**
-   * Preview of the text as it should appear on the recipient’s device.
+   * Preview of the message content as it should appear on the recipient’s device.
    *
    * @return textPreview
    */

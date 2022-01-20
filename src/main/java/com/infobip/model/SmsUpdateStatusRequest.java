@@ -28,7 +28,7 @@ public class SmsUpdateStatusRequest {
   }
 
   /**
-   * Get status
+   * The status of the message(s).
    *
    * @return status
    */

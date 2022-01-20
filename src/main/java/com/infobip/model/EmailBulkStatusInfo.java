@@ -24,7 +24,7 @@ public class EmailBulkStatusInfo {
   public static final String SERIALIZED_NAME_STATUS = "status";
 
   @SerializedName(SERIALIZED_NAME_STATUS)
-  private EmailBulkStatus status = null;
+  private EmailBulkStatus status;
 
   public EmailBulkStatusInfo bulkId(String bulkId) {
 

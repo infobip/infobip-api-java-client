@@ -14,60 +14,17 @@ package com.infobip.model;
 import com.google.gson.annotations.SerializedName;
 import java.util.Objects;
 
-/** EmailPrice */
+/** Sent email price. */
 public class EmailPrice {
-  public static final String SERIALIZED_NAME_CURRENCY = "currency";
-
-  @SerializedName(SERIALIZED_NAME_CURRENCY)
-  private String currency;
-
-  public static final String SERIALIZED_NAME_PRICE_PER_LOOKUP = "pricePerLookup";
-
-  @SerializedName(SERIALIZED_NAME_PRICE_PER_LOOKUP)
-  private Double pricePerLookup;
-
   public static final String SERIALIZED_NAME_PRICE_PER_MESSAGE = "pricePerMessage";
 
   @SerializedName(SERIALIZED_NAME_PRICE_PER_MESSAGE)
   private Double pricePerMessage;
 
-  public EmailPrice currency(String currency) {
+  public static final String SERIALIZED_NAME_CURRENCY = "currency";
 
-    this.currency = currency;
-    return this;
-  }
-
-  /**
-   * Get currency
-   *
-   * @return currency
-   */
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
-  public EmailPrice pricePerLookup(Double pricePerLookup) {
-
-    this.pricePerLookup = pricePerLookup;
-    return this;
-  }
-
-  /**
-   * Get pricePerLookup
-   *
-   * @return pricePerLookup
-   */
-  public Double getPricePerLookup() {
-    return pricePerLookup;
-  }
-
-  public void setPricePerLookup(Double pricePerLookup) {
-    this.pricePerLookup = pricePerLookup;
-  }
+  @SerializedName(SERIALIZED_NAME_CURRENCY)
+  private String currency;
 
   public EmailPrice pricePerMessage(Double pricePerMessage) {
 
@@ -76,7 +33,7 @@ public class EmailPrice {
   }
 
   /**
-   * Get pricePerMessage
+   * Price per one email request.
    *
    * @return pricePerMessage
    */
@@ -88,6 +45,25 @@ public class EmailPrice {
     this.pricePerMessage = pricePerMessage;
   }
 
+  public EmailPrice currency(String currency) {
+
+    this.currency = currency;
+    return this;
+  }
+
+  /**
+   * The currency in which the price is expressed.
+   *
+   * @return currency
+   */
+  public String getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -97,23 +73,21 @@ public class EmailPrice {
       return false;
     }
     EmailPrice emailPrice = (EmailPrice) o;
-    return Objects.equals(this.currency, emailPrice.currency)
-        && Objects.equals(this.pricePerLookup, emailPrice.pricePerLookup)
-        && Objects.equals(this.pricePerMessage, emailPrice.pricePerMessage);
+    return Objects.equals(this.pricePerMessage, emailPrice.pricePerMessage)
+        && Objects.equals(this.currency, emailPrice.currency);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(currency, pricePerLookup, pricePerMessage);
+    return Objects.hash(pricePerMessage, currency);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class EmailPrice {\n");
-    sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
-    sb.append("    pricePerLookup: ").append(toIndentedString(pricePerLookup)).append("\n");
     sb.append("    pricePerMessage: ").append(toIndentedString(pricePerMessage)).append("\n");
+    sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("}");
     return sb.toString();
   }

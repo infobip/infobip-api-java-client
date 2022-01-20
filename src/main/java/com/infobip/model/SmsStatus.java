@@ -47,7 +47,7 @@ public class SmsStatus {
   private String name;
 
   /**
-   * Action that should be taken to eliminate the error.
+   * Action that should be taken to recover from the error.
    *
    * @return action
    */
@@ -74,7 +74,8 @@ public class SmsStatus {
   }
 
   /**
-   * Status group name.
+   * Status group name that describes which category the status code belongs to, e.g. PENDING,
+   * UNDELIVERABLE, DELIVERED, EXPIRED, REJECTED.
    *
    * @return groupName
    */
@@ -92,7 +93,7 @@ public class SmsStatus {
   }
 
   /**
-   * Status name.
+   * [Status name](https://www.infobip.com/docs/essentials/response-status-and-error-codes).
    *
    * @return name
    */

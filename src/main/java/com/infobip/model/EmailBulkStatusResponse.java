@@ -18,15 +18,34 @@ import java.util.Objects;
 
 /** EmailBulkStatusResponse */
 public class EmailBulkStatusResponse {
+  public static final String SERIALIZED_NAME_EXTERNAL_BULK_ID = "externalBulkId";
+
+  @SerializedName(SERIALIZED_NAME_EXTERNAL_BULK_ID)
+  private String externalBulkId;
+
   public static final String SERIALIZED_NAME_BULKS = "bulks";
 
   @SerializedName(SERIALIZED_NAME_BULKS)
   private List<EmailBulkStatusInfo> bulks = null;
 
-  public static final String SERIALIZED_NAME_EXTERNAL_BULK_ID = "externalBulkId";
+  public EmailBulkStatusResponse externalBulkId(String externalBulkId) {
 
-  @SerializedName(SERIALIZED_NAME_EXTERNAL_BULK_ID)
-  private String externalBulkId;
+    this.externalBulkId = externalBulkId;
+    return this;
+  }
+
+  /**
+   * Get externalBulkId
+   *
+   * @return externalBulkId
+   */
+  public String getExternalBulkId() {
+    return externalBulkId;
+  }
+
+  public void setExternalBulkId(String externalBulkId) {
+    this.externalBulkId = externalBulkId;
+  }
 
   public EmailBulkStatusResponse bulks(List<EmailBulkStatusInfo> bulks) {
 
@@ -55,25 +74,6 @@ public class EmailBulkStatusResponse {
     this.bulks = bulks;
   }
 
-  public EmailBulkStatusResponse externalBulkId(String externalBulkId) {
-
-    this.externalBulkId = externalBulkId;
-    return this;
-  }
-
-  /**
-   * Get externalBulkId
-   *
-   * @return externalBulkId
-   */
-  public String getExternalBulkId() {
-    return externalBulkId;
-  }
-
-  public void setExternalBulkId(String externalBulkId) {
-    this.externalBulkId = externalBulkId;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -83,21 +83,21 @@ public class EmailBulkStatusResponse {
       return false;
     }
     EmailBulkStatusResponse emailBulkStatusResponse = (EmailBulkStatusResponse) o;
-    return Objects.equals(this.bulks, emailBulkStatusResponse.bulks)
-        && Objects.equals(this.externalBulkId, emailBulkStatusResponse.externalBulkId);
+    return Objects.equals(this.externalBulkId, emailBulkStatusResponse.externalBulkId)
+        && Objects.equals(this.bulks, emailBulkStatusResponse.bulks);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bulks, externalBulkId);
+    return Objects.hash(externalBulkId, bulks);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class EmailBulkStatusResponse {\n");
-    sb.append("    bulks: ").append(toIndentedString(bulks)).append("\n");
     sb.append("    externalBulkId: ").append(toIndentedString(externalBulkId)).append("\n");
+    sb.append("    bulks: ").append(toIndentedString(bulks)).append("\n");
     sb.append("}");
     return sb.toString();
   }

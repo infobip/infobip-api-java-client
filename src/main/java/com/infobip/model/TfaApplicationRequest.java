@@ -57,7 +57,7 @@ public class TfaApplicationRequest {
   }
 
   /**
-   * Indicates if the created application is enabled.
+   * Indicates whether the created application is enabled.
    *
    * @return enabled
    */

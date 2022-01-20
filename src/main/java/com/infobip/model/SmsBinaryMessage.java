@@ -105,7 +105,7 @@ public class SmsBinaryMessage {
   }
 
   /**
-   * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 200
+   * Additional client data that will be sent on the notifyUrl. The maximum value is 4000
    * characters.
    *
    * @return callbackData
@@ -125,11 +125,7 @@ public class SmsBinaryMessage {
   }
 
   /**
-   * Scheduling object that allows setting up detailed time windows in which the message can be
-   * sent. Consists of &#x60;from&#x60;, &#x60;to&#x60; and &#x60;days&#x60; properties.
-   * &#x60;Days&#x60; property is mandatory. &#x60;From&#x60; and &#x60;to&#x60; properties should
-   * be either both included, to allow finer time window granulation or both omitted, to include
-   * whole days in the delivery time window.
+   * Sets specific scheduling options to send a message within daily or hourly intervals.
    *
    * @return deliveryTimeWindow
    */
@@ -156,7 +152,8 @@ public class SmsBinaryMessage {
   }
 
   /**
-   * Get destinations
+   * An array of destination objects for where messages are being sent. A valid destination is
+   * required.
    *
    * @return destinations
    */
@@ -175,8 +172,9 @@ public class SmsBinaryMessage {
   }
 
   /**
-   * Can be &#x60;true&#x60; or &#x60;false&#x60;. If the value is set to &#x60;true&#x60;, a flash
-   * SMS will be sent. Otherwise, a normal SMS will be sent. The default value is &#x60;false&#x60;.
+   * Allows for sending a [flash SMS](https://www.infobip.com/docs/sms/message-types#flash-sms) to
+   * automatically appear on recipient devices without interaction. Set to &#x60;true&#x60; to
+   * enable flash SMS, or leave the default value, &#x60;false&#x60; to send a standard SMS.
    *
    * @return flash
    */
@@ -195,9 +193,9 @@ public class SmsBinaryMessage {
   }
 
   /**
-   * Represents a sender ID which can be alphanumeric or numeric. Alphanumeric sender ID length
-   * should be between 3 and 11 characters (Example: &#x60;CompanyName&#x60;). Numeric sender ID
-   * length should be between 3 and 14 characters.
+   * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;). Make sure
+   * you don&#39;t exceed [character
+   * limit](https://www.infobip.com/docs/sms/get-started#sender-names).
    *
    * @return from
    */
@@ -216,8 +214,10 @@ public class SmsBinaryMessage {
   }
 
   /**
-   * The real-time Intermediate delivery report that will be sent on your callback server. Can be
-   * &#x60;true&#x60; or &#x60;false&#x60;.
+   * The [real-time intermediate delivery
+   * report](https://www.infobip.com/docs/api#channels/sms/receive-outbound-sms-message-report)
+   * containing GSM error codes, messages status, pricing, network and country codes, etc., which
+   * will be sent on your callback server. Defaults to &#x60;false&#x60;.
    *
    * @return intermediateReport
    */
@@ -236,7 +236,7 @@ public class SmsBinaryMessage {
   }
 
   /**
-   * Preferred Delivery report content type. Can be &#x60;application/json&#x60; or
+   * Preferred delivery report content type, &#x60;application/json&#x60; or
    * &#x60;application/xml&#x60;.
    *
    * @return notifyContentType
@@ -275,8 +275,8 @@ public class SmsBinaryMessage {
   }
 
   /**
-   * Region specific parameters, often specified by local laws. Use this if country or region that
-   * you are sending SMS to requires some extra parameters.
+   * Region-specific parameters, often imposed by local laws. Use this, if country or region that
+   * you are sending an SMS to requires additional information.
    *
    * @return regional
    */
@@ -295,9 +295,10 @@ public class SmsBinaryMessage {
   }
 
   /**
-   * Date and time when the message is to be sent. Used for scheduled SMS (SMS not sent immediately,
-   * but at the scheduled time). Has the following format:
-   * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+   * Date and time when the message is to be sent. Used for [scheduled
+   * SMS](https://www.infobip.com/docs/api#channels/sms/get-scheduled-sms-messages). Has the
+   * following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. Must be sooner than 180 days
+   * from now.
    *
    * @return sendAt
    */

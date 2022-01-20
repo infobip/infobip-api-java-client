@@ -50,7 +50,8 @@ public class TfaStartAuthenticationRequest {
   }
 
   /**
-   * 2FA application ID.
+   * The ID of the application that represents your service, e.g. 2FA for login, 2FA for changing
+   * the password, etc.
    *
    * @return applicationId
    */
@@ -90,7 +91,8 @@ public class TfaStartAuthenticationRequest {
   }
 
   /**
-   * Message template ID that will be sent to phone number.
+   * The ID of the message template (message body with the PIN placeholder) that is sent to the
+   * recipient.
    *
    * @return messageId
    */

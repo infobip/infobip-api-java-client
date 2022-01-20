@@ -33,7 +33,7 @@ public class SmsIndiaDltOptions {
   }
 
   /**
-   * Id of your registered DTL content template that matches this message&#39;s text.
+   * Registered DTL content template ID which matches message you are sending.
    *
    * @return contentTemplateId
    */
@@ -52,7 +52,7 @@ public class SmsIndiaDltOptions {
   }
 
   /**
-   * Your assigned DTL principal entity id.
+   * Your assigned DTL principal entity ID.
    *
    * @return principalEntityId
    */

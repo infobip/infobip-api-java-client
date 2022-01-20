@@ -28,8 +28,10 @@ public class SmsResponse {
   private List<SmsResponseDetails> messages = null;
 
   /**
-   * The ID that uniquely identifies the request. Bulk ID will be received only when you send a
-   * message to more than one destination address.
+   * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages
+   * via a single API request. Typically, used to fetch [delivery
+   * reports](#channels/sms/get-outbound-sms-message-delivery-reports) and [message
+   * logs](#channels/sms/get-outbound-sms-message-logs).
    *
    * @return bulkId
    */
@@ -38,7 +40,7 @@ public class SmsResponse {
   }
 
   /**
-   * Array of sent message objects, one object per every message.
+   * An array of message objects of a single message or multiple messages sent under one bulk ID.
    *
    * @return messages
    */

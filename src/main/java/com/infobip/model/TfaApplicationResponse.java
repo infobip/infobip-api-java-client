@@ -37,7 +37,8 @@ public class TfaApplicationResponse {
   private String name;
 
   /**
-   * 2FA application ID.
+   * The ID of the application that represents your service, e.g. 2FA for login, 2FA for changing
+   * the password, etc.
    *
    * @return applicationId
    */
@@ -55,7 +56,7 @@ public class TfaApplicationResponse {
   }
 
   /**
-   * Indicates if the created application is enabled.
+   * Indicates whether the created application is enabled.
    *
    * @return enabled
    */

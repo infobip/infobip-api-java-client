@@ -45,9 +45,8 @@ public class SmsDeliveryTimeWindow {
   }
 
   /**
-   * Days which are included in the delivery time window. Values are: &#x60;MONDAY&#x60;,
-   * &#x60;TUESDAY&#x60;, &#x60;WEDNESDAY&#x60;, &#x60;THURSDAY&#x60;, &#x60;FRIDAY&#x60;,
-   * &#x60;SATURDAY&#x60;, &#x60;SUNDAY&#x60;. At least one day must be stated.
+   * Days of the week which are included in the delivery time window. At least one day must be
+   * provided. Separate multiple days with a comma.
    *
    * @return days
    */
@@ -66,8 +65,8 @@ public class SmsDeliveryTimeWindow {
   }
 
   /**
-   * Exact time of day in which the sending can start. Consists of hour and minute properties, both
-   * mandatory. Time is expressed in the UTC time zone.
+   * The exact time of day to start sending messages. Time is expressed in the UTC time zone. If
+   * set, use it together with the &#x60;to&#x60; property with minimum 1 hour difference.
    *
    * @return from
    */
@@ -86,8 +85,8 @@ public class SmsDeliveryTimeWindow {
   }
 
   /**
-   * Exact time of day in which the sending will end. Consists of an hour and minute properties,
-   * both mandatory. Time is expressed in the UTC time zone.
+   * The exact time of day to end sending messages. Time is expressed in the UTC time zone. If set,
+   * use it together with the &#x60;from&#x60; property with minimum 1 hour difference.
    *
    * @return to
    */

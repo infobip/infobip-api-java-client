@@ -68,7 +68,7 @@ public class SmsInboundMessage {
   private String to;
 
   /**
-   * Custom callback data can be inserted during the setup phase.
+   * Custom callback data sent over the notifyUrl.
    *
    * @return callbackData
    */
@@ -77,7 +77,7 @@ public class SmsInboundMessage {
   }
 
   /**
-   * Text of received message without a keyword (if a keyword was sent).
+   * Content of the message without a keyword (if a keyword was sent).
    *
    * @return cleanText
    */
@@ -95,7 +95,7 @@ public class SmsInboundMessage {
   }
 
   /**
-   * Keyword extracted from the message text.
+   * Keyword extracted from the message content.
    *
    * @return keyword
    */
@@ -104,7 +104,7 @@ public class SmsInboundMessage {
   }
 
   /**
-   * The ID that uniquely identifies the received message.
+   * Unique message ID.
    *
    * @return messageId
    */
@@ -112,14 +112,8 @@ public class SmsInboundMessage {
     return messageId;
   }
 
-  public SmsInboundMessage price(SmsPrice price) {
-
-    this.price = price;
-    return this;
-  }
-
   /**
-   * Get price
+   * A price object showing currency and a price per each message.
    *
    * @return price
    */
@@ -127,12 +121,8 @@ public class SmsInboundMessage {
     return price;
   }
 
-  public void setPrice(SmsPrice price) {
-    this.price = price;
-  }
-
   /**
-   * Tells when Infobip platform received the message. It has the following format:
+   * Indicates when the Infobip platform received the message. Has the following format:
    * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
    *
    * @return receivedAt
@@ -142,7 +132,7 @@ public class SmsInboundMessage {
   }
 
   /**
-   * The number of sent message segments.
+   * The number of characters within a message
    *
    * @return smsCount
    */
@@ -151,7 +141,7 @@ public class SmsInboundMessage {
   }
 
   /**
-   * Full text of the received message.
+   * Full content of the message.
    *
    * @return text
    */
@@ -160,7 +150,7 @@ public class SmsInboundMessage {
   }
 
   /**
-   * The message destination address.
+   * The destination address of the message.
    *
    * @return to
    */

@@ -12,7 +12,6 @@
 package com.infobip.model;
 
 import com.google.gson.annotations.SerializedName;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,14 +32,8 @@ public class SmsInboundMessageResult {
   @SerializedName(SERIALIZED_NAME_RESULTS)
   private List<SmsInboundMessage> results = null;
 
-  public SmsInboundMessageResult messageCount(Integer messageCount) {
-
-    this.messageCount = messageCount;
-    return this;
-  }
-
   /**
-   * Get messageCount
+   * The number of messages returned in the &#x60;results&#x60; array.
    *
    * @return messageCount
    */
@@ -48,18 +41,8 @@ public class SmsInboundMessageResult {
     return messageCount;
   }
 
-  public void setMessageCount(Integer messageCount) {
-    this.messageCount = messageCount;
-  }
-
-  public SmsInboundMessageResult pendingMessageCount(Integer pendingMessageCount) {
-
-    this.pendingMessageCount = pendingMessageCount;
-    return this;
-  }
-
   /**
-   * Get pendingMessageCount
+   * The number of messages that have not been pulled in.
    *
    * @return pendingMessageCount
    */
@@ -67,35 +50,13 @@ public class SmsInboundMessageResult {
     return pendingMessageCount;
   }
 
-  public void setPendingMessageCount(Integer pendingMessageCount) {
-    this.pendingMessageCount = pendingMessageCount;
-  }
-
-  public SmsInboundMessageResult results(List<SmsInboundMessage> results) {
-
-    this.results = results;
-    return this;
-  }
-
-  public SmsInboundMessageResult addResultsItem(SmsInboundMessage resultsItem) {
-    if (this.results == null) {
-      this.results = new ArrayList<>();
-    }
-    this.results.add(resultsItem);
-    return this;
-  }
-
   /**
-   * Get results
+   * An array of result objects.
    *
    * @return results
    */
   public List<SmsInboundMessage> getResults() {
     return results;
-  }
-
-  public void setResults(List<SmsInboundMessage> results) {
-    this.results = results;
   }
 
   @Override

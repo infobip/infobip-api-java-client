@@ -28,7 +28,7 @@ public class SmsPreviewResponse {
   private List<SmsPreview> previews = null;
 
   /**
-   * Text supplied in the request.
+   * Message content supplied in the request.
    *
    * @return originalText
    */
@@ -37,7 +37,8 @@ public class SmsPreviewResponse {
   }
 
   /**
-   * Previews of applying different configurations to the original text.
+   * Allows for previewing the original message content once additional language configuration has
+   * been applied to it.
    *
    * @return previews
    */

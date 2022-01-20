@@ -78,7 +78,8 @@ public class TfaMessage {
   }
 
   /**
-   * 2FA application ID for which the requested message is created.
+   * The ID of the application that represents your service (e.g. 2FA for login, 2FA for changing
+   * the password, etc.) for which the requested message has been created.
    *
    * @return applicationId
    */
@@ -97,8 +98,8 @@ public class TfaMessage {
   }
 
   /**
-   * Language code of language in which message text is written. It is used for reading the message
-   * when it is sent via voice. If no language is set, message will be read in &#x60;English&#x60;.
+   * The language code which message is written in used when sending text-to-speech messages. If not
+   * defined, it will default to English (&#x60;en&#x60;).
    *
    * @return language
    */
@@ -117,7 +118,8 @@ public class TfaMessage {
   }
 
   /**
-   * Message template ID.
+   * The ID of the message template (message body with the PIN placeholder) that is sent to the
+   * recipient.
    *
    * @return messageId
    */
@@ -174,7 +176,7 @@ public class TfaMessage {
   }
 
   /**
-   * PIN code placeholder that will be replaced with generated PIN code.
+   * The PIN code placeholder that will be replaced with a generated PIN code.
    *
    * @return pinPlaceholder
    */
@@ -193,8 +195,8 @@ public class TfaMessage {
   }
 
   /**
-   * Type of PIN code that will be generated and sent as part of 2FA message. You can set PIN type
-   * to numeric, alpha, alphanumeric or hex.
+   * The type of PIN code that will be generated and sent as part of 2FA message. You can set PIN
+   * type to numeric, alpha, alphanumeric or hex.
    *
    * @return pinType
    */

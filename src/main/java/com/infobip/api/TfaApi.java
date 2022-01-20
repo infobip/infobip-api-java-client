@@ -304,7 +304,7 @@ public class TfaApi {
   /**
    * Build call for getTfaApplication.
    *
-   * @param appId Requested application ID. (required)
+   * @param appId ID of application for which configuration view was requested. (required)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
@@ -369,7 +369,7 @@ public class TfaApi {
   /**
    * Get 2FA application. Get a single 2FA application to see its configuration details.
    *
-   * @param appId Requested application ID. (required)
+   * @param appId ID of application for which configuration view was requested. (required)
    * @return TfaApplicationResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
@@ -384,7 +384,7 @@ public class TfaApi {
   /**
    * Get 2FA application. Get a single 2FA application to see its configuration details.
    *
-   * @param appId Requested application ID. (required)
+   * @param appId ID of application for which configuration view was requested. (required)
    * @return ApiResponse&lt;TfaApplicationResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
@@ -402,7 +402,7 @@ public class TfaApi {
    * Get 2FA application (asynchronously). Get a single 2FA application to see its configuration
    * details.
    *
-   * @param appId Requested application ID. (required)
+   * @param appId ID of application for which configuration view was requested. (required)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object

@@ -38,9 +38,9 @@ public class SmsPreviewRequest {
   }
 
   /**
-   * Code for language character set of a message text. Possible values: &#x60;TR&#x60; for Turkish,
-   * &#x60;ES&#x60; for Spanish, &#x60;PT&#x60; for Portuguese and &#x60;AUTODETECT&#x60; to let
-   * platform pick character set automatically based on the message text.
+   * Language code for the correct character set. Possible values: &#x60;TR&#x60; for Turkish,
+   * &#x60;ES&#x60; for Spanish, &#x60;PT&#x60; for Portuguese, or &#x60;AUTODETECT&#x60; to let
+   * platform select the character set based on message content.
    *
    * @return languageCode
    */
@@ -59,7 +59,7 @@ public class SmsPreviewRequest {
   }
 
   /**
-   * Message text to preview.
+   * Content of the message being sent.
    *
    * @return text
    */
@@ -78,9 +78,11 @@ public class SmsPreviewRequest {
   }
 
   /**
-   * Conversion of a message text from one script to another. Possible values: &#x60;TURKISH&#x60;,
-   * &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;, &#x60;SERBIAN_CYRILLIC&#x60;,
-   * &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60; and &#x60;NON_UNICODE&#x60;.
+   * The transliteration of your sent message from one script to another. Transliteration is used to
+   * replace characters which are not recognized as part of your defaulted alphabet. Possible
+   * values: &#x60;TURKISH&#x60;, &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;,
+   * &#x60;SERBIAN_CYRILLIC&#x60;, &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60; and
+   * &#x60;NON_UNICODE&#x60;.
    *
    * @return transliteration
    */

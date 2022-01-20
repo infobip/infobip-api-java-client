@@ -27,14 +27,9 @@ public class SmsBulkResponse {
   @SerializedName(SERIALIZED_NAME_SEND_AT)
   private OffsetDateTime sendAt;
 
-  public SmsBulkResponse bulkId(String bulkId) {
-
-    this.bulkId = bulkId;
-    return this;
-  }
-
   /**
-   * Get bulkId
+   * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages
+   * via a single API request.
    *
    * @return bulkId
    */
@@ -42,27 +37,15 @@ public class SmsBulkResponse {
     return bulkId;
   }
 
-  public void setBulkId(String bulkId) {
-    this.bulkId = bulkId;
-  }
-
-  public SmsBulkResponse sendAt(OffsetDateTime sendAt) {
-
-    this.sendAt = sendAt;
-    return this;
-  }
-
   /**
-   * Get sendAt
+   * Date and time when the message is to be sent. Used for scheduled SMS (see [Scheduled SMS
+   * endpoints](#channels/sms/get-scheduled-sms-messages) for more details). Has the following
+   * format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
    *
    * @return sendAt
    */
   public OffsetDateTime getSendAt() {
     return sendAt;
-  }
-
-  public void setSendAt(OffsetDateTime sendAt) {
-    this.sendAt = sendAt;
   }
 
   @Override

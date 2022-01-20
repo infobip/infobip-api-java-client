@@ -29,7 +29,9 @@ public class SmsBulkRequest {
   }
 
   /**
-   * Get sendAt
+   * Date and time when the message is to be sent. Used for scheduled SMS (see [Scheduled SMS
+   * endpoints](#channels/sms/get-scheduled-sms-messages) for more details). Has the following
+   * format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
    *
    * @return sendAt
    */

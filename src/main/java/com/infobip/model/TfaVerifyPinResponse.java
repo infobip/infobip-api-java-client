@@ -60,7 +60,7 @@ public class TfaVerifyPinResponse {
   }
 
   /**
-   * Indicates if any error occurs during PIN verification.
+   * Indicates whether an error has occurred during PIN verification.
    *
    * @return pinError
    */
@@ -78,7 +78,7 @@ public class TfaVerifyPinResponse {
   }
 
   /**
-   * Indicates if the phone number (&#x60;MSISDN&#x60;) was successfully verified.
+   * Indicates whether the phone number (&#x60;MSISDN&#x60;) was successfully verified.
    *
    * @return verified
    */

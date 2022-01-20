@@ -50,6 +50,10 @@ public enum TfaLanguage {
 
   FI("fi"),
 
+  HR("hr"),
+
+  SL("sl"),
+
   PT_PT("pt-pt"),
 
   PT_BR("pt-br"),

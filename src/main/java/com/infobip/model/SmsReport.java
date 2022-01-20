@@ -78,7 +78,8 @@ public class SmsReport {
   private String to;
 
   /**
-   * Bulk ID.
+   * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages
+   * via a single API request.
    *
    * @return bulkId
    */
@@ -87,7 +88,7 @@ public class SmsReport {
   }
 
   /**
-   * Callback data sent through &#x60;callbackData&#x60; field in fully featured SMS message.
+   * Custom data sent over to the &#x60;notifyUrl&#x60;.
    *
    * @return callbackData
    */
@@ -96,8 +97,8 @@ public class SmsReport {
   }
 
   /**
-   * Tells when the SMS was finished processing by Infobip (i.e., delivered to the destination,
-   * delivered to the destination network, etc.). Has the following format:
+   * Date and time when the Infobip services finished processing the message (i.e., delivered to the
+   * destination, delivered to the destination network, etc.). Has the following format:
    * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
    *
    * @return doneAt
@@ -107,7 +108,7 @@ public class SmsReport {
   }
 
   /**
-   * Indicates whether the error occurred during the query execution.
+   * Indicates whether an error occurred during the query execution.
    *
    * @return error
    */
@@ -116,7 +117,7 @@ public class SmsReport {
   }
 
   /**
-   * Sender ID that can be alphanumeric or numeric.
+   * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
    *
    * @return from
    */
@@ -134,7 +135,7 @@ public class SmsReport {
   }
 
   /**
-   * Message ID.
+   * Unique message ID.
    *
    * @return messageId
    */
@@ -152,8 +153,8 @@ public class SmsReport {
   }
 
   /**
-   * Tells when the SMS was sent. Has the following format:
-   * &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+   * Date and time when the message was [scheduled](#channels/sms/get-scheduled-sms-messages) to be
+   * sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
    *
    * @return sentAt
    */
@@ -162,7 +163,7 @@ public class SmsReport {
   }
 
   /**
-   * The number of parts the sent SMS was split into.
+   * The number of parts the message content was split into.
    *
    * @return smsCount
    */
@@ -171,8 +172,9 @@ public class SmsReport {
   }
 
   /**
-   * Indicates whether the message is successfully sent, not sent, delivered, not delivered, waiting
-   * for delivery or any other possible status.
+   * Indicates the
+   * [status](https://www.infobip.com/docs/essentials/response-status-and-error-codes#api-status-codes)
+   * of the message and how to recover from an error should there be any.
    *
    * @return status
    */
@@ -181,7 +183,7 @@ public class SmsReport {
   }
 
   /**
-   * Destination address.
+   * Message destination address.
    *
    * @return to
    */

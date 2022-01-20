@@ -19,7 +19,7 @@ public class EmailBulkUpdateStatusRequest {
   public static final String SERIALIZED_NAME_STATUS = "status";
 
   @SerializedName(SERIALIZED_NAME_STATUS)
-  private EmailBulkStatus status = null;
+  private EmailBulkStatus status;
 
   public EmailBulkUpdateStatusRequest status(EmailBulkStatus status) {
 

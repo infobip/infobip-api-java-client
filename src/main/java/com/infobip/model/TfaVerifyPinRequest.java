@@ -28,7 +28,7 @@ public class TfaVerifyPinRequest {
   }
 
   /**
-   * PIN code to verify
+   * The PIN code to verify.
    *
    * @return pin
    */

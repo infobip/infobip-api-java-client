@@ -18,7 +18,7 @@ import com.infobip.ApiException;
 import com.infobip.ApiResponse;
 import com.infobip.Configuration;
 import com.infobip.Pair;
-import com.infobip.model.EmailLogsResult;
+import com.infobip.model.EmailLogsResponse;
 import com.infobip.model.EmailReportsResult;
 import com.infobip.model.EmailSendResponse;
 import java.io.File;
@@ -52,13 +52,11 @@ public class SendEmailApi {
    * Build call for getEmailDeliveryReports.
    *
    * @param bulkId Bulk ID for which report is requested. (optional)
-   * @param messageId Message ID for which report is requested. (optional)
+   * @param messageId The ID that uniquely identifies the sent email. (optional)
    * @param limit Maximum number of reports. (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about Email channel and use
-   *     cases.</a>
    */
   public okhttp3.Call getEmailDeliveryReportsCall(
       String bulkId, String messageId, Integer limit, final ApiCallback _callback)
@@ -85,7 +83,7 @@ public class SendEmailApi {
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
     Map<String, String> localVarCookieParams = new HashMap<String, String>();
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-    final String[] localVarAccepts = {"application/json", "application/xml"};
+    final String[] localVarAccepts = {"application/json"};
     final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
     if (localVarAccept != null) {
       localVarHeaderParams.put("Accept", localVarAccept);
@@ -125,13 +123,11 @@ public class SendEmailApi {
    * Email delivery reports. Get one-time delivery reports for all sent emails.
    *
    * @param bulkId Bulk ID for which report is requested. (optional)
-   * @param messageId Message ID for which report is requested. (optional)
+   * @param messageId The ID that uniquely identifies the sent email. (optional)
    * @param limit Maximum number of reports. (optional)
    * @return EmailReportsResult
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about Email channel and use
-   *     cases.</a>
    */
   public EmailReportsResult getEmailDeliveryReports(String bulkId, String messageId, Integer limit)
       throws ApiException {
@@ -144,13 +140,11 @@ public class SendEmailApi {
    * Email delivery reports. Get one-time delivery reports for all sent emails.
    *
    * @param bulkId Bulk ID for which report is requested. (optional)
-   * @param messageId Message ID for which report is requested. (optional)
+   * @param messageId The ID that uniquely identifies the sent email. (optional)
    * @param limit Maximum number of reports. (optional)
    * @return ApiResponse&lt;EmailReportsResult&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about Email channel and use
-   *     cases.</a>
    */
   public ApiResponse<EmailReportsResult> getEmailDeliveryReportsWithHttpInfo(
       String bulkId, String messageId, Integer limit) throws ApiException {
@@ -164,13 +158,11 @@ public class SendEmailApi {
    * Email delivery reports (asynchronously). Get one-time delivery reports for all sent emails.
    *
    * @param bulkId Bulk ID for which report is requested. (optional)
-   * @param messageId Message ID for which report is requested. (optional)
+   * @param messageId The ID that uniquely identifies the sent email. (optional)
    * @param limit Maximum number of reports. (optional)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about Email channel and use
-   *     cases.</a>
    */
   public okhttp3.Call getEmailDeliveryReportsAsync(
       String bulkId,
@@ -188,27 +180,23 @@ public class SendEmailApi {
   /**
    * Build call for getEmailLogs.
    *
-   * @param from Sender address. (optional)
-   * @param to Destination address. (optional)
-   * @param bulkId Bulk ID for which log is requested. (optional)
-   * @param messageId Email ID for which log is requested. (optional)
-   * @param generalStatus Sent SMS status. (optional)
-   * @param sentSince Lower limit on date and time of sending message. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSXXX&#x60;. (optional)
-   * @param sentUntil Upper limit on date and time of sending message. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSXXX&#x60;. (optional)
-   * @param limit Maximal number of messages in returned logs. (optional)
+   * @param messageId The ID that uniquely identifies the sent email. (optional)
+   * @param from (optional, default to )
+   * @param to (optional, default to )
+   * @param bulkId (optional, default to )
+   * @param generalStatus (optional, default to )
+   * @param sentSince (optional)
+   * @param sentUntil (optional)
+   * @param limit (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about Email channel and use
-   *     cases</a>
    */
   public okhttp3.Call getEmailLogsCall(
+      List<String> messageId,
       String from,
       String to,
-      List<String> bulkId,
-      List<String> messageId,
+      String bulkId,
       String generalStatus,
       OffsetDateTime sentSince,
       OffsetDateTime sentUntil,
@@ -222,6 +210,11 @@ public class SendEmailApi {
 
     List<Pair> localVarQueryParams = new ArrayList<Pair>();
     List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+    if (messageId != null) {
+      localVarCollectionQueryParams.addAll(
+          localVarApiClient.parameterToPairs("multi", "messageId", messageId));
+    }
+
     if (from != null) {
       localVarQueryParams.addAll(localVarApiClient.parameterToPair("from", from));
     }
@@ -231,13 +224,7 @@ public class SendEmailApi {
     }
 
     if (bulkId != null) {
-      localVarCollectionQueryParams.addAll(
-          localVarApiClient.parameterToPairs("multi", "bulkId", bulkId));
-    }
-
-    if (messageId != null) {
-      localVarCollectionQueryParams.addAll(
-          localVarApiClient.parameterToPairs("multi", "messageId", messageId));
+      localVarQueryParams.addAll(localVarApiClient.parameterToPair("bulkId", bulkId));
     }
 
     if (generalStatus != null) {
@@ -259,7 +246,7 @@ public class SendEmailApi {
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
     Map<String, String> localVarCookieParams = new HashMap<String, String>();
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-    final String[] localVarAccepts = {"application/json", "application/xml"};
+    final String[] localVarAccepts = {"application/json"};
     final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
     if (localVarAccept != null) {
       localVarHeaderParams.put("Accept", localVarAccept);
@@ -288,10 +275,10 @@ public class SendEmailApi {
 
   @SuppressWarnings("rawtypes")
   private okhttp3.Call getEmailLogsValidateBeforeCall(
+      List<String> messageId,
       String from,
       String to,
-      List<String> bulkId,
-      List<String> messageId,
+      String bulkId,
       String generalStatus,
       OffsetDateTime sentSince,
       OffsetDateTime sentUntil,
@@ -301,69 +288,63 @@ public class SendEmailApi {
 
     okhttp3.Call localVarCall =
         getEmailLogsCall(
-            from, to, bulkId, messageId, generalStatus, sentSince, sentUntil, limit, _callback);
+            messageId, from, to, bulkId, generalStatus, sentSince, sentUntil, limit, _callback);
     return localVarCall;
   }
 
   /**
-   * Email messages logs. Get the logs to all email communications, including statuses.
+   * Get email logs. This method allows you to get email logs of sent Email messagesId for request.
+   * Email logs are available for the last 48 hours!
    *
-   * @param from Sender address. (optional)
-   * @param to Destination address. (optional)
-   * @param bulkId Bulk ID for which log is requested. (optional)
-   * @param messageId Email ID for which log is requested. (optional)
-   * @param generalStatus Sent SMS status. (optional)
-   * @param sentSince Lower limit on date and time of sending message. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSXXX&#x60;. (optional)
-   * @param sentUntil Upper limit on date and time of sending message. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSXXX&#x60;. (optional)
-   * @param limit Maximal number of messages in returned logs. (optional)
-   * @return EmailLogsResult
+   * @param messageId The ID that uniquely identifies the sent email. (optional)
+   * @param from (optional, default to )
+   * @param to (optional, default to )
+   * @param bulkId (optional, default to )
+   * @param generalStatus (optional, default to )
+   * @param sentSince (optional)
+   * @param sentUntil (optional)
+   * @param limit (optional)
+   * @return EmailLogsResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about Email channel and use
-   *     cases</a>
    */
-  public EmailLogsResult getEmailLogs(
+  public EmailLogsResponse getEmailLogs(
+      List<String> messageId,
       String from,
       String to,
-      List<String> bulkId,
-      List<String> messageId,
+      String bulkId,
       String generalStatus,
       OffsetDateTime sentSince,
       OffsetDateTime sentUntil,
       Integer limit)
       throws ApiException {
-    ApiResponse<EmailLogsResult> localVarResp =
+    ApiResponse<EmailLogsResponse> localVarResp =
         getEmailLogsWithHttpInfo(
-            from, to, bulkId, messageId, generalStatus, sentSince, sentUntil, limit);
+            messageId, from, to, bulkId, generalStatus, sentSince, sentUntil, limit);
     return localVarResp.getData();
   }
 
   /**
-   * Email messages logs. Get the logs to all email communications, including statuses.
+   * Get email logs. This method allows you to get email logs of sent Email messagesId for request.
+   * Email logs are available for the last 48 hours!
    *
-   * @param from Sender address. (optional)
-   * @param to Destination address. (optional)
-   * @param bulkId Bulk ID for which log is requested. (optional)
-   * @param messageId Email ID for which log is requested. (optional)
-   * @param generalStatus Sent SMS status. (optional)
-   * @param sentSince Lower limit on date and time of sending message. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSXXX&#x60;. (optional)
-   * @param sentUntil Upper limit on date and time of sending message. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSXXX&#x60;. (optional)
-   * @param limit Maximal number of messages in returned logs. (optional)
-   * @return ApiResponse&lt;EmailLogsResult&gt;
+   * @param messageId The ID that uniquely identifies the sent email. (optional)
+   * @param from (optional, default to )
+   * @param to (optional, default to )
+   * @param bulkId (optional, default to )
+   * @param generalStatus (optional, default to )
+   * @param sentSince (optional)
+   * @param sentUntil (optional)
+   * @param limit (optional)
+   * @return ApiResponse&lt;EmailLogsResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about Email channel and use
-   *     cases</a>
    */
-  public ApiResponse<EmailLogsResult> getEmailLogsWithHttpInfo(
+  public ApiResponse<EmailLogsResponse> getEmailLogsWithHttpInfo(
+      List<String> messageId,
       String from,
       String to,
-      List<String> bulkId,
-      List<String> messageId,
+      String bulkId,
       String generalStatus,
       OffsetDateTime sentSince,
       OffsetDateTime sentUntil,
@@ -371,47 +352,43 @@ public class SendEmailApi {
       throws ApiException {
     okhttp3.Call localVarCall =
         getEmailLogsValidateBeforeCall(
-            from, to, bulkId, messageId, generalStatus, sentSince, sentUntil, limit, null);
-    Type localVarReturnType = new TypeToken<EmailLogsResult>() {}.getType();
+            messageId, from, to, bulkId, generalStatus, sentSince, sentUntil, limit, null);
+    Type localVarReturnType = new TypeToken<EmailLogsResponse>() {}.getType();
     return localVarApiClient.execute(localVarCall, localVarReturnType);
   }
 
   /**
-   * Email messages logs (asynchronously). Get the logs to all email communications, including
-   * statuses.
+   * Get email logs (asynchronously). This method allows you to get email logs of sent Email
+   * messagesId for request. Email logs are available for the last 48 hours!
    *
-   * @param from Sender address. (optional)
-   * @param to Destination address. (optional)
-   * @param bulkId Bulk ID for which log is requested. (optional)
-   * @param messageId Email ID for which log is requested. (optional)
-   * @param generalStatus Sent SMS status. (optional)
-   * @param sentSince Lower limit on date and time of sending message. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSXXX&#x60;. (optional)
-   * @param sentUntil Upper limit on date and time of sending message. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSXXX&#x60;. (optional)
-   * @param limit Maximal number of messages in returned logs. (optional)
+   * @param messageId The ID that uniquely identifies the sent email. (optional)
+   * @param from (optional, default to )
+   * @param to (optional, default to )
+   * @param bulkId (optional, default to )
+   * @param generalStatus (optional, default to )
+   * @param sentSince (optional)
+   * @param sentUntil (optional)
+   * @param limit (optional)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-   * @see <a href="https://www.infobip.com/docs/email">Learn more about Email channel and use
-   *     cases</a>
    */
   public okhttp3.Call getEmailLogsAsync(
+      List<String> messageId,
       String from,
       String to,
-      List<String> bulkId,
-      List<String> messageId,
+      String bulkId,
       String generalStatus,
       OffsetDateTime sentSince,
       OffsetDateTime sentUntil,
       Integer limit,
-      final ApiCallback<EmailLogsResult> _callback)
+      final ApiCallback<EmailLogsResponse> _callback)
       throws ApiException {
 
     okhttp3.Call localVarCall =
         getEmailLogsValidateBeforeCall(
-            from, to, bulkId, messageId, generalStatus, sentSince, sentUntil, limit, _callback);
-    Type localVarReturnType = new TypeToken<EmailLogsResult>() {}.getType();
+            messageId, from, to, bulkId, generalStatus, sentSince, sentUntil, limit, _callback);
+    Type localVarReturnType = new TypeToken<EmailLogsResponse>() {}.getType();
     localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
     return localVarCall;
   }
@@ -440,6 +417,9 @@ public class SendEmailApi {
       Boolean intermediateReport,
       String notifyUrl,
       String notifyContentType,
+      OffsetDateTime sendAt,
+      String landingPagePlaceholders,
+      String landingPageId,
       final ApiCallback _callback)
       throws ApiException {
     Object localVarPostBody = null;
@@ -544,6 +524,18 @@ public class SendEmailApi {
       localVarFormParams.put("notifyContentType", notifyContentType);
     }
 
+    if (sendAt != null) {
+      localVarFormParams.put("sendAt", sendAt);
+    }
+
+    if (landingPagePlaceholders != null) {
+      localVarFormParams.put("landingPagePlaceholders", landingPagePlaceholders);
+    }
+
+    if (landingPageId != null) {
+      localVarFormParams.put("landingPageId", landingPageId);
+    }
+
     final String[] localVarAccepts = {"application/json", "application/xml"};
     final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
     if (localVarAccept != null) {
@@ -595,6 +587,9 @@ public class SendEmailApi {
       Boolean intermediateReport,
       String notifyUrl,
       String notifyContentType,
+      OffsetDateTime sendAt,
+      String landingPagePlaceholders,
+      String landingPageId,
       final ApiCallback _callback)
       throws ApiException {
 
@@ -639,6 +634,9 @@ public class SendEmailApi {
             intermediateReport,
             notifyUrl,
             notifyContentType,
+            sendAt,
+            landingPagePlaceholders,
+            landingPageId,
             _callback);
     return localVarCall;
   }
@@ -666,7 +664,10 @@ public class SendEmailApi {
       String callbackData,
       Boolean intermediateReport,
       String notifyUrl,
-      String notifyContentType)
+      String notifyContentType,
+      OffsetDateTime sendAt,
+      String landingPagePlaceholders,
+      String landingPageId)
       throws ApiException {
     okhttp3.Call localVarCall =
         sendEmailValidateBeforeCall(
@@ -693,6 +694,9 @@ public class SendEmailApi {
             intermediateReport,
             notifyUrl,
             notifyContentType,
+            sendAt,
+            landingPagePlaceholders,
+            landingPageId,
             null);
     Type localVarReturnType = new TypeToken<EmailSendResponse>() {}.getType();
     return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -722,6 +726,9 @@ public class SendEmailApi {
       Boolean intermediateReport,
       String notifyUrl,
       String notifyContentType,
+      OffsetDateTime sendAt,
+      String landingPagePlaceholders,
+      String landingPageId,
       final ApiCallback<EmailSendResponse> _callback)
       throws ApiException {
 
@@ -750,6 +757,9 @@ public class SendEmailApi {
             intermediateReport,
             notifyUrl,
             notifyContentType,
+            sendAt,
+            landingPagePlaceholders,
+            landingPageId,
             _callback);
     Type localVarReturnType = new TypeToken<EmailSendResponse>() {}.getType();
     localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
@@ -780,6 +790,9 @@ public class SendEmailApi {
     private Boolean intermediateReport;
     private String notifyUrl;
     private String notifyContentType;
+    private OffsetDateTime sendAt;
+    private String landingPagePlaceholders;
+    private String landingPageId;
 
     private APIsendEmailRequest(String from, String to, String subject) {
       this.from = from;
@@ -1030,6 +1043,44 @@ public class SendEmailApi {
     }
 
     /**
+     * Set sendAt
+     *
+     * @param sendAt To schedule message at a given time in future. Time provided should be in UTC
+     *     in following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSXXX. (optional)
+     * @return APIsendEmailRequest
+     */
+    public APIsendEmailRequest sendAt(OffsetDateTime sendAt) {
+      this.sendAt = sendAt;
+      return this;
+    }
+
+    /**
+     * Set landingPagePlaceholders
+     *
+     * @param landingPagePlaceholders Personalize opt out landing page by inserting placeholders.
+     *     Insert placeholder or tag while designing landing page. (optional)
+     * @return APIsendEmailRequest
+     */
+    public APIsendEmailRequest landingPagePlaceholders(String landingPagePlaceholders) {
+      this.landingPagePlaceholders = landingPagePlaceholders;
+      return this;
+    }
+
+    /**
+     * Set landingPageId
+     *
+     * @param landingPageId Opt out landing page which will be used and displayed once end user
+     *     clicks unsubscribe link. If not present default opt out landing page will be displayed.
+     *     Create landing page on IB’s portal and use last 6 digits from URL to use that opt out
+     *     page. (optional)
+     * @return APIsendEmailRequest
+     */
+    public APIsendEmailRequest landingPageId(String landingPageId) {
+      this.landingPageId = landingPageId;
+      return this;
+    }
+
+    /**
      * Build call for sendEmail.
      *
      * @param _callback ApiCallback API callback
@@ -1061,6 +1112,9 @@ public class SendEmailApi {
           intermediateReport,
           notifyUrl,
           notifyContentType,
+          sendAt,
+          landingPagePlaceholders,
+          landingPageId,
           _callback);
     }
 
@@ -1096,7 +1150,10 @@ public class SendEmailApi {
               callbackData,
               intermediateReport,
               notifyUrl,
-              notifyContentType);
+              notifyContentType,
+              sendAt,
+              landingPagePlaceholders,
+              landingPageId);
       return localVarResp.getData();
     }
 
@@ -1131,7 +1188,10 @@ public class SendEmailApi {
           callbackData,
           intermediateReport,
           notifyUrl,
-          notifyContentType);
+          notifyContentType,
+          sendAt,
+          landingPagePlaceholders,
+          landingPageId);
     }
 
     /**
@@ -1168,13 +1228,16 @@ public class SendEmailApi {
           intermediateReport,
           notifyUrl,
           notifyContentType,
+          sendAt,
+          landingPagePlaceholders,
+          landingPageId,
           _callback);
     }
   }
 
   /**
-   * Fully featured email. Send an email or multiple emails to a recipient or multiple recipients
-   * with CC/BCC enabled.
+   * Send fully featured email. Send an email or multiple emails to a recipient or multiple
+   * recipients with CC/BCC enabled.
    *
    * @param from Email address with optional sender name. (required)
    * @param to Email address of the recipient. (required)

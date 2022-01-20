@@ -28,7 +28,7 @@ public class EmailValidationRequest {
   }
 
   /**
-   * Get to
+   * Email address of the recipient.
    *
    * @return to
    */

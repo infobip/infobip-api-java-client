@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.infobip.model.*;
 import io.gsonfire.GsonFireBuilder;
+import io.gsonfire.TypeSelector;
 import java.io.IOException;
 import java.io.StringReader;
 import java.lang.reflect.Type;
@@ -31,6 +32,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import okio.ByteString;
 
@@ -45,7 +47,921 @@ public class JSON {
 
   @SuppressWarnings("unchecked")
   public static GsonBuilder createGson() {
-    GsonFireBuilder fireBuilder = new GsonFireBuilder();
+    GsonFireBuilder fireBuilder =
+        new GsonFireBuilder()
+            .registerTypeSelector(
+                WhatsAppButtonApiData.class,
+                new TypeSelector<WhatsAppButtonApiData>() {
+                  @Override
+                  public Class<? extends WhatsAppButtonApiData> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "PHONE_NUMBER", WhatsAppPhoneNumberButtonApiData.class);
+                    classByDiscriminatorValue.put(
+                        "QUICK_REPLY", WhatsAppQuickReplyButtonApiData.class);
+                    classByDiscriminatorValue.put("URL", WhatsAppUrlButtonApiData.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppPhoneNumberButtonApiData", WhatsAppPhoneNumberButtonApiData.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppQuickReplyButtonApiData", WhatsAppQuickReplyButtonApiData.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppUrlButtonApiData", WhatsAppUrlButtonApiData.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppButtonReplyContent.class,
+                new TypeSelector<WhatsAppButtonReplyContent>() {
+                  @Override
+                  public Class<? extends WhatsAppButtonReplyContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppDocumentHeaderApiData.class,
+                new TypeSelector<WhatsAppDocumentHeaderApiData>() {
+                  @Override
+                  public Class<? extends WhatsAppDocumentHeaderApiData> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppDocumentHeaderApiData.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppImageHeaderApiData.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppLocationHeaderApiData.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppTextHeaderApiData.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppVideoHeaderApiData.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "format"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppHeaderApiData.class,
+                new TypeSelector<WhatsAppHeaderApiData>() {
+                  @Override
+                  public Class<? extends WhatsAppHeaderApiData> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppDocumentHeaderApiData.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppImageHeaderApiData.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppLocationHeaderApiData.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppTextHeaderApiData.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppVideoHeaderApiData.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppDocumentHeaderApiData", WhatsAppDocumentHeaderApiData.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppImageHeaderApiData", WhatsAppImageHeaderApiData.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppLocationHeaderApiData", WhatsAppLocationHeaderApiData.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppTextHeaderApiData", WhatsAppTextHeaderApiData.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppVideoHeaderApiData", WhatsAppVideoHeaderApiData.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "format"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppImageHeaderApiData.class,
+                new TypeSelector<WhatsAppImageHeaderApiData>() {
+                  @Override
+                  public Class<? extends WhatsAppImageHeaderApiData> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppDocumentHeaderApiData.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppImageHeaderApiData.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppLocationHeaderApiData.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppTextHeaderApiData.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppVideoHeaderApiData.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "format"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInboundAudioMessage.class,
+                new TypeSelector<WhatsAppInboundAudioMessage>() {
+                  @Override
+                  public Class<? extends WhatsAppInboundAudioMessage> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInboundContactMessage.class,
+                new TypeSelector<WhatsAppInboundContactMessage>() {
+                  @Override
+                  public Class<? extends WhatsAppInboundContactMessage> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInboundDocumentMessage.class,
+                new TypeSelector<WhatsAppInboundDocumentMessage>() {
+                  @Override
+                  public Class<? extends WhatsAppInboundDocumentMessage> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInboundImageMessage.class,
+                new TypeSelector<WhatsAppInboundImageMessage>() {
+                  @Override
+                  public Class<? extends WhatsAppInboundImageMessage> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInboundLocationMessage.class,
+                new TypeSelector<WhatsAppInboundLocationMessage>() {
+                  @Override
+                  public Class<? extends WhatsAppInboundLocationMessage> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInboundMessage.class,
+                new TypeSelector<WhatsAppInboundMessage>() {
+                  @Override
+                  public Class<? extends WhatsAppInboundMessage> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppButtonReplyContent", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInboundAudioMessage", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInboundContactMessage", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInboundDocumentMessage", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInboundImageMessage", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInboundLocationMessage", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInboundStickerMessage", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInboundTextMessage", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInboundVideoMessage", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInboundVoiceMessage", WhatsAppInboundVoiceMessage.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppListReplyContent", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppOrderContent", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppQuickReplyContent", WhatsAppQuickReplyContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInboundStickerMessage.class,
+                new TypeSelector<WhatsAppInboundStickerMessage>() {
+                  @Override
+                  public Class<? extends WhatsAppInboundStickerMessage> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInboundTextMessage.class,
+                new TypeSelector<WhatsAppInboundTextMessage>() {
+                  @Override
+                  public Class<? extends WhatsAppInboundTextMessage> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInboundVideoMessage.class,
+                new TypeSelector<WhatsAppInboundVideoMessage>() {
+                  @Override
+                  public Class<? extends WhatsAppInboundVideoMessage> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInboundVoiceMessage.class,
+                new TypeSelector<WhatsAppInboundVoiceMessage>() {
+                  @Override
+                  public Class<? extends WhatsAppInboundVoiceMessage> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInteractiveButtonContent.class,
+                new TypeSelector<WhatsAppInteractiveButtonContent>() {
+                  @Override
+                  public Class<? extends WhatsAppInteractiveButtonContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "REPLY", WhatsAppInteractiveReplyButtonContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInteractiveReplyButtonContent",
+                        WhatsAppInteractiveReplyButtonContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInteractiveButtonsDocumentHeaderContent.class,
+                new TypeSelector<WhatsAppInteractiveButtonsDocumentHeaderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppInteractiveButtonsDocumentHeaderContent>
+                      getClassForElement(JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "DOCUMENT", WhatsAppInteractiveButtonsDocumentHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "IMAGE", WhatsAppInteractiveButtonsImageHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "TEXT", WhatsAppInteractiveButtonsTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "VIDEO", WhatsAppInteractiveButtonsVideoHeaderContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInteractiveButtonsHeaderContent.class,
+                new TypeSelector<WhatsAppInteractiveButtonsHeaderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppInteractiveButtonsHeaderContent>
+                      getClassForElement(JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "DOCUMENT", WhatsAppInteractiveButtonsDocumentHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "IMAGE", WhatsAppInteractiveButtonsImageHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "TEXT", WhatsAppInteractiveButtonsTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "VIDEO", WhatsAppInteractiveButtonsVideoHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInteractiveButtonsDocumentHeaderContent",
+                        WhatsAppInteractiveButtonsDocumentHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInteractiveButtonsImageHeaderContent",
+                        WhatsAppInteractiveButtonsImageHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInteractiveButtonsTextHeaderContent",
+                        WhatsAppInteractiveButtonsTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInteractiveButtonsVideoHeaderContent",
+                        WhatsAppInteractiveButtonsVideoHeaderContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInteractiveButtonsImageHeaderContent.class,
+                new TypeSelector<WhatsAppInteractiveButtonsImageHeaderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppInteractiveButtonsImageHeaderContent>
+                      getClassForElement(JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "DOCUMENT", WhatsAppInteractiveButtonsDocumentHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "IMAGE", WhatsAppInteractiveButtonsImageHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "TEXT", WhatsAppInteractiveButtonsTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "VIDEO", WhatsAppInteractiveButtonsVideoHeaderContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInteractiveButtonsTextHeaderContent.class,
+                new TypeSelector<WhatsAppInteractiveButtonsTextHeaderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppInteractiveButtonsTextHeaderContent>
+                      getClassForElement(JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "DOCUMENT", WhatsAppInteractiveButtonsDocumentHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "IMAGE", WhatsAppInteractiveButtonsImageHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "TEXT", WhatsAppInteractiveButtonsTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "VIDEO", WhatsAppInteractiveButtonsVideoHeaderContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInteractiveButtonsVideoHeaderContent.class,
+                new TypeSelector<WhatsAppInteractiveButtonsVideoHeaderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppInteractiveButtonsVideoHeaderContent>
+                      getClassForElement(JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "DOCUMENT", WhatsAppInteractiveButtonsDocumentHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "IMAGE", WhatsAppInteractiveButtonsImageHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "TEXT", WhatsAppInteractiveButtonsTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "VIDEO", WhatsAppInteractiveButtonsVideoHeaderContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInteractiveListHeaderContent.class,
+                new TypeSelector<WhatsAppInteractiveListHeaderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppInteractiveListHeaderContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "TEXT", WhatsAppInteractiveListTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppInteractiveListTextHeaderContent",
+                        WhatsAppInteractiveListTextHeaderContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInteractiveListTextHeaderContent.class,
+                new TypeSelector<WhatsAppInteractiveListTextHeaderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppInteractiveListTextHeaderContent>
+                      getClassForElement(JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "TEXT", WhatsAppInteractiveListTextHeaderContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppInteractiveReplyButtonContent.class,
+                new TypeSelector<WhatsAppInteractiveReplyButtonContent>() {
+                  @Override
+                  public Class<? extends WhatsAppInteractiveReplyButtonContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "REPLY", WhatsAppInteractiveReplyButtonContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppListReplyContent.class,
+                new TypeSelector<WhatsAppListReplyContent>() {
+                  @Override
+                  public Class<? extends WhatsAppListReplyContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppLocationHeaderApiData.class,
+                new TypeSelector<WhatsAppLocationHeaderApiData>() {
+                  @Override
+                  public Class<? extends WhatsAppLocationHeaderApiData> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppDocumentHeaderApiData.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppImageHeaderApiData.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppLocationHeaderApiData.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppTextHeaderApiData.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppVideoHeaderApiData.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "format"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppOrderContent.class,
+                new TypeSelector<WhatsAppOrderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppOrderContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppPhoneNumberButtonApiData.class,
+                new TypeSelector<WhatsAppPhoneNumberButtonApiData>() {
+                  @Override
+                  public Class<? extends WhatsAppPhoneNumberButtonApiData> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "PHONE_NUMBER", WhatsAppPhoneNumberButtonApiData.class);
+                    classByDiscriminatorValue.put(
+                        "QUICK_REPLY", WhatsAppQuickReplyButtonApiData.class);
+                    classByDiscriminatorValue.put("URL", WhatsAppUrlButtonApiData.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppQuickReplyButtonApiData.class,
+                new TypeSelector<WhatsAppQuickReplyButtonApiData>() {
+                  @Override
+                  public Class<? extends WhatsAppQuickReplyButtonApiData> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "PHONE_NUMBER", WhatsAppPhoneNumberButtonApiData.class);
+                    classByDiscriminatorValue.put(
+                        "QUICK_REPLY", WhatsAppQuickReplyButtonApiData.class);
+                    classByDiscriminatorValue.put("URL", WhatsAppUrlButtonApiData.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppQuickReplyContent.class,
+                new TypeSelector<WhatsAppQuickReplyContent>() {
+                  @Override
+                  public Class<? extends WhatsAppQuickReplyContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("AUDIO", WhatsAppInboundAudioMessage.class);
+                    classByDiscriminatorValue.put("BUTTON", WhatsAppQuickReplyContent.class);
+                    classByDiscriminatorValue.put("CONTACT", WhatsAppInboundContactMessage.class);
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppInboundDocumentMessage.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppInboundImageMessage.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_BUTTON_REPLY", WhatsAppButtonReplyContent.class);
+                    classByDiscriminatorValue.put(
+                        "INTERACTIVE_LIST_REPLY", WhatsAppListReplyContent.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppInboundLocationMessage.class);
+                    classByDiscriminatorValue.put("ORDER", WhatsAppOrderContent.class);
+                    classByDiscriminatorValue.put("STICKER", WhatsAppInboundStickerMessage.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppInboundTextMessage.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppInboundVideoMessage.class);
+                    classByDiscriminatorValue.put("VOICE", WhatsAppInboundVoiceMessage.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppTemplateButtonContent.class,
+                new TypeSelector<WhatsAppTemplateButtonContent>() {
+                  @Override
+                  public Class<? extends WhatsAppTemplateButtonContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "QUICK_REPLY", WhatsAppTemplateQuickReplyButtonContent.class);
+                    classByDiscriminatorValue.put("URL", WhatsAppTemplateUrlButtonContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppTemplateQuickReplyButtonContent",
+                        WhatsAppTemplateQuickReplyButtonContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppTemplateUrlButtonContent", WhatsAppTemplateUrlButtonContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppTemplateDocumentHeaderContent.class,
+                new TypeSelector<WhatsAppTemplateDocumentHeaderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppTemplateDocumentHeaderContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "DOCUMENT", WhatsAppTemplateDocumentHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "IMAGE", WhatsAppTemplateImageHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "LOCATION", WhatsAppTemplateLocationHeaderContent.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppTemplateTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "VIDEO", WhatsAppTemplateVideoHeaderContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppTemplateHeaderContent.class,
+                new TypeSelector<WhatsAppTemplateHeaderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppTemplateHeaderContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "DOCUMENT", WhatsAppTemplateDocumentHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "IMAGE", WhatsAppTemplateImageHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "LOCATION", WhatsAppTemplateLocationHeaderContent.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppTemplateTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "VIDEO", WhatsAppTemplateVideoHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppTemplateDocumentHeaderContent",
+                        WhatsAppTemplateDocumentHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppTemplateImageHeaderContent",
+                        WhatsAppTemplateImageHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppTemplateLocationHeaderContent",
+                        WhatsAppTemplateLocationHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppTemplateTextHeaderContent",
+                        WhatsAppTemplateTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "WhatsAppTemplateVideoHeaderContent",
+                        WhatsAppTemplateVideoHeaderContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppTemplateImageHeaderContent.class,
+                new TypeSelector<WhatsAppTemplateImageHeaderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppTemplateImageHeaderContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "DOCUMENT", WhatsAppTemplateDocumentHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "IMAGE", WhatsAppTemplateImageHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "LOCATION", WhatsAppTemplateLocationHeaderContent.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppTemplateTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "VIDEO", WhatsAppTemplateVideoHeaderContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppTemplateLocationHeaderContent.class,
+                new TypeSelector<WhatsAppTemplateLocationHeaderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppTemplateLocationHeaderContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "DOCUMENT", WhatsAppTemplateDocumentHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "IMAGE", WhatsAppTemplateImageHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "LOCATION", WhatsAppTemplateLocationHeaderContent.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppTemplateTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "VIDEO", WhatsAppTemplateVideoHeaderContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppTemplateQuickReplyButtonContent.class,
+                new TypeSelector<WhatsAppTemplateQuickReplyButtonContent>() {
+                  @Override
+                  public Class<? extends WhatsAppTemplateQuickReplyButtonContent>
+                      getClassForElement(JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "QUICK_REPLY", WhatsAppTemplateQuickReplyButtonContent.class);
+                    classByDiscriminatorValue.put("URL", WhatsAppTemplateUrlButtonContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppTemplateTextHeaderContent.class,
+                new TypeSelector<WhatsAppTemplateTextHeaderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppTemplateTextHeaderContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "DOCUMENT", WhatsAppTemplateDocumentHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "IMAGE", WhatsAppTemplateImageHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "LOCATION", WhatsAppTemplateLocationHeaderContent.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppTemplateTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "VIDEO", WhatsAppTemplateVideoHeaderContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppTemplateUrlButtonContent.class,
+                new TypeSelector<WhatsAppTemplateUrlButtonContent>() {
+                  @Override
+                  public Class<? extends WhatsAppTemplateUrlButtonContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "QUICK_REPLY", WhatsAppTemplateQuickReplyButtonContent.class);
+                    classByDiscriminatorValue.put("URL", WhatsAppTemplateUrlButtonContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppTemplateVideoHeaderContent.class,
+                new TypeSelector<WhatsAppTemplateVideoHeaderContent>() {
+                  @Override
+                  public Class<? extends WhatsAppTemplateVideoHeaderContent> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "DOCUMENT", WhatsAppTemplateDocumentHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "IMAGE", WhatsAppTemplateImageHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "LOCATION", WhatsAppTemplateLocationHeaderContent.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppTemplateTextHeaderContent.class);
+                    classByDiscriminatorValue.put(
+                        "VIDEO", WhatsAppTemplateVideoHeaderContent.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppTextHeaderApiData.class,
+                new TypeSelector<WhatsAppTextHeaderApiData>() {
+                  @Override
+                  public Class<? extends WhatsAppTextHeaderApiData> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppDocumentHeaderApiData.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppImageHeaderApiData.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppLocationHeaderApiData.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppTextHeaderApiData.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppVideoHeaderApiData.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "format"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppUrlButtonApiData.class,
+                new TypeSelector<WhatsAppUrlButtonApiData>() {
+                  @Override
+                  public Class<? extends WhatsAppUrlButtonApiData> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put(
+                        "PHONE_NUMBER", WhatsAppPhoneNumberButtonApiData.class);
+                    classByDiscriminatorValue.put(
+                        "QUICK_REPLY", WhatsAppQuickReplyButtonApiData.class);
+                    classByDiscriminatorValue.put("URL", WhatsAppUrlButtonApiData.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "type"));
+                  }
+                })
+            .registerTypeSelector(
+                WhatsAppVideoHeaderApiData.class,
+                new TypeSelector<WhatsAppVideoHeaderApiData>() {
+                  @Override
+                  public Class<? extends WhatsAppVideoHeaderApiData> getClassForElement(
+                      JsonElement readElement) {
+                    Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                    classByDiscriminatorValue.put("DOCUMENT", WhatsAppDocumentHeaderApiData.class);
+                    classByDiscriminatorValue.put("IMAGE", WhatsAppImageHeaderApiData.class);
+                    classByDiscriminatorValue.put("LOCATION", WhatsAppLocationHeaderApiData.class);
+                    classByDiscriminatorValue.put("TEXT", WhatsAppTextHeaderApiData.class);
+                    classByDiscriminatorValue.put("VIDEO", WhatsAppVideoHeaderApiData.class);
+                    return getClassByDiscriminator(
+                        classByDiscriminatorValue, getDiscriminatorValue(readElement, "format"));
+                  }
+                });
     GsonBuilder builder = fireBuilder.createGsonBuilder();
     return builder;
   }

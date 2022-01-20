@@ -32,7 +32,8 @@ public class SmsResponseDetails {
   private String to;
 
   /**
-   * The ID that uniquely identifies the message sent.
+   * Unique message ID. If not passed, it will be automatically generated and returned in a
+   * response.
    *
    * @return messageId
    */
@@ -41,8 +42,9 @@ public class SmsResponseDetails {
   }
 
   /**
-   * Indicates whether the message is successfully sent, not sent, delivered, not delivered, waiting
-   * for delivery or any other possible status.
+   * Indicates the
+   * [status](https://www.infobip.com/docs/essentials/response-status-and-error-codes#api-status-codes)
+   * of the message and how to recover from an error should there be any.
    *
    * @return status
    */
@@ -51,7 +53,7 @@ public class SmsResponseDetails {
   }
 
   /**
-   * The message destination address.
+   * The destination address of the message.
    *
    * @return to
    */

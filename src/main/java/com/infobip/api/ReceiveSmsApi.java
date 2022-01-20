@@ -47,7 +47,7 @@ public class ReceiveSmsApi {
   /**
    * Build call for getInboundSmsMessages.
    *
-   * @param limit Maximal number of received messages that will be returned. (optional)
+   * @param limit Maximum number of messages to be returned in a response. (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
@@ -104,12 +104,12 @@ public class ReceiveSmsApi {
   }
 
   /**
-   * Get inbound SMS messages. If for some reason you are unable to receive incoming SMS at the
+   * Get inbound SMS messages. If for some reason you are unable to receive incoming SMS to the
    * endpoint of your choice in real time, you can use this API call to fetch messages. Each request
-   * will return a batch of received messages - only once. The following API request will return
-   * only new messages that arrived since the last API request.
+   * will return a batch of received messages - only once. The API request will only return new
+   * messages that arrived since the last API request.
    *
-   * @param limit Maximal number of received messages that will be returned. (optional)
+   * @param limit Maximum number of messages to be returned in a response. (optional)
    * @return SmsInboundMessageResult
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
@@ -120,12 +120,12 @@ public class ReceiveSmsApi {
   }
 
   /**
-   * Get inbound SMS messages. If for some reason you are unable to receive incoming SMS at the
+   * Get inbound SMS messages. If for some reason you are unable to receive incoming SMS to the
    * endpoint of your choice in real time, you can use this API call to fetch messages. Each request
-   * will return a batch of received messages - only once. The following API request will return
-   * only new messages that arrived since the last API request.
+   * will return a batch of received messages - only once. The API request will only return new
+   * messages that arrived since the last API request.
    *
-   * @param limit Maximal number of received messages that will be returned. (optional)
+   * @param limit Maximum number of messages to be returned in a response. (optional)
    * @return ApiResponse&lt;SmsInboundMessageResult&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
@@ -139,11 +139,11 @@ public class ReceiveSmsApi {
 
   /**
    * Get inbound SMS messages (asynchronously). If for some reason you are unable to receive
-   * incoming SMS at the endpoint of your choice in real time, you can use this API call to fetch
-   * messages. Each request will return a batch of received messages - only once. The following API
-   * request will return only new messages that arrived since the last API request.
+   * incoming SMS to the endpoint of your choice in real time, you can use this API call to fetch
+   * messages. Each request will return a batch of received messages - only once. The API request
+   * will only return new messages that arrived since the last API request.
    *
-   * @param limit Maximal number of received messages that will be returned. (optional)
+   * @param limit Maximum number of messages to be returned in a response. (optional)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object

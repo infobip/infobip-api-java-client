@@ -63,8 +63,8 @@ public class TfaUpdateMessageRequest {
   }
 
   /**
-   * Language code of language in which message text is written. It is used for reading the message
-   * when it is sent via voice. If no language is set, message will be read in &#x60;English&#x60;.
+   * Language code which message is written in. This is used when sending text-to-speech messages.
+   * If not defined, it will default to English (&#x60;en&#x60;).
    *
    * @return language
    */
@@ -83,7 +83,8 @@ public class TfaUpdateMessageRequest {
   }
 
   /**
-   * Text of a message that will be sent. Message text must contain &#x60;pinPlaceholder&#x60;.
+   * Content of the message being sent which contains at minimum one placeholder for a PIN code
+   * (&#x60;{{pin}}&#x60;). Placeholder format is &#x60;{{placeholderName}}&#x60;.
    *
    * @return messageText
    */
@@ -121,8 +122,7 @@ public class TfaUpdateMessageRequest {
   }
 
   /**
-   * Type of PIN code that will be generated and sent as part of 2FA message. You can set PIN type
-   * to numeric, alpha, alphanumeric or hex.
+   * The type of PIN code that will be generated and sent as part of a 2FA message.
    *
    * @return pinType
    */
@@ -141,8 +141,8 @@ public class TfaUpdateMessageRequest {
   }
 
   /**
-   * Region specific parameters, often specified by local laws. Use this if country or region that
-   * you are sending SMS to requires some extra parameters.
+   * Region-specific parameters, often imposed by local laws. Use this, if country or region that
+   * you are sending a message to requires additional information.
    *
    * @return regional
    */
@@ -161,7 +161,8 @@ public class TfaUpdateMessageRequest {
   }
 
   /**
-   * In case PIN message is sent by Voice, DTMF code will enable replaying the message.
+   * If the PIN is sent as a voice message, the DTMF code allows the recipient to replay the
+   * message.
    *
    * @return repeatDTMF
    */
@@ -180,7 +181,7 @@ public class TfaUpdateMessageRequest {
   }
 
   /**
-   * The name that will appear as the sender of the 2FA message (Example: CompanyName).
+   * The name that will appear as the sender of the 2FA message (e.g. CompanyName).
    *
    * @return senderId
    */
@@ -199,8 +200,8 @@ public class TfaUpdateMessageRequest {
   }
 
   /**
-   * In case PIN message is sent by Voice, the speed of speech can be set for the message. Supported
-   * range is from &#x60;0.5&#x60; to &#x60;2&#x60;.
+   * The speed of narration for messages sent as voice. Supported range is from &#x60;0.5&#x60; to
+   * &#x60;2&#x60;.
    *
    * @return speechRate
    */

@@ -185,7 +185,7 @@ public class ApiClient {
     json = new JSON();
 
     // Set default User-Agent.
-    setUserAgent("infobip-api-client-java/3.1.0");
+    setUserAgent("infobip-api-client-java/3.2.0");
 
     authentications = new HashMap<String, Authentication>();
   }

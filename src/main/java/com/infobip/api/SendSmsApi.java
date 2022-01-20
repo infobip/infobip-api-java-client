@@ -54,9 +54,10 @@ public class SendSmsApi {
   /**
    * Build call for getOutboundSmsMessageDeliveryReports.
    *
-   * @param bulkId ID of bulk which delivery report is requested. (optional)
-   * @param messageId ID of SMS which delivery report is requested. (optional)
-   * @param limit Maximal number of delivery reports that will be returned. (optional)
+   * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending
+   *     multiple messages via a single API request. (optional)
+   * @param messageId Unique message ID for which a report is requested. (optional)
+   * @param limit Maximum number of delivery reports to be returned. (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
@@ -125,15 +126,16 @@ public class SendSmsApi {
   }
 
   /**
-   * Get outbound SMS message delivery reports. If you are for any reason unable to receive real
-   * time delivery reports on your endpoint, you can use this API method to learn if and when the
-   * message has been delivered to the recipient. Each request will return a batch of delivery
+   * Get outbound SMS message delivery reports. If you are for any reason unable to receive
+   * real-time delivery reports on your endpoint, you can use this API method to learn if and when
+   * the message has been delivered to the recipient. Each request will return a batch of delivery
    * reports - only once. The following API request will return only new reports that arrived since
-   * the last API request.
+   * the last API request in the last 48 hours.
    *
-   * @param bulkId ID of bulk which delivery report is requested. (optional)
-   * @param messageId ID of SMS which delivery report is requested. (optional)
-   * @param limit Maximal number of delivery reports that will be returned. (optional)
+   * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending
+   *     multiple messages via a single API request. (optional)
+   * @param messageId Unique message ID for which a report is requested. (optional)
+   * @param limit Maximum number of delivery reports to be returned. (optional)
    * @return SmsDeliveryResult
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
@@ -147,15 +149,16 @@ public class SendSmsApi {
   }
 
   /**
-   * Get outbound SMS message delivery reports. If you are for any reason unable to receive real
-   * time delivery reports on your endpoint, you can use this API method to learn if and when the
-   * message has been delivered to the recipient. Each request will return a batch of delivery
+   * Get outbound SMS message delivery reports. If you are for any reason unable to receive
+   * real-time delivery reports on your endpoint, you can use this API method to learn if and when
+   * the message has been delivered to the recipient. Each request will return a batch of delivery
    * reports - only once. The following API request will return only new reports that arrived since
-   * the last API request.
+   * the last API request in the last 48 hours.
    *
-   * @param bulkId ID of bulk which delivery report is requested. (optional)
-   * @param messageId ID of SMS which delivery report is requested. (optional)
-   * @param limit Maximal number of delivery reports that will be returned. (optional)
+   * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending
+   *     multiple messages via a single API request. (optional)
+   * @param messageId Unique message ID for which a report is requested. (optional)
+   * @param limit Maximum number of delivery reports to be returned. (optional)
    * @return ApiResponse&lt;SmsDeliveryResult&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
@@ -171,14 +174,15 @@ public class SendSmsApi {
 
   /**
    * Get outbound SMS message delivery reports (asynchronously). If you are for any reason unable to
-   * receive real time delivery reports on your endpoint, you can use this API method to learn if
+   * receive real-time delivery reports on your endpoint, you can use this API method to learn if
    * and when the message has been delivered to the recipient. Each request will return a batch of
    * delivery reports - only once. The following API request will return only new reports that
-   * arrived since the last API request.
+   * arrived since the last API request in the last 48 hours.
    *
-   * @param bulkId ID of bulk which delivery report is requested. (optional)
-   * @param messageId ID of SMS which delivery report is requested. (optional)
-   * @param limit Maximal number of delivery reports that will be returned. (optional)
+   * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending
+   *     multiple messages via a single API request. (optional)
+   * @param messageId Unique message ID for which a report is requested. (optional)
+   * @param limit Maximum number of delivery reports to be returned. (optional)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -200,21 +204,24 @@ public class SendSmsApi {
   /**
    * Build call for getOutboundSmsMessageLogs.
    *
-   * @param from Sender address. (optional)
-   * @param to Destination address. (optional)
-   * @param bulkId Bulk ID for which log is requested. (optional)
-   * @param messageId SMS ID for which log is requested. (optional)
-   * @param generalStatus Sent SMS status. (optional)
-   * @param sentSince Lower limit on date and time of sending SMS. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
-   * @param sentUntil Upper limit on date and time of sending SMS. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
-   * @param limit Maximal number of messages in returned logs. Limit should be between &#x60;1&#x60;
-   *     and &#x60;1000&#x60;. If you want to fetch more than 1000 logs you can retrieve them in
-   *     pages using &#x60;sentSince&#x60; and &#x60;sentUntil&#x60; parameters. Defaults to
-   *     &#x60;50&#x60;. (optional)
-   * @param mcc Mobile country code. (optional)
-   * @param mnc Mobile network code. (optional)
+   * @param from The sender ID which can be alphanumeric or numeric. (optional)
+   * @param to Message destination address. (optional)
+   * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending
+   *     multiple messages via a single API request. (optional)
+   * @param messageId Unique message ID for which a log is requested. (optional)
+   * @param generalStatus Sent [message
+   *     status](https://www.infobip.com/docs/essentials/response-status-and-error-codes#api-status-codes).
+   *     Possible values: &#x60;ACCEPTED&#x60;, &#x60;PENDING&#x60;, &#x60;UNDELIVERABLE&#x60;,
+   *     &#x60;DELIVERED&#x60;, &#x60;REJECTED&#x60;, &#x60;EXPIRED&#x60;. (optional)
+   * @param sentSince Sets the lower limit on the date and time filter for sent messages. Has the
+   *     following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
+   * @param sentUntil Sets the upper limit on the date and time filter for sent messages. Has the
+   *     following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
+   * @param limit Maximum number of messages to include in logs. If you want to fetch more than
+   *     &#x60;1000&#x60; logs, you can retrieve them in pages using &#x60;sentSince&#x60; and
+   *     &#x60;sentUntil&#x60; parameters. Defaults to &#x60;50&#x60;. (optional)
+   * @param mcc Mobile Country Code. (optional)
+   * @param mnc Mobile Network Code. (optional)
    * @param _callback Callback for upload/download progress
    * @return Call to execute
    * @throws ApiException If fail to serialize the request body object
@@ -344,26 +351,29 @@ public class SendSmsApi {
   }
 
   /**
-   * Get outbound SMS message logs. You should use this method for displaying logs in the user
-   * interface or for some other less frequent usage. See [message delivery
+   * Get outbound SMS message logs. Use this method for displaying logs for example in the user
+   * interface. The only available logs are for the last 48 hours. See [message delivery
    * reports](#channels/sms/get-outbound-sms-message-delivery-reports) if your use case is to verify
    * message delivery.
    *
-   * @param from Sender address. (optional)
-   * @param to Destination address. (optional)
-   * @param bulkId Bulk ID for which log is requested. (optional)
-   * @param messageId SMS ID for which log is requested. (optional)
-   * @param generalStatus Sent SMS status. (optional)
-   * @param sentSince Lower limit on date and time of sending SMS. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
-   * @param sentUntil Upper limit on date and time of sending SMS. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
-   * @param limit Maximal number of messages in returned logs. Limit should be between &#x60;1&#x60;
-   *     and &#x60;1000&#x60;. If you want to fetch more than 1000 logs you can retrieve them in
-   *     pages using &#x60;sentSince&#x60; and &#x60;sentUntil&#x60; parameters. Defaults to
-   *     &#x60;50&#x60;. (optional)
-   * @param mcc Mobile country code. (optional)
-   * @param mnc Mobile network code. (optional)
+   * @param from The sender ID which can be alphanumeric or numeric. (optional)
+   * @param to Message destination address. (optional)
+   * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending
+   *     multiple messages via a single API request. (optional)
+   * @param messageId Unique message ID for which a log is requested. (optional)
+   * @param generalStatus Sent [message
+   *     status](https://www.infobip.com/docs/essentials/response-status-and-error-codes#api-status-codes).
+   *     Possible values: &#x60;ACCEPTED&#x60;, &#x60;PENDING&#x60;, &#x60;UNDELIVERABLE&#x60;,
+   *     &#x60;DELIVERED&#x60;, &#x60;REJECTED&#x60;, &#x60;EXPIRED&#x60;. (optional)
+   * @param sentSince Sets the lower limit on the date and time filter for sent messages. Has the
+   *     following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
+   * @param sentUntil Sets the upper limit on the date and time filter for sent messages. Has the
+   *     following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
+   * @param limit Maximum number of messages to include in logs. If you want to fetch more than
+   *     &#x60;1000&#x60; logs, you can retrieve them in pages using &#x60;sentSince&#x60; and
+   *     &#x60;sentUntil&#x60; parameters. Defaults to &#x60;50&#x60;. (optional)
+   * @param mcc Mobile Country Code. (optional)
+   * @param mnc Mobile Network Code. (optional)
    * @return SmsLogsResponse
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
@@ -388,26 +398,29 @@ public class SendSmsApi {
   }
 
   /**
-   * Get outbound SMS message logs. You should use this method for displaying logs in the user
-   * interface or for some other less frequent usage. See [message delivery
+   * Get outbound SMS message logs. Use this method for displaying logs for example in the user
+   * interface. The only available logs are for the last 48 hours. See [message delivery
    * reports](#channels/sms/get-outbound-sms-message-delivery-reports) if your use case is to verify
    * message delivery.
    *
-   * @param from Sender address. (optional)
-   * @param to Destination address. (optional)
-   * @param bulkId Bulk ID for which log is requested. (optional)
-   * @param messageId SMS ID for which log is requested. (optional)
-   * @param generalStatus Sent SMS status. (optional)
-   * @param sentSince Lower limit on date and time of sending SMS. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
-   * @param sentUntil Upper limit on date and time of sending SMS. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
-   * @param limit Maximal number of messages in returned logs. Limit should be between &#x60;1&#x60;
-   *     and &#x60;1000&#x60;. If you want to fetch more than 1000 logs you can retrieve them in
-   *     pages using &#x60;sentSince&#x60; and &#x60;sentUntil&#x60; parameters. Defaults to
-   *     &#x60;50&#x60;. (optional)
-   * @param mcc Mobile country code. (optional)
-   * @param mnc Mobile network code. (optional)
+   * @param from The sender ID which can be alphanumeric or numeric. (optional)
+   * @param to Message destination address. (optional)
+   * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending
+   *     multiple messages via a single API request. (optional)
+   * @param messageId Unique message ID for which a log is requested. (optional)
+   * @param generalStatus Sent [message
+   *     status](https://www.infobip.com/docs/essentials/response-status-and-error-codes#api-status-codes).
+   *     Possible values: &#x60;ACCEPTED&#x60;, &#x60;PENDING&#x60;, &#x60;UNDELIVERABLE&#x60;,
+   *     &#x60;DELIVERED&#x60;, &#x60;REJECTED&#x60;, &#x60;EXPIRED&#x60;. (optional)
+   * @param sentSince Sets the lower limit on the date and time filter for sent messages. Has the
+   *     following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
+   * @param sentUntil Sets the upper limit on the date and time filter for sent messages. Has the
+   *     following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
+   * @param limit Maximum number of messages to include in logs. If you want to fetch more than
+   *     &#x60;1000&#x60; logs, you can retrieve them in pages using &#x60;sentSince&#x60; and
+   *     &#x60;sentUntil&#x60; parameters. Defaults to &#x60;50&#x60;. (optional)
+   * @param mcc Mobile Country Code. (optional)
+   * @param mnc Mobile Network Code. (optional)
    * @return ApiResponse&lt;SmsLogsResponse&gt;
    * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the
    *     response body
@@ -443,26 +456,29 @@ public class SendSmsApi {
   }
 
   /**
-   * Get outbound SMS message logs (asynchronously). You should use this method for displaying logs
-   * in the user interface or for some other less frequent usage. See [message delivery
+   * Get outbound SMS message logs (asynchronously). Use this method for displaying logs for example
+   * in the user interface. The only available logs are for the last 48 hours. See [message delivery
    * reports](#channels/sms/get-outbound-sms-message-delivery-reports) if your use case is to verify
    * message delivery.
    *
-   * @param from Sender address. (optional)
-   * @param to Destination address. (optional)
-   * @param bulkId Bulk ID for which log is requested. (optional)
-   * @param messageId SMS ID for which log is requested. (optional)
-   * @param generalStatus Sent SMS status. (optional)
-   * @param sentSince Lower limit on date and time of sending SMS. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
-   * @param sentUntil Upper limit on date and time of sending SMS. Has the following format:
-   *     &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
-   * @param limit Maximal number of messages in returned logs. Limit should be between &#x60;1&#x60;
-   *     and &#x60;1000&#x60;. If you want to fetch more than 1000 logs you can retrieve them in
-   *     pages using &#x60;sentSince&#x60; and &#x60;sentUntil&#x60; parameters. Defaults to
-   *     &#x60;50&#x60;. (optional)
-   * @param mcc Mobile country code. (optional)
-   * @param mnc Mobile network code. (optional)
+   * @param from The sender ID which can be alphanumeric or numeric. (optional)
+   * @param to Message destination address. (optional)
+   * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending
+   *     multiple messages via a single API request. (optional)
+   * @param messageId Unique message ID for which a log is requested. (optional)
+   * @param generalStatus Sent [message
+   *     status](https://www.infobip.com/docs/essentials/response-status-and-error-codes#api-status-codes).
+   *     Possible values: &#x60;ACCEPTED&#x60;, &#x60;PENDING&#x60;, &#x60;UNDELIVERABLE&#x60;,
+   *     &#x60;DELIVERED&#x60;, &#x60;REJECTED&#x60;, &#x60;EXPIRED&#x60;. (optional)
+   * @param sentSince Sets the lower limit on the date and time filter for sent messages. Has the
+   *     following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
+   * @param sentUntil Sets the upper limit on the date and time filter for sent messages. Has the
+   *     following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
+   * @param limit Maximum number of messages to include in logs. If you want to fetch more than
+   *     &#x60;1000&#x60; logs, you can retrieve them in pages using &#x60;sentSince&#x60; and
+   *     &#x60;sentUntil&#x60; parameters. Defaults to &#x60;50&#x60;. (optional)
+   * @param mcc Mobile Country Code. (optional)
+   * @param mnc Mobile Network Code. (optional)
    * @param _callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws ApiException If fail to process the API call, e.g. serializing the request body object

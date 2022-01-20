@@ -5,6 +5,31 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [3.2.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.2.0) ] - 2022-01-19
+
+### Added
+- Support for [Infobip WhatsApp API](https://www.infobip.com/docs/api#channels/whatsapp)
+- `whatsapp.md` containing quick start guide for WhatsApp API
+
+### Changed
+- Email sending API to match the latest version of the API. 
+  - Signature changed: getEmailLogs()
+- Renamed some email API models to be consistent across multiple products
+  - EmailError -> EmailReportError
+  - EmailLogsResult -> EmailLogsResponse
+
+### Fixed
+- Minor SMS API changes (some field became readonly)
+- Improved Javadoc comments
+
+
+## [ [3.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.1.0) ] - 2021-06-16
+
+### Added
+- Support for [Infobip Email API](https://www.infobip.com/docs/api#channels/email)
+- `email.md` which contains basic example of Email API usage
+
+
 ## [ [3.0.1](https://github.com/infobip/infobip-api-java-client/releases/tag/3.0.1) ] - 2021-02-16
 
 ### Changed

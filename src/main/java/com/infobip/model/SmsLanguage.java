@@ -28,9 +28,9 @@ public class SmsLanguage {
   }
 
   /**
-   * Code for language character set of a message text. Possible values: &#x60;TR&#x60; for Turkish,
-   * &#x60;ES&#x60; for Spanish, &#x60;PT&#x60; for Portuguese and &#x60;AUTODETECT&#x60; to let
-   * platform pick character set automatically based on the message text.
+   * Language code for the correct character set. Possible values: &#x60;TR&#x60; for Turkish,
+   * &#x60;ES&#x60; for Spanish, &#x60;PT&#x60; for Portuguese, or &#x60;AUTODETECT&#x60; to let
+   * platform select the character set based on message content.
    *
    * @return languageCode
    */
