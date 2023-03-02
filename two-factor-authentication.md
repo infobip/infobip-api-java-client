@@ -1,56 +1,81 @@
-## Two-Factor Authentication (2FA)
-Initialize 2FA API client:
+# Two-Factor Authentication (2FA)
+
+This tutorial will show you how to use a two-factor authentication using [Infobip 2FA API](https://www.infobip.com/docs/api/channels/sms/2fa).
+
+Initialize a 2FA API client:
+
 ```java
-    ApiClient apiClient = new ApiClient();
-    apiClient.setApiKeyPrefix(API_KEY_PREFIX);
-    apiClient.setApiKey(API_KEY);
-    apiClient.setBasePath(URL_BASE_PATH);
+    ApiClient apiClient = ApiClient.forApiKey(ApiKey.from(API_KEY))
+        .withBaseUrl(BaseUrl.from(BASE_URL))
+        .build();
 
     TfaApi tfaApi = new TfaApi(apiClient);
 ```
-Before sending one-time PIN codes you need to set up application and message template.
 
-#### Application setup
-The application represents your service. It’s good practice to have separate applications for separate services.
+Before sending one-time PIN codes you need to set up an application and a message template.
+
+## Application setup
+
+The application represents your service. It’s a good practice to have separate applications for separate services.
+
 ```java
-    TfaApplicationResponse tfaApplication = tfaApi.createTfaApplication(
-        new TfaApplicationRequest().name("2FA application")
-    );
+    TfaApplicationRequest request = new TfaApplicationRequest()
+        .name("2FA application");
+
+    TfaApplicationResponse tfaApplication = tfaApi
+        .createTfaApplication(request)
+        .execute();
+
     String appId = tfaApplication.getApplicationId();
 ```
 
-#### Message template setup
-Message template is the message body with the PIN placeholder that is sent to end users.
+## Message template setup
+
+A message template represents the message body with the PIN placeholder that is sent to the end users.
+
 ```java
-    TfaMessage tfaMessageTemplate = tfaApi.createTfaMessageTemplate(appId,
-        new TfaCreateMessageRequest()
-            .messageText("Your pin is {{pin}}")
-            .pinType(TfaPinType.NUMERIC)
-            .pinLength(4)
-    );
+    TfaCreateMessageRequest request = new TfaCreateMessageRequest()
+        .messageText("Your pin is {{pin}}")
+        .pinType(TfaPinType.NUMERIC)
+        .pinLength(4);
+
+    TfaMessage tfaMessageTemplate = tfaApi
+        .createTfaMessageTemplate(appId, request)
+        .execute();
 
     String messageId = tfaMessageTemplate.getMessageId();
 ```
 
-#### Send 2FA code via SMS
-After setting up the application and message template, you can start generating and sending PIN codes via SMS to the provided destination address.
+## Send a 2FA code via an SMS
+
+Once you set up application and message templates, you can start generating and sending PIN codes via an SMS to the provided destination addresses (i.e. numbers you've purchased from Infobip).
+
 ```java
-    TfaStartAuthenticationResponse sendCodeResponse = tfaApi.sendTfaPinCodeOverSms(true,
-        new TfaStartAuthenticationRequest()
-            .applicationId(appId)
-            .messageId(messageId)
-            .from("InfoSMS")
-            .to("41793026727")
-    );
+    TfaStartAuthenticationRequest request = new TfaStartAuthenticationRequest()
+        .applicationId(appId)
+        .messageId(messageId)
+        .from("InfoSMS")
+        .to("41793026727");
+
+    TfaStartAuthenticationResponse sendCodeResponse = tfaApi
+        .sendTfaPinCodeOverSms(request)
+        .execute();
+
     boolean isSuccessful = sendCodeResponse.getSmsStatus().equals("MESSAGE_SENT");
     String pinId = sendCodeResponse.getPinId();
 ```
 
-#### Verify phone number
-Verify a phone number to confirm successful 2FA authentication.
+## Verify a phone number
+
+Verify a phone number to confirm a successful 2FA authentication.
+
 ```java
-    TfaVerifyPinResponse verifyResponse = tfaApi.verifyTfaPhoneNumber(pinId,
-        new TfaVerifyPinRequest().pin("1598")
-    );
+    TfaVerifyPinRequest request = new TfaVerifyPinRequest()
+        .pin("1598");
+
+    TfaVerifyPinResponse verifyResponse = tfaApi
+        .verifyTfaPhoneNumber(pinId, request)
+        .execute();
+
     boolean verified = verifyResponse.getVerified();
 ```

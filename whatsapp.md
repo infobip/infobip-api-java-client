@@ -1,40 +1,43 @@
-## WhatsApp API quickstart
-This quick guide aims to help you start with Infobip WhatsApp API. After reading it, you should know how to use a WhatsApp client, send various types of messages, and receive delivery reports.
+# WhatsApp API quickstart
+
+This quick guide aims to help you start with [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp). After reading it, you should know how to use a WhatsApp client, send various types of messages, and receive delivery reports.
 
 The first step is to create an `ApiClient` instance with some configuration.
-```java
-    ApiClient apiClient = new ApiClient();
-    apiClient.setApiKeyPrefix(API_KEY_PREFIX);
-    apiClient.setApiKey(API_KEY);
-    apiClient.setBasePath(URL_BASE_PATH);
-```
-With that ready, you can now create an instance of `SendWhatsAppApi` which allows you to send WhatsApp messages.
 
 ```java
-SendWhatsAppApi whatsAppApi = new SendWhatsAppApi(apiClient);
+    ApiClient apiClient = ApiClient.forApiKey(ApiKey.from(API_KEY))
+        .withBaseUrl(BaseUrl.from(BASE_URL))
+        .build();
 ```
 
-### Activate your test sender
-Before sending WhatsApp messages you need to activate your sender and connect to our test domain.
+With that ready, you can now create an instance of `WhatsAppApi` which allows you to send WhatsApp messages.
 
-Just add **447860099299** Infobip sender to your WhatsApp contacts and send a message containing your Infobip account username. 
+```java
+WhatsAppApi whatsAppApi = new WhatsAppApi(apiClient);
+```
 
-Or you can go to the [docs page][whatsapp-docs-page] for an easier way to do the same thing.
+## Activate your test sender
+
+Before sending a WhatsApp message you need to activate your sender and connect to our test domain.
+
+Add the **447860099299** Infobip sender to your WhatsApp contacts and send a message containing your Infobip account username.
+
+Alternatively, you can go to our [documentation page][whatsapp-docs-page] for an easier way to do the same thing.
 
 You are now ready to send your first message.
 
-IMPORTANT NOTE: Keep in mind that for test purposes you can only send messages to registered numbers.
+IMPORTANT NOTE: Keep in mind that for test purposes you can only send messages to a number you registered when you created your Infobip account.
 
-### Send your first message
+## Send your first message
 
-The easiest way to start with WhatsApp messages is to send template messages. Because for other types of messages the recipient must initiate the conversation.
-Template messages are a predefined and structured type of messages approved by WhatsApp for a certain sender.
-So, it is the easiest way to get started.
+The easiest way to start with WhatsApp messages is to send a template message. Template messages are predefined and structured messages approved by WhatsApp for a specific sender. For other types of messages, the recipient must initiate the conversation.
 
-Infobip test sender has a lot of predefined templates that you can fetch by using this [endpoint][get-templates-url].
+The Infobip test sender has a lot of predefined templates that you can fetch by using the [GET WhatsApp templates][get-templates-url] endpoint or the equivalent `WhatsAppApi` method `getWhatsappTemplates`.
 
 The example below shows how to use a template named `welcome_multiple_languages` with only one placeholder. 
-First, create an instance of `WhatsAppMessage` and provide all required data like recipient number as to parameter. We use `en` as a language parameter here, but you can change it to a few others predefined in templates. 
+
+First, create a `WhatsAppMessage` instance and provide all required data. We'll use `en` as a language parameter here, but you can change it to any defined in the template. 
+
 ```java
     WhatsAppMessage message = new WhatsAppMessage()
         .from("447860099299")
@@ -49,59 +52,52 @@ First, create an instance of `WhatsAppMessage` and provide all required data lik
                 )
         );
 ```
-The next step is to create `WhatsAppBulkMessage` instance that serves as a container for multiple messages like we created above.
+
+The next step is to create a `WhatsAppBulkMessage` instance that serves as a container for multiple messages. Just like the one we've created above.
+
 ```java
     WhatsAppBulkMessage bulkMessage = new WhatsAppBulkMessage()
         .addMessagesItem(message);
 ```
-Next, create an instance of WhatsApp API client and pass it the configuration instance created at the beginning.
+
+Finally, we can send the message invoking the appropriate send method and store the results in a new variable.
+
 ```java
-    SendWhatsAppApi whatsAppApi = new SendWhatsAppApi(apiClient);
+    WhatsAppBulkMessageInfo messageInfo = whatsAppApi
+        .sendWhatsappTemplateMessage(bulkMessage)
+        .execute();
 ```
 
-And finally, we can send the message invoking the appropriate send method and store the result new variable.
-```java
-    WhatsAppBulkMessageInfo messageInfo = whatsAppApi.sendWhatsAppTemplateMessage(bulkMessage);
-```
+Once the invocation finishes, you can inspect the results and print a status description, as shown below.
 
-After invocation finishes, you can inspect the result and print, for example, a status description like shown below.
 ```java
     System.out.println(messageInfo.getMessages().get(0).getStatus().getDescription());
 ```
 
-### Send another template message
+## Send another template message
 
-For sending another message we will choose a bit more complex template example called `registration_success`.
-This time we, start with creating an instance of `WhatsAppTemplateContent` just because it is more readable.
+To send another message, we will choose a bit more complex template example called `back_in_stock`.
+This time we'll start with creating a `WhatsAppTemplateContent` instance for better readability.
 
 ```java
     WhatsAppTemplateContent content = new WhatsAppTemplateContent()
         .language("en")
-        .templateName("registration_success")
+        .templateName("back_in_stock")
         .templateData(new WhatsAppTemplateDataContent()
-                .header(new WhatsAppTemplateDocumentHeaderContent()
-                        .mediaUrl("https://api.infobip.com/ott/1/media/infobipLogo")
-                        .type("IMAGE")
-                )
-                .body(new WhatsAppTemplateBodyContent()
-                        .addPlaceholdersItem("<PUT YOUR NAME>")
-                        .addPlaceholdersItem("WhatsApp message")
-                        .addPlaceholdersItem("delivered")
-                        .addPlaceholdersItem("exploring Infobip API")
-                )
-                .addButtonsItem(new WhatsAppTemplateQuickReplyButtonContent()
-                        .parameter("Yes")
-                        .type("QUICK_REPLY"))
-                .addButtonsItem(new WhatsAppTemplateQuickReplyButtonContent()
-                        .parameter("No")
-                        .type("QUICK_REPLY"))
-                .addButtonsItem(new WhatsAppTemplateQuickReplyButtonContent()
-                        .parameter("Later")
-                        .type("QUICK_REPLY"))
+            .header(new WhatsAppTemplateImageHeaderContent()
+                    .mediaUrl("https://api.infobip.com/ott/1/media/infobipLogo")
+            ).body(new WhatsAppTemplateBodyContent()
+                    .addPlaceholdersItem("<PUT YOUR NAME>")
+                    .addPlaceholdersItem("<PUT THE ITEM NAME")
+            ).addButtonsItem(new WhatsAppTemplateQuickReplyButtonContent()
+                    .parameter("yes")
+            )
         );
 ```
-With that prepared now, we can create an instance of `WhatsAppBulkMessage` and provide the above-created object as its `content` field.
-The rest is the same as in the previous example. We are using the `apiClient` instance created at the beginning and invoke send method.
+
+Once it's all prepared, we can create a `WhatsAppBulkMessage` instance and provide the above-created object as its `content` field.
+The rest is the same as in the previous example. We are using the `whatsAppApi` instance created at the beginning and invoke a send method.
+
 ```java
     WhatsAppBulkMessage bulkMessage = new WhatsAppBulkMessage()
         .addMessagesItem(new WhatsAppMessage()
@@ -110,15 +106,17 @@ The rest is the same as in the previous example. We are using the `apiClient` in
                 .content(content)
         );
 
-    SendWhatsAppApi whatsAppApi = new SendWhatsAppApi(apiClient);
-    WhatsAppBulkMessageInfo messageInfo = whatsAppApi.sendWhatsAppTemplateMessage(bulkMessage);
+    WhatsAppBulkMessageInfo messageInfo = whatsAppApi
+        .sendWhatsappTemplateMessage(bulkMessage)
+        .execute();;
 
     System.out.println(messageInfo.getMessages().get(0).getStatus().getDescription());
 ```
 
-### Responding to user-initiated messages
-You are not restricted to sending only template messages.
-You may respond to user messages with any type of message within 24 hours of message receipt.
+## Respond to user-initiated messages
+
+As mentioned above, you are not restricted to only sending template messages.
+You may respond to a user-initiated message with any type of message within 24 hours of receiving the message.
 So, for sending freestyle messages you have to initiate WhatsApp conversation from your registered number.
 
 ```java
@@ -147,7 +145,7 @@ You can find more details about the structure of the message you can expect on y
 ```java
     @PostMapping("/incoming-whatsapp")
     public void receiveWhatsApp(HttpServletRequest request) throws IOException {
-        WhatsAppInboundMessageResult messages = new JSON().getGson().fromJson(request.getReader(), WhatsAppInboundMessageResult.class);
+        WhatsAppInboundMessageResult messages = new JSON().deserialize(request.getInputStream(), WhatsAppInboundMessageResult.class);
         for (WhatsAppInboundMessageData messageData : messages.getResults()) {
             WhatsAppInboundMessage message = messageData.getMessage();
             String text;
