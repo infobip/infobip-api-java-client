@@ -1,0 +1,36 @@
+name: Maven publish
+
+on:
+  workflow_dispatch:
+    branches:
+      - master
+    inputs:
+      username:
+        description: 'MAVEN_USERNAME'
+      password:
+        description: 'MAVEN_PASSWORD'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      matrix:
+        java: [ '11' ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java for publishing to Maven Central Repository
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'temurin'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+      - name: Publish to the Maven Central Repository
+        run: mvn --batch-mode deploy
+        env:
+          MAVEN_USERNAME: ${{ github.event.inputs.username }}
+          MAVEN_PASSWORD: ${{ github.event.inputs.password }}
