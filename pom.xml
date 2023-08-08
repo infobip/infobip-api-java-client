@@ -131,25 +131,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>com.rudikershaw.gitbuildhook</groupId>
-                <artifactId>git-build-hook-maven-plugin</artifactId>
-                <version>3.4.1</version>
-                <configuration>
-                    <installHooks>
-                        <!-- The location of a git hook to install into the default hooks directory. -->
-                        <pre-commit>hooks/pre-commit.sh</pre-commit>
-                    </installHooks>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <!-- Sets git config specified under configuration > gitConfig. -->
-                            <goal>install</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
@@ -181,6 +162,32 @@
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>git-hook</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.rudikershaw.gitbuildhook</groupId>
+                        <artifactId>git-build-hook-maven-plugin</artifactId>
+                        <version>3.4.1</version>
+                        <configuration>
+                            <installHooks>
+                                <!-- The location of a git hook to install into the default hooks directory. -->
+                                <pre-commit>hooks/pre-commit.sh</pre-commit>
+                            </installHooks>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <!-- Sets git config specified under configuration > gitConfig. -->
+                                    <goal>install</goal>
                                 </goals>
                             </execution>
                         </executions>
