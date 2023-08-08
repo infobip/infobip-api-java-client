@@ -21,13 +21,13 @@ jobs:
         run: mvn clean install -U
 
   snyk:
-    name: Snyk Code Coverage
+    name: Run Snyk to check for vulnerabilities
     permissions:
       security-events: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Running Snyk Code Coverage
+      - name: Snyk vulnerability check
         uses: snyk/actions/maven-3-jdk-11@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
