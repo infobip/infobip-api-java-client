@@ -5,7 +5,7 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
-## [ [4.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.0.0) ] - 2023-03-01
+## [4.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.0.0) - 2023-03-01
 
 🎉 **NEW Major Version of `infobip-api-java-client`.**
 
@@ -107,7 +107,7 @@ If you find out that something was not addressed properly, please submit an issu
   We don't allow calling the API without processing the response internally anymore.
 
 
-## [ [3.2.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.2.0) ] - 2022-01-19
+## [3.2.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.2.0) - 2022-01-19
 
 ### Added
 - Support for [Infobip WhatsApp API](https://www.infobip.com/docs/api#channels/whatsapp)
@@ -125,14 +125,14 @@ If you find out that something was not addressed properly, please submit an issu
 - Improved Javadoc comments
 
 
-## [ [3.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.1.0) ] - 2021-06-16
+## [3.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.1.0) - 2021-06-16
 
 ### Added
 - Support for [Infobip Email API](https://www.infobip.com/docs/api#channels/email)
 - `email.md` which contains basic example of Email API usage
 
 
-## [ [3.0.1](https://github.com/infobip/infobip-api-java-client/releases/tag/3.0.1) ] - 2021-02-16
+## [3.0.1](https://github.com/infobip/infobip-api-java-client/releases/tag/3.0.1) - 2021-02-16
 
 ### Changed
 - `README.md` which now contains more details about supported authentication methods & updated examples of library usage for webhooks
@@ -145,7 +145,7 @@ If you find out that something was not addressed properly, please submit an issu
 ### Fixed
 - Supported date formats as specified in [Integration Best Practices](https://www.infobip.com/docs/essentials/integration-best-practices#date-formats)
 
-## [ [3.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.0.0) ] - 2021-02-03
+## [3.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.0.0) - 2021-02-03
 
 🎉 **NEW Major Version of `infobip-api-java-client`.**
 
