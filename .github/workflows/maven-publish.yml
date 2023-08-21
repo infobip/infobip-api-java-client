@@ -8,12 +8,6 @@ on:
       release-version:
         description: 'RELEASE_VERSION'
         required: true
-      username:
-        description: 'MAVEN_USERNAME'
-        required: true
-      password:
-        description: 'MAVEN_PASSWORD'
-        required: true
 
 jobs:
   mvn-release:
@@ -67,30 +61,3 @@ jobs:
           prerelease: false
           draft: false
           token: ${{ secrets.GITHUB_TOKEN }}
-  publish:
-    runs-on: ubuntu-latest
-    needs: release-on-push
-    permissions:
-      contents: read
-      packages: write
-    strategy:
-      matrix:
-        java: [ '11' ]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref }}
-      - name: Set up Java for publishing to Maven Central Repository
-        uses: actions/setup-java@v2
-        with:
-          java-version: ${{ matrix.java }}
-          distribution: 'temurin'
-          server-id: ossrh
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
-      - name: Publish to the Maven Central Repository
-        run: mvn --batch-mode deploy
-        env:
-          MAVEN_USERNAME: ${{ github.event.inputs.username }}
-          MAVEN_PASSWORD: ${{ github.event.inputs.password }}
