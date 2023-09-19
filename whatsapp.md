@@ -127,8 +127,8 @@ So, for sending freestyle messages you have to initiate WhatsApp conversation fr
                     .text("This is my first WhatsApp message sent using Infobip API client library")
             );
 
-    SendWhatsAppApi whatsAppApi = new SendWhatsAppApi(apiClient);
-    WhatsAppSingleMessageInfo messageInfo = whatsAppApi.sendWhatsAppTextMessage(textMessage);
+    WhatsAppApi whatsAppApi = new WhatsAppApi(apiClient);
+    WhatsAppSingleMessageInfo messageInfo = whatsAppApi.sendWhatsAppTextMessage(textMessage).execute();
 
     System.out.println(messageInfo.getStatus().getDescription());
 ```
