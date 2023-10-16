@@ -5,13 +5,14 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
-## [4.0.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.0.1) - 2023-08-10
+## [4.0.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.0.1) - 2023-10-16
 
 ### Added
-- `maven-publish.yml` workflow for releasing new versions on GitHub and publishing to the Maven Central repository.
-- Snyk step added to `maven.yml` workflow to check for dependency vulnerabilities.
-- `git-build-hook-maven-plugin` plugin to support Git hooks within the project.
-- `pre-commit.sh` hook to run `mvn spotless:apply` before each commit.
+- Added `maven-publish.yml` workflow to facilitate the release of new project versions on GitHub and enable publishing to the Maven Central repository.
+- Introduced `snyk.yml` workflow, which serves the purpose of identifying and addressing dependency vulnerabilities in the project.
+- Introduced `sonar.yml` workflow to analyze the source code, enhancing code quality and maintainability.
+- Introduced `git-build-hook-maven-plugin` plugin into the project, providing support for Git hooks.
+- Implemented `pre-commit.sh` hook, which automatically executes `mvn spotless:apply` prior to each commit, ensuring code formatting consistency.
 
 ### Changed
 - [slf4j-api](https://github.com/qos-ch/slf4j/tree/master/slf4j-api) dependency was bumped to version `2.0.7`
