@@ -1,0 +1,23 @@
+name: Snyk vulnerability scan
+
+on: [push]
+
+jobs:
+  snyk:
+    name: Run Snyk to check for vulnerabilities
+    permissions:
+      security-events: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Snyk vulnerability check
+        uses: snyk/actions/maven-3-jdk-11@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --sarif-file-output=snyk.sarif
+            --severity-threshold=high
+      - name: Upload Results to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
