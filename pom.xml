@@ -39,7 +39,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <jackson.version>2.14.2</jackson.version>
-        <okhttp.version>4.10.0</okhttp.version>
+        <okhttp.version>4.12.0</okhttp.version>
         <slf4j.version>2.0.6</slf4j.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
         <assertj-core.version>3.24.2</assertj-core.version>
@@ -120,7 +120,7 @@
                <version>2.32.0</version>
                <configuration>
                    <java>
-                       <palantirJavaFormat />
+                       <palantirJavaFormat/>
                    </java>
                </configuration>
                <executions>
