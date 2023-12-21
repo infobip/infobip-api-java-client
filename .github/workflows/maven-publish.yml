@@ -83,6 +83,9 @@ jobs:
           server-id: ossrh
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
+      - name: Maven build
+        run: |
+          mvn clean install -U
       - name: Publish to the Maven Central Repository
         run: mvn --batch-mode deploy
         env:
