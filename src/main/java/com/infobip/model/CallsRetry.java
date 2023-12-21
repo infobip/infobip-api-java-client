@@ -73,7 +73,7 @@ public class CallsRetry {
      * Sets maxPeriod.
      * <p>
      * Field description:
-     * Defines the maximum waiting time (in minutes) after the previous failed attempt to try to deliver the message again.
+     * Defines the maximum waiting time (in minutes) after the previous failed attempt to try to deliver the message again. Supported values are 1 min, 2 min, 5 min, 10 min, 20 min, 30 min, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, 24 hours. If entered a value that isn&#39;t from the previous list but that&#39;s smaller than 24 hours, it is used the next bigger value from the list. If entered value that is bigger than 24 hours than it is used 24 hours.
      * <p>
      * The field is required.
      *
@@ -89,7 +89,7 @@ public class CallsRetry {
      * Returns maxPeriod.
      * <p>
      * Field description:
-     * Defines the maximum waiting time (in minutes) after the previous failed attempt to try to deliver the message again.
+     * Defines the maximum waiting time (in minutes) after the previous failed attempt to try to deliver the message again. Supported values are 1 min, 2 min, 5 min, 10 min, 20 min, 30 min, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, 24 hours. If entered a value that isn&#39;t from the previous list but that&#39;s smaller than 24 hours, it is used the next bigger value from the list. If entered value that is bigger than 24 hours than it is used 24 hours.
      * <p>
      * The field is required.
      *
@@ -104,7 +104,7 @@ public class CallsRetry {
      * Sets maxPeriod.
      * <p>
      * Field description:
-     * Defines the maximum waiting time (in minutes) after the previous failed attempt to try to deliver the message again.
+     * Defines the maximum waiting time (in minutes) after the previous failed attempt to try to deliver the message again. Supported values are 1 min, 2 min, 5 min, 10 min, 20 min, 30 min, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, 24 hours. If entered a value that isn&#39;t from the previous list but that&#39;s smaller than 24 hours, it is used the next bigger value from the list. If entered value that is bigger than 24 hours than it is used 24 hours.
      * <p>
      * The field is required.
      *
@@ -119,7 +119,7 @@ public class CallsRetry {
      * Sets minPeriod.
      * <p>
      * Field description:
-     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to deliver the message again.
+     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to deliver the message again. Supported values are 1 min, 2 min, 5 min, 10 min, 20 min, 30 min, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, 24 hours. If entered a value that isn&#39;t from the previous list but that&#39;s smaller than 24 hours, it is used the next bigger value from the list. If entered value that is bigger than 24 hours than it is used 24 hours.
      * <p>
      * The field is required.
      *
@@ -135,7 +135,7 @@ public class CallsRetry {
      * Returns minPeriod.
      * <p>
      * Field description:
-     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to deliver the message again.
+     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to deliver the message again. Supported values are 1 min, 2 min, 5 min, 10 min, 20 min, 30 min, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, 24 hours. If entered a value that isn&#39;t from the previous list but that&#39;s smaller than 24 hours, it is used the next bigger value from the list. If entered value that is bigger than 24 hours than it is used 24 hours.
      * <p>
      * The field is required.
      *
@@ -150,7 +150,7 @@ public class CallsRetry {
      * Sets minPeriod.
      * <p>
      * Field description:
-     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to deliver the message again.
+     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to deliver the message again. Supported values are 1 min, 2 min, 5 min, 10 min, 20 min, 30 min, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, 24 hours. If entered a value that isn&#39;t from the previous list but that&#39;s smaller than 24 hours, it is used the next bigger value from the list. If entered value that is bigger than 24 hours than it is used 24 hours.
      * <p>
      * The field is required.
      *

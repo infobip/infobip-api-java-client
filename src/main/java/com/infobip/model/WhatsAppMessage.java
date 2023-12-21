@@ -29,7 +29,13 @@ public class WhatsAppMessage {
 
     private String notifyUrl;
 
+    private WhatsAppUrlOptions urlOptions;
+
     private WhatsAppFailover smsFailover;
+
+    private String entityId;
+
+    private String applicationId;
 
     /**
      * Sets from.
@@ -281,6 +287,37 @@ public class WhatsAppMessage {
     }
 
     /**
+     * Sets urlOptions.
+     *
+     * @param urlOptions
+     * @return This {@link WhatsAppMessage instance}.
+     */
+    public WhatsAppMessage urlOptions(WhatsAppUrlOptions urlOptions) {
+        this.urlOptions = urlOptions;
+        return this;
+    }
+
+    /**
+     * Returns urlOptions.
+     *
+     * @return urlOptions
+     */
+    @JsonProperty("urlOptions")
+    public WhatsAppUrlOptions getUrlOptions() {
+        return urlOptions;
+    }
+
+    /**
+     * Sets urlOptions.
+     *
+     * @param urlOptions
+     */
+    @JsonProperty("urlOptions")
+    public void setUrlOptions(WhatsAppUrlOptions urlOptions) {
+        this.urlOptions = urlOptions;
+    }
+
+    /**
      * Sets smsFailover.
      *
      * @param smsFailover
@@ -311,6 +348,86 @@ public class WhatsAppMessage {
         this.smsFailover = smsFailover;
     }
 
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Required for entity use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     * @return This {@link WhatsAppMessage instance}.
+     */
+    public WhatsAppMessage entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * Required for entity use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Required for entity use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     * @return This {@link WhatsAppMessage instance}.
+     */
+    public WhatsAppMessage applicationId(String applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -326,12 +443,25 @@ public class WhatsAppMessage {
                 && Objects.equals(this.content, whatsAppMessage.content)
                 && Objects.equals(this.callbackData, whatsAppMessage.callbackData)
                 && Objects.equals(this.notifyUrl, whatsAppMessage.notifyUrl)
-                && Objects.equals(this.smsFailover, whatsAppMessage.smsFailover);
+                && Objects.equals(this.urlOptions, whatsAppMessage.urlOptions)
+                && Objects.equals(this.smsFailover, whatsAppMessage.smsFailover)
+                && Objects.equals(this.entityId, whatsAppMessage.entityId)
+                && Objects.equals(this.applicationId, whatsAppMessage.applicationId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, to, messageId, content, callbackData, notifyUrl, smsFailover);
+        return Objects.hash(
+                from,
+                to,
+                messageId,
+                content,
+                callbackData,
+                notifyUrl,
+                urlOptions,
+                smsFailover,
+                entityId,
+                applicationId);
     }
 
     @Override
@@ -358,8 +488,17 @@ public class WhatsAppMessage {
                 .append("    notifyUrl: ")
                 .append(toIndentedString(notifyUrl))
                 .append(newLine)
+                .append("    urlOptions: ")
+                .append(toIndentedString(urlOptions))
+                .append(newLine)
                 .append("    smsFailover: ")
                 .append(toIndentedString(smsFailover))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
                 .append(newLine)
                 .append("}")
                 .toString();

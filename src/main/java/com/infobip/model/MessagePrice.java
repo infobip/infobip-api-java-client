@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * MMS price.
+ * Message price.
  */
 public class MessagePrice {
 

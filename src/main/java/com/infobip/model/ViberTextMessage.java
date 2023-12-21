@@ -41,6 +41,10 @@ public class ViberTextMessage {
 
     private ViberUrlOptions urlOptions;
 
+    private String entityId;
+
+    private String applicationId;
+
     /**
      * Sets from.
      * <p>
@@ -503,6 +507,86 @@ public class ViberTextMessage {
         this.urlOptions = urlOptions;
     }
 
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Required for entity use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     * @return This {@link ViberTextMessage instance}.
+     */
+    public ViberTextMessage entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * Required for entity use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Required for entity use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     * @return This {@link ViberTextMessage instance}.
+     */
+    public ViberTextMessage applicationId(String applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -523,7 +607,9 @@ public class ViberTextMessage {
                 && Objects.equals(this.label, viberTextMessage.label)
                 && Objects.equals(this.smsFailover, viberTextMessage.smsFailover)
                 && Objects.equals(this.notifyUrl, viberTextMessage.notifyUrl)
-                && Objects.equals(this.urlOptions, viberTextMessage.urlOptions);
+                && Objects.equals(this.urlOptions, viberTextMessage.urlOptions)
+                && Objects.equals(this.entityId, viberTextMessage.entityId)
+                && Objects.equals(this.applicationId, viberTextMessage.applicationId);
     }
 
     @Override
@@ -540,7 +626,9 @@ public class ViberTextMessage {
                 label,
                 smsFailover,
                 notifyUrl,
-                urlOptions);
+                urlOptions,
+                entityId,
+                applicationId);
     }
 
     @Override
@@ -584,6 +672,12 @@ public class ViberTextMessage {
                 .append(newLine)
                 .append("    urlOptions: ")
                 .append(toIndentedString(urlOptions))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -37,6 +37,8 @@ public class CallRequest {
 
     private String applicationId;
 
+    private String parentCallId;
+
     /**
      * Sets endpoint.
      * <p>
@@ -406,6 +408,46 @@ public class CallRequest {
         this.applicationId = applicationId;
     }
 
+    /**
+     * Sets parentCallId.
+     * <p>
+     * Field description:
+     * ID of an existing call that initiated this leg. Required for [creating a dialog with an existing call.](#create-dialog-with-existing-calls)
+     *
+     * @param parentCallId
+     * @return This {@link CallRequest instance}.
+     */
+    public CallRequest parentCallId(String parentCallId) {
+        this.parentCallId = parentCallId;
+        return this;
+    }
+
+    /**
+     * Returns parentCallId.
+     * <p>
+     * Field description:
+     * ID of an existing call that initiated this leg. Required for [creating a dialog with an existing call.](#create-dialog-with-existing-calls)
+     *
+     * @return parentCallId
+     */
+    @JsonProperty("parentCallId")
+    public String getParentCallId() {
+        return parentCallId;
+    }
+
+    /**
+     * Sets parentCallId.
+     * <p>
+     * Field description:
+     * ID of an existing call that initiated this leg. Required for [creating a dialog with an existing call.](#create-dialog-with-existing-calls)
+     *
+     * @param parentCallId
+     */
+    @JsonProperty("parentCallId")
+    public void setParentCallId(String parentCallId) {
+        this.parentCallId = parentCallId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -423,7 +465,8 @@ public class CallRequest {
                 && Objects.equals(this.machineDetection, callRequest.machineDetection)
                 && Objects.equals(this.maxDuration, callRequest.maxDuration)
                 && Objects.equals(this.customData, callRequest.customData)
-                && Objects.equals(this.applicationId, callRequest.applicationId);
+                && Objects.equals(this.applicationId, callRequest.applicationId)
+                && Objects.equals(this.parentCallId, callRequest.parentCallId);
     }
 
     @Override
@@ -437,7 +480,8 @@ public class CallRequest {
                 machineDetection,
                 maxDuration,
                 customData,
-                applicationId);
+                applicationId,
+                parentCallId);
     }
 
     @Override
@@ -472,6 +516,9 @@ public class CallRequest {
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    parentCallId: ")
+                .append(toIndentedString(parentCallId))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -9,6 +9,8 @@
 
 package com.infobip;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infobip.ApiException.RequestContext;
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +27,16 @@ final class ResponseProcessor {
     private final Downloader downloader;
     private final JSON json;
     private final DeprecationChecker deprecationChecker;
+    private final ApiExceptionDetailsResolver apiExceptionDetailsResolver = new ApiExceptionDetailsResolver();
+    private final ErrorResponseSerializer errorResponseSerializer = new ErrorResponseSerializer();
+
+    private static final class ErrorResponseSerializer extends JSON {
+
+        @Override
+        protected ObjectMapper configureObjectMapper() {
+            return super.configureObjectMapper().enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        }
+    }
 
     /**
      * {@link ResponseProcessor} constructor.
@@ -78,10 +90,15 @@ final class ResponseProcessor {
         if (responseBody != null) {
             try {
                 rawResponseBody = responseBody.string();
-                ApiExceptionWrapper wrapper = json.deserialize(rawResponseBody, ApiExceptionWrapper.class);
-                details = wrapper.getDetails();
+                details = errorResponseSerializer.deserialize(rawResponseBody, ApiExceptionDetails.class);
             } catch (Exception e) {
-                // ignored, best effort
+                try {
+                    ApiExceptionWrapper wrapper =
+                            errorResponseSerializer.deserialize(rawResponseBody, ApiExceptionWrapper.class);
+                    details = apiExceptionDetailsResolver.resolveDetails(wrapper.getDetails());
+                } catch (Exception exception) {
+                    // ignored, best effort
+                }
             }
         }
         throw ApiException.becauseApiRequestFailed(RequestContext.tryToReadFrom(response), rawResponseBody, details);

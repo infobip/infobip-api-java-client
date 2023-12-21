@@ -34,11 +34,11 @@ public class EmailReport {
 
     private Integer messageCount;
 
-    private EmailPrice price;
+    private MessagePrice price;
 
-    private EmailStatus status;
+    private MessageStatus status;
 
-    private EmailReportError error;
+    private MessageError error;
 
     /**
      * Sets applicationId.
@@ -284,7 +284,7 @@ public class EmailReport {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Tells when the email request was processed by Infobip
+     * Tells when the email request was processed by Infobip.
      *
      * @param doneAt
      * @return This {@link EmailReport instance}.
@@ -298,7 +298,7 @@ public class EmailReport {
      * Returns doneAt.
      * <p>
      * Field description:
-     * Tells when the email request was processed by Infobip
+     * Tells when the email request was processed by Infobip.
      *
      * @return doneAt
      */
@@ -311,7 +311,7 @@ public class EmailReport {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Tells when the email request was processed by Infobip
+     * Tells when the email request was processed by Infobip.
      *
      * @param doneAt
      */
@@ -366,7 +366,7 @@ public class EmailReport {
      * @param price
      * @return This {@link EmailReport instance}.
      */
-    public EmailReport price(EmailPrice price) {
+    public EmailReport price(MessagePrice price) {
         this.price = price;
         return this;
     }
@@ -377,7 +377,7 @@ public class EmailReport {
      * @return price
      */
     @JsonProperty("price")
-    public EmailPrice getPrice() {
+    public MessagePrice getPrice() {
         return price;
     }
 
@@ -387,7 +387,7 @@ public class EmailReport {
      * @param price
      */
     @JsonProperty("price")
-    public void setPrice(EmailPrice price) {
+    public void setPrice(MessagePrice price) {
         this.price = price;
     }
 
@@ -397,7 +397,7 @@ public class EmailReport {
      * @param status
      * @return This {@link EmailReport instance}.
      */
-    public EmailReport status(EmailStatus status) {
+    public EmailReport status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -408,7 +408,7 @@ public class EmailReport {
      * @return status
      */
     @JsonProperty("status")
-    public EmailStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -418,7 +418,7 @@ public class EmailReport {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(EmailStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 
@@ -428,7 +428,7 @@ public class EmailReport {
      * @param error
      * @return This {@link EmailReport instance}.
      */
-    public EmailReport error(EmailReportError error) {
+    public EmailReport error(MessageError error) {
         this.error = error;
         return this;
     }
@@ -439,7 +439,7 @@ public class EmailReport {
      * @return error
      */
     @JsonProperty("error")
-    public EmailReportError getError() {
+    public MessageError getError() {
         return error;
     }
 
@@ -449,7 +449,7 @@ public class EmailReport {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(EmailReportError error) {
+    public void setError(MessageError error) {
         this.error = error;
     }
 

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents CallsDestination model.
+ * Message destination addresses. Destination address must be in the E.164 standard format (Example: 41793026727). Maximum number of destination addresses is 20k.
  */
 public class CallsDestination {
 

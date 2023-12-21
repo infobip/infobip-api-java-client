@@ -28,6 +28,7 @@ import com.infobip.model.EmailDomainIpResponse;
 import com.infobip.model.EmailDomainResponse;
 import com.infobip.model.EmailLogsResponse;
 import com.infobip.model.EmailReportsResult;
+import com.infobip.model.EmailReturnPathAddressRequest;
 import com.infobip.model.EmailSendResponse;
 import com.infobip.model.EmailSimpleApiResponse;
 import com.infobip.model.EmailTrackingEventRequest;
@@ -307,7 +308,7 @@ public class EmailApi {
         /**
          * Sets size.
          *
-         * @param size Maximum number of domains to be viewed per page. Default value is 10 with a maximum of 20 records per page. (optional)
+         * @param size Maximum number of domains to be viewed per page. Default value is 10 with a maximum of 20 records per page. (optional, default to 10)
          * @return GetAllDomainsRequest
          */
         public GetAllDomainsRequest size(Integer size) {
@@ -318,7 +319,7 @@ public class EmailApi {
         /**
          * Sets page.
          *
-         * @param page Page number you want to see. Default is 0. (optional)
+         * @param page Page number you want to see. Default is 0. (optional, default to 0)
          * @return GetAllDomainsRequest
          */
         public GetAllDomainsRequest page(Integer page) {
@@ -469,7 +470,8 @@ public class EmailApi {
         return new GetDomainDetailsRequest(domainName);
     }
 
-    private RequestDefinition getEmailDeliveryReportsDefinition(String bulkId, String messageId, Integer limit) {
+    private RequestDefinition getEmailDeliveryReportsDefinition(
+            String bulkId, String messageId, Integer limit, String applicationId, String entityId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/reports")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -483,6 +485,12 @@ public class EmailApi {
         if (limit != null) {
             builder.addQueryParameter(new Parameter("limit", limit));
         }
+        if (applicationId != null) {
+            builder.addQueryParameter(new Parameter("applicationId", applicationId));
+        }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
+        }
         return builder.build();
     }
 
@@ -493,6 +501,8 @@ public class EmailApi {
         private String bulkId;
         private String messageId;
         private Integer limit;
+        private String applicationId;
+        private String entityId;
 
         private GetEmailDeliveryReportsRequest() {}
 
@@ -530,6 +540,28 @@ public class EmailApi {
         }
 
         /**
+         * Sets applicationId.
+         *
+         * @param applicationId [Application](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#application) identifier used for filtering. (optional)
+         * @return GetEmailDeliveryReportsRequest
+         */
+        public GetEmailDeliveryReportsRequest applicationId(String applicationId) {
+            this.applicationId = applicationId;
+            return this;
+        }
+
+        /**
+         * Sets entityId.
+         *
+         * @param entityId [Entity](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#entity) identifier used for filtering. (optional)
+         * @return GetEmailDeliveryReportsRequest
+         */
+        public GetEmailDeliveryReportsRequest entityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
+
+        /**
          * Executes the getEmailDeliveryReports request.
          *
          * @return EmailReportsResult The deserialized response.
@@ -537,7 +569,7 @@ public class EmailApi {
          */
         public EmailReportsResult execute() throws ApiException {
             RequestDefinition getEmailDeliveryReportsDefinition =
-                    getEmailDeliveryReportsDefinition(bulkId, messageId, limit);
+                    getEmailDeliveryReportsDefinition(bulkId, messageId, limit, applicationId, entityId);
             return apiClient.execute(
                     getEmailDeliveryReportsDefinition, new TypeReference<EmailReportsResult>() {}.getType());
         }
@@ -550,7 +582,7 @@ public class EmailApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<EmailReportsResult> callback) {
             RequestDefinition getEmailDeliveryReportsDefinition =
-                    getEmailDeliveryReportsDefinition(bulkId, messageId, limit);
+                    getEmailDeliveryReportsDefinition(bulkId, messageId, limit, applicationId, entityId);
             return apiClient.executeAsync(
                     getEmailDeliveryReportsDefinition, new TypeReference<EmailReportsResult>() {}.getType(), callback);
         }
@@ -575,7 +607,9 @@ public class EmailApi {
             String generalStatus,
             OffsetDateTime sentSince,
             OffsetDateTime sentUntil,
-            Integer limit) {
+            Integer limit,
+            String applicationId,
+            String entityId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/logs")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -604,6 +638,12 @@ public class EmailApi {
         if (limit != null) {
             builder.addQueryParameter(new Parameter("limit", limit));
         }
+        if (applicationId != null) {
+            builder.addQueryParameter(new Parameter("applicationId", applicationId));
+        }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
+        }
         return builder.build();
     }
 
@@ -619,6 +659,8 @@ public class EmailApi {
         private OffsetDateTime sentSince;
         private OffsetDateTime sentUntil;
         private Integer limit;
+        private String applicationId;
+        private String entityId;
 
         private GetEmailLogsRequest() {}
 
@@ -711,14 +753,36 @@ public class EmailApi {
         }
 
         /**
+         * Sets applicationId.
+         *
+         * @param applicationId [Application](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#application) identifier used for filtering. (optional)
+         * @return GetEmailLogsRequest
+         */
+        public GetEmailLogsRequest applicationId(String applicationId) {
+            this.applicationId = applicationId;
+            return this;
+        }
+
+        /**
+         * Sets entityId.
+         *
+         * @param entityId [Entity](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#entity) identifier used for filtering. (optional)
+         * @return GetEmailLogsRequest
+         */
+        public GetEmailLogsRequest entityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
+
+        /**
          * Executes the getEmailLogs request.
          *
          * @return EmailLogsResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public EmailLogsResponse execute() throws ApiException {
-            RequestDefinition getEmailLogsDefinition =
-                    getEmailLogsDefinition(messageId, from, to, bulkId, generalStatus, sentSince, sentUntil, limit);
+            RequestDefinition getEmailLogsDefinition = getEmailLogsDefinition(
+                    messageId, from, to, bulkId, generalStatus, sentSince, sentUntil, limit, applicationId, entityId);
             return apiClient.execute(getEmailLogsDefinition, new TypeReference<EmailLogsResponse>() {}.getType());
         }
 
@@ -729,8 +793,8 @@ public class EmailApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<EmailLogsResponse> callback) {
-            RequestDefinition getEmailLogsDefinition =
-                    getEmailLogsDefinition(messageId, from, to, bulkId, generalStatus, sentSince, sentUntil, limit);
+            RequestDefinition getEmailLogsDefinition = getEmailLogsDefinition(
+                    messageId, from, to, bulkId, generalStatus, sentSince, sentUntil, limit, applicationId, entityId);
             return apiClient.executeAsync(
                     getEmailLogsDefinition, new TypeReference<EmailLogsResponse>() {}.getType(), callback);
         }
@@ -739,7 +803,7 @@ public class EmailApi {
     /**
      * Get email logs.
      * <p>
-     * This method allows you to get email logs of sent Email messagesId for request. Email logs are available for the last 48 hours!
+     * This method allows you to get logs for sent emails using their messageId. Email logs are available for the last 48 hours.
      *
      * @return GetEmailLogsRequest
      */
@@ -800,7 +864,7 @@ public class EmailApi {
      * <p>
      * See the status of scheduled email messages.
      *
-     * @param bulkId  (required)
+     * @param bulkId The ID uniquely identifies the sent email request. (required)
      * @return GetScheduledEmailStatusesRequest
      */
     public GetScheduledEmailStatusesRequest getScheduledEmailStatuses(String bulkId) {
@@ -860,7 +924,7 @@ public class EmailApi {
      * <p>
      * See the scheduled time of your Email messages.
      *
-     * @param bulkId  (required)
+     * @param bulkId The ID uniquely identifies the sent email request. (required)
      * @return GetScheduledEmailsRequest
      */
     public GetScheduledEmailsRequest getScheduledEmails(String bulkId) {
@@ -1010,7 +1074,7 @@ public class EmailApi {
             String text,
             String html,
             String ampHtml,
-            Integer templateId,
+            Long templateId,
             List<File> attachment,
             List<File> inlineImage,
             Boolean intermediateReport,
@@ -1029,6 +1093,7 @@ public class EmailApi {
             OffsetDateTime sendAt,
             String landingPagePlaceholders,
             String landingPageId,
+            String templateLanguageVersion,
             String applicationId,
             String entityId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/email/3/send")
@@ -1117,6 +1182,9 @@ public class EmailApi {
         if (landingPageId != null) {
             builder.addFormParameter(new Parameter("landingPageId", landingPageId));
         }
+        if (templateLanguageVersion != null) {
+            builder.addFormParameter(new Parameter("templateLanguageVersion", templateLanguageVersion));
+        }
         if (applicationId != null) {
             builder.addFormParameter(new Parameter("applicationId", applicationId));
         }
@@ -1138,7 +1206,7 @@ public class EmailApi {
         private String text;
         private String html;
         private String ampHtml;
-        private Integer templateId;
+        private Long templateId;
         private List<File> attachment;
         private List<File> inlineImage;
         private Boolean intermediateReport;
@@ -1157,6 +1225,7 @@ public class EmailApi {
         private OffsetDateTime sendAt;
         private String landingPagePlaceholders;
         private String landingPageId;
+        private String templateLanguageVersion;
         private String applicationId;
         private String entityId;
 
@@ -1178,7 +1247,7 @@ public class EmailApi {
         /**
          * Sets cc.
          *
-         * @param cc CC recipient email address. (optional)
+         * @param cc CC recipient email address.  Note: Maximum number of recipients per request is 1000 overall including to, cc and bcc field. (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest cc(List<String> cc) {
@@ -1189,7 +1258,7 @@ public class EmailApi {
         /**
          * Sets bcc.
          *
-         * @param bcc BCC recipient email address. (optional)
+         * @param bcc BCC recipient email address.  Note: Maximum number of recipients per request is 1000 overall including to, cc and bcc field. (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest bcc(List<String> bcc) {
@@ -1233,7 +1302,7 @@ public class EmailApi {
         /**
          * Sets ampHtml.
          *
-         * @param ampHtml Amp HTML body of the message. If &#x60;ampHtml&#x60; is present, &#x60;html&#x60; is mandatory. Amp HTML is not supported by all the email clients. Please check this link for configuring gmail client https://developers.google.com/gmail/ampemail/ (optional)
+         * @param ampHtml Amp HTML body of the message. If &#x60;ampHtml&#x60; is present, &#x60;html&#x60; is mandatory. Amp HTML is not supported by all the email clients. Please check this link for configuring gmail client https://developers.google.com/gmail/ampemail/. (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest ampHtml(String ampHtml) {
@@ -1247,7 +1316,7 @@ public class EmailApi {
          * @param templateId Template ID used for generating email content. The template is created over Infobip web interface. If &#x60;templateId&#x60; is present, then &#x60;html&#x60; and &#x60;text&#x60; values are ignored.  Note: &#x60;templateId&#x60; only supports the value of &#x60;Broadcast&#x60;. &#x60;Content&#x60; and &#x60;Flow&#x60; are not supported. (optional)
          * @return SendEmailRequest
          */
-        public SendEmailRequest templateId(Integer templateId) {
+        public SendEmailRequest templateId(Long templateId) {
             this.templateId = templateId;
             return this;
         }
@@ -1398,7 +1467,7 @@ public class EmailApi {
         /**
          * Sets defaultPlaceholders.
          *
-         * @param defaultPlaceholders General placeholder, given in a form of json example: &#x60;defaultPlaceholders&#x3D;{\\\&quot;ph1\\\&quot;: \\\&quot;Success\\\&quot;}&#x60;, which will replace given key &#x60;{{ph1}}&#x60; with given value &#x60;Success&#x60; anywhere in the email (subject, text, html...). In case of more destinations in &#x60;To&#x60; field, this placeholder will resolve the same value for key &#x60;ph1&#x60; (optional)
+         * @param defaultPlaceholders General placeholder, given in a form of json example: &#x60;defaultPlaceholders&#x3D;{\\\&quot;ph1\\\&quot;: \\\&quot;Success\\\&quot;}&#x60;, which will replace given key &#x60;{{ph1}}&#x60; with given value &#x60;Success&#x60; anywhere in the email (subject, text, html...). In case of more destinations in &#x60;To&#x60; field, this placeholder will resolve the same value for key &#x60;ph1&#x60;. (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest defaultPlaceholders(String defaultPlaceholders) {
@@ -1420,7 +1489,7 @@ public class EmailApi {
         /**
          * Sets sendAt.
          *
-         * @param sendAt To schedule message at a given time in future. Time provided should be in UTC in the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.  (optional)
+         * @param sendAt To schedule message at a given time. Time provided should be in UTC in the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60; and cannot exceed 30 days in the future.  (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest sendAt(OffsetDateTime sendAt) {
@@ -1442,11 +1511,22 @@ public class EmailApi {
         /**
          * Sets landingPageId.
          *
-         * @param landingPageId Opt out landing page which will be used and displayed once end user clicks the unsubscribe link. If not present default opt out landing page will be displayed. Create a landing page on IB’s portal and use the last 6 digits from URL to use that opt out page. (optional)
+         * @param landingPageId The ID of an opt out landing page to be used and displayed once an end user clicks the unsubscribe link. If not present, default opt out landing page will be displayed. Create a landing page in your Infobip account and use its ID, e.g., &#x60;#1_23456&#x60;. (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest landingPageId(String landingPageId) {
             this.landingPageId = landingPageId;
+            return this;
+        }
+
+        /**
+         * Sets templateLanguageVersion.
+         *
+         * @param templateLanguageVersion Specifies template language version that will be used in the current message template. Use version 1 for previous version of template language. Use version 2 for features of the new template language. If not present version 1 will be used as default version.  (optional, default to 1)
+         * @return SendEmailRequest
+         */
+        public SendEmailRequest templateLanguageVersion(String templateLanguageVersion) {
+            this.templateLanguageVersion = templateLanguageVersion;
             return this;
         }
 
@@ -1507,6 +1587,7 @@ public class EmailApi {
                     sendAt,
                     landingPagePlaceholders,
                     landingPageId,
+                    templateLanguageVersion,
                     applicationId,
                     entityId);
             return apiClient.execute(sendEmailDefinition, new TypeReference<EmailSendResponse>() {}.getType());
@@ -1547,6 +1628,7 @@ public class EmailApi {
                     sendAt,
                     landingPagePlaceholders,
                     landingPageId,
+                    templateLanguageVersion,
                     applicationId,
                     entityId);
             return apiClient.executeAsync(
@@ -1559,11 +1641,81 @@ public class EmailApi {
      * <p>
      * Send an email or multiple emails to a recipient or multiple recipients with CC/BCC enabled.
      *
-     * @param to Email address of the recipient in a form of &#x60;To&#x3D;\\\&quot;john.smith@somecompany.com\\\&quot;&#x60;.  As optional feature on this field, a specific placeholder can be defined whose value will apply only for this destination. Given &#x60;To&#x60; value should look like:  &#x60;To&#x3D; {\\\&quot;to\\\&quot;: \\\&quot;john.smith@somecompany.com\\\&quot;,\\\&quot;placeholders\\\&quot;: {\\\&quot;name\\\&quot;: \\\&quot;John\\\&quot;}}&#x60; &#x60;To&#x3D; {\\\&quot;to\\\&quot;: \\\&quot;alice.grey@somecompany.com\\\&quot;,\\\&quot;placeholders\\\&quot;: {\\\&quot;name\\\&quot;: \\\&quot;Alice\\\&quot;}}&#x60;  (required)
+     * @param to Email address of the recipient in a form of &#x60;To&#x3D;\\\&quot;john.smith@somecompany.com\\\&quot;&#x60;. As optional feature on this field, a specific placeholder can be defined whose value will apply only for this destination. Given &#x60;To&#x60; value should look like: &#x60;To&#x3D; {\\\&quot;to\\\&quot;: \\\&quot;john.smith@somecompany.com\\\&quot;,\\\&quot;placeholders\\\&quot;: {\\\&quot;name\\\&quot;: \\\&quot;John\\\&quot;}}&#x60; &#x60;To&#x3D; {\\\&quot;to\\\&quot;: \\\&quot;alice.grey@somecompany.com\\\&quot;,\\\&quot;placeholders\\\&quot;: {\\\&quot;name\\\&quot;: \\\&quot;Alice\\\&quot;}}&#x60;.  Note: Maximum number of recipients per request is 1000 overall including to, cc and bcc field. (required)
      * @return SendEmailRequest
      */
     public SendEmailRequest sendEmail(List<String> to) {
         return new SendEmailRequest(to);
+    }
+
+    private RequestDefinition updateReturnPathDefinition(
+            String domainName, EmailReturnPathAddressRequest emailReturnPathAddressRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "PUT", "/email/1/domains/{domainName}/return-path")
+                .body(emailReturnPathAddressRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (domainName != null) {
+            builder.addPathParameter(new Parameter("domainName", domainName));
+        }
+        return builder.build();
+    }
+
+    /**
+     * updateReturnPath request builder class.
+     */
+    public class UpdateReturnPathRequest {
+        private final String domainName;
+        private final EmailReturnPathAddressRequest emailReturnPathAddressRequest;
+
+        private UpdateReturnPathRequest(
+                String domainName, EmailReturnPathAddressRequest emailReturnPathAddressRequest) {
+            this.domainName = Objects.requireNonNull(domainName, "The required parameter 'domainName' is missing.");
+            this.emailReturnPathAddressRequest = Objects.requireNonNull(
+                    emailReturnPathAddressRequest,
+                    "The required parameter 'emailReturnPathAddressRequest' is missing.");
+        }
+
+        /**
+         * Executes the updateReturnPath request.
+         *
+         * @return EmailDomainResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public EmailDomainResponse execute() throws ApiException {
+            RequestDefinition updateReturnPathDefinition =
+                    updateReturnPathDefinition(domainName, emailReturnPathAddressRequest);
+            return apiClient.execute(updateReturnPathDefinition, new TypeReference<EmailDomainResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the updateReturnPath request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<EmailDomainResponse> callback) {
+            RequestDefinition updateReturnPathDefinition =
+                    updateReturnPathDefinition(domainName, emailReturnPathAddressRequest);
+            return apiClient.executeAsync(
+                    updateReturnPathDefinition, new TypeReference<EmailDomainResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Update return path.
+     * <p>
+     * API to update return path for the provided domain. The mailbox used for return path should be based on the same domain.
+     *
+     * @param domainName Domain for which the return path address needs to be updated. (required)
+     * @param emailReturnPathAddressRequest  (required)
+     * @return UpdateReturnPathRequest
+     */
+    public UpdateReturnPathRequest updateReturnPath(
+            String domainName, EmailReturnPathAddressRequest emailReturnPathAddressRequest) {
+        return new UpdateReturnPathRequest(domainName, emailReturnPathAddressRequest);
     }
 
     private RequestDefinition updateScheduledEmailStatusesDefinition(
@@ -1629,7 +1781,7 @@ public class EmailApi {
      * <p>
      * Change status or completely cancel sending of scheduled messages.
      *
-     * @param bulkId  (required)
+     * @param bulkId The ID uniquely identifies the sent email request. (required)
      * @param emailBulkUpdateStatusRequest  (required)
      * @return UpdateScheduledEmailStatusesRequest
      */

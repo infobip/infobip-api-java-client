@@ -18,11 +18,15 @@ import java.util.Objects;
  */
 public class SmsLog {
 
+    private String applicationId;
+
     private String bulkId;
 
     private OffsetDateTime doneAt;
 
-    private SmsError error;
+    private String entityId;
+
+    private MessageError error;
 
     private String from;
 
@@ -30,17 +34,57 @@ public class SmsLog {
 
     private String messageId;
 
-    private SmsPrice price;
+    private MessagePrice price;
 
     private OffsetDateTime sentAt;
 
     private Integer smsCount;
 
-    private SmsStatus status;
+    private MessageStatus status;
 
     private String text;
 
     private String to;
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Application id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     * @return This {@link SmsLog instance}.
+     */
+    public SmsLog applicationId(String applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * Application id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Application id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
 
     /**
      * Sets bulkId.
@@ -123,12 +167,52 @@ public class SmsLog {
     }
 
     /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Entity id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     * @return This {@link SmsLog instance}.
+     */
+    public SmsLog entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * Entity id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Entity id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
+    /**
      * Sets error.
      *
      * @param error
      * @return This {@link SmsLog instance}.
      */
-    public SmsLog error(SmsError error) {
+    public SmsLog error(MessageError error) {
         this.error = error;
         return this;
     }
@@ -139,7 +223,7 @@ public class SmsLog {
      * @return error
      */
     @JsonProperty("error")
-    public SmsError getError() {
+    public MessageError getError() {
         return error;
     }
 
@@ -149,7 +233,7 @@ public class SmsLog {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(SmsError error) {
+    public void setError(MessageError error) {
         this.error = error;
     }
 
@@ -279,7 +363,7 @@ public class SmsLog {
      * @param price
      * @return This {@link SmsLog instance}.
      */
-    public SmsLog price(SmsPrice price) {
+    public SmsLog price(MessagePrice price) {
         this.price = price;
         return this;
     }
@@ -290,7 +374,7 @@ public class SmsLog {
      * @return price
      */
     @JsonProperty("price")
-    public SmsPrice getPrice() {
+    public MessagePrice getPrice() {
         return price;
     }
 
@@ -300,7 +384,7 @@ public class SmsLog {
      * @param price
      */
     @JsonProperty("price")
-    public void setPrice(SmsPrice price) {
+    public void setPrice(MessagePrice price) {
         this.price = price;
     }
 
@@ -390,7 +474,7 @@ public class SmsLog {
      * @param status
      * @return This {@link SmsLog instance}.
      */
-    public SmsLog status(SmsStatus status) {
+    public SmsLog status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -401,7 +485,7 @@ public class SmsLog {
      * @return status
      */
     @JsonProperty("status")
-    public SmsStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -411,7 +495,7 @@ public class SmsLog {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(SmsStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 
@@ -504,8 +588,10 @@ public class SmsLog {
             return false;
         }
         SmsLog smsLog = (SmsLog) o;
-        return Objects.equals(this.bulkId, smsLog.bulkId)
+        return Objects.equals(this.applicationId, smsLog.applicationId)
+                && Objects.equals(this.bulkId, smsLog.bulkId)
                 && Objects.equals(this.doneAt, smsLog.doneAt)
+                && Objects.equals(this.entityId, smsLog.entityId)
                 && Objects.equals(this.error, smsLog.error)
                 && Objects.equals(this.from, smsLog.from)
                 && Objects.equals(this.mccMnc, smsLog.mccMnc)
@@ -520,7 +606,21 @@ public class SmsLog {
 
     @Override
     public int hashCode() {
-        return Objects.hash(bulkId, doneAt, error, from, mccMnc, messageId, price, sentAt, smsCount, status, text, to);
+        return Objects.hash(
+                applicationId,
+                bulkId,
+                doneAt,
+                entityId,
+                error,
+                from,
+                mccMnc,
+                messageId,
+                price,
+                sentAt,
+                smsCount,
+                status,
+                text,
+                to);
     }
 
     @Override
@@ -529,11 +629,17 @@ public class SmsLog {
         return new StringBuilder()
                 .append("class SmsLog {")
                 .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
+                .append(newLine)
                 .append("    bulkId: ")
                 .append(toIndentedString(bulkId))
                 .append(newLine)
                 .append("    doneAt: ")
                 .append(toIndentedString(doneAt))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
                 .append(newLine)
                 .append("    error: ")
                 .append(toIndentedString(error))

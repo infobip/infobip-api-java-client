@@ -17,9 +17,57 @@ import java.util.Objects;
  */
 public class CallsMediaStreamConfigRequest {
 
+    private String name;
+
     private String url;
 
     private CallsUrlSecurityConfig securityConfig;
+
+    /**
+     * Sets name.
+     * <p>
+     * Field description:
+     * Media-stream configuration name.
+     * <p>
+     * The field is required.
+     *
+     * @param name
+     * @return This {@link CallsMediaStreamConfigRequest instance}.
+     */
+    public CallsMediaStreamConfigRequest name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * Returns name.
+     * <p>
+     * Field description:
+     * Media-stream configuration name.
+     * <p>
+     * The field is required.
+     *
+     * @return name
+     */
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets name.
+     * <p>
+     * Field description:
+     * Media-stream configuration name.
+     * <p>
+     * The field is required.
+     *
+     * @param name
+     */
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
 
     /**
      * Sets url.
@@ -107,13 +155,14 @@ public class CallsMediaStreamConfigRequest {
             return false;
         }
         CallsMediaStreamConfigRequest callsMediaStreamConfigRequest = (CallsMediaStreamConfigRequest) o;
-        return Objects.equals(this.url, callsMediaStreamConfigRequest.url)
+        return Objects.equals(this.name, callsMediaStreamConfigRequest.name)
+                && Objects.equals(this.url, callsMediaStreamConfigRequest.url)
                 && Objects.equals(this.securityConfig, callsMediaStreamConfigRequest.securityConfig);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, securityConfig);
+        return Objects.hash(name, url, securityConfig);
     }
 
     @Override
@@ -121,6 +170,9 @@ public class CallsMediaStreamConfigRequest {
         String newLine = System.lineSeparator();
         return new StringBuilder()
                 .append("class CallsMediaStreamConfigRequest {")
+                .append(newLine)
+                .append("    name: ")
+                .append(toIndentedString(name))
                 .append(newLine)
                 .append("    url: ")
                 .append(toIndentedString(url))

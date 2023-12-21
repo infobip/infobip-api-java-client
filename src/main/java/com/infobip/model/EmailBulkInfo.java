@@ -24,6 +24,9 @@ public class EmailBulkInfo {
 
     /**
      * Sets bulkId.
+     * <p>
+     * Field description:
+     * The ID uniquely identifies the sent email request.
      *
      * @param bulkId
      * @return This {@link EmailBulkInfo instance}.
@@ -35,6 +38,9 @@ public class EmailBulkInfo {
 
     /**
      * Returns bulkId.
+     * <p>
+     * Field description:
+     * The ID uniquely identifies the sent email request.
      *
      * @return bulkId
      */
@@ -45,6 +51,9 @@ public class EmailBulkInfo {
 
     /**
      * Sets bulkId.
+     * <p>
+     * Field description:
+     * The ID uniquely identifies the sent email request.
      *
      * @param bulkId
      */
@@ -55,6 +64,9 @@ public class EmailBulkInfo {
 
     /**
      * Sets sendAt.
+     * <p>
+     * Field description:
+     * Date and time when the email is to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @param sendAt
      * @return This {@link EmailBulkInfo instance}.
@@ -66,6 +78,9 @@ public class EmailBulkInfo {
 
     /**
      * Returns sendAt.
+     * <p>
+     * Field description:
+     * Date and time when the email is to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @return sendAt
      */
@@ -76,6 +91,9 @@ public class EmailBulkInfo {
 
     /**
      * Sets sendAt.
+     * <p>
+     * Field description:
+     * Date and time when the email is to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @param sendAt
      */

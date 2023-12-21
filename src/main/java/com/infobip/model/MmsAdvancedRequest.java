@@ -23,8 +23,6 @@ public class MmsAdvancedRequest {
 
     private List<MmsAdvancedMessage> messages = new ArrayList<>();
 
-    private MmsSendingSpeedLimit sendingSpeedLimit;
-
     /**
      * Sets bulkId.
      * <p>
@@ -130,37 +128,6 @@ public class MmsAdvancedRequest {
         this.messages = messages;
     }
 
-    /**
-     * Sets sendingSpeedLimit.
-     *
-     * @param sendingSpeedLimit
-     * @return This {@link MmsAdvancedRequest instance}.
-     */
-    public MmsAdvancedRequest sendingSpeedLimit(MmsSendingSpeedLimit sendingSpeedLimit) {
-        this.sendingSpeedLimit = sendingSpeedLimit;
-        return this;
-    }
-
-    /**
-     * Returns sendingSpeedLimit.
-     *
-     * @return sendingSpeedLimit
-     */
-    @JsonProperty("sendingSpeedLimit")
-    public MmsSendingSpeedLimit getSendingSpeedLimit() {
-        return sendingSpeedLimit;
-    }
-
-    /**
-     * Sets sendingSpeedLimit.
-     *
-     * @param sendingSpeedLimit
-     */
-    @JsonProperty("sendingSpeedLimit")
-    public void setSendingSpeedLimit(MmsSendingSpeedLimit sendingSpeedLimit) {
-        this.sendingSpeedLimit = sendingSpeedLimit;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -171,13 +138,12 @@ public class MmsAdvancedRequest {
         }
         MmsAdvancedRequest mmsAdvancedRequest = (MmsAdvancedRequest) o;
         return Objects.equals(this.bulkId, mmsAdvancedRequest.bulkId)
-                && Objects.equals(this.messages, mmsAdvancedRequest.messages)
-                && Objects.equals(this.sendingSpeedLimit, mmsAdvancedRequest.sendingSpeedLimit);
+                && Objects.equals(this.messages, mmsAdvancedRequest.messages);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bulkId, messages, sendingSpeedLimit);
+        return Objects.hash(bulkId, messages);
     }
 
     @Override
@@ -191,9 +157,6 @@ public class MmsAdvancedRequest {
                 .append(newLine)
                 .append("    messages: ")
                 .append(toIndentedString(messages))
-                .append(newLine)
-                .append("    sendingSpeedLimit: ")
-                .append(toIndentedString(sendingSpeedLimit))
                 .append(newLine)
                 .append("}")
                 .toString();

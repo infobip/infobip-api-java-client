@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Indicates whether the email is successfully sent, not sent, delivered, not delivered, waiting for delivery or any other possible status.
+ * Indicates whether the message is successfully sent, not sent, delivered, not delivered, waiting for delivery or any other possible status.
  */
 public class MessageStatus {
 

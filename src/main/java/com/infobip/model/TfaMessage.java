@@ -19,6 +19,10 @@ public class TfaMessage {
 
     private String applicationId;
 
+    private Long emailTemplateId;
+
+    private String from;
+
     private TfaLanguage language;
 
     private String messageId;
@@ -77,6 +81,86 @@ public class TfaMessage {
     @JsonProperty("applicationId")
     public void setApplicationId(String applicationId) {
         this.applicationId = applicationId;
+    }
+
+    /**
+     * Sets emailTemplateId.
+     * <p>
+     * Field description:
+     * Email template ID that should reference a previously created Email template. This field is present only for [Email message templates](#channels/sms/create-2fa-email-message-template).
+     *
+     * @param emailTemplateId
+     * @return This {@link TfaMessage instance}.
+     */
+    public TfaMessage emailTemplateId(Long emailTemplateId) {
+        this.emailTemplateId = emailTemplateId;
+        return this;
+    }
+
+    /**
+     * Returns emailTemplateId.
+     * <p>
+     * Field description:
+     * Email template ID that should reference a previously created Email template. This field is present only for [Email message templates](#channels/sms/create-2fa-email-message-template).
+     *
+     * @return emailTemplateId
+     */
+    @JsonProperty("emailTemplateId")
+    public Long getEmailTemplateId() {
+        return emailTemplateId;
+    }
+
+    /**
+     * Sets emailTemplateId.
+     * <p>
+     * Field description:
+     * Email template ID that should reference a previously created Email template. This field is present only for [Email message templates](#channels/sms/create-2fa-email-message-template).
+     *
+     * @param emailTemplateId
+     */
+    @JsonProperty("emailTemplateId")
+    public void setEmailTemplateId(Long emailTemplateId) {
+        this.emailTemplateId = emailTemplateId;
+    }
+
+    /**
+     * Sets from.
+     * <p>
+     * Field description:
+     * The sender of the 2FA message, an email address with an optional sender name (e.g. &#x60;company@example.com&#x60; or &#x60;Jane Smith &lt;jane.smith@somecompany.com&gt;&#x60;). This field is present only for [Email message templates](#channels/sms/create-2fa-email-message-template).
+     *
+     * @param from
+     * @return This {@link TfaMessage instance}.
+     */
+    public TfaMessage from(String from) {
+        this.from = from;
+        return this;
+    }
+
+    /**
+     * Returns from.
+     * <p>
+     * Field description:
+     * The sender of the 2FA message, an email address with an optional sender name (e.g. &#x60;company@example.com&#x60; or &#x60;Jane Smith &lt;jane.smith@somecompany.com&gt;&#x60;). This field is present only for [Email message templates](#channels/sms/create-2fa-email-message-template).
+     *
+     * @return from
+     */
+    @JsonProperty("from")
+    public String getFrom() {
+        return from;
+    }
+
+    /**
+     * Sets from.
+     * <p>
+     * Field description:
+     * The sender of the 2FA message, an email address with an optional sender name (e.g. &#x60;company@example.com&#x60; or &#x60;Jane Smith &lt;jane.smith@somecompany.com&gt;&#x60;). This field is present only for [Email message templates](#channels/sms/create-2fa-email-message-template).
+     *
+     * @param from
+     */
+    @JsonProperty("from")
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     /**
@@ -376,7 +460,7 @@ public class TfaMessage {
      * Sets senderId.
      * <p>
      * Field description:
-     * The name that will appear as the sender of the 2FA message (Example: CompanyName).
+     * The sender of the 2FA message (Example: CompanyName).
      *
      * @param senderId
      * @return This {@link TfaMessage instance}.
@@ -390,7 +474,7 @@ public class TfaMessage {
      * Returns senderId.
      * <p>
      * Field description:
-     * The name that will appear as the sender of the 2FA message (Example: CompanyName).
+     * The sender of the 2FA message (Example: CompanyName).
      *
      * @return senderId
      */
@@ -403,7 +487,7 @@ public class TfaMessage {
      * Sets senderId.
      * <p>
      * Field description:
-     * The name that will appear as the sender of the 2FA message (Example: CompanyName).
+     * The sender of the 2FA message (Example: CompanyName).
      *
      * @param senderId
      */
@@ -462,6 +546,8 @@ public class TfaMessage {
         }
         TfaMessage tfaMessage = (TfaMessage) o;
         return Objects.equals(this.applicationId, tfaMessage.applicationId)
+                && Objects.equals(this.emailTemplateId, tfaMessage.emailTemplateId)
+                && Objects.equals(this.from, tfaMessage.from)
                 && Objects.equals(this.language, tfaMessage.language)
                 && Objects.equals(this.messageId, tfaMessage.messageId)
                 && Objects.equals(this.messageText, tfaMessage.messageText)
@@ -478,6 +564,8 @@ public class TfaMessage {
     public int hashCode() {
         return Objects.hash(
                 applicationId,
+                emailTemplateId,
+                from,
                 language,
                 messageId,
                 messageText,
@@ -498,6 +586,12 @@ public class TfaMessage {
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    emailTemplateId: ")
+                .append(toIndentedString(emailTemplateId))
+                .append(newLine)
+                .append("    from: ")
+                .append(toIndentedString(from))
                 .append(newLine)
                 .append("    language: ")
                 .append(toIndentedString(language))

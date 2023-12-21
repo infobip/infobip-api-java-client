@@ -15,11 +15,14 @@ import com.infobip.ApiClient;
 import com.infobip.ApiException;
 import com.infobip.Parameter;
 import com.infobip.RequestDefinition;
+import com.infobip.model.WebRtcFilePageResponse;
+import com.infobip.model.WebRtcFileResponse;
 import com.infobip.model.WebRtcPushConfigurationPageResponse;
 import com.infobip.model.WebRtcPushConfigurationRequest;
 import com.infobip.model.WebRtcPushConfigurationResponse;
 import com.infobip.model.WebRtcTokenRequestModel;
 import com.infobip.model.WebRtcTokenResponseModel;
+import java.io.File;
 import java.util.Objects;
 
 /**
@@ -36,6 +39,63 @@ public class WebRtcApi {
      */
     public WebRtcApi(ApiClient apiClient) {
         this.apiClient = Objects.requireNonNull(apiClient, "ApiClient must not be null!");
+    }
+
+    private RequestDefinition deleteFileDefinition(String id) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("DELETE", "/webrtc/1/files/{id}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (id != null) {
+            builder.addPathParameter(new Parameter("id", id));
+        }
+        return builder.build();
+    }
+
+    /**
+     * deleteFile request builder class.
+     */
+    public class DeleteFileRequest {
+        private final String id;
+
+        private DeleteFileRequest(String id) {
+            this.id = Objects.requireNonNull(id, "The required parameter 'id' is missing.");
+        }
+
+        /**
+         * Executes the deleteFile request.
+         *
+         * @return WebRtcFileResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WebRtcFileResponse execute() throws ApiException {
+            RequestDefinition deleteFileDefinition = deleteFileDefinition(id);
+            return apiClient.execute(deleteFileDefinition, new TypeReference<WebRtcFileResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the deleteFile request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WebRtcFileResponse> callback) {
+            RequestDefinition deleteFileDefinition = deleteFileDefinition(id);
+            return apiClient.executeAsync(
+                    deleteFileDefinition, new TypeReference<WebRtcFileResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Delete file.
+     * <p>
+     * Use this method to delete a file.
+     *
+     * @param id Id of the file to be deleted. (required)
+     * @return DeleteFileRequest
+     */
+    public DeleteFileRequest deleteFile(String id) {
+        return new DeleteFileRequest(id);
     }
 
     private RequestDefinition deletePushConfigurationDefinition(String id) {
@@ -90,6 +150,62 @@ public class WebRtcApi {
      */
     public DeletePushConfigurationRequest deletePushConfiguration(String id) {
         return new DeletePushConfigurationRequest(id);
+    }
+
+    private RequestDefinition downloadFileDefinition(String id) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/webrtc/1/files/{id}/download")
+                .requiresAuthentication(true)
+                .accept("application/octet-stream");
+
+        if (id != null) {
+            builder.addPathParameter(new Parameter("id", id));
+        }
+        return builder.build();
+    }
+
+    /**
+     * downloadFile request builder class.
+     */
+    public class DownloadFileRequest {
+        private final String id;
+
+        private DownloadFileRequest(String id) {
+            this.id = Objects.requireNonNull(id, "The required parameter 'id' is missing.");
+        }
+
+        /**
+         * Executes the downloadFile request.
+         *
+         * @return File The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public File execute() throws ApiException {
+            RequestDefinition downloadFileDefinition = downloadFileDefinition(id);
+            return apiClient.execute(downloadFileDefinition, new TypeReference<File>() {}.getType());
+        }
+
+        /**
+         * Executes the downloadFile request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<File> callback) {
+            RequestDefinition downloadFileDefinition = downloadFileDefinition(id);
+            return apiClient.executeAsync(downloadFileDefinition, new TypeReference<File>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Download file.
+     * <p>
+     * Use this method to download a file.
+     *
+     * @param id Id of the file to be downloaded. (required)
+     * @return DownloadFileRequest
+     */
+    public DownloadFileRequest downloadFile(String id) {
+        return new DownloadFileRequest(id);
     }
 
     private RequestDefinition generateWebRtcTokenDefinition(WebRtcTokenRequestModel webRtcTokenRequestModel) {
@@ -152,6 +268,143 @@ public class WebRtcApi {
         return new GenerateWebRtcTokenRequest(webRtcTokenRequestModel);
     }
 
+    private RequestDefinition getFileDefinition(String id) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/webrtc/1/files/{id}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (id != null) {
+            builder.addPathParameter(new Parameter("id", id));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getFile request builder class.
+     */
+    public class GetFileRequest {
+        private final String id;
+
+        private GetFileRequest(String id) {
+            this.id = Objects.requireNonNull(id, "The required parameter 'id' is missing.");
+        }
+
+        /**
+         * Executes the getFile request.
+         *
+         * @return WebRtcFileResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WebRtcFileResponse execute() throws ApiException {
+            RequestDefinition getFileDefinition = getFileDefinition(id);
+            return apiClient.execute(getFileDefinition, new TypeReference<WebRtcFileResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getFile request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WebRtcFileResponse> callback) {
+            RequestDefinition getFileDefinition = getFileDefinition(id);
+            return apiClient.executeAsync(
+                    getFileDefinition, new TypeReference<WebRtcFileResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get file.
+     * <p>
+     * Use this method to get a single file.
+     *
+     * @param id Id of the file. (required)
+     * @return GetFileRequest
+     */
+    public GetFileRequest getFile(String id) {
+        return new GetFileRequest(id);
+    }
+
+    private RequestDefinition getFilesDefinition(Integer page, Integer size) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/webrtc/1/files")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (page != null) {
+            builder.addQueryParameter(new Parameter("page", page));
+        }
+        if (size != null) {
+            builder.addQueryParameter(new Parameter("size", size));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getFiles request builder class.
+     */
+    public class GetFilesRequest {
+        private Integer page;
+        private Integer size;
+
+        private GetFilesRequest() {}
+
+        /**
+         * Sets page.
+         *
+         * @param page Results page to retrieve (0..N). (optional, default to 0)
+         * @return GetFilesRequest
+         */
+        public GetFilesRequest page(Integer page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Sets size.
+         *
+         * @param size Number of files per page. Maximum page size is 100. (optional, default to 20)
+         * @return GetFilesRequest
+         */
+        public GetFilesRequest size(Integer size) {
+            this.size = size;
+            return this;
+        }
+
+        /**
+         * Executes the getFiles request.
+         *
+         * @return WebRtcFilePageResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WebRtcFilePageResponse execute() throws ApiException {
+            RequestDefinition getFilesDefinition = getFilesDefinition(page, size);
+            return apiClient.execute(getFilesDefinition, new TypeReference<WebRtcFilePageResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getFiles request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WebRtcFilePageResponse> callback) {
+            RequestDefinition getFilesDefinition = getFilesDefinition(page, size);
+            return apiClient.executeAsync(
+                    getFilesDefinition, new TypeReference<WebRtcFilePageResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get files.
+     * <p>
+     * Use this method to get files with pagination.
+     *
+     * @return GetFilesRequest
+     */
+    public GetFilesRequest getFiles() {
+        return new GetFilesRequest();
+    }
+
     private RequestDefinition getPushConfigurationDefinition(String id) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/webrtc/1/webrtc-push-config/{id}")
                 .requiresAuthentication(true)
@@ -212,14 +465,11 @@ public class WebRtcApi {
         return new GetPushConfigurationRequest(id);
     }
 
-    private RequestDefinition getPushConfigurationsDefinition(Integer page, Integer size, String applicationId) {
+    private RequestDefinition getPushConfigurationsDefinition(Integer page, Integer size) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/webrtc/1/webrtc-push-config")
                 .requiresAuthentication(true)
                 .accept("application/json");
 
-        if (applicationId != null) {
-            builder.addQueryParameter(new Parameter("applicationId", applicationId));
-        }
         if (page != null) {
             builder.addQueryParameter(new Parameter("page", page));
         }
@@ -235,22 +485,10 @@ public class WebRtcApi {
     public class GetPushConfigurationsRequest {
         private final Integer page;
         private final Integer size;
-        private String applicationId;
 
         private GetPushConfigurationsRequest(Integer page, Integer size) {
             this.page = Objects.requireNonNull(page, "The required parameter 'page' is missing.");
             this.size = Objects.requireNonNull(size, "The required parameter 'size' is missing.");
-        }
-
-        /**
-         * Sets applicationId.
-         *
-         * @param applicationId Id of the application to associate the push configuration with. (optional)
-         * @return GetPushConfigurationsRequest
-         */
-        public GetPushConfigurationsRequest applicationId(String applicationId) {
-            this.applicationId = applicationId;
-            return this;
         }
 
         /**
@@ -260,8 +498,7 @@ public class WebRtcApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public WebRtcPushConfigurationPageResponse execute() throws ApiException {
-            RequestDefinition getPushConfigurationsDefinition =
-                    getPushConfigurationsDefinition(page, size, applicationId);
+            RequestDefinition getPushConfigurationsDefinition = getPushConfigurationsDefinition(page, size);
             return apiClient.execute(
                     getPushConfigurationsDefinition,
                     new TypeReference<WebRtcPushConfigurationPageResponse>() {}.getType());
@@ -274,8 +511,7 @@ public class WebRtcApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<WebRtcPushConfigurationPageResponse> callback) {
-            RequestDefinition getPushConfigurationsDefinition =
-                    getPushConfigurationsDefinition(page, size, applicationId);
+            RequestDefinition getPushConfigurationsDefinition = getPushConfigurationsDefinition(page, size);
             return apiClient.executeAsync(
                     getPushConfigurationsDefinition,
                     new TypeReference<WebRtcPushConfigurationPageResponse>() {}.getType(),

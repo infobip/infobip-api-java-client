@@ -32,7 +32,7 @@ public class EmailWebhookDeliveryReport {
 
     private String callbackData;
 
-    private EmailWebhookPrice price;
+    private MessagePrice price;
 
     private MessageStatus status;
 
@@ -326,7 +326,7 @@ public class EmailWebhookDeliveryReport {
      * @param price
      * @return This {@link EmailWebhookDeliveryReport instance}.
      */
-    public EmailWebhookDeliveryReport price(EmailWebhookPrice price) {
+    public EmailWebhookDeliveryReport price(MessagePrice price) {
         this.price = price;
         return this;
     }
@@ -337,7 +337,7 @@ public class EmailWebhookDeliveryReport {
      * @return price
      */
     @JsonProperty("price")
-    public EmailWebhookPrice getPrice() {
+    public MessagePrice getPrice() {
         return price;
     }
 
@@ -347,7 +347,7 @@ public class EmailWebhookDeliveryReport {
      * @param price
      */
     @JsonProperty("price")
-    public void setPrice(EmailWebhookPrice price) {
+    public void setPrice(MessagePrice price) {
         this.price = price;
     }
 

@@ -13,11 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Indicates whether the message has been successfully sent, not sent, delivered, not delivered, waiting for delivery or any other possible status.
+ * Indicates whether the message is successfully sent, not sent, delivered, not delivered, waiting for delivery or any other possible status.
  */
 public class CallsSingleMessageStatus {
-
-    private String description;
 
     private Integer groupId;
 
@@ -27,45 +25,7 @@ public class CallsSingleMessageStatus {
 
     private String name;
 
-    /**
-     * Sets description.
-     * <p>
-     * Field description:
-     * Human-readable description of the status.
-     *
-     * @param description
-     * @return This {@link CallsSingleMessageStatus instance}.
-     */
-    public CallsSingleMessageStatus description(String description) {
-        this.description = description;
-        return this;
-    }
-
-    /**
-     * Returns description.
-     * <p>
-     * Field description:
-     * Human-readable description of the status.
-     *
-     * @return description
-     */
-    @JsonProperty("description")
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Sets description.
-     * <p>
-     * Field description:
-     * Human-readable description of the status.
-     *
-     * @param description
-     */
-    @JsonProperty("description")
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    private String description;
 
     /**
      * Sets groupId.
@@ -111,7 +71,7 @@ public class CallsSingleMessageStatus {
      * Sets groupName.
      * <p>
      * Field description:
-     * Status group name.
+     * Status group name that describes which category the status code belongs to, e.g. PENDING, UNDELIVERABLE, DELIVERED, EXPIRED, REJECTED.
      *
      * @param groupName
      * @return This {@link CallsSingleMessageStatus instance}.
@@ -125,7 +85,7 @@ public class CallsSingleMessageStatus {
      * Returns groupName.
      * <p>
      * Field description:
-     * Status group name.
+     * Status group name that describes which category the status code belongs to, e.g. PENDING, UNDELIVERABLE, DELIVERED, EXPIRED, REJECTED.
      *
      * @return groupName
      */
@@ -138,7 +98,7 @@ public class CallsSingleMessageStatus {
      * Sets groupName.
      * <p>
      * Field description:
-     * Status group name.
+     * Status group name that describes which category the status code belongs to, e.g. PENDING, UNDELIVERABLE, DELIVERED, EXPIRED, REJECTED.
      *
      * @param groupName
      */
@@ -227,6 +187,46 @@ public class CallsSingleMessageStatus {
         this.name = name;
     }
 
+    /**
+     * Sets description.
+     * <p>
+     * Field description:
+     * Human-readable description of the status.
+     *
+     * @param description
+     * @return This {@link CallsSingleMessageStatus instance}.
+     */
+    public CallsSingleMessageStatus description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    /**
+     * Returns description.
+     * <p>
+     * Field description:
+     * Human-readable description of the status.
+     *
+     * @return description
+     */
+    @JsonProperty("description")
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Sets description.
+     * <p>
+     * Field description:
+     * Human-readable description of the status.
+     *
+     * @param description
+     */
+    @JsonProperty("description")
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -236,16 +236,16 @@ public class CallsSingleMessageStatus {
             return false;
         }
         CallsSingleMessageStatus callsSingleMessageStatus = (CallsSingleMessageStatus) o;
-        return Objects.equals(this.description, callsSingleMessageStatus.description)
-                && Objects.equals(this.groupId, callsSingleMessageStatus.groupId)
+        return Objects.equals(this.groupId, callsSingleMessageStatus.groupId)
                 && Objects.equals(this.groupName, callsSingleMessageStatus.groupName)
                 && Objects.equals(this.id, callsSingleMessageStatus.id)
-                && Objects.equals(this.name, callsSingleMessageStatus.name);
+                && Objects.equals(this.name, callsSingleMessageStatus.name)
+                && Objects.equals(this.description, callsSingleMessageStatus.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(description, groupId, groupName, id, name);
+        return Objects.hash(groupId, groupName, id, name, description);
     }
 
     @Override
@@ -253,9 +253,6 @@ public class CallsSingleMessageStatus {
         String newLine = System.lineSeparator();
         return new StringBuilder()
                 .append("class CallsSingleMessageStatus {")
-                .append(newLine)
-                .append("    description: ")
-                .append(toIndentedString(description))
                 .append(newLine)
                 .append("    groupId: ")
                 .append(toIndentedString(groupId))
@@ -268,6 +265,9 @@ public class CallsSingleMessageStatus {
                 .append(newLine)
                 .append("    name: ")
                 .append(toIndentedString(name))
+                .append(newLine)
+                .append("    description: ")
+                .append(toIndentedString(description))
                 .append(newLine)
                 .append("}")
                 .toString();

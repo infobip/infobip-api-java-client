@@ -21,6 +21,8 @@ public class SmsRegionalOptions {
 
     private SmsTurkeyIysOptions turkeyIys;
 
+    private SmsSouthKoreaOptions southKorea;
+
     /**
      * Sets indiaDlt.
      *
@@ -83,6 +85,37 @@ public class SmsRegionalOptions {
         this.turkeyIys = turkeyIys;
     }
 
+    /**
+     * Sets southKorea.
+     *
+     * @param southKorea
+     * @return This {@link SmsRegionalOptions instance}.
+     */
+    public SmsRegionalOptions southKorea(SmsSouthKoreaOptions southKorea) {
+        this.southKorea = southKorea;
+        return this;
+    }
+
+    /**
+     * Returns southKorea.
+     *
+     * @return southKorea
+     */
+    @JsonProperty("southKorea")
+    public SmsSouthKoreaOptions getSouthKorea() {
+        return southKorea;
+    }
+
+    /**
+     * Sets southKorea.
+     *
+     * @param southKorea
+     */
+    @JsonProperty("southKorea")
+    public void setSouthKorea(SmsSouthKoreaOptions southKorea) {
+        this.southKorea = southKorea;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -93,12 +126,13 @@ public class SmsRegionalOptions {
         }
         SmsRegionalOptions smsRegionalOptions = (SmsRegionalOptions) o;
         return Objects.equals(this.indiaDlt, smsRegionalOptions.indiaDlt)
-                && Objects.equals(this.turkeyIys, smsRegionalOptions.turkeyIys);
+                && Objects.equals(this.turkeyIys, smsRegionalOptions.turkeyIys)
+                && Objects.equals(this.southKorea, smsRegionalOptions.southKorea);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(indiaDlt, turkeyIys);
+        return Objects.hash(indiaDlt, turkeyIys, southKorea);
     }
 
     @Override
@@ -112,6 +146,9 @@ public class SmsRegionalOptions {
                 .append(newLine)
                 .append("    turkeyIys: ")
                 .append(toIndentedString(turkeyIys))
+                .append(newLine)
+                .append("    southKorea: ")
+                .append(toIndentedString(southKorea))
                 .append(newLine)
                 .append("}")
                 .toString();

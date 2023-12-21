@@ -35,14 +35,19 @@ import com.infobip.model.CallsAnswerRequest;
 import com.infobip.model.CallsApplicationTransferRequest;
 import com.infobip.model.CallsConference;
 import com.infobip.model.CallsConferenceAndCall;
+import com.infobip.model.CallsConferenceBroadcastWebrtcTextRequest;
 import com.infobip.model.CallsConferenceLog;
 import com.infobip.model.CallsConferenceLogPage;
 import com.infobip.model.CallsConferencePage;
 import com.infobip.model.CallsConferenceRecording;
 import com.infobip.model.CallsConferenceRecordingPage;
+import com.infobip.model.CallsConferenceRecordingRequest;
 import com.infobip.model.CallsConferenceRequest;
 import com.infobip.model.CallsConnectRequest;
 import com.infobip.model.CallsConnectWithNewCallRequest;
+import com.infobip.model.CallsCountryList;
+import com.infobip.model.CallsCreateSipTrunkResponse;
+import com.infobip.model.CallsDialogBroadcastWebrtcTextRequest;
 import com.infobip.model.CallsDialogLogPage;
 import com.infobip.model.CallsDialogLogResponse;
 import com.infobip.model.CallsDialogPage;
@@ -54,8 +59,10 @@ import com.infobip.model.CallsDialogRequest;
 import com.infobip.model.CallsDialogResponse;
 import com.infobip.model.CallsDialogSayRequest;
 import com.infobip.model.CallsDialogState;
+import com.infobip.model.CallsDialogWithExistingCallRequest;
 import com.infobip.model.CallsDtmfCaptureRequest;
 import com.infobip.model.CallsDtmfSendRequest;
+import com.infobip.model.CallsExtendedSipTrunkStatusResponse;
 import com.infobip.model.CallsFile;
 import com.infobip.model.CallsFilePage;
 import com.infobip.model.CallsHangupRequest;
@@ -64,12 +71,24 @@ import com.infobip.model.CallsMediaStreamConfigRequest;
 import com.infobip.model.CallsMediaStreamConfigResponse;
 import com.infobip.model.CallsOnDemandComposition;
 import com.infobip.model.CallsPlayRequest;
+import com.infobip.model.CallsPreAnswerRequest;
+import com.infobip.model.CallsPublicSipTrunkServiceAddress;
+import com.infobip.model.CallsPublicSipTrunkServiceAddressRequest;
 import com.infobip.model.CallsRecordingFile;
 import com.infobip.model.CallsRecordingStartRequest;
+import com.infobip.model.CallsRegionList;
 import com.infobip.model.CallsRescheduleRequest;
 import com.infobip.model.CallsSayRequest;
+import com.infobip.model.CallsSipTrunkPage;
+import com.infobip.model.CallsSipTrunkRequest;
+import com.infobip.model.CallsSipTrunkResponse;
+import com.infobip.model.CallsSipTrunkServiceAddressPage;
+import com.infobip.model.CallsSipTrunkStatusRequest;
+import com.infobip.model.CallsSipTrunkStatusResponse;
+import com.infobip.model.CallsSipTrunkUpdateRequest;
+import com.infobip.model.CallsSpeechCaptureRequest;
 import com.infobip.model.CallsStartMediaStreamRequest;
-import com.infobip.model.CallsStartRecordingRequest;
+import com.infobip.model.CallsStopPlayRequest;
 import com.infobip.model.CallsUpdateRequest;
 import java.io.File;
 import java.time.OffsetDateTime;
@@ -574,6 +593,74 @@ public class CallsApi {
         return new CallCaptureDtmfRequest(callId, callsDtmfCaptureRequest);
     }
 
+    private RequestDefinition callCaptureSpeechDefinition(
+            String callId, CallsSpeechCaptureRequest callsSpeechCaptureRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/calls/{callId}/capture/speech")
+                .body(callsSpeechCaptureRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (callId != null) {
+            builder.addPathParameter(new Parameter("callId", callId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * callCaptureSpeech request builder class.
+     */
+    public class CallCaptureSpeechRequest {
+        private final String callId;
+        private final CallsSpeechCaptureRequest callsSpeechCaptureRequest;
+
+        private CallCaptureSpeechRequest(String callId, CallsSpeechCaptureRequest callsSpeechCaptureRequest) {
+            this.callId = Objects.requireNonNull(callId, "The required parameter 'callId' is missing.");
+            this.callsSpeechCaptureRequest = Objects.requireNonNull(
+                    callsSpeechCaptureRequest, "The required parameter 'callsSpeechCaptureRequest' is missing.");
+        }
+
+        /**
+         * Executes the callCaptureSpeech request.
+         *
+         * @return CallsActionResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsActionResponse execute() throws ApiException {
+            RequestDefinition callCaptureSpeechDefinition =
+                    callCaptureSpeechDefinition(callId, callsSpeechCaptureRequest);
+            return apiClient.execute(
+                    callCaptureSpeechDefinition, new TypeReference<CallsActionResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the callCaptureSpeech request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
+            RequestDefinition callCaptureSpeechDefinition =
+                    callCaptureSpeechDefinition(callId, callsSpeechCaptureRequest);
+            return apiClient.executeAsync(
+                    callCaptureSpeechDefinition, new TypeReference<CallsActionResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Capture Speech.
+     * <p>
+     * Capture speech on a call.
+     *
+     * @param callId Call ID. (required)
+     * @param callsSpeechCaptureRequest  (required)
+     * @return CallCaptureSpeechRequest
+     */
+    public CallCaptureSpeechRequest callCaptureSpeech(
+            String callId, CallsSpeechCaptureRequest callsSpeechCaptureRequest) {
+        return new CallCaptureSpeechRequest(callId, callsSpeechCaptureRequest);
+    }
+
     private RequestDefinition callPlayFileDefinition(String callId, CallsPlayRequest callsPlayRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/calls/{callId}/play")
                 .body(callsPlayRequest)
@@ -831,10 +918,12 @@ public class CallsApi {
         return new CallStartRecordingRequest(callId, callsRecordingStartRequest);
     }
 
-    private RequestDefinition callStopPlayingFileDefinition(String callId) {
+    private RequestDefinition callStopPlayingFileDefinition(String callId, CallsStopPlayRequest callsStopPlayRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/calls/{callId}/stop-play")
+                .body(callsStopPlayRequest)
                 .requiresAuthentication(true)
-                .accept("application/json");
+                .accept("application/json")
+                .contentType("application/json");
 
         if (callId != null) {
             builder.addPathParameter(new Parameter("callId", callId));
@@ -847,9 +936,12 @@ public class CallsApi {
      */
     public class CallStopPlayingFileRequest {
         private final String callId;
+        private final CallsStopPlayRequest callsStopPlayRequest;
 
-        private CallStopPlayingFileRequest(String callId) {
+        private CallStopPlayingFileRequest(String callId, CallsStopPlayRequest callsStopPlayRequest) {
             this.callId = Objects.requireNonNull(callId, "The required parameter 'callId' is missing.");
+            this.callsStopPlayRequest = Objects.requireNonNull(
+                    callsStopPlayRequest, "The required parameter 'callsStopPlayRequest' is missing.");
         }
 
         /**
@@ -859,7 +951,8 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public CallsActionResponse execute() throws ApiException {
-            RequestDefinition callStopPlayingFileDefinition = callStopPlayingFileDefinition(callId);
+            RequestDefinition callStopPlayingFileDefinition =
+                    callStopPlayingFileDefinition(callId, callsStopPlayRequest);
             return apiClient.execute(
                     callStopPlayingFileDefinition, new TypeReference<CallsActionResponse>() {}.getType());
         }
@@ -871,7 +964,8 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
-            RequestDefinition callStopPlayingFileDefinition = callStopPlayingFileDefinition(callId);
+            RequestDefinition callStopPlayingFileDefinition =
+                    callStopPlayingFileDefinition(callId, callsStopPlayRequest);
             return apiClient.executeAsync(
                     callStopPlayingFileDefinition, new TypeReference<CallsActionResponse>() {}.getType(), callback);
         }
@@ -883,10 +977,11 @@ public class CallsApi {
      * Stop playing an audio file on a call.
      *
      * @param callId Call ID. (required)
+     * @param callsStopPlayRequest  (required)
      * @return CallStopPlayingFileRequest
      */
-    public CallStopPlayingFileRequest callStopPlayingFile(String callId) {
-        return new CallStopPlayingFileRequest(callId);
+    public CallStopPlayingFileRequest callStopPlayingFile(String callId, CallsStopPlayRequest callsStopPlayRequest) {
+        return new CallStopPlayingFileRequest(callId, callsStopPlayRequest);
     }
 
     private RequestDefinition callStopRecordingDefinition(String callId) {
@@ -995,7 +1090,7 @@ public class CallsApi {
     /**
      * Cancel.
      * <p>
-     * Cancel a bulk.
+     * Cancel a bulk. Bulk can be cancelled if it was created with scheduling options and has not finished yet.
      *
      * @param bulkId Bulk ID. (required)
      * @return CancelBulkRequest
@@ -1005,7 +1100,7 @@ public class CallsApi {
     }
 
     private RequestDefinition composeConferenceRecordingDefinition(
-            String conferenceId, CallsOnDemandComposition callsOnDemandComposition) {
+            String conferenceId, CallsOnDemandComposition callsOnDemandComposition, String location) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "POST", "/calls/1/recordings/conferences/{conferenceId}/compose")
                 .body(callsOnDemandComposition)
@@ -1016,6 +1111,9 @@ public class CallsApi {
         if (conferenceId != null) {
             builder.addPathParameter(new Parameter("conferenceId", conferenceId));
         }
+        if (location != null) {
+            builder.addQueryParameter(new Parameter("location", location));
+        }
         return builder.build();
     }
 
@@ -1025,6 +1123,7 @@ public class CallsApi {
     public class ComposeConferenceRecordingRequest {
         private final String conferenceId;
         private final CallsOnDemandComposition callsOnDemandComposition;
+        private String location;
 
         private ComposeConferenceRecordingRequest(
                 String conferenceId, CallsOnDemandComposition callsOnDemandComposition) {
@@ -1035,6 +1134,17 @@ public class CallsApi {
         }
 
         /**
+         * Sets location.
+         *
+         * @param location Recording location. (optional)
+         * @return ComposeConferenceRecordingRequest
+         */
+        public ComposeConferenceRecordingRequest location(String location) {
+            this.location = location;
+            return this;
+        }
+
+        /**
          * Executes the composeConferenceRecording request.
          *
          * @return CallsActionResponse The deserialized response.
@@ -1042,7 +1152,7 @@ public class CallsApi {
          */
         public CallsActionResponse execute() throws ApiException {
             RequestDefinition composeConferenceRecordingDefinition =
-                    composeConferenceRecordingDefinition(conferenceId, callsOnDemandComposition);
+                    composeConferenceRecordingDefinition(conferenceId, callsOnDemandComposition, location);
             return apiClient.execute(
                     composeConferenceRecordingDefinition, new TypeReference<CallsActionResponse>() {}.getType());
         }
@@ -1055,7 +1165,7 @@ public class CallsApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
             RequestDefinition composeConferenceRecordingDefinition =
-                    composeConferenceRecordingDefinition(conferenceId, callsOnDemandComposition);
+                    composeConferenceRecordingDefinition(conferenceId, callsOnDemandComposition, location);
             return apiClient.executeAsync(
                     composeConferenceRecordingDefinition,
                     new TypeReference<CallsActionResponse>() {}.getType(),
@@ -1078,7 +1188,7 @@ public class CallsApi {
     }
 
     private RequestDefinition composeDialogRecordingDefinition(
-            String dialogId, CallsOnDemandComposition callsOnDemandComposition) {
+            String dialogId, CallsOnDemandComposition callsOnDemandComposition, String location) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "POST", "/calls/1/recordings/dialogs/{dialogId}/compose")
                 .body(callsOnDemandComposition)
@@ -1089,6 +1199,9 @@ public class CallsApi {
         if (dialogId != null) {
             builder.addPathParameter(new Parameter("dialogId", dialogId));
         }
+        if (location != null) {
+            builder.addQueryParameter(new Parameter("location", location));
+        }
         return builder.build();
     }
 
@@ -1098,11 +1211,23 @@ public class CallsApi {
     public class ComposeDialogRecordingRequest {
         private final String dialogId;
         private final CallsOnDemandComposition callsOnDemandComposition;
+        private String location;
 
         private ComposeDialogRecordingRequest(String dialogId, CallsOnDemandComposition callsOnDemandComposition) {
             this.dialogId = Objects.requireNonNull(dialogId, "The required parameter 'dialogId' is missing.");
             this.callsOnDemandComposition = Objects.requireNonNull(
                     callsOnDemandComposition, "The required parameter 'callsOnDemandComposition' is missing.");
+        }
+
+        /**
+         * Sets location.
+         *
+         * @param location Recording location. (optional)
+         * @return ComposeDialogRecordingRequest
+         */
+        public ComposeDialogRecordingRequest location(String location) {
+            this.location = location;
+            return this;
         }
 
         /**
@@ -1113,7 +1238,7 @@ public class CallsApi {
          */
         public CallsActionResponse execute() throws ApiException {
             RequestDefinition composeDialogRecordingDefinition =
-                    composeDialogRecordingDefinition(dialogId, callsOnDemandComposition);
+                    composeDialogRecordingDefinition(dialogId, callsOnDemandComposition, location);
             return apiClient.execute(
                     composeDialogRecordingDefinition, new TypeReference<CallsActionResponse>() {}.getType());
         }
@@ -1126,7 +1251,7 @@ public class CallsApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
             RequestDefinition composeDialogRecordingDefinition =
-                    composeDialogRecordingDefinition(dialogId, callsOnDemandComposition);
+                    composeDialogRecordingDefinition(dialogId, callsOnDemandComposition, location);
             return apiClient.executeAsync(
                     composeDialogRecordingDefinition, new TypeReference<CallsActionResponse>() {}.getType(), callback);
         }
@@ -1144,6 +1269,81 @@ public class CallsApi {
     public ComposeDialogRecordingRequest composeDialogRecording(
             String dialogId, CallsOnDemandComposition callsOnDemandComposition) {
         return new ComposeDialogRecordingRequest(dialogId, callsOnDemandComposition);
+    }
+
+    private RequestDefinition conferenceBroadcastWebrtcTextDefinition(
+            String conferenceId, CallsConferenceBroadcastWebrtcTextRequest callsConferenceBroadcastWebrtcTextRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/calls/1/conferences/{conferenceId}/broadcast-webrtc-text")
+                .body(callsConferenceBroadcastWebrtcTextRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (conferenceId != null) {
+            builder.addPathParameter(new Parameter("conferenceId", conferenceId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * conferenceBroadcastWebrtcText request builder class.
+     */
+    public class ConferenceBroadcastWebrtcTextRequest {
+        private final String conferenceId;
+        private final CallsConferenceBroadcastWebrtcTextRequest callsConferenceBroadcastWebrtcTextRequest;
+
+        private ConferenceBroadcastWebrtcTextRequest(
+                String conferenceId,
+                CallsConferenceBroadcastWebrtcTextRequest callsConferenceBroadcastWebrtcTextRequest) {
+            this.conferenceId =
+                    Objects.requireNonNull(conferenceId, "The required parameter 'conferenceId' is missing.");
+            this.callsConferenceBroadcastWebrtcTextRequest = Objects.requireNonNull(
+                    callsConferenceBroadcastWebrtcTextRequest,
+                    "The required parameter 'callsConferenceBroadcastWebrtcTextRequest' is missing.");
+        }
+
+        /**
+         * Executes the conferenceBroadcastWebrtcText request.
+         *
+         * @return CallsActionResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsActionResponse execute() throws ApiException {
+            RequestDefinition conferenceBroadcastWebrtcTextDefinition =
+                    conferenceBroadcastWebrtcTextDefinition(conferenceId, callsConferenceBroadcastWebrtcTextRequest);
+            return apiClient.execute(
+                    conferenceBroadcastWebrtcTextDefinition, new TypeReference<CallsActionResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the conferenceBroadcastWebrtcText request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
+            RequestDefinition conferenceBroadcastWebrtcTextDefinition =
+                    conferenceBroadcastWebrtcTextDefinition(conferenceId, callsConferenceBroadcastWebrtcTextRequest);
+            return apiClient.executeAsync(
+                    conferenceBroadcastWebrtcTextDefinition,
+                    new TypeReference<CallsActionResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Broadcast text.
+     * <p>
+     * Broadcasts a text message to conference WebRTC participants with open data channel.
+     *
+     * @param conferenceId Conference ID. (required)
+     * @param callsConferenceBroadcastWebrtcTextRequest  (required)
+     * @return ConferenceBroadcastWebrtcTextRequest
+     */
+    public ConferenceBroadcastWebrtcTextRequest conferenceBroadcastWebrtcText(
+            String conferenceId, CallsConferenceBroadcastWebrtcTextRequest callsConferenceBroadcastWebrtcTextRequest) {
+        return new ConferenceBroadcastWebrtcTextRequest(conferenceId, callsConferenceBroadcastWebrtcTextRequest);
     }
 
     private RequestDefinition conferencePlayFileDefinition(String conferenceId, CallsPlayRequest callsPlayRequest) {
@@ -1280,10 +1480,10 @@ public class CallsApi {
     }
 
     private RequestDefinition conferenceStartRecordingDefinition(
-            String conferenceId, CallsStartRecordingRequest callsStartRecordingRequest) {
+            String conferenceId, CallsConferenceRecordingRequest callsConferenceRecordingRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "POST", "/calls/1/conferences/{conferenceId}/start-recording")
-                .body(callsStartRecordingRequest)
+                .body(callsConferenceRecordingRequest)
                 .requiresAuthentication(true)
                 .accept("application/json")
                 .contentType("application/json");
@@ -1299,14 +1499,15 @@ public class CallsApi {
      */
     public class ConferenceStartRecordingRequest {
         private final String conferenceId;
-        private final CallsStartRecordingRequest callsStartRecordingRequest;
+        private final CallsConferenceRecordingRequest callsConferenceRecordingRequest;
 
         private ConferenceStartRecordingRequest(
-                String conferenceId, CallsStartRecordingRequest callsStartRecordingRequest) {
+                String conferenceId, CallsConferenceRecordingRequest callsConferenceRecordingRequest) {
             this.conferenceId =
                     Objects.requireNonNull(conferenceId, "The required parameter 'conferenceId' is missing.");
-            this.callsStartRecordingRequest = Objects.requireNonNull(
-                    callsStartRecordingRequest, "The required parameter 'callsStartRecordingRequest' is missing.");
+            this.callsConferenceRecordingRequest = Objects.requireNonNull(
+                    callsConferenceRecordingRequest,
+                    "The required parameter 'callsConferenceRecordingRequest' is missing.");
         }
 
         /**
@@ -1317,7 +1518,7 @@ public class CallsApi {
          */
         public CallsActionResponse execute() throws ApiException {
             RequestDefinition conferenceStartRecordingDefinition =
-                    conferenceStartRecordingDefinition(conferenceId, callsStartRecordingRequest);
+                    conferenceStartRecordingDefinition(conferenceId, callsConferenceRecordingRequest);
             return apiClient.execute(
                     conferenceStartRecordingDefinition, new TypeReference<CallsActionResponse>() {}.getType());
         }
@@ -1330,7 +1531,7 @@ public class CallsApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
             RequestDefinition conferenceStartRecordingDefinition =
-                    conferenceStartRecordingDefinition(conferenceId, callsStartRecordingRequest);
+                    conferenceStartRecordingDefinition(conferenceId, callsConferenceRecordingRequest);
             return apiClient.executeAsync(
                     conferenceStartRecordingDefinition,
                     new TypeReference<CallsActionResponse>() {}.getType(),
@@ -1344,12 +1545,12 @@ public class CallsApi {
      * Start recording a conference.
      *
      * @param conferenceId Conference ID. (required)
-     * @param callsStartRecordingRequest  (required)
+     * @param callsConferenceRecordingRequest  (required)
      * @return ConferenceStartRecordingRequest
      */
     public ConferenceStartRecordingRequest conferenceStartRecording(
-            String conferenceId, CallsStartRecordingRequest callsStartRecordingRequest) {
-        return new ConferenceStartRecordingRequest(conferenceId, callsStartRecordingRequest);
+            String conferenceId, CallsConferenceRecordingRequest callsConferenceRecordingRequest) {
+        return new ConferenceStartRecordingRequest(conferenceId, callsConferenceRecordingRequest);
     }
 
     private RequestDefinition conferenceStopPlayingFileDefinition(String conferenceId) {
@@ -1649,7 +1850,7 @@ public class CallsApi {
     /**
      * Create bulk of calls.
      * <p>
-     * Create a bulk of an outbound calls. Currently, only &#x60;PHONE&#x60; endpoints are supported.
+     * Create a bulk of outbound calls. Currently, only &#x60;PHONE&#x60; endpoints are supported. When retry options are specified, bulk calls are retried if they meet internal or client retry criteria. Client retry criteria are met when call reaches the end device and fails. Internal retry criteria are met when call fails before reaching the end device.
      *
      * @param callBulkRequest  (required)
      * @return CreateBulkRequest
@@ -1827,6 +2028,92 @@ public class CallsApi {
         return new CreateDialogRequest(callsDialogRequest);
     }
 
+    private RequestDefinition createDialogWithExistingCallsDefinition(
+            String parentCallId,
+            String childCallId,
+            CallsDialogWithExistingCallRequest callsDialogWithExistingCallRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/calls/1/dialogs/parent-call/{parentCallId}/child-call/{childCallId}")
+                .body(callsDialogWithExistingCallRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (parentCallId != null) {
+            builder.addPathParameter(new Parameter("parentCallId", parentCallId));
+        }
+        if (childCallId != null) {
+            builder.addPathParameter(new Parameter("childCallId", childCallId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * createDialogWithExistingCalls request builder class.
+     */
+    public class CreateDialogWithExistingCallsRequest {
+        private final String parentCallId;
+        private final String childCallId;
+        private final CallsDialogWithExistingCallRequest callsDialogWithExistingCallRequest;
+
+        private CreateDialogWithExistingCallsRequest(
+                String parentCallId,
+                String childCallId,
+                CallsDialogWithExistingCallRequest callsDialogWithExistingCallRequest) {
+            this.parentCallId =
+                    Objects.requireNonNull(parentCallId, "The required parameter 'parentCallId' is missing.");
+            this.childCallId = Objects.requireNonNull(childCallId, "The required parameter 'childCallId' is missing.");
+            this.callsDialogWithExistingCallRequest = Objects.requireNonNull(
+                    callsDialogWithExistingCallRequest,
+                    "The required parameter 'callsDialogWithExistingCallRequest' is missing.");
+        }
+
+        /**
+         * Executes the createDialogWithExistingCalls request.
+         *
+         * @return CallsDialogResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsDialogResponse execute() throws ApiException {
+            RequestDefinition createDialogWithExistingCallsDefinition = createDialogWithExistingCallsDefinition(
+                    parentCallId, childCallId, callsDialogWithExistingCallRequest);
+            return apiClient.execute(
+                    createDialogWithExistingCallsDefinition, new TypeReference<CallsDialogResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the createDialogWithExistingCalls request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsDialogResponse> callback) {
+            RequestDefinition createDialogWithExistingCallsDefinition = createDialogWithExistingCallsDefinition(
+                    parentCallId, childCallId, callsDialogWithExistingCallRequest);
+            return apiClient.executeAsync(
+                    createDialogWithExistingCallsDefinition,
+                    new TypeReference<CallsDialogResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Create dialog with existing calls.
+     * <p>
+     * Create a dialog with existing calls.
+     *
+     * @param parentCallId Call ID of the parent call to be connected in a dialog. (required)
+     * @param childCallId Call ID of the child call to be connected in a dialog. Needs to have been created using [create method](#create-call) with &#x60;parentCallId&#x60; parameter equal to the parent call ID above. (required)
+     * @param callsDialogWithExistingCallRequest  (required)
+     * @return CreateDialogWithExistingCallsRequest
+     */
+    public CreateDialogWithExistingCallsRequest createDialogWithExistingCalls(
+            String parentCallId,
+            String childCallId,
+            CallsDialogWithExistingCallRequest callsDialogWithExistingCallRequest) {
+        return new CreateDialogWithExistingCallsRequest(parentCallId, childCallId, callsDialogWithExistingCallRequest);
+    }
+
     private RequestDefinition createMediaStreamConfigDefinition(
             CallsMediaStreamConfigRequest callsMediaStreamConfigRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/media-stream-configs")
@@ -1893,13 +2180,141 @@ public class CallsApi {
         return new CreateMediaStreamConfigRequest(callsMediaStreamConfigRequest);
     }
 
-    private RequestDefinition deleteCallRecordingsDefinition(String callId) {
+    private RequestDefinition createSipTrunkDefinition(CallsSipTrunkRequest callsSipTrunkRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/sip-trunks")
+                .body(callsSipTrunkRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * createSipTrunk request builder class.
+     */
+    public class CreateSipTrunkRequest {
+        private final CallsSipTrunkRequest callsSipTrunkRequest;
+
+        private CreateSipTrunkRequest(CallsSipTrunkRequest callsSipTrunkRequest) {
+            this.callsSipTrunkRequest = Objects.requireNonNull(
+                    callsSipTrunkRequest, "The required parameter 'callsSipTrunkRequest' is missing.");
+        }
+
+        /**
+         * Executes the createSipTrunk request.
+         *
+         * @return CallsCreateSipTrunkResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsCreateSipTrunkResponse execute() throws ApiException {
+            RequestDefinition createSipTrunkDefinition = createSipTrunkDefinition(callsSipTrunkRequest);
+            return apiClient.execute(
+                    createSipTrunkDefinition, new TypeReference<CallsCreateSipTrunkResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the createSipTrunk request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsCreateSipTrunkResponse> callback) {
+            RequestDefinition createSipTrunkDefinition = createSipTrunkDefinition(callsSipTrunkRequest);
+            return apiClient.executeAsync(
+                    createSipTrunkDefinition, new TypeReference<CallsCreateSipTrunkResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Create SIP trunk.
+     * <p>
+     * Create a SIP trunk. Fields not sent in request body will take default values. This operation is asynchronous. The SIP trunk will be created in the background.
+     *
+     * @param callsSipTrunkRequest  (required)
+     * @return CreateSipTrunkRequest
+     */
+    public CreateSipTrunkRequest createSipTrunk(CallsSipTrunkRequest callsSipTrunkRequest) {
+        return new CreateSipTrunkRequest(callsSipTrunkRequest);
+    }
+
+    private RequestDefinition createSipTrunkServiceAddressDefinition(
+            CallsPublicSipTrunkServiceAddressRequest callsPublicSipTrunkServiceAddressRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/sip-trunks/service-addresses")
+                .body(callsPublicSipTrunkServiceAddressRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * createSipTrunkServiceAddress request builder class.
+     */
+    public class CreateSipTrunkServiceAddressRequest {
+        private final CallsPublicSipTrunkServiceAddressRequest callsPublicSipTrunkServiceAddressRequest;
+
+        private CreateSipTrunkServiceAddressRequest(
+                CallsPublicSipTrunkServiceAddressRequest callsPublicSipTrunkServiceAddressRequest) {
+            this.callsPublicSipTrunkServiceAddressRequest = Objects.requireNonNull(
+                    callsPublicSipTrunkServiceAddressRequest,
+                    "The required parameter 'callsPublicSipTrunkServiceAddressRequest' is missing.");
+        }
+
+        /**
+         * Executes the createSipTrunkServiceAddress request.
+         *
+         * @return CallsPublicSipTrunkServiceAddress The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsPublicSipTrunkServiceAddress execute() throws ApiException {
+            RequestDefinition createSipTrunkServiceAddressDefinition =
+                    createSipTrunkServiceAddressDefinition(callsPublicSipTrunkServiceAddressRequest);
+            return apiClient.execute(
+                    createSipTrunkServiceAddressDefinition,
+                    new TypeReference<CallsPublicSipTrunkServiceAddress>() {}.getType());
+        }
+
+        /**
+         * Executes the createSipTrunkServiceAddress request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsPublicSipTrunkServiceAddress> callback) {
+            RequestDefinition createSipTrunkServiceAddressDefinition =
+                    createSipTrunkServiceAddressDefinition(callsPublicSipTrunkServiceAddressRequest);
+            return apiClient.executeAsync(
+                    createSipTrunkServiceAddressDefinition,
+                    new TypeReference<CallsPublicSipTrunkServiceAddress>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Create SIP trunk service address.
+     * <p>
+     * Create a SIP trunk service address.
+     *
+     * @param callsPublicSipTrunkServiceAddressRequest  (required)
+     * @return CreateSipTrunkServiceAddressRequest
+     */
+    public CreateSipTrunkServiceAddressRequest createSipTrunkServiceAddress(
+            CallsPublicSipTrunkServiceAddressRequest callsPublicSipTrunkServiceAddressRequest) {
+        return new CreateSipTrunkServiceAddressRequest(callsPublicSipTrunkServiceAddressRequest);
+    }
+
+    private RequestDefinition deleteCallRecordingsDefinition(String callId, String location) {
         RequestDefinition.Builder builder = RequestDefinition.builder("DELETE", "/calls/1/recordings/calls/{callId}")
                 .requiresAuthentication(true)
                 .accept("application/json");
 
         if (callId != null) {
             builder.addPathParameter(new Parameter("callId", callId));
+        }
+        if (location != null) {
+            builder.addQueryParameter(new Parameter("location", location));
         }
         return builder.build();
     }
@@ -1909,9 +2324,21 @@ public class CallsApi {
      */
     public class DeleteCallRecordingsRequest {
         private final String callId;
+        private String location;
 
         private DeleteCallRecordingsRequest(String callId) {
             this.callId = Objects.requireNonNull(callId, "The required parameter 'callId' is missing.");
+        }
+
+        /**
+         * Sets location.
+         *
+         * @param location Recording location. (optional)
+         * @return DeleteCallRecordingsRequest
+         */
+        public DeleteCallRecordingsRequest location(String location) {
+            this.location = location;
+            return this;
         }
 
         /**
@@ -1921,7 +2348,7 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public CallRecording execute() throws ApiException {
-            RequestDefinition deleteCallRecordingsDefinition = deleteCallRecordingsDefinition(callId);
+            RequestDefinition deleteCallRecordingsDefinition = deleteCallRecordingsDefinition(callId, location);
             return apiClient.execute(deleteCallRecordingsDefinition, new TypeReference<CallRecording>() {}.getType());
         }
 
@@ -1932,7 +2359,7 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<CallRecording> callback) {
-            RequestDefinition deleteCallRecordingsDefinition = deleteCallRecordingsDefinition(callId);
+            RequestDefinition deleteCallRecordingsDefinition = deleteCallRecordingsDefinition(callId, location);
             return apiClient.executeAsync(
                     deleteCallRecordingsDefinition, new TypeReference<CallRecording>() {}.getType(), callback);
         }
@@ -2007,7 +2434,7 @@ public class CallsApi {
         return new DeleteCallsFileRequest(fileId);
     }
 
-    private RequestDefinition deleteConferenceRecordingsDefinition(String conferenceId) {
+    private RequestDefinition deleteConferenceRecordingsDefinition(String conferenceId, String location) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "DELETE", "/calls/1/recordings/conferences/{conferenceId}")
                 .requiresAuthentication(true)
@@ -2015,6 +2442,9 @@ public class CallsApi {
 
         if (conferenceId != null) {
             builder.addPathParameter(new Parameter("conferenceId", conferenceId));
+        }
+        if (location != null) {
+            builder.addQueryParameter(new Parameter("location", location));
         }
         return builder.build();
     }
@@ -2024,10 +2454,22 @@ public class CallsApi {
      */
     public class DeleteConferenceRecordingsRequest {
         private final String conferenceId;
+        private String location;
 
         private DeleteConferenceRecordingsRequest(String conferenceId) {
             this.conferenceId =
                     Objects.requireNonNull(conferenceId, "The required parameter 'conferenceId' is missing.");
+        }
+
+        /**
+         * Sets location.
+         *
+         * @param location Recording location. (optional)
+         * @return DeleteConferenceRecordingsRequest
+         */
+        public DeleteConferenceRecordingsRequest location(String location) {
+            this.location = location;
+            return this;
         }
 
         /**
@@ -2037,7 +2479,8 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public CallsConferenceRecording execute() throws ApiException {
-            RequestDefinition deleteConferenceRecordingsDefinition = deleteConferenceRecordingsDefinition(conferenceId);
+            RequestDefinition deleteConferenceRecordingsDefinition =
+                    deleteConferenceRecordingsDefinition(conferenceId, location);
             return apiClient.execute(
                     deleteConferenceRecordingsDefinition, new TypeReference<CallsConferenceRecording>() {}.getType());
         }
@@ -2049,7 +2492,8 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsConferenceRecording> callback) {
-            RequestDefinition deleteConferenceRecordingsDefinition = deleteConferenceRecordingsDefinition(conferenceId);
+            RequestDefinition deleteConferenceRecordingsDefinition =
+                    deleteConferenceRecordingsDefinition(conferenceId, location);
             return apiClient.executeAsync(
                     deleteConferenceRecordingsDefinition,
                     new TypeReference<CallsConferenceRecording>() {}.getType(),
@@ -2069,7 +2513,7 @@ public class CallsApi {
         return new DeleteConferenceRecordingsRequest(conferenceId);
     }
 
-    private RequestDefinition deleteDialogRecordingsDefinition(String dialogId) {
+    private RequestDefinition deleteDialogRecordingsDefinition(String dialogId, String location) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "DELETE", "/calls/1/recordings/dialogs/{dialogId}")
                 .requiresAuthentication(true)
@@ -2077,6 +2521,9 @@ public class CallsApi {
 
         if (dialogId != null) {
             builder.addPathParameter(new Parameter("dialogId", dialogId));
+        }
+        if (location != null) {
+            builder.addQueryParameter(new Parameter("location", location));
         }
         return builder.build();
     }
@@ -2086,9 +2533,21 @@ public class CallsApi {
      */
     public class DeleteDialogRecordingsRequest {
         private final String dialogId;
+        private String location;
 
         private DeleteDialogRecordingsRequest(String dialogId) {
             this.dialogId = Objects.requireNonNull(dialogId, "The required parameter 'dialogId' is missing.");
+        }
+
+        /**
+         * Sets location.
+         *
+         * @param location Recording location. (optional)
+         * @return DeleteDialogRecordingsRequest
+         */
+        public DeleteDialogRecordingsRequest location(String location) {
+            this.location = location;
+            return this;
         }
 
         /**
@@ -2098,7 +2557,7 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public CallsDialogRecordingResponse execute() throws ApiException {
-            RequestDefinition deleteDialogRecordingsDefinition = deleteDialogRecordingsDefinition(dialogId);
+            RequestDefinition deleteDialogRecordingsDefinition = deleteDialogRecordingsDefinition(dialogId, location);
             return apiClient.execute(
                     deleteDialogRecordingsDefinition, new TypeReference<CallsDialogRecordingResponse>() {}.getType());
         }
@@ -2110,7 +2569,7 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsDialogRecordingResponse> callback) {
-            RequestDefinition deleteDialogRecordingsDefinition = deleteDialogRecordingsDefinition(dialogId);
+            RequestDefinition deleteDialogRecordingsDefinition = deleteDialogRecordingsDefinition(dialogId, location);
             return apiClient.executeAsync(
                     deleteDialogRecordingsDefinition,
                     new TypeReference<CallsDialogRecordingResponse>() {}.getType(),
@@ -2195,13 +2654,16 @@ public class CallsApi {
         return new DeleteMediaStreamConfigRequest(mediaStreamConfigId);
     }
 
-    private RequestDefinition deleteRecordingFileDefinition(String fileId) {
+    private RequestDefinition deleteRecordingFileDefinition(String fileId, String location) {
         RequestDefinition.Builder builder = RequestDefinition.builder("DELETE", "/calls/1/recordings/files/{fileId}")
                 .requiresAuthentication(true)
                 .accept("application/json");
 
         if (fileId != null) {
             builder.addPathParameter(new Parameter("fileId", fileId));
+        }
+        if (location != null) {
+            builder.addQueryParameter(new Parameter("location", location));
         }
         return builder.build();
     }
@@ -2211,9 +2673,21 @@ public class CallsApi {
      */
     public class DeleteRecordingFileRequest {
         private final String fileId;
+        private String location;
 
         private DeleteRecordingFileRequest(String fileId) {
             this.fileId = Objects.requireNonNull(fileId, "The required parameter 'fileId' is missing.");
+        }
+
+        /**
+         * Sets location.
+         *
+         * @param location Recording location. (optional)
+         * @return DeleteRecordingFileRequest
+         */
+        public DeleteRecordingFileRequest location(String location) {
+            this.location = location;
+            return this;
         }
 
         /**
@@ -2223,7 +2697,7 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public CallsRecordingFile execute() throws ApiException {
-            RequestDefinition deleteRecordingFileDefinition = deleteRecordingFileDefinition(fileId);
+            RequestDefinition deleteRecordingFileDefinition = deleteRecordingFileDefinition(fileId, location);
             return apiClient.execute(
                     deleteRecordingFileDefinition, new TypeReference<CallsRecordingFile>() {}.getType());
         }
@@ -2235,7 +2709,7 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsRecordingFile> callback) {
-            RequestDefinition deleteRecordingFileDefinition = deleteRecordingFileDefinition(fileId);
+            RequestDefinition deleteRecordingFileDefinition = deleteRecordingFileDefinition(fileId, location);
             return apiClient.executeAsync(
                     deleteRecordingFileDefinition, new TypeReference<CallsRecordingFile>() {}.getType(), callback);
         }
@@ -2251,6 +2725,201 @@ public class CallsApi {
      */
     public DeleteRecordingFileRequest deleteRecordingFile(String fileId) {
         return new DeleteRecordingFileRequest(fileId);
+    }
+
+    private RequestDefinition deleteSipTrunkDefinition(String sipTrunkId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("DELETE", "/calls/1/sip-trunks/{sipTrunkId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sipTrunkId != null) {
+            builder.addPathParameter(new Parameter("sipTrunkId", sipTrunkId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * deleteSipTrunk request builder class.
+     */
+    public class DeleteSipTrunkRequest {
+        private final String sipTrunkId;
+
+        private DeleteSipTrunkRequest(String sipTrunkId) {
+            this.sipTrunkId = Objects.requireNonNull(sipTrunkId, "The required parameter 'sipTrunkId' is missing.");
+        }
+
+        /**
+         * Executes the deleteSipTrunk request.
+         *
+         * @return CallsSipTrunkResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsSipTrunkResponse execute() throws ApiException {
+            RequestDefinition deleteSipTrunkDefinition = deleteSipTrunkDefinition(sipTrunkId);
+            return apiClient.execute(deleteSipTrunkDefinition, new TypeReference<CallsSipTrunkResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the deleteSipTrunk request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsSipTrunkResponse> callback) {
+            RequestDefinition deleteSipTrunkDefinition = deleteSipTrunkDefinition(sipTrunkId);
+            return apiClient.executeAsync(
+                    deleteSipTrunkDefinition, new TypeReference<CallsSipTrunkResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Delete SIP trunk.
+     * <p>
+     * Delete a SIP trunk. This operation is asynchronous. The SIP trunk will be deleted in the background.
+     *
+     * @param sipTrunkId SIP trunk ID. (required)
+     * @return DeleteSipTrunkRequest
+     */
+    public DeleteSipTrunkRequest deleteSipTrunk(String sipTrunkId) {
+        return new DeleteSipTrunkRequest(sipTrunkId);
+    }
+
+    private RequestDefinition deleteSipTrunkServiceAddressDefinition(String sipTrunkServiceAddressId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "DELETE", "/calls/1/sip-trunks/service-addresses/{sipTrunkServiceAddressId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sipTrunkServiceAddressId != null) {
+            builder.addPathParameter(new Parameter("sipTrunkServiceAddressId", sipTrunkServiceAddressId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * deleteSipTrunkServiceAddress request builder class.
+     */
+    public class DeleteSipTrunkServiceAddressRequest {
+        private final String sipTrunkServiceAddressId;
+
+        private DeleteSipTrunkServiceAddressRequest(String sipTrunkServiceAddressId) {
+            this.sipTrunkServiceAddressId = Objects.requireNonNull(
+                    sipTrunkServiceAddressId, "The required parameter 'sipTrunkServiceAddressId' is missing.");
+        }
+
+        /**
+         * Executes the deleteSipTrunkServiceAddress request.
+         *
+         * @return CallsPublicSipTrunkServiceAddress The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsPublicSipTrunkServiceAddress execute() throws ApiException {
+            RequestDefinition deleteSipTrunkServiceAddressDefinition =
+                    deleteSipTrunkServiceAddressDefinition(sipTrunkServiceAddressId);
+            return apiClient.execute(
+                    deleteSipTrunkServiceAddressDefinition,
+                    new TypeReference<CallsPublicSipTrunkServiceAddress>() {}.getType());
+        }
+
+        /**
+         * Executes the deleteSipTrunkServiceAddress request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsPublicSipTrunkServiceAddress> callback) {
+            RequestDefinition deleteSipTrunkServiceAddressDefinition =
+                    deleteSipTrunkServiceAddressDefinition(sipTrunkServiceAddressId);
+            return apiClient.executeAsync(
+                    deleteSipTrunkServiceAddressDefinition,
+                    new TypeReference<CallsPublicSipTrunkServiceAddress>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Delete SIP trunk service address.
+     * <p>
+     * Delete SIP trunk service address.
+     *
+     * @param sipTrunkServiceAddressId SIP trunk service address ID. (required)
+     * @return DeleteSipTrunkServiceAddressRequest
+     */
+    public DeleteSipTrunkServiceAddressRequest deleteSipTrunkServiceAddress(String sipTrunkServiceAddressId) {
+        return new DeleteSipTrunkServiceAddressRequest(sipTrunkServiceAddressId);
+    }
+
+    private RequestDefinition dialogBroadcastWebrtcTextDefinition(
+            String dialogId, CallsDialogBroadcastWebrtcTextRequest callsDialogBroadcastWebrtcTextRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/calls/1/dialogs/{dialogId}/broadcast-webrtc-text")
+                .body(callsDialogBroadcastWebrtcTextRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (dialogId != null) {
+            builder.addPathParameter(new Parameter("dialogId", dialogId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * dialogBroadcastWebrtcText request builder class.
+     */
+    public class DialogBroadcastWebrtcTextRequest {
+        private final String dialogId;
+        private final CallsDialogBroadcastWebrtcTextRequest callsDialogBroadcastWebrtcTextRequest;
+
+        private DialogBroadcastWebrtcTextRequest(
+                String dialogId, CallsDialogBroadcastWebrtcTextRequest callsDialogBroadcastWebrtcTextRequest) {
+            this.dialogId = Objects.requireNonNull(dialogId, "The required parameter 'dialogId' is missing.");
+            this.callsDialogBroadcastWebrtcTextRequest = Objects.requireNonNull(
+                    callsDialogBroadcastWebrtcTextRequest,
+                    "The required parameter 'callsDialogBroadcastWebrtcTextRequest' is missing.");
+        }
+
+        /**
+         * Executes the dialogBroadcastWebrtcText request.
+         *
+         * @return CallsActionResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsActionResponse execute() throws ApiException {
+            RequestDefinition dialogBroadcastWebrtcTextDefinition =
+                    dialogBroadcastWebrtcTextDefinition(dialogId, callsDialogBroadcastWebrtcTextRequest);
+            return apiClient.execute(
+                    dialogBroadcastWebrtcTextDefinition, new TypeReference<CallsActionResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the dialogBroadcastWebrtcText request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
+            RequestDefinition dialogBroadcastWebrtcTextDefinition =
+                    dialogBroadcastWebrtcTextDefinition(dialogId, callsDialogBroadcastWebrtcTextRequest);
+            return apiClient.executeAsync(
+                    dialogBroadcastWebrtcTextDefinition,
+                    new TypeReference<CallsActionResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Broadcast text.
+     * <p>
+     * Broadcasts a text message to dialog WebRTC call legs with open data channel.
+     *
+     * @param dialogId Dialog ID. (required)
+     * @param callsDialogBroadcastWebrtcTextRequest  (required)
+     * @return DialogBroadcastWebrtcTextRequest
+     */
+    public DialogBroadcastWebrtcTextRequest dialogBroadcastWebrtcText(
+            String dialogId, CallsDialogBroadcastWebrtcTextRequest callsDialogBroadcastWebrtcTextRequest) {
+        return new DialogBroadcastWebrtcTextRequest(dialogId, callsDialogBroadcastWebrtcTextRequest);
     }
 
     private RequestDefinition dialogPlayFileDefinition(String dialogId, CallsDialogPlayRequest callsDialogPlayRequest) {
@@ -2565,13 +3234,16 @@ public class CallsApi {
         return new DialogStopRecordingRequest(dialogId);
     }
 
-    private RequestDefinition downloadRecordingFileDefinition(String fileId) {
+    private RequestDefinition downloadRecordingFileDefinition(String fileId, String location) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/recordings/files/{fileId}")
                 .requiresAuthentication(true)
                 .accept("application/octet-stream");
 
         if (fileId != null) {
             builder.addPathParameter(new Parameter("fileId", fileId));
+        }
+        if (location != null) {
+            builder.addQueryParameter(new Parameter("location", location));
         }
         return builder.build();
     }
@@ -2581,9 +3253,21 @@ public class CallsApi {
      */
     public class DownloadRecordingFileRequest {
         private final String fileId;
+        private String location;
 
         private DownloadRecordingFileRequest(String fileId) {
             this.fileId = Objects.requireNonNull(fileId, "The required parameter 'fileId' is missing.");
+        }
+
+        /**
+         * Sets location.
+         *
+         * @param location Recording location. (optional)
+         * @return DownloadRecordingFileRequest
+         */
+        public DownloadRecordingFileRequest location(String location) {
+            this.location = location;
+            return this;
         }
 
         /**
@@ -2593,7 +3277,7 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public File execute() throws ApiException {
-            RequestDefinition downloadRecordingFileDefinition = downloadRecordingFileDefinition(fileId);
+            RequestDefinition downloadRecordingFileDefinition = downloadRecordingFileDefinition(fileId, location);
             return apiClient.execute(downloadRecordingFileDefinition, new TypeReference<File>() {}.getType());
         }
 
@@ -2604,7 +3288,7 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<File> callback) {
-            RequestDefinition downloadRecordingFileDefinition = downloadRecordingFileDefinition(fileId);
+            RequestDefinition downloadRecordingFileDefinition = downloadRecordingFileDefinition(fileId, location);
             return apiClient.executeAsync(
                     downloadRecordingFileDefinition, new TypeReference<File>() {}.getType(), callback);
         }
@@ -2670,7 +3354,7 @@ public class CallsApi {
     /**
      * Get bulk status.
      * <p>
-     * Get a single bulk status.
+     * Get a single bulk status. Bulk has a status if it was created with scheduling options.
      *
      * @param bulkId Bulk ID. (required)
      * @return GetBulkStatusRequest
@@ -2792,13 +3476,16 @@ public class CallsApi {
         return new GetCallHistoryRequest(callId);
     }
 
-    private RequestDefinition getCallRecordingsDefinition(String callId) {
+    private RequestDefinition getCallRecordingsDefinition(String callId, String location) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/recordings/calls/{callId}")
                 .requiresAuthentication(true)
                 .accept("application/json");
 
         if (callId != null) {
             builder.addPathParameter(new Parameter("callId", callId));
+        }
+        if (location != null) {
+            builder.addQueryParameter(new Parameter("location", location));
         }
         return builder.build();
     }
@@ -2808,9 +3495,21 @@ public class CallsApi {
      */
     public class GetCallRecordingsRequest {
         private final String callId;
+        private String location;
 
         private GetCallRecordingsRequest(String callId) {
             this.callId = Objects.requireNonNull(callId, "The required parameter 'callId' is missing.");
+        }
+
+        /**
+         * Sets location.
+         *
+         * @param location Recording location. (optional)
+         * @return GetCallRecordingsRequest
+         */
+        public GetCallRecordingsRequest location(String location) {
+            this.location = location;
+            return this;
         }
 
         /**
@@ -2820,7 +3519,7 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public CallRecording execute() throws ApiException {
-            RequestDefinition getCallRecordingsDefinition = getCallRecordingsDefinition(callId);
+            RequestDefinition getCallRecordingsDefinition = getCallRecordingsDefinition(callId, location);
             return apiClient.execute(getCallRecordingsDefinition, new TypeReference<CallRecording>() {}.getType());
         }
 
@@ -2831,7 +3530,7 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<CallRecording> callback) {
-            RequestDefinition getCallRecordingsDefinition = getCallRecordingsDefinition(callId);
+            RequestDefinition getCallRecordingsDefinition = getCallRecordingsDefinition(callId, location);
             return apiClient.executeAsync(
                     getCallRecordingsDefinition, new TypeReference<CallRecording>() {}.getType(), callback);
         }
@@ -2859,6 +3558,7 @@ public class CallsApi {
             OffsetDateTime startTimeAfter,
             String conferenceId,
             String dialogId,
+            String bulkId,
             Integer page,
             Integer size) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/calls")
@@ -2892,6 +3592,9 @@ public class CallsApi {
         if (dialogId != null) {
             builder.addQueryParameter(new Parameter("dialogId", dialogId));
         }
+        if (bulkId != null) {
+            builder.addQueryParameter(new Parameter("bulkId", bulkId));
+        }
         if (page != null) {
             builder.addQueryParameter(new Parameter("page", page));
         }
@@ -2914,6 +3617,7 @@ public class CallsApi {
         private OffsetDateTime startTimeAfter;
         private String conferenceId;
         private String dialogId;
+        private String bulkId;
         private Integer page;
         private Integer size;
 
@@ -3019,6 +3723,17 @@ public class CallsApi {
         }
 
         /**
+         * Sets bulkId.
+         *
+         * @param bulkId Bulk ID. (optional)
+         * @return GetCallsRequest
+         */
+        public GetCallsRequest bulkId(String bulkId) {
+            this.bulkId = bulkId;
+            return this;
+        }
+
+        /**
          * Sets page.
          *
          * @param page Results page to retrieve (0..N). (optional, default to 0)
@@ -3057,6 +3772,7 @@ public class CallsApi {
                     startTimeAfter,
                     conferenceId,
                     dialogId,
+                    bulkId,
                     page,
                     size);
             return apiClient.execute(getCallsDefinition, new TypeReference<CallPage>() {}.getType());
@@ -3079,6 +3795,7 @@ public class CallsApi {
                     startTimeAfter,
                     conferenceId,
                     dialogId,
+                    bulkId,
                     page,
                     size);
             return apiClient.executeAsync(getCallsDefinition, new TypeReference<CallPage>() {}.getType(), callback);
@@ -3244,6 +3961,7 @@ public class CallsApi {
             OffsetDateTime endTimeBefore,
             String conferenceId,
             String dialogId,
+            String bulkId,
             Integer page,
             Integer size) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/calls/history")
@@ -3280,6 +3998,9 @@ public class CallsApi {
         if (dialogId != null) {
             builder.addQueryParameter(new Parameter("dialogId", dialogId));
         }
+        if (bulkId != null) {
+            builder.addQueryParameter(new Parameter("bulkId", bulkId));
+        }
         if (page != null) {
             builder.addQueryParameter(new Parameter("page", page));
         }
@@ -3303,6 +4024,7 @@ public class CallsApi {
         private OffsetDateTime endTimeBefore;
         private String conferenceId;
         private String dialogId;
+        private String bulkId;
         private Integer page;
         private Integer size;
 
@@ -3419,6 +4141,17 @@ public class CallsApi {
         }
 
         /**
+         * Sets bulkId.
+         *
+         * @param bulkId Bulk ID. (optional)
+         * @return GetCallsHistoryRequest
+         */
+        public GetCallsHistoryRequest bulkId(String bulkId) {
+            this.bulkId = bulkId;
+            return this;
+        }
+
+        /**
          * Sets page.
          *
          * @param page Results page to retrieve (0..N). (optional, default to 0)
@@ -3458,6 +4191,7 @@ public class CallsApi {
                     endTimeBefore,
                     conferenceId,
                     dialogId,
+                    bulkId,
                     page,
                     size);
             return apiClient.execute(getCallsHistoryDefinition, new TypeReference<CallLogPage>() {}.getType());
@@ -3481,6 +4215,7 @@ public class CallsApi {
                     endTimeBefore,
                     conferenceId,
                     dialogId,
+                    bulkId,
                     page,
                     size);
             return apiClient.executeAsync(
@@ -3507,6 +4242,7 @@ public class CallsApi {
             OffsetDateTime endTimeBefore,
             CallDirection direction,
             CallEndpointType endpointType,
+            String location,
             Integer page,
             Integer size) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/recordings/calls")
@@ -3534,6 +4270,9 @@ public class CallsApi {
         if (endpointType != null) {
             builder.addQueryParameter(new Parameter("endpointType", endpointType));
         }
+        if (location != null) {
+            builder.addQueryParameter(new Parameter("location", location));
+        }
         if (page != null) {
             builder.addQueryParameter(new Parameter("page", page));
         }
@@ -3554,6 +4293,7 @@ public class CallsApi {
         private OffsetDateTime endTimeBefore;
         private CallDirection direction;
         private CallEndpointType endpointType;
+        private String location;
         private Integer page;
         private Integer size;
 
@@ -3637,6 +4377,17 @@ public class CallsApi {
         }
 
         /**
+         * Sets location.
+         *
+         * @param location Recording location. (optional)
+         * @return GetCallsRecordingsRequest
+         */
+        public GetCallsRecordingsRequest location(String location) {
+            this.location = location;
+            return this;
+        }
+
+        /**
          * Sets page.
          *
          * @param page Results page to retrieve (0..N). (optional, default to 0)
@@ -3673,6 +4424,7 @@ public class CallsApi {
                     endTimeBefore,
                     direction,
                     endpointType,
+                    location,
                     page,
                     size);
             return apiClient.execute(getCallsRecordingsDefinition, new TypeReference<CallRecordingPage>() {}.getType());
@@ -3693,6 +4445,7 @@ public class CallsApi {
                     endTimeBefore,
                     direction,
                     endpointType,
+                    location,
                     page,
                     size);
             return apiClient.executeAsync(
@@ -3829,7 +4582,7 @@ public class CallsApi {
         return new GetConferenceHistoryRequest(conferenceId);
     }
 
-    private RequestDefinition getConferenceRecordingsDefinition(String conferenceId) {
+    private RequestDefinition getConferenceRecordingsDefinition(String conferenceId, String location) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "GET", "/calls/1/recordings/conferences/{conferenceId}")
                 .requiresAuthentication(true)
@@ -3837,6 +4590,9 @@ public class CallsApi {
 
         if (conferenceId != null) {
             builder.addPathParameter(new Parameter("conferenceId", conferenceId));
+        }
+        if (location != null) {
+            builder.addQueryParameter(new Parameter("location", location));
         }
         return builder.build();
     }
@@ -3846,10 +4602,22 @@ public class CallsApi {
      */
     public class GetConferenceRecordingsRequest {
         private final String conferenceId;
+        private String location;
 
         private GetConferenceRecordingsRequest(String conferenceId) {
             this.conferenceId =
                     Objects.requireNonNull(conferenceId, "The required parameter 'conferenceId' is missing.");
+        }
+
+        /**
+         * Sets location.
+         *
+         * @param location Recording location. (optional)
+         * @return GetConferenceRecordingsRequest
+         */
+        public GetConferenceRecordingsRequest location(String location) {
+            this.location = location;
+            return this;
         }
 
         /**
@@ -3859,7 +4627,8 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public CallsConferenceRecording execute() throws ApiException {
-            RequestDefinition getConferenceRecordingsDefinition = getConferenceRecordingsDefinition(conferenceId);
+            RequestDefinition getConferenceRecordingsDefinition =
+                    getConferenceRecordingsDefinition(conferenceId, location);
             return apiClient.execute(
                     getConferenceRecordingsDefinition, new TypeReference<CallsConferenceRecording>() {}.getType());
         }
@@ -3871,7 +4640,8 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsConferenceRecording> callback) {
-            RequestDefinition getConferenceRecordingsDefinition = getConferenceRecordingsDefinition(conferenceId);
+            RequestDefinition getConferenceRecordingsDefinition =
+                    getConferenceRecordingsDefinition(conferenceId, location);
             return apiClient.executeAsync(
                     getConferenceRecordingsDefinition,
                     new TypeReference<CallsConferenceRecording>() {}.getType(),
@@ -4214,6 +4984,7 @@ public class CallsApi {
             OffsetDateTime startTimeAfter,
             OffsetDateTime endTimeBefore,
             Boolean composition,
+            String location,
             Integer page,
             Integer size) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/recordings/conferences")
@@ -4241,6 +5012,9 @@ public class CallsApi {
         if (composition != null) {
             builder.addQueryParameter(new Parameter("composition", composition));
         }
+        if (location != null) {
+            builder.addQueryParameter(new Parameter("location", location));
+        }
         if (page != null) {
             builder.addQueryParameter(new Parameter("page", page));
         }
@@ -4261,6 +5035,7 @@ public class CallsApi {
         private OffsetDateTime startTimeAfter;
         private OffsetDateTime endTimeBefore;
         private Boolean composition;
+        private String location;
         private Integer page;
         private Integer size;
 
@@ -4344,6 +5119,17 @@ public class CallsApi {
         }
 
         /**
+         * Sets location.
+         *
+         * @param location Recording location. (optional)
+         * @return GetConferencesRecordingsRequest
+         */
+        public GetConferencesRecordingsRequest location(String location) {
+            this.location = location;
+            return this;
+        }
+
+        /**
          * Sets page.
          *
          * @param page Results page to retrieve (0..N). (optional, default to 0)
@@ -4380,6 +5166,7 @@ public class CallsApi {
                     startTimeAfter,
                     endTimeBefore,
                     composition,
+                    location,
                     page,
                     size);
             return apiClient.execute(
@@ -4401,6 +5188,7 @@ public class CallsApi {
                     startTimeAfter,
                     endTimeBefore,
                     composition,
+                    location,
                     page,
                     size);
             return apiClient.executeAsync(
@@ -4419,6 +5207,57 @@ public class CallsApi {
      */
     public GetConferencesRecordingsRequest getConferencesRecordings() {
         return new GetConferencesRecordingsRequest();
+    }
+
+    private RequestDefinition getCountriesDefinition() {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "GET", "/calls/1/sip-trunks/service-addresses/countries")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * getCountries request builder class.
+     */
+    public class GetCountriesRequest {
+
+        private GetCountriesRequest() {}
+
+        /**
+         * Executes the getCountries request.
+         *
+         * @return CallsCountryList The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsCountryList execute() throws ApiException {
+            RequestDefinition getCountriesDefinition = getCountriesDefinition();
+            return apiClient.execute(getCountriesDefinition, new TypeReference<CallsCountryList>() {}.getType());
+        }
+
+        /**
+         * Executes the getCountries request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsCountryList> callback) {
+            RequestDefinition getCountriesDefinition = getCountriesDefinition();
+            return apiClient.executeAsync(
+                    getCountriesDefinition, new TypeReference<CallsCountryList>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get countries.
+     * <p>
+     * Get countries with shortcodes you&#39;d need for a SIP trunk address.
+     *
+     * @return GetCountriesRequest
+     */
+    public GetCountriesRequest getCountries() {
+        return new GetCountriesRequest();
     }
 
     private RequestDefinition getDialogDefinition(String dialogId) {
@@ -4536,13 +5375,16 @@ public class CallsApi {
         return new GetDialogHistoryRequest(dialogId);
     }
 
-    private RequestDefinition getDialogRecordingsDefinition(String dialogId) {
+    private RequestDefinition getDialogRecordingsDefinition(String dialogId, String location) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/recordings/dialogs/{dialogId}")
                 .requiresAuthentication(true)
                 .accept("application/json");
 
         if (dialogId != null) {
             builder.addPathParameter(new Parameter("dialogId", dialogId));
+        }
+        if (location != null) {
+            builder.addQueryParameter(new Parameter("location", location));
         }
         return builder.build();
     }
@@ -4552,9 +5394,21 @@ public class CallsApi {
      */
     public class GetDialogRecordingsRequest {
         private final String dialogId;
+        private String location;
 
         private GetDialogRecordingsRequest(String dialogId) {
             this.dialogId = Objects.requireNonNull(dialogId, "The required parameter 'dialogId' is missing.");
+        }
+
+        /**
+         * Sets location.
+         *
+         * @param location Recording location. (optional)
+         * @return GetDialogRecordingsRequest
+         */
+        public GetDialogRecordingsRequest location(String location) {
+            this.location = location;
+            return this;
         }
 
         /**
@@ -4564,7 +5418,7 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public CallsDialogRecordingResponse execute() throws ApiException {
-            RequestDefinition getDialogRecordingsDefinition = getDialogRecordingsDefinition(dialogId);
+            RequestDefinition getDialogRecordingsDefinition = getDialogRecordingsDefinition(dialogId, location);
             return apiClient.execute(
                     getDialogRecordingsDefinition, new TypeReference<CallsDialogRecordingResponse>() {}.getType());
         }
@@ -4576,7 +5430,7 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsDialogRecordingResponse> callback) {
-            RequestDefinition getDialogRecordingsDefinition = getDialogRecordingsDefinition(dialogId);
+            RequestDefinition getDialogRecordingsDefinition = getDialogRecordingsDefinition(dialogId, location);
             return apiClient.executeAsync(
                     getDialogRecordingsDefinition,
                     new TypeReference<CallsDialogRecordingResponse>() {}.getType(),
@@ -4947,6 +5801,7 @@ public class CallsApi {
             OffsetDateTime startTimeAfter,
             OffsetDateTime endTimeBefore,
             Boolean composition,
+            String location,
             Integer page,
             Integer size) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/recordings/dialogs")
@@ -4971,6 +5826,9 @@ public class CallsApi {
         if (composition != null) {
             builder.addQueryParameter(new Parameter("composition", composition));
         }
+        if (location != null) {
+            builder.addQueryParameter(new Parameter("location", location));
+        }
         if (page != null) {
             builder.addQueryParameter(new Parameter("page", page));
         }
@@ -4990,6 +5848,7 @@ public class CallsApi {
         private OffsetDateTime startTimeAfter;
         private OffsetDateTime endTimeBefore;
         private Boolean composition;
+        private String location;
         private Integer page;
         private Integer size;
 
@@ -5062,6 +5921,17 @@ public class CallsApi {
         }
 
         /**
+         * Sets location.
+         *
+         * @param location Recording location. (optional)
+         * @return GetDialogsRecordingsRequest
+         */
+        public GetDialogsRecordingsRequest location(String location) {
+            this.location = location;
+            return this;
+        }
+
+        /**
          * Sets page.
          *
          * @param page Results page to retrieve (0..N). (optional, default to 0)
@@ -5091,7 +5961,7 @@ public class CallsApi {
          */
         public CallsDialogRecordingPage execute() throws ApiException {
             RequestDefinition getDialogsRecordingsDefinition = getDialogsRecordingsDefinition(
-                    dialogId, applicationId, callId, startTimeAfter, endTimeBefore, composition, page, size);
+                    dialogId, applicationId, callId, startTimeAfter, endTimeBefore, composition, location, page, size);
             return apiClient.execute(
                     getDialogsRecordingsDefinition, new TypeReference<CallsDialogRecordingPage>() {}.getType());
         }
@@ -5104,7 +5974,7 @@ public class CallsApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsDialogRecordingPage> callback) {
             RequestDefinition getDialogsRecordingsDefinition = getDialogsRecordingsDefinition(
-                    dialogId, applicationId, callId, startTimeAfter, endTimeBefore, composition, page, size);
+                    dialogId, applicationId, callId, startTimeAfter, endTimeBefore, composition, location, page, size);
             return apiClient.executeAsync(
                     getDialogsRecordingsDefinition,
                     new TypeReference<CallsDialogRecordingPage>() {}.getType(),
@@ -5266,6 +6136,425 @@ public class CallsApi {
      */
     public GetMediaStreamConfigsRequest getMediaStreamConfigs() {
         return new GetMediaStreamConfigsRequest();
+    }
+
+    private RequestDefinition getRegionsDefinition(String countryCode) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "GET", "/calls/1/sip-trunks/service-addresses/countries/regions")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (countryCode != null) {
+            builder.addQueryParameter(new Parameter("countryCode", countryCode));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getRegions request builder class.
+     */
+    public class GetRegionsRequest {
+        private final String countryCode;
+
+        private GetRegionsRequest(String countryCode) {
+            this.countryCode = Objects.requireNonNull(countryCode, "The required parameter 'countryCode' is missing.");
+        }
+
+        /**
+         * Executes the getRegions request.
+         *
+         * @return CallsRegionList The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsRegionList execute() throws ApiException {
+            RequestDefinition getRegionsDefinition = getRegionsDefinition(countryCode);
+            return apiClient.execute(getRegionsDefinition, new TypeReference<CallsRegionList>() {}.getType());
+        }
+
+        /**
+         * Executes the getRegions request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsRegionList> callback) {
+            RequestDefinition getRegionsDefinition = getRegionsDefinition(countryCode);
+            return apiClient.executeAsync(
+                    getRegionsDefinition, new TypeReference<CallsRegionList>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get regions.
+     * <p>
+     * Get regions with shortcodes you&#39;d need for a SIP trunk address.
+     *
+     * @param countryCode Country code. (required)
+     * @return GetRegionsRequest
+     */
+    public GetRegionsRequest getRegions(String countryCode) {
+        return new GetRegionsRequest(countryCode);
+    }
+
+    private RequestDefinition getSipTrunkDefinition(String sipTrunkId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/sip-trunks/{sipTrunkId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sipTrunkId != null) {
+            builder.addPathParameter(new Parameter("sipTrunkId", sipTrunkId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getSipTrunk request builder class.
+     */
+    public class GetSipTrunkRequest {
+        private final String sipTrunkId;
+
+        private GetSipTrunkRequest(String sipTrunkId) {
+            this.sipTrunkId = Objects.requireNonNull(sipTrunkId, "The required parameter 'sipTrunkId' is missing.");
+        }
+
+        /**
+         * Executes the getSipTrunk request.
+         *
+         * @return CallsSipTrunkResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsSipTrunkResponse execute() throws ApiException {
+            RequestDefinition getSipTrunkDefinition = getSipTrunkDefinition(sipTrunkId);
+            return apiClient.execute(getSipTrunkDefinition, new TypeReference<CallsSipTrunkResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getSipTrunk request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsSipTrunkResponse> callback) {
+            RequestDefinition getSipTrunkDefinition = getSipTrunkDefinition(sipTrunkId);
+            return apiClient.executeAsync(
+                    getSipTrunkDefinition, new TypeReference<CallsSipTrunkResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get SIP trunk.
+     * <p>
+     * Get a single SIP trunk.
+     *
+     * @param sipTrunkId SIP trunk ID. (required)
+     * @return GetSipTrunkRequest
+     */
+    public GetSipTrunkRequest getSipTrunk(String sipTrunkId) {
+        return new GetSipTrunkRequest(sipTrunkId);
+    }
+
+    private RequestDefinition getSipTrunkServiceAddressDefinition(String sipTrunkServiceAddressId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "GET", "/calls/1/sip-trunks/service-addresses/{sipTrunkServiceAddressId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sipTrunkServiceAddressId != null) {
+            builder.addPathParameter(new Parameter("sipTrunkServiceAddressId", sipTrunkServiceAddressId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getSipTrunkServiceAddress request builder class.
+     */
+    public class GetSipTrunkServiceAddressRequest {
+        private final String sipTrunkServiceAddressId;
+
+        private GetSipTrunkServiceAddressRequest(String sipTrunkServiceAddressId) {
+            this.sipTrunkServiceAddressId = Objects.requireNonNull(
+                    sipTrunkServiceAddressId, "The required parameter 'sipTrunkServiceAddressId' is missing.");
+        }
+
+        /**
+         * Executes the getSipTrunkServiceAddress request.
+         *
+         * @return CallsPublicSipTrunkServiceAddress The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsPublicSipTrunkServiceAddress execute() throws ApiException {
+            RequestDefinition getSipTrunkServiceAddressDefinition =
+                    getSipTrunkServiceAddressDefinition(sipTrunkServiceAddressId);
+            return apiClient.execute(
+                    getSipTrunkServiceAddressDefinition,
+                    new TypeReference<CallsPublicSipTrunkServiceAddress>() {}.getType());
+        }
+
+        /**
+         * Executes the getSipTrunkServiceAddress request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsPublicSipTrunkServiceAddress> callback) {
+            RequestDefinition getSipTrunkServiceAddressDefinition =
+                    getSipTrunkServiceAddressDefinition(sipTrunkServiceAddressId);
+            return apiClient.executeAsync(
+                    getSipTrunkServiceAddressDefinition,
+                    new TypeReference<CallsPublicSipTrunkServiceAddress>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get SIP trunk service address.
+     * <p>
+     * Get SIP trunk service address.
+     *
+     * @param sipTrunkServiceAddressId SIP trunk service address ID. (required)
+     * @return GetSipTrunkServiceAddressRequest
+     */
+    public GetSipTrunkServiceAddressRequest getSipTrunkServiceAddress(String sipTrunkServiceAddressId) {
+        return new GetSipTrunkServiceAddressRequest(sipTrunkServiceAddressId);
+    }
+
+    private RequestDefinition getSipTrunkServiceAddressesDefinition(Integer page, Integer size) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/sip-trunks/service-addresses")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (page != null) {
+            builder.addQueryParameter(new Parameter("page", page));
+        }
+        if (size != null) {
+            builder.addQueryParameter(new Parameter("size", size));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getSipTrunkServiceAddresses request builder class.
+     */
+    public class GetSipTrunkServiceAddressesRequest {
+        private Integer page;
+        private Integer size;
+
+        private GetSipTrunkServiceAddressesRequest() {}
+
+        /**
+         * Sets page.
+         *
+         * @param page Results page to retrieve (0..N). (optional, default to 0)
+         * @return GetSipTrunkServiceAddressesRequest
+         */
+        public GetSipTrunkServiceAddressesRequest page(Integer page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Sets size.
+         *
+         * @param size Number of records per page. (optional, default to 20)
+         * @return GetSipTrunkServiceAddressesRequest
+         */
+        public GetSipTrunkServiceAddressesRequest size(Integer size) {
+            this.size = size;
+            return this;
+        }
+
+        /**
+         * Executes the getSipTrunkServiceAddresses request.
+         *
+         * @return CallsSipTrunkServiceAddressPage The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsSipTrunkServiceAddressPage execute() throws ApiException {
+            RequestDefinition getSipTrunkServiceAddressesDefinition = getSipTrunkServiceAddressesDefinition(page, size);
+            return apiClient.execute(
+                    getSipTrunkServiceAddressesDefinition,
+                    new TypeReference<CallsSipTrunkServiceAddressPage>() {}.getType());
+        }
+
+        /**
+         * Executes the getSipTrunkServiceAddresses request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsSipTrunkServiceAddressPage> callback) {
+            RequestDefinition getSipTrunkServiceAddressesDefinition = getSipTrunkServiceAddressesDefinition(page, size);
+            return apiClient.executeAsync(
+                    getSipTrunkServiceAddressesDefinition,
+                    new TypeReference<CallsSipTrunkServiceAddressPage>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get SIP trunk service addresses.
+     * <p>
+     * Get SIP trunk service addresses.
+     *
+     * @return GetSipTrunkServiceAddressesRequest
+     */
+    public GetSipTrunkServiceAddressesRequest getSipTrunkServiceAddresses() {
+        return new GetSipTrunkServiceAddressesRequest();
+    }
+
+    private RequestDefinition getSipTrunkStatusDefinition(String sipTrunkId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/sip-trunks/{sipTrunkId}/status")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sipTrunkId != null) {
+            builder.addPathParameter(new Parameter("sipTrunkId", sipTrunkId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getSipTrunkStatus request builder class.
+     */
+    public class GetSipTrunkStatusRequest {
+        private final String sipTrunkId;
+
+        private GetSipTrunkStatusRequest(String sipTrunkId) {
+            this.sipTrunkId = Objects.requireNonNull(sipTrunkId, "The required parameter 'sipTrunkId' is missing.");
+        }
+
+        /**
+         * Executes the getSipTrunkStatus request.
+         *
+         * @return CallsExtendedSipTrunkStatusResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsExtendedSipTrunkStatusResponse execute() throws ApiException {
+            RequestDefinition getSipTrunkStatusDefinition = getSipTrunkStatusDefinition(sipTrunkId);
+            return apiClient.execute(
+                    getSipTrunkStatusDefinition, new TypeReference<CallsExtendedSipTrunkStatusResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getSipTrunkStatus request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsExtendedSipTrunkStatusResponse> callback) {
+            RequestDefinition getSipTrunkStatusDefinition = getSipTrunkStatusDefinition(sipTrunkId);
+            return apiClient.executeAsync(
+                    getSipTrunkStatusDefinition,
+                    new TypeReference<CallsExtendedSipTrunkStatusResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get SIP trunk status.
+     * <p>
+     * Get a SIP trunk status. Successfully deleted SIP trunk does not have status.
+     *
+     * @param sipTrunkId Sip Trunk ID. (required)
+     * @return GetSipTrunkStatusRequest
+     */
+    public GetSipTrunkStatusRequest getSipTrunkStatus(String sipTrunkId) {
+        return new GetSipTrunkStatusRequest(sipTrunkId);
+    }
+
+    private RequestDefinition getSipTrunksDefinition(String name, Integer page, Integer size) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/sip-trunks")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (name != null) {
+            builder.addQueryParameter(new Parameter("name", name));
+        }
+        if (page != null) {
+            builder.addQueryParameter(new Parameter("page", page));
+        }
+        if (size != null) {
+            builder.addQueryParameter(new Parameter("size", size));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getSipTrunks request builder class.
+     */
+    public class GetSipTrunksRequest {
+        private String name;
+        private Integer page;
+        private Integer size;
+
+        private GetSipTrunksRequest() {}
+
+        /**
+         * Sets name.
+         *
+         * @param name SIP trunk name. (optional)
+         * @return GetSipTrunksRequest
+         */
+        public GetSipTrunksRequest name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * Sets page.
+         *
+         * @param page Results page to retrieve (0..N). (optional, default to 0)
+         * @return GetSipTrunksRequest
+         */
+        public GetSipTrunksRequest page(Integer page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Sets size.
+         *
+         * @param size Number of records per page. (optional, default to 20)
+         * @return GetSipTrunksRequest
+         */
+        public GetSipTrunksRequest size(Integer size) {
+            this.size = size;
+            return this;
+        }
+
+        /**
+         * Executes the getSipTrunks request.
+         *
+         * @return CallsSipTrunkPage The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsSipTrunkPage execute() throws ApiException {
+            RequestDefinition getSipTrunksDefinition = getSipTrunksDefinition(name, page, size);
+            return apiClient.execute(getSipTrunksDefinition, new TypeReference<CallsSipTrunkPage>() {}.getType());
+        }
+
+        /**
+         * Executes the getSipTrunks request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsSipTrunkPage> callback) {
+            RequestDefinition getSipTrunksDefinition = getSipTrunksDefinition(name, page, size);
+            return apiClient.executeAsync(
+                    getSipTrunksDefinition, new TypeReference<CallsSipTrunkPage>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get SIP trunks.
+     * <p>
+     * Get SIP trunks with pagination.
+     *
+     * @return GetSipTrunksRequest
+     */
+    public GetSipTrunksRequest getSipTrunks() {
+        return new GetSipTrunksRequest();
     }
 
     private RequestDefinition hangupCallDefinition(String callId, CallsHangupRequest callsHangupRequest) {
@@ -5494,7 +6783,7 @@ public class CallsApi {
     /**
      * Pause.
      * <p>
-     * Pause a bulk.
+     * Pause a bulk. Bulk can be paused if it is in progress and was created with scheduling options.
      *
      * @param bulkId Bulk ID. (required)
      * @return PauseBulkRequest
@@ -5503,10 +6792,12 @@ public class CallsApi {
         return new PauseBulkRequest(bulkId);
     }
 
-    private RequestDefinition preAnswerCallDefinition(String callId) {
+    private RequestDefinition preAnswerCallDefinition(String callId, CallsPreAnswerRequest callsPreAnswerRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/calls/{callId}/pre-answer")
+                .body(callsPreAnswerRequest)
                 .requiresAuthentication(true)
-                .accept("application/json");
+                .accept("application/json")
+                .contentType("application/json");
 
         if (callId != null) {
             builder.addPathParameter(new Parameter("callId", callId));
@@ -5519,9 +6810,12 @@ public class CallsApi {
      */
     public class PreAnswerCallRequest {
         private final String callId;
+        private final CallsPreAnswerRequest callsPreAnswerRequest;
 
-        private PreAnswerCallRequest(String callId) {
+        private PreAnswerCallRequest(String callId, CallsPreAnswerRequest callsPreAnswerRequest) {
             this.callId = Objects.requireNonNull(callId, "The required parameter 'callId' is missing.");
+            this.callsPreAnswerRequest = Objects.requireNonNull(
+                    callsPreAnswerRequest, "The required parameter 'callsPreAnswerRequest' is missing.");
         }
 
         /**
@@ -5531,7 +6825,7 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public CallsActionResponse execute() throws ApiException {
-            RequestDefinition preAnswerCallDefinition = preAnswerCallDefinition(callId);
+            RequestDefinition preAnswerCallDefinition = preAnswerCallDefinition(callId, callsPreAnswerRequest);
             return apiClient.execute(preAnswerCallDefinition, new TypeReference<CallsActionResponse>() {}.getType());
         }
 
@@ -5542,7 +6836,7 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
-            RequestDefinition preAnswerCallDefinition = preAnswerCallDefinition(callId);
+            RequestDefinition preAnswerCallDefinition = preAnswerCallDefinition(callId, callsPreAnswerRequest);
             return apiClient.executeAsync(
                     preAnswerCallDefinition, new TypeReference<CallsActionResponse>() {}.getType(), callback);
         }
@@ -5554,10 +6848,11 @@ public class CallsApi {
      * Pre-answer a call to handle early media.
      *
      * @param callId Call ID. (required)
+     * @param callsPreAnswerRequest  (required)
      * @return PreAnswerCallRequest
      */
-    public PreAnswerCallRequest preAnswerCall(String callId) {
-        return new PreAnswerCallRequest(callId);
+    public PreAnswerCallRequest preAnswerCall(String callId, CallsPreAnswerRequest callsPreAnswerRequest) {
+        return new PreAnswerCallRequest(callId, callsPreAnswerRequest);
     }
 
     private RequestDefinition removeConferenceCallDefinition(String conferenceId, String callId) {
@@ -5679,7 +6974,7 @@ public class CallsApi {
     /**
      * Reschedule.
      * <p>
-     * Reschedule a bulk.
+     * Reschedule a bulk. Rescheduling is possible only if the bulk was created with scheduling options and has not started yet.
      *
      * @param bulkId Bulk ID. (required)
      * @param callsRescheduleRequest  (required)
@@ -5737,7 +7032,7 @@ public class CallsApi {
     /**
      * Resume.
      * <p>
-     * Resume a bulk.
+     * Resume a bulk. Bulk can be resumed if it is paused and was created with scheduling options.
      *
      * @param bulkId Bulk ID. (required)
      * @return ResumeBulkRequest
@@ -5801,6 +7096,76 @@ public class CallsApi {
      */
     public SendRingingRequest sendRinging(String callId) {
         return new SendRingingRequest(callId);
+    }
+
+    private RequestDefinition setSipTrunkStatusDefinition(
+            String sipTrunkId, CallsSipTrunkStatusRequest callsSipTrunkStatusRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/sip-trunks/{sipTrunkId}/status")
+                .body(callsSipTrunkStatusRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (sipTrunkId != null) {
+            builder.addPathParameter(new Parameter("sipTrunkId", sipTrunkId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * setSipTrunkStatus request builder class.
+     */
+    public class SetSipTrunkStatusRequest {
+        private final String sipTrunkId;
+        private final CallsSipTrunkStatusRequest callsSipTrunkStatusRequest;
+
+        private SetSipTrunkStatusRequest(String sipTrunkId, CallsSipTrunkStatusRequest callsSipTrunkStatusRequest) {
+            this.sipTrunkId = Objects.requireNonNull(sipTrunkId, "The required parameter 'sipTrunkId' is missing.");
+            this.callsSipTrunkStatusRequest = Objects.requireNonNull(
+                    callsSipTrunkStatusRequest, "The required parameter 'callsSipTrunkStatusRequest' is missing.");
+        }
+
+        /**
+         * Executes the setSipTrunkStatus request.
+         *
+         * @return CallsSipTrunkStatusResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsSipTrunkStatusResponse execute() throws ApiException {
+            RequestDefinition setSipTrunkStatusDefinition =
+                    setSipTrunkStatusDefinition(sipTrunkId, callsSipTrunkStatusRequest);
+            return apiClient.execute(
+                    setSipTrunkStatusDefinition, new TypeReference<CallsSipTrunkStatusResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the setSipTrunkStatus request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsSipTrunkStatusResponse> callback) {
+            RequestDefinition setSipTrunkStatusDefinition =
+                    setSipTrunkStatusDefinition(sipTrunkId, callsSipTrunkStatusRequest);
+            return apiClient.executeAsync(
+                    setSipTrunkStatusDefinition,
+                    new TypeReference<CallsSipTrunkStatusResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Set SIP trunk status.
+     * <p>
+     * Set a SIP trunk&#39;s status.
+     *
+     * @param sipTrunkId Sip Trunk ID. (required)
+     * @param callsSipTrunkStatusRequest  (required)
+     * @return SetSipTrunkStatusRequest
+     */
+    public SetSipTrunkStatusRequest setSipTrunkStatus(
+            String sipTrunkId, CallsSipTrunkStatusRequest callsSipTrunkStatusRequest) {
+        return new SetSipTrunkStatusRequest(sipTrunkId, callsSipTrunkStatusRequest);
     }
 
     private RequestDefinition startMediaStreamDefinition(
@@ -6142,6 +7507,152 @@ public class CallsApi {
     public UpdateMediaStreamConfigRequest updateMediaStreamConfig(
             String mediaStreamConfigId, CallsMediaStreamConfigRequest callsMediaStreamConfigRequest) {
         return new UpdateMediaStreamConfigRequest(mediaStreamConfigId, callsMediaStreamConfigRequest);
+    }
+
+    private RequestDefinition updateSipTrunkDefinition(
+            String sipTrunkId, CallsSipTrunkUpdateRequest callsSipTrunkUpdateRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("PUT", "/calls/1/sip-trunks/{sipTrunkId}")
+                .body(callsSipTrunkUpdateRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (sipTrunkId != null) {
+            builder.addPathParameter(new Parameter("sipTrunkId", sipTrunkId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * updateSipTrunk request builder class.
+     */
+    public class UpdateSipTrunkRequest {
+        private final String sipTrunkId;
+        private final CallsSipTrunkUpdateRequest callsSipTrunkUpdateRequest;
+
+        private UpdateSipTrunkRequest(String sipTrunkId, CallsSipTrunkUpdateRequest callsSipTrunkUpdateRequest) {
+            this.sipTrunkId = Objects.requireNonNull(sipTrunkId, "The required parameter 'sipTrunkId' is missing.");
+            this.callsSipTrunkUpdateRequest = Objects.requireNonNull(
+                    callsSipTrunkUpdateRequest, "The required parameter 'callsSipTrunkUpdateRequest' is missing.");
+        }
+
+        /**
+         * Executes the updateSipTrunk request.
+         *
+         * @return CallsSipTrunkResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsSipTrunkResponse execute() throws ApiException {
+            RequestDefinition updateSipTrunkDefinition =
+                    updateSipTrunkDefinition(sipTrunkId, callsSipTrunkUpdateRequest);
+            return apiClient.execute(updateSipTrunkDefinition, new TypeReference<CallsSipTrunkResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the updateSipTrunk request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsSipTrunkResponse> callback) {
+            RequestDefinition updateSipTrunkDefinition =
+                    updateSipTrunkDefinition(sipTrunkId, callsSipTrunkUpdateRequest);
+            return apiClient.executeAsync(
+                    updateSipTrunkDefinition, new TypeReference<CallsSipTrunkResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Update SIP trunk.
+     * <p>
+     * Update a SIP trunk. Fields not sent in request body will take default values and overwrite the existing ones. This operation is asynchronous. The SIP trunk will be updated in the background.
+     *
+     * @param sipTrunkId Sip Trunk ID. (required)
+     * @param callsSipTrunkUpdateRequest  (required)
+     * @return UpdateSipTrunkRequest
+     */
+    public UpdateSipTrunkRequest updateSipTrunk(
+            String sipTrunkId, CallsSipTrunkUpdateRequest callsSipTrunkUpdateRequest) {
+        return new UpdateSipTrunkRequest(sipTrunkId, callsSipTrunkUpdateRequest);
+    }
+
+    private RequestDefinition updateSipTrunkServiceAddressDefinition(
+            String sipTrunkServiceAddressId,
+            CallsPublicSipTrunkServiceAddressRequest callsPublicSipTrunkServiceAddressRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "PUT", "/calls/1/sip-trunks/service-addresses/{sipTrunkServiceAddressId}")
+                .body(callsPublicSipTrunkServiceAddressRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (sipTrunkServiceAddressId != null) {
+            builder.addPathParameter(new Parameter("sipTrunkServiceAddressId", sipTrunkServiceAddressId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * updateSipTrunkServiceAddress request builder class.
+     */
+    public class UpdateSipTrunkServiceAddressRequest {
+        private final String sipTrunkServiceAddressId;
+        private final CallsPublicSipTrunkServiceAddressRequest callsPublicSipTrunkServiceAddressRequest;
+
+        private UpdateSipTrunkServiceAddressRequest(
+                String sipTrunkServiceAddressId,
+                CallsPublicSipTrunkServiceAddressRequest callsPublicSipTrunkServiceAddressRequest) {
+            this.sipTrunkServiceAddressId = Objects.requireNonNull(
+                    sipTrunkServiceAddressId, "The required parameter 'sipTrunkServiceAddressId' is missing.");
+            this.callsPublicSipTrunkServiceAddressRequest = Objects.requireNonNull(
+                    callsPublicSipTrunkServiceAddressRequest,
+                    "The required parameter 'callsPublicSipTrunkServiceAddressRequest' is missing.");
+        }
+
+        /**
+         * Executes the updateSipTrunkServiceAddress request.
+         *
+         * @return CallsPublicSipTrunkServiceAddress The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsPublicSipTrunkServiceAddress execute() throws ApiException {
+            RequestDefinition updateSipTrunkServiceAddressDefinition = updateSipTrunkServiceAddressDefinition(
+                    sipTrunkServiceAddressId, callsPublicSipTrunkServiceAddressRequest);
+            return apiClient.execute(
+                    updateSipTrunkServiceAddressDefinition,
+                    new TypeReference<CallsPublicSipTrunkServiceAddress>() {}.getType());
+        }
+
+        /**
+         * Executes the updateSipTrunkServiceAddress request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsPublicSipTrunkServiceAddress> callback) {
+            RequestDefinition updateSipTrunkServiceAddressDefinition = updateSipTrunkServiceAddressDefinition(
+                    sipTrunkServiceAddressId, callsPublicSipTrunkServiceAddressRequest);
+            return apiClient.executeAsync(
+                    updateSipTrunkServiceAddressDefinition,
+                    new TypeReference<CallsPublicSipTrunkServiceAddress>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Update SIP trunk service address.
+     * <p>
+     * Update SIP trunk service address.
+     *
+     * @param sipTrunkServiceAddressId SIP trunk service address ID. (required)
+     * @param callsPublicSipTrunkServiceAddressRequest  (required)
+     * @return UpdateSipTrunkServiceAddressRequest
+     */
+    public UpdateSipTrunkServiceAddressRequest updateSipTrunkServiceAddress(
+            String sipTrunkServiceAddressId,
+            CallsPublicSipTrunkServiceAddressRequest callsPublicSipTrunkServiceAddressRequest) {
+        return new UpdateSipTrunkServiceAddressRequest(
+                sipTrunkServiceAddressId, callsPublicSipTrunkServiceAddressRequest);
     }
 
     private RequestDefinition uploadCallsAudioFileDefinition(File _file) {

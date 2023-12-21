@@ -28,6 +28,10 @@ public class WhatsAppWebhookSeenReport {
 
     private OffsetDateTime seenAt;
 
+    private String applicationId;
+
+    private String entityId;
+
     /**
      * Sets messageId.
      * <p>
@@ -228,6 +232,86 @@ public class WhatsAppWebhookSeenReport {
         this.seenAt = seenAt;
     }
 
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Application id that the message is linked to.
+     *
+     * @param applicationId
+     * @return This {@link WhatsAppWebhookSeenReport instance}.
+     */
+    public WhatsAppWebhookSeenReport applicationId(String applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * Application id that the message is linked to.
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Application id that the message is linked to.
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Entity id that the message is linked to.
+     *
+     * @param entityId
+     * @return This {@link WhatsAppWebhookSeenReport instance}.
+     */
+    public WhatsAppWebhookSeenReport entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * Entity id that the message is linked to.
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Entity id that the message is linked to.
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -241,12 +325,14 @@ public class WhatsAppWebhookSeenReport {
                 && Objects.equals(this.from, whatsAppWebhookSeenReport.from)
                 && Objects.equals(this.to, whatsAppWebhookSeenReport.to)
                 && Objects.equals(this.sentAt, whatsAppWebhookSeenReport.sentAt)
-                && Objects.equals(this.seenAt, whatsAppWebhookSeenReport.seenAt);
+                && Objects.equals(this.seenAt, whatsAppWebhookSeenReport.seenAt)
+                && Objects.equals(this.applicationId, whatsAppWebhookSeenReport.applicationId)
+                && Objects.equals(this.entityId, whatsAppWebhookSeenReport.entityId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageId, from, to, sentAt, seenAt);
+        return Objects.hash(messageId, from, to, sentAt, seenAt, applicationId, entityId);
     }
 
     @Override
@@ -269,6 +355,12 @@ public class WhatsAppWebhookSeenReport {
                 .append(newLine)
                 .append("    seenAt: ")
                 .append(toIndentedString(seenAt))
+                .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -63,6 +63,8 @@ public class CallsBulkStatusResponse {
 
     /**
      * Sets status.
+     * <p>
+     * The field is required.
      *
      * @param status
      * @return This {@link CallsBulkStatusResponse instance}.
@@ -74,6 +76,8 @@ public class CallsBulkStatusResponse {
 
     /**
      * Returns status.
+     * <p>
+     * The field is required.
      *
      * @return status
      */
@@ -84,6 +88,8 @@ public class CallsBulkStatusResponse {
 
     /**
      * Sets status.
+     * <p>
+     * The field is required.
      *
      * @param status
      */

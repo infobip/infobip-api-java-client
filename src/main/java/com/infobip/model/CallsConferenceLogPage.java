@@ -21,7 +21,7 @@ public class CallsConferenceLogPage {
 
     private List<CallsConferenceLog> results = null;
 
-    private CallsPageInfo paging;
+    private PageInfo paging;
 
     /**
      * Sets results.
@@ -86,7 +86,7 @@ public class CallsConferenceLogPage {
      * @param paging
      * @return This {@link CallsConferenceLogPage instance}.
      */
-    public CallsConferenceLogPage paging(CallsPageInfo paging) {
+    public CallsConferenceLogPage paging(PageInfo paging) {
         this.paging = paging;
         return this;
     }
@@ -97,7 +97,7 @@ public class CallsConferenceLogPage {
      * @return paging
      */
     @JsonProperty("paging")
-    public CallsPageInfo getPaging() {
+    public PageInfo getPaging() {
         return paging;
     }
 
@@ -107,7 +107,7 @@ public class CallsConferenceLogPage {
      * @param paging
      */
     @JsonProperty("paging")
-    public void setPaging(CallsPageInfo paging) {
+    public void setPaging(PageInfo paging) {
         this.paging = paging;
     }
 

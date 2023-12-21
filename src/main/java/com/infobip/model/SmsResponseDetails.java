@@ -19,9 +19,11 @@ public class SmsResponseDetails {
 
     private String messageId;
 
-    private SmsStatus status;
+    private MessageStatus status;
 
     private String to;
+
+    private Integer smsCount;
 
     /**
      * Sets messageId.
@@ -69,7 +71,7 @@ public class SmsResponseDetails {
      * @param status
      * @return This {@link SmsResponseDetails instance}.
      */
-    public SmsResponseDetails status(SmsStatus status) {
+    public SmsResponseDetails status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -80,7 +82,7 @@ public class SmsResponseDetails {
      * @return status
      */
     @JsonProperty("status")
-    public SmsStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -90,7 +92,7 @@ public class SmsResponseDetails {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(SmsStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 
@@ -134,6 +136,46 @@ public class SmsResponseDetails {
         this.to = to;
     }
 
+    /**
+     * Sets smsCount.
+     * <p>
+     * Field description:
+     * This is the total count of SMS submitted in the request. SMS messages have a character limit and messages longer than that limit will be split into multiple SMS and reflected in the total count of SMS submitted.
+     *
+     * @param smsCount
+     * @return This {@link SmsResponseDetails instance}.
+     */
+    public SmsResponseDetails smsCount(Integer smsCount) {
+        this.smsCount = smsCount;
+        return this;
+    }
+
+    /**
+     * Returns smsCount.
+     * <p>
+     * Field description:
+     * This is the total count of SMS submitted in the request. SMS messages have a character limit and messages longer than that limit will be split into multiple SMS and reflected in the total count of SMS submitted.
+     *
+     * @return smsCount
+     */
+    @JsonProperty("smsCount")
+    public Integer getSmsCount() {
+        return smsCount;
+    }
+
+    /**
+     * Sets smsCount.
+     * <p>
+     * Field description:
+     * This is the total count of SMS submitted in the request. SMS messages have a character limit and messages longer than that limit will be split into multiple SMS and reflected in the total count of SMS submitted.
+     *
+     * @param smsCount
+     */
+    @JsonProperty("smsCount")
+    public void setSmsCount(Integer smsCount) {
+        this.smsCount = smsCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -145,12 +187,13 @@ public class SmsResponseDetails {
         SmsResponseDetails smsResponseDetails = (SmsResponseDetails) o;
         return Objects.equals(this.messageId, smsResponseDetails.messageId)
                 && Objects.equals(this.status, smsResponseDetails.status)
-                && Objects.equals(this.to, smsResponseDetails.to);
+                && Objects.equals(this.to, smsResponseDetails.to)
+                && Objects.equals(this.smsCount, smsResponseDetails.smsCount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageId, status, to);
+        return Objects.hash(messageId, status, to, smsCount);
     }
 
     @Override
@@ -167,6 +210,9 @@ public class SmsResponseDetails {
                 .append(newLine)
                 .append("    to: ")
                 .append(toIndentedString(to))
+                .append(newLine)
+                .append("    smsCount: ")
+                .append(toIndentedString(smsCount))
                 .append(newLine)
                 .append("}")
                 .toString();

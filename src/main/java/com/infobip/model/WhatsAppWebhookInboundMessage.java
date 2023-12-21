@@ -30,6 +30,9 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundImageMessage.class, name = "IMAGE"),
     @JsonSubTypes.Type(value = WhatsAppWebhookButtonReplyContent.class, name = "INTERACTIVE_BUTTON_REPLY"),
     @JsonSubTypes.Type(value = WhatsAppWebhookListReplyContent.class, name = "INTERACTIVE_LIST_REPLY"),
+    @JsonSubTypes.Type(
+            value = WhatsAppWebhookPaymentConfirmationContent.class,
+            name = "INTERACTIVE_PAYMENT_CONFIRMATION"),
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundLocationMessage.class, name = "LOCATION"),
     @JsonSubTypes.Type(value = WhatsAppWebhookOrderContent.class, name = "ORDER"),
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundStickerMessage.class, name = "STICKER"),

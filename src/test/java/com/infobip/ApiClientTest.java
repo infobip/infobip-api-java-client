@@ -723,6 +723,14 @@ class ApiClientTest {
         expectedDetails.setMessageId("BAD_REQUEST");
         expectedDetails.setText("Bad request");
         expectedDetails.setValidationErrors(Map.of("message", List.of("must not be empty")));
+        expectedDetails.setDescription("Bad request");
+        expectedDetails.setErrorCode("E400");
+
+        var violation = new ApiExceptionDetails.Violation();
+        violation.setProperty("message");
+        violation.setViolation("must not be empty");
+
+        expectedDetails.setViolations(List.of(violation));
 
         ThrowingConsumer<ApiException> exceptionAssertions = apiException -> {
             then(apiException)
@@ -733,6 +741,114 @@ class ApiClientTest {
             then(apiException.rawResponseBody()).isEqualTo(givenResponseBody);
             then(apiException.responseStatusCode()).isEqualTo(givenResponseStatusCode);
             then(apiException.details()).isEqualTo(expectedDetails);
+        };
+
+        ThrowingConsumer<RecordedRequest> requestAssertions = recordedRequest -> {
+            then(recordedRequest.getPath()).isEqualTo(givenPath);
+            then(recordedRequest.getMethod()).isEqualTo(givenMethod);
+            then(recordedRequest.getHeader("Accept")).isEqualTo("application/json");
+            then(recordedRequest.getHeader("Content-Type")).isEqualTo("application/json; charset=utf-8");
+            then(recordedRequest.getHeader("Authorization")).isEqualTo(EXPECTED_AUTHORIZATION_HEADER);
+            then(recordedRequest.getHeader("User-Agent")).startsWith(EXPECTED_USER_AGENT_HEADER_PREFIX);
+        };
+
+        // sync
+        server.enqueue(givenResponse);
+        thenExceptionOfType(ApiException.class)
+                .isThrownBy(() -> apiClient.execute(givenRequestDefinition, TestResource.class))
+                .satisfies(exceptionAssertions);
+        then(server.takeRequest()).satisfies(requestAssertions);
+
+        // async
+        server.enqueue(givenResponse);
+        AsyncCallResult<Void> callResult =
+                AsyncExecutor.using(apiClient).execute(givenRequestDefinition, TestResource.class);
+        then(callResult.result()).isEmpty();
+        then(callResult.exception()).isNotEmpty();
+        then(callResult.exception().get()).satisfies(exceptionAssertions);
+        then(callResult.responseStatusCode()).isEqualTo(givenResponseStatusCode);
+        then(callResult.responseHeaders()).containsAllEntriesOf(givenResponseHeaders.toMultimap());
+        then(server.takeRequest()).satisfies(requestAssertions);
+    }
+
+    @Test
+    void shouldAcceptAdditionalFieldsInErrorResponse() throws InterruptedException {
+        // given
+        ApiClient apiClient = ApiClient.forApiKey(GIVEN_API_KEY)
+                .withBaseUrl(localhost(server.getPort()))
+                .build();
+
+        String givenPath = "/resources";
+        String givenMethod = "POST";
+        TestResource givenResource = new TestResource("");
+
+        int givenResponseStatusCode = 400;
+        Headers givenResponseHeaders = new Headers.Builder()
+                .set("Content-Type", "application/json")
+                .set("X-Request-Id", "100")
+                .build();
+        String givenResponseBody = "{\n" + "  \"errorCode\": \"E500\",\n"
+                + "  \"description\": \"A detailed description of the error\",\n"
+                + "  \"action\": \"Action that should be taken to recover from the error\",\n"
+                + "  \"violations\": [ \n"
+                + "    {\n"
+                + "      \"property\": \"messages[1].content.text\", \n"
+                + "      \"violation\": \"Must not be null.\"\n"
+                + "    }\n"
+                + "  ],\n"
+                + "  \"resources\": [ \n"
+                + "    {\n"
+                + "      \"name\": \"API endpoint documentation\",\n"
+                + "      \"url\": \"https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message\"\n"
+                + "    },\n"
+                + "    {\n"
+                + "      \"name\": \"Error codes description\",\n"
+                + "      \"url\": \"https://www.infobip.com/docs/essentials/response-status-and-error-codes\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+
+        MockResponse givenResponse = new MockResponse()
+                .setResponseCode(givenResponseStatusCode)
+                .setHeaders(givenResponseHeaders)
+                .setBody(givenResponseBody);
+
+        // when, then
+        RequestDefinition givenRequestDefinition = RequestDefinition.builder(givenMethod, givenPath)
+                .body(givenResource)
+                .accept("application/json")
+                .contentType("application/json")
+                .requiresAuthentication(true)
+                .build();
+
+        ApiExceptionDetails.Violation violation = new ApiExceptionDetails.Violation();
+        violation.setProperty("messages[1].content.text");
+        violation.setViolation("Must not be null.");
+
+        ApiExceptionDetails.Resource resource = new ApiExceptionDetails.Resource();
+        resource.setName("API endpoint documentation");
+        resource.setUrl("https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message");
+
+        ApiExceptionDetails.Resource anotherResource = new ApiExceptionDetails.Resource();
+        anotherResource.setName("Error codes description");
+        anotherResource.setUrl("https://www.infobip.com/docs/essentials/response-status-and-error-codes");
+
+        ApiExceptionDetails apiExceptionDetails = new ApiExceptionDetails();
+        apiExceptionDetails.setErrorCode("E500");
+        apiExceptionDetails.setDescription("A detailed description of the error");
+        apiExceptionDetails.setAction("Action that should be taken to recover from the error");
+        apiExceptionDetails.setViolations(List.of(violation));
+        apiExceptionDetails.setResources(List.of(resource, anotherResource));
+
+        ThrowingConsumer<ApiException> exceptionAssertions = apiException -> {
+            then(apiException)
+                    .hasMessageStartingWith(String.format(
+                            "Infobip API returned %d when calling %s %s.",
+                            givenResponseStatusCode, givenMethod, givenPath))
+                    .hasNoCause();
+            then(apiException.rawResponseBody()).isEqualTo(givenResponseBody);
+            then(apiException.responseStatusCode()).isEqualTo(givenResponseStatusCode);
+            then(apiException.details()).isEqualTo(apiExceptionDetails);
         };
 
         ThrowingConsumer<RecordedRequest> requestAssertions = recordedRequest -> {

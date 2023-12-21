@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -24,6 +26,10 @@ public class CallsDtmfCaptureRequest {
     private String terminator;
 
     private Integer digitTimeout;
+
+    private CallsPlayContent playContent;
+
+    private Map<String, String> customData = null;
 
     /**
      * Sets maxLength.
@@ -197,6 +203,95 @@ public class CallsDtmfCaptureRequest {
         this.digitTimeout = digitTimeout;
     }
 
+    /**
+     * Sets playContent.
+     *
+     * @param playContent
+     * @return This {@link CallsDtmfCaptureRequest instance}.
+     */
+    public CallsDtmfCaptureRequest playContent(CallsPlayContent playContent) {
+        this.playContent = playContent;
+        return this;
+    }
+
+    /**
+     * Returns playContent.
+     *
+     * @return playContent
+     */
+    @JsonProperty("playContent")
+    public CallsPlayContent getPlayContent() {
+        return playContent;
+    }
+
+    /**
+     * Sets playContent.
+     *
+     * @param playContent
+     */
+    @JsonProperty("playContent")
+    public void setPlayContent(CallsPlayContent playContent) {
+        this.playContent = playContent;
+    }
+
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @param customData
+     * @return This {@link CallsDtmfCaptureRequest instance}.
+     */
+    public CallsDtmfCaptureRequest customData(Map<String, String> customData) {
+        this.customData = customData;
+        return this;
+    }
+
+    /**
+     * Puts and entry into customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @param key The given key.
+     * @param customDataItem The item to be associated with the given key.
+     * @return This {@link CallsDtmfCaptureRequest instance}.
+     */
+    public CallsDtmfCaptureRequest putCustomDataItem(String key, String customDataItem) {
+        if (this.customData == null) {
+            this.customData = new HashMap<>();
+        }
+        this.customData.put(key, customDataItem);
+        return this;
+    }
+
+    /**
+     * Returns customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @return customData
+     */
+    @JsonProperty("customData")
+    public Map<String, String> getCustomData() {
+        return customData;
+    }
+
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @param customData
+     */
+    @JsonProperty("customData")
+    public void setCustomData(Map<String, String> customData) {
+        this.customData = customData;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -209,12 +304,14 @@ public class CallsDtmfCaptureRequest {
         return Objects.equals(this.maxLength, callsDtmfCaptureRequest.maxLength)
                 && Objects.equals(this.timeout, callsDtmfCaptureRequest.timeout)
                 && Objects.equals(this.terminator, callsDtmfCaptureRequest.terminator)
-                && Objects.equals(this.digitTimeout, callsDtmfCaptureRequest.digitTimeout);
+                && Objects.equals(this.digitTimeout, callsDtmfCaptureRequest.digitTimeout)
+                && Objects.equals(this.playContent, callsDtmfCaptureRequest.playContent)
+                && Objects.equals(this.customData, callsDtmfCaptureRequest.customData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(maxLength, timeout, terminator, digitTimeout);
+        return Objects.hash(maxLength, timeout, terminator, digitTimeout, playContent, customData);
     }
 
     @Override
@@ -234,6 +331,12 @@ public class CallsDtmfCaptureRequest {
                 .append(newLine)
                 .append("    digitTimeout: ")
                 .append(toIndentedString(digitTimeout))
+                .append(newLine)
+                .append("    playContent: ")
+                .append(toIndentedString(playContent))
+                .append(newLine)
+                .append("    customData: ")
+                .append(toIndentedString(customData))
                 .append(newLine)
                 .append("}")
                 .toString();

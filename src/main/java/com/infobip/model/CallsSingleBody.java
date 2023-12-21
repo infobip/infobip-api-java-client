@@ -33,7 +33,7 @@ public class CallsSingleBody {
      * Sets audioFileUrl.
      * <p>
      * Field description:
-     * An audio file can be delivered as a voice message to the recipients. An audio file must be uploaded online, so that the existing URL can be available for file download. Size of the audio file must be below 4 MB. Supported formats of the provided file are aac, aiff, m4a, mp2, mp3, mp4 (audio only), ogg, wav and wma. Our platform needs to have permission to make GET and HEAD HTTP requests on the provided URL. Standard http ports (like 80, 8080, etc.) are advised.
+     * An audio file can be delivered as a voice message to the recipients. An audio file must be uploaded online, so that the existing URL can be available for file download. Size of the audio file must be below 4 MB. Supported formats of the provided file are mp3 and wav. Our platform needs to have permission to make GET and HEAD HTTP requests on the provided URL. Standard http ports (like 80, 8080, etc.) are advised.
      *
      * @param audioFileUrl
      * @return This {@link CallsSingleBody instance}.
@@ -47,7 +47,7 @@ public class CallsSingleBody {
      * Returns audioFileUrl.
      * <p>
      * Field description:
-     * An audio file can be delivered as a voice message to the recipients. An audio file must be uploaded online, so that the existing URL can be available for file download. Size of the audio file must be below 4 MB. Supported formats of the provided file are aac, aiff, m4a, mp2, mp3, mp4 (audio only), ogg, wav and wma. Our platform needs to have permission to make GET and HEAD HTTP requests on the provided URL. Standard http ports (like 80, 8080, etc.) are advised.
+     * An audio file can be delivered as a voice message to the recipients. An audio file must be uploaded online, so that the existing URL can be available for file download. Size of the audio file must be below 4 MB. Supported formats of the provided file are mp3 and wav. Our platform needs to have permission to make GET and HEAD HTTP requests on the provided URL. Standard http ports (like 80, 8080, etc.) are advised.
      *
      * @return audioFileUrl
      */
@@ -60,7 +60,7 @@ public class CallsSingleBody {
      * Sets audioFileUrl.
      * <p>
      * Field description:
-     * An audio file can be delivered as a voice message to the recipients. An audio file must be uploaded online, so that the existing URL can be available for file download. Size of the audio file must be below 4 MB. Supported formats of the provided file are aac, aiff, m4a, mp2, mp3, mp4 (audio only), ogg, wav and wma. Our platform needs to have permission to make GET and HEAD HTTP requests on the provided URL. Standard http ports (like 80, 8080, etc.) are advised.
+     * An audio file can be delivered as a voice message to the recipients. An audio file must be uploaded online, so that the existing URL can be available for file download. Size of the audio file must be below 4 MB. Supported formats of the provided file are mp3 and wav. Our platform needs to have permission to make GET and HEAD HTTP requests on the provided URL. Standard http ports (like 80, 8080, etc.) are advised.
      *
      * @param audioFileUrl
      */
@@ -159,7 +159,7 @@ public class CallsSingleBody {
      * Sets text.
      * <p>
      * Field description:
-     * Message to be converted to speech and played to subscribers. Message text can be up to 1400 characters long and cannot contain only punctuation.
+     * Message to be converted to speech and played to subscribers. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
      *
      * @param text
      * @return This {@link CallsSingleBody instance}.
@@ -173,7 +173,7 @@ public class CallsSingleBody {
      * Returns text.
      * <p>
      * Field description:
-     * Message to be converted to speech and played to subscribers. Message text can be up to 1400 characters long and cannot contain only punctuation.
+     * Message to be converted to speech and played to subscribers. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
      *
      * @return text
      */
@@ -186,7 +186,7 @@ public class CallsSingleBody {
      * Sets text.
      * <p>
      * Field description:
-     * Message to be converted to speech and played to subscribers. Message text can be up to 1400 characters long and cannot contain only punctuation.
+     * Message to be converted to speech and played to subscribers. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
      *
      * @param text
      */

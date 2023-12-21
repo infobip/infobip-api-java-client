@@ -36,11 +36,15 @@ public class SmsReport {
 
     private String callbackData;
 
-    private SmsPrice price;
+    private MessagePrice price;
 
-    private SmsStatus status;
+    private MessageStatus status;
 
-    private SmsError error;
+    private MessageError error;
+
+    private String entityId;
+
+    private String applicationId;
 
     /**
      * Sets bulkId.
@@ -408,7 +412,7 @@ public class SmsReport {
      * @param price
      * @return This {@link SmsReport instance}.
      */
-    public SmsReport price(SmsPrice price) {
+    public SmsReport price(MessagePrice price) {
         this.price = price;
         return this;
     }
@@ -419,7 +423,7 @@ public class SmsReport {
      * @return price
      */
     @JsonProperty("price")
-    public SmsPrice getPrice() {
+    public MessagePrice getPrice() {
         return price;
     }
 
@@ -429,7 +433,7 @@ public class SmsReport {
      * @param price
      */
     @JsonProperty("price")
-    public void setPrice(SmsPrice price) {
+    public void setPrice(MessagePrice price) {
         this.price = price;
     }
 
@@ -439,7 +443,7 @@ public class SmsReport {
      * @param status
      * @return This {@link SmsReport instance}.
      */
-    public SmsReport status(SmsStatus status) {
+    public SmsReport status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -450,7 +454,7 @@ public class SmsReport {
      * @return status
      */
     @JsonProperty("status")
-    public SmsStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -460,7 +464,7 @@ public class SmsReport {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(SmsStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 
@@ -470,7 +474,7 @@ public class SmsReport {
      * @param error
      * @return This {@link SmsReport instance}.
      */
-    public SmsReport error(SmsError error) {
+    public SmsReport error(MessageError error) {
         this.error = error;
         return this;
     }
@@ -481,7 +485,7 @@ public class SmsReport {
      * @return error
      */
     @JsonProperty("error")
-    public SmsError getError() {
+    public MessageError getError() {
         return error;
     }
 
@@ -491,8 +495,88 @@ public class SmsReport {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(SmsError error) {
+    public void setError(MessageError error) {
         this.error = error;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * The entity used when sending the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     * @return This {@link SmsReport instance}.
+     */
+    public SmsReport entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * The entity used when sending the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * The entity used when sending the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * The application used when sending the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     * @return This {@link SmsReport instance}.
+     */
+    public SmsReport applicationId(String applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * The application used when sending the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * The application used when sending the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
     }
 
     @Override
@@ -515,13 +599,28 @@ public class SmsReport {
                 && Objects.equals(this.callbackData, smsReport.callbackData)
                 && Objects.equals(this.price, smsReport.price)
                 && Objects.equals(this.status, smsReport.status)
-                && Objects.equals(this.error, smsReport.error);
+                && Objects.equals(this.error, smsReport.error)
+                && Objects.equals(this.entityId, smsReport.entityId)
+                && Objects.equals(this.applicationId, smsReport.applicationId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                bulkId, messageId, to, from, sentAt, doneAt, smsCount, mccMnc, callbackData, price, status, error);
+                bulkId,
+                messageId,
+                to,
+                from,
+                sentAt,
+                doneAt,
+                smsCount,
+                mccMnc,
+                callbackData,
+                price,
+                status,
+                error,
+                entityId,
+                applicationId);
     }
 
     @Override
@@ -565,6 +664,12 @@ public class SmsReport {
                 .append(newLine)
                 .append("    error: ")
                 .append(toIndentedString(error))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
                 .append(newLine)
                 .append("}")
                 .toString();

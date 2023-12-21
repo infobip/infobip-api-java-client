@@ -9,11 +9,13 @@
 
 package com.infobip.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * List of all templates for given sender.
+ * Represents WhatsAppTemplateApiResponse model.
  */
 public class WhatsAppTemplateApiResponse {
 
@@ -29,7 +31,45 @@ public class WhatsAppTemplateApiResponse {
 
     private WhatsAppCategory category;
 
-    private WhatsAppTemplateStructureApiData structure;
+    private WhatsAppDefaultTemplateStructureApiData structure;
+
+    /**
+     * Quality of the template.
+     */
+    public enum QualityEnum {
+        HIGH("HIGH"),
+        MEDIUM("MEDIUM"),
+        LOW("LOW"),
+        UNKNOWN("UNKNOWN");
+
+        private String value;
+
+        QualityEnum(String value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        @JsonCreator
+        public static QualityEnum fromValue(String value) {
+            for (QualityEnum enumElement : QualityEnum.values()) {
+                if (enumElement.value.equals(value)) {
+                    return enumElement;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
+        }
+    }
+
+    private QualityEnum quality;
 
     /**
      * Sets id.
@@ -250,7 +290,7 @@ public class WhatsAppTemplateApiResponse {
      * @param structure
      * @return This {@link WhatsAppTemplateApiResponse instance}.
      */
-    public WhatsAppTemplateApiResponse structure(WhatsAppTemplateStructureApiData structure) {
+    public WhatsAppTemplateApiResponse structure(WhatsAppDefaultTemplateStructureApiData structure) {
         this.structure = structure;
         return this;
     }
@@ -261,7 +301,7 @@ public class WhatsAppTemplateApiResponse {
      * @return structure
      */
     @JsonProperty("structure")
-    public WhatsAppTemplateStructureApiData getStructure() {
+    public WhatsAppDefaultTemplateStructureApiData getStructure() {
         return structure;
     }
 
@@ -271,8 +311,48 @@ public class WhatsAppTemplateApiResponse {
      * @param structure
      */
     @JsonProperty("structure")
-    public void setStructure(WhatsAppTemplateStructureApiData structure) {
+    public void setStructure(WhatsAppDefaultTemplateStructureApiData structure) {
         this.structure = structure;
+    }
+
+    /**
+     * Sets quality.
+     * <p>
+     * Field description:
+     * Quality of the template.
+     *
+     * @param quality
+     * @return This {@link WhatsAppTemplateApiResponse instance}.
+     */
+    public WhatsAppTemplateApiResponse quality(QualityEnum quality) {
+        this.quality = quality;
+        return this;
+    }
+
+    /**
+     * Returns quality.
+     * <p>
+     * Field description:
+     * Quality of the template.
+     *
+     * @return quality
+     */
+    @JsonProperty("quality")
+    public QualityEnum getQuality() {
+        return quality;
+    }
+
+    /**
+     * Sets quality.
+     * <p>
+     * Field description:
+     * Quality of the template.
+     *
+     * @param quality
+     */
+    @JsonProperty("quality")
+    public void setQuality(QualityEnum quality) {
+        this.quality = quality;
     }
 
     @Override
@@ -290,12 +370,13 @@ public class WhatsAppTemplateApiResponse {
                 && Objects.equals(this.language, whatsAppTemplateApiResponse.language)
                 && Objects.equals(this.status, whatsAppTemplateApiResponse.status)
                 && Objects.equals(this.category, whatsAppTemplateApiResponse.category)
-                && Objects.equals(this.structure, whatsAppTemplateApiResponse.structure);
+                && Objects.equals(this.structure, whatsAppTemplateApiResponse.structure)
+                && Objects.equals(this.quality, whatsAppTemplateApiResponse.quality);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, businessAccountId, name, language, status, category, structure);
+        return Objects.hash(id, businessAccountId, name, language, status, category, structure, quality);
     }
 
     @Override
@@ -324,6 +405,9 @@ public class WhatsAppTemplateApiResponse {
                 .append(newLine)
                 .append("    structure: ")
                 .append(toIndentedString(structure))
+                .append(newLine)
+                .append("    quality: ")
+                .append(toIndentedString(quality))
                 .append(newLine)
                 .append("}")
                 .toString();

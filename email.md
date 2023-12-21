@@ -31,7 +31,7 @@ Keep in mind the following restrictions while using a trial account:
     File fileAttachment = new File("/path/report.csv");
 
     EmailSendResponse sendResponse = emailApi
-        .sendFullyFeaturedEmail(List.of("john.smith@somedomain.com"))
+        .sendEmail(List.of("john.smith@somedomain.com"))
         .from("Jane Smith <jane.smith@somecompany.com>")
         .subject("Mail subject text")
         .text("Test message with a file")

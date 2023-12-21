@@ -25,7 +25,7 @@ public class CallsMultiBody {
      * Sets messages.
      * <p>
      * Field description:
-     * Array of messages to be sent, one per every message
+     * Array of messages to be sent, one per every message.
      * <p>
      * The field is required.
      *
@@ -41,7 +41,7 @@ public class CallsMultiBody {
      * Adds and item into messages.
      * <p>
      * Field description:
-     * Array of messages to be sent, one per every message
+     * Array of messages to be sent, one per every message.
      * <p>
      * The field is required.
      *
@@ -60,7 +60,7 @@ public class CallsMultiBody {
      * Returns messages.
      * <p>
      * Field description:
-     * Array of messages to be sent, one per every message
+     * Array of messages to be sent, one per every message.
      * <p>
      * The field is required.
      *
@@ -75,7 +75,7 @@ public class CallsMultiBody {
      * Sets messages.
      * <p>
      * Field description:
-     * Array of messages to be sent, one per every message
+     * Array of messages to be sent, one per every message.
      * <p>
      * The field is required.
      *

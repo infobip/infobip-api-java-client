@@ -23,7 +23,7 @@ public class CallsApplicationTransferRequest {
 
     private Integer timeout;
 
-    private Map<String, String> context = null;
+    private Map<String, String> customData = null;
 
     /**
      * Sets destinationApplicationId.
@@ -112,61 +112,61 @@ public class CallsApplicationTransferRequest {
     }
 
     /**
-     * Sets context.
+     * Sets customData.
      * <p>
      * Field description:
-     * Client defined data to be passed to the destination application.
+     * Optional parameter to update a call&#39;s custom data.
      *
-     * @param context
+     * @param customData
      * @return This {@link CallsApplicationTransferRequest instance}.
      */
-    public CallsApplicationTransferRequest context(Map<String, String> context) {
-        this.context = context;
+    public CallsApplicationTransferRequest customData(Map<String, String> customData) {
+        this.customData = customData;
         return this;
     }
 
     /**
-     * Puts and entry into context.
+     * Puts and entry into customData.
      * <p>
      * Field description:
-     * Client defined data to be passed to the destination application.
+     * Optional parameter to update a call&#39;s custom data.
      *
      * @param key The given key.
-     * @param contextItem The item to be associated with the given key.
+     * @param customDataItem The item to be associated with the given key.
      * @return This {@link CallsApplicationTransferRequest instance}.
      */
-    public CallsApplicationTransferRequest putContextItem(String key, String contextItem) {
-        if (this.context == null) {
-            this.context = new HashMap<>();
+    public CallsApplicationTransferRequest putCustomDataItem(String key, String customDataItem) {
+        if (this.customData == null) {
+            this.customData = new HashMap<>();
         }
-        this.context.put(key, contextItem);
+        this.customData.put(key, customDataItem);
         return this;
     }
 
     /**
-     * Returns context.
+     * Returns customData.
      * <p>
      * Field description:
-     * Client defined data to be passed to the destination application.
+     * Optional parameter to update a call&#39;s custom data.
      *
-     * @return context
+     * @return customData
      */
-    @JsonProperty("context")
-    public Map<String, String> getContext() {
-        return context;
+    @JsonProperty("customData")
+    public Map<String, String> getCustomData() {
+        return customData;
     }
 
     /**
-     * Sets context.
+     * Sets customData.
      * <p>
      * Field description:
-     * Client defined data to be passed to the destination application.
+     * Optional parameter to update a call&#39;s custom data.
      *
-     * @param context
+     * @param customData
      */
-    @JsonProperty("context")
-    public void setContext(Map<String, String> context) {
-        this.context = context;
+    @JsonProperty("customData")
+    public void setCustomData(Map<String, String> customData) {
+        this.customData = customData;
     }
 
     @Override
@@ -180,12 +180,12 @@ public class CallsApplicationTransferRequest {
         CallsApplicationTransferRequest callsApplicationTransferRequest = (CallsApplicationTransferRequest) o;
         return Objects.equals(this.destinationApplicationId, callsApplicationTransferRequest.destinationApplicationId)
                 && Objects.equals(this.timeout, callsApplicationTransferRequest.timeout)
-                && Objects.equals(this.context, callsApplicationTransferRequest.context);
+                && Objects.equals(this.customData, callsApplicationTransferRequest.customData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(destinationApplicationId, timeout, context);
+        return Objects.hash(destinationApplicationId, timeout, customData);
     }
 
     @Override
@@ -200,8 +200,8 @@ public class CallsApplicationTransferRequest {
                 .append("    timeout: ")
                 .append(toIndentedString(timeout))
                 .append(newLine)
-                .append("    context: ")
-                .append(toIndentedString(context))
+                .append("    customData: ")
+                .append(toIndentedString(customData))
                 .append(newLine)
                 .append("}")
                 .toString();

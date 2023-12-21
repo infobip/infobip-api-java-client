@@ -19,6 +19,8 @@ public class CallsDialogPropagationOptions {
 
     private Boolean childCallHangup;
 
+    private Boolean childCallRinging;
+
     /**
      * Sets childCallHangup.
      * <p>
@@ -59,6 +61,46 @@ public class CallsDialogPropagationOptions {
         this.childCallHangup = childCallHangup;
     }
 
+    /**
+     * Sets childCallRinging.
+     * <p>
+     * Field description:
+     * Flag indicating if a child call&#39;s ringing should be propagated to the parent call. The parent call must be &#x60;INBOUND&#x60;.
+     *
+     * @param childCallRinging
+     * @return This {@link CallsDialogPropagationOptions instance}.
+     */
+    public CallsDialogPropagationOptions childCallRinging(Boolean childCallRinging) {
+        this.childCallRinging = childCallRinging;
+        return this;
+    }
+
+    /**
+     * Returns childCallRinging.
+     * <p>
+     * Field description:
+     * Flag indicating if a child call&#39;s ringing should be propagated to the parent call. The parent call must be &#x60;INBOUND&#x60;.
+     *
+     * @return childCallRinging
+     */
+    @JsonProperty("childCallRinging")
+    public Boolean getChildCallRinging() {
+        return childCallRinging;
+    }
+
+    /**
+     * Sets childCallRinging.
+     * <p>
+     * Field description:
+     * Flag indicating if a child call&#39;s ringing should be propagated to the parent call. The parent call must be &#x60;INBOUND&#x60;.
+     *
+     * @param childCallRinging
+     */
+    @JsonProperty("childCallRinging")
+    public void setChildCallRinging(Boolean childCallRinging) {
+        this.childCallRinging = childCallRinging;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -68,12 +110,13 @@ public class CallsDialogPropagationOptions {
             return false;
         }
         CallsDialogPropagationOptions callsDialogPropagationOptions = (CallsDialogPropagationOptions) o;
-        return Objects.equals(this.childCallHangup, callsDialogPropagationOptions.childCallHangup);
+        return Objects.equals(this.childCallHangup, callsDialogPropagationOptions.childCallHangup)
+                && Objects.equals(this.childCallRinging, callsDialogPropagationOptions.childCallRinging);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(childCallHangup);
+        return Objects.hash(childCallHangup, childCallRinging);
     }
 
     @Override
@@ -84,6 +127,9 @@ public class CallsDialogPropagationOptions {
                 .append(newLine)
                 .append("    childCallHangup: ")
                 .append(toIndentedString(childCallHangup))
+                .append(newLine)
+                .append("    childCallRinging: ")
+                .append(toIndentedString(childCallRinging))
                 .append(newLine)
                 .append("}")
                 .toString();

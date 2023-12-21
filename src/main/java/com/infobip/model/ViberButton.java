@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Button to be displayed alongside the text.
+ * Button to be displayed alongside the image.
  */
 public class ViberButton {
 
@@ -25,7 +25,7 @@ public class ViberButton {
      * Sets title.
      * <p>
      * Field description:
-     * Button text.
+     * The text that will appear on the action button.
      * <p>
      * The field is required.
      *
@@ -41,7 +41,7 @@ public class ViberButton {
      * Returns title.
      * <p>
      * Field description:
-     * Button text.
+     * The text that will appear on the action button.
      * <p>
      * The field is required.
      *
@@ -56,7 +56,7 @@ public class ViberButton {
      * Sets title.
      * <p>
      * Field description:
-     * Button text.
+     * The text that will appear on the action button.
      * <p>
      * The field is required.
      *
@@ -71,7 +71,7 @@ public class ViberButton {
      * Sets action.
      * <p>
      * Field description:
-     * Button action.
+     * The URL users are directed to or the action performed when pressing the action button.
      * <p>
      * The field is required.
      *
@@ -87,7 +87,7 @@ public class ViberButton {
      * Returns action.
      * <p>
      * Field description:
-     * Button action.
+     * The URL users are directed to or the action performed when pressing the action button.
      * <p>
      * The field is required.
      *
@@ -102,7 +102,7 @@ public class ViberButton {
      * Sets action.
      * <p>
      * Field description:
-     * Button action.
+     * The URL users are directed to or the action performed when pressing the action button.
      * <p>
      * The field is required.
      *

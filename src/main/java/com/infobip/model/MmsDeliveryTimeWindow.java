@@ -29,7 +29,7 @@ public class MmsDeliveryTimeWindow {
      * Sets days.
      * <p>
      * Field description:
-     * Days of the week which are included in the delivery time window. At least one day must be provided. Separate multiple days with a comma.
+     * Days of the week which are included in the delivery time window. At least one day must be provided.
      * <p>
      * The field is required.
      *
@@ -45,7 +45,7 @@ public class MmsDeliveryTimeWindow {
      * Adds and item into days.
      * <p>
      * Field description:
-     * Days of the week which are included in the delivery time window. At least one day must be provided. Separate multiple days with a comma.
+     * Days of the week which are included in the delivery time window. At least one day must be provided.
      * <p>
      * The field is required.
      *
@@ -64,7 +64,7 @@ public class MmsDeliveryTimeWindow {
      * Returns days.
      * <p>
      * Field description:
-     * Days of the week which are included in the delivery time window. At least one day must be provided. Separate multiple days with a comma.
+     * Days of the week which are included in the delivery time window. At least one day must be provided.
      * <p>
      * The field is required.
      *
@@ -79,7 +79,7 @@ public class MmsDeliveryTimeWindow {
      * Sets days.
      * <p>
      * Field description:
-     * Days of the week which are included in the delivery time window. At least one day must be provided. Separate multiple days with a comma.
+     * Days of the week which are included in the delivery time window. At least one day must be provided.
      * <p>
      * The field is required.
      *

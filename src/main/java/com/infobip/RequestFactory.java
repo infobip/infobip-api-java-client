@@ -26,7 +26,7 @@ import okhttp3.internal.http.HttpMethod;
  */
 final class RequestFactory {
 
-    private static final String USER_AGENT_HEADER_VALUE = "infobip-api-client-java/4.0.0";
+    private static final String USER_AGENT_HEADER_VALUE = "infobip-api-client-java/4.1.0";
 
     private final ApiKey apiKey;
     private final BaseUrl baseUrl;

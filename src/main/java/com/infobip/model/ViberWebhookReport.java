@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * Represents ViberWebhookReport model.
+ * Collection of reports, one per every message.
  */
 public class ViberWebhookReport {
 
@@ -22,27 +22,31 @@ public class ViberWebhookReport {
 
     private MessagePrice price;
 
-    private MessageStatus status;
+    private ViberMessageStatus status;
 
-    private MessageError error;
+    private ViberMessageError error;
 
     private String messageId;
+
+    private String to;
+
+    private String sender;
+
+    private OffsetDateTime sentAt;
 
     private OffsetDateTime doneAt;
 
     private Integer messageCount;
 
-    private OffsetDateTime sentAt;
+    private String mccMnc;
 
-    private String to;
-
-    private WebhookOmniChannel channel;
+    private String callbackData;
 
     /**
      * Sets bulkId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the request.
+     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request.
      *
      * @param bulkId
      * @return This {@link ViberWebhookReport instance}.
@@ -56,7 +60,7 @@ public class ViberWebhookReport {
      * Returns bulkId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the request.
+     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request.
      *
      * @return bulkId
      */
@@ -69,7 +73,7 @@ public class ViberWebhookReport {
      * Sets bulkId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the request.
+     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request.
      *
      * @param bulkId
      */
@@ -115,7 +119,7 @@ public class ViberWebhookReport {
      * @param status
      * @return This {@link ViberWebhookReport instance}.
      */
-    public ViberWebhookReport status(MessageStatus status) {
+    public ViberWebhookReport status(ViberMessageStatus status) {
         this.status = status;
         return this;
     }
@@ -126,7 +130,7 @@ public class ViberWebhookReport {
      * @return status
      */
     @JsonProperty("status")
-    public MessageStatus getStatus() {
+    public ViberMessageStatus getStatus() {
         return status;
     }
 
@@ -136,7 +140,7 @@ public class ViberWebhookReport {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(MessageStatus status) {
+    public void setStatus(ViberMessageStatus status) {
         this.status = status;
     }
 
@@ -146,7 +150,7 @@ public class ViberWebhookReport {
      * @param error
      * @return This {@link ViberWebhookReport instance}.
      */
-    public ViberWebhookReport error(MessageError error) {
+    public ViberWebhookReport error(ViberMessageError error) {
         this.error = error;
         return this;
     }
@@ -157,7 +161,7 @@ public class ViberWebhookReport {
      * @return error
      */
     @JsonProperty("error")
-    public MessageError getError() {
+    public ViberMessageError getError() {
         return error;
     }
 
@@ -167,7 +171,7 @@ public class ViberWebhookReport {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(MessageError error) {
+    public void setError(ViberMessageError error) {
         this.error = error;
     }
 
@@ -175,7 +179,7 @@ public class ViberWebhookReport {
      * Sets messageId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the message sent.
+     * Unique message ID.
      *
      * @param messageId
      * @return This {@link ViberWebhookReport instance}.
@@ -189,7 +193,7 @@ public class ViberWebhookReport {
      * Returns messageId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the message sent.
+     * Unique message ID.
      *
      * @return messageId
      */
@@ -202,7 +206,7 @@ public class ViberWebhookReport {
      * Sets messageId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the message sent.
+     * Unique message ID.
      *
      * @param messageId
      */
@@ -212,130 +216,10 @@ public class ViberWebhookReport {
     }
 
     /**
-     * Sets doneAt.
-     * <p>
-     * Field description:
-     * Tells when the message was finished processing by Infobip (ie. delivered to destination, delivered to destination network, etc.).
-     *
-     * @param doneAt
-     * @return This {@link ViberWebhookReport instance}.
-     */
-    public ViberWebhookReport doneAt(OffsetDateTime doneAt) {
-        this.doneAt = doneAt;
-        return this;
-    }
-
-    /**
-     * Returns doneAt.
-     * <p>
-     * Field description:
-     * Tells when the message was finished processing by Infobip (ie. delivered to destination, delivered to destination network, etc.).
-     *
-     * @return doneAt
-     */
-    @JsonProperty("doneAt")
-    public OffsetDateTime getDoneAt() {
-        return doneAt;
-    }
-
-    /**
-     * Sets doneAt.
-     * <p>
-     * Field description:
-     * Tells when the message was finished processing by Infobip (ie. delivered to destination, delivered to destination network, etc.).
-     *
-     * @param doneAt
-     */
-    @JsonProperty("doneAt")
-    public void setDoneAt(OffsetDateTime doneAt) {
-        this.doneAt = doneAt;
-    }
-
-    /**
-     * Sets messageCount.
-     * <p>
-     * Field description:
-     * The number of sent message segments.
-     *
-     * @param messageCount
-     * @return This {@link ViberWebhookReport instance}.
-     */
-    public ViberWebhookReport messageCount(Integer messageCount) {
-        this.messageCount = messageCount;
-        return this;
-    }
-
-    /**
-     * Returns messageCount.
-     * <p>
-     * Field description:
-     * The number of sent message segments.
-     *
-     * @return messageCount
-     */
-    @JsonProperty("messageCount")
-    public Integer getMessageCount() {
-        return messageCount;
-    }
-
-    /**
-     * Sets messageCount.
-     * <p>
-     * Field description:
-     * The number of sent message segments.
-     *
-     * @param messageCount
-     */
-    @JsonProperty("messageCount")
-    public void setMessageCount(Integer messageCount) {
-        this.messageCount = messageCount;
-    }
-
-    /**
-     * Sets sentAt.
-     * <p>
-     * Field description:
-     * Tells when the message was sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
-     *
-     * @param sentAt
-     * @return This {@link ViberWebhookReport instance}.
-     */
-    public ViberWebhookReport sentAt(OffsetDateTime sentAt) {
-        this.sentAt = sentAt;
-        return this;
-    }
-
-    /**
-     * Returns sentAt.
-     * <p>
-     * Field description:
-     * Tells when the message was sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
-     *
-     * @return sentAt
-     */
-    @JsonProperty("sentAt")
-    public OffsetDateTime getSentAt() {
-        return sentAt;
-    }
-
-    /**
-     * Sets sentAt.
-     * <p>
-     * Field description:
-     * Tells when the message was sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
-     *
-     * @param sentAt
-     */
-    @JsonProperty("sentAt")
-    public void setSentAt(OffsetDateTime sentAt) {
-        this.sentAt = sentAt;
-    }
-
-    /**
      * Sets to.
      * <p>
      * Field description:
-     * The message destination address.
+     * Message destination address.
      *
      * @param to
      * @return This {@link ViberWebhookReport instance}.
@@ -349,7 +233,7 @@ public class ViberWebhookReport {
      * Returns to.
      * <p>
      * Field description:
-     * The message destination address.
+     * Message destination address.
      *
      * @return to
      */
@@ -362,7 +246,7 @@ public class ViberWebhookReport {
      * Sets to.
      * <p>
      * Field description:
-     * The message destination address.
+     * Message destination address.
      *
      * @param to
      */
@@ -372,43 +256,243 @@ public class ViberWebhookReport {
     }
 
     /**
-     * Sets channel.
+     * Sets sender.
      * <p>
      * Field description:
-     * Channel that was used for message delivering.
+     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
      *
-     * @param channel
+     * @param sender
      * @return This {@link ViberWebhookReport instance}.
      */
-    public ViberWebhookReport channel(WebhookOmniChannel channel) {
-        this.channel = channel;
+    public ViberWebhookReport sender(String sender) {
+        this.sender = sender;
         return this;
     }
 
     /**
-     * Returns channel.
+     * Returns sender.
      * <p>
      * Field description:
-     * Channel that was used for message delivering.
+     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
      *
-     * @return channel
+     * @return sender
      */
-    @JsonProperty("channel")
-    public WebhookOmniChannel getChannel() {
-        return channel;
+    @JsonProperty("sender")
+    public String getSender() {
+        return sender;
     }
 
     /**
-     * Sets channel.
+     * Sets sender.
      * <p>
      * Field description:
-     * Channel that was used for message delivering.
+     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
      *
-     * @param channel
+     * @param sender
      */
-    @JsonProperty("channel")
-    public void setChannel(WebhookOmniChannel channel) {
-        this.channel = channel;
+    @JsonProperty("sender")
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    /**
+     * Sets sentAt.
+     * <p>
+     * Field description:
+     * Date and time when the message was [scheduled](#channels/sms/get-scheduled-sms-messages) to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     *
+     * @param sentAt
+     * @return This {@link ViberWebhookReport instance}.
+     */
+    public ViberWebhookReport sentAt(OffsetDateTime sentAt) {
+        this.sentAt = sentAt;
+        return this;
+    }
+
+    /**
+     * Returns sentAt.
+     * <p>
+     * Field description:
+     * Date and time when the message was [scheduled](#channels/sms/get-scheduled-sms-messages) to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     *
+     * @return sentAt
+     */
+    @JsonProperty("sentAt")
+    public OffsetDateTime getSentAt() {
+        return sentAt;
+    }
+
+    /**
+     * Sets sentAt.
+     * <p>
+     * Field description:
+     * Date and time when the message was [scheduled](#channels/sms/get-scheduled-sms-messages) to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     *
+     * @param sentAt
+     */
+    @JsonProperty("sentAt")
+    public void setSentAt(OffsetDateTime sentAt) {
+        this.sentAt = sentAt;
+    }
+
+    /**
+     * Sets doneAt.
+     * <p>
+     * Field description:
+     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     *
+     * @param doneAt
+     * @return This {@link ViberWebhookReport instance}.
+     */
+    public ViberWebhookReport doneAt(OffsetDateTime doneAt) {
+        this.doneAt = doneAt;
+        return this;
+    }
+
+    /**
+     * Returns doneAt.
+     * <p>
+     * Field description:
+     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     *
+     * @return doneAt
+     */
+    @JsonProperty("doneAt")
+    public OffsetDateTime getDoneAt() {
+        return doneAt;
+    }
+
+    /**
+     * Sets doneAt.
+     * <p>
+     * Field description:
+     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     *
+     * @param doneAt
+     */
+    @JsonProperty("doneAt")
+    public void setDoneAt(OffsetDateTime doneAt) {
+        this.doneAt = doneAt;
+    }
+
+    /**
+     * Sets messageCount.
+     * <p>
+     * Field description:
+     * The number of sent messages.
+     *
+     * @param messageCount
+     * @return This {@link ViberWebhookReport instance}.
+     */
+    public ViberWebhookReport messageCount(Integer messageCount) {
+        this.messageCount = messageCount;
+        return this;
+    }
+
+    /**
+     * Returns messageCount.
+     * <p>
+     * Field description:
+     * The number of sent messages.
+     *
+     * @return messageCount
+     */
+    @JsonProperty("messageCount")
+    public Integer getMessageCount() {
+        return messageCount;
+    }
+
+    /**
+     * Sets messageCount.
+     * <p>
+     * Field description:
+     * The number of sent messages.
+     *
+     * @param messageCount
+     */
+    @JsonProperty("messageCount")
+    public void setMessageCount(Integer messageCount) {
+        this.messageCount = messageCount;
+    }
+
+    /**
+     * Sets mccMnc.
+     * <p>
+     * Field description:
+     * Mobile country and network codes.
+     *
+     * @param mccMnc
+     * @return This {@link ViberWebhookReport instance}.
+     */
+    public ViberWebhookReport mccMnc(String mccMnc) {
+        this.mccMnc = mccMnc;
+        return this;
+    }
+
+    /**
+     * Returns mccMnc.
+     * <p>
+     * Field description:
+     * Mobile country and network codes.
+     *
+     * @return mccMnc
+     */
+    @JsonProperty("mccMnc")
+    public String getMccMnc() {
+        return mccMnc;
+    }
+
+    /**
+     * Sets mccMnc.
+     * <p>
+     * Field description:
+     * Mobile country and network codes.
+     *
+     * @param mccMnc
+     */
+    @JsonProperty("mccMnc")
+    public void setMccMnc(String mccMnc) {
+        this.mccMnc = mccMnc;
+    }
+
+    /**
+     * Sets callbackData.
+     * <p>
+     * Field description:
+     * Callback data sent through ‛callbackData‛ field when sending message.
+     *
+     * @param callbackData
+     * @return This {@link ViberWebhookReport instance}.
+     */
+    public ViberWebhookReport callbackData(String callbackData) {
+        this.callbackData = callbackData;
+        return this;
+    }
+
+    /**
+     * Returns callbackData.
+     * <p>
+     * Field description:
+     * Callback data sent through ‛callbackData‛ field when sending message.
+     *
+     * @return callbackData
+     */
+    @JsonProperty("callbackData")
+    public String getCallbackData() {
+        return callbackData;
+    }
+
+    /**
+     * Sets callbackData.
+     * <p>
+     * Field description:
+     * Callback data sent through ‛callbackData‛ field when sending message.
+     *
+     * @param callbackData
+     */
+    @JsonProperty("callbackData")
+    public void setCallbackData(String callbackData) {
+        this.callbackData = callbackData;
     }
 
     @Override
@@ -425,16 +509,30 @@ public class ViberWebhookReport {
                 && Objects.equals(this.status, viberWebhookReport.status)
                 && Objects.equals(this.error, viberWebhookReport.error)
                 && Objects.equals(this.messageId, viberWebhookReport.messageId)
+                && Objects.equals(this.to, viberWebhookReport.to)
+                && Objects.equals(this.sender, viberWebhookReport.sender)
+                && Objects.equals(this.sentAt, viberWebhookReport.sentAt)
                 && Objects.equals(this.doneAt, viberWebhookReport.doneAt)
                 && Objects.equals(this.messageCount, viberWebhookReport.messageCount)
-                && Objects.equals(this.sentAt, viberWebhookReport.sentAt)
-                && Objects.equals(this.to, viberWebhookReport.to)
-                && Objects.equals(this.channel, viberWebhookReport.channel);
+                && Objects.equals(this.mccMnc, viberWebhookReport.mccMnc)
+                && Objects.equals(this.callbackData, viberWebhookReport.callbackData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bulkId, price, status, error, messageId, doneAt, messageCount, sentAt, to, channel);
+        return Objects.hash(
+                bulkId,
+                price,
+                status,
+                error,
+                messageId,
+                to,
+                sender,
+                sentAt,
+                doneAt,
+                messageCount,
+                mccMnc,
+                callbackData);
     }
 
     @Override
@@ -458,20 +556,26 @@ public class ViberWebhookReport {
                 .append("    messageId: ")
                 .append(toIndentedString(messageId))
                 .append(newLine)
+                .append("    to: ")
+                .append(toIndentedString(to))
+                .append(newLine)
+                .append("    sender: ")
+                .append(toIndentedString(sender))
+                .append(newLine)
+                .append("    sentAt: ")
+                .append(toIndentedString(sentAt))
+                .append(newLine)
                 .append("    doneAt: ")
                 .append(toIndentedString(doneAt))
                 .append(newLine)
                 .append("    messageCount: ")
                 .append(toIndentedString(messageCount))
                 .append(newLine)
-                .append("    sentAt: ")
-                .append(toIndentedString(sentAt))
+                .append("    mccMnc: ")
+                .append(toIndentedString(mccMnc))
                 .append(newLine)
-                .append("    to: ")
-                .append(toIndentedString(to))
-                .append(newLine)
-                .append("    channel: ")
-                .append(toIndentedString(channel))
+                .append("    callbackData: ")
+                .append(toIndentedString(callbackData))
                 .append(newLine)
                 .append("}")
                 .toString();

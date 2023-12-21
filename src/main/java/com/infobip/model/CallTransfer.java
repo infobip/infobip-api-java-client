@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents CallTransfer model.
+ * Call transfers object enables transferring the ongoing call to another recipient(s) and establish a communication between your original recipient and additional one.
  */
 public class CallTransfer {
 
@@ -21,9 +21,9 @@ public class CallTransfer {
 
     private String equals;
 
-    private String _if;
-
     private String transferTo;
+
+    private String _if;
 
     /**
      * Sets callTransferMaxDuration.
@@ -112,52 +112,6 @@ public class CallTransfer {
     }
 
     /**
-     * Sets _if.
-     * <p>
-     * Field description:
-     * Specifies what to evaluate. Can be &#x60;dtmf&#x60; or &#x60;anyDtmf&#x60;.
-     * <p>
-     * The field is required.
-     *
-     * @param _if
-     * @return This {@link CallTransfer instance}.
-     */
-    public CallTransfer _if(String _if) {
-        this._if = _if;
-        return this;
-    }
-
-    /**
-     * Returns _if.
-     * <p>
-     * Field description:
-     * Specifies what to evaluate. Can be &#x60;dtmf&#x60; or &#x60;anyDtmf&#x60;.
-     * <p>
-     * The field is required.
-     *
-     * @return _if
-     */
-    @JsonProperty("if")
-    public String getIf() {
-        return _if;
-    }
-
-    /**
-     * Sets _if.
-     * <p>
-     * Field description:
-     * Specifies what to evaluate. Can be &#x60;dtmf&#x60; or &#x60;anyDtmf&#x60;.
-     * <p>
-     * The field is required.
-     *
-     * @param _if
-     */
-    @JsonProperty("if")
-    public void setIf(String _if) {
-        this._if = _if;
-    }
-
-    /**
      * Sets transferTo.
      * <p>
      * Field description:
@@ -203,6 +157,52 @@ public class CallTransfer {
         this.transferTo = transferTo;
     }
 
+    /**
+     * Sets _if.
+     * <p>
+     * Field description:
+     * Specifies what to evaluate. Can be &#x60;dtmf&#x60; or &#x60;anyDtmf&#x60;.
+     * <p>
+     * The field is required.
+     *
+     * @param _if
+     * @return This {@link CallTransfer instance}.
+     */
+    public CallTransfer _if(String _if) {
+        this._if = _if;
+        return this;
+    }
+
+    /**
+     * Returns _if.
+     * <p>
+     * Field description:
+     * Specifies what to evaluate. Can be &#x60;dtmf&#x60; or &#x60;anyDtmf&#x60;.
+     * <p>
+     * The field is required.
+     *
+     * @return _if
+     */
+    @JsonProperty("if")
+    public String getIf() {
+        return _if;
+    }
+
+    /**
+     * Sets _if.
+     * <p>
+     * Field description:
+     * Specifies what to evaluate. Can be &#x60;dtmf&#x60; or &#x60;anyDtmf&#x60;.
+     * <p>
+     * The field is required.
+     *
+     * @param _if
+     */
+    @JsonProperty("if")
+    public void setIf(String _if) {
+        this._if = _if;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -214,13 +214,13 @@ public class CallTransfer {
         CallTransfer callTransfer = (CallTransfer) o;
         return Objects.equals(this.callTransferMaxDuration, callTransfer.callTransferMaxDuration)
                 && Objects.equals(this.equals, callTransfer.equals)
-                && Objects.equals(this._if, callTransfer._if)
-                && Objects.equals(this.transferTo, callTransfer.transferTo);
+                && Objects.equals(this.transferTo, callTransfer.transferTo)
+                && Objects.equals(this._if, callTransfer._if);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(callTransferMaxDuration, equals, _if, transferTo);
+        return Objects.hash(callTransferMaxDuration, equals, transferTo, _if);
     }
 
     @Override
@@ -235,11 +235,11 @@ public class CallTransfer {
                 .append("    equals: ")
                 .append(toIndentedString(equals))
                 .append(newLine)
-                .append("    _if: ")
-                .append(toIndentedString(_if))
-                .append(newLine)
                 .append("    transferTo: ")
                 .append(toIndentedString(transferTo))
+                .append(newLine)
+                .append("    _if: ")
+                .append(toIndentedString(_if))
                 .append(newLine)
                 .append("}")
                 .toString();

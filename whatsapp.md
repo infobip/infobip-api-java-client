@@ -64,7 +64,7 @@ Finally, we can send the message invoking the appropriate send method and store 
 
 ```java
     WhatsAppBulkMessageInfo messageInfo = whatsAppApi
-        .sendWhatsappTemplateMessage(bulkMessage)
+        .sendWhatsAppTemplateMessage(bulkMessage)
         .execute();
 ```
 
@@ -107,7 +107,7 @@ The rest is the same as in the previous example. We are using the `whatsAppApi` 
         );
 
     WhatsAppBulkMessageInfo messageInfo = whatsAppApi
-        .sendWhatsappTemplateMessage(bulkMessage)
+        .sendWhatsAppTemplateMessage(bulkMessage)
         .execute();;
 
     System.out.println(messageInfo.getMessages().get(0).getStatus().getDescription());
@@ -127,8 +127,8 @@ So, for sending freestyle messages you have to initiate WhatsApp conversation fr
                     .text("This is my first WhatsApp message sent using Infobip API client library")
             );
 
-    SendWhatsAppApi whatsAppApi = new SendWhatsAppApi(apiClient);
-    WhatsAppSingleMessageInfo messageInfo = whatsAppApi.sendWhatsAppTextMessage(textMessage);
+    WhatsAppApi whatsAppApi = new WhatsAppApi(apiClient);
+    WhatsAppSingleMessageInfo messageInfo = whatsAppApi.sendWhatsAppTextMessage(textMessage).execute();
 
     System.out.println(messageInfo.getStatus().getDescription());
 ```
@@ -145,27 +145,26 @@ You can find more details about the structure of the message you can expect on y
 ```java
     @PostMapping("/incoming-whatsapp")
     public void receiveWhatsApp(HttpServletRequest request) throws IOException {
-        WhatsAppInboundMessageResult messages = new JSON().deserialize(request.getInputStream(), WhatsAppInboundMessageResult.class);
-        for (WhatsAppInboundMessageData messageData : messages.getResults()) {
-            WhatsAppInboundMessage message = messageData.getMessage();
+        WhatsAppWebhookInboundMessageResult messages = new JSON().deserialize(request.getInputStream(), WhatsAppWebhookInboundMessageResult.class);
+        for (WhatsAppWebhookInboundMessageData messageData : messages.getResults()) {
+            WhatsAppWebhookInboundMessage message = messageData.getMessage();
             String text;
             switch (message.getType()) {
                 case TEXT:
-                    text = ((WhatsAppInboundTextMessage) message).getText();
+                    text = ((WhatsAppWebhookInboundTextMessage) message).getText();
                     break;
                 case IMAGE:
-                    text = ((WhatsAppInboundImageMessage) message).getCaption();
+                    text = ((WhatsAppWebhookInboundImageMessage) message).getCaption();
                     break;
                 case DOCUMENT:
-                    text = ((WhatsAppInboundDocumentMessage) message).getCaption();
+                    text = ((WhatsAppWebhookInboundDocumentMessage) message).getCaption();
                     break;
                 case LOCATION:
-                    text = ((WhatsAppInboundLocationMessage) message).getAddress();
+                    text = ((WhatsAppWebhookInboundLocationMessage) message).getAddress();
                     break;
-                case CONTACT:
-                    WhatsAppName name = ((WhatsAppInboundContactMessage) message).getContacts().get(0).getName();
-                    text = name.getFirstName() + " " + name.getLastName();
-                    break;
+                /*
+                      Remaining cases for not covered message types
+                 */
                 default:
                     text = "Unexpected message type!";
                     break;

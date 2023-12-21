@@ -10,16 +10,16 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
- * Scheduling object that allows setting up detailed time windows in which the message can be sent. Consists of from, to and days properties. Days property is mandatory. From and to properties should be either both included, to allow finer time window granulation or both omitted, to include whole days in the delivery time window. Note: delivery time window is set in UTC timezone.
+ * Scheduling object that allows setting up detailed time windows in which the message can be sent. Consists of from, to and days properties. Days property is mandatory. Days in the week are written as their full names: Monday-Sunday. Days parameter must be populated as a list, between two square brackets. &#x60;Example: [&#39;MONDAY&#39;, &#39;TUESDAY&#39;, &#39;WEDNESDAY&#39;]&#x60;. From and to properties should be either both included, to allow finer time window granulation or both omitted, to include whole days in the delivery time window. From and to parameters are objects, that consist of hour and minute fields that hold integer values. For example, &#x60; from: [ hour: 15, minute:45 ]&#x60;. For complete json, please check out our example. Note: delivery time window is set in UTC timezone.
  */
 public class CallsDeliveryTimeWindow {
 
-    private List<CallsDeliveryDay> days = null;
+    private Set<CallsDeliveryDay> days = null;
 
     private CallsDeliveryTime from;
 
@@ -31,7 +31,7 @@ public class CallsDeliveryTimeWindow {
      * @param days
      * @return This {@link CallsDeliveryTimeWindow instance}.
      */
-    public CallsDeliveryTimeWindow days(List<CallsDeliveryDay> days) {
+    public CallsDeliveryTimeWindow days(Set<CallsDeliveryDay> days) {
         this.days = days;
         return this;
     }
@@ -44,7 +44,7 @@ public class CallsDeliveryTimeWindow {
      */
     public CallsDeliveryTimeWindow addDaysItem(CallsDeliveryDay daysItem) {
         if (this.days == null) {
-            this.days = new ArrayList<>();
+            this.days = new LinkedHashSet<>();
         }
         this.days.add(daysItem);
         return this;
@@ -56,7 +56,7 @@ public class CallsDeliveryTimeWindow {
      * @return days
      */
     @JsonProperty("days")
-    public List<CallsDeliveryDay> getDays() {
+    public Set<CallsDeliveryDay> getDays() {
         return days;
     }
 
@@ -66,7 +66,7 @@ public class CallsDeliveryTimeWindow {
      * @param days
      */
     @JsonProperty("days")
-    public void setDays(List<CallsDeliveryDay> days) {
+    public void setDays(Set<CallsDeliveryDay> days) {
         this.days = days;
     }
 

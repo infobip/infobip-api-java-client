@@ -62,6 +62,8 @@ public class CallLog {
 
     private String dialogId;
 
+    private String sender;
+
     /**
      * Sets callId.
      * <p>
@@ -875,6 +877,46 @@ public class CallLog {
         this.dialogId = dialogId;
     }
 
+    /**
+     * Sets sender.
+     * <p>
+     * Field description:
+     * Sender.
+     *
+     * @param sender
+     * @return This {@link CallLog instance}.
+     */
+    public CallLog sender(String sender) {
+        this.sender = sender;
+        return this;
+    }
+
+    /**
+     * Returns sender.
+     * <p>
+     * Field description:
+     * Sender.
+     *
+     * @return sender
+     */
+    @JsonProperty("sender")
+    public String getSender() {
+        return sender;
+    }
+
+    /**
+     * Sets sender.
+     * <p>
+     * Field description:
+     * Sender.
+     *
+     * @param sender
+     */
+    @JsonProperty("sender")
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -903,7 +945,8 @@ public class CallLog {
                 && Objects.equals(this.hasScreenshareVideo, callLog.hasScreenshareVideo)
                 && Objects.equals(this.errorCode, callLog.errorCode)
                 && Objects.equals(this.customData, callLog.customData)
-                && Objects.equals(this.dialogId, callLog.dialogId);
+                && Objects.equals(this.dialogId, callLog.dialogId)
+                && Objects.equals(this.sender, callLog.sender);
     }
 
     @Override
@@ -928,7 +971,8 @@ public class CallLog {
                 hasScreenshareVideo,
                 errorCode,
                 customData,
-                dialogId);
+                dialogId,
+                sender);
     }
 
     @Override
@@ -996,6 +1040,9 @@ public class CallLog {
                 .append(newLine)
                 .append("    dialogId: ")
                 .append(toIndentedString(dialogId))
+                .append(newLine)
+                .append("    sender: ")
+                .append(toIndentedString(sender))
                 .append(newLine)
                 .append("}")
                 .toString();

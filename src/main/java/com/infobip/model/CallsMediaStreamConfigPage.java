@@ -21,7 +21,7 @@ public class CallsMediaStreamConfigPage {
 
     private List<CallsMediaStreamConfigResponse> results = null;
 
-    private CallsPageInfo paging;
+    private PageInfo paging;
 
     /**
      * Sets results.
@@ -86,7 +86,7 @@ public class CallsMediaStreamConfigPage {
      * @param paging
      * @return This {@link CallsMediaStreamConfigPage instance}.
      */
-    public CallsMediaStreamConfigPage paging(CallsPageInfo paging) {
+    public CallsMediaStreamConfigPage paging(PageInfo paging) {
         this.paging = paging;
         return this;
     }
@@ -97,7 +97,7 @@ public class CallsMediaStreamConfigPage {
      * @return paging
      */
     @JsonProperty("paging")
-    public CallsPageInfo getPaging() {
+    public PageInfo getPaging() {
         return paging;
     }
 
@@ -107,7 +107,7 @@ public class CallsMediaStreamConfigPage {
      * @param paging
      */
     @JsonProperty("paging")
-    public void setPaging(CallsPageInfo paging) {
+    public void setPaging(PageInfo paging) {
         this.paging = paging;
     }
 

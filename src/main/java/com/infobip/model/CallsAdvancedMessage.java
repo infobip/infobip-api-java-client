@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents CallsAdvancedMessage model.
+ * Array of messages to be sent, one object per every message
  */
 public class CallsAdvancedMessage {
 
@@ -282,7 +282,7 @@ public class CallsAdvancedMessage {
      * Sets destinations.
      * <p>
      * Field description:
-     * Message destination addresses. Destination address must be in the E.164 standard format (Example: 41793026727).
+     * Message destination addresses. Destination address must be in the E.164 standard format (Example: 41793026727). Maximum number of destination addresses is 20k.
      * <p>
      * The field is required.
      *
@@ -298,7 +298,7 @@ public class CallsAdvancedMessage {
      * Adds and item into destinations.
      * <p>
      * Field description:
-     * Message destination addresses. Destination address must be in the E.164 standard format (Example: 41793026727).
+     * Message destination addresses. Destination address must be in the E.164 standard format (Example: 41793026727). Maximum number of destination addresses is 20k.
      * <p>
      * The field is required.
      *
@@ -317,7 +317,7 @@ public class CallsAdvancedMessage {
      * Returns destinations.
      * <p>
      * Field description:
-     * Message destination addresses. Destination address must be in the E.164 standard format (Example: 41793026727).
+     * Message destination addresses. Destination address must be in the E.164 standard format (Example: 41793026727). Maximum number of destination addresses is 20k.
      * <p>
      * The field is required.
      *
@@ -332,7 +332,7 @@ public class CallsAdvancedMessage {
      * Sets destinations.
      * <p>
      * Field description:
-     * Message destination addresses. Destination address must be in the E.164 standard format (Example: 41793026727).
+     * Message destination addresses. Destination address must be in the E.164 standard format (Example: 41793026727). Maximum number of destination addresses is 20k.
      * <p>
      * The field is required.
      *
@@ -969,7 +969,7 @@ public class CallsAdvancedMessage {
      * Sets text.
      * <p>
      * Field description:
-     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. Adding _pauses_ between the words and extending the duration of the voice message is possible by using the comma character &#x60;“,”&#x60;. For example, if you want to have a 3 second pause after each word, then the text parameter should look like this &#x60;“one,,,,,,two,,,,,,three,,,,,,”&#x60;. Each comma creates a pause of 0.5 seconds.
+     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. Adding _pauses_ between the words and extending the duration of the voice message is possible by using the comma character &#x60;“,”&#x60;. For example, if you want to have a 3 second pause after each word, then the text parameter should look like this &#x60;“one,,,,,,two,,,,,,three,,,,,,”&#x60;. Each comma creates a pause of 0.5 seconds. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
      *
      * @param text
      * @return This {@link CallsAdvancedMessage instance}.
@@ -983,7 +983,7 @@ public class CallsAdvancedMessage {
      * Returns text.
      * <p>
      * Field description:
-     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. Adding _pauses_ between the words and extending the duration of the voice message is possible by using the comma character &#x60;“,”&#x60;. For example, if you want to have a 3 second pause after each word, then the text parameter should look like this &#x60;“one,,,,,,two,,,,,,three,,,,,,”&#x60;. Each comma creates a pause of 0.5 seconds.
+     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. Adding _pauses_ between the words and extending the duration of the voice message is possible by using the comma character &#x60;“,”&#x60;. For example, if you want to have a 3 second pause after each word, then the text parameter should look like this &#x60;“one,,,,,,two,,,,,,three,,,,,,”&#x60;. Each comma creates a pause of 0.5 seconds. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
      *
      * @return text
      */
@@ -996,7 +996,7 @@ public class CallsAdvancedMessage {
      * Sets text.
      * <p>
      * Field description:
-     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. Adding _pauses_ between the words and extending the duration of the voice message is possible by using the comma character &#x60;“,”&#x60;. For example, if you want to have a 3 second pause after each word, then the text parameter should look like this &#x60;“one,,,,,,two,,,,,,three,,,,,,”&#x60;. Each comma creates a pause of 0.5 seconds.
+     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. Adding _pauses_ between the words and extending the duration of the voice message is possible by using the comma character &#x60;“,”&#x60;. For example, if you want to have a 3 second pause after each word, then the text parameter should look like this &#x60;“one,,,,,,two,,,,,,three,,,,,,”&#x60;. Each comma creates a pause of 0.5 seconds. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
      *
      * @param text
      */

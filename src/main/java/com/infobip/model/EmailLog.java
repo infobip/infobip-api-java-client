@@ -18,6 +18,10 @@ import java.util.Objects;
  */
 public class EmailLog {
 
+    private String applicationId;
+
+    private String entityId;
+
     private String messageId;
 
     private String to;
@@ -32,11 +36,91 @@ public class EmailLog {
 
     private Integer messageCount;
 
-    private EmailPrice price;
+    private MessagePrice price;
 
-    private EmailStatus status;
+    private MessageStatus status;
 
     private String bulkId;
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * The Application ID sent in the email request.
+     *
+     * @param applicationId
+     * @return This {@link EmailLog instance}.
+     */
+    public EmailLog applicationId(String applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * The Application ID sent in the email request.
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * The Application ID sent in the email request.
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * The Entity ID sent in the email request.
+     *
+     * @param entityId
+     * @return This {@link EmailLog instance}.
+     */
+    public EmailLog entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * The Entity ID sent in the email request.
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * The Entity ID sent in the email request.
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
 
     /**
      * Sets messageId.
@@ -242,7 +326,7 @@ public class EmailLog {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Tells when the email request was processed by Infobip
+     * Date and time when the Infobip services finished processing the email (i.e. delivered to the destination, waiting for delivery, etc.).
      *
      * @param doneAt
      * @return This {@link EmailLog instance}.
@@ -256,7 +340,7 @@ public class EmailLog {
      * Returns doneAt.
      * <p>
      * Field description:
-     * Tells when the email request was processed by Infobip
+     * Date and time when the Infobip services finished processing the email (i.e. delivered to the destination, waiting for delivery, etc.).
      *
      * @return doneAt
      */
@@ -269,7 +353,7 @@ public class EmailLog {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Tells when the email request was processed by Infobip
+     * Date and time when the Infobip services finished processing the email (i.e. delivered to the destination, waiting for delivery, etc.).
      *
      * @param doneAt
      */
@@ -324,7 +408,7 @@ public class EmailLog {
      * @param price
      * @return This {@link EmailLog instance}.
      */
-    public EmailLog price(EmailPrice price) {
+    public EmailLog price(MessagePrice price) {
         this.price = price;
         return this;
     }
@@ -335,7 +419,7 @@ public class EmailLog {
      * @return price
      */
     @JsonProperty("price")
-    public EmailPrice getPrice() {
+    public MessagePrice getPrice() {
         return price;
     }
 
@@ -345,7 +429,7 @@ public class EmailLog {
      * @param price
      */
     @JsonProperty("price")
-    public void setPrice(EmailPrice price) {
+    public void setPrice(MessagePrice price) {
         this.price = price;
     }
 
@@ -355,7 +439,7 @@ public class EmailLog {
      * @param status
      * @return This {@link EmailLog instance}.
      */
-    public EmailLog status(EmailStatus status) {
+    public EmailLog status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -366,7 +450,7 @@ public class EmailLog {
      * @return status
      */
     @JsonProperty("status")
-    public EmailStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -376,7 +460,7 @@ public class EmailLog {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(EmailStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 
@@ -429,7 +513,9 @@ public class EmailLog {
             return false;
         }
         EmailLog emailLog = (EmailLog) o;
-        return Objects.equals(this.messageId, emailLog.messageId)
+        return Objects.equals(this.applicationId, emailLog.applicationId)
+                && Objects.equals(this.entityId, emailLog.entityId)
+                && Objects.equals(this.messageId, emailLog.messageId)
                 && Objects.equals(this.to, emailLog.to)
                 && Objects.equals(this.from, emailLog.from)
                 && Objects.equals(this.text, emailLog.text)
@@ -443,7 +529,19 @@ public class EmailLog {
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageId, to, from, text, sentAt, doneAt, messageCount, price, status, bulkId);
+        return Objects.hash(
+                applicationId,
+                entityId,
+                messageId,
+                to,
+                from,
+                text,
+                sentAt,
+                doneAt,
+                messageCount,
+                price,
+                status,
+                bulkId);
     }
 
     @Override
@@ -451,6 +549,12 @@ public class EmailLog {
         String newLine = System.lineSeparator();
         return new StringBuilder()
                 .append("class EmailLog {")
+                .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
                 .append(newLine)
                 .append("    messageId: ")
                 .append(toIndentedString(messageId))

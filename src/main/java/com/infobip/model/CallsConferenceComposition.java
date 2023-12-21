@@ -17,15 +17,13 @@ import java.util.Objects;
  */
 public class CallsConferenceComposition {
 
-    private Boolean enabled = false;
+    private Boolean enabled;
 
     /**
      * Sets enabled.
      * <p>
      * Field description:
      * Indicates whether to create a single recording of all participants. If set to &#x60;True&#x60;, all participants are merged into a single audio or video file. Otherwise, all participants will have their own individual audio or video file.
-     * <p>
-     * The field is required.
      *
      * @param enabled
      * @return This {@link CallsConferenceComposition instance}.
@@ -40,8 +38,6 @@ public class CallsConferenceComposition {
      * <p>
      * Field description:
      * Indicates whether to create a single recording of all participants. If set to &#x60;True&#x60;, all participants are merged into a single audio or video file. Otherwise, all participants will have their own individual audio or video file.
-     * <p>
-     * The field is required.
      *
      * @return enabled
      */
@@ -55,8 +51,6 @@ public class CallsConferenceComposition {
      * <p>
      * Field description:
      * Indicates whether to create a single recording of all participants. If set to &#x60;True&#x60;, all participants are merged into a single audio or video file. Otherwise, all participants will have their own individual audio or video file.
-     * <p>
-     * The field is required.
      *
      * @param enabled
      */
