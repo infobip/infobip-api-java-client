@@ -13,53 +13,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Used to define voice in which text would be synthesized. It has two parameters: _name_ and _gender_. When only _name_ is provided, then that exact voice with that name will be used to synthesize text. If only _gender_ is provided, then text is synthesized with first voice in given gender. If voice is not set, then default voice is used.
+ * Array of voices belonging to the specified language.
  */
 public class CallsVoice {
 
-    private String gender;
-
     private String name;
 
-    /**
-     * Sets gender.
-     * <p>
-     * Field description:
-     * Gender of the voice. Can be &#x60;male&#x60; or &#x60;female&#x60;.
-     *
-     * @param gender
-     * @return This {@link CallsVoice instance}.
-     */
-    public CallsVoice gender(String gender) {
-        this.gender = gender;
-        return this;
-    }
-
-    /**
-     * Returns gender.
-     * <p>
-     * Field description:
-     * Gender of the voice. Can be &#x60;male&#x60; or &#x60;female&#x60;.
-     *
-     * @return gender
-     */
-    @JsonProperty("gender")
-    public String getGender() {
-        return gender;
-    }
-
-    /**
-     * Sets gender.
-     * <p>
-     * Field description:
-     * Gender of the voice. Can be &#x60;male&#x60; or &#x60;female&#x60;.
-     *
-     * @param gender
-     */
-    @JsonProperty("gender")
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+    private String gender;
 
     /**
      * Sets name.
@@ -101,6 +61,46 @@ public class CallsVoice {
         this.name = name;
     }
 
+    /**
+     * Sets gender.
+     * <p>
+     * Field description:
+     * Gender of the voice. Can be &#x60;male&#x60; or &#x60;female&#x60;.
+     *
+     * @param gender
+     * @return This {@link CallsVoice instance}.
+     */
+    public CallsVoice gender(String gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    /**
+     * Returns gender.
+     * <p>
+     * Field description:
+     * Gender of the voice. Can be &#x60;male&#x60; or &#x60;female&#x60;.
+     *
+     * @return gender
+     */
+    @JsonProperty("gender")
+    public String getGender() {
+        return gender;
+    }
+
+    /**
+     * Sets gender.
+     * <p>
+     * Field description:
+     * Gender of the voice. Can be &#x60;male&#x60; or &#x60;female&#x60;.
+     *
+     * @param gender
+     */
+    @JsonProperty("gender")
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -110,12 +110,12 @@ public class CallsVoice {
             return false;
         }
         CallsVoice callsVoice = (CallsVoice) o;
-        return Objects.equals(this.gender, callsVoice.gender) && Objects.equals(this.name, callsVoice.name);
+        return Objects.equals(this.name, callsVoice.name) && Objects.equals(this.gender, callsVoice.gender);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(gender, name);
+        return Objects.hash(name, gender);
     }
 
     @Override
@@ -124,11 +124,11 @@ public class CallsVoice {
         return new StringBuilder()
                 .append("class CallsVoice {")
                 .append(newLine)
-                .append("    gender: ")
-                .append(toIndentedString(gender))
-                .append(newLine)
                 .append("    name: ")
                 .append(toIndentedString(name))
+                .append(newLine)
+                .append("    gender: ")
+                .append(toIndentedString(gender))
                 .append(newLine)
                 .append("}")
                 .toString();

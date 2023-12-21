@@ -23,8 +23,6 @@ public class CallsSipEndpoint extends CallEndpoint {
 
     private String sipTrunkId;
 
-    private String sipTrunkGroupId;
-
     private Map<String, String> customHeaders = null;
 
     /**
@@ -84,7 +82,9 @@ public class CallsSipEndpoint extends CallEndpoint {
      * Sets sipTrunkId.
      * <p>
      * Field description:
-     * SIP trunk ID. Either this field or &#x60;sipTrunkGroupId&#x60; has to be provided.
+     * SIP trunk ID.
+     * <p>
+     * The field is required.
      *
      * @param sipTrunkId
      * @return This {@link CallsSipEndpoint instance}.
@@ -98,7 +98,9 @@ public class CallsSipEndpoint extends CallEndpoint {
      * Returns sipTrunkId.
      * <p>
      * Field description:
-     * SIP trunk ID. Either this field or &#x60;sipTrunkGroupId&#x60; has to be provided.
+     * SIP trunk ID.
+     * <p>
+     * The field is required.
      *
      * @return sipTrunkId
      */
@@ -111,7 +113,9 @@ public class CallsSipEndpoint extends CallEndpoint {
      * Sets sipTrunkId.
      * <p>
      * Field description:
-     * SIP trunk ID. Either this field or &#x60;sipTrunkGroupId&#x60; has to be provided.
+     * SIP trunk ID.
+     * <p>
+     * The field is required.
      *
      * @param sipTrunkId
      */
@@ -121,50 +125,10 @@ public class CallsSipEndpoint extends CallEndpoint {
     }
 
     /**
-     * Sets sipTrunkGroupId.
-     * <p>
-     * Field description:
-     * SIP trunk group ID. Either this field or &#x60;sipTrunkId&#x60; has to be provided.
-     *
-     * @param sipTrunkGroupId
-     * @return This {@link CallsSipEndpoint instance}.
-     */
-    public CallsSipEndpoint sipTrunkGroupId(String sipTrunkGroupId) {
-        this.sipTrunkGroupId = sipTrunkGroupId;
-        return this;
-    }
-
-    /**
-     * Returns sipTrunkGroupId.
-     * <p>
-     * Field description:
-     * SIP trunk group ID. Either this field or &#x60;sipTrunkId&#x60; has to be provided.
-     *
-     * @return sipTrunkGroupId
-     */
-    @JsonProperty("sipTrunkGroupId")
-    public String getSipTrunkGroupId() {
-        return sipTrunkGroupId;
-    }
-
-    /**
-     * Sets sipTrunkGroupId.
-     * <p>
-     * Field description:
-     * SIP trunk group ID. Either this field or &#x60;sipTrunkId&#x60; has to be provided.
-     *
-     * @param sipTrunkGroupId
-     */
-    @JsonProperty("sipTrunkGroupId")
-    public void setSipTrunkGroupId(String sipTrunkGroupId) {
-        this.sipTrunkGroupId = sipTrunkGroupId;
-    }
-
-    /**
      * Sets customHeaders.
      * <p>
      * Field description:
-     * Custom headers.
+     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated.
      *
      * @param customHeaders
      * @return This {@link CallsSipEndpoint instance}.
@@ -178,7 +142,7 @@ public class CallsSipEndpoint extends CallEndpoint {
      * Puts and entry into customHeaders.
      * <p>
      * Field description:
-     * Custom headers.
+     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated.
      *
      * @param key The given key.
      * @param customHeadersItem The item to be associated with the given key.
@@ -196,7 +160,7 @@ public class CallsSipEndpoint extends CallEndpoint {
      * Returns customHeaders.
      * <p>
      * Field description:
-     * Custom headers.
+     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated.
      *
      * @return customHeaders
      */
@@ -209,7 +173,7 @@ public class CallsSipEndpoint extends CallEndpoint {
      * Sets customHeaders.
      * <p>
      * Field description:
-     * Custom headers.
+     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated.
      *
      * @param customHeaders
      */
@@ -229,14 +193,13 @@ public class CallsSipEndpoint extends CallEndpoint {
         CallsSipEndpoint callsSipEndpoint = (CallsSipEndpoint) o;
         return Objects.equals(this.username, callsSipEndpoint.username)
                 && Objects.equals(this.sipTrunkId, callsSipEndpoint.sipTrunkId)
-                && Objects.equals(this.sipTrunkGroupId, callsSipEndpoint.sipTrunkGroupId)
                 && Objects.equals(this.customHeaders, callsSipEndpoint.customHeaders)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, sipTrunkId, sipTrunkGroupId, customHeaders, super.hashCode());
+        return Objects.hash(username, sipTrunkId, customHeaders, super.hashCode());
     }
 
     @Override
@@ -253,9 +216,6 @@ public class CallsSipEndpoint extends CallEndpoint {
                 .append(newLine)
                 .append("    sipTrunkId: ")
                 .append(toIndentedString(sipTrunkId))
-                .append(newLine)
-                .append("    sipTrunkGroupId: ")
-                .append(toIndentedString(sipTrunkGroupId))
                 .append(newLine)
                 .append("    customHeaders: ")
                 .append(toIndentedString(customHeaders))

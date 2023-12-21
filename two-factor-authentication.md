@@ -19,11 +19,11 @@ Before sending one-time PIN codes you need to set up an application and a messag
 The application represents your service. It’s a good practice to have separate applications for separate services.
 
 ```java
-    TfaApplicationRequest request = new TfaApplicationRequest()
+    TfaApplicationRequest applicationRequest = new TfaApplicationRequest()
         .name("2FA application");
 
     TfaApplicationResponse tfaApplication = tfaApi
-        .createTfaApplication(request)
+        .createTfaApplication(applicationRequest)
         .execute();
 
     String appId = tfaApplication.getApplicationId();
@@ -34,13 +34,13 @@ The application represents your service. It’s a good practice to have separate
 A message template represents the message body with the PIN placeholder that is sent to the end users.
 
 ```java
-    TfaCreateMessageRequest request = new TfaCreateMessageRequest()
+    TfaCreateMessageRequest createMessageRequest = new TfaCreateMessageRequest()
         .messageText("Your pin is {{pin}}")
         .pinType(TfaPinType.NUMERIC)
         .pinLength(4);
 
     TfaMessage tfaMessageTemplate = tfaApi
-        .createTfaMessageTemplate(appId, request)
+        .createTfaMessageTemplate(appId, createMessageRequest)
         .execute();
 
     String messageId = tfaMessageTemplate.getMessageId();
@@ -51,14 +51,14 @@ A message template represents the message body with the PIN placeholder that is 
 Once you set up application and message templates, you can start generating and sending PIN codes via an SMS to the provided destination addresses (i.e. numbers you've purchased from Infobip).
 
 ```java
-    TfaStartAuthenticationRequest request = new TfaStartAuthenticationRequest()
+    TfaStartAuthenticationRequest startAuthenticationRequest = new TfaStartAuthenticationRequest()
         .applicationId(appId)
         .messageId(messageId)
         .from("InfoSMS")
         .to("41793026727");
 
     TfaStartAuthenticationResponse sendCodeResponse = tfaApi
-        .sendTfaPinCodeOverSms(request)
+        .sendTfaPinCodeOverSms(startAuthenticationRequest)
         .execute();
 
     boolean isSuccessful = sendCodeResponse.getSmsStatus().equals("MESSAGE_SENT");
@@ -70,11 +70,11 @@ Once you set up application and message templates, you can start generating and 
 Verify a phone number to confirm a successful 2FA authentication.
 
 ```java
-    TfaVerifyPinRequest request = new TfaVerifyPinRequest()
+    TfaVerifyPinRequest verifyPinRequest = new TfaVerifyPinRequest()
         .pin("1598");
 
     TfaVerifyPinResponse verifyResponse = tfaApi
-        .verifyTfaPhoneNumber(pinId, request)
+        .verifyTfaPhoneNumber(pinId, verifyPinRequest)
         .execute();
 
     boolean verified = verifyResponse.getVerified();

@@ -13,13 +13,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Message failover validity period time unit. Required if &#39;validityPeriod&#39; is set. Allowed values: SECONDS, MINUTES, HOURS, DAYS.
+ * Message validity period time unit.
  */
 public enum ViberValidityPeriodTimeUnit {
     SECONDS("SECONDS"),
     MINUTES("MINUTES"),
-    HOURS("HOURS"),
-    DAYS("DAYS");
+    HOURS("HOURS");
 
     private final String value;
 

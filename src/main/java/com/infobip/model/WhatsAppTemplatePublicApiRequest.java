@@ -11,25 +11,37 @@ package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
  * Represents WhatsAppTemplatePublicApiRequest model.
  */
-public class WhatsAppTemplatePublicApiRequest {
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "category",
+        visible = true)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = WhatsAppAuthenticationTemplatePublicApiRequest.class, name = "AUTHENTICATION"),
+    @JsonSubTypes.Type(value = WhatsAppDefaultMarketingTemplatePublicApiRequest.class, name = "MARKETING"),
+    @JsonSubTypes.Type(value = WhatsAppDefaultUtilityTemplatePublicApiRequest.class, name = "UTILITY"),
+})
+public abstract class WhatsAppTemplatePublicApiRequest {
 
     private String name;
 
     private WhatsAppLanguage language;
 
     /**
-     * Category of the template.
+     * Category of the template. Mind that each category has different fields available for the endpoint. If you&#39;re sending traffic in India, for &#x60;AUTHENTICATION&#x60;, use fields available for &#x60;UTILITY&#x60; with &#x60;AUTHENTICATION&#x60; as category.
      */
     public enum CategoryEnum {
         MARKETING("MARKETING"),
-        TRANSACTIONAL("TRANSACTIONAL"),
-        OTP("OTP");
+        AUTHENTICATION("AUTHENTICATION"),
+        UTILITY("UTILITY");
 
         private String value;
 
@@ -58,9 +70,18 @@ public class WhatsAppTemplatePublicApiRequest {
         }
     }
 
-    private CategoryEnum category;
+    protected final CategoryEnum category;
 
-    private WhatsAppTemplateStructureApiData structure;
+    /**
+     * Constructs a new {@link WhatsAppTemplatePublicApiRequest} instance.
+     */
+    public WhatsAppTemplatePublicApiRequest(String category) {
+        this.category = CategoryEnum.fromValue(category);
+    }
+
+    private Boolean allowCategoryChange;
+
+    private Object structure;
 
     /**
      * Sets name.
@@ -146,26 +167,10 @@ public class WhatsAppTemplatePublicApiRequest {
     }
 
     /**
-     * Sets category.
-     * <p>
-     * Field description:
-     * Category of the template.
-     * <p>
-     * The field is required.
-     *
-     * @param category
-     * @return This {@link WhatsAppTemplatePublicApiRequest instance}.
-     */
-    public WhatsAppTemplatePublicApiRequest category(CategoryEnum category) {
-        this.category = category;
-        return this;
-    }
-
-    /**
      * Returns category.
      * <p>
      * Field description:
-     * Category of the template.
+     * Category of the template. Mind that each category has different fields available for the endpoint. If you&#39;re sending traffic in India, for &#x60;AUTHENTICATION&#x60;, use fields available for &#x60;UTILITY&#x60; with &#x60;AUTHENTICATION&#x60; as category.
      * <p>
      * The field is required.
      *
@@ -177,18 +182,43 @@ public class WhatsAppTemplatePublicApiRequest {
     }
 
     /**
-     * Sets category.
+     * Sets allowCategoryChange.
      * <p>
      * Field description:
-     * Category of the template.
-     * <p>
-     * The field is required.
+     * If set to true, Meta will be able to assign category based on their template guidelines. If omitted, template will not be auto-assigned a category and may get rejected if determined to be miscategorized.
      *
-     * @param category
+     * @param allowCategoryChange
+     * @return This {@link WhatsAppTemplatePublicApiRequest instance}.
      */
-    @JsonProperty("category")
-    public void setCategory(CategoryEnum category) {
-        this.category = category;
+    public WhatsAppTemplatePublicApiRequest allowCategoryChange(Boolean allowCategoryChange) {
+        this.allowCategoryChange = allowCategoryChange;
+        return this;
+    }
+
+    /**
+     * Returns allowCategoryChange.
+     * <p>
+     * Field description:
+     * If set to true, Meta will be able to assign category based on their template guidelines. If omitted, template will not be auto-assigned a category and may get rejected if determined to be miscategorized.
+     *
+     * @return allowCategoryChange
+     */
+    @JsonProperty("allowCategoryChange")
+    public Boolean getAllowCategoryChange() {
+        return allowCategoryChange;
+    }
+
+    /**
+     * Sets allowCategoryChange.
+     * <p>
+     * Field description:
+     * If set to true, Meta will be able to assign category based on their template guidelines. If omitted, template will not be auto-assigned a category and may get rejected if determined to be miscategorized.
+     *
+     * @param allowCategoryChange
+     */
+    @JsonProperty("allowCategoryChange")
+    public void setAllowCategoryChange(Boolean allowCategoryChange) {
+        this.allowCategoryChange = allowCategoryChange;
     }
 
     /**
@@ -199,7 +229,7 @@ public class WhatsAppTemplatePublicApiRequest {
      * @param structure
      * @return This {@link WhatsAppTemplatePublicApiRequest instance}.
      */
-    public WhatsAppTemplatePublicApiRequest structure(WhatsAppTemplateStructureApiData structure) {
+    public WhatsAppTemplatePublicApiRequest structure(Object structure) {
         this.structure = structure;
         return this;
     }
@@ -212,7 +242,7 @@ public class WhatsAppTemplatePublicApiRequest {
      * @return structure
      */
     @JsonProperty("structure")
-    public WhatsAppTemplateStructureApiData getStructure() {
+    public Object getStructure() {
         return structure;
     }
 
@@ -224,7 +254,7 @@ public class WhatsAppTemplatePublicApiRequest {
      * @param structure
      */
     @JsonProperty("structure")
-    public void setStructure(WhatsAppTemplateStructureApiData structure) {
+    public void setStructure(Object structure) {
         this.structure = structure;
     }
 
@@ -240,12 +270,13 @@ public class WhatsAppTemplatePublicApiRequest {
         return Objects.equals(this.name, whatsAppTemplatePublicApiRequest.name)
                 && Objects.equals(this.language, whatsAppTemplatePublicApiRequest.language)
                 && Objects.equals(this.category, whatsAppTemplatePublicApiRequest.category)
+                && Objects.equals(this.allowCategoryChange, whatsAppTemplatePublicApiRequest.allowCategoryChange)
                 && Objects.equals(this.structure, whatsAppTemplatePublicApiRequest.structure);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, language, category, structure);
+        return Objects.hash(name, language, category, allowCategoryChange, structure);
     }
 
     @Override
@@ -262,6 +293,9 @@ public class WhatsAppTemplatePublicApiRequest {
                 .append(newLine)
                 .append("    category: ")
                 .append(toIndentedString(category))
+                .append(newLine)
+                .append("    allowCategoryChange: ")
+                .append(toIndentedString(allowCategoryChange))
                 .append(newLine)
                 .append("    structure: ")
                 .append(toIndentedString(structure))

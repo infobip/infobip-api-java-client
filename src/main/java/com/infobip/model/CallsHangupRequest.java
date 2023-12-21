@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents CallsHangupRequest model.
+ * Hangup request.
  */
 public class CallsHangupRequest {
 

@@ -71,7 +71,7 @@ public class ViberFileContent {
      * Sets mediaUrl.
      * <p>
      * Field description:
-     * URL of the file being sent. Must be a valid URL starting with https:// or http://. Supported file types are .doc, .docx, .rtf, .dot, .dotx, .odt ,.odf, .fodt, .txt, .info, .pdf, .xps, .pdax, .eps, .xls, .xlsx, .ods, .fods, .csv, .xlsm, .xltx. Maximum file size is 10 MB.
+     * URL of the file being sent. Must be a valid URL starting with https:// or http://. Supported file types are .doc, .docx, .rtf, .dot, .dotx, .odt ,.odf, .fodt, .txt, .info, .pdf, .xps, .pdax, .eps, .xls, .xlsx, .ods, .fods, .csv, .xlsm, .xltx. Maximum file size is 200 MB.
      * <p>
      * The field is required.
      *
@@ -87,7 +87,7 @@ public class ViberFileContent {
      * Returns mediaUrl.
      * <p>
      * Field description:
-     * URL of the file being sent. Must be a valid URL starting with https:// or http://. Supported file types are .doc, .docx, .rtf, .dot, .dotx, .odt ,.odf, .fodt, .txt, .info, .pdf, .xps, .pdax, .eps, .xls, .xlsx, .ods, .fods, .csv, .xlsm, .xltx. Maximum file size is 10 MB.
+     * URL of the file being sent. Must be a valid URL starting with https:// or http://. Supported file types are .doc, .docx, .rtf, .dot, .dotx, .odt ,.odf, .fodt, .txt, .info, .pdf, .xps, .pdax, .eps, .xls, .xlsx, .ods, .fods, .csv, .xlsm, .xltx. Maximum file size is 200 MB.
      * <p>
      * The field is required.
      *
@@ -102,7 +102,7 @@ public class ViberFileContent {
      * Sets mediaUrl.
      * <p>
      * Field description:
-     * URL of the file being sent. Must be a valid URL starting with https:// or http://. Supported file types are .doc, .docx, .rtf, .dot, .dotx, .odt ,.odf, .fodt, .txt, .info, .pdf, .xps, .pdax, .eps, .xls, .xlsx, .ods, .fods, .csv, .xlsm, .xltx. Maximum file size is 10 MB.
+     * URL of the file being sent. Must be a valid URL starting with https:// or http://. Supported file types are .doc, .docx, .rtf, .dot, .dotx, .odt ,.odf, .fodt, .txt, .info, .pdf, .xps, .pdax, .eps, .xls, .xlsx, .ods, .fods, .csv, .xlsm, .xltx. Maximum file size is 200 MB.
      * <p>
      * The field is required.
      *

@@ -19,6 +19,8 @@ public class CallsMediaStreamConfigResponse {
 
     private String id;
 
+    private String name;
+
     private String url;
 
     /**
@@ -62,12 +64,50 @@ public class CallsMediaStreamConfigResponse {
     }
 
     /**
+     * Sets name.
+     * <p>
+     * Field description:
+     * Media-stream configuration name.
+     *
+     * @param name
+     * @return This {@link CallsMediaStreamConfigResponse instance}.
+     */
+    public CallsMediaStreamConfigResponse name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * Returns name.
+     * <p>
+     * Field description:
+     * Media-stream configuration name.
+     *
+     * @return name
+     */
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets name.
+     * <p>
+     * Field description:
+     * Media-stream configuration name.
+     *
+     * @param name
+     */
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
      * Sets url.
      * <p>
      * Field description:
      * Destination websocket or load balancer URL.
-     * <p>
-     * The field is required.
      *
      * @param url
      * @return This {@link CallsMediaStreamConfigResponse instance}.
@@ -82,8 +122,6 @@ public class CallsMediaStreamConfigResponse {
      * <p>
      * Field description:
      * Destination websocket or load balancer URL.
-     * <p>
-     * The field is required.
      *
      * @return url
      */
@@ -97,8 +135,6 @@ public class CallsMediaStreamConfigResponse {
      * <p>
      * Field description:
      * Destination websocket or load balancer URL.
-     * <p>
-     * The field is required.
      *
      * @param url
      */
@@ -117,12 +153,13 @@ public class CallsMediaStreamConfigResponse {
         }
         CallsMediaStreamConfigResponse callsMediaStreamConfigResponse = (CallsMediaStreamConfigResponse) o;
         return Objects.equals(this.id, callsMediaStreamConfigResponse.id)
+                && Objects.equals(this.name, callsMediaStreamConfigResponse.name)
                 && Objects.equals(this.url, callsMediaStreamConfigResponse.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, url);
+        return Objects.hash(id, name, url);
     }
 
     @Override
@@ -133,6 +170,9 @@ public class CallsMediaStreamConfigResponse {
                 .append(newLine)
                 .append("    id: ")
                 .append(toIndentedString(id))
+                .append(newLine)
+                .append("    name: ")
+                .append(toIndentedString(name))
                 .append(newLine)
                 .append("    url: ")
                 .append(toIndentedString(url))

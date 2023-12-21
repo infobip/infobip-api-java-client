@@ -13,86 +13,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents CallsVoiceResponseDetails model.
+ * Array of sent messages, one object per every message.
  */
 public class CallsVoiceResponseDetails {
 
-    private String messageId;
+    private String to;
 
     private CallsSingleMessageStatus status;
 
-    private String to;
-
-    /**
-     * Sets messageId.
-     * <p>
-     * Field description:
-     * The ID that uniquely identifies the message sent.
-     *
-     * @param messageId
-     * @return This {@link CallsVoiceResponseDetails instance}.
-     */
-    public CallsVoiceResponseDetails messageId(String messageId) {
-        this.messageId = messageId;
-        return this;
-    }
-
-    /**
-     * Returns messageId.
-     * <p>
-     * Field description:
-     * The ID that uniquely identifies the message sent.
-     *
-     * @return messageId
-     */
-    @JsonProperty("messageId")
-    public String getMessageId() {
-        return messageId;
-    }
-
-    /**
-     * Sets messageId.
-     * <p>
-     * Field description:
-     * The ID that uniquely identifies the message sent.
-     *
-     * @param messageId
-     */
-    @JsonProperty("messageId")
-    public void setMessageId(String messageId) {
-        this.messageId = messageId;
-    }
-
-    /**
-     * Sets status.
-     *
-     * @param status
-     * @return This {@link CallsVoiceResponseDetails instance}.
-     */
-    public CallsVoiceResponseDetails status(CallsSingleMessageStatus status) {
-        this.status = status;
-        return this;
-    }
-
-    /**
-     * Returns status.
-     *
-     * @return status
-     */
-    @JsonProperty("status")
-    public CallsSingleMessageStatus getStatus() {
-        return status;
-    }
-
-    /**
-     * Sets status.
-     *
-     * @param status
-     */
-    @JsonProperty("status")
-    public void setStatus(CallsSingleMessageStatus status) {
-        this.status = status;
-    }
+    private String messageId;
 
     /**
      * Sets to.
@@ -134,6 +63,77 @@ public class CallsVoiceResponseDetails {
         this.to = to;
     }
 
+    /**
+     * Sets status.
+     *
+     * @param status
+     * @return This {@link CallsVoiceResponseDetails instance}.
+     */
+    public CallsVoiceResponseDetails status(CallsSingleMessageStatus status) {
+        this.status = status;
+        return this;
+    }
+
+    /**
+     * Returns status.
+     *
+     * @return status
+     */
+    @JsonProperty("status")
+    public CallsSingleMessageStatus getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets status.
+     *
+     * @param status
+     */
+    @JsonProperty("status")
+    public void setStatus(CallsSingleMessageStatus status) {
+        this.status = status;
+    }
+
+    /**
+     * Sets messageId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the message sent.
+     *
+     * @param messageId
+     * @return This {@link CallsVoiceResponseDetails instance}.
+     */
+    public CallsVoiceResponseDetails messageId(String messageId) {
+        this.messageId = messageId;
+        return this;
+    }
+
+    /**
+     * Returns messageId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the message sent.
+     *
+     * @return messageId
+     */
+    @JsonProperty("messageId")
+    public String getMessageId() {
+        return messageId;
+    }
+
+    /**
+     * Sets messageId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the message sent.
+     *
+     * @param messageId
+     */
+    @JsonProperty("messageId")
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -143,14 +143,14 @@ public class CallsVoiceResponseDetails {
             return false;
         }
         CallsVoiceResponseDetails callsVoiceResponseDetails = (CallsVoiceResponseDetails) o;
-        return Objects.equals(this.messageId, callsVoiceResponseDetails.messageId)
+        return Objects.equals(this.to, callsVoiceResponseDetails.to)
                 && Objects.equals(this.status, callsVoiceResponseDetails.status)
-                && Objects.equals(this.to, callsVoiceResponseDetails.to);
+                && Objects.equals(this.messageId, callsVoiceResponseDetails.messageId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageId, status, to);
+        return Objects.hash(to, status, messageId);
     }
 
     @Override
@@ -159,14 +159,14 @@ public class CallsVoiceResponseDetails {
         return new StringBuilder()
                 .append("class CallsVoiceResponseDetails {")
                 .append(newLine)
-                .append("    messageId: ")
-                .append(toIndentedString(messageId))
+                .append("    to: ")
+                .append(toIndentedString(to))
                 .append(newLine)
                 .append("    status: ")
                 .append(toIndentedString(status))
                 .append(newLine)
-                .append("    to: ")
-                .append(toIndentedString(to))
+                .append("    messageId: ")
+                .append(toIndentedString(messageId))
                 .append(newLine)
                 .append("}")
                 .toString();

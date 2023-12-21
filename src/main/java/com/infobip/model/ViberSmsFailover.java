@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * SMS to be sent in case a message could not be delivered through the main channel.
+ * SMS message to be sent if the Viber message could not be delivered.
  */
 public class ViberSmsFailover {
 
@@ -29,7 +29,7 @@ public class ViberSmsFailover {
      * Sets from.
      * <p>
      * Field description:
-     * Message failover sender.
+     * SMS sender number. Must be in international format.
      * <p>
      * The field is required.
      *
@@ -45,7 +45,7 @@ public class ViberSmsFailover {
      * Returns from.
      * <p>
      * Field description:
-     * Message failover sender.
+     * SMS sender number. Must be in international format.
      * <p>
      * The field is required.
      *
@@ -60,7 +60,7 @@ public class ViberSmsFailover {
      * Sets from.
      * <p>
      * Field description:
-     * Message failover sender.
+     * SMS sender number. Must be in international format.
      * <p>
      * The field is required.
      *
@@ -75,7 +75,7 @@ public class ViberSmsFailover {
      * Sets text.
      * <p>
      * Field description:
-     * Message failover content.
+     * Content of the SMS that will be sent.
      * <p>
      * The field is required.
      *
@@ -91,7 +91,7 @@ public class ViberSmsFailover {
      * Returns text.
      * <p>
      * Field description:
-     * Message failover content.
+     * Content of the SMS that will be sent.
      * <p>
      * The field is required.
      *
@@ -106,7 +106,7 @@ public class ViberSmsFailover {
      * Sets text.
      * <p>
      * Field description:
-     * Message failover content.
+     * Content of the SMS that will be sent.
      * <p>
      * The field is required.
      *

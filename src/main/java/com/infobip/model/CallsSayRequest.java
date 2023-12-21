@@ -27,8 +27,6 @@ public class CallsSayRequest {
 
     private CallsVoicePreferences preferences;
 
-    private CallsDtmfTermination stopOn;
-
     /**
      * Sets text.
      * <p>
@@ -223,37 +221,6 @@ public class CallsSayRequest {
         this.preferences = preferences;
     }
 
-    /**
-     * Sets stopOn.
-     *
-     * @param stopOn
-     * @return This {@link CallsSayRequest instance}.
-     */
-    public CallsSayRequest stopOn(CallsDtmfTermination stopOn) {
-        this.stopOn = stopOn;
-        return this;
-    }
-
-    /**
-     * Returns stopOn.
-     *
-     * @return stopOn
-     */
-    @JsonProperty("stopOn")
-    public CallsDtmfTermination getStopOn() {
-        return stopOn;
-    }
-
-    /**
-     * Sets stopOn.
-     *
-     * @param stopOn
-     */
-    @JsonProperty("stopOn")
-    public void setStopOn(CallsDtmfTermination stopOn) {
-        this.stopOn = stopOn;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -267,13 +234,12 @@ public class CallsSayRequest {
                 && Objects.equals(this.language, callsSayRequest.language)
                 && Objects.equals(this.speechRate, callsSayRequest.speechRate)
                 && Objects.equals(this.loopCount, callsSayRequest.loopCount)
-                && Objects.equals(this.preferences, callsSayRequest.preferences)
-                && Objects.equals(this.stopOn, callsSayRequest.stopOn);
+                && Objects.equals(this.preferences, callsSayRequest.preferences);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, language, speechRate, loopCount, preferences, stopOn);
+        return Objects.hash(text, language, speechRate, loopCount, preferences);
     }
 
     @Override
@@ -296,9 +262,6 @@ public class CallsSayRequest {
                 .append(newLine)
                 .append("    preferences: ")
                 .append(toIndentedString(preferences))
-                .append(newLine)
-                .append("    stopOn: ")
-                .append(toIndentedString(stopOn))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -34,6 +34,8 @@ public class EmailDomainResponse {
 
     private OffsetDateTime createdAt;
 
+    private String returnPathAddress;
+
     /**
      * Sets domainId.
      * <p>
@@ -286,7 +288,7 @@ public class EmailDomainResponse {
      * Sets createdAt.
      * <p>
      * Field description:
-     * Date the domain was created. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;
+     * Date the domain was created. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @param createdAt
      * @return This {@link EmailDomainResponse instance}.
@@ -300,7 +302,7 @@ public class EmailDomainResponse {
      * Returns createdAt.
      * <p>
      * Field description:
-     * Date the domain was created. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;
+     * Date the domain was created. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @return createdAt
      */
@@ -313,13 +315,53 @@ public class EmailDomainResponse {
      * Sets createdAt.
      * <p>
      * Field description:
-     * Date the domain was created. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;
+     * Date the domain was created. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @param createdAt
      */
     @JsonProperty("createdAt")
     public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    /**
+     * Sets returnPathAddress.
+     * <p>
+     * Field description:
+     * Mailbox for return path.
+     *
+     * @param returnPathAddress
+     * @return This {@link EmailDomainResponse instance}.
+     */
+    public EmailDomainResponse returnPathAddress(String returnPathAddress) {
+        this.returnPathAddress = returnPathAddress;
+        return this;
+    }
+
+    /**
+     * Returns returnPathAddress.
+     * <p>
+     * Field description:
+     * Mailbox for return path.
+     *
+     * @return returnPathAddress
+     */
+    @JsonProperty("returnPathAddress")
+    public String getReturnPathAddress() {
+        return returnPathAddress;
+    }
+
+    /**
+     * Sets returnPathAddress.
+     * <p>
+     * Field description:
+     * Mailbox for return path.
+     *
+     * @param returnPathAddress
+     */
+    @JsonProperty("returnPathAddress")
+    public void setReturnPathAddress(String returnPathAddress) {
+        this.returnPathAddress = returnPathAddress;
     }
 
     @Override
@@ -337,12 +379,13 @@ public class EmailDomainResponse {
                 && Objects.equals(this.tracking, emailDomainResponse.tracking)
                 && Objects.equals(this.dnsRecords, emailDomainResponse.dnsRecords)
                 && Objects.equals(this.blocked, emailDomainResponse.blocked)
-                && Objects.equals(this.createdAt, emailDomainResponse.createdAt);
+                && Objects.equals(this.createdAt, emailDomainResponse.createdAt)
+                && Objects.equals(this.returnPathAddress, emailDomainResponse.returnPathAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(domainId, domainName, active, tracking, dnsRecords, blocked, createdAt);
+        return Objects.hash(domainId, domainName, active, tracking, dnsRecords, blocked, createdAt, returnPathAddress);
     }
 
     @Override
@@ -371,6 +414,9 @@ public class EmailDomainResponse {
                 .append(newLine)
                 .append("    createdAt: ")
                 .append(toIndentedString(createdAt))
+                .append(newLine)
+                .append("    returnPathAddress: ")
+                .append(toIndentedString(returnPathAddress))
                 .append(newLine)
                 .append("}")
                 .toString();

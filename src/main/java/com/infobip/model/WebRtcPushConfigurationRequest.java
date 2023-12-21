@@ -19,6 +19,8 @@ public class WebRtcPushConfigurationRequest {
 
     private String applicationId;
 
+    private String name;
+
     private WebRtcIosPushNotificationConfig ios;
 
     private WebRtcAndroidPushNotificationConfig android;
@@ -67,6 +69,46 @@ public class WebRtcPushConfigurationRequest {
     @JsonProperty("applicationId")
     public void setApplicationId(String applicationId) {
         this.applicationId = applicationId;
+    }
+
+    /**
+     * Sets name.
+     * <p>
+     * Field description:
+     * Optional. Name describing the push configuration.
+     *
+     * @param name
+     * @return This {@link WebRtcPushConfigurationRequest instance}.
+     */
+    public WebRtcPushConfigurationRequest name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * Returns name.
+     * <p>
+     * Field description:
+     * Optional. Name describing the push configuration.
+     *
+     * @return name
+     */
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets name.
+     * <p>
+     * Field description:
+     * Optional. Name describing the push configuration.
+     *
+     * @param name
+     */
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -141,13 +183,14 @@ public class WebRtcPushConfigurationRequest {
         }
         WebRtcPushConfigurationRequest webRtcPushConfigurationRequest = (WebRtcPushConfigurationRequest) o;
         return Objects.equals(this.applicationId, webRtcPushConfigurationRequest.applicationId)
+                && Objects.equals(this.name, webRtcPushConfigurationRequest.name)
                 && Objects.equals(this.ios, webRtcPushConfigurationRequest.ios)
                 && Objects.equals(this.android, webRtcPushConfigurationRequest.android);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(applicationId, ios, android);
+        return Objects.hash(applicationId, name, ios, android);
     }
 
     @Override
@@ -158,6 +201,9 @@ public class WebRtcPushConfigurationRequest {
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    name: ")
+                .append(toIndentedString(name))
                 .append(newLine)
                 .append("    ios: ")
                 .append(toIndentedString(ios))

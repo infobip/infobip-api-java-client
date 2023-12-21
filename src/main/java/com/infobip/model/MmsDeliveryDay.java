@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Days of the week which are included in the delivery time window. At least one day must be provided. Separate multiple days with a comma.
+ * Days of the week which are included in the delivery time window. At least one day must be provided.
  */
 public enum MmsDeliveryDay {
     MONDAY("MONDAY"),

@@ -18,9 +18,13 @@ import java.util.Objects;
  */
 public class SmsInboundMessage {
 
+    private String applicationId;
+
     private String callbackData;
 
     private String cleanText;
+
+    private String entityId;
 
     private String from;
 
@@ -28,7 +32,7 @@ public class SmsInboundMessage {
 
     private String messageId;
 
-    private SmsPrice price;
+    private MessagePrice price;
 
     private OffsetDateTime receivedAt;
 
@@ -37,6 +41,46 @@ public class SmsInboundMessage {
     private String text;
 
     private String to;
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Application id linked to the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     * @return This {@link SmsInboundMessage instance}.
+     */
+    public SmsInboundMessage applicationId(String applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * Application id linked to the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Application id linked to the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
 
     /**
      * Sets callbackData.
@@ -116,6 +160,46 @@ public class SmsInboundMessage {
     @JsonProperty("cleanText")
     public void setCleanText(String cleanText) {
         this.cleanText = cleanText;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Entity id linked to the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     * @return This {@link SmsInboundMessage instance}.
+     */
+    public SmsInboundMessage entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * Entity id linked to the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Entity id linked to the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
     }
 
     /**
@@ -244,7 +328,7 @@ public class SmsInboundMessage {
      * @param price
      * @return This {@link SmsInboundMessage instance}.
      */
-    public SmsInboundMessage price(SmsPrice price) {
+    public SmsInboundMessage price(MessagePrice price) {
         this.price = price;
         return this;
     }
@@ -255,7 +339,7 @@ public class SmsInboundMessage {
      * @return price
      */
     @JsonProperty("price")
-    public SmsPrice getPrice() {
+    public MessagePrice getPrice() {
         return price;
     }
 
@@ -265,7 +349,7 @@ public class SmsInboundMessage {
      * @param price
      */
     @JsonProperty("price")
-    public void setPrice(SmsPrice price) {
+    public void setPrice(MessagePrice price) {
         this.price = price;
     }
 
@@ -438,8 +522,10 @@ public class SmsInboundMessage {
             return false;
         }
         SmsInboundMessage smsInboundMessage = (SmsInboundMessage) o;
-        return Objects.equals(this.callbackData, smsInboundMessage.callbackData)
+        return Objects.equals(this.applicationId, smsInboundMessage.applicationId)
+                && Objects.equals(this.callbackData, smsInboundMessage.callbackData)
                 && Objects.equals(this.cleanText, smsInboundMessage.cleanText)
+                && Objects.equals(this.entityId, smsInboundMessage.entityId)
                 && Objects.equals(this.from, smsInboundMessage.from)
                 && Objects.equals(this.keyword, smsInboundMessage.keyword)
                 && Objects.equals(this.messageId, smsInboundMessage.messageId)
@@ -452,7 +538,19 @@ public class SmsInboundMessage {
 
     @Override
     public int hashCode() {
-        return Objects.hash(callbackData, cleanText, from, keyword, messageId, price, receivedAt, smsCount, text, to);
+        return Objects.hash(
+                applicationId,
+                callbackData,
+                cleanText,
+                entityId,
+                from,
+                keyword,
+                messageId,
+                price,
+                receivedAt,
+                smsCount,
+                text,
+                to);
     }
 
     @Override
@@ -461,11 +559,17 @@ public class SmsInboundMessage {
         return new StringBuilder()
                 .append("class SmsInboundMessage {")
                 .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
+                .append(newLine)
                 .append("    callbackData: ")
                 .append(toIndentedString(callbackData))
                 .append(newLine)
                 .append("    cleanText: ")
                 .append(toIndentedString(cleanText))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
                 .append(newLine)
                 .append("    from: ")
                 .append(toIndentedString(from))

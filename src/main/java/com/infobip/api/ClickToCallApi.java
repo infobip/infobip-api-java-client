@@ -86,11 +86,11 @@ public class ClickToCallApi {
     /**
      * Send click-to-call message.
      * <p>
-     * This method allows you to send click to call voice messages.
+     * This method allows you to send click-to-call voice messages.
      *
      * @param callsClickToCallMessageBody  (required)
      * @return SendClickToCallMessageRequest
-     * @see <a href="https://www.infobip.com/docs/voice-and-video/send-voice-over-api">Learn more about click-to-call</a>
+     * @see <a href="https://www.infobip.com/docs/voice-and-video/click-to-call">Learn more about click-to-call</a>
      */
     public SendClickToCallMessageRequest sendClickToCallMessage(
             CallsClickToCallMessageBody callsClickToCallMessageBody) {

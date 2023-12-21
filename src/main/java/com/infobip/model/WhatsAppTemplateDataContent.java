@@ -97,7 +97,7 @@ public class WhatsAppTemplateDataContent {
      * Sets buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered. It can have up to three &#x60;quick reply&#x60; buttons or only one &#x60;dynamic URL&#x60; button.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons.
      *
      * @param buttons
      * @return This {@link WhatsAppTemplateDataContent instance}.
@@ -111,7 +111,7 @@ public class WhatsAppTemplateDataContent {
      * Adds and item into buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered. It can have up to three &#x60;quick reply&#x60; buttons or only one &#x60;dynamic URL&#x60; button.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons.
      *
      * @param buttonsItem The item to be added to the list.
      * @return This {@link WhatsAppTemplateDataContent instance}.
@@ -128,7 +128,7 @@ public class WhatsAppTemplateDataContent {
      * Returns buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered. It can have up to three &#x60;quick reply&#x60; buttons or only one &#x60;dynamic URL&#x60; button.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons.
      *
      * @return buttons
      */
@@ -141,7 +141,7 @@ public class WhatsAppTemplateDataContent {
      * Sets buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered. It can have up to three &#x60;quick reply&#x60; buttons or only one &#x60;dynamic URL&#x60; button.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons.
      *
      * @param buttons
      */

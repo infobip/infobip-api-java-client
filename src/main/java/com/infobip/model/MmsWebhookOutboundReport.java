@@ -40,6 +40,10 @@ public class MmsWebhookOutboundReport {
 
     private MessageError error;
 
+    private String entityId;
+
+    private String applicationId;
+
     /**
      * Sets bulkId.
      * <p>
@@ -124,7 +128,7 @@ public class MmsWebhookOutboundReport {
      * Sets to.
      * <p>
      * Field description:
-     * Destination address
+     * Destination address.
      *
      * @param to
      * @return This {@link MmsWebhookOutboundReport instance}.
@@ -138,7 +142,7 @@ public class MmsWebhookOutboundReport {
      * Returns to.
      * <p>
      * Field description:
-     * Destination address
+     * Destination address.
      *
      * @return to
      */
@@ -151,7 +155,7 @@ public class MmsWebhookOutboundReport {
      * Sets to.
      * <p>
      * Field description:
-     * Destination address
+     * Destination address.
      *
      * @param to
      */
@@ -164,7 +168,7 @@ public class MmsWebhookOutboundReport {
      * Sets sentAt.
      * <p>
      * Field description:
-     * Tells when the MMS was sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Indicates whether the MMS was sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @param sentAt
      * @return This {@link MmsWebhookOutboundReport instance}.
@@ -178,7 +182,7 @@ public class MmsWebhookOutboundReport {
      * Returns sentAt.
      * <p>
      * Field description:
-     * Tells when the MMS was sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Indicates whether the MMS was sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @return sentAt
      */
@@ -191,7 +195,7 @@ public class MmsWebhookOutboundReport {
      * Sets sentAt.
      * <p>
      * Field description:
-     * Tells when the MMS was sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Indicates whether the MMS was sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @param sentAt
      */
@@ -204,7 +208,7 @@ public class MmsWebhookOutboundReport {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Tells when the MMS was finished processing by Infobip (i.e., delivered to the destination, delivered to the destination network, etc.)
+     * Indicates whether the MMS was finished processing by Infobip (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @param doneAt
      * @return This {@link MmsWebhookOutboundReport instance}.
@@ -218,7 +222,7 @@ public class MmsWebhookOutboundReport {
      * Returns doneAt.
      * <p>
      * Field description:
-     * Tells when the MMS was finished processing by Infobip (i.e., delivered to the destination, delivered to the destination network, etc.)
+     * Indicates whether the MMS was finished processing by Infobip (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @return doneAt
      */
@@ -231,7 +235,7 @@ public class MmsWebhookOutboundReport {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Tells when the MMS was finished processing by Infobip (i.e., delivered to the destination, delivered to the destination network, etc.)
+     * Indicates whether the MMS was finished processing by Infobip (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @param doneAt
      */
@@ -453,6 +457,86 @@ public class MmsWebhookOutboundReport {
         this.error = error;
     }
 
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Entity used in MMS request.
+     *
+     * @param entityId
+     * @return This {@link MmsWebhookOutboundReport instance}.
+     */
+    public MmsWebhookOutboundReport entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * Entity used in MMS request.
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Entity used in MMS request.
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Application used in MMS request.
+     *
+     * @param applicationId
+     * @return This {@link MmsWebhookOutboundReport instance}.
+     */
+    public MmsWebhookOutboundReport applicationId(String applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * Application used in MMS request.
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Application used in MMS request.
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -472,13 +556,27 @@ public class MmsWebhookOutboundReport {
                 && Objects.equals(this.callbackData, mmsWebhookOutboundReport.callbackData)
                 && Objects.equals(this.price, mmsWebhookOutboundReport.price)
                 && Objects.equals(this.status, mmsWebhookOutboundReport.status)
-                && Objects.equals(this.error, mmsWebhookOutboundReport.error);
+                && Objects.equals(this.error, mmsWebhookOutboundReport.error)
+                && Objects.equals(this.entityId, mmsWebhookOutboundReport.entityId)
+                && Objects.equals(this.applicationId, mmsWebhookOutboundReport.applicationId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                bulkId, messageId, to, sentAt, doneAt, smsCount, mccMnc, callbackData, price, status, error);
+                bulkId,
+                messageId,
+                to,
+                sentAt,
+                doneAt,
+                smsCount,
+                mccMnc,
+                callbackData,
+                price,
+                status,
+                error,
+                entityId,
+                applicationId);
     }
 
     @Override
@@ -519,6 +617,12 @@ public class MmsWebhookOutboundReport {
                 .append(newLine)
                 .append("    error: ")
                 .append(toIndentedString(error))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
                 .append(newLine)
                 .append("}")
                 .toString();

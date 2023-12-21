@@ -40,6 +40,8 @@ public class MmsWebhookInboundReport {
 
     private List<MmsWebhookInboundMessageSegment> message = null;
 
+    private List<MmsWebhookInboundDestination> group = null;
+
     private MessagePrice price;
 
     /**
@@ -460,6 +462,63 @@ public class MmsWebhookInboundReport {
     }
 
     /**
+     * Sets group.
+     * <p>
+     * Field description:
+     * Recipients of group MMS.
+     *
+     * @param group
+     * @return This {@link MmsWebhookInboundReport instance}.
+     */
+    public MmsWebhookInboundReport group(List<MmsWebhookInboundDestination> group) {
+        this.group = group;
+        return this;
+    }
+
+    /**
+     * Adds and item into group.
+     * <p>
+     * Field description:
+     * Recipients of group MMS.
+     *
+     * @param groupItem The item to be added to the list.
+     * @return This {@link MmsWebhookInboundReport instance}.
+     */
+    public MmsWebhookInboundReport addGroupItem(MmsWebhookInboundDestination groupItem) {
+        if (this.group == null) {
+            this.group = new ArrayList<>();
+        }
+        this.group.add(groupItem);
+        return this;
+    }
+
+    /**
+     * Returns group.
+     * <p>
+     * Field description:
+     * Recipients of group MMS.
+     *
+     * @return group
+     */
+    @JsonProperty("group")
+    public List<MmsWebhookInboundDestination> getGroup() {
+        return group;
+    }
+
+    /**
+     * Sets group.
+     * <p>
+     * Field description:
+     * Recipients of group MMS.
+     *
+     * @param group
+     */
+    @JsonProperty("group")
+    public void setGroup(List<MmsWebhookInboundDestination> group) {
+        this.group = group;
+    }
+
+    /**
      * Sets price.
      *
      * @param price
@@ -509,6 +568,7 @@ public class MmsWebhookInboundReport {
                 && Objects.equals(this.callbackData, mmsWebhookInboundReport.callbackData)
                 && Objects.equals(this.userAgent, mmsWebhookInboundReport.userAgent)
                 && Objects.equals(this.message, mmsWebhookInboundReport.message)
+                && Objects.equals(this.group, mmsWebhookInboundReport.group)
                 && Objects.equals(this.price, mmsWebhookInboundReport.price);
     }
 
@@ -525,6 +585,7 @@ public class MmsWebhookInboundReport {
                 callbackData,
                 userAgent,
                 message,
+                group,
                 price);
     }
 
@@ -563,6 +624,9 @@ public class MmsWebhookInboundReport {
                 .append(newLine)
                 .append("    message: ")
                 .append(toIndentedString(message))
+                .append(newLine)
+                .append("    group: ")
+                .append(toIndentedString(group))
                 .append(newLine)
                 .append("    price: ")
                 .append(toIndentedString(price))

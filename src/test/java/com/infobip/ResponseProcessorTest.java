@@ -265,7 +265,8 @@ class ResponseProcessorTest {
                 + "      \"text\": \"Bad request\",\n"
                 + "      \"validationErrors\": {\n"
                 + "        \"message\": [\n"
-                + "          \"must not be null\"\n"
+                + "          \"must not be null\"\n,"
+                + "          \"must not be empty\"\n"
                 + "        ]\n"
                 + "      }\n"
                 + "    }\n"
@@ -283,7 +284,73 @@ class ResponseProcessorTest {
         ApiExceptionDetails expectedDetails = new ApiExceptionDetails();
         expectedDetails.setMessageId("BAD_REQUEST");
         expectedDetails.setText("Bad request");
-        expectedDetails.setValidationErrors(Map.of("message", List.of("must not be null")));
+        expectedDetails.setValidationErrors(Map.of("message", List.of("must not be null", "must not be empty")));
+        expectedDetails.setErrorCode("E400");
+        expectedDetails.setDescription("Bad request");
+
+        var violation1 = new ApiExceptionDetails.Violation();
+        violation1.setProperty("message");
+        violation1.setViolation("must not be null");
+
+        var violation2 = new ApiExceptionDetails.Violation();
+        violation2.setProperty("message");
+        violation2.setViolation("must not be empty");
+
+        expectedDetails.setViolations(List.of(violation1, violation2));
+
+        thenExceptionOfType(ApiException.class)
+                .isThrownBy(() -> responseProcessor.processResponse(response, TestResource.class))
+                .withNoCause()
+                .satisfies(
+                        apiException -> then(apiException.responseStatusCode()).isEqualTo(givenResponseCode))
+                .satisfies(apiException -> then(apiException.rawResponseBody()).isEqualTo(givenResponseBody))
+                .satisfies(apiException -> then(apiException.details()).isEqualTo(expectedDetails));
+        thenResponseBodyIsClosed(response);
+    }
+
+    @Test
+    void shouldThrowApiExceptionIfRequestFailsWith4XXStatusAndAdditionalErrorFields() throws IOException {
+        // given
+        int givenResponseCode = 400;
+        String givenResponseBody = "{\n" + "  \"errorCode\": \"E400\",\n"
+                + "  \"description\": \"Provided request can not be processed.\",\n"
+                + "  \"action\": \"Check request syntax and provided violations to adjust the request accordingly.\",\n"
+                + "  \"violations\": [\n"
+                + "    {\n"
+                + "      \"property\": \"Some property\",\n"
+                + "      \"violation\": \"Some violation\"\n"
+                + "    }\n"
+                + "  ],\n"
+                + "  \"resources\": [\n"
+                + "    {\n"
+                + "      \"name\": \"API docs\",\n"
+                + "      \"url\": \"https://www.infobip.com/docs/api\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+        MockResponse mockResponse =
+                new MockResponse().setResponseCode(givenResponseCode).setBody(givenResponseBody);
+        server.enqueue(mockResponse);
+
+        ResponseProcessor responseProcessor = new ResponseProcessor(downloader, json, deprecationChecker);
+
+        // when, then
+        Response response = sendRequest(server);
+
+        ApiExceptionDetails expectedDetails = new ApiExceptionDetails();
+        expectedDetails.setErrorCode("E400");
+        expectedDetails.setDescription("Provided request can not be processed.");
+        expectedDetails.setAction("Check request syntax and provided violations to adjust the request accordingly.");
+
+        var violation = new ApiExceptionDetails.Violation();
+        violation.setProperty("Some property");
+        violation.setViolation("Some violation");
+        expectedDetails.setViolations(List.of(violation));
+
+        var resource = new ApiExceptionDetails.Resource();
+        resource.setName("API docs");
+        resource.setUrl("https://www.infobip.com/docs/api");
+        expectedDetails.setResources(List.of(resource));
 
         thenExceptionOfType(ApiException.class)
                 .isThrownBy(() -> responseProcessor.processResponse(response, TestResource.class))
@@ -318,6 +385,8 @@ class ResponseProcessorTest {
         ApiExceptionDetails expectedDetails = new ApiExceptionDetails();
         expectedDetails.setMessageId("GENERAL_ERROR");
         expectedDetails.setText("Something went wrong. Please contact support.");
+        expectedDetails.setErrorCode("E500");
+        expectedDetails.setDescription("Something went wrong. Please contact support.");
 
         thenExceptionOfType(ApiException.class)
                 .isThrownBy(() -> responseProcessor.processResponse(response, TestResource.class))
@@ -330,7 +399,61 @@ class ResponseProcessorTest {
     }
 
     @Test
-    void shouldRespectDeprecationAndSunsetHeaders() throws IOException, ApiException {
+    void shouldThrowApiExceptionIfRequestFailsWith5XXStatusAndAdditionalErrorFields() throws IOException {
+        // given
+        int givenResponseCode = 500;
+        String givenResponseBody = "{\n" + "  \"errorCode\": \"E500\",\n"
+                + "  \"description\": \"Something went wrong.\",\n"
+                + "  \"action\": \"Please contact the support.\",\n"
+                + "  \"violations\": [\n"
+                + "    {\n"
+                + "      \"property\": \"Some property\",\n"
+                + "      \"violation\": \"Some violation\"\n"
+                + "    }\n"
+                + "  ],\n"
+                + "  \"resources\": [\n"
+                + "    {\n"
+                + "      \"name\": \"API docs\",\n"
+                + "      \"url\": \"https://www.infobip.com/docs/api\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+        MockResponse mockResponse =
+                new MockResponse().setResponseCode(givenResponseCode).setBody(givenResponseBody);
+        server.enqueue(mockResponse);
+
+        ResponseProcessor responseProcessor = new ResponseProcessor(downloader, json, deprecationChecker);
+
+        // when, then
+        Response response = sendRequest(server);
+
+        ApiExceptionDetails expectedDetails = new ApiExceptionDetails();
+        expectedDetails.setErrorCode("E500");
+        expectedDetails.setDescription("Something went wrong.");
+        expectedDetails.setAction("Please contact the support.");
+
+        var violation = new ApiExceptionDetails.Violation();
+        violation.setProperty("Some property");
+        violation.setViolation("Some violation");
+        expectedDetails.setViolations(List.of(violation));
+
+        var resource = new ApiExceptionDetails.Resource();
+        resource.setName("API docs");
+        resource.setUrl("https://www.infobip.com/docs/api");
+        expectedDetails.setResources(List.of(resource));
+
+        thenExceptionOfType(ApiException.class)
+                .isThrownBy(() -> responseProcessor.processResponse(response, TestResource.class))
+                .withNoCause()
+                .satisfies(
+                        apiException -> then(apiException.responseStatusCode()).isEqualTo(givenResponseCode))
+                .satisfies(apiException -> then(apiException.rawResponseBody()).isEqualTo(givenResponseBody))
+                .satisfies(apiException -> then(apiException.details()).isEqualTo(expectedDetails));
+        thenResponseBodyIsClosed(response);
+    }
+
+    @Test
+    void shouldRespectDeprecationAndSunsetHeaders() throws IOException {
         // given
         TestResource testBody = new TestResource("Hello World!");
 

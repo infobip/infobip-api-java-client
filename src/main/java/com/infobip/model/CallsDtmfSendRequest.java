@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -17,7 +19,67 @@ import java.util.Objects;
  */
 public class CallsDtmfSendRequest {
 
+    private Map<String, String> customData = null;
+
     private String dtmf;
+
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @param customData
+     * @return This {@link CallsDtmfSendRequest instance}.
+     */
+    public CallsDtmfSendRequest customData(Map<String, String> customData) {
+        this.customData = customData;
+        return this;
+    }
+
+    /**
+     * Puts and entry into customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @param key The given key.
+     * @param customDataItem The item to be associated with the given key.
+     * @return This {@link CallsDtmfSendRequest instance}.
+     */
+    public CallsDtmfSendRequest putCustomDataItem(String key, String customDataItem) {
+        if (this.customData == null) {
+            this.customData = new HashMap<>();
+        }
+        this.customData.put(key, customDataItem);
+        return this;
+    }
+
+    /**
+     * Returns customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @return customData
+     */
+    @JsonProperty("customData")
+    public Map<String, String> getCustomData() {
+        return customData;
+    }
+
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @param customData
+     */
+    @JsonProperty("customData")
+    public void setCustomData(Map<String, String> customData) {
+        this.customData = customData;
+    }
 
     /**
      * Sets dtmf.
@@ -74,12 +136,13 @@ public class CallsDtmfSendRequest {
             return false;
         }
         CallsDtmfSendRequest callsDtmfSendRequest = (CallsDtmfSendRequest) o;
-        return Objects.equals(this.dtmf, callsDtmfSendRequest.dtmf);
+        return Objects.equals(this.customData, callsDtmfSendRequest.customData)
+                && Objects.equals(this.dtmf, callsDtmfSendRequest.dtmf);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dtmf);
+        return Objects.hash(customData, dtmf);
     }
 
     @Override
@@ -87,6 +150,9 @@ public class CallsDtmfSendRequest {
         String newLine = System.lineSeparator();
         return new StringBuilder()
                 .append("class CallsDtmfSendRequest {")
+                .append(newLine)
+                .append("    customData: ")
+                .append(toIndentedString(customData))
                 .append(newLine)
                 .append("    dtmf: ")
                 .append(toIndentedString(dtmf))

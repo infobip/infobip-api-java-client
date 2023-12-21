@@ -21,17 +21,17 @@ public class WebRtcPushConfigurationResponse {
 
     private String applicationId;
 
-    private WebRtcIosPushNotificationConfig ios;
+    private String name;
 
-    private WebRtcAndroidPushNotificationConfig android;
+    private Boolean androidConfigured;
+
+    private Boolean iosConfigured;
 
     /**
      * Sets id.
      * <p>
      * Field description:
      * The identifier to associate the push configuration with.
-     * <p>
-     * The field is required.
      *
      * @param id
      * @return This {@link WebRtcPushConfigurationResponse instance}.
@@ -46,8 +46,6 @@ public class WebRtcPushConfigurationResponse {
      * <p>
      * Field description:
      * The identifier to associate the push configuration with.
-     * <p>
-     * The field is required.
      *
      * @return id
      */
@@ -61,8 +59,6 @@ public class WebRtcPushConfigurationResponse {
      * <p>
      * Field description:
      * The identifier to associate the push configuration with.
-     * <p>
-     * The field is required.
      *
      * @param id
      */
@@ -76,8 +72,6 @@ public class WebRtcPushConfigurationResponse {
      * <p>
      * Field description:
      * Application id to associate the push configuration with.
-     * <p>
-     * The field is required.
      *
      * @param applicationId
      * @return This {@link WebRtcPushConfigurationResponse instance}.
@@ -92,8 +86,6 @@ public class WebRtcPushConfigurationResponse {
      * <p>
      * Field description:
      * Application id to associate the push configuration with.
-     * <p>
-     * The field is required.
      *
      * @return applicationId
      */
@@ -107,8 +99,6 @@ public class WebRtcPushConfigurationResponse {
      * <p>
      * Field description:
      * Application id to associate the push configuration with.
-     * <p>
-     * The field is required.
      *
      * @param applicationId
      */
@@ -118,65 +108,123 @@ public class WebRtcPushConfigurationResponse {
     }
 
     /**
-     * Sets ios.
+     * Sets name.
+     * <p>
+     * Field description:
+     * Name describing the push configuration.
      *
-     * @param ios
+     * @param name
      * @return This {@link WebRtcPushConfigurationResponse instance}.
      */
-    public WebRtcPushConfigurationResponse ios(WebRtcIosPushNotificationConfig ios) {
-        this.ios = ios;
+    public WebRtcPushConfigurationResponse name(String name) {
+        this.name = name;
         return this;
     }
 
     /**
-     * Returns ios.
+     * Returns name.
+     * <p>
+     * Field description:
+     * Name describing the push configuration.
      *
-     * @return ios
+     * @return name
      */
-    @JsonProperty("ios")
-    public WebRtcIosPushNotificationConfig getIos() {
-        return ios;
+    @JsonProperty("name")
+    public String getName() {
+        return name;
     }
 
     /**
-     * Sets ios.
+     * Sets name.
+     * <p>
+     * Field description:
+     * Name describing the push configuration.
      *
-     * @param ios
+     * @param name
      */
-    @JsonProperty("ios")
-    public void setIos(WebRtcIosPushNotificationConfig ios) {
-        this.ios = ios;
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
-     * Sets android.
+     * Sets androidConfigured.
+     * <p>
+     * Field description:
+     * Flag indicating whether the Android push notification config is set.
      *
-     * @param android
+     * @param androidConfigured
      * @return This {@link WebRtcPushConfigurationResponse instance}.
      */
-    public WebRtcPushConfigurationResponse android(WebRtcAndroidPushNotificationConfig android) {
-        this.android = android;
+    public WebRtcPushConfigurationResponse androidConfigured(Boolean androidConfigured) {
+        this.androidConfigured = androidConfigured;
         return this;
     }
 
     /**
-     * Returns android.
+     * Returns androidConfigured.
+     * <p>
+     * Field description:
+     * Flag indicating whether the Android push notification config is set.
      *
-     * @return android
+     * @return androidConfigured
      */
-    @JsonProperty("android")
-    public WebRtcAndroidPushNotificationConfig getAndroid() {
-        return android;
+    @JsonProperty("androidConfigured")
+    public Boolean getAndroidConfigured() {
+        return androidConfigured;
     }
 
     /**
-     * Sets android.
+     * Sets androidConfigured.
+     * <p>
+     * Field description:
+     * Flag indicating whether the Android push notification config is set.
      *
-     * @param android
+     * @param androidConfigured
      */
-    @JsonProperty("android")
-    public void setAndroid(WebRtcAndroidPushNotificationConfig android) {
-        this.android = android;
+    @JsonProperty("androidConfigured")
+    public void setAndroidConfigured(Boolean androidConfigured) {
+        this.androidConfigured = androidConfigured;
+    }
+
+    /**
+     * Sets iosConfigured.
+     * <p>
+     * Field description:
+     * Flag indicating whether the iOS push notification config is set.
+     *
+     * @param iosConfigured
+     * @return This {@link WebRtcPushConfigurationResponse instance}.
+     */
+    public WebRtcPushConfigurationResponse iosConfigured(Boolean iosConfigured) {
+        this.iosConfigured = iosConfigured;
+        return this;
+    }
+
+    /**
+     * Returns iosConfigured.
+     * <p>
+     * Field description:
+     * Flag indicating whether the iOS push notification config is set.
+     *
+     * @return iosConfigured
+     */
+    @JsonProperty("iosConfigured")
+    public Boolean getIosConfigured() {
+        return iosConfigured;
+    }
+
+    /**
+     * Sets iosConfigured.
+     * <p>
+     * Field description:
+     * Flag indicating whether the iOS push notification config is set.
+     *
+     * @param iosConfigured
+     */
+    @JsonProperty("iosConfigured")
+    public void setIosConfigured(Boolean iosConfigured) {
+        this.iosConfigured = iosConfigured;
     }
 
     @Override
@@ -190,13 +238,14 @@ public class WebRtcPushConfigurationResponse {
         WebRtcPushConfigurationResponse webRtcPushConfigurationResponse = (WebRtcPushConfigurationResponse) o;
         return Objects.equals(this.id, webRtcPushConfigurationResponse.id)
                 && Objects.equals(this.applicationId, webRtcPushConfigurationResponse.applicationId)
-                && Objects.equals(this.ios, webRtcPushConfigurationResponse.ios)
-                && Objects.equals(this.android, webRtcPushConfigurationResponse.android);
+                && Objects.equals(this.name, webRtcPushConfigurationResponse.name)
+                && Objects.equals(this.androidConfigured, webRtcPushConfigurationResponse.androidConfigured)
+                && Objects.equals(this.iosConfigured, webRtcPushConfigurationResponse.iosConfigured);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, applicationId, ios, android);
+        return Objects.hash(id, applicationId, name, androidConfigured, iosConfigured);
     }
 
     @Override
@@ -211,11 +260,14 @@ public class WebRtcPushConfigurationResponse {
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
                 .append(newLine)
-                .append("    ios: ")
-                .append(toIndentedString(ios))
+                .append("    name: ")
+                .append(toIndentedString(name))
                 .append(newLine)
-                .append("    android: ")
-                .append(toIndentedString(android))
+                .append("    androidConfigured: ")
+                .append(toIndentedString(androidConfigured))
+                .append(newLine)
+                .append("    iosConfigured: ")
+                .append(toIndentedString(iosConfigured))
                 .append(newLine)
                 .append("}")
                 .toString();

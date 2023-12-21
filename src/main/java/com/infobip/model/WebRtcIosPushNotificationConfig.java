@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Configuration used to enable iOS push notifications.
+ * Optional. Configuration used to enable iOS push notifications.
  */
 public class WebRtcIosPushNotificationConfig {
 
@@ -73,7 +73,7 @@ public class WebRtcIosPushNotificationConfig {
      * Sets apnsCertificateFileContent.
      * <p>
      * Field description:
-     * Content of the APNS certificate file used to enable iOS push notifications.
+     * Base64 encoded content of the P12 APNS certificate file used to enable iOS push notifications.
      * <p>
      * The field is required.
      *
@@ -89,7 +89,7 @@ public class WebRtcIosPushNotificationConfig {
      * Returns apnsCertificateFileContent.
      * <p>
      * Field description:
-     * Content of the APNS certificate file used to enable iOS push notifications.
+     * Base64 encoded content of the P12 APNS certificate file used to enable iOS push notifications.
      * <p>
      * The field is required.
      *
@@ -104,7 +104,7 @@ public class WebRtcIosPushNotificationConfig {
      * Sets apnsCertificateFileContent.
      * <p>
      * Field description:
-     * Content of the APNS certificate file used to enable iOS push notifications.
+     * Base64 encoded content of the P12 APNS certificate file used to enable iOS push notifications.
      * <p>
      * The field is required.
      *

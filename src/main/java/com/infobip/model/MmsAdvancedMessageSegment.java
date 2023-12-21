@@ -35,7 +35,7 @@ public class MmsAdvancedMessageSegment {
      * Sets contentId.
      * <p>
      * Field description:
-     * Unique identifier within single message. [a-zA-Z] up to 20 characters.
+     * Unique identifier within single message. &#x60;[a-zA-Z]&#x60; up to 20 characters. Using other characters (e.g. spaces) may cause your message to be rejected by some mobile carriers.
      *
      * @param contentId
      * @return This {@link MmsAdvancedMessageSegment instance}.
@@ -49,7 +49,7 @@ public class MmsAdvancedMessageSegment {
      * Returns contentId.
      * <p>
      * Field description:
-     * Unique identifier within single message. [a-zA-Z] up to 20 characters.
+     * Unique identifier within single message. &#x60;[a-zA-Z]&#x60; up to 20 characters. Using other characters (e.g. spaces) may cause your message to be rejected by some mobile carriers.
      *
      * @return contentId
      */
@@ -62,7 +62,7 @@ public class MmsAdvancedMessageSegment {
      * Sets contentId.
      * <p>
      * Field description:
-     * Unique identifier within single message. [a-zA-Z] up to 20 characters.
+     * Unique identifier within single message. &#x60;[a-zA-Z]&#x60; up to 20 characters. Using other characters (e.g. spaces) may cause your message to be rejected by some mobile carriers.
      *
      * @param contentId
      */
@@ -115,7 +115,7 @@ public class MmsAdvancedMessageSegment {
      * Sets contentType.
      * <p>
      * Field description:
-     * Content type for media, for example &#39;image/png&#39;.
+     * Content type for media, for example &#x60;application/smil&#x60;.
      *
      * @param contentType
      * @return This {@link MmsAdvancedMessageSegment instance}.
@@ -129,7 +129,7 @@ public class MmsAdvancedMessageSegment {
      * Returns contentType.
      * <p>
      * Field description:
-     * Content type for media, for example &#39;image/png&#39;.
+     * Content type for media, for example &#x60;application/smil&#x60;.
      *
      * @return contentType
      */
@@ -142,7 +142,7 @@ public class MmsAdvancedMessageSegment {
      * Sets contentType.
      * <p>
      * Field description:
-     * Content type for media, for example &#39;image/png&#39;.
+     * Content type for media, for example &#x60;application/smil&#x60;.
      *
      * @param contentType
      */
@@ -156,6 +156,8 @@ public class MmsAdvancedMessageSegment {
      * <p>
      * Field description:
      * URL of externally hosted content.
+     * <p>
+     * The field is required.
      *
      * @param contentUrl
      * @return This {@link MmsAdvancedMessageSegment instance}.
@@ -170,6 +172,8 @@ public class MmsAdvancedMessageSegment {
      * <p>
      * Field description:
      * URL of externally hosted content.
+     * <p>
+     * The field is required.
      *
      * @return contentUrl
      */
@@ -183,6 +187,8 @@ public class MmsAdvancedMessageSegment {
      * <p>
      * Field description:
      * URL of externally hosted content.
+     * <p>
+     * The field is required.
      *
      * @param contentUrl
      */
@@ -235,7 +241,7 @@ public class MmsAdvancedMessageSegment {
      * Sets smil.
      * <p>
      * Field description:
-     * Message segment as SMIL format.
+     * Message segment as SMIL format. Be aware that some devices and/or operating systems ignore SMIL, so there is no guarantee that segments will be displayed as specified in SMIL format.
      *
      * @param smil
      * @return This {@link MmsAdvancedMessageSegment instance}.
@@ -249,7 +255,7 @@ public class MmsAdvancedMessageSegment {
      * Returns smil.
      * <p>
      * Field description:
-     * Message segment as SMIL format.
+     * Message segment as SMIL format. Be aware that some devices and/or operating systems ignore SMIL, so there is no guarantee that segments will be displayed as specified in SMIL format.
      *
      * @return smil
      */
@@ -262,7 +268,7 @@ public class MmsAdvancedMessageSegment {
      * Sets smil.
      * <p>
      * Field description:
-     * Message segment as SMIL format.
+     * Message segment as SMIL format. Be aware that some devices and/or operating systems ignore SMIL, so there is no guarantee that segments will be displayed as specified in SMIL format.
      *
      * @param smil
      */

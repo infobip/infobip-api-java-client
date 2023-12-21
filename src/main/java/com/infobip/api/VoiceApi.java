@@ -273,7 +273,7 @@ public class VoiceApi {
     /**
      * Manage sent bulk&#39;s status.
      * <p>
-     * This method allows you to manage statuses of scheduled TTS bulk. Messages scheduled with the sendAt or sending speed parameter can be paused, resumed or canceled by changing the message status, or rescheduled using the _bulkId_ parameter as an identifier. Only voice messages that were not already sent can be canceled.
+     * This method allows you to manage statuses of scheduled TTS bulk. Messages scheduled with the sendAt or sending speed parameter can be paused, resumed or canceled by changing the message status, or rescheduled using the bulkId parameter as an identifier. Only voice messages that were not already sent can be canceled.
      *
      * @param bulkId Unique ID of the bulk. (required)
      * @param callsUpdateStatusRequest  (required)
@@ -400,7 +400,7 @@ public class VoiceApi {
      *
      * @param callsAdvancedBody  (required)
      * @return SendAdvancedVoiceTtsRequest
-     * @see <a href="https://www.infobip.com/docs/voice-and-video/send-voice-over-api">Learn more about voice messages</a>
+     * @see <a href="https://www.infobip.com/docs/voice-and-video/voice-messages">Learn more about voice messages</a>
      */
     public SendAdvancedVoiceTtsRequest sendAdvancedVoiceTts(CallsAdvancedBody callsAdvancedBody) {
         return new SendAdvancedVoiceTtsRequest(callsAdvancedBody);
@@ -459,7 +459,7 @@ public class VoiceApi {
      *
      * @param callsMultiBody  (required)
      * @return SendMultipleVoiceTtsRequest
-     * @see <a href="https://www.infobip.com/docs/voice-and-video/send-voice-over-api">Learn more about voice messages</a>
+     * @see <a href="https://www.infobip.com/docs/voice-and-video/voice-messages">Learn more about voice messages</a>
      */
     public SendMultipleVoiceTtsRequest sendMultipleVoiceTts(CallsMultiBody callsMultiBody) {
         return new SendMultipleVoiceTtsRequest(callsMultiBody);
@@ -518,7 +518,7 @@ public class VoiceApi {
      *
      * @param callsSingleBody  (required)
      * @return SendSingleVoiceTtsRequest
-     * @see <a href="https://www.infobip.com/docs/voice-and-video/send-voice-over-api">Learn more about voice messages</a>
+     * @see <a href="https://www.infobip.com/docs/voice-and-video/voice-messages">Learn more about voice messages</a>
      */
     public SendSingleVoiceTtsRequest sendSingleVoiceTts(CallsSingleBody callsSingleBody) {
         return new SendSingleVoiceTtsRequest(callsSingleBody);

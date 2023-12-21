@@ -29,6 +29,10 @@ public class WhatsAppStickerMessage {
 
     private String notifyUrl;
 
+    private String entityId;
+
+    private String applicationId;
+
     /**
      * Sets from.
      * <p>
@@ -278,6 +282,86 @@ public class WhatsAppStickerMessage {
         this.notifyUrl = notifyUrl;
     }
 
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Required for entity use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     * @return This {@link WhatsAppStickerMessage instance}.
+     */
+    public WhatsAppStickerMessage entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * Required for entity use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Required for entity use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     * @return This {@link WhatsAppStickerMessage instance}.
+     */
+    public WhatsAppStickerMessage applicationId(String applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -292,12 +376,14 @@ public class WhatsAppStickerMessage {
                 && Objects.equals(this.messageId, whatsAppStickerMessage.messageId)
                 && Objects.equals(this.content, whatsAppStickerMessage.content)
                 && Objects.equals(this.callbackData, whatsAppStickerMessage.callbackData)
-                && Objects.equals(this.notifyUrl, whatsAppStickerMessage.notifyUrl);
+                && Objects.equals(this.notifyUrl, whatsAppStickerMessage.notifyUrl)
+                && Objects.equals(this.entityId, whatsAppStickerMessage.entityId)
+                && Objects.equals(this.applicationId, whatsAppStickerMessage.applicationId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, to, messageId, content, callbackData, notifyUrl);
+        return Objects.hash(from, to, messageId, content, callbackData, notifyUrl, entityId, applicationId);
     }
 
     @Override
@@ -323,6 +409,12 @@ public class WhatsAppStickerMessage {
                 .append(newLine)
                 .append("    notifyUrl: ")
                 .append(toIndentedString(notifyUrl))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -17,7 +19,67 @@ import java.util.Objects;
  */
 public class CallsAnswerRequest {
 
+    private Map<String, String> customData = null;
+
     private CallRecordingRequest recording;
+
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @param customData
+     * @return This {@link CallsAnswerRequest instance}.
+     */
+    public CallsAnswerRequest customData(Map<String, String> customData) {
+        this.customData = customData;
+        return this;
+    }
+
+    /**
+     * Puts and entry into customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @param key The given key.
+     * @param customDataItem The item to be associated with the given key.
+     * @return This {@link CallsAnswerRequest instance}.
+     */
+    public CallsAnswerRequest putCustomDataItem(String key, String customDataItem) {
+        if (this.customData == null) {
+            this.customData = new HashMap<>();
+        }
+        this.customData.put(key, customDataItem);
+        return this;
+    }
+
+    /**
+     * Returns customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @return customData
+     */
+    @JsonProperty("customData")
+    public Map<String, String> getCustomData() {
+        return customData;
+    }
+
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @param customData
+     */
+    @JsonProperty("customData")
+    public void setCustomData(Map<String, String> customData) {
+        this.customData = customData;
+    }
 
     /**
      * Sets recording.
@@ -59,12 +121,13 @@ public class CallsAnswerRequest {
             return false;
         }
         CallsAnswerRequest callsAnswerRequest = (CallsAnswerRequest) o;
-        return Objects.equals(this.recording, callsAnswerRequest.recording);
+        return Objects.equals(this.customData, callsAnswerRequest.customData)
+                && Objects.equals(this.recording, callsAnswerRequest.recording);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(recording);
+        return Objects.hash(customData, recording);
     }
 
     @Override
@@ -72,6 +135,9 @@ public class CallsAnswerRequest {
         String newLine = System.lineSeparator();
         return new StringBuilder()
                 .append("class CallsAnswerRequest {")
+                .append(newLine)
+                .append("    customData: ")
+                .append(toIndentedString(customData))
                 .append(newLine)
                 .append("    recording: ")
                 .append(toIndentedString(recording))

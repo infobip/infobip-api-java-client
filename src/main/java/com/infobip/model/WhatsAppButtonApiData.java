@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * Template buttons. Can be either up to 3 &#x60;quick reply&#x60; buttons or up to 2 &#x60;call to action&#x60; buttons. Call to action buttons must be unique in type.
+ * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons and a phone number button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,

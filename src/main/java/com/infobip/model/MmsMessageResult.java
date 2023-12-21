@@ -17,11 +17,46 @@ import java.util.Objects;
  */
 public class MmsMessageResult {
 
+    private MessageStatus status;
+
     private String to;
 
-    private MmsStatus status;
-
     private String messageId;
+
+    private String cc;
+
+    private String bcc;
+
+    /**
+     * Sets status.
+     *
+     * @param status
+     * @return This {@link MmsMessageResult instance}.
+     */
+    public MmsMessageResult status(MessageStatus status) {
+        this.status = status;
+        return this;
+    }
+
+    /**
+     * Returns status.
+     *
+     * @return status
+     */
+    @JsonProperty("status")
+    public MessageStatus getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets status.
+     *
+     * @param status
+     */
+    @JsonProperty("status")
+    public void setStatus(MessageStatus status) {
+        this.status = status;
+    }
 
     /**
      * Sets to.
@@ -64,43 +99,6 @@ public class MmsMessageResult {
     }
 
     /**
-     * Sets status.
-     * <p>
-     * The field is required.
-     *
-     * @param status
-     * @return This {@link MmsMessageResult instance}.
-     */
-    public MmsMessageResult status(MmsStatus status) {
-        this.status = status;
-        return this;
-    }
-
-    /**
-     * Returns status.
-     * <p>
-     * The field is required.
-     *
-     * @return status
-     */
-    @JsonProperty("status")
-    public MmsStatus getStatus() {
-        return status;
-    }
-
-    /**
-     * Sets status.
-     * <p>
-     * The field is required.
-     *
-     * @param status
-     */
-    @JsonProperty("status")
-    public void setStatus(MmsStatus status) {
-        this.status = status;
-    }
-
-    /**
      * Sets messageId.
      * <p>
      * Field description:
@@ -140,6 +138,86 @@ public class MmsMessageResult {
         this.messageId = messageId;
     }
 
+    /**
+     * Sets cc.
+     * <p>
+     * Field description:
+     * The message destination address.
+     *
+     * @param cc
+     * @return This {@link MmsMessageResult instance}.
+     */
+    public MmsMessageResult cc(String cc) {
+        this.cc = cc;
+        return this;
+    }
+
+    /**
+     * Returns cc.
+     * <p>
+     * Field description:
+     * The message destination address.
+     *
+     * @return cc
+     */
+    @JsonProperty("cc")
+    public String getCc() {
+        return cc;
+    }
+
+    /**
+     * Sets cc.
+     * <p>
+     * Field description:
+     * The message destination address.
+     *
+     * @param cc
+     */
+    @JsonProperty("cc")
+    public void setCc(String cc) {
+        this.cc = cc;
+    }
+
+    /**
+     * Sets bcc.
+     * <p>
+     * Field description:
+     * The message destination address.
+     *
+     * @param bcc
+     * @return This {@link MmsMessageResult instance}.
+     */
+    public MmsMessageResult bcc(String bcc) {
+        this.bcc = bcc;
+        return this;
+    }
+
+    /**
+     * Returns bcc.
+     * <p>
+     * Field description:
+     * The message destination address.
+     *
+     * @return bcc
+     */
+    @JsonProperty("bcc")
+    public String getBcc() {
+        return bcc;
+    }
+
+    /**
+     * Sets bcc.
+     * <p>
+     * Field description:
+     * The message destination address.
+     *
+     * @param bcc
+     */
+    @JsonProperty("bcc")
+    public void setBcc(String bcc) {
+        this.bcc = bcc;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -149,14 +227,16 @@ public class MmsMessageResult {
             return false;
         }
         MmsMessageResult mmsMessageResult = (MmsMessageResult) o;
-        return Objects.equals(this.to, mmsMessageResult.to)
-                && Objects.equals(this.status, mmsMessageResult.status)
-                && Objects.equals(this.messageId, mmsMessageResult.messageId);
+        return Objects.equals(this.status, mmsMessageResult.status)
+                && Objects.equals(this.to, mmsMessageResult.to)
+                && Objects.equals(this.messageId, mmsMessageResult.messageId)
+                && Objects.equals(this.cc, mmsMessageResult.cc)
+                && Objects.equals(this.bcc, mmsMessageResult.bcc);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(to, status, messageId);
+        return Objects.hash(status, to, messageId, cc, bcc);
     }
 
     @Override
@@ -165,14 +245,20 @@ public class MmsMessageResult {
         return new StringBuilder()
                 .append("class MmsMessageResult {")
                 .append(newLine)
-                .append("    to: ")
-                .append(toIndentedString(to))
-                .append(newLine)
                 .append("    status: ")
                 .append(toIndentedString(status))
                 .append(newLine)
+                .append("    to: ")
+                .append(toIndentedString(to))
+                .append(newLine)
                 .append("    messageId: ")
                 .append(toIndentedString(messageId))
+                .append(newLine)
+                .append("    cc: ")
+                .append(toIndentedString(cc))
+                .append(newLine)
+                .append("    bcc: ")
+                .append(toIndentedString(bcc))
                 .append(newLine)
                 .append("}")
                 .toString();

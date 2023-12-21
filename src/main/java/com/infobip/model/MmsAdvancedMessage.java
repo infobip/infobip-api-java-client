@@ -10,6 +10,7 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -29,9 +30,9 @@ public class MmsAdvancedMessage {
 
     private Boolean intermediateReport;
 
-    private String notifyContentType;
-
     private String notifyUrl;
+
+    private OffsetDateTime sendAt;
 
     private List<MmsAdvancedMessageSegment> messageSegments = new ArrayList<>();
 
@@ -260,46 +261,6 @@ public class MmsAdvancedMessage {
     }
 
     /**
-     * Sets notifyContentType.
-     * <p>
-     * Field description:
-     * Preferred delivery report content type, &#x60;application/json&#x60; or &#x60;application/xml&#x60;.
-     *
-     * @param notifyContentType
-     * @return This {@link MmsAdvancedMessage instance}.
-     */
-    public MmsAdvancedMessage notifyContentType(String notifyContentType) {
-        this.notifyContentType = notifyContentType;
-        return this;
-    }
-
-    /**
-     * Returns notifyContentType.
-     * <p>
-     * Field description:
-     * Preferred delivery report content type, &#x60;application/json&#x60; or &#x60;application/xml&#x60;.
-     *
-     * @return notifyContentType
-     */
-    @JsonProperty("notifyContentType")
-    public String getNotifyContentType() {
-        return notifyContentType;
-    }
-
-    /**
-     * Sets notifyContentType.
-     * <p>
-     * Field description:
-     * Preferred delivery report content type, &#x60;application/json&#x60; or &#x60;application/xml&#x60;.
-     *
-     * @param notifyContentType
-     */
-    @JsonProperty("notifyContentType")
-    public void setNotifyContentType(String notifyContentType) {
-        this.notifyContentType = notifyContentType;
-    }
-
-    /**
      * Sets notifyUrl.
      * <p>
      * Field description:
@@ -337,6 +298,46 @@ public class MmsAdvancedMessage {
     @JsonProperty("notifyUrl")
     public void setNotifyUrl(String notifyUrl) {
         this.notifyUrl = notifyUrl;
+    }
+
+    /**
+     * Sets sendAt.
+     * <p>
+     * Field description:
+     * Date and time when the message is to be sent. Used for scheduled MMS. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     *
+     * @param sendAt
+     * @return This {@link MmsAdvancedMessage instance}.
+     */
+    public MmsAdvancedMessage sendAt(OffsetDateTime sendAt) {
+        this.sendAt = sendAt;
+        return this;
+    }
+
+    /**
+     * Returns sendAt.
+     * <p>
+     * Field description:
+     * Date and time when the message is to be sent. Used for scheduled MMS. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     *
+     * @return sendAt
+     */
+    @JsonProperty("sendAt")
+    public OffsetDateTime getSendAt() {
+        return sendAt;
+    }
+
+    /**
+     * Sets sendAt.
+     * <p>
+     * Field description:
+     * Date and time when the message is to be sent. Used for scheduled MMS. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     *
+     * @param sendAt
+     */
+    @JsonProperty("sendAt")
+    public void setSendAt(OffsetDateTime sendAt) {
+        this.sendAt = sendAt;
     }
 
     /**
@@ -569,8 +570,8 @@ public class MmsAdvancedMessage {
                 && Objects.equals(this.destinations, mmsAdvancedMessage.destinations)
                 && Objects.equals(this.from, mmsAdvancedMessage.from)
                 && Objects.equals(this.intermediateReport, mmsAdvancedMessage.intermediateReport)
-                && Objects.equals(this.notifyContentType, mmsAdvancedMessage.notifyContentType)
                 && Objects.equals(this.notifyUrl, mmsAdvancedMessage.notifyUrl)
+                && Objects.equals(this.sendAt, mmsAdvancedMessage.sendAt)
                 && Objects.equals(this.messageSegments, mmsAdvancedMessage.messageSegments)
                 && Objects.equals(this.validityPeriod, mmsAdvancedMessage.validityPeriod)
                 && Objects.equals(this.title, mmsAdvancedMessage.title)
@@ -586,8 +587,8 @@ public class MmsAdvancedMessage {
                 destinations,
                 from,
                 intermediateReport,
-                notifyContentType,
                 notifyUrl,
+                sendAt,
                 messageSegments,
                 validityPeriod,
                 title,
@@ -616,11 +617,11 @@ public class MmsAdvancedMessage {
                 .append("    intermediateReport: ")
                 .append(toIndentedString(intermediateReport))
                 .append(newLine)
-                .append("    notifyContentType: ")
-                .append(toIndentedString(notifyContentType))
-                .append(newLine)
                 .append("    notifyUrl: ")
                 .append(toIndentedString(notifyUrl))
+                .append(newLine)
+                .append("    sendAt: ")
+                .append(toIndentedString(sendAt))
                 .append(newLine)
                 .append("    messageSegments: ")
                 .append(toIndentedString(messageSegments))

@@ -35,11 +35,11 @@ public class MmsReport {
 
     private String callbackData;
 
-    private MmsPrice price;
+    private MessagePrice price;
 
-    private MmsStatus status;
+    private MessageStatus status;
 
-    private MmsError error;
+    private MessageError error;
 
     private String entityId;
 
@@ -249,7 +249,7 @@ public class MmsReport {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Indicates Whether the MMS was finished processing by Infobip (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Indicates whether the MMS was finished processing by Infobip (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @param doneAt
      * @return This {@link MmsReport instance}.
@@ -263,7 +263,7 @@ public class MmsReport {
      * Returns doneAt.
      * <p>
      * Field description:
-     * Indicates Whether the MMS was finished processing by Infobip (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Indicates whether the MMS was finished processing by Infobip (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @return doneAt
      */
@@ -276,7 +276,7 @@ public class MmsReport {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Indicates Whether the MMS was finished processing by Infobip (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Indicates whether the MMS was finished processing by Infobip (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      *
      * @param doneAt
      */
@@ -411,7 +411,7 @@ public class MmsReport {
      * @param price
      * @return This {@link MmsReport instance}.
      */
-    public MmsReport price(MmsPrice price) {
+    public MmsReport price(MessagePrice price) {
         this.price = price;
         return this;
     }
@@ -422,7 +422,7 @@ public class MmsReport {
      * @return price
      */
     @JsonProperty("price")
-    public MmsPrice getPrice() {
+    public MessagePrice getPrice() {
         return price;
     }
 
@@ -432,7 +432,7 @@ public class MmsReport {
      * @param price
      */
     @JsonProperty("price")
-    public void setPrice(MmsPrice price) {
+    public void setPrice(MessagePrice price) {
         this.price = price;
     }
 
@@ -442,7 +442,7 @@ public class MmsReport {
      * @param status
      * @return This {@link MmsReport instance}.
      */
-    public MmsReport status(MmsStatus status) {
+    public MmsReport status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -453,7 +453,7 @@ public class MmsReport {
      * @return status
      */
     @JsonProperty("status")
-    public MmsStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -463,7 +463,7 @@ public class MmsReport {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(MmsStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 
@@ -473,7 +473,7 @@ public class MmsReport {
      * @param error
      * @return This {@link MmsReport instance}.
      */
-    public MmsReport error(MmsError error) {
+    public MmsReport error(MessageError error) {
         this.error = error;
         return this;
     }
@@ -484,7 +484,7 @@ public class MmsReport {
      * @return error
      */
     @JsonProperty("error")
-    public MmsError getError() {
+    public MessageError getError() {
         return error;
     }
 
@@ -494,7 +494,7 @@ public class MmsReport {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(MmsError error) {
+    public void setError(MessageError error) {
         this.error = error;
     }
 

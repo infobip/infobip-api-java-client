@@ -5,6 +5,64 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [4.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.1.0) ] - 2023-12-20
+
+⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
+All changes, including breaking changes, are addressed and explained in the list bellow.
+If you find out that something was not addressed properly, please submit an issue.
+
+### Added
+* Support for [Infobip Call Routing API](https://www.infobip.com/docs/api/channels/voice/routing).
+* Support for [Infobip Call Link API](https://www.infobip.com/docs/api/channels/webrtc-calls/call-link).
+* Most recent [Infobip Email API](https://www.infobip.com/docs/api/channels/email) feature set.
+* Most recent [Infobip SMS API](https://www.infobip.com/docs/api/channels/sms) feature set.
+* Most recent [Infobip MMS API](https://www.infobip.com/docs/api/channels/mms) feature set.
+* Most recent [Infobip Voice API](https://www.infobip.com/docs/api/channels/voice) feature set.
+* Most recent [Infobip WebRTC API](https://www.infobip.com/docs/api/channels/webrtc) feature set.
+* Most recent [Infobip Viber API](https://www.infobip.com/docs/api/channels/viber) feature set.
+* [CPaaS-X](https://www.infobip.com/docs/cpaas-x/application-and-entity-management) support to more channels.
+* Support for handling ApiError models:
+  * [ApiError](src/main/java/com/infobip/model/ApiError.java)
+  * [ApiErrorResource](src/main/java/com/infobip/model/ApiErrorResource.java)
+  * [ApiErrorViolation](src/main/java/com/infobip/model/ApiErrorViolation.java)
+
+### Changed
+* **Removed classes and unified structures**
+  * Removed pagination classes (`CallsPageInfo`, `WebRtcPageInfo`) in favor of a unified class: [PageInfo](src/main/java/com/infobip/model/PageInfo.java)
+  * Removed status-defining classes for messages by products (`EmailStatus`, `MmsStatus`, `SmsStatus`) and introduced a unified class: [MessageStatus](src/main/java/com/infobip/model/PageInfo.java)
+  * Removed price-defining classes for messages by products (`EmailPrice`, `MmsPrice`, `SmsPrice`, `EmailWebhookPrice`) and replaced with a unified class: [MessagePrice](src/main/java/com/infobip/model/MessagePrice.java)
+  * Removed error-defining classes for query execution by different products (`EmailReportError`, `MmsError`, `SmsError`) and introduced a unified class: [MessageError](src/main/java/com/infobip/model/MessageError.java)
+* **Fixes and changes**
+  * Expanded [ApiExceptionDetails](src/main/java/com/infobip/ApiExceptionDetails.java) model with additional fields supporting enriched error responses that the API might return.
+  * Changed `templateId` field type from Integer to Long in EmailApi's SendEmailRequest class because of reported [issue](https://github.com/infobip/infobip-api-java-client/issues/37).
+  * Updated [WhatsAppCategory](src/main/java/com/infobip/model/WhatsAppCategory.java) enumeration values based on [report](https://developers.facebook.com/docs/whatsapp/business-platform/changelog#february-3--2023) and reported [issue](https://github.com/infobip/infobip-api-java-client/issues/36).
+  * Updated [CallsErrorCode](src/main/java/com/infobip/model/CallsErrorCode.java) enumeration values to reflect changes on [Hangup](https://www.infobip.com/docs/api/channels/voice/calls/call-legs/hangup-call) endpoint.
+  * Updated [ViberValidityPeriodTimeUnit](src/main/java/com/infobip/model/ViberValidityPeriodTimeUnit.java) enumeration values since 'DAYS' is no longer supported, use 'HOURS' instead.
+  * Changed 'context' field name in [CallsApplicationTransferRequest](src/main/java/com/infobip/model/CallsApplicationTransferRequest.java) to 'customData'.
+  * Changed 'days' field type in [CallsDeliveryTimeWindow](src/main/java/com/infobip/model/CallsDeliveryTimeWindow.java) from List to Set to avoid duplicates.
+  * Removed 'type' field in [CallsDtmfTermination](src/main/java/com/infobip/model/CallsDtmfTermination.java) since it is not supported on the API side.
+  * Removed 'stopOn' field in [CallsSayRequest](src/main/java/com/infobip/model/CallsSayRequest.java) since it is not supported on the API side.
+  * Removed 'sipTrunkGroupId' field in [CallsSipEndpoint](src/main/java/com/infobip/model/CallsSipEndpoint.java) since it is not supported on the API side.
+  * Removed 'notifyContentType' field in [MmsAdvancedMessage](src/main/java/com/infobip/model/MmsAdvancedMessage.java) since it is not supported on the API side.
+  * Removed 'sendingSpeedLimit' field in [MmsAdvancedRequest](src/main/java/com/infobip/model/MmsAdvancedRequest.java) since it is not supported on the API side.
+  * Fixed Viber webhook report models.
+  * Changed 'results' field name in [ViberWebhookReportResponse](src/main/java/com/infobip/model/ViberWebhookReportsResponse.java) to reports.
+  * Replaced 'ios' and 'android' fields in [WebRtcPushConfigurationResponse](src/main/java/com/infobip/model/WebRtcPushConfigurationResponse.java) with 'androidConfigured' and 'iosConfigured' since they didn't correspond to the state of the endpoint.
+  * Changed 'structure' field type in [WhatsAppTemplateApiResponse](src/main/java/com/infobip/model/WhatsAppTemplateApiResponse.java) from 'WhatsAppTemplateStructureApiData' and 'WhatsAppDefaultTemplateStructureApiData'.
+  * Changed [WhatsAppTemplatePublicApiRequest](src/main/java/com/infobip/model/WhatsAppTemplatePublicApiRequest.java) by making it an abstract class, serving as a base for WhatsAppAuthenticationTemplatePublicApiRequest, WhatsAppDefaultMarketingTemplatePublicApiRequest, WhatsAppDefaultUtilityTemplatePublicApiRequest.
+* **Documentation**
+  * Fixed Javadoc.
+* **Dependencies**
+  * Bumped `slf4j-api` version to `2.0.9`
+  * Bumped `jackson` version to `2.15.2`
+  * Bumped `okhttp` version to `4.12.0`
+
+### Removed
+- Unused model classes
+
+### Deprecated
+- Deprecated old error fields in [ApiExceptionDetails](src/main/java/com/infobip/ApiExceptionDetails.java)
+
 ## [ [4.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.0.0) ] - 2023-03-01
 
 🎉 **NEW Major Version of `infobip-api-java-client`.**
@@ -114,7 +172,7 @@ If you find out that something was not addressed properly, please submit an issu
 - `whatsapp.md` containing quick start guide for WhatsApp API
 
 ### Changed
-- Email sending API to match the latest version of the API. 
+- Email sending API to match the latest version of the API.
   - Signature changed: getEmailLogs()
 - Renamed some email API models to be consistent across multiple products
   - EmailError -> EmailReportError

@@ -32,6 +32,8 @@ public class CallsDialogRequest {
      * <p>
      * Field description:
      * Unique parent call ID.
+     * <p>
+     * The field is required.
      *
      * @param parentCallId
      * @return This {@link CallsDialogRequest instance}.
@@ -46,6 +48,8 @@ public class CallsDialogRequest {
      * <p>
      * Field description:
      * Unique parent call ID.
+     * <p>
+     * The field is required.
      *
      * @return parentCallId
      */
@@ -59,6 +63,8 @@ public class CallsDialogRequest {
      * <p>
      * Field description:
      * Unique parent call ID.
+     * <p>
+     * The field is required.
      *
      * @param parentCallId
      */

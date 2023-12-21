@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents CallsClickToCallMessage model.
+ * Array of click to call messages to be sent.
  */
 public class CallsClickToCallMessage {
 
@@ -263,6 +263,8 @@ public class CallsClickToCallMessage {
      * <p>
      * Field description:
      * Numeric sender ID in E.164 format. Will be shown to _destinationA_.
+     * <p>
+     * The field is required.
      *
      * @param from
      * @return This {@link CallsClickToCallMessage instance}.
@@ -277,6 +279,8 @@ public class CallsClickToCallMessage {
      * <p>
      * Field description:
      * Numeric sender ID in E.164 format. Will be shown to _destinationA_.
+     * <p>
+     * The field is required.
      *
      * @return from
      */
@@ -290,6 +294,8 @@ public class CallsClickToCallMessage {
      * <p>
      * Field description:
      * Numeric sender ID in E.164 format. Will be shown to _destinationA_.
+     * <p>
+     * The field is required.
      *
      * @param from
      */
@@ -382,7 +388,7 @@ public class CallsClickToCallMessage {
      * Sets machineDetection.
      * <p>
      * Field description:
-     * Used for enabling detection of answering machine after the call has been answered. It can be set to &#x60;hangup&#x60; or &#x60;continue&#x60;. When set to &#x60;hangup&#x60;, if a machine is detected call is hung up. When set to &#x60;continue&#x60;, if a machine is detected, then voice message starts playing into voice mail after the answering message is finished with its greeting. If machineDetection is used, there is a minimum of 4 seconds detection time, which can result in delay of playing the message. Answering machine detection is additionally charged. For more information please contact your account manager.
+     * Used for enabling detection of answering machine after the call has been answered on &#x60;destinationA&#x60;. It can be set to &#x60;hangup&#x60; which means if a machine is detected, the call is hung up. If &#x60;machineDetection&#x60; is used, there is a minimum of 4 seconds detection time, which can result in delay of playing the message. Answering machine detection is additionally charged. For more information please contact your account manager.
      *
      * @param machineDetection
      * @return This {@link CallsClickToCallMessage instance}.
@@ -396,7 +402,7 @@ public class CallsClickToCallMessage {
      * Returns machineDetection.
      * <p>
      * Field description:
-     * Used for enabling detection of answering machine after the call has been answered. It can be set to &#x60;hangup&#x60; or &#x60;continue&#x60;. When set to &#x60;hangup&#x60;, if a machine is detected call is hung up. When set to &#x60;continue&#x60;, if a machine is detected, then voice message starts playing into voice mail after the answering message is finished with its greeting. If machineDetection is used, there is a minimum of 4 seconds detection time, which can result in delay of playing the message. Answering machine detection is additionally charged. For more information please contact your account manager.
+     * Used for enabling detection of answering machine after the call has been answered on &#x60;destinationA&#x60;. It can be set to &#x60;hangup&#x60; which means if a machine is detected, the call is hung up. If &#x60;machineDetection&#x60; is used, there is a minimum of 4 seconds detection time, which can result in delay of playing the message. Answering machine detection is additionally charged. For more information please contact your account manager.
      *
      * @return machineDetection
      */
@@ -409,7 +415,7 @@ public class CallsClickToCallMessage {
      * Sets machineDetection.
      * <p>
      * Field description:
-     * Used for enabling detection of answering machine after the call has been answered. It can be set to &#x60;hangup&#x60; or &#x60;continue&#x60;. When set to &#x60;hangup&#x60;, if a machine is detected call is hung up. When set to &#x60;continue&#x60;, if a machine is detected, then voice message starts playing into voice mail after the answering message is finished with its greeting. If machineDetection is used, there is a minimum of 4 seconds detection time, which can result in delay of playing the message. Answering machine detection is additionally charged. For more information please contact your account manager.
+     * Used for enabling detection of answering machine after the call has been answered on &#x60;destinationA&#x60;. It can be set to &#x60;hangup&#x60; which means if a machine is detected, the call is hung up. If &#x60;machineDetection&#x60; is used, there is a minimum of 4 seconds detection time, which can result in delay of playing the message. Answering machine detection is additionally charged. For more information please contact your account manager.
      *
      * @param machineDetection
      */

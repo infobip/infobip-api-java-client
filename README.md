@@ -46,7 +46,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
       <groupId>com.infobip</groupId>
       <artifactId>infobip-api-java-client</artifactId>
-      <version>4.0.0</version>
+      <version>4.1.0</version>
 </dependency>
 ```
 
@@ -82,7 +82,7 @@ For details, check the [ApiClient](https://github.com/infobip/infobip-api-java-c
 See below, a simple example of sending a single SMS message to a single recipient.
 
 ```java
-    SmsApi smsApi = new SmsApi();
+    SmsApi smsApi = new SmsApi(apiClient);
     SmsTextualMessage smsMessage = new SmsTextualMessage()
         .from("InfoSMS")
         .addDestinationsItem(new SmsDestination().to("41793026727"))
@@ -101,7 +101,7 @@ See below, a simple example of sending a single SMS message to a single recipien
 
 For asynchronous processing, you can use the following approach:
 ```java
-    sendSmsApi.sendSmsMessage(request)
+    smsApi.sendSmsMessage(smsMessageRequest)
         .executeAsync(new ApiCallback<>() {
             @Override
             public void onSuccess(SmsResponse result, int responseStatusCode, Map<String, List<String>> responseHeaders) {
@@ -156,7 +156,7 @@ If you are for any reason unable to receive real-time delivery reports on your e
 Each request will return a batch of delivery reports - only once. See [documentation](https://www.infobip.com/docs/api/channels/sms/sms-messaging/logs-and-status-reports/get-outbound-sms-message-delivery-reports) for more details.
 
 ```java
-    SmsDeliveryResult deliveryReports = sendSmsApi.getOutboundSmsMessageDeliveryReports()
+    SmsDeliveryResult deliveryReports = smsApi.getOutboundSmsMessageDeliveryReports()
             .bulkId(bulkId)
             .execute();
     for (SmsReport report : deliveryReports.getResults()) {
@@ -170,7 +170,7 @@ Infobip API supports Unicode characters and automatically detects encoding. Unic
 ```java
     SmsPreviewRequest smsPreviewRequest = new SmsPreviewRequest()
             .text("Let's see how many characters will remain unused in this message.");
-    SmsPreviewResponse previewResponse = sendSmsApi
+    SmsPreviewResponse previewResponse = smsApi
             .previewSmsMessage(smsPreviewRequest)
             .execute();
     System.out.println(previewResponse);

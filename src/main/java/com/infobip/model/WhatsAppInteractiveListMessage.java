@@ -29,6 +29,12 @@ public class WhatsAppInteractiveListMessage {
 
     private String notifyUrl;
 
+    private WhatsAppUrlOptions urlOptions;
+
+    private String entityId;
+
+    private String applicationId;
+
     /**
      * Sets from.
      * <p>
@@ -278,6 +284,117 @@ public class WhatsAppInteractiveListMessage {
         this.notifyUrl = notifyUrl;
     }
 
+    /**
+     * Sets urlOptions.
+     *
+     * @param urlOptions
+     * @return This {@link WhatsAppInteractiveListMessage instance}.
+     */
+    public WhatsAppInteractiveListMessage urlOptions(WhatsAppUrlOptions urlOptions) {
+        this.urlOptions = urlOptions;
+        return this;
+    }
+
+    /**
+     * Returns urlOptions.
+     *
+     * @return urlOptions
+     */
+    @JsonProperty("urlOptions")
+    public WhatsAppUrlOptions getUrlOptions() {
+        return urlOptions;
+    }
+
+    /**
+     * Sets urlOptions.
+     *
+     * @param urlOptions
+     */
+    @JsonProperty("urlOptions")
+    public void setUrlOptions(WhatsAppUrlOptions urlOptions) {
+        this.urlOptions = urlOptions;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Required for entity use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     * @return This {@link WhatsAppInteractiveListMessage instance}.
+     */
+    public WhatsAppInteractiveListMessage entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * Required for entity use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Required for entity use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     * @return This {@link WhatsAppInteractiveListMessage instance}.
+     */
+    public WhatsAppInteractiveListMessage applicationId(String applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -292,12 +409,15 @@ public class WhatsAppInteractiveListMessage {
                 && Objects.equals(this.messageId, whatsAppInteractiveListMessage.messageId)
                 && Objects.equals(this.content, whatsAppInteractiveListMessage.content)
                 && Objects.equals(this.callbackData, whatsAppInteractiveListMessage.callbackData)
-                && Objects.equals(this.notifyUrl, whatsAppInteractiveListMessage.notifyUrl);
+                && Objects.equals(this.notifyUrl, whatsAppInteractiveListMessage.notifyUrl)
+                && Objects.equals(this.urlOptions, whatsAppInteractiveListMessage.urlOptions)
+                && Objects.equals(this.entityId, whatsAppInteractiveListMessage.entityId)
+                && Objects.equals(this.applicationId, whatsAppInteractiveListMessage.applicationId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, to, messageId, content, callbackData, notifyUrl);
+        return Objects.hash(from, to, messageId, content, callbackData, notifyUrl, urlOptions, entityId, applicationId);
     }
 
     @Override
@@ -323,6 +443,15 @@ public class WhatsAppInteractiveListMessage {
                 .append(newLine)
                 .append("    notifyUrl: ")
                 .append(toIndentedString(notifyUrl))
+                .append(newLine)
+                .append("    urlOptions: ")
+                .append(toIndentedString(urlOptions))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
                 .append(newLine)
                 .append("}")
                 .toString();

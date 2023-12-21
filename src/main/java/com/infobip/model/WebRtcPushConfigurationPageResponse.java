@@ -21,7 +21,7 @@ public class WebRtcPushConfigurationPageResponse {
 
     private List<WebRtcPushConfigurationResponse> results = null;
 
-    private WebRtcPageInfo pageInfo;
+    private PageInfo pageInfo;
 
     /**
      * Sets results.
@@ -86,7 +86,7 @@ public class WebRtcPushConfigurationPageResponse {
      * @param pageInfo
      * @return This {@link WebRtcPushConfigurationPageResponse instance}.
      */
-    public WebRtcPushConfigurationPageResponse pageInfo(WebRtcPageInfo pageInfo) {
+    public WebRtcPushConfigurationPageResponse pageInfo(PageInfo pageInfo) {
         this.pageInfo = pageInfo;
         return this;
     }
@@ -97,7 +97,7 @@ public class WebRtcPushConfigurationPageResponse {
      * @return pageInfo
      */
     @JsonProperty("pageInfo")
-    public WebRtcPageInfo getPageInfo() {
+    public PageInfo getPageInfo() {
         return pageInfo;
     }
 
@@ -107,7 +107,7 @@ public class WebRtcPushConfigurationPageResponse {
      * @param pageInfo
      */
     @JsonProperty("pageInfo")
-    public void setPageInfo(WebRtcPageInfo pageInfo) {
+    public void setPageInfo(PageInfo pageInfo) {
         this.pageInfo = pageInfo;
     }
 

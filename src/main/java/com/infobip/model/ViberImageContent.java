@@ -27,7 +27,7 @@ public class ViberImageContent {
      * Sets text.
      * <p>
      * Field description:
-     * Text to be displayed alongside the image.
+     * Text to be displayed alongside the image. It is required when sending a message with a button and an image.
      *
      * @param text
      * @return This {@link ViberImageContent instance}.
@@ -41,7 +41,7 @@ public class ViberImageContent {
      * Returns text.
      * <p>
      * Field description:
-     * Text to be displayed alongside the image.
+     * Text to be displayed alongside the image. It is required when sending a message with a button and an image.
      *
      * @return text
      */
@@ -54,7 +54,7 @@ public class ViberImageContent {
      * Sets text.
      * <p>
      * Field description:
-     * Text to be displayed alongside the image.
+     * Text to be displayed alongside the image. It is required when sending a message with a button and an image.
      *
      * @param text
      */

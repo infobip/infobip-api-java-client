@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Status of the bulk. Possible values are &#x60;PENDING&#x60;, &#x60;PAUSED&#x60;, &#x60;CANCELED&#x60;, &#x60;PROCESSING&#x60; and &#x60;FINISHED&#x60;
+ * New status of the bulk.
  */
 public enum CallsBulkStatus {
     PENDING("PENDING"),

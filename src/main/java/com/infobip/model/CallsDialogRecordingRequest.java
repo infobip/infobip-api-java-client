@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -20,6 +22,10 @@ public class CallsDialogRecordingRequest {
     private CallsRecordingType recordingType;
 
     private CallsDialogRecordingComposition dialogComposition;
+
+    private Map<String, String> customData = null;
+
+    private String filePrefix;
 
     /**
      * Sets recordingType.
@@ -89,6 +95,104 @@ public class CallsDialogRecordingRequest {
         this.dialogComposition = dialogComposition;
     }
 
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Custom data.
+     *
+     * @param customData
+     * @return This {@link CallsDialogRecordingRequest instance}.
+     */
+    public CallsDialogRecordingRequest customData(Map<String, String> customData) {
+        this.customData = customData;
+        return this;
+    }
+
+    /**
+     * Puts and entry into customData.
+     * <p>
+     * Field description:
+     * Custom data.
+     *
+     * @param key The given key.
+     * @param customDataItem The item to be associated with the given key.
+     * @return This {@link CallsDialogRecordingRequest instance}.
+     */
+    public CallsDialogRecordingRequest putCustomDataItem(String key, String customDataItem) {
+        if (this.customData == null) {
+            this.customData = new HashMap<>();
+        }
+        this.customData.put(key, customDataItem);
+        return this;
+    }
+
+    /**
+     * Returns customData.
+     * <p>
+     * Field description:
+     * Custom data.
+     *
+     * @return customData
+     */
+    @JsonProperty("customData")
+    public Map<String, String> getCustomData() {
+        return customData;
+    }
+
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Custom data.
+     *
+     * @param customData
+     */
+    @JsonProperty("customData")
+    public void setCustomData(Map<String, String> customData) {
+        this.customData = customData;
+    }
+
+    /**
+     * Sets filePrefix.
+     * <p>
+     * Field description:
+     * Custom name for the recording&#39;s zip file. Applicable only when SFTP server is enabled on [Voice settings page](https://portal.infobip.com/apps/voice/recording/settings). Using the same filePrefix will override the files on the SFTP server. For recordings without composition, &#x60;callId&#x60; and &#x60;fileId&#x60; will be appended to the &#x60;filePrefix&#x60; value.
+     *
+     * @param filePrefix
+     * @return This {@link CallsDialogRecordingRequest instance}.
+     */
+    public CallsDialogRecordingRequest filePrefix(String filePrefix) {
+        this.filePrefix = filePrefix;
+        return this;
+    }
+
+    /**
+     * Returns filePrefix.
+     * <p>
+     * Field description:
+     * Custom name for the recording&#39;s zip file. Applicable only when SFTP server is enabled on [Voice settings page](https://portal.infobip.com/apps/voice/recording/settings). Using the same filePrefix will override the files on the SFTP server. For recordings without composition, &#x60;callId&#x60; and &#x60;fileId&#x60; will be appended to the &#x60;filePrefix&#x60; value.
+     *
+     * @return filePrefix
+     */
+    @JsonProperty("filePrefix")
+    public String getFilePrefix() {
+        return filePrefix;
+    }
+
+    /**
+     * Sets filePrefix.
+     * <p>
+     * Field description:
+     * Custom name for the recording&#39;s zip file. Applicable only when SFTP server is enabled on [Voice settings page](https://portal.infobip.com/apps/voice/recording/settings). Using the same filePrefix will override the files on the SFTP server. For recordings without composition, &#x60;callId&#x60; and &#x60;fileId&#x60; will be appended to the &#x60;filePrefix&#x60; value.
+     *
+     * @param filePrefix
+     */
+    @JsonProperty("filePrefix")
+    public void setFilePrefix(String filePrefix) {
+        this.filePrefix = filePrefix;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -99,12 +203,14 @@ public class CallsDialogRecordingRequest {
         }
         CallsDialogRecordingRequest callsDialogRecordingRequest = (CallsDialogRecordingRequest) o;
         return Objects.equals(this.recordingType, callsDialogRecordingRequest.recordingType)
-                && Objects.equals(this.dialogComposition, callsDialogRecordingRequest.dialogComposition);
+                && Objects.equals(this.dialogComposition, callsDialogRecordingRequest.dialogComposition)
+                && Objects.equals(this.customData, callsDialogRecordingRequest.customData)
+                && Objects.equals(this.filePrefix, callsDialogRecordingRequest.filePrefix);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(recordingType, dialogComposition);
+        return Objects.hash(recordingType, dialogComposition, customData, filePrefix);
     }
 
     @Override
@@ -118,6 +224,12 @@ public class CallsDialogRecordingRequest {
                 .append(newLine)
                 .append("    dialogComposition: ")
                 .append(toIndentedString(dialogComposition))
+                .append(newLine)
+                .append("    customData: ")
+                .append(toIndentedString(customData))
+                .append(newLine)
+                .append("    filePrefix: ")
+                .append(toIndentedString(filePrefix))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -23,6 +23,9 @@ public class EmailBulkRescheduleRequest {
     /**
      * Sets sendAt.
      * <p>
+     * Field description:
+     * Date and time when the email is to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * <p>
      * The field is required.
      *
      * @param sendAt
@@ -36,6 +39,9 @@ public class EmailBulkRescheduleRequest {
     /**
      * Returns sendAt.
      * <p>
+     * Field description:
+     * Date and time when the email is to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * <p>
      * The field is required.
      *
      * @return sendAt
@@ -47,6 +53,9 @@ public class EmailBulkRescheduleRequest {
 
     /**
      * Sets sendAt.
+     * <p>
+     * Field description:
+     * Date and time when the email is to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      * <p>
      * The field is required.
      *

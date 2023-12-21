@@ -47,13 +47,19 @@ public class SmsApi {
         this.apiClient = Objects.requireNonNull(apiClient, "ApiClient must not be null!");
     }
 
-    private RequestDefinition getInboundSmsMessagesDefinition(Integer limit) {
+    private RequestDefinition getInboundSmsMessagesDefinition(Integer limit, String applicationId, String entityId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/sms/1/inbox/reports")
                 .requiresAuthentication(true)
                 .accept("application/json");
 
         if (limit != null) {
             builder.addQueryParameter(new Parameter("limit", limit));
+        }
+        if (applicationId != null) {
+            builder.addQueryParameter(new Parameter("applicationId", applicationId));
+        }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
         }
         return builder.build();
     }
@@ -63,6 +69,8 @@ public class SmsApi {
      */
     public class GetInboundSmsMessagesRequest {
         private Integer limit;
+        private String applicationId;
+        private String entityId;
 
         private GetInboundSmsMessagesRequest() {}
 
@@ -78,13 +86,36 @@ public class SmsApi {
         }
 
         /**
+         * Sets applicationId.
+         *
+         * @param applicationId Application id that the message is linked to. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
+         * @return GetInboundSmsMessagesRequest
+         */
+        public GetInboundSmsMessagesRequest applicationId(String applicationId) {
+            this.applicationId = applicationId;
+            return this;
+        }
+
+        /**
+         * Sets entityId.
+         *
+         * @param entityId Entity id that the message is linked to. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
+         * @return GetInboundSmsMessagesRequest
+         */
+        public GetInboundSmsMessagesRequest entityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
+
+        /**
          * Executes the getInboundSmsMessages request.
          *
          * @return SmsInboundMessageResult The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public SmsInboundMessageResult execute() throws ApiException {
-            RequestDefinition getInboundSmsMessagesDefinition = getInboundSmsMessagesDefinition(limit);
+            RequestDefinition getInboundSmsMessagesDefinition =
+                    getInboundSmsMessagesDefinition(limit, applicationId, entityId);
             return apiClient.execute(
                     getInboundSmsMessagesDefinition, new TypeReference<SmsInboundMessageResult>() {}.getType());
         }
@@ -96,7 +127,8 @@ public class SmsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<SmsInboundMessageResult> callback) {
-            RequestDefinition getInboundSmsMessagesDefinition = getInboundSmsMessagesDefinition(limit);
+            RequestDefinition getInboundSmsMessagesDefinition =
+                    getInboundSmsMessagesDefinition(limit, applicationId, entityId);
             return apiClient.executeAsync(
                     getInboundSmsMessagesDefinition,
                     new TypeReference<SmsInboundMessageResult>() {}.getType(),
@@ -116,7 +148,7 @@ public class SmsApi {
     }
 
     private RequestDefinition getOutboundSmsMessageDeliveryReportsDefinition(
-            String bulkId, String messageId, Integer limit) {
+            String bulkId, String messageId, Integer limit, String applicationId, String entityId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/sms/1/reports")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -130,6 +162,12 @@ public class SmsApi {
         if (limit != null) {
             builder.addQueryParameter(new Parameter("limit", limit));
         }
+        if (applicationId != null) {
+            builder.addQueryParameter(new Parameter("applicationId", applicationId));
+        }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
+        }
         return builder.build();
     }
 
@@ -140,6 +178,8 @@ public class SmsApi {
         private String bulkId;
         private String messageId;
         private Integer limit;
+        private String applicationId;
+        private String entityId;
 
         private GetOutboundSmsMessageDeliveryReportsRequest() {}
 
@@ -177,6 +217,28 @@ public class SmsApi {
         }
 
         /**
+         * Sets applicationId.
+         *
+         * @param applicationId Application id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
+         * @return GetOutboundSmsMessageDeliveryReportsRequest
+         */
+        public GetOutboundSmsMessageDeliveryReportsRequest applicationId(String applicationId) {
+            this.applicationId = applicationId;
+            return this;
+        }
+
+        /**
+         * Sets entityId.
+         *
+         * @param entityId Entity id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
+         * @return GetOutboundSmsMessageDeliveryReportsRequest
+         */
+        public GetOutboundSmsMessageDeliveryReportsRequest entityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
+
+        /**
          * Executes the getOutboundSmsMessageDeliveryReports request.
          *
          * @return SmsDeliveryResult The deserialized response.
@@ -184,7 +246,7 @@ public class SmsApi {
          */
         public SmsDeliveryResult execute() throws ApiException {
             RequestDefinition getOutboundSmsMessageDeliveryReportsDefinition =
-                    getOutboundSmsMessageDeliveryReportsDefinition(bulkId, messageId, limit);
+                    getOutboundSmsMessageDeliveryReportsDefinition(bulkId, messageId, limit, applicationId, entityId);
             return apiClient.execute(
                     getOutboundSmsMessageDeliveryReportsDefinition,
                     new TypeReference<SmsDeliveryResult>() {}.getType());
@@ -198,7 +260,7 @@ public class SmsApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<SmsDeliveryResult> callback) {
             RequestDefinition getOutboundSmsMessageDeliveryReportsDefinition =
-                    getOutboundSmsMessageDeliveryReportsDefinition(bulkId, messageId, limit);
+                    getOutboundSmsMessageDeliveryReportsDefinition(bulkId, messageId, limit, applicationId, entityId);
             return apiClient.executeAsync(
                     getOutboundSmsMessageDeliveryReportsDefinition,
                     new TypeReference<SmsDeliveryResult>() {}.getType(),
@@ -228,7 +290,9 @@ public class SmsApi {
             OffsetDateTime sentUntil,
             Integer limit,
             String mcc,
-            String mnc) {
+            String mnc,
+            String applicationId,
+            String entityId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/sms/1/logs")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -267,6 +331,12 @@ public class SmsApi {
         if (mnc != null) {
             builder.addQueryParameter(new Parameter("mnc", mnc));
         }
+        if (applicationId != null) {
+            builder.addQueryParameter(new Parameter("applicationId", applicationId));
+        }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
+        }
         return builder.build();
     }
 
@@ -284,6 +354,8 @@ public class SmsApi {
         private Integer limit;
         private String mcc;
         private String mnc;
+        private String applicationId;
+        private String entityId;
 
         private GetOutboundSmsMessageLogsRequest() {}
 
@@ -398,6 +470,28 @@ public class SmsApi {
         }
 
         /**
+         * Sets applicationId.
+         *
+         * @param applicationId Application id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
+         * @return GetOutboundSmsMessageLogsRequest
+         */
+        public GetOutboundSmsMessageLogsRequest applicationId(String applicationId) {
+            this.applicationId = applicationId;
+            return this;
+        }
+
+        /**
+         * Sets entityId.
+         *
+         * @param entityId Entity id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
+         * @return GetOutboundSmsMessageLogsRequest
+         */
+        public GetOutboundSmsMessageLogsRequest entityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
+
+        /**
          * Executes the getOutboundSmsMessageLogs request.
          *
          * @return SmsLogsResponse The deserialized response.
@@ -405,7 +499,18 @@ public class SmsApi {
          */
         public SmsLogsResponse execute() throws ApiException {
             RequestDefinition getOutboundSmsMessageLogsDefinition = getOutboundSmsMessageLogsDefinition(
-                    from, to, bulkId, messageId, generalStatus, sentSince, sentUntil, limit, mcc, mnc);
+                    from,
+                    to,
+                    bulkId,
+                    messageId,
+                    generalStatus,
+                    sentSince,
+                    sentUntil,
+                    limit,
+                    mcc,
+                    mnc,
+                    applicationId,
+                    entityId);
             return apiClient.execute(
                     getOutboundSmsMessageLogsDefinition, new TypeReference<SmsLogsResponse>() {}.getType());
         }
@@ -418,7 +523,18 @@ public class SmsApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<SmsLogsResponse> callback) {
             RequestDefinition getOutboundSmsMessageLogsDefinition = getOutboundSmsMessageLogsDefinition(
-                    from, to, bulkId, messageId, generalStatus, sentSince, sentUntil, limit, mcc, mnc);
+                    from,
+                    to,
+                    bulkId,
+                    messageId,
+                    generalStatus,
+                    sentSince,
+                    sentUntil,
+                    limit,
+                    mcc,
+                    mnc,
+                    applicationId,
+                    entityId);
             return apiClient.executeAsync(
                     getOutboundSmsMessageLogsDefinition, new TypeReference<SmsLogsResponse>() {}.getType(), callback);
         }
@@ -727,7 +843,7 @@ public class SmsApi {
     /**
      * Send binary SMS message.
      * <p>
-     * Send single or multiple binary messages to one or more destination address.
+     * Send single or multiple binary messages to one or more destination address. The API response will not contain the final delivery status, use [Delivery Reports](https://www.infobip.com/docs/api/channels/sms/sms-messaging/logs-and-status-reports/receive-outbound-sms-message-report) instead.
      *
      * @param smsAdvancedBinaryRequest  (required)
      * @return SendBinarySmsMessageRequest
@@ -785,7 +901,7 @@ public class SmsApi {
     /**
      * Send SMS message.
      * <p>
-     * 99% of all use cases can be achieved by using this API method. Everything from sending a simple single message to a single destination, up to batch sending of personalized messages to the thousands of recipients with a single API request. Language, transliteration, scheduling and every advanced feature you can think of is supported.
+     * Use this endpoint to send an SMS and set up a rich set of features, such as batch sending with a single API request, scheduling, URL tracking, language and transliteration configuration, etc. The API response will not contain the final delivery status, use [Delivery Reports](https://www.infobip.com/docs/api/channels/sms/sms-messaging/logs-and-status-reports/receive-outbound-sms-message-report) instead.
      *
      * @param smsAdvancedTextualRequest  (required)
      * @return SendSmsMessageRequest

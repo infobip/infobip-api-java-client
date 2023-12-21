@@ -18,6 +18,8 @@ import com.infobip.RequestDefinition;
 import com.infobip.model.WhatsAppAudioMessage;
 import com.infobip.model.WhatsAppBulkMessage;
 import com.infobip.model.WhatsAppBulkMessageInfo;
+import com.infobip.model.WhatsAppBusinessInfoRequest;
+import com.infobip.model.WhatsAppBusinessInfoResponse;
 import com.infobip.model.WhatsAppContactsMessage;
 import com.infobip.model.WhatsAppDocumentMessage;
 import com.infobip.model.WhatsAppIdentityConfirmation;
@@ -25,18 +27,29 @@ import com.infobip.model.WhatsAppIdentityInfo;
 import com.infobip.model.WhatsAppImageMessage;
 import com.infobip.model.WhatsAppInteractiveButtonsMessage;
 import com.infobip.model.WhatsAppInteractiveListMessage;
+import com.infobip.model.WhatsAppInteractiveLocationRequestMessage;
 import com.infobip.model.WhatsAppInteractiveMultiProductMessage;
+import com.infobip.model.WhatsAppInteractiveOrderDetailsMessage;
+import com.infobip.model.WhatsAppInteractiveOrderStatusMessage;
 import com.infobip.model.WhatsAppInteractiveProductMessage;
 import com.infobip.model.WhatsAppLocationMessage;
+import com.infobip.model.WhatsAppOtpRequest;
+import com.infobip.model.WhatsAppPayment;
+import com.infobip.model.WhatsAppPhoneNumberRequest;
+import com.infobip.model.WhatsAppSenderQualityResponse;
+import com.infobip.model.WhatsAppSenderRegistrationResponse;
 import com.infobip.model.WhatsAppSingleMessageInfo;
 import com.infobip.model.WhatsAppStickerMessage;
 import com.infobip.model.WhatsAppTemplateApiResponse;
+import com.infobip.model.WhatsAppTemplateEditPublicApiRequest;
 import com.infobip.model.WhatsAppTemplatePublicApiRequest;
 import com.infobip.model.WhatsAppTemplatesApiResponse;
 import com.infobip.model.WhatsAppTextMessage;
 import com.infobip.model.WhatsAppUrlDeletionRequest;
+import com.infobip.model.WhatsAppVerifyCodeRequest;
 import com.infobip.model.WhatsAppVideoMessage;
 import java.io.File;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -53,6 +66,81 @@ public class WhatsAppApi {
      */
     public WhatsAppApi(ApiClient apiClient) {
         this.apiClient = Objects.requireNonNull(apiClient, "ApiClient must not be null!");
+    }
+
+    private RequestDefinition addWhatsappSenderDefinition(
+            Long businessAccountId, WhatsAppPhoneNumberRequest whatsAppPhoneNumberRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST",
+                        "/whatsapp/1/embedded-signup/registrations/business-account/{businessAccountId}/senders")
+                .body(whatsAppPhoneNumberRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (businessAccountId != null) {
+            builder.addPathParameter(new Parameter("businessAccountId", businessAccountId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * addWhatsappSender request builder class.
+     */
+    public class AddWhatsappSenderRequest {
+        private final Long businessAccountId;
+        private final WhatsAppPhoneNumberRequest whatsAppPhoneNumberRequest;
+
+        private AddWhatsappSenderRequest(
+                Long businessAccountId, WhatsAppPhoneNumberRequest whatsAppPhoneNumberRequest) {
+            this.businessAccountId =
+                    Objects.requireNonNull(businessAccountId, "The required parameter 'businessAccountId' is missing.");
+            this.whatsAppPhoneNumberRequest = Objects.requireNonNull(
+                    whatsAppPhoneNumberRequest, "The required parameter 'whatsAppPhoneNumberRequest' is missing.");
+        }
+
+        /**
+         * Executes the addWhatsappSender request.
+         *
+         * @return WhatsAppSenderRegistrationResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppSenderRegistrationResponse execute() throws ApiException {
+            RequestDefinition addWhatsappSenderDefinition =
+                    addWhatsappSenderDefinition(businessAccountId, whatsAppPhoneNumberRequest);
+            return apiClient.execute(
+                    addWhatsappSenderDefinition, new TypeReference<WhatsAppSenderRegistrationResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the addWhatsappSender request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppSenderRegistrationResponse> callback) {
+            RequestDefinition addWhatsappSenderDefinition =
+                    addWhatsappSenderDefinition(businessAccountId, whatsAppPhoneNumberRequest);
+            return apiClient.executeAsync(
+                    addWhatsappSenderDefinition,
+                    new TypeReference<WhatsAppSenderRegistrationResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Add WhatsApp sender.
+     * <p>
+     * Add a WhatsApp sender to your WhatsApp Business Account and initiate the verification process. If the sender is recognized as already verified, it will be automatically submitted for registration.
+     *
+     * @param businessAccountId WhatsApp Business Account Id. (required)
+     * @param whatsAppPhoneNumberRequest  (required)
+     * @return AddWhatsappSenderRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public AddWhatsappSenderRequest addWhatsappSender(
+            Long businessAccountId, WhatsAppPhoneNumberRequest whatsAppPhoneNumberRequest) {
+        return new AddWhatsappSenderRequest(businessAccountId, whatsAppPhoneNumberRequest);
     }
 
     private RequestDefinition confirmWhatsAppIdentityDefinition(
@@ -206,6 +294,7 @@ public class WhatsAppApi {
         RequestDefinition.Builder builder = RequestDefinition.builder("DELETE", "/whatsapp/1/senders/{sender}/media")
                 .body(whatsAppUrlDeletionRequest)
                 .requiresAuthentication(true)
+                .accept("application/json")
                 .contentType("application/json");
 
         if (sender != null) {
@@ -395,6 +484,86 @@ public class WhatsAppApi {
         return new DownloadWhatsAppInboundMediaRequest(sender, mediaId);
     }
 
+    private RequestDefinition editWhatsappTemplateDefinition(
+            String sender, String id, WhatsAppTemplateEditPublicApiRequest whatsAppTemplateEditPublicApiRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "PATCH", "/whatsapp/2/senders/{sender}/templates/{id}")
+                .body(whatsAppTemplateEditPublicApiRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        if (id != null) {
+            builder.addPathParameter(new Parameter("id", id));
+        }
+        return builder.build();
+    }
+
+    /**
+     * editWhatsappTemplate request builder class.
+     */
+    public class EditWhatsappTemplateRequest {
+        private final String sender;
+        private final String id;
+        private final WhatsAppTemplateEditPublicApiRequest whatsAppTemplateEditPublicApiRequest;
+
+        private EditWhatsappTemplateRequest(
+                String sender, String id, WhatsAppTemplateEditPublicApiRequest whatsAppTemplateEditPublicApiRequest) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this.id = Objects.requireNonNull(id, "The required parameter 'id' is missing.");
+            this.whatsAppTemplateEditPublicApiRequest = Objects.requireNonNull(
+                    whatsAppTemplateEditPublicApiRequest,
+                    "The required parameter 'whatsAppTemplateEditPublicApiRequest' is missing.");
+        }
+
+        /**
+         * Executes the editWhatsappTemplate request.
+         *
+         * @return WhatsAppTemplateApiResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppTemplateApiResponse execute() throws ApiException {
+            RequestDefinition editWhatsappTemplateDefinition =
+                    editWhatsappTemplateDefinition(sender, id, whatsAppTemplateEditPublicApiRequest);
+            return apiClient.execute(
+                    editWhatsappTemplateDefinition, new TypeReference<WhatsAppTemplateApiResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the editWhatsappTemplate request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppTemplateApiResponse> callback) {
+            RequestDefinition editWhatsappTemplateDefinition =
+                    editWhatsappTemplateDefinition(sender, id, whatsAppTemplateEditPublicApiRequest);
+            return apiClient.executeAsync(
+                    editWhatsappTemplateDefinition,
+                    new TypeReference<WhatsAppTemplateApiResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Edit WhatsApp Template.
+     * <p>
+     * Edit a WhatsApp template. Edited template will be submitted for WhatsApp&#39;s review and approval. Once approved, template can be sent to end-users. Refer to [template guidelines](https://www.infobip.com/docs/whatsapp/message-types#guidelines-amp-best-practices) for additional info. * Only templates with an approved, rejected or paused status can be edited. * Please use structure documented in [Create WhatsApp Template](#channels/whatsapp/whatsapp-service-management/create-whatsapp-template) endpoint. * Category of an approved template cannot be edited. * Approved template can be edited up to 10 times in a 30 day window, or 1 time in a 24 hour window. Rejected or paused templates can be edited an unlimited number of times.
+     *
+     * @param sender Registered WhatsApp sender number. Must be in international format. (required)
+     * @param id Template ID. Must be a number. (required)
+     * @param whatsAppTemplateEditPublicApiRequest  (required)
+     * @return EditWhatsappTemplateRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases.</a>
+     */
+    public EditWhatsappTemplateRequest editWhatsappTemplate(
+            String sender, String id, WhatsAppTemplateEditPublicApiRequest whatsAppTemplateEditPublicApiRequest) {
+        return new EditWhatsappTemplateRequest(sender, id, whatsAppTemplateEditPublicApiRequest);
+    }
+
     private RequestDefinition getWhatsAppIdentityDefinition(String sender, String userNumber) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "GET", "/whatsapp/1/{sender}/contacts/{userNumber}/identity")
@@ -464,7 +633,8 @@ public class WhatsAppApi {
     private RequestDefinition getWhatsAppMediaMetadataDefinition(String sender, String mediaId) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "HEAD", "/whatsapp/1/senders/{sender}/media/{mediaId}")
-                .requiresAuthentication(true);
+                .requiresAuthentication(true)
+                .accept("application/json");
 
         if (sender != null) {
             builder.addPathParameter(new Parameter("sender", sender));
@@ -583,6 +753,400 @@ public class WhatsAppApi {
         return new GetWhatsAppTemplatesRequest(sender);
     }
 
+    private RequestDefinition getWhatsappBrazilPaymentStatusDefinition(String sender, String paymentId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "GET", "/whatsapp/1/senders/{sender}/payments/br/{paymentId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        if (paymentId != null) {
+            builder.addPathParameter(new Parameter("paymentId", paymentId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getWhatsappBrazilPaymentStatus request builder class.
+     */
+    public class GetWhatsappBrazilPaymentStatusRequest {
+        private final String sender;
+        private final String paymentId;
+
+        private GetWhatsappBrazilPaymentStatusRequest(String sender, String paymentId) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this.paymentId = Objects.requireNonNull(paymentId, "The required parameter 'paymentId' is missing.");
+        }
+
+        /**
+         * Executes the getWhatsappBrazilPaymentStatus request.
+         *
+         * @return WhatsAppPayment The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppPayment execute() throws ApiException {
+            RequestDefinition getWhatsappBrazilPaymentStatusDefinition =
+                    getWhatsappBrazilPaymentStatusDefinition(sender, paymentId);
+            return apiClient.execute(
+                    getWhatsappBrazilPaymentStatusDefinition, new TypeReference<WhatsAppPayment>() {}.getType());
+        }
+
+        /**
+         * Executes the getWhatsappBrazilPaymentStatus request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppPayment> callback) {
+            RequestDefinition getWhatsappBrazilPaymentStatusDefinition =
+                    getWhatsappBrazilPaymentStatusDefinition(sender, paymentId);
+            return apiClient.executeAsync(
+                    getWhatsappBrazilPaymentStatusDefinition,
+                    new TypeReference<WhatsAppPayment>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get Brazil payment status.
+     * <p>
+     * Get Brazil payment and transaction status.
+     *
+     * @param sender Registered WhatsApp sender number. Must be in international format. (required)
+     * @param paymentId Unique identifier of the payment. (required)
+     * @return GetWhatsappBrazilPaymentStatusRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public GetWhatsappBrazilPaymentStatusRequest getWhatsappBrazilPaymentStatus(String sender, String paymentId) {
+        return new GetWhatsappBrazilPaymentStatusRequest(sender, paymentId);
+    }
+
+    private RequestDefinition getWhatsappSenderBusinessInfoDefinition(String sender) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "GET", "/whatsapp/1/senders/{sender}/business-info")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getWhatsappSenderBusinessInfo request builder class.
+     */
+    public class GetWhatsappSenderBusinessInfoRequest {
+        private final String sender;
+
+        private GetWhatsappSenderBusinessInfoRequest(String sender) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+        }
+
+        /**
+         * Executes the getWhatsappSenderBusinessInfo request.
+         *
+         * @return WhatsAppBusinessInfoResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppBusinessInfoResponse execute() throws ApiException {
+            RequestDefinition getWhatsappSenderBusinessInfoDefinition = getWhatsappSenderBusinessInfoDefinition(sender);
+            return apiClient.execute(
+                    getWhatsappSenderBusinessInfoDefinition,
+                    new TypeReference<WhatsAppBusinessInfoResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getWhatsappSenderBusinessInfo request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppBusinessInfoResponse> callback) {
+            RequestDefinition getWhatsappSenderBusinessInfoDefinition = getWhatsappSenderBusinessInfoDefinition(sender);
+            return apiClient.executeAsync(
+                    getWhatsappSenderBusinessInfoDefinition,
+                    new TypeReference<WhatsAppBusinessInfoResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get business info of WhatsApp sender.
+     * <p>
+     * Get WhatsApp sender business information, such as about, address, description, email, vertical, websites, and display name.
+     *
+     * @param sender Registered WhatsApp sender number. Must be in international format. (required)
+     * @return GetWhatsappSenderBusinessInfoRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public GetWhatsappSenderBusinessInfoRequest getWhatsappSenderBusinessInfo(String sender) {
+        return new GetWhatsappSenderBusinessInfoRequest(sender);
+    }
+
+    private RequestDefinition getWhatsappSenderBusinessLogoDefinition(String sender) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "GET", "/whatsapp/1/senders/{sender}/business-info/logo")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getWhatsappSenderBusinessLogo request builder class.
+     */
+    public class GetWhatsappSenderBusinessLogoRequest {
+        private final String sender;
+
+        private GetWhatsappSenderBusinessLogoRequest(String sender) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+        }
+
+        /**
+         * Executes the getWhatsappSenderBusinessLogo request.
+         *
+         * @return File The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public File execute() throws ApiException {
+            RequestDefinition getWhatsappSenderBusinessLogoDefinition = getWhatsappSenderBusinessLogoDefinition(sender);
+            return apiClient.execute(getWhatsappSenderBusinessLogoDefinition, new TypeReference<File>() {}.getType());
+        }
+
+        /**
+         * Executes the getWhatsappSenderBusinessLogo request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<File> callback) {
+            RequestDefinition getWhatsappSenderBusinessLogoDefinition = getWhatsappSenderBusinessLogoDefinition(sender);
+            return apiClient.executeAsync(
+                    getWhatsappSenderBusinessLogoDefinition, new TypeReference<File>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Download business logo of WhatsApp sender.
+     * <p>
+     * Download WhatsApp sender business logo.
+     *
+     * @param sender Registered WhatsApp sender number. Must be in international format. (required)
+     * @return GetWhatsappSenderBusinessLogoRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public GetWhatsappSenderBusinessLogoRequest getWhatsappSenderBusinessLogo(String sender) {
+        return new GetWhatsappSenderBusinessLogoRequest(sender);
+    }
+
+    private RequestDefinition getWhatsappSendersQualityDefinition(List<String> senders) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/whatsapp/1/senders/quality")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (senders != null) {
+            for (var parameterItem : senders) {
+                builder.addQueryParameter(new Parameter("senders", senders));
+            }
+        }
+        return builder.build();
+    }
+
+    /**
+     * getWhatsappSendersQuality request builder class.
+     */
+    public class GetWhatsappSendersQualityRequest {
+        private final List<String> senders;
+
+        private GetWhatsappSendersQualityRequest(List<String> senders) {
+            this.senders = Objects.requireNonNull(senders, "The required parameter 'senders' is missing.");
+        }
+
+        /**
+         * Executes the getWhatsappSendersQuality request.
+         *
+         * @return WhatsAppSenderQualityResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppSenderQualityResponse execute() throws ApiException {
+            RequestDefinition getWhatsappSendersQualityDefinition = getWhatsappSendersQualityDefinition(senders);
+            return apiClient.execute(
+                    getWhatsappSendersQualityDefinition,
+                    new TypeReference<WhatsAppSenderQualityResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getWhatsappSendersQuality request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppSenderQualityResponse> callback) {
+            RequestDefinition getWhatsappSendersQualityDefinition = getWhatsappSendersQualityDefinition(senders);
+            return apiClient.executeAsync(
+                    getWhatsappSendersQualityDefinition,
+                    new TypeReference<WhatsAppSenderQualityResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get quality information of WhatsApp senders.
+     * <p>
+     * Get WhatsApp sender information, such as quality rating, status, and current limit of given senders. Only senders associated with your account are included in the response.
+     *
+     * @param senders List of comma-separated WhatsApp sender numbers. (required)
+     * @return GetWhatsappSendersQualityRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public GetWhatsappSendersQualityRequest getWhatsappSendersQuality(List<String> senders) {
+        return new GetWhatsappSendersQualityRequest(senders);
+    }
+
+    private RequestDefinition getWhatsappTemplateDefinition(String sender, String id) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "GET", "/whatsapp/2/senders/{sender}/templates/{id}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        if (id != null) {
+            builder.addPathParameter(new Parameter("id", id));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getWhatsappTemplate request builder class.
+     */
+    public class GetWhatsappTemplateRequest {
+        private final String sender;
+        private final String id;
+
+        private GetWhatsappTemplateRequest(String sender, String id) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this.id = Objects.requireNonNull(id, "The required parameter 'id' is missing.");
+        }
+
+        /**
+         * Executes the getWhatsappTemplate request.
+         *
+         * @return WhatsAppTemplateApiResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppTemplateApiResponse execute() throws ApiException {
+            RequestDefinition getWhatsappTemplateDefinition = getWhatsappTemplateDefinition(sender, id);
+            return apiClient.execute(
+                    getWhatsappTemplateDefinition, new TypeReference<WhatsAppTemplateApiResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getWhatsappTemplate request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppTemplateApiResponse> callback) {
+            RequestDefinition getWhatsappTemplateDefinition = getWhatsappTemplateDefinition(sender, id);
+            return apiClient.executeAsync(
+                    getWhatsappTemplateDefinition,
+                    new TypeReference<WhatsAppTemplateApiResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get WhatsApp Template.
+     * <p>
+     * Get a single template with its status for a given template ID.
+     *
+     * @param sender Registered WhatsApp sender number. Must be in international format. (required)
+     * @param id Template ID. Must be a number. (required)
+     * @return GetWhatsappTemplateRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases.</a>
+     */
+    public GetWhatsappTemplateRequest getWhatsappTemplate(String sender, String id) {
+        return new GetWhatsappTemplateRequest(sender, id);
+    }
+
+    private RequestDefinition getWhatsappUpiPayuPaymentStatusDefinition(String sender, String paymentId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "GET", "/whatsapp/1/senders/{sender}/payments/upi/payu/{paymentId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        if (paymentId != null) {
+            builder.addPathParameter(new Parameter("paymentId", paymentId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getWhatsappUpiPayuPaymentStatus request builder class.
+     */
+    public class GetWhatsappUpiPayuPaymentStatusRequest {
+        private final String sender;
+        private final String paymentId;
+
+        private GetWhatsappUpiPayuPaymentStatusRequest(String sender, String paymentId) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this.paymentId = Objects.requireNonNull(paymentId, "The required parameter 'paymentId' is missing.");
+        }
+
+        /**
+         * Executes the getWhatsappUpiPayuPaymentStatus request.
+         *
+         * @return WhatsAppPayment The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppPayment execute() throws ApiException {
+            RequestDefinition getWhatsappUpiPayuPaymentStatusDefinition =
+                    getWhatsappUpiPayuPaymentStatusDefinition(sender, paymentId);
+            return apiClient.execute(
+                    getWhatsappUpiPayuPaymentStatusDefinition, new TypeReference<WhatsAppPayment>() {}.getType());
+        }
+
+        /**
+         * Executes the getWhatsappUpiPayuPaymentStatus request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppPayment> callback) {
+            RequestDefinition getWhatsappUpiPayuPaymentStatusDefinition =
+                    getWhatsappUpiPayuPaymentStatusDefinition(sender, paymentId);
+            return apiClient.executeAsync(
+                    getWhatsappUpiPayuPaymentStatusDefinition,
+                    new TypeReference<WhatsAppPayment>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get India UPI PayU payment status.
+     * <p>
+     * Get India UPI PayU payment and transaction status.
+     *
+     * @param sender Registered WhatsApp sender number. Must be in international format. (required)
+     * @param paymentId Unique identifier of the payment. (required)
+     * @return GetWhatsappUpiPayuPaymentStatusRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public GetWhatsappUpiPayuPaymentStatusRequest getWhatsappUpiPayuPaymentStatus(String sender, String paymentId) {
+        return new GetWhatsappUpiPayuPaymentStatusRequest(sender, paymentId);
+    }
+
     private RequestDefinition markWhatsAppMessageAsReadDefinition(String sender, String messageId) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "POST", "/whatsapp/1/senders/{sender}/message/{messageId}/read")
@@ -645,6 +1209,72 @@ public class WhatsAppApi {
      */
     public MarkWhatsAppMessageAsReadRequest markWhatsAppMessageAsRead(String sender, String messageId) {
         return new MarkWhatsAppMessageAsReadRequest(sender, messageId);
+    }
+
+    private RequestDefinition retryWhatsappSenderVerificationDefinition(
+            String sender, WhatsAppOtpRequest whatsAppOtpRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "PUT", "/whatsapp/1/embedded-signup/registrations/senders/{sender}/verification")
+                .body(whatsAppOtpRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        return builder.build();
+    }
+
+    /**
+     * retryWhatsappSenderVerification request builder class.
+     */
+    public class RetryWhatsappSenderVerificationRequest {
+        private final String sender;
+        private final WhatsAppOtpRequest whatsAppOtpRequest;
+
+        private RetryWhatsappSenderVerificationRequest(String sender, WhatsAppOtpRequest whatsAppOtpRequest) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this.whatsAppOtpRequest = Objects.requireNonNull(
+                    whatsAppOtpRequest, "The required parameter 'whatsAppOtpRequest' is missing.");
+        }
+
+        /**
+         * Executes the retryWhatsappSenderVerification request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition retryWhatsappSenderVerificationDefinition =
+                    retryWhatsappSenderVerificationDefinition(sender, whatsAppOtpRequest);
+            apiClient.execute(retryWhatsappSenderVerificationDefinition);
+        }
+
+        /**
+         * Executes the retryWhatsappSenderVerification request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition retryWhatsappSenderVerificationDefinition =
+                    retryWhatsappSenderVerificationDefinition(sender, whatsAppOtpRequest);
+            return apiClient.executeAsync(retryWhatsappSenderVerificationDefinition, callback);
+        }
+    }
+
+    /**
+     * Retry WhatsApp sender verification.
+     * <p>
+     * Retry the WhatsApp sender verification process in the event of a non-delivered verification code.
+     *
+     * @param sender WhatsApp sender number. Must be in international format. (required)
+     * @param whatsAppOtpRequest  (required)
+     * @return RetryWhatsappSenderVerificationRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public RetryWhatsappSenderVerificationRequest retryWhatsappSenderVerification(
+            String sender, WhatsAppOtpRequest whatsAppOtpRequest) {
+        return new RetryWhatsappSenderVerificationRequest(sender, whatsAppOtpRequest);
     }
 
     private RequestDefinition sendWhatsAppAudioMessageDefinition(WhatsAppAudioMessage whatsAppAudioMessage) {
@@ -1488,5 +2118,345 @@ public class WhatsAppApi {
      */
     public SendWhatsAppVideoMessageRequest sendWhatsAppVideoMessage(WhatsAppVideoMessage whatsAppVideoMessage) {
         return new SendWhatsAppVideoMessageRequest(whatsAppVideoMessage);
+    }
+
+    private RequestDefinition sendWhatsappInteractiveLocationRequestMessageDefinition(
+            WhatsAppInteractiveLocationRequestMessage whatsAppInteractiveLocationRequestMessage) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/whatsapp/1/message/interactive/location-request")
+                .body(whatsAppInteractiveLocationRequestMessage)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * sendWhatsappInteractiveLocationRequestMessage request builder class.
+     */
+    public class SendWhatsappInteractiveLocationRequestMessageRequest {
+        private final WhatsAppInteractiveLocationRequestMessage whatsAppInteractiveLocationRequestMessage;
+
+        private SendWhatsappInteractiveLocationRequestMessageRequest(
+                WhatsAppInteractiveLocationRequestMessage whatsAppInteractiveLocationRequestMessage) {
+            this.whatsAppInteractiveLocationRequestMessage = Objects.requireNonNull(
+                    whatsAppInteractiveLocationRequestMessage,
+                    "The required parameter 'whatsAppInteractiveLocationRequestMessage' is missing.");
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveLocationRequestMessage request.
+         *
+         * @return WhatsAppSingleMessageInfo The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppSingleMessageInfo execute() throws ApiException {
+            RequestDefinition sendWhatsappInteractiveLocationRequestMessageDefinition =
+                    sendWhatsappInteractiveLocationRequestMessageDefinition(whatsAppInteractiveLocationRequestMessage);
+            return apiClient.execute(
+                    sendWhatsappInteractiveLocationRequestMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType());
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveLocationRequestMessage request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppSingleMessageInfo> callback) {
+            RequestDefinition sendWhatsappInteractiveLocationRequestMessageDefinition =
+                    sendWhatsappInteractiveLocationRequestMessageDefinition(whatsAppInteractiveLocationRequestMessage);
+            return apiClient.executeAsync(
+                    sendWhatsappInteractiveLocationRequestMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Send WhatsApp interactive location request message.
+     * <p>
+     * Send an interactive location request message to a single recipient. Interactive location request messages can only be successfully delivered if the recipient has contacted the business within the last 24 hours, otherwise [template message](#channels/whatsapp/send-whatsapp-template-message) should be used. &lt;br/&gt; The API response will not contain the final delivery status, use [Delivery Reports](#channels/whatsapp/receive-whatsapp-delivery-reports) instead.
+     *
+     * @param whatsAppInteractiveLocationRequestMessage  (required)
+     * @return SendWhatsappInteractiveLocationRequestMessageRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public SendWhatsappInteractiveLocationRequestMessageRequest sendWhatsappInteractiveLocationRequestMessage(
+            WhatsAppInteractiveLocationRequestMessage whatsAppInteractiveLocationRequestMessage) {
+        return new SendWhatsappInteractiveLocationRequestMessageRequest(whatsAppInteractiveLocationRequestMessage);
+    }
+
+    private RequestDefinition sendWhatsappInteractiveOrderDetailsMessageDefinition(
+            WhatsAppInteractiveOrderDetailsMessage whatsAppInteractiveOrderDetailsMessage) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/whatsapp/1/message/interactive/order-details")
+                .body(whatsAppInteractiveOrderDetailsMessage)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * sendWhatsappInteractiveOrderDetailsMessage request builder class.
+     */
+    public class SendWhatsappInteractiveOrderDetailsMessageRequest {
+        private final WhatsAppInteractiveOrderDetailsMessage whatsAppInteractiveOrderDetailsMessage;
+
+        private SendWhatsappInteractiveOrderDetailsMessageRequest(
+                WhatsAppInteractiveOrderDetailsMessage whatsAppInteractiveOrderDetailsMessage) {
+            this.whatsAppInteractiveOrderDetailsMessage = Objects.requireNonNull(
+                    whatsAppInteractiveOrderDetailsMessage,
+                    "The required parameter 'whatsAppInteractiveOrderDetailsMessage' is missing.");
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveOrderDetailsMessage request.
+         *
+         * @return WhatsAppSingleMessageInfo The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppSingleMessageInfo execute() throws ApiException {
+            RequestDefinition sendWhatsappInteractiveOrderDetailsMessageDefinition =
+                    sendWhatsappInteractiveOrderDetailsMessageDefinition(whatsAppInteractiveOrderDetailsMessage);
+            return apiClient.execute(
+                    sendWhatsappInteractiveOrderDetailsMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType());
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveOrderDetailsMessage request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppSingleMessageInfo> callback) {
+            RequestDefinition sendWhatsappInteractiveOrderDetailsMessageDefinition =
+                    sendWhatsappInteractiveOrderDetailsMessageDefinition(whatsAppInteractiveOrderDetailsMessage);
+            return apiClient.executeAsync(
+                    sendWhatsappInteractiveOrderDetailsMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Send WhatsApp interactive order-details message.
+     * <p>
+     * Send an interactive order-details message to a single recipient. &lt;br/&gt; An order-details message is a structured message containing essential information about the customer&#39;s selected products. Alternatively, a [single](#channels/whatsapp/send-whatsapp-interactive-product-message) or [multi-product](#channels/whatsapp/send-whatsapp-interactive-multi-product-message) interactive message can serve this purpose. &lt;br/&gt; Interactive order-details messages can only be successfully delivered if the recipient has contacted the business within the last 24 hours, otherwise [template message](#channels/whatsapp/send-whatsapp-template-message) should be used. &lt;br/&gt; The API response will not contain the final delivery status, use [Delivery Reports](#channels/whatsapp/receive-whatsapp-delivery-reports) instead.
+     *
+     * @param whatsAppInteractiveOrderDetailsMessage  (required)
+     * @return SendWhatsappInteractiveOrderDetailsMessageRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public SendWhatsappInteractiveOrderDetailsMessageRequest sendWhatsappInteractiveOrderDetailsMessage(
+            WhatsAppInteractiveOrderDetailsMessage whatsAppInteractiveOrderDetailsMessage) {
+        return new SendWhatsappInteractiveOrderDetailsMessageRequest(whatsAppInteractiveOrderDetailsMessage);
+    }
+
+    private RequestDefinition sendWhatsappInteractiveOrderStatusMessageDefinition(
+            WhatsAppInteractiveOrderStatusMessage whatsAppInteractiveOrderStatusMessage) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/whatsapp/1/message/interactive/order-status")
+                .body(whatsAppInteractiveOrderStatusMessage)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * sendWhatsappInteractiveOrderStatusMessage request builder class.
+     */
+    public class SendWhatsappInteractiveOrderStatusMessageRequest {
+        private final WhatsAppInteractiveOrderStatusMessage whatsAppInteractiveOrderStatusMessage;
+
+        private SendWhatsappInteractiveOrderStatusMessageRequest(
+                WhatsAppInteractiveOrderStatusMessage whatsAppInteractiveOrderStatusMessage) {
+            this.whatsAppInteractiveOrderStatusMessage = Objects.requireNonNull(
+                    whatsAppInteractiveOrderStatusMessage,
+                    "The required parameter 'whatsAppInteractiveOrderStatusMessage' is missing.");
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveOrderStatusMessage request.
+         *
+         * @return WhatsAppSingleMessageInfo The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppSingleMessageInfo execute() throws ApiException {
+            RequestDefinition sendWhatsappInteractiveOrderStatusMessageDefinition =
+                    sendWhatsappInteractiveOrderStatusMessageDefinition(whatsAppInteractiveOrderStatusMessage);
+            return apiClient.execute(
+                    sendWhatsappInteractiveOrderStatusMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType());
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveOrderStatusMessage request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppSingleMessageInfo> callback) {
+            RequestDefinition sendWhatsappInteractiveOrderStatusMessageDefinition =
+                    sendWhatsappInteractiveOrderStatusMessageDefinition(whatsAppInteractiveOrderStatusMessage);
+            return apiClient.executeAsync(
+                    sendWhatsappInteractiveOrderStatusMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Send WhatsApp interactive order-status message.
+     * <p>
+     * Send an interactive order-status message to a single recipient. &lt;br/&gt; An order-status message delivers real-time updates to customers about the current status of their order. &lt;br/&gt; Interactive order-status messages can only be successfully delivered if the recipient has contacted the business within the last 24 hours, otherwise [template message](#channels/whatsapp/send-whatsapp-template-message) should be used. &lt;br/&gt; The API response will not contain the final delivery status, use [Delivery Reports](#channels/whatsapp/receive-whatsapp-delivery-reports) instead.
+     *
+     * @param whatsAppInteractiveOrderStatusMessage  (required)
+     * @return SendWhatsappInteractiveOrderStatusMessageRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public SendWhatsappInteractiveOrderStatusMessageRequest sendWhatsappInteractiveOrderStatusMessage(
+            WhatsAppInteractiveOrderStatusMessage whatsAppInteractiveOrderStatusMessage) {
+        return new SendWhatsappInteractiveOrderStatusMessageRequest(whatsAppInteractiveOrderStatusMessage);
+    }
+
+    private RequestDefinition updateWhatsappSenderBusinessInfoDefinition(
+            String sender, WhatsAppBusinessInfoRequest whatsAppBusinessInfoRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "PATCH", "/whatsapp/1/senders/{sender}/business-info")
+                .body(whatsAppBusinessInfoRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        return builder.build();
+    }
+
+    /**
+     * updateWhatsappSenderBusinessInfo request builder class.
+     */
+    public class UpdateWhatsappSenderBusinessInfoRequest {
+        private final String sender;
+        private final WhatsAppBusinessInfoRequest whatsAppBusinessInfoRequest;
+
+        private UpdateWhatsappSenderBusinessInfoRequest(
+                String sender, WhatsAppBusinessInfoRequest whatsAppBusinessInfoRequest) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this.whatsAppBusinessInfoRequest = Objects.requireNonNull(
+                    whatsAppBusinessInfoRequest, "The required parameter 'whatsAppBusinessInfoRequest' is missing.");
+        }
+
+        /**
+         * Executes the updateWhatsappSenderBusinessInfo request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition updateWhatsappSenderBusinessInfoDefinition =
+                    updateWhatsappSenderBusinessInfoDefinition(sender, whatsAppBusinessInfoRequest);
+            apiClient.execute(updateWhatsappSenderBusinessInfoDefinition);
+        }
+
+        /**
+         * Executes the updateWhatsappSenderBusinessInfo request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition updateWhatsappSenderBusinessInfoDefinition =
+                    updateWhatsappSenderBusinessInfoDefinition(sender, whatsAppBusinessInfoRequest);
+            return apiClient.executeAsync(updateWhatsappSenderBusinessInfoDefinition, callback);
+        }
+    }
+
+    /**
+     * Update business info of WhatsApp sender.
+     * <p>
+     * Update WhatsApp sender business information, such as about, address, description, email, vertical, websites, and logo.
+     *
+     * @param sender Registered WhatsApp sender number. Must be in international format. (required)
+     * @param whatsAppBusinessInfoRequest  (required)
+     * @return UpdateWhatsappSenderBusinessInfoRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public UpdateWhatsappSenderBusinessInfoRequest updateWhatsappSenderBusinessInfo(
+            String sender, WhatsAppBusinessInfoRequest whatsAppBusinessInfoRequest) {
+        return new UpdateWhatsappSenderBusinessInfoRequest(sender, whatsAppBusinessInfoRequest);
+    }
+
+    private RequestDefinition verifyWhatsappSenderDefinition(
+            String sender, WhatsAppVerifyCodeRequest whatsAppVerifyCodeRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/whatsapp/1/embedded-signup/registrations/senders/{sender}/verification")
+                .body(whatsAppVerifyCodeRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        return builder.build();
+    }
+
+    /**
+     * verifyWhatsappSender request builder class.
+     */
+    public class VerifyWhatsappSenderRequest {
+        private final String sender;
+        private final WhatsAppVerifyCodeRequest whatsAppVerifyCodeRequest;
+
+        private VerifyWhatsappSenderRequest(String sender, WhatsAppVerifyCodeRequest whatsAppVerifyCodeRequest) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this.whatsAppVerifyCodeRequest = Objects.requireNonNull(
+                    whatsAppVerifyCodeRequest, "The required parameter 'whatsAppVerifyCodeRequest' is missing.");
+        }
+
+        /**
+         * Executes the verifyWhatsappSender request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition verifyWhatsappSenderDefinition =
+                    verifyWhatsappSenderDefinition(sender, whatsAppVerifyCodeRequest);
+            apiClient.execute(verifyWhatsappSenderDefinition);
+        }
+
+        /**
+         * Executes the verifyWhatsappSender request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition verifyWhatsappSenderDefinition =
+                    verifyWhatsappSenderDefinition(sender, whatsAppVerifyCodeRequest);
+            return apiClient.executeAsync(verifyWhatsappSenderDefinition, callback);
+        }
+    }
+
+    /**
+     * Verify WhatsApp sender.
+     * <p>
+     * Verify your WhatsApp sender and submit it for registration.
+     *
+     * @param sender WhatsApp sender number. Must be in international format. (required)
+     * @param whatsAppVerifyCodeRequest  (required)
+     * @return VerifyWhatsappSenderRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public VerifyWhatsappSenderRequest verifyWhatsappSender(
+            String sender, WhatsAppVerifyCodeRequest whatsAppVerifyCodeRequest) {
+        return new VerifyWhatsappSenderRequest(sender, whatsAppVerifyCodeRequest);
     }
 }

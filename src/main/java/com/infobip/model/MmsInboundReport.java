@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -25,19 +27,25 @@ public class MmsInboundReport {
 
     private String message;
 
+    private List<MmsInboundDestination> group = null;
+
     private String receivedAt;
 
     private Integer mmsCount;
 
     private String callbackData;
 
-    private MmsPrice price;
+    private MessagePrice price;
+
+    private String applicationId;
+
+    private String entityId;
 
     /**
      * Sets messageId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the received message.
+     * ID that uniquely identifies the received message.
      *
      * @param messageId
      * @return This {@link MmsInboundReport instance}.
@@ -51,7 +59,7 @@ public class MmsInboundReport {
      * Returns messageId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the received message.
+     * ID that uniquely identifies the received message.
      *
      * @return messageId
      */
@@ -64,7 +72,7 @@ public class MmsInboundReport {
      * Sets messageId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the received message.
+     * ID that uniquely identifies the received message.
      *
      * @param messageId
      */
@@ -77,7 +85,7 @@ public class MmsInboundReport {
      * Sets to.
      * <p>
      * Field description:
-     * The message destination address.
+     * Message destination address.
      *
      * @param to
      * @return This {@link MmsInboundReport instance}.
@@ -91,7 +99,7 @@ public class MmsInboundReport {
      * Returns to.
      * <p>
      * Field description:
-     * The message destination address.
+     * Message destination address.
      *
      * @return to
      */
@@ -104,7 +112,7 @@ public class MmsInboundReport {
      * Sets to.
      * <p>
      * Field description:
-     * The message destination address.
+     * Message destination address.
      *
      * @param to
      */
@@ -191,6 +199,63 @@ public class MmsInboundReport {
     @JsonProperty("message")
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    /**
+     * Sets group.
+     * <p>
+     * Field description:
+     * Recipients of group MMS.
+     *
+     * @param group
+     * @return This {@link MmsInboundReport instance}.
+     */
+    public MmsInboundReport group(List<MmsInboundDestination> group) {
+        this.group = group;
+        return this;
+    }
+
+    /**
+     * Adds and item into group.
+     * <p>
+     * Field description:
+     * Recipients of group MMS.
+     *
+     * @param groupItem The item to be added to the list.
+     * @return This {@link MmsInboundReport instance}.
+     */
+    public MmsInboundReport addGroupItem(MmsInboundDestination groupItem) {
+        if (this.group == null) {
+            this.group = new ArrayList<>();
+        }
+        this.group.add(groupItem);
+        return this;
+    }
+
+    /**
+     * Returns group.
+     * <p>
+     * Field description:
+     * Recipients of group MMS.
+     *
+     * @return group
+     */
+    @JsonProperty("group")
+    public List<MmsInboundDestination> getGroup() {
+        return group;
+    }
+
+    /**
+     * Sets group.
+     * <p>
+     * Field description:
+     * Recipients of group MMS.
+     *
+     * @param group
+     */
+    @JsonProperty("group")
+    public void setGroup(List<MmsInboundDestination> group) {
+        this.group = group;
     }
 
     /**
@@ -319,7 +384,7 @@ public class MmsInboundReport {
      * @param price
      * @return This {@link MmsInboundReport instance}.
      */
-    public MmsInboundReport price(MmsPrice price) {
+    public MmsInboundReport price(MessagePrice price) {
         this.price = price;
         return this;
     }
@@ -330,7 +395,7 @@ public class MmsInboundReport {
      * @return price
      */
     @JsonProperty("price")
-    public MmsPrice getPrice() {
+    public MessagePrice getPrice() {
         return price;
     }
 
@@ -340,8 +405,88 @@ public class MmsInboundReport {
      * @param price
      */
     @JsonProperty("price")
-    public void setPrice(MmsPrice price) {
+    public void setPrice(MessagePrice price) {
         this.price = price;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * [Application](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#application) identifier the message belongs to.
+     *
+     * @param applicationId
+     * @return This {@link MmsInboundReport instance}.
+     */
+    public MmsInboundReport applicationId(String applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * [Application](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#application) identifier the message belongs to.
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * [Application](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#application) identifier the message belongs to.
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * [Entity](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#entity) identifier the message belongs to.
+     *
+     * @param entityId
+     * @return This {@link MmsInboundReport instance}.
+     */
+    public MmsInboundReport entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * [Entity](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#entity) identifier the message belongs to.
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * [Entity](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#entity) identifier the message belongs to.
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
     }
 
     @Override
@@ -357,15 +502,29 @@ public class MmsInboundReport {
                 && Objects.equals(this.to, mmsInboundReport.to)
                 && Objects.equals(this.from, mmsInboundReport.from)
                 && Objects.equals(this.message, mmsInboundReport.message)
+                && Objects.equals(this.group, mmsInboundReport.group)
                 && Objects.equals(this.receivedAt, mmsInboundReport.receivedAt)
                 && Objects.equals(this.mmsCount, mmsInboundReport.mmsCount)
                 && Objects.equals(this.callbackData, mmsInboundReport.callbackData)
-                && Objects.equals(this.price, mmsInboundReport.price);
+                && Objects.equals(this.price, mmsInboundReport.price)
+                && Objects.equals(this.applicationId, mmsInboundReport.applicationId)
+                && Objects.equals(this.entityId, mmsInboundReport.entityId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageId, to, from, message, receivedAt, mmsCount, callbackData, price);
+        return Objects.hash(
+                messageId,
+                to,
+                from,
+                message,
+                group,
+                receivedAt,
+                mmsCount,
+                callbackData,
+                price,
+                applicationId,
+                entityId);
     }
 
     @Override
@@ -386,6 +545,9 @@ public class MmsInboundReport {
                 .append("    message: ")
                 .append(toIndentedString(message))
                 .append(newLine)
+                .append("    group: ")
+                .append(toIndentedString(group))
+                .append(newLine)
                 .append("    receivedAt: ")
                 .append(toIndentedString(receivedAt))
                 .append(newLine)
@@ -397,6 +559,12 @@ public class MmsInboundReport {
                 .append(newLine)
                 .append("    price: ")
                 .append(toIndentedString(price))
+                .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
                 .append(newLine)
                 .append("}")
                 .toString();

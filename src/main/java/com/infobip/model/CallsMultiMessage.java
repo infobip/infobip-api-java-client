@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents CallsMultiMessage model.
+ * Array of messages to be sent, one per every message.
  */
 public class CallsMultiMessage {
 
@@ -155,7 +155,7 @@ public class CallsMultiMessage {
      * Sets text.
      * <p>
      * Field description:
-     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation.
+     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
      *
      * @param text
      * @return This {@link CallsMultiMessage instance}.
@@ -169,7 +169,7 @@ public class CallsMultiMessage {
      * Returns text.
      * <p>
      * Field description:
-     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation.
+     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
      *
      * @return text
      */
@@ -182,7 +182,7 @@ public class CallsMultiMessage {
      * Sets text.
      * <p>
      * Field description:
-     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation.
+     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
      *
      * @param text
      */
@@ -195,7 +195,7 @@ public class CallsMultiMessage {
      * Sets to.
      * <p>
      * Field description:
-     * Phone number of the recipient. Phone number must be written in E.164 standard format (Example: 41793026727).
+     * Phone number of the recipient. Phone number must be written in E.164 standard format (Example: 41793026727). Maximum number of phone numbers listed is 20k.
      * <p>
      * The field is required.
      *
@@ -211,7 +211,7 @@ public class CallsMultiMessage {
      * Adds and item into to.
      * <p>
      * Field description:
-     * Phone number of the recipient. Phone number must be written in E.164 standard format (Example: 41793026727).
+     * Phone number of the recipient. Phone number must be written in E.164 standard format (Example: 41793026727). Maximum number of phone numbers listed is 20k.
      * <p>
      * The field is required.
      *
@@ -230,7 +230,7 @@ public class CallsMultiMessage {
      * Returns to.
      * <p>
      * Field description:
-     * Phone number of the recipient. Phone number must be written in E.164 standard format (Example: 41793026727).
+     * Phone number of the recipient. Phone number must be written in E.164 standard format (Example: 41793026727). Maximum number of phone numbers listed is 20k.
      * <p>
      * The field is required.
      *
@@ -245,7 +245,7 @@ public class CallsMultiMessage {
      * Sets to.
      * <p>
      * Field description:
-     * Phone number of the recipient. Phone number must be written in E.164 standard format (Example: 41793026727).
+     * Phone number of the recipient. Phone number must be written in E.164 standard format (Example: 41793026727). Maximum number of phone numbers listed is 20k.
      * <p>
      * The field is required.
      *

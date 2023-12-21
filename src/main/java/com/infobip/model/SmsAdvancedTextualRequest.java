@@ -29,6 +29,8 @@ public class SmsAdvancedTextualRequest {
 
     private SmsTracking tracking;
 
+    private Boolean includeSmsCountInResponse;
+
     /**
      * Sets bulkId.
      * <p>
@@ -227,6 +229,46 @@ public class SmsAdvancedTextualRequest {
         this.tracking = tracking;
     }
 
+    /**
+     * Sets includeSmsCountInResponse.
+     * <p>
+     * Field description:
+     * Set to true to return smsCount in the response.  Default is false. smsCount is the total count of SMS submitted in the request.  SMS messages have a character limit and messages longer than that limit will be split into multiple SMS and reflected in the total count of SMS submitted.
+     *
+     * @param includeSmsCountInResponse
+     * @return This {@link SmsAdvancedTextualRequest instance}.
+     */
+    public SmsAdvancedTextualRequest includeSmsCountInResponse(Boolean includeSmsCountInResponse) {
+        this.includeSmsCountInResponse = includeSmsCountInResponse;
+        return this;
+    }
+
+    /**
+     * Returns includeSmsCountInResponse.
+     * <p>
+     * Field description:
+     * Set to true to return smsCount in the response.  Default is false. smsCount is the total count of SMS submitted in the request.  SMS messages have a character limit and messages longer than that limit will be split into multiple SMS and reflected in the total count of SMS submitted.
+     *
+     * @return includeSmsCountInResponse
+     */
+    @JsonProperty("includeSmsCountInResponse")
+    public Boolean getIncludeSmsCountInResponse() {
+        return includeSmsCountInResponse;
+    }
+
+    /**
+     * Sets includeSmsCountInResponse.
+     * <p>
+     * Field description:
+     * Set to true to return smsCount in the response.  Default is false. smsCount is the total count of SMS submitted in the request.  SMS messages have a character limit and messages longer than that limit will be split into multiple SMS and reflected in the total count of SMS submitted.
+     *
+     * @param includeSmsCountInResponse
+     */
+    @JsonProperty("includeSmsCountInResponse")
+    public void setIncludeSmsCountInResponse(Boolean includeSmsCountInResponse) {
+        this.includeSmsCountInResponse = includeSmsCountInResponse;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -240,12 +282,13 @@ public class SmsAdvancedTextualRequest {
                 && Objects.equals(this.messages, smsAdvancedTextualRequest.messages)
                 && Objects.equals(this.sendingSpeedLimit, smsAdvancedTextualRequest.sendingSpeedLimit)
                 && Objects.equals(this.urlOptions, smsAdvancedTextualRequest.urlOptions)
-                && Objects.equals(this.tracking, smsAdvancedTextualRequest.tracking);
+                && Objects.equals(this.tracking, smsAdvancedTextualRequest.tracking)
+                && Objects.equals(this.includeSmsCountInResponse, smsAdvancedTextualRequest.includeSmsCountInResponse);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bulkId, messages, sendingSpeedLimit, urlOptions, tracking);
+        return Objects.hash(bulkId, messages, sendingSpeedLimit, urlOptions, tracking, includeSmsCountInResponse);
     }
 
     @Override
@@ -268,6 +311,9 @@ public class SmsAdvancedTextualRequest {
                 .append(newLine)
                 .append("    tracking: ")
                 .append(toIndentedString(tracking))
+                .append(newLine)
+                .append("    includeSmsCountInResponse: ")
+                .append(toIndentedString(includeSmsCountInResponse))
                 .append(newLine)
                 .append("}")
                 .toString();

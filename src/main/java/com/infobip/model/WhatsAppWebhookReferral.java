@@ -59,6 +59,14 @@ public class WhatsAppWebhookReferral {
 
     private String sourceUrl;
 
+    private String headline;
+
+    private String body;
+
+    private String ctwaClickId;
+
+    private WhatsAppWebhookReferralMedia referralMedia;
+
     /**
      * Sets sourceType.
      * <p>
@@ -179,6 +187,157 @@ public class WhatsAppWebhookReferral {
         this.sourceUrl = sourceUrl;
     }
 
+    /**
+     * Sets headline.
+     * <p>
+     * Field description:
+     * Headline used in the ad that generated the message.
+     *
+     * @param headline
+     * @return This {@link WhatsAppWebhookReferral instance}.
+     */
+    public WhatsAppWebhookReferral headline(String headline) {
+        this.headline = headline;
+        return this;
+    }
+
+    /**
+     * Returns headline.
+     * <p>
+     * Field description:
+     * Headline used in the ad that generated the message.
+     *
+     * @return headline
+     */
+    @JsonProperty("headline")
+    public String getHeadline() {
+        return headline;
+    }
+
+    /**
+     * Sets headline.
+     * <p>
+     * Field description:
+     * Headline used in the ad that generated the message.
+     *
+     * @param headline
+     */
+    @JsonProperty("headline")
+    public void setHeadline(String headline) {
+        this.headline = headline;
+    }
+
+    /**
+     * Sets body.
+     * <p>
+     * Field description:
+     * Body from the ad that generated the message.
+     *
+     * @param body
+     * @return This {@link WhatsAppWebhookReferral instance}.
+     */
+    public WhatsAppWebhookReferral body(String body) {
+        this.body = body;
+        return this;
+    }
+
+    /**
+     * Returns body.
+     * <p>
+     * Field description:
+     * Body from the ad that generated the message.
+     *
+     * @return body
+     */
+    @JsonProperty("body")
+    public String getBody() {
+        return body;
+    }
+
+    /**
+     * Sets body.
+     * <p>
+     * Field description:
+     * Body from the ad that generated the message.
+     *
+     * @param body
+     */
+    @JsonProperty("body")
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    /**
+     * Sets ctwaClickId.
+     * <p>
+     * Field description:
+     * Unique per click identifier exposed when the end user entering the conversation originated from a Click to WhatsApp (CTWA) ad.
+     *
+     * @param ctwaClickId
+     * @return This {@link WhatsAppWebhookReferral instance}.
+     */
+    public WhatsAppWebhookReferral ctwaClickId(String ctwaClickId) {
+        this.ctwaClickId = ctwaClickId;
+        return this;
+    }
+
+    /**
+     * Returns ctwaClickId.
+     * <p>
+     * Field description:
+     * Unique per click identifier exposed when the end user entering the conversation originated from a Click to WhatsApp (CTWA) ad.
+     *
+     * @return ctwaClickId
+     */
+    @JsonProperty("ctwaClickId")
+    public String getCtwaClickId() {
+        return ctwaClickId;
+    }
+
+    /**
+     * Sets ctwaClickId.
+     * <p>
+     * Field description:
+     * Unique per click identifier exposed when the end user entering the conversation originated from a Click to WhatsApp (CTWA) ad.
+     *
+     * @param ctwaClickId
+     */
+    @JsonProperty("ctwaClickId")
+    public void setCtwaClickId(String ctwaClickId) {
+        this.ctwaClickId = ctwaClickId;
+    }
+
+    /**
+     * Sets referralMedia.
+     *
+     * @param referralMedia
+     * @return This {@link WhatsAppWebhookReferral instance}.
+     */
+    public WhatsAppWebhookReferral referralMedia(WhatsAppWebhookReferralMedia referralMedia) {
+        this.referralMedia = referralMedia;
+        return this;
+    }
+
+    /**
+     * Returns referralMedia.
+     *
+     * @return referralMedia
+     */
+    @JsonProperty("referralMedia")
+    public WhatsAppWebhookReferralMedia getReferralMedia() {
+        return referralMedia;
+    }
+
+    /**
+     * Sets referralMedia.
+     *
+     * @param referralMedia
+     */
+    @JsonProperty("referralMedia")
+    public void setReferralMedia(WhatsAppWebhookReferralMedia referralMedia) {
+        this.referralMedia = referralMedia;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -190,12 +349,16 @@ public class WhatsAppWebhookReferral {
         WhatsAppWebhookReferral whatsAppWebhookReferral = (WhatsAppWebhookReferral) o;
         return Objects.equals(this.sourceType, whatsAppWebhookReferral.sourceType)
                 && Objects.equals(this.sourceId, whatsAppWebhookReferral.sourceId)
-                && Objects.equals(this.sourceUrl, whatsAppWebhookReferral.sourceUrl);
+                && Objects.equals(this.sourceUrl, whatsAppWebhookReferral.sourceUrl)
+                && Objects.equals(this.headline, whatsAppWebhookReferral.headline)
+                && Objects.equals(this.body, whatsAppWebhookReferral.body)
+                && Objects.equals(this.ctwaClickId, whatsAppWebhookReferral.ctwaClickId)
+                && Objects.equals(this.referralMedia, whatsAppWebhookReferral.referralMedia);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sourceType, sourceId, sourceUrl);
+        return Objects.hash(sourceType, sourceId, sourceUrl, headline, body, ctwaClickId, referralMedia);
     }
 
     @Override
@@ -212,6 +375,18 @@ public class WhatsAppWebhookReferral {
                 .append(newLine)
                 .append("    sourceUrl: ")
                 .append(toIndentedString(sourceUrl))
+                .append(newLine)
+                .append("    headline: ")
+                .append(toIndentedString(headline))
+                .append(newLine)
+                .append("    body: ")
+                .append(toIndentedString(body))
+                .append(newLine)
+                .append("    ctwaClickId: ")
+                .append(toIndentedString(ctwaClickId))
+                .append(newLine)
+                .append("    referralMedia: ")
+                .append(toIndentedString(referralMedia))
                 .append(newLine)
                 .append("}")
                 .toString();

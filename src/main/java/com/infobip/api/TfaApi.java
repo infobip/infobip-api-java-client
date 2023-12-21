@@ -17,11 +17,16 @@ import com.infobip.Parameter;
 import com.infobip.RequestDefinition;
 import com.infobip.model.TfaApplicationRequest;
 import com.infobip.model.TfaApplicationResponse;
+import com.infobip.model.TfaCreateEmailMessageRequest;
 import com.infobip.model.TfaCreateMessageRequest;
+import com.infobip.model.TfaEmailMessage;
 import com.infobip.model.TfaMessage;
 import com.infobip.model.TfaResendPinRequest;
 import com.infobip.model.TfaStartAuthenticationRequest;
 import com.infobip.model.TfaStartAuthenticationResponse;
+import com.infobip.model.TfaStartEmailAuthenticationRequest;
+import com.infobip.model.TfaStartEmailAuthenticationResponse;
+import com.infobip.model.TfaUpdateEmailMessageRequest;
 import com.infobip.model.TfaUpdateMessageRequest;
 import com.infobip.model.TfaVerificationResponse;
 import com.infobip.model.TfaVerifyPinRequest;
@@ -98,10 +103,83 @@ public class TfaApi {
      *
      * @param tfaApplicationRequest  (required)
      * @return CreateTfaApplicationRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public CreateTfaApplicationRequest createTfaApplication(TfaApplicationRequest tfaApplicationRequest) {
         return new CreateTfaApplicationRequest(tfaApplicationRequest);
+    }
+
+    private RequestDefinition createTfaEmailMessageTemplateDefinition(
+            String appId, TfaCreateEmailMessageRequest tfaCreateEmailMessageRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/2fa/2/applications/{appId}/email/messages")
+                .body(tfaCreateEmailMessageRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (appId != null) {
+            builder.addPathParameter(new Parameter("appId", appId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * createTfaEmailMessageTemplate request builder class.
+     */
+    public class CreateTfaEmailMessageTemplateRequest {
+        private final String appId;
+        private final TfaCreateEmailMessageRequest tfaCreateEmailMessageRequest;
+
+        private CreateTfaEmailMessageTemplateRequest(
+                String appId, TfaCreateEmailMessageRequest tfaCreateEmailMessageRequest) {
+            this.appId = Objects.requireNonNull(appId, "The required parameter 'appId' is missing.");
+            this.tfaCreateEmailMessageRequest = Objects.requireNonNull(
+                    tfaCreateEmailMessageRequest, "The required parameter 'tfaCreateEmailMessageRequest' is missing.");
+        }
+
+        /**
+         * Executes the createTfaEmailMessageTemplate request.
+         *
+         * @return TfaEmailMessage The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public TfaEmailMessage execute() throws ApiException {
+            RequestDefinition createTfaEmailMessageTemplateDefinition =
+                    createTfaEmailMessageTemplateDefinition(appId, tfaCreateEmailMessageRequest);
+            return apiClient.execute(
+                    createTfaEmailMessageTemplateDefinition, new TypeReference<TfaEmailMessage>() {}.getType());
+        }
+
+        /**
+         * Executes the createTfaEmailMessageTemplate request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<TfaEmailMessage> callback) {
+            RequestDefinition createTfaEmailMessageTemplateDefinition =
+                    createTfaEmailMessageTemplateDefinition(appId, tfaCreateEmailMessageRequest);
+            return apiClient.executeAsync(
+                    createTfaEmailMessageTemplateDefinition,
+                    new TypeReference<TfaEmailMessage>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Create 2FA Email message template.
+     * <p>
+     * Once you have your [2FA application](#channels/sms/create-2fa-application), create one or more [Email message templates](#channels/sms/2fa/2fa-configuration/create-2fa-email-message-template) where your PIN will be dynamically included when you send the PIN message over Email.
+     *
+     * @param appId ID of application for which requested message was created. (required)
+     * @param tfaCreateEmailMessageRequest  (required)
+     * @return CreateTfaEmailMessageTemplateRequest
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     */
+    public CreateTfaEmailMessageTemplateRequest createTfaEmailMessageTemplate(
+            String appId, TfaCreateEmailMessageRequest tfaCreateEmailMessageRequest) {
+        return new CreateTfaEmailMessageTemplateRequest(appId, tfaCreateEmailMessageRequest);
     }
 
     private RequestDefinition createTfaMessageTemplateDefinition(
@@ -158,14 +236,14 @@ public class TfaApi {
     }
 
     /**
-     * Create 2FA message template.
+     * Create 2FA SMS or Voice message template.
      * <p>
-     * Once you have your [2FA application](#channels/sms/create-2fa-message-template), create one or more message templates where your PIN will be dynamically included when you send the PIN message.
+     * Once you have your [2FA application](#channels/sms/2fa/2fa-configuration/create-2fa-application), create one or more [message templates](#channels/sms/2fa/2fa-configuration/create-2fa-message-template) where your PIN will be dynamically included when you send the PIN message over SMS or Voice.
      *
      * @param appId ID of application for which requested message was created. (required)
      * @param tfaCreateMessageRequest  (required)
      * @return CreateTfaMessageTemplateRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public CreateTfaMessageTemplateRequest createTfaMessageTemplate(
             String appId, TfaCreateMessageRequest tfaCreateMessageRequest) {
@@ -225,7 +303,7 @@ public class TfaApi {
      *
      * @param appId ID of application for which configuration view was requested. (required)
      * @return GetTfaApplicationRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public GetTfaApplicationRequest getTfaApplication(String appId) {
         return new GetTfaApplicationRequest(appId);
@@ -279,7 +357,7 @@ public class TfaApi {
      * An application is a container for 2FA message templates. Use this method to list your applications.
      *
      * @return GetTfaApplicationsRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public GetTfaApplicationsRequest getTfaApplications() {
         return new GetTfaApplicationsRequest();
@@ -344,7 +422,7 @@ public class TfaApi {
      * @param appId ID of application for which requested message was created. (required)
      * @param msgId Requested message ID. (required)
      * @return GetTfaMessageTemplateRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public GetTfaMessageTemplateRequest getTfaMessageTemplate(String appId, String msgId) {
         return new GetTfaMessageTemplateRequest(appId, msgId);
@@ -403,7 +481,7 @@ public class TfaApi {
      *
      * @param appId ID of application for which requested message was created. (required)
      * @return GetTfaMessageTemplatesRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public GetTfaMessageTemplatesRequest getTfaMessageTemplates(String appId) {
         return new GetTfaMessageTemplatesRequest(appId);
@@ -504,10 +582,82 @@ public class TfaApi {
      * @param msisdn Filter by msisdn (phone number) for which verification status is checked. (required)
      * @param appId ID of 2-FA application for which phone number verification status is requested. (required)
      * @return GetTfaVerificationStatusRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public GetTfaVerificationStatusRequest getTfaVerificationStatus(String msisdn, String appId) {
         return new GetTfaVerificationStatusRequest(msisdn, appId);
+    }
+
+    private RequestDefinition resend2faPinCodeOverEmailDefinition(
+            String pinId, TfaResendPinRequest tfaResendPinRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/2fa/2/pin/{pinId}/resend/email")
+                .body(tfaResendPinRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (pinId != null) {
+            builder.addPathParameter(new Parameter("pinId", pinId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * resend2faPinCodeOverEmail request builder class.
+     */
+    public class Resend2faPinCodeOverEmailRequest {
+        private final String pinId;
+        private final TfaResendPinRequest tfaResendPinRequest;
+
+        private Resend2faPinCodeOverEmailRequest(String pinId, TfaResendPinRequest tfaResendPinRequest) {
+            this.pinId = Objects.requireNonNull(pinId, "The required parameter 'pinId' is missing.");
+            this.tfaResendPinRequest = Objects.requireNonNull(
+                    tfaResendPinRequest, "The required parameter 'tfaResendPinRequest' is missing.");
+        }
+
+        /**
+         * Executes the resend2faPinCodeOverEmail request.
+         *
+         * @return TfaStartEmailAuthenticationResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public TfaStartEmailAuthenticationResponse execute() throws ApiException {
+            RequestDefinition resend2faPinCodeOverEmailDefinition =
+                    resend2faPinCodeOverEmailDefinition(pinId, tfaResendPinRequest);
+            return apiClient.execute(
+                    resend2faPinCodeOverEmailDefinition,
+                    new TypeReference<TfaStartEmailAuthenticationResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the resend2faPinCodeOverEmail request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<TfaStartEmailAuthenticationResponse> callback) {
+            RequestDefinition resend2faPinCodeOverEmailDefinition =
+                    resend2faPinCodeOverEmailDefinition(pinId, tfaResendPinRequest);
+            return apiClient.executeAsync(
+                    resend2faPinCodeOverEmailDefinition,
+                    new TypeReference<TfaStartEmailAuthenticationResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Resend 2FA PIN code over Email.
+     * <p>
+     * If needed, you can resend the same (previously sent) PIN code over Email.
+     *
+     * @param pinId ID of the pin code that has to be verified. (required)
+     * @param tfaResendPinRequest  (required)
+     * @return Resend2faPinCodeOverEmailRequest
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     */
+    public Resend2faPinCodeOverEmailRequest resend2faPinCodeOverEmail(
+            String pinId, TfaResendPinRequest tfaResendPinRequest) {
+        return new Resend2faPinCodeOverEmailRequest(pinId, tfaResendPinRequest);
     }
 
     private RequestDefinition resendTfaPinCodeOverSmsDefinition(String pinId, TfaResendPinRequest tfaResendPinRequest) {
@@ -574,7 +724,7 @@ public class TfaApi {
      * @param pinId ID of the pin code that has to be verified. (required)
      * @param tfaResendPinRequest  (required)
      * @return ResendTfaPinCodeOverSmsRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public ResendTfaPinCodeOverSmsRequest resendTfaPinCodeOverSms(
             String pinId, TfaResendPinRequest tfaResendPinRequest) {
@@ -646,11 +796,78 @@ public class TfaApi {
      * @param pinId ID of the pin code that has to be verified. (required)
      * @param tfaResendPinRequest  (required)
      * @return ResendTfaPinCodeOverVoiceRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public ResendTfaPinCodeOverVoiceRequest resendTfaPinCodeOverVoice(
             String pinId, TfaResendPinRequest tfaResendPinRequest) {
         return new ResendTfaPinCodeOverVoiceRequest(pinId, tfaResendPinRequest);
+    }
+
+    private RequestDefinition send2faPinCodeOverEmailDefinition(
+            TfaStartEmailAuthenticationRequest tfaStartEmailAuthenticationRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/2fa/2/pin/email")
+                .body(tfaStartEmailAuthenticationRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * send2faPinCodeOverEmail request builder class.
+     */
+    public class Send2faPinCodeOverEmailRequest {
+        private final TfaStartEmailAuthenticationRequest tfaStartEmailAuthenticationRequest;
+
+        private Send2faPinCodeOverEmailRequest(TfaStartEmailAuthenticationRequest tfaStartEmailAuthenticationRequest) {
+            this.tfaStartEmailAuthenticationRequest = Objects.requireNonNull(
+                    tfaStartEmailAuthenticationRequest,
+                    "The required parameter 'tfaStartEmailAuthenticationRequest' is missing.");
+        }
+
+        /**
+         * Executes the send2faPinCodeOverEmail request.
+         *
+         * @return TfaStartEmailAuthenticationResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public TfaStartEmailAuthenticationResponse execute() throws ApiException {
+            RequestDefinition send2faPinCodeOverEmailDefinition =
+                    send2faPinCodeOverEmailDefinition(tfaStartEmailAuthenticationRequest);
+            return apiClient.execute(
+                    send2faPinCodeOverEmailDefinition,
+                    new TypeReference<TfaStartEmailAuthenticationResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the send2faPinCodeOverEmail request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<TfaStartEmailAuthenticationResponse> callback) {
+            RequestDefinition send2faPinCodeOverEmailDefinition =
+                    send2faPinCodeOverEmailDefinition(tfaStartEmailAuthenticationRequest);
+            return apiClient.executeAsync(
+                    send2faPinCodeOverEmailDefinition,
+                    new TypeReference<TfaStartEmailAuthenticationResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Send 2FA PIN code over Email.
+     * <p>
+     * Send a PIN code over Email using previously created [Email message template](#channels/sms/2fa/2fa-configuration/create-2fa-email-message-template).
+     *
+     * @param tfaStartEmailAuthenticationRequest  (required)
+     * @return Send2faPinCodeOverEmailRequest
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     */
+    public Send2faPinCodeOverEmailRequest send2faPinCodeOverEmail(
+            TfaStartEmailAuthenticationRequest tfaStartEmailAuthenticationRequest) {
+        return new Send2faPinCodeOverEmailRequest(tfaStartEmailAuthenticationRequest);
     }
 
     private RequestDefinition sendTfaPinCodeOverSmsDefinition(
@@ -727,7 +944,7 @@ public class TfaApi {
      *
      * @param tfaStartAuthenticationRequest  (required)
      * @return SendTfaPinCodeOverSmsRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public SendTfaPinCodeOverSmsRequest sendTfaPinCodeOverSms(
             TfaStartAuthenticationRequest tfaStartAuthenticationRequest) {
@@ -794,7 +1011,7 @@ public class TfaApi {
      *
      * @param tfaStartAuthenticationRequest  (required)
      * @return SendTfaPinCodeOverVoiceRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public SendTfaPinCodeOverVoiceRequest sendTfaPinCodeOverVoice(
             TfaStartAuthenticationRequest tfaStartAuthenticationRequest) {
@@ -863,10 +1080,89 @@ public class TfaApi {
      * @param appId ID of application that should be updated. (required)
      * @param tfaApplicationRequest  (required)
      * @return UpdateTfaApplicationRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public UpdateTfaApplicationRequest updateTfaApplication(String appId, TfaApplicationRequest tfaApplicationRequest) {
         return new UpdateTfaApplicationRequest(appId, tfaApplicationRequest);
+    }
+
+    private RequestDefinition updateTfaEmailMessageTemplateDefinition(
+            String appId, String msgId, TfaUpdateEmailMessageRequest tfaUpdateEmailMessageRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "PUT", "/2fa/2/applications/{appId}/email/messages/{msgId}")
+                .body(tfaUpdateEmailMessageRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (appId != null) {
+            builder.addPathParameter(new Parameter("appId", appId));
+        }
+        if (msgId != null) {
+            builder.addPathParameter(new Parameter("msgId", msgId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * updateTfaEmailMessageTemplate request builder class.
+     */
+    public class UpdateTfaEmailMessageTemplateRequest {
+        private final String appId;
+        private final String msgId;
+        private final TfaUpdateEmailMessageRequest tfaUpdateEmailMessageRequest;
+
+        private UpdateTfaEmailMessageTemplateRequest(
+                String appId, String msgId, TfaUpdateEmailMessageRequest tfaUpdateEmailMessageRequest) {
+            this.appId = Objects.requireNonNull(appId, "The required parameter 'appId' is missing.");
+            this.msgId = Objects.requireNonNull(msgId, "The required parameter 'msgId' is missing.");
+            this.tfaUpdateEmailMessageRequest = Objects.requireNonNull(
+                    tfaUpdateEmailMessageRequest, "The required parameter 'tfaUpdateEmailMessageRequest' is missing.");
+        }
+
+        /**
+         * Executes the updateTfaEmailMessageTemplate request.
+         *
+         * @return TfaEmailMessage The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public TfaEmailMessage execute() throws ApiException {
+            RequestDefinition updateTfaEmailMessageTemplateDefinition =
+                    updateTfaEmailMessageTemplateDefinition(appId, msgId, tfaUpdateEmailMessageRequest);
+            return apiClient.execute(
+                    updateTfaEmailMessageTemplateDefinition, new TypeReference<TfaEmailMessage>() {}.getType());
+        }
+
+        /**
+         * Executes the updateTfaEmailMessageTemplate request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<TfaEmailMessage> callback) {
+            RequestDefinition updateTfaEmailMessageTemplateDefinition =
+                    updateTfaEmailMessageTemplateDefinition(appId, msgId, tfaUpdateEmailMessageRequest);
+            return apiClient.executeAsync(
+                    updateTfaEmailMessageTemplateDefinition,
+                    new TypeReference<TfaEmailMessage>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Update 2FA Email message template.
+     * <p>
+     * Change configuration options for your existing 2FA application Email message template.
+     *
+     * @param appId ID of application for which requested message was created. (required)
+     * @param msgId Requested message ID. (required)
+     * @param tfaUpdateEmailMessageRequest  (required)
+     * @return UpdateTfaEmailMessageTemplateRequest
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     */
+    public UpdateTfaEmailMessageTemplateRequest updateTfaEmailMessageTemplate(
+            String appId, String msgId, TfaUpdateEmailMessageRequest tfaUpdateEmailMessageRequest) {
+        return new UpdateTfaEmailMessageTemplateRequest(appId, msgId, tfaUpdateEmailMessageRequest);
     }
 
     private RequestDefinition updateTfaMessageTemplateDefinition(
@@ -930,15 +1226,15 @@ public class TfaApi {
     }
 
     /**
-     * Update 2FA message template.
+     * Update 2FA SMS or Voice message template.
      * <p>
-     * Change configuration options for your existing 2FA application message template.
+     * Change configuration options for your existing 2FA application SMS or Voice message template.
      *
      * @param appId ID of application for which requested message was created. (required)
      * @param msgId Requested message ID. (required)
      * @param tfaUpdateMessageRequest  (required)
      * @return UpdateTfaMessageTemplateRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public UpdateTfaMessageTemplateRequest updateTfaMessageTemplate(
             String appId, String msgId, TfaUpdateMessageRequest tfaUpdateMessageRequest) {
@@ -1006,7 +1302,7 @@ public class TfaApi {
      * @param pinId ID of the pin code that has to be verified. (required)
      * @param tfaVerifyPinRequest  (required)
      * @return VerifyTfaPhoneNumberRequest
-     * @see <a href="https://www.infobip.com/docs/use-cases/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
      */
     public VerifyTfaPhoneNumberRequest verifyTfaPhoneNumber(String pinId, TfaVerifyPinRequest tfaVerifyPinRequest) {
         return new VerifyTfaPhoneNumberRequest(pinId, tfaVerifyPinRequest);

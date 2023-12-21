@@ -13,38 +13,21 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Error code to hang up with.
+ * Error code to hang up with. There are rules for using error codes.  &#x60;NORMAL_HANGUP&#x60; - Call needs to be established.  &#x60;NO_ANSWER&#x60; - Call cannot be established.  &#x60;BUSY&#x60; - Call cannot be established.  &#x60;CANCELLED&#x60; - Call cannot be established and must be &#x60;INBOUND&#x60; call  &#x60;REJECTED&#x60; - Call cannot be established and must be &#x60;OUTBOUND&#x60; call.  &#x60;FORBIDDEN&#x60; - Call cannot be established.  &#x60;DESTINATION_NOT_FOUND&#x60; - Call cannot be established and must be &#x60;OUTBOUND&#x60;  &#x60;DESTINATION_UNAVAILABLE&#x60; - Call cannot be established and must be &#x60;OUTBOUND&#x60;.  &#x60;INVALID_DESTINATION&#x60; - Call needs to be established and must be &#x60;OUTBOUND&#x60;.  &#x60;SERVICE_UNAVAILABLE&#x60; - Call cannot to be established.
  */
 public enum CallsErrorCode {
     NORMAL_HANGUP("NORMAL_HANGUP"),
-    ANSWERED_ELSEWHERE("ANSWERED_ELSEWHERE"),
-    MACHINE_DETECTED("MACHINE_DETECTED"),
-    HUMAN_DETECTED("HUMAN_DETECTED"),
-    MAX_DURATION_REACHED("MAX_DURATION_REACHED"),
-    DEVICE_FORBIDDEN("DEVICE_FORBIDDEN"),
-    DEVICE_NOT_FOUND("DEVICE_NOT_FOUND"),
-    DEVICE_UNAVAILABLE("DEVICE_UNAVAILABLE"),
-    MEDIA_ERROR("MEDIA_ERROR"),
     NO_ANSWER("NO_ANSWER"),
     BUSY("BUSY"),
     CANCELLED("CANCELLED"),
     REJECTED("REJECTED"),
     FORBIDDEN("FORBIDDEN"),
-    INSUFFICIENT_FUNDS("INSUFFICIENT_FUNDS"),
-    UNAUTHENTICATED("UNAUTHENTICATED"),
     DESTINATION_NOT_FOUND("DESTINATION_NOT_FOUND"),
     DESTINATION_UNAVAILABLE("DESTINATION_UNAVAILABLE"),
     INVALID_DESTINATION("INVALID_DESTINATION"),
     INVALID_REQUEST("INVALID_REQUEST"),
     REQUEST_TIMEOUT("REQUEST_TIMEOUT"),
-    NETWORK_ERROR("NETWORK_ERROR"),
-    SERVICE_UNAVAILABLE("SERVICE_UNAVAILABLE"),
-    UNKNOWN("UNKNOWN"),
-    FEATURE_UNAVAILABLE("FEATURE_UNAVAILABLE"),
-    CONGESTION("CONGESTION"),
-    URL_NOT_FOUND("URL_NOT_FOUND"),
-    URL_UNREACHABLE("URL_UNREACHABLE"),
-    INVALID_RESPONSE("INVALID_RESPONSE");
+    SERVICE_UNAVAILABLE("SERVICE_UNAVAILABLE");
 
     private final String value;
 
