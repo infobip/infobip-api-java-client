@@ -8,6 +8,12 @@ on:
       release-version:
         description: 'RELEASE_VERSION'
         required: true
+      create-github-release:
+        description: 'CREATE_GITHUB_RELEASE'
+        type: boolean
+      publish-maven-central:
+        description: 'PUBLISH_TO_MAVEN_CENTRAL'
+        type: boolean
 
 jobs:
   mvn-release:
@@ -34,7 +40,7 @@ jobs:
       - name: Upload changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Release version ${{ github.event.inputs.release-version }}
+          commit_message: Update to version ${{ github.event.inputs.release-version }}
   release-on-push:
     name: Create Github release
     needs: mvn-release
@@ -53,6 +59,7 @@ jobs:
           version: ${{ github.event.inputs.release-version }}
           path: ./CHANGELOG.md
       - name: Create release
+        if: ${{ github.event.inputs.create-github-release == 'true' }}
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ github.event.inputs.release-version }}
@@ -69,7 +76,7 @@ jobs:
       packages: write
     strategy:
       matrix:
-        java: [ '17' ]
+        java: [ '11' ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -87,6 +94,7 @@ jobs:
         run: |
           mvn clean install -U
       - name: Publish to the Maven Central Repository
+        if: ${{ github.event.inputs.publish-maven-central == 'true' }}
         run: mvn --batch-mode deploy
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USER }}
