@@ -4,7 +4,7 @@
 
     <groupId>com.infobip</groupId>
     <artifactId>infobip-api-java-client</artifactId>
-    <version>4.1.0</version>
+    <version>4.1.1</version>
     <packaging>jar</packaging>
 
     <name>infobip-api-java-client</name>
@@ -43,6 +43,7 @@
         <slf4j.version>2.0.9</slf4j.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
         <assertj-core.version>3.24.2</assertj-core.version>
+        <guava.version>32.1.2-jre</guava.version>
     </properties>
 
     <build>
@@ -218,6 +219,11 @@
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+	    <dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>${guava.version}</version>
+	    </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>

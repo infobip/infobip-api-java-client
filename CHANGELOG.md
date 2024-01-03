@@ -5,6 +5,23 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [4.1.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.1.1) - 2024-01-03
+
+### Added
+* `guava` dependency to tag `early-access` endpoints with `@Beta` annotation.
+* Most recent [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp) feature set.
+* `maven-publish.yml` workflow to facilitate the release of new project versions on GitHub and enable publishing to the Maven Central repository.
+* `snyk.yml` workflow, which serves the purpose of identifying and addressing dependency vulnerabilities in the project.
+* `sonar.yml` workflow to analyze the source code, enhancing code quality and maintainability.
+* `git-build-hook-maven-plugin` plugin into the project, providing support for Git hooks.
+* `pre-commit.sh` hook, which automatically executes `mvn spotless:apply` prior to each commit, ensuring code formatting consistency.
+
+
+### Changed
+* Expanded [WhatsAppTemplateDataContent](src/main/java/com/infobip/model/WhatsAppTemplateDataContent.java) model with additional field supporting `WhatsAppTemplateCarouselContent` that the API might return.
+* Early access endpoints in [WhatsAppApi](src/main/java/com/infobip/api/WhatsAppApi.java) are tagged with `@Beta` annotation
+* Fixed Javadoc.
+
 ## [4.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.1.0) - 2023-12-20
 
 ⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
@@ -20,16 +37,12 @@ If you find out that something was not addressed properly, please submit an issu
 * Most recent [Infobip Voice API](https://www.infobip.com/docs/api/channels/voice) feature set.
 * Most recent [Infobip WebRTC API](https://www.infobip.com/docs/api/channels/webrtc) feature set.
 * Most recent [Infobip Viber API](https://www.infobip.com/docs/api/channels/viber) feature set.
+* Most recent [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp) feature set.
 * [CPaaS-X](https://www.infobip.com/docs/cpaas-x/application-and-entity-management) support to more channels.
 * Support for handling ApiError models:
   * [ApiError](src/main/java/com/infobip/model/ApiError.java)
   * [ApiErrorResource](src/main/java/com/infobip/model/ApiErrorResource.java)
   * [ApiErrorViolation](src/main/java/com/infobip/model/ApiErrorViolation.java)
-* Added `maven-publish.yml` workflow to facilitate the release of new project versions on GitHub and enable publishing to the Maven Central repository.
-* Introduced `snyk.yml` workflow, which serves the purpose of identifying and addressing dependency vulnerabilities in the project.
-* Introduced `sonar.yml` workflow to analyze the source code, enhancing code quality and maintainability.
-* Introduced `git-build-hook-maven-plugin` plugin into the project, providing support for Git hooks.
-* Implemented `pre-commit.sh` hook, which automatically executes `mvn spotless:apply` prior to each commit, ensuring code formatting consistency.
 
 ### Changed
 * **Removed classes and unified structures**
