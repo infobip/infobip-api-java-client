@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Optional. Configuration used to enable iOS push notifications.
+ * Optional. Required if android is not set. Configuration used to enable iOS push notifications.
  */
 public class WebRtcIosPushNotificationConfig {
 

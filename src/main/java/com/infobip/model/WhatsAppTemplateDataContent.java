@@ -25,6 +25,8 @@ public class WhatsAppTemplateDataContent {
 
     private List<WhatsAppTemplateButtonContent> buttons = null;
 
+    private WhatsAppTemplateCarouselContent carousel;
+
     /**
      * Sets body.
      * <p>
@@ -150,6 +152,37 @@ public class WhatsAppTemplateDataContent {
         this.buttons = buttons;
     }
 
+    /**
+     * Sets carousel.
+     *
+     * @param carousel
+     * @return This {@link WhatsAppTemplateDataContent instance}.
+     */
+    public WhatsAppTemplateDataContent carousel(WhatsAppTemplateCarouselContent carousel) {
+        this.carousel = carousel;
+        return this;
+    }
+
+    /**
+     * Returns carousel.
+     *
+     * @return carousel
+     */
+    @JsonProperty("carousel")
+    public WhatsAppTemplateCarouselContent getCarousel() {
+        return carousel;
+    }
+
+    /**
+     * Sets carousel.
+     *
+     * @param carousel
+     */
+    @JsonProperty("carousel")
+    public void setCarousel(WhatsAppTemplateCarouselContent carousel) {
+        this.carousel = carousel;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -161,12 +194,13 @@ public class WhatsAppTemplateDataContent {
         WhatsAppTemplateDataContent whatsAppTemplateDataContent = (WhatsAppTemplateDataContent) o;
         return Objects.equals(this.body, whatsAppTemplateDataContent.body)
                 && Objects.equals(this.header, whatsAppTemplateDataContent.header)
-                && Objects.equals(this.buttons, whatsAppTemplateDataContent.buttons);
+                && Objects.equals(this.buttons, whatsAppTemplateDataContent.buttons)
+                && Objects.equals(this.carousel, whatsAppTemplateDataContent.carousel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(body, header, buttons);
+        return Objects.hash(body, header, buttons, carousel);
     }
 
     @Override
@@ -183,6 +217,9 @@ public class WhatsAppTemplateDataContent {
                 .append(newLine)
                 .append("    buttons: ")
                 .append(toIndentedString(buttons))
+                .append(newLine)
+                .append("    carousel: ")
+                .append(toIndentedString(carousel))
                 .append(newLine)
                 .append("}")
                 .toString();

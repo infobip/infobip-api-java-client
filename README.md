@@ -46,7 +46,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
       <groupId>com.infobip</groupId>
       <artifactId>infobip-api-java-client</artifactId>
-      <version>4.1.0</version>
+      <version>4.1.1</version>
 </dependency>
 ```
 

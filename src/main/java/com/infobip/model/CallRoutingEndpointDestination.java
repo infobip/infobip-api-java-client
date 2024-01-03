@@ -115,7 +115,7 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
      * Sets weight.
      * <p>
      * Field description:
-     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100.
+     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
      *
      * @param weight
      * @return This {@link CallRoutingEndpointDestination instance}.
@@ -129,7 +129,7 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
      * Returns weight.
      * <p>
      * Field description:
-     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100.
+     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
      *
      * @return weight
      */
@@ -142,7 +142,7 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
      * Sets weight.
      * <p>
      * Field description:
-     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100.
+     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
      *
      * @param weight
      */

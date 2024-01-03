@@ -36,7 +36,7 @@ public class CallRoutingUrlDestination extends CallRoutingDestination {
      * Sets priority.
      * <p>
      * Field description:
-     * Priority of the destination within a route. Either all or no destinations need to have this value defined.
+     * Priority of the destination within a route. Destinations with lower value have higher priority. Either all or no destination need to have this value defined.
      *
      * @param priority
      * @return This {@link CallRoutingUrlDestination instance}.
@@ -50,7 +50,7 @@ public class CallRoutingUrlDestination extends CallRoutingDestination {
      * Returns priority.
      * <p>
      * Field description:
-     * Priority of the destination within a route. Either all or no destinations need to have this value defined.
+     * Priority of the destination within a route. Destinations with lower value have higher priority. Either all or no destination need to have this value defined.
      *
      * @return priority
      */
@@ -63,7 +63,7 @@ public class CallRoutingUrlDestination extends CallRoutingDestination {
      * Sets priority.
      * <p>
      * Field description:
-     * Priority of the destination within a route. Either all or no destinations need to have this value defined.
+     * Priority of the destination within a route. Destinations with lower value have higher priority. Either all or no destination need to have this value defined.
      *
      * @param priority
      */
@@ -76,7 +76,7 @@ public class CallRoutingUrlDestination extends CallRoutingDestination {
      * Sets weight.
      * <p>
      * Field description:
-     * Weight of the destination within a route.
+     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
      *
      * @param weight
      * @return This {@link CallRoutingUrlDestination instance}.
@@ -90,7 +90,7 @@ public class CallRoutingUrlDestination extends CallRoutingDestination {
      * Returns weight.
      * <p>
      * Field description:
-     * Weight of the destination within a route.
+     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
      *
      * @return weight
      */
@@ -103,7 +103,7 @@ public class CallRoutingUrlDestination extends CallRoutingDestination {
      * Sets weight.
      * <p>
      * Field description:
-     * Weight of the destination within a route.
+     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
      *
      * @param weight
      */
