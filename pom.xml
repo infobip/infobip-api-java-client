@@ -43,7 +43,7 @@
         <slf4j.version>2.0.9</slf4j.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
         <assertj-core.version>3.24.2</assertj-core.version>
-	    <guava.version>32.1.2-jre</guava.version>
+        <guava.version>32.1.2-jre</guava.version>
     </properties>
 
     <build>
