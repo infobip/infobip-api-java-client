@@ -90,7 +90,7 @@ jobs:
           server-id: ossrh
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg-private-key: ${{ secrets.MVN_CENTRAL_GPG_SIGNING_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
           cache: 'maven'
       - name: Maven build
@@ -98,8 +98,8 @@ jobs:
           mvn clean install -U
       - name: Publish to the Maven Central Repository
         if: ${{ github.event.inputs.publish-maven-central == 'true' }}
-        run: mvn --batch-mode deploy -Darguments=-Dgpg.passphrase=${{ secrets.SIGN_KEY_PASS }} -X
+        run: mvn --batch-mode deploy -Darguments=-Dgpg.passphrase=${{ secrets.GPG_SIGNING_PASSPHRASE }} -X
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USER }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASS }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.SIGN_KEY_PASS }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSPHRASE }}
