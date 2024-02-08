@@ -5,18 +5,24 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
-## [ [4.1.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.1.1) ] - 2024-01-03
+## [4.1.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.1.1) - 2024-01-03
 
 ### Added
 * `guava` dependency to tag `early-access` endpoints with `@Beta` annotation.
 * Most recent [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp) feature set.
+* `maven-publish.yml` workflow to facilitate the release of new project versions on GitHub and enable publishing to the Maven Central repository.
+* `snyk.yml` workflow, which serves the purpose of identifying and addressing dependency vulnerabilities in the project.
+* `sonar.yml` workflow to analyze the source code, enhancing code quality and maintainability.
+* `git-build-hook-maven-plugin` plugin into the project, providing support for Git hooks.
+* `pre-commit.sh` hook, which automatically executes `mvn spotless:apply` prior to each commit, ensuring code formatting consistency.
+
 
 ### Changed
 * Expanded [WhatsAppTemplateDataContent](src/main/java/com/infobip/model/WhatsAppTemplateDataContent.java) model with additional field supporting `WhatsAppTemplateCarouselContent` that the API might return.
 * Early access endpoints in [WhatsAppApi](src/main/java/com/infobip/api/WhatsAppApi.java) are tagged with `@Beta` annotation
 * Fixed Javadoc.
 
-## [ [4.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.1.0) ] - 2023-12-20
+## [4.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.1.0) - 2023-12-20
 
 ⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
 All changes, including breaking changes, are addressed and explained in the list bellow.
@@ -75,7 +81,7 @@ If you find out that something was not addressed properly, please submit an issu
 ### Deprecated
 - Deprecated old error fields in [ApiExceptionDetails](src/main/java/com/infobip/ApiExceptionDetails.java)
 
-## [ [4.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.0.0) ] - 2023-03-01
+## [4.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.0.0) - 2023-03-01
 
 🎉 **NEW Major Version of `infobip-api-java-client`.**
 
@@ -177,7 +183,7 @@ If you find out that something was not addressed properly, please submit an issu
   We don't allow calling the API without processing the response internally anymore.
 
 
-## [ [3.2.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.2.0) ] - 2022-01-19
+## [3.2.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.2.0) - 2022-01-19
 
 ### Added
 - Support for [Infobip WhatsApp API](https://www.infobip.com/docs/api#channels/whatsapp)
@@ -195,14 +201,14 @@ If you find out that something was not addressed properly, please submit an issu
 - Improved Javadoc comments
 
 
-## [ [3.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.1.0) ] - 2021-06-16
+## [3.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.1.0) - 2021-06-16
 
 ### Added
 - Support for [Infobip Email API](https://www.infobip.com/docs/api#channels/email)
 - `email.md` which contains basic example of Email API usage
 
 
-## [ [3.0.1](https://github.com/infobip/infobip-api-java-client/releases/tag/3.0.1) ] - 2021-02-16
+## [3.0.1](https://github.com/infobip/infobip-api-java-client/releases/tag/3.0.1) - 2021-02-16
 
 ### Changed
 - `README.md` which now contains more details about supported authentication methods & updated examples of library usage for webhooks
@@ -215,7 +221,7 @@ If you find out that something was not addressed properly, please submit an issu
 ### Fixed
 - Supported date formats as specified in [Integration Best Practices](https://www.infobip.com/docs/essentials/integration-best-practices#date-formats)
 
-## [ [3.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.0.0) ] - 2021-02-03
+## [3.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/3.0.0) - 2021-02-03
 
 🎉 **NEW Major Version of `infobip-api-java-client`.**
 
