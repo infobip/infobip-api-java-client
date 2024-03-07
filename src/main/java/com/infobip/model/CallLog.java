@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * The list of the results for this page.
+ * Represents CallLog model.
  */
 public class CallLog {
 

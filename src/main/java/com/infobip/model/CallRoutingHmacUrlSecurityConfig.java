@@ -9,9 +9,7 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
@@ -21,45 +19,7 @@ public class CallRoutingHmacUrlSecurityConfig extends CallRoutingUrlSecurityConf
 
     private String secretKey;
 
-    /**
-     * Represents algorithm enumeration.
-     */
-    public enum AlgorithmEnum {
-        MD5("HMAC_MD5"),
-        SHA_1("HMAC_SHA_1"),
-        SHA_224("HMAC_SHA_224"),
-        SHA_256("HMAC_SHA_256"),
-        SHA_384("HMAC_SHA_384"),
-        SHA_512("HMAC_SHA_512");
-
-        private String value;
-
-        AlgorithmEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static AlgorithmEnum fromValue(String value) {
-            for (AlgorithmEnum enumElement : AlgorithmEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private AlgorithmEnum algorithm;
+    private HmacAlgorithm algorithm;
 
     /**
      * Constructs a new {@link CallRoutingHmacUrlSecurityConfig} instance.
@@ -122,7 +82,7 @@ public class CallRoutingHmacUrlSecurityConfig extends CallRoutingUrlSecurityConf
      * @param algorithm
      * @return This {@link CallRoutingHmacUrlSecurityConfig instance}.
      */
-    public CallRoutingHmacUrlSecurityConfig algorithm(AlgorithmEnum algorithm) {
+    public CallRoutingHmacUrlSecurityConfig algorithm(HmacAlgorithm algorithm) {
         this.algorithm = algorithm;
         return this;
     }
@@ -135,7 +95,7 @@ public class CallRoutingHmacUrlSecurityConfig extends CallRoutingUrlSecurityConf
      * @return algorithm
      */
     @JsonProperty("algorithm")
-    public AlgorithmEnum getAlgorithm() {
+    public HmacAlgorithm getAlgorithm() {
         return algorithm;
     }
 
@@ -147,7 +107,7 @@ public class CallRoutingHmacUrlSecurityConfig extends CallRoutingUrlSecurityConf
      * @param algorithm
      */
     @JsonProperty("algorithm")
-    public void setAlgorithm(AlgorithmEnum algorithm) {
+    public void setAlgorithm(HmacAlgorithm algorithm) {
         this.algorithm = algorithm;
     }
 

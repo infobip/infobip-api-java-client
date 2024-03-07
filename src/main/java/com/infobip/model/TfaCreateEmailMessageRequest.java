@@ -29,7 +29,7 @@ public class TfaCreateEmailMessageRequest {
      * Sets emailTemplateId.
      * <p>
      * Field description:
-     * Email template ID that should reference a previously created Email template.
+     * Email template ID that should reference a previously created [Broadcast template](https://www.infobip.com/docs/email/templates).
      * <p>
      * The field is required.
      *
@@ -45,7 +45,7 @@ public class TfaCreateEmailMessageRequest {
      * Returns emailTemplateId.
      * <p>
      * Field description:
-     * Email template ID that should reference a previously created Email template.
+     * Email template ID that should reference a previously created [Broadcast template](https://www.infobip.com/docs/email/templates).
      * <p>
      * The field is required.
      *
@@ -60,7 +60,7 @@ public class TfaCreateEmailMessageRequest {
      * Sets emailTemplateId.
      * <p>
      * Field description:
-     * Email template ID that should reference a previously created Email template.
+     * Email template ID that should reference a previously created [Broadcast template](https://www.infobip.com/docs/email/templates).
      * <p>
      * The field is required.
      *

@@ -63,6 +63,8 @@ public class WebRtcTheme {
 
     private List<LayoutsEnum> layouts = null;
 
+    private WebRtcLocalization localization;
+
     /**
      * Sets images.
      *
@@ -213,6 +215,37 @@ public class WebRtcTheme {
         this.layouts = layouts;
     }
 
+    /**
+     * Sets localization.
+     *
+     * @param localization
+     * @return This {@link WebRtcTheme instance}.
+     */
+    public WebRtcTheme localization(WebRtcLocalization localization) {
+        this.localization = localization;
+        return this;
+    }
+
+    /**
+     * Returns localization.
+     *
+     * @return localization
+     */
+    @JsonProperty("localization")
+    public WebRtcLocalization getLocalization() {
+        return localization;
+    }
+
+    /**
+     * Sets localization.
+     *
+     * @param localization
+     */
+    @JsonProperty("localization")
+    public void setLocalization(WebRtcLocalization localization) {
+        this.localization = localization;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -225,12 +258,13 @@ public class WebRtcTheme {
         return Objects.equals(this.images, webRtcTheme.images)
                 && Objects.equals(this.messages, webRtcTheme.messages)
                 && Objects.equals(this.colors, webRtcTheme.colors)
-                && Objects.equals(this.layouts, webRtcTheme.layouts);
+                && Objects.equals(this.layouts, webRtcTheme.layouts)
+                && Objects.equals(this.localization, webRtcTheme.localization);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(images, messages, colors, layouts);
+        return Objects.hash(images, messages, colors, layouts, localization);
     }
 
     @Override
@@ -250,6 +284,9 @@ public class WebRtcTheme {
                 .append(newLine)
                 .append("    layouts: ")
                 .append(toIndentedString(layouts))
+                .append(newLine)
+                .append("    localization: ")
+                .append(toIndentedString(localization))
                 .append(newLine)
                 .append("}")
                 .toString();

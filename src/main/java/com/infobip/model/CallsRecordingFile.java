@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * Call recording files.
+ * Represents CallsRecordingFile model.
  */
 public class CallsRecordingFile {
 

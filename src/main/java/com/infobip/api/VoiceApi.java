@@ -157,13 +157,16 @@ public class VoiceApi {
         return new GetSentBulksStatusRequest(bulkId);
     }
 
-    private RequestDefinition getVoicesDefinition(String language) {
+    private RequestDefinition getVoicesDefinition(String language, Boolean includeNeural) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/tts/3/voices/{language}")
                 .requiresAuthentication(true)
                 .accept("application/json");
 
         if (language != null) {
             builder.addPathParameter(new Parameter("language", language));
+        }
+        if (includeNeural != null) {
+            builder.addQueryParameter(new Parameter("includeNeural", includeNeural));
         }
         return builder.build();
     }
@@ -173,9 +176,21 @@ public class VoiceApi {
      */
     public class GetVoicesRequest {
         private final String language;
+        private Boolean includeNeural;
 
         private GetVoicesRequest(String language) {
             this.language = Objects.requireNonNull(language, "The required parameter 'language' is missing.");
+        }
+
+        /**
+         * Sets includeNeural.
+         *
+         * @param includeNeural Indicates whether neural voices should be included in the response. If set to &#x60;false&#x60; or omitted, only standard voices will be included in the response. If set to &#x60;true&#x60;, both standard and neural voices will be included in the response.  (optional, default to false)
+         * @return GetVoicesRequest
+         */
+        public GetVoicesRequest includeNeural(Boolean includeNeural) {
+            this.includeNeural = includeNeural;
+            return this;
         }
 
         /**
@@ -185,7 +200,7 @@ public class VoiceApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public CallsGetVoicesResponse execute() throws ApiException {
-            RequestDefinition getVoicesDefinition = getVoicesDefinition(language);
+            RequestDefinition getVoicesDefinition = getVoicesDefinition(language, includeNeural);
             return apiClient.execute(getVoicesDefinition, new TypeReference<CallsGetVoicesResponse>() {}.getType());
         }
 
@@ -196,7 +211,7 @@ public class VoiceApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsGetVoicesResponse> callback) {
-            RequestDefinition getVoicesDefinition = getVoicesDefinition(language);
+            RequestDefinition getVoicesDefinition = getVoicesDefinition(language, includeNeural);
             return apiClient.executeAsync(
                     getVoicesDefinition, new TypeReference<CallsGetVoicesResponse>() {}.getType(), callback);
         }

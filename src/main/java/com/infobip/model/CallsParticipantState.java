@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum CallsParticipantState {
     JOINING("JOINING"),
-    JOINED("JOINED");
+    JOINED("JOINED"),
+    LEFT("LEFT");
 
     private final String value;
 

@@ -20,8 +20,9 @@ import com.infobip.model.ViberBulkTextMessage;
 import com.infobip.model.ViberFileMessage;
 import com.infobip.model.ViberImageMessage;
 import com.infobip.model.ViberLogsResponse;
+import com.infobip.model.ViberMessageGeneralStatus;
 import com.infobip.model.ViberRequest;
-import com.infobip.model.ViberResponse;
+import com.infobip.model.ViberResponseEnvelopeMessageResponseMessageResponseDetails;
 import com.infobip.model.ViberSingleMessageInfo;
 import com.infobip.model.ViberVideoMessage;
 import com.infobip.model.ViberWebhookReportsResponse;
@@ -44,7 +45,7 @@ public class ViberApi {
     }
 
     private RequestDefinition getOutboundViberMessageDeliveryReportsDefinition(
-            String bulkId, String messageId, Integer limit) {
+            String bulkId, String messageId, Integer limit, String entityId, String applicationId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/viber/2/reports")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -58,6 +59,12 @@ public class ViberApi {
         if (limit != null) {
             builder.addQueryParameter(new Parameter("limit", limit));
         }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
+        }
+        if (applicationId != null) {
+            builder.addQueryParameter(new Parameter("applicationId", applicationId));
+        }
         return builder.build();
     }
 
@@ -68,6 +75,8 @@ public class ViberApi {
         private String bulkId;
         private String messageId;
         private Integer limit;
+        private String entityId;
+        private String applicationId;
 
         private GetOutboundViberMessageDeliveryReportsRequest() {}
 
@@ -96,11 +105,33 @@ public class ViberApi {
         /**
          * Sets limit.
          *
-         * @param limit Maximal number of messages in returned reports. Default value is __50__ and maximal value is __1000__. (optional, default to 50)
+         * @param limit Maximum number of delivery reports to be returned. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access reports for the last 48h (optional, default to 50)
          * @return GetOutboundViberMessageDeliveryReportsRequest
          */
         public GetOutboundViberMessageDeliveryReportsRequest limit(Integer limit) {
             this.limit = limit;
+            return this;
+        }
+
+        /**
+         * Sets entityId.
+         *
+         * @param entityId Entity id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
+         * @return GetOutboundViberMessageDeliveryReportsRequest
+         */
+        public GetOutboundViberMessageDeliveryReportsRequest entityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
+
+        /**
+         * Sets applicationId.
+         *
+         * @param applicationId Application id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
+         * @return GetOutboundViberMessageDeliveryReportsRequest
+         */
+        public GetOutboundViberMessageDeliveryReportsRequest applicationId(String applicationId) {
+            this.applicationId = applicationId;
             return this;
         }
 
@@ -112,7 +143,7 @@ public class ViberApi {
          */
         public ViberWebhookReportsResponse execute() throws ApiException {
             RequestDefinition getOutboundViberMessageDeliveryReportsDefinition =
-                    getOutboundViberMessageDeliveryReportsDefinition(bulkId, messageId, limit);
+                    getOutboundViberMessageDeliveryReportsDefinition(bulkId, messageId, limit, entityId, applicationId);
             return apiClient.execute(
                     getOutboundViberMessageDeliveryReportsDefinition,
                     new TypeReference<ViberWebhookReportsResponse>() {}.getType());
@@ -126,7 +157,7 @@ public class ViberApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<ViberWebhookReportsResponse> callback) {
             RequestDefinition getOutboundViberMessageDeliveryReportsDefinition =
-                    getOutboundViberMessageDeliveryReportsDefinition(bulkId, messageId, limit);
+                    getOutboundViberMessageDeliveryReportsDefinition(bulkId, messageId, limit, entityId, applicationId);
             return apiClient.executeAsync(
                     getOutboundViberMessageDeliveryReportsDefinition,
                     new TypeReference<ViberWebhookReportsResponse>() {}.getType(),
@@ -151,7 +182,7 @@ public class ViberApi {
             String destination,
             String bulkId,
             String messageId,
-            String generalStatus,
+            ViberMessageGeneralStatus generalStatus,
             String sentSince,
             String sentUntil,
             String limit,
@@ -202,7 +233,7 @@ public class ViberApi {
         private String destination;
         private String bulkId;
         private String messageId;
-        private String generalStatus;
+        private ViberMessageGeneralStatus generalStatus;
         private String sentSince;
         private String sentUntil;
         private String limit;
@@ -258,10 +289,10 @@ public class ViberApi {
         /**
          * Sets generalStatus.
          *
-         * @param generalStatus Sent message status group. Indicates whether the message is successfully sent, not sent, delivered, not delivered, waiting for delivery or any other possible status. (optional)
+         * @param generalStatus  (optional)
          * @return GetOutboundViberMessageLogsRequest
          */
-        public GetOutboundViberMessageLogsRequest generalStatus(String generalStatus) {
+        public GetOutboundViberMessageLogsRequest generalStatus(ViberMessageGeneralStatus generalStatus) {
             this.generalStatus = generalStatus;
             return this;
         }
@@ -535,12 +566,14 @@ public class ViberApi {
         /**
          * Executes the sendViberMessages request.
          *
-         * @return ViberResponse The deserialized response.
+         * @return ViberResponseEnvelopeMessageResponseMessageResponseDetails The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public ViberResponse execute() throws ApiException {
+        public ViberResponseEnvelopeMessageResponseMessageResponseDetails execute() throws ApiException {
             RequestDefinition sendViberMessagesDefinition = sendViberMessagesDefinition(viberRequest);
-            return apiClient.execute(sendViberMessagesDefinition, new TypeReference<ViberResponse>() {}.getType());
+            return apiClient.execute(
+                    sendViberMessagesDefinition,
+                    new TypeReference<ViberResponseEnvelopeMessageResponseMessageResponseDetails>() {}.getType());
         }
 
         /**
@@ -549,10 +582,13 @@ public class ViberApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<ViberResponse> callback) {
+        public okhttp3.Call executeAsync(
+                ApiCallback<ViberResponseEnvelopeMessageResponseMessageResponseDetails> callback) {
             RequestDefinition sendViberMessagesDefinition = sendViberMessagesDefinition(viberRequest);
             return apiClient.executeAsync(
-                    sendViberMessagesDefinition, new TypeReference<ViberResponse>() {}.getType(), callback);
+                    sendViberMessagesDefinition,
+                    new TypeReference<ViberResponseEnvelopeMessageResponseMessageResponseDetails>() {}.getType(),
+                    callback);
         }
     }
 

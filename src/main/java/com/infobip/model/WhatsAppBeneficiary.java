@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Beneficiary for this order. Required when orderType is set to PHYSICAL_GOODS.
+ * Beneficiary of the payment.
  */
 public class WhatsAppBeneficiary {
 
@@ -35,7 +35,7 @@ public class WhatsAppBeneficiary {
      * Sets name.
      * <p>
      * Field description:
-     * Name of the individual or business receiving the physical goods.
+     * Beneficiary&#39;s name.
      * <p>
      * The field is required.
      *
@@ -51,7 +51,7 @@ public class WhatsAppBeneficiary {
      * Returns name.
      * <p>
      * Field description:
-     * Name of the individual or business receiving the physical goods.
+     * Beneficiary&#39;s name.
      * <p>
      * The field is required.
      *
@@ -66,7 +66,7 @@ public class WhatsAppBeneficiary {
      * Sets name.
      * <p>
      * Field description:
-     * Name of the individual or business receiving the physical goods.
+     * Beneficiary&#39;s name.
      * <p>
      * The field is required.
      *
@@ -81,7 +81,7 @@ public class WhatsAppBeneficiary {
      * Sets firstAddressLine.
      * <p>
      * Field description:
-     * First line of the address.
+     * First address.
      * <p>
      * The field is required.
      *
@@ -97,7 +97,7 @@ public class WhatsAppBeneficiary {
      * Returns firstAddressLine.
      * <p>
      * Field description:
-     * First line of the address.
+     * First address.
      * <p>
      * The field is required.
      *
@@ -112,7 +112,7 @@ public class WhatsAppBeneficiary {
      * Sets firstAddressLine.
      * <p>
      * Field description:
-     * First line of the address.
+     * First address.
      * <p>
      * The field is required.
      *
@@ -127,7 +127,7 @@ public class WhatsAppBeneficiary {
      * Sets secondAddressLine.
      * <p>
      * Field description:
-     * Second line of the address.
+     * Second address.
      *
      * @param secondAddressLine
      * @return This {@link WhatsAppBeneficiary instance}.
@@ -141,7 +141,7 @@ public class WhatsAppBeneficiary {
      * Returns secondAddressLine.
      * <p>
      * Field description:
-     * Second line of the address.
+     * Second address.
      *
      * @return secondAddressLine
      */
@@ -154,7 +154,7 @@ public class WhatsAppBeneficiary {
      * Sets secondAddressLine.
      * <p>
      * Field description:
-     * Second line of the address.
+     * Second address.
      *
      * @param secondAddressLine
      */
@@ -167,7 +167,7 @@ public class WhatsAppBeneficiary {
      * Sets city.
      * <p>
      * Field description:
-     * City.
+     * City name.
      *
      * @param city
      * @return This {@link WhatsAppBeneficiary instance}.
@@ -181,7 +181,7 @@ public class WhatsAppBeneficiary {
      * Returns city.
      * <p>
      * Field description:
-     * City.
+     * City name.
      *
      * @return city
      */
@@ -194,7 +194,7 @@ public class WhatsAppBeneficiary {
      * Sets city.
      * <p>
      * Field description:
-     * City.
+     * City name.
      *
      * @param city
      */
@@ -207,7 +207,7 @@ public class WhatsAppBeneficiary {
      * Sets state.
      * <p>
      * Field description:
-     * State.
+     * State name.
      *
      * @param state
      * @return This {@link WhatsAppBeneficiary instance}.
@@ -221,7 +221,7 @@ public class WhatsAppBeneficiary {
      * Returns state.
      * <p>
      * Field description:
-     * State.
+     * State name.
      *
      * @return state
      */
@@ -234,7 +234,7 @@ public class WhatsAppBeneficiary {
      * Sets state.
      * <p>
      * Field description:
-     * State.
+     * State name.
      *
      * @param state
      */
@@ -284,9 +284,7 @@ public class WhatsAppBeneficiary {
      * Sets postalCode.
      * <p>
      * Field description:
-     * Postal code.
-     * <p>
-     * The field is required.
+     * Zip code value.
      *
      * @param postalCode
      * @return This {@link WhatsAppBeneficiary instance}.
@@ -300,9 +298,7 @@ public class WhatsAppBeneficiary {
      * Returns postalCode.
      * <p>
      * Field description:
-     * Postal code.
-     * <p>
-     * The field is required.
+     * Zip code value.
      *
      * @return postalCode
      */
@@ -315,9 +311,7 @@ public class WhatsAppBeneficiary {
      * Sets postalCode.
      * <p>
      * Field description:
-     * Postal code.
-     * <p>
-     * The field is required.
+     * Zip code value.
      *
      * @param postalCode
      */

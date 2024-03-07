@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Allows to select the CPaaS X Application and Entity for the message. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+ * Platform options. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
  */
 public class ViberPlatform {
 

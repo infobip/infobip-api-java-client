@@ -237,7 +237,9 @@ public class MmsApi {
          *
          * @return MmsReportResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         * @deprecated
          */
+        @Deprecated
         public MmsReportResponse execute() throws ApiException {
             RequestDefinition getOutboundMmsMessageDeliveryReportsDefinition =
                     getOutboundMmsMessageDeliveryReportsDefinition(bulkId, messageId, limit, applicationId, entityId);
@@ -251,7 +253,9 @@ public class MmsApi {
          *
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(ApiCallback<MmsReportResponse> callback) {
             RequestDefinition getOutboundMmsMessageDeliveryReportsDefinition =
                     getOutboundMmsMessageDeliveryReportsDefinition(bulkId, messageId, limit, applicationId, entityId);
@@ -268,7 +272,9 @@ public class MmsApi {
      * If you are unable to receive real-time delivery reports towards your endpoint for various reasons, we offer you an API method to fetch batches of delivery reports to confirm whether specific messages have been delivered. Each request towards this endpoint will return batches of the latest delivery reports. Please note they will be returned only once.
      *
      * @return GetOutboundMmsMessageDeliveryReportsRequest
+     * @deprecated
      */
+    @Deprecated
     public GetOutboundMmsMessageDeliveryReportsRequest getOutboundMmsMessageDeliveryReports() {
         return new GetOutboundMmsMessageDeliveryReportsRequest();
     }
@@ -485,7 +491,9 @@ public class MmsApi {
          *
          * @return MmsLogsResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         * @deprecated
          */
+        @Deprecated
         public MmsLogsResponse execute() throws ApiException {
             RequestDefinition getOutboundMmsMessageLogsDefinition = getOutboundMmsMessageLogsDefinition(
                     from,
@@ -509,7 +517,9 @@ public class MmsApi {
          *
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(ApiCallback<MmsLogsResponse> callback) {
             RequestDefinition getOutboundMmsMessageLogsDefinition = getOutboundMmsMessageLogsDefinition(
                     from,
@@ -535,8 +545,10 @@ public class MmsApi {
      * Use this method for displaying logs for example in the user interface. Available are the logs for the last 48 hours and you can only retrieve maximum of 1000 logs per call. See [message delivery reports](#channels/mms/get-outbound-mms-message-delivery-reports) if your use case is to verify message delivery.
      *
      * @return GetOutboundMmsMessageLogsRequest
+     * @deprecated
      * @see <a href="https://www.infobip.com/docs/mms">Learn more about MMS channel and use cases</a>
      */
+    @Deprecated
     public GetOutboundMmsMessageLogsRequest getOutboundMmsMessageLogs() {
         return new GetOutboundMmsMessageLogsRequest();
     }
@@ -567,7 +579,9 @@ public class MmsApi {
          *
          * @return MmsSendResult The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         * @deprecated
          */
+        @Deprecated
         public MmsSendResult execute() throws ApiException {
             RequestDefinition sendMmsMessageDefinition = sendMmsMessageDefinition(mmsAdvancedRequest);
             return apiClient.execute(sendMmsMessageDefinition, new TypeReference<MmsSendResult>() {}.getType());
@@ -578,7 +592,9 @@ public class MmsApi {
          *
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(ApiCallback<MmsSendResult> callback) {
             RequestDefinition sendMmsMessageDefinition = sendMmsMessageDefinition(mmsAdvancedRequest);
             return apiClient.executeAsync(
@@ -593,8 +609,10 @@ public class MmsApi {
      *
      * @param mmsAdvancedRequest  (required)
      * @return SendMmsMessageRequest
+     * @deprecated
      * @see <a href="https://www.infobip.com/docs/mms">Learn more about MMS channel and use cases</a>
      */
+    @Deprecated
     public SendMmsMessageRequest sendMmsMessage(MmsAdvancedRequest mmsAdvancedRequest) {
         return new SendMmsMessageRequest(mmsAdvancedRequest);
     }

@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Status of the order.
  */
 public enum WhatsAppOrderStatus {
+    PENDING("PENDING"),
     PROCESSING("PROCESSING"),
     PARTIALLY_SHIPPED("PARTIALLY_SHIPPED"),
     SHIPPED("SHIPPED"),

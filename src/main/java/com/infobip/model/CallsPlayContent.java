@@ -9,13 +9,15 @@
 
 package com.infobip.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * Audio content to play. It can either be previously uploaded file or a file from a URL.
+ * Represents CallsPlayContent model.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -25,17 +27,53 @@ import java.util.Objects;
 @JsonSubTypes({
     @JsonSubTypes.Type(value = CallsFilePlayContent.class, name = "FILE"),
     @JsonSubTypes.Type(value = CallsRecordingPlayContent.class, name = "RECORDING"),
+    @JsonSubTypes.Type(value = CallsTextPlayContent.class, name = "TEXT"),
     @JsonSubTypes.Type(value = CallsUrlPlayContent.class, name = "URL"),
 })
 public abstract class CallsPlayContent {
+    /**
+     * Represents type enumeration.
+     */
+    public enum TypeEnum {
+        FILE("FILE"),
+        URL("URL"),
+        RECORDING("RECORDING"),
+        TEXT("TEXT");
 
-    protected final CallsPlayContentType type;
+        private String value;
+
+        TypeEnum(String value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        @JsonCreator
+        public static TypeEnum fromValue(String value) {
+            for (TypeEnum enumElement : TypeEnum.values()) {
+                if (enumElement.value.equals(value)) {
+                    return enumElement;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
+        }
+    }
+
+    protected final TypeEnum type;
 
     /**
      * Constructs a new {@link CallsPlayContent} instance.
      */
     public CallsPlayContent(String type) {
-        this.type = CallsPlayContentType.fromValue(type);
+        this.type = TypeEnum.fromValue(type);
     }
 
     /**
@@ -44,7 +82,7 @@ public abstract class CallsPlayContent {
      * @return type
      */
     @JsonProperty("type")
-    public CallsPlayContentType getType() {
+    public TypeEnum getType() {
         return type;
     }
 

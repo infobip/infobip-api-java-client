@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Sets up [URL shortening](https://www.infobip.com/docs/url-shortening) and tracking feature. Not compatible with old tracking feature.
+ * Sets up [URL shortening](https://www.infobip.com/docs/url-shortening) and tracking feature.
  */
 public class SmsUrlOptions {
 

@@ -9,13 +9,11 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * Represents WhatsAppWebhookAddress model.
+ * Array of addresses information.
  */
 public class WhatsAppWebhookAddress {
 
@@ -31,41 +29,7 @@ public class WhatsAppWebhookAddress {
 
     private String countryCode;
 
-    /**
-     * Type of an address.
-     */
-    public enum TypeEnum {
-        HOME("HOME"),
-        WORK("WORK");
-
-        private String value;
-
-        TypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TypeEnum fromValue(String value) {
-            for (TypeEnum enumElement : TypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private TypeEnum type;
+    private String type;
 
     /**
      * Sets street.
@@ -191,7 +155,7 @@ public class WhatsAppWebhookAddress {
      * Sets zip.
      * <p>
      * Field description:
-     * Zip value.
+     * Zip code value.
      *
      * @param zip
      * @return This {@link WhatsAppWebhookAddress instance}.
@@ -205,7 +169,7 @@ public class WhatsAppWebhookAddress {
      * Returns zip.
      * <p>
      * Field description:
-     * Zip value.
+     * Zip code value.
      *
      * @return zip
      */
@@ -218,7 +182,7 @@ public class WhatsAppWebhookAddress {
      * Sets zip.
      * <p>
      * Field description:
-     * Zip value.
+     * Zip code value.
      *
      * @param zip
      */
@@ -311,12 +275,12 @@ public class WhatsAppWebhookAddress {
      * Sets type.
      * <p>
      * Field description:
-     * Type of an address.
+     * Type of the address. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
      *
      * @param type
      * @return This {@link WhatsAppWebhookAddress instance}.
      */
-    public WhatsAppWebhookAddress type(TypeEnum type) {
+    public WhatsAppWebhookAddress type(String type) {
         this.type = type;
         return this;
     }
@@ -325,12 +289,12 @@ public class WhatsAppWebhookAddress {
      * Returns type.
      * <p>
      * Field description:
-     * Type of an address.
+     * Type of the address. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
      *
      * @return type
      */
     @JsonProperty("type")
-    public TypeEnum getType() {
+    public String getType() {
         return type;
     }
 
@@ -338,12 +302,12 @@ public class WhatsAppWebhookAddress {
      * Sets type.
      * <p>
      * Field description:
-     * Type of an address.
+     * Type of the address. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
      *
      * @param type
      */
     @JsonProperty("type")
-    public void setType(TypeEnum type) {
+    public void setType(String type) {
         this.type = type;
     }
 

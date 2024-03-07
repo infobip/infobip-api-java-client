@@ -1,6 +1,7 @@
 # WhatsApp API quickstart
 
-This quick guide aims to help you start with [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp). After reading it, you should know how to use a WhatsApp client, send various types of messages, and receive delivery reports.
+This quick guide aims to help you start with [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp). After reading it, you should know how
+to use a WhatsApp client, send various types of messages, and receive delivery reports.
 
 The first step is to create an `ApiClient` instance with some configuration.
 
@@ -30,13 +31,16 @@ IMPORTANT NOTE: Keep in mind that for test purposes you can only send messages t
 
 ## Send your first message
 
-The easiest way to start with WhatsApp messages is to send a template message. Template messages are predefined and structured messages approved by WhatsApp for a specific sender. For other types of messages, the recipient must initiate the conversation.
+The easiest way to start with WhatsApp messages is to send a template message. Template messages are predefined and structured messages approved by WhatsApp for
+a specific sender. For other types of messages, the recipient must initiate the conversation.
 
-The Infobip test sender has a lot of predefined templates that you can fetch by using the [GET WhatsApp templates][get-templates-url] endpoint or the equivalent `WhatsAppApi` method `getWhatsappTemplates`.
+The Infobip test sender has a lot of predefined templates that you can fetch by using the [GET WhatsApp templates][get-templates-url] endpoint or the
+equivalent `WhatsAppApi` method `getWhatsappTemplates`.
 
-The example below shows how to use a template named `welcome_multiple_languages` with only one placeholder. 
+The example below shows how to use a template named `welcome_multiple_languages` with only one placeholder.
 
-First, create a `WhatsAppMessage` instance and provide all required data. We'll use `en` as a language parameter here, but you can change it to any defined in the template. 
+First, create a `WhatsAppMessage` instance and provide all required data. We'll use `en` as a language parameter here, but you can change it to any defined in
+the template.
 
 ```java
     WhatsAppMessage message = new WhatsAppMessage()
@@ -132,9 +136,11 @@ So, for sending freestyle messages you have to initiate WhatsApp conversation fr
 
     System.out.println(messageInfo.getStatus().getDescription());
 ```
+
 Before you sending messages you may want to reactivate your sender by sending STOP and then your Infobip account username to start it again.
 
 ### How to receive messages
+
 To receive WhatsApp messages you have to set up the webhook.
 
 Basically, that is just an endpoint implemented on your side where you will accept the requests when a new message arrives.
@@ -173,6 +179,9 @@ You can find more details about the structure of the message you can expect on y
         }
     }
 ```
+
 [get-templates-url]: https://www.infobip.com/docs/api#channels/whatsapp/get-whatsapp-templates
+
 [receive-webhook-url]: https://www.infobip.com/docs/api#channels/whatsapp/receive-whatsapp-inbound-messages
+
 [whatsapp-docs-page]: https://www.infobip.com/docs/api#channels/whatsapp

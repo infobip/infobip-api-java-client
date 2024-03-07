@@ -9,64 +9,25 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * Represents WhatsAppWebhookPhone model.
+ * Array of phones information.
  */
 public class WhatsAppWebhookPhone {
 
     private String phone;
 
+    private String type;
+
     private String waId;
-
-    /**
-     * Type of a phone.
-     */
-    public enum TypeEnum {
-        CELL("CELL"),
-        MAIN("MAIN"),
-        IPHONE("IPHONE"),
-        HOME("HOME"),
-        WORK("WORK");
-
-        private String value;
-
-        TypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TypeEnum fromValue(String value) {
-            for (TypeEnum enumElement : TypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private TypeEnum type;
 
     /**
      * Sets phone.
      * <p>
      * Field description:
-     * Contact phone number.
+     * Contact&#39;s phone number.
      *
      * @param phone
      * @return This {@link WhatsAppWebhookPhone instance}.
@@ -80,7 +41,7 @@ public class WhatsAppWebhookPhone {
      * Returns phone.
      * <p>
      * Field description:
-     * Contact phone number.
+     * Contact&#39;s phone number.
      *
      * @return phone
      */
@@ -93,7 +54,7 @@ public class WhatsAppWebhookPhone {
      * Sets phone.
      * <p>
      * Field description:
-     * Contact phone number.
+     * Contact&#39;s phone number.
      *
      * @param phone
      */
@@ -103,10 +64,50 @@ public class WhatsAppWebhookPhone {
     }
 
     /**
+     * Sets type.
+     * <p>
+     * Field description:
+     * Type of the phone number. Can be &#x60;CELL&#x60;, &#x60;MAIN&#x60;, &#x60;IPHONE&#x60;, &#x60;HOME&#x60; or &#x60;WORK&#x60;.
+     *
+     * @param type
+     * @return This {@link WhatsAppWebhookPhone instance}.
+     */
+    public WhatsAppWebhookPhone type(String type) {
+        this.type = type;
+        return this;
+    }
+
+    /**
+     * Returns type.
+     * <p>
+     * Field description:
+     * Type of the phone number. Can be &#x60;CELL&#x60;, &#x60;MAIN&#x60;, &#x60;IPHONE&#x60;, &#x60;HOME&#x60; or &#x60;WORK&#x60;.
+     *
+     * @return type
+     */
+    @JsonProperty("type")
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Sets type.
+     * <p>
+     * Field description:
+     * Type of the phone number. Can be &#x60;CELL&#x60;, &#x60;MAIN&#x60;, &#x60;IPHONE&#x60;, &#x60;HOME&#x60; or &#x60;WORK&#x60;.
+     *
+     * @param type
+     */
+    @JsonProperty("type")
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
      * Sets waId.
      * <p>
      * Field description:
-     * WhatsApp ID.
+     * Contact&#39;s WhatsApp ID.
      *
      * @param waId
      * @return This {@link WhatsAppWebhookPhone instance}.
@@ -120,7 +121,7 @@ public class WhatsAppWebhookPhone {
      * Returns waId.
      * <p>
      * Field description:
-     * WhatsApp ID.
+     * Contact&#39;s WhatsApp ID.
      *
      * @return waId
      */
@@ -133,53 +134,13 @@ public class WhatsAppWebhookPhone {
      * Sets waId.
      * <p>
      * Field description:
-     * WhatsApp ID.
+     * Contact&#39;s WhatsApp ID.
      *
      * @param waId
      */
     @JsonProperty("waId")
     public void setWaId(String waId) {
         this.waId = waId;
-    }
-
-    /**
-     * Sets type.
-     * <p>
-     * Field description:
-     * Type of a phone.
-     *
-     * @param type
-     * @return This {@link WhatsAppWebhookPhone instance}.
-     */
-    public WhatsAppWebhookPhone type(TypeEnum type) {
-        this.type = type;
-        return this;
-    }
-
-    /**
-     * Returns type.
-     * <p>
-     * Field description:
-     * Type of a phone.
-     *
-     * @return type
-     */
-    @JsonProperty("type")
-    public TypeEnum getType() {
-        return type;
-    }
-
-    /**
-     * Sets type.
-     * <p>
-     * Field description:
-     * Type of a phone.
-     *
-     * @param type
-     */
-    @JsonProperty("type")
-    public void setType(TypeEnum type) {
-        this.type = type;
     }
 
     @Override
@@ -192,13 +153,13 @@ public class WhatsAppWebhookPhone {
         }
         WhatsAppWebhookPhone whatsAppWebhookPhone = (WhatsAppWebhookPhone) o;
         return Objects.equals(this.phone, whatsAppWebhookPhone.phone)
-                && Objects.equals(this.waId, whatsAppWebhookPhone.waId)
-                && Objects.equals(this.type, whatsAppWebhookPhone.type);
+                && Objects.equals(this.type, whatsAppWebhookPhone.type)
+                && Objects.equals(this.waId, whatsAppWebhookPhone.waId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(phone, waId, type);
+        return Objects.hash(phone, type, waId);
     }
 
     @Override
@@ -210,11 +171,11 @@ public class WhatsAppWebhookPhone {
                 .append("    phone: ")
                 .append(toIndentedString(phone))
                 .append(newLine)
-                .append("    waId: ")
-                .append(toIndentedString(waId))
-                .append(newLine)
                 .append("    type: ")
                 .append(toIndentedString(type))
+                .append(newLine)
+                .append("    waId: ")
+                .append(toIndentedString(waId))
                 .append(newLine)
                 .append("}")
                 .toString();

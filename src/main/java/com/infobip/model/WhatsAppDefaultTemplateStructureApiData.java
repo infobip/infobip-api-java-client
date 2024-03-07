@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Structure of the created template. Can consist of body (mandatory), header, footer and buttons.
+ * Structure of the created template. Can consist of body (mandatory), header, footer, buttons, carousel and limited time offer.
  */
 public class WhatsAppDefaultTemplateStructureApiData {
 
@@ -29,8 +29,12 @@ public class WhatsAppDefaultTemplateStructureApiData {
 
     private List<WhatsAppButtonApiData> buttons = null;
 
+    private WhatsAppCarouselApiData carousel;
+
+    private WhatsAppLimitedTimeOfferApiData limitedTimeOffer;
+
     /**
-     * Represents type enumeration.
+     * Template structure type.
      */
     public enum TypeEnum {
         TEXT("TEXT"),
@@ -169,7 +173,7 @@ public class WhatsAppDefaultTemplateStructureApiData {
      * Sets buttons.
      * <p>
      * Field description:
-     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons and a phone number button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
+     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, a phone number button and &#x60;copy code&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
      *
      * @param buttons
      * @return This {@link WhatsAppDefaultTemplateStructureApiData instance}.
@@ -183,7 +187,7 @@ public class WhatsAppDefaultTemplateStructureApiData {
      * Adds and item into buttons.
      * <p>
      * Field description:
-     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons and a phone number button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
+     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, a phone number button and &#x60;copy code&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
      *
      * @param buttonsItem The item to be added to the list.
      * @return This {@link WhatsAppDefaultTemplateStructureApiData instance}.
@@ -200,7 +204,7 @@ public class WhatsAppDefaultTemplateStructureApiData {
      * Returns buttons.
      * <p>
      * Field description:
-     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons and a phone number button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
+     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, a phone number button and &#x60;copy code&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
      *
      * @return buttons
      */
@@ -213,7 +217,7 @@ public class WhatsAppDefaultTemplateStructureApiData {
      * Sets buttons.
      * <p>
      * Field description:
-     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons and a phone number button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
+     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, a phone number button and &#x60;copy code&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
      *
      * @param buttons
      */
@@ -223,7 +227,72 @@ public class WhatsAppDefaultTemplateStructureApiData {
     }
 
     /**
+     * Sets carousel.
+     *
+     * @param carousel
+     * @return This {@link WhatsAppDefaultTemplateStructureApiData instance}.
+     */
+    public WhatsAppDefaultTemplateStructureApiData carousel(WhatsAppCarouselApiData carousel) {
+        this.carousel = carousel;
+        return this;
+    }
+
+    /**
+     * Returns carousel.
+     *
+     * @return carousel
+     */
+    @JsonProperty("carousel")
+    public WhatsAppCarouselApiData getCarousel() {
+        return carousel;
+    }
+
+    /**
+     * Sets carousel.
+     *
+     * @param carousel
+     */
+    @JsonProperty("carousel")
+    public void setCarousel(WhatsAppCarouselApiData carousel) {
+        this.carousel = carousel;
+    }
+
+    /**
+     * Sets limitedTimeOffer.
+     *
+     * @param limitedTimeOffer
+     * @return This {@link WhatsAppDefaultTemplateStructureApiData instance}.
+     */
+    public WhatsAppDefaultTemplateStructureApiData limitedTimeOffer(WhatsAppLimitedTimeOfferApiData limitedTimeOffer) {
+        this.limitedTimeOffer = limitedTimeOffer;
+        return this;
+    }
+
+    /**
+     * Returns limitedTimeOffer.
+     *
+     * @return limitedTimeOffer
+     */
+    @JsonProperty("limitedTimeOffer")
+    public WhatsAppLimitedTimeOfferApiData getLimitedTimeOffer() {
+        return limitedTimeOffer;
+    }
+
+    /**
+     * Sets limitedTimeOffer.
+     *
+     * @param limitedTimeOffer
+     */
+    @JsonProperty("limitedTimeOffer")
+    public void setLimitedTimeOffer(WhatsAppLimitedTimeOfferApiData limitedTimeOffer) {
+        this.limitedTimeOffer = limitedTimeOffer;
+    }
+
+    /**
      * Sets type.
+     * <p>
+     * Field description:
+     * Template structure type.
      *
      * @param type
      * @return This {@link WhatsAppDefaultTemplateStructureApiData instance}.
@@ -235,6 +304,9 @@ public class WhatsAppDefaultTemplateStructureApiData {
 
     /**
      * Returns type.
+     * <p>
+     * Field description:
+     * Template structure type.
      *
      * @return type
      */
@@ -245,6 +317,9 @@ public class WhatsAppDefaultTemplateStructureApiData {
 
     /**
      * Sets type.
+     * <p>
+     * Field description:
+     * Template structure type.
      *
      * @param type
      */
@@ -267,12 +342,14 @@ public class WhatsAppDefaultTemplateStructureApiData {
                 && Objects.equals(this.body, whatsAppDefaultTemplateStructureApiData.body)
                 && Objects.equals(this.footer, whatsAppDefaultTemplateStructureApiData.footer)
                 && Objects.equals(this.buttons, whatsAppDefaultTemplateStructureApiData.buttons)
+                && Objects.equals(this.carousel, whatsAppDefaultTemplateStructureApiData.carousel)
+                && Objects.equals(this.limitedTimeOffer, whatsAppDefaultTemplateStructureApiData.limitedTimeOffer)
                 && Objects.equals(this.type, whatsAppDefaultTemplateStructureApiData.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(header, body, footer, buttons, type);
+        return Objects.hash(header, body, footer, buttons, carousel, limitedTimeOffer, type);
     }
 
     @Override
@@ -292,6 +369,12 @@ public class WhatsAppDefaultTemplateStructureApiData {
                 .append(newLine)
                 .append("    buttons: ")
                 .append(toIndentedString(buttons))
+                .append(newLine)
+                .append("    carousel: ")
+                .append(toIndentedString(carousel))
+                .append(newLine)
+                .append("    limitedTimeOffer: ")
+                .append(toIndentedString(limitedTimeOffer))
                 .append(newLine)
                 .append("    type: ")
                 .append(toIndentedString(type))

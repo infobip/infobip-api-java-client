@@ -11,13 +11,25 @@ package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
  * Represents WhatsAppTemplateApiResponse model.
  */
-public class WhatsAppTemplateApiResponse {
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "category",
+        visible = true)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = WhatsAppAuthenticationTemplateApiResponse.class, name = "AUTHENTICATION"),
+    @JsonSubTypes.Type(value = WhatsAppDefaultMarketingTemplateApiResponse.class, name = "MARKETING"),
+    @JsonSubTypes.Type(value = WhatsAppDefaultTemplateApiResponse.class, name = "UTILITY"),
+})
+public abstract class WhatsAppTemplateApiResponse {
 
     private String id;
 
@@ -29,7 +41,14 @@ public class WhatsAppTemplateApiResponse {
 
     private WhatsAppStatus status;
 
-    private WhatsAppCategory category;
+    protected final WhatsAppCategory category;
+
+    /**
+     * Constructs a new {@link WhatsAppTemplateApiResponse} instance.
+     */
+    public WhatsAppTemplateApiResponse(String category) {
+        this.category = WhatsAppCategory.fromValue(category);
+    }
 
     private WhatsAppDefaultTemplateStructureApiData structure;
 
@@ -254,17 +273,6 @@ public class WhatsAppTemplateApiResponse {
     }
 
     /**
-     * Sets category.
-     *
-     * @param category
-     * @return This {@link WhatsAppTemplateApiResponse instance}.
-     */
-    public WhatsAppTemplateApiResponse category(WhatsAppCategory category) {
-        this.category = category;
-        return this;
-    }
-
-    /**
      * Returns category.
      *
      * @return category
@@ -275,17 +283,9 @@ public class WhatsAppTemplateApiResponse {
     }
 
     /**
-     * Sets category.
-     *
-     * @param category
-     */
-    @JsonProperty("category")
-    public void setCategory(WhatsAppCategory category) {
-        this.category = category;
-    }
-
-    /**
      * Sets structure.
+     * <p>
+     * The field is required.
      *
      * @param structure
      * @return This {@link WhatsAppTemplateApiResponse instance}.
@@ -297,6 +297,8 @@ public class WhatsAppTemplateApiResponse {
 
     /**
      * Returns structure.
+     * <p>
+     * The field is required.
      *
      * @return structure
      */
@@ -307,6 +309,8 @@ public class WhatsAppTemplateApiResponse {
 
     /**
      * Sets structure.
+     * <p>
+     * The field is required.
      *
      * @param structure
      */

@@ -10,16 +10,12 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 /**
  * Represents ViberOutboundImageContent model.
  */
 public class ViberOutboundImageContent extends ViberOutboundContent {
-
-    private Map<String, Object> values = null;
 
     private String text;
 
@@ -32,52 +28,6 @@ public class ViberOutboundImageContent extends ViberOutboundContent {
      */
     public ViberOutboundImageContent() {
         super("IMAGE");
-    }
-
-    /**
-     * Sets values.
-     *
-     * @param values
-     * @return This {@link ViberOutboundImageContent instance}.
-     */
-    public ViberOutboundImageContent values(Map<String, Object> values) {
-        this.values = values;
-        return this;
-    }
-
-    /**
-     * Puts and entry into values.
-     *
-     * @param key The given key.
-     * @param valuesItem The item to be associated with the given key.
-     * @return This {@link ViberOutboundImageContent instance}.
-     */
-    public ViberOutboundImageContent putValuesItem(String key, Object valuesItem) {
-        if (this.values == null) {
-            this.values = new HashMap<>();
-        }
-        this.values.put(key, valuesItem);
-        return this;
-    }
-
-    /**
-     * Returns values.
-     *
-     * @return values
-     */
-    @JsonProperty("values")
-    public Map<String, Object> getValues() {
-        return values;
-    }
-
-    /**
-     * Sets values.
-     *
-     * @param values
-     */
-    @JsonProperty("values")
-    public void setValues(Map<String, Object> values) {
-        this.values = values;
     }
 
     /**
@@ -206,8 +156,7 @@ public class ViberOutboundImageContent extends ViberOutboundContent {
             return false;
         }
         ViberOutboundImageContent viberOutboundImageContent = (ViberOutboundImageContent) o;
-        return Objects.equals(this.values, viberOutboundImageContent.values)
-                && Objects.equals(this.text, viberOutboundImageContent.text)
+        return Objects.equals(this.text, viberOutboundImageContent.text)
                 && Objects.equals(this.mediaUrl, viberOutboundImageContent.mediaUrl)
                 && Objects.equals(this.button, viberOutboundImageContent.button)
                 && super.equals(o);
@@ -215,7 +164,7 @@ public class ViberOutboundImageContent extends ViberOutboundContent {
 
     @Override
     public int hashCode() {
-        return Objects.hash(values, text, mediaUrl, button, super.hashCode());
+        return Objects.hash(text, mediaUrl, button, super.hashCode());
     }
 
     @Override
@@ -226,9 +175,6 @@ public class ViberOutboundImageContent extends ViberOutboundContent {
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
-                .append(newLine)
-                .append("    values: ")
-                .append(toIndentedString(values))
                 .append(newLine)
                 .append("    text: ")
                 .append(toIndentedString(text))

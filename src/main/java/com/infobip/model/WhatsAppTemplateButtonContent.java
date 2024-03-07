@@ -23,6 +23,7 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = WhatsAppTemplateCopyCodeButtonContent.class, name = "COPY_CODE"),
     @JsonSubTypes.Type(value = WhatsAppTemplateQuickReplyButtonContent.class, name = "QUICK_REPLY"),
     @JsonSubTypes.Type(value = WhatsAppTemplateUrlButtonContent.class, name = "URL"),
 })

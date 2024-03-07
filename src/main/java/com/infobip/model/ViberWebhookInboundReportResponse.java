@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class ViberWebhookInboundReportResponse {
 
-    private List<ViberWebhookInboundReport> results = new ArrayList<>();
+    private List<ViberMoMessageViberInboundContent> results = new ArrayList<>();
 
     private Integer messageCount;
 
@@ -36,7 +36,7 @@ public class ViberWebhookInboundReportResponse {
      * @param results
      * @return This {@link ViberWebhookInboundReportResponse instance}.
      */
-    public ViberWebhookInboundReportResponse results(List<ViberWebhookInboundReport> results) {
+    public ViberWebhookInboundReportResponse results(List<ViberMoMessageViberInboundContent> results) {
         this.results = results;
         return this;
     }
@@ -52,7 +52,7 @@ public class ViberWebhookInboundReportResponse {
      * @param resultsItem The item to be added to the list.
      * @return This {@link ViberWebhookInboundReportResponse instance}.
      */
-    public ViberWebhookInboundReportResponse addResultsItem(ViberWebhookInboundReport resultsItem) {
+    public ViberWebhookInboundReportResponse addResultsItem(ViberMoMessageViberInboundContent resultsItem) {
         if (this.results == null) {
             this.results = new ArrayList<>();
         }
@@ -71,7 +71,7 @@ public class ViberWebhookInboundReportResponse {
      * @return results
      */
     @JsonProperty("results")
-    public List<ViberWebhookInboundReport> getResults() {
+    public List<ViberMoMessageViberInboundContent> getResults() {
         return results;
     }
 
@@ -86,7 +86,7 @@ public class ViberWebhookInboundReportResponse {
      * @param results
      */
     @JsonProperty("results")
-    public void setResults(List<ViberWebhookInboundReport> results) {
+    public void setResults(List<ViberMoMessageViberInboundContent> results) {
         this.results = results;
     }
 

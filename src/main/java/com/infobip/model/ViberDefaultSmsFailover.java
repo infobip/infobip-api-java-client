@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * SMS to be sent in case a message could not be delivered through the main channel.
+ * Failover SMS message to be sent if the original message could not be delivered.
  */
 public class ViberDefaultSmsFailover {
 

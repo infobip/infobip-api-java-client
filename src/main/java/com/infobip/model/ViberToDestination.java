@@ -26,6 +26,8 @@ public class ViberToDestination {
      * <p>
      * Field description:
      * The destination address of the message.
+     * <p>
+     * The field is required.
      *
      * @param to
      * @return This {@link ViberToDestination instance}.
@@ -40,6 +42,8 @@ public class ViberToDestination {
      * <p>
      * Field description:
      * The destination address of the message.
+     * <p>
+     * The field is required.
      *
      * @return to
      */
@@ -53,6 +57,8 @@ public class ViberToDestination {
      * <p>
      * Field description:
      * The destination address of the message.
+     * <p>
+     * The field is required.
      *
      * @param to
      */

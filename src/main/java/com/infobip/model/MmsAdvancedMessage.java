@@ -32,6 +32,8 @@ public class MmsAdvancedMessage {
 
     private String notifyUrl;
 
+    private MmsRegional regional;
+
     private OffsetDateTime sendAt;
 
     private List<MmsAdvancedMessageSegment> messageSegments = new ArrayList<>();
@@ -298,6 +300,37 @@ public class MmsAdvancedMessage {
     @JsonProperty("notifyUrl")
     public void setNotifyUrl(String notifyUrl) {
         this.notifyUrl = notifyUrl;
+    }
+
+    /**
+     * Sets regional.
+     *
+     * @param regional
+     * @return This {@link MmsAdvancedMessage instance}.
+     */
+    public MmsAdvancedMessage regional(MmsRegional regional) {
+        this.regional = regional;
+        return this;
+    }
+
+    /**
+     * Returns regional.
+     *
+     * @return regional
+     */
+    @JsonProperty("regional")
+    public MmsRegional getRegional() {
+        return regional;
+    }
+
+    /**
+     * Sets regional.
+     *
+     * @param regional
+     */
+    @JsonProperty("regional")
+    public void setRegional(MmsRegional regional) {
+        this.regional = regional;
     }
 
     /**
@@ -571,6 +604,7 @@ public class MmsAdvancedMessage {
                 && Objects.equals(this.from, mmsAdvancedMessage.from)
                 && Objects.equals(this.intermediateReport, mmsAdvancedMessage.intermediateReport)
                 && Objects.equals(this.notifyUrl, mmsAdvancedMessage.notifyUrl)
+                && Objects.equals(this.regional, mmsAdvancedMessage.regional)
                 && Objects.equals(this.sendAt, mmsAdvancedMessage.sendAt)
                 && Objects.equals(this.messageSegments, mmsAdvancedMessage.messageSegments)
                 && Objects.equals(this.validityPeriod, mmsAdvancedMessage.validityPeriod)
@@ -588,6 +622,7 @@ public class MmsAdvancedMessage {
                 from,
                 intermediateReport,
                 notifyUrl,
+                regional,
                 sendAt,
                 messageSegments,
                 validityPeriod,
@@ -619,6 +654,9 @@ public class MmsAdvancedMessage {
                 .append(newLine)
                 .append("    notifyUrl: ")
                 .append(toIndentedString(notifyUrl))
+                .append(newLine)
+                .append("    regional: ")
+                .append(toIndentedString(regional))
                 .append(newLine)
                 .append("    sendAt: ")
                 .append(toIndentedString(sendAt))

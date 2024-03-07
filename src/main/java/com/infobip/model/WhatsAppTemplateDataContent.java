@@ -27,6 +27,8 @@ public class WhatsAppTemplateDataContent {
 
     private WhatsAppTemplateCarouselContent carousel;
 
+    private WhatsAppTemplateLimitedTimeOfferContent limitedTimeOffer;
+
     /**
      * Sets body.
      * <p>
@@ -99,7 +101,7 @@ public class WhatsAppTemplateDataContent {
      * Sets buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60; or &#x60;copy code&#x60; buttonshave been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button.
      *
      * @param buttons
      * @return This {@link WhatsAppTemplateDataContent instance}.
@@ -113,7 +115,7 @@ public class WhatsAppTemplateDataContent {
      * Adds and item into buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60; or &#x60;copy code&#x60; buttonshave been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button.
      *
      * @param buttonsItem The item to be added to the list.
      * @return This {@link WhatsAppTemplateDataContent instance}.
@@ -130,7 +132,7 @@ public class WhatsAppTemplateDataContent {
      * Returns buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60; or &#x60;copy code&#x60; buttonshave been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button.
      *
      * @return buttons
      */
@@ -143,7 +145,7 @@ public class WhatsAppTemplateDataContent {
      * Sets buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60; or &#x60;copy code&#x60; buttonshave been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button.
      *
      * @param buttons
      */
@@ -183,6 +185,37 @@ public class WhatsAppTemplateDataContent {
         this.carousel = carousel;
     }
 
+    /**
+     * Sets limitedTimeOffer.
+     *
+     * @param limitedTimeOffer
+     * @return This {@link WhatsAppTemplateDataContent instance}.
+     */
+    public WhatsAppTemplateDataContent limitedTimeOffer(WhatsAppTemplateLimitedTimeOfferContent limitedTimeOffer) {
+        this.limitedTimeOffer = limitedTimeOffer;
+        return this;
+    }
+
+    /**
+     * Returns limitedTimeOffer.
+     *
+     * @return limitedTimeOffer
+     */
+    @JsonProperty("limitedTimeOffer")
+    public WhatsAppTemplateLimitedTimeOfferContent getLimitedTimeOffer() {
+        return limitedTimeOffer;
+    }
+
+    /**
+     * Sets limitedTimeOffer.
+     *
+     * @param limitedTimeOffer
+     */
+    @JsonProperty("limitedTimeOffer")
+    public void setLimitedTimeOffer(WhatsAppTemplateLimitedTimeOfferContent limitedTimeOffer) {
+        this.limitedTimeOffer = limitedTimeOffer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -195,12 +228,13 @@ public class WhatsAppTemplateDataContent {
         return Objects.equals(this.body, whatsAppTemplateDataContent.body)
                 && Objects.equals(this.header, whatsAppTemplateDataContent.header)
                 && Objects.equals(this.buttons, whatsAppTemplateDataContent.buttons)
-                && Objects.equals(this.carousel, whatsAppTemplateDataContent.carousel);
+                && Objects.equals(this.carousel, whatsAppTemplateDataContent.carousel)
+                && Objects.equals(this.limitedTimeOffer, whatsAppTemplateDataContent.limitedTimeOffer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(body, header, buttons, carousel);
+        return Objects.hash(body, header, buttons, carousel, limitedTimeOffer);
     }
 
     @Override
@@ -220,6 +254,9 @@ public class WhatsAppTemplateDataContent {
                 .append(newLine)
                 .append("    carousel: ")
                 .append(toIndentedString(carousel))
+                .append(newLine)
+                .append("    limitedTimeOffer: ")
+                .append(toIndentedString(limitedTimeOffer))
                 .append(newLine)
                 .append("}")
                 .toString();

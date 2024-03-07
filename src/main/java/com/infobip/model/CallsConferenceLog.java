@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * The list of the results for this page.
+ * Represents CallsConferenceLog model.
  */
 public class CallsConferenceLog {
 

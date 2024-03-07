@@ -31,6 +31,8 @@ public class WebRtcCallLinkConfig {
 
     private String subdomainId;
 
+    private WebRtcWebhook webhook;
+
     /**
      * Sets id.
      * <p>
@@ -246,6 +248,9 @@ public class WebRtcCallLinkConfig {
 
     /**
      * Sets subdomainId.
+     * <p>
+     * Field description:
+     * Id of the subdomain that will be set on every call link generated with this configuration. If undefined, call links will be generated without a subdomain.
      *
      * @param subdomainId
      * @return This {@link WebRtcCallLinkConfig instance}.
@@ -257,6 +262,9 @@ public class WebRtcCallLinkConfig {
 
     /**
      * Returns subdomainId.
+     * <p>
+     * Field description:
+     * Id of the subdomain that will be set on every call link generated with this configuration. If undefined, call links will be generated without a subdomain.
      *
      * @return subdomainId
      */
@@ -267,12 +275,46 @@ public class WebRtcCallLinkConfig {
 
     /**
      * Sets subdomainId.
+     * <p>
+     * Field description:
+     * Id of the subdomain that will be set on every call link generated with this configuration. If undefined, call links will be generated without a subdomain.
      *
      * @param subdomainId
      */
     @JsonProperty("subdomainId")
     public void setSubdomainId(String subdomainId) {
         this.subdomainId = subdomainId;
+    }
+
+    /**
+     * Sets webhook.
+     *
+     * @param webhook
+     * @return This {@link WebRtcCallLinkConfig instance}.
+     */
+    public WebRtcCallLinkConfig webhook(WebRtcWebhook webhook) {
+        this.webhook = webhook;
+        return this;
+    }
+
+    /**
+     * Returns webhook.
+     *
+     * @return webhook
+     */
+    @JsonProperty("webhook")
+    public WebRtcWebhook getWebhook() {
+        return webhook;
+    }
+
+    /**
+     * Sets webhook.
+     *
+     * @param webhook
+     */
+    @JsonProperty("webhook")
+    public void setWebhook(WebRtcWebhook webhook) {
+        this.webhook = webhook;
     }
 
     @Override
@@ -290,12 +332,13 @@ public class WebRtcCallLinkConfig {
                 && Objects.equals(this.initialOptions, webRtcCallLinkConfig.initialOptions)
                 && Objects.equals(this.callOptions, webRtcCallLinkConfig.callOptions)
                 && Objects.equals(this.theme, webRtcCallLinkConfig.theme)
-                && Objects.equals(this.subdomainId, webRtcCallLinkConfig.subdomainId);
+                && Objects.equals(this.subdomainId, webRtcCallLinkConfig.subdomainId)
+                && Objects.equals(this.webhook, webRtcCallLinkConfig.webhook);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, isDefault, initialOptions, callOptions, theme, subdomainId);
+        return Objects.hash(id, name, isDefault, initialOptions, callOptions, theme, subdomainId, webhook);
     }
 
     @Override
@@ -324,6 +367,9 @@ public class WebRtcCallLinkConfig {
                 .append(newLine)
                 .append("    subdomainId: ")
                 .append(toIndentedString(subdomainId))
+                .append(newLine)
+                .append("    webhook: ")
+                .append(toIndentedString(webhook))
                 .append(newLine)
                 .append("}")
                 .toString();

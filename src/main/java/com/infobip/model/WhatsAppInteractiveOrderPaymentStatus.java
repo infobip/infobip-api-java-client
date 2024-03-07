@@ -24,6 +24,7 @@ import java.util.Objects;
         visible = true)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = WhatsAppInteractiveOrderBrazilPaymentStatus.class, name = "BRAZIL"),
+    @JsonSubTypes.Type(value = WhatsAppInteractiveOrderBrazilPixDcPaymentStatus.class, name = "BRAZIL_PIX_DC"),
     @JsonSubTypes.Type(value = WhatsAppInteractiveOrderUPIPGPayUPaymentStatus.class, name = "PG_PAYU"),
     @JsonSubTypes.Type(value = WhatsAppInteractiveOrderUPIPGRazorpayPaymentStatus.class, name = "PG_RAZORPAY"),
     @JsonSubTypes.Type(value = WhatsAppInteractiveOrderUPIPayUPaymentStatus.class, name = "UPI_PAYU"),

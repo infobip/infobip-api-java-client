@@ -22,6 +22,8 @@ public class EmailLog {
 
     private String entityId;
 
+    private String bulkId;
+
     private String messageId;
 
     private String to;
@@ -40,7 +42,7 @@ public class EmailLog {
 
     private MessageStatus status;
 
-    private String bulkId;
+    private EmailError error;
 
     /**
      * Sets applicationId.
@@ -120,6 +122,46 @@ public class EmailLog {
     @JsonProperty("entityId")
     public void setEntityId(String entityId) {
         this.entityId = entityId;
+    }
+
+    /**
+     * Sets bulkId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the request.
+     *
+     * @param bulkId
+     * @return This {@link EmailLog instance}.
+     */
+    public EmailLog bulkId(String bulkId) {
+        this.bulkId = bulkId;
+        return this;
+    }
+
+    /**
+     * Returns bulkId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the request.
+     *
+     * @return bulkId
+     */
+    @JsonProperty("bulkId")
+    public String getBulkId() {
+        return bulkId;
+    }
+
+    /**
+     * Sets bulkId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the request.
+     *
+     * @param bulkId
+     */
+    @JsonProperty("bulkId")
+    public void setBulkId(String bulkId) {
+        this.bulkId = bulkId;
     }
 
     /**
@@ -465,43 +507,34 @@ public class EmailLog {
     }
 
     /**
-     * Sets bulkId.
-     * <p>
-     * Field description:
-     * The ID that uniquely identifies the request.
+     * Sets error.
      *
-     * @param bulkId
+     * @param error
      * @return This {@link EmailLog instance}.
      */
-    public EmailLog bulkId(String bulkId) {
-        this.bulkId = bulkId;
+    public EmailLog error(EmailError error) {
+        this.error = error;
         return this;
     }
 
     /**
-     * Returns bulkId.
-     * <p>
-     * Field description:
-     * The ID that uniquely identifies the request.
+     * Returns error.
      *
-     * @return bulkId
+     * @return error
      */
-    @JsonProperty("bulkId")
-    public String getBulkId() {
-        return bulkId;
+    @JsonProperty("error")
+    public EmailError getError() {
+        return error;
     }
 
     /**
-     * Sets bulkId.
-     * <p>
-     * Field description:
-     * The ID that uniquely identifies the request.
+     * Sets error.
      *
-     * @param bulkId
+     * @param error
      */
-    @JsonProperty("bulkId")
-    public void setBulkId(String bulkId) {
-        this.bulkId = bulkId;
+    @JsonProperty("error")
+    public void setError(EmailError error) {
+        this.error = error;
     }
 
     @Override
@@ -515,6 +548,7 @@ public class EmailLog {
         EmailLog emailLog = (EmailLog) o;
         return Objects.equals(this.applicationId, emailLog.applicationId)
                 && Objects.equals(this.entityId, emailLog.entityId)
+                && Objects.equals(this.bulkId, emailLog.bulkId)
                 && Objects.equals(this.messageId, emailLog.messageId)
                 && Objects.equals(this.to, emailLog.to)
                 && Objects.equals(this.from, emailLog.from)
@@ -524,7 +558,7 @@ public class EmailLog {
                 && Objects.equals(this.messageCount, emailLog.messageCount)
                 && Objects.equals(this.price, emailLog.price)
                 && Objects.equals(this.status, emailLog.status)
-                && Objects.equals(this.bulkId, emailLog.bulkId);
+                && Objects.equals(this.error, emailLog.error);
     }
 
     @Override
@@ -532,6 +566,7 @@ public class EmailLog {
         return Objects.hash(
                 applicationId,
                 entityId,
+                bulkId,
                 messageId,
                 to,
                 from,
@@ -541,7 +576,7 @@ public class EmailLog {
                 messageCount,
                 price,
                 status,
-                bulkId);
+                error);
     }
 
     @Override
@@ -555,6 +590,9 @@ public class EmailLog {
                 .append(newLine)
                 .append("    entityId: ")
                 .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    bulkId: ")
+                .append(toIndentedString(bulkId))
                 .append(newLine)
                 .append("    messageId: ")
                 .append(toIndentedString(messageId))
@@ -583,8 +621,8 @@ public class EmailLog {
                 .append("    status: ")
                 .append(toIndentedString(status))
                 .append(newLine)
-                .append("    bulkId: ")
-                .append(toIndentedString(bulkId))
+                .append("    error: ")
+                .append(toIndentedString(error))
                 .append(newLine)
                 .append("}")
                 .toString();

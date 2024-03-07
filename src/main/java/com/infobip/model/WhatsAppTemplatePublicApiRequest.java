@@ -83,6 +83,8 @@ public abstract class WhatsAppTemplatePublicApiRequest {
 
     private Object structure;
 
+    private WhatsAppValidityPeriodApiData validityPeriod;
+
     /**
      * Sets name.
      * <p>
@@ -258,6 +260,37 @@ public abstract class WhatsAppTemplatePublicApiRequest {
         this.structure = structure;
     }
 
+    /**
+     * Sets validityPeriod.
+     *
+     * @param validityPeriod
+     * @return This {@link WhatsAppTemplatePublicApiRequest instance}.
+     */
+    public WhatsAppTemplatePublicApiRequest validityPeriod(WhatsAppValidityPeriodApiData validityPeriod) {
+        this.validityPeriod = validityPeriod;
+        return this;
+    }
+
+    /**
+     * Returns validityPeriod.
+     *
+     * @return validityPeriod
+     */
+    @JsonProperty("validityPeriod")
+    public WhatsAppValidityPeriodApiData getValidityPeriod() {
+        return validityPeriod;
+    }
+
+    /**
+     * Sets validityPeriod.
+     *
+     * @param validityPeriod
+     */
+    @JsonProperty("validityPeriod")
+    public void setValidityPeriod(WhatsAppValidityPeriodApiData validityPeriod) {
+        this.validityPeriod = validityPeriod;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -271,12 +304,13 @@ public abstract class WhatsAppTemplatePublicApiRequest {
                 && Objects.equals(this.language, whatsAppTemplatePublicApiRequest.language)
                 && Objects.equals(this.category, whatsAppTemplatePublicApiRequest.category)
                 && Objects.equals(this.allowCategoryChange, whatsAppTemplatePublicApiRequest.allowCategoryChange)
-                && Objects.equals(this.structure, whatsAppTemplatePublicApiRequest.structure);
+                && Objects.equals(this.structure, whatsAppTemplatePublicApiRequest.structure)
+                && Objects.equals(this.validityPeriod, whatsAppTemplatePublicApiRequest.validityPeriod);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, language, category, allowCategoryChange, structure);
+        return Objects.hash(name, language, category, allowCategoryChange, structure, validityPeriod);
     }
 
     @Override
@@ -299,6 +333,9 @@ public abstract class WhatsAppTemplatePublicApiRequest {
                 .append(newLine)
                 .append("    structure: ")
                 .append(toIndentedString(structure))
+                .append(newLine)
+                .append("    validityPeriod: ")
+                .append(toIndentedString(validityPeriod))
                 .append(newLine)
                 .append("}")
                 .toString();

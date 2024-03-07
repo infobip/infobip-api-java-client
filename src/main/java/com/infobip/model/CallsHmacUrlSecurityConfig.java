@@ -19,7 +19,7 @@ public class CallsHmacUrlSecurityConfig extends CallsUrlSecurityConfig {
 
     private String secretKey;
 
-    private CallsHmacAlgorithm algorithm;
+    private HmacAlgorithm algorithm;
 
     /**
      * Constructs a new {@link CallsHmacUrlSecurityConfig} instance.
@@ -82,7 +82,7 @@ public class CallsHmacUrlSecurityConfig extends CallsUrlSecurityConfig {
      * @param algorithm
      * @return This {@link CallsHmacUrlSecurityConfig instance}.
      */
-    public CallsHmacUrlSecurityConfig algorithm(CallsHmacAlgorithm algorithm) {
+    public CallsHmacUrlSecurityConfig algorithm(HmacAlgorithm algorithm) {
         this.algorithm = algorithm;
         return this;
     }
@@ -95,7 +95,7 @@ public class CallsHmacUrlSecurityConfig extends CallsUrlSecurityConfig {
      * @return algorithm
      */
     @JsonProperty("algorithm")
-    public CallsHmacAlgorithm getAlgorithm() {
+    public HmacAlgorithm getAlgorithm() {
         return algorithm;
     }
 
@@ -107,7 +107,7 @@ public class CallsHmacUrlSecurityConfig extends CallsUrlSecurityConfig {
      * @param algorithm
      */
     @JsonProperty("algorithm")
-    public void setAlgorithm(CallsHmacAlgorithm algorithm) {
+    public void setAlgorithm(HmacAlgorithm algorithm) {
         this.algorithm = algorithm;
     }
 
