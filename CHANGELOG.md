@@ -5,6 +5,12 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [4.1.2](https://github.com/infobip/infobip-api-java-client/releases/tag/4.1.2) ] - 2024-03-07
+
+### Fixed
+* Issue that caused the number of query parameters for 'bulkId' & 'messageId' to be squared when making getOutboundSmsMessageLogsDefinition call in SmsApi.
+* Issue that caused the number of query parameters for 'sender' to be squared when making getWhatsappSendersQualityDefinition call in WhatsAppApi.
+
 ## [ [4.1.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.1.1) ] - 2024-01-03
 
 ### Added
