@@ -7,8 +7,13 @@ and this library adheres to [Semantic Versioning](http://semver.org/) as mention
 
 ## ~~[ [4.2.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.2.0) ] - 2024-03-07~~
 
-⚠️ **IMPORTANT NOTE:** This release contains changes that are not compatible with Infobip HTTP API. 
-Therefore, it is considered broken. We strongly advise to avoid using it. We are working on version 4.2.1.
+⚠️ **IMPORTANT NOTE:** This release contains changes that are not compatible with Infobip HTTP API. Therefore, it is considered broken. We strongly advise to avoid using it. We are working on a new version.
+
+## [ [4.1.2](https://github.com/infobip/infobip-api-java-client/releases/tag/4.1.2) ] - 2024-03-07
+
+### Fixed
+* Issue that caused the number of query parameters for 'bulkId' & 'messageId' to be squared when making getOutboundSmsMessageLogsDefinition call in SmsApi.
+* Issue that caused the number of query parameters for 'sender' to be squared when making getWhatsappSendersQualityDefinition call in WhatsAppApi.
 
 ## [ [4.1.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.1.1) ] - 2024-01-03
 
