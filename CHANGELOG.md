@@ -5,45 +5,10 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
-## [ [4.2.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.2.0) ] - 2024-03-07
+## ~~[ [4.2.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.2.0) ] - 2024-03-07~~
 
-⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
-All changes, including breaking changes, are addressed and explained in the list bellow.
-If you find out that something was not addressed properly, please submit an issue.
-
-### Added
-* Support for [Infobip Messages API](https://www.infobip.com/docs/api/platform/messages-api).
-* Most recent [Infobip Voice API](https://www.infobip.com/docs/api/channels/voice) feature set.
-* Most recent [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp) feature set.
-* Most recent [Infobip Viber API](https://www.infobip.com/docs/api/channels/viber) feature set.
-* Most recent [Infobip WebRTC API](https://www.infobip.com/docs/api/channels/webrtc-calls) feature set.
-* Most recent [Infobip MMS API](https://www.infobip.com/docs/api/channels/mms) feature set.
-* Most recent [Infobip Email API](https://www.infobip.com/docs/api/channels/email) feature set.
-
-### Changed
-* **Fixes and changes**
-* Removed HMAC classes for messages by products (CallsHmacAlgorithm) and replaced with a unified class: HmacAlgorithm.
-* New model class `BulkEndpoint` instead if `CallsEndpoint`
-* Removed `values` field in `ViberOutboundImageContent` and `ViberOutboundVideoContent` class
-* in API POST /2fa/2/applications/{appId}/messages removed the enum value 'pt-br', 'pt-pt', 'zh-cn', 'zh-tw' of the request property 'Language'
-* in API PUT /2fa/2/applications/{appId}/messages/{msgId} removed the enum value 'pt-br', 'pt-pt', 'zh-cn', 'zh-tw' of the request property 'Language'
-* in API POST /calls/1/bulks the request property 'items/items/machineDetection/enabled' became required
-* in API POST /calls/1/bulks removed the enum value 'SIP', 'VIBER', 'WEBRTC' of the request property 'items/items/callRequests/items/endpoint/type'
-* in API POST /calls/1/calls the request property 'machineDetection/enabled' became required
-* in API POST /calls/1/calls/{callId}/connect the request property 'callRequest/machineDetection/enabled' became required
-* in API POST /calls/1/conferences/{conferenceId}/call the request property 'callRequest/machineDetection/enabled' became required
-* in API POST /calls/1/dialogs the request property 'childCallRequest/machineDetection/enabled' became required
-* in API GET /viber/2/logs the 'query' request parameter 'generalStatus' was restricted to a list of enum values
-* in API POST /viber/2/messages the request property 'messages/items/content/type' and 'messages/items/destinations/items/to' became required
-* in API POST /viber/2/messages the 'messages/items/webhooks/callbackData' request property type/format changed from 'object' to 'string'
-* in API GET /whatsapp/2/senders/{sender}/templates removed the required property 'templates/items/structure/buttons/items/text' from the response with the '200' status
-* in API POST /whatsapp/2/senders/{sender}/templates removed the required property 'structure/buttons/items/text' from the response with the '201' status
-* in API GET /whatsapp/2/senders/{sender}/templates/{id} removed the required property 'structure/buttons/items/text' from the response with the '200' status
-* in API PATCH /whatsapp/2/senders/{sender}/templates/{id} removed the required property 'structure/buttons/items/text' from the response with the '200' status
-
-### Removed
-* Unused model classes
-
+⚠️ **IMPORTANT NOTE:** Due to technical issues, this version is unstable and shouldn't be used. 
+New one will be provided soon and until then, please use the previous one.
 
 ## [ [4.1.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.1.1) ] - 2024-01-03
 
