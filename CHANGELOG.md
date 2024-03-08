@@ -7,8 +7,8 @@ and this library adheres to [Semantic Versioning](http://semver.org/) as mention
 
 ## ~~[ [4.2.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.2.0) ] - 2024-03-07~~
 
-⚠️ **IMPORTANT NOTE:** Due to technical issues, this version is unstable and shouldn't be used. 
-New one will be provided soon and until then, please use the previous one.
+⚠️ **IMPORTANT NOTE:** This release contains changes that are not compatible with Infobip HTTP API. 
+Therefore, it is considered broken. We strongly advise to avoid using it. We are working on version 4.2.1.
 
 ## [ [4.1.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.1.1) ] - 2024-01-03
 
