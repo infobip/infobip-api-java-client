@@ -17,7 +17,7 @@ import com.infobip.ApiException;
 import com.infobip.RequestDefinition;
 import com.infobip.model.MessagesApiEventRequest;
 import com.infobip.model.MessagesApiRequest;
-import com.infobip.model.ResponseEnvelopeMessageResponseMessageResponseDetails;
+import com.infobip.model.MessagesApiResponse;
 import java.util.Objects;
 
 /**
@@ -60,15 +60,14 @@ public class MessagesApi {
         /**
          * Executes the sendMessagesApiEvents request.
          *
-         * @return ResponseEnvelopeMessageResponseMessageResponseDetails The deserialized response.
+         * @return MessagesApiResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public ResponseEnvelopeMessageResponseMessageResponseDetails execute() throws ApiException {
+        public MessagesApiResponse execute() throws ApiException {
             RequestDefinition sendMessagesApiEventsDefinition =
                     sendMessagesApiEventsDefinition(messagesApiEventRequest);
             return apiClient.execute(
-                    sendMessagesApiEventsDefinition,
-                    new TypeReference<ResponseEnvelopeMessageResponseMessageResponseDetails>() {}.getType());
+                    sendMessagesApiEventsDefinition, new TypeReference<MessagesApiResponse>() {}.getType());
         }
 
         /**
@@ -77,13 +76,11 @@ public class MessagesApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<ResponseEnvelopeMessageResponseMessageResponseDetails> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<MessagesApiResponse> callback) {
             RequestDefinition sendMessagesApiEventsDefinition =
                     sendMessagesApiEventsDefinition(messagesApiEventRequest);
             return apiClient.executeAsync(
-                    sendMessagesApiEventsDefinition,
-                    new TypeReference<ResponseEnvelopeMessageResponseMessageResponseDetails>() {}.getType(),
-                    callback);
+                    sendMessagesApiEventsDefinition, new TypeReference<MessagesApiResponse>() {}.getType(), callback);
         }
     }
 
@@ -125,14 +122,13 @@ public class MessagesApi {
         /**
          * Executes the sendMessagesApiMessage request.
          *
-         * @return ResponseEnvelopeMessageResponseMessageResponseDetails The deserialized response.
+         * @return MessagesApiResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public ResponseEnvelopeMessageResponseMessageResponseDetails execute() throws ApiException {
+        public MessagesApiResponse execute() throws ApiException {
             RequestDefinition sendMessagesApiMessageDefinition = sendMessagesApiMessageDefinition(messagesApiRequest);
             return apiClient.execute(
-                    sendMessagesApiMessageDefinition,
-                    new TypeReference<ResponseEnvelopeMessageResponseMessageResponseDetails>() {}.getType());
+                    sendMessagesApiMessageDefinition, new TypeReference<MessagesApiResponse>() {}.getType());
         }
 
         /**
@@ -141,12 +137,10 @@ public class MessagesApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<ResponseEnvelopeMessageResponseMessageResponseDetails> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<MessagesApiResponse> callback) {
             RequestDefinition sendMessagesApiMessageDefinition = sendMessagesApiMessageDefinition(messagesApiRequest);
             return apiClient.executeAsync(
-                    sendMessagesApiMessageDefinition,
-                    new TypeReference<ResponseEnvelopeMessageResponseMessageResponseDetails>() {}.getType(),
-                    callback);
+                    sendMessagesApiMessageDefinition, new TypeReference<MessagesApiResponse>() {}.getType(), callback);
         }
     }
 

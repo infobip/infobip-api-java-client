@@ -30,6 +30,7 @@ The current version of this library includes this subset of Infobip products:
 * [Email](https://www.infobip.com/docs/api/channels/email)
 * [WhatsApp](https://www.infobip.com/docs/api/channels/whatsapp)
 * [Viber](https://www.infobip.com/docs/api/channels/viber)
+* [Messages API](https://www.infobip.com/docs/api/platform/messages-api)
 
 ## General Info
 For `infobip-api-java-client` versioning we use [Semantic Versioning][semver] scheme.
@@ -46,7 +47,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
       <groupId>com.infobip</groupId>
       <artifactId>infobip-api-java-client</artifactId>
-      <version>4.2.0</version>
+      <version>4.3.0</version>
 </dependency>
 ```
 
@@ -199,6 +200,9 @@ For Email quick start guide, view [these examples](email.md).
 
 #### WhatsApp
 For WhatsApp quick start guide, view [these examples](whatsapp.md).
+
+#### Messages API
+For Messages API quick start guide, view [these examples](messages-api.md).
 
 ## Ask for help
 

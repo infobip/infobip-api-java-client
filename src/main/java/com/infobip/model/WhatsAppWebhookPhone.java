@@ -9,7 +9,9 @@
 
 package com.infobip.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
@@ -19,7 +21,44 @@ public class WhatsAppWebhookPhone {
 
     private String phone;
 
-    private String type;
+    /**
+     * Type of the phone number. Can be &#x60;CELL&#x60;, &#x60;MAIN&#x60;, &#x60;IPHONE&#x60;, &#x60;HOME&#x60; or &#x60;WORK&#x60;.
+     */
+    public enum TypeEnum {
+        CELL("CELL"),
+        MAIN("MAIN"),
+        IPHONE("IPHONE"),
+        HOME("HOME"),
+        WORK("WORK");
+
+        private String value;
+
+        TypeEnum(String value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        @JsonCreator
+        public static TypeEnum fromValue(String value) {
+            for (TypeEnum enumElement : TypeEnum.values()) {
+                if (enumElement.value.equals(value)) {
+                    return enumElement;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
+        }
+    }
+
+    private TypeEnum type;
 
     private String waId;
 
@@ -72,7 +111,7 @@ public class WhatsAppWebhookPhone {
      * @param type
      * @return This {@link WhatsAppWebhookPhone instance}.
      */
-    public WhatsAppWebhookPhone type(String type) {
+    public WhatsAppWebhookPhone type(TypeEnum type) {
         this.type = type;
         return this;
     }
@@ -86,7 +125,7 @@ public class WhatsAppWebhookPhone {
      * @return type
      */
     @JsonProperty("type")
-    public String getType() {
+    public TypeEnum getType() {
         return type;
     }
 
@@ -99,7 +138,7 @@ public class WhatsAppWebhookPhone {
      * @param type
      */
     @JsonProperty("type")
-    public void setType(String type) {
+    public void setType(TypeEnum type) {
         this.type = type;
     }
 

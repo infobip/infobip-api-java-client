@@ -5,6 +5,54 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [4.3.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.3.0) ] - 2024-03-19
+
+⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
+All changes, including breaking changes, are addressed and explained in the list bellow.
+If you find out that something was not addressed properly, please submit an issue.
+
+### Added
+* Support for [Infobip Messages API](https://www.infobip.com/docs/api/channels/voice/routing).
+* Most recent feature set for:
+  * [Infobip Call Routing API](https://www.infobip.com/docs/api/channels/voice/routing)
+  * [Infobip Call Link API](https://www.infobip.com/docs/api/channels/webrtc-calls/call-link)
+  * [Infobip Email API](https://www.infobip.com/docs/api/channels/email)
+  * [Infobip MMS API](https://www.infobip.com/docs/api/channels/mms)
+  * [Infobip Voice API](https://www.infobip.com/docs/api/channels/voice)
+  * [Infobip WebRTC API](https://www.infobip.com/docs/api/channels/webrtc)
+  * [Infobip Viber API](https://www.infobip.com/docs/api/channels/viber)
+  * [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp)
+
+### Changed
+* **Removed classes and unified structures**
+  * Removed basic url security configuration classes (`CallsBasicUrlSecurityConfig`, `CallRoutingBasicUrlSecurityConfig`) in favor of a unified class: [BasicSecurityConfig](src/main/java/com/infobip/model/BasicSecurityConfig.java)
+  * Removed hmac algorithm class (`CallsHmacAlgorithm`) in favor of a unified class: [HmacAlgorithm](src/main/java/com/infobip/model/HmacAlgorithm.java)
+  * Removed hmac url security configuration classes (`CallRoutingHmacUrlSecurityConfig`, `CallsHmacUrlSecurityConfig`) in favor of a unified class: [HmacSecurityConfig](src/main/java/com/infobip/model/HmacSecurityConfig.java)
+  * Removed url security configuration classes (`CallRoutingUrlSecurityConfig`, `CallsUrlSecurityConfig`) in favor of a unified class: [SecurityConfig](src/main/java/com/infobip/model/SecurityConfig.java)
+* **Fixes and changes**
+  * Changed [CallRoutingRecording](src/main/java/com/infobip/model/CallRoutingRecording.java) model, previously nested enum 'RecordingTypeEnum' is now extracted to a separate class: [CallRoutingRecordingType](src/main/java/com/infobip/model/RecordingTypeEnum.java).
+  * Changed 'endpoint' field type in [CallsBulkCall](src/main/java/com/infobip/model/CallsBulkCall.java) from CallEndpoint to CallsBulkEndpoint since it didn't correspond to the state of the endpoint.
+  * Changed 'endpoint' field type in [CallsBulkCallRequest](src/main/java/com/infobip/model/CallsBulkCallRequest.java) from CallEndpoint to CallsBulkEndpoint since it didn't correspond to the state of the endpoint.
+  * Fixed some of the enum values in [TfaLanguage](src/main/java/com/infobip/model/TfaLanguage.java) since they didn't correspond to the state of the endpoint.
+  * Removed 'record' field in [CallsClickToCallMessage](src/main/java/com/infobip/model/CallsClickToCallMessage.java) since it is not supported on the API side.
+  * Removed 'values' field in [ViberOutboundFileContent](src/main/java/com/infobip/model/ViberOutboundFileContent.java) since it is not supported on the API side.
+  * Removed 'values' field in [ViberOutboundImageContent](src/main/java/com/infobip/model/ViberOutboundImageContent.java) since it is not supported on the API side.
+  * Removed 'values' field in [ViberOutboundVideoContent](src/main/java/com/infobip/model/ViberOutboundVideoContent.java) since it is not supported on the API side.
+  * Changed 'reports' field name in [ViberWebhookReportResponse](src/main/java/com/infobip/model/ViberWebhookReportsResponse.java) to 'results'.
+  * Changed 'callbackData' field type in [ViberWebhooks](src/main/java/com/infobip/model/ViberWebhooks.java) from Object to String since it didn't correspond to the state of the endpoint.
+  * Changed [WhatsAppTemplateApiResponse](src/main/java/com/infobip/model/WhatsAppTemplateApiResponse.java) by making it an abstract class, serving as a base for WhatsAppAuthenticationTemplateApiResponse, WhatsAppDefaultMarketingTemplateApiResponse, WhatsAppDefaultUtilityTemplateApiResponse.
+  * Changed 'results' field in [WhatsAppWebhookInboundContactMessage](src/main/java/com/infobip/model/WhatsAppWebhookInboundContactMessage.java) to be initialized to an empty list rather than null.
+  * Changed 'results' field in [WhatsAppWebhookInboundMessageResult](src/main/java/com/infobip/model/WhatsAppWebhookInboundMessageResult.java) to be initialized to an empty list rather than null.
+  * Removed 'contact' field in [WhatsAppWebhookInboundMessageData](src/main/java/com/infobip/model/WhatsAppWebhookInboundMessageData.java) since it didn't correspond to the state of the endpoint.
+  * Changed [WhatsAppWebhookReferral](src/main/java/com/infobip/model/WhatsAppWebhookReferral.java) model, previously nested enum 'SourceTypeEnum' is now extracted to a separate class: [WhatsAppWebhookReferralSourceType](src/main/java/com/infobip/model/WhatsAppWebhookReferralSourceType.java).
+  * Changed [WhatsAppWebhookReferralMedia](src/main/java/com/infobip/model/WhatsAppWebhookReferralMedia.java) by making it an abstract class, serving as a base for WhatsAppWebhookReferralMediaImage, WhatsAppWebhookReferralMediaVideo.
+* **Documentation**
+  * Fixed Javadoc.
+
+### Removed
+- Models for Receive WhatsApp Deleted Reports webhook since it is no longer part of Infobip's product stack.
+- Unused model classes
+
 ## ~~[ [4.2.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.2.0) ] - 2024-03-07~~
 
 ⚠️ **IMPORTANT NOTE:** This release contains changes that are not compatible with Infobip HTTP API. Therefore, it is considered broken. We strongly advise to avoid using it. We are working on a new version. In the meantime, please use 4.1.2.

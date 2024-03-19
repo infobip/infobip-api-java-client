@@ -23,7 +23,7 @@ public class WhatsAppContext {
 
     private String groupId;
 
-    private WhatsAppReferredProduct referredProduct;
+    private WhatsAppWebhookReferredProduct referredProduct;
 
     /**
      * Sets from.
@@ -151,7 +151,7 @@ public class WhatsAppContext {
      * @param referredProduct
      * @return This {@link WhatsAppContext instance}.
      */
-    public WhatsAppContext referredProduct(WhatsAppReferredProduct referredProduct) {
+    public WhatsAppContext referredProduct(WhatsAppWebhookReferredProduct referredProduct) {
         this.referredProduct = referredProduct;
         return this;
     }
@@ -162,7 +162,7 @@ public class WhatsAppContext {
      * @return referredProduct
      */
     @JsonProperty("referredProduct")
-    public WhatsAppReferredProduct getReferredProduct() {
+    public WhatsAppWebhookReferredProduct getReferredProduct() {
         return referredProduct;
     }
 
@@ -172,7 +172,7 @@ public class WhatsAppContext {
      * @param referredProduct
      */
     @JsonProperty("referredProduct")
-    public void setReferredProduct(WhatsAppReferredProduct referredProduct) {
+    public void setReferredProduct(WhatsAppWebhookReferredProduct referredProduct) {
         this.referredProduct = referredProduct;
     }
 

@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class MessagesApiChannelDestination {
 
-    private OutboundMessageChannel channel;
+    private MessagesApiOutboundMessageChannel channel;
 
     private String to;
 
@@ -31,7 +31,7 @@ public class MessagesApiChannelDestination {
      * @param channel
      * @return This {@link MessagesApiChannelDestination instance}.
      */
-    public MessagesApiChannelDestination channel(OutboundMessageChannel channel) {
+    public MessagesApiChannelDestination channel(MessagesApiOutboundMessageChannel channel) {
         this.channel = channel;
         return this;
     }
@@ -44,7 +44,7 @@ public class MessagesApiChannelDestination {
      * @return channel
      */
     @JsonProperty("channel")
-    public OutboundMessageChannel getChannel() {
+    public MessagesApiOutboundMessageChannel getChannel() {
         return channel;
     }
 
@@ -56,7 +56,7 @@ public class MessagesApiChannelDestination {
      * @param channel
      */
     @JsonProperty("channel")
-    public void setChannel(OutboundMessageChannel channel) {
+    public void setChannel(MessagesApiOutboundMessageChannel channel) {
         this.channel = channel;
     }
 

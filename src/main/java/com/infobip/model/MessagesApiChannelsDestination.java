@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * Represents a destination which can be specified by a &#x60;channel&#x60;. It is required for a message failover.
  */
-public class MessagesApiChannelsDestination {
+public class MessagesApiChannelsDestination implements MessagesApiMessageDestination {
 
     private List<MessagesApiChannelDestination> byChannel = new ArrayList<>();
 

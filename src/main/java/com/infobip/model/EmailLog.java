@@ -42,7 +42,7 @@ public class EmailLog {
 
     private MessageStatus status;
 
-    private EmailError error;
+    private MessageError error;
 
     /**
      * Sets applicationId.
@@ -512,7 +512,7 @@ public class EmailLog {
      * @param error
      * @return This {@link EmailLog instance}.
      */
-    public EmailLog error(EmailError error) {
+    public EmailLog error(MessageError error) {
         this.error = error;
         return this;
     }
@@ -523,7 +523,7 @@ public class EmailLog {
      * @return error
      */
     @JsonProperty("error")
-    public EmailError getError() {
+    public MessageError getError() {
         return error;
     }
 
@@ -533,7 +533,7 @@ public class EmailLog {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(EmailError error) {
+    public void setError(MessageError error) {
         this.error = error;
     }
 

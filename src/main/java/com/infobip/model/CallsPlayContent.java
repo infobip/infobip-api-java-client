@@ -9,11 +9,9 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
@@ -31,49 +29,14 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = CallsUrlPlayContent.class, name = "URL"),
 })
 public abstract class CallsPlayContent {
-    /**
-     * Represents type enumeration.
-     */
-    public enum TypeEnum {
-        FILE("FILE"),
-        URL("URL"),
-        RECORDING("RECORDING"),
-        TEXT("TEXT");
 
-        private String value;
-
-        TypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TypeEnum fromValue(String value) {
-            for (TypeEnum enumElement : TypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    protected final TypeEnum type;
+    protected final CallsPlayContentType type;
 
     /**
      * Constructs a new {@link CallsPlayContent} instance.
      */
     public CallsPlayContent(String type) {
-        this.type = TypeEnum.fromValue(type);
+        this.type = CallsPlayContentType.fromValue(type);
     }
 
     /**
@@ -82,7 +45,7 @@ public abstract class CallsPlayContent {
      * @return type
      */
     @JsonProperty("type")
-    public TypeEnum getType() {
+    public CallsPlayContentType getType() {
         return type;
     }
 

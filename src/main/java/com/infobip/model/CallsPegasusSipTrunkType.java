@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum CallsPegasusSipTrunkType {
     STATIC("STATIC"),
-    REGISTERED("REGISTERED");
+    REGISTERED("REGISTERED"),
+    PROVIDER("PROVIDER");
 
     private final String value;
 

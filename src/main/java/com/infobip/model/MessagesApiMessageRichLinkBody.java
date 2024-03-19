@@ -131,6 +131,8 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
      * <p>
      * Field description:
      * URL of the rich link. It can be image or video. When you provide it with &#x60;thumbnailUrl&#x60; then it will be mapped as a video, otherwise - as an image.
+     * <p>
+     * The field is required.
      *
      * @param url
      * @return This {@link MessagesApiMessageRichLinkBody instance}.
@@ -145,6 +147,8 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
      * <p>
      * Field description:
      * URL of the rich link. It can be image or video. When you provide it with &#x60;thumbnailUrl&#x60; then it will be mapped as a video, otherwise - as an image.
+     * <p>
+     * The field is required.
      *
      * @return url
      */
@@ -158,6 +162,8 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
      * <p>
      * Field description:
      * URL of the rich link. It can be image or video. When you provide it with &#x60;thumbnailUrl&#x60; then it will be mapped as a video, otherwise - as an image.
+     * <p>
+     * The field is required.
      *
      * @param url
      */

@@ -125,8 +125,6 @@ public class MessagesApiMessageListBody extends MessagesApiMessageBody {
      * <p>
      * Field description:
      * URL of the image.
-     * <p>
-     * The field is required.
      *
      * @param imageUrl
      * @return This {@link MessagesApiMessageListBody instance}.
@@ -141,8 +139,6 @@ public class MessagesApiMessageListBody extends MessagesApiMessageBody {
      * <p>
      * Field description:
      * URL of the image.
-     * <p>
-     * The field is required.
      *
      * @return imageUrl
      */
@@ -156,8 +152,6 @@ public class MessagesApiMessageListBody extends MessagesApiMessageBody {
      * <p>
      * Field description:
      * URL of the image.
-     * <p>
-     * The field is required.
      *
      * @param imageUrl
      */

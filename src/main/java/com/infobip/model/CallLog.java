@@ -46,6 +46,8 @@ public class CallLog {
 
     private Long ringDuration;
 
+    private List<String> callsConfigurationIds = null;
+
     private List<String> applicationIds = null;
 
     private List<String> conferenceIds = null;
@@ -515,6 +517,63 @@ public class CallLog {
     }
 
     /**
+     * Sets callsConfigurationIds.
+     * <p>
+     * Field description:
+     * IDs of the calls configurations used during the call.
+     *
+     * @param callsConfigurationIds
+     * @return This {@link CallLog instance}.
+     */
+    public CallLog callsConfigurationIds(List<String> callsConfigurationIds) {
+        this.callsConfigurationIds = callsConfigurationIds;
+        return this;
+    }
+
+    /**
+     * Adds and item into callsConfigurationIds.
+     * <p>
+     * Field description:
+     * IDs of the calls configurations used during the call.
+     *
+     * @param callsConfigurationIdsItem The item to be added to the list.
+     * @return This {@link CallLog instance}.
+     */
+    public CallLog addCallsConfigurationIdsItem(String callsConfigurationIdsItem) {
+        if (this.callsConfigurationIds == null) {
+            this.callsConfigurationIds = new ArrayList<>();
+        }
+        this.callsConfigurationIds.add(callsConfigurationIdsItem);
+        return this;
+    }
+
+    /**
+     * Returns callsConfigurationIds.
+     * <p>
+     * Field description:
+     * IDs of the calls configurations used during the call.
+     *
+     * @return callsConfigurationIds
+     */
+    @JsonProperty("callsConfigurationIds")
+    public List<String> getCallsConfigurationIds() {
+        return callsConfigurationIds;
+    }
+
+    /**
+     * Sets callsConfigurationIds.
+     * <p>
+     * Field description:
+     * IDs of the calls configurations used during the call.
+     *
+     * @param callsConfigurationIds
+     */
+    @JsonProperty("callsConfigurationIds")
+    public void setCallsConfigurationIds(List<String> callsConfigurationIds) {
+        this.callsConfigurationIds = callsConfigurationIds;
+    }
+
+    /**
      * Sets applicationIds.
      * <p>
      * Field description:
@@ -938,6 +997,7 @@ public class CallLog {
                 && Objects.equals(this.parentCallId, callLog.parentCallId)
                 && Objects.equals(this.machineDetection, callLog.machineDetection)
                 && Objects.equals(this.ringDuration, callLog.ringDuration)
+                && Objects.equals(this.callsConfigurationIds, callLog.callsConfigurationIds)
                 && Objects.equals(this.applicationIds, callLog.applicationIds)
                 && Objects.equals(this.conferenceIds, callLog.conferenceIds)
                 && Objects.equals(this.duration, callLog.duration)
@@ -964,6 +1024,7 @@ public class CallLog {
                 parentCallId,
                 machineDetection,
                 ringDuration,
+                callsConfigurationIds,
                 applicationIds,
                 conferenceIds,
                 duration,
@@ -1016,6 +1077,9 @@ public class CallLog {
                 .append(newLine)
                 .append("    ringDuration: ")
                 .append(toIndentedString(ringDuration))
+                .append(newLine)
+                .append("    callsConfigurationIds: ")
+                .append(toIndentedString(callsConfigurationIds))
                 .append(newLine)
                 .append("    applicationIds: ")
                 .append(toIndentedString(applicationIds))

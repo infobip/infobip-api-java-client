@@ -38,7 +38,7 @@ public class EmailReport {
 
     private MessageStatus status;
 
-    private EmailError error;
+    private MessageError error;
 
     /**
      * Sets applicationId.
@@ -428,7 +428,7 @@ public class EmailReport {
      * @param error
      * @return This {@link EmailReport instance}.
      */
-    public EmailReport error(EmailError error) {
+    public EmailReport error(MessageError error) {
         this.error = error;
         return this;
     }
@@ -439,7 +439,7 @@ public class EmailReport {
      * @return error
      */
     @JsonProperty("error")
-    public EmailError getError() {
+    public MessageError getError() {
         return error;
     }
 
@@ -449,7 +449,7 @@ public class EmailReport {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(EmailError error) {
+    public void setError(MessageError error) {
         this.error = error;
     }
 

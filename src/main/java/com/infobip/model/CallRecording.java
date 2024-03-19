@@ -32,6 +32,8 @@ public class CallRecording {
 
     private String reason;
 
+    private String callsConfigurationId;
+
     private String applicationId;
 
     private OffsetDateTime startTime;
@@ -275,6 +277,46 @@ public class CallRecording {
     }
 
     /**
+     * Sets callsConfigurationId.
+     * <p>
+     * Field description:
+     * Calls Configuration ID.
+     *
+     * @param callsConfigurationId
+     * @return This {@link CallRecording instance}.
+     */
+    public CallRecording callsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+        return this;
+    }
+
+    /**
+     * Returns callsConfigurationId.
+     * <p>
+     * Field description:
+     * Calls Configuration ID.
+     *
+     * @return callsConfigurationId
+     */
+    @JsonProperty("callsConfigurationId")
+    public String getCallsConfigurationId() {
+        return callsConfigurationId;
+    }
+
+    /**
+     * Sets callsConfigurationId.
+     * <p>
+     * Field description:
+     * Calls Configuration ID.
+     *
+     * @param callsConfigurationId
+     */
+    @JsonProperty("callsConfigurationId")
+    public void setCallsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+    }
+
+    /**
      * Sets applicationId.
      * <p>
      * Field description:
@@ -409,6 +451,7 @@ public class CallRecording {
                 && Objects.equals(this.files, callRecording.files)
                 && Objects.equals(this.status, callRecording.status)
                 && Objects.equals(this.reason, callRecording.reason)
+                && Objects.equals(this.callsConfigurationId, callRecording.callsConfigurationId)
                 && Objects.equals(this.applicationId, callRecording.applicationId)
                 && Objects.equals(this.startTime, callRecording.startTime)
                 && Objects.equals(this.endTime, callRecording.endTime);
@@ -416,7 +459,17 @@ public class CallRecording {
 
     @Override
     public int hashCode() {
-        return Objects.hash(callId, endpoint, direction, files, status, reason, applicationId, startTime, endTime);
+        return Objects.hash(
+                callId,
+                endpoint,
+                direction,
+                files,
+                status,
+                reason,
+                callsConfigurationId,
+                applicationId,
+                startTime,
+                endTime);
     }
 
     @Override
@@ -442,6 +495,9 @@ public class CallRecording {
                 .append(newLine)
                 .append("    reason: ")
                 .append(toIndentedString(reason))
+                .append(newLine)
+                .append("    callsConfigurationId: ")
+                .append(toIndentedString(callsConfigurationId))
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))

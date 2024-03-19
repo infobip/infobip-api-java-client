@@ -17,11 +17,11 @@ import java.util.Objects;
  */
 public class MessagesApiFailover {
 
-    private OutboundMessageChannel channel;
+    private MessagesApiOutboundMessageChannel channel;
 
     private String sender;
 
-    private ValidityPeriod validityPeriod;
+    private MessagesApiValidityPeriod validityPeriod;
 
     /**
      * Sets channel.
@@ -31,7 +31,7 @@ public class MessagesApiFailover {
      * @param channel
      * @return This {@link MessagesApiFailover instance}.
      */
-    public MessagesApiFailover channel(OutboundMessageChannel channel) {
+    public MessagesApiFailover channel(MessagesApiOutboundMessageChannel channel) {
         this.channel = channel;
         return this;
     }
@@ -44,7 +44,7 @@ public class MessagesApiFailover {
      * @return channel
      */
     @JsonProperty("channel")
-    public OutboundMessageChannel getChannel() {
+    public MessagesApiOutboundMessageChannel getChannel() {
         return channel;
     }
 
@@ -56,7 +56,7 @@ public class MessagesApiFailover {
      * @param channel
      */
     @JsonProperty("channel")
-    public void setChannel(OutboundMessageChannel channel) {
+    public void setChannel(MessagesApiOutboundMessageChannel channel) {
         this.channel = channel;
     }
 
@@ -112,7 +112,7 @@ public class MessagesApiFailover {
      * @param validityPeriod
      * @return This {@link MessagesApiFailover instance}.
      */
-    public MessagesApiFailover validityPeriod(ValidityPeriod validityPeriod) {
+    public MessagesApiFailover validityPeriod(MessagesApiValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
         return this;
     }
@@ -123,7 +123,7 @@ public class MessagesApiFailover {
      * @return validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public ValidityPeriod getValidityPeriod() {
+    public MessagesApiValidityPeriod getValidityPeriod() {
         return validityPeriod;
     }
 
@@ -133,7 +133,7 @@ public class MessagesApiFailover {
      * @param validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public void setValidityPeriod(ValidityPeriod validityPeriod) {
+    public void setValidityPeriod(MessagesApiValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
     }
 

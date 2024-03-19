@@ -17,9 +17,9 @@ import java.util.Objects;
 /**
  * Represents a single template message.
  */
-public class MessagesApiTemplateMessage {
+public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInner {
 
-    private OutboundTemplateChannel channel;
+    private MessagesApiOutboundTemplateChannel channel;
 
     private String sender;
 
@@ -31,7 +31,7 @@ public class MessagesApiTemplateMessage {
 
     private MessagesApiMessageOptions options;
 
-    private Webhooks webhooks;
+    private MessagesApiWebhooks webhooks;
 
     /**
      * Sets channel.
@@ -41,7 +41,7 @@ public class MessagesApiTemplateMessage {
      * @param channel
      * @return This {@link MessagesApiTemplateMessage instance}.
      */
-    public MessagesApiTemplateMessage channel(OutboundTemplateChannel channel) {
+    public MessagesApiTemplateMessage channel(MessagesApiOutboundTemplateChannel channel) {
         this.channel = channel;
         return this;
     }
@@ -54,7 +54,7 @@ public class MessagesApiTemplateMessage {
      * @return channel
      */
     @JsonProperty("channel")
-    public OutboundTemplateChannel getChannel() {
+    public MessagesApiOutboundTemplateChannel getChannel() {
         return channel;
     }
 
@@ -66,7 +66,7 @@ public class MessagesApiTemplateMessage {
      * @param channel
      */
     @JsonProperty("channel")
-    public void setChannel(OutboundTemplateChannel channel) {
+    public void setChannel(MessagesApiOutboundTemplateChannel channel) {
         this.channel = channel;
     }
 
@@ -286,7 +286,7 @@ public class MessagesApiTemplateMessage {
      * @param webhooks
      * @return This {@link MessagesApiTemplateMessage instance}.
      */
-    public MessagesApiTemplateMessage webhooks(Webhooks webhooks) {
+    public MessagesApiTemplateMessage webhooks(MessagesApiWebhooks webhooks) {
         this.webhooks = webhooks;
         return this;
     }
@@ -297,7 +297,7 @@ public class MessagesApiTemplateMessage {
      * @return webhooks
      */
     @JsonProperty("webhooks")
-    public Webhooks getWebhooks() {
+    public MessagesApiWebhooks getWebhooks() {
         return webhooks;
     }
 
@@ -307,7 +307,7 @@ public class MessagesApiTemplateMessage {
      * @param webhooks
      */
     @JsonProperty("webhooks")
-    public void setWebhooks(Webhooks webhooks) {
+    public void setWebhooks(MessagesApiWebhooks webhooks) {
         this.webhooks = webhooks;
     }
 

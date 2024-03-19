@@ -112,7 +112,7 @@ The rest is the same as in the previous example. We are using the `whatsAppApi` 
 
     WhatsAppBulkMessageInfo messageInfo = whatsAppApi
         .sendWhatsAppTemplateMessage(bulkMessage)
-        .execute();;
+        .execute();
 
     System.out.println(messageInfo.getMessages().get(0).getStatus().getDescription());
 ```
@@ -131,7 +131,6 @@ So, for sending freestyle messages you have to initiate WhatsApp conversation fr
                     .text("This is my first WhatsApp message sent using Infobip API client library")
             );
 
-    WhatsAppApi whatsAppApi = new WhatsAppApi(apiClient);
     WhatsAppSingleMessageInfo messageInfo = whatsAppApi.sendWhatsAppTextMessage(textMessage).execute();
 
     System.out.println(messageInfo.getStatus().getDescription());

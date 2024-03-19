@@ -10,7 +10,7 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,17 +22,17 @@ public class WhatsAppWebhookContact {
 
     private List<WhatsAppWebhookAddress> addresses = null;
 
-    private LocalDate birthday;
+    private OffsetDateTime birthday;
 
-    private List<WhatsAppEmail> emails = null;
+    private List<WhatsAppWebhookEmail> emails = null;
 
     private WhatsAppWebhookName name;
 
-    private WhatsAppOrganization org;
+    private WhatsAppWebhookOrganization org;
 
     private List<WhatsAppWebhookPhone> phones = null;
 
-    private List<WhatsAppUrl> urls = null;
+    private List<WhatsAppWebhookUrl> urls = null;
 
     /**
      * Sets addresses.
@@ -100,7 +100,7 @@ public class WhatsAppWebhookContact {
      * @param birthday
      * @return This {@link WhatsAppWebhookContact instance}.
      */
-    public WhatsAppWebhookContact birthday(LocalDate birthday) {
+    public WhatsAppWebhookContact birthday(OffsetDateTime birthday) {
         this.birthday = birthday;
         return this;
     }
@@ -114,7 +114,7 @@ public class WhatsAppWebhookContact {
      * @return birthday
      */
     @JsonProperty("birthday")
-    public LocalDate getBirthday() {
+    public OffsetDateTime getBirthday() {
         return birthday;
     }
 
@@ -127,7 +127,7 @@ public class WhatsAppWebhookContact {
      * @param birthday
      */
     @JsonProperty("birthday")
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(OffsetDateTime birthday) {
         this.birthday = birthday;
     }
 
@@ -140,7 +140,7 @@ public class WhatsAppWebhookContact {
      * @param emails
      * @return This {@link WhatsAppWebhookContact instance}.
      */
-    public WhatsAppWebhookContact emails(List<WhatsAppEmail> emails) {
+    public WhatsAppWebhookContact emails(List<WhatsAppWebhookEmail> emails) {
         this.emails = emails;
         return this;
     }
@@ -154,7 +154,7 @@ public class WhatsAppWebhookContact {
      * @param emailsItem The item to be added to the list.
      * @return This {@link WhatsAppWebhookContact instance}.
      */
-    public WhatsAppWebhookContact addEmailsItem(WhatsAppEmail emailsItem) {
+    public WhatsAppWebhookContact addEmailsItem(WhatsAppWebhookEmail emailsItem) {
         if (this.emails == null) {
             this.emails = new ArrayList<>();
         }
@@ -171,7 +171,7 @@ public class WhatsAppWebhookContact {
      * @return emails
      */
     @JsonProperty("emails")
-    public List<WhatsAppEmail> getEmails() {
+    public List<WhatsAppWebhookEmail> getEmails() {
         return emails;
     }
 
@@ -184,7 +184,7 @@ public class WhatsAppWebhookContact {
      * @param emails
      */
     @JsonProperty("emails")
-    public void setEmails(List<WhatsAppEmail> emails) {
+    public void setEmails(List<WhatsAppWebhookEmail> emails) {
         this.emails = emails;
     }
 
@@ -225,7 +225,7 @@ public class WhatsAppWebhookContact {
      * @param org
      * @return This {@link WhatsAppWebhookContact instance}.
      */
-    public WhatsAppWebhookContact org(WhatsAppOrganization org) {
+    public WhatsAppWebhookContact org(WhatsAppWebhookOrganization org) {
         this.org = org;
         return this;
     }
@@ -236,7 +236,7 @@ public class WhatsAppWebhookContact {
      * @return org
      */
     @JsonProperty("org")
-    public WhatsAppOrganization getOrg() {
+    public WhatsAppWebhookOrganization getOrg() {
         return org;
     }
 
@@ -246,7 +246,7 @@ public class WhatsAppWebhookContact {
      * @param org
      */
     @JsonProperty("org")
-    public void setOrg(WhatsAppOrganization org) {
+    public void setOrg(WhatsAppWebhookOrganization org) {
         this.org = org;
     }
 
@@ -316,7 +316,7 @@ public class WhatsAppWebhookContact {
      * @param urls
      * @return This {@link WhatsAppWebhookContact instance}.
      */
-    public WhatsAppWebhookContact urls(List<WhatsAppUrl> urls) {
+    public WhatsAppWebhookContact urls(List<WhatsAppWebhookUrl> urls) {
         this.urls = urls;
         return this;
     }
@@ -330,7 +330,7 @@ public class WhatsAppWebhookContact {
      * @param urlsItem The item to be added to the list.
      * @return This {@link WhatsAppWebhookContact instance}.
      */
-    public WhatsAppWebhookContact addUrlsItem(WhatsAppUrl urlsItem) {
+    public WhatsAppWebhookContact addUrlsItem(WhatsAppWebhookUrl urlsItem) {
         if (this.urls == null) {
             this.urls = new ArrayList<>();
         }
@@ -347,7 +347,7 @@ public class WhatsAppWebhookContact {
      * @return urls
      */
     @JsonProperty("urls")
-    public List<WhatsAppUrl> getUrls() {
+    public List<WhatsAppWebhookUrl> getUrls() {
         return urls;
     }
 
@@ -360,7 +360,7 @@ public class WhatsAppWebhookContact {
      * @param urls
      */
     @JsonProperty("urls")
-    public void setUrls(List<WhatsAppUrl> urls) {
+    public void setUrls(List<WhatsAppWebhookUrl> urls) {
         this.urls = urls;
     }
 

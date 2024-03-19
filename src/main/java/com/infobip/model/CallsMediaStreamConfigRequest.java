@@ -21,7 +21,7 @@ public class CallsMediaStreamConfigRequest {
 
     private String url;
 
-    private CallsUrlSecurityConfig securityConfig;
+    private SecurityConfig securityConfig;
 
     /**
      * Sets name.
@@ -121,7 +121,7 @@ public class CallsMediaStreamConfigRequest {
      * @param securityConfig
      * @return This {@link CallsMediaStreamConfigRequest instance}.
      */
-    public CallsMediaStreamConfigRequest securityConfig(CallsUrlSecurityConfig securityConfig) {
+    public CallsMediaStreamConfigRequest securityConfig(SecurityConfig securityConfig) {
         this.securityConfig = securityConfig;
         return this;
     }
@@ -132,7 +132,7 @@ public class CallsMediaStreamConfigRequest {
      * @return securityConfig
      */
     @JsonProperty("securityConfig")
-    public CallsUrlSecurityConfig getSecurityConfig() {
+    public SecurityConfig getSecurityConfig() {
         return securityConfig;
     }
 
@@ -142,7 +142,7 @@ public class CallsMediaStreamConfigRequest {
      * @param securityConfig
      */
     @JsonProperty("securityConfig")
-    public void setSecurityConfig(CallsUrlSecurityConfig securityConfig) {
+    public void setSecurityConfig(SecurityConfig securityConfig) {
         this.securityConfig = securityConfig;
     }
 

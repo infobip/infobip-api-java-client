@@ -305,12 +305,12 @@ public class SmsApi {
         }
         if (bulkId != null) {
             for (var parameterItem : bulkId) {
-                builder.addQueryParameter(new Parameter("bulkId", bulkId));
+                builder.addQueryParameter(new Parameter("bulkId", parameterItem));
             }
         }
         if (messageId != null) {
             for (var parameterItem : messageId) {
-                builder.addQueryParameter(new Parameter("messageId", messageId));
+                builder.addQueryParameter(new Parameter("messageId", parameterItem));
             }
         }
         if (generalStatus != null) {

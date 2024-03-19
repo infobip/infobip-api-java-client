@@ -23,7 +23,6 @@ public enum WebRtcLanguageCode {
     FR_FR("fr-FR"),
     IT_IT("it-IT"),
     JA_JP("ja-JP"),
-    KO_KR("ko-KR"),
     PT_BR("pt-BR"),
     RU_RU("ru-RU"),
     SV_SE("sv-SE"),

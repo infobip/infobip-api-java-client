@@ -19,11 +19,11 @@ public class MessagesApiMessageOptions {
 
     private MessagesApiPlatform platform;
 
-    private ValidityPeriod validityPeriod;
+    private MessagesApiValidityPeriod validityPeriod;
 
     private Boolean adaptationMode;
 
-    private RegionalOptions regional;
+    private MessagesApiRegionalOptions regional;
 
     /**
      * Sets platform.
@@ -62,7 +62,7 @@ public class MessagesApiMessageOptions {
      * @param validityPeriod
      * @return This {@link MessagesApiMessageOptions instance}.
      */
-    public MessagesApiMessageOptions validityPeriod(ValidityPeriod validityPeriod) {
+    public MessagesApiMessageOptions validityPeriod(MessagesApiValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
         return this;
     }
@@ -73,7 +73,7 @@ public class MessagesApiMessageOptions {
      * @return validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public ValidityPeriod getValidityPeriod() {
+    public MessagesApiValidityPeriod getValidityPeriod() {
         return validityPeriod;
     }
 
@@ -83,7 +83,7 @@ public class MessagesApiMessageOptions {
      * @param validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public void setValidityPeriod(ValidityPeriod validityPeriod) {
+    public void setValidityPeriod(MessagesApiValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
     }
 
@@ -133,7 +133,7 @@ public class MessagesApiMessageOptions {
      * @param regional
      * @return This {@link MessagesApiMessageOptions instance}.
      */
-    public MessagesApiMessageOptions regional(RegionalOptions regional) {
+    public MessagesApiMessageOptions regional(MessagesApiRegionalOptions regional) {
         this.regional = regional;
         return this;
     }
@@ -144,7 +144,7 @@ public class MessagesApiMessageOptions {
      * @return regional
      */
     @JsonProperty("regional")
-    public RegionalOptions getRegional() {
+    public MessagesApiRegionalOptions getRegional() {
         return regional;
     }
 
@@ -154,7 +154,7 @@ public class MessagesApiMessageOptions {
      * @param regional
      */
     @JsonProperty("regional")
-    public void setRegional(RegionalOptions regional) {
+    public void setRegional(MessagesApiRegionalOptions regional) {
         this.regional = regional;
     }
 

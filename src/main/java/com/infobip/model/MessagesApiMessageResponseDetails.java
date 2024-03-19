@@ -23,7 +23,7 @@ public class MessagesApiMessageResponseDetails {
 
     private String destination;
 
-    private Object details;
+    private MessagesApiMessageResponseDetails details;
 
     /**
      * Sets messageId.
@@ -138,41 +138,32 @@ public class MessagesApiMessageResponseDetails {
 
     /**
      * Sets details.
-     * <p>
-     * Field description:
-     * Other details of the message.
      *
      * @param details
      * @return This {@link MessagesApiMessageResponseDetails instance}.
      */
-    public MessagesApiMessageResponseDetails details(Object details) {
+    public MessagesApiMessageResponseDetails details(MessagesApiMessageResponseDetails details) {
         this.details = details;
         return this;
     }
 
     /**
      * Returns details.
-     * <p>
-     * Field description:
-     * Other details of the message.
      *
      * @return details
      */
     @JsonProperty("details")
-    public Object getDetails() {
+    public MessagesApiMessageResponseDetails getDetails() {
         return details;
     }
 
     /**
      * Sets details.
-     * <p>
-     * Field description:
-     * Other details of the message.
      *
      * @param details
      */
     @JsonProperty("details")
-    public void setDetails(Object details) {
+    public void setDetails(MessagesApiMessageResponseDetails details) {
         this.details = details;
     }
 

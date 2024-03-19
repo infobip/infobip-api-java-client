@@ -38,7 +38,7 @@ class RequestFactoryTest {
 
     private static final String GIVEN_API_KEY_VALUE = "apiKeyValue";
     private static final ApiKey GIVEN_API_KEY = ApiKey.from(GIVEN_API_KEY_VALUE);
-    private static final String EXPECTED_USER_AGENT_HEADER_VALUE = "infobip-api-client-java/4.2.0";
+    private static final String EXPECTED_USER_AGENT_HEADER_VALUE = "infobip-api-client-java/4.3.0";
 
     private final OkHttpClient client = new OkHttpClient();
     private final JSON json = new JSON();

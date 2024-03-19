@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * If localization object is not defined, English will be used. If localization type is set to BROWSER_DETECTED and browser language is one of the languages that could be set in PRESET type, then that language will be used. Otherwise, English will be used.If localization type is set to PRESET, languageCode must be set to one of the predefined values.
+ * If the localization object is not defined, English will be used. If the localization type is set to PRESET, the language code is mandatory to be defined to one of the predefined values.If the localization type is set to BROWSER_DETECTED and the browser language is one of the languages that could be set in PRESET type, then that language will be used. Otherwise, English will be used.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,

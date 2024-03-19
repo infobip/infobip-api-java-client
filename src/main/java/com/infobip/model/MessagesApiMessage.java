@@ -17,19 +17,19 @@ import java.util.Objects;
 /**
  * Represents a single message.
  */
-public class MessagesApiMessage {
+public class MessagesApiMessage implements MessagesApiRequestMessagesInner {
 
-    private OutboundMessageChannel channel;
+    private MessagesApiOutboundMessageChannel channel;
 
     private String sender;
 
-    private List<MessageDestination> destinations = new ArrayList<>();
+    private List<MessagesApiMessageDestination> destinations = new ArrayList<>();
 
     private MessagesApiMessageContent content;
 
     private MessagesApiMessageOptions options;
 
-    private Webhooks webhooks;
+    private MessagesApiWebhooks webhooks;
 
     private List<MessagesApiFailover> failover = null;
 
@@ -41,7 +41,7 @@ public class MessagesApiMessage {
      * @param channel
      * @return This {@link MessagesApiMessage instance}.
      */
-    public MessagesApiMessage channel(OutboundMessageChannel channel) {
+    public MessagesApiMessage channel(MessagesApiOutboundMessageChannel channel) {
         this.channel = channel;
         return this;
     }
@@ -54,7 +54,7 @@ public class MessagesApiMessage {
      * @return channel
      */
     @JsonProperty("channel")
-    public OutboundMessageChannel getChannel() {
+    public MessagesApiOutboundMessageChannel getChannel() {
         return channel;
     }
 
@@ -66,7 +66,7 @@ public class MessagesApiMessage {
      * @param channel
      */
     @JsonProperty("channel")
-    public void setChannel(OutboundMessageChannel channel) {
+    public void setChannel(MessagesApiOutboundMessageChannel channel) {
         this.channel = channel;
     }
 
@@ -127,7 +127,7 @@ public class MessagesApiMessage {
      * @param destinations
      * @return This {@link MessagesApiMessage instance}.
      */
-    public MessagesApiMessage destinations(List<MessageDestination> destinations) {
+    public MessagesApiMessage destinations(List<MessagesApiMessageDestination> destinations) {
         this.destinations = destinations;
         return this;
     }
@@ -143,7 +143,7 @@ public class MessagesApiMessage {
      * @param destinationsItem The item to be added to the list.
      * @return This {@link MessagesApiMessage instance}.
      */
-    public MessagesApiMessage addDestinationsItem(MessageDestination destinationsItem) {
+    public MessagesApiMessage addDestinationsItem(MessagesApiMessageDestination destinationsItem) {
         if (this.destinations == null) {
             this.destinations = new ArrayList<>();
         }
@@ -162,7 +162,7 @@ public class MessagesApiMessage {
      * @return destinations
      */
     @JsonProperty("destinations")
-    public List<MessageDestination> getDestinations() {
+    public List<MessagesApiMessageDestination> getDestinations() {
         return destinations;
     }
 
@@ -177,7 +177,7 @@ public class MessagesApiMessage {
      * @param destinations
      */
     @JsonProperty("destinations")
-    public void setDestinations(List<MessageDestination> destinations) {
+    public void setDestinations(List<MessagesApiMessageDestination> destinations) {
         this.destinations = destinations;
     }
 
@@ -255,7 +255,7 @@ public class MessagesApiMessage {
      * @param webhooks
      * @return This {@link MessagesApiMessage instance}.
      */
-    public MessagesApiMessage webhooks(Webhooks webhooks) {
+    public MessagesApiMessage webhooks(MessagesApiWebhooks webhooks) {
         this.webhooks = webhooks;
         return this;
     }
@@ -266,7 +266,7 @@ public class MessagesApiMessage {
      * @return webhooks
      */
     @JsonProperty("webhooks")
-    public Webhooks getWebhooks() {
+    public MessagesApiWebhooks getWebhooks() {
         return webhooks;
     }
 
@@ -276,7 +276,7 @@ public class MessagesApiMessage {
      * @param webhooks
      */
     @JsonProperty("webhooks")
-    public void setWebhooks(Webhooks webhooks) {
+    public void setWebhooks(MessagesApiWebhooks webhooks) {
         this.webhooks = webhooks;
     }
 

@@ -27,7 +27,7 @@ import java.util.Objects;
 @JsonSubTypes({
     @JsonSubTypes.Type(value = WhatsAppAuthenticationTemplateApiResponse.class, name = "AUTHENTICATION"),
     @JsonSubTypes.Type(value = WhatsAppDefaultMarketingTemplateApiResponse.class, name = "MARKETING"),
-    @JsonSubTypes.Type(value = WhatsAppDefaultTemplateApiResponse.class, name = "UTILITY"),
+    @JsonSubTypes.Type(value = WhatsAppDefaultUtilityTemplateApiResponse.class, name = "UTILITY"),
 })
 public abstract class WhatsAppTemplateApiResponse {
 

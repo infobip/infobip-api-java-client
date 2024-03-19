@@ -19,7 +19,7 @@ public class WebRtcWebhook {
 
     private String url;
 
-    private WebRtcSecurityConfig securityConfig;
+    private SecurityConfig securityConfig;
 
     /**
      * Sets url.
@@ -73,7 +73,7 @@ public class WebRtcWebhook {
      * @param securityConfig
      * @return This {@link WebRtcWebhook instance}.
      */
-    public WebRtcWebhook securityConfig(WebRtcSecurityConfig securityConfig) {
+    public WebRtcWebhook securityConfig(SecurityConfig securityConfig) {
         this.securityConfig = securityConfig;
         return this;
     }
@@ -84,7 +84,7 @@ public class WebRtcWebhook {
      * @return securityConfig
      */
     @JsonProperty("securityConfig")
-    public WebRtcSecurityConfig getSecurityConfig() {
+    public SecurityConfig getSecurityConfig() {
         return securityConfig;
     }
 
@@ -94,7 +94,7 @@ public class WebRtcWebhook {
      * @param securityConfig
      */
     @JsonProperty("securityConfig")
-    public void setSecurityConfig(WebRtcSecurityConfig securityConfig) {
+    public void setSecurityConfig(SecurityConfig securityConfig) {
         this.securityConfig = securityConfig;
     }
 

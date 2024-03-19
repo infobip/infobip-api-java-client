@@ -9,7 +9,9 @@
 
 package com.infobip.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
@@ -29,7 +31,41 @@ public class WhatsAppWebhookAddress {
 
     private String countryCode;
 
-    private String type;
+    /**
+     * Type of the address. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
+     */
+    public enum TypeEnum {
+        HOME("HOME"),
+        WORK("WORK");
+
+        private String value;
+
+        TypeEnum(String value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        @JsonCreator
+        public static TypeEnum fromValue(String value) {
+            for (TypeEnum enumElement : TypeEnum.values()) {
+                if (enumElement.value.equals(value)) {
+                    return enumElement;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
+        }
+    }
+
+    private TypeEnum type;
 
     /**
      * Sets street.
@@ -280,7 +316,7 @@ public class WhatsAppWebhookAddress {
      * @param type
      * @return This {@link WhatsAppWebhookAddress instance}.
      */
-    public WhatsAppWebhookAddress type(String type) {
+    public WhatsAppWebhookAddress type(TypeEnum type) {
         this.type = type;
         return this;
     }
@@ -294,7 +330,7 @@ public class WhatsAppWebhookAddress {
      * @return type
      */
     @JsonProperty("type")
-    public String getType() {
+    public TypeEnum getType() {
         return type;
     }
 
@@ -307,7 +343,7 @@ public class WhatsAppWebhookAddress {
      * @param type
      */
     @JsonProperty("type")
-    public void setType(String type) {
+    public void setType(TypeEnum type) {
         this.type = type;
     }
 

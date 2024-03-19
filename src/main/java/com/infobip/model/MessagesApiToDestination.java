@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * Represents a simple destination.
  */
-public class MessagesApiToDestination {
+public class MessagesApiToDestination implements MessagesApiMessageDestination {
 
     private String to;
 

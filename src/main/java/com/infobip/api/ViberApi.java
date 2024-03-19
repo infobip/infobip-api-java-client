@@ -22,7 +22,7 @@ import com.infobip.model.ViberImageMessage;
 import com.infobip.model.ViberLogsResponse;
 import com.infobip.model.ViberMessageGeneralStatus;
 import com.infobip.model.ViberRequest;
-import com.infobip.model.ViberResponseEnvelopeMessageResponseMessageResponseDetails;
+import com.infobip.model.ViberResponse;
 import com.infobip.model.ViberSingleMessageInfo;
 import com.infobip.model.ViberVideoMessage;
 import com.infobip.model.ViberWebhookReportsResponse;
@@ -566,14 +566,12 @@ public class ViberApi {
         /**
          * Executes the sendViberMessages request.
          *
-         * @return ViberResponseEnvelopeMessageResponseMessageResponseDetails The deserialized response.
+         * @return ViberResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public ViberResponseEnvelopeMessageResponseMessageResponseDetails execute() throws ApiException {
+        public ViberResponse execute() throws ApiException {
             RequestDefinition sendViberMessagesDefinition = sendViberMessagesDefinition(viberRequest);
-            return apiClient.execute(
-                    sendViberMessagesDefinition,
-                    new TypeReference<ViberResponseEnvelopeMessageResponseMessageResponseDetails>() {}.getType());
+            return apiClient.execute(sendViberMessagesDefinition, new TypeReference<ViberResponse>() {}.getType());
         }
 
         /**
@@ -582,13 +580,10 @@ public class ViberApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(
-                ApiCallback<ViberResponseEnvelopeMessageResponseMessageResponseDetails> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<ViberResponse> callback) {
             RequestDefinition sendViberMessagesDefinition = sendViberMessagesDefinition(viberRequest);
             return apiClient.executeAsync(
-                    sendViberMessagesDefinition,
-                    new TypeReference<ViberResponseEnvelopeMessageResponseMessageResponseDetails>() {}.getType(),
-                    callback);
+                    sendViberMessagesDefinition, new TypeReference<ViberResponse>() {}.getType(), callback);
         }
     }
 

@@ -46,6 +46,8 @@ public class Call {
 
     private Integer ringDuration;
 
+    private String callsConfigurationId;
+
     private String applicationId;
 
     private String conferenceId;
@@ -536,6 +538,46 @@ public class Call {
     }
 
     /**
+     * Sets callsConfigurationId.
+     * <p>
+     * Field description:
+     * Current calls configuration ID.
+     *
+     * @param callsConfigurationId
+     * @return This {@link Call instance}.
+     */
+    public Call callsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+        return this;
+    }
+
+    /**
+     * Returns callsConfigurationId.
+     * <p>
+     * Field description:
+     * Current calls configuration ID.
+     *
+     * @return callsConfigurationId
+     */
+    @JsonProperty("callsConfigurationId")
+    public String getCallsConfigurationId() {
+        return callsConfigurationId;
+    }
+
+    /**
+     * Sets callsConfigurationId.
+     * <p>
+     * Field description:
+     * Current calls configuration ID.
+     *
+     * @param callsConfigurationId
+     */
+    @JsonProperty("callsConfigurationId")
+    public void setCallsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+    }
+
+    /**
      * Sets applicationId.
      * <p>
      * Field description:
@@ -735,6 +777,7 @@ public class Call {
                 && Objects.equals(this.parentCallId, call.parentCallId)
                 && Objects.equals(this.machineDetection, call.machineDetection)
                 && Objects.equals(this.ringDuration, call.ringDuration)
+                && Objects.equals(this.callsConfigurationId, call.callsConfigurationId)
                 && Objects.equals(this.applicationId, call.applicationId)
                 && Objects.equals(this.conferenceId, call.conferenceId)
                 && Objects.equals(this.customData, call.customData)
@@ -757,6 +800,7 @@ public class Call {
                 parentCallId,
                 machineDetection,
                 ringDuration,
+                callsConfigurationId,
                 applicationId,
                 conferenceId,
                 customData,
@@ -807,6 +851,9 @@ public class Call {
                 .append(newLine)
                 .append("    ringDuration: ")
                 .append(toIndentedString(ringDuration))
+                .append(newLine)
+                .append("    callsConfigurationId: ")
+                .append(toIndentedString(callsConfigurationId))
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
