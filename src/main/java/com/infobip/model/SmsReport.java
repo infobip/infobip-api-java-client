@@ -370,7 +370,7 @@ public class SmsReport {
      * Sets callbackData.
      * <p>
      * Field description:
-     * Custom data sent over to the &#x60;notifyUrl&#x60;.
+     * Callback data sent through ‛callbackData‛ field when sending message.
      *
      * @param callbackData
      * @return This {@link SmsReport instance}.
@@ -384,7 +384,7 @@ public class SmsReport {
      * Returns callbackData.
      * <p>
      * Field description:
-     * Custom data sent over to the &#x60;notifyUrl&#x60;.
+     * Callback data sent through ‛callbackData‛ field when sending message.
      *
      * @return callbackData
      */
@@ -397,7 +397,7 @@ public class SmsReport {
      * Sets callbackData.
      * <p>
      * Field description:
-     * Custom data sent over to the &#x60;notifyUrl&#x60;.
+     * Callback data sent through ‛callbackData‛ field when sending message.
      *
      * @param callbackData
      */

@@ -18,6 +18,7 @@ final class ApiExceptionDetailsResolver {
     private static final Map<String, String> errorCodes = Map.of(
             "BAD_REQUEST", "E400",
             "UNAUTHORIZED", "E401",
+            "FORBIDDEN", "E403",
             "NOT_FOUND", "E404",
             "TOO_MANY_REQUESTS", "E429",
             "GENERAL_ERROR", "E500");

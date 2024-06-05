@@ -384,7 +384,7 @@ public class SmsApi {
         /**
          * Sets bulkId.
          *
-         * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. (optional)
+         * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. May contain multiple comma-separated values. Maximum length 2048 characters. (optional)
          * @return GetOutboundSmsMessageLogsRequest
          */
         public GetOutboundSmsMessageLogsRequest bulkId(List<String> bulkId) {
@@ -395,7 +395,7 @@ public class SmsApi {
         /**
          * Sets messageId.
          *
-         * @param messageId Unique message ID for which a log is requested. (optional)
+         * @param messageId Unique message ID for which a log is requested. May contain multiple comma-separated values. Maximum length 2048 characters. (optional)
          * @return GetOutboundSmsMessageLogsRequest
          */
         public GetOutboundSmsMessageLogsRequest messageId(List<String> messageId) {
@@ -496,7 +496,9 @@ public class SmsApi {
          *
          * @return SmsLogsResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         * @deprecated
          */
+        @Deprecated
         public SmsLogsResponse execute() throws ApiException {
             RequestDefinition getOutboundSmsMessageLogsDefinition = getOutboundSmsMessageLogsDefinition(
                     from,
@@ -520,7 +522,9 @@ public class SmsApi {
          *
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(ApiCallback<SmsLogsResponse> callback) {
             RequestDefinition getOutboundSmsMessageLogsDefinition = getOutboundSmsMessageLogsDefinition(
                     from,
@@ -543,11 +547,13 @@ public class SmsApi {
     /**
      * Get outbound SMS message logs.
      * <p>
-     * Use this method for displaying logs for example in the user interface. Available are the logs for the last 48 hours and you can only retrieve maximum of 1000 logs per call. See [message delivery reports](#channels/sms/get-outbound-sms-message-delivery-reports) if your use case is to verify message delivery.
+     * Use this method for displaying logs for example in the user interface. Available are the logs for the last 48 hours and you can only retrieve maximum of 1000 logs per call. See [message delivery reports](#channels/sms/get-outbound-sms-message-delivery-reports) if your use case is to verify message delivery.\\ Although this endpoint remains functional, starting from May 16, 2024., we recommend transitioning to the new endpoint provided at [Get outbound SMS message delivery reports](#channels/sms/get-outbound-sms-message-logs-v3) for improved support and future updates.
      *
      * @return GetOutboundSmsMessageLogsRequest
+     * @deprecated
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
      */
+    @Deprecated
     public GetOutboundSmsMessageLogsRequest getOutboundSmsMessageLogs() {
         return new GetOutboundSmsMessageLogsRequest();
     }
@@ -843,7 +849,7 @@ public class SmsApi {
     /**
      * Send binary SMS message.
      * <p>
-     * Send single or multiple binary messages to one or more destination address. The API response will not contain the final delivery status, use [Delivery Reports](https://www.infobip.com/docs/api/channels/sms/sms-messaging/logs-and-status-reports/receive-outbound-sms-message-report) instead.
+     * Send single or multiple binary messages to one or more destination address. The API response will not contain the final delivery status, use [Delivery Reports](https://www.infobip.com/docs/api/channels/sms/sms-messaging/logs-and-status-reports/receive-outbound-sms-message-report) instead.\\ In light of improved features, this endpoint has been superseded. Please visit [Send SMS message](#channels/sms/send-sms-messages) for the next version.
      *
      * @param smsAdvancedBinaryRequest  (required)
      * @return SendBinarySmsMessageRequest
@@ -901,7 +907,7 @@ public class SmsApi {
     /**
      * Send SMS message.
      * <p>
-     * Use this endpoint to send an SMS and set up a rich set of features, such as batch sending with a single API request, scheduling, URL tracking, language and transliteration configuration, etc. The API response will not contain the final delivery status, use [Delivery Reports](https://www.infobip.com/docs/api/channels/sms/sms-messaging/logs-and-status-reports/receive-outbound-sms-message-report) instead.
+     * Use this endpoint to send an SMS and set up a rich set of features, such as batch sending with a single API request, scheduling, URL tracking, language and transliteration configuration, etc. The API response will not contain the final delivery status, use [Delivery Reports](https://www.infobip.com/docs/api/channels/sms/sms-messaging/logs-and-status-reports/receive-outbound-sms-message-report) instead.\\ In light of improved features, this endpoint has been superseded. Please visit [Send SMS message](#channels/sms/send-sms-messages) for the next version.
      *
      * @param smsAdvancedTextualRequest  (required)
      * @return SendSmsMessageRequest

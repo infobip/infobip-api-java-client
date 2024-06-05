@@ -5,6 +5,20 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [4.3.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.3.1) ] - 2024-06-05
+
+### Added
+* Most recent [Infobip SMS API](https://www.infobip.com/docs/api/channels/sms) feature set.
+
+### Changed
+* **Fixes and changes**
+  * Changed [SmsTurkeyIysOptions](src/main/java/com/infobip/model/SmsTurkeyIysOptions.java) model, previously nested enum 'RecipientTypeEnum' is now extracted to a separate class: [SmsIysRecipientType](src/main/java/com/infobip/model/SmsIysRecipientType.java).
+  * Expanded [ApiExceptionDetailsResolver](src/main/java/com/infobip/ApiExceptionDetails.java) model with additional error response that the API might return.
+
+* **Documentation**
+  * Fixed Javadoc.
+
+
 ## [ [4.3.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.3.0) ] - 2024-03-19
 
 ⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
