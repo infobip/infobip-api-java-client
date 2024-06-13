@@ -9,6 +9,11 @@ and this library adheres to [Semantic Versioning](http://semver.org/) as mention
 
 ### Added
 * Most recent [Infobip SMS API](https://www.infobip.com/docs/api/channels/sms) feature set.
+* `snyk.yml` workflow, which serves the purpose of identifying and addressing dependency vulnerabilities in the project.
+* `sonar.yml` workflow to analyze the source code, enhancing code quality and maintainability.
+* `git-build-hook-maven-plugin` plugin into the project, providing support for Git hooks.
+* `pre-commit.sh` hook, which automatically executes `mvn spotless:apply` prior to each commit, ensuring code formatting consistency.
+
 
 ### Changed
 * **Fixes and changes**
