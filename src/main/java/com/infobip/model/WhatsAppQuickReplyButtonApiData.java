@@ -9,6 +9,7 @@
 
 package com.infobip.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
@@ -16,11 +17,59 @@ import java.util.Objects;
  */
 public class WhatsAppQuickReplyButtonApiData extends WhatsAppButtonApiData {
 
+    private String text;
+
     /**
      * Constructs a new {@link WhatsAppQuickReplyButtonApiData} instance.
      */
     public WhatsAppQuickReplyButtonApiData() {
         super("QUICK_REPLY");
+    }
+
+    /**
+     * Sets text.
+     * <p>
+     * Field description:
+     * Button text.
+     * <p>
+     * The field is required.
+     *
+     * @param text
+     * @return This {@link WhatsAppQuickReplyButtonApiData instance}.
+     */
+    public WhatsAppQuickReplyButtonApiData text(String text) {
+        this.text = text;
+        return this;
+    }
+
+    /**
+     * Returns text.
+     * <p>
+     * Field description:
+     * Button text.
+     * <p>
+     * The field is required.
+     *
+     * @return text
+     */
+    @JsonProperty("text")
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * Sets text.
+     * <p>
+     * Field description:
+     * Button text.
+     * <p>
+     * The field is required.
+     *
+     * @param text
+     */
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
     }
 
     @Override
@@ -31,12 +80,13 @@ public class WhatsAppQuickReplyButtonApiData extends WhatsAppButtonApiData {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        return super.equals(o);
+        WhatsAppQuickReplyButtonApiData whatsAppQuickReplyButtonApiData = (WhatsAppQuickReplyButtonApiData) o;
+        return Objects.equals(this.text, whatsAppQuickReplyButtonApiData.text) && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode());
+        return Objects.hash(text, super.hashCode());
     }
 
     @Override
@@ -47,6 +97,9 @@ public class WhatsAppQuickReplyButtonApiData extends WhatsAppButtonApiData {
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
+                .append(newLine)
+                .append("    text: ")
+                .append(toIndentedString(text))
                 .append(newLine)
                 .append("}")
                 .toString();

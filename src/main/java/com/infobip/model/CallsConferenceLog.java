@@ -16,13 +16,15 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * The list of the results for this page.
+ * Represents CallsConferenceLog model.
  */
 public class CallsConferenceLog {
 
     private String conferenceId;
 
     private String name;
+
+    private String callsConfigurationId;
 
     private String applicationId;
 
@@ -116,6 +118,46 @@ public class CallsConferenceLog {
     @JsonProperty("name")
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Sets callsConfigurationId.
+     * <p>
+     * Field description:
+     * Calls Configuration ID.
+     *
+     * @param callsConfigurationId
+     * @return This {@link CallsConferenceLog instance}.
+     */
+    public CallsConferenceLog callsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+        return this;
+    }
+
+    /**
+     * Returns callsConfigurationId.
+     * <p>
+     * Field description:
+     * Calls Configuration ID.
+     *
+     * @return callsConfigurationId
+     */
+    @JsonProperty("callsConfigurationId")
+    public String getCallsConfigurationId() {
+        return callsConfigurationId;
+    }
+
+    /**
+     * Sets callsConfigurationId.
+     * <p>
+     * Field description:
+     * Calls Configuration ID.
+     *
+     * @param callsConfigurationId
+     */
+    @JsonProperty("callsConfigurationId")
+    public void setCallsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
     }
 
     /**
@@ -408,6 +450,7 @@ public class CallsConferenceLog {
         CallsConferenceLog callsConferenceLog = (CallsConferenceLog) o;
         return Objects.equals(this.conferenceId, callsConferenceLog.conferenceId)
                 && Objects.equals(this.name, callsConferenceLog.name)
+                && Objects.equals(this.callsConfigurationId, callsConferenceLog.callsConfigurationId)
                 && Objects.equals(this.applicationId, callsConferenceLog.applicationId)
                 && Objects.equals(this.startTime, callsConferenceLog.startTime)
                 && Objects.equals(this.endTime, callsConferenceLog.endTime)
@@ -420,7 +463,16 @@ public class CallsConferenceLog {
     @Override
     public int hashCode() {
         return Objects.hash(
-                conferenceId, name, applicationId, startTime, endTime, duration, sessions, recording, errorCode);
+                conferenceId,
+                name,
+                callsConfigurationId,
+                applicationId,
+                startTime,
+                endTime,
+                duration,
+                sessions,
+                recording,
+                errorCode);
     }
 
     @Override
@@ -434,6 +486,9 @@ public class CallsConferenceLog {
                 .append(newLine)
                 .append("    name: ")
                 .append(toIndentedString(name))
+                .append(newLine)
+                .append("    callsConfigurationId: ")
+                .append(toIndentedString(callsConfigurationId))
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))

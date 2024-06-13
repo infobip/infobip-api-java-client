@@ -19,7 +19,7 @@ public class CallsBulkCallRequest {
 
     private String externalId;
 
-    private CallEndpoint endpoint;
+    private CallsBulkEndpoint endpoint;
 
     /**
      * Sets externalId.
@@ -69,7 +69,7 @@ public class CallsBulkCallRequest {
      * @param endpoint
      * @return This {@link CallsBulkCallRequest instance}.
      */
-    public CallsBulkCallRequest endpoint(CallEndpoint endpoint) {
+    public CallsBulkCallRequest endpoint(CallsBulkEndpoint endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -82,7 +82,7 @@ public class CallsBulkCallRequest {
      * @return endpoint
      */
     @JsonProperty("endpoint")
-    public CallEndpoint getEndpoint() {
+    public CallsBulkEndpoint getEndpoint() {
         return endpoint;
     }
 
@@ -94,7 +94,7 @@ public class CallsBulkCallRequest {
      * @param endpoint
      */
     @JsonProperty("endpoint")
-    public void setEndpoint(CallEndpoint endpoint) {
+    public void setEndpoint(CallsBulkEndpoint endpoint) {
         this.endpoint = endpoint;
     }
 

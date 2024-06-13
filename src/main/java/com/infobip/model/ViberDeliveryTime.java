@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * The exact time of day to end sending messages. Time is expressed in the UTC time zone. If set, use it together with the &#x60;from&#x60; property with minimum 1 hour difference.
+ * The exact time of the day. The time is expressed in the UTC time zone.
  */
 public class ViberDeliveryTime {
 

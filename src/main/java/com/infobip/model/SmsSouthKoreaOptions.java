@@ -19,6 +19,8 @@ public class SmsSouthKoreaOptions {
 
     private Integer resellerCode;
 
+    private String title;
+
     /**
      * Sets resellerCode.
      * <p>
@@ -59,6 +61,46 @@ public class SmsSouthKoreaOptions {
         this.resellerCode = resellerCode;
     }
 
+    /**
+     * Sets title.
+     * <p>
+     * Field description:
+     * Set the title or subject of a message. South Korea only.
+     *
+     * @param title
+     * @return This {@link SmsSouthKoreaOptions instance}.
+     */
+    public SmsSouthKoreaOptions title(String title) {
+        this.title = title;
+        return this;
+    }
+
+    /**
+     * Returns title.
+     * <p>
+     * Field description:
+     * Set the title or subject of a message. South Korea only.
+     *
+     * @return title
+     */
+    @JsonProperty("title")
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Sets title.
+     * <p>
+     * Field description:
+     * Set the title or subject of a message. South Korea only.
+     *
+     * @param title
+     */
+    @JsonProperty("title")
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -68,12 +110,13 @@ public class SmsSouthKoreaOptions {
             return false;
         }
         SmsSouthKoreaOptions smsSouthKoreaOptions = (SmsSouthKoreaOptions) o;
-        return Objects.equals(this.resellerCode, smsSouthKoreaOptions.resellerCode);
+        return Objects.equals(this.resellerCode, smsSouthKoreaOptions.resellerCode)
+                && Objects.equals(this.title, smsSouthKoreaOptions.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(resellerCode);
+        return Objects.hash(resellerCode, title);
     }
 
     @Override
@@ -84,6 +127,9 @@ public class SmsSouthKoreaOptions {
                 .append(newLine)
                 .append("    resellerCode: ")
                 .append(toIndentedString(resellerCode))
+                .append(newLine)
+                .append("    title: ")
+                .append(toIndentedString(title))
                 .append(newLine)
                 .append("}")
                 .toString();

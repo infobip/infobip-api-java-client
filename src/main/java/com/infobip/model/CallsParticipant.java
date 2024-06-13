@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * The list of conference participants.
+ * Represents CallsParticipant model.
  */
 public class CallsParticipant {
 
@@ -25,6 +25,8 @@ public class CallsParticipant {
     private CallsParticipantState state;
 
     private OffsetDateTime joinTime;
+
+    private OffsetDateTime leaveTime;
 
     private CallsMediaProperties media;
 
@@ -177,6 +179,46 @@ public class CallsParticipant {
     }
 
     /**
+     * Sets leaveTime.
+     * <p>
+     * Field description:
+     * Date and time when the participant has left.
+     *
+     * @param leaveTime
+     * @return This {@link CallsParticipant instance}.
+     */
+    public CallsParticipant leaveTime(OffsetDateTime leaveTime) {
+        this.leaveTime = leaveTime;
+        return this;
+    }
+
+    /**
+     * Returns leaveTime.
+     * <p>
+     * Field description:
+     * Date and time when the participant has left.
+     *
+     * @return leaveTime
+     */
+    @JsonProperty("leaveTime")
+    public OffsetDateTime getLeaveTime() {
+        return leaveTime;
+    }
+
+    /**
+     * Sets leaveTime.
+     * <p>
+     * Field description:
+     * Date and time when the participant has left.
+     *
+     * @param leaveTime
+     */
+    @JsonProperty("leaveTime")
+    public void setLeaveTime(OffsetDateTime leaveTime) {
+        this.leaveTime = leaveTime;
+    }
+
+    /**
      * Sets media.
      *
      * @param media
@@ -220,12 +262,13 @@ public class CallsParticipant {
                 && Objects.equals(this.endpoint, callsParticipant.endpoint)
                 && Objects.equals(this.state, callsParticipant.state)
                 && Objects.equals(this.joinTime, callsParticipant.joinTime)
+                && Objects.equals(this.leaveTime, callsParticipant.leaveTime)
                 && Objects.equals(this.media, callsParticipant.media);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(callId, endpoint, state, joinTime, media);
+        return Objects.hash(callId, endpoint, state, joinTime, leaveTime, media);
     }
 
     @Override
@@ -245,6 +288,9 @@ public class CallsParticipant {
                 .append(newLine)
                 .append("    joinTime: ")
                 .append(toIndentedString(joinTime))
+                .append(newLine)
+                .append("    leaveTime: ")
+                .append(toIndentedString(leaveTime))
                 .append(newLine)
                 .append("    media: ")
                 .append(toIndentedString(media))

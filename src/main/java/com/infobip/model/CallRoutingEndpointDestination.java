@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -26,6 +28,8 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
     private Integer connectTimeout;
 
     private CallRoutingRecording recording;
+
+    private List<CallRoutingAllowedTimeWindow> allowedTimeWindows = null;
 
     /**
      * Constructs a new {@link CallRoutingEndpointDestination} instance.
@@ -222,6 +226,64 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
         this.recording = recording;
     }
 
+    /**
+     * Sets allowedTimeWindows.
+     * <p>
+     * Field description:
+     * Sets specific delivery windows outside of which calls won&#39;t be forwarded to the destination. If defined, call forwarding is allowed only if any time window in array is satisfied.
+     *
+     * @param allowedTimeWindows
+     * @return This {@link CallRoutingEndpointDestination instance}.
+     */
+    public CallRoutingEndpointDestination allowedTimeWindows(List<CallRoutingAllowedTimeWindow> allowedTimeWindows) {
+        this.allowedTimeWindows = allowedTimeWindows;
+        return this;
+    }
+
+    /**
+     * Adds and item into allowedTimeWindows.
+     * <p>
+     * Field description:
+     * Sets specific delivery windows outside of which calls won&#39;t be forwarded to the destination. If defined, call forwarding is allowed only if any time window in array is satisfied.
+     *
+     * @param allowedTimeWindowsItem The item to be added to the list.
+     * @return This {@link CallRoutingEndpointDestination instance}.
+     */
+    public CallRoutingEndpointDestination addAllowedTimeWindowsItem(
+            CallRoutingAllowedTimeWindow allowedTimeWindowsItem) {
+        if (this.allowedTimeWindows == null) {
+            this.allowedTimeWindows = new ArrayList<>();
+        }
+        this.allowedTimeWindows.add(allowedTimeWindowsItem);
+        return this;
+    }
+
+    /**
+     * Returns allowedTimeWindows.
+     * <p>
+     * Field description:
+     * Sets specific delivery windows outside of which calls won&#39;t be forwarded to the destination. If defined, call forwarding is allowed only if any time window in array is satisfied.
+     *
+     * @return allowedTimeWindows
+     */
+    @JsonProperty("allowedTimeWindows")
+    public List<CallRoutingAllowedTimeWindow> getAllowedTimeWindows() {
+        return allowedTimeWindows;
+    }
+
+    /**
+     * Sets allowedTimeWindows.
+     * <p>
+     * Field description:
+     * Sets specific delivery windows outside of which calls won&#39;t be forwarded to the destination. If defined, call forwarding is allowed only if any time window in array is satisfied.
+     *
+     * @param allowedTimeWindows
+     */
+    @JsonProperty("allowedTimeWindows")
+    public void setAllowedTimeWindows(List<CallRoutingAllowedTimeWindow> allowedTimeWindows) {
+        this.allowedTimeWindows = allowedTimeWindows;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -236,12 +298,13 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
                 && Objects.equals(this.weight, callRoutingEndpointDestination.weight)
                 && Objects.equals(this.connectTimeout, callRoutingEndpointDestination.connectTimeout)
                 && Objects.equals(this.recording, callRoutingEndpointDestination.recording)
+                && Objects.equals(this.allowedTimeWindows, callRoutingEndpointDestination.allowedTimeWindows)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, priority, weight, connectTimeout, recording, super.hashCode());
+        return Objects.hash(value, priority, weight, connectTimeout, recording, allowedTimeWindows, super.hashCode());
     }
 
     @Override
@@ -267,6 +330,9 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
                 .append(newLine)
                 .append("    recording: ")
                 .append(toIndentedString(recording))
+                .append(newLine)
+                .append("    allowedTimeWindows: ")
+                .append(toIndentedString(allowedTimeWindows))
                 .append(newLine)
                 .append("}")
                 .toString();

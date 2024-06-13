@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * Criteria type
+ * Criteria type.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,

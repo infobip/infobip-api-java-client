@@ -19,6 +19,18 @@ import java.util.Objects;
  */
 public class CallsStaticSipTrunkRequest extends CallsSipTrunkRequest {
 
+    private Boolean tls;
+
+    private List<CallsAudioCodec> codecs = null;
+
+    private CallsDtmfType dtmf;
+
+    private CallsFaxType fax;
+
+    private CallsNumberPresentationFormat numberFormat;
+
+    private CallsAnonymizationType anonymization;
+
     private List<String> sourceHosts = null;
 
     private List<String> destinationHosts = null;
@@ -35,10 +47,231 @@ public class CallsStaticSipTrunkRequest extends CallsSipTrunkRequest {
     }
 
     /**
+     * Sets tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @param tls
+     * @return This {@link CallsStaticSipTrunkRequest instance}.
+     */
+    public CallsStaticSipTrunkRequest tls(Boolean tls) {
+        this.tls = tls;
+        return this;
+    }
+
+    /**
+     * Returns tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @return tls
+     */
+    @JsonProperty("tls")
+    public Boolean getTls() {
+        return tls;
+    }
+
+    /**
+     * Sets tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @param tls
+     */
+    @JsonProperty("tls")
+    public void setTls(Boolean tls) {
+        this.tls = tls;
+    }
+
+    /**
+     * Sets codecs.
+     * <p>
+     * Field description:
+     * List of audio codecs supported by a SIP trunk.
+     *
+     * @param codecs
+     * @return This {@link CallsStaticSipTrunkRequest instance}.
+     */
+    public CallsStaticSipTrunkRequest codecs(List<CallsAudioCodec> codecs) {
+        this.codecs = codecs;
+        return this;
+    }
+
+    /**
+     * Adds and item into codecs.
+     * <p>
+     * Field description:
+     * List of audio codecs supported by a SIP trunk.
+     *
+     * @param codecsItem The item to be added to the list.
+     * @return This {@link CallsStaticSipTrunkRequest instance}.
+     */
+    public CallsStaticSipTrunkRequest addCodecsItem(CallsAudioCodec codecsItem) {
+        if (this.codecs == null) {
+            this.codecs = new ArrayList<>();
+        }
+        this.codecs.add(codecsItem);
+        return this;
+    }
+
+    /**
+     * Returns codecs.
+     * <p>
+     * Field description:
+     * List of audio codecs supported by a SIP trunk.
+     *
+     * @return codecs
+     */
+    @JsonProperty("codecs")
+    public List<CallsAudioCodec> getCodecs() {
+        return codecs;
+    }
+
+    /**
+     * Sets codecs.
+     * <p>
+     * Field description:
+     * List of audio codecs supported by a SIP trunk.
+     *
+     * @param codecs
+     */
+    @JsonProperty("codecs")
+    public void setCodecs(List<CallsAudioCodec> codecs) {
+        this.codecs = codecs;
+    }
+
+    /**
+     * Sets dtmf.
+     *
+     * @param dtmf
+     * @return This {@link CallsStaticSipTrunkRequest instance}.
+     */
+    public CallsStaticSipTrunkRequest dtmf(CallsDtmfType dtmf) {
+        this.dtmf = dtmf;
+        return this;
+    }
+
+    /**
+     * Returns dtmf.
+     *
+     * @return dtmf
+     */
+    @JsonProperty("dtmf")
+    public CallsDtmfType getDtmf() {
+        return dtmf;
+    }
+
+    /**
+     * Sets dtmf.
+     *
+     * @param dtmf
+     */
+    @JsonProperty("dtmf")
+    public void setDtmf(CallsDtmfType dtmf) {
+        this.dtmf = dtmf;
+    }
+
+    /**
+     * Sets fax.
+     *
+     * @param fax
+     * @return This {@link CallsStaticSipTrunkRequest instance}.
+     */
+    public CallsStaticSipTrunkRequest fax(CallsFaxType fax) {
+        this.fax = fax;
+        return this;
+    }
+
+    /**
+     * Returns fax.
+     *
+     * @return fax
+     */
+    @JsonProperty("fax")
+    public CallsFaxType getFax() {
+        return fax;
+    }
+
+    /**
+     * Sets fax.
+     *
+     * @param fax
+     */
+    @JsonProperty("fax")
+    public void setFax(CallsFaxType fax) {
+        this.fax = fax;
+    }
+
+    /**
+     * Sets numberFormat.
+     *
+     * @param numberFormat
+     * @return This {@link CallsStaticSipTrunkRequest instance}.
+     */
+    public CallsStaticSipTrunkRequest numberFormat(CallsNumberPresentationFormat numberFormat) {
+        this.numberFormat = numberFormat;
+        return this;
+    }
+
+    /**
+     * Returns numberFormat.
+     *
+     * @return numberFormat
+     */
+    @JsonProperty("numberFormat")
+    public CallsNumberPresentationFormat getNumberFormat() {
+        return numberFormat;
+    }
+
+    /**
+     * Sets numberFormat.
+     *
+     * @param numberFormat
+     */
+    @JsonProperty("numberFormat")
+    public void setNumberFormat(CallsNumberPresentationFormat numberFormat) {
+        this.numberFormat = numberFormat;
+    }
+
+    /**
+     * Sets anonymization.
+     *
+     * @param anonymization
+     * @return This {@link CallsStaticSipTrunkRequest instance}.
+     */
+    public CallsStaticSipTrunkRequest anonymization(CallsAnonymizationType anonymization) {
+        this.anonymization = anonymization;
+        return this;
+    }
+
+    /**
+     * Returns anonymization.
+     *
+     * @return anonymization
+     */
+    @JsonProperty("anonymization")
+    public CallsAnonymizationType getAnonymization() {
+        return anonymization;
+    }
+
+    /**
+     * Sets anonymization.
+     *
+     * @param anonymization
+     */
+    @JsonProperty("anonymization")
+    public void setAnonymization(CallsAnonymizationType anonymization) {
+        this.anonymization = anonymization;
+    }
+
+    /**
      * Sets sourceHosts.
      * <p>
      * Field description:
-     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source host can be sent only in IP address without port format.
+     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source hosts can be send in 2 formats: IP address without port or domain without port.
      *
      * @param sourceHosts
      * @return This {@link CallsStaticSipTrunkRequest instance}.
@@ -52,7 +285,7 @@ public class CallsStaticSipTrunkRequest extends CallsSipTrunkRequest {
      * Adds and item into sourceHosts.
      * <p>
      * Field description:
-     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source host can be sent only in IP address without port format.
+     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source hosts can be send in 2 formats: IP address without port or domain without port.
      *
      * @param sourceHostsItem The item to be added to the list.
      * @return This {@link CallsStaticSipTrunkRequest instance}.
@@ -69,7 +302,7 @@ public class CallsStaticSipTrunkRequest extends CallsSipTrunkRequest {
      * Returns sourceHosts.
      * <p>
      * Field description:
-     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source host can be sent only in IP address without port format.
+     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source hosts can be send in 2 formats: IP address without port or domain without port.
      *
      * @return sourceHosts
      */
@@ -82,7 +315,7 @@ public class CallsStaticSipTrunkRequest extends CallsSipTrunkRequest {
      * Sets sourceHosts.
      * <p>
      * Field description:
-     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source host can be sent only in IP address without port format.
+     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source hosts can be send in 2 formats: IP address without port or domain without port.
      *
      * @param sourceHosts
      */
@@ -219,7 +452,13 @@ public class CallsStaticSipTrunkRequest extends CallsSipTrunkRequest {
             return false;
         }
         CallsStaticSipTrunkRequest callsStaticSipTrunkRequest = (CallsStaticSipTrunkRequest) o;
-        return Objects.equals(this.sourceHosts, callsStaticSipTrunkRequest.sourceHosts)
+        return Objects.equals(this.tls, callsStaticSipTrunkRequest.tls)
+                && Objects.equals(this.codecs, callsStaticSipTrunkRequest.codecs)
+                && Objects.equals(this.dtmf, callsStaticSipTrunkRequest.dtmf)
+                && Objects.equals(this.fax, callsStaticSipTrunkRequest.fax)
+                && Objects.equals(this.numberFormat, callsStaticSipTrunkRequest.numberFormat)
+                && Objects.equals(this.anonymization, callsStaticSipTrunkRequest.anonymization)
+                && Objects.equals(this.sourceHosts, callsStaticSipTrunkRequest.sourceHosts)
                 && Objects.equals(this.destinationHosts, callsStaticSipTrunkRequest.destinationHosts)
                 && Objects.equals(this.strategy, callsStaticSipTrunkRequest.strategy)
                 && Objects.equals(this.sipOptions, callsStaticSipTrunkRequest.sipOptions)
@@ -228,7 +467,18 @@ public class CallsStaticSipTrunkRequest extends CallsSipTrunkRequest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(sourceHosts, destinationHosts, strategy, sipOptions, super.hashCode());
+        return Objects.hash(
+                tls,
+                codecs,
+                dtmf,
+                fax,
+                numberFormat,
+                anonymization,
+                sourceHosts,
+                destinationHosts,
+                strategy,
+                sipOptions,
+                super.hashCode());
     }
 
     @Override
@@ -239,6 +489,24 @@ public class CallsStaticSipTrunkRequest extends CallsSipTrunkRequest {
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
+                .append(newLine)
+                .append("    tls: ")
+                .append(toIndentedString(tls))
+                .append(newLine)
+                .append("    codecs: ")
+                .append(toIndentedString(codecs))
+                .append(newLine)
+                .append("    dtmf: ")
+                .append(toIndentedString(dtmf))
+                .append(newLine)
+                .append("    fax: ")
+                .append(toIndentedString(fax))
+                .append(newLine)
+                .append("    numberFormat: ")
+                .append(toIndentedString(numberFormat))
+                .append(newLine)
+                .append("    anonymization: ")
+                .append(toIndentedString(anonymization))
                 .append(newLine)
                 .append("    sourceHosts: ")
                 .append(toIndentedString(sourceHosts))

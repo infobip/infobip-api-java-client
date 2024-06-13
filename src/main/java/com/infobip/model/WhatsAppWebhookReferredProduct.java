@@ -26,6 +26,8 @@ public class WhatsAppWebhookReferredProduct {
      * <p>
      * Field description:
      * The ID that uniquely identifies the catalog registered with Facebook, connected to the WhatsApp Business Account (WABA) the sender belongs to.
+     * <p>
+     * The field is required.
      *
      * @param catalogId
      * @return This {@link WhatsAppWebhookReferredProduct instance}.
@@ -40,6 +42,8 @@ public class WhatsAppWebhookReferredProduct {
      * <p>
      * Field description:
      * The ID that uniquely identifies the catalog registered with Facebook, connected to the WhatsApp Business Account (WABA) the sender belongs to.
+     * <p>
+     * The field is required.
      *
      * @return catalogId
      */
@@ -53,6 +57,8 @@ public class WhatsAppWebhookReferredProduct {
      * <p>
      * Field description:
      * The ID that uniquely identifies the catalog registered with Facebook, connected to the WhatsApp Business Account (WABA) the sender belongs to.
+     * <p>
+     * The field is required.
      *
      * @param catalogId
      */
@@ -66,6 +72,8 @@ public class WhatsAppWebhookReferredProduct {
      * <p>
      * Field description:
      * Product unique identifier, as defined in catalog.
+     * <p>
+     * The field is required.
      *
      * @param productRetailerId
      * @return This {@link WhatsAppWebhookReferredProduct instance}.
@@ -80,6 +88,8 @@ public class WhatsAppWebhookReferredProduct {
      * <p>
      * Field description:
      * Product unique identifier, as defined in catalog.
+     * <p>
+     * The field is required.
      *
      * @return productRetailerId
      */
@@ -93,6 +103,8 @@ public class WhatsAppWebhookReferredProduct {
      * <p>
      * Field description:
      * Product unique identifier, as defined in catalog.
+     * <p>
+     * The field is required.
      *
      * @param productRetailerId
      */

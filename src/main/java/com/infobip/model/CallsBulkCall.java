@@ -27,7 +27,7 @@ public class CallsBulkCall {
 
     private String from;
 
-    private CallEndpoint endpoint;
+    private CallsBulkEndpoint endpoint;
 
     /**
      * Action status.
@@ -235,7 +235,7 @@ public class CallsBulkCall {
      * @param endpoint
      * @return This {@link CallsBulkCall instance}.
      */
-    public CallsBulkCall endpoint(CallEndpoint endpoint) {
+    public CallsBulkCall endpoint(CallsBulkEndpoint endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -246,7 +246,7 @@ public class CallsBulkCall {
      * @return endpoint
      */
     @JsonProperty("endpoint")
-    public CallEndpoint getEndpoint() {
+    public CallsBulkEndpoint getEndpoint() {
         return endpoint;
     }
 
@@ -256,7 +256,7 @@ public class CallsBulkCall {
      * @param endpoint
      */
     @JsonProperty("endpoint")
-    public void setEndpoint(CallEndpoint endpoint) {
+    public void setEndpoint(CallsBulkEndpoint endpoint) {
         this.endpoint = endpoint;
     }
 

@@ -19,63 +19,63 @@ import java.util.Objects;
  */
 public class ViberWebhookReportsResponse {
 
-    private List<ViberWebhookReport> reports = null;
+    private List<ViberWebhookReport> results = null;
 
     /**
-     * Sets reports.
+     * Sets results.
      * <p>
      * Field description:
      * Collection of reports, one per every message.
      *
-     * @param reports
+     * @param results
      * @return This {@link ViberWebhookReportsResponse instance}.
      */
-    public ViberWebhookReportsResponse reports(List<ViberWebhookReport> reports) {
-        this.reports = reports;
+    public ViberWebhookReportsResponse results(List<ViberWebhookReport> results) {
+        this.results = results;
         return this;
     }
 
     /**
-     * Adds and item into reports.
+     * Adds and item into results.
      * <p>
      * Field description:
      * Collection of reports, one per every message.
      *
-     * @param reportsItem The item to be added to the list.
+     * @param resultsItem The item to be added to the list.
      * @return This {@link ViberWebhookReportsResponse instance}.
      */
-    public ViberWebhookReportsResponse addReportsItem(ViberWebhookReport reportsItem) {
-        if (this.reports == null) {
-            this.reports = new ArrayList<>();
+    public ViberWebhookReportsResponse addResultsItem(ViberWebhookReport resultsItem) {
+        if (this.results == null) {
+            this.results = new ArrayList<>();
         }
-        this.reports.add(reportsItem);
+        this.results.add(resultsItem);
         return this;
     }
 
     /**
-     * Returns reports.
+     * Returns results.
      * <p>
      * Field description:
      * Collection of reports, one per every message.
      *
-     * @return reports
+     * @return results
      */
-    @JsonProperty("reports")
-    public List<ViberWebhookReport> getReports() {
-        return reports;
+    @JsonProperty("results")
+    public List<ViberWebhookReport> getResults() {
+        return results;
     }
 
     /**
-     * Sets reports.
+     * Sets results.
      * <p>
      * Field description:
      * Collection of reports, one per every message.
      *
-     * @param reports
+     * @param results
      */
-    @JsonProperty("reports")
-    public void setReports(List<ViberWebhookReport> reports) {
-        this.reports = reports;
+    @JsonProperty("results")
+    public void setResults(List<ViberWebhookReport> results) {
+        this.results = results;
     }
 
     @Override
@@ -87,12 +87,12 @@ public class ViberWebhookReportsResponse {
             return false;
         }
         ViberWebhookReportsResponse viberWebhookReportsResponse = (ViberWebhookReportsResponse) o;
-        return Objects.equals(this.reports, viberWebhookReportsResponse.reports);
+        return Objects.equals(this.results, viberWebhookReportsResponse.results);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(reports);
+        return Objects.hash(results);
     }
 
     @Override
@@ -101,8 +101,8 @@ public class ViberWebhookReportsResponse {
         return new StringBuilder()
                 .append("class ViberWebhookReportsResponse {")
                 .append(newLine)
-                .append("    reports: ")
-                .append(toIndentedString(reports))
+                .append("    results: ")
+                .append(toIndentedString(results))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -9,9 +9,7 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -20,41 +18,8 @@ import java.util.Objects;
  * If set, captures the call session from an established call to a given destination.
  */
 public class CallRoutingRecording {
-    /**
-     * Type of a call session recording.
-     */
-    public enum RecordingTypeEnum {
-        AUDIO("AUDIO"),
-        AUDIO_AND_VIDEO("AUDIO_AND_VIDEO");
 
-        private String value;
-
-        RecordingTypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static RecordingTypeEnum fromValue(String value) {
-            for (RecordingTypeEnum enumElement : RecordingTypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private RecordingTypeEnum recordingType;
+    private CallRoutingRecordingType recordingType;
 
     private CallRoutingRecordingComposition recordingComposition;
 
@@ -65,15 +30,12 @@ public class CallRoutingRecording {
     /**
      * Sets recordingType.
      * <p>
-     * Field description:
-     * Type of a call session recording.
-     * <p>
      * The field is required.
      *
      * @param recordingType
      * @return This {@link CallRoutingRecording instance}.
      */
-    public CallRoutingRecording recordingType(RecordingTypeEnum recordingType) {
+    public CallRoutingRecording recordingType(CallRoutingRecordingType recordingType) {
         this.recordingType = recordingType;
         return this;
     }
@@ -81,30 +43,24 @@ public class CallRoutingRecording {
     /**
      * Returns recordingType.
      * <p>
-     * Field description:
-     * Type of a call session recording.
-     * <p>
      * The field is required.
      *
      * @return recordingType
      */
     @JsonProperty("recordingType")
-    public RecordingTypeEnum getRecordingType() {
+    public CallRoutingRecordingType getRecordingType() {
         return recordingType;
     }
 
     /**
      * Sets recordingType.
      * <p>
-     * Field description:
-     * Type of a call session recording.
-     * <p>
      * The field is required.
      *
      * @param recordingType
      */
     @JsonProperty("recordingType")
-    public void setRecordingType(RecordingTypeEnum recordingType) {
+    public void setRecordingType(CallRoutingRecordingType recordingType) {
         this.recordingType = recordingType;
     }
 

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Sent message status.
+ * Status group name that describes which category the status code belongs to, i.e., [PENDING](https://www.infobip.com/docs/essentials/response-status-and-error-codes#pending-general-status-codes), [UNDELIVERABLE](https://www.infobip.com/docs/essentials/response-status-and-error-codes#undeliverable-general-status-codes), [DELIVERED](https://www.infobip.com/docs/essentials/response-status-and-error-codes#delivered-general-status-codes), [EXPIRED](https://www.infobip.com/docs/essentials/response-status-and-error-codes#expired-general-status-codes), [REJECTED](https://www.infobip.com/docs/essentials/response-status-and-error-codes#rejected-general-status-codes).
  */
 public enum ViberMessageGeneralStatus {
     ACCEPTED("ACCEPTED"),

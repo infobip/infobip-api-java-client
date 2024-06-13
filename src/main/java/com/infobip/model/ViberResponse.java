@@ -27,7 +27,7 @@ public class ViberResponse {
      * Sets bulkId.
      * <p>
      * Field description:
-     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. If not provided, it will be auto-generated and returned in the API response.
+     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. If not provided, it will be auto-generated and returned in the API response. Typically used for fetching delivery reports and message logs.
      *
      * @param bulkId
      * @return This {@link ViberResponse instance}.
@@ -41,7 +41,7 @@ public class ViberResponse {
      * Returns bulkId.
      * <p>
      * Field description:
-     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. If not provided, it will be auto-generated and returned in the API response.
+     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. If not provided, it will be auto-generated and returned in the API response. Typically used for fetching delivery reports and message logs.
      *
      * @return bulkId
      */
@@ -54,7 +54,7 @@ public class ViberResponse {
      * Sets bulkId.
      * <p>
      * Field description:
-     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. If not provided, it will be auto-generated and returned in the API response.
+     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. If not provided, it will be auto-generated and returned in the API response. Typically used for fetching delivery reports and message logs.
      *
      * @param bulkId
      */

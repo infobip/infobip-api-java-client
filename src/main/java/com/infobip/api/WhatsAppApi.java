@@ -954,7 +954,7 @@ public class WhatsAppApi {
 
         if (senders != null) {
             for (var parameterItem : senders) {
-                builder.addQueryParameter(new Parameter("senders", senders));
+                builder.addQueryParameter(new Parameter("senders", parameterItem));
             }
         }
         return builder.build();

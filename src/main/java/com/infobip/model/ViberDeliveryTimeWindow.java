@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Sets specific message delivery window outside of which messages won&#39;t be delivered. Often, used when there are restrictions on when messages can be sent.
+ * Sets specific message delivery window outside of which messages won&#39;t be delivered. Often, used when there are restrictions on when messages can be sent. The exact time of the day to start sending messages can be defined using the &#x60;from&#x60; property. The exact time of the day to end sending messages can be defined using the &#x60;to&#x60; property. Properties &#x60;from&#x60; and &#x60;to&#x60; should be both provided with the minimum 1 hour difference or omitted.
  */
 public class ViberDeliveryTimeWindow {
 

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Message error group.
+ * Error group name that describes which category the error code belongs to.
  */
 public enum ViberMessageErrorGroup {
     OK("OK"),

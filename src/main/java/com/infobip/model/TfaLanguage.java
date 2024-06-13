@@ -34,10 +34,10 @@ public enum TfaLanguage {
     HR("hr"),
     SL("sl"),
     RO("ro"),
-    PT_PT("pt-pt"),
-    PT_BR("pt-br"),
-    ZH_CN("zh-cn"),
-    ZH_TW("zh-tw");
+    PT_PT("pt_pt"),
+    PT_BR("pt_br"),
+    ZH_CN("zh_cn"),
+    ZH_TW("zh_tw");
 
     private final String value;
 

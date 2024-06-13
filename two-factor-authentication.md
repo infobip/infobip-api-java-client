@@ -48,7 +48,8 @@ A message template represents the message body with the PIN placeholder that is 
 
 ## Send a 2FA code via an SMS
 
-Once you set up application and message templates, you can start generating and sending PIN codes via an SMS to the provided destination addresses (i.e. numbers you've purchased from Infobip).
+Once you set up application and message templates, you can start generating and sending PIN codes via an SMS to the provided destination addresses (i.e. numbers
+you've purchased from Infobip).
 
 ```java
     TfaStartAuthenticationRequest startAuthenticationRequest = new TfaStartAuthenticationRequest()

@@ -57,6 +57,8 @@ public class WhatsAppTemplateEditPublicApiRequest {
 
     private Object structure;
 
+    private WhatsAppEditValidityPeriod validityPeriod;
+
     /**
      * Sets category.
      * <p>
@@ -99,6 +101,9 @@ public class WhatsAppTemplateEditPublicApiRequest {
 
     /**
      * Sets structure.
+     * <p>
+     * Field description:
+     * Template structure. Format depends on the template category.
      *
      * @param structure
      * @return This {@link WhatsAppTemplateEditPublicApiRequest instance}.
@@ -110,6 +115,9 @@ public class WhatsAppTemplateEditPublicApiRequest {
 
     /**
      * Returns structure.
+     * <p>
+     * Field description:
+     * Template structure. Format depends on the template category.
      *
      * @return structure
      */
@@ -120,12 +128,46 @@ public class WhatsAppTemplateEditPublicApiRequest {
 
     /**
      * Sets structure.
+     * <p>
+     * Field description:
+     * Template structure. Format depends on the template category.
      *
      * @param structure
      */
     @JsonProperty("structure")
     public void setStructure(Object structure) {
         this.structure = structure;
+    }
+
+    /**
+     * Sets validityPeriod.
+     *
+     * @param validityPeriod
+     * @return This {@link WhatsAppTemplateEditPublicApiRequest instance}.
+     */
+    public WhatsAppTemplateEditPublicApiRequest validityPeriod(WhatsAppEditValidityPeriod validityPeriod) {
+        this.validityPeriod = validityPeriod;
+        return this;
+    }
+
+    /**
+     * Returns validityPeriod.
+     *
+     * @return validityPeriod
+     */
+    @JsonProperty("validityPeriod")
+    public WhatsAppEditValidityPeriod getValidityPeriod() {
+        return validityPeriod;
+    }
+
+    /**
+     * Sets validityPeriod.
+     *
+     * @param validityPeriod
+     */
+    @JsonProperty("validityPeriod")
+    public void setValidityPeriod(WhatsAppEditValidityPeriod validityPeriod) {
+        this.validityPeriod = validityPeriod;
     }
 
     @Override
@@ -139,12 +181,13 @@ public class WhatsAppTemplateEditPublicApiRequest {
         WhatsAppTemplateEditPublicApiRequest whatsAppTemplateEditPublicApiRequest =
                 (WhatsAppTemplateEditPublicApiRequest) o;
         return Objects.equals(this.category, whatsAppTemplateEditPublicApiRequest.category)
-                && Objects.equals(this.structure, whatsAppTemplateEditPublicApiRequest.structure);
+                && Objects.equals(this.structure, whatsAppTemplateEditPublicApiRequest.structure)
+                && Objects.equals(this.validityPeriod, whatsAppTemplateEditPublicApiRequest.validityPeriod);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(category, structure);
+        return Objects.hash(category, structure, validityPeriod);
     }
 
     @Override
@@ -158,6 +201,9 @@ public class WhatsAppTemplateEditPublicApiRequest {
                 .append(newLine)
                 .append("    structure: ")
                 .append(toIndentedString(structure))
+                .append(newLine)
+                .append("    validityPeriod: ")
+                .append(toIndentedString(validityPeriod))
                 .append(newLine)
                 .append("}")
                 .toString();

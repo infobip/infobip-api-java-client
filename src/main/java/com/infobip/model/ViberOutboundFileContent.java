@@ -10,16 +10,12 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 /**
  * Represents ViberOutboundFileContent model.
  */
 public class ViberOutboundFileContent extends ViberOutboundContent {
-
-    private Map<String, String> values = null;
 
     private String fileName;
 
@@ -30,52 +26,6 @@ public class ViberOutboundFileContent extends ViberOutboundContent {
      */
     public ViberOutboundFileContent() {
         super("FILE");
-    }
-
-    /**
-     * Sets values.
-     *
-     * @param values
-     * @return This {@link ViberOutboundFileContent instance}.
-     */
-    public ViberOutboundFileContent values(Map<String, String> values) {
-        this.values = values;
-        return this;
-    }
-
-    /**
-     * Puts and entry into values.
-     *
-     * @param key The given key.
-     * @param valuesItem The item to be associated with the given key.
-     * @return This {@link ViberOutboundFileContent instance}.
-     */
-    public ViberOutboundFileContent putValuesItem(String key, String valuesItem) {
-        if (this.values == null) {
-            this.values = new HashMap<>();
-        }
-        this.values.put(key, valuesItem);
-        return this;
-    }
-
-    /**
-     * Returns values.
-     *
-     * @return values
-     */
-    @JsonProperty("values")
-    public Map<String, String> getValues() {
-        return values;
-    }
-
-    /**
-     * Sets values.
-     *
-     * @param values
-     */
-    @JsonProperty("values")
-    public void setValues(Map<String, String> values) {
-        this.values = values;
     }
 
     /**
@@ -179,15 +129,14 @@ public class ViberOutboundFileContent extends ViberOutboundContent {
             return false;
         }
         ViberOutboundFileContent viberOutboundFileContent = (ViberOutboundFileContent) o;
-        return Objects.equals(this.values, viberOutboundFileContent.values)
-                && Objects.equals(this.fileName, viberOutboundFileContent.fileName)
+        return Objects.equals(this.fileName, viberOutboundFileContent.fileName)
                 && Objects.equals(this.mediaUrl, viberOutboundFileContent.mediaUrl)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(values, fileName, mediaUrl, super.hashCode());
+        return Objects.hash(fileName, mediaUrl, super.hashCode());
     }
 
     @Override
@@ -198,9 +147,6 @@ public class ViberOutboundFileContent extends ViberOutboundContent {
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
-                .append(newLine)
-                .append("    values: ")
-                .append(toIndentedString(values))
                 .append(newLine)
                 .append("    fileName: ")
                 .append(toIndentedString(fileName))

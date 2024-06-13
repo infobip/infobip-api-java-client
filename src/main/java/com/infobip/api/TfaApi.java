@@ -170,7 +170,7 @@ public class TfaApi {
     /**
      * Create 2FA Email message template.
      * <p>
-     * Once you have your [2FA application](#channels/sms/create-2fa-application), create one or more [Email message templates](#channels/sms/2fa/2fa-configuration/create-2fa-email-message-template) where your PIN will be dynamically included when you send the PIN message over Email.
+     * Once you have your [2FA application](#channels/sms/create-2fa-application), create one or more [Email message templates](https://www.infobip.com/docs/email/templates) where your PIN will be dynamically included when you send the PIN message over Email.
      *
      * @param appId ID of application for which requested message was created. (required)
      * @param tfaCreateEmailMessageRequest  (required)

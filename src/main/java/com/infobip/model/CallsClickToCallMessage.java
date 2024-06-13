@@ -45,8 +45,6 @@ public class CallsClickToCallMessage {
 
     private String notifyUrl;
 
-    private Boolean record;
-
     private CallsRetry retry;
 
     private String text;
@@ -625,46 +623,6 @@ public class CallsClickToCallMessage {
     }
 
     /**
-     * Sets record.
-     * <p>
-     * Field description:
-     * [Early access: Contact your account manager to enable the usage] Record the call and expose it to client as URL inside the delivery report. Can be &#x60;true&#x60; or &#x60;false&#x60;.
-     *
-     * @param record
-     * @return This {@link CallsClickToCallMessage instance}.
-     */
-    public CallsClickToCallMessage record(Boolean record) {
-        this.record = record;
-        return this;
-    }
-
-    /**
-     * Returns record.
-     * <p>
-     * Field description:
-     * [Early access: Contact your account manager to enable the usage] Record the call and expose it to client as URL inside the delivery report. Can be &#x60;true&#x60; or &#x60;false&#x60;.
-     *
-     * @return record
-     */
-    @JsonProperty("record")
-    public Boolean getRecord() {
-        return record;
-    }
-
-    /**
-     * Sets record.
-     * <p>
-     * Field description:
-     * [Early access: Contact your account manager to enable the usage] Record the call and expose it to client as URL inside the delivery report. Can be &#x60;true&#x60; or &#x60;false&#x60;.
-     *
-     * @param record
-     */
-    @JsonProperty("record")
-    public void setRecord(Boolean record) {
-        this.record = record;
-    }
-
-    /**
      * Sets retry.
      *
      * @param retry
@@ -829,7 +787,6 @@ public class CallsClickToCallMessage {
                 && Objects.equals(this.notifyContentType, callsClickToCallMessage.notifyContentType)
                 && Objects.equals(this.notifyContentVersion, callsClickToCallMessage.notifyContentVersion)
                 && Objects.equals(this.notifyUrl, callsClickToCallMessage.notifyUrl)
-                && Objects.equals(this.record, callsClickToCallMessage.record)
                 && Objects.equals(this.retry, callsClickToCallMessage.retry)
                 && Objects.equals(this.text, callsClickToCallMessage.text)
                 && Objects.equals(this.voice, callsClickToCallMessage.voice)
@@ -853,7 +810,6 @@ public class CallsClickToCallMessage {
                 notifyContentType,
                 notifyContentVersion,
                 notifyUrl,
-                record,
                 retry,
                 text,
                 voice,
@@ -907,9 +863,6 @@ public class CallsClickToCallMessage {
                 .append(newLine)
                 .append("    notifyUrl: ")
                 .append(toIndentedString(notifyUrl))
-                .append(newLine)
-                .append("    record: ")
-                .append(toIndentedString(record))
                 .append(newLine)
                 .append("    retry: ")
                 .append(toIndentedString(retry))

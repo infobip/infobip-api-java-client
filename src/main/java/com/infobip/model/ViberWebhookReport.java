@@ -42,6 +42,8 @@ public class ViberWebhookReport {
 
     private String callbackData;
 
+    private ViberPlatform platform;
+
     /**
      * Sets bulkId.
      * <p>
@@ -299,7 +301,7 @@ public class ViberWebhookReport {
      * Sets sentAt.
      * <p>
      * Field description:
-     * Date and time when the message was [scheduled](#channels/sms/get-scheduled-sms-messages) to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @param sentAt
      * @return This {@link ViberWebhookReport instance}.
@@ -313,7 +315,7 @@ public class ViberWebhookReport {
      * Returns sentAt.
      * <p>
      * Field description:
-     * Date and time when the message was [scheduled](#channels/sms/get-scheduled-sms-messages) to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @return sentAt
      */
@@ -326,7 +328,7 @@ public class ViberWebhookReport {
      * Sets sentAt.
      * <p>
      * Field description:
-     * Date and time when the message was [scheduled](#channels/sms/get-scheduled-sms-messages) to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @param sentAt
      */
@@ -339,7 +341,7 @@ public class ViberWebhookReport {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, network, etc.). Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @param doneAt
      * @return This {@link ViberWebhookReport instance}.
@@ -353,7 +355,7 @@ public class ViberWebhookReport {
      * Returns doneAt.
      * <p>
      * Field description:
-     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, network, etc.). Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @return doneAt
      */
@@ -366,7 +368,7 @@ public class ViberWebhookReport {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, network, etc.). Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @param doneAt
      */
@@ -495,6 +497,37 @@ public class ViberWebhookReport {
         this.callbackData = callbackData;
     }
 
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     * @return This {@link ViberWebhookReport instance}.
+     */
+    public ViberWebhookReport platform(ViberPlatform platform) {
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * Returns platform.
+     *
+     * @return platform
+     */
+    @JsonProperty("platform")
+    public ViberPlatform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     */
+    @JsonProperty("platform")
+    public void setPlatform(ViberPlatform platform) {
+        this.platform = platform;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -515,7 +548,8 @@ public class ViberWebhookReport {
                 && Objects.equals(this.doneAt, viberWebhookReport.doneAt)
                 && Objects.equals(this.messageCount, viberWebhookReport.messageCount)
                 && Objects.equals(this.mccMnc, viberWebhookReport.mccMnc)
-                && Objects.equals(this.callbackData, viberWebhookReport.callbackData);
+                && Objects.equals(this.callbackData, viberWebhookReport.callbackData)
+                && Objects.equals(this.platform, viberWebhookReport.platform);
     }
 
     @Override
@@ -532,7 +566,8 @@ public class ViberWebhookReport {
                 doneAt,
                 messageCount,
                 mccMnc,
-                callbackData);
+                callbackData,
+                platform);
     }
 
     @Override
@@ -576,6 +611,9 @@ public class ViberWebhookReport {
                 .append(newLine)
                 .append("    callbackData: ")
                 .append(toIndentedString(callbackData))
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("}")
                 .toString();

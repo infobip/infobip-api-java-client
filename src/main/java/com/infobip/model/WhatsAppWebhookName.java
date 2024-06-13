@@ -13,13 +13,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Full contact name.
+ * Contains information about contact&#39;s name.
  */
 public class WhatsAppWebhookName {
 
     private String firstName;
-
-    private String formattedName;
 
     private String lastName;
 
@@ -29,11 +27,13 @@ public class WhatsAppWebhookName {
 
     private String namePrefix;
 
+    private String formattedName;
+
     /**
      * Sets firstName.
      * <p>
      * Field description:
-     * First name of a contact. Mandatory value.
+     * Contact&#39;s first name.
      *
      * @param firstName
      * @return This {@link WhatsAppWebhookName instance}.
@@ -47,7 +47,7 @@ public class WhatsAppWebhookName {
      * Returns firstName.
      * <p>
      * Field description:
-     * First name of a contact. Mandatory value.
+     * Contact&#39;s first name.
      *
      * @return firstName
      */
@@ -60,7 +60,7 @@ public class WhatsAppWebhookName {
      * Sets firstName.
      * <p>
      * Field description:
-     * First name of a contact. Mandatory value.
+     * Contact&#39;s first name.
      *
      * @param firstName
      */
@@ -70,50 +70,10 @@ public class WhatsAppWebhookName {
     }
 
     /**
-     * Sets formattedName.
-     * <p>
-     * Field description:
-     * Full name as it normally appears. Mandatory value.
-     *
-     * @param formattedName
-     * @return This {@link WhatsAppWebhookName instance}.
-     */
-    public WhatsAppWebhookName formattedName(String formattedName) {
-        this.formattedName = formattedName;
-        return this;
-    }
-
-    /**
-     * Returns formattedName.
-     * <p>
-     * Field description:
-     * Full name as it normally appears. Mandatory value.
-     *
-     * @return formattedName
-     */
-    @JsonProperty("formattedName")
-    public String getFormattedName() {
-        return formattedName;
-    }
-
-    /**
-     * Sets formattedName.
-     * <p>
-     * Field description:
-     * Full name as it normally appears. Mandatory value.
-     *
-     * @param formattedName
-     */
-    @JsonProperty("formattedName")
-    public void setFormattedName(String formattedName) {
-        this.formattedName = formattedName;
-    }
-
-    /**
      * Sets lastName.
      * <p>
      * Field description:
-     * Last name of a contact.
+     * Contact&#39;s last name.
      *
      * @param lastName
      * @return This {@link WhatsAppWebhookName instance}.
@@ -127,7 +87,7 @@ public class WhatsAppWebhookName {
      * Returns lastName.
      * <p>
      * Field description:
-     * Last name of a contact.
+     * Contact&#39;s last name.
      *
      * @return lastName
      */
@@ -140,7 +100,7 @@ public class WhatsAppWebhookName {
      * Sets lastName.
      * <p>
      * Field description:
-     * Last name of a contact.
+     * Contact&#39;s last name.
      *
      * @param lastName
      */
@@ -153,7 +113,7 @@ public class WhatsAppWebhookName {
      * Sets middleName.
      * <p>
      * Field description:
-     * Middle name of a contact.
+     * Contact&#39;s middle name.
      *
      * @param middleName
      * @return This {@link WhatsAppWebhookName instance}.
@@ -167,7 +127,7 @@ public class WhatsAppWebhookName {
      * Returns middleName.
      * <p>
      * Field description:
-     * Middle name of a contact.
+     * Contact&#39;s middle name.
      *
      * @return middleName
      */
@@ -180,7 +140,7 @@ public class WhatsAppWebhookName {
      * Sets middleName.
      * <p>
      * Field description:
-     * Middle name of a contact.
+     * Contact&#39;s middle name.
      *
      * @param middleName
      */
@@ -193,7 +153,7 @@ public class WhatsAppWebhookName {
      * Sets nameSuffix.
      * <p>
      * Field description:
-     * Name suffix of a contact.
+     * Contact&#39;s name suffix.
      *
      * @param nameSuffix
      * @return This {@link WhatsAppWebhookName instance}.
@@ -207,7 +167,7 @@ public class WhatsAppWebhookName {
      * Returns nameSuffix.
      * <p>
      * Field description:
-     * Name suffix of a contact.
+     * Contact&#39;s name suffix.
      *
      * @return nameSuffix
      */
@@ -220,7 +180,7 @@ public class WhatsAppWebhookName {
      * Sets nameSuffix.
      * <p>
      * Field description:
-     * Name suffix of a contact.
+     * Contact&#39;s name suffix.
      *
      * @param nameSuffix
      */
@@ -233,7 +193,7 @@ public class WhatsAppWebhookName {
      * Sets namePrefix.
      * <p>
      * Field description:
-     * Name prefix of a contact.
+     * Contact&#39;s name prefix.
      *
      * @param namePrefix
      * @return This {@link WhatsAppWebhookName instance}.
@@ -247,7 +207,7 @@ public class WhatsAppWebhookName {
      * Returns namePrefix.
      * <p>
      * Field description:
-     * Name prefix of a contact.
+     * Contact&#39;s name prefix.
      *
      * @return namePrefix
      */
@@ -260,13 +220,53 @@ public class WhatsAppWebhookName {
      * Sets namePrefix.
      * <p>
      * Field description:
-     * Name prefix of a contact.
+     * Contact&#39;s name prefix.
      *
      * @param namePrefix
      */
     @JsonProperty("namePrefix")
     public void setNamePrefix(String namePrefix) {
         this.namePrefix = namePrefix;
+    }
+
+    /**
+     * Sets formattedName.
+     * <p>
+     * Field description:
+     * Contact&#39;s full name as it normally appears.
+     *
+     * @param formattedName
+     * @return This {@link WhatsAppWebhookName instance}.
+     */
+    public WhatsAppWebhookName formattedName(String formattedName) {
+        this.formattedName = formattedName;
+        return this;
+    }
+
+    /**
+     * Returns formattedName.
+     * <p>
+     * Field description:
+     * Contact&#39;s full name as it normally appears.
+     *
+     * @return formattedName
+     */
+    @JsonProperty("formattedName")
+    public String getFormattedName() {
+        return formattedName;
+    }
+
+    /**
+     * Sets formattedName.
+     * <p>
+     * Field description:
+     * Contact&#39;s full name as it normally appears.
+     *
+     * @param formattedName
+     */
+    @JsonProperty("formattedName")
+    public void setFormattedName(String formattedName) {
+        this.formattedName = formattedName;
     }
 
     @Override
@@ -279,16 +279,16 @@ public class WhatsAppWebhookName {
         }
         WhatsAppWebhookName whatsAppWebhookName = (WhatsAppWebhookName) o;
         return Objects.equals(this.firstName, whatsAppWebhookName.firstName)
-                && Objects.equals(this.formattedName, whatsAppWebhookName.formattedName)
                 && Objects.equals(this.lastName, whatsAppWebhookName.lastName)
                 && Objects.equals(this.middleName, whatsAppWebhookName.middleName)
                 && Objects.equals(this.nameSuffix, whatsAppWebhookName.nameSuffix)
-                && Objects.equals(this.namePrefix, whatsAppWebhookName.namePrefix);
+                && Objects.equals(this.namePrefix, whatsAppWebhookName.namePrefix)
+                && Objects.equals(this.formattedName, whatsAppWebhookName.formattedName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, formattedName, lastName, middleName, nameSuffix, namePrefix);
+        return Objects.hash(firstName, lastName, middleName, nameSuffix, namePrefix, formattedName);
     }
 
     @Override
@@ -299,9 +299,6 @@ public class WhatsAppWebhookName {
                 .append(newLine)
                 .append("    firstName: ")
                 .append(toIndentedString(firstName))
-                .append(newLine)
-                .append("    formattedName: ")
-                .append(toIndentedString(formattedName))
                 .append(newLine)
                 .append("    lastName: ")
                 .append(toIndentedString(lastName))
@@ -314,6 +311,9 @@ public class WhatsAppWebhookName {
                 .append(newLine)
                 .append("    namePrefix: ")
                 .append(toIndentedString(namePrefix))
+                .append(newLine)
+                .append("    formattedName: ")
+                .append(toIndentedString(formattedName))
                 .append(newLine)
                 .append("}")
                 .toString();
