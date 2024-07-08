@@ -10,6 +10,7 @@ and this library adheres to [Semantic Versioning](http://semver.org/) as mention
 ### Added
 * Most recent [Infobip SMS API](https://www.infobip.com/docs/api/channels/sms) feature set.
 * Added mock tests to verify the correctness of request payloads and response handling.
+* Added `awaitility` and `wiremock` test dependencies.
 
 ### Changed
 * **Fixes and changes**
