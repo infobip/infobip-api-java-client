@@ -1,21 +1,16 @@
 package com.infobip.api;
 
-import com.infobip.model.*;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static org.assertj.core.api.BDDAssertions.then;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
+import com.infobip.model.*;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static org.assertj.core.api.BDDAssertions.then;
+import org.junit.jupiter.api.Test;
 
 class CallLinkApiTest extends ApiTest {
 
@@ -43,16 +38,12 @@ class CallLinkApiTest extends ApiTest {
         var givenCustomDataLanguage = "en";
         var givenValidityWindowOneTime = true;
         var givenValidityWindowStartTime = "2023-12-04T09:17:26.000+0000";
-        var givenValidityWindowStartTimeDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2023, 12, 4, 9, 17, 26, 0),
-            ZoneOffset.ofHours(0)
-        );
+        var givenValidityWindowStartTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 4, 9, 17, 26, 0), ZoneOffset.ofHours(0));
 
         var givenValidityWindowEndTime = "2023-12-05T09:17:26.000+0000";
-        var givenValidityWindowEndTimeDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2023, 12, 5, 9, 17, 26, 0),
-            ZoneOffset.ofHours(0)
-        );
+        var givenValidityWindowEndTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 5, 9, 17, 26, 0), ZoneOffset.ofHours(0));
 
         var givenCallLinkConfigId = "638dbdc6ecede164c3799d04";
         var givenPagingPage = 0;
@@ -60,102 +51,93 @@ class CallLinkApiTest extends ApiTest {
         var givenPagingTotalPages = 1;
         var givenPagingTotalResults = 2L;
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"results\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"identity\": \"%s\",\n" +
-                                                 "      \"displayName\": \"%s\",\n" +
-                                                 "      \"destination\": {\n" +
-                                                 "        \"identity\": \"%s\",\n" +
-                                                 "        \"type\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"customData\": {\n" +
-                                                 "        \"city\": \"%s\",\n" +
-                                                 "        \"language\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"validityWindow\": {\n" +
-                                                 "        \"oneTime\": %b,\n" +
-                                                 "        \"startTime\": \"%s\",\n" +
-                                                 "        \"endTime\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"callLinkConfigId\": \"%s\"\n" +
-                                                 "    },\n" +
-                                                 "    {\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"identity\": \"%s\",\n" +
-                                                 "      \"displayName\": \"%s\",\n" +
-                                                 "      \"destination\": {\n" +
-                                                 "        \"identity\": \"%s\",\n" +
-                                                 "        \"type\": \"%s\"\n" +
-                                                 "      }\n" +
-                                                 "    }\n" +
-                                                 "  ],\n" +
-                                                 "  \"paging\": {\n" +
-                                                 "    \"page\": %d,\n" +
-                                                 "    \"size\": %d,\n" +
-                                                 "    \"totalPages\": %d,\n" +
-                                                 "    \"totalResults\": %d\n" +
-                                                 "  }\n" +
-                                                 "}\n",
-                                             givenId,
-                                             givenIdentity,
-                                             givenDisplayName,
-                                             givenDestinationIdentity,
-                                             givenDestinationType,
-                                             givenCustomDataCity,
-                                             givenCustomDataLanguage,
-                                             givenValidityWindowOneTime,
-                                             givenValidityWindowStartTime,
-                                             givenValidityWindowEndTime,
-                                             givenCallLinkConfigId,
-                                             givenId,
-                                             givenIdentity,
-                                             givenDisplayName,
-                                             givenDestinationIdentity,
-                                             givenDestinationType,
-                                             givenPagingPage,
-                                             givenPagingSize,
-                                             givenPagingTotalPages,
-                                             givenPagingTotalResults
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"id\": \"%s\",\n"
+                        + "      \"identity\": \"%s\",\n"
+                        + "      \"displayName\": \"%s\",\n"
+                        + "      \"destination\": {\n"
+                        + "        \"identity\": \"%s\",\n"
+                        + "        \"type\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"customData\": {\n"
+                        + "        \"city\": \"%s\",\n"
+                        + "        \"language\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"validityWindow\": {\n"
+                        + "        \"oneTime\": %b,\n"
+                        + "        \"startTime\": \"%s\",\n"
+                        + "        \"endTime\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"callLinkConfigId\": \"%s\"\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"id\": \"%s\",\n"
+                        + "      \"identity\": \"%s\",\n"
+                        + "      \"displayName\": \"%s\",\n"
+                        + "      \"destination\": {\n"
+                        + "        \"identity\": \"%s\",\n"
+                        + "        \"type\": \"%s\"\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"paging\": {\n"
+                        + "    \"page\": %d,\n"
+                        + "    \"size\": %d,\n"
+                        + "    \"totalPages\": %d,\n"
+                        + "    \"totalResults\": %d\n"
+                        + "  }\n"
+                        + "}\n",
+                givenId,
+                givenIdentity,
+                givenDisplayName,
+                givenDestinationIdentity,
+                givenDestinationType,
+                givenCustomDataCity,
+                givenCustomDataLanguage,
+                givenValidityWindowOneTime,
+                givenValidityWindowStartTime,
+                givenValidityWindowEndTime,
+                givenCallLinkConfigId,
+                givenId,
+                givenIdentity,
+                givenDisplayName,
+                givenDestinationIdentity,
+                givenDestinationType,
+                givenPagingPage,
+                givenPagingSize,
+                givenPagingTotalPages,
+                givenPagingTotalResults);
 
-        setUpSuccessGetRequest(
-            CALL_LINKS,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(CALL_LINKS, Map.of(), givenResponse);
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var expectedResponse = new WebRtcCallLinkPage()
-            .addResultsItem(new WebRtcCallLink()
-                                .id(givenId)
-                                .identity(givenIdentity)
-                                .displayName(givenDisplayName)
-                                .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity))
-                                .customData(Map.of(
-                                    "city", givenCustomDataCity,
-                                    "language", givenCustomDataLanguage
-                                ))
-                                .validityWindow(new WebRtcValidityWindow()
-                                                    .oneTime(givenValidityWindowOneTime)
-                                                    .startTime(givenValidityWindowStartTimeDateTime)
-                                                    .endTime(givenValidityWindowEndTimeDateTime))
-                                .callLinkConfigId(givenCallLinkConfigId)
-            )
-            .addResultsItem(new WebRtcCallLink()
-                                .id(givenId)
-                                .identity(givenIdentity)
-                                .displayName(givenDisplayName)
-                                .destination(new WebRtcWebRtcDestination()
-                                                 .identity(givenDestinationIdentity)))
-            .paging(new PageInfo()
+                .addResultsItem(new WebRtcCallLink()
+                        .id(givenId)
+                        .identity(givenIdentity)
+                        .displayName(givenDisplayName)
+                        .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity))
+                        .customData(Map.of(
+                                "city", givenCustomDataCity,
+                                "language", givenCustomDataLanguage))
+                        .validityWindow(new WebRtcValidityWindow()
+                                .oneTime(givenValidityWindowOneTime)
+                                .startTime(givenValidityWindowStartTimeDateTime)
+                                .endTime(givenValidityWindowEndTimeDateTime))
+                        .callLinkConfigId(givenCallLinkConfigId))
+                .addResultsItem(new WebRtcCallLink()
+                        .id(givenId)
+                        .identity(givenIdentity)
+                        .displayName(givenDisplayName)
+                        .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity)))
+                .paging(new PageInfo()
                         .page(givenPagingPage)
                         .size(givenPagingSize)
                         .totalPages(givenPagingTotalPages)
-                        .totalResults(givenPagingTotalResults)
-            );
+                        .totalResults(givenPagingTotalResults));
 
         Consumer<WebRtcCallLinkPage> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -171,65 +153,51 @@ class CallLinkApiTest extends ApiTest {
         var givenDestinationType = "WEBRTC";
         var givenValidityWindowOneTime = true;
         var givenValidityWindowStartTime = "2023-12-04T09:17:26.000+0000";
-        var givenValidityWindowStartTimeDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2023, 12, 4, 9, 17, 26, 0),
-            ZoneOffset.ofHours(0)
-        );
+        var givenValidityWindowStartTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 4, 9, 17, 26, 0), ZoneOffset.ofHours(0));
 
         var givenValidityWindowEndTime = "2023-12-05T09:17:26.000+0000";
-        var givenValidityWindowEndTimeDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2023, 12, 5, 9, 17, 26, 0),
-            ZoneOffset.ofHours(0)
-        );
+        var givenValidityWindowEndTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 5, 9, 17, 26, 0), ZoneOffset.ofHours(0));
 
         var givenCallLinkConfigId = "638dbdc6ecede164c3799d04";
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"destination\": {\n" +
-                                                   "    \"identity\": \"%s\",\n" +
-                                                   "    \"type\": \"%s\"\n" +
-                                                   "  },\n" +
-                                                   "  \"validityWindow\": {\n" +
-                                                   "    \"oneTime\": %b,\n" +
-                                                   "    \"startTime\": \"%s\",\n" +
-                                                   "    \"endTime\": \"%s\"\n" +
-                                                   "  },\n" +
-                                                   "  \"callLinkConfigId\": \"%s\"\n" +
-                                                   "}\n",
-                                               givenDestinationIdentity,
-                                               givenDestinationType,
-                                               givenValidityWindowOneTime,
-                                               givenValidityWindowStartTime,
-                                               givenValidityWindowEndTime,
-                                               givenCallLinkConfigId
-        );
+        String expectedRequest = String.format(
+                "{\n" + "  \"destination\": {\n"
+                        + "    \"identity\": \"%s\",\n"
+                        + "    \"type\": \"%s\"\n"
+                        + "  },\n"
+                        + "  \"validityWindow\": {\n"
+                        + "    \"oneTime\": %b,\n"
+                        + "    \"startTime\": \"%s\",\n"
+                        + "    \"endTime\": \"%s\"\n"
+                        + "  },\n"
+                        + "  \"callLinkConfigId\": \"%s\"\n"
+                        + "}\n",
+                givenDestinationIdentity,
+                givenDestinationType,
+                givenValidityWindowOneTime,
+                givenValidityWindowStartTime,
+                givenValidityWindowEndTime,
+                givenCallLinkConfigId);
 
         var givenId = "r9wpIY";
         var givenUrl = "https://call-link.com/r9wpIY";
 
-        String givenResponse = String.format("{\n" +
-                                                 "    \"id\": \"%s\",\n" +
-                                                 "    \"url\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenId,
-                                             givenUrl
-        );
+        String givenResponse =
+                String.format("{\n" + "    \"id\": \"%s\",\n" + "    \"url\": \"%s\"\n" + "}\n", givenId, givenUrl);
 
-        setUpSuccessPostRequest(
-            CALL_LINKS,
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(CALL_LINKS, expectedRequest, givenResponse);
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var request = new WebRtcCallLinkRequest()
-            .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity))
-            .validityWindow(new WebRtcValidityWindow()
-                                .oneTime(givenValidityWindowOneTime)
-                                .startTime(givenValidityWindowStartTimeDateTime)
-                                .endTime(givenValidityWindowEndTimeDateTime))
-            .callLinkConfigId(givenCallLinkConfigId);
+                .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity))
+                .validityWindow(new WebRtcValidityWindow()
+                        .oneTime(givenValidityWindowOneTime)
+                        .startTime(givenValidityWindowStartTimeDateTime)
+                        .endTime(givenValidityWindowEndTimeDateTime))
+                .callLinkConfigId(givenCallLinkConfigId);
 
         var expectedResponse = new WebRtcCallLinkResponse().id(givenId).url(givenUrl);
 
@@ -254,16 +222,12 @@ class CallLinkApiTest extends ApiTest {
         var givenCustomDataLanguage = "en";
         var givenValidityWindowOneTime = true;
         var givenValidityWindowStartTime = "2023-12-04T09:17:26.000+0000";
-        var givenValidityWindowStartTimeDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2023, 12, 4, 9, 17, 26, 0),
-            ZoneOffset.ofHours(0)
-        );
+        var givenValidityWindowStartTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 4, 9, 17, 26, 0), ZoneOffset.ofHours(0));
 
         var givenValidityWindowEndTime = "2023-12-05T09:17:26.000+0000";
-        var givenValidityWindowEndTimeDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2023, 12, 5, 9, 17, 26, 0),
-            ZoneOffset.ofHours(0)
-        );
+        var givenValidityWindowEndTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 5, 9, 17, 26, 0), ZoneOffset.ofHours(0));
 
         var givenAcceptableHoursStartHour = 0;
         var givenAcceptableHoursStartMinute = 0;
@@ -272,92 +236,86 @@ class CallLinkApiTest extends ApiTest {
         var givenAcceptableDays = WebRtcValidityWindow.AcceptableDaysEnum.MONDAY;
 
         var givenCallLinkConfigId = "638dbdc6ecede164c3799d04";
-        String givenResponse = String.format("{\n" +
-                                                 "   \"id\": \"%s\",\n" +
-                                                 "   \"url\": \"%s\",\n" +
-                                                 "   \"identity\": \"%s\",\n" +
-                                                 "   \"displayName\": \"%s\",\n" +
-                                                 "   \"showIdentity\": %b,\n" +
-                                                 "   \"destination\": {\n" +
-                                                 "     \"identity\": \"%s\",\n" +
-                                                 "     \"type\": \"%s\"\n" +
-                                                 "   },\n" +
-                                                 "   \"customData\": {\n" +
-                                                 "     \"city\": \"%s\",\n" +
-                                                 "     \"language\": \"%s\"\n" +
-                                                 "   },\n" +
-                                                 "   \"validityWindow\": {\n" +
-                                                 "     \"oneTime\": %b,\n" +
-                                                 "     \"startTime\": \"%s\",\n" +
-                                                 "     \"endTime\": \"%s\",\n" +
-                                                 "     \"acceptableHours\": {\n" +
-                                                 "       \"start\": {\n" +
-                                                 "         \"hour\": %d,\n" +
-                                                 "         \"minute\": %d\n" +
-                                                 "       },\n" +
-                                                 "       \"end\": {\n" +
-                                                 "         \"hour\": %d,\n" +
-                                                 "         \"minute\": %d\n" +
-                                                 "       }\n" +
-                                                 "     },\n" +
-                                                 "     \"acceptableDays\": [\n" +
-                                                 "       \"%s\"\n" +
-                                                 "     ]\n" +
-                                                 "   },\n" +
-                                                 "   \"callLinkConfigId\": \"%s\"\n" +
-                                                 " }\n",
-                                             givenId,
-                                             givenUrl,
-                                             givenIdentity,
-                                             givenDisplayName,
-                                             givenShowIdentity,
-                                             givenDestinationIdentity,
-                                             givenDestinationType,
-                                             givenCustomDataCity,
-                                             givenCustomDataLanguage,
-                                             givenValidityWindowOneTime,
-                                             givenValidityWindowStartTime,
-                                             givenValidityWindowEndTime,
-                                             givenAcceptableHoursStartHour,
-                                             givenAcceptableHoursStartMinute,
-                                             givenAcceptableHoursEndHour,
-                                             givenAcceptableHoursEndMinute,
-                                             givenAcceptableDays,
-                                             givenCallLinkConfigId
-        );
+        String givenResponse = String.format(
+                "{\n" + "   \"id\": \"%s\",\n"
+                        + "   \"url\": \"%s\",\n"
+                        + "   \"identity\": \"%s\",\n"
+                        + "   \"displayName\": \"%s\",\n"
+                        + "   \"showIdentity\": %b,\n"
+                        + "   \"destination\": {\n"
+                        + "     \"identity\": \"%s\",\n"
+                        + "     \"type\": \"%s\"\n"
+                        + "   },\n"
+                        + "   \"customData\": {\n"
+                        + "     \"city\": \"%s\",\n"
+                        + "     \"language\": \"%s\"\n"
+                        + "   },\n"
+                        + "   \"validityWindow\": {\n"
+                        + "     \"oneTime\": %b,\n"
+                        + "     \"startTime\": \"%s\",\n"
+                        + "     \"endTime\": \"%s\",\n"
+                        + "     \"acceptableHours\": {\n"
+                        + "       \"start\": {\n"
+                        + "         \"hour\": %d,\n"
+                        + "         \"minute\": %d\n"
+                        + "       },\n"
+                        + "       \"end\": {\n"
+                        + "         \"hour\": %d,\n"
+                        + "         \"minute\": %d\n"
+                        + "       }\n"
+                        + "     },\n"
+                        + "     \"acceptableDays\": [\n"
+                        + "       \"%s\"\n"
+                        + "     ]\n"
+                        + "   },\n"
+                        + "   \"callLinkConfigId\": \"%s\"\n"
+                        + " }\n",
+                givenId,
+                givenUrl,
+                givenIdentity,
+                givenDisplayName,
+                givenShowIdentity,
+                givenDestinationIdentity,
+                givenDestinationType,
+                givenCustomDataCity,
+                givenCustomDataLanguage,
+                givenValidityWindowOneTime,
+                givenValidityWindowStartTime,
+                givenValidityWindowEndTime,
+                givenAcceptableHoursStartHour,
+                givenAcceptableHoursStartMinute,
+                givenAcceptableHoursEndHour,
+                givenAcceptableHoursEndMinute,
+                givenAcceptableDays,
+                givenCallLinkConfigId);
 
-        setUpSuccessGetRequest(
-            CALL_LINK.replace("{id}", givenId),
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(CALL_LINK.replace("{id}", givenId), Map.of(), givenResponse);
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var expectedResponse = new WebRtcCallLink()
-            .id(givenId)
-            .url(givenUrl)
-            .identity(givenIdentity)
-            .displayName(givenDisplayName)
-            .showIdentity(givenShowIdentity)
-            .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity))
-            .customData(Map.of(
-                "city", givenCustomDataCity,
-                "language", givenCustomDataLanguage
-            ))
-            .validityWindow(new WebRtcValidityWindow()
-                                .oneTime(givenValidityWindowOneTime)
-                                .startTime(givenValidityWindowStartTimeDateTime)
-                                .endTime(givenValidityWindowEndTimeDateTime)
-                                .acceptableHours(new WebRtcAcceptableHours()
-                                                     .start(new WebRtcTimeOfDay()
-                                                                .hour(givenAcceptableHoursStartHour)
-                                                                .minute(givenAcceptableHoursStartMinute))
-                                                     .end(new WebRtcTimeOfDay()
-                                                              .hour(givenAcceptableHoursEndHour)
-                                                              .minute(givenAcceptableHoursEndMinute)))
-                                .acceptableDays(List.of(WebRtcValidityWindow.AcceptableDaysEnum.MONDAY)))
-            .callLinkConfigId(givenCallLinkConfigId);
+                .id(givenId)
+                .url(givenUrl)
+                .identity(givenIdentity)
+                .displayName(givenDisplayName)
+                .showIdentity(givenShowIdentity)
+                .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity))
+                .customData(Map.of(
+                        "city", givenCustomDataCity,
+                        "language", givenCustomDataLanguage))
+                .validityWindow(new WebRtcValidityWindow()
+                        .oneTime(givenValidityWindowOneTime)
+                        .startTime(givenValidityWindowStartTimeDateTime)
+                        .endTime(givenValidityWindowEndTimeDateTime)
+                        .acceptableHours(new WebRtcAcceptableHours()
+                                .start(new WebRtcTimeOfDay()
+                                        .hour(givenAcceptableHoursStartHour)
+                                        .minute(givenAcceptableHoursStartMinute))
+                                .end(new WebRtcTimeOfDay()
+                                        .hour(givenAcceptableHoursEndHour)
+                                        .minute(givenAcceptableHoursEndMinute)))
+                        .acceptableDays(List.of(WebRtcValidityWindow.AcceptableDaysEnum.MONDAY)))
+                .callLinkConfigId(givenCallLinkConfigId);
 
         Consumer<WebRtcCallLink> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -380,16 +338,12 @@ class CallLinkApiTest extends ApiTest {
         var givenCustomDataLanguage = "en";
         var givenValidityWindowOneTime = true;
         var givenValidityWindowStartTime = "2023-12-04T09:17:26.000+0000";
-        var givenValidityWindowStartTimeDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2023, 12, 4, 9, 17, 26, 0),
-            ZoneOffset.ofHours(0)
-        );
+        var givenValidityWindowStartTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 4, 9, 17, 26, 0), ZoneOffset.ofHours(0));
 
         var givenValidityWindowEndTime = "2023-12-05T09:17:26.000+0000";
-        var givenValidityWindowEndTimeDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2023, 12, 5, 9, 17, 26, 0),
-            ZoneOffset.ofHours(0)
-        );
+        var givenValidityWindowEndTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 5, 9, 17, 26, 0), ZoneOffset.ofHours(0));
 
         var givenAcceptableHoursStartHour = 0;
         var givenAcceptableHoursStartMinute = 0;
@@ -398,93 +352,86 @@ class CallLinkApiTest extends ApiTest {
         var givenAcceptableDays = WebRtcValidityWindow.AcceptableDaysEnum.MONDAY;
 
         var givenCallLinkConfigId = "638dbdc6ecede164c3799d04";
-        String givenResponse = String.format("{\n" +
-                                                 "   \"id\": \"%s\",\n" +
-                                                 "   \"url\": \"%s\",\n" +
-                                                 "   \"identity\": \"%s\",\n" +
-                                                 "   \"displayName\": \"%s\",\n" +
-                                                 "   \"showIdentity\": %b,\n" +
-                                                 "   \"destination\": {\n" +
-                                                 "     \"identity\": \"%s\",\n" +
-                                                 "     \"type\": \"%s\"\n" +
-                                                 "   },\n" +
-                                                 "   \"customData\": {\n" +
-                                                 "     \"city\": \"%s\",\n" +
-                                                 "     \"language\": \"%s\"\n" +
-                                                 "   },\n" +
-                                                 "   \"validityWindow\": {\n" +
-                                                 "     \"oneTime\": %b,\n" +
-                                                 "     \"startTime\": \"%s\",\n" +
-                                                 "     \"endTime\": \"%s\",\n" +
-                                                 "     \"acceptableHours\": {\n" +
-                                                 "       \"start\": {\n" +
-                                                 "         \"hour\": %d,\n" +
-                                                 "         \"minute\": %d\n" +
-                                                 "       },\n" +
-                                                 "       \"end\": {\n" +
-                                                 "         \"hour\": %d,\n" +
-                                                 "         \"minute\": %d\n" +
-                                                 "       }\n" +
-                                                 "     },\n" +
-                                                 "     \"acceptableDays\": [\n" +
-                                                 "       \"%s\"\n" +
-                                                 "     ]\n" +
-                                                 "   },\n" +
-                                                 "   \"callLinkConfigId\": \"%s\"\n" +
-                                                 " }\n",
-                                             givenId,
-                                             givenUrl,
-                                             givenIdentity,
-                                             givenDisplayName,
-                                             givenShowIdentity,
-                                             givenDestinationIdentity,
-                                             givenDestinationType,
-                                             givenCustomDataCity,
-                                             givenCustomDataLanguage,
-                                             givenValidityWindowOneTime,
-                                             givenValidityWindowStartTime,
-                                             givenValidityWindowEndTime,
-                                             givenAcceptableHoursStartHour,
-                                             givenAcceptableHoursStartMinute,
-                                             givenAcceptableHoursEndHour,
-                                             givenAcceptableHoursEndMinute,
-                                             givenAcceptableDays,
-                                             givenCallLinkConfigId
-        );
+        String givenResponse = String.format(
+                "{\n" + "   \"id\": \"%s\",\n"
+                        + "   \"url\": \"%s\",\n"
+                        + "   \"identity\": \"%s\",\n"
+                        + "   \"displayName\": \"%s\",\n"
+                        + "   \"showIdentity\": %b,\n"
+                        + "   \"destination\": {\n"
+                        + "     \"identity\": \"%s\",\n"
+                        + "     \"type\": \"%s\"\n"
+                        + "   },\n"
+                        + "   \"customData\": {\n"
+                        + "     \"city\": \"%s\",\n"
+                        + "     \"language\": \"%s\"\n"
+                        + "   },\n"
+                        + "   \"validityWindow\": {\n"
+                        + "     \"oneTime\": %b,\n"
+                        + "     \"startTime\": \"%s\",\n"
+                        + "     \"endTime\": \"%s\",\n"
+                        + "     \"acceptableHours\": {\n"
+                        + "       \"start\": {\n"
+                        + "         \"hour\": %d,\n"
+                        + "         \"minute\": %d\n"
+                        + "       },\n"
+                        + "       \"end\": {\n"
+                        + "         \"hour\": %d,\n"
+                        + "         \"minute\": %d\n"
+                        + "       }\n"
+                        + "     },\n"
+                        + "     \"acceptableDays\": [\n"
+                        + "       \"%s\"\n"
+                        + "     ]\n"
+                        + "   },\n"
+                        + "   \"callLinkConfigId\": \"%s\"\n"
+                        + " }\n",
+                givenId,
+                givenUrl,
+                givenIdentity,
+                givenDisplayName,
+                givenShowIdentity,
+                givenDestinationIdentity,
+                givenDestinationType,
+                givenCustomDataCity,
+                givenCustomDataLanguage,
+                givenValidityWindowOneTime,
+                givenValidityWindowStartTime,
+                givenValidityWindowEndTime,
+                givenAcceptableHoursStartHour,
+                givenAcceptableHoursStartMinute,
+                givenAcceptableHoursEndHour,
+                givenAcceptableHoursEndMinute,
+                givenAcceptableDays,
+                givenCallLinkConfigId);
 
-        setUpNoRequestBodyDeleteRequest(
-            CALL_LINK.replace("{id}", givenId),
-            Map.of(),
-            givenResponse,
-            200
-        );
+        setUpNoRequestBodyDeleteRequest(CALL_LINK.replace("{id}", givenId), Map.of(), givenResponse, 200);
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var expectedResponse = new WebRtcCallLink()
-            .id(givenId)
-            .url(givenUrl)
-            .identity(givenIdentity)
-            .displayName(givenDisplayName)
-            .showIdentity(givenShowIdentity)
-            .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity))
-            .customData(Map.of(
-                "city", givenCustomDataCity,
-                "language", givenCustomDataLanguage
-            ))
-            .validityWindow(new WebRtcValidityWindow()
-                                .oneTime(givenValidityWindowOneTime)
-                                .startTime(givenValidityWindowStartTimeDateTime)
-                                .endTime(givenValidityWindowEndTimeDateTime)
-                                .acceptableHours(new WebRtcAcceptableHours()
-                                                     .start(new WebRtcTimeOfDay()
-                                                                .hour(givenAcceptableHoursStartHour)
-                                                                .minute(givenAcceptableHoursStartMinute))
-                                                     .end(new WebRtcTimeOfDay()
-                                                              .hour(givenAcceptableHoursEndHour)
-                                                              .minute(givenAcceptableHoursEndMinute)))
-                                .acceptableDays(List.of(WebRtcValidityWindow.AcceptableDaysEnum.MONDAY)))
-            .callLinkConfigId(givenCallLinkConfigId);
+                .id(givenId)
+                .url(givenUrl)
+                .identity(givenIdentity)
+                .displayName(givenDisplayName)
+                .showIdentity(givenShowIdentity)
+                .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity))
+                .customData(Map.of(
+                        "city", givenCustomDataCity,
+                        "language", givenCustomDataLanguage))
+                .validityWindow(new WebRtcValidityWindow()
+                        .oneTime(givenValidityWindowOneTime)
+                        .startTime(givenValidityWindowStartTimeDateTime)
+                        .endTime(givenValidityWindowEndTimeDateTime)
+                        .acceptableHours(new WebRtcAcceptableHours()
+                                .start(new WebRtcTimeOfDay()
+                                        .hour(givenAcceptableHoursStartHour)
+                                        .minute(givenAcceptableHoursStartMinute))
+                                .end(new WebRtcTimeOfDay()
+                                        .hour(givenAcceptableHoursEndHour)
+                                        .minute(givenAcceptableHoursEndMinute)))
+                        .acceptableDays(List.of(WebRtcValidityWindow.AcceptableDaysEnum.MONDAY)))
+                .callLinkConfigId(givenCallLinkConfigId);
 
         Consumer<WebRtcCallLink> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -511,69 +458,61 @@ class CallLinkApiTest extends ApiTest {
         var givenPagingTotalPages = 1;
         var givenPagingTotalResults = 2L;
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"results\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"type\": \"%s\",\n" +
-                                                 "      \"size\": %d\n" +
-                                                 "    },\n" +
-                                                 "    {\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"type\": \"%s\",\n" +
-                                                 "      \"size\": %d\n" +
-                                                 "    }\n" +
-                                                 "  ],\n" +
-                                                 "  \"paging\": {\n" +
-                                                 "    \"page\": %d,\n" +
-                                                 "    \"size\": %d,\n" +
-                                                 "    \"totalPages\": %d,\n" +
-                                                 "    \"totalResults\": %d\n" +
-                                                 "  }\n" +
-                                                 "}\n",
-                                             givenFirstId,
-                                             givenFirstName,
-                                             givenFirstType,
-                                             givenFirstSize,
-                                             givenSecondId,
-                                             givenSecondName,
-                                             givenSecondType,
-                                             givenSecondSize,
-                                             givenPagingPage,
-                                             givenPagingSize,
-                                             givenPagingTotalPages,
-                                             givenPagingTotalResults
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"type\": \"%s\",\n"
+                        + "      \"size\": %d\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"type\": \"%s\",\n"
+                        + "      \"size\": %d\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"paging\": {\n"
+                        + "    \"page\": %d,\n"
+                        + "    \"size\": %d,\n"
+                        + "    \"totalPages\": %d,\n"
+                        + "    \"totalResults\": %d\n"
+                        + "  }\n"
+                        + "}\n",
+                givenFirstId,
+                givenFirstName,
+                givenFirstType,
+                givenFirstSize,
+                givenSecondId,
+                givenSecondName,
+                givenSecondType,
+                givenSecondSize,
+                givenPagingPage,
+                givenPagingSize,
+                givenPagingTotalPages,
+                givenPagingTotalResults);
 
-        setUpSuccessGetRequest(
-            IMAGES,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(IMAGES, Map.of(), givenResponse);
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var expectedResponse = new WebRtcImagePage()
-            .addResultsItem(new WebRtcImageResponse()
-                                .id(givenFirstId)
-                                .name(givenFirstName)
-                                .type(givenFirstType)
-                                .size(givenFirstSize)
-
-            )
-            .addResultsItem(new WebRtcImageResponse()
-                                .id(givenSecondId)
-                                .name(givenSecondName)
-                                .type(givenSecondType)
-                                .size(givenSecondSize))
-            .paging(new PageInfo()
+                .addResultsItem(new WebRtcImageResponse()
+                        .id(givenFirstId)
+                        .name(givenFirstName)
+                        .type(givenFirstType)
+                        .size(givenFirstSize))
+                .addResultsItem(new WebRtcImageResponse()
+                        .id(givenSecondId)
+                        .name(givenSecondName)
+                        .type(givenSecondType)
+                        .size(givenSecondSize))
+                .paging(new PageInfo()
                         .page(givenPagingPage)
                         .size(givenPagingSize)
                         .totalPages(givenPagingTotalPages)
-                        .totalResults(givenPagingTotalResults)
-            );
+                        .totalResults(givenPagingTotalResults));
 
         Consumer<WebRtcImagePage> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -590,31 +529,23 @@ class CallLinkApiTest extends ApiTest {
         var givenFirstType = WebRtcImageType.LOGO;
         var givenFirstSize = 512L;
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"id\": \"%s\",\n" +
-                                                 "  \"name\": \"%s\",\n" +
-                                                 "  \"type\": \"%s\",\n" +
-                                                 "  \"size\": %d\n" +
-                                                 "}\n",
-                                             givenFirstId,
-                                             givenFirstName,
-                                             givenFirstType,
-                                             givenFirstSize
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"id\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"type\": \"%s\",\n"
+                        + "  \"size\": %d\n"
+                        + "}\n",
+                givenFirstId, givenFirstName, givenFirstType, givenFirstSize);
 
-        setUpSuccessGetRequest(
-            IMAGE.replace("{id}", givenFirstId),
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(IMAGE.replace("{id}", givenFirstId), Map.of(), givenResponse);
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var expectedResponse = new WebRtcImageResponse()
-            .id(givenFirstId)
-            .name(givenFirstName)
-            .type(givenFirstType)
-            .size(givenFirstSize);
+                .id(givenFirstId)
+                .name(givenFirstName)
+                .type(givenFirstType)
+                .size(givenFirstSize);
 
         Consumer<WebRtcImageResponse> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -631,32 +562,23 @@ class CallLinkApiTest extends ApiTest {
         var givenFirstType = WebRtcImageType.LOGO;
         var givenFirstSize = 512L;
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"id\": \"%s\",\n" +
-                                                 "  \"name\": \"%s\",\n" +
-                                                 "  \"type\": \"%s\",\n" +
-                                                 "  \"size\": %d\n" +
-                                                 "}\n",
-                                             givenFirstId,
-                                             givenFirstName,
-                                             givenFirstType,
-                                             givenFirstSize
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"id\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"type\": \"%s\",\n"
+                        + "  \"size\": %d\n"
+                        + "}\n",
+                givenFirstId, givenFirstName, givenFirstType, givenFirstSize);
 
-        setUpNoRequestBodyDeleteRequest(
-            IMAGE.replace("{id}", givenFirstId),
-            Map.of(),
-            givenResponse,
-            200
-        );
+        setUpNoRequestBodyDeleteRequest(IMAGE.replace("{id}", givenFirstId), Map.of(), givenResponse, 200);
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var expectedResponse = new WebRtcImageResponse()
-            .id(givenFirstId)
-            .name(givenFirstName)
-            .type(givenFirstType)
-            .size(givenFirstSize);
+                .id(givenFirstId)
+                .name(givenFirstName)
+                .type(givenFirstType)
+                .size(givenFirstSize);
 
         Consumer<WebRtcImageResponse> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -671,30 +593,19 @@ class CallLinkApiTest extends ApiTest {
         var givenFirstId = "id";
         var givenFirstName = "subdomain";
 
-        String givenResponse = String.format("[\n" +
-                                                 "  {\n" +
-                                                 "    \"id\": \"%s\",\n" +
-                                                 "    \"name\": \"%s\"\n" +
-                                                 "  }\n" +
-                                                 "]\n",
-                                             givenFirstId,
-                                             givenFirstName
-        );
+        String givenResponse = String.format(
+                "[\n" + "  {\n" + "    \"id\": \"%s\",\n" + "    \"name\": \"%s\"\n" + "  }\n" + "]\n",
+                givenFirstId, givenFirstName);
 
-        setUpSuccessGetRequest(
-            SUBDOMAINS,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(SUBDOMAINS, Map.of(), givenResponse);
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
-        var expectedResponse = List.of(
-            new WebRtcSubdomainResponse()
-                .id(givenFirstId).name(givenFirstName)
-        );
+        var expectedResponse =
+                List.of(new WebRtcSubdomainResponse().id(givenFirstId).name(givenFirstName));
 
-        Consumer<List<WebRtcSubdomainResponse>> assertions = response -> then(response).isEqualTo(expectedResponse);
+        Consumer<List<WebRtcSubdomainResponse>> assertions =
+                response -> then(response).isEqualTo(expectedResponse);
 
         var call = callLinkApi.getSubdomains();
 
@@ -707,32 +618,18 @@ class CallLinkApiTest extends ApiTest {
         var givenFirstId = "id";
         var givenFirstName = "subdomain";
 
-        String expectedRequest = String.format("  {\n" +
-                                                   "    \"name\": \"%s\"\n" +
-                                                   "  }\n",
-                                               givenFirstName
-        );
+        String expectedRequest = String.format("  {\n" + "    \"name\": \"%s\"\n" + "  }\n", givenFirstName);
 
-        String givenResponse = String.format("  {\n" +
-                                                 "    \"id\": \"%s\",\n" +
-                                                 "    \"name\": \"%s\"\n" +
-                                                 "  }\n",
-                                             givenFirstId,
-                                             givenFirstName
-        );
+        String givenResponse = String.format(
+                "  {\n" + "    \"id\": \"%s\",\n" + "    \"name\": \"%s\"\n" + "  }\n", givenFirstId, givenFirstName);
 
-        setUpSuccessPostRequest(
-            SUBDOMAINS,
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(SUBDOMAINS, expectedRequest, givenResponse);
 
         var request = new WebRtcSubdomainRequest().name(givenFirstName);
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
-        var expectedResponse = new WebRtcSubdomain()
-            .id(givenFirstId).name(givenFirstName);
+        var expectedResponse = new WebRtcSubdomain().id(givenFirstId).name(givenFirstName);
 
         Consumer<WebRtcSubdomain> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -747,27 +644,16 @@ class CallLinkApiTest extends ApiTest {
         var givenFirstId = "id";
         var givenFirstName = "subdomain";
 
-        String givenResponse = String.format("  {\n" +
-                                                 "    \"id\": \"%s\",\n" +
-                                                 "    \"name\": \"%s\"\n" +
-                                                 "  }\n",
-                                             givenFirstId,
-                                             givenFirstName
-        );
+        String givenResponse = String.format(
+                "  {\n" + "    \"id\": \"%s\",\n" + "    \"name\": \"%s\"\n" + "  }\n", givenFirstId, givenFirstName);
 
-        setUpNoRequestBodyDeleteRequest(
-            SUBDOMAIN.replace("{id}", givenFirstId),
-            Map.of(),
-            givenResponse,
-            200
-        );
+        setUpNoRequestBodyDeleteRequest(SUBDOMAIN.replace("{id}", givenFirstId), Map.of(), givenResponse, 200);
 
         var request = new WebRtcSubdomainRequest().name(givenFirstName);
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
-        var expectedResponse = new WebRtcSubdomain()
-            .id(givenFirstId).name(givenFirstName);
+        var expectedResponse = new WebRtcSubdomain().id(givenFirstId).name(givenFirstName);
 
         Consumer<WebRtcSubdomain> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -812,154 +698,148 @@ class CallLinkApiTest extends ApiTest {
         var givenPagingTotalPages = 1;
         var givenPagingTotalResults = 2L;
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"results\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"initialOptions\": {\n" +
-                                                 "        \"audio\": %b,\n" +
-                                                 "        \"video\": %b,\n" +
-                                                 "        \"muted\": %b,\n" +
-                                                 "        \"cameraFacingMode\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"callOptions\": {\n" +
-                                                 "        \"mute\": %b,\n" +
-                                                 "        \"screenShare\": %b,\n" +
-                                                 "        \"switchCameraFacingMode\": %b,\n" +
-                                                 "        \"dialPad\": %b\n" +
-                                                 "      },\n" +
-                                                 "      \"theme\": {\n" +
-                                                 "        \"images\": {\n" +
-                                                 "          \"logoImageId\": \"%s\",\n" +
-                                                 "          \"backgroundImageId\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"messages\": {\n" +
-                                                 "          \"welcomeText\": \"%s\",\n" +
-                                                 "          \"inactiveText\": \"%s\",\n" +
-                                                 "          \"expirationText\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"colors\": {\n" +
-                                                 "          \"primary\": \"%s\",\n" +
-                                                 "          \"primaryText\": \"%s\",\n" +
-                                                 "          \"background\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      }\n" +
-                                                 "    },\n" +
-                                                 "    {\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"theme\": {\n" +
-                                                 "        \"images\": {\n" +
-                                                 "          \"logoImageId\": \"%s\",\n" +
-                                                 "          \"backgroundImageId\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"messages\": {\n" +
-                                                 "          \"welcomeText\": \"%s\",\n" +
-                                                 "          \"inactiveText\": \"%s\",\n" +
-                                                 "          \"expirationText\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"colors\": {\n" +
-                                                 "          \"primary\": \"%s\",\n" +
-                                                 "          \"primaryText\": \"%s\",\n" +
-                                                 "          \"background\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      }\n" +
-                                                 "    }\n" +
-                                                 "  ],\n" +
-                                                 "  \"paging\": {\n" +
-                                                 "    \"page\": %d,\n" +
-                                                 "    \"size\": %d,\n" +
-                                                 "    \"totalPages\": %d,\n" +
-                                                 "    \"totalResults\": %d\n" +
-                                                 "  }\n" +
-                                                 "}\n",
-                                             givenName,
-                                             givenInitialOptionsAudio,
-                                             givenInitialOptionsVideo,
-                                             givenInitialOptionsMuted,
-                                             givenInitialOptionsCameraFacingMode,
-                                             givenCallOptionsMute,
-                                             givenCallOptionsScreenShare,
-                                             givenCallOptionsSwitchCameraFacingMode,
-                                             givenCallOptionsDialPad,
-                                             givenThemeImagesLogoImageId,
-                                             givenThemeImagesBackgroundImageId,
-                                             givenThemeMessagesWelcomeText,
-                                             givenThemeMessagesInactiveText,
-                                             givenThemeMessagesExpirationText,
-                                             givenThemeColorsPrimary,
-                                             givenThemeColorsPrimaryText,
-                                             givenThemeColorsBackground,
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"initialOptions\": {\n"
+                        + "        \"audio\": %b,\n"
+                        + "        \"video\": %b,\n"
+                        + "        \"muted\": %b,\n"
+                        + "        \"cameraFacingMode\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"callOptions\": {\n"
+                        + "        \"mute\": %b,\n"
+                        + "        \"screenShare\": %b,\n"
+                        + "        \"switchCameraFacingMode\": %b,\n"
+                        + "        \"dialPad\": %b\n"
+                        + "      },\n"
+                        + "      \"theme\": {\n"
+                        + "        \"images\": {\n"
+                        + "          \"logoImageId\": \"%s\",\n"
+                        + "          \"backgroundImageId\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"messages\": {\n"
+                        + "          \"welcomeText\": \"%s\",\n"
+                        + "          \"inactiveText\": \"%s\",\n"
+                        + "          \"expirationText\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"colors\": {\n"
+                        + "          \"primary\": \"%s\",\n"
+                        + "          \"primaryText\": \"%s\",\n"
+                        + "          \"background\": \"%s\"\n"
+                        + "        }\n"
+                        + "      }\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"theme\": {\n"
+                        + "        \"images\": {\n"
+                        + "          \"logoImageId\": \"%s\",\n"
+                        + "          \"backgroundImageId\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"messages\": {\n"
+                        + "          \"welcomeText\": \"%s\",\n"
+                        + "          \"inactiveText\": \"%s\",\n"
+                        + "          \"expirationText\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"colors\": {\n"
+                        + "          \"primary\": \"%s\",\n"
+                        + "          \"primaryText\": \"%s\",\n"
+                        + "          \"background\": \"%s\"\n"
+                        + "        }\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"paging\": {\n"
+                        + "    \"page\": %d,\n"
+                        + "    \"size\": %d,\n"
+                        + "    \"totalPages\": %d,\n"
+                        + "    \"totalResults\": %d\n"
+                        + "  }\n"
+                        + "}\n",
+                givenName,
+                givenInitialOptionsAudio,
+                givenInitialOptionsVideo,
+                givenInitialOptionsMuted,
+                givenInitialOptionsCameraFacingMode,
+                givenCallOptionsMute,
+                givenCallOptionsScreenShare,
+                givenCallOptionsSwitchCameraFacingMode,
+                givenCallOptionsDialPad,
+                givenThemeImagesLogoImageId,
+                givenThemeImagesBackgroundImageId,
+                givenThemeMessagesWelcomeText,
+                givenThemeMessagesInactiveText,
+                givenThemeMessagesExpirationText,
+                givenThemeColorsPrimary,
+                givenThemeColorsPrimaryText,
+                givenThemeColorsBackground,
+                givenSecondName,
+                givenSecondThemeImagesLogoImageId,
+                givenSecondThemeImagesBackgroundImageId,
+                givenSecondThemeMessagesWelcomeText,
+                givenSecondThemeMessagesInactiveText,
+                givenSecondThemeMessagesExpirationText,
+                givenSecondThemeColorsPrimary,
+                givenSecondThemeColorsPrimaryText,
+                givenSecondThemeColorsBackground,
+                givenPagingPage,
+                givenPagingSize,
+                givenPagingTotalPages,
+                givenPagingTotalResults);
 
-                                             givenSecondName,
-                                             givenSecondThemeImagesLogoImageId,
-                                             givenSecondThemeImagesBackgroundImageId,
-                                             givenSecondThemeMessagesWelcomeText,
-                                             givenSecondThemeMessagesInactiveText,
-                                             givenSecondThemeMessagesExpirationText,
-                                             givenSecondThemeColorsPrimary,
-                                             givenSecondThemeColorsPrimaryText,
-                                             givenSecondThemeColorsBackground,
-
-                                             givenPagingPage,
-                                             givenPagingSize,
-                                             givenPagingTotalPages,
-                                             givenPagingTotalResults
-        );
-
-        setUpSuccessGetRequest(
-            CONFIGS,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(CONFIGS, Map.of(), givenResponse);
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var expectedResponse = new WebRtcCallLinkConfigPage()
-            .addResultsItem(new WebRtcCallLinkConfig()
-                                .name(givenName)
-                                .initialOptions(new WebRtcInitialOptions()
-                                                    .audio(givenInitialOptionsAudio)
-                                                    .video(givenInitialOptionsVideo)
-                                                    .muted(givenInitialOptionsMuted)
-                                                    .cameraFacingMode(givenInitialOptionsCameraFacingMode))
-                                .callOptions(new WebRtcCallOptions()
-                                                 .mute(givenCallOptionsMute)
-                                                 .screenShare(givenCallOptionsScreenShare)
-                                                 .switchCameraFacingMode(givenCallOptionsSwitchCameraFacingMode)
-                                                 .dialPad(givenCallOptionsDialPad))
-                                .theme(new WebRtcTheme()
-                                           .images(new WebRtcImages()
-                                                       .logoImageId(givenThemeImagesLogoImageId)
-                                                       .backgroundImageId(givenThemeImagesBackgroundImageId))
-                                           .messages(new WebRtcMessages()
-                                                         .welcomeText(givenThemeMessagesWelcomeText)
-                                                         .inactiveText(givenThemeMessagesInactiveText)
-                                                         .expirationText(givenThemeMessagesExpirationText))
-                                           .colors(new WebRtcColors()
-                                                       .primary(givenThemeColorsPrimary)
-                                                       .primaryText(givenThemeColorsPrimaryText)
-                                                       .background(givenThemeColorsBackground))))
-            .addResultsItem(new WebRtcCallLinkConfig()
-                                .name(givenName)
-                                .theme(new WebRtcTheme()
-                                           .images(new WebRtcImages()
-                                                       .logoImageId(givenSecondThemeImagesLogoImageId)
-                                                       .backgroundImageId(givenSecondThemeImagesBackgroundImageId))
-                                           .messages(new WebRtcMessages()
-                                                         .welcomeText(givenSecondThemeMessagesWelcomeText)
-                                                         .inactiveText(givenSecondThemeMessagesInactiveText)
-                                                         .expirationText(givenSecondThemeMessagesExpirationText))
-                                           .colors(new WebRtcColors()
-                                                       .primary(givenSecondThemeColorsPrimary)
-                                                       .primaryText(givenSecondThemeColorsPrimaryText)
-                                                       .background(givenSecondThemeColorsBackground))))
-            .paging(new PageInfo()
+                .addResultsItem(new WebRtcCallLinkConfig()
+                        .name(givenName)
+                        .initialOptions(new WebRtcInitialOptions()
+                                .audio(givenInitialOptionsAudio)
+                                .video(givenInitialOptionsVideo)
+                                .muted(givenInitialOptionsMuted)
+                                .cameraFacingMode(givenInitialOptionsCameraFacingMode))
+                        .callOptions(new WebRtcCallOptions()
+                                .mute(givenCallOptionsMute)
+                                .screenShare(givenCallOptionsScreenShare)
+                                .switchCameraFacingMode(givenCallOptionsSwitchCameraFacingMode)
+                                .dialPad(givenCallOptionsDialPad))
+                        .theme(new WebRtcTheme()
+                                .images(new WebRtcImages()
+                                        .logoImageId(givenThemeImagesLogoImageId)
+                                        .backgroundImageId(givenThemeImagesBackgroundImageId))
+                                .messages(new WebRtcMessages()
+                                        .welcomeText(givenThemeMessagesWelcomeText)
+                                        .inactiveText(givenThemeMessagesInactiveText)
+                                        .expirationText(givenThemeMessagesExpirationText))
+                                .colors(new WebRtcColors()
+                                        .primary(givenThemeColorsPrimary)
+                                        .primaryText(givenThemeColorsPrimaryText)
+                                        .background(givenThemeColorsBackground))))
+                .addResultsItem(new WebRtcCallLinkConfig()
+                        .name(givenName)
+                        .theme(new WebRtcTheme()
+                                .images(new WebRtcImages()
+                                        .logoImageId(givenSecondThemeImagesLogoImageId)
+                                        .backgroundImageId(givenSecondThemeImagesBackgroundImageId))
+                                .messages(new WebRtcMessages()
+                                        .welcomeText(givenSecondThemeMessagesWelcomeText)
+                                        .inactiveText(givenSecondThemeMessagesInactiveText)
+                                        .expirationText(givenSecondThemeMessagesExpirationText))
+                                .colors(new WebRtcColors()
+                                        .primary(givenSecondThemeColorsPrimary)
+                                        .primaryText(givenSecondThemeColorsPrimaryText)
+                                        .background(givenSecondThemeColorsBackground))))
+                .paging(new PageInfo()
                         .page(givenPagingPage)
                         .size(givenPagingSize)
                         .totalPages(givenPagingTotalPages)
                         .totalResults(givenPagingTotalResults));
 
-        Consumer<WebRtcCallLinkConfigPage> assertions = response -> then(response).isEqualTo(expectedResponse);
+        Consumer<WebRtcCallLinkConfigPage> assertions =
+                response -> then(response).isEqualTo(expectedResponse);
 
         var call = callLinkApi.getConfigs();
 
@@ -987,112 +867,106 @@ class CallLinkApiTest extends ApiTest {
         var givenThemeColorsPrimaryText = "242424";
         var givenThemeColorsBackground = "FFFFFF";
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"name\": \"%s\",\n" +
-                                                   "  \"initialOptions\": {\n" +
-                                                   "    \"audio\": %b,\n" +
-                                                   "    \"video\": %b,\n" +
-                                                   "    \"muted\": %b,\n" +
-                                                   "    \"cameraFacingMode\": \"%s\"\n" +
-                                                   "  }\n" +
-                                                   "}\n",
-                                               givenName,
-                                               givenInitialOptionsAudio,
-                                               givenInitialOptionsVideo,
-                                               givenInitialOptionsMuted,
-                                               givenInitialOptionsCameraFacingMode
-        );
+        String expectedRequest = String.format(
+                "{\n" + "  \"name\": \"%s\",\n"
+                        + "  \"initialOptions\": {\n"
+                        + "    \"audio\": %b,\n"
+                        + "    \"video\": %b,\n"
+                        + "    \"muted\": %b,\n"
+                        + "    \"cameraFacingMode\": \"%s\"\n"
+                        + "  }\n"
+                        + "}\n",
+                givenName,
+                givenInitialOptionsAudio,
+                givenInitialOptionsVideo,
+                givenInitialOptionsMuted,
+                givenInitialOptionsCameraFacingMode);
 
-        String givenResponse = String.format("{\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"initialOptions\": {\n" +
-                                                 "        \"audio\": %b,\n" +
-                                                 "        \"video\": %b,\n" +
-                                                 "        \"muted\": %b,\n" +
-                                                 "        \"cameraFacingMode\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"callOptions\": {\n" +
-                                                 "        \"mute\": %b,\n" +
-                                                 "        \"screenShare\": %b,\n" +
-                                                 "        \"switchCameraFacingMode\": %b,\n" +
-                                                 "        \"dialPad\": %b\n" +
-                                                 "      },\n" +
-                                                 "      \"theme\": {\n" +
-                                                 "        \"images\": {\n" +
-                                                 "          \"logoImageId\": \"%s\",\n" +
-                                                 "          \"backgroundImageId\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"messages\": {\n" +
-                                                 "          \"welcomeText\": \"%s\",\n" +
-                                                 "          \"inactiveText\": \"%s\",\n" +
-                                                 "          \"expirationText\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"colors\": {\n" +
-                                                 "          \"primary\": \"%s\",\n" +
-                                                 "          \"primaryText\": \"%s\",\n" +
-                                                 "          \"background\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      }\n" +
-                                                 "}\n",
-                                             givenName,
-                                             givenInitialOptionsAudio,
-                                             givenInitialOptionsVideo,
-                                             givenInitialOptionsMuted,
-                                             givenInitialOptionsCameraFacingMode,
-                                             givenCallOptionsMute,
-                                             givenCallOptionsScreenShare,
-                                             givenCallOptionsSwitchCameraFacingMode,
-                                             givenCallOptionsDialPad,
-                                             givenThemeImagesLogoImageId,
-                                             givenThemeImagesBackgroundImageId,
-                                             givenThemeMessagesWelcomeText,
-                                             givenThemeMessagesInactiveText,
-                                             givenThemeMessagesExpirationText,
-                                             givenThemeColorsPrimary,
-                                             givenThemeColorsPrimaryText,
-                                             givenThemeColorsBackground
-        );
+        String givenResponse = String.format(
+                "{\n" + "      \"name\": \"%s\",\n"
+                        + "      \"initialOptions\": {\n"
+                        + "        \"audio\": %b,\n"
+                        + "        \"video\": %b,\n"
+                        + "        \"muted\": %b,\n"
+                        + "        \"cameraFacingMode\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"callOptions\": {\n"
+                        + "        \"mute\": %b,\n"
+                        + "        \"screenShare\": %b,\n"
+                        + "        \"switchCameraFacingMode\": %b,\n"
+                        + "        \"dialPad\": %b\n"
+                        + "      },\n"
+                        + "      \"theme\": {\n"
+                        + "        \"images\": {\n"
+                        + "          \"logoImageId\": \"%s\",\n"
+                        + "          \"backgroundImageId\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"messages\": {\n"
+                        + "          \"welcomeText\": \"%s\",\n"
+                        + "          \"inactiveText\": \"%s\",\n"
+                        + "          \"expirationText\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"colors\": {\n"
+                        + "          \"primary\": \"%s\",\n"
+                        + "          \"primaryText\": \"%s\",\n"
+                        + "          \"background\": \"%s\"\n"
+                        + "        }\n"
+                        + "      }\n"
+                        + "}\n",
+                givenName,
+                givenInitialOptionsAudio,
+                givenInitialOptionsVideo,
+                givenInitialOptionsMuted,
+                givenInitialOptionsCameraFacingMode,
+                givenCallOptionsMute,
+                givenCallOptionsScreenShare,
+                givenCallOptionsSwitchCameraFacingMode,
+                givenCallOptionsDialPad,
+                givenThemeImagesLogoImageId,
+                givenThemeImagesBackgroundImageId,
+                givenThemeMessagesWelcomeText,
+                givenThemeMessagesInactiveText,
+                givenThemeMessagesExpirationText,
+                givenThemeColorsPrimary,
+                givenThemeColorsPrimaryText,
+                givenThemeColorsBackground);
 
-        setUpSuccessPostRequest(
-            CONFIGS,
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(CONFIGS, expectedRequest, givenResponse);
 
         var request = new WebRtcCallLinkConfigRequest()
-            .name(givenName)
-            .initialOptions(new WebRtcInitialOptions()
-                                .audio(givenInitialOptionsAudio)
-                                .video(givenInitialOptionsVideo)
-                                .muted(givenInitialOptionsMuted)
-                                .cameraFacingMode(givenInitialOptionsCameraFacingMode));
+                .name(givenName)
+                .initialOptions(new WebRtcInitialOptions()
+                        .audio(givenInitialOptionsAudio)
+                        .video(givenInitialOptionsVideo)
+                        .muted(givenInitialOptionsMuted)
+                        .cameraFacingMode(givenInitialOptionsCameraFacingMode));
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var expectedResponse = new WebRtcCallLinkConfig()
-            .name(givenName)
-            .initialOptions(new WebRtcInitialOptions()
-                                .audio(givenInitialOptionsAudio)
-                                .video(givenInitialOptionsVideo)
-                                .muted(givenInitialOptionsMuted)
-                                .cameraFacingMode(givenInitialOptionsCameraFacingMode))
-            .callOptions(new WebRtcCallOptions()
-                             .mute(givenCallOptionsMute)
-                             .screenShare(givenCallOptionsScreenShare)
-                             .switchCameraFacingMode(givenCallOptionsSwitchCameraFacingMode)
-                             .dialPad(givenCallOptionsDialPad))
-            .theme(new WebRtcTheme()
-                       .images(new WebRtcImages()
-                                   .logoImageId(givenThemeImagesLogoImageId)
-                                   .backgroundImageId(givenThemeImagesBackgroundImageId))
-                       .messages(new WebRtcMessages()
-                                     .welcomeText(givenThemeMessagesWelcomeText)
-                                     .inactiveText(givenThemeMessagesInactiveText)
-                                     .expirationText(givenThemeMessagesExpirationText))
-                       .colors(new WebRtcColors()
-                                   .primary(givenThemeColorsPrimary)
-                                   .primaryText(givenThemeColorsPrimaryText)
-                                   .background(givenThemeColorsBackground)));
+                .name(givenName)
+                .initialOptions(new WebRtcInitialOptions()
+                        .audio(givenInitialOptionsAudio)
+                        .video(givenInitialOptionsVideo)
+                        .muted(givenInitialOptionsMuted)
+                        .cameraFacingMode(givenInitialOptionsCameraFacingMode))
+                .callOptions(new WebRtcCallOptions()
+                        .mute(givenCallOptionsMute)
+                        .screenShare(givenCallOptionsScreenShare)
+                        .switchCameraFacingMode(givenCallOptionsSwitchCameraFacingMode)
+                        .dialPad(givenCallOptionsDialPad))
+                .theme(new WebRtcTheme()
+                        .images(new WebRtcImages()
+                                .logoImageId(givenThemeImagesLogoImageId)
+                                .backgroundImageId(givenThemeImagesBackgroundImageId))
+                        .messages(new WebRtcMessages()
+                                .welcomeText(givenThemeMessagesWelcomeText)
+                                .inactiveText(givenThemeMessagesInactiveText)
+                                .expirationText(givenThemeMessagesExpirationText))
+                        .colors(new WebRtcColors()
+                                .primary(givenThemeColorsPrimary)
+                                .primaryText(givenThemeColorsPrimaryText)
+                                .background(givenThemeColorsBackground)));
 
         Consumer<WebRtcCallLinkConfig> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -1123,91 +997,86 @@ class CallLinkApiTest extends ApiTest {
         var givenThemeColorsPrimaryText = "242424";
         var givenThemeColorsBackground = "FFFFFF";
 
-        String givenResponse = String.format("{\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"initialOptions\": {\n" +
-                                                 "        \"audio\": %b,\n" +
-                                                 "        \"video\": %b,\n" +
-                                                 "        \"muted\": %b,\n" +
-                                                 "        \"cameraFacingMode\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"callOptions\": {\n" +
-                                                 "        \"mute\": %b,\n" +
-                                                 "        \"screenShare\": %b,\n" +
-                                                 "        \"switchCameraFacingMode\": %b,\n" +
-                                                 "        \"dialPad\": %b\n" +
-                                                 "      },\n" +
-                                                 "      \"theme\": {\n" +
-                                                 "        \"images\": {\n" +
-                                                 "          \"logoImageId\": \"%s\",\n" +
-                                                 "          \"backgroundImageId\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"messages\": {\n" +
-                                                 "          \"welcomeText\": \"%s\",\n" +
-                                                 "          \"inactiveText\": \"%s\",\n" +
-                                                 "          \"expirationText\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"colors\": {\n" +
-                                                 "          \"primary\": \"%s\",\n" +
-                                                 "          \"primaryText\": \"%s\",\n" +
-                                                 "          \"background\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      }\n" +
-                                                 "}\n",
-                                             givenId,
-                                             givenName,
-                                             givenInitialOptionsAudio,
-                                             givenInitialOptionsVideo,
-                                             givenInitialOptionsMuted,
-                                             givenInitialOptionsCameraFacingMode,
-                                             givenCallOptionsMute,
-                                             givenCallOptionsScreenShare,
-                                             givenCallOptionsSwitchCameraFacingMode,
-                                             givenCallOptionsDialPad,
-                                             givenThemeImagesLogoImageId,
-                                             givenThemeImagesBackgroundImageId,
-                                             givenThemeMessagesWelcomeText,
-                                             givenThemeMessagesInactiveText,
-                                             givenThemeMessagesExpirationText,
-                                             givenThemeColorsPrimary,
-                                             givenThemeColorsPrimaryText,
-                                             givenThemeColorsBackground
-        );
+        String givenResponse = String.format(
+                "{\n" + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"initialOptions\": {\n"
+                        + "        \"audio\": %b,\n"
+                        + "        \"video\": %b,\n"
+                        + "        \"muted\": %b,\n"
+                        + "        \"cameraFacingMode\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"callOptions\": {\n"
+                        + "        \"mute\": %b,\n"
+                        + "        \"screenShare\": %b,\n"
+                        + "        \"switchCameraFacingMode\": %b,\n"
+                        + "        \"dialPad\": %b\n"
+                        + "      },\n"
+                        + "      \"theme\": {\n"
+                        + "        \"images\": {\n"
+                        + "          \"logoImageId\": \"%s\",\n"
+                        + "          \"backgroundImageId\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"messages\": {\n"
+                        + "          \"welcomeText\": \"%s\",\n"
+                        + "          \"inactiveText\": \"%s\",\n"
+                        + "          \"expirationText\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"colors\": {\n"
+                        + "          \"primary\": \"%s\",\n"
+                        + "          \"primaryText\": \"%s\",\n"
+                        + "          \"background\": \"%s\"\n"
+                        + "        }\n"
+                        + "      }\n"
+                        + "}\n",
+                givenId,
+                givenName,
+                givenInitialOptionsAudio,
+                givenInitialOptionsVideo,
+                givenInitialOptionsMuted,
+                givenInitialOptionsCameraFacingMode,
+                givenCallOptionsMute,
+                givenCallOptionsScreenShare,
+                givenCallOptionsSwitchCameraFacingMode,
+                givenCallOptionsDialPad,
+                givenThemeImagesLogoImageId,
+                givenThemeImagesBackgroundImageId,
+                givenThemeMessagesWelcomeText,
+                givenThemeMessagesInactiveText,
+                givenThemeMessagesExpirationText,
+                givenThemeColorsPrimary,
+                givenThemeColorsPrimaryText,
+                givenThemeColorsBackground);
 
-        setUpSuccessGetRequest(
-            CONFIG.replace("{id}", givenId),
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(CONFIG.replace("{id}", givenId), Map.of(), givenResponse);
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var expectedResponse = new WebRtcCallLinkConfig()
-            .id(givenId)
-            .name(givenName)
-            .initialOptions(new WebRtcInitialOptions()
-                                .audio(givenInitialOptionsAudio)
-                                .video(givenInitialOptionsVideo)
-                                .muted(givenInitialOptionsMuted)
-                                .cameraFacingMode(givenInitialOptionsCameraFacingMode))
-            .callOptions(new WebRtcCallOptions()
-                             .mute(givenCallOptionsMute)
-                             .screenShare(givenCallOptionsScreenShare)
-                             .switchCameraFacingMode(givenCallOptionsSwitchCameraFacingMode)
-                             .dialPad(givenCallOptionsDialPad))
-            .theme(new WebRtcTheme()
-                       .images(new WebRtcImages()
-                                   .logoImageId(givenThemeImagesLogoImageId)
-                                   .backgroundImageId(givenThemeImagesBackgroundImageId))
-                       .messages(new WebRtcMessages()
-                                     .welcomeText(givenThemeMessagesWelcomeText)
-                                     .inactiveText(givenThemeMessagesInactiveText)
-                                     .expirationText(givenThemeMessagesExpirationText))
-                       .colors(new WebRtcColors()
-                                   .primary(givenThemeColorsPrimary)
-                                   .primaryText(givenThemeColorsPrimaryText)
-                                   .background(givenThemeColorsBackground)));
+                .id(givenId)
+                .name(givenName)
+                .initialOptions(new WebRtcInitialOptions()
+                        .audio(givenInitialOptionsAudio)
+                        .video(givenInitialOptionsVideo)
+                        .muted(givenInitialOptionsMuted)
+                        .cameraFacingMode(givenInitialOptionsCameraFacingMode))
+                .callOptions(new WebRtcCallOptions()
+                        .mute(givenCallOptionsMute)
+                        .screenShare(givenCallOptionsScreenShare)
+                        .switchCameraFacingMode(givenCallOptionsSwitchCameraFacingMode)
+                        .dialPad(givenCallOptionsDialPad))
+                .theme(new WebRtcTheme()
+                        .images(new WebRtcImages()
+                                .logoImageId(givenThemeImagesLogoImageId)
+                                .backgroundImageId(givenThemeImagesBackgroundImageId))
+                        .messages(new WebRtcMessages()
+                                .welcomeText(givenThemeMessagesWelcomeText)
+                                .inactiveText(givenThemeMessagesInactiveText)
+                                .expirationText(givenThemeMessagesExpirationText))
+                        .colors(new WebRtcColors()
+                                .primary(givenThemeColorsPrimary)
+                                .primaryText(givenThemeColorsPrimaryText)
+                                .background(givenThemeColorsBackground)));
 
         Consumer<WebRtcCallLinkConfig> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -1238,116 +1107,109 @@ class CallLinkApiTest extends ApiTest {
         var givenThemeColorsPrimaryText = "242424";
         var givenThemeColorsBackground = "FFFFFF";
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"name\": \"%s\",\n" +
-                                                   "  \"initialOptions\": {\n" +
-                                                   "    \"audio\": %b,\n" +
-                                                   "    \"video\": %b,\n" +
-                                                   "    \"muted\": %b,\n" +
-                                                   "    \"cameraFacingMode\": \"%s\"\n" +
-                                                   "  }\n" +
-                                                   "}\n",
-                                               givenName,
-                                               givenInitialOptionsAudio,
-                                               givenInitialOptionsVideo,
-                                               givenInitialOptionsMuted,
-                                               givenInitialOptionsCameraFacingMode
-        );
+        String expectedRequest = String.format(
+                "{\n" + "  \"name\": \"%s\",\n"
+                        + "  \"initialOptions\": {\n"
+                        + "    \"audio\": %b,\n"
+                        + "    \"video\": %b,\n"
+                        + "    \"muted\": %b,\n"
+                        + "    \"cameraFacingMode\": \"%s\"\n"
+                        + "  }\n"
+                        + "}\n",
+                givenName,
+                givenInitialOptionsAudio,
+                givenInitialOptionsVideo,
+                givenInitialOptionsMuted,
+                givenInitialOptionsCameraFacingMode);
 
-        String givenResponse = String.format("{\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"initialOptions\": {\n" +
-                                                 "        \"audio\": %b,\n" +
-                                                 "        \"video\": %b,\n" +
-                                                 "        \"muted\": %b,\n" +
-                                                 "        \"cameraFacingMode\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"callOptions\": {\n" +
-                                                 "        \"mute\": %b,\n" +
-                                                 "        \"screenShare\": %b,\n" +
-                                                 "        \"switchCameraFacingMode\": %b,\n" +
-                                                 "        \"dialPad\": %b\n" +
-                                                 "      },\n" +
-                                                 "      \"theme\": {\n" +
-                                                 "        \"images\": {\n" +
-                                                 "          \"logoImageId\": \"%s\",\n" +
-                                                 "          \"backgroundImageId\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"messages\": {\n" +
-                                                 "          \"welcomeText\": \"%s\",\n" +
-                                                 "          \"inactiveText\": \"%s\",\n" +
-                                                 "          \"expirationText\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"colors\": {\n" +
-                                                 "          \"primary\": \"%s\",\n" +
-                                                 "          \"primaryText\": \"%s\",\n" +
-                                                 "          \"background\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      }\n" +
-                                                 "}\n",
-                                             givenId,
-                                             givenName,
-                                             givenInitialOptionsAudio,
-                                             givenInitialOptionsVideo,
-                                             givenInitialOptionsMuted,
-                                             givenInitialOptionsCameraFacingMode,
-                                             givenCallOptionsMute,
-                                             givenCallOptionsScreenShare,
-                                             givenCallOptionsSwitchCameraFacingMode,
-                                             givenCallOptionsDialPad,
-                                             givenThemeImagesLogoImageId,
-                                             givenThemeImagesBackgroundImageId,
-                                             givenThemeMessagesWelcomeText,
-                                             givenThemeMessagesInactiveText,
-                                             givenThemeMessagesExpirationText,
-                                             givenThemeColorsPrimary,
-                                             givenThemeColorsPrimaryText,
-                                             givenThemeColorsBackground
-        );
+        String givenResponse = String.format(
+                "{\n" + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"initialOptions\": {\n"
+                        + "        \"audio\": %b,\n"
+                        + "        \"video\": %b,\n"
+                        + "        \"muted\": %b,\n"
+                        + "        \"cameraFacingMode\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"callOptions\": {\n"
+                        + "        \"mute\": %b,\n"
+                        + "        \"screenShare\": %b,\n"
+                        + "        \"switchCameraFacingMode\": %b,\n"
+                        + "        \"dialPad\": %b\n"
+                        + "      },\n"
+                        + "      \"theme\": {\n"
+                        + "        \"images\": {\n"
+                        + "          \"logoImageId\": \"%s\",\n"
+                        + "          \"backgroundImageId\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"messages\": {\n"
+                        + "          \"welcomeText\": \"%s\",\n"
+                        + "          \"inactiveText\": \"%s\",\n"
+                        + "          \"expirationText\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"colors\": {\n"
+                        + "          \"primary\": \"%s\",\n"
+                        + "          \"primaryText\": \"%s\",\n"
+                        + "          \"background\": \"%s\"\n"
+                        + "        }\n"
+                        + "      }\n"
+                        + "}\n",
+                givenId,
+                givenName,
+                givenInitialOptionsAudio,
+                givenInitialOptionsVideo,
+                givenInitialOptionsMuted,
+                givenInitialOptionsCameraFacingMode,
+                givenCallOptionsMute,
+                givenCallOptionsScreenShare,
+                givenCallOptionsSwitchCameraFacingMode,
+                givenCallOptionsDialPad,
+                givenThemeImagesLogoImageId,
+                givenThemeImagesBackgroundImageId,
+                givenThemeMessagesWelcomeText,
+                givenThemeMessagesInactiveText,
+                givenThemeMessagesExpirationText,
+                givenThemeColorsPrimary,
+                givenThemeColorsPrimaryText,
+                givenThemeColorsBackground);
 
-        setUpSuccessPutRequest(
-            CONFIG.replace("{id}", givenId),
-            Map.of(),
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPutRequest(CONFIG.replace("{id}", givenId), Map.of(), expectedRequest, givenResponse);
 
         var request = new WebRtcCallLinkConfigRequest()
-            .name(givenName)
-            .initialOptions(new WebRtcInitialOptions()
-                                .audio(givenInitialOptionsAudio)
-                                .video(givenInitialOptionsVideo)
-                                .muted(givenInitialOptionsMuted)
-                                .cameraFacingMode(givenInitialOptionsCameraFacingMode));
+                .name(givenName)
+                .initialOptions(new WebRtcInitialOptions()
+                        .audio(givenInitialOptionsAudio)
+                        .video(givenInitialOptionsVideo)
+                        .muted(givenInitialOptionsMuted)
+                        .cameraFacingMode(givenInitialOptionsCameraFacingMode));
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var expectedResponse = new WebRtcCallLinkConfig()
-            .id(givenId)
-            .name(givenName)
-            .initialOptions(new WebRtcInitialOptions()
-                                .audio(givenInitialOptionsAudio)
-                                .video(givenInitialOptionsVideo)
-                                .muted(givenInitialOptionsMuted)
-                                .cameraFacingMode(givenInitialOptionsCameraFacingMode))
-            .callOptions(new WebRtcCallOptions()
-                             .mute(givenCallOptionsMute)
-                             .screenShare(givenCallOptionsScreenShare)
-                             .switchCameraFacingMode(givenCallOptionsSwitchCameraFacingMode)
-                             .dialPad(givenCallOptionsDialPad))
-            .theme(new WebRtcTheme()
-                       .images(new WebRtcImages()
-                                   .logoImageId(givenThemeImagesLogoImageId)
-                                   .backgroundImageId(givenThemeImagesBackgroundImageId))
-                       .messages(new WebRtcMessages()
-                                     .welcomeText(givenThemeMessagesWelcomeText)
-                                     .inactiveText(givenThemeMessagesInactiveText)
-                                     .expirationText(givenThemeMessagesExpirationText))
-                       .colors(new WebRtcColors()
-                                   .primary(givenThemeColorsPrimary)
-                                   .primaryText(givenThemeColorsPrimaryText)
-                                   .background(givenThemeColorsBackground)));
+                .id(givenId)
+                .name(givenName)
+                .initialOptions(new WebRtcInitialOptions()
+                        .audio(givenInitialOptionsAudio)
+                        .video(givenInitialOptionsVideo)
+                        .muted(givenInitialOptionsMuted)
+                        .cameraFacingMode(givenInitialOptionsCameraFacingMode))
+                .callOptions(new WebRtcCallOptions()
+                        .mute(givenCallOptionsMute)
+                        .screenShare(givenCallOptionsScreenShare)
+                        .switchCameraFacingMode(givenCallOptionsSwitchCameraFacingMode)
+                        .dialPad(givenCallOptionsDialPad))
+                .theme(new WebRtcTheme()
+                        .images(new WebRtcImages()
+                                .logoImageId(givenThemeImagesLogoImageId)
+                                .backgroundImageId(givenThemeImagesBackgroundImageId))
+                        .messages(new WebRtcMessages()
+                                .welcomeText(givenThemeMessagesWelcomeText)
+                                .inactiveText(givenThemeMessagesInactiveText)
+                                .expirationText(givenThemeMessagesExpirationText))
+                        .colors(new WebRtcColors()
+                                .primary(givenThemeColorsPrimary)
+                                .primaryText(givenThemeColorsPrimaryText)
+                                .background(givenThemeColorsBackground)));
 
         Consumer<WebRtcCallLinkConfig> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -1378,92 +1240,86 @@ class CallLinkApiTest extends ApiTest {
         var givenThemeColorsPrimaryText = "242424";
         var givenThemeColorsBackground = "FFFFFF";
 
-        String givenResponse = String.format("{\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"initialOptions\": {\n" +
-                                                 "        \"audio\": %b,\n" +
-                                                 "        \"video\": %b,\n" +
-                                                 "        \"muted\": %b,\n" +
-                                                 "        \"cameraFacingMode\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"callOptions\": {\n" +
-                                                 "        \"mute\": %b,\n" +
-                                                 "        \"screenShare\": %b,\n" +
-                                                 "        \"switchCameraFacingMode\": %b,\n" +
-                                                 "        \"dialPad\": %b\n" +
-                                                 "      },\n" +
-                                                 "      \"theme\": {\n" +
-                                                 "        \"images\": {\n" +
-                                                 "          \"logoImageId\": \"%s\",\n" +
-                                                 "          \"backgroundImageId\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"messages\": {\n" +
-                                                 "          \"welcomeText\": \"%s\",\n" +
-                                                 "          \"inactiveText\": \"%s\",\n" +
-                                                 "          \"expirationText\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"colors\": {\n" +
-                                                 "          \"primary\": \"%s\",\n" +
-                                                 "          \"primaryText\": \"%s\",\n" +
-                                                 "          \"background\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      }\n" +
-                                                 "}\n",
-                                             givenId,
-                                             givenName,
-                                             givenInitialOptionsAudio,
-                                             givenInitialOptionsVideo,
-                                             givenInitialOptionsMuted,
-                                             givenInitialOptionsCameraFacingMode,
-                                             givenCallOptionsMute,
-                                             givenCallOptionsScreenShare,
-                                             givenCallOptionsSwitchCameraFacingMode,
-                                             givenCallOptionsDialPad,
-                                             givenThemeImagesLogoImageId,
-                                             givenThemeImagesBackgroundImageId,
-                                             givenThemeMessagesWelcomeText,
-                                             givenThemeMessagesInactiveText,
-                                             givenThemeMessagesExpirationText,
-                                             givenThemeColorsPrimary,
-                                             givenThemeColorsPrimaryText,
-                                             givenThemeColorsBackground
-        );
+        String givenResponse = String.format(
+                "{\n" + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"initialOptions\": {\n"
+                        + "        \"audio\": %b,\n"
+                        + "        \"video\": %b,\n"
+                        + "        \"muted\": %b,\n"
+                        + "        \"cameraFacingMode\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"callOptions\": {\n"
+                        + "        \"mute\": %b,\n"
+                        + "        \"screenShare\": %b,\n"
+                        + "        \"switchCameraFacingMode\": %b,\n"
+                        + "        \"dialPad\": %b\n"
+                        + "      },\n"
+                        + "      \"theme\": {\n"
+                        + "        \"images\": {\n"
+                        + "          \"logoImageId\": \"%s\",\n"
+                        + "          \"backgroundImageId\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"messages\": {\n"
+                        + "          \"welcomeText\": \"%s\",\n"
+                        + "          \"inactiveText\": \"%s\",\n"
+                        + "          \"expirationText\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"colors\": {\n"
+                        + "          \"primary\": \"%s\",\n"
+                        + "          \"primaryText\": \"%s\",\n"
+                        + "          \"background\": \"%s\"\n"
+                        + "        }\n"
+                        + "      }\n"
+                        + "}\n",
+                givenId,
+                givenName,
+                givenInitialOptionsAudio,
+                givenInitialOptionsVideo,
+                givenInitialOptionsMuted,
+                givenInitialOptionsCameraFacingMode,
+                givenCallOptionsMute,
+                givenCallOptionsScreenShare,
+                givenCallOptionsSwitchCameraFacingMode,
+                givenCallOptionsDialPad,
+                givenThemeImagesLogoImageId,
+                givenThemeImagesBackgroundImageId,
+                givenThemeMessagesWelcomeText,
+                givenThemeMessagesInactiveText,
+                givenThemeMessagesExpirationText,
+                givenThemeColorsPrimary,
+                givenThemeColorsPrimaryText,
+                givenThemeColorsBackground);
 
-        setUpNoRequestBodyDeleteRequest(
-            CONFIG.replace("{id}", givenId),
-            Map.of(),
-            givenResponse,
-            200
-        );
+        setUpNoRequestBodyDeleteRequest(CONFIG.replace("{id}", givenId), Map.of(), givenResponse, 200);
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var expectedResponse = new WebRtcCallLinkConfig()
-            .id(givenId)
-            .name(givenName)
-            .initialOptions(new WebRtcInitialOptions()
-                                .audio(givenInitialOptionsAudio)
-                                .video(givenInitialOptionsVideo)
-                                .muted(givenInitialOptionsMuted)
-                                .cameraFacingMode(givenInitialOptionsCameraFacingMode))
-            .callOptions(new WebRtcCallOptions()
-                             .mute(givenCallOptionsMute)
-                             .screenShare(givenCallOptionsScreenShare)
-                             .switchCameraFacingMode(givenCallOptionsSwitchCameraFacingMode)
-                             .dialPad(givenCallOptionsDialPad))
-            .theme(new WebRtcTheme()
-                       .images(new WebRtcImages()
-                                   .logoImageId(givenThemeImagesLogoImageId)
-                                   .backgroundImageId(givenThemeImagesBackgroundImageId))
-                       .messages(new WebRtcMessages()
-                                     .welcomeText(givenThemeMessagesWelcomeText)
-                                     .inactiveText(givenThemeMessagesInactiveText)
-                                     .expirationText(givenThemeMessagesExpirationText))
-                       .colors(new WebRtcColors()
-                                   .primary(givenThemeColorsPrimary)
-                                   .primaryText(givenThemeColorsPrimaryText)
-                                   .background(givenThemeColorsBackground)));
+                .id(givenId)
+                .name(givenName)
+                .initialOptions(new WebRtcInitialOptions()
+                        .audio(givenInitialOptionsAudio)
+                        .video(givenInitialOptionsVideo)
+                        .muted(givenInitialOptionsMuted)
+                        .cameraFacingMode(givenInitialOptionsCameraFacingMode))
+                .callOptions(new WebRtcCallOptions()
+                        .mute(givenCallOptionsMute)
+                        .screenShare(givenCallOptionsScreenShare)
+                        .switchCameraFacingMode(givenCallOptionsSwitchCameraFacingMode)
+                        .dialPad(givenCallOptionsDialPad))
+                .theme(new WebRtcTheme()
+                        .images(new WebRtcImages()
+                                .logoImageId(givenThemeImagesLogoImageId)
+                                .backgroundImageId(givenThemeImagesBackgroundImageId))
+                        .messages(new WebRtcMessages()
+                                .welcomeText(givenThemeMessagesWelcomeText)
+                                .inactiveText(givenThemeMessagesInactiveText)
+                                .expirationText(givenThemeMessagesExpirationText))
+                        .colors(new WebRtcColors()
+                                .primary(givenThemeColorsPrimary)
+                                .primaryText(givenThemeColorsPrimaryText)
+                                .background(givenThemeColorsBackground)));
 
         Consumer<WebRtcCallLinkConfig> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -1494,117 +1350,109 @@ class CallLinkApiTest extends ApiTest {
         var givenThemeColorsPrimaryText = "242424";
         var givenThemeColorsBackground = "FFFFFF";
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"name\": \"%s\",\n" +
-                                                   "  \"initialOptions\": {\n" +
-                                                   "    \"audio\": %b,\n" +
-                                                   "    \"video\": %b,\n" +
-                                                   "    \"muted\": %b,\n" +
-                                                   "    \"cameraFacingMode\": \"%s\"\n" +
-                                                   "  }\n" +
-                                                   "}\n",
-                                               givenName,
-                                               givenInitialOptionsAudio,
-                                               givenInitialOptionsVideo,
-                                               givenInitialOptionsMuted,
-                                               givenInitialOptionsCameraFacingMode
-        );
+        String expectedRequest = String.format(
+                "{\n" + "  \"name\": \"%s\",\n"
+                        + "  \"initialOptions\": {\n"
+                        + "    \"audio\": %b,\n"
+                        + "    \"video\": %b,\n"
+                        + "    \"muted\": %b,\n"
+                        + "    \"cameraFacingMode\": \"%s\"\n"
+                        + "  }\n"
+                        + "}\n",
+                givenName,
+                givenInitialOptionsAudio,
+                givenInitialOptionsVideo,
+                givenInitialOptionsMuted,
+                givenInitialOptionsCameraFacingMode);
 
-        String givenResponse = String.format("{\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"initialOptions\": {\n" +
-                                                 "        \"audio\": %b,\n" +
-                                                 "        \"video\": %b,\n" +
-                                                 "        \"muted\": %b,\n" +
-                                                 "        \"cameraFacingMode\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"callOptions\": {\n" +
-                                                 "        \"mute\": %b,\n" +
-                                                 "        \"screenShare\": %b,\n" +
-                                                 "        \"switchCameraFacingMode\": %b,\n" +
-                                                 "        \"dialPad\": %b\n" +
-                                                 "      },\n" +
-                                                 "      \"theme\": {\n" +
-                                                 "        \"images\": {\n" +
-                                                 "          \"logoImageId\": \"%s\",\n" +
-                                                 "          \"backgroundImageId\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"messages\": {\n" +
-                                                 "          \"welcomeText\": \"%s\",\n" +
-                                                 "          \"inactiveText\": \"%s\",\n" +
-                                                 "          \"expirationText\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"colors\": {\n" +
-                                                 "          \"primary\": \"%s\",\n" +
-                                                 "          \"primaryText\": \"%s\",\n" +
-                                                 "          \"background\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      }\n" +
-                                                 "}\n",
-                                             givenId,
-                                             givenName,
-                                             givenInitialOptionsAudio,
-                                             givenInitialOptionsVideo,
-                                             givenInitialOptionsMuted,
-                                             givenInitialOptionsCameraFacingMode,
-                                             givenCallOptionsMute,
-                                             givenCallOptionsScreenShare,
-                                             givenCallOptionsSwitchCameraFacingMode,
-                                             givenCallOptionsDialPad,
-                                             givenThemeImagesLogoImageId,
-                                             givenThemeImagesBackgroundImageId,
-                                             givenThemeMessagesWelcomeText,
-                                             givenThemeMessagesInactiveText,
-                                             givenThemeMessagesExpirationText,
-                                             givenThemeColorsPrimary,
-                                             givenThemeColorsPrimaryText,
-                                             givenThemeColorsBackground
-        );
+        String givenResponse = String.format(
+                "{\n" + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"initialOptions\": {\n"
+                        + "        \"audio\": %b,\n"
+                        + "        \"video\": %b,\n"
+                        + "        \"muted\": %b,\n"
+                        + "        \"cameraFacingMode\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"callOptions\": {\n"
+                        + "        \"mute\": %b,\n"
+                        + "        \"screenShare\": %b,\n"
+                        + "        \"switchCameraFacingMode\": %b,\n"
+                        + "        \"dialPad\": %b\n"
+                        + "      },\n"
+                        + "      \"theme\": {\n"
+                        + "        \"images\": {\n"
+                        + "          \"logoImageId\": \"%s\",\n"
+                        + "          \"backgroundImageId\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"messages\": {\n"
+                        + "          \"welcomeText\": \"%s\",\n"
+                        + "          \"inactiveText\": \"%s\",\n"
+                        + "          \"expirationText\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"colors\": {\n"
+                        + "          \"primary\": \"%s\",\n"
+                        + "          \"primaryText\": \"%s\",\n"
+                        + "          \"background\": \"%s\"\n"
+                        + "        }\n"
+                        + "      }\n"
+                        + "}\n",
+                givenId,
+                givenName,
+                givenInitialOptionsAudio,
+                givenInitialOptionsVideo,
+                givenInitialOptionsMuted,
+                givenInitialOptionsCameraFacingMode,
+                givenCallOptionsMute,
+                givenCallOptionsScreenShare,
+                givenCallOptionsSwitchCameraFacingMode,
+                givenCallOptionsDialPad,
+                givenThemeImagesLogoImageId,
+                givenThemeImagesBackgroundImageId,
+                givenThemeMessagesWelcomeText,
+                givenThemeMessagesInactiveText,
+                givenThemeMessagesExpirationText,
+                givenThemeColorsPrimary,
+                givenThemeColorsPrimaryText,
+                givenThemeColorsBackground);
 
-        setUpPatchRequest(
-            CONFIG.replace("{id}", givenId),
-            Map.of(),
-            expectedRequest,
-            givenResponse,
-            200
-        );
+        setUpPatchRequest(CONFIG.replace("{id}", givenId), Map.of(), expectedRequest, givenResponse, 200);
 
         var request = new WebRtcCallLinkConfigRequest()
-            .name(givenName)
-            .initialOptions(new WebRtcInitialOptions()
-                                .audio(givenInitialOptionsAudio)
-                                .video(givenInitialOptionsVideo)
-                                .muted(givenInitialOptionsMuted)
-                                .cameraFacingMode(givenInitialOptionsCameraFacingMode));
+                .name(givenName)
+                .initialOptions(new WebRtcInitialOptions()
+                        .audio(givenInitialOptionsAudio)
+                        .video(givenInitialOptionsVideo)
+                        .muted(givenInitialOptionsMuted)
+                        .cameraFacingMode(givenInitialOptionsCameraFacingMode));
 
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var expectedResponse = new WebRtcCallLinkConfig()
-            .id(givenId)
-            .name(givenName)
-            .initialOptions(new WebRtcInitialOptions()
-                                .audio(givenInitialOptionsAudio)
-                                .video(givenInitialOptionsVideo)
-                                .muted(givenInitialOptionsMuted)
-                                .cameraFacingMode(givenInitialOptionsCameraFacingMode))
-            .callOptions(new WebRtcCallOptions()
-                             .mute(givenCallOptionsMute)
-                             .screenShare(givenCallOptionsScreenShare)
-                             .switchCameraFacingMode(givenCallOptionsSwitchCameraFacingMode)
-                             .dialPad(givenCallOptionsDialPad))
-            .theme(new WebRtcTheme()
-                       .images(new WebRtcImages()
-                                   .logoImageId(givenThemeImagesLogoImageId)
-                                   .backgroundImageId(givenThemeImagesBackgroundImageId))
-                       .messages(new WebRtcMessages()
-                                     .welcomeText(givenThemeMessagesWelcomeText)
-                                     .inactiveText(givenThemeMessagesInactiveText)
-                                     .expirationText(givenThemeMessagesExpirationText))
-                       .colors(new WebRtcColors()
-                                   .primary(givenThemeColorsPrimary)
-                                   .primaryText(givenThemeColorsPrimaryText)
-                                   .background(givenThemeColorsBackground)));
+                .id(givenId)
+                .name(givenName)
+                .initialOptions(new WebRtcInitialOptions()
+                        .audio(givenInitialOptionsAudio)
+                        .video(givenInitialOptionsVideo)
+                        .muted(givenInitialOptionsMuted)
+                        .cameraFacingMode(givenInitialOptionsCameraFacingMode))
+                .callOptions(new WebRtcCallOptions()
+                        .mute(givenCallOptionsMute)
+                        .screenShare(givenCallOptionsScreenShare)
+                        .switchCameraFacingMode(givenCallOptionsSwitchCameraFacingMode)
+                        .dialPad(givenCallOptionsDialPad))
+                .theme(new WebRtcTheme()
+                        .images(new WebRtcImages()
+                                .logoImageId(givenThemeImagesLogoImageId)
+                                .backgroundImageId(givenThemeImagesBackgroundImageId))
+                        .messages(new WebRtcMessages()
+                                .welcomeText(givenThemeMessagesWelcomeText)
+                                .inactiveText(givenThemeMessagesInactiveText)
+                                .expirationText(givenThemeMessagesExpirationText))
+                        .colors(new WebRtcColors()
+                                .primary(givenThemeColorsPrimary)
+                                .primaryText(givenThemeColorsPrimaryText)
+                                .background(givenThemeColorsBackground)));
 
         Consumer<WebRtcCallLinkConfig> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -1613,5 +1461,4 @@ class CallLinkApiTest extends ApiTest {
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
-
 }

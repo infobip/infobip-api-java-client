@@ -1,18 +1,17 @@
 package com.infobip.api;
 
+import static com.infobip.api.util.ResponseStatuses.*;
+import static org.assertj.core.api.BDDAssertions.then;
+
 import com.infobip.JSON;
 import com.infobip.model.*;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
-import static com.infobip.api.util.ResponseStatuses.*;
-import static org.assertj.core.api.BDDAssertions.then;
+import org.junit.jupiter.api.Test;
 
 class SmsApiTest extends ApiTest {
 
@@ -36,42 +35,31 @@ class SmsApiTest extends ApiTest {
         String givenFrom = "InfoSMS";
         String givenText = "This is a sample message";
 
-        String expectedRequest = String.format("{" +
-                                                   "  \"messages\": [" +
-                                                   "    {" +
-                                                   "      \"from\": \"%s\"," +
-                                                   "      \"destinations\": [" +
-                                                   "        {" +
-                                                   "          \"to\": \"%s\"" +
-                                                   "        }" +
-                                                   "      ]," +
-                                                   "      \"text\": \"%s\"" +
-                                                   "    }" +
-                                                   "  ]" +
-                                                   "}",
-                                               givenFrom,
-                                               givenTo,
-                                               givenText
-        );
+        String expectedRequest = String.format(
+                "{" + "  \"messages\": ["
+                        + "    {"
+                        + "      \"from\": \"%s\","
+                        + "      \"destinations\": ["
+                        + "        {"
+                        + "          \"to\": \"%s\""
+                        + "        }"
+                        + "      ],"
+                        + "      \"text\": \"%s\""
+                        + "    }"
+                        + "  ]"
+                        + "}",
+                givenFrom, givenTo, givenText);
 
-        setUpSuccessPostRequest(
-            TEXT_ADVANCED,
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(TEXT_ADVANCED, expectedRequest, givenResponse);
 
         SmsApi sendSmsApi = new SmsApi(getApiClient());
 
-        SmsDestination destination = new SmsDestination()
-            .to(givenTo);
+        SmsDestination destination = new SmsDestination().to(givenTo);
 
-        SmsTextualMessage message = new SmsTextualMessage()
-            .from(givenFrom)
-            .text(givenText)
-            .destinations(List.of(destination));
+        SmsTextualMessage message =
+                new SmsTextualMessage().from(givenFrom).text(givenText).destinations(List.of(destination));
 
-        SmsAdvancedTextualRequest request = new SmsAdvancedTextualRequest()
-            .messages(List.of(message));
+        SmsAdvancedTextualRequest request = new SmsAdvancedTextualRequest().messages(List.of(message));
 
         Consumer<SmsResponse> assertions = (smsResponse) -> {
             then(smsResponse).isNotNull();
@@ -99,41 +87,35 @@ class SmsApiTest extends ApiTest {
         String givenText = "Toto, I've got a feeling we're not in Kansas anymore.";
         boolean isFlash = true;
 
-        String expectedRequest = String.format("{" +
-                                                   "  \"messages\": [" +
-                                                   "    {" +
-                                                   "      \"from\": \"%s\"," +
-                                                   "      \"destinations\": [" +
-                                                   "        {" +
-                                                   "          \"to\": \"%s\"" +
-                                                   "        }" +
-                                                   "      ]," +
-                                                   "      \"text\": \"%s\"," +
-                                                   "      \"flash\": %b" +
-                                                   "    }" +
-                                                   "  ]" +
-                                                   "}",
-                                               givenFrom,
-                                               givenTo,
-                                               givenText,
-                                               isFlash
-        );
+        String expectedRequest = String.format(
+                "{" + "  \"messages\": ["
+                        + "    {"
+                        + "      \"from\": \"%s\","
+                        + "      \"destinations\": ["
+                        + "        {"
+                        + "          \"to\": \"%s\""
+                        + "        }"
+                        + "      ],"
+                        + "      \"text\": \"%s\","
+                        + "      \"flash\": %b"
+                        + "    }"
+                        + "  ]"
+                        + "}",
+                givenFrom, givenTo, givenText, isFlash);
 
         setUpSuccessPostRequest(TEXT_ADVANCED, expectedRequest, givenResponse);
 
         SmsApi sendSmsApi = new SmsApi(getApiClient());
 
-        SmsDestination destination = new SmsDestination()
-            .to(givenTo);
+        SmsDestination destination = new SmsDestination().to(givenTo);
 
         SmsTextualMessage message = new SmsTextualMessage()
-            .from(givenFrom)
-            .text(givenText)
-            .destinations(List.of(destination))
-            .flash(isFlash);
+                .from(givenFrom)
+                .text(givenText)
+                .destinations(List.of(destination))
+                .flash(isFlash);
 
-        SmsAdvancedTextualRequest request = new SmsAdvancedTextualRequest()
-            .messages(List.of(message));
+        SmsAdvancedTextualRequest request = new SmsAdvancedTextualRequest().messages(List.of(message));
 
         Consumer<SmsResponse> assertions = (smsResponse) -> {
             then(smsResponse).isNotNull();
@@ -186,91 +168,90 @@ class SmsApiTest extends ApiTest {
         var givenResellerCode = 10;
         String givenSouthKoreaTitle = "SouthKoreaTitle";
 
-        String expectedMessage = String.format("{\n" +
-                                                   "    \"callbackData\": \"%s\",\n" +
-                                                   "    \"deliveryTimeWindow\": {\n" +
-                                                   "        \"days\": [\n" +
-                                                   "            \"%s\",\n" +
-                                                   "            \"%s\"\n" +
-                                                   "        ],\n" +
-                                                   "        \"from\": {\n" +
-                                                   "            \"hour\": %d,\n" +
-                                                   "            \"minute\": %d\n" +
-                                                   "        },\n" +
-                                                   "        \"to\": {\n" +
-                                                   "            \"hour\": %d,\n" +
-                                                   "            \"minute\": %d\n" +
-                                                   "        }\n" +
-                                                   "    },\n" +
-                                                   "    \"destinations\": [\n" +
-                                                   "        {\n" +
-                                                   "            \"messageId\": \"%s\",\n" +
-                                                   "            \"to\": \"%s\"\n" +
-                                                   "        },\n" +
-                                                   "        {\n" +
-                                                   "            \"messageId\": \"%s\",\n" +
-                                                   "            \"to\": \"%s\"\n" +
-                                                   "        }\n" +
-                                                   "    ],\n" +
-                                                   "    \"flash\": %b,\n" +
-                                                   "    \"from\": \"%s\",\n" +
-                                                   "    \"intermediateReport\": %b,\n" +
-                                                   "    \"language\": {\n" +
-                                                   "        \"languageCode\": \"%s\"\n" +
-                                                   "    },\n" +
-                                                   "    \"notifyContentType\": \"%s\",\n" +
-                                                   "    \"notifyUrl\": \"%s\",\n" +
-                                                   "    \"regional\": {\n" +
-                                                   "        \"indiaDlt\": {\n" +
-                                                   "            \"contentTemplateId\": \"%s\",\n" +
-                                                   "            \"principalEntityId\": \"%s\"\n" +
-                                                   "        },\n" +
-                                                   "        \"turkeyIys\": {\n" +
-                                                   "            \"brandCode\": %d,\n" +
-                                                   "            \"recipientType\": \"%s\"\n" +
-                                                   "        },\n" +
-                                                   "        \"southKorea\": {\n" +
-                                                   "            \"resellerCode\": %d,\n" +
-                                                   "            \"title\": \"%s\"\n" +
-                                                   "        }\n" +
-                                                   "    },\n" +
-                                                   "    \"sendAt\": \"%s\",\n" +
-                                                   "    \"text\": \"%s\",\n" +
-                                                   "    \"transliteration\": \"%s\",\n" +
-                                                   "    \"validityPeriod\": %d,\n" +
-                                                   "    \"entityId\": \"%s\",\n" +
-                                                   "    \"applicationId\": \"%s\"\n" +
-                                                   "}\n",
-                                               givenCallbackData,
-                                               deliveryTimeWindowDayMondayString,
-                                               deliveryTimeWindowDaySundayString,
-                                               deliveryTimeWindowFromHours,
-                                               deliveryTimeWindowFromMinutes,
-                                               deliveryTimeWindowToHours,
-                                               deliveryTimeWindowToMinutes,
-                                               givenFirstDestinationMessageId,
-                                               givenFirstDestination,
-                                               givenSecondDestinationMessageId,
-                                               givenSecondDestination,
-                                               givenFlash,
-                                               givenFrom,
-                                               givenIntermediateReport,
-                                               givenLanguageCode,
-                                               givenNotifyContentType,
-                                               givenNotifyUrl,
-                                               givenIndiaDltContentTemplateId,
-                                               givenIndiaDltPrincipalEntityId,
-                                               givenTurkeyIysBrandCode,
-                                               givenTurkeyIysRecipientTypeString,
-                                               givenResellerCode,
-                                               givenSouthKoreaTitle,
-                                               givenSendAtString,
-                                               givenText,
-                                               givenTransliteration,
-                                               givenValidityPeriod,
-                                               givenEntityId,
-                                               givenApplicationId
-        );
+        String expectedMessage = String.format(
+                "{\n" + "    \"callbackData\": \"%s\",\n"
+                        + "    \"deliveryTimeWindow\": {\n"
+                        + "        \"days\": [\n"
+                        + "            \"%s\",\n"
+                        + "            \"%s\"\n"
+                        + "        ],\n"
+                        + "        \"from\": {\n"
+                        + "            \"hour\": %d,\n"
+                        + "            \"minute\": %d\n"
+                        + "        },\n"
+                        + "        \"to\": {\n"
+                        + "            \"hour\": %d,\n"
+                        + "            \"minute\": %d\n"
+                        + "        }\n"
+                        + "    },\n"
+                        + "    \"destinations\": [\n"
+                        + "        {\n"
+                        + "            \"messageId\": \"%s\",\n"
+                        + "            \"to\": \"%s\"\n"
+                        + "        },\n"
+                        + "        {\n"
+                        + "            \"messageId\": \"%s\",\n"
+                        + "            \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "    ],\n"
+                        + "    \"flash\": %b,\n"
+                        + "    \"from\": \"%s\",\n"
+                        + "    \"intermediateReport\": %b,\n"
+                        + "    \"language\": {\n"
+                        + "        \"languageCode\": \"%s\"\n"
+                        + "    },\n"
+                        + "    \"notifyContentType\": \"%s\",\n"
+                        + "    \"notifyUrl\": \"%s\",\n"
+                        + "    \"regional\": {\n"
+                        + "        \"indiaDlt\": {\n"
+                        + "            \"contentTemplateId\": \"%s\",\n"
+                        + "            \"principalEntityId\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"turkeyIys\": {\n"
+                        + "            \"brandCode\": %d,\n"
+                        + "            \"recipientType\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"southKorea\": {\n"
+                        + "            \"resellerCode\": %d,\n"
+                        + "            \"title\": \"%s\"\n"
+                        + "        }\n"
+                        + "    },\n"
+                        + "    \"sendAt\": \"%s\",\n"
+                        + "    \"text\": \"%s\",\n"
+                        + "    \"transliteration\": \"%s\",\n"
+                        + "    \"validityPeriod\": %d,\n"
+                        + "    \"entityId\": \"%s\",\n"
+                        + "    \"applicationId\": \"%s\"\n"
+                        + "}\n",
+                givenCallbackData,
+                deliveryTimeWindowDayMondayString,
+                deliveryTimeWindowDaySundayString,
+                deliveryTimeWindowFromHours,
+                deliveryTimeWindowFromMinutes,
+                deliveryTimeWindowToHours,
+                deliveryTimeWindowToMinutes,
+                givenFirstDestinationMessageId,
+                givenFirstDestination,
+                givenSecondDestinationMessageId,
+                givenSecondDestination,
+                givenFlash,
+                givenFrom,
+                givenIntermediateReport,
+                givenLanguageCode,
+                givenNotifyContentType,
+                givenNotifyUrl,
+                givenIndiaDltContentTemplateId,
+                givenIndiaDltPrincipalEntityId,
+                givenTurkeyIysBrandCode,
+                givenTurkeyIysRecipientTypeString,
+                givenResellerCode,
+                givenSouthKoreaTitle,
+                givenSendAtString,
+                givenText,
+                givenTransliteration,
+                givenValidityPeriod,
+                givenEntityId,
+                givenApplicationId);
 
         String givenBulkId = "BULK-ID-123-xyz";
         int givenSendingSpeedLimitAmount = 10;
@@ -286,131 +267,114 @@ class SmsApiTest extends ApiTest {
         String givenTrackingBaseUrl = "https://example.com";
         String givenTrackingProcessKey = "123";
 
-        String expectedRequest = String.format("{\n" +
-                                                   "    \"bulkId\": \"%s\",\n" +
-                                                   "    \"messages\": [\n" +
-                                                   "        %s\n" +
-                                                   "    ],\n" +
-                                                   "    \"sendingSpeedLimit\": {\n" +
-                                                   "        \"amount\": %d,\n" +
-                                                   "        \"timeUnit\": \"%s\"\n" +
-                                                   "    },\n" +
-                                                   "    \"urlOptions\": {\n" +
-                                                   "        \"shortenUrl\": %b,\n" +
-                                                   "        \"trackClicks\": %b,\n" +
-                                                   "        \"trackingUrl\": \"%s\",\n" +
-                                                   "        \"removeProtocol\": %b,\n" +
-                                                   "        \"customDomain\": \"%s\"\n" +
-                                                   "    },\n" +
-                                                   "    \"tracking\": {\n" +
-                                                   "        \"baseUrl\": \"%s\",\n" +
-                                                   "        \"processKey\": \"%s\",\n" +
-                                                   "        \"track\": \"%s\",\n" +
-                                                   "        \"type\": \"%s\"\n" +
-                                                   "    }\n" +
-                                                   "}",
-                                               givenBulkId,
-                                               expectedMessage,
-                                               givenSendingSpeedLimitAmount,
-                                               givenSendingSpeedLimitTimeUnitString,
-                                               givenUrlOptionsShortenUrl,
-                                               givenUrlOptionsTrackClicks,
-                                               givenUrlOptionsTrackingUrl,
-                                               givenUrlOptionsRemoveProtocol,
-                                               givenUrlOptionsCustomDomain,
-                                               givenTrackingBaseUrl,
-                                               givenTrackingProcessKey,
-                                               givenTracking,
-                                               givenTrackingType
-        );
+        String expectedRequest = String.format(
+                "{\n" + "    \"bulkId\": \"%s\",\n"
+                        + "    \"messages\": [\n"
+                        + "        %s\n"
+                        + "    ],\n"
+                        + "    \"sendingSpeedLimit\": {\n"
+                        + "        \"amount\": %d,\n"
+                        + "        \"timeUnit\": \"%s\"\n"
+                        + "    },\n"
+                        + "    \"urlOptions\": {\n"
+                        + "        \"shortenUrl\": %b,\n"
+                        + "        \"trackClicks\": %b,\n"
+                        + "        \"trackingUrl\": \"%s\",\n"
+                        + "        \"removeProtocol\": %b,\n"
+                        + "        \"customDomain\": \"%s\"\n"
+                        + "    },\n"
+                        + "    \"tracking\": {\n"
+                        + "        \"baseUrl\": \"%s\",\n"
+                        + "        \"processKey\": \"%s\",\n"
+                        + "        \"track\": \"%s\",\n"
+                        + "        \"type\": \"%s\"\n"
+                        + "    }\n"
+                        + "}",
+                givenBulkId,
+                expectedMessage,
+                givenSendingSpeedLimitAmount,
+                givenSendingSpeedLimitTimeUnitString,
+                givenUrlOptionsShortenUrl,
+                givenUrlOptionsTrackClicks,
+                givenUrlOptionsTrackingUrl,
+                givenUrlOptionsRemoveProtocol,
+                givenUrlOptionsCustomDomain,
+                givenTrackingBaseUrl,
+                givenTrackingProcessKey,
+                givenTracking,
+                givenTrackingType);
 
         String givenResponse = givenPendingResponse(
-            givenBulkId,
-            givenFirstDestination,
-            givenFirstDestinationMessageId,
-            givenSecondDestination,
-            givenSecondDestinationMessageId
-        );
+                givenBulkId,
+                givenFirstDestination,
+                givenFirstDestinationMessageId,
+                givenSecondDestination,
+                givenSecondDestinationMessageId);
 
         setUpSuccessPostRequest(TEXT_ADVANCED, expectedRequest, givenResponse);
 
         SmsApi sendSmsApi = new SmsApi(getApiClient());
 
         SmsDeliveryTimeWindow givenDeliveryTimeWindow = new SmsDeliveryTimeWindow()
-            .days(List.of(deliveryTimeWindowDayMonday, deliveryTimeWindowDaySunday))
-            .from(
-                new SmsDeliveryTimeFrom()
-                    .hour(deliveryTimeWindowFromHours)
-                    .minute(deliveryTimeWindowFromMinutes)
-            ).to(
-                new SmsDeliveryTimeTo()
-                    .hour(deliveryTimeWindowToHours)
-                    .minute(deliveryTimeWindowToMinutes)
-            );
+                .days(List.of(deliveryTimeWindowDayMonday, deliveryTimeWindowDaySunday))
+                .from(new SmsDeliveryTimeFrom()
+                        .hour(deliveryTimeWindowFromHours)
+                        .minute(deliveryTimeWindowFromMinutes))
+                .to(new SmsDeliveryTimeTo().hour(deliveryTimeWindowToHours).minute(deliveryTimeWindowToMinutes));
 
-        SmsDestination firstDestination = new SmsDestination()
-            .messageId(givenFirstDestinationMessageId)
-            .to(givenFirstDestination);
+        SmsDestination firstDestination =
+                new SmsDestination().messageId(givenFirstDestinationMessageId).to(givenFirstDestination);
 
-        SmsDestination secondDestination = new SmsDestination()
-            .messageId(givenSecondDestinationMessageId)
-            .to(givenSecondDestination);
+        SmsDestination secondDestination =
+                new SmsDestination().messageId(givenSecondDestinationMessageId).to(givenSecondDestination);
 
         SmsRegionalOptions regionalOptions = new SmsRegionalOptions()
-            .indiaDlt(
-                new SmsIndiaDltOptions()
-                    .contentTemplateId(givenIndiaDltContentTemplateId)
-                    .principalEntityId(givenIndiaDltPrincipalEntityId)
-            ).turkeyIys(
-                new SmsTurkeyIysOptions()
-                    .brandCode(givenTurkeyIysBrandCode)
-                    .recipientType(givenTurkeyIysRecipientType)
-            ).southKorea(
-                new SmsSouthKoreaOptions()
-                    .resellerCode(givenResellerCode)
-                    .title(givenSouthKoreaTitle)
-            );
+                .indiaDlt(new SmsIndiaDltOptions()
+                        .contentTemplateId(givenIndiaDltContentTemplateId)
+                        .principalEntityId(givenIndiaDltPrincipalEntityId))
+                .turkeyIys(new SmsTurkeyIysOptions()
+                        .brandCode(givenTurkeyIysBrandCode)
+                        .recipientType(givenTurkeyIysRecipientType))
+                .southKorea(new SmsSouthKoreaOptions()
+                        .resellerCode(givenResellerCode)
+                        .title(givenSouthKoreaTitle));
 
         SmsTextualMessage message = new SmsTextualMessage()
-            .callbackData(givenCallbackData)
-            .deliveryTimeWindow(givenDeliveryTimeWindow)
-            .addDestinationsItem(firstDestination)
-            .addDestinationsItem(secondDestination)
-            .flash(givenFlash)
-            .from(givenFrom)
-            .intermediateReport(givenIntermediateReport)
-            .language(new SmsLanguage().languageCode(givenLanguageCode))
-            .notifyContentType(givenNotifyContentType)
-            .notifyUrl(givenNotifyUrl)
-            .regional(regionalOptions)
-            .sendAt(givenSendAt)
-            .text(givenText)
-            .transliteration(givenTransliteration)
-            .validityPeriod(givenValidityPeriod)
-            .entityId(givenEntityId)
-            .applicationId(givenApplicationId);
+                .callbackData(givenCallbackData)
+                .deliveryTimeWindow(givenDeliveryTimeWindow)
+                .addDestinationsItem(firstDestination)
+                .addDestinationsItem(secondDestination)
+                .flash(givenFlash)
+                .from(givenFrom)
+                .intermediateReport(givenIntermediateReport)
+                .language(new SmsLanguage().languageCode(givenLanguageCode))
+                .notifyContentType(givenNotifyContentType)
+                .notifyUrl(givenNotifyUrl)
+                .regional(regionalOptions)
+                .sendAt(givenSendAt)
+                .text(givenText)
+                .transliteration(givenTransliteration)
+                .validityPeriod(givenValidityPeriod)
+                .entityId(givenEntityId)
+                .applicationId(givenApplicationId);
 
         SmsAdvancedTextualRequest request = new SmsAdvancedTextualRequest()
-            .bulkId(givenBulkId)
-            .addMessagesItem(message)
-            .sendingSpeedLimit(
-                new SmsSendingSpeedLimit()
-                    .amount(givenSendingSpeedLimitAmount)
-                    .timeUnit(givenSendingSpeedLimitTimeUnit)
-            ).urlOptions(
-                new SmsUrlOptions()
-                    .shortenUrl(givenUrlOptionsShortenUrl)
-                    .trackClicks(givenUrlOptionsTrackClicks)
-                    .trackingUrl(givenUrlOptionsTrackingUrl)
-                    .removeProtocol(givenUrlOptionsRemoveProtocol)
-                    .customDomain(givenUrlOptionsCustomDomain)
-            ).tracking(
-                new SmsTracking()
-                    .baseUrl(givenTrackingBaseUrl)
-                    .processKey(givenTrackingProcessKey)
-                    .track(givenTracking)
-                    .type(givenTrackingType)
-            );
+                .bulkId(givenBulkId)
+                .addMessagesItem(message)
+                .sendingSpeedLimit(new SmsSendingSpeedLimit()
+                        .amount(givenSendingSpeedLimitAmount)
+                        .timeUnit(givenSendingSpeedLimitTimeUnit))
+                .urlOptions(new SmsUrlOptions()
+                        .shortenUrl(givenUrlOptionsShortenUrl)
+                        .trackClicks(givenUrlOptionsTrackClicks)
+                        .trackingUrl(givenUrlOptionsTrackingUrl)
+                        .removeProtocol(givenUrlOptionsRemoveProtocol)
+                        .customDomain(givenUrlOptionsCustomDomain))
+                .tracking(new SmsTracking()
+                        .baseUrl(givenTrackingBaseUrl)
+                        .processKey(givenTrackingProcessKey)
+                        .track(givenTracking)
+                        .type(givenTrackingType));
 
         Consumer<SmsResponse> assertions = (smsResponse) -> {
             then(smsResponse).isNotNull();
@@ -420,8 +384,10 @@ class SmsApiTest extends ApiTest {
             then(smsResponseDetails).isNotNull();
             then(smsResponseDetails).hasSize(2);
 
-            thenResponseDetailsForMessageHasStatusPending(smsResponseDetails.get(0), givenFirstDestination, givenFirstDestinationMessageId);
-            thenResponseDetailsForMessageHasStatusPending(smsResponseDetails.get(1), givenSecondDestination, givenSecondDestinationMessageId);
+            thenResponseDetailsForMessageHasStatusPending(
+                    smsResponseDetails.get(0), givenFirstDestination, givenFirstDestinationMessageId);
+            thenResponseDetailsForMessageHasStatusPending(
+                    smsResponseDetails.get(1), givenSecondDestination, givenSecondDestinationMessageId);
         };
 
         var call = sendSmsApi.sendSmsMessage(request);
@@ -444,42 +410,40 @@ class SmsApiTest extends ApiTest {
         String givenCallbackDataMessage1 = "DLR callback data";
         Long givenValidityPeriodMessage1 = 720L;
 
-        String expectedMessage1 = String.format("{" +
-                                                    "  \"from\": \"%s\"," +
-                                                    "  \"destinations\": [" +
-                                                    "    {" +
-                                                    "      \"to\": \"%s\"," +
-                                                    "      \"messageId\": \"%s\"" +
-                                                    "    }," +
-                                                    "    {" +
-                                                    "      \"to\": \"%s\"" +
-                                                    "    }" +
-                                                    "  ]," +
-                                                    "  \"binary\": {" +
-                                                    "    \"hex\": \"%s\"," +
-                                                    "    \"dataCoding\": %d," +
-                                                    "    \"esmClass\": %d" +
-                                                    "  }," +
-                                                    "  \"intermediateReport\": %s," +
-                                                    "  \"notifyUrl\": \"%s\"," +
-                                                    "  \"notifyContentType\": \"%s\"," +
-                                                    "  \"callbackData\": \"%s\"," +
-                                                    "  \"validityPeriod\": %d" +
-                                                    "}",
-                                                givenFromMessage1,
-                                                givenToMessage1,
-                                                givenMessageIdMessage1,
-                                                givenAnotherToMessage1,
-                                                givenHexMessage1,
-                                                givenDataCodingMessage1,
-                                                givenEsmClassMessage1,
-                                                givenIntermediateReportMessage1,
-                                                givenNotifyUrlMessage1,
-                                                givenNotifyContentTypeMessage1,
-                                                givenCallbackDataMessage1,
-                                                givenValidityPeriodMessage1
-
-        );
+        String expectedMessage1 = String.format(
+                "{" + "  \"from\": \"%s\","
+                        + "  \"destinations\": ["
+                        + "    {"
+                        + "      \"to\": \"%s\","
+                        + "      \"messageId\": \"%s\""
+                        + "    },"
+                        + "    {"
+                        + "      \"to\": \"%s\""
+                        + "    }"
+                        + "  ],"
+                        + "  \"binary\": {"
+                        + "    \"hex\": \"%s\","
+                        + "    \"dataCoding\": %d,"
+                        + "    \"esmClass\": %d"
+                        + "  },"
+                        + "  \"intermediateReport\": %s,"
+                        + "  \"notifyUrl\": \"%s\","
+                        + "  \"notifyContentType\": \"%s\","
+                        + "  \"callbackData\": \"%s\","
+                        + "  \"validityPeriod\": %d"
+                        + "}",
+                givenFromMessage1,
+                givenToMessage1,
+                givenMessageIdMessage1,
+                givenAnotherToMessage1,
+                givenHexMessage1,
+                givenDataCodingMessage1,
+                givenEsmClassMessage1,
+                givenIntermediateReportMessage1,
+                givenNotifyUrlMessage1,
+                givenNotifyContentTypeMessage1,
+                givenCallbackDataMessage1,
+                givenValidityPeriodMessage1);
 
         String givenFromMessage2 = "41793026700";
         String givenToMessage2 = "41793026700";
@@ -494,153 +458,127 @@ class SmsApiTest extends ApiTest {
         String givenContentTemplateIdMessage2 = "contentTemplateId";
         String givenPrincipalEntityIdMessage2 = "givenPrincipalEntityId";
 
-        String expectedMessage2 = String.format("{" +
-                                                    "  \"from\": \"%s\"," +
-                                                    "  \"destinations\": [" +
-                                                    "    {" +
-                                                    "      \"to\": \"%s\"" +
-                                                    "    }" +
-                                                    "  ]," +
-                                                    "  \"binary\": {" +
-                                                    "    \"hex\": \"%s\"," +
-                                                    "    \"dataCoding\": %d," +
-                                                    "    \"esmClass\": %d" +
-                                                    "  }," +
-                                                    "  \"sendAt\": \"%s\"," +
-                                                    "  \"deliveryTimeWindow\": {" +
-                                                    "    \"from\": {" +
-                                                    "      \"hour\": %d," +
-                                                    "      \"minute\": %d" +
-                                                    "    }," +
-                                                    "    \"to\": {" +
-                                                    "      \"hour\": %d," +
-                                                    "      \"minute\": %d" +
-                                                    "    }," +
-                                                    "    \"days\": [" +
-                                                    "      \"MONDAY\"," +
-                                                    "      \"TUESDAY\"," +
-                                                    "      \"WEDNESDAY\"" +
-                                                    "    ]" +
-                                                    "  }," +
-                                                    "  \"regional\": {" +
-                                                    "    \"indiaDlt\": {" +
-                                                    "      \"contentTemplateId\": \"%s\"," +
-                                                    "      \"principalEntityId\": \"%s\"" +
-                                                    "    }" +
-                                                    "  }" +
-                                                    "}",
-                                                givenFromMessage2,
-                                                givenToMessage2,
-                                                givenHexMessage2,
-                                                givenDataCodingMessage2,
-                                                givenEsmClassMessage2,
-                                                givenSendAtMessage2,
-                                                givenDeliveryTimeFromHourMessage2,
-                                                givenDeliveryTimeFromMinuteMessage2,
-                                                givenDeliveryTimeToHourMessage2,
-                                                givenDeliveryTimeToMinuteMessage2,
-                                                givenContentTemplateIdMessage2,
-                                                givenPrincipalEntityIdMessage2
-        );
+        String expectedMessage2 = String.format(
+                "{" + "  \"from\": \"%s\","
+                        + "  \"destinations\": ["
+                        + "    {"
+                        + "      \"to\": \"%s\""
+                        + "    }"
+                        + "  ],"
+                        + "  \"binary\": {"
+                        + "    \"hex\": \"%s\","
+                        + "    \"dataCoding\": %d,"
+                        + "    \"esmClass\": %d"
+                        + "  },"
+                        + "  \"sendAt\": \"%s\","
+                        + "  \"deliveryTimeWindow\": {"
+                        + "    \"from\": {"
+                        + "      \"hour\": %d,"
+                        + "      \"minute\": %d"
+                        + "    },"
+                        + "    \"to\": {"
+                        + "      \"hour\": %d,"
+                        + "      \"minute\": %d"
+                        + "    },"
+                        + "    \"days\": ["
+                        + "      \"MONDAY\","
+                        + "      \"TUESDAY\","
+                        + "      \"WEDNESDAY\""
+                        + "    ]"
+                        + "  },"
+                        + "  \"regional\": {"
+                        + "    \"indiaDlt\": {"
+                        + "      \"contentTemplateId\": \"%s\","
+                        + "      \"principalEntityId\": \"%s\""
+                        + "    }"
+                        + "  }"
+                        + "}",
+                givenFromMessage2,
+                givenToMessage2,
+                givenHexMessage2,
+                givenDataCodingMessage2,
+                givenEsmClassMessage2,
+                givenSendAtMessage2,
+                givenDeliveryTimeFromHourMessage2,
+                givenDeliveryTimeFromMinuteMessage2,
+                givenDeliveryTimeToHourMessage2,
+                givenDeliveryTimeToMinuteMessage2,
+                givenContentTemplateIdMessage2,
+                givenPrincipalEntityIdMessage2);
 
         String givenBulkId = "BULK-ID-123-xyz";
         int givenSendingSpeedLimitAmount = 10;
         String givenSendingSpeedLimitTimeUnitString = "HOUR";
         SmsSpeedLimitTimeUnit givenSendingSpeedLimitTimeUnit = SmsSpeedLimitTimeUnit.HOUR;
 
-        String expectedRequest = String.format("{" +
-                                                   "  \"messages\": [" +
-                                                   "    %s," +
-                                                   "    %s" +
-                                                   "  ]," +
-                                                   "  \"bulkId\": \"%s\"," +
-                                                   "  \"sendingSpeedLimit\": {" +
-                                                   "    \"amount\": %d," +
-                                                   "    \"timeUnit\": \"%s\"" +
-                                                   "  }" +
-                                                   "}",
-                                               expectedMessage1,
-                                               expectedMessage2,
-                                               givenBulkId,
-                                               givenSendingSpeedLimitAmount,
-                                               givenSendingSpeedLimitTimeUnitString
-        );
+        String expectedRequest = String.format(
+                "{" + "  \"messages\": ["
+                        + "    %s,"
+                        + "    %s"
+                        + "  ],"
+                        + "  \"bulkId\": \"%s\","
+                        + "  \"sendingSpeedLimit\": {"
+                        + "    \"amount\": %d,"
+                        + "    \"timeUnit\": \"%s\""
+                        + "  }"
+                        + "}",
+                expectedMessage1,
+                expectedMessage2,
+                givenBulkId,
+                givenSendingSpeedLimitAmount,
+                givenSendingSpeedLimitTimeUnitString);
 
         String givenMessageIdMessage2 = "2033247207850523792";
 
         String givenResponse = givenPendingResponse(
-            givenBulkId,
-            givenToMessage1,
-            givenMessageIdMessage1,
-            givenToMessage2,
-            givenMessageIdMessage2
-        );
+                givenBulkId, givenToMessage1, givenMessageIdMessage1, givenToMessage2, givenMessageIdMessage2);
 
         setUpSuccessPostRequest(BINARY_ADVANCED, expectedRequest, givenResponse);
 
         SmsApi sendSmsApi = new SmsApi(getApiClient());
 
         SmsBinaryMessage message1 = new SmsBinaryMessage()
-            .from(givenFromMessage1)
-            .destinations(List.of(
-                new SmsDestination()
-                    .to(givenToMessage1)
-                    .messageId(givenMessageIdMessage1),
-                new SmsDestination()
-                    .to(givenAnotherToMessage1)
-            )).binary(
-                new SmsBinaryContent()
-                    .hex(givenHexMessage1)
-                    .dataCoding(givenDataCodingMessage1)
-                    .esmClass(givenEsmClassMessage1)
-            ).intermediateReport(givenIntermediateReportMessage1)
-            .notifyUrl(givenNotifyUrlMessage1)
-            .notifyContentType(givenNotifyContentTypeMessage1)
-            .callbackData(givenCallbackDataMessage1)
-            .validityPeriod(givenValidityPeriodMessage1);
+                .from(givenFromMessage1)
+                .destinations(List.of(
+                        new SmsDestination().to(givenToMessage1).messageId(givenMessageIdMessage1),
+                        new SmsDestination().to(givenAnotherToMessage1)))
+                .binary(new SmsBinaryContent()
+                        .hex(givenHexMessage1)
+                        .dataCoding(givenDataCodingMessage1)
+                        .esmClass(givenEsmClassMessage1))
+                .intermediateReport(givenIntermediateReportMessage1)
+                .notifyUrl(givenNotifyUrlMessage1)
+                .notifyContentType(givenNotifyContentTypeMessage1)
+                .callbackData(givenCallbackDataMessage1)
+                .validityPeriod(givenValidityPeriodMessage1);
 
         SmsBinaryMessage message2 = new SmsBinaryMessage()
-            .from(givenFromMessage2)
-            .destinations(List.of(
-                new SmsDestination()
-                    .to(givenToMessage2)
-            )).binary(
-                new SmsBinaryContent()
-                    .hex(givenHexMessage2)
-                    .dataCoding(givenDataCodingMessage2)
-                    .esmClass(givenEsmClassMessage2)
-            )
-            .sendAt(OffsetDateTime.of(2021, 8, 8, 16, 10, 0, 0, ZoneOffset.ofHours(5)))
-            .deliveryTimeWindow(
-                new SmsDeliveryTimeWindow()
-                    .to(
-                        new SmsDeliveryTimeTo()
-                            .hour(givenDeliveryTimeToHourMessage2)
-                            .minute(givenDeliveryTimeToMinuteMessage2)
-                    )
-                    .from(
-                        new SmsDeliveryTimeFrom()
-                            .hour(givenDeliveryTimeFromHourMessage2)
-                            .minute(givenDeliveryTimeFromMinuteMessage2)
-                    )
-                    .days(List.of(SmsDeliveryDay.MONDAY, SmsDeliveryDay.TUESDAY, SmsDeliveryDay.WEDNESDAY))
-            ).regional(
-                new SmsRegionalOptions()
-                    .indiaDlt(
-                        new SmsIndiaDltOptions()
-                            .contentTemplateId(givenContentTemplateIdMessage2)
-                            .principalEntityId(givenPrincipalEntityIdMessage2)
-                    )
-            );
+                .from(givenFromMessage2)
+                .destinations(List.of(new SmsDestination().to(givenToMessage2)))
+                .binary(new SmsBinaryContent()
+                        .hex(givenHexMessage2)
+                        .dataCoding(givenDataCodingMessage2)
+                        .esmClass(givenEsmClassMessage2))
+                .sendAt(OffsetDateTime.of(2021, 8, 8, 16, 10, 0, 0, ZoneOffset.ofHours(5)))
+                .deliveryTimeWindow(new SmsDeliveryTimeWindow()
+                        .to(new SmsDeliveryTimeTo()
+                                .hour(givenDeliveryTimeToHourMessage2)
+                                .minute(givenDeliveryTimeToMinuteMessage2))
+                        .from(new SmsDeliveryTimeFrom()
+                                .hour(givenDeliveryTimeFromHourMessage2)
+                                .minute(givenDeliveryTimeFromMinuteMessage2))
+                        .days(List.of(SmsDeliveryDay.MONDAY, SmsDeliveryDay.TUESDAY, SmsDeliveryDay.WEDNESDAY)))
+                .regional(new SmsRegionalOptions()
+                        .indiaDlt(new SmsIndiaDltOptions()
+                                .contentTemplateId(givenContentTemplateIdMessage2)
+                                .principalEntityId(givenPrincipalEntityIdMessage2)));
 
         SmsAdvancedBinaryRequest request = new SmsAdvancedBinaryRequest()
-            .messages(List.of(message1, message2))
-            .bulkId(givenBulkId)
-            .sendingSpeedLimit(
-                new SmsSendingSpeedLimit()
-                    .amount(givenSendingSpeedLimitAmount)
-                    .timeUnit(givenSendingSpeedLimitTimeUnit)
-            );
+                .messages(List.of(message1, message2))
+                .bulkId(givenBulkId)
+                .sendingSpeedLimit(new SmsSendingSpeedLimit()
+                        .amount(givenSendingSpeedLimitAmount)
+                        .timeUnit(givenSendingSpeedLimitTimeUnit));
 
         Consumer<SmsResponse> assertions = (smsResponse) -> {
             then(smsResponse).isNotNull();
@@ -650,8 +588,10 @@ class SmsApiTest extends ApiTest {
             then(smsResponseDetails).isNotNull();
             then(smsResponseDetails).hasSize(2);
 
-            thenResponseDetailsForMessageHasStatusPending(smsResponseDetails.get(0), givenToMessage1, givenMessageIdMessage1);
-            thenResponseDetailsForMessageHasStatusPending(smsResponseDetails.get(1), givenToMessage2, givenMessageIdMessage2);
+            thenResponseDetailsForMessageHasStatusPending(
+                    smsResponseDetails.get(0), givenToMessage1, givenMessageIdMessage1);
+            thenResponseDetailsForMessageHasStatusPending(
+                    smsResponseDetails.get(1), givenToMessage2, givenMessageIdMessage2);
         };
 
         var call = sendSmsApi.sendBinarySmsMessage(request);
@@ -668,57 +608,48 @@ class SmsApiTest extends ApiTest {
         String givenResponse = givenPendingResponse(givenBulkId, givenTo, givenMessageId);
 
         String givenFrom = "InfoSMS";
-        String givenHex = "0048 0065 006c 006c 006f 0020 0077 006f 0072 006c 0064 002c 0020 039a 03b1 03bb 03b7 03bc 03ad 03c1 03b1 0020 03ba 03cc 03c3 03bc 03b5 002c 0020 30b3 30f3 30cb 30c1 30cf";
+        String givenHex =
+                "0048 0065 006c 006c 006f 0020 0077 006f 0072 006c 0064 002c 0020 039a 03b1 03bb 03b7 03bc 03ad 03c1 03b1 0020 03ba 03cc 03c3 03bc 03b5 002c 0020 30b3 30f3 30cb 30c1 30cf";
         int givenDataCoding = 0;
         int givenEsmClass = 0;
         boolean isFlash = true;
 
-        String expectedRequest = String.format("{" +
-                                                   "  \"messages\": [" +
-                                                   "    {" +
-                                                   "      \"from\": \"%s\"," +
-                                                   "      \"destinations\": [" +
-                                                   "        {" +
-                                                   "          \"to\": \"%s\"" +
-                                                   "        }" +
-                                                   "      ]," +
-                                                   "      \"binary\": {" +
-                                                   "        \"hex\": \"%s\"," +
-                                                   "        \"dataCoding\": %d," +
-                                                   "        \"esmClass\": %d" +
-                                                   "      }," +
-                                                   "      \"flash\": %b" +
-                                                   "    }" +
-                                                   "  ]" +
-                                                   "}",
-                                               givenFrom,
-                                               givenTo,
-                                               givenHex,
-                                               givenDataCoding,
-                                               givenEsmClass,
-                                               isFlash
-        );
+        String expectedRequest = String.format(
+                "{" + "  \"messages\": ["
+                        + "    {"
+                        + "      \"from\": \"%s\","
+                        + "      \"destinations\": ["
+                        + "        {"
+                        + "          \"to\": \"%s\""
+                        + "        }"
+                        + "      ],"
+                        + "      \"binary\": {"
+                        + "        \"hex\": \"%s\","
+                        + "        \"dataCoding\": %d,"
+                        + "        \"esmClass\": %d"
+                        + "      },"
+                        + "      \"flash\": %b"
+                        + "    }"
+                        + "  ]"
+                        + "}",
+                givenFrom, givenTo, givenHex, givenDataCoding, givenEsmClass, isFlash);
 
         setUpSuccessPostRequest(BINARY_ADVANCED, expectedRequest, givenResponse);
 
         SmsApi sendSmsApi = new SmsApi(getApiClient());
 
-        SmsDestination destination = new SmsDestination()
-            .to(givenTo);
+        SmsDestination destination = new SmsDestination().to(givenTo);
 
         SmsBinaryMessage message = new SmsBinaryMessage()
-            .from(givenFrom)
-            .binary(
-                new SmsBinaryContent()
-                    .hex(givenHex)
-                    .dataCoding(givenDataCoding)
-                    .esmClass(givenEsmClass)
-            )
-            .destinations(List.of(destination))
-            .flash(isFlash);
+                .from(givenFrom)
+                .binary(new SmsBinaryContent()
+                        .hex(givenHex)
+                        .dataCoding(givenDataCoding)
+                        .esmClass(givenEsmClass))
+                .destinations(List.of(destination))
+                .flash(isFlash);
 
-        SmsAdvancedBinaryRequest request = new SmsAdvancedBinaryRequest()
-            .messages(List.of(message));
+        SmsAdvancedBinaryRequest request = new SmsAdvancedBinaryRequest().messages(List.of(message));
 
         Consumer<SmsResponse> assertions = (smsResponse) -> {
             then(smsResponse).isNotNull();
@@ -742,34 +673,22 @@ class SmsApiTest extends ApiTest {
         Integer givenMessageCount = 1;
         Integer givenCharactersRemaining = 96;
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"originalText\": \"%s\",\n" +
-                                                 "  \"previews\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"textPreview\": \"%s\",\n" +
-                                                 "      \"messageCount\": %d,\n" +
-                                                 "      \"charactersRemaining\": %d,\n" +
-                                                 "      \"configuration\": {}\n" +
-                                                 "    }\n" +
-                                                 "  ]\n" +
-                                                 "}\n",
-                                             givenOriginalText,
-                                             givenTextPreview,
-                                             givenMessageCount,
-                                             givenCharactersRemaining
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"originalText\": \"%s\",\n"
+                        + "  \"previews\": [\n"
+                        + "    {\n"
+                        + "      \"textPreview\": \"%s\",\n"
+                        + "      \"messageCount\": %d,\n"
+                        + "      \"charactersRemaining\": %d,\n"
+                        + "      \"configuration\": {}\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenOriginalText, givenTextPreview, givenMessageCount, givenCharactersRemaining);
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"text\": \"%s\"\n" +
-                                                   "}\n",
-                                               givenOriginalText
-        );
+        String expectedRequest = String.format("{\n" + "  \"text\": \"%s\"\n" + "}\n", givenOriginalText);
 
-        setUpSuccessPostRequest(
-            PREVIEW,
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(PREVIEW, expectedRequest, givenResponse);
 
         SmsApi api = new SmsApi(getApiClient());
 
@@ -797,13 +716,11 @@ class SmsApiTest extends ApiTest {
         String givenMessageId = "MESSAGE-ID-123-xyz";
         String givenTo = "41793026727";
         String givenSentAt = "2019-11-09T16:00:00.000+0000";
-        OffsetDateTime givenSentAtDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2019, 11, 9, 16, 0, 0),
-            ZoneOffset.ofHours(0));
+        OffsetDateTime givenSentAtDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2019, 11, 9, 16, 0, 0), ZoneOffset.ofHours(0));
         String givenDoneAt = "2019-11-09T16:00:00.000+0000";
-        OffsetDateTime givenDoneAtDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2019, 11, 9, 16, 0, 0),
-            ZoneOffset.ofHours(0));
+        OffsetDateTime givenDoneAtDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2019, 11, 9, 16, 0, 0), ZoneOffset.ofHours(0));
         Integer givenSmsCount = 1;
         Double givenPricePerMessage = 0.01;
         String givenCurrency = "EUR";
@@ -821,79 +738,104 @@ class SmsApiTest extends ApiTest {
         String givenMessageId2 = "12db39c3-7822-4e72-a3ec-c87442c0ffc5";
         String givenTo2 = "41793026834";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"results\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"bulkId\": \"%s\",\n" +
-                                                 "      \"messageId\": \"%s\",\n" +
-                                                 "      \"to\": \"%s\",\n" +
-                                                 "      \"sentAt\": \"%s\",\n" +
-                                                 "      \"doneAt\": \"%s\",\n" +
-                                                 "      \"smsCount\": %d,\n" +
-                                                 "      \"price\": {\n" +
-                                                 "        \"pricePerMessage\": %f,\n" +
-                                                 "        \"currency\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"status\": {\n" +
-                                                 "        \"groupId\": %d,\n" +
-                                                 "        \"groupName\": \"%s\",\n" +
-                                                 "        \"id\": %d,\n" +
-                                                 "        \"name\": \"%s\",\n" +
-                                                 "        \"description\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"error\": {\n" +
-                                                 "        \"groupId\": %d,\n" +
-                                                 "        \"groupName\": \"%s\",\n" +
-                                                 "        \"id\": %d,\n" +
-                                                 "        \"name\": \"%s\",\n" +
-                                                 "        \"description\": \"%s\",\n" +
-                                                 "        \"permanent\": %b\n" +
-                                                 "      }\n" +
-                                                 "    },\n" +
-                                                 "    {\n" +
-                                                 "      \"bulkId\": \"%s\",\n" +
-                                                 "      \"messageId\": \"%s\",\n" +
-                                                 "      \"to\": \"%s\",\n" +
-                                                 "      \"sentAt\": \"%s\",\n" +
-                                                 "      \"doneAt\": \"%s\",\n" +
-                                                 "      \"smsCount\": %d,\n" +
-                                                 "      \"price\": {\n" +
-                                                 "        \"pricePerMessage\": %f,\n" +
-                                                 "        \"currency\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"status\": {\n" +
-                                                 "        \"groupId\": %d,\n" +
-                                                 "        \"groupName\": \"%s\",\n" +
-                                                 "        \"id\": %d,\n" +
-                                                 "        \"name\": \"%s\",\n" +
-                                                 "        \"description\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"error\": {\n" +
-                                                 "        \"groupId\": %d,\n" +
-                                                 "        \"groupName\": \"%s\",\n" +
-                                                 "        \"id\": %d,\n" +
-                                                 "        \"name\": \"%s\",\n" +
-                                                 "        \"description\": \"%s\",\n" +
-                                                 "        \"permanent\": %b\n" +
-                                                 "      }\n" +
-                                                 "    }\n" +
-                                                 "  ]\n" +
-                                                 "}\n",
-                                             givenBulkId, givenMessageId, givenTo, givenSentAt, givenDoneAt, givenSmsCount,
-                                             givenPricePerMessage, givenCurrency,
-                                             givenGroupId, givenGroupName, givenId, givenName, givenDescription,
-                                             givenErrorGroupId, givenErrorGroupName, givenErrorId, givenErrorName, givenErrorDescription, givenErrorPermanent,
-                                             givenBulkId, givenMessageId2, givenTo2, givenSentAt, givenDoneAt, givenSmsCount,
-                                             givenPricePerMessage, givenCurrency,
-                                             givenGroupId, givenGroupName, givenId, givenName, givenDescription,
-                                             givenErrorGroupId, givenErrorGroupName, givenErrorId, givenErrorName, givenErrorDescription, givenErrorPermanent
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"bulkId\": \"%s\",\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"sentAt\": \"%s\",\n"
+                        + "      \"doneAt\": \"%s\",\n"
+                        + "      \"smsCount\": %d,\n"
+                        + "      \"price\": {\n"
+                        + "        \"pricePerMessage\": %f,\n"
+                        + "        \"currency\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"error\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\",\n"
+                        + "        \"permanent\": %b\n"
+                        + "      }\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"bulkId\": \"%s\",\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"sentAt\": \"%s\",\n"
+                        + "      \"doneAt\": \"%s\",\n"
+                        + "      \"smsCount\": %d,\n"
+                        + "      \"price\": {\n"
+                        + "        \"pricePerMessage\": %f,\n"
+                        + "        \"currency\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"error\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\",\n"
+                        + "        \"permanent\": %b\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenBulkId,
+                givenMessageId,
+                givenTo,
+                givenSentAt,
+                givenDoneAt,
+                givenSmsCount,
+                givenPricePerMessage,
+                givenCurrency,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenErrorGroupId,
+                givenErrorGroupName,
+                givenErrorId,
+                givenErrorName,
+                givenErrorDescription,
+                givenErrorPermanent,
+                givenBulkId,
+                givenMessageId2,
+                givenTo2,
+                givenSentAt,
+                givenDoneAt,
+                givenSmsCount,
+                givenPricePerMessage,
+                givenCurrency,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenErrorGroupId,
+                givenErrorGroupName,
+                givenErrorId,
+                givenErrorName,
+                givenErrorDescription,
+                givenErrorPermanent);
 
-        setUpSuccessGetRequest(
-            REPORTS,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(REPORTS, Map.of(), givenResponse);
 
         SmsApi api = new SmsApi(getApiClient());
 
@@ -951,7 +893,6 @@ class SmsApiTest extends ApiTest {
             then(error2.getName()).isEqualTo(givenErrorName);
             then(error2.getDescription()).isEqualTo(givenErrorDescription);
             then(error2.getPermanent()).isEqualTo(givenErrorPermanent);
-
         };
 
         var call = api.getOutboundSmsMessageDeliveryReports();
@@ -963,10 +904,8 @@ class SmsApiTest extends ApiTest {
     void shouldGetSmsLogs() {
         String givenBulkId = "BULK-ID-123-xyz";
         String givenSentSinceString = "2015-02-22T17:42:05.390+0100";
-        OffsetDateTime givenSentSinceDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2015, 2, 22, 17, 42, 5, 390000000),
-            ZoneOffset.ofHours(1)
-        );
+        OffsetDateTime givenSentSinceDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2015, 2, 22, 17, 42, 5, 390000000), ZoneOffset.ofHours(1));
 
         String givenMessageIdMessage1 = "MESSAGE-ID-123-xyz";
         String givenToMessage1 = "41793026727";
@@ -986,116 +925,113 @@ class SmsApiTest extends ApiTest {
         var givenApplicationId = "applicationId";
         var givenEntityId = "entityId";
 
-        String givenResponse = String.format("{" +
-                                                 "  \"results\": [" +
-                                                 "    {" +
-                                                 "      \"bulkId\": \"%s\"," +
-                                                 "      \"applicationId\": \"%s\"," +
-                                                 "      \"entityId\": \"%s\"," +
-                                                 "      \"messageId\": \"%s\"," +
-                                                 "      \"to\": \"%s\"," +
-                                                 "      \"sentAt\": \"%s\"," +
-                                                 "      \"doneAt\": \"%s\"," +
-                                                 "      \"smsCount\": %d," +
-                                                 "      \"price\": {" +
-                                                 "        \"pricePerMessage\": %g," +
-                                                 "        \"currency\": \"%s\"" +
-                                                 "      }," +
-                                                 "      \"status\": {" +
-                                                 "        \"groupId\": %d," +
-                                                 "        \"groupName\": \"%s\"," +
-                                                 "        \"id\": %d," +
-                                                 "        \"name\": \"%s\"," +
-                                                 "        \"description\": \"%s\"" +
-                                                 "      }," +
-                                                 "      \"error\": {" +
-                                                 "        \"groupId\": %d," +
-                                                 "        \"groupName\": \"%s\"," +
-                                                 "        \"id\": %d," +
-                                                 "        \"name\": \"%s\"," +
-                                                 "        \"description\": \"%s\"," +
-                                                 "        \"permanent\": %b" +
-                                                 "      }" +
-                                                 "    }," +
-                                                 "    {" +
-                                                 "      \"bulkId\": \"%s\"," +
-                                                 "      \"messageId\": \"%s\"," +
-                                                 "      \"to\": \"%s\"," +
-                                                 "      \"sentAt\": \"%s\"," +
-                                                 "      \"doneAt\": \"%s\"," +
-                                                 "      \"smsCount\": %d," +
-                                                 "      \"price\": {" +
-                                                 "        \"pricePerMessage\": %g," +
-                                                 "        \"currency\": \"%s\"" +
-                                                 "      }," +
-                                                 "      \"status\": {" +
-                                                 "        \"groupId\": %d," +
-                                                 "        \"groupName\": \"%s\"," +
-                                                 "        \"id\": %d," +
-                                                 "        \"name\": \"%s\"," +
-                                                 "        \"description\": \"%s\"" +
-                                                 "      }," +
-                                                 "      \"error\": {" +
-                                                 "        \"groupId\": %d," +
-                                                 "        \"groupName\": \"%s\"," +
-                                                 "        \"id\": %d," +
-                                                 "        \"name\": \"%s\"," +
-                                                 "        \"description\": \"%s\"," +
-                                                 "        \"permanent\": %b" +
-                                                 "      }" +
-                                                 "    }" +
-                                                 "  ]" +
-                                                 "}",
-                                             givenBulkId,
-                                             givenApplicationId,
-                                             givenEntityId,
-                                             givenMessageIdMessage1,
-                                             givenToMessage1,
-                                             givenSendAtMessage1,
-                                             givenDoneAtMessage1,
-                                             givenSmsCountMessage1,
-                                             givenPricePerMessageMessage1,
-                                             givenCurrencyMessage1,
-                                             DELIVERED_STATUS_GROUP_ID,
-                                             DELIVERED_STATUS_GROUP_NAME,
-                                             DELIVERED_STATUS_ID,
-                                             DELIVERED_STATUS_NAME,
-                                             DELIVERED_STATUS_DESCRIPTION,
-                                             NO_ERROR_GROUP_ID,
-                                             NO_ERROR_GROUP_NAME,
-                                             NO_ERROR_ID,
-                                             NO_ERROR_NAME,
-                                             NO_ERROR_DESCRIPTION,
-                                             NO_ERROR_IS_PERMANENT,
-                                             givenBulkId,
-                                             givenMessageIdMessage2,
-                                             givenToMessage2,
-                                             givenSendAtMessage2,
-                                             givenDoneAtMessage2,
-                                             givenSmsCountMessage2,
-                                             givenPricePerMessageMessage2,
-                                             givenCurrencyMessage2,
-                                             DELIVERED_STATUS_GROUP_ID,
-                                             DELIVERED_STATUS_GROUP_NAME,
-                                             DELIVERED_STATUS_ID,
-                                             DELIVERED_STATUS_NAME,
-                                             DELIVERED_STATUS_DESCRIPTION,
-                                             NO_ERROR_GROUP_ID,
-                                             NO_ERROR_GROUP_NAME,
-                                             NO_ERROR_ID,
-                                             NO_ERROR_NAME,
-                                             NO_ERROR_DESCRIPTION,
-                                             NO_ERROR_IS_PERMANENT
-        );
+        String givenResponse = String.format(
+                "{" + "  \"results\": ["
+                        + "    {"
+                        + "      \"bulkId\": \"%s\","
+                        + "      \"applicationId\": \"%s\","
+                        + "      \"entityId\": \"%s\","
+                        + "      \"messageId\": \"%s\","
+                        + "      \"to\": \"%s\","
+                        + "      \"sentAt\": \"%s\","
+                        + "      \"doneAt\": \"%s\","
+                        + "      \"smsCount\": %d,"
+                        + "      \"price\": {"
+                        + "        \"pricePerMessage\": %g,"
+                        + "        \"currency\": \"%s\""
+                        + "      },"
+                        + "      \"status\": {"
+                        + "        \"groupId\": %d,"
+                        + "        \"groupName\": \"%s\","
+                        + "        \"id\": %d,"
+                        + "        \"name\": \"%s\","
+                        + "        \"description\": \"%s\""
+                        + "      },"
+                        + "      \"error\": {"
+                        + "        \"groupId\": %d,"
+                        + "        \"groupName\": \"%s\","
+                        + "        \"id\": %d,"
+                        + "        \"name\": \"%s\","
+                        + "        \"description\": \"%s\","
+                        + "        \"permanent\": %b"
+                        + "      }"
+                        + "    },"
+                        + "    {"
+                        + "      \"bulkId\": \"%s\","
+                        + "      \"messageId\": \"%s\","
+                        + "      \"to\": \"%s\","
+                        + "      \"sentAt\": \"%s\","
+                        + "      \"doneAt\": \"%s\","
+                        + "      \"smsCount\": %d,"
+                        + "      \"price\": {"
+                        + "        \"pricePerMessage\": %g,"
+                        + "        \"currency\": \"%s\""
+                        + "      },"
+                        + "      \"status\": {"
+                        + "        \"groupId\": %d,"
+                        + "        \"groupName\": \"%s\","
+                        + "        \"id\": %d,"
+                        + "        \"name\": \"%s\","
+                        + "        \"description\": \"%s\""
+                        + "      },"
+                        + "      \"error\": {"
+                        + "        \"groupId\": %d,"
+                        + "        \"groupName\": \"%s\","
+                        + "        \"id\": %d,"
+                        + "        \"name\": \"%s\","
+                        + "        \"description\": \"%s\","
+                        + "        \"permanent\": %b"
+                        + "      }"
+                        + "    }"
+                        + "  ]"
+                        + "}",
+                givenBulkId,
+                givenApplicationId,
+                givenEntityId,
+                givenMessageIdMessage1,
+                givenToMessage1,
+                givenSendAtMessage1,
+                givenDoneAtMessage1,
+                givenSmsCountMessage1,
+                givenPricePerMessageMessage1,
+                givenCurrencyMessage1,
+                DELIVERED_STATUS_GROUP_ID,
+                DELIVERED_STATUS_GROUP_NAME,
+                DELIVERED_STATUS_ID,
+                DELIVERED_STATUS_NAME,
+                DELIVERED_STATUS_DESCRIPTION,
+                NO_ERROR_GROUP_ID,
+                NO_ERROR_GROUP_NAME,
+                NO_ERROR_ID,
+                NO_ERROR_NAME,
+                NO_ERROR_DESCRIPTION,
+                NO_ERROR_IS_PERMANENT,
+                givenBulkId,
+                givenMessageIdMessage2,
+                givenToMessage2,
+                givenSendAtMessage2,
+                givenDoneAtMessage2,
+                givenSmsCountMessage2,
+                givenPricePerMessageMessage2,
+                givenCurrencyMessage2,
+                DELIVERED_STATUS_GROUP_ID,
+                DELIVERED_STATUS_GROUP_NAME,
+                DELIVERED_STATUS_ID,
+                DELIVERED_STATUS_NAME,
+                DELIVERED_STATUS_DESCRIPTION,
+                NO_ERROR_GROUP_ID,
+                NO_ERROR_GROUP_NAME,
+                NO_ERROR_ID,
+                NO_ERROR_NAME,
+                NO_ERROR_DESCRIPTION,
+                NO_ERROR_IS_PERMANENT);
 
         setUpSuccessGetRequest(
-            LOGS,
-            Map.of(
-                "bulkId", givenBulkId,
-                "sentSince", givenSentSinceString
-            ),
-            givenResponse
-        );
+                LOGS,
+                Map.of(
+                        "bulkId", givenBulkId,
+                        "sentSince", givenSentSinceString),
+                givenResponse);
 
         SmsApi sendSmsApi = new SmsApi(getApiClient());
 
@@ -1105,15 +1041,11 @@ class SmsApiTest extends ApiTest {
             then(results).isNotNull();
             then(results).hasSize(2);
 
-            OffsetDateTime expectedSendAtMessage1 = OffsetDateTime.of(
-                LocalDateTime.of(2019, 11, 9, 16, 0),
-                ZoneOffset.UTC
-            );
+            OffsetDateTime expectedSendAtMessage1 =
+                    OffsetDateTime.of(LocalDateTime.of(2019, 11, 9, 16, 0), ZoneOffset.UTC);
 
-            OffsetDateTime expectedDoneAtMessage1 = OffsetDateTime.of(
-                LocalDateTime.of(2019, 11, 9, 16, 0),
-                ZoneOffset.UTC
-            );
+            OffsetDateTime expectedDoneAtMessage1 =
+                    OffsetDateTime.of(LocalDateTime.of(2019, 11, 9, 16, 0), ZoneOffset.UTC);
 
             SmsLog log = results.get(0);
             then(log).isNotNull();
@@ -1132,15 +1064,11 @@ class SmsApiTest extends ApiTest {
             thenStatusIsDelivered(log.getStatus());
             thenNoError(log.getError());
 
-            OffsetDateTime expectedSendAtMessage2 = OffsetDateTime.of(
-                LocalDateTime.of(2019, 11, 9, 17, 0),
-                ZoneOffset.UTC
-            );
+            OffsetDateTime expectedSendAtMessage2 =
+                    OffsetDateTime.of(LocalDateTime.of(2019, 11, 9, 17, 0), ZoneOffset.UTC);
 
-            OffsetDateTime expectedDoneAtMessage2 = OffsetDateTime.of(
-                LocalDateTime.of(2019, 11, 9, 17, 0),
-                ZoneOffset.UTC
-            );
+            OffsetDateTime expectedDoneAtMessage2 =
+                    OffsetDateTime.of(LocalDateTime.of(2019, 11, 9, 17, 0), ZoneOffset.UTC);
 
             SmsLog anotherLog = results.get(1);
             then(anotherLog).isNotNull();
@@ -1157,72 +1085,56 @@ class SmsApiTest extends ApiTest {
             thenNoError(anotherLog.getError());
         };
 
-        var call = sendSmsApi.getOutboundSmsMessageLogs()
-                             .bulkId(List.of(givenBulkId))
-                             .sentSince(givenSentSinceDateTime);
+        var call = sendSmsApi
+                .getOutboundSmsMessageLogs()
+                .bulkId(List.of(givenBulkId))
+                .sentSince(givenSentSinceDateTime);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
 
     private String givenPendingResponse(String givenBulkId, String givenTo, String givenMessageId) {
-        return String.format("{" +
-                                 "  \"bulkId\": \"%s\"," +
-                                 "  \"messages\": [" +
-                                 "    %s" +
-                                 "  ]" +
-                                 "}",
-                             givenBulkId,
-                             givenPendingResponseDetails(givenTo, givenMessageId)
-        );
+        return String.format(
+                "{" + "  \"bulkId\": \"%s\"," + "  \"messages\": [" + "    %s" + "  ]" + "}",
+                givenBulkId, givenPendingResponseDetails(givenTo, givenMessageId));
     }
 
     private String givenPendingResponse(
-        String givenBulkId,
-        String givenToMessage1,
-        String givenMessageIdMessage1,
-        String givenToMessage2,
-        String givenMessageIdMessage2
-    ) {
-        return String.format("{" +
-                                 "  \"bulkId\": \"%s\"," +
-                                 "  \"messages\": [" +
-                                 "    %s," +
-                                 "    %s" +
-                                 "  ]" +
-                                 "}",
-                             givenBulkId,
-                             givenPendingResponseDetails(givenToMessage1, givenMessageIdMessage1),
-                             givenPendingResponseDetails(givenToMessage2, givenMessageIdMessage2)
-        );
+            String givenBulkId,
+            String givenToMessage1,
+            String givenMessageIdMessage1,
+            String givenToMessage2,
+            String givenMessageIdMessage2) {
+        return String.format(
+                "{" + "  \"bulkId\": \"%s\"," + "  \"messages\": [" + "    %s," + "    %s" + "  ]" + "}",
+                givenBulkId,
+                givenPendingResponseDetails(givenToMessage1, givenMessageIdMessage1),
+                givenPendingResponseDetails(givenToMessage2, givenMessageIdMessage2));
     }
 
     private String givenPendingResponseDetails(String givenTo, String givenMessageId) {
-        return String.format("{" +
-                                 "  \"to\": \"%s\"," +
-                                 "  \"status\": {" +
-                                 "    \"groupId\": %d," +
-                                 "    \"groupName\": \"%s\"," +
-                                 "    \"id\": %d," +
-                                 "    \"name\": \"%s\"," +
-                                 "    \"description\": \"%s\"" +
-                                 "  }," +
-                                 "  \"messageId\": \"%s\"" +
-                                 "}",
-                             givenTo,
-                             PENDING_STATUS_GROUP_ID,
-                             PENDING_STATUS_GROUP_NAME,
-                             PENDING_STATUS_ID,
-                             PENDING_STATUS_NAME,
-                             PENDING_STATUS_DESCRIPTION,
-                             givenMessageId
-        );
+        return String.format(
+                "{" + "  \"to\": \"%s\","
+                        + "  \"status\": {"
+                        + "    \"groupId\": %d,"
+                        + "    \"groupName\": \"%s\","
+                        + "    \"id\": %d,"
+                        + "    \"name\": \"%s\","
+                        + "    \"description\": \"%s\""
+                        + "  },"
+                        + "  \"messageId\": \"%s\""
+                        + "}",
+                givenTo,
+                PENDING_STATUS_GROUP_ID,
+                PENDING_STATUS_GROUP_NAME,
+                PENDING_STATUS_ID,
+                PENDING_STATUS_NAME,
+                PENDING_STATUS_DESCRIPTION,
+                givenMessageId);
     }
 
     private void thenResponseDetailsForMessageHasStatusPending(
-        SmsResponseDetails responseDetails,
-        String expectedTo,
-        String expectedMessageId
-    ) {
+            SmsResponseDetails responseDetails, String expectedTo, String expectedMessageId) {
         then(responseDetails.getTo()).isEqualTo(expectedTo);
         then(responseDetails.getMessageId()).isEqualTo(expectedMessageId);
         thenStatusIsPending(responseDetails.getStatus());
@@ -1273,10 +1185,8 @@ class SmsApiTest extends ApiTest {
         String givenCleanText = "Correct answer is Paris";
         String givenKeyword = "QUIZ";
         String givenReceivedAtString = "2021-08-25T16:10:00.000+0500";
-        OffsetDateTime givenReceivedAt = OffsetDateTime.of(
-            LocalDateTime.of(2021, 8, 25, 16, 10, 0),
-            ZoneOffset.ofHours(5)
-        );
+        OffsetDateTime givenReceivedAt =
+                OffsetDateTime.of(LocalDateTime.of(2021, 8, 25, 16, 10, 0), ZoneOffset.ofHours(5));
         int givenSmsCount = 1;
         double givenPricePerMessage = 0;
         String givenCurrency = "EUR";
@@ -1286,53 +1196,48 @@ class SmsApiTest extends ApiTest {
         var givenApplicationId = "applicationId";
         var givenEntityId = "entityId";
 
-        String givenResponse = String.format("{\n" +
-                                                 "    \"results\": [\n" +
-                                                 "      {\n" +
-                                                 "        \"messageId\": \"%s\",\n" +
-                                                 "        \"from\": \"%s\",\n" +
-                                                 "        \"to\": \"%s\",\n" +
-                                                 "        \"text\": \"%s\",\n" +
-                                                 "        \"cleanText\": \"%s\",\n" +
-                                                 "        \"keyword\": \"%s\",\n" +
-                                                 "        \"receivedAt\": \"%s\",\n" +
-                                                 "        \"smsCount\": %d,\n" +
-                                                 "        \"price\": {\n" +
-                                                 "          \"pricePerMessage\": %g,\n" +
-                                                 "          \"currency\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        \"callbackData\": \"%s\",\n" +
-                                                 "        \"applicationId\": \"%s\",\n" +
-                                                 "        \"entityId\": \"%s\"\n" +
-                                                 "      }\n" +
-                                                 "    ],\n" +
-                                                 "    \"messageCount\": %d,\n" +
-                                                 "    \"pendingMessageCount\": %d\n" +
-                                                 "}\n",
-                                             givenMessageId,
-                                             givenFrom,
-                                             givenTo,
-                                             givenText,
-                                             givenCleanText,
-                                             givenKeyword,
-                                             givenReceivedAtString,
-                                             givenSmsCount,
-                                             givenPricePerMessage,
-                                             givenCurrency,
-                                             givenCallbackData,
-                                             givenApplicationId,
-                                             givenEntityId,
-                                             givenMessageCount,
-                                             givenPendingMessageCount
-        );
+        String givenResponse = String.format(
+                "{\n" + "    \"results\": [\n"
+                        + "      {\n"
+                        + "        \"messageId\": \"%s\",\n"
+                        + "        \"from\": \"%s\",\n"
+                        + "        \"to\": \"%s\",\n"
+                        + "        \"text\": \"%s\",\n"
+                        + "        \"cleanText\": \"%s\",\n"
+                        + "        \"keyword\": \"%s\",\n"
+                        + "        \"receivedAt\": \"%s\",\n"
+                        + "        \"smsCount\": %d,\n"
+                        + "        \"price\": {\n"
+                        + "          \"pricePerMessage\": %g,\n"
+                        + "          \"currency\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"callbackData\": \"%s\",\n"
+                        + "        \"applicationId\": \"%s\",\n"
+                        + "        \"entityId\": \"%s\"\n"
+                        + "      }\n"
+                        + "    ],\n"
+                        + "    \"messageCount\": %d,\n"
+                        + "    \"pendingMessageCount\": %d\n"
+                        + "}\n",
+                givenMessageId,
+                givenFrom,
+                givenTo,
+                givenText,
+                givenCleanText,
+                givenKeyword,
+                givenReceivedAtString,
+                givenSmsCount,
+                givenPricePerMessage,
+                givenCurrency,
+                givenCallbackData,
+                givenApplicationId,
+                givenEntityId,
+                givenMessageCount,
+                givenPendingMessageCount);
 
         Integer givenLimit = 2;
 
-        setUpSuccessGetRequest(
-            INBOX_REPORTS,
-            Map.of("limit", givenLimit.toString()),
-            givenResponse
-        );
+        setUpSuccessGetRequest(INBOX_REPORTS, Map.of("limit", givenLimit.toString()), givenResponse);
 
         SmsApi receiveSmsApi = new SmsApi(getApiClient());
 
@@ -1365,8 +1270,7 @@ class SmsApiTest extends ApiTest {
             then(price.getCurrency()).isEqualTo(givenCurrency);
         };
 
-        var call = receiveSmsApi.getInboundSmsMessages()
-                                .limit(givenLimit);
+        var call = receiveSmsApi.getInboundSmsMessages().limit(givenLimit);
 
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
@@ -1421,137 +1325,122 @@ class SmsApiTest extends ApiTest {
         var givenApplicationId = "application";
         var givenEntityId = "entity";
 
-        String givenResponse = String.format("{" +
-                                                 "  \"results\": [" +
-                                                 "    {" +
-                                                 "   \"bulkId\": \"%s\"," +
-                                                 "   \"applicationId\": \"%s\"," +
-                                                 "   \"entityId\": \"%s\"," +
-                                                 "   \"messageId\": \"%s\"," +
-                                                 "   \"to\": \"%s\"," +
-                                                 "   \"sentAt\": \"%s\"," +
-                                                 "   \"doneAt\": \"%s\"," +
-                                                 "   \"smsCount\": %s," +
-                                                 "   \"price\": {" +
-                                                 "     \"pricePerMessage\": %g," +
-                                                 "     \"currency\": \"%s\"" +
-                                                 "    }," +
-                                                 "   \"status\": {" +
-                                                 "     \"groupId\": %d," +
-                                                 "     \"groupName\": \"%s\"," +
-                                                 "     \"id\": %d," +
-                                                 "     \"name\": \"%s\"," +
-                                                 "     \"description\": \"%s\"" +
-                                                 "    }," +
-                                                 "   \"error\": {" +
-                                                 "     \"groupId\": %d," +
-                                                 "     \"groupName\": \"%s\"," +
-                                                 "     \"id\": %d," +
-                                                 "     \"name\": \"%s\"," +
-                                                 "     \"description\": \"%s\"," +
-                                                 "     \"permanent\": \"%b\"" +
-                                                 "    }" +
-                                                 "  }," +
-                                                 "    {" +
-                                                 "   \"bulkId\": \"%s\"," +
-                                                 "   \"messageId\": \"%s\"," +
-                                                 "   \"to\": \"%s\"," +
-                                                 "   \"sentAt\": \"%s\"," +
-                                                 "   \"doneAt\": \"%s\"," +
-                                                 "   \"smsCount\": %s," +
-                                                 "   \"price\": {" +
-                                                 "     \"pricePerMessage\": %g," +
-                                                 "     \"currency\": \"%s\"" +
-                                                 "    }," +
-                                                 "   \"status\": {" +
-                                                 "     \"groupId\": %d," +
-                                                 "     \"groupName\": \"%s\"," +
-                                                 "     \"id\": %d," +
-                                                 "     \"name\": \"%s\"," +
-                                                 "     \"description\": \"%s\"" +
-                                                 "    }," +
-                                                 "   \"error\": {" +
-                                                 "     \"groupId\": %d," +
-                                                 "     \"groupName\": \"%s\"," +
-                                                 "     \"id\": %d," +
-                                                 "     \"name\": \"%s\"," +
-                                                 "     \"description\": \"%s\"," +
-                                                 "     \"permanent\": \"%b\"" +
-                                                 "    }" +
-                                                 "   }" +
-                                                 "  ]" +
-                                                 "}",
-                                             givenBulkId,
-                                             givenApplicationId,
-                                             givenEntityId,
-                                             givenMessageIdMessage1,
-                                             givenToMessage1,
-                                             givenSentAtMessage1,
-                                             givenDoneAtMessage1,
-                                             givenSmsCountMessage1,
-                                             givenPricePerMessageMessage1,
-                                             givenCurrencyMessage1,
-                                             givenStatusGroupIdMessage1,
-                                             givenStatusGroupNameMessage1,
-                                             givenStatusIdMessage1,
-                                             givenStatusNameMessage1,
-                                             givenStatusDescriptionMessage1,
-                                             givenErrorGroupIdMessage1,
-                                             givenErrorGroupNameMessage1,
-                                             givenErrorIdMessage1,
-                                             givenErrorNameMessage1,
-                                             givenErrorDescriptionMessage1,
-                                             givenErrorPermanentMessage1,
-                                             givenBulkId,
-                                             givenMessageIdMessage2,
-                                             givenToMessage2,
-                                             givenSentAtMessage2,
-                                             givenDoneAtMessage2,
-                                             givenSmsCountMessage2,
-                                             givenPricePerMessageMessage2,
-                                             givenCurrencyMessage2,
-                                             givenStatusGroupIdMessage2,
-                                             givenStatusGroupNameMessage2,
-                                             givenStatusIdMessage2,
-                                             givenStatusNameMessage2,
-                                             givenStatusDescriptionMessage2,
-                                             givenErrorGroupIdMessage2,
-                                             givenErrorGroupNameMessage2,
-                                             givenErrorIdMessage2,
-                                             givenErrorNameMessage2,
-                                             givenErrorDescriptionMessage2,
-                                             givenErrorPermanentMessage2
-        );
+        String givenResponse = String.format(
+                "{" + "  \"results\": ["
+                        + "    {"
+                        + "   \"bulkId\": \"%s\","
+                        + "   \"applicationId\": \"%s\","
+                        + "   \"entityId\": \"%s\","
+                        + "   \"messageId\": \"%s\","
+                        + "   \"to\": \"%s\","
+                        + "   \"sentAt\": \"%s\","
+                        + "   \"doneAt\": \"%s\","
+                        + "   \"smsCount\": %s,"
+                        + "   \"price\": {"
+                        + "     \"pricePerMessage\": %g,"
+                        + "     \"currency\": \"%s\""
+                        + "    },"
+                        + "   \"status\": {"
+                        + "     \"groupId\": %d,"
+                        + "     \"groupName\": \"%s\","
+                        + "     \"id\": %d,"
+                        + "     \"name\": \"%s\","
+                        + "     \"description\": \"%s\""
+                        + "    },"
+                        + "   \"error\": {"
+                        + "     \"groupId\": %d,"
+                        + "     \"groupName\": \"%s\","
+                        + "     \"id\": %d,"
+                        + "     \"name\": \"%s\","
+                        + "     \"description\": \"%s\","
+                        + "     \"permanent\": \"%b\""
+                        + "    }"
+                        + "  },"
+                        + "    {"
+                        + "   \"bulkId\": \"%s\","
+                        + "   \"messageId\": \"%s\","
+                        + "   \"to\": \"%s\","
+                        + "   \"sentAt\": \"%s\","
+                        + "   \"doneAt\": \"%s\","
+                        + "   \"smsCount\": %s,"
+                        + "   \"price\": {"
+                        + "     \"pricePerMessage\": %g,"
+                        + "     \"currency\": \"%s\""
+                        + "    },"
+                        + "   \"status\": {"
+                        + "     \"groupId\": %d,"
+                        + "     \"groupName\": \"%s\","
+                        + "     \"id\": %d,"
+                        + "     \"name\": \"%s\","
+                        + "     \"description\": \"%s\""
+                        + "    },"
+                        + "   \"error\": {"
+                        + "     \"groupId\": %d,"
+                        + "     \"groupName\": \"%s\","
+                        + "     \"id\": %d,"
+                        + "     \"name\": \"%s\","
+                        + "     \"description\": \"%s\","
+                        + "     \"permanent\": \"%b\""
+                        + "    }"
+                        + "   }"
+                        + "  ]"
+                        + "}",
+                givenBulkId,
+                givenApplicationId,
+                givenEntityId,
+                givenMessageIdMessage1,
+                givenToMessage1,
+                givenSentAtMessage1,
+                givenDoneAtMessage1,
+                givenSmsCountMessage1,
+                givenPricePerMessageMessage1,
+                givenCurrencyMessage1,
+                givenStatusGroupIdMessage1,
+                givenStatusGroupNameMessage1,
+                givenStatusIdMessage1,
+                givenStatusNameMessage1,
+                givenStatusDescriptionMessage1,
+                givenErrorGroupIdMessage1,
+                givenErrorGroupNameMessage1,
+                givenErrorIdMessage1,
+                givenErrorNameMessage1,
+                givenErrorDescriptionMessage1,
+                givenErrorPermanentMessage1,
+                givenBulkId,
+                givenMessageIdMessage2,
+                givenToMessage2,
+                givenSentAtMessage2,
+                givenDoneAtMessage2,
+                givenSmsCountMessage2,
+                givenPricePerMessageMessage2,
+                givenCurrencyMessage2,
+                givenStatusGroupIdMessage2,
+                givenStatusGroupNameMessage2,
+                givenStatusIdMessage2,
+                givenStatusNameMessage2,
+                givenStatusDescriptionMessage2,
+                givenErrorGroupIdMessage2,
+                givenErrorGroupNameMessage2,
+                givenErrorIdMessage2,
+                givenErrorNameMessage2,
+                givenErrorDescriptionMessage2,
+                givenErrorPermanentMessage2);
 
         String messageIdParameter = "MESSAGE-ID-123-xyz";
         String limitParameter = "2";
         setUpSuccessGetRequest(
-            REPORTS,
-            Map.of(
-                "messageId", messageIdParameter,
-                "limit", limitParameter
-            ),
-            givenResponse
-        );
+                REPORTS,
+                Map.of(
+                        "messageId", messageIdParameter,
+                        "limit", limitParameter),
+                givenResponse);
 
         SmsApi sendSmsApi = new SmsApi(getApiClient());
 
-        OffsetDateTime expectedSendAtMessage1 = OffsetDateTime.of(
-            LocalDateTime.of(2019, 11, 9, 16, 0),
-            ZoneOffset.UTC
-        );
-        OffsetDateTime expectedDoneAtMessage1 = OffsetDateTime.of(
-            LocalDateTime.of(2019, 11, 9, 16, 0),
-            ZoneOffset.UTC
-        );
-        OffsetDateTime expectedSendAtMessage2 = OffsetDateTime.of(
-            LocalDateTime.of(2019, 11, 9, 17, 0),
-            ZoneOffset.UTC
-        );
-        OffsetDateTime expectedDoneAtMessage2 = OffsetDateTime.of(
-            LocalDateTime.of(2019, 11, 9, 17, 0),
-            ZoneOffset.UTC
-        );
+        OffsetDateTime expectedSendAtMessage1 = OffsetDateTime.of(LocalDateTime.of(2019, 11, 9, 16, 0), ZoneOffset.UTC);
+        OffsetDateTime expectedDoneAtMessage1 = OffsetDateTime.of(LocalDateTime.of(2019, 11, 9, 16, 0), ZoneOffset.UTC);
+        OffsetDateTime expectedSendAtMessage2 = OffsetDateTime.of(LocalDateTime.of(2019, 11, 9, 17, 0), ZoneOffset.UTC);
+        OffsetDateTime expectedDoneAtMessage2 = OffsetDateTime.of(LocalDateTime.of(2019, 11, 9, 17, 0), ZoneOffset.UTC);
 
         Consumer<SmsDeliveryResult> assertions = (deliveryResult) -> {
             then(deliveryResult).isNotNull();
@@ -1610,10 +1499,11 @@ class SmsApiTest extends ApiTest {
             then(error2.getPermanent()).isEqualTo(givenErrorPermanentMessage2);
         };
 
-        var call = sendSmsApi.getOutboundSmsMessageDeliveryReports()
-                             .bulkId(givenBulkId)
-                             .messageId(messageIdParameter)
-                             .limit(Integer.valueOf(limitParameter));
+        var call = sendSmsApi
+                .getOutboundSmsMessageDeliveryReports()
+                .bulkId(givenBulkId)
+                .messageId(messageIdParameter)
+                .limit(Integer.valueOf(limitParameter));
 
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
@@ -1623,24 +1513,14 @@ class SmsApiTest extends ApiTest {
     void shouldGetScheduledSmsMessages() {
         String givenBulkId = "BULK-ID-123-xyz";
         String givenSendAtString = "2021-02-22T17:42:05.0+0100";
-        OffsetDateTime givenSendAt = OffsetDateTime.of(
-            LocalDateTime.of(2021, 2, 22, 17, 42, 5, 0),
-            ZoneOffset.ofHours(1)
-        );
+        OffsetDateTime givenSendAt =
+                OffsetDateTime.of(LocalDateTime.of(2021, 2, 22, 17, 42, 5, 0), ZoneOffset.ofHours(1));
 
-        String givenResponse = String.format("{\n" +
-                                                 "    \"bulkId\": \"%s\",\n" +
-                                                 "    \"sendAt\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenBulkId,
-                                             givenSendAtString
-        );
+        String givenResponse = String.format(
+                "{\n" + "    \"bulkId\": \"%s\",\n" + "    \"sendAt\": \"%s\"\n" + "}\n",
+                givenBulkId, givenSendAtString);
 
-        setUpSuccessGetRequest(
-            BULKS,
-            Map.of("bulkId", givenBulkId),
-            givenResponse
-        );
+        setUpSuccessGetRequest(BULKS, Map.of("bulkId", givenBulkId), givenResponse);
 
         SmsApi scheduledSmsApi = new SmsApi(getApiClient());
 
@@ -1659,31 +1539,16 @@ class SmsApiTest extends ApiTest {
     void shouldRescheduleSmsMessages() {
         String givenBulkId = "BULK-ID-123-xyz";
         String givenSendAtString = "2021-02-22T17:42:05.390+0100";
-        OffsetDateTime givenSendAt = OffsetDateTime.of(
-            LocalDateTime.of(2021, 2, 22, 17, 42, 5, 390000000),
-            ZoneOffset.ofHours(1)
-        );
+        OffsetDateTime givenSendAt =
+                OffsetDateTime.of(LocalDateTime.of(2021, 2, 22, 17, 42, 5, 390000000), ZoneOffset.ofHours(1));
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"sendAt\": \"%s\"\n" +
-                                                   "}\n",
-                                               givenSendAtString
-        );
+        String expectedRequest = String.format("{\n" + "  \"sendAt\": \"%s\"\n" + "}\n", givenSendAtString);
 
-        String givenResponse = String.format("{\n" +
-                                                 "    \"bulkId\": \"%s\",\n" +
-                                                 "    \"sendAt\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenBulkId,
-                                             givenSendAtString
-        );
+        String givenResponse = String.format(
+                "{\n" + "    \"bulkId\": \"%s\",\n" + "    \"sendAt\": \"%s\"\n" + "}\n",
+                givenBulkId, givenSendAtString);
 
-        setUpSuccessPutRequest(
-            BULKS,
-            Map.of("bulkId", givenBulkId),
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPutRequest(BULKS, Map.of("bulkId", givenBulkId), expectedRequest, givenResponse);
 
         SmsApi scheduledSmsApi = new SmsApi(getApiClient());
 
@@ -1706,19 +1571,11 @@ class SmsApiTest extends ApiTest {
         String givenBulkStatusString = "PAUSED";
         SmsBulkStatus givenBulkStatus = SmsBulkStatus.PAUSED;
 
-        String givenResponse = String.format("{\n" +
-                                                 "    \"bulkId\": \"%s\",\n" +
-                                                 "    \"status\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenBulkId,
-                                             givenBulkStatusString
-        );
+        String givenResponse = String.format(
+                "{\n" + "    \"bulkId\": \"%s\",\n" + "    \"status\": \"%s\"\n" + "}\n",
+                givenBulkId, givenBulkStatusString);
 
-        setUpSuccessGetRequest(
-            BULKS_STATUS,
-            Map.of("bulkId", givenBulkId),
-            givenResponse
-        );
+        setUpSuccessGetRequest(BULKS_STATUS, Map.of("bulkId", givenBulkId), givenResponse);
 
         SmsApi scheduledSmsApi = new SmsApi(getApiClient());
 
@@ -1739,26 +1596,13 @@ class SmsApiTest extends ApiTest {
         String givenBulkStatusString = "PAUSED";
         SmsBulkStatus givenBulkStatus = SmsBulkStatus.PAUSED;
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"bulkId\": \"%s\",\n" +
-                                                 "  \"status\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenBulkId,
-                                             givenBulkStatusString
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n" + "  \"status\": \"%s\"\n" + "}\n",
+                givenBulkId, givenBulkStatusString);
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"status\": \"%s\"\n" +
-                                                   "}\n",
-                                               givenBulkStatusString
-        );
+        String expectedRequest = String.format("{\n" + "  \"status\": \"%s\"\n" + "}\n", givenBulkStatusString);
 
-        setUpSuccessPutRequest(
-            BULKS_STATUS,
-            Map.of("bulkId", givenBulkId),
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPutRequest(BULKS_STATUS, Map.of("bulkId", givenBulkId), expectedRequest, givenResponse);
 
         SmsApi scheduledSmsApi = new SmsApi(getApiClient());
 
@@ -1779,39 +1623,30 @@ class SmsApiTest extends ApiTest {
     void shouldSendSmsPreview() {
 
         String expectedPreviewText = "Let's see how many characters will remain unused in this message.";
-        String expectedRequest = String.format("{" +
-                                                   "  \"text\": \"%s\"" +
-                                                   "}",
-                                               expectedPreviewText
-        );
+        String expectedRequest = String.format("{" + "  \"text\": \"%s\"" + "}", expectedPreviewText);
 
         String givenOriginalText = "Let's see how many characters will remain unused in this message.";
         String givenTextPreview = "Let's see how many characters will remain unused in this message.";
         int givenMessageCount = 1;
         int givenCharactersRemaining = 95;
-        String givenResponse = String.format("{" +
-                                                 "  \"originalText\": \"%s\"," +
-                                                 "   \"previews\": [" +
-                                                 "    {" +
-                                                 "      \"textPreview\": \"%s\"," +
-                                                 "      \"messageCount\": %d," +
-                                                 "      \"charactersRemaining\": %d," +
-                                                 "      \"configuration\": { }" +
-                                                 "    }" +
-                                                 "  ]" +
-                                                 "}",
-                                             givenOriginalText,
-                                             givenTextPreview,
-                                             givenMessageCount,
-                                             givenCharactersRemaining
-        );
+        String givenResponse = String.format(
+                "{" + "  \"originalText\": \"%s\","
+                        + "   \"previews\": ["
+                        + "    {"
+                        + "      \"textPreview\": \"%s\","
+                        + "      \"messageCount\": %d,"
+                        + "      \"charactersRemaining\": %d,"
+                        + "      \"configuration\": { }"
+                        + "    }"
+                        + "  ]"
+                        + "}",
+                givenOriginalText, givenTextPreview, givenMessageCount, givenCharactersRemaining);
 
         setUpSuccessPostRequest(PREVIEW, expectedRequest, givenResponse);
 
         SmsApi sendSmsApi = new SmsApi(getApiClient());
 
-        SmsPreviewRequest request = new SmsPreviewRequest()
-            .text(givenTextPreview);
+        SmsPreviewRequest request = new SmsPreviewRequest().text(givenTextPreview);
 
         Consumer<SmsPreviewResponse> assertions = (smsResponse) -> {
             then(smsResponse).isNotNull();
@@ -1838,31 +1673,28 @@ class SmsApiTest extends ApiTest {
 
     @Test
     void shouldParseInboundSmsMessages() {
-        var givenRequest = "{\n" +
-            "  \"results\": [\n" +
-            "    {\n" +
-            "      \"messageId\": \"817790313235066447\",\n" +
-            "      \"from\": \"385916242493\",\n" +
-            "      \"to\": \"385921004026\",\n" +
-            "      \"text\": \"QUIZ Correct answer is Paris\",\n" +
-            "      \"cleanText\": \"Correct answer is Paris\",\n" +
-            "      \"keyword\": \"QUIZ\",\n" +
-            "      \"receivedAt\": \"2016-10-06T09:28:39.220+0000\",\n" +
-            "      \"smsCount\": 1,\n" +
-            "      \"price\": {\n" +
-            "        \"pricePerMessage\": 0,\n" +
-            "        \"currency\": \"EUR\"\n" +
-            "      },\n" +
-            "      \"callbackData\": \"callbackData\"\n" +
-            "    }\n" +
-            "  ],\n" +
-            "  \"messageCount\": 1,\n" +
-            "  \"pendingMessageCount\": 0\n" +
-            "}\n";
-        SmsWebhookInboundReportResponse reportResponse = json.deserialize(
-            givenRequest,
-            SmsWebhookInboundReportResponse.class
-        );
+        var givenRequest = "{\n" + "  \"results\": [\n"
+                + "    {\n"
+                + "      \"messageId\": \"817790313235066447\",\n"
+                + "      \"from\": \"385916242493\",\n"
+                + "      \"to\": \"385921004026\",\n"
+                + "      \"text\": \"QUIZ Correct answer is Paris\",\n"
+                + "      \"cleanText\": \"Correct answer is Paris\",\n"
+                + "      \"keyword\": \"QUIZ\",\n"
+                + "      \"receivedAt\": \"2016-10-06T09:28:39.220+0000\",\n"
+                + "      \"smsCount\": 1,\n"
+                + "      \"price\": {\n"
+                + "        \"pricePerMessage\": 0,\n"
+                + "        \"currency\": \"EUR\"\n"
+                + "      },\n"
+                + "      \"callbackData\": \"callbackData\"\n"
+                + "    }\n"
+                + "  ],\n"
+                + "  \"messageCount\": 1,\n"
+                + "  \"pendingMessageCount\": 0\n"
+                + "}\n";
+        SmsWebhookInboundReportResponse reportResponse =
+                json.deserialize(givenRequest, SmsWebhookInboundReportResponse.class);
         then(reportResponse.getResults()).isNotNull();
         then(reportResponse.getResults().size()).isEqualTo(1);
         then(reportResponse.getResults().get(0).getClass()).isEqualTo(SmsWebhookInboundReport.class);
@@ -1872,68 +1704,64 @@ class SmsApiTest extends ApiTest {
 
     @Test
     void shouldParseOutboundSmsMessageReport() {
-        var givenRequest = "{\n" +
-            "  \"results\": [\n" +
-            "    {\n" +
-            "      \"bulkId\": \"BULK-ID-123-xyz\",\n" +
-            "      \"messageId\": \"MESSAGE-ID-123-xyz\",\n" +
-            "      \"to\": \"41793026727\",\n" +
-            "      \"sentAt\": \"2019-11-09T16:00:00.000+0000\",\n" +
-            "      \"doneAt\": \"2019-11-09T16:00:00.000+0000\",\n" +
-            "      \"smsCount\": 1,\n" +
-            "      \"price\": {\n" +
-            "        \"pricePerMessage\": 0.01,\n" +
-            "        \"currency\": \"EUR\"\n" +
-            "      },\n" +
-            "      \"status\": {\n" +
-            "        \"groupId\": 3,\n" +
-            "        \"groupName\": \"DELIVERED\",\n" +
-            "        \"id\": 5,\n" +
-            "        \"name\": \"DELIVERED_TO_HANDSET\",\n" +
-            "        \"description\": \"Message delivered to handset\"\n" +
-            "      },\n" +
-            "      \"error\": {\n" +
-            "        \"groupId\": 0,\n" +
-            "        \"groupName\": \"Ok\",\n" +
-            "        \"id\": 0,\n" +
-            "        \"name\": \"NO_ERROR\",\n" +
-            "        \"description\": \"No Error\",\n" +
-            "        \"permanent\": false\n" +
-            "      }\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"bulkId\": \"BULK-ID-123-xyz\",\n" +
-            "      \"messageId\": \"12db39c3-7822-4e72-a3ec-c87442c0ffc5\",\n" +
-            "      \"to\": \"41793026834\",\n" +
-            "      \"sentAt\": \"2019-11-09T17:00:00.000+0000\",\n" +
-            "      \"doneAt\": \"2019-11-09T17:00:00.000+0000\",\n" +
-            "      \"smsCount\": 1,\n" +
-            "      \"price\": {\n" +
-            "        \"pricePerMessage\": 0.01,\n" +
-            "        \"currency\": \"EUR\"\n" +
-            "      },\n" +
-            "      \"status\": {\n" +
-            "        \"groupId\": 3,\n" +
-            "        \"groupName\": \"DELIVERED\",\n" +
-            "        \"id\": 5,\n" +
-            "        \"name\": \"DELIVERED_TO_HANDSET\",\n" +
-            "        \"description\": \"Message delivered to handset\"\n" +
-            "      },\n" +
-            "      \"error\": {\n" +
-            "        \"groupId\": 0,\n" +
-            "        \"groupName\": \"Ok\",\n" +
-            "        \"id\": 0,\n" +
-            "        \"name\": \"NO_ERROR\",\n" +
-            "        \"description\": \"No Error\",\n" +
-            "        \"permanent\": false\n" +
-            "      }\n" +
-            "    }\n" +
-            "  ]\n" +
-            "}\n";
-        SmsDeliveryResult reportResponse = json.deserialize(
-            givenRequest,
-            SmsDeliveryResult.class
-        );
+        var givenRequest = "{\n" + "  \"results\": [\n"
+                + "    {\n"
+                + "      \"bulkId\": \"BULK-ID-123-xyz\",\n"
+                + "      \"messageId\": \"MESSAGE-ID-123-xyz\",\n"
+                + "      \"to\": \"41793026727\",\n"
+                + "      \"sentAt\": \"2019-11-09T16:00:00.000+0000\",\n"
+                + "      \"doneAt\": \"2019-11-09T16:00:00.000+0000\",\n"
+                + "      \"smsCount\": 1,\n"
+                + "      \"price\": {\n"
+                + "        \"pricePerMessage\": 0.01,\n"
+                + "        \"currency\": \"EUR\"\n"
+                + "      },\n"
+                + "      \"status\": {\n"
+                + "        \"groupId\": 3,\n"
+                + "        \"groupName\": \"DELIVERED\",\n"
+                + "        \"id\": 5,\n"
+                + "        \"name\": \"DELIVERED_TO_HANDSET\",\n"
+                + "        \"description\": \"Message delivered to handset\"\n"
+                + "      },\n"
+                + "      \"error\": {\n"
+                + "        \"groupId\": 0,\n"
+                + "        \"groupName\": \"Ok\",\n"
+                + "        \"id\": 0,\n"
+                + "        \"name\": \"NO_ERROR\",\n"
+                + "        \"description\": \"No Error\",\n"
+                + "        \"permanent\": false\n"
+                + "      }\n"
+                + "    },\n"
+                + "    {\n"
+                + "      \"bulkId\": \"BULK-ID-123-xyz\",\n"
+                + "      \"messageId\": \"12db39c3-7822-4e72-a3ec-c87442c0ffc5\",\n"
+                + "      \"to\": \"41793026834\",\n"
+                + "      \"sentAt\": \"2019-11-09T17:00:00.000+0000\",\n"
+                + "      \"doneAt\": \"2019-11-09T17:00:00.000+0000\",\n"
+                + "      \"smsCount\": 1,\n"
+                + "      \"price\": {\n"
+                + "        \"pricePerMessage\": 0.01,\n"
+                + "        \"currency\": \"EUR\"\n"
+                + "      },\n"
+                + "      \"status\": {\n"
+                + "        \"groupId\": 3,\n"
+                + "        \"groupName\": \"DELIVERED\",\n"
+                + "        \"id\": 5,\n"
+                + "        \"name\": \"DELIVERED_TO_HANDSET\",\n"
+                + "        \"description\": \"Message delivered to handset\"\n"
+                + "      },\n"
+                + "      \"error\": {\n"
+                + "        \"groupId\": 0,\n"
+                + "        \"groupName\": \"Ok\",\n"
+                + "        \"id\": 0,\n"
+                + "        \"name\": \"NO_ERROR\",\n"
+                + "        \"description\": \"No Error\",\n"
+                + "        \"permanent\": false\n"
+                + "      }\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}\n";
+        SmsDeliveryResult reportResponse = json.deserialize(givenRequest, SmsDeliveryResult.class);
         then(reportResponse.getResults()).isNotNull();
         then(reportResponse.getResults().size()).isEqualTo(2);
 
@@ -1949,5 +1777,4 @@ class SmsApiTest extends ApiTest {
         then(message2.getStatus().getClass()).isEqualTo(MessageStatus.class);
         then(message2.getError().getClass()).isEqualTo(MessageError.class);
     }
-
 }

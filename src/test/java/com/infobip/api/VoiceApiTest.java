@@ -1,18 +1,15 @@
 package com.infobip.api;
 
-import com.infobip.model.*;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.BDDAssertions.then;
 
+import com.infobip.model.*;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
-
-import static org.assertj.core.api.BDDAssertions.then;
+import org.junit.jupiter.api.Test;
 
 class VoiceApiTest extends ApiTest {
 
@@ -27,24 +24,13 @@ class VoiceApiTest extends ApiTest {
     void shouldGetSentBulks() {
         String givenBulkId = "string";
         String givenSendAt = "2022-12-06T13:37:15Z";
-        OffsetDateTime givenSendAtDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2022, 12, 6, 13, 37, 15),
-            ZoneOffset.ofHours(0)
-        );
+        OffsetDateTime givenSendAtDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2022, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"bulkId\": \"%s\",\n" +
-                                                 "  \"sendAt\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenBulkId,
-                                             givenSendAt
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n" + "  \"sendAt\": \"%s\"\n" + "}\n", givenBulkId, givenSendAt);
 
-        setUpSuccessGetRequest(
-            BULKS,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(BULKS, Map.of(), givenResponse);
 
         VoiceApi api = new VoiceApi(getApiClient());
 
@@ -63,31 +49,15 @@ class VoiceApiTest extends ApiTest {
     void shouldRescheduleSentBulk() {
         String givenBulkId = "123";
         String givenSendAt = "2022-12-06T13:37:15.000+0000";
-        OffsetDateTime givenSendAtDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2022, 12, 6, 13, 37, 15, 0),
-            ZoneOffset.ofHours(0)
-        );
+        OffsetDateTime givenSendAtDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2022, 12, 6, 13, 37, 15, 0), ZoneOffset.ofHours(0));
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"bulkId\": \"%s\",\n" +
-                                                 "  \"sendAt\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenBulkId,
-                                             givenSendAt
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n" + "  \"sendAt\": \"%s\"\n" + "}\n", givenBulkId, givenSendAt);
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"sendAt\": \"%s\"\n" +
-                                                   "}\n",
-                                               givenSendAt
-        );
+        String expectedRequest = String.format("{\n" + "  \"sendAt\": \"%s\"\n" + "}\n", givenSendAt);
 
-        setUpSuccessPutRequest(
-            BULKS,
-            Map.of("bulkId", givenBulkId),
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPutRequest(BULKS, Map.of("bulkId", givenBulkId), expectedRequest, givenResponse);
 
         VoiceApi api = new VoiceApi(getApiClient());
 
@@ -108,19 +78,10 @@ class VoiceApiTest extends ApiTest {
     void shouldGetSentBulksStatus() {
         String givenBulkId = "string";
         CallsBulkStatus givenStatus = CallsBulkStatus.PENDING;
-        String givenResponse = String.format("{\n" +
-                                                 "  \"bulkId\": \"%s\",\n" +
-                                                 "  \"status\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenBulkId,
-                                             givenStatus
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n" + "  \"status\": \"%s\"\n" + "}\n", givenBulkId, givenStatus);
 
-        setUpSuccessGetRequest(
-            BULKS_STATUS,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(BULKS_STATUS, Map.of(), givenResponse);
 
         VoiceApi api = new VoiceApi(getApiClient());
 
@@ -139,20 +100,11 @@ class VoiceApiTest extends ApiTest {
     void shouldManageSentBulksStatus() {
         String givenBulkId = "string";
         CallsBulkStatus givenStatus = CallsBulkStatus.PENDING;
-        String givenResponse = String.format("{\n" +
-                                                 "  \"bulkId\": \"%s\",\n" +
-                                                 "  \"status\": \"%s\"\n" +
-                                                 "}\n", givenBulkId, givenStatus);
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"status\": \"%s\"\n" +
-                                                   "}\n", givenStatus);
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n" + "  \"status\": \"%s\"\n" + "}\n", givenBulkId, givenStatus);
+        String expectedRequest = String.format("{\n" + "  \"status\": \"%s\"\n" + "}\n", givenStatus);
 
-        setUpSuccessPutRequest(
-            BULKS_STATUS,
-            Map.of(),
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPutRequest(BULKS_STATUS, Map.of(), expectedRequest, givenResponse);
 
         VoiceApi api = new VoiceApi(getApiClient());
         CallsUpdateStatusRequest request = new CallsUpdateStatusRequest().status(givenStatus);
@@ -185,42 +137,44 @@ class VoiceApiTest extends ApiTest {
         String givenGender = "female";
         String givenFrom = "442032864231";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"bulkId\": \"%s\",\n" +
-                                                 "  \"messages\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"to\": \"%s\",\n" +
-                                                 "      \"status\": {\n" +
-                                                 "        \"groupId\": %d,\n" +
-                                                 "        \"groupName\": \"%s\",\n" +
-                                                 "        \"id\": %d,\n" +
-                                                 "        \"name\": \"%s\",\n" +
-                                                 "        \"description\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"messageId\": \"%s\"\n" +
-                                                 "    }\n" +
-                                                 "  ]\n" +
-                                                 "}\n",
-                                             givenBulkId, givenTo, givenStatusGroupId, givenStatusGroupName, givenStatusId, givenStatusName,
-                                             givenStatusDescription, givenMessageId
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"messageId\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenBulkId,
+                givenTo,
+                givenStatusGroupId,
+                givenStatusGroupName,
+                givenStatusId,
+                givenStatusName,
+                givenStatusDescription,
+                givenMessageId);
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"text\": \"%s\",\n" +
-                                                   "  \"language\": \"%s\",\n" +
-                                                   "  \"voice\": {\n" +
-                                                   "    \"name\": \"%s\",\n" +
-                                                   "    \"gender\": \"%s\"\n" +
-                                                   "  },\n" +
-                                                   "  \"from\": \"%s\",\n" +
-                                                   "  \"to\": \"%s\"\n" +
-                                                   "}\n", givenText, givenLanguage, givenName, givenGender, givenFrom, givenTo);
+        String expectedRequest = String.format(
+                "{\n" + "  \"text\": \"%s\",\n"
+                        + "  \"language\": \"%s\",\n"
+                        + "  \"voice\": {\n"
+                        + "    \"name\": \"%s\",\n"
+                        + "    \"gender\": \"%s\"\n"
+                        + "  },\n"
+                        + "  \"from\": \"%s\",\n"
+                        + "  \"to\": \"%s\"\n"
+                        + "}\n",
+                givenText, givenLanguage, givenName, givenGender, givenFrom, givenTo);
 
-        setUpSuccessPostRequest(
-            SINGLE,
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(SINGLE, expectedRequest, givenResponse);
 
         VoiceApi api = new VoiceApi(getApiClient());
 
@@ -242,11 +196,11 @@ class VoiceApiTest extends ApiTest {
         };
 
         CallsSingleBody request = new CallsSingleBody()
-            .text(givenText)
-            .language(givenLanguage)
-            .voice(new CallsVoice().name(givenName).gender(givenGender))
-            .from(givenFrom)
-            .to(givenTo);
+                .text(givenText)
+                .language(givenLanguage)
+                .voice(new CallsVoice().name(givenName).gender(givenGender))
+                .from(givenFrom)
+                .to(givenTo);
 
         var call = api.sendSingleVoiceTts(request);
         testSuccessfulCall(call::execute, assertions);
@@ -274,74 +228,82 @@ class VoiceApiTest extends ApiTest {
         String givenGender = "female";
         String givenTo1 = "41793026785";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"bulkId\": \"%s\",\n" +
-                                                 "  \"messages\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"to\": \"%s\",\n" +
-                                                 "      \"status\": {\n" +
-                                                 "        \"groupId\": %d,\n" +
-                                                 "        \"groupName\": \"%s\",\n" +
-                                                 "        \"id\": %d,\n" +
-                                                 "        \"name\": \"%s\",\n" +
-                                                 "        \"description\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"messageId\": \"%s\"\n" +
-                                                 "    }\n" +
-                                                 "  ]\n" +
-                                                 "}\n",
-                                             givenBulkId, givenTo, givenStatusGroupId, givenStatusGroupName, givenStatusId, givenStatusName,
-                                             givenStatusDescription, givenMessageId
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"messageId\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenBulkId,
+                givenTo,
+                givenStatusGroupId,
+                givenStatusGroupName,
+                givenStatusId,
+                givenStatusName,
+                givenStatusDescription,
+                givenMessageId);
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"messages\": [\n" +
-                                                   "    {\n" +
-                                                   "      \"audioFileUrl\": \"%s\",\n" +
-                                                   "      \"from\": \"%s\",\n" +
-                                                   "      \"to\": [\n" +
-                                                   "        \"%s\",\n" +
-                                                   "        \"%s\"\n" +
-                                                   "      ]\n" +
-                                                   "    },\n" +
-                                                   "    {\n" +
-                                                   "      \"from\": \"%s\",\n" +
-                                                   "      \"to\": [\n" +
-                                                   "        \"%s\"\n" +
-                                                   "      ],\n" +
-                                                   "      \"language\": \"%s\",\n" +
-                                                   "      \"text\": \"%s\",\n" +
-                                                   "      \"voice\": {\n" +
-                                                   "        \"gender\": \"%s\",\n" +
-                                                   "        \"name\": \"%s\"\n" +
-                                                   "      }\n" +
-                                                   "    }\n" +
-                                                   "  ]\n" +
-                                                   "}\n",
-                                               givenAudioFileUrl, givenReqFrom, givenReqTo1, givenReqTo2,
-                                               givenReqFrom, givenTo1, givenLanguage, givenText, givenGender, givenName
-        );
+        String expectedRequest = String.format(
+                "{\n" + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"audioFileUrl\": \"%s\",\n"
+                        + "      \"from\": \"%s\",\n"
+                        + "      \"to\": [\n"
+                        + "        \"%s\",\n"
+                        + "        \"%s\"\n"
+                        + "      ]\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"from\": \"%s\",\n"
+                        + "      \"to\": [\n"
+                        + "        \"%s\"\n"
+                        + "      ],\n"
+                        + "      \"language\": \"%s\",\n"
+                        + "      \"text\": \"%s\",\n"
+                        + "      \"voice\": {\n"
+                        + "        \"gender\": \"%s\",\n"
+                        + "        \"name\": \"%s\"\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenAudioFileUrl,
+                givenReqFrom,
+                givenReqTo1,
+                givenReqTo2,
+                givenReqFrom,
+                givenTo1,
+                givenLanguage,
+                givenText,
+                givenGender,
+                givenName);
 
-        setUpSuccessPostRequest(
-            MULTIPLE,
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(MULTIPLE, expectedRequest, givenResponse);
 
         VoiceApi api = new VoiceApi(getApiClient());
 
-        CallsMultiBody request = new CallsMultiBody().messages(List.of(
-            new CallsMultiMessage()
-                .audioFileUrl(givenAudioFileUrl)
-                .from(givenReqFrom)
-                .to(List.of(givenReqTo1, givenReqTo2)),
-            new CallsMultiMessage()
-                .text(givenText)
-                .language(givenLanguage)
-                .voice(new CallsVoice().name(givenName).gender(givenGender))
-                .from(givenReqFrom)
-                .to(List.of(givenTo1))
-        ));
+        CallsMultiBody request = new CallsMultiBody()
+                .messages(List.of(
+                        new CallsMultiMessage()
+                                .audioFileUrl(givenAudioFileUrl)
+                                .from(givenReqFrom)
+                                .to(List.of(givenReqTo1, givenReqTo2)),
+                        new CallsMultiMessage()
+                                .text(givenText)
+                                .language(givenLanguage)
+                                .voice(new CallsVoice().name(givenName).gender(givenGender))
+                                .from(givenReqFrom)
+                                .to(List.of(givenTo1))));
 
         Consumer<CallsVoiceResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -377,34 +339,29 @@ class VoiceApiTest extends ApiTest {
         String givenName4 = "Joey";
         String givenGender4 = "male";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"voices\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"gender\": \"%s\"\n" +
-                                                 "    },\n" +
-                                                 "    {\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"gender\": \"%s\"\n" +
-                                                 "    },\n" +
-                                                 "    {\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"gender\": \"%s\"\n" +
-                                                 "    },\n" +
-                                                 "    {\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"gender\": \"%s\"\n" +
-                                                 "    }\n" +
-                                                 "  ]\n" +
-                                                 "}\n",
-                                             givenName1, givenGender1, givenName2, givenGender2, givenName3, givenGender3, givenName4, givenGender4
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"voices\": [\n"
+                        + "    {\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"gender\": \"%s\"\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"gender\": \"%s\"\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"gender\": \"%s\"\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"gender\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenName1, givenGender1, givenName2, givenGender2, givenName3, givenGender3, givenName4, givenGender4);
 
-        setUpSuccessGetRequest(
-            VOICE_LANGUAGE.replace("{language}", givenLanguage),
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(VOICE_LANGUAGE.replace("{language}", givenLanguage), Map.of(), givenResponse);
 
         VoiceApi api = new VoiceApi(getApiClient());
 
@@ -435,5 +392,4 @@ class VoiceApiTest extends ApiTest {
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
-
 }

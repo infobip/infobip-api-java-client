@@ -1,13 +1,12 @@
 package com.infobip.api;
 
-import com.infobip.model.*;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.BDDAssertions.then;
 
+import com.infobip.model.*;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
-import static org.assertj.core.api.BDDAssertions.then;
+import org.junit.jupiter.api.Test;
 
 class CallRoutingApiTest extends ApiTest {
 
@@ -45,150 +44,136 @@ class CallRoutingApiTest extends ApiTest {
         var givenPagingTotalPages = 1;
         var givenPagingTotalResults = 2L;
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"results\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"destinations\": [\n" +
-                                                 "        {\n" +
-                                                 "          \"value\": {\n" +
-                                                 "            \"username\": \"%s\",\n" +
-                                                 "            \"sipTrunkId\": \"%s\",\n" +
-                                                 "            \"customHeaders\": {\n" +
-                                                 "              \"string\": \"%s\"\n" +
-                                                 "            },\n" +
-                                                 "            \"type\": \"%s\"\n" +
-                                                 "          },\n" +
-                                                 "          \"connectTimeout\": %d,\n" +
-                                                 "          \"recording\": {\n" +
-                                                 "            \"recordingType\": \"%s\",\n" +
-                                                 "            \"recordingComposition\": {\n" +
-                                                 "              \"enabled\": %b\n" +
-                                                 "            },\n" +
-                                                 "            \"customData\": {\n" +
-                                                 "              \"string\": \"%s\"\n" +
-                                                 "            },\n" +
-                                                 "            \"filePrefix\": \"%s\"\n" +
-                                                 "          },\n" +
-                                                 "          \"type\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      ]\n" +
-                                                 "    },\n" +
-                                                 "    {\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"destinations\": [\n" +
-                                                 "        {\n" +
-                                                 "          \"value\": {\n" +
-                                                 "            \"phoneNumber\": \"%s\",\n" +
-                                                 "            \"type\": \"%s\"\n" +
-                                                 "          },\n" +
-                                                 "          \"connectTimeout\": %d,\n" +
-                                                 "          \"recording\": {\n" +
-                                                 "            \"recordingType\": \"%s\",\n" +
-                                                 "            \"recordingComposition\": {\n" +
-                                                 "              \"enabled\": %b\n" +
-                                                 "            },\n" +
-                                                 "            \"customData\": {\n" +
-                                                 "              \"string\": \"%s\"\n" +
-                                                 "            },\n" +
-                                                 "            \"filePrefix\": \"%s\"\n" +
-                                                 "          },\n" +
-                                                 "          \"type\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      ]\n" +
-                                                 "    }\n" +
-                                                 "  ],\n" +
-                                                 "  \"paging\": {\n" +
-                                                 "    \"page\": %d,\n" +
-                                                 "    \"size\": %d,\n" +
-                                                 "    \"totalPages\": %d,\n" +
-                                                 "    \"totalResults\": %d\n" +
-                                                 "  }\n" +
-                                                 "}\n",
-                                             givenId,
-                                             givenName,
-                                             givenDestinationsValueUsername,
-                                             givenDestinationsValueSipTrunkId,
-                                             givenDestinationsValueCustomHeadersString,
-                                             givenDestinationsValueType,
-                                             givenDestinationsConnectTimeout,
-                                             givenDestinationsRecordingRecordingType,
-                                             givenDestinationsRecordingRecordingCompositionEnabled,
-                                             givenDestinationsRecordingCustomDataString,
-                                             givenDestinationsRecordingFilePrefix,
-                                             givenDestinationsType,
-                                             givenSecondId,
-                                             givenSecondName,
-                                             givenSecondDestinationsValuePhoneNumber,
-                                             givenSecondDestinationsValueType,
-                                             givenSecondDestinationsConnectTimeout,
-                                             givenSecondDestinationsRecordingRecordingType,
-                                             givenSecondDestinationsRecordingRecordingCompositionEnabled,
-                                             givenSecondDestinationsRecordingCustomDataString,
-                                             givenSecondDestinationsRecordingFilePrefix,
-                                             givenSecondDestinationsType,
-                                             givenPagingPage,
-                                             givenPagingSize,
-                                             givenPagingTotalPages,
-                                             givenPagingTotalResults
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"value\": {\n"
+                        + "            \"username\": \"%s\",\n"
+                        + "            \"sipTrunkId\": \"%s\",\n"
+                        + "            \"customHeaders\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"connectTimeout\": %d,\n"
+                        + "          \"recording\": {\n"
+                        + "            \"recordingType\": \"%s\",\n"
+                        + "            \"recordingComposition\": {\n"
+                        + "              \"enabled\": %b\n"
+                        + "            },\n"
+                        + "            \"customData\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"filePrefix\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ]\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"value\": {\n"
+                        + "            \"phoneNumber\": \"%s\",\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"connectTimeout\": %d,\n"
+                        + "          \"recording\": {\n"
+                        + "            \"recordingType\": \"%s\",\n"
+                        + "            \"recordingComposition\": {\n"
+                        + "              \"enabled\": %b\n"
+                        + "            },\n"
+                        + "            \"customData\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"filePrefix\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ]\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"paging\": {\n"
+                        + "    \"page\": %d,\n"
+                        + "    \"size\": %d,\n"
+                        + "    \"totalPages\": %d,\n"
+                        + "    \"totalResults\": %d\n"
+                        + "  }\n"
+                        + "}\n",
+                givenId,
+                givenName,
+                givenDestinationsValueUsername,
+                givenDestinationsValueSipTrunkId,
+                givenDestinationsValueCustomHeadersString,
+                givenDestinationsValueType,
+                givenDestinationsConnectTimeout,
+                givenDestinationsRecordingRecordingType,
+                givenDestinationsRecordingRecordingCompositionEnabled,
+                givenDestinationsRecordingCustomDataString,
+                givenDestinationsRecordingFilePrefix,
+                givenDestinationsType,
+                givenSecondId,
+                givenSecondName,
+                givenSecondDestinationsValuePhoneNumber,
+                givenSecondDestinationsValueType,
+                givenSecondDestinationsConnectTimeout,
+                givenSecondDestinationsRecordingRecordingType,
+                givenSecondDestinationsRecordingRecordingCompositionEnabled,
+                givenSecondDestinationsRecordingCustomDataString,
+                givenSecondDestinationsRecordingFilePrefix,
+                givenSecondDestinationsType,
+                givenPagingPage,
+                givenPagingSize,
+                givenPagingTotalPages,
+                givenPagingTotalResults);
 
-        setUpSuccessGetRequest(
-            ROUTES,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(ROUTES, Map.of(), givenResponse);
 
         var callRoutingApi = new CallRoutingApi(getApiClient());
 
         var expectedResponse = new CallRoutingRouteResponsePage()
-            .addResultsItem(new CallRoutingRouteResponse()
-                                .id(givenId)
-                                .name(givenName)
-                                .destinations(List.of(
-                                    new CallRoutingEndpointDestination()
-                                        .value(new CallRoutingSipEndpoint()
-                                                   .username(givenDestinationsValueUsername)
-                                                   .sipTrunkId(givenDestinationsValueSipTrunkId)
-                                                   .customHeaders(Map.of(
-                                                       "string", givenDestinationsRecordingCustomDataString
-                                                   )))
-                                        .connectTimeout(givenDestinationsConnectTimeout)
-                                        .recording(new CallRoutingRecording()
-                                                       .recordingType(givenDestinationsRecordingRecordingType)
-                                                       .recordingComposition(new CallRoutingRecordingComposition()
-                                                                                 .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
-                                                       .customData(Map.of(
-                                                           "string", givenDestinationsRecordingCustomDataString
-                                                       ))
-                                                       .filePrefix(givenDestinationsRecordingFilePrefix))
-                                )))
-            .addResultsItem(new CallRoutingRouteResponse()
-                                .id(givenSecondId)
-                                .name(givenSecondName)
-                                .destinations(List.of(
-                                    new CallRoutingEndpointDestination()
-                                        .value(new CallRoutingPhoneEndpoint().phoneNumber(givenSecondDestinationsValuePhoneNumber))
-                                        .connectTimeout(givenSecondDestinationsConnectTimeout)
-                                        .recording(new CallRoutingRecording()
-                                                       .recordingType(givenSecondDestinationsRecordingRecordingType)
-                                                       .recordingComposition(new CallRoutingRecordingComposition()
-                                                                                 .enabled(givenSecondDestinationsRecordingRecordingCompositionEnabled))
-                                                       .customData(Map.of(
-                                                           "string", givenSecondDestinationsRecordingCustomDataString
-                                                       ))
-                                                       .filePrefix(givenSecondDestinationsRecordingFilePrefix))
-                                )))
-            .paging(new PageInfo()
+                .addResultsItem(new CallRoutingRouteResponse()
+                        .id(givenId)
+                        .name(givenName)
+                        .destinations(List.of(new CallRoutingEndpointDestination()
+                                .value(new CallRoutingSipEndpoint()
+                                        .username(givenDestinationsValueUsername)
+                                        .sipTrunkId(givenDestinationsValueSipTrunkId)
+                                        .customHeaders(Map.of("string", givenDestinationsRecordingCustomDataString)))
+                                .connectTimeout(givenDestinationsConnectTimeout)
+                                .recording(new CallRoutingRecording()
+                                        .recordingType(givenDestinationsRecordingRecordingType)
+                                        .recordingComposition(new CallRoutingRecordingComposition()
+                                                .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
+                                        .customData(Map.of("string", givenDestinationsRecordingCustomDataString))
+                                        .filePrefix(givenDestinationsRecordingFilePrefix)))))
+                .addResultsItem(new CallRoutingRouteResponse()
+                        .id(givenSecondId)
+                        .name(givenSecondName)
+                        .destinations(List.of(new CallRoutingEndpointDestination()
+                                .value(new CallRoutingPhoneEndpoint()
+                                        .phoneNumber(givenSecondDestinationsValuePhoneNumber))
+                                .connectTimeout(givenSecondDestinationsConnectTimeout)
+                                .recording(new CallRoutingRecording()
+                                        .recordingType(givenSecondDestinationsRecordingRecordingType)
+                                        .recordingComposition(new CallRoutingRecordingComposition()
+                                                .enabled(givenSecondDestinationsRecordingRecordingCompositionEnabled))
+                                        .customData(Map.of("string", givenSecondDestinationsRecordingCustomDataString))
+                                        .filePrefix(givenSecondDestinationsRecordingFilePrefix)))))
+                .paging(new PageInfo()
                         .page(givenPagingPage)
                         .size(givenPagingSize)
                         .totalPages(givenPagingTotalPages)
-                        .totalResults(givenPagingTotalResults)
-            );
+                        .totalResults(givenPagingTotalResults));
 
-        Consumer<CallRoutingRouteResponsePage> assertions = response -> then(response).isEqualTo(expectedResponse);
+        Consumer<CallRoutingRouteResponsePage> assertions =
+                response -> then(response).isEqualTo(expectedResponse);
 
         var call = callRoutingApi.getCallRoutes();
 
@@ -211,139 +196,122 @@ class CallRoutingApiTest extends ApiTest {
         var givenDestinationsRecordingFilePrefix = "string";
         var givenDestinationsType = "ENDPOINT";
 
-        String expectedRequest = String.format("{\n" +
-                                                   "      \"name\": \"%s\",\n" +
-                                                   "      \"destinations\": [\n" +
-                                                   "        {\n" +
-                                                   "          \"value\": {\n" +
-                                                   "            \"username\": \"%s\",\n" +
-                                                   "            \"sipTrunkId\": \"%s\",\n" +
-                                                   "            \"customHeaders\": {\n" +
-                                                   "              \"string\": \"%s\"\n" +
-                                                   "            },\n" +
-                                                   "            \"type\": \"%s\"\n" +
-                                                   "          },\n" +
-                                                   "          \"connectTimeout\": %d,\n" +
-                                                   "          \"recording\": {\n" +
-                                                   "            \"recordingType\": \"%s\",\n" +
-                                                   "            \"recordingComposition\": {\n" +
-                                                   "              \"enabled\": %b\n" +
-                                                   "            },\n" +
-                                                   "            \"customData\": {\n" +
-                                                   "              \"string\": \"%s\"\n" +
-                                                   "            },\n" +
-                                                   "            \"filePrefix\": \"%s\"\n" +
-                                                   "          },\n" +
-                                                   "          \"type\": \"%s\"\n" +
-                                                   "        }\n" +
-                                                   "      ]\n" +
-                                                   "    }\n",
-                                               givenName,
-                                               givenDestinationsValueUsername,
-                                               givenDestinationsValueSipTrunkId,
-                                               givenDestinationsValueCustomHeadersString,
-                                               givenDestinationsValueType,
-                                               givenDestinationsConnectTimeout,
-                                               givenDestinationsRecordingRecordingType,
-                                               givenDestinationsRecordingRecordingCompositionEnabled,
-                                               givenDestinationsRecordingCustomDataString,
-                                               givenDestinationsRecordingFilePrefix,
-                                               givenDestinationsType
-        );
+        String expectedRequest = String.format(
+                "{\n" + "      \"name\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"value\": {\n"
+                        + "            \"username\": \"%s\",\n"
+                        + "            \"sipTrunkId\": \"%s\",\n"
+                        + "            \"customHeaders\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"connectTimeout\": %d,\n"
+                        + "          \"recording\": {\n"
+                        + "            \"recordingType\": \"%s\",\n"
+                        + "            \"recordingComposition\": {\n"
+                        + "              \"enabled\": %b\n"
+                        + "            },\n"
+                        + "            \"customData\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"filePrefix\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ]\n"
+                        + "    }\n",
+                givenName,
+                givenDestinationsValueUsername,
+                givenDestinationsValueSipTrunkId,
+                givenDestinationsValueCustomHeadersString,
+                givenDestinationsValueType,
+                givenDestinationsConnectTimeout,
+                givenDestinationsRecordingRecordingType,
+                givenDestinationsRecordingRecordingCompositionEnabled,
+                givenDestinationsRecordingCustomDataString,
+                givenDestinationsRecordingFilePrefix,
+                givenDestinationsType);
 
-        String givenResponse = String.format("{\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"destinations\": [\n" +
-                                                 "        {\n" +
-                                                 "          \"value\": {\n" +
-                                                 "            \"username\": \"%s\",\n" +
-                                                 "            \"sipTrunkId\": \"%s\",\n" +
-                                                 "            \"customHeaders\": {\n" +
-                                                 "              \"string\": \"%s\"\n" +
-                                                 "            },\n" +
-                                                 "            \"type\": \"%s\"\n" +
-                                                 "          },\n" +
-                                                 "          \"connectTimeout\": %d,\n" +
-                                                 "          \"recording\": {\n" +
-                                                 "            \"recordingType\": \"%s\",\n" +
-                                                 "            \"recordingComposition\": {\n" +
-                                                 "              \"enabled\": %b\n" +
-                                                 "            },\n" +
-                                                 "            \"customData\": {\n" +
-                                                 "              \"string\": \"%s\"\n" +
-                                                 "            },\n" +
-                                                 "            \"filePrefix\": \"%s\"\n" +
-                                                 "          },\n" +
-                                                 "          \"type\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      ]\n" +
-                                                 "    }\n",
-                                             givenId,
-                                             givenName,
-                                             givenDestinationsValueUsername,
-                                             givenDestinationsValueSipTrunkId,
-                                             givenDestinationsValueCustomHeadersString,
-                                             givenDestinationsValueType,
-                                             givenDestinationsConnectTimeout,
-                                             givenDestinationsRecordingRecordingType,
-                                             givenDestinationsRecordingRecordingCompositionEnabled,
-                                             givenDestinationsRecordingCustomDataString,
-                                             givenDestinationsRecordingFilePrefix,
-                                             givenDestinationsType
-        );
+        String givenResponse = String.format(
+                "{\n" + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"value\": {\n"
+                        + "            \"username\": \"%s\",\n"
+                        + "            \"sipTrunkId\": \"%s\",\n"
+                        + "            \"customHeaders\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"connectTimeout\": %d,\n"
+                        + "          \"recording\": {\n"
+                        + "            \"recordingType\": \"%s\",\n"
+                        + "            \"recordingComposition\": {\n"
+                        + "              \"enabled\": %b\n"
+                        + "            },\n"
+                        + "            \"customData\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"filePrefix\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ]\n"
+                        + "    }\n",
+                givenId,
+                givenName,
+                givenDestinationsValueUsername,
+                givenDestinationsValueSipTrunkId,
+                givenDestinationsValueCustomHeadersString,
+                givenDestinationsValueType,
+                givenDestinationsConnectTimeout,
+                givenDestinationsRecordingRecordingType,
+                givenDestinationsRecordingRecordingCompositionEnabled,
+                givenDestinationsRecordingCustomDataString,
+                givenDestinationsRecordingFilePrefix,
+                givenDestinationsType);
 
-        setUpSuccessPostRequest(
-            ROUTES,
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(ROUTES, expectedRequest, givenResponse);
 
         var callRoutingApi = new CallRoutingApi(getApiClient());
 
         var request = new CallRoutingRouteRequest()
-            .name(givenName)
-            .destinations(List.of(
-                new CallRoutingEndpointDestination()
-                    .value(new CallRoutingSipEndpoint()
-                               .username(givenDestinationsValueUsername)
-                               .sipTrunkId(givenDestinationsValueSipTrunkId)
-                               .customHeaders(Map.of(
-                                   "string", givenDestinationsRecordingCustomDataString
-                               )))
-                    .connectTimeout(givenDestinationsConnectTimeout)
-                    .recording(new CallRoutingRecording()
-                                   .recordingType(givenDestinationsRecordingRecordingType)
-                                   .recordingComposition(new CallRoutingRecordingComposition()
-                                                             .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
-                                   .customData(Map.of(
-                                       "string", givenDestinationsRecordingCustomDataString
-                                   ))
-                                   .filePrefix(givenDestinationsRecordingFilePrefix))
-            ));
+                .name(givenName)
+                .destinations(List.of(new CallRoutingEndpointDestination()
+                        .value(new CallRoutingSipEndpoint()
+                                .username(givenDestinationsValueUsername)
+                                .sipTrunkId(givenDestinationsValueSipTrunkId)
+                                .customHeaders(Map.of("string", givenDestinationsRecordingCustomDataString)))
+                        .connectTimeout(givenDestinationsConnectTimeout)
+                        .recording(new CallRoutingRecording()
+                                .recordingType(givenDestinationsRecordingRecordingType)
+                                .recordingComposition(new CallRoutingRecordingComposition()
+                                        .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
+                                .customData(Map.of("string", givenDestinationsRecordingCustomDataString))
+                                .filePrefix(givenDestinationsRecordingFilePrefix))));
 
         var expectedResponse = new CallRoutingRouteResponse()
-            .id(givenId)
-            .name(givenName)
-            .destinations(List.of(
-                new CallRoutingEndpointDestination()
-                    .value(new CallRoutingSipEndpoint()
-                               .username(givenDestinationsValueUsername)
-                               .sipTrunkId(givenDestinationsValueSipTrunkId)
-                               .customHeaders(Map.of(
-                                   "string", givenDestinationsRecordingCustomDataString
-                               )))
-                    .connectTimeout(givenDestinationsConnectTimeout)
-                    .recording(new CallRoutingRecording()
-                                   .recordingType(givenDestinationsRecordingRecordingType)
-                                   .recordingComposition(new CallRoutingRecordingComposition()
-                                                             .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
-                                   .customData(Map.of(
-                                       "string", givenDestinationsRecordingCustomDataString
-                                   ))
-                                   .filePrefix(givenDestinationsRecordingFilePrefix))
-            ));
-        Consumer<CallRoutingRouteResponse> assertions = response -> then(response).isEqualTo(expectedResponse);
+                .id(givenId)
+                .name(givenName)
+                .destinations(List.of(new CallRoutingEndpointDestination()
+                        .value(new CallRoutingSipEndpoint()
+                                .username(givenDestinationsValueUsername)
+                                .sipTrunkId(givenDestinationsValueSipTrunkId)
+                                .customHeaders(Map.of("string", givenDestinationsRecordingCustomDataString)))
+                        .connectTimeout(givenDestinationsConnectTimeout)
+                        .recording(new CallRoutingRecording()
+                                .recordingType(givenDestinationsRecordingRecordingType)
+                                .recordingComposition(new CallRoutingRecordingComposition()
+                                        .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
+                                .customData(Map.of("string", givenDestinationsRecordingCustomDataString))
+                                .filePrefix(givenDestinationsRecordingFilePrefix))));
+        Consumer<CallRoutingRouteResponse> assertions =
+                response -> then(response).isEqualTo(expectedResponse);
 
         var call = callRoutingApi.createCallRoute(request);
 
@@ -366,78 +334,68 @@ class CallRoutingApiTest extends ApiTest {
         var givenDestinationsRecordingFilePrefix = "string";
         var givenDestinationsType = "ENDPOINT";
 
-        String givenResponse = String.format("{\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"destinations\": [\n" +
-                                                 "        {\n" +
-                                                 "          \"value\": {\n" +
-                                                 "            \"username\": \"%s\",\n" +
-                                                 "            \"sipTrunkId\": \"%s\",\n" +
-                                                 "            \"customHeaders\": {\n" +
-                                                 "              \"string\": \"%s\"\n" +
-                                                 "            },\n" +
-                                                 "            \"type\": \"%s\"\n" +
-                                                 "          },\n" +
-                                                 "          \"connectTimeout\": %d,\n" +
-                                                 "          \"recording\": {\n" +
-                                                 "            \"recordingType\": \"%s\",\n" +
-                                                 "            \"recordingComposition\": {\n" +
-                                                 "              \"enabled\": %b\n" +
-                                                 "            },\n" +
-                                                 "            \"customData\": {\n" +
-                                                 "              \"string\": \"%s\"\n" +
-                                                 "            },\n" +
-                                                 "            \"filePrefix\": \"%s\"\n" +
-                                                 "          },\n" +
-                                                 "          \"type\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      ]\n" +
-                                                 "    }\n",
-                                             givenId,
-                                             givenName,
-                                             givenDestinationsValueUsername,
-                                             givenDestinationsValueSipTrunkId,
-                                             givenDestinationsValueCustomHeadersString,
-                                             givenDestinationsValueType,
-                                             givenDestinationsConnectTimeout,
-                                             givenDestinationsRecordingRecordingType,
-                                             givenDestinationsRecordingRecordingCompositionEnabled,
-                                             givenDestinationsRecordingCustomDataString,
-                                             givenDestinationsRecordingFilePrefix,
-                                             givenDestinationsType
-        );
+        String givenResponse = String.format(
+                "{\n" + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"value\": {\n"
+                        + "            \"username\": \"%s\",\n"
+                        + "            \"sipTrunkId\": \"%s\",\n"
+                        + "            \"customHeaders\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"connectTimeout\": %d,\n"
+                        + "          \"recording\": {\n"
+                        + "            \"recordingType\": \"%s\",\n"
+                        + "            \"recordingComposition\": {\n"
+                        + "              \"enabled\": %b\n"
+                        + "            },\n"
+                        + "            \"customData\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"filePrefix\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ]\n"
+                        + "    }\n",
+                givenId,
+                givenName,
+                givenDestinationsValueUsername,
+                givenDestinationsValueSipTrunkId,
+                givenDestinationsValueCustomHeadersString,
+                givenDestinationsValueType,
+                givenDestinationsConnectTimeout,
+                givenDestinationsRecordingRecordingType,
+                givenDestinationsRecordingRecordingCompositionEnabled,
+                givenDestinationsRecordingCustomDataString,
+                givenDestinationsRecordingFilePrefix,
+                givenDestinationsType);
 
-        setUpSuccessGetRequest(
-            ROUTE.replace("{routeId}", givenId),
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(ROUTE.replace("{routeId}", givenId), Map.of(), givenResponse);
 
         var callRoutingApi = new CallRoutingApi(getApiClient());
 
         var expectedResponse = new CallRoutingRouteResponse()
-            .id(givenId)
-            .name(givenName)
-            .destinations(List.of(
-                new CallRoutingEndpointDestination()
-                    .value(new CallRoutingSipEndpoint()
-                               .username(givenDestinationsValueUsername)
-                               .sipTrunkId(givenDestinationsValueSipTrunkId)
-                               .customHeaders(Map.of(
-                                   "string", givenDestinationsRecordingCustomDataString
-                               )))
-                    .connectTimeout(givenDestinationsConnectTimeout)
-                    .recording(new CallRoutingRecording()
-                                   .recordingType(givenDestinationsRecordingRecordingType)
-                                   .recordingComposition(new CallRoutingRecordingComposition()
-                                                             .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
-                                   .customData(Map.of(
-                                       "string", givenDestinationsRecordingCustomDataString
-                                   ))
-                                   .filePrefix(givenDestinationsRecordingFilePrefix))
-            ));
-        Consumer<CallRoutingRouteResponse> assertions = response -> then(response).isEqualTo(expectedResponse);
+                .id(givenId)
+                .name(givenName)
+                .destinations(List.of(new CallRoutingEndpointDestination()
+                        .value(new CallRoutingSipEndpoint()
+                                .username(givenDestinationsValueUsername)
+                                .sipTrunkId(givenDestinationsValueSipTrunkId)
+                                .customHeaders(Map.of("string", givenDestinationsRecordingCustomDataString)))
+                        .connectTimeout(givenDestinationsConnectTimeout)
+                        .recording(new CallRoutingRecording()
+                                .recordingType(givenDestinationsRecordingRecordingType)
+                                .recordingComposition(new CallRoutingRecordingComposition()
+                                        .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
+                                .customData(Map.of("string", givenDestinationsRecordingCustomDataString))
+                                .filePrefix(givenDestinationsRecordingFilePrefix))));
+        Consumer<CallRoutingRouteResponse> assertions =
+                response -> then(response).isEqualTo(expectedResponse);
 
         var call = callRoutingApi.getCallRoute(givenId);
 
@@ -460,140 +418,122 @@ class CallRoutingApiTest extends ApiTest {
         var givenDestinationsRecordingFilePrefix = "string";
         var givenDestinationsType = "ENDPOINT";
 
-        String expectedRequest = String.format("{\n" +
-                                                   "      \"name\": \"%s\",\n" +
-                                                   "      \"destinations\": [\n" +
-                                                   "        {\n" +
-                                                   "          \"value\": {\n" +
-                                                   "            \"username\": \"%s\",\n" +
-                                                   "            \"sipTrunkId\": \"%s\",\n" +
-                                                   "            \"customHeaders\": {\n" +
-                                                   "              \"string\": \"%s\"\n" +
-                                                   "            },\n" +
-                                                   "            \"type\": \"%s\"\n" +
-                                                   "          },\n" +
-                                                   "          \"connectTimeout\": %d,\n" +
-                                                   "          \"recording\": {\n" +
-                                                   "            \"recordingType\": \"%s\",\n" +
-                                                   "            \"recordingComposition\": {\n" +
-                                                   "              \"enabled\": %b\n" +
-                                                   "            },\n" +
-                                                   "            \"customData\": {\n" +
-                                                   "              \"string\": \"%s\"\n" +
-                                                   "            },\n" +
-                                                   "            \"filePrefix\": \"%s\"\n" +
-                                                   "          },\n" +
-                                                   "          \"type\": \"%s\"\n" +
-                                                   "        }\n" +
-                                                   "      ]\n" +
-                                                   "    }\n",
-                                               givenName,
-                                               givenDestinationsValueUsername,
-                                               givenDestinationsValueSipTrunkId,
-                                               givenDestinationsValueCustomHeadersString,
-                                               givenDestinationsValueType,
-                                               givenDestinationsConnectTimeout,
-                                               givenDestinationsRecordingRecordingType,
-                                               givenDestinationsRecordingRecordingCompositionEnabled,
-                                               givenDestinationsRecordingCustomDataString,
-                                               givenDestinationsRecordingFilePrefix,
-                                               givenDestinationsType
-        );
+        String expectedRequest = String.format(
+                "{\n" + "      \"name\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"value\": {\n"
+                        + "            \"username\": \"%s\",\n"
+                        + "            \"sipTrunkId\": \"%s\",\n"
+                        + "            \"customHeaders\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"connectTimeout\": %d,\n"
+                        + "          \"recording\": {\n"
+                        + "            \"recordingType\": \"%s\",\n"
+                        + "            \"recordingComposition\": {\n"
+                        + "              \"enabled\": %b\n"
+                        + "            },\n"
+                        + "            \"customData\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"filePrefix\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ]\n"
+                        + "    }\n",
+                givenName,
+                givenDestinationsValueUsername,
+                givenDestinationsValueSipTrunkId,
+                givenDestinationsValueCustomHeadersString,
+                givenDestinationsValueType,
+                givenDestinationsConnectTimeout,
+                givenDestinationsRecordingRecordingType,
+                givenDestinationsRecordingRecordingCompositionEnabled,
+                givenDestinationsRecordingCustomDataString,
+                givenDestinationsRecordingFilePrefix,
+                givenDestinationsType);
 
-        String givenResponse = String.format("{\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"destinations\": [\n" +
-                                                 "        {\n" +
-                                                 "          \"value\": {\n" +
-                                                 "            \"username\": \"%s\",\n" +
-                                                 "            \"sipTrunkId\": \"%s\",\n" +
-                                                 "            \"customHeaders\": {\n" +
-                                                 "              \"string\": \"%s\"\n" +
-                                                 "            },\n" +
-                                                 "            \"type\": \"%s\"\n" +
-                                                 "          },\n" +
-                                                 "          \"connectTimeout\": %d,\n" +
-                                                 "          \"recording\": {\n" +
-                                                 "            \"recordingType\": \"%s\",\n" +
-                                                 "            \"recordingComposition\": {\n" +
-                                                 "              \"enabled\": %b\n" +
-                                                 "            },\n" +
-                                                 "            \"customData\": {\n" +
-                                                 "              \"string\": \"%s\"\n" +
-                                                 "            },\n" +
-                                                 "            \"filePrefix\": \"%s\"\n" +
-                                                 "          },\n" +
-                                                 "          \"type\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      ]\n" +
-                                                 "    }\n",
-                                             givenId,
-                                             givenName,
-                                             givenDestinationsValueUsername,
-                                             givenDestinationsValueSipTrunkId,
-                                             givenDestinationsValueCustomHeadersString,
-                                             givenDestinationsValueType,
-                                             givenDestinationsConnectTimeout,
-                                             givenDestinationsRecordingRecordingType,
-                                             givenDestinationsRecordingRecordingCompositionEnabled,
-                                             givenDestinationsRecordingCustomDataString,
-                                             givenDestinationsRecordingFilePrefix,
-                                             givenDestinationsType
-        );
+        String givenResponse = String.format(
+                "{\n" + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"value\": {\n"
+                        + "            \"username\": \"%s\",\n"
+                        + "            \"sipTrunkId\": \"%s\",\n"
+                        + "            \"customHeaders\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"connectTimeout\": %d,\n"
+                        + "          \"recording\": {\n"
+                        + "            \"recordingType\": \"%s\",\n"
+                        + "            \"recordingComposition\": {\n"
+                        + "              \"enabled\": %b\n"
+                        + "            },\n"
+                        + "            \"customData\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"filePrefix\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ]\n"
+                        + "    }\n",
+                givenId,
+                givenName,
+                givenDestinationsValueUsername,
+                givenDestinationsValueSipTrunkId,
+                givenDestinationsValueCustomHeadersString,
+                givenDestinationsValueType,
+                givenDestinationsConnectTimeout,
+                givenDestinationsRecordingRecordingType,
+                givenDestinationsRecordingRecordingCompositionEnabled,
+                givenDestinationsRecordingCustomDataString,
+                givenDestinationsRecordingFilePrefix,
+                givenDestinationsType);
 
-        setUpSuccessPutRequest(
-            ROUTE.replace("{routeId}", givenId),
-            Map.of(),
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPutRequest(ROUTE.replace("{routeId}", givenId), Map.of(), expectedRequest, givenResponse);
 
         var callRoutingApi = new CallRoutingApi(getApiClient());
 
         var request = new CallRoutingRouteRequest()
-            .name(givenName)
-            .destinations(List.of(
-                new CallRoutingEndpointDestination()
-                    .value(new CallRoutingSipEndpoint()
-                               .username(givenDestinationsValueUsername)
-                               .sipTrunkId(givenDestinationsValueSipTrunkId)
-                               .customHeaders(Map.of(
-                                   "string", givenDestinationsRecordingCustomDataString
-                               )))
-                    .connectTimeout(givenDestinationsConnectTimeout)
-                    .recording(new CallRoutingRecording()
-                                   .recordingType(givenDestinationsRecordingRecordingType)
-                                   .recordingComposition(new CallRoutingRecordingComposition()
-                                                             .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
-                                   .customData(Map.of(
-                                       "string", givenDestinationsRecordingCustomDataString
-                                   ))
-                                   .filePrefix(givenDestinationsRecordingFilePrefix))
-            ));
+                .name(givenName)
+                .destinations(List.of(new CallRoutingEndpointDestination()
+                        .value(new CallRoutingSipEndpoint()
+                                .username(givenDestinationsValueUsername)
+                                .sipTrunkId(givenDestinationsValueSipTrunkId)
+                                .customHeaders(Map.of("string", givenDestinationsRecordingCustomDataString)))
+                        .connectTimeout(givenDestinationsConnectTimeout)
+                        .recording(new CallRoutingRecording()
+                                .recordingType(givenDestinationsRecordingRecordingType)
+                                .recordingComposition(new CallRoutingRecordingComposition()
+                                        .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
+                                .customData(Map.of("string", givenDestinationsRecordingCustomDataString))
+                                .filePrefix(givenDestinationsRecordingFilePrefix))));
 
         var expectedResponse = new CallRoutingRouteResponse()
-            .id(givenId)
-            .name(givenName)
-            .destinations(List.of(
-                new CallRoutingEndpointDestination()
-                    .value(new CallRoutingSipEndpoint()
-                               .username(givenDestinationsValueUsername)
-                               .sipTrunkId(givenDestinationsValueSipTrunkId)
-                               .customHeaders(Map.of(
-                                   "string", givenDestinationsRecordingCustomDataString
-                               )))
-                    .connectTimeout(givenDestinationsConnectTimeout)
-                    .recording(new CallRoutingRecording()
-                                   .recordingType(givenDestinationsRecordingRecordingType)
-                                   .recordingComposition(new CallRoutingRecordingComposition()
-                                                             .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
-                                   .customData(Map.of(
-                                       "string", givenDestinationsRecordingCustomDataString
-                                   ))
-                                   .filePrefix(givenDestinationsRecordingFilePrefix))
-            ));
-        Consumer<CallRoutingRouteResponse> assertions = response -> then(response).isEqualTo(expectedResponse);
+                .id(givenId)
+                .name(givenName)
+                .destinations(List.of(new CallRoutingEndpointDestination()
+                        .value(new CallRoutingSipEndpoint()
+                                .username(givenDestinationsValueUsername)
+                                .sipTrunkId(givenDestinationsValueSipTrunkId)
+                                .customHeaders(Map.of("string", givenDestinationsRecordingCustomDataString)))
+                        .connectTimeout(givenDestinationsConnectTimeout)
+                        .recording(new CallRoutingRecording()
+                                .recordingType(givenDestinationsRecordingRecordingType)
+                                .recordingComposition(new CallRoutingRecordingComposition()
+                                        .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
+                                .customData(Map.of("string", givenDestinationsRecordingCustomDataString))
+                                .filePrefix(givenDestinationsRecordingFilePrefix))));
+        Consumer<CallRoutingRouteResponse> assertions =
+                response -> then(response).isEqualTo(expectedResponse);
 
         var call = callRoutingApi.updateCallRoute(givenId, request);
 
@@ -616,84 +556,72 @@ class CallRoutingApiTest extends ApiTest {
         var givenDestinationsRecordingFilePrefix = "string";
         var givenDestinationsType = "ENDPOINT";
 
-        String givenResponse = String.format("{\n" +
-                                                 "      \"id\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"destinations\": [\n" +
-                                                 "        {\n" +
-                                                 "          \"value\": {\n" +
-                                                 "            \"username\": \"%s\",\n" +
-                                                 "            \"sipTrunkId\": \"%s\",\n" +
-                                                 "            \"customHeaders\": {\n" +
-                                                 "              \"string\": \"%s\"\n" +
-                                                 "            },\n" +
-                                                 "            \"type\": \"%s\"\n" +
-                                                 "          },\n" +
-                                                 "          \"connectTimeout\": %d,\n" +
-                                                 "          \"recording\": {\n" +
-                                                 "            \"recordingType\": \"%s\",\n" +
-                                                 "            \"recordingComposition\": {\n" +
-                                                 "              \"enabled\": %b\n" +
-                                                 "            },\n" +
-                                                 "            \"customData\": {\n" +
-                                                 "              \"string\": \"%s\"\n" +
-                                                 "            },\n" +
-                                                 "            \"filePrefix\": \"%s\"\n" +
-                                                 "          },\n" +
-                                                 "          \"type\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      ]\n" +
-                                                 "    }\n",
-                                             givenId,
-                                             givenName,
-                                             givenDestinationsValueUsername,
-                                             givenDestinationsValueSipTrunkId,
-                                             givenDestinationsValueCustomHeadersString,
-                                             givenDestinationsValueType,
-                                             givenDestinationsConnectTimeout,
-                                             givenDestinationsRecordingRecordingType,
-                                             givenDestinationsRecordingRecordingCompositionEnabled,
-                                             givenDestinationsRecordingCustomDataString,
-                                             givenDestinationsRecordingFilePrefix,
-                                             givenDestinationsType
-        );
+        String givenResponse = String.format(
+                "{\n" + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"value\": {\n"
+                        + "            \"username\": \"%s\",\n"
+                        + "            \"sipTrunkId\": \"%s\",\n"
+                        + "            \"customHeaders\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"connectTimeout\": %d,\n"
+                        + "          \"recording\": {\n"
+                        + "            \"recordingType\": \"%s\",\n"
+                        + "            \"recordingComposition\": {\n"
+                        + "              \"enabled\": %b\n"
+                        + "            },\n"
+                        + "            \"customData\": {\n"
+                        + "              \"string\": \"%s\"\n"
+                        + "            },\n"
+                        + "            \"filePrefix\": \"%s\"\n"
+                        + "          },\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ]\n"
+                        + "    }\n",
+                givenId,
+                givenName,
+                givenDestinationsValueUsername,
+                givenDestinationsValueSipTrunkId,
+                givenDestinationsValueCustomHeadersString,
+                givenDestinationsValueType,
+                givenDestinationsConnectTimeout,
+                givenDestinationsRecordingRecordingType,
+                givenDestinationsRecordingRecordingCompositionEnabled,
+                givenDestinationsRecordingCustomDataString,
+                givenDestinationsRecordingFilePrefix,
+                givenDestinationsType);
 
-        setUpNoRequestBodyDeleteRequest(
-            ROUTE.replace("{routeId}", givenId),
-            Map.of(),
-            givenResponse,
-            200
-        );
+        setUpNoRequestBodyDeleteRequest(ROUTE.replace("{routeId}", givenId), Map.of(), givenResponse, 200);
 
         var callRoutingApi = new CallRoutingApi(getApiClient());
 
         var expectedResponse = new CallRoutingRouteResponse()
-            .id(givenId)
-            .name(givenName)
-            .destinations(List.of(
-                new CallRoutingEndpointDestination()
-                    .value(new CallRoutingSipEndpoint()
-                               .username(givenDestinationsValueUsername)
-                               .sipTrunkId(givenDestinationsValueSipTrunkId)
-                               .customHeaders(Map.of(
-                                   "string", givenDestinationsRecordingCustomDataString
-                               )))
-                    .connectTimeout(givenDestinationsConnectTimeout)
-                    .recording(new CallRoutingRecording()
-                                   .recordingType(givenDestinationsRecordingRecordingType)
-                                   .recordingComposition(new CallRoutingRecordingComposition()
-                                                             .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
-                                   .customData(Map.of(
-                                       "string", givenDestinationsRecordingCustomDataString
-                                   ))
-                                   .filePrefix(givenDestinationsRecordingFilePrefix))
-            ));
-        Consumer<CallRoutingRouteResponse> assertions = response -> then(response).isEqualTo(expectedResponse);
+                .id(givenId)
+                .name(givenName)
+                .destinations(List.of(new CallRoutingEndpointDestination()
+                        .value(new CallRoutingSipEndpoint()
+                                .username(givenDestinationsValueUsername)
+                                .sipTrunkId(givenDestinationsValueSipTrunkId)
+                                .customHeaders(Map.of("string", givenDestinationsRecordingCustomDataString)))
+                        .connectTimeout(givenDestinationsConnectTimeout)
+                        .recording(new CallRoutingRecording()
+                                .recordingType(givenDestinationsRecordingRecordingType)
+                                .recordingComposition(new CallRoutingRecordingComposition()
+                                        .enabled(givenDestinationsRecordingRecordingCompositionEnabled))
+                                .customData(Map.of("string", givenDestinationsRecordingCustomDataString))
+                                .filePrefix(givenDestinationsRecordingFilePrefix))));
+        Consumer<CallRoutingRouteResponse> assertions =
+                response -> then(response).isEqualTo(expectedResponse);
 
         var call = callRoutingApi.deleteCallRoute(givenId);
 
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
-
 }

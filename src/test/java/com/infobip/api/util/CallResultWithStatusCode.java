@@ -25,5 +25,4 @@ public class CallResultWithStatusCode<T> {
     public ApiException getException() {
         return exception;
     }
-
 }

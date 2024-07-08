@@ -11,7 +11,8 @@ public class ResponseStatuses {
     public static final String PENDING_WAITING_DELIVERY_STATUS_NAME = "PENDING_WAITING_DELIVERY";
     public static final String PENDING_ENROUTE_STATUS_NAME = "PENDING_ENROUTE";
     public static final String PENDING_STATUS_DESCRIPTION = "Message sent to next instance";
-    public static final String PENDING_WAITING_DELIVERY_STATUS_DESCRIPTION = "Message sent, waiting for delivery report";
+    public static final String PENDING_WAITING_DELIVERY_STATUS_DESCRIPTION =
+            "Message sent, waiting for delivery report";
 
     public static final int DELIVERED_STATUS_GROUP_ID = 3;
     public static final String DELIVERED_STATUS_GROUP_NAME = "DELIVERED";
@@ -25,5 +26,4 @@ public class ResponseStatuses {
     public static final String NO_ERROR_NAME = "NO_ERROR";
     public static final String NO_ERROR_DESCRIPTION = "No Error";
     public static final boolean NO_ERROR_IS_PERMANENT = false;
-
 }

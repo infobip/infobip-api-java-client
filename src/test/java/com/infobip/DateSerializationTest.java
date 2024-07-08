@@ -1,15 +1,14 @@
 package com.infobip;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static org.assertj.core.api.BDDAssertions.then;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Objects;
 import java.util.stream.Stream;
-
-import static org.assertj.core.api.BDDAssertions.then;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class DateSerializationTest {
 
@@ -50,8 +49,7 @@ public class DateSerializationTest {
                 "2035-08-18T13:38:42.777+01:30",
                 "2035-08-18T10:38:42.777-01:30",
                 "2035-08-18T17:38:42.777+05:30",
-                "2035-08-18T06:38:42.777-05:30"
-        );
+                "2035-08-18T06:38:42.777-05:30");
     }
 
     @ParameterizedTest
@@ -72,14 +70,10 @@ public class DateSerializationTest {
     private static Stream<Arguments> jsonDateSerializationSource() {
         return Stream.of(
                 Arguments.of(
-                        OffsetDateTime.of(2020, 4, 26, 15, 24, 10, 0, ZoneOffset.UTC),
-                        "2020-04-26T15:24:10.000+0000"
-                ),
+                        OffsetDateTime.of(2020, 4, 26, 15, 24, 10, 0, ZoneOffset.UTC), "2020-04-26T15:24:10.000+0000"),
                 Arguments.of(
                         OffsetDateTime.of(2020, 4, 26, 17, 24, 10, 0, ZoneOffset.of("+0100")),
-                        "2020-04-26T17:24:10.000+0100"
-                )
-        );
+                        "2020-04-26T17:24:10.000+0100"));
     }
 
     private static final class DateContainer {

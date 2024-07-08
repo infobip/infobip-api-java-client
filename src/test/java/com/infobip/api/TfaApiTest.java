@@ -1,13 +1,12 @@
 package com.infobip.api;
 
-import com.infobip.model.*;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.BDDAssertions.then;
 
+import com.infobip.model.*;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
-import static org.assertj.core.api.BDDAssertions.then;
+import org.junit.jupiter.api.Test;
 
 class TfaApiTest extends ApiTest {
 
@@ -59,83 +58,75 @@ class TfaApiTest extends ApiTest {
         boolean givenEnabled3 = true;
 
         String givenResponse = String.format(
-            "[" +
-                " {" +
-                "    \"applicationId\": \"%s\"," +
-                "    \"name\": \"%s\"," +
-                "    \"configuration\": {" +
-                "      \"pinAttempts\": %d," +
-                "      \"allowMultiplePinVerifications\": %b," +
-                "      \"pinTimeToLive\": \"%s\"," +
-                "      \"verifyPinLimit\": \"%s\"," +
-                "      \"sendPinPerApplicationLimit\": \"%s\"," +
-                "      \"sendPinPerPhoneNumberLimit\": \"%s\"" +
-                "    }," +
-                "    \"enabled\": %b" +
-                "  }," +
-                "  {" +
-                "    \"applicationId\": \"%s\"," +
-                "    \"name\": \"%s\"," +
-                "    \"configuration\": {" +
-                "      \"pinAttempts\": %d," +
-                "      \"allowMultiplePinVerifications\": %b," +
-                "      \"pinTimeToLive\": \"%s\"," +
-                "      \"verifyPinLimit\": \"%s\"," +
-                "      \"sendPinPerApplicationLimit\": \"%s\"," +
-                "      \"sendPinPerPhoneNumberLimit\": \"%s\"" +
-                "    }," +
-                "    \"enabled\": %b" +
-                "  }," +
-                "  {" +
-                "    \"applicationId\": \"%s\"," +
-                "    \"name\": \"%s\"," +
-                "    \"configuration\": {" +
-                "      \"pinAttempts\": %d," +
-                "      \"allowMultiplePinVerifications\": %b," +
-                "      \"pinTimeToLive\": \"%s\"," +
-                "      \"verifyPinLimit\": \"%s\"," +
-                "      \"sendPinPerApplicationLimit\": \"%s\"," +
-                "      \"sendPinPerPhoneNumberLimit\": \"%s\"" +
-                "    }," +
-                "    \"enabled\": %b" +
-                "  }" +
-                "]",
-            givenApplicationId1,
-            givenName1,
-            givenPinAttempts1,
-            givenAllowMultiplePinVerifications1,
-            givenPinTimeToLive1,
-            givenVerifyPinLimit1,
-            givenSendPinPerApplicationLimit1,
-            givenSendPinPerPhoneNumberLimit1,
-            givenEnabled1,
+                "[" + " {"
+                        + "    \"applicationId\": \"%s\","
+                        + "    \"name\": \"%s\","
+                        + "    \"configuration\": {"
+                        + "      \"pinAttempts\": %d,"
+                        + "      \"allowMultiplePinVerifications\": %b,"
+                        + "      \"pinTimeToLive\": \"%s\","
+                        + "      \"verifyPinLimit\": \"%s\","
+                        + "      \"sendPinPerApplicationLimit\": \"%s\","
+                        + "      \"sendPinPerPhoneNumberLimit\": \"%s\""
+                        + "    },"
+                        + "    \"enabled\": %b"
+                        + "  },"
+                        + "  {"
+                        + "    \"applicationId\": \"%s\","
+                        + "    \"name\": \"%s\","
+                        + "    \"configuration\": {"
+                        + "      \"pinAttempts\": %d,"
+                        + "      \"allowMultiplePinVerifications\": %b,"
+                        + "      \"pinTimeToLive\": \"%s\","
+                        + "      \"verifyPinLimit\": \"%s\","
+                        + "      \"sendPinPerApplicationLimit\": \"%s\","
+                        + "      \"sendPinPerPhoneNumberLimit\": \"%s\""
+                        + "    },"
+                        + "    \"enabled\": %b"
+                        + "  },"
+                        + "  {"
+                        + "    \"applicationId\": \"%s\","
+                        + "    \"name\": \"%s\","
+                        + "    \"configuration\": {"
+                        + "      \"pinAttempts\": %d,"
+                        + "      \"allowMultiplePinVerifications\": %b,"
+                        + "      \"pinTimeToLive\": \"%s\","
+                        + "      \"verifyPinLimit\": \"%s\","
+                        + "      \"sendPinPerApplicationLimit\": \"%s\","
+                        + "      \"sendPinPerPhoneNumberLimit\": \"%s\""
+                        + "    },"
+                        + "    \"enabled\": %b"
+                        + "  }"
+                        + "]",
+                givenApplicationId1,
+                givenName1,
+                givenPinAttempts1,
+                givenAllowMultiplePinVerifications1,
+                givenPinTimeToLive1,
+                givenVerifyPinLimit1,
+                givenSendPinPerApplicationLimit1,
+                givenSendPinPerPhoneNumberLimit1,
+                givenEnabled1,
+                givenApplicationId2,
+                givenName2,
+                givenPinAttempts2,
+                givenAllowMultiplePinVerifications2,
+                givenPinTimeToLive2,
+                givenVerifyPinLimit2,
+                givenSendPinPerApplicationLimit2,
+                givenSendPinPerPhoneNumberLimit2,
+                givenEnabled2,
+                givenApplicationId3,
+                givenName3,
+                givenPinAttempts3,
+                givenAllowMultiplePinVerifications3,
+                givenPinTimeToLive3,
+                givenVerifyPinLimit3,
+                givenSendPinPerApplicationLimit3,
+                givenSendPinPerPhoneNumberLimit3,
+                givenEnabled3);
 
-            givenApplicationId2,
-            givenName2,
-            givenPinAttempts2,
-            givenAllowMultiplePinVerifications2,
-            givenPinTimeToLive2,
-            givenVerifyPinLimit2,
-            givenSendPinPerApplicationLimit2,
-            givenSendPinPerPhoneNumberLimit2,
-            givenEnabled2,
-
-            givenApplicationId3,
-            givenName3,
-            givenPinAttempts3,
-            givenAllowMultiplePinVerifications3,
-            givenPinTimeToLive3,
-            givenVerifyPinLimit3,
-            givenSendPinPerApplicationLimit3,
-            givenSendPinPerPhoneNumberLimit3,
-            givenEnabled3
-        );
-
-        setUpSuccessGetRequest(
-            APPLICATIONS,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(APPLICATIONS, Map.of(), givenResponse);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
 
@@ -149,10 +140,13 @@ class TfaApiTest extends ApiTest {
             then(response1.getEnabled()).isEqualTo(givenEnabled1);
             then(response1.getConfiguration().getPinAttempts()).isEqualTo(givenPinAttempts1);
             then(response1.getConfiguration().getPinTimeToLive()).isEqualTo(givenPinTimeToLive1);
-            then(response1.getConfiguration().getSendPinPerApplicationLimit()).isEqualTo(givenSendPinPerApplicationLimit1);
+            then(response1.getConfiguration().getSendPinPerApplicationLimit())
+                    .isEqualTo(givenSendPinPerApplicationLimit1);
             then(response1.getConfiguration().getVerifyPinLimit()).isEqualTo(givenVerifyPinLimit1);
-            then(response1.getConfiguration().getSendPinPerPhoneNumberLimit()).isEqualTo(givenSendPinPerPhoneNumberLimit1);
-            then(response1.getConfiguration().getAllowMultiplePinVerifications()).isEqualTo(givenAllowMultiplePinVerifications1);
+            then(response1.getConfiguration().getSendPinPerPhoneNumberLimit())
+                    .isEqualTo(givenSendPinPerPhoneNumberLimit1);
+            then(response1.getConfiguration().getAllowMultiplePinVerifications())
+                    .isEqualTo(givenAllowMultiplePinVerifications1);
 
             TfaApplicationResponse response2 = tfaApplicationsResponse.get(1);
             then(response2.getApplicationId()).isEqualTo(givenApplicationId2);
@@ -160,10 +154,13 @@ class TfaApiTest extends ApiTest {
             then(response2.getEnabled()).isEqualTo(givenEnabled2);
             then(response2.getConfiguration().getPinAttempts()).isEqualTo(givenPinAttempts2);
             then(response2.getConfiguration().getPinTimeToLive()).isEqualTo(givenPinTimeToLive2);
-            then(response2.getConfiguration().getSendPinPerApplicationLimit()).isEqualTo(givenSendPinPerApplicationLimit2);
+            then(response2.getConfiguration().getSendPinPerApplicationLimit())
+                    .isEqualTo(givenSendPinPerApplicationLimit2);
             then(response2.getConfiguration().getVerifyPinLimit()).isEqualTo(givenVerifyPinLimit2);
-            then(response2.getConfiguration().getSendPinPerPhoneNumberLimit()).isEqualTo(givenSendPinPerPhoneNumberLimit2);
-            then(response2.getConfiguration().getAllowMultiplePinVerifications()).isEqualTo(givenAllowMultiplePinVerifications2);
+            then(response2.getConfiguration().getSendPinPerPhoneNumberLimit())
+                    .isEqualTo(givenSendPinPerPhoneNumberLimit2);
+            then(response2.getConfiguration().getAllowMultiplePinVerifications())
+                    .isEqualTo(givenAllowMultiplePinVerifications2);
 
             TfaApplicationResponse response3 = tfaApplicationsResponse.get(2);
             then(response3.getApplicationId()).isEqualTo(givenApplicationId3);
@@ -171,10 +168,13 @@ class TfaApiTest extends ApiTest {
             then(response3.getEnabled()).isEqualTo(givenEnabled3);
             then(response3.getConfiguration().getPinAttempts()).isEqualTo(givenPinAttempts3);
             then(response3.getConfiguration().getPinTimeToLive()).isEqualTo(givenPinTimeToLive3);
-            then(response3.getConfiguration().getSendPinPerApplicationLimit()).isEqualTo(givenSendPinPerApplicationLimit3);
+            then(response3.getConfiguration().getSendPinPerApplicationLimit())
+                    .isEqualTo(givenSendPinPerApplicationLimit3);
             then(response3.getConfiguration().getVerifyPinLimit()).isEqualTo(givenVerifyPinLimit3);
-            then(response3.getConfiguration().getSendPinPerPhoneNumberLimit()).isEqualTo(givenSendPinPerPhoneNumberLimit3);
-            then(response3.getConfiguration().getAllowMultiplePinVerifications()).isEqualTo(givenAllowMultiplePinVerifications3);
+            then(response3.getConfiguration().getSendPinPerPhoneNumberLimit())
+                    .isEqualTo(givenSendPinPerPhoneNumberLimit3);
+            then(response3.getConfiguration().getAllowMultiplePinVerifications())
+                    .isEqualTo(givenAllowMultiplePinVerifications3);
         };
 
         var call = tfaApi.getTfaApplications();
@@ -196,67 +196,60 @@ class TfaApiTest extends ApiTest {
         boolean givenEnabled = true;
 
         String givenResponse = String.format(
-            " {" +
-                "    \"applicationId\": \"%s\"," +
-                "    \"name\": \"%s\"," +
-                "    \"configuration\": {" +
-                "      \"pinAttempts\": %d," +
-                "      \"allowMultiplePinVerifications\": %b," +
-                "      \"pinTimeToLive\": \"%s\"," +
-                "      \"verifyPinLimit\": \"%s\"," +
-                "      \"sendPinPerApplicationLimit\": \"%s\"," +
-                "      \"sendPinPerPhoneNumberLimit\": \"%s\"" +
-                "    }," +
-                "    \"enabled\": %b" +
-                "  }",
-            givenApplicationId,
-            givenName,
-            givenPinAttempts,
-            givenAllowMultiplePinVerifications,
-            givenPinTimeToLive,
-            givenVerifyPinLimit,
-            givenSendPinPerApplicationLimit,
-            givenSendPinPerPhoneNumberLimit,
-            givenEnabled
-        );
+                " {" + "    \"applicationId\": \"%s\","
+                        + "    \"name\": \"%s\","
+                        + "    \"configuration\": {"
+                        + "      \"pinAttempts\": %d,"
+                        + "      \"allowMultiplePinVerifications\": %b,"
+                        + "      \"pinTimeToLive\": \"%s\","
+                        + "      \"verifyPinLimit\": \"%s\","
+                        + "      \"sendPinPerApplicationLimit\": \"%s\","
+                        + "      \"sendPinPerPhoneNumberLimit\": \"%s\""
+                        + "    },"
+                        + "    \"enabled\": %b"
+                        + "  }",
+                givenApplicationId,
+                givenName,
+                givenPinAttempts,
+                givenAllowMultiplePinVerifications,
+                givenPinTimeToLive,
+                givenVerifyPinLimit,
+                givenSendPinPerApplicationLimit,
+                givenSendPinPerPhoneNumberLimit,
+                givenEnabled);
 
         String expectedRequest = String.format(
-            "{" +
-                "    \"name\": \"%s\"," +
-                "    \"configuration\": {" +
-                "      \"pinAttempts\": %d," +
-                "      \"allowMultiplePinVerifications\": %b," +
-                "      \"pinTimeToLive\": \"%s\"," +
-                "      \"verifyPinLimit\": \"%s\"," +
-                "      \"sendPinPerApplicationLimit\": \"%s\"," +
-                "      \"sendPinPerPhoneNumberLimit\": \"%s\"" +
-                "    }," +
-                "    \"enabled\": %b" +
-                "}",
-            givenName,
-            givenPinAttempts,
-            givenAllowMultiplePinVerifications,
-            givenPinTimeToLive,
-            givenVerifyPinLimit,
-            givenSendPinPerApplicationLimit,
-            givenSendPinPerPhoneNumberLimit,
-            givenEnabled
-        );
+                "{" + "    \"name\": \"%s\","
+                        + "    \"configuration\": {"
+                        + "      \"pinAttempts\": %d,"
+                        + "      \"allowMultiplePinVerifications\": %b,"
+                        + "      \"pinTimeToLive\": \"%s\","
+                        + "      \"verifyPinLimit\": \"%s\","
+                        + "      \"sendPinPerApplicationLimit\": \"%s\","
+                        + "      \"sendPinPerPhoneNumberLimit\": \"%s\""
+                        + "    },"
+                        + "    \"enabled\": %b"
+                        + "}",
+                givenName,
+                givenPinAttempts,
+                givenAllowMultiplePinVerifications,
+                givenPinTimeToLive,
+                givenVerifyPinLimit,
+                givenSendPinPerApplicationLimit,
+                givenSendPinPerPhoneNumberLimit,
+                givenEnabled);
 
-        setUpSuccessPostRequest(
-            APPLICATIONS,
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(APPLICATIONS, expectedRequest, givenResponse);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
 
-        TfaApplicationConfiguration givenConfiguration = givenTfaApplicationConfiguration(givenPinAttempts,
-                                                                                          givenAllowMultiplePinVerifications,
-                                                                                          givenPinTimeToLive,
-                                                                                          givenVerifyPinLimit,
-                                                                                          givenSendPinPerApplicationLimit,
-                                                                                          givenSendPinPerPhoneNumberLimit);
+        TfaApplicationConfiguration givenConfiguration = givenTfaApplicationConfiguration(
+                givenPinAttempts,
+                givenAllowMultiplePinVerifications,
+                givenPinTimeToLive,
+                givenVerifyPinLimit,
+                givenSendPinPerApplicationLimit,
+                givenSendPinPerPhoneNumberLimit);
         TfaApplicationRequest request = givenTfaApplicationRequest(givenName, givenEnabled, givenConfiguration);
 
         Consumer<TfaApplicationResponse> assertions = (tfaApplicationResponse) -> {
@@ -285,45 +278,39 @@ class TfaApiTest extends ApiTest {
         boolean givenEnabled = true;
 
         String givenResponse = String.format(
-            "{" +
-                "    \"applicationId\": \"%s\"," +
-                "    \"name\": \"%s\"," +
-                "    \"configuration\": {" +
-                "      \"pinAttempts\": %d," +
-                "      \"allowMultiplePinVerifications\": %b," +
-                "      \"pinTimeToLive\": \"%s\"," +
-                "      \"verifyPinLimit\": \"%s\"," +
-                "      \"sendPinPerApplicationLimit\": \"%s\"," +
-                "      \"sendPinPerPhoneNumberLimit\": \"%s\"" +
-                "    }," +
-                "    \"enabled\": %b" +
-                "}",
-            givenApplicationId,
-            givenName,
-            givenPinAttempts,
-            givenAllowMultiplePinVerifications,
-            givenPinTimeToLive,
-            givenVerifyPinLimit,
-            givenSendPinPerApplicationLimit,
-            givenSendPinPerPhoneNumberLimit,
-            givenEnabled
-        );
+                "{" + "    \"applicationId\": \"%s\","
+                        + "    \"name\": \"%s\","
+                        + "    \"configuration\": {"
+                        + "      \"pinAttempts\": %d,"
+                        + "      \"allowMultiplePinVerifications\": %b,"
+                        + "      \"pinTimeToLive\": \"%s\","
+                        + "      \"verifyPinLimit\": \"%s\","
+                        + "      \"sendPinPerApplicationLimit\": \"%s\","
+                        + "      \"sendPinPerPhoneNumberLimit\": \"%s\""
+                        + "    },"
+                        + "    \"enabled\": %b"
+                        + "}",
+                givenApplicationId,
+                givenName,
+                givenPinAttempts,
+                givenAllowMultiplePinVerifications,
+                givenPinTimeToLive,
+                givenVerifyPinLimit,
+                givenSendPinPerApplicationLimit,
+                givenSendPinPerPhoneNumberLimit,
+                givenEnabled);
 
-        setUpSuccessGetRequest(
-            APPLICATION.replace("{appId}", givenApplicationId),
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(APPLICATION.replace("{appId}", givenApplicationId), Map.of(), givenResponse);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
 
         TfaApplicationConfiguration givenConfiguration = givenTfaApplicationConfiguration(
-            givenPinAttempts,
-            givenAllowMultiplePinVerifications,
-            givenPinTimeToLive,
-            givenVerifyPinLimit,
-            givenSendPinPerApplicationLimit,
-            givenSendPinPerPhoneNumberLimit);
+                givenPinAttempts,
+                givenAllowMultiplePinVerifications,
+                givenPinTimeToLive,
+                givenVerifyPinLimit,
+                givenSendPinPerApplicationLimit,
+                givenSendPinPerPhoneNumberLimit);
 
         Consumer<TfaApplicationResponse> assertions = (tfaApplicationResponse) -> {
             then(tfaApplicationResponse).isNotNull();
@@ -351,73 +338,62 @@ class TfaApiTest extends ApiTest {
         boolean givenEnabled = true;
 
         String givenResponse = String.format(
-            "{" +
-                "    \"applicationId\": \"%s\"," +
-                "    \"name\": \"%s\"," +
-                "    \"configuration\": {" +
-                "      \"pinAttempts\": %d," +
-                "      \"allowMultiplePinVerifications\": %b," +
-                "      \"pinTimeToLive\": \"%s\"," +
-                "      \"verifyPinLimit\": \"%s\"," +
-                "      \"sendPinPerApplicationLimit\": \"%s\"," +
-                "      \"sendPinPerPhoneNumberLimit\": \"%s\"" +
-                "    }," +
-                "    \"enabled\": %b" +
-                "}",
-            givenApplicationId,
-            givenName,
-            givenPinAttempts,
-            givenAllowMultiplePinVerifications,
-            givenPinTimeToLive,
-            givenVerifyPinLimit,
-            givenSendPinPerApplicationLimit,
-            givenSendPinPerPhoneNumberLimit,
-            givenEnabled
-        );
+                "{" + "    \"applicationId\": \"%s\","
+                        + "    \"name\": \"%s\","
+                        + "    \"configuration\": {"
+                        + "      \"pinAttempts\": %d,"
+                        + "      \"allowMultiplePinVerifications\": %b,"
+                        + "      \"pinTimeToLive\": \"%s\","
+                        + "      \"verifyPinLimit\": \"%s\","
+                        + "      \"sendPinPerApplicationLimit\": \"%s\","
+                        + "      \"sendPinPerPhoneNumberLimit\": \"%s\""
+                        + "    },"
+                        + "    \"enabled\": %b"
+                        + "}",
+                givenApplicationId,
+                givenName,
+                givenPinAttempts,
+                givenAllowMultiplePinVerifications,
+                givenPinTimeToLive,
+                givenVerifyPinLimit,
+                givenSendPinPerApplicationLimit,
+                givenSendPinPerPhoneNumberLimit,
+                givenEnabled);
 
         String expectedRequest = String.format(
-            "{" +
-                "    \"name\": \"%s\"," +
-                "    \"configuration\": {" +
-                "      \"pinAttempts\": %d," +
-                "      \"allowMultiplePinVerifications\": %b," +
-                "      \"pinTimeToLive\": \"%s\"," +
-                "      \"verifyPinLimit\": \"%s\"," +
-                "      \"sendPinPerApplicationLimit\": \"%s\"," +
-                "      \"sendPinPerPhoneNumberLimit\": \"%s\"" +
-                "    }," +
-                "    \"enabled\": %b" +
-                "}",
-            givenName,
-            givenPinAttempts,
-            givenAllowMultiplePinVerifications,
-            givenPinTimeToLive,
-            givenVerifyPinLimit,
-            givenSendPinPerApplicationLimit,
-            givenSendPinPerPhoneNumberLimit,
-            givenEnabled
-        );
+                "{" + "    \"name\": \"%s\","
+                        + "    \"configuration\": {"
+                        + "      \"pinAttempts\": %d,"
+                        + "      \"allowMultiplePinVerifications\": %b,"
+                        + "      \"pinTimeToLive\": \"%s\","
+                        + "      \"verifyPinLimit\": \"%s\","
+                        + "      \"sendPinPerApplicationLimit\": \"%s\","
+                        + "      \"sendPinPerPhoneNumberLimit\": \"%s\""
+                        + "    },"
+                        + "    \"enabled\": %b"
+                        + "}",
+                givenName,
+                givenPinAttempts,
+                givenAllowMultiplePinVerifications,
+                givenPinTimeToLive,
+                givenVerifyPinLimit,
+                givenSendPinPerApplicationLimit,
+                givenSendPinPerPhoneNumberLimit,
+                givenEnabled);
 
         setUpSuccessPutRequest(
-            APPLICATION.replace("{appId}", givenApplicationId),
-            Map.of(),
-            expectedRequest,
-            givenResponse
-        );
+                APPLICATION.replace("{appId}", givenApplicationId), Map.of(), expectedRequest, givenResponse);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
 
         TfaApplicationConfiguration givenConfiguration = givenTfaApplicationConfiguration(
-            givenPinAttempts,
-            givenAllowMultiplePinVerifications,
-            givenPinTimeToLive,
-            givenVerifyPinLimit,
-            givenSendPinPerApplicationLimit,
-            givenSendPinPerPhoneNumberLimit);
-        TfaApplicationRequest request = givenTfaApplicationRequest(
-            givenName,
-            givenEnabled,
-            givenConfiguration);
+                givenPinAttempts,
+                givenAllowMultiplePinVerifications,
+                givenPinTimeToLive,
+                givenVerifyPinLimit,
+                givenSendPinPerApplicationLimit,
+                givenSendPinPerPhoneNumberLimit);
+        TfaApplicationRequest request = givenTfaApplicationRequest(givenName, givenEnabled, givenConfiguration);
 
         Consumer<TfaApplicationResponse> assertions = (tfaApplicationResponse) -> {
             then(tfaApplicationResponse).isNotNull();
@@ -456,57 +432,51 @@ class TfaApiTest extends ApiTest {
         var givenEmailTemplateId = 10L;
 
         String givenResponse = String.format(
-            "[" +
-                "  {" +
-                "    \"messageId\": \"%s\"," +
-                "    \"from\": \"%s\"," +
-                "    \"emailTemplateId\": %d," +
-                "    \"applicationId\": \"%s\"," +
-                "    \"pinPlaceholder\": \"%s\"," +
-                "    \"messageText\": \"%s\"," +
-                "    \"pinLength\": %d," +
-                "    \"pinType\": \"%s\"," +
-                "    \"language\": \"%s\"," +
-                "    \"repeatDTMF\": \"%s\"," +
-                "    \"speechRate\": %.1f" +
-                "  }," +
-                "  {" +
-                "    \"messageId\": \"%s\"," +
-                "    \"applicationId\": \"%s\"," +
-                "    \"pinPlaceholder\": \"%s\"," +
-                "    \"messageText\": \"%s\"," +
-                "    \"pinLength\": %d," +
-                "    \"pinType\": \"%s\"," +
-                "    \"repeatDTMF\": \"%s\"," +
-                "    \"speechRate\": %.1f" +
-                "  }" +
-                "]",
-            givenMessageId1,
-            givenFrom,
-            givenEmailTemplateId,
-            givenApplicationId,
-            givenPinPlaceholder1,
-            givenMessageText1,
-            givenPinLength1,
-            givenPinType1,
-            givenLanguage1,
-            givenRepeatDtmf1,
-            givenSpeechRate1,
-            givenMessageId2,
-            givenApplicationId,
-            givenPinPlaceholder2,
-            givenMessageText2,
-            givenPinLength2,
-            givenPinType2,
-            givenRepeatDtmf2,
-            givenSpeechRate2
-        );
+                "[" + "  {"
+                        + "    \"messageId\": \"%s\","
+                        + "    \"from\": \"%s\","
+                        + "    \"emailTemplateId\": %d,"
+                        + "    \"applicationId\": \"%s\","
+                        + "    \"pinPlaceholder\": \"%s\","
+                        + "    \"messageText\": \"%s\","
+                        + "    \"pinLength\": %d,"
+                        + "    \"pinType\": \"%s\","
+                        + "    \"language\": \"%s\","
+                        + "    \"repeatDTMF\": \"%s\","
+                        + "    \"speechRate\": %.1f"
+                        + "  },"
+                        + "  {"
+                        + "    \"messageId\": \"%s\","
+                        + "    \"applicationId\": \"%s\","
+                        + "    \"pinPlaceholder\": \"%s\","
+                        + "    \"messageText\": \"%s\","
+                        + "    \"pinLength\": %d,"
+                        + "    \"pinType\": \"%s\","
+                        + "    \"repeatDTMF\": \"%s\","
+                        + "    \"speechRate\": %.1f"
+                        + "  }"
+                        + "]",
+                givenMessageId1,
+                givenFrom,
+                givenEmailTemplateId,
+                givenApplicationId,
+                givenPinPlaceholder1,
+                givenMessageText1,
+                givenPinLength1,
+                givenPinType1,
+                givenLanguage1,
+                givenRepeatDtmf1,
+                givenSpeechRate1,
+                givenMessageId2,
+                givenApplicationId,
+                givenPinPlaceholder2,
+                givenMessageText2,
+                givenPinLength2,
+                givenPinType2,
+                givenRepeatDtmf2,
+                givenSpeechRate2);
 
-        setUpSuccessGetRequest(
-            APPLICATION_MESSAGES.replace("{appId}", givenApplicationId),
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(APPLICATION_MESSAGES.replace("{appId}", givenApplicationId), Map.of(), givenResponse);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
 
@@ -557,61 +527,54 @@ class TfaApiTest extends ApiTest {
         double givenSpeechRate = 1d;
 
         String givenResponse = String.format(
-            "  {" +
-                "    \"pinPlaceholder\": \"%s\"," +
-                "    \"messageText\": \"%s\"," +
-                "    \"pinLength\": %d," +
-                "    \"pinType\": \"%s\"," +
-                "    \"language\": \"%s\"," +
-                "    \"senderId\": \"%s\"," +
-                "    \"repeatDTMF\": \"%s\"," +
-                "    \"speechRate\": %.1f" +
-                "  }",
-            givenPinPlaceholder,
-            givenMessageText,
-            givenPinLength,
-            givenPinType,
-            givenLanguage,
-            givenSenderId,
-            givenRepeatDtmf,
-            givenSpeechRate
-        );
+                "  {" + "    \"pinPlaceholder\": \"%s\","
+                        + "    \"messageText\": \"%s\","
+                        + "    \"pinLength\": %d,"
+                        + "    \"pinType\": \"%s\","
+                        + "    \"language\": \"%s\","
+                        + "    \"senderId\": \"%s\","
+                        + "    \"repeatDTMF\": \"%s\","
+                        + "    \"speechRate\": %.1f"
+                        + "  }",
+                givenPinPlaceholder,
+                givenMessageText,
+                givenPinLength,
+                givenPinType,
+                givenLanguage,
+                givenSenderId,
+                givenRepeatDtmf,
+                givenSpeechRate);
 
         String expectedRequest = String.format(
-            "  {" +
-                "    \"messageText\": \"%s\"," +
-                "    \"pinLength\": %d," +
-                "    \"pinType\": \"%s\"," +
-                "    \"language\": \"%s\"," +
-                "    \"senderId\": \"%s\"," +
-                "    \"repeatDTMF\": \"%s\"," +
-                "    \"speechRate\": %.1f" +
-                "  }",
-            givenMessageText,
-            givenPinLength,
-            givenPinType,
-            givenLanguage,
-            givenSenderId,
-            givenRepeatDtmf,
-            givenSpeechRate
-        );
+                "  {" + "    \"messageText\": \"%s\","
+                        + "    \"pinLength\": %d,"
+                        + "    \"pinType\": \"%s\","
+                        + "    \"language\": \"%s\","
+                        + "    \"senderId\": \"%s\","
+                        + "    \"repeatDTMF\": \"%s\","
+                        + "    \"speechRate\": %.1f"
+                        + "  }",
+                givenMessageText,
+                givenPinLength,
+                givenPinType,
+                givenLanguage,
+                givenSenderId,
+                givenRepeatDtmf,
+                givenSpeechRate);
 
         setUpSuccessPostRequest(
-            APPLICATION_MESSAGES.replace("{appId}", givenApplicationId),
-            expectedRequest,
-            givenResponse
-        );
+                APPLICATION_MESSAGES.replace("{appId}", givenApplicationId), expectedRequest, givenResponse);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
 
         TfaCreateMessageRequest request = new TfaCreateMessageRequest()
-            .messageText(givenMessageText)
-            .pinLength(givenPinLength)
-            .pinType(TfaPinType.fromValue(givenPinType))
-            .language(TfaLanguage.fromValue(givenLanguage))
-            .senderId(givenSenderId)
-            .repeatDTMF(givenRepeatDtmf)
-            .speechRate(givenSpeechRate);
+                .messageText(givenMessageText)
+                .pinLength(givenPinLength)
+                .pinType(TfaPinType.fromValue(givenPinType))
+                .language(TfaLanguage.fromValue(givenLanguage))
+                .senderId(givenSenderId)
+                .repeatDTMF(givenRepeatDtmf)
+                .speechRate(givenSpeechRate);
 
         Consumer<TfaMessage> assertions = (tfaMessage) -> {
             then(tfaMessage).isNotNull();
@@ -646,33 +609,28 @@ class TfaApiTest extends ApiTest {
         double givenSpeechRate = 1d;
 
         String givenResponse = String.format(
-            "  {" +
-                "    \"pinPlaceholder\": \"%s\"," +
-                "    \"messageText\": \"%s\"," +
-                "    \"pinLength\": %d," +
-                "    \"pinType\": \"%s\"," +
-                "    \"language\": \"%s\"," +
-                "    \"senderId\": \"%s\"," +
-                "    \"repeatDTMF\": \"%s\"," +
-                "    \"speechRate\": %.1f" +
-                "  }",
-            givenPinPlaceholder,
-            givenMessageText,
-            givenPinLength,
-            givenPinType,
-            givenLanguage,
-            givenSenderId,
-            givenRepeatDtmf,
-            givenSpeechRate
-        );
+                "  {" + "    \"pinPlaceholder\": \"%s\","
+                        + "    \"messageText\": \"%s\","
+                        + "    \"pinLength\": %d,"
+                        + "    \"pinType\": \"%s\","
+                        + "    \"language\": \"%s\","
+                        + "    \"senderId\": \"%s\","
+                        + "    \"repeatDTMF\": \"%s\","
+                        + "    \"speechRate\": %.1f"
+                        + "  }",
+                givenPinPlaceholder,
+                givenMessageText,
+                givenPinLength,
+                givenPinType,
+                givenLanguage,
+                givenSenderId,
+                givenRepeatDtmf,
+                givenSpeechRate);
 
         setUpSuccessGetRequest(
-            APPLICATION_MESSAGE
-                .replace("{appId}", givenApplicationId)
-                .replace("{msgId}", givenMessageId),
-            Map.of(),
-            givenResponse
-        );
+                APPLICATION_MESSAGE.replace("{appId}", givenApplicationId).replace("{msgId}", givenMessageId),
+                Map.of(),
+                givenResponse);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
 
@@ -707,64 +665,57 @@ class TfaApiTest extends ApiTest {
         double givenSpeechRate = 1d;
 
         String givenResponse = String.format(
-            "  {" +
-                "    \"pinPlaceholder\": \"%s\"," +
-                "    \"messageText\": \"%s\"," +
-                "    \"pinLength\": %d," +
-                "    \"pinType\": \"%s\"," +
-                "    \"language\": \"%s\"," +
-                "    \"senderId\": \"%s\"," +
-                "    \"repeatDTMF\": \"%s\"," +
-                "    \"speechRate\": %.1f" +
-                "  }",
-            givenPinPlaceholder,
-            givenMessageText,
-            givenPinLength,
-            givenPinType,
-            givenLanguage,
-            givenSenderId,
-            givenRepeatDtmf,
-            givenSpeechRate
-        );
+                "  {" + "    \"pinPlaceholder\": \"%s\","
+                        + "    \"messageText\": \"%s\","
+                        + "    \"pinLength\": %d,"
+                        + "    \"pinType\": \"%s\","
+                        + "    \"language\": \"%s\","
+                        + "    \"senderId\": \"%s\","
+                        + "    \"repeatDTMF\": \"%s\","
+                        + "    \"speechRate\": %.1f"
+                        + "  }",
+                givenPinPlaceholder,
+                givenMessageText,
+                givenPinLength,
+                givenPinType,
+                givenLanguage,
+                givenSenderId,
+                givenRepeatDtmf,
+                givenSpeechRate);
 
         String expectedRequest = String.format(
-            "  {" +
-                "    \"messageText\": \"%s\"," +
-                "    \"pinLength\": %d," +
-                "    \"pinType\": \"%s\"," +
-                "    \"language\": \"%s\"," +
-                "    \"senderId\": \"%s\"," +
-                "    \"repeatDTMF\": \"%s\"," +
-                "    \"speechRate\": %.1f" +
-                "  }",
-            givenMessageText,
-            givenPinLength,
-            givenPinType,
-            givenLanguage,
-            givenSenderId,
-            givenRepeatDtmf,
-            givenSpeechRate
-        );
+                "  {" + "    \"messageText\": \"%s\","
+                        + "    \"pinLength\": %d,"
+                        + "    \"pinType\": \"%s\","
+                        + "    \"language\": \"%s\","
+                        + "    \"senderId\": \"%s\","
+                        + "    \"repeatDTMF\": \"%s\","
+                        + "    \"speechRate\": %.1f"
+                        + "  }",
+                givenMessageText,
+                givenPinLength,
+                givenPinType,
+                givenLanguage,
+                givenSenderId,
+                givenRepeatDtmf,
+                givenSpeechRate);
 
         setUpSuccessPutRequest(
-            APPLICATION_MESSAGE
-                .replace("{appId}", givenApplicationId)
-                .replace("{msgId}", givenMessageId),
-            Map.of(),
-            expectedRequest,
-            givenResponse
-        );
+                APPLICATION_MESSAGE.replace("{appId}", givenApplicationId).replace("{msgId}", givenMessageId),
+                Map.of(),
+                expectedRequest,
+                givenResponse);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
 
         TfaUpdateMessageRequest request = new TfaUpdateMessageRequest()
-            .messageText(givenMessageText)
-            .pinLength(givenPinLength)
-            .pinType(TfaPinType.fromValue(givenPinType))
-            .language(TfaLanguage.fromValue(givenLanguage))
-            .senderId(givenSenderId)
-            .repeatDTMF(givenRepeatDtmf)
-            .speechRate(givenSpeechRate);
+                .messageText(givenMessageText)
+                .pinLength(givenPinLength)
+                .pinType(TfaPinType.fromValue(givenPinType))
+                .language(TfaLanguage.fromValue(givenLanguage))
+                .senderId(givenSenderId)
+                .repeatDTMF(givenRepeatDtmf)
+                .speechRate(givenSpeechRate);
 
         Consumer<TfaMessage> assertions = (tfaMessage) -> {
             then(tfaMessage).isNotNull();
@@ -797,34 +748,23 @@ class TfaApiTest extends ApiTest {
         String givenFirstName = "John";
 
         String givenResponse = String.format(
-            "{" +
-                "  \"pinId\": \"%s\"," +
-                "  \"to\": \"%s\"," +
-                "  \"ncStatus\": \"%s\"," +
-                "  \"smsStatus\": \"%s\"" +
-                "}",
-            givenPinId,
-            givenTo,
-            givenNcStatus,
-            givenSmsStatus
-        );
+                "{" + "  \"pinId\": \"%s\","
+                        + "  \"to\": \"%s\","
+                        + "  \"ncStatus\": \"%s\","
+                        + "  \"smsStatus\": \"%s\""
+                        + "}",
+                givenPinId, givenTo, givenNcStatus, givenSmsStatus);
 
         String expectedRequest = String.format(
-            "{" +
-                "  \"applicationId\": \"%s\"," +
-                "  \"messageId\": \"%s\"," +
-                "  \"from\": \"%s\"," +
-                "  \"to\": \"%s\"," +
-                "  \"placeholders\": {" +
-                "    \"firstName\": \"%s\"" +
-                "  }" +
-                "}",
-            givenApplicationId,
-            givenMessageId,
-            givenFrom,
-            givenTo,
-            givenFirstName
-        );
+                "{" + "  \"applicationId\": \"%s\","
+                        + "  \"messageId\": \"%s\","
+                        + "  \"from\": \"%s\","
+                        + "  \"to\": \"%s\","
+                        + "  \"placeholders\": {"
+                        + "    \"firstName\": \"%s\""
+                        + "  }"
+                        + "}",
+                givenApplicationId, givenMessageId, givenFrom, givenTo, givenFirstName);
 
         setUpSuccessPostRequest(PIN, expectedRequest, givenResponse);
 
@@ -832,7 +772,8 @@ class TfaApiTest extends ApiTest {
 
         Map<String, String> givenPlaceholders = Map.of("firstName", givenFirstName);
 
-        TfaStartAuthenticationRequest request = givenTfaStartAuthenticationRequest(givenTo, givenApplicationId, givenMessageId, givenFrom, givenPlaceholders);
+        TfaStartAuthenticationRequest request = givenTfaStartAuthenticationRequest(
+                givenTo, givenApplicationId, givenMessageId, givenFrom, givenPlaceholders);
 
         Consumer<TfaStartAuthenticationResponse> assertions = tfaStartAuthenticationResponse -> {
             then(tfaStartAuthenticationResponse).isNotNull();
@@ -858,37 +799,21 @@ class TfaApiTest extends ApiTest {
         String givenFirstName = "John";
 
         String givenResponse = String.format(
-            "{" +
-                "  \"pinId\": \"%s\"," +
-                "  \"to\": \"%s\"," +
-                "  \"ncStatus\": \"%s\"," +
-                "  \"smsStatus\": \"%s\"" +
-                "}",
-            givenPinId,
-            givenTo,
-            givenNcStatus,
-            givenSmsStatus
-        );
+                "{" + "  \"pinId\": \"%s\","
+                        + "  \"to\": \"%s\","
+                        + "  \"ncStatus\": \"%s\","
+                        + "  \"smsStatus\": \"%s\""
+                        + "}",
+                givenPinId, givenTo, givenNcStatus, givenSmsStatus);
 
         String expectedRequest = String.format(
-            "{" +
-                "  \"placeholders\": {" +
-                "    \"firstName\": \"%s\"" +
-                "  }" +
-                "}",
-            givenFirstName
-        );
+                "{" + "  \"placeholders\": {" + "    \"firstName\": \"%s\"" + "  }" + "}", givenFirstName);
 
-        setUpSuccessPostRequest(
-            PIN_RESEND.replace("{pinId}", givenPinId),
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(PIN_RESEND.replace("{pinId}", givenPinId), expectedRequest, givenResponse);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
 
-        TfaResendPinRequest request = new TfaResendPinRequest()
-            .placeholders(Map.of("firstName", givenFirstName));
+        TfaResendPinRequest request = new TfaResendPinRequest().placeholders(Map.of("firstName", givenFirstName));
 
         Consumer<TfaStartAuthenticationResponse> assertions = tfaStartAuthenticationResponse -> {
             then(tfaStartAuthenticationResponse).isNotNull();
@@ -916,32 +841,19 @@ class TfaApiTest extends ApiTest {
         String givenFirstName = "John";
 
         String givenResponse = String.format(
-            "{" +
-                "  \"pinId\": \"%s\"," +
-                "  \"to\": \"%s\"," +
-                "  \"callStatus\": \"%s\"" +
-                "}",
-            givenPinId,
-            givenTo,
-            givenCallStatus
-        );
+                "{" + "  \"pinId\": \"%s\"," + "  \"to\": \"%s\"," + "  \"callStatus\": \"%s\"" + "}",
+                givenPinId, givenTo, givenCallStatus);
 
         String expectedRequest = String.format(
-            "{" +
-                "  \"applicationId\": \"%s\"," +
-                "  \"messageId\": \"%s\"," +
-                "  \"from\": \"%s\"," +
-                "  \"to\": \"%s\"," +
-                "  \"placeholders\": {" +
-                "    \"firstName\": \"%s\"" +
-                "  }" +
-                "}",
-            givenApplicationId,
-            givenMessageId,
-            givenFrom,
-            givenTo,
-            givenFirstName
-        );
+                "{" + "  \"applicationId\": \"%s\","
+                        + "  \"messageId\": \"%s\","
+                        + "  \"from\": \"%s\","
+                        + "  \"to\": \"%s\","
+                        + "  \"placeholders\": {"
+                        + "    \"firstName\": \"%s\""
+                        + "  }"
+                        + "}",
+                givenApplicationId, givenMessageId, givenFrom, givenTo, givenFirstName);
 
         setUpSuccessPostRequest(PIN_VIA_VOICE, expectedRequest, givenResponse);
 
@@ -949,7 +861,8 @@ class TfaApiTest extends ApiTest {
 
         Map<String, String> givenPlaceholders = Map.of("firstName", givenFirstName);
 
-        TfaStartAuthenticationRequest request = givenTfaStartAuthenticationRequest(givenTo, givenApplicationId, givenMessageId, givenFrom, givenPlaceholders);
+        TfaStartAuthenticationRequest request = givenTfaStartAuthenticationRequest(
+                givenTo, givenApplicationId, givenMessageId, givenFrom, givenPlaceholders);
 
         Consumer<TfaStartAuthenticationResponse> assertions = tfaStartAuthenticationResponse -> {
             then(tfaStartAuthenticationResponse).isNotNull();
@@ -963,7 +876,6 @@ class TfaApiTest extends ApiTest {
         var call = tfaApi.sendTfaPinCodeOverVoice(request);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
-
     }
 
     @Test
@@ -976,37 +888,21 @@ class TfaApiTest extends ApiTest {
         String givenFirstName = "Doe";
 
         String givenResponse = String.format(
-            "{" +
-                "  \"pinId\": \"%s\"," +
-                "  \"to\": \"%s\"," +
-                "  \"ncStatus\": \"%s\"," +
-                "  \"smsStatus\": \"%s\"" +
-                "}",
-            givenPinId,
-            givenTo,
-            givenNcStatus,
-            givenSmsStatus
-        );
+                "{" + "  \"pinId\": \"%s\","
+                        + "  \"to\": \"%s\","
+                        + "  \"ncStatus\": \"%s\","
+                        + "  \"smsStatus\": \"%s\""
+                        + "}",
+                givenPinId, givenTo, givenNcStatus, givenSmsStatus);
 
         String expectedRequest = String.format(
-            "{" +
-                "  \"placeholders\": {" +
-                "    \"firstName\": \"%s\"" +
-                "  }" +
-                "}",
-            givenFirstName
-        );
+                "{" + "  \"placeholders\": {" + "    \"firstName\": \"%s\"" + "  }" + "}", givenFirstName);
 
-        setUpSuccessPostRequest(
-            PIN_RESEND_VIA_VOICE.replace("{pinId}", givenPinId),
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(PIN_RESEND_VIA_VOICE.replace("{pinId}", givenPinId), expectedRequest, givenResponse);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
 
-        TfaResendPinRequest request = new TfaResendPinRequest()
-            .placeholders(Map.of("firstName", givenFirstName));
+        TfaResendPinRequest request = new TfaResendPinRequest().placeholders(Map.of("firstName", givenFirstName));
 
         Consumer<TfaStartAuthenticationResponse> assertions = tfaStartAuthenticationResponse -> {
             then(tfaStartAuthenticationResponse).isNotNull();
@@ -1032,35 +928,20 @@ class TfaApiTest extends ApiTest {
         int givenAttemptsRemaining = 0;
 
         String givenResponse = String.format(
-            "{" +
-                "  \"pinId\": \"%s\"," +
-                "  \"msisdn\": \"%s\"," +
-                "  \"verified\": %b," +
-                "  \"attemptsRemaining\": %d" +
-                "}",
-            givenPinId,
-            givenMsisdn,
-            givenVerified,
-            givenAttemptsRemaining
-        );
+                "{" + "  \"pinId\": \"%s\","
+                        + "  \"msisdn\": \"%s\","
+                        + "  \"verified\": %b,"
+                        + "  \"attemptsRemaining\": %d"
+                        + "}",
+                givenPinId, givenMsisdn, givenVerified, givenAttemptsRemaining);
 
-        String expectedRequest = String.format(
-            "{" +
-                "  \"pin\": \"%s\"" +
-                "}",
-            givenPin
-        );
+        String expectedRequest = String.format("{" + "  \"pin\": \"%s\"" + "}", givenPin);
 
-        setUpSuccessPostRequest(
-            PIN_VERIFY.replace("{pinId}", givenPinId),
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(PIN_VERIFY.replace("{pinId}", givenPinId), expectedRequest, givenResponse);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
 
-        TfaVerifyPinRequest request = new TfaVerifyPinRequest()
-            .pin(givenPin);
+        TfaVerifyPinRequest request = new TfaVerifyPinRequest().pin(givenPin);
 
         Consumer<TfaVerifyPinResponse> assertions = tfaVerifyPinResponse -> {
             then(tfaVerifyPinResponse).isNotNull();
@@ -1089,38 +970,32 @@ class TfaApiTest extends ApiTest {
         Long givenSentAt2 = 1418333246L;
 
         String givenResponse = String.format(
-            "{" +
-                "  \"verifications\": [" +
-                "    {" +
-                "      \"msisdn\": \"%s\"," +
-                "      \"verified\": %b," +
-                "      \"verifiedAt\": %d," +
-                "      \"sentAt\": %d" +
-                "    }," +
-                "    {" +
-                "      \"msisdn\": \"%s\"," +
-                "      \"verified\": %b," +
-                "      \"verifiedAt\": %d," +
-                "      \"sentAt\": %d" +
-                "    }" +
-                "  ]" +
-                "}",
-            givenMsisdn,
-            givenVerified1,
-            givenVerifiedAt1,
-            givenSentAt1,
-
-            givenMsisdn,
-            givenVerified2,
-            givenVerifiedAt2,
-            givenSentAt2
-        );
+                "{" + "  \"verifications\": ["
+                        + "    {"
+                        + "      \"msisdn\": \"%s\","
+                        + "      \"verified\": %b,"
+                        + "      \"verifiedAt\": %d,"
+                        + "      \"sentAt\": %d"
+                        + "    },"
+                        + "    {"
+                        + "      \"msisdn\": \"%s\","
+                        + "      \"verified\": %b,"
+                        + "      \"verifiedAt\": %d,"
+                        + "      \"sentAt\": %d"
+                        + "    }"
+                        + "  ]"
+                        + "}",
+                givenMsisdn,
+                givenVerified1,
+                givenVerifiedAt1,
+                givenSentAt1,
+                givenMsisdn,
+                givenVerified2,
+                givenVerifiedAt2,
+                givenSentAt2);
 
         setUpSuccessGetRequest(
-            APPLICATION_VERIFICATIONS.replace("{appId}", givenApplicationId),
-            Map.of(),
-            givenResponse
-        );
+                APPLICATION_VERIFICATIONS.replace("{appId}", givenApplicationId), Map.of(), givenResponse);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
 
@@ -1129,13 +1004,15 @@ class TfaApiTest extends ApiTest {
             then(tfaVerificationResponse.getVerifications()).isNotNull();
             then(tfaVerificationResponse.getVerifications().size()).isEqualTo(2);
 
-            TfaVerification tfaVerification1 = tfaVerificationResponse.getVerifications().get(0);
+            TfaVerification tfaVerification1 =
+                    tfaVerificationResponse.getVerifications().get(0);
             then(tfaVerification1.getMsisdn()).isEqualTo(givenMsisdn);
             then(tfaVerification1.getVerified()).isEqualTo(givenVerified1);
             then(tfaVerification1.getVerifiedAt()).isEqualTo(givenVerifiedAt1);
             then(tfaVerification1.getSentAt()).isEqualTo(givenSentAt1);
 
-            TfaVerification tfaVerification2 = tfaVerificationResponse.getVerifications().get(1);
+            TfaVerification tfaVerification2 =
+                    tfaVerificationResponse.getVerifications().get(1);
             then(tfaVerification2.getMsisdn()).isEqualTo(givenMsisdn);
             then(tfaVerification2.getVerified()).isEqualTo(givenVerified2);
             then(tfaVerification2.getVerifiedAt()).isEqualTo(givenVerifiedAt2);
@@ -1158,49 +1035,43 @@ class TfaApiTest extends ApiTest {
 
         String givenAppId = "0933F3BC087D2A617AC6DCB2EF5B8A61";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"messageId\": \"%s\",\n" +
-                                                 "  \"applicationId\": \"%s\",\n" +
-                                                 "  \"pinLength\": %d,\n" +
-                                                 "  \"pinType\": \"%s\",\n" +
-                                                 "  \"from\": \"%s\",\n" +
-                                                 "  \"emailTemplateId\": %d\n" +
-                                                 "}\n",
-                                             givenMessageId,
-                                             givenApplicationId,
-                                             givenPinLength,
-                                             givenPinType.getValue(),
-                                             givenFrom,
-                                             givenEmailTemplateId);
+        String givenResponse = String.format(
+                "{\n" + "  \"messageId\": \"%s\",\n"
+                        + "  \"applicationId\": \"%s\",\n"
+                        + "  \"pinLength\": %d,\n"
+                        + "  \"pinType\": \"%s\",\n"
+                        + "  \"from\": \"%s\",\n"
+                        + "  \"emailTemplateId\": %d\n"
+                        + "}\n",
+                givenMessageId,
+                givenApplicationId,
+                givenPinLength,
+                givenPinType.getValue(),
+                givenFrom,
+                givenEmailTemplateId);
 
         String expectedPinType = "NUMERIC";
         Integer expectedPinLength = 4;
         String expectedFrom = "company@example.com";
         Long expectedEmailTemplateId = 1234L;
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"pinType\": \"%s\",\n" +
-                                                   "  \"pinLength\": %d,\n" +
-                                                   "  \"from\": \"%s\",\n" +
-                                                   "  \"emailTemplateId\": %d\n" +
-                                                   "}",
-                                               expectedPinType,
-                                               expectedPinLength,
-                                               expectedFrom,
-                                               expectedEmailTemplateId
-        );
+        String expectedRequest = String.format(
+                "{\n" + "  \"pinType\": \"%s\",\n"
+                        + "  \"pinLength\": %d,\n"
+                        + "  \"from\": \"%s\",\n"
+                        + "  \"emailTemplateId\": %d\n"
+                        + "}",
+                expectedPinType, expectedPinLength, expectedFrom, expectedEmailTemplateId);
 
-        setUpPostRequest(APPLICATION_EMAIL_MESSAGES.replace("{appId}", givenAppId),
-                         expectedRequest,
-                         givenResponse,
-                         200);
+        setUpPostRequest(
+                APPLICATION_EMAIL_MESSAGES.replace("{appId}", givenAppId), expectedRequest, givenResponse, 200);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
         var tfaCreateEmailMessageRequest = new TfaCreateEmailMessageRequest()
-            .pinType(TfaPinType.valueOf(expectedPinType))
-            .pinLength(expectedPinLength)
-            .from(expectedFrom)
-            .emailTemplateId(expectedEmailTemplateId);
+                .pinType(TfaPinType.valueOf(expectedPinType))
+                .pinLength(expectedPinLength)
+                .from(expectedFrom)
+                .emailTemplateId(expectedEmailTemplateId);
 
         Consumer<TfaEmailMessage> assertions = tfaEmailMessage -> {
             then(tfaEmailMessage).isNotNull();
@@ -1229,50 +1100,47 @@ class TfaApiTest extends ApiTest {
         String givenAppId = "0933F3BC087D2A617AC6DCB2EF5B8A61";
         String givenMsgId = "16A8B5FE2BCD6CA716A2D780CB3F3390";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"messageId\": \"%s\",\n" +
-                                                 "  \"applicationId\": \"%s\",\n" +
-                                                 "  \"pinLength\": %d,\n" +
-                                                 "  \"pinType\": \"%s\",\n" +
-                                                 "  \"from\": \"%s\",\n" +
-                                                 "  \"emailTemplateId\": %d\n" +
-                                                 "}\n",
-                                             givenMessageId,
-                                             givenApplicationId,
-                                             givenPinLength,
-                                             givenPinType.getValue(),
-                                             givenFrom,
-                                             givenEmailTemplateId);
+        String givenResponse = String.format(
+                "{\n" + "  \"messageId\": \"%s\",\n"
+                        + "  \"applicationId\": \"%s\",\n"
+                        + "  \"pinLength\": %d,\n"
+                        + "  \"pinType\": \"%s\",\n"
+                        + "  \"from\": \"%s\",\n"
+                        + "  \"emailTemplateId\": %d\n"
+                        + "}\n",
+                givenMessageId,
+                givenApplicationId,
+                givenPinLength,
+                givenPinType.getValue(),
+                givenFrom,
+                givenEmailTemplateId);
 
         String expectedPinType = "ALPHANUMERIC";
         Integer expectedPinLength = 6;
         String expectedFrom = "company@example.com";
         Long expectedEmailTemplateId = 1234L;
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"pinType\": \"%s\",\n" +
-                                                   "  \"pinLength\": %d,\n" +
-                                                   "  \"from\": \"%s\",\n" +
-                                                   "  \"emailTemplateId\": %d\n" +
-                                                   "}",
-                                               expectedPinType,
-                                               expectedPinLength,
-                                               expectedFrom,
-                                               expectedEmailTemplateId
-        );
+        String expectedRequest = String.format(
+                "{\n" + "  \"pinType\": \"%s\",\n"
+                        + "  \"pinLength\": %d,\n"
+                        + "  \"from\": \"%s\",\n"
+                        + "  \"emailTemplateId\": %d\n"
+                        + "}",
+                expectedPinType, expectedPinLength, expectedFrom, expectedEmailTemplateId);
 
-        setUpPutRequest(APPLICATION_EMAIL_MESSAGE.replace("{appId}", givenAppId).replace("{msgId}", givenMsgId),
-                        Map.of(),
-                        expectedRequest,
-                        givenResponse,
-                        200);
+        setUpPutRequest(
+                APPLICATION_EMAIL_MESSAGE.replace("{appId}", givenAppId).replace("{msgId}", givenMsgId),
+                Map.of(),
+                expectedRequest,
+                givenResponse,
+                200);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
         var tfaUpdateEmailMessageRequest = new TfaUpdateEmailMessageRequest()
-            .pinType(TfaPinType.valueOf(expectedPinType))
-            .pinLength(expectedPinLength)
-            .from(expectedFrom)
-            .emailTemplateId(expectedEmailTemplateId);
+                .pinType(TfaPinType.valueOf(expectedPinType))
+                .pinLength(expectedPinLength)
+                .from(expectedFrom)
+                .emailTemplateId(expectedEmailTemplateId);
 
         Consumer<TfaEmailMessage> assertions = tfaEmailMessage -> {
             then(tfaEmailMessage).isNotNull();
@@ -1295,54 +1163,41 @@ class TfaApiTest extends ApiTest {
         String givenTo = "john.smith@example.com";
         String givenName = "PENDING_ACCEPTED";
         String givenDescription = "Message accepted, pending for delivery.";
-        String givenResponse = String.format("{\n" +
-                                                 "  \"pinId\": \"%s\",\n" +
-                                                 "  \"to\": \"%s\",\n" +
-                                                 "  \"emailStatus\": {\n" +
-                                                 "    \"name\": \"%s\",\n" +
-                                                 "    \"description\": \"%s\"\n" +
-                                                 "  }\n" +
-                                                 "}\n",
-                                             givenPinId,
-                                             givenTo,
-                                             givenName,
-                                             givenDescription);
+        String givenResponse = String.format(
+                "{\n" + "  \"pinId\": \"%s\",\n"
+                        + "  \"to\": \"%s\",\n"
+                        + "  \"emailStatus\": {\n"
+                        + "    \"name\": \"%s\",\n"
+                        + "    \"description\": \"%s\"\n"
+                        + "  }\n"
+                        + "}\n",
+                givenPinId, givenTo, givenName, givenDescription);
 
         String expectedApplicationId = "1234567";
         String expectedMessageId = "7654321";
         String expectedFrom = "jane.smith@example.com";
         String expectedTo = "john.smith@example.com";
         String expectedFirstName = "John";
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"applicationId\": \"%s\",\n" +
-                                                   "  \"messageId\": \"%s\",\n" +
-                                                   "  \"from\": \"%s\",\n" +
-                                                   "  \"to\": \"%s\",\n" +
-                                                   "  \"placeholders\": {\n" +
-                                                   "    \"firstName\": \"%s\"\n" +
-                                                   "  }\n" +
-                                                   "}\n",
-                                               expectedApplicationId,
-                                               expectedMessageId,
-                                               expectedFrom,
-                                               expectedTo,
-                                               expectedFirstName
-        );
+        String expectedRequest = String.format(
+                "{\n" + "  \"applicationId\": \"%s\",\n"
+                        + "  \"messageId\": \"%s\",\n"
+                        + "  \"from\": \"%s\",\n"
+                        + "  \"to\": \"%s\",\n"
+                        + "  \"placeholders\": {\n"
+                        + "    \"firstName\": \"%s\"\n"
+                        + "  }\n"
+                        + "}\n",
+                expectedApplicationId, expectedMessageId, expectedFrom, expectedTo, expectedFirstName);
 
-        setUpPostRequest(PIN_EMAIL_SEND,
-                         expectedRequest,
-                         givenResponse,
-                         200);
+        setUpPostRequest(PIN_EMAIL_SEND, expectedRequest, givenResponse, 200);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
         var tfaStartEmailAuthenticationRequest = new TfaStartEmailAuthenticationRequest()
-            .applicationId(expectedApplicationId)
-            .messageId(expectedMessageId)
-            .from(expectedFrom)
-            .to(expectedTo)
-            .placeholders(Map.of(
-                "firstName", "John"
-            ));
+                .applicationId(expectedApplicationId)
+                .messageId(expectedMessageId)
+                .from(expectedFrom)
+                .to(expectedTo)
+                .placeholders(Map.of("firstName", "John"));
 
         Consumer<TfaStartEmailAuthenticationResponse> assertions = tfaStartEmailAuthenticationResponse -> {
             then(tfaStartEmailAuthenticationResponse).isNotNull();
@@ -1368,38 +1223,24 @@ class TfaApiTest extends ApiTest {
 
         String sentPinId = "0933F3BC087D2A617AC6DCB2EF5B8A61";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"pinId\": \"%s\",\n" +
-                                                 "  \"to\": \"%s\",\n" +
-                                                 "  \"emailStatus\": {\n" +
-                                                 "    \"name\": \"%s\",\n" +
-                                                 "    \"description\": \"%s\"\n" +
-                                                 "  }\n" +
-                                                 "}\n",
-                                             givenPinId,
-                                             givenTo,
-                                             givenName,
-                                             givenDescription);
+        String givenResponse = String.format(
+                "{\n" + "  \"pinId\": \"%s\",\n"
+                        + "  \"to\": \"%s\",\n"
+                        + "  \"emailStatus\": {\n"
+                        + "    \"name\": \"%s\",\n"
+                        + "    \"description\": \"%s\"\n"
+                        + "  }\n"
+                        + "}\n",
+                givenPinId, givenTo, givenName, givenDescription);
 
         String expectedFirstName = "John";
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"placeholders\": {\n" +
-                                                   "    \"firstName\": \"%s\"\n" +
-                                                   "  }\n" +
-                                                   "}\n",
-                                               expectedFirstName
-        );
+        String expectedRequest = String.format(
+                "{\n" + "  \"placeholders\": {\n" + "    \"firstName\": \"%s\"\n" + "  }\n" + "}\n", expectedFirstName);
 
-        setUpPostRequest(PIN_EMAIL_RESEND.replace("{pinId}", sentPinId),
-                         expectedRequest,
-                         givenResponse,
-                         200);
+        setUpPostRequest(PIN_EMAIL_RESEND.replace("{pinId}", sentPinId), expectedRequest, givenResponse, 200);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
-        var tfaStartEmailAuthenticationRequest = new TfaResendPinRequest()
-            .placeholders(Map.of(
-                "firstName", "John"
-            ));
+        var tfaStartEmailAuthenticationRequest = new TfaResendPinRequest().placeholders(Map.of("firstName", "John"));
 
         Consumer<TfaStartEmailAuthenticationResponse> assertions = tfaStartEmailAuthenticationResponse -> {
             then(tfaStartEmailAuthenticationResponse).isNotNull();
@@ -1417,41 +1258,41 @@ class TfaApiTest extends ApiTest {
     }
 
     private TfaApplicationConfiguration givenTfaApplicationConfiguration(
-        int givenPinAttempts,
-        boolean givenAllowMultiplePinVerifications,
-        String givenPinTimeToLive,
-        String givenVerifyPinLimit,
-        String givenSendPinPerApplicationLimit,
-        String givenSendPinPerPhoneNumberLimit) {
+            int givenPinAttempts,
+            boolean givenAllowMultiplePinVerifications,
+            String givenPinTimeToLive,
+            String givenVerifyPinLimit,
+            String givenSendPinPerApplicationLimit,
+            String givenSendPinPerPhoneNumberLimit) {
 
         return new TfaApplicationConfiguration()
-            .pinAttempts(givenPinAttempts)
-            .pinTimeToLive(givenPinTimeToLive)
-            .allowMultiplePinVerifications(givenAllowMultiplePinVerifications)
-            .sendPinPerApplicationLimit(givenSendPinPerApplicationLimit)
-            .sendPinPerPhoneNumberLimit(givenSendPinPerPhoneNumberLimit)
-            .verifyPinLimit(givenVerifyPinLimit);
+                .pinAttempts(givenPinAttempts)
+                .pinTimeToLive(givenPinTimeToLive)
+                .allowMultiplePinVerifications(givenAllowMultiplePinVerifications)
+                .sendPinPerApplicationLimit(givenSendPinPerApplicationLimit)
+                .sendPinPerPhoneNumberLimit(givenSendPinPerPhoneNumberLimit)
+                .verifyPinLimit(givenVerifyPinLimit);
     }
 
-    private TfaApplicationRequest givenTfaApplicationRequest(String givenName,
-                                                             boolean givenEnabled,
-                                                             TfaApplicationConfiguration givenConfiguration) {
+    private TfaApplicationRequest givenTfaApplicationRequest(
+            String givenName, boolean givenEnabled, TfaApplicationConfiguration givenConfiguration) {
         return new TfaApplicationRequest()
-            .name(givenName)
-            ._configuration(givenConfiguration)
-            .enabled(givenEnabled);
+                .name(givenName)
+                ._configuration(givenConfiguration)
+                .enabled(givenEnabled);
     }
 
-    private TfaStartAuthenticationRequest givenTfaStartAuthenticationRequest(String givenTo,
-                                                                             String givenApplicationId,
-                                                                             String givenMessageId,
-                                                                             String givenFrom, Map<String, String> givenPlaceholders) {
+    private TfaStartAuthenticationRequest givenTfaStartAuthenticationRequest(
+            String givenTo,
+            String givenApplicationId,
+            String givenMessageId,
+            String givenFrom,
+            Map<String, String> givenPlaceholders) {
         return new TfaStartAuthenticationRequest()
-            .applicationId(givenApplicationId)
-            .messageId(givenMessageId)
-            .from(givenFrom)
-            .to(givenTo)
-            .placeholders(givenPlaceholders);
+                .applicationId(givenApplicationId)
+                .messageId(givenMessageId)
+                .from(givenFrom)
+                .to(givenTo)
+                .placeholders(givenPlaceholders);
     }
-
 }

@@ -1,9 +1,10 @@
 package com.infobip.api;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static org.assertj.core.api.BDDAssertions.then;
+
 import com.infobip.JSON;
 import com.infobip.model.*;
-import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,9 +13,7 @@ import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static org.assertj.core.api.BDDAssertions.then;
+import org.junit.jupiter.api.Test;
 
 class MmsApiTest extends ApiTest {
 
@@ -53,138 +52,120 @@ class MmsApiTest extends ApiTest {
         String givenApplicationId = "applicationId";
         String givenEntityId = "entityId";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"bulkId\": \"%s\",\n" +
-                                                 "  \"messages\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"to\": \"%s\",\n" +
-                                                 "      \"status\": {\n" +
-                                                 "        \"groupId\": %d,\n" +
-                                                 "        \"groupName\": \"%s\",\n" +
-                                                 "        \"id\": %d,\n" +
-                                                 "        \"name\": \"%s\",\n" +
-                                                 "        \"description\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"messageId\": \"%s\"\n" +
-                                                 "    }\n" +
-                                                 "  ],\n" +
-                                                 "  \"errorMessage\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenBulkId,
-                                             givenTo,
-                                             givenGroupId,
-                                             givenGroupName,
-                                             givenId,
-                                             givenName,
-                                             givenDescription,
-                                             givenMessageId,
-                                             givenErrorMessage
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"messageId\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"errorMessage\": \"%s\"\n"
+                        + "}\n",
+                givenBulkId,
+                givenTo,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenMessageId,
+                givenErrorMessage);
 
-        String expectedRequest = String.format("{\n" +
-                                                   "   \"bulkId\": \"%s\",\n" +
-                                                   "   \"messages\": [\n" +
-                                                   "     {\n" +
-                                                   "       \"callbackData\": \"%s\",\n" +
-                                                   "       \"deliveryTimeWindow\": {\n" +
-                                                   "         \"days\": [\n" +
-                                                   "           \"%s\"\n" +
-                                                   "         ],\n" +
-                                                   "         \"from\": {\n" +
-                                                   "           \"hour\": %d,\n" +
-                                                   "           \"minute\": %d\n" +
-                                                   "         },\n" +
-                                                   "         \"to\": {\n" +
-                                                   "           \"hour\": %d,\n" +
-                                                   "           \"minute\": %d\n" +
-                                                   "         }\n" +
-                                                   "       },\n" +
-                                                   "       \"destinations\": [\n" +
-                                                   "         {\n" +
-                                                   "           \"messageId\": \"%s\",\n" +
-                                                   "           \"to\": \"%s\",\n" +
-                                                   "           \"group\": []\n" +
-                                                   "         }\n" +
-                                                   "       ],\n" +
-                                                   "       \"from\": \"%s\",\n" +
-                                                   "       \"intermediateReport\": %b,\n" +
-                                                   "       \"notifyUrl\": \"%s\",\n" +
-                                                   "       \"sendAt\": \"%s\",\n" +
-                                                   "       \"messageSegments\": [\n" +
-                                                   "         {\n" +
-                                                   "           \"contentId\": \"%s\",\n" +
-                                                   "           \"text\": \"%s\"\n" +
-                                                   "         }\n" +
-                                                   "       ],\n" +
-                                                   "       \"validityPeriod\": %d,\n" +
-                                                   "       \"title\": \"%s\",\n" +
-                                                   "       \"applicationId\": \"%s\",\n" +
-                                                   "       \"entityId\": \"%s\"\n" +
-                                                   "     }\n" +
-                                                   "   ]\n" +
-                                                   "}\n",
-                                               givenBulkId,
-                                               givenCallbackData,
-                                               givenDay,
-                                               givenFromHour,
-                                               givenFromMinute,
-                                               givenToHour,
-                                               givenToMinute,
-                                               givenMessageId,
-                                               givenTo,
-                                               givenFrom,
-                                               givenIntermediateReport,
-                                               givenNotifyUrl,
-                                               givenSendAt,
-                                               givenContentId,
-                                               givenText,
-                                               givenValidityPeriod,
-                                               givenTitle,
-                                               givenApplicationId,
-                                               givenEntityId
-        );
+        String expectedRequest = String.format(
+                "{\n" + "   \"bulkId\": \"%s\",\n"
+                        + "   \"messages\": [\n"
+                        + "     {\n"
+                        + "       \"callbackData\": \"%s\",\n"
+                        + "       \"deliveryTimeWindow\": {\n"
+                        + "         \"days\": [\n"
+                        + "           \"%s\"\n"
+                        + "         ],\n"
+                        + "         \"from\": {\n"
+                        + "           \"hour\": %d,\n"
+                        + "           \"minute\": %d\n"
+                        + "         },\n"
+                        + "         \"to\": {\n"
+                        + "           \"hour\": %d,\n"
+                        + "           \"minute\": %d\n"
+                        + "         }\n"
+                        + "       },\n"
+                        + "       \"destinations\": [\n"
+                        + "         {\n"
+                        + "           \"messageId\": \"%s\",\n"
+                        + "           \"to\": \"%s\",\n"
+                        + "           \"group\": []\n"
+                        + "         }\n"
+                        + "       ],\n"
+                        + "       \"from\": \"%s\",\n"
+                        + "       \"intermediateReport\": %b,\n"
+                        + "       \"notifyUrl\": \"%s\",\n"
+                        + "       \"sendAt\": \"%s\",\n"
+                        + "       \"messageSegments\": [\n"
+                        + "         {\n"
+                        + "           \"contentId\": \"%s\",\n"
+                        + "           \"text\": \"%s\"\n"
+                        + "         }\n"
+                        + "       ],\n"
+                        + "       \"validityPeriod\": %d,\n"
+                        + "       \"title\": \"%s\",\n"
+                        + "       \"applicationId\": \"%s\",\n"
+                        + "       \"entityId\": \"%s\"\n"
+                        + "     }\n"
+                        + "   ]\n"
+                        + "}\n",
+                givenBulkId,
+                givenCallbackData,
+                givenDay,
+                givenFromHour,
+                givenFromMinute,
+                givenToHour,
+                givenToMinute,
+                givenMessageId,
+                givenTo,
+                givenFrom,
+                givenIntermediateReport,
+                givenNotifyUrl,
+                givenSendAt,
+                givenContentId,
+                givenText,
+                givenValidityPeriod,
+                givenTitle,
+                givenApplicationId,
+                givenEntityId);
 
-        setUpSuccessPostRequest(
-            ADVANCED,
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(ADVANCED, expectedRequest, givenResponse);
 
         MmsApi api = new MmsApi(getApiClient());
 
         MmsAdvancedRequest request = new MmsAdvancedRequest()
-            .bulkId(givenBulkId)
-            .messages(List.of(new MmsAdvancedMessage()
-                                  .callbackData(givenCallbackData)
-                                  .deliveryTimeWindow(new MmsDeliveryTimeWindow()
-                                                          .days(List.of(givenDay))
-                                                          .from(new MmsDeliveryTime()
-                                                                    .hour(givenFromHour)
-                                                                    .minute(givenFromMinute)
-                                                          )
-                                                          .to(new MmsDeliveryTime()
-                                                                  .hour(givenToHour)
-                                                                  .minute(givenToMinute)
-                                                          )
-                                  )
-                                  .addDestinationsItem(new MmsDestination()
-                                                           .messageId(givenMessageId)
-                                                           .to(givenTo)
-                                  ).from(givenFrom)
-                                  .intermediateReport(givenIntermediateReport)
-                                  .notifyUrl(givenNotifyUrl)
-                                  .sendAt(givenSendAtDate)
-                                  .messageSegments(List.of(
-                                      new MmsAdvancedMessageSegment()
-                                          .contentId(givenContentId)
-                                          .text(givenText)
-                                  ))
-                                  .validityPeriod(givenValidityPeriod)
-                                  .title(givenTitle)
-                                  .applicationId(givenApplicationId)
-                                  .entityId(givenEntityId)
-                      )
-            );
+                .bulkId(givenBulkId)
+                .messages(List.of(new MmsAdvancedMessage()
+                        .callbackData(givenCallbackData)
+                        .deliveryTimeWindow(new MmsDeliveryTimeWindow()
+                                .days(List.of(givenDay))
+                                .from(new MmsDeliveryTime().hour(givenFromHour).minute(givenFromMinute))
+                                .to(new MmsDeliveryTime().hour(givenToHour).minute(givenToMinute)))
+                        .addDestinationsItem(
+                                new MmsDestination().messageId(givenMessageId).to(givenTo))
+                        .from(givenFrom)
+                        .intermediateReport(givenIntermediateReport)
+                        .notifyUrl(givenNotifyUrl)
+                        .sendAt(givenSendAtDate)
+                        .messageSegments(List.of(new MmsAdvancedMessageSegment()
+                                .contentId(givenContentId)
+                                .text(givenText)))
+                        .validityPeriod(givenValidityPeriod)
+                        .title(givenTitle)
+                        .applicationId(givenApplicationId)
+                        .entityId(givenEntityId)));
 
         Consumer<MmsSendResult> assertions = (response) -> {
             then(response).isNotNull();
@@ -235,53 +216,66 @@ class MmsApiTest extends ApiTest {
         String givenEntityId = "string";
         String givenApplicationId = "string";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"results\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"bulkId\": \"%s\",\n" +
-                                                 "      \"messageId\": \"%s\",\n" +
-                                                 "      \"to\": \"%s\",\n" +
-                                                 "      \"from\": \"%s\",\n" +
-                                                 "      \"sentAt\": \"%s\",\n" +
-                                                 "      \"doneAt\": \"%s\",\n" +
-                                                 "      \"mmsCount\": %d,\n" +
-                                                 "      \"mccMnc\": \"%s\",\n" +
-                                                 "      \"callbackData\": \"%s\",\n" +
-                                                 "      \"price\": {\n" +
-                                                 "        \"pricePerMessage\": %f,\n" +
-                                                 "        \"currency\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"status\": {\n" +
-                                                 "        \"groupId\": %d,\n" +
-                                                 "        \"groupName\": \"%s\",\n" +
-                                                 "        \"id\": %d,\n" +
-                                                 "        \"name\": \"%s\",\n" +
-                                                 "        \"description\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"error\": {\n" +
-                                                 "        \"groupId\": %d,\n" +
-                                                 "        \"groupName\": \"%s\",\n" +
-                                                 "        \"id\": %d,\n" +
-                                                 "        \"name\": \"%s\",\n" +
-                                                 "        \"description\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"entityId\": \"%s\",\n" +
-                                                 "      \"applicationId\": \"%s\"\n" +
-                                                 "    }\n" +
-                                                 "  ]\n" +
-                                                 "}\n",
-                                             givenBulkId, givenMessageId, givenTo, givenFrom, givenSentAt, givenDoneAt, givenMmsCount, givenMccMnc,
-                                             givenCallbackData, givenPricePerMessage, givenCurrency,
-                                             givenGroupId, givenGroupName, givenId, givenName, givenDescription,
-                                             givenErrorGroupId, givenErrorGroupName, givenErrorId, givenErrorName, givenErrorDescription,
-                                             givenEntityId, givenApplicationId
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"bulkId\": \"%s\",\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"from\": \"%s\",\n"
+                        + "      \"sentAt\": \"%s\",\n"
+                        + "      \"doneAt\": \"%s\",\n"
+                        + "      \"mmsCount\": %d,\n"
+                        + "      \"mccMnc\": \"%s\",\n"
+                        + "      \"callbackData\": \"%s\",\n"
+                        + "      \"price\": {\n"
+                        + "        \"pricePerMessage\": %f,\n"
+                        + "        \"currency\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"error\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"entityId\": \"%s\",\n"
+                        + "      \"applicationId\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenBulkId,
+                givenMessageId,
+                givenTo,
+                givenFrom,
+                givenSentAt,
+                givenDoneAt,
+                givenMmsCount,
+                givenMccMnc,
+                givenCallbackData,
+                givenPricePerMessage,
+                givenCurrency,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenErrorGroupId,
+                givenErrorGroupName,
+                givenErrorId,
+                givenErrorName,
+                givenErrorDescription,
+                givenEntityId,
+                givenApplicationId);
 
-        setUpSuccessGetRequest(
-            REPORTS,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(REPORTS, Map.of(), givenResponse);
 
         MmsApi api = new MmsApi(getApiClient());
 
@@ -327,37 +321,31 @@ class MmsApiTest extends ApiTest {
 
     @Test
     void shouldUploadBinary() throws IOException {
-        String givenUploadedContentId = "B44419205B27012D82F3BAD7B7EB37BAC884DBC91685390C3232D2191DC9D5EAF32F119D3530679F9B251AB689B4A60D7C2EB5A5EBB75C305367140D512E6B5D04200E7FFA5E84EAF37590C33F22B973514126755981CB170D86A7506CB38265280478A5B4EF2A7D11E9F24F286E7E315DFB1FF9BFEE08E036584074A1B76F097D9EC77E3FDD0FCC08362243E306F99F";
+        String givenUploadedContentId =
+                "B44419205B27012D82F3BAD7B7EB37BAC884DBC91685390C3232D2191DC9D5EAF32F119D3530679F9B251AB689B4A60D7C2EB5A5EBB75C305367140D512E6B5D04200E7FFA5E84EAF37590C33F22B973514126755981CB170D86A7506CB38265280478A5B4EF2A7D11E9F24F286E7E315DFB1FF9BFEE08E036584074A1B76F097D9EC77E3FDD0FCC08362243E306F99F";
 
         String xContentId = "icon_png";
         String xMediaType = "image/png";
         File body = new File(MmsApiTest.class.getResource("/icon.png").getFile());
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"uploadedContentId\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenUploadedContentId
-        );
+        String givenResponse =
+                String.format("{\n" + "  \"uploadedContentId\": \"%s\"\n" + "}\n", givenUploadedContentId);
 
-        getWireMockServer().givenThat(
-            post(urlPathEqualTo(CONTENT))
-                .withHeader("Authorization", equalTo(getExpectedApiKeyValue()))
-                .withHeader("Content-Type", equalTo(xMediaType))
-                .withHeader("X-Content-Id", equalTo(xContentId))
-                .withHeader("X-Media-Type", equalTo(xMediaType))
-                .withRequestBody(binaryEqualTo(Files.readAllBytes(body.toPath())))
-                .willReturn(aResponse()
-                                .withStatus(200)
-                                .withBody(givenResponse)
-                )
-        );
+        getWireMockServer()
+                .givenThat(post(urlPathEqualTo(CONTENT))
+                        .withHeader("Authorization", equalTo(getExpectedApiKeyValue()))
+                        .withHeader("Content-Type", equalTo(xMediaType))
+                        .withHeader("X-Content-Id", equalTo(xContentId))
+                        .withHeader("X-Media-Type", equalTo(xMediaType))
+                        .withRequestBody(binaryEqualTo(Files.readAllBytes(body.toPath())))
+                        .willReturn(aResponse().withStatus(200).withBody(givenResponse)));
 
         MmsApi api = new MmsApi(getApiClient());
 
         Consumer<MmsUploadBinaryResult> assertions = response -> then(response)
-            .isNotNull()
-            .extracting(MmsUploadBinaryResult::getUploadedContentId)
-            .isEqualTo(givenUploadedContentId);
+                .isNotNull()
+                .extracting(MmsUploadBinaryResult::getUploadedContentId)
+                .isEqualTo(givenUploadedContentId);
 
         var call = api.uploadBinary(xContentId, xMediaType, body);
         testSuccessfulCall(call::execute, assertions);
@@ -378,34 +366,38 @@ class MmsApiTest extends ApiTest {
         String givenEntityId = "string";
         String givenApplicationId = "string";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"results\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"messageId\": \"%s\",\n" +
-                                                 "      \"to\": \"%s\",\n" +
-                                                 "      \"from\": \"%s\",\n" +
-                                                 "      \"message\": \"%s\",\n" +
-                                                 "      \"receivedAt\": \"%s\",\n" +
-                                                 "      \"mmsCount\": %s,\n" +
-                                                 "      \"callbackData\": \"%s\",\n" +
-                                                 "      \"price\": {\n" +
-                                                 "        \"pricePerMessage\": %f,\n" +
-                                                 "        \"currency\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"entityId\": \"%s\",\n" +
-                                                 "      \"applicationId\": \"%s\"\n" +
-                                                 "    }\n" +
-                                                 "  ]\n" +
-                                                 "}\n",
-                                             givenMessageId, givenTo, givenFrom, givenMessage, givenReceivedAt, givenMmsCount, givenCallbackData,
-                                             givenPricePerMessage, givenCurrency, givenEntityId, givenApplicationId
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"from\": \"%s\",\n"
+                        + "      \"message\": \"%s\",\n"
+                        + "      \"receivedAt\": \"%s\",\n"
+                        + "      \"mmsCount\": %s,\n"
+                        + "      \"callbackData\": \"%s\",\n"
+                        + "      \"price\": {\n"
+                        + "        \"pricePerMessage\": %f,\n"
+                        + "        \"currency\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"entityId\": \"%s\",\n"
+                        + "      \"applicationId\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenMessageId,
+                givenTo,
+                givenFrom,
+                givenMessage,
+                givenReceivedAt,
+                givenMmsCount,
+                givenCallbackData,
+                givenPricePerMessage,
+                givenCurrency,
+                givenEntityId,
+                givenApplicationId);
 
-        setUpSuccessGetRequest(
-            INBOX_REPORTS,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(INBOX_REPORTS, Map.of(), givenResponse);
 
         MmsApi api = new MmsApi(getApiClient());
 
@@ -463,83 +455,81 @@ class MmsApiTest extends ApiTest {
         String givenEntityId = "string";
         String givenApplicationId = "string";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"results\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"bulkId\": \"%s\",\n" +
-                                                 "      \"messageId\": \"%s\",\n" +
-                                                 "      \"to\": \"%s\",\n" +
-                                                 "      \"from\": \"%s\",\n" +
-                                                 "      \"title\": \"%s\",\n" +
-                                                 "      \"messageSegments\": [\n" +
-                                                 "        {\n" +
-                                                 "          \"contentId\": \"%s\",\n" +
-                                                 "          \"text\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        {\n" +
-                                                 "          \"contentId\": \"%s\",\n" +
-                                                 "          \"contentType\": \"%s\",\n" +
-                                                 "          \"contentUrl\": \"%s\"\n" +
-                                                 "        },\n" +
-                                                 "        {\n" +
-                                                 "          \"contentId\": \"%s\",\n" +
-                                                 "          \"text\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "      ],\n" +
-                                                 "      \"sentAt\": \"%s\",\n" +
-                                                 "      \"doneAt\": \"%s\",\n" +
-                                                 "      \"mmsCount\": %d,\n" +
-                                                 "      \"mccMnc\": \"%s\",\n" +
-                                                 "      \"price\": {\n" +
-                                                 "        \"pricePerMessage\": %f,\n" +
-                                                 "        \"currency\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"status\": {\n" +
-                                                 "        \"groupId\": %d,\n" +
-                                                 "        \"groupName\": \"%s\",\n" +
-                                                 "        \"id\": %d,\n" +
-                                                 "        \"name\": \"%s\",\n" +
-                                                 "        \"description\": \"%s\"\n" +
-                                                 "      },\n" +
-                                                 "      \"entityId\": \"%s\",\n" +
-                                                 "      \"applicationId\": \"%s\"\n" +
-                                                 "    }\n" +
-                                                 "  ]\n" +
-                                                 "}\n",
-                                             givenBulkId,
-                                             givenMessageId,
-                                             givenTo,
-                                             givenFrom,
-                                             givenTitle,
-                                             givenContentId,
-                                             givenText,
-                                             givenContentId2,
-                                             givenContentType2,
-                                             givenContentUrl2,
-                                             givenContentId3,
-                                             givenText3,
-                                             givenSentAt,
-                                             givenDoneAt,
-                                             givenMmsCount,
-                                             givenMccMnc,
-                                             givenPricePerMessage,
-                                             givenCurrency,
-                                             givenGroupId,
-                                             givenGroupName,
-                                             givenId,
-                                             givenName,
-                                             givenDescription,
-                                             givenEntityId,
-                                             givenApplicationId);
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"bulkId\": \"%s\",\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"from\": \"%s\",\n"
+                        + "      \"title\": \"%s\",\n"
+                        + "      \"messageSegments\": [\n"
+                        + "        {\n"
+                        + "          \"contentId\": \"%s\",\n"
+                        + "          \"text\": \"%s\"\n"
+                        + "        },\n"
+                        + "        {\n"
+                        + "          \"contentId\": \"%s\",\n"
+                        + "          \"contentType\": \"%s\",\n"
+                        + "          \"contentUrl\": \"%s\"\n"
+                        + "        },\n"
+                        + "        {\n"
+                        + "          \"contentId\": \"%s\",\n"
+                        + "          \"text\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"sentAt\": \"%s\",\n"
+                        + "      \"doneAt\": \"%s\",\n"
+                        + "      \"mmsCount\": %d,\n"
+                        + "      \"mccMnc\": \"%s\",\n"
+                        + "      \"price\": {\n"
+                        + "        \"pricePerMessage\": %f,\n"
+                        + "        \"currency\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"entityId\": \"%s\",\n"
+                        + "      \"applicationId\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenBulkId,
+                givenMessageId,
+                givenTo,
+                givenFrom,
+                givenTitle,
+                givenContentId,
+                givenText,
+                givenContentId2,
+                givenContentType2,
+                givenContentUrl2,
+                givenContentId3,
+                givenText3,
+                givenSentAt,
+                givenDoneAt,
+                givenMmsCount,
+                givenMccMnc,
+                givenPricePerMessage,
+                givenCurrency,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenEntityId,
+                givenApplicationId);
 
         setUpSuccessGetRequest(
-            LOGS,
-            Map.of(
-                "bulkId", "BULK-ID-123-xyz",
-                "messageId", "MESSAGE-ID-123-xyz"
-            ),
-            givenResponse
-        );
+                LOGS,
+                Map.of(
+                        "bulkId", "BULK-ID-123-xyz",
+                        "messageId", "MESSAGE-ID-123-xyz"),
+                givenResponse);
 
         MmsApi api = new MmsApi(getApiClient());
 
@@ -582,9 +572,7 @@ class MmsApiTest extends ApiTest {
             then(result.getApplicationId()).isEqualTo(givenApplicationId);
         };
 
-        var call = api.getOutboundMmsMessageLogs()
-                      .bulkId("BULK-ID-123-xyz")
-                      .messageId("MESSAGE-ID-123-xyz");
+        var call = api.getOutboundMmsMessageLogs().bulkId("BULK-ID-123-xyz").messageId("MESSAGE-ID-123-xyz");
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -594,77 +582,74 @@ class MmsApiTest extends ApiTest {
 
     @Test
     void shouldParseOutboundMmsMessageReport() {
-        var givenRequest = "{\n" +
-            "  \"results\": [\n" +
-            "    {\n" +
-            "      \"bulkId\": \"BULK-ID-123-xyz\",\n" +
-            "      \"messageId\": \"MESSAGE-ID-123-xyz\",\n" +
-            "      \"to\": \"41793026727\",\n" +
-            "      \"sentAt\": \"2019-11-09T16:00:00.000+0000\",\n" +
-            "      \"doneAt\": \"2019-11-09T16:00:00.000+0000\",\n" +
-            "      \"smsCount\": 1,\n" +
-            "      \"mccMnc\": 90134,\n" +
-            "      \"callbackData\": \"callbackData\",\n" +
-            "      \"price\": {\n" +
-            "        \"pricePerMessage\": 0.01,\n" +
-            "        \"currency\": \"EUR\"\n" +
-            "      },\n" +
-            "      \"status\": {\n" +
-            "        \"groupId\": 3,\n" +
-            "        \"groupName\": \"DELIVERED\",\n" +
-            "        \"id\": 5,\n" +
-            "        \"name\": \"DELIVERED_TO_HANDSET\",\n" +
-            "        \"description\": \"Message delivered to handset\"\n" +
-            "      },\n" +
-            "      \"error\": {\n" +
-            "        \"groupId\": 0,\n" +
-            "        \"groupName\": \"Ok\",\n" +
-            "        \"id\": 0,\n" +
-            "        \"name\": \"NO_ERROR\",\n" +
-            "        \"description\": \"No Error\",\n" +
-            "        \"permanent\": false\n" +
-            "      },\n" +
-            "      \"entityId\": \"entityId\",\n" +
-            "      \"applicationId\": \"applicationId\"\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"bulkId\": \"BULK-ID-123-xyz\",\n" +
-            "      \"messageId\": \"12db39c3-7822-4e72-a3ec-c87442c0ffc5\",\n" +
-            "      \"to\": \"41793026834\",\n" +
-            "      \"sentAt\": \"2019-11-09T17:00:00.000+0000\",\n" +
-            "      \"doneAt\": \"2019-11-09T17:00:00.000+0000\",\n" +
-            "      \"smsCount\": 1,\n" +
-            "      \"mccMnc\": 90134,\n" +
-            "      \"callbackData\": \"callbackData\",\n" +
-            "      \"price\": {\n" +
-            "        \"pricePerMessage\": 0.01,\n" +
-            "        \"currency\": \"EUR\"\n" +
-            "      },\n" +
-            "      \"status\": {\n" +
-            "        \"groupId\": 3,\n" +
-            "        \"groupName\": \"DELIVERED\",\n" +
-            "        \"id\": 5,\n" +
-            "        \"name\": \"DELIVERED_TO_HANDSET\",\n" +
-            "        \"description\": \"Message delivered to handset\"\n" +
-            "      },\n" +
-            "      \"error\": {\n" +
-            "        \"groupId\": 0,\n" +
-            "        \"groupName\": \"Ok\",\n" +
-            "        \"id\": 0,\n" +
-            "        \"name\": \"NO_ERROR\",\n" +
-            "        \"description\": \"No Error\",\n" +
-            "        \"permanent\": false\n" +
-            "      },\n" +
-            "      \"entityId\": \"entityId\",\n" +
-            "      \"applicationId\": \"applicationId\"\n" +
-            "    }\n" +
-            "  ]\n" +
-            "}\n";
+        var givenRequest = "{\n" + "  \"results\": [\n"
+                + "    {\n"
+                + "      \"bulkId\": \"BULK-ID-123-xyz\",\n"
+                + "      \"messageId\": \"MESSAGE-ID-123-xyz\",\n"
+                + "      \"to\": \"41793026727\",\n"
+                + "      \"sentAt\": \"2019-11-09T16:00:00.000+0000\",\n"
+                + "      \"doneAt\": \"2019-11-09T16:00:00.000+0000\",\n"
+                + "      \"smsCount\": 1,\n"
+                + "      \"mccMnc\": 90134,\n"
+                + "      \"callbackData\": \"callbackData\",\n"
+                + "      \"price\": {\n"
+                + "        \"pricePerMessage\": 0.01,\n"
+                + "        \"currency\": \"EUR\"\n"
+                + "      },\n"
+                + "      \"status\": {\n"
+                + "        \"groupId\": 3,\n"
+                + "        \"groupName\": \"DELIVERED\",\n"
+                + "        \"id\": 5,\n"
+                + "        \"name\": \"DELIVERED_TO_HANDSET\",\n"
+                + "        \"description\": \"Message delivered to handset\"\n"
+                + "      },\n"
+                + "      \"error\": {\n"
+                + "        \"groupId\": 0,\n"
+                + "        \"groupName\": \"Ok\",\n"
+                + "        \"id\": 0,\n"
+                + "        \"name\": \"NO_ERROR\",\n"
+                + "        \"description\": \"No Error\",\n"
+                + "        \"permanent\": false\n"
+                + "      },\n"
+                + "      \"entityId\": \"entityId\",\n"
+                + "      \"applicationId\": \"applicationId\"\n"
+                + "    },\n"
+                + "    {\n"
+                + "      \"bulkId\": \"BULK-ID-123-xyz\",\n"
+                + "      \"messageId\": \"12db39c3-7822-4e72-a3ec-c87442c0ffc5\",\n"
+                + "      \"to\": \"41793026834\",\n"
+                + "      \"sentAt\": \"2019-11-09T17:00:00.000+0000\",\n"
+                + "      \"doneAt\": \"2019-11-09T17:00:00.000+0000\",\n"
+                + "      \"smsCount\": 1,\n"
+                + "      \"mccMnc\": 90134,\n"
+                + "      \"callbackData\": \"callbackData\",\n"
+                + "      \"price\": {\n"
+                + "        \"pricePerMessage\": 0.01,\n"
+                + "        \"currency\": \"EUR\"\n"
+                + "      },\n"
+                + "      \"status\": {\n"
+                + "        \"groupId\": 3,\n"
+                + "        \"groupName\": \"DELIVERED\",\n"
+                + "        \"id\": 5,\n"
+                + "        \"name\": \"DELIVERED_TO_HANDSET\",\n"
+                + "        \"description\": \"Message delivered to handset\"\n"
+                + "      },\n"
+                + "      \"error\": {\n"
+                + "        \"groupId\": 0,\n"
+                + "        \"groupName\": \"Ok\",\n"
+                + "        \"id\": 0,\n"
+                + "        \"name\": \"NO_ERROR\",\n"
+                + "        \"description\": \"No Error\",\n"
+                + "        \"permanent\": false\n"
+                + "      },\n"
+                + "      \"entityId\": \"entityId\",\n"
+                + "      \"applicationId\": \"applicationId\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}\n";
 
-        MmsWebhookOutboundReportResponse reportResponse = json.deserialize(
-            givenRequest,
-            MmsWebhookOutboundReportResponse.class
-        );
+        MmsWebhookOutboundReportResponse reportResponse =
+                json.deserialize(givenRequest, MmsWebhookOutboundReportResponse.class);
         then(reportResponse.getResults()).isNotNull();
         then(reportResponse.getResults().size()).isEqualTo(2);
 
@@ -683,50 +668,47 @@ class MmsApiTest extends ApiTest {
 
     @Test
     void shouldParseInboundMmsMessages() {
-        var givenRequest = "{\n" +
-            "   \"results\": [\n" +
-            "     {\n" +
-            "       \"entityId\": \"entityId\",\n" +
-            "       \"applicationId\": \"applicationId\",\n" +
-            "       \"from\": \"385916242493\",\n" +
-            "       \"to\": \"385921004026\",\n" +
-            "       \"receivedAt\": \"2016-10-06T09:28:39.220+0000\",\n" +
-            "       \"messageId\": \"817790313235066447\",\n" +
-            "       \"pairedMessageId\": null,\n" +
-            "       \"callbackData\": null,\n" +
-            "       \"userAgent\": \"iPhone_12_Pro_Max_A2342\",\n" +
-            "       \"message\": [\n" +
-            "         {\n" +
-            "           \"contentType\": \"image/jpeg\",\n" +
-            "           \"url\": \"https://examplelink.com/123456\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "           \"contentType\": \"text/plain\",\n" +
-            "           \"value\": \"This is message text\"\n" +
-            "         }\n" +
-            "       ],\n" +
-            "       \"group\": [\n" +
-            "         {\n" +
-            "            \"to\": \"abc\"\n" +
-            "         },\n" +
-            "         {\n" +
-            "            \"cc\": \"def\"\n" +
-            "         }\n" +
-            "       ],\n" +
-            "       \"price\": {\n" +
-            "         \"pricePerMessage\": 0,\n" +
-            "         \"currency\": \"EUR\"\n" +
-            "       }\n" +
-            "     }\n" +
-            "   ],\n" +
-            "   \"messageCount\": 1,\n" +
-            "   \"pendingMessageCount\": 0\n" +
-            " }\n";
+        var givenRequest = "{\n" + "   \"results\": [\n"
+                + "     {\n"
+                + "       \"entityId\": \"entityId\",\n"
+                + "       \"applicationId\": \"applicationId\",\n"
+                + "       \"from\": \"385916242493\",\n"
+                + "       \"to\": \"385921004026\",\n"
+                + "       \"receivedAt\": \"2016-10-06T09:28:39.220+0000\",\n"
+                + "       \"messageId\": \"817790313235066447\",\n"
+                + "       \"pairedMessageId\": null,\n"
+                + "       \"callbackData\": null,\n"
+                + "       \"userAgent\": \"iPhone_12_Pro_Max_A2342\",\n"
+                + "       \"message\": [\n"
+                + "         {\n"
+                + "           \"contentType\": \"image/jpeg\",\n"
+                + "           \"url\": \"https://examplelink.com/123456\"\n"
+                + "         },\n"
+                + "         {\n"
+                + "           \"contentType\": \"text/plain\",\n"
+                + "           \"value\": \"This is message text\"\n"
+                + "         }\n"
+                + "       ],\n"
+                + "       \"group\": [\n"
+                + "         {\n"
+                + "            \"to\": \"abc\"\n"
+                + "         },\n"
+                + "         {\n"
+                + "            \"cc\": \"def\"\n"
+                + "         }\n"
+                + "       ],\n"
+                + "       \"price\": {\n"
+                + "         \"pricePerMessage\": 0,\n"
+                + "         \"currency\": \"EUR\"\n"
+                + "       }\n"
+                + "     }\n"
+                + "   ],\n"
+                + "   \"messageCount\": 1,\n"
+                + "   \"pendingMessageCount\": 0\n"
+                + " }\n";
 
-        MmsWebhookInboundReportResponse reportResponse = json.deserialize(
-            givenRequest,
-            MmsWebhookInboundReportResponse.class
-        );
+        MmsWebhookInboundReportResponse reportResponse =
+                json.deserialize(givenRequest, MmsWebhookInboundReportResponse.class);
         then(reportResponse.getResults()).isNotNull();
 
         then(reportResponse.getResults().get(0).getClass()).isEqualTo(MmsWebhookInboundReport.class);
@@ -739,5 +721,4 @@ class MmsApiTest extends ApiTest {
         then(result.getGroup().get(0).getClass()).isEqualTo(MmsWebhookInboundDestination.class);
         then(result.getGroup().get(1).getClass()).isEqualTo(MmsWebhookInboundDestination.class);
     }
-
 }

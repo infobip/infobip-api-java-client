@@ -1,9 +1,10 @@
 package com.infobip.api;
 
+import static com.infobip.api.util.ResponseStatuses.*;
+import static org.assertj.core.api.BDDAssertions.then;
+
 import com.infobip.JSON;
 import com.infobip.model.*;
-import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,9 +14,7 @@ import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-
-import static com.infobip.api.util.ResponseStatuses.*;
-import static org.assertj.core.api.BDDAssertions.then;
+import org.junit.jupiter.api.Test;
 
 class EmailApiTest extends ApiTest {
 
@@ -41,27 +40,19 @@ class EmailApiTest extends ApiTest {
         Integer givenAssignedDomainCount = 1;
         String givenStatus = "ASSIGNABLE";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"result\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"ipAddress\": \"%s\",\n" +
-                                                 "      \"dedicated\": %b,\n" +
-                                                 "      \"assignedDomainCount\": %d,\n" +
-                                                 "      \"status\": \"%s\"\n" +
-                                                 "    }\n" +
-                                                 "  ]\n" +
-                                                 "}\n",
-                                             givenIpAddress,
-                                             givenDedicated,
-                                             givenAssignedDomainCount,
-                                             givenStatus
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"result\": [\n"
+                        + "    {\n"
+                        + "      \"ipAddress\": \"%s\",\n"
+                        + "      \"dedicated\": %b,\n"
+                        + "      \"assignedDomainCount\": %d,\n"
+                        + "      \"status\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenIpAddress, givenDedicated, givenAssignedDomainCount, givenStatus);
 
-        setUpSuccessGetRequest(
-            DOMAIN_IPS,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(DOMAIN_IPS, Map.of(), givenResponse);
 
         EmailApi api = new EmailApi(getApiClient());
 
@@ -88,31 +79,18 @@ class EmailApiTest extends ApiTest {
         String givenDomainName = "newDomain.com";
         String givenIpAddress = "11.11.11.1";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"result\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenResult
-        );
+        String givenResponse = String.format("{\n" + "  \"result\": \"%s\"\n" + "}\n", givenResult);
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"domainName\": \"%s\",\n" +
-                                                   "  \"ipAddress\": \"%s\"\n" +
-                                                   "}\n",
-                                               givenDomainName,
-                                               givenIpAddress
-        );
+        String expectedRequest = String.format(
+                "{\n" + "  \"domainName\": \"%s\",\n" + "  \"ipAddress\": \"%s\"\n" + "}\n",
+                givenDomainName, givenIpAddress);
 
-        setUpSuccessPostRequest(
-            DOMAIN_IPS,
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(DOMAIN_IPS, expectedRequest, givenResponse);
 
         EmailApi api = new EmailApi(getApiClient());
 
-        EmailDomainIpRequest request = new EmailDomainIpRequest()
-            .domainName(givenDomainName)
-            .ipAddress(givenIpAddress);
+        EmailDomainIpRequest request =
+                new EmailDomainIpRequest().domainName(givenDomainName).ipAddress(givenIpAddress);
 
         Consumer<EmailSimpleApiResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -130,21 +108,15 @@ class EmailApiTest extends ApiTest {
         String givenDomainName = "newDomain.com";
         String givenIpAddress = "11.11.11.1";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"result\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenResult
-        );
+        String givenResponse = String.format("{\n" + "  \"result\": \"%s\"\n" + "}\n", givenResult);
 
         setUpNoRequestBodyDeleteRequest(
-            DOMAIN_IPS,
-            Map.of(
-                "domainName", givenDomainName,
-                "ipAddress", givenIpAddress
-            ),
-            givenResponse,
-            200
-        );
+                DOMAIN_IPS,
+                Map.of(
+                        "domainName", givenDomainName,
+                        "ipAddress", givenIpAddress),
+                givenResponse,
+                200);
 
         EmailApi api = new EmailApi(getApiClient());
 
@@ -161,7 +133,8 @@ class EmailApiTest extends ApiTest {
     @Test
     void shouldAddDomain() {
         String givenDomainName = "newDomain.com";
-        EmailAddDomainRequest.DkimKeyLengthEnum givenDkimKeyLength = EmailAddDomainRequest.DkimKeyLengthEnum.NUMBER_1024;
+        EmailAddDomainRequest.DkimKeyLengthEnum givenDkimKeyLength =
+                EmailAddDomainRequest.DkimKeyLengthEnum.NUMBER_1024;
 
         Long givenDomainId = 1L;
         Boolean givenActive = false;
@@ -173,68 +146,58 @@ class EmailApiTest extends ApiTest {
         Long givenTargetedDailyTraffic = 15L;
         String givenReturnPathAddress = "pathAddress";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"domainId\": %d,\n" +
-                                                 "  \"domainName\": \"%s\",\n" +
-                                                 "  \"active\": %b,\n" +
-                                                 "  \"tracking\": {\n" +
-                                                 "    \"clicks\": %b,\n" +
-                                                 "    \"opens\": %b,\n" +
-                                                 "    \"unsubscribe\": %b\n" +
-                                                 "  },\n" +
-                                                 "  \"dnsRecords\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"recordType\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"expectedValue\": \"%s\",\n" +
-                                                 "      \"verified\": %b\n" +
-                                                 "    }\n" +
-                                                 "  ],\n" +
-                                                 "  \"blocked\": %b,\n" +
-                                                 "  \"createdAt\": \"%s\",\n" +
-                                                 "  \"returnPathAddress\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenDomainId,
-                                             givenDomainName,
-                                             givenActive,
-                                             givenTracking,
-                                             givenTracking,
-                                             givenTracking,
-                                             givenDnsRecords,
-                                             givenDnsRecords,
-                                             givenDnsRecords,
-                                             givenVerified,
-                                             givenBlocked,
-                                             givenCreatedAt,
-                                             givenReturnPathAddress
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"domainId\": %d,\n"
+                        + "  \"domainName\": \"%s\",\n"
+                        + "  \"active\": %b,\n"
+                        + "  \"tracking\": {\n"
+                        + "    \"clicks\": %b,\n"
+                        + "    \"opens\": %b,\n"
+                        + "    \"unsubscribe\": %b\n"
+                        + "  },\n"
+                        + "  \"dnsRecords\": [\n"
+                        + "    {\n"
+                        + "      \"recordType\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"expectedValue\": \"%s\",\n"
+                        + "      \"verified\": %b\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"blocked\": %b,\n"
+                        + "  \"createdAt\": \"%s\",\n"
+                        + "  \"returnPathAddress\": \"%s\"\n"
+                        + "}\n",
+                givenDomainId,
+                givenDomainName,
+                givenActive,
+                givenTracking,
+                givenTracking,
+                givenTracking,
+                givenDnsRecords,
+                givenDnsRecords,
+                givenDnsRecords,
+                givenVerified,
+                givenBlocked,
+                givenCreatedAt,
+                givenReturnPathAddress);
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"domainName\": \"%s\",\n" +
-                                                   "  \"dkimKeyLength\": %s,\n" +
-                                                   "  \"targetedDailyTraffic\": %d,\n" +
-                                                   "  \"returnPathAddress\": \"%s\"\n" +
-                                                   "}\n",
-                                               givenDomainName,
-                                               givenDkimKeyLength,
-                                               givenTargetedDailyTraffic,
-                                               givenReturnPathAddress
-        );
+        String expectedRequest = String.format(
+                "{\n" + "  \"domainName\": \"%s\",\n"
+                        + "  \"dkimKeyLength\": %s,\n"
+                        + "  \"targetedDailyTraffic\": %d,\n"
+                        + "  \"returnPathAddress\": \"%s\"\n"
+                        + "}\n",
+                givenDomainName, givenDkimKeyLength, givenTargetedDailyTraffic, givenReturnPathAddress);
 
-        setUpSuccessPostRequest(
-            DOMAINS,
-            Map.of(),
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPostRequest(DOMAINS, Map.of(), expectedRequest, givenResponse);
 
         EmailApi api = new EmailApi(getApiClient());
 
         EmailAddDomainRequest request = new EmailAddDomainRequest()
-            .domainName(givenDomainName)
-            .dkimKeyLength(givenDkimKeyLength)
-            .targetedDailyTraffic(givenTargetedDailyTraffic)
-            .returnPathAddress(givenReturnPathAddress);
+                .domainName(givenDomainName)
+                .dkimKeyLength(givenDkimKeyLength)
+                .targetedDailyTraffic(givenTargetedDailyTraffic)
+                .returnPathAddress(givenReturnPathAddress);
 
         Consumer<EmailDomainResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -274,59 +237,54 @@ class EmailApiTest extends ApiTest {
         Boolean givenBlocked = false;
         String givenCreatedAt = "2022-05-05T17:32:28.777+01:00";
 
-        String givenResponse = String.format("{\n" +
-                                                 "    \"paging\": {\n" +
-                                                 "    \"page\": %d,\n" +
-                                                 "    \"size\": %d,\n" +
-                                                 "    \"totalPages\": %d,\n" +
-                                                 "    \"totalResults\": %d\n" +
-                                                 "    },\n" +
-                                                 "    \"results\": [\n" +
-                                                 "        {\n" +
-                                                 "          \"domainId\": %d,\n" +
-                                                 "          \"domainName\": \"%s\",\n" +
-                                                 "          \"active\": %b,\n" +
-                                                 "          \"tracking\": {\n" +
-                                                 "            \"clicks\": %b,\n" +
-                                                 "            \"opens\": %b,\n" +
-                                                 "            \"unsubscribe\": %b\n" +
-                                                 "          },\n" +
-                                                 "          \"dnsRecords\": [\n" +
-                                                 "            {\n" +
-                                                 "              \"recordType\": \"%s\",\n" +
-                                                 "              \"name\": \"%s\",\n" +
-                                                 "              \"expectedValue\": \"%s\",\n" +
-                                                 "              \"verified\": %b\n" +
-                                                 "            }\n" +
-                                                 "          ],\n" +
-                                                 "          \"blocked\": %b,\n" +
-                                                 "          \"createdAt\": \"%s\"\n" +
-                                                 "        }\n" +
-                                                 "    ]\n" +
-                                                 "}\n",
-                                             givenPaging,
-                                             givenPaging,
-                                             givenPaging,
-                                             givenPaging,
-                                             givenDomainId,
-                                             givenDomainName,
-                                             givenActive,
-                                             givenTracking,
-                                             givenTracking,
-                                             givenTracking,
-                                             givenDnsRecords,
-                                             givenDnsRecords,
-                                             givenDnsRecords,
-                                             givenVerified,
-                                             givenBlocked,
-                                             givenCreatedAt
-        );
+        String givenResponse = String.format(
+                "{\n" + "    \"paging\": {\n"
+                        + "    \"page\": %d,\n"
+                        + "    \"size\": %d,\n"
+                        + "    \"totalPages\": %d,\n"
+                        + "    \"totalResults\": %d\n"
+                        + "    },\n"
+                        + "    \"results\": [\n"
+                        + "        {\n"
+                        + "          \"domainId\": %d,\n"
+                        + "          \"domainName\": \"%s\",\n"
+                        + "          \"active\": %b,\n"
+                        + "          \"tracking\": {\n"
+                        + "            \"clicks\": %b,\n"
+                        + "            \"opens\": %b,\n"
+                        + "            \"unsubscribe\": %b\n"
+                        + "          },\n"
+                        + "          \"dnsRecords\": [\n"
+                        + "            {\n"
+                        + "              \"recordType\": \"%s\",\n"
+                        + "              \"name\": \"%s\",\n"
+                        + "              \"expectedValue\": \"%s\",\n"
+                        + "              \"verified\": %b\n"
+                        + "            }\n"
+                        + "          ],\n"
+                        + "          \"blocked\": %b,\n"
+                        + "          \"createdAt\": \"%s\"\n"
+                        + "        }\n"
+                        + "    ]\n"
+                        + "}\n",
+                givenPaging,
+                givenPaging,
+                givenPaging,
+                givenPaging,
+                givenDomainId,
+                givenDomainName,
+                givenActive,
+                givenTracking,
+                givenTracking,
+                givenTracking,
+                givenDnsRecords,
+                givenDnsRecords,
+                givenDnsRecords,
+                givenVerified,
+                givenBlocked,
+                givenCreatedAt);
 
-        setUpSuccessGetRequest(
-            DOMAINS,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(DOMAINS, Map.of(), givenResponse);
 
         EmailApi api = new EmailApi(getApiClient());
 
@@ -376,45 +334,40 @@ class EmailApiTest extends ApiTest {
         Boolean givenBlocked = false;
         String givenCreatedAt = "2022-05-05T17:32:28.777+01:00";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"domainId\": %d,\n" +
-                                                 "  \"domainName\": \"%s\",\n" +
-                                                 "  \"active\": %b,\n" +
-                                                 "  \"tracking\": {\n" +
-                                                 "    \"clicks\": %b,\n" +
-                                                 "    \"opens\": %b,\n" +
-                                                 "    \"unsubscribe\": %b\n" +
-                                                 "  },\n" +
-                                                 "  \"dnsRecords\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"recordType\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"expectedValue\": \"%s\",\n" +
-                                                 "      \"verified\": %b\n" +
-                                                 "    }\n" +
-                                                 "  ],\n" +
-                                                 "  \"blocked\": %b,\n" +
-                                                 "  \"createdAt\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenDomainId,
-                                             givenDomainName,
-                                             givenActive,
-                                             givenTracking,
-                                             givenTracking,
-                                             givenTracking,
-                                             givenDnsRecords,
-                                             givenDnsRecords,
-                                             givenDnsRecords,
-                                             givenVerified,
-                                             givenBlocked,
-                                             givenCreatedAt
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"domainId\": %d,\n"
+                        + "  \"domainName\": \"%s\",\n"
+                        + "  \"active\": %b,\n"
+                        + "  \"tracking\": {\n"
+                        + "    \"clicks\": %b,\n"
+                        + "    \"opens\": %b,\n"
+                        + "    \"unsubscribe\": %b\n"
+                        + "  },\n"
+                        + "  \"dnsRecords\": [\n"
+                        + "    {\n"
+                        + "      \"recordType\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"expectedValue\": \"%s\",\n"
+                        + "      \"verified\": %b\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"blocked\": %b,\n"
+                        + "  \"createdAt\": \"%s\"\n"
+                        + "}\n",
+                givenDomainId,
+                givenDomainName,
+                givenActive,
+                givenTracking,
+                givenTracking,
+                givenTracking,
+                givenDnsRecords,
+                givenDnsRecords,
+                givenDnsRecords,
+                givenVerified,
+                givenBlocked,
+                givenCreatedAt);
 
-        setUpSuccessGetRequest(
-            DOMAIN.replace("{domainName}", givenDomainName),
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(DOMAIN.replace("{domainName}", givenDomainName), Map.of(), givenResponse);
 
         EmailApi api = new EmailApi(getApiClient());
         Consumer<EmailDomainResponse> assertions = (response) -> {
@@ -447,11 +400,7 @@ class EmailApiTest extends ApiTest {
         String givenDomainName = "newDomain.com";
         int givenStatusCode = 204;
 
-        setUpNoResponseBodyDeleteRequest(
-            DOMAIN.replace("{domainName}", givenDomainName),
-            Map.of(),
-            givenStatusCode
-        );
+        setUpNoResponseBodyDeleteRequest(DOMAIN.replace("{domainName}", givenDomainName), Map.of(), givenStatusCode);
 
         EmailApi api = new EmailApi(getApiClient());
 
@@ -471,61 +420,52 @@ class EmailApiTest extends ApiTest {
         Boolean givenBlocked = false;
         String givenCreatedAt = "2022-05-05T17:32:28.777+01:00";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"domainId\": %d,\n" +
-                                                 "  \"domainName\": \"%s\",\n" +
-                                                 "  \"active\": %b,\n" +
-                                                 "  \"tracking\": {\n" +
-                                                 "    \"clicks\": %b,\n" +
-                                                 "    \"opens\": %b,\n" +
-                                                 "    \"unsubscribe\": %b\n" +
-                                                 "  },\n" +
-                                                 "  \"dnsRecords\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"recordType\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"expectedValue\": \"%s\",\n" +
-                                                 "      \"verified\": %b\n" +
-                                                 "    }\n" +
-                                                 "  ],\n" +
-                                                 "  \"blocked\": %b,\n" +
-                                                 "  \"createdAt\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenDomainId,
-                                             givenDomainName,
-                                             givenActive,
-                                             givenTracking,
-                                             givenTracking,
-                                             givenTracking,
-                                             givenDnsRecords,
-                                             givenDnsRecords,
-                                             givenDnsRecords,
-                                             givenVerified,
-                                             givenBlocked,
-                                             givenCreatedAt
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"domainId\": %d,\n"
+                        + "  \"domainName\": \"%s\",\n"
+                        + "  \"active\": %b,\n"
+                        + "  \"tracking\": {\n"
+                        + "    \"clicks\": %b,\n"
+                        + "    \"opens\": %b,\n"
+                        + "    \"unsubscribe\": %b\n"
+                        + "  },\n"
+                        + "  \"dnsRecords\": [\n"
+                        + "    {\n"
+                        + "      \"recordType\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"expectedValue\": \"%s\",\n"
+                        + "      \"verified\": %b\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"blocked\": %b,\n"
+                        + "  \"createdAt\": \"%s\"\n"
+                        + "}\n",
+                givenDomainId,
+                givenDomainName,
+                givenActive,
+                givenTracking,
+                givenTracking,
+                givenTracking,
+                givenDnsRecords,
+                givenDnsRecords,
+                givenDnsRecords,
+                givenVerified,
+                givenBlocked,
+                givenCreatedAt);
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"open\": %b,\n" +
-                                                   "  \"clicks\": %b,\n" +
-                                                   "  \"unsubscribe\": %b\n" +
-                                                   "}\n",
-                                               givenTracking, givenTracking, givenUnsubscribe
-        );
+        String expectedRequest = String.format(
+                "{\n" + "  \"open\": %b,\n" + "  \"clicks\": %b,\n" + "  \"unsubscribe\": %b\n" + "}\n",
+                givenTracking, givenTracking, givenUnsubscribe);
 
         setUpSuccessPutRequest(
-            DOMAIN_TRACKING.replace("{domainName}", givenDomainName),
-            Map.of(),
-            expectedRequest,
-            givenResponse
-        );
+                DOMAIN_TRACKING.replace("{domainName}", givenDomainName), Map.of(), expectedRequest, givenResponse);
 
         EmailApi api = new EmailApi(getApiClient());
 
         EmailTrackingEventRequest request = new EmailTrackingEventRequest()
-            .open(givenTracking)
-            .clicks(givenTracking)
-            .unsubscribe(givenUnsubscribe);
+                .open(givenTracking)
+                .clicks(givenTracking)
+                .unsubscribe(givenUnsubscribe);
 
         Consumer<EmailDomainResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -557,10 +497,7 @@ class EmailApiTest extends ApiTest {
         String givenDomainName = "newDomain.com";
         int givenStatusCode = 202;
 
-        setUpNoContentPostRequest(
-            DOMAIN_VERIFY.replace("{domainName}", givenDomainName),
-            givenStatusCode
-        );
+        setUpNoContentPostRequest(DOMAIN_VERIFY.replace("{domainName}", givenDomainName), givenStatusCode);
 
         EmailApi api = new EmailApi(getApiClient());
 
@@ -575,27 +512,19 @@ class EmailApiTest extends ApiTest {
         Integer givenAssignedDomainCount = 1;
         String givenStatus = "ASSIGNABLE";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"result\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"ipAddress\": \"%s\",\n" +
-                                                 "      \"dedicated\": %b,\n" +
-                                                 "      \"assignedDomainCount\": %d,\n" +
-                                                 "      \"status\": \"%s\"\n" +
-                                                 "    }\n" +
-                                                 "  ]\n" +
-                                                 "}\n",
-                                             givenIpAddress,
-                                             givenDedicated,
-                                             givenAssignedDomainCount,
-                                             givenStatus
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"result\": [\n"
+                        + "    {\n"
+                        + "      \"ipAddress\": \"%s\",\n"
+                        + "      \"dedicated\": %b,\n"
+                        + "      \"assignedDomainCount\": %d,\n"
+                        + "      \"status\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenIpAddress, givenDedicated, givenAssignedDomainCount, givenStatus);
 
-        setUpSuccessGetRequest(
-            IPS,
-            Map.of(),
-            givenResponse
-        );
+        setUpSuccessGetRequest(IPS, Map.of(), givenResponse);
 
         EmailApi api = new EmailApi(getApiClient());
 
@@ -621,25 +550,18 @@ class EmailApiTest extends ApiTest {
         Boolean givenValidSyntax = true;
         String givenDidYouMean = null;
 
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"to\": \"%s\"\n" +
-                                                   "}",
-                                               givenTo
-        );
+        String expectedRequest = String.format("{\n" + "  \"to\": \"%s\"\n" + "}", givenTo);
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"to\": \"%s\",\n" +
-                                                 "  \"validMailbox\": true,\n" +
-                                                 "  \"validSyntax\": %b,\n" +
-                                                 "  \"catchAll\": false,\n" +
-                                                 "  \"didYouMean\": %s,\n" +
-                                                 "  \"disposable\": false,\n" +
-                                                 "  \"roleBased\": true\n" +
-                                                 "}",
-                                             givenTo,
-                                             givenValidSyntax,
-                                             givenDidYouMean
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"to\": \"%s\",\n"
+                        + "  \"validMailbox\": true,\n"
+                        + "  \"validSyntax\": %b,\n"
+                        + "  \"catchAll\": false,\n"
+                        + "  \"didYouMean\": %s,\n"
+                        + "  \"disposable\": false,\n"
+                        + "  \"roleBased\": true\n"
+                        + "}",
+                givenTo, givenValidSyntax, givenDidYouMean);
 
         setUpPostRequest(VALIDATION, expectedRequest, givenResponse, 200);
 
@@ -663,15 +585,16 @@ class EmailApiTest extends ApiTest {
 
         String givenBulkId = "BULK-ID-123-xyz";
         String givenExternalBulkId = "SOME_USER_DEFINE_BULK_123";
-        String givenResponse = String.format("{\n" +
-                                                 "  \"externalBulkId\": \"%s\",\n" +
-                                                 "  \"bulks\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"bulkId\": \"%s\",\n" +
-                                                 "      \"sendAt\": \"2021-08-25T16:00:00.000+0000\"\n" +
-                                                 "    }\n" +
-                                                 "  ]\n" +
-                                                 "}", givenExternalBulkId, givenBulkId);
+        String givenResponse = String.format(
+                "{\n" + "  \"externalBulkId\": \"%s\",\n"
+                        + "  \"bulks\": [\n"
+                        + "    {\n"
+                        + "      \"bulkId\": \"%s\",\n"
+                        + "      \"sendAt\": \"2021-08-25T16:00:00.000+0000\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenExternalBulkId, givenBulkId);
 
         Consumer<EmailBulkScheduleResponse> assertions = scheduledEmails -> {
             then(scheduledEmails.getExternalBulkId()).isEqualTo(givenExternalBulkId);
@@ -692,15 +615,16 @@ class EmailApiTest extends ApiTest {
         String givenBulkId = "BULK-ID-123-xyz";
         String givenExternalBulkId = "SOME_USER_DEFINE_BULK_123";
         String givenStatus = "PENDING";
-        String givenResponse = String.format("{\n" +
-                                                 "  \"externalBulkId\": \"%s\",\n" +
-                                                 "  \"bulks\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"bulkId\": \"%s\",\n" +
-                                                 "      \"status\": \"%s\"\n" +
-                                                 "    }\n" +
-                                                 "  ]\n" +
-                                                 "}", givenExternalBulkId, givenBulkId, givenStatus);
+        String givenResponse = String.format(
+                "{\n" + "  \"externalBulkId\": \"%s\",\n"
+                        + "  \"bulks\": [\n"
+                        + "    {\n"
+                        + "      \"bulkId\": \"%s\",\n"
+                        + "      \"status\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenExternalBulkId, givenBulkId, givenStatus);
 
         Consumer<EmailBulkStatusResponse> assertions = scheduledEmails -> {
             then(scheduledEmails.getExternalBulkId()).isEqualTo(givenExternalBulkId);
@@ -721,19 +645,13 @@ class EmailApiTest extends ApiTest {
     void shouldRescheduledEmails() {
         String givenBulkId = "BULK-ID-123-xyz";
         String givenSendAt = "2021-06-08T17:42:05.390+0100";
-        OffsetDateTime givenSendAtDateTime = OffsetDateTime.of(
-            LocalDateTime.of(2021, 6, 8, 17, 42, 5, 390000000),
-            ZoneOffset.ofHours(1)
-        );
+        OffsetDateTime givenSendAtDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2021, 6, 8, 17, 42, 5, 390000000), ZoneOffset.ofHours(1));
 
-        String givenRequest = String.format("{\n" +
-                                                "  \"sendAt\": \"%s\"\n" +
-                                                "}", givenSendAt);
+        String givenRequest = String.format("{\n" + "  \"sendAt\": \"%s\"\n" + "}", givenSendAt);
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"bulkId\": \"%s\",\n" +
-                                                 "  \"sendAt\": \"%s\"\n" +
-                                                 "}", givenBulkId, givenSendAt);
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n" + "  \"sendAt\": \"%s\"\n" + "}", givenBulkId, givenSendAt);
 
         setUpPutRequest(BULKS, Map.of("bulkId", givenBulkId), givenRequest, givenResponse, 200);
 
@@ -743,7 +661,8 @@ class EmailApiTest extends ApiTest {
         };
 
         EmailApi scheduledEmailApi = new EmailApi(getApiClient());
-        var call = scheduledEmailApi.rescheduleEmails(givenBulkId, new EmailBulkRescheduleRequest().sendAt(givenSendAtDateTime));
+        var call = scheduledEmailApi.rescheduleEmails(
+                givenBulkId, new EmailBulkRescheduleRequest().sendAt(givenSendAtDateTime));
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -753,25 +672,11 @@ class EmailApiTest extends ApiTest {
         String givenBulkId = "string";
         EmailBulkStatus givenStatus = EmailBulkStatus.PENDING;
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"bulkId\": \"%s\",\n" +
-                                                 "  \"status\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenBulkId,
-                                             givenStatus
-        );
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"status\": \"%s\"\n" +
-                                                   "}\n",
-                                               givenStatus
-        );
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n" + "  \"status\": \"%s\"\n" + "}\n", givenBulkId, givenStatus);
+        String expectedRequest = String.format("{\n" + "  \"status\": \"%s\"\n" + "}\n", givenStatus);
 
-        setUpSuccessPutRequest(
-            BULKS_STATUS,
-            Map.of(),
-            expectedRequest,
-            givenResponse
-        );
+        setUpSuccessPutRequest(BULKS_STATUS, Map.of(), expectedRequest, givenResponse);
 
         EmailApi api = new EmailApi(getApiClient());
 
@@ -818,70 +723,63 @@ class EmailApiTest extends ApiTest {
         String givenCallbackData = "DLR callback data";
 
         var parts = List.of(
-            new Multipart("from", givenFrom),
-            new Multipart("to", givenTo),
-            new Multipart("to", givenAnotherTo),
-            new Multipart("replyTo", givenReplyTo),
-            new Multipart("subject", givenSubject),
-            new Multipart("text", givenText),
-            new Multipart("html", givenHtml),
-            new Multipart("attachment", givenAttachmentText),
-            new Multipart("intermediateReport", intermediateReport.toString()),
-            new Multipart("notifyUrl", givenNotifyUrl),
-            new Multipart("notifyContentType", givenNotifyContentType),
-            new Multipart("callbackData", givenCallbackData)
-        );
+                new Multipart("from", givenFrom),
+                new Multipart("to", givenTo),
+                new Multipart("to", givenAnotherTo),
+                new Multipart("replyTo", givenReplyTo),
+                new Multipart("subject", givenSubject),
+                new Multipart("text", givenText),
+                new Multipart("html", givenHtml),
+                new Multipart("attachment", givenAttachmentText),
+                new Multipart("intermediateReport", intermediateReport.toString()),
+                new Multipart("notifyUrl", givenNotifyUrl),
+                new Multipart("notifyContentType", givenNotifyContentType),
+                new Multipart("callbackData", givenCallbackData));
 
-        String expectedResponse = String.format("{\n" +
-                                                    "  \"bulkId\": \"%s\",\n" +
-                                                    "  \"messages\": [\n" +
-                                                    "    {\n" +
-                                                    "      \"to\": \"%s\",\n" +
-                                                    "      \"messageId\": \"%s\",\n" +
-                                                    "      \"status\": {\n" +
-                                                    "        \"groupId\": %d,\n" +
-                                                    "        \"groupName\": \"%s\",\n" +
-                                                    "        \"id\": %d,\n" +
-                                                    "        \"name\": \"%s\",\n" +
-                                                    "        \"description\": \"%s\"\n" +
-                                                    "      }\n" +
-                                                    "    },\n" +
-                                                    "    {\n" +
-                                                    "      \"to\": \"%s\",\n" +
-                                                    "      \"messageId\": \"%s\",\n" +
-                                                    "      \"status\": {\n" +
-                                                    "        \"groupId\": %d,\n" +
-                                                    "        \"groupName\": \"%s\",\n" +
-                                                    "        \"id\": %d,\n" +
-                                                    "        \"name\": \"%s\",\n" +
-                                                    "        \"description\": \"%s\"\n" +
-                                                    "      }\n" +
-                                                    "    }\n" +
-                                                    "  ]\n" +
-                                                    "}",
-                                                givenBulkId,
-                                                givenTo,
-                                                givenMessageId,
-                                                givenGroupId,
-                                                givenGroupName,
-                                                givenId,
-                                                givenName,
-                                                givenDescription,
-                                                anotherToInResponse,
-                                                givenAnotherMessageId,
-                                                givenGroupId,
-                                                givenGroupName,
-                                                givenId,
-                                                givenName,
-                                                givenDescription
-        );
+        String expectedResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      }\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId,
+                givenTo,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                anotherToInResponse,
+                givenAnotherMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription);
 
-        setUpMultipartRequest(
-            EMAIL_SEND,
-            parts,
-            expectedResponse,
-            200
-        );
+        setUpMultipartRequest(EMAIL_SEND, parts, expectedResponse, 200);
 
         Consumer<EmailSendResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -891,11 +789,11 @@ class EmailApiTest extends ApiTest {
             then(messages).isNotNull();
             then(messages).hasSize(2);
             var expectedStatus = new EmailSingleMessageStatus()
-                .groupId(givenGroupId)
-                .groupName(givenGroupName)
-                .id(givenId)
-                .name(givenName)
-                .description(givenDescription);
+                    .groupId(givenGroupId)
+                    .groupName(givenGroupName)
+                    .id(givenId)
+                    .name(givenName)
+                    .description(givenDescription);
             var firstMessage = messages.get(0);
             then(firstMessage.getTo()).isEqualTo(givenTo);
             then(firstMessage.getMessageId()).isEqualTo(givenMessageId);
@@ -908,75 +806,65 @@ class EmailApiTest extends ApiTest {
 
         EmailApi sendEmailApi = new EmailApi(getApiClient());
 
-        var call = sendEmailApi.sendEmail(List.of(givenTo, givenAnotherTo))
-                               .from(givenFrom)
-                               .subject(givenSubject)
-                               .replyTo(givenReplyTo)
-                               .html(givenHtml)
-                               .text(givenText)
-                               .attachment(List.of(tempFile))
-                               .intermediateReport(intermediateReport)
-                               .notifyUrl(givenNotifyUrl)
-                               .notifyContentType(givenNotifyContentType)
-                               .callbackData(givenCallbackData);
+        var call = sendEmailApi
+                .sendEmail(List.of(givenTo, givenAnotherTo))
+                .from(givenFrom)
+                .subject(givenSubject)
+                .replyTo(givenReplyTo)
+                .html(givenHtml)
+                .text(givenText)
+                .attachment(List.of(tempFile))
+                .intermediateReport(intermediateReport)
+                .notifyUrl(givenNotifyUrl)
+                .notifyContentType(givenNotifyContentType)
+                .callbackData(givenCallbackData);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
-
     }
 
     @Test
     void shouldGetEmailDeliveryReports() {
         String givenSentAt = "2021-08-25T16:10:00.000+0500";
         String givenDoneAt = "2021-08-25T16:11:00.000+0500";
-        OffsetDateTime expectedSentAt = OffsetDateTime.of(
-            LocalDateTime.of(2021, 8, 25, 16, 10),
-            ZoneOffset.ofHours(5)
-        );
-        OffsetDateTime expectedDoneAt = OffsetDateTime.of(
-            LocalDateTime.of(2021, 8, 25, 16, 11),
-            ZoneOffset.ofHours(5)
-        );
+        OffsetDateTime expectedSentAt = OffsetDateTime.of(LocalDateTime.of(2021, 8, 25, 16, 10), ZoneOffset.ofHours(5));
+        OffsetDateTime expectedDoneAt = OffsetDateTime.of(LocalDateTime.of(2021, 8, 25, 16, 11), ZoneOffset.ofHours(5));
         String givenBulkId = "csdstgteet4fath2pclbq";
         String givenMessageId = "45653761-3a88-4060-869e-ae372adc7a51";
         String givenTo = "john.doe@email.com";
 
-        String expectedResponse = String.format("{\n" +
-                                                    "  \"results\": [\n" +
-                                                    "    {\n" +
-                                                    "      \"bulkId\": \"%s\",\n" +
-                                                    "      \"messageId\": \"%s\",\n" +
-                                                    "      \"to\": \"%s\",\n" +
-                                                    "      \"sentAt\": \"%s\",\n" +
-                                                    "      \"doneAt\": \"%s\",\n" +
-                                                    "      \"messageCount\": 1,\n" +
-                                                    "      \"price\": {\n" +
-                                                    "        \"pricePerMessage\": 0,\n" +
-                                                    "        \"currency\": \"UNKNOWN\"\n" +
-                                                    "      },\n" +
-                                                    "      \"status\": {\n" +
-                                                    "        \"groupId\": 3,\n" +
-                                                    "        \"groupName\": \"DELIVERED\",\n" +
-                                                    "        \"id\": 5,\n" +
-                                                    "        \"name\": \"DELIVERED_TO_HANDSET\",\n" +
-                                                    "        \"description\": \"Message delivered to handset\"\n" +
-                                                    "      },\n" +
-                                                    "      \"error\": {\n" +
-                                                    "        \"groupId\": 0,\n" +
-                                                    "        \"groupName\": \"OK\",\n" +
-                                                    "        \"id\": 0,\n" +
-                                                    "        \"name\": \"NO_ERROR\",\n" +
-                                                    "        \"description\": \"No Error\",\n" +
-                                                    "        \"permanent\": false\n" +
-                                                    "      },\n" +
-                                                    "      \"channel\": \"EMAIL\"\n" +
-                                                    "    }\n" +
-                                                    "  ]\n" +
-                                                    "}",
-                                                givenBulkId,
-                                                givenMessageId,
-                                                givenTo,
-                                                givenSentAt,
-                                                givenDoneAt);
+        String expectedResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"bulkId\": \"%s\",\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"sentAt\": \"%s\",\n"
+                        + "      \"doneAt\": \"%s\",\n"
+                        + "      \"messageCount\": 1,\n"
+                        + "      \"price\": {\n"
+                        + "        \"pricePerMessage\": 0,\n"
+                        + "        \"currency\": \"UNKNOWN\"\n"
+                        + "      },\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 3,\n"
+                        + "        \"groupName\": \"DELIVERED\",\n"
+                        + "        \"id\": 5,\n"
+                        + "        \"name\": \"DELIVERED_TO_HANDSET\",\n"
+                        + "        \"description\": \"Message delivered to handset\"\n"
+                        + "      },\n"
+                        + "      \"error\": {\n"
+                        + "        \"groupId\": 0,\n"
+                        + "        \"groupName\": \"OK\",\n"
+                        + "        \"id\": 0,\n"
+                        + "        \"name\": \"NO_ERROR\",\n"
+                        + "        \"description\": \"No Error\",\n"
+                        + "        \"permanent\": false\n"
+                        + "      },\n"
+                        + "      \"channel\": \"EMAIL\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId, givenMessageId, givenTo, givenSentAt, givenDoneAt);
 
         Consumer<EmailReportsResult> assertions = emailReportsResult -> {
             then(emailReportsResult).isNotNull();
@@ -1009,17 +897,19 @@ class EmailApiTest extends ApiTest {
             then(error.getPermanent()).isEqualTo(NO_ERROR_IS_PERMANENT);
         };
 
-        Map<String, String> params = Map.of("bulkId", givenBulkId,
-                                            "messageId", givenMessageId,
-                                            "limit", "1");
+        Map<String, String> params = Map.of(
+                "bulkId", givenBulkId,
+                "messageId", givenMessageId,
+                "limit", "1");
 
         setUpGetRequest(REPORTS, params, expectedResponse, 200);
 
         EmailApi sendEmailApi = new EmailApi(getApiClient());
-        var call = sendEmailApi.getEmailDeliveryReports()
-                               .bulkId(givenBulkId)
-                               .messageId(givenMessageId)
-                               .limit(1);
+        var call = sendEmailApi
+                .getEmailDeliveryReports()
+                .bulkId(givenBulkId)
+                .messageId(givenMessageId)
+                .limit(1);
 
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
@@ -1041,52 +931,51 @@ class EmailApiTest extends ApiTest {
         String givenCreatedAt = "2021-01-02T01:00:00.123Z";
         String givenReturnPathAddress = "returnpath@example.com";
 
-        String givenResponse = String.format("{\n" +
-                                                 "  \"domainId\": %d,\n" +
-                                                 "  \"domainName\": \"%s\",\n" +
-                                                 "  \"active\": %b,\n" +
-                                                 "  \"tracking\": {\n" +
-                                                 "    \"clicks\": %b,\n" +
-                                                 "    \"opens\": %b,\n" +
-                                                 "    \"unsubscribe\": %b\n" +
-                                                 "  },\n" +
-                                                 "  \"dnsRecords\": [\n" +
-                                                 "    {\n" +
-                                                 "      \"recordType\": \"%s\",\n" +
-                                                 "      \"name\": \"%s\",\n" +
-                                                 "      \"expectedValue\": \"%s\",\n" +
-                                                 "      \"verified\": %b\n" +
-                                                 "    }\n" +
-                                                 "  ],\n" +
-                                                 "  \"blocked\": %b,\n" +
-                                                 "  \"createdAt\": \"%s\",\n" +
-                                                 "  \"returnPathAddress\": \"%s\"\n" +
-                                                 "}\n",
-                                             givenDomainId,
-                                             givenDomainName,
-                                             givenActive,
-                                             givenTracking,
-                                             givenOpens,
-                                             givenUnsubscribe,
-                                             givenRecordType,
-                                             givenName,
-                                             givenExpectedValue,
-                                             givenVerified,
-                                             givenBlocked,
-                                             givenCreatedAt,
-                                             givenReturnPathAddress);
+        String givenResponse = String.format(
+                "{\n" + "  \"domainId\": %d,\n"
+                        + "  \"domainName\": \"%s\",\n"
+                        + "  \"active\": %b,\n"
+                        + "  \"tracking\": {\n"
+                        + "    \"clicks\": %b,\n"
+                        + "    \"opens\": %b,\n"
+                        + "    \"unsubscribe\": %b\n"
+                        + "  },\n"
+                        + "  \"dnsRecords\": [\n"
+                        + "    {\n"
+                        + "      \"recordType\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"expectedValue\": \"%s\",\n"
+                        + "      \"verified\": %b\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"blocked\": %b,\n"
+                        + "  \"createdAt\": \"%s\",\n"
+                        + "  \"returnPathAddress\": \"%s\"\n"
+                        + "}\n",
+                givenDomainId,
+                givenDomainName,
+                givenActive,
+                givenTracking,
+                givenOpens,
+                givenUnsubscribe,
+                givenRecordType,
+                givenName,
+                givenExpectedValue,
+                givenVerified,
+                givenBlocked,
+                givenCreatedAt,
+                givenReturnPathAddress);
 
         String expectedReturnPathAddress = "returnpath@example.com";
-        String expectedRequest = String.format("{\n" +
-                                                   "  \"returnPathAddress\": \"%s\"\n" +
-                                                   "}\n",
-                                               expectedReturnPathAddress);
+        String expectedRequest =
+                String.format("{\n" + "  \"returnPathAddress\": \"%s\"\n" + "}\n", expectedReturnPathAddress);
 
-        setUpPutRequest(RETURN_PATH.replace("{domainName}", givenDomainName), Map.of(), expectedRequest, givenResponse, 200);
+        setUpPutRequest(
+                RETURN_PATH.replace("{domainName}", givenDomainName), Map.of(), expectedRequest, givenResponse, 200);
 
         EmailApi sendEmailApi = new EmailApi(getApiClient());
-        var givenReturnPathAddressRequest = new EmailReturnPathAddressRequest()
-            .returnPathAddress(givenReturnPathAddress);
+        var givenReturnPathAddressRequest =
+                new EmailReturnPathAddressRequest().returnPathAddress(givenReturnPathAddress);
 
         Consumer<EmailDomainResponse> assertions = emailDomainResponse -> {
             then(emailDomainResponse).isNotNull();
@@ -1121,44 +1010,41 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldParseEmailDeliveryReports() {
-        String givenRequest = "{\n" +
-            "  \"results\": [\n" +
-            "    {\n" +
-            "      \"bulkId\": \"aszzmbhu62l7bxkhmyrj\",\n" +
-            "      \"price\": {\n" +
-            "        \"pricePerMessage\": 0,\n" +
-            "        \"currency\": \"UNKNOWN\"\n" +
-            "      },\n" +
-            "      \"status\": {\n" +
-            "        \"id\": 5,\n" +
-            "        \"groupId\": 3,\n" +
-            "        \"groupName\": \"DELIVERED\",\n" +
-            "        \"name\": \"DELIVERED_TO_HANDSET\",\n" +
-            "        \"description\": \"Message delivered to handset\"\n" +
-            "      },\n" +
-            "      \"error\": {\n" +
-            "        \"id\": 0,\n" +
-            "        \"name\": \"NO_ERROR\",\n" +
-            "        \"description\": \"No Error\",\n" +
-            "        \"groupId\": 0,\n" +
-            "        \"groupName\": \"OK\",\n" +
-            "        \"permanent\": false\n" +
-            "      },\n" +
-            "      \"messageId\": \"hgtesn8bcmc71pujp92d\",\n" +
-            "      \"doneAt\": \"2020-09-08T05:27:59.256+0000\",\n" +
-            "      \"smsCount\": 1,\n" +
-            "      \"sentAt\": \"2020-09-08T05:27:57.628+0000\",\n" +
-            "      \"browserLink\": \"http://tracking.domain.com/render/content?id=9A31C6F61DBAE9664D74C7A5A5A01F92283F581D11EA80A28C12E83BC83D449BC4A9F32F1AE3C3E\",\n" +
-            "      \"callbackData\": \"something you want back\",\n" +
-            "      \"to\": \"john.doe@gmail.com\"\n" +
-            "    }\n" +
-            "  ]\n" +
-            "}\n";
+        String givenRequest = "{\n" + "  \"results\": [\n"
+                + "    {\n"
+                + "      \"bulkId\": \"aszzmbhu62l7bxkhmyrj\",\n"
+                + "      \"price\": {\n"
+                + "        \"pricePerMessage\": 0,\n"
+                + "        \"currency\": \"UNKNOWN\"\n"
+                + "      },\n"
+                + "      \"status\": {\n"
+                + "        \"id\": 5,\n"
+                + "        \"groupId\": 3,\n"
+                + "        \"groupName\": \"DELIVERED\",\n"
+                + "        \"name\": \"DELIVERED_TO_HANDSET\",\n"
+                + "        \"description\": \"Message delivered to handset\"\n"
+                + "      },\n"
+                + "      \"error\": {\n"
+                + "        \"id\": 0,\n"
+                + "        \"name\": \"NO_ERROR\",\n"
+                + "        \"description\": \"No Error\",\n"
+                + "        \"groupId\": 0,\n"
+                + "        \"groupName\": \"OK\",\n"
+                + "        \"permanent\": false\n"
+                + "      },\n"
+                + "      \"messageId\": \"hgtesn8bcmc71pujp92d\",\n"
+                + "      \"doneAt\": \"2020-09-08T05:27:59.256+0000\",\n"
+                + "      \"smsCount\": 1,\n"
+                + "      \"sentAt\": \"2020-09-08T05:27:57.628+0000\",\n"
+                + "      \"browserLink\": \"http://tracking.domain.com/render/content?id=9A31C6F61DBAE9664D74C7A5A5A01F92283F581D11EA80A28C12E83BC83D449BC4A9F32F1AE3C3E\",\n"
+                + "      \"callbackData\": \"something you want back\",\n"
+                + "      \"to\": \"john.doe@gmail.com\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}\n";
 
-        EmailWebhookDLRReportResponse reportResponse = json.deserialize(
-            givenRequest,
-            EmailWebhookDLRReportResponse.class
-        );
+        EmailWebhookDLRReportResponse reportResponse =
+                json.deserialize(givenRequest, EmailWebhookDLRReportResponse.class);
 
         then(reportResponse.getResults()).isNotNull();
         then(reportResponse.getResults().size()).isEqualTo(1);
@@ -1171,34 +1057,29 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldParseUserEvents() {
-        String givenRequest = "{\n" +
-            "   \"notificationType\": \"OPENED\",\n" +
-            "   \"domain\": \"mydomain.com\",\n" +
-            "   \"recipient\": \"john.doe@somedomain.com\",\n" +
-            "   \"sendDateTime\": 1599542877689,\n" +
-            "   \"messageId\": \"14b734recsf69n8zkao5\",\n" +
-            "   \"bulkId\": \"ikzzmbhu6223bxkhmyrj\",\n" +
-            "   \"recipientInfo\": {\n" +
-            "     \"deviceType\": \"Phone\",\n" +
-            "     \"os\": \"iOS 12\",\n" +
-            "     \"deviceName\": \"Apple\"\n" +
-            "   },\n" +
-            "   \"geoLocation\": {\n" +
-            "     \"city\": \"Los Angeles\",\n" +
-            "     \"longitude\": \"-118.24550\",\n" +
-            "     \"latitude\": \"34.05361\",\n" +
-            "     \"country_name\": \"United States\"\n" +
-            "   }\n" +
-            "}\n";
+        String givenRequest = "{\n" + "   \"notificationType\": \"OPENED\",\n"
+                + "   \"domain\": \"mydomain.com\",\n"
+                + "   \"recipient\": \"john.doe@somedomain.com\",\n"
+                + "   \"sendDateTime\": 1599542877689,\n"
+                + "   \"messageId\": \"14b734recsf69n8zkao5\",\n"
+                + "   \"bulkId\": \"ikzzmbhu6223bxkhmyrj\",\n"
+                + "   \"recipientInfo\": {\n"
+                + "     \"deviceType\": \"Phone\",\n"
+                + "     \"os\": \"iOS 12\",\n"
+                + "     \"deviceName\": \"Apple\"\n"
+                + "   },\n"
+                + "   \"geoLocation\": {\n"
+                + "     \"city\": \"Los Angeles\",\n"
+                + "     \"longitude\": \"-118.24550\",\n"
+                + "     \"latitude\": \"34.05361\",\n"
+                + "     \"country_name\": \"United States\"\n"
+                + "   }\n"
+                + "}\n";
 
-        EmailWebhookTrackResponse reportResponse = json.deserialize(
-            givenRequest,
-            EmailWebhookTrackResponse.class
-        );
+        EmailWebhookTrackResponse reportResponse = json.deserialize(givenRequest, EmailWebhookTrackResponse.class);
 
         then(reportResponse).isNotNull();
         then(reportResponse.getRecipientInfo().getClass()).isEqualTo(EmailWebhookRecipientInfo.class);
         then(reportResponse.getGeoLocation().getClass()).isEqualTo(EmailWebhookGeoLocation.class);
     }
-
 }

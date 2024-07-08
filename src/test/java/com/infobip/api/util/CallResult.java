@@ -27,5 +27,4 @@ public class CallResult<T> {
     public ApiException getException() {
         return exception;
     }
-
 }

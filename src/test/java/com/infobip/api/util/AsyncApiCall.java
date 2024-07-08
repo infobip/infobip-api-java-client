@@ -8,5 +8,4 @@ import okhttp3.Call;
 public interface AsyncApiCall<T> {
 
     Call execute(ApiCallback<T> callback) throws ApiException;
-
 }

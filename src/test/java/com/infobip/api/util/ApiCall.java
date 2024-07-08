@@ -6,5 +6,4 @@ import com.infobip.ApiException;
 public interface ApiCall<T> {
 
     T execute() throws ApiException;
-
 }
