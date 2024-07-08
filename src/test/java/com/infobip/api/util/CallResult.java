@@ -3,6 +3,7 @@ package com.infobip.api.util;
 import com.infobip.ApiException;
 
 public class CallResult<T> {
+
     private final T result;
     private final ApiException exception;
 
@@ -26,4 +27,5 @@ public class CallResult<T> {
     public ApiException getException() {
         return exception;
     }
+
 }

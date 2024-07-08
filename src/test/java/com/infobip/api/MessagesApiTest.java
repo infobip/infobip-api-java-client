@@ -1,7 +1,6 @@
 package com.infobip.api;
 
 import com.infobip.JSON;
-import com.infobip.api.MessagesApi;
 import com.infobip.model.*;
 import org.junit.jupiter.api.Test;
 
@@ -34,21 +33,21 @@ class MessagesApiTest extends ApiTest {
         String givenType = "TEXT";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"bulkId\": \"%s\",\n" +
-                                             "  \"messages\": [\n" +
-                                             "    {\n" +
-                                             "      \"messageId\": \"%s\",\n" +
-                                             "      \"status\": {\n" +
-                                             "        \"groupId\": %d,\n" +
-                                             "        \"groupName\": \"%s\",\n" +
-                                             "        \"id\": %d,\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"description\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"destination\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ]\n" +
-                                             "}\n",
+                                                 "  \"bulkId\": \"%s\",\n" +
+                                                 "  \"messages\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"messageId\": \"%s\",\n" +
+                                                 "      \"status\": {\n" +
+                                                 "        \"groupId\": %d,\n" +
+                                                 "        \"groupName\": \"%s\",\n" +
+                                                 "        \"id\": %d,\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"description\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"destination\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ]\n" +
+                                                 "}\n",
                                              givenBulkId,
                                              givenMessageId,
                                              givenGroupId,
@@ -59,24 +58,24 @@ class MessagesApiTest extends ApiTest {
                                              givenDestination);
 
         String expectedRequest = String.format("{\n" +
-                                               "   \"messages\": [\n" +
-                                               "     {\n" +
-                                               "       \"channel\": \"%s\",\n" +
-                                               "       \"sender\": \"%s\",\n" +
-                                               "       \"destinations\": [\n" +
-                                               "         {\n" +
-                                               "           \"to\": \"%s\"\n" +
-                                               "         }\n" +
-                                               "       ],\n" +
-                                               "       \"content\": {\n" +
-                                               "         \"body\": {\n" +
-                                               "           \"text\": \"%s\",\n" +
-                                               "           \"type\": \"%s\"\n" +
-                                               "         }\n" +
-                                               "       }\n" +
-                                               "     }\n" +
-                                               "   ]\n" +
-                                               "}", givenChannel, givenSender, givenTo, givenText, givenType);
+                                                   "   \"messages\": [\n" +
+                                                   "     {\n" +
+                                                   "       \"channel\": \"%s\",\n" +
+                                                   "       \"sender\": \"%s\",\n" +
+                                                   "       \"destinations\": [\n" +
+                                                   "         {\n" +
+                                                   "           \"to\": \"%s\"\n" +
+                                                   "         }\n" +
+                                                   "       ],\n" +
+                                                   "       \"content\": {\n" +
+                                                   "         \"body\": {\n" +
+                                                   "           \"text\": \"%s\",\n" +
+                                                   "           \"type\": \"%s\"\n" +
+                                                   "         }\n" +
+                                                   "       }\n" +
+                                                   "     }\n" +
+                                                   "   ]\n" +
+                                                   "}", givenChannel, givenSender, givenTo, givenText, givenType);
 
         setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
 
@@ -124,21 +123,21 @@ class MessagesApiTest extends ApiTest {
         String givenDestination = "48600700800";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"bulkId\": \"%s\",\n" +
-                                             "  \"messages\": [\n" +
-                                             "    {\n" +
-                                             "      \"messageId\": \"%s\",\n" +
-                                             "      \"status\": {\n" +
-                                             "        \"groupId\": %d,\n" +
-                                             "        \"groupName\": \"%s\",\n" +
-                                             "        \"id\": %d,\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"description\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"destination\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ]\n" +
-                                             "}",
+                                                 "  \"bulkId\": \"%s\",\n" +
+                                                 "  \"messages\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"messageId\": \"%s\",\n" +
+                                                 "      \"status\": {\n" +
+                                                 "        \"groupId\": %d,\n" +
+                                                 "        \"groupName\": \"%s\",\n" +
+                                                 "        \"id\": %d,\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"description\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"destination\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ]\n" +
+                                                 "}",
                                              givenBulkId,
                                              givenMessageId,
                                              givenGroupId,
@@ -158,33 +157,33 @@ class MessagesApiTest extends ApiTest {
         String expectedButtonType = "OPEN_URL";
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"messages\": [\n" +
-                                               "    {\n" +
-                                               "      \"channel\": \"%s\",\n" +
-                                               "      \"sender\": \"%s\",\n" +
-                                               "      \"destinations\": [\n" +
-                                               "        {\n" +
-                                               "          \"to\": \"%s\"\n" +
-                                               "        }\n" +
-                                               "      ],\n" +
-                                               "      \"template\": {\n" +
-                                               "        \"templateName\": \"%s\",\n" +
-                                               "        \"language\": \"%s\"\n" +
-                                               "      },\n" +
-                                               "      \"content\": {\n" +
-                                               "        \"body\": {\n" +
-                                               "          \"type\": \"%s\"\n" +
-                                               "        },\n" +
-                                               "        \"buttons\": [\n" +
-                                               "          {\n" +
-                                               "            \"suffix\": \"%s\",\n" +
-                                               "            \"type\": \"%s\"\n" +
-                                               "          }\n" +
-                                               "        ]\n" +
-                                               "      }\n" +
-                                               "    }\n" +
-                                               "  ]\n" +
-                                               "}",
+                                                   "  \"messages\": [\n" +
+                                                   "    {\n" +
+                                                   "      \"channel\": \"%s\",\n" +
+                                                   "      \"sender\": \"%s\",\n" +
+                                                   "      \"destinations\": [\n" +
+                                                   "        {\n" +
+                                                   "          \"to\": \"%s\"\n" +
+                                                   "        }\n" +
+                                                   "      ],\n" +
+                                                   "      \"template\": {\n" +
+                                                   "        \"templateName\": \"%s\",\n" +
+                                                   "        \"language\": \"%s\"\n" +
+                                                   "      },\n" +
+                                                   "      \"content\": {\n" +
+                                                   "        \"body\": {\n" +
+                                                   "          \"type\": \"%s\"\n" +
+                                                   "        },\n" +
+                                                   "        \"buttons\": [\n" +
+                                                   "          {\n" +
+                                                   "            \"suffix\": \"%s\",\n" +
+                                                   "            \"type\": \"%s\"\n" +
+                                                   "          }\n" +
+                                                   "        ]\n" +
+                                                   "      }\n" +
+                                                   "    }\n" +
+                                                   "  ]\n" +
+                                                   "}",
                                                expectedChannel,
                                                expectedSender,
                                                expectedDestination,
@@ -253,21 +252,21 @@ class MessagesApiTest extends ApiTest {
         String givenEvent = "TYPING_STARTED";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"bulkId\": \"%s\",\n" +
-                                             "  \"messages\": [\n" +
-                                             "    {\n" +
-                                             "      \"messageId\": \"%s\",\n" +
-                                             "      \"status\": {\n" +
-                                             "        \"groupId\": %d,\n" +
-                                             "        \"groupName\": \"%s\",\n" +
-                                             "        \"id\": %d,\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"description\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"destination\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ]\n" +
-                                             "}\n",
+                                                 "  \"bulkId\": \"%s\",\n" +
+                                                 "  \"messages\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"messageId\": \"%s\",\n" +
+                                                 "      \"status\": {\n" +
+                                                 "        \"groupId\": %d,\n" +
+                                                 "        \"groupName\": \"%s\",\n" +
+                                                 "        \"id\": %d,\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"description\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"destination\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ]\n" +
+                                                 "}\n",
                                              givenBulkId,
                                              givenMessageId,
                                              givenGroupId,
@@ -278,28 +277,28 @@ class MessagesApiTest extends ApiTest {
                                              givenDestination);
 
         String expectedRequest = String.format("{\n" +
-                                               "   \"events\": [\n" +
-                                               "     {\n" +
-                                               "       \"channel\": \"%s\",\n" +
-                                               "       \"sender\": \"%s\",\n" +
-                                               "       \"destinations\": [\n" +
-                                               "         {\n" +
-                                               "           \"to\": \"%s\"\n" +
-                                               "         }\n" +
-                                               "       ],\n" +
-                                               "       \"event\": \"%s\"\n" +
-                                               "     }\n" +
-                                               "   ]\n" +
-                                               " }\n", givenChannel, givenSender, givenTo, givenEvent);
+                                                   "   \"events\": [\n" +
+                                                   "     {\n" +
+                                                   "       \"channel\": \"%s\",\n" +
+                                                   "       \"sender\": \"%s\",\n" +
+                                                   "       \"destinations\": [\n" +
+                                                   "         {\n" +
+                                                   "           \"to\": \"%s\"\n" +
+                                                   "         }\n" +
+                                                   "       ],\n" +
+                                                   "       \"event\": \"%s\"\n" +
+                                                   "     }\n" +
+                                                   "   ]\n" +
+                                                   " }\n", givenChannel, givenSender, givenTo, givenEvent);
 
         setUpSuccessPostRequest(EVENTS, expectedRequest, givenResponse);
 
         MessagesApi api = new MessagesApi(getApiClient());
 
         var request = new MessagesApiEventRequest().events(List.of(new MessagesApiOutboundTypingStartedEvent().channel(givenChannel)
-                                                                                                      .sender(givenSender)
-                                                                                                      .destinations(List.of(new MessagesApiToDestination().to(
-                                                                                                          givenTo)))));
+                                                                                                              .sender(givenSender)
+                                                                                                              .destinations(List.of(new MessagesApiToDestination().to(
+                                                                                                                  givenTo)))));
 
         Consumer<MessagesApiResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -357,42 +356,42 @@ class MessagesApiTest extends ApiTest {
         Integer expectedNetworkId = 0;
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"results\": [\n" +
-                                               "    {\n" +
-                                               "      \"event\": \"%s\",\n" +
-                                               "      \"channel\": \"%s\",\n" +
-                                               "      \"sender\": \"%s\",\n" +
-                                               "      \"destination\": \"%s\",\n" +
-                                               "      \"sentAt\": \"%s\",\n" +
-                                               "      \"doneAt\": \"%s\",\n" +
-                                               "      \"messageId\": \"%s\",\n" +
-                                               "      \"callbackData\": \"%s\",\n" +
-                                               "      \"messageCount\": %d,\n" +
-                                               "      \"status\": {\n" +
-                                               "        \"groupId\": %d,\n" +
-                                               "        \"groupName\": \"%s\",\n" +
-                                               "        \"id\": %d,\n" +
-                                               "        \"name\": \"%s\",\n" +
-                                               "        \"description\": \"%s\"\n" +
-                                               "      },\n" +
-                                               "      \"error\": {\n" +
-                                               "        \"groupId\": %d,\n" +
-                                               "        \"groupName\": \"%s\",\n" +
-                                               "        \"id\": %d,\n" +
-                                               "        \"name\": \"%s\",\n" +
-                                               "        \"description\": \"%s\",\n" +
-                                               "        \"permanent\": %b\n" +
-                                               "      },\n" +
-                                               "      \"platform\": {\n" +
-                                               "        \"applicationId\": \"%s\",\n" +
-                                               "        \"entityId\": \"%s\"\n" +
-                                               "      },\n" +
-                                               "      \"deviceDetails\": \"%s\",\n" +
-                                               "      \"mccMnc\": %d,\n" +
-                                               "      \"networkId\": %d\n" +
-                                               "    }\n" +
-                                               "  ]\n" +
-                                               "}",
+                                                   "  \"results\": [\n" +
+                                                   "    {\n" +
+                                                   "      \"event\": \"%s\",\n" +
+                                                   "      \"channel\": \"%s\",\n" +
+                                                   "      \"sender\": \"%s\",\n" +
+                                                   "      \"destination\": \"%s\",\n" +
+                                                   "      \"sentAt\": \"%s\",\n" +
+                                                   "      \"doneAt\": \"%s\",\n" +
+                                                   "      \"messageId\": \"%s\",\n" +
+                                                   "      \"callbackData\": \"%s\",\n" +
+                                                   "      \"messageCount\": %d,\n" +
+                                                   "      \"status\": {\n" +
+                                                   "        \"groupId\": %d,\n" +
+                                                   "        \"groupName\": \"%s\",\n" +
+                                                   "        \"id\": %d,\n" +
+                                                   "        \"name\": \"%s\",\n" +
+                                                   "        \"description\": \"%s\"\n" +
+                                                   "      },\n" +
+                                                   "      \"error\": {\n" +
+                                                   "        \"groupId\": %d,\n" +
+                                                   "        \"groupName\": \"%s\",\n" +
+                                                   "        \"id\": %d,\n" +
+                                                   "        \"name\": \"%s\",\n" +
+                                                   "        \"description\": \"%s\",\n" +
+                                                   "        \"permanent\": %b\n" +
+                                                   "      },\n" +
+                                                   "      \"platform\": {\n" +
+                                                   "        \"applicationId\": \"%s\",\n" +
+                                                   "        \"entityId\": \"%s\"\n" +
+                                                   "      },\n" +
+                                                   "      \"deviceDetails\": \"%s\",\n" +
+                                                   "      \"mccMnc\": %d,\n" +
+                                                   "      \"networkId\": %d\n" +
+                                                   "    }\n" +
+                                                   "  ]\n" +
+                                                   "}",
                                                expectedEvent,
                                                expectedChannel,
                                                expectedSender,
@@ -470,29 +469,29 @@ class MessagesApiTest extends ApiTest {
         MessagesApiInboundEventType expectedEvent = MessagesApiInboundEventType.MO;
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"results\": [\n" +
-                                               "    {\n" +
-                                               "      \"channel\": \"%s\",\n" +
-                                               "      \"sender\": \"%s\",\n" +
-                                               "      \"destination\": \"%s\",\n" +
-                                               "      \"content\": [\n" +
-                                               "        {\n" +
-                                               "          \"text\": \"%s\",\n" +
-                                               "          \"cleanText\": \"%s\",\n" +
-                                               "          \"messageCount\": %d,\n" +
-                                               "          \"type\": \"%s\"\n" +
-                                               "        }\n" +
-                                               "      ],\n" +
-                                               "      \"receivedAt\": \"%s\",\n" +
-                                               "      \"messageId\": \"%s\",\n" +
-                                               "      \"platform\": {\n" +
-                                               "        \"applicationId\": \"%s\",\n" +
-                                               "        \"entityId\": \"%s\"\n" +
-                                               "      },\n" +
-                                               "      \"event\": \"%s\"\n" +
-                                               "    }\n" +
-                                               "  ]\n" +
-                                               "}",
+                                                   "  \"results\": [\n" +
+                                                   "    {\n" +
+                                                   "      \"channel\": \"%s\",\n" +
+                                                   "      \"sender\": \"%s\",\n" +
+                                                   "      \"destination\": \"%s\",\n" +
+                                                   "      \"content\": [\n" +
+                                                   "        {\n" +
+                                                   "          \"text\": \"%s\",\n" +
+                                                   "          \"cleanText\": \"%s\",\n" +
+                                                   "          \"messageCount\": %d,\n" +
+                                                   "          \"type\": \"%s\"\n" +
+                                                   "        }\n" +
+                                                   "      ],\n" +
+                                                   "      \"receivedAt\": \"%s\",\n" +
+                                                   "      \"messageId\": \"%s\",\n" +
+                                                   "      \"platform\": {\n" +
+                                                   "        \"applicationId\": \"%s\",\n" +
+                                                   "        \"entityId\": \"%s\"\n" +
+                                                   "      },\n" +
+                                                   "      \"event\": \"%s\"\n" +
+                                                   "    }\n" +
+                                                   "  ]\n" +
+                                                   "}",
                                                expectedChannel,
                                                expectedSender,
                                                expectedDestination,

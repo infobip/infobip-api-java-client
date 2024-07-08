@@ -41,7 +41,7 @@ abstract class ApiTest {
     @BeforeEach
     void setUp() {
         wireMockServer = new WireMockServer(
-                options().dynamicPort()
+            options().dynamicPort()
         );
 
         wireMockServer.start();
@@ -50,8 +50,8 @@ abstract class ApiTest {
         configureFor(port);
 
         apiClientWithApiKeyAuth = ApiClient.forApiKey(ApiKey.from(API_KEY))
-                .withBaseUrl(BaseUrl.from(String.format("http://localhost:%d", port)))
-                .build();
+                                           .withBaseUrl(BaseUrl.from(String.format("http://localhost:%d", port)))
+                                           .build();
     }
 
     protected ApiClient getApiClient() {
@@ -80,116 +80,117 @@ abstract class ApiTest {
 
     protected void setUpNoBodyPostRequest(String url, Map<String, String> expectedParameters, int statusCode) {
         wireMockServer.givenThat(post(urlPathEqualTo(url))
-                .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
-                .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
-                .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                .withQueryParams(equalToParams(expectedParameters))
-                .willReturn(aResponse()
-                        .withStatus(statusCode)
-                        .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
-                        .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                        .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
+                                     .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .withQueryParams(equalToParams(expectedParameters))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                     )
         );
     }
 
     protected void setUpEmptyPostRequest(String url, Map<String, String> expectedParameters, String givenResponse, int statusCode) {
         wireMockServer.givenThat(post(urlPathEqualTo(url))
-                .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
-                .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
-                .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                .withQueryParams(equalToParams(expectedParameters))
-                .willReturn(aResponse()
-                        .withStatus(statusCode)
-                        .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
-                        .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                        .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                        .withBody(givenResponse)
-                )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
+                                     .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .withQueryParams(equalToParams(expectedParameters))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                                     .withBody(givenResponse)
+                                     )
         );
     }
 
     protected void setUpPostRequest(String url, Map<String, String> expectedParameters, String expectedRequest, String givenResponse, int statusCode) {
         wireMockServer.givenThat(post(urlPathEqualTo(url))
-                .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
-                .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
-                .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                .withQueryParams(equalToParams(expectedParameters))
-                .withRequestBody(equalToJson(expectedRequest, true, false))
-                .willReturn(aResponse()
-                        .withStatus(statusCode)
-                        .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
-                        .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                        .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                        .withBody(givenResponse)
-                )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
+                                     .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .withQueryParams(equalToParams(expectedParameters))
+                                     .withRequestBody(equalToJson(expectedRequest, true, false))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                                     .withBody(givenResponse)
+                                     )
         );
     }
 
     protected void setUpNoResponseBodyPostRequest(String url, Map<String, String> expectedParameters, String expectedRequest, int statusCode) {
         wireMockServer.givenThat(post(urlPathEqualTo(url))
-                                         .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                                         .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
-                                         .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
-                                         .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                                         .withQueryParams(equalToParams(expectedParameters))
-                                         .withRequestBody(equalToJson(expectedRequest, true, false))
-                                         .willReturn(aResponse()
-                                                             .withStatus(statusCode)
-                                                             .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
-                                                             .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                                                             .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                                         )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
+                                     .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .withQueryParams(equalToParams(expectedParameters))
+                                     .withRequestBody(equalToJson(expectedRequest, true, false))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                     )
         );
     }
 
     protected void setUpNoRequestBodyDeleteRequest(String url, Map<String, String> expectedParameters, String givenResponse, int statusCode) {
         wireMockServer.givenThat(delete(urlPathEqualTo(url))
-                .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                .withQueryParams(equalToParams(expectedParameters))
-                .willReturn(aResponse()
-                        .withStatus(statusCode)
-                        .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
-                        .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                        .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                        .withBody(givenResponse)
-                )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .withQueryParams(equalToParams(expectedParameters))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                                     .withBody(givenResponse)
+                                     )
         );
     }
 
     protected void setUpNoResponseBodyDeleteRequest(String url, Map<String, String> expectedParameters, String expectedRequest, int statusCode) {
         wireMockServer.givenThat(delete(urlPathEqualTo(url))
-                .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
-                .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                .withQueryParams(equalToParams(expectedParameters))
-                .withRequestBody(equalToJson(expectedRequest, true, false))
-                .willReturn(aResponse()
-                        .withStatus(statusCode)
-                        .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                        .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .withQueryParams(equalToParams(expectedParameters))
+                                     .withRequestBody(equalToJson(expectedRequest, true, false))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                     )
         );
     }
 
     protected void setUpNoResponseBodyDeleteRequest(String url, Map<String, String> expectedParameters, int statusCode) {
         wireMockServer.givenThat(delete(urlPathEqualTo(url))
-                .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                .withQueryParams(equalToParams(expectedParameters))
-                .willReturn(aResponse()
-                        .withStatus(statusCode)
-                        .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                        .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .withQueryParams(equalToParams(expectedParameters))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                     )
         );
     }
 
     public class Multipart {
+
         private final String name;
         private final String body;
 
@@ -205,25 +206,26 @@ abstract class ApiTest {
         public String getBody() {
             return body;
         }
+
     }
 
     protected void setUpMultipartRequest(String url, List<Multipart> expectedParts, String givenResponse, int statusCode) {
         MappingBuilder mappingBuilder = post(urlPathEqualTo(url));
         expectedParts.forEach(part -> mappingBuilder
-                .withMultipartRequestBody(aMultipart(part.getName()).withBody(equalTo(part.getBody())))
+            .withMultipartRequestBody(aMultipart(part.getName()).withBody(equalTo(part.getBody())))
         );
         mappingBuilder
-                .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                .withHeader("Content-Type", matching("multipart/form-data; boundary=.*"))
-                .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
-                .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                .willReturn(aResponse()
-                        .withStatus(statusCode)
-                        .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
-                        .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                        .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                        .withBody(givenResponse)
-                );
+            .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+            .withHeader("Content-Type", matching("multipart/form-data; boundary=.*"))
+            .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
+            .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+            .willReturn(aResponse()
+                            .withStatus(statusCode)
+                            .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
+                            .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                            .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                            .withBody(givenResponse)
+            );
         wireMockServer.givenThat(mappingBuilder);
     }
 
@@ -231,34 +233,34 @@ abstract class ApiTest {
         setUpGetRequest(url, expectedParameters, givenResponse, 200);
     }
 
-    protected void setUpGetRequestOctet(String url, Map<String,String> expectedParameters, String givenResponse, int statusCode){
+    protected void setUpGetRequestOctet(String url, Map<String, String> expectedParameters, String givenResponse, int statusCode) {
         wireMockServer.givenThat(get(urlPathEqualTo(url))
-                .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                .withHeader("Accept", equalTo("application/octet-stream"))
-                .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                .withQueryParams(equalToParams(expectedParameters))
-                .willReturn(aResponse()
-                        .withStatus(statusCode)
-                        .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                        .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                        .withBody(givenResponse)
-                )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("Accept", equalTo("application/octet-stream"))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .withQueryParams(equalToParams(expectedParameters))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                                     .withBody(givenResponse)
+                                     )
         );
     }
 
     protected void setUpGetRequest(String url, Map<String, String> expectedParameters, String givenResponse, int statusCode) {
         wireMockServer.givenThat(get(urlPathEqualTo(url))
-                .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
-                .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                .withQueryParams(equalToParams(expectedParameters))
-                .willReturn(aResponse()
-                        .withStatus(statusCode)
-                        .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
-                        .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                        .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                        .withBody(givenResponse)
-                )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .withQueryParams(equalToParams(expectedParameters))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                                     .withBody(givenResponse)
+                                     )
         );
     }
 
@@ -268,96 +270,96 @@ abstract class ApiTest {
 
     protected void setUpPutRequest(String url, Map<String, String> expectedParameters, String expectedRequest, String givenResponse, int statusCode) {
         wireMockServer.givenThat(put(urlPathEqualTo(url))
-                .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
-                .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
-                .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                .withRequestBody(equalToJson(expectedRequest, true, false))
-                .withQueryParams(equalToParams(expectedParameters))
-                .willReturn(aResponse()
-                        .withStatus(statusCode)
-                        .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
-                        .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                        .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                        .withBody(givenResponse)
-                )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
+                                     .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .withRequestBody(equalToJson(expectedRequest, true, false))
+                                     .withQueryParams(equalToParams(expectedParameters))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                                     .withBody(givenResponse)
+                                     )
         );
     }
 
     protected void setUpNoResponseBodyPutRequest(String url, Map<String, String> expectedParameters, String expectedRequest, int statusCode) {
         wireMockServer.givenThat(put(urlPathEqualTo(url))
-                .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
-                .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
-                .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                .withRequestBody(equalToJson(expectedRequest, true, false))
-                .withQueryParams(equalToParams(expectedParameters))
-                .willReturn(aResponse()
-                        .withStatus(statusCode)
-                        .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                        .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
+                                     .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .withRequestBody(equalToJson(expectedRequest, true, false))
+                                     .withQueryParams(equalToParams(expectedParameters))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                     )
         );
     }
 
     protected void setUpNoContentPostRequest(String url, int statusCode) {
         wireMockServer.givenThat(post(urlPathEqualTo(url))
-                .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
-                .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                .willReturn(aResponse()
-                        .withStatus(statusCode)
-                        .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                        .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                     )
         );
     }
 
     protected void setUpSuccessHeadRequest(String url) {
         wireMockServer.givenThat(head(urlPathEqualTo(url))
-                .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "text/plain")
-                        .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                        .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .willReturn(aResponse()
+                                                     .withStatus(200)
+                                                     .withHeader("Content-Type", "text/plain")
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                     )
         );
     }
 
     protected void setUpPatchRequest(String url, Map<String, String> expectedParameters, String expectedRequest, String givenResponse, int statusCode) {
         wireMockServer.givenThat(patch(urlPathEqualTo(url))
-                                         .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                                         .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
-                                         .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
-                                         .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                                         .withQueryParams(equalToParams(expectedParameters))
-                                         .withRequestBody(equalToJson(expectedRequest, true, false))
-                                         .willReturn(aResponse()
-                                                             .withStatus(statusCode)
-                                                             .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
-                                                             .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                                                             .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                                                             .withBody(givenResponse)
-                                         )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
+                                     .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .withQueryParams(equalToParams(expectedParameters))
+                                     .withRequestBody(equalToJson(expectedRequest, true, false))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                                     .withBody(givenResponse)
+                                     )
         );
     }
 
     protected void setUpNoResponseBodyPatchRequest(String url, Map<String, String> expectedParameters, String expectedRequest, int statusCode) {
         wireMockServer.givenThat(patch(urlPathEqualTo(url))
-                                         .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
-                                         .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
-                                         .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
-                                         .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
-                                         .withQueryParams(equalToParams(expectedParameters))
-                                         .withRequestBody(equalToJson(expectedRequest, true, false))
-                                         .willReturn(aResponse()
-                                                             .withStatus(statusCode)
-                                                             .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
-                                                             .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
-                                                             .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
-                                         )
+                                     .withHeader("Authorization", equalTo(EXPECTED_API_KEY_HEADER_VALUE))
+                                     .withHeader("Content-Type", equalTo(EXPECTED_CONTENT_TYPE_HEADER_VALUE))
+                                     .withHeader("Accept", equalTo(EXPECTED_ACCEPT_HEADER_VALUE))
+                                     .withHeader("User-Agent", matching("infobip-api-client-java/.*"))
+                                     .withQueryParams(equalToParams(expectedParameters))
+                                     .withRequestBody(equalToJson(expectedRequest, true, false))
+                                     .willReturn(aResponse()
+                                                     .withStatus(statusCode)
+                                                     .withHeader("Content-Type", EXPECTED_CONTENT_TYPE_HEADER_VALUE)
+                                                     .withHeader("Server", EXPECTED_SERVER_HEADER_VALUE)
+                                                     .withHeader("X-Request-Id", EXPECTED_X_REQUEST_ID_HEADER_VALUE)
+                                     )
         );
     }
 
@@ -425,14 +427,15 @@ abstract class ApiTest {
 
     private Map<String, StringValuePattern> equalToParams(Map<String, String> parameters) {
         return parameters.entrySet().stream()
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        entry -> equalTo(entry.getValue())
-                ));
+                         .collect(Collectors.toMap(
+                             Map.Entry::getKey,
+                             entry -> equalTo(entry.getValue())
+                         ));
     }
 
     @AfterEach
     void tearDown() {
         wireMockServer.stop();
     }
+
 }

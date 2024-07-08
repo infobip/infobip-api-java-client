@@ -3,7 +3,6 @@ package com.infobip.api;
 import com.infobip.ApiCallback;
 import com.infobip.ApiException;
 import com.infobip.ApiExceptionDetails;
-import com.infobip.api.SmsApi;
 import com.infobip.model.SmsAdvancedTextualRequest;
 import com.infobip.model.SmsDestination;
 import com.infobip.model.SmsResponse;
@@ -32,18 +31,18 @@ class ApiErrorResponsesTest extends ApiTest {
         String givenText = "This is a sample message";
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"messages\": [\n" +
-                                               "    {\n" +
-                                               "      \"destinations\": [\n" +
-                                               "        {\n" +
-                                               "          \"to\": \"%s\"\n" +
-                                               "        }\n" +
-                                               "      ],\n" +
-                                               "      \"from\": \"%s\",\n" +
-                                               "      \"text\": \"%s\"\n" +
-                                               "    }\n" +
-                                               "  ]\n" +
-                                               "}",
+                                                   "  \"messages\": [\n" +
+                                                   "    {\n" +
+                                                   "      \"destinations\": [\n" +
+                                                   "        {\n" +
+                                                   "          \"to\": \"%s\"\n" +
+                                                   "        }\n" +
+                                                   "      ],\n" +
+                                                   "      \"from\": \"%s\",\n" +
+                                                   "      \"text\": \"%s\"\n" +
+                                                   "    }\n" +
+                                                   "  ]\n" +
+                                                   "}",
                                                givenTo,
                                                givenFrom,
                                                givenText
@@ -56,12 +55,12 @@ class ApiErrorResponsesTest extends ApiTest {
         SmsDestination destination = new SmsDestination().to(givenTo);
 
         SmsTextualMessage message = new SmsTextualMessage()
-                .from(givenFrom)
-                .text(givenText)
-                .destinations(List.of(destination));
+            .from(givenFrom)
+            .text(givenText)
+            .destinations(List.of(destination));
 
         SmsAdvancedTextualRequest request = new SmsAdvancedTextualRequest()
-                .messages(List.of(message));
+            .messages(List.of(message));
 
         Consumer<ApiException> assertions = (apiException) -> {
             then(apiException).isNotNull();
@@ -71,38 +70,38 @@ class ApiErrorResponsesTest extends ApiTest {
         };
 
         testFailedCall(
-                () -> sendSmsApi.sendSmsMessage(request).execute(),
-                assertions
+            () -> sendSmsApi.sendSmsMessage(request).execute(),
+            assertions
         );
 
         testFailedAsyncCall(
-                (ApiCallback<SmsResponse> apiCallback) -> sendSmsApi.sendSmsMessage(request).executeAsync(apiCallback),
-                assertions
+            (ApiCallback<SmsResponse> apiCallback) -> sendSmsApi.sendSmsMessage(request).executeAsync(apiCallback),
+            assertions
         );
     }
 
     private static Stream<Arguments> errorResponsesSource() {
         return Stream.of(
-                badRequestResponse(),
-                internalServerErrorResponse()
+            badRequestResponse(),
+            internalServerErrorResponse()
 
         );
     }
 
     private static Arguments badRequestResponse() {
         String badRequestResponse = "{\n" +
-                                    "  \"requestError\": {\n" +
-                                    "    \"serviceException\": {\n" +
-                                    "      \"messageId\": \"BAD_REQUEST\",\n" +
-                                    "      \"text\": \"Bad request\",\n" +
-                                    "      \"validationErrors\": {\n" +
-                                    "        \"messages[0].text\": [\n" +
-                                    "          \"invalid text\"\n" +
-                                    "        ]\n" +
-                                    "      }\n" +
-                                    "    }\n" +
-                                    "  }\n" +
-                                    "}";
+            "  \"requestError\": {\n" +
+            "    \"serviceException\": {\n" +
+            "      \"messageId\": \"BAD_REQUEST\",\n" +
+            "      \"text\": \"Bad request\",\n" +
+            "      \"validationErrors\": {\n" +
+            "        \"messages[0].text\": [\n" +
+            "          \"invalid text\"\n" +
+            "        ]\n" +
+            "      }\n" +
+            "    }\n" +
+            "  }\n" +
+            "}";
 
         var violation = new ApiExceptionDetails.Violation();
         violation.setViolation("invalid text");
@@ -123,13 +122,13 @@ class ApiErrorResponsesTest extends ApiTest {
 
     private static Arguments internalServerErrorResponse() {
         String serverErrorResponse = "{\n" +
-                                     "  \"requestError\": {\n" +
-                                     "    \"serviceException\": {\n" +
-                                     "      \"messageId\": \"GENERAL_ERROR\",\n" +
-                                     "      \"text\": \"Something went wrong. Please contact support.\"\n" +
-                                     "    }\n" +
-                                     "  }\n" +
-                                     "}";
+            "  \"requestError\": {\n" +
+            "    \"serviceException\": {\n" +
+            "      \"messageId\": \"GENERAL_ERROR\",\n" +
+            "      \"text\": \"Something went wrong. Please contact support.\"\n" +
+            "    }\n" +
+            "  }\n" +
+            "}";
         ApiExceptionDetails expectedDetails = new ApiExceptionDetails();
         expectedDetails.setMessageId("GENERAL_ERROR");
         expectedDetails.setText("Something went wrong. Please contact support.");
@@ -138,4 +137,5 @@ class ApiErrorResponsesTest extends ApiTest {
 
         return Arguments.of(500, serverErrorResponse, expectedDetails);
     }
+
 }

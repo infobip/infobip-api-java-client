@@ -14,6 +14,7 @@ import java.util.function.Consumer;
 import static org.assertj.core.api.BDDAssertions.then;
 
 class ViberApiTest extends ApiTest {
+
     private static final String SEND_VIBER_TEXT_MESSAGE = "/viber/1/message/text";
     private static final String SEND_VIBER_IMAGE_MESSAGE = "/viber/1/message/image";
     private static final String SEND_VIBER_FILE_MESSAGE = "/viber/1/message/file";
@@ -50,23 +51,23 @@ class ViberApiTest extends ApiTest {
         var givenEntityId = "entity";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"messages\": [\n" +
-                                             "    {\n" +
-                                             "      \"to\": \"%s\",\n" +
-                                             "      \"messageCount\": %d,\n" +
-                                             "      \"messageId\": \"%s\",\n" +
-                                             "      \"status\": {\n" +
-                                             "        \"groupId\": %d,\n" +
-                                             "        \"groupName\": \"%s\",\n" +
-                                             "        \"id\": %d,\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"description\": \"%s\",\n" +
-                                             "        \"action\": \"%s\"\n" +
-                                             "      }\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"bulkId\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"messages\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"to\": \"%s\",\n" +
+                                                 "      \"messageCount\": %d,\n" +
+                                                 "      \"messageId\": \"%s\",\n" +
+                                                 "      \"status\": {\n" +
+                                                 "        \"groupId\": %d,\n" +
+                                                 "        \"groupName\": \"%s\",\n" +
+                                                 "        \"id\": %d,\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"description\": \"%s\",\n" +
+                                                 "        \"action\": \"%s\"\n" +
+                                                 "      }\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"bulkId\": \"%s\"\n" +
+                                                 "}\n",
                                              givenTo,
                                              givenMessageCount,
                                              givenMessageId,
@@ -80,34 +81,34 @@ class ViberApiTest extends ApiTest {
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"messages\": [\n" +
-                                               "    {\n" +
-                                               "      \"from\": \"%s\",\n" +
-                                               "      \"to\": \"%s\",\n" +
-                                               "      \"messageId\": \"%s\",\n" +
-                                               "      \"content\": {\n" +
-                                               "        \"text\": \"%s\",\n" +
-                                               "        \"button\": {\n" +
-                                               "          \"title\": \"%s\",\n" +
-                                               "          \"action\": \"%s\"\n" +
-                                               "        }\n" +
-                                               "      },\n" +
-                                               "      \"callbackData\": \"%s\",\n" +
-                                               "      \"trackingData\": \"%s\",\n" +
-                                               "      \"applySessionRate\": %b,\n" +
-                                               "      \"toPrimaryDeviceOnly\": %b,\n" +
-                                               "      \"label\": \"%s\",\n" +
-                                               "      \"smsFailover\": {\n" +
-                                               "        \"from\": \"%s\",\n" +
-                                               "        \"text\": \"%s\",\n" +
-                                               "        \"validityPeriod\": %d,\n" +
-                                               "        \"validityPeriodTimeUnit\": \"%s\"\n" +
-                                               "      },\n" +
-                                               "      \"entityId\" : \"%s\",\n" +
-                                               "      \"applicationId\" : \"%s\"\n" +
-                                               "    }\n" +
-                                               "  ]\n" +
-                                               "}\n",
+                                                   "  \"messages\": [\n" +
+                                                   "    {\n" +
+                                                   "      \"from\": \"%s\",\n" +
+                                                   "      \"to\": \"%s\",\n" +
+                                                   "      \"messageId\": \"%s\",\n" +
+                                                   "      \"content\": {\n" +
+                                                   "        \"text\": \"%s\",\n" +
+                                                   "        \"button\": {\n" +
+                                                   "          \"title\": \"%s\",\n" +
+                                                   "          \"action\": \"%s\"\n" +
+                                                   "        }\n" +
+                                                   "      },\n" +
+                                                   "      \"callbackData\": \"%s\",\n" +
+                                                   "      \"trackingData\": \"%s\",\n" +
+                                                   "      \"applySessionRate\": %b,\n" +
+                                                   "      \"toPrimaryDeviceOnly\": %b,\n" +
+                                                   "      \"label\": \"%s\",\n" +
+                                                   "      \"smsFailover\": {\n" +
+                                                   "        \"from\": \"%s\",\n" +
+                                                   "        \"text\": \"%s\",\n" +
+                                                   "        \"validityPeriod\": %d,\n" +
+                                                   "        \"validityPeriodTimeUnit\": \"%s\"\n" +
+                                                   "      },\n" +
+                                                   "      \"entityId\" : \"%s\",\n" +
+                                                   "      \"applicationId\" : \"%s\"\n" +
+                                                   "    }\n" +
+                                                   "  ]\n" +
+                                                   "}\n",
                                                givenFrom,
                                                givenTo,
                                                givenMessageId,
@@ -128,58 +129,58 @@ class ViberApiTest extends ApiTest {
         );
 
         setUpSuccessPostRequest(
-                SEND_VIBER_TEXT_MESSAGE,
-                Map.of(),
-                expectedRequest,
-                givenResponse
+            SEND_VIBER_TEXT_MESSAGE,
+            Map.of(),
+            expectedRequest,
+            givenResponse
         );
 
         ViberApi api = new ViberApi(getApiClient());
 
         ViberBulkTextMessage request = new ViberBulkTextMessage()
-                .messages(List.of(
-                        new ViberTextMessage()
-                                .from(givenFrom)
-                                .to(givenTo)
-                                .applicationId(givenApplicationId)
-                                .entityId(givenEntityId)
-                                .messageId(givenMessageId)
-                                .content(new ViberTextContent()
-                                        .text(givenText)
-                                        .button(new ViberButton()
-                                                .title(givenTitle)
-                                                .action(givenAction)
-                                        )
-                                )
-                                .callbackData(givenCallbackData)
-                                .trackingData(givenTrackingData)
-                                .applySessionRate(givenApplySessionRate)
-                                .toPrimaryDeviceOnly(givenToPrimaryDeviceOnly)
-                                .label(givenLabel)
-                                .smsFailover(new ViberSmsFailover()
-                                        .from(givenFailoverFrom)
-                                        .text(givenFailoverText)
-                                        .validityPeriod(givenFailoverValidityPeriod)
-                                        .validityPeriodTimeUnit(givenFailoverValidityPeriodTimeUnit)
-                                )
-                ));
+            .messages(List.of(
+                new ViberTextMessage()
+                    .from(givenFrom)
+                    .to(givenTo)
+                    .applicationId(givenApplicationId)
+                    .entityId(givenEntityId)
+                    .messageId(givenMessageId)
+                    .content(new ViberTextContent()
+                                 .text(givenText)
+                                 .button(new ViberButton()
+                                             .title(givenTitle)
+                                             .action(givenAction)
+                                 )
+                    )
+                    .callbackData(givenCallbackData)
+                    .trackingData(givenTrackingData)
+                    .applySessionRate(givenApplySessionRate)
+                    .toPrimaryDeviceOnly(givenToPrimaryDeviceOnly)
+                    .label(givenLabel)
+                    .smsFailover(new ViberSmsFailover()
+                                     .from(givenFailoverFrom)
+                                     .text(givenFailoverText)
+                                     .validityPeriod(givenFailoverValidityPeriod)
+                                     .validityPeriodTimeUnit(givenFailoverValidityPeriodTimeUnit)
+                    )
+            ));
 
         ViberSingleMessageInfo expectedMessageInfo = new ViberSingleMessageInfo()
-                .to(givenTo)
-                .messageCount(givenMessageCount)
-                .messageId(givenMessageId)
-                .status(new ViberSingleMessageStatus()
+            .to(givenTo)
+            .messageCount(givenMessageCount)
+            .messageId(givenMessageId)
+            .status(new ViberSingleMessageStatus()
                         .groupId(givenGroupId)
                         .groupName(givenGroupName)
                         .id(givenId)
                         .name(givenName)
                         .description(givenDescription)
                         .action(givenAction)
-                );
+            );
 
         ViberBulkMessageInfo expectedResponse = new ViberBulkMessageInfo()
-                .addMessagesItem(expectedMessageInfo)
-                .bulkId(givenBulkId);
+            .addMessagesItem(expectedMessageInfo)
+            .bulkId(givenBulkId);
 
         Consumer<ViberBulkMessageInfo> assertions = response -> then(response).isEqualTo(expectedResponse);
 
@@ -215,18 +216,18 @@ class ViberApiTest extends ApiTest {
         var givenEntityId = "entityId";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"to\": \"%s\",\n" +
-                                             "  \"messageCount\": %d,\n" +
-                                             "  \"messageId\": \"%s\",\n" +
-                                             "  \"status\": {\n" +
-                                             "    \"groupId\": %d,\n" +
-                                             "    \"groupName\": \"%s\",\n" +
-                                             "    \"id\": %d,\n" +
-                                             "    \"name\": \"%s\",\n" +
-                                             "    \"description\": \"%s\",\n" +
-                                             "    \"action\": \"%s\"\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"to\": \"%s\",\n" +
+                                                 "  \"messageCount\": %d,\n" +
+                                                 "  \"messageId\": \"%s\",\n" +
+                                                 "  \"status\": {\n" +
+                                                 "    \"groupId\": %d,\n" +
+                                                 "    \"groupName\": \"%s\",\n" +
+                                                 "    \"id\": %d,\n" +
+                                                 "    \"name\": \"%s\",\n" +
+                                                 "    \"description\": \"%s\",\n" +
+                                                 "    \"action\": \"%s\"\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenTo,
                                              givenMessageCount,
                                              givenMessageId,
@@ -239,30 +240,30 @@ class ViberApiTest extends ApiTest {
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"from\": \"%s\",\n" +
-                                               "  \"to\": \"%s\",\n" +
-                                               "  \"messageId\": \"%s\",\n" +
-                                               "  \"content\": {\n" +
-                                               "    \"text\": \"%s\",\n" +
-                                               "    \"mediaUrl\": \"%s\",\n" +
-                                               "    \"button\": {\n" +
-                                               "      \"title\": \"%s\",\n" +
-                                               "      \"action\": \"%s\"\n" +
-                                               "    }\n" +
-                                               "  },\n" +
-                                               "  \"callbackData\": \"%s\",\n" +
-                                               "  \"trackingData\": \"%s\",\n" +
-                                               "  \"applySessionRate\": %b,\n" +
-                                               "  \"label\": \"%s\",\n" +
-                                               "  \"smsFailover\": {\n" +
-                                               "    \"from\": \"%s\",\n" +
-                                               "    \"text\": \"%s\",\n" +
-                                               "    \"validityPeriod\": %d,\n" +
-                                               "    \"validityPeriodTimeUnit\": \"%s\"\n" +
-                                               "  },\n" +
-                                               "  \"entityId\" : \"%s\",\n" +
-                                               "  \"applicationId\" : \"%s\"\n" +
-                                               "}\n",
+                                                   "  \"from\": \"%s\",\n" +
+                                                   "  \"to\": \"%s\",\n" +
+                                                   "  \"messageId\": \"%s\",\n" +
+                                                   "  \"content\": {\n" +
+                                                   "    \"text\": \"%s\",\n" +
+                                                   "    \"mediaUrl\": \"%s\",\n" +
+                                                   "    \"button\": {\n" +
+                                                   "      \"title\": \"%s\",\n" +
+                                                   "      \"action\": \"%s\"\n" +
+                                                   "    }\n" +
+                                                   "  },\n" +
+                                                   "  \"callbackData\": \"%s\",\n" +
+                                                   "  \"trackingData\": \"%s\",\n" +
+                                                   "  \"applySessionRate\": %b,\n" +
+                                                   "  \"label\": \"%s\",\n" +
+                                                   "  \"smsFailover\": {\n" +
+                                                   "    \"from\": \"%s\",\n" +
+                                                   "    \"text\": \"%s\",\n" +
+                                                   "    \"validityPeriod\": %d,\n" +
+                                                   "    \"validityPeriodTimeUnit\": \"%s\"\n" +
+                                                   "  },\n" +
+                                                   "  \"entityId\" : \"%s\",\n" +
+                                                   "  \"applicationId\" : \"%s\"\n" +
+                                                   "}\n",
                                                givenFrom,
                                                givenTo,
                                                givenMessageId,
@@ -283,38 +284,38 @@ class ViberApiTest extends ApiTest {
         );
 
         setUpSuccessPostRequest(
-                SEND_VIBER_IMAGE_MESSAGE,
-                Map.of(),
-                expectedRequest,
-                givenResponse
+            SEND_VIBER_IMAGE_MESSAGE,
+            Map.of(),
+            expectedRequest,
+            givenResponse
         );
 
         ViberApi api = new ViberApi(getApiClient());
 
         ViberImageMessage request = new ViberImageMessage()
-                .from(givenFrom)
-                .to(givenTo)
-                .entityId(givenEntityId)
-                .applicationId(givenApplicationId)
-                .messageId(givenMessageId)
-                .content(new ViberImageContent()
-                        .text(givenText)
-                        .mediaUrl(givenMediaUrl)
-                        .button(new ViberButton()
-                                .title(givenTitle)
-                                .action(givenAction)
-                        )
-                )
-                .callbackData(givenCallbackData)
-                .trackingData(givenTrackingData)
-                .applySessionRate(givenApplySessionRate)
-                .label(givenLabel)
-                .smsFailover(new ViberSmsFailover()
-                        .from(givenFailoverFrom)
-                        .text(givenFailoverText)
-                        .validityPeriod(givenFailoverValidityPeriod)
-                        .validityPeriodTimeUnit(givenFailoverValidityPeriodTimeUnit)
-                );
+            .from(givenFrom)
+            .to(givenTo)
+            .entityId(givenEntityId)
+            .applicationId(givenApplicationId)
+            .messageId(givenMessageId)
+            .content(new ViberImageContent()
+                         .text(givenText)
+                         .mediaUrl(givenMediaUrl)
+                         .button(new ViberButton()
+                                     .title(givenTitle)
+                                     .action(givenAction)
+                         )
+            )
+            .callbackData(givenCallbackData)
+            .trackingData(givenTrackingData)
+            .applySessionRate(givenApplySessionRate)
+            .label(givenLabel)
+            .smsFailover(new ViberSmsFailover()
+                             .from(givenFailoverFrom)
+                             .text(givenFailoverText)
+                             .validityPeriod(givenFailoverValidityPeriod)
+                             .validityPeriodTimeUnit(givenFailoverValidityPeriodTimeUnit)
+            );
 
         Consumer<ViberSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
@@ -361,18 +362,18 @@ class ViberApiTest extends ApiTest {
         var givenApplicationId = "application";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"to\": \"%s\",\n" +
-                                             "  \"messageCount\": %d,\n" +
-                                             "  \"messageId\": \"%s\",\n" +
-                                             "  \"status\": {\n" +
-                                             "    \"groupId\": %d,\n" +
-                                             "    \"groupName\": \"%s\",\n" +
-                                             "    \"id\": %d,\n" +
-                                             "    \"name\": \"%s\",\n" +
-                                             "    \"description\": \"%s\",\n" +
-                                             "    \"action\": \"%s\"\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"to\": \"%s\",\n" +
+                                                 "  \"messageCount\": %d,\n" +
+                                                 "  \"messageId\": \"%s\",\n" +
+                                                 "  \"status\": {\n" +
+                                                 "    \"groupId\": %d,\n" +
+                                                 "    \"groupName\": \"%s\",\n" +
+                                                 "    \"id\": %d,\n" +
+                                                 "    \"name\": \"%s\",\n" +
+                                                 "    \"description\": \"%s\",\n" +
+                                                 "    \"action\": \"%s\"\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenTo,
                                              givenMessageCount,
                                              givenMessageId,
@@ -386,28 +387,27 @@ class ViberApiTest extends ApiTest {
 
         String givenFileName = "sample_file.pdf";
 
-
         String expectedRequest = String.format("{\n" +
-                                               "  \"from\": \"%s\",\n" +
-                                               "  \"to\": \"%s\",\n" +
-                                               "  \"messageId\": \"%s\",\n" +
-                                               "  \"content\": {\n" +
-                                               "    \"filename\": \"%s\",\n" +
-                                               "    \"mediaUrl\": \"%s\"\n" +
-                                               "  },\n" +
-                                               "  \"callbackData\": \"%s\",\n" +
-                                               "  \"trackingData\": \"%s\",\n" +
-                                               "  \"applySessionRate\": %b,\n" +
-                                               "  \"label\": \"%s\",\n" +
-                                               "  \"smsFailover\": {\n" +
-                                               "    \"from\": \"%s\",\n" +
-                                               "    \"text\": \"%s\",\n" +
-                                               "    \"validityPeriod\": %d,\n" +
-                                               "    \"validityPeriodTimeUnit\": \"%s\"\n" +
-                                               "  },\n" +
-                                               "  \"entityId\" : \"entity\",\n" +
-                                               "  \"applicationId\" : \"application\"\n" +
-                                               "}\n",
+                                                   "  \"from\": \"%s\",\n" +
+                                                   "  \"to\": \"%s\",\n" +
+                                                   "  \"messageId\": \"%s\",\n" +
+                                                   "  \"content\": {\n" +
+                                                   "    \"filename\": \"%s\",\n" +
+                                                   "    \"mediaUrl\": \"%s\"\n" +
+                                                   "  },\n" +
+                                                   "  \"callbackData\": \"%s\",\n" +
+                                                   "  \"trackingData\": \"%s\",\n" +
+                                                   "  \"applySessionRate\": %b,\n" +
+                                                   "  \"label\": \"%s\",\n" +
+                                                   "  \"smsFailover\": {\n" +
+                                                   "    \"from\": \"%s\",\n" +
+                                                   "    \"text\": \"%s\",\n" +
+                                                   "    \"validityPeriod\": %d,\n" +
+                                                   "    \"validityPeriodTimeUnit\": \"%s\"\n" +
+                                                   "  },\n" +
+                                                   "  \"entityId\" : \"entity\",\n" +
+                                                   "  \"applicationId\" : \"application\"\n" +
+                                                   "}\n",
                                                givenFrom,
                                                givenTo,
                                                givenMessageId,
@@ -426,33 +426,33 @@ class ViberApiTest extends ApiTest {
         );
 
         setUpSuccessPostRequest(
-                SEND_VIBER_FILE_MESSAGE,
-                Map.of(),
-                expectedRequest,
-                givenResponse
+            SEND_VIBER_FILE_MESSAGE,
+            Map.of(),
+            expectedRequest,
+            givenResponse
         );
 
         ViberApi api = new ViberApi(getApiClient());
 
         ViberFileMessage request = new ViberFileMessage()
-                .from(givenFrom)
-                .entityId(givenEntityId)
-                .applicationId(givenApplicationId)
-                .to(givenTo)
-                .messageId(givenMessageId)
-                .content(new ViberFileContent()
-                        .filename(givenFileName)
-                        .mediaUrl(givenMediaUrl))
-                .callbackData(givenCallbackData)
-                .trackingData(givenTrackingData)
-                .applySessionRate(givenApplySessionRate)
-                .label(givenLabel)
-                .smsFailover(new ViberSmsFailover()
-                        .from(givenFailoverFrom)
-                        .text(givenFailoverText)
-                        .validityPeriod(givenFailoverValidityPeriod)
-                        .validityPeriodTimeUnit(givenFailoverValidityPeriodTimeUnit)
-                );
+            .from(givenFrom)
+            .entityId(givenEntityId)
+            .applicationId(givenApplicationId)
+            .to(givenTo)
+            .messageId(givenMessageId)
+            .content(new ViberFileContent()
+                         .filename(givenFileName)
+                         .mediaUrl(givenMediaUrl))
+            .callbackData(givenCallbackData)
+            .trackingData(givenTrackingData)
+            .applySessionRate(givenApplySessionRate)
+            .label(givenLabel)
+            .smsFailover(new ViberSmsFailover()
+                             .from(givenFailoverFrom)
+                             .text(givenFailoverText)
+                             .validityPeriod(givenFailoverValidityPeriod)
+                             .validityPeriodTimeUnit(givenFailoverValidityPeriodTimeUnit)
+            );
 
         Consumer<ViberSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
@@ -507,18 +507,18 @@ class ViberApiTest extends ApiTest {
         var givenEntityId = "entity";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"to\": \"%s\",\n" +
-                                             "  \"messageCount\": %d,\n" +
-                                             "  \"messageId\": \"%s\",\n" +
-                                             "  \"status\": {\n" +
-                                             "    \"groupId\": %d,\n" +
-                                             "    \"groupName\": \"%s\",\n" +
-                                             "    \"id\": %d,\n" +
-                                             "    \"name\": \"%s\",\n" +
-                                             "    \"description\": \"%s\",\n" +
-                                             "    \"action\": \"%s\"\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"to\": \"%s\",\n" +
+                                                 "  \"messageCount\": %d,\n" +
+                                                 "  \"messageId\": \"%s\",\n" +
+                                                 "  \"status\": {\n" +
+                                                 "    \"groupId\": %d,\n" +
+                                                 "    \"groupName\": \"%s\",\n" +
+                                                 "    \"id\": %d,\n" +
+                                                 "    \"name\": \"%s\",\n" +
+                                                 "    \"description\": \"%s\",\n" +
+                                                 "    \"action\": \"%s\"\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenTo,
                                              givenMessageCount,
                                              givenMessageId,
@@ -531,35 +531,35 @@ class ViberApiTest extends ApiTest {
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"from\": \"%s\",\n" +
-                                               "  \"to\": \"%s\",\n" +
-                                               "  \"messageId\": \"%s\",\n" +
-                                               "  \"content\": {\n" +
-                                               "    \"text\": \"%s\",\n" +
-                                               "    \"mediaUrl\": \"%s\",\n" +
-                                               "    \"thumbnailUrl\": \"%s\",\n" +
-                                               "    \"mediaDuration\": %d,\n" +
-                                               "    \"buttonTitle\": \"%s\"\n" +
-                                               "  },\n" +
-                                               "  \"callbackData\": \"%s\",\n" +
-                                               "  \"trackingData\": \"%s\",\n" +
-                                               "  \"smsFailover\": {\n" +
-                                               "    \"from\": \"%s\",\n" +
-                                               "    \"text\": \"%s\",\n" +
-                                               "    \"validityPeriod\": %d,\n" +
-                                               "    \"validityPeriodTimeUnit\": \"%s\"\n" +
-                                               "  },\n" +
-                                               "  \"notifyUrl\": \"%s\",\n" +
-                                               "  \"urlOptions\": {\n" +
-                                               "    \"shortenUrl\": %b,\n" +
-                                               "    \"trackClicks\": %b,\n" +
-                                               "    \"trackingUrl\": \"%s\",\n" +
-                                               "    \"removeProtocol\": %b,\n" +
-                                               "    \"customDomain\": \"%s\"\n" +
-                                               "  },\n" +
-                                               "  \"entityId\" : \"%s\",\n" +
-                                               "  \"applicationId\" : \"%s\"\n" +
-                                               "}\n",
+                                                   "  \"from\": \"%s\",\n" +
+                                                   "  \"to\": \"%s\",\n" +
+                                                   "  \"messageId\": \"%s\",\n" +
+                                                   "  \"content\": {\n" +
+                                                   "    \"text\": \"%s\",\n" +
+                                                   "    \"mediaUrl\": \"%s\",\n" +
+                                                   "    \"thumbnailUrl\": \"%s\",\n" +
+                                                   "    \"mediaDuration\": %d,\n" +
+                                                   "    \"buttonTitle\": \"%s\"\n" +
+                                                   "  },\n" +
+                                                   "  \"callbackData\": \"%s\",\n" +
+                                                   "  \"trackingData\": \"%s\",\n" +
+                                                   "  \"smsFailover\": {\n" +
+                                                   "    \"from\": \"%s\",\n" +
+                                                   "    \"text\": \"%s\",\n" +
+                                                   "    \"validityPeriod\": %d,\n" +
+                                                   "    \"validityPeriodTimeUnit\": \"%s\"\n" +
+                                                   "  },\n" +
+                                                   "  \"notifyUrl\": \"%s\",\n" +
+                                                   "  \"urlOptions\": {\n" +
+                                                   "    \"shortenUrl\": %b,\n" +
+                                                   "    \"trackClicks\": %b,\n" +
+                                                   "    \"trackingUrl\": \"%s\",\n" +
+                                                   "    \"removeProtocol\": %b,\n" +
+                                                   "    \"customDomain\": \"%s\"\n" +
+                                                   "  },\n" +
+                                                   "  \"entityId\" : \"%s\",\n" +
+                                                   "  \"applicationId\" : \"%s\"\n" +
+                                                   "}\n",
                                                givenFrom, givenTo, givenMessageId,
                                                givenText, givenMediaUrl, givenThumbnailUrl, givenMediaDuration, givenButtonTitle,
                                                givenCallbackData, givenTrackingData,
@@ -569,43 +569,43 @@ class ViberApiTest extends ApiTest {
         );
 
         setUpSuccessPostRequest(
-                SEND_VIBER_VIDEO_MESSAGE,
-                Map.of(),
-                expectedRequest,
-                givenResponse
+            SEND_VIBER_VIDEO_MESSAGE,
+            Map.of(),
+            expectedRequest,
+            givenResponse
         );
 
         ViberApi api = new ViberApi(getApiClient());
 
         ViberVideoMessage request = new ViberVideoMessage()
-                .from(givenFrom)
-                .to(givenTo)
-                .applicationId(givenApplicationId)
-                .entityId(givenEntityId)
-                .messageId(givenMessageId)
-                .content(new ViberVideoContent()
-                        .text(givenText)
-                        .mediaUrl(givenMediaUrl)
-                        .thumbnailUrl(givenThumbnailUrl)
-                        .mediaDuration(givenMediaDuration)
-                        .buttonTitle(givenButtonTitle)
-                )
-                .callbackData(givenCallbackData)
-                .trackingData(givenTrackingData)
-                .smsFailover(new ViberSmsFailover()
-                        .from(givenFailoverFrom)
-                        .text(givenFailoverText)
-                        .validityPeriod(givenFailoverValidityPeriod)
-                        .validityPeriodTimeUnit(givenFailoverValidityPeriodTimeUnit)
-                )
-                .notifyUrl(givenNotifyUrl)
-                .urlOptions(new ViberUrlOptions()
-                        .shortenUrl(givenShortenUrl)
-                        .trackClicks(givenTrackClicks)
-                        .trackingUrl(givenTrackingUrl)
-                        .removeProtocol(givenRemoveProtocol)
-                        .customDomain(givenCustomDomain)
-                );
+            .from(givenFrom)
+            .to(givenTo)
+            .applicationId(givenApplicationId)
+            .entityId(givenEntityId)
+            .messageId(givenMessageId)
+            .content(new ViberVideoContent()
+                         .text(givenText)
+                         .mediaUrl(givenMediaUrl)
+                         .thumbnailUrl(givenThumbnailUrl)
+                         .mediaDuration(givenMediaDuration)
+                         .buttonTitle(givenButtonTitle)
+            )
+            .callbackData(givenCallbackData)
+            .trackingData(givenTrackingData)
+            .smsFailover(new ViberSmsFailover()
+                             .from(givenFailoverFrom)
+                             .text(givenFailoverText)
+                             .validityPeriod(givenFailoverValidityPeriod)
+                             .validityPeriodTimeUnit(givenFailoverValidityPeriodTimeUnit)
+            )
+            .notifyUrl(givenNotifyUrl)
+            .urlOptions(new ViberUrlOptions()
+                            .shortenUrl(givenShortenUrl)
+                            .trackClicks(givenTrackClicks)
+                            .trackingUrl(givenTrackingUrl)
+                            .removeProtocol(givenRemoveProtocol)
+                            .customDomain(givenCustomDomain)
+            );
 
         Consumer<ViberSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
@@ -638,21 +638,21 @@ class ViberApiTest extends ApiTest {
         String givenDescription = "Message sent to next instance";
         String givenDestination = "441134960001";
         String givenResponse = String.format("{\n" +
-                                             "  \"bulkId\": \"%s\",\n" +
-                                             "  \"messages\": [\n" +
-                                             "    {\n" +
-                                             "      \"messageId\": \"%s\",\n" +
-                                             "      \"status\": {\n" +
-                                             "        \"groupId\": %d,\n" +
-                                             "        \"groupName\": \"%s\",\n" +
-                                             "        \"id\": %d,\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"description\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"destination\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ]\n" +
-                                             "}",
+                                                 "  \"bulkId\": \"%s\",\n" +
+                                                 "  \"messages\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"messageId\": \"%s\",\n" +
+                                                 "      \"status\": {\n" +
+                                                 "        \"groupId\": %d,\n" +
+                                                 "        \"groupName\": \"%s\",\n" +
+                                                 "        \"id\": %d,\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"description\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"destination\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ]\n" +
+                                                 "}",
                                              givenBulkId,
                                              givenMessageId,
                                              givenGroupId,
@@ -675,34 +675,34 @@ class ViberApiTest extends ApiTest {
         Boolean expectedApplySessionRate = false;
         Boolean expectedToPrimaryDeviceOnly = true;
         String expectedRequest = String.format("{\n" +
-                                               "  \"messages\": [\n" +
-                                               "    {\n" +
-                                               "      \"sender\": \"%s\",\n" +
-                                               "      \"destinations\": [\n" +
-                                               "        {\n" +
-                                               "          \"to\": \"%s\"\n" +
-                                               "        }\n" +
-                                               "      ],\n" +
-                                               "      \"content\": {\n" +
-                                               "        \"text\": \"%s\",\n" +
-                                               "        \"button\": {\n" +
-                                               "          \"title\": \"%s\",\n" +
-                                               "          \"action\": \"%s\"\n" +
-                                               "        },\n" +
-                                               "        \"type\": \"%s\"\n" +
-                                               "      },\n" +
-                                               "      \"options\": {\n" +
-                                               "        \"smsFailover\": {\n" +
-                                               "           \"sender\": \"%s\",\n" +
-                                               "           \"text\": \"%s\"\n" +
-                                               "        },\n" +
-                                               "        \"label\": \"%s\",\n" +
-                                               "        \"applySessionRate\": %b,\n" +
-                                               "        \"toPrimaryDeviceOnly\": %b\n" +
-                                               "      }\n" +
-                                               "    }\n" +
-                                               "  ]\n" +
-                                               "}",
+                                                   "  \"messages\": [\n" +
+                                                   "    {\n" +
+                                                   "      \"sender\": \"%s\",\n" +
+                                                   "      \"destinations\": [\n" +
+                                                   "        {\n" +
+                                                   "          \"to\": \"%s\"\n" +
+                                                   "        }\n" +
+                                                   "      ],\n" +
+                                                   "      \"content\": {\n" +
+                                                   "        \"text\": \"%s\",\n" +
+                                                   "        \"button\": {\n" +
+                                                   "          \"title\": \"%s\",\n" +
+                                                   "          \"action\": \"%s\"\n" +
+                                                   "        },\n" +
+                                                   "        \"type\": \"%s\"\n" +
+                                                   "      },\n" +
+                                                   "      \"options\": {\n" +
+                                                   "        \"smsFailover\": {\n" +
+                                                   "           \"sender\": \"%s\",\n" +
+                                                   "           \"text\": \"%s\"\n" +
+                                                   "        },\n" +
+                                                   "        \"label\": \"%s\",\n" +
+                                                   "        \"applySessionRate\": %b,\n" +
+                                                   "        \"toPrimaryDeviceOnly\": %b\n" +
+                                                   "      }\n" +
+                                                   "    }\n" +
+                                                   "  ]\n" +
+                                                   "}",
                                                expectedSender,
                                                expectedTo,
                                                expectedText,
@@ -717,44 +717,44 @@ class ViberApiTest extends ApiTest {
         );
 
         setUpPostRequest(
-                SEND_VIBER_MESSAGES,
-                expectedRequest,
-                givenResponse,
-                200
+            SEND_VIBER_MESSAGES,
+            expectedRequest,
+            givenResponse,
+            200
         );
 
         ViberApi api = new ViberApi(getApiClient());
 
         ViberMessage viberMessage = new ViberMessage()
-                .sender(expectedSender)
-                .destinations(
-                        List.of(
-                                new ViberToDestination()
-                                        .to(expectedTo)
-                        )
+            .sender(expectedSender)
+            .destinations(
+                List.of(
+                    new ViberToDestination()
+                        .to(expectedTo)
                 )
-                .content(
-                        new ViberOutboundTextContent()
-                                .text(expectedText)
-                                .button(
-                                        new ViberButton()
-                                                .title(expectedTitle)
-                                                .action(expectedAction)
-                                )
-                )
-                .options(
-                        new ViberMessageOptions()
-                                .smsFailover(
-                                        new ViberDefaultSmsFailover()
-                                                .sender(expectedSmsFailoverSender)
-                                                .text(expectedSmsFailoverText)
-                                )
-                                .label(ViberLabel.TRANSACTIONAL)
-                                .applySessionRate(expectedApplySessionRate)
-                                .toPrimaryDeviceOnly(expectedToPrimaryDeviceOnly)
-                );
+            )
+            .content(
+                new ViberOutboundTextContent()
+                    .text(expectedText)
+                    .button(
+                        new ViberButton()
+                            .title(expectedTitle)
+                            .action(expectedAction)
+                    )
+            )
+            .options(
+                new ViberMessageOptions()
+                    .smsFailover(
+                        new ViberDefaultSmsFailover()
+                            .sender(expectedSmsFailoverSender)
+                            .text(expectedSmsFailoverText)
+                    )
+                    .label(ViberLabel.TRANSACTIONAL)
+                    .applySessionRate(expectedApplySessionRate)
+                    .toPrimaryDeviceOnly(expectedToPrimaryDeviceOnly)
+            );
         ViberRequest viberRequest = new ViberRequest()
-                .addMessagesItem(viberMessage);
+            .addMessagesItem(viberMessage);
 
         Consumer<ViberResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -788,21 +788,21 @@ class ViberApiTest extends ApiTest {
         String givenDescription = "Message sent to next instance";
         String givenDestination = "441134960001";
         String givenResponse = String.format("{\n" +
-                                             "  \"bulkId\": \"%s\",\n" +
-                                             "  \"messages\": [\n" +
-                                             "    {\n" +
-                                             "      \"messageId\": \"%s\",\n" +
-                                             "      \"status\": {\n" +
-                                             "        \"groupId\": %d,\n" +
-                                             "        \"groupName\": \"%s\",\n" +
-                                             "        \"id\": %d,\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"description\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"destination\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ]\n" +
-                                             "}",
+                                                 "  \"bulkId\": \"%s\",\n" +
+                                                 "  \"messages\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"messageId\": \"%s\",\n" +
+                                                 "      \"status\": {\n" +
+                                                 "        \"groupId\": %d,\n" +
+                                                 "        \"groupName\": \"%s\",\n" +
+                                                 "        \"id\": %d,\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"description\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"destination\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ]\n" +
+                                                 "}",
                                              givenBulkId,
                                              givenMessageId,
                                              givenGroupId,
@@ -821,26 +821,26 @@ class ViberApiTest extends ApiTest {
         String expectedAction = "https://www.example.com/action";
         String expectedType = "IMAGE";
         String expectedRequest = String.format("{\n" +
-                                               "  \"messages\": [\n" +
-                                               "    {\n" +
-                                               "      \"sender\": \"%s\",\n" +
-                                               "      \"destinations\": [\n" +
-                                               "        {\n" +
-                                               "          \"to\": \"%s\"\n" +
-                                               "        }\n" +
-                                               "      ],\n" +
-                                               "      \"content\": {\n" +
-                                               "        \"text\": \"%s\",\n" +
-                                               "        \"mediaUrl\": \"%s\",\n" +
-                                               "        \"button\": {\n" +
-                                               "          \"title\": \"%s\",\n" +
-                                               "          \"action\": \"%s\"\n" +
-                                               "        },\n" +
-                                               "        \"type\": \"%s\"\n" +
-                                               "      }\n" +
-                                               "    }\n" +
-                                               "  ]\n" +
-                                               "}",
+                                                   "  \"messages\": [\n" +
+                                                   "    {\n" +
+                                                   "      \"sender\": \"%s\",\n" +
+                                                   "      \"destinations\": [\n" +
+                                                   "        {\n" +
+                                                   "          \"to\": \"%s\"\n" +
+                                                   "        }\n" +
+                                                   "      ],\n" +
+                                                   "      \"content\": {\n" +
+                                                   "        \"text\": \"%s\",\n" +
+                                                   "        \"mediaUrl\": \"%s\",\n" +
+                                                   "        \"button\": {\n" +
+                                                   "          \"title\": \"%s\",\n" +
+                                                   "          \"action\": \"%s\"\n" +
+                                                   "        },\n" +
+                                                   "        \"type\": \"%s\"\n" +
+                                                   "      }\n" +
+                                                   "    }\n" +
+                                                   "  ]\n" +
+                                                   "}",
                                                expectedSender,
                                                expectedTo,
                                                expectedText,
@@ -851,35 +851,35 @@ class ViberApiTest extends ApiTest {
         );
 
         setUpPostRequest(
-                SEND_VIBER_MESSAGES,
-                expectedRequest,
-                givenResponse,
-                200
+            SEND_VIBER_MESSAGES,
+            expectedRequest,
+            givenResponse,
+            200
         );
 
         ViberApi api = new ViberApi(getApiClient());
 
         ViberMessage viberMessage = new ViberMessage()
-                .sender(expectedSender)
-                .destinations(
-                        List.of(
-                                new ViberToDestination()
-                                        .to(expectedTo)
-                        )
+            .sender(expectedSender)
+            .destinations(
+                List.of(
+                    new ViberToDestination()
+                        .to(expectedTo)
                 )
-                .content(
-                        new ViberOutboundImageContent()
-                                .text(expectedText)
-                                .mediaUrl(expectedMediaUrl)
-                                .button(
-                                        new ViberButton()
-                                                .title(expectedTitle)
-                                                .action(expectedAction)
-                                )
-                );
+            )
+            .content(
+                new ViberOutboundImageContent()
+                    .text(expectedText)
+                    .mediaUrl(expectedMediaUrl)
+                    .button(
+                        new ViberButton()
+                            .title(expectedTitle)
+                            .action(expectedAction)
+                    )
+            );
 
         ViberRequest viberRequest = new ViberRequest()
-                .addMessagesItem(viberMessage);
+            .addMessagesItem(viberMessage);
 
         Consumer<ViberResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -913,21 +913,21 @@ class ViberApiTest extends ApiTest {
         String givenDescription = "Message sent to next instance";
         String givenDestination = "441134960001";
         String givenResponse = String.format("{\n" +
-                                             "  \"bulkId\": \"%s\",\n" +
-                                             "  \"messages\": [\n" +
-                                             "    {\n" +
-                                             "      \"messageId\": \"%s\",\n" +
-                                             "      \"status\": {\n" +
-                                             "        \"groupId\": %d,\n" +
-                                             "        \"groupName\": \"%s\",\n" +
-                                             "        \"id\": %d,\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"description\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"destination\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ]\n" +
-                                             "}",
+                                                 "  \"bulkId\": \"%s\",\n" +
+                                                 "  \"messages\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"messageId\": \"%s\",\n" +
+                                                 "      \"status\": {\n" +
+                                                 "        \"groupId\": %d,\n" +
+                                                 "        \"groupName\": \"%s\",\n" +
+                                                 "        \"id\": %d,\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"description\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"destination\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ]\n" +
+                                                 "}",
                                              givenBulkId,
                                              givenMessageId,
                                              givenGroupId,
@@ -947,25 +947,25 @@ class ViberApiTest extends ApiTest {
         String expectedButtonTitle = "Button title";
         String expectedType = "VIDEO";
         String expectedRequest = String.format("{\n" +
-                                               "  \"messages\": [\n" +
-                                               "    {\n" +
-                                               "      \"sender\": \"%s\",\n" +
-                                               "      \"destinations\": [\n" +
-                                               "        {\n" +
-                                               "          \"to\": \"%s\"\n" +
-                                               "        }\n" +
-                                               "      ],\n" +
-                                               "      \"content\": {\n" +
-                                               "        \"text\": \"%s\",\n" +
-                                               "        \"mediaUrl\": \"%s\",\n" +
-                                               "        \"mediaDuration\": \"%s\",\n" +
-                                               "        \"thumbnailUrl\": \"%s\",\n" +
-                                               "        \"buttonTitle\": \"%s\",\n" +
-                                               "        \"type\": \"%s\"\n" +
-                                               "      }\n" +
-                                               "    }\n" +
-                                               "  ]\n" +
-                                               "}",
+                                                   "  \"messages\": [\n" +
+                                                   "    {\n" +
+                                                   "      \"sender\": \"%s\",\n" +
+                                                   "      \"destinations\": [\n" +
+                                                   "        {\n" +
+                                                   "          \"to\": \"%s\"\n" +
+                                                   "        }\n" +
+                                                   "      ],\n" +
+                                                   "      \"content\": {\n" +
+                                                   "        \"text\": \"%s\",\n" +
+                                                   "        \"mediaUrl\": \"%s\",\n" +
+                                                   "        \"mediaDuration\": \"%s\",\n" +
+                                                   "        \"thumbnailUrl\": \"%s\",\n" +
+                                                   "        \"buttonTitle\": \"%s\",\n" +
+                                                   "        \"type\": \"%s\"\n" +
+                                                   "      }\n" +
+                                                   "    }\n" +
+                                                   "  ]\n" +
+                                                   "}",
                                                expectedSender,
                                                expectedTo,
                                                expectedText,
@@ -977,33 +977,33 @@ class ViberApiTest extends ApiTest {
         );
 
         setUpPostRequest(
-                SEND_VIBER_MESSAGES,
-                expectedRequest,
-                givenResponse,
-                200
+            SEND_VIBER_MESSAGES,
+            expectedRequest,
+            givenResponse,
+            200
         );
 
         ViberApi api = new ViberApi(getApiClient());
 
         ViberMessage viberMessage = new ViberMessage()
-                .sender(expectedSender)
-                .destinations(
-                        List.of(
-                                new ViberToDestination()
-                                        .to(expectedTo)
-                        )
+            .sender(expectedSender)
+            .destinations(
+                List.of(
+                    new ViberToDestination()
+                        .to(expectedTo)
                 )
-                .content(
-                        new ViberOutboundVideoContent()
-                                .text(expectedText)
-                                .mediaUrl(expectedMediaUrl)
-                                .mediaDuration(expectedMediaDuration)
-                                .thumbnailUrl(expectedThumbnailUrl)
-                                .buttonTitle(expectedButtonTitle)
-                );
+            )
+            .content(
+                new ViberOutboundVideoContent()
+                    .text(expectedText)
+                    .mediaUrl(expectedMediaUrl)
+                    .mediaDuration(expectedMediaDuration)
+                    .thumbnailUrl(expectedThumbnailUrl)
+                    .buttonTitle(expectedButtonTitle)
+            );
 
         ViberRequest viberRequest = new ViberRequest()
-                .addMessagesItem(viberMessage);
+            .addMessagesItem(viberMessage);
 
         Consumer<ViberResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -1037,21 +1037,21 @@ class ViberApiTest extends ApiTest {
         String givenDescription = "Message sent to next instance";
         String givenDestination = "441134960001";
         String givenResponse = String.format("{\n" +
-                                             "  \"bulkId\": \"%s\",\n" +
-                                             "  \"messages\": [\n" +
-                                             "    {\n" +
-                                             "      \"messageId\": \"%s\",\n" +
-                                             "      \"status\": {\n" +
-                                             "        \"groupId\": %d,\n" +
-                                             "        \"groupName\": \"%s\",\n" +
-                                             "        \"id\": %d,\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"description\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"destination\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ]\n" +
-                                             "}",
+                                                 "  \"bulkId\": \"%s\",\n" +
+                                                 "  \"messages\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"messageId\": \"%s\",\n" +
+                                                 "      \"status\": {\n" +
+                                                 "        \"groupId\": %d,\n" +
+                                                 "        \"groupName\": \"%s\",\n" +
+                                                 "        \"id\": %d,\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"description\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"destination\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ]\n" +
+                                                 "}",
                                              givenBulkId,
                                              givenMessageId,
                                              givenGroupId,
@@ -1068,22 +1068,22 @@ class ViberApiTest extends ApiTest {
         String expectedMediaUrl = "https://www.example.com/file.xlsx";
         String expectedType = "FILE";
         String expectedRequest = String.format("{\n" +
-                                               "  \"messages\": [\n" +
-                                               "    {\n" +
-                                               "      \"sender\": \"%s\",\n" +
-                                               "      \"destinations\": [\n" +
-                                               "        {\n" +
-                                               "          \"to\": \"%s\"\n" +
-                                               "        }\n" +
-                                               "      ],\n" +
-                                               "      \"content\": {\n" +
-                                               "        \"fileName\": \"%s\",\n" +
-                                               "        \"mediaUrl\": \"%s\",\n" +
-                                               "        \"type\": \"%s\"\n" +
-                                               "      }\n" +
-                                               "    }\n" +
-                                               "  ]\n" +
-                                               "}",
+                                                   "  \"messages\": [\n" +
+                                                   "    {\n" +
+                                                   "      \"sender\": \"%s\",\n" +
+                                                   "      \"destinations\": [\n" +
+                                                   "        {\n" +
+                                                   "          \"to\": \"%s\"\n" +
+                                                   "        }\n" +
+                                                   "      ],\n" +
+                                                   "      \"content\": {\n" +
+                                                   "        \"fileName\": \"%s\",\n" +
+                                                   "        \"mediaUrl\": \"%s\",\n" +
+                                                   "        \"type\": \"%s\"\n" +
+                                                   "      }\n" +
+                                                   "    }\n" +
+                                                   "  ]\n" +
+                                                   "}",
                                                expectedSender,
                                                expectedTo,
                                                expectedFileName,
@@ -1092,30 +1092,30 @@ class ViberApiTest extends ApiTest {
         );
 
         setUpPostRequest(
-                SEND_VIBER_MESSAGES,
-                expectedRequest,
-                givenResponse,
-                200
+            SEND_VIBER_MESSAGES,
+            expectedRequest,
+            givenResponse,
+            200
         );
 
         ViberApi api = new ViberApi(getApiClient());
 
         ViberMessage viberMessage = new ViberMessage()
-                .sender(expectedSender)
-                .destinations(
-                        List.of(
-                                new ViberToDestination()
-                                        .to(expectedTo)
-                        )
+            .sender(expectedSender)
+            .destinations(
+                List.of(
+                    new ViberToDestination()
+                        .to(expectedTo)
                 )
-                .content(
-                        new ViberOutboundFileContent()
-                                .fileName(expectedFileName)
-                                .mediaUrl(expectedMediaUrl)
-                );
+            )
+            .content(
+                new ViberOutboundFileContent()
+                    .fileName(expectedFileName)
+                    .mediaUrl(expectedMediaUrl)
+            );
 
         ViberRequest viberRequest = new ViberRequest()
-                .addMessagesItem(viberMessage);
+            .addMessagesItem(viberMessage);
 
         Consumer<ViberResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -1165,40 +1165,40 @@ class ViberApiTest extends ApiTest {
         String givenCallbackData = "string";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"results\": [\n" +
-                                             "    {\n" +
-                                             "      \"bulkId\": \"%s\",\n" +
-                                             "      \"price\": {\n" +
-                                             "        \"pricePerMessage\": %f,\n" +
-                                             "        \"currency\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"status\": {\n" +
-                                             "        \"groupId\": %d,\n" +
-                                             "        \"groupName\": \"%s\",\n" +
-                                             "        \"id\": %d,\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"description\": \"%s\",\n" +
-                                             "        \"action\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"error\": {\n" +
-                                             "        \"groupId\": %d,\n" +
-                                             "        \"groupName\": \"%s\",\n" +
-                                             "        \"id\": %d,\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"description\": \"%s\",\n" +
-                                             "        \"permanent\": %b\n" +
-                                             "      },\n" +
-                                             "      \"messageId\": \"%s\",\n" +
-                                             "      \"to\": \"%s\",\n" +
-                                             "      \"sender\": \"%s\",\n" +
-                                             "      \"sentAt\": \"%s\",\n" +
-                                             "      \"doneAt\": \"%s\",\n" +
-                                             "      \"messageCount\": %d,\n" +
-                                             "      \"mccMnc\": \"%s\",\n" +
-                                             "      \"callbackData\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ]\n" +
-                                             "}\n",
+                                                 "  \"results\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"bulkId\": \"%s\",\n" +
+                                                 "      \"price\": {\n" +
+                                                 "        \"pricePerMessage\": %f,\n" +
+                                                 "        \"currency\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"status\": {\n" +
+                                                 "        \"groupId\": %d,\n" +
+                                                 "        \"groupName\": \"%s\",\n" +
+                                                 "        \"id\": %d,\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"description\": \"%s\",\n" +
+                                                 "        \"action\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"error\": {\n" +
+                                                 "        \"groupId\": %d,\n" +
+                                                 "        \"groupName\": \"%s\",\n" +
+                                                 "        \"id\": %d,\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"description\": \"%s\",\n" +
+                                                 "        \"permanent\": %b\n" +
+                                                 "      },\n" +
+                                                 "      \"messageId\": \"%s\",\n" +
+                                                 "      \"to\": \"%s\",\n" +
+                                                 "      \"sender\": \"%s\",\n" +
+                                                 "      \"sentAt\": \"%s\",\n" +
+                                                 "      \"doneAt\": \"%s\",\n" +
+                                                 "      \"messageCount\": %d,\n" +
+                                                 "      \"mccMnc\": \"%s\",\n" +
+                                                 "      \"callbackData\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ]\n" +
+                                                 "}\n",
                                              givenBulkId,
                                              givenPricePerMessage,
                                              givenCurrency,
@@ -1225,11 +1225,11 @@ class ViberApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                GET_VIBER_REPORTS,
-                Map.of("bulkId","BULK-ID-123-xyz",
-                        "messageId","MESSAGE-ID-123-xyz",
-                       "limit", "2"),
-                givenResponse
+            GET_VIBER_REPORTS,
+            Map.of("bulkId", "BULK-ID-123-xyz",
+                   "messageId", "MESSAGE-ID-123-xyz",
+                   "limit", "2"),
+            givenResponse
         );
 
         ViberApi api = new ViberApi(getApiClient());
@@ -1304,46 +1304,46 @@ class ViberApiTest extends ApiTest {
         String givenContentText = "Some text";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"results\": [\n" +
-                                             "    {\n" +
-                                             "      \"sender\": \"%s\",\n" +
-                                             "      \"destination\": \"%s\",\n" +
-                                             "      \"bulkId\": \"%s\",\n" +
-                                             "      \"messageId\": \"%s\",\n" +
-                                             "      \"sentAt\": \"%s\",\n" +
-                                             "      \"doneAt\": \"%s\",\n" +
-                                             "      \"messageCount\": %d,\n" +
-                                             "      \"price\": {\n" +
-                                             "        \"pricePerMessage\": %f,\n" +
-                                             "        \"currency\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"status\": {\n" +
-                                             "        \"groupId\": %d,\n" +
-                                             "        \"groupName\": \"%s\",\n" +
-                                             "        \"id\": %d,\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"description\": \"%s\",\n" +
-                                             "        \"action\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"error\": {\n" +
-                                             "        \"groupId\": %d,\n" +
-                                             "        \"groupName\": \"%s\",\n" +
-                                             "        \"id\": %d,\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"description\": \"%s\",\n" +
-                                             "        \"permanent\": %b\n" +
-                                             "      },\n" +
-                                             "      \"platform\": {\n" +
-                                             "        \"entityId\": \"%s\",\n" +
-                                             "        \"applicationId\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"content\": {\n" +
-                                             "        \"type\": \"%s\",\n" +
-                                             "        \"text\": \"%s\"\n" +
-                                             "      }\n" +
-                                             "    }\n" +
-                                             "  ]\n" +
-                                             "}",
+                                                 "  \"results\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"sender\": \"%s\",\n" +
+                                                 "      \"destination\": \"%s\",\n" +
+                                                 "      \"bulkId\": \"%s\",\n" +
+                                                 "      \"messageId\": \"%s\",\n" +
+                                                 "      \"sentAt\": \"%s\",\n" +
+                                                 "      \"doneAt\": \"%s\",\n" +
+                                                 "      \"messageCount\": %d,\n" +
+                                                 "      \"price\": {\n" +
+                                                 "        \"pricePerMessage\": %f,\n" +
+                                                 "        \"currency\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"status\": {\n" +
+                                                 "        \"groupId\": %d,\n" +
+                                                 "        \"groupName\": \"%s\",\n" +
+                                                 "        \"id\": %d,\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"description\": \"%s\",\n" +
+                                                 "        \"action\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"error\": {\n" +
+                                                 "        \"groupId\": %d,\n" +
+                                                 "        \"groupName\": \"%s\",\n" +
+                                                 "        \"id\": %d,\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"description\": \"%s\",\n" +
+                                                 "        \"permanent\": %b\n" +
+                                                 "      },\n" +
+                                                 "      \"platform\": {\n" +
+                                                 "        \"entityId\": \"%s\",\n" +
+                                                 "        \"applicationId\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"content\": {\n" +
+                                                 "        \"type\": \"%s\",\n" +
+                                                 "        \"text\": \"%s\"\n" +
+                                                 "      }\n" +
+                                                 "    }\n" +
+                                                 "  ]\n" +
+                                                 "}",
                                              givenSender,
                                              givenDestination,
                                              givenBulkId,
@@ -1404,20 +1404,20 @@ class ViberApiTest extends ApiTest {
         };
 
         setUpSuccessGetRequest(
-                GET_VIBER_LOGS,
-                Map.of(
-                        "bulkId", "BULK-ID-123-xyz",
-                        "messageId","MESSAGE-ID-123-xyz",
-                        "sender", "sender",
-                        "destination", "destination",
-                        "generalStatus", "DELIVERED",
-                        "sentSince", "2020-02-22T17:42:05.390+01:00",
-                        "sentUntil", "2020-02-22T17:42:05.390+01:00",
-                        "limit", "50",
-                        "entityId", "entityId",
-                        "applicationId", "applicationId"
-                ),
-                givenResponse
+            GET_VIBER_LOGS,
+            Map.of(
+                "bulkId", "BULK-ID-123-xyz",
+                "messageId", "MESSAGE-ID-123-xyz",
+                "sender", "sender",
+                "destination", "destination",
+                "generalStatus", "DELIVERED",
+                "sentSince", "2020-02-22T17:42:05.390+01:00",
+                "sentUntil", "2020-02-22T17:42:05.390+01:00",
+                "limit", "50",
+                "entityId", "entityId",
+                "applicationId", "applicationId"
+            ),
+            givenResponse
         );
 
         var call = api.getOutboundViberMessageLogs()
@@ -1461,106 +1461,106 @@ class ViberApiTest extends ApiTest {
         var givenCallbackData = "Callback data";
         var givenRequest = String.format(
             "{\n" +
-            "\"results\": [\n" +
-            "  {\n" +
-            "    \"bulkId\": \"%s\",\n" +
-            "    \"price\": {\n" +
-            "      \"pricePerMessage\": %f,\n" +
-            "      \"currency\": \"%s\"\n" +
-            "    },\n" +
-            "    \"status\": {\n" +
-            "      \"groupId\": %d,\n" +
-            "      \"groupName\": \"%s\",\n" +
-            "      \"id\": %d,\n" +
-            "      \"name\": \"%s\",\n" +
-            "      \"description\": \"%s\"\n" +
-            "    },\n" +
-            "    \"error\": {\n" +
-            "      \"groupId\": %d,\n" +
-            "      \"groupName\": \"%s\",\n" +
-            "      \"id\": %d,\n" +
-            "      \"name\": \"%s\",\n" +
-            "      \"description\": \"%s\",\n" +
-            "      \"permanent\": %b\n" +
-            "    },\n" +
-            "    \"messageId\": \"%s\",\n" +
-            "    \"to\": \"%s\",\n" +
-            "    \"sender\": \"%s\",\n" +
-            "    \"sentAt\": \"%s\",\n" +
-            "    \"doneAt\": \"%s\",\n" +
-            "    \"messageCount\": %d,\n" +
-            "    \"mccMnc\": \"%s\",\n" +
-            "    \"callbackData\": \"%s\"\n" +
-            "  }\n" +
-            " ]\n" +
-            "}",
-                givenBulkId,
-                givenPricePerMessage,
-                givenCurrency,
-                givenStatusGroupId,
-                givenStatusGroupName,
-                givenStatusId,
-                givenStatusName,
-                givenStatusDescription,
-                givenErrorGroupId,
-                givenErrorGroupName,
-                givenErrorId,
-                givenErrorName,
-                givenErrorDescription,
-                givenErrorPermanent,
-                givenMessageId,
-                givenTo,
-                givenSender,
-                givenSentAt,
-                givenDoneAt,
-                givenMessageCount,
-                givenMccMnc,
-                givenCallbackData
+                "\"results\": [\n" +
+                "  {\n" +
+                "    \"bulkId\": \"%s\",\n" +
+                "    \"price\": {\n" +
+                "      \"pricePerMessage\": %f,\n" +
+                "      \"currency\": \"%s\"\n" +
+                "    },\n" +
+                "    \"status\": {\n" +
+                "      \"groupId\": %d,\n" +
+                "      \"groupName\": \"%s\",\n" +
+                "      \"id\": %d,\n" +
+                "      \"name\": \"%s\",\n" +
+                "      \"description\": \"%s\"\n" +
+                "    },\n" +
+                "    \"error\": {\n" +
+                "      \"groupId\": %d,\n" +
+                "      \"groupName\": \"%s\",\n" +
+                "      \"id\": %d,\n" +
+                "      \"name\": \"%s\",\n" +
+                "      \"description\": \"%s\",\n" +
+                "      \"permanent\": %b\n" +
+                "    },\n" +
+                "    \"messageId\": \"%s\",\n" +
+                "    \"to\": \"%s\",\n" +
+                "    \"sender\": \"%s\",\n" +
+                "    \"sentAt\": \"%s\",\n" +
+                "    \"doneAt\": \"%s\",\n" +
+                "    \"messageCount\": %d,\n" +
+                "    \"mccMnc\": \"%s\",\n" +
+                "    \"callbackData\": \"%s\"\n" +
+                "  }\n" +
+                " ]\n" +
+                "}",
+            givenBulkId,
+            givenPricePerMessage,
+            givenCurrency,
+            givenStatusGroupId,
+            givenStatusGroupName,
+            givenStatusId,
+            givenStatusName,
+            givenStatusDescription,
+            givenErrorGroupId,
+            givenErrorGroupName,
+            givenErrorId,
+            givenErrorName,
+            givenErrorDescription,
+            givenErrorPermanent,
+            givenMessageId,
+            givenTo,
+            givenSender,
+            givenSentAt,
+            givenDoneAt,
+            givenMessageCount,
+            givenMccMnc,
+            givenCallbackData
         );
 
         ViberWebhookReportsResponse deliveryResult = new JSON().deserialize(
-                givenRequest,
-                ViberWebhookReportsResponse.class
+            givenRequest,
+            ViberWebhookReportsResponse.class
         );
 
         var expectedSentAt = OffsetDateTime.of(
-                LocalDateTime.of(2019, 4, 9, 16, 0, 58),
-                ZoneOffset.ofHours(-3)
+            LocalDateTime.of(2019, 4, 9, 16, 0, 58),
+            ZoneOffset.ofHours(-3)
         );
         var expectedDoneAt = OffsetDateTime.of(
-                LocalDateTime.of(2019, 4, 9, 16, 1, 56),
-                ZoneOffset.ofHours(-3)
+            LocalDateTime.of(2019, 4, 9, 16, 1, 56),
+            ZoneOffset.ofHours(-3)
         );
 
         var expectedReport = new ViberWebhookReport()
-                .bulkId(givenBulkId)
-                .messageId(givenMessageId)
-                .to(givenTo)
-                .sentAt(expectedSentAt)
-                .doneAt(expectedDoneAt)
-                .sender(givenSender)
-                .messageCount(givenMessageCount)
-                .mccMnc(givenMccMnc)
-                .callbackData(givenCallbackData)
-                .price(new MessagePrice()
-                        .pricePerMessage(givenPricePerMessage)
-                        .currency(givenCurrency)
-                ).error(new ViberMessageError()
+            .bulkId(givenBulkId)
+            .messageId(givenMessageId)
+            .to(givenTo)
+            .sentAt(expectedSentAt)
+            .doneAt(expectedDoneAt)
+            .sender(givenSender)
+            .messageCount(givenMessageCount)
+            .mccMnc(givenMccMnc)
+            .callbackData(givenCallbackData)
+            .price(new MessagePrice()
+                       .pricePerMessage(givenPricePerMessage)
+                       .currency(givenCurrency)
+            ).error(new ViberMessageError()
                         .id(givenErrorId)
                         .groupId(givenErrorGroupId)
                         .groupName(ViberMessageErrorGroup.valueOf(givenErrorGroupName))
                         .name(givenErrorName)
                         .description(givenErrorDescription)
                         .permanent(givenErrorPermanent)
-                ).status(new ViberMessageStatus()
-                        .id(givenStatusId)
-                        .name(givenStatusName)
-                        .description(givenStatusDescription)
-                        .groupId(givenStatusGroupId)
-                        .groupName(ViberMessageGeneralStatus.valueOf(givenStatusGroupName))
-                );
+            ).status(new ViberMessageStatus()
+                         .id(givenStatusId)
+                         .name(givenStatusName)
+                         .description(givenStatusDescription)
+                         .groupId(givenStatusGroupId)
+                         .groupName(ViberMessageGeneralStatus.valueOf(givenStatusGroupName))
+            );
         var expectedReportResponse = new ViberWebhookReportsResponse()
-                .addResultsItem(expectedReport);
+            .addResultsItem(expectedReport);
 
         then(deliveryResult).isEqualTo(expectedReportResponse);
     }
@@ -1583,29 +1583,29 @@ class ViberApiTest extends ApiTest {
         Integer givenPendingMessageCount = 1;
 
         String givenRequest = String.format("{\n" +
-                                            "  \"results\": [\n" +
-                                            "    {\n" +
-                                            "      \"from\": \"%s\",\n" +
-                                            "      \"to\": \"%s\",\n" +
-                                            "      \"integrationType\": \"%s\",\n" +
-                                            "      \"receivedAt\": \"%s\",\n" +
-                                            "      \"messageId\": \"%s\",\n" +
-                                            "      \"pairedMessageId\": \"%s\",\n" +
-                                            "      \"callbackData\": \"%s\",\n" +
-                                            "      \"message\": {\n" +
-                                            "        \"text\": \"%s\",\n" +
-                                            "        \"trackingData\": \"%s\",\n" +
-                                            "        \"type\": \"%s\"\n" +
-                                            "      },\n" +
-                                            "      \"price\": {\n" +
-                                            "        \"pricePerMessage\": %f,\n" +
-                                            "        \"currency\": \"%s\"\n" +
-                                            "      }\n" +
-                                            "    }\n" +
-                                            "  ],\n" +
-                                            "  \"messageCount\": %d,\n" +
-                                            "  \"pendingMessageCount\": %d\n" +
-                                            "}\n",
+                                                "  \"results\": [\n" +
+                                                "    {\n" +
+                                                "      \"from\": \"%s\",\n" +
+                                                "      \"to\": \"%s\",\n" +
+                                                "      \"integrationType\": \"%s\",\n" +
+                                                "      \"receivedAt\": \"%s\",\n" +
+                                                "      \"messageId\": \"%s\",\n" +
+                                                "      \"pairedMessageId\": \"%s\",\n" +
+                                                "      \"callbackData\": \"%s\",\n" +
+                                                "      \"message\": {\n" +
+                                                "        \"text\": \"%s\",\n" +
+                                                "        \"trackingData\": \"%s\",\n" +
+                                                "        \"type\": \"%s\"\n" +
+                                                "      },\n" +
+                                                "      \"price\": {\n" +
+                                                "        \"pricePerMessage\": %f,\n" +
+                                                "        \"currency\": \"%s\"\n" +
+                                                "      }\n" +
+                                                "    }\n" +
+                                                "  ],\n" +
+                                                "  \"messageCount\": %d,\n" +
+                                                "  \"pendingMessageCount\": %d\n" +
+                                                "}\n",
                                             givenFrom,
                                             givenTo,
                                             givenIntegrationType,
@@ -1622,35 +1622,35 @@ class ViberApiTest extends ApiTest {
                                             givenPendingMessageCount);
 
         ViberWebhookInboundReportResponse receivedMessages = new JSON().deserialize(
-                givenRequest,
-                ViberWebhookInboundReportResponse.class
+            givenRequest,
+            ViberWebhookInboundReportResponse.class
         );
 
         var expectedSentAt = OffsetDateTime.of(
-                LocalDateTime.of(2020, 4, 1, 11, 2, 43, 594_000_000),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2020, 4, 1, 11, 2, 43, 594_000_000),
+            ZoneOffset.ofHours(0)
         );
 
         var viberResultViberInboundContent = new ViberWebhookInboundReport()
-                .from(givenFrom)
-                .to(givenTo)
-                .integrationType(givenIntegrationType)
-                .receivedAt(expectedSentAt)
-                .messageId(givenMessageId)
-                .pairedMessageId(givenPairedMessageId)
-                .callbackData(givenCallbackData)
-                .message(new ViberInboundTextContent()
-                                 .text(givenText)
-                                 .trackingData(givenTrackingData))
-                .price(new MessagePrice()
-                               .pricePerMessage(givenPricePerMessage)
-                               .currency(givenCurrency)
-                );
+            .from(givenFrom)
+            .to(givenTo)
+            .integrationType(givenIntegrationType)
+            .receivedAt(expectedSentAt)
+            .messageId(givenMessageId)
+            .pairedMessageId(givenPairedMessageId)
+            .callbackData(givenCallbackData)
+            .message(new ViberInboundTextContent()
+                         .text(givenText)
+                         .trackingData(givenTrackingData))
+            .price(new MessagePrice()
+                       .pricePerMessage(givenPricePerMessage)
+                       .currency(givenCurrency)
+            );
 
         var viberWebhookInboundReportResponse = new ViberWebhookInboundReportResponse()
-                .addResultsItem(viberResultViberInboundContent)
-                .messageCount(givenMessageCount)
-                .pendingMessageCount(givenPendingMessageCount);
+            .addResultsItem(viberResultViberInboundContent)
+            .messageCount(givenMessageCount)
+            .pendingMessageCount(givenPendingMessageCount);
 
         then(viberWebhookInboundReportResponse).isEqualTo(receivedMessages);
     }
@@ -1674,30 +1674,30 @@ class ViberApiTest extends ApiTest {
         Integer givenPendingMessageCount = 1;
 
         String givenRequest = String.format("{\n" +
-                                            "  \"results\": [\n" +
-                                            "    {\n" +
-                                            "      \"from\": \"%s\",\n" +
-                                            "      \"to\": \"%s\",\n" +
-                                            "      \"integrationType\": \"%s\",\n" +
-                                            "      \"receivedAt\": \"%s\",\n" +
-                                            "      \"messageId\": \"%s\",\n" +
-                                            "      \"pairedMessageId\": \"%s\",\n" +
-                                            "      \"callbackData\": \"%s\",\n" +
-                                            "      \"message\": {\n" +
-                                            "        \"url\": \"%s\",\n" +
-                                            "        \"fileName\": \"%s\",\n" +
-                                            "        \"trackingData\": \"%s\",\n" +
-                                            "        \"type\": \"%s\"\n" +
-                                            "      },\n" +
-                                            "      \"price\": {\n" +
-                                            "        \"pricePerMessage\": %f,\n" +
-                                            "        \"currency\": \"%s\"\n" +
-                                            "      }\n" +
-                                            "    }\n" +
-                                            "  ],\n" +
-                                            "  \"messageCount\": %d,\n" +
-                                            "  \"pendingMessageCount\": %d\n" +
-                                            "}\n",
+                                                "  \"results\": [\n" +
+                                                "    {\n" +
+                                                "      \"from\": \"%s\",\n" +
+                                                "      \"to\": \"%s\",\n" +
+                                                "      \"integrationType\": \"%s\",\n" +
+                                                "      \"receivedAt\": \"%s\",\n" +
+                                                "      \"messageId\": \"%s\",\n" +
+                                                "      \"pairedMessageId\": \"%s\",\n" +
+                                                "      \"callbackData\": \"%s\",\n" +
+                                                "      \"message\": {\n" +
+                                                "        \"url\": \"%s\",\n" +
+                                                "        \"fileName\": \"%s\",\n" +
+                                                "        \"trackingData\": \"%s\",\n" +
+                                                "        \"type\": \"%s\"\n" +
+                                                "      },\n" +
+                                                "      \"price\": {\n" +
+                                                "        \"pricePerMessage\": %f,\n" +
+                                                "        \"currency\": \"%s\"\n" +
+                                                "      }\n" +
+                                                "    }\n" +
+                                                "  ],\n" +
+                                                "  \"messageCount\": %d,\n" +
+                                                "  \"pendingMessageCount\": %d\n" +
+                                                "}\n",
                                             givenFrom,
                                             givenTo,
                                             givenIntegrationType,
@@ -1715,36 +1715,36 @@ class ViberApiTest extends ApiTest {
                                             givenPendingMessageCount);
 
         ViberWebhookInboundReportResponse receivedMessages = new JSON().deserialize(
-                givenRequest,
-                ViberWebhookInboundReportResponse.class
+            givenRequest,
+            ViberWebhookInboundReportResponse.class
         );
 
         var expectedSentAt = OffsetDateTime.of(
-                LocalDateTime.of(2020, 4, 1, 11, 2, 43, 594_000_000),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2020, 4, 1, 11, 2, 43, 594_000_000),
+            ZoneOffset.ofHours(0)
         );
 
         var viberResultViberInboundContent = new ViberWebhookInboundReport()
-                .from(givenFrom)
-                .to(givenTo)
-                .integrationType(givenIntegrationType)
-                .receivedAt(expectedSentAt)
-                .messageId(givenMessageId)
-                .pairedMessageId(givenPairedMessageId)
-                .callbackData(givenCallbackData)
-                .message(new ViberInboundFileContent()
-                                 .url(givenUrl)
-                                 .fileName(givenFileName)
-                                 .trackingData(givenTrackingData))
-                .price(new MessagePrice()
-                               .pricePerMessage(givenPricePerMessage)
-                               .currency(givenCurrency)
-                );
+            .from(givenFrom)
+            .to(givenTo)
+            .integrationType(givenIntegrationType)
+            .receivedAt(expectedSentAt)
+            .messageId(givenMessageId)
+            .pairedMessageId(givenPairedMessageId)
+            .callbackData(givenCallbackData)
+            .message(new ViberInboundFileContent()
+                         .url(givenUrl)
+                         .fileName(givenFileName)
+                         .trackingData(givenTrackingData))
+            .price(new MessagePrice()
+                       .pricePerMessage(givenPricePerMessage)
+                       .currency(givenCurrency)
+            );
 
         var viberInboundMessages = new ViberWebhookInboundReportResponse()
-                .addResultsItem(viberResultViberInboundContent)
-                .messageCount(givenMessageCount)
-                .pendingMessageCount(givenPendingMessageCount);
+            .addResultsItem(viberResultViberInboundContent)
+            .messageCount(givenMessageCount)
+            .pendingMessageCount(givenPendingMessageCount);
 
         then(viberInboundMessages).isEqualTo(receivedMessages);
     }
@@ -1760,18 +1760,18 @@ class ViberApiTest extends ApiTest {
         String givenEntityId = "entityId";
 
         String givenRequest = String.format("{\n" +
-                                            "  \"results\": [\n" +
-                                            "    {\n" +
-                                            "      \"messageId\": \"%s\",\n" +
-                                            "      \"from\": \"%s\",\n" +
-                                            "      \"to\": \"%s\",\n" +
-                                            "      \"sentAt\": \"%s\",\n" +
-                                            "      \"seenAt\": \"%s\",\n" +
-                                            "      \"applicationId\": \"%s\",\n" +
-                                            "      \"entityId\": \"%s\"\n" +
-                                            "    }\n" +
-                                            "  ]\n" +
-                                            "}",
+                                                "  \"results\": [\n" +
+                                                "    {\n" +
+                                                "      \"messageId\": \"%s\",\n" +
+                                                "      \"from\": \"%s\",\n" +
+                                                "      \"to\": \"%s\",\n" +
+                                                "      \"sentAt\": \"%s\",\n" +
+                                                "      \"seenAt\": \"%s\",\n" +
+                                                "      \"applicationId\": \"%s\",\n" +
+                                                "      \"entityId\": \"%s\"\n" +
+                                                "    }\n" +
+                                                "  ]\n" +
+                                                "}",
                                             givenMessageId,
                                             givenFrom,
                                             givenTo,
@@ -1781,32 +1781,33 @@ class ViberApiTest extends ApiTest {
                                             givenEntityId);
 
         ViberSeenReports receivedSeenReports = new JSON().deserialize(
-                givenRequest,
-                ViberSeenReports.class
+            givenRequest,
+            ViberSeenReports.class
         );
 
         var expectedSentAt = OffsetDateTime.of(
-                LocalDateTime.of(2023, 4, 5, 11, 21, 57, 793_000_000),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2023, 4, 5, 11, 21, 57, 793_000_000),
+            ZoneOffset.ofHours(0)
         );
 
         var expectedSeenAt = OffsetDateTime.of(
-                LocalDateTime.of(2023, 4, 5, 11, 22, 10, 251_000_000),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2023, 4, 5, 11, 22, 10, 251_000_000),
+            ZoneOffset.ofHours(0)
         );
 
         var seenReport = new ViberSeenReport()
-                .messageId(givenMessageId)
-                .from(givenFrom)
-                .to(givenTo)
-                .sentAt(expectedSentAt)
-                .seenAt(expectedSeenAt)
-                .applicationId(givenApplicationId)
-                .entityId(givenEntityId);
+            .messageId(givenMessageId)
+            .from(givenFrom)
+            .to(givenTo)
+            .sentAt(expectedSentAt)
+            .seenAt(expectedSeenAt)
+            .applicationId(givenApplicationId)
+            .entityId(givenEntityId);
 
         var seenReports = new ViberSeenReports()
-                .addResultsItem(seenReport);
+            .addResultsItem(seenReport);
 
         then(receivedSeenReports).isEqualTo(seenReports);
     }
+
 }

@@ -6,5 +6,7 @@ import okhttp3.Call;
 
 @FunctionalInterface
 public interface AsyncApiCall<T> {
+
     Call execute(ApiCallback<T> callback) throws ApiException;
+
 }

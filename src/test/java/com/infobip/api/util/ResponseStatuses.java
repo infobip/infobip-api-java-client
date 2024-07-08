@@ -1,6 +1,7 @@
 package com.infobip.api.util;
 
 public class ResponseStatuses {
+
     public static final int PENDING_STATUS_GROUP_ID = 1;
     public static final String PENDING_STATUS_GROUP_NAME = "PENDING";
     public static final int PENDING_STATUS_ID = 26;
@@ -24,4 +25,5 @@ public class ResponseStatuses {
     public static final String NO_ERROR_NAME = "NO_ERROR";
     public static final String NO_ERROR_DESCRIPTION = "No Error";
     public static final boolean NO_ERROR_IS_PERMANENT = false;
+
 }

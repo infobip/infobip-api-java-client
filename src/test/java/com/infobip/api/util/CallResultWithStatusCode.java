@@ -3,6 +3,7 @@ package com.infobip.api.util;
 import com.infobip.ApiException;
 
 public class CallResultWithStatusCode<T> {
+
     private final int statusCode;
     private final T data;
     private final ApiException exception;
@@ -24,4 +25,5 @@ public class CallResultWithStatusCode<T> {
     public ApiException getException() {
         return exception;
     }
+
 }

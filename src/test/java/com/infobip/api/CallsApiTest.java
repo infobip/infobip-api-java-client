@@ -1,8 +1,6 @@
 package com.infobip.api;
 
-import com.infobip.api.CallsApi;
 import com.infobip.model.*;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -18,6 +16,7 @@ import static org.assertj.core.api.Assertions.entry;
 import static org.assertj.core.api.BDDAssertions.then;
 
 class CallsApiTest extends ApiTest {
+
     private static final String APPLICATION_TRANSFER = "/calls/1/calls/{callId}/application-transfer";
     private static final String APPLICATION_TRANSFER_ACCEPT = "/calls/1/calls/{callId}/application-transfer/{transferId}/accept";
     private static final String APPLICATION_TRANSFER_REJECT = "/calls/1/calls/{callId}/application-transfer/{transferId}/reject";
@@ -89,21 +88,21 @@ class CallsApiTest extends ApiTest {
         String givenCustomDataField = "custom";
         String givenCustomDataFieldValue = "data";
         Map<String, String> givenCustomData = Map.of(
-                givenCustomDataField, givenCustomDataFieldValue
+            givenCustomDataField, givenCustomDataFieldValue
         );
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
         String expectedRequest = String.format("{\n" +
-                                               "  \"destinationApplicationId\": \"%s\",\n" +
-                                               "  \"timeout\": %d,\n" +
-                                               "  \"customData\": {\n" +
-                                               "      \"%s\": \"%s\"\n" +
-                                               "  }\n" +
-                                               "}\n",
+                                                   "  \"destinationApplicationId\": \"%s\",\n" +
+                                                   "  \"timeout\": %d,\n" +
+                                                   "  \"customData\": {\n" +
+                                                   "      \"%s\": \"%s\"\n" +
+                                                   "  }\n" +
+                                                   "}\n",
                                                givenDestinationApplicationId,
                                                givenTimeout,
                                                givenCustomDataField,
@@ -111,17 +110,17 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessPostRequest(
-                APPLICATION_TRANSFER.replace("{callId}", givenDestinationApplicationId),
-                expectedRequest,
-                givenResponse
+            APPLICATION_TRANSFER.replace("{callId}", givenDestinationApplicationId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsApplicationTransferRequest request = new CallsApplicationTransferRequest()
-                .destinationApplicationId(givenDestinationApplicationId)
-                .timeout(givenTimeout)
-                .customData(givenCustomData);
+            .destinationApplicationId(givenDestinationApplicationId)
+            .timeout(givenTimeout)
+            .customData(givenCustomData);
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -140,18 +139,18 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         setUpEmptyPostRequest(
-                APPLICATION_TRANSFER_ACCEPT
-                        .replace("{callId}", givenCallId)
-                        .replace("{transferId}", givenTransferId),
-                Map.of(),
-                givenResponse,
-                200
+            APPLICATION_TRANSFER_ACCEPT
+                .replace("{callId}", givenCallId)
+                .replace("{transferId}", givenTransferId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -174,18 +173,18 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         setUpEmptyPostRequest(
-                APPLICATION_TRANSFER_REJECT
-                        .replace("{callId}", givenCallId)
-                        .replace("{transferId}", givenTransferId),
-                Map.of(),
-                givenResponse,
-                200
+            APPLICATION_TRANSFER_REJECT
+                .replace("{callId}", givenCallId)
+                .replace("{transferId}", givenTransferId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -230,51 +229,51 @@ class CallsApiTest extends ApiTest {
         Long givenPageTotalResults = 0L;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"results\": [\n" +
-                                             "    {\n" +
-                                             "        \"id\": \"%s\",\n" +
-                                             "        \"endpoint\": {\n" +
-                                             "          \"phoneNumber\": \"%s\",\n" +
-                                             "          \"type\": \"%s\"\n" +
-                                             "        },\n" +
-                                             "        \"from\": \"%s\",\n" +
-                                             "        \"to\": \"%s\",\n" +
-                                             "        \"direction\": \"%s\",\n" +
-                                             "        \"state\": \"%s\",\n" +
-                                             "        \"media\": {\n" +
-                                             "          \"audio\": {\n" +
-                                             "            \"muted\": %b,\n" +
-                                             "            \"userMuted\": %b,\n" +
-                                             "            \"deaf\": %b\n" +
-                                             "          },\n" +
-                                             "          \"video\": {\n" +
-                                             "            \"camera\": %b,\n" +
-                                             "            \"screenShare\": %b\n" +
-                                             "          }\n" +
-                                             "        },\n" +
-                                             "        \"startTime\": \"%s\",\n" +
-                                             "        \"answerTime\": \"%s\",\n" +
-                                             "        \"endTime\": \"%s\",\n" +
-                                             "        \"parentCallId\": \"%s\",\n" +
-                                             "        \"machineDetection\": {\n" +
-                                             "          \"detectionResult\": \"%s\"\n" +
-                                             "        },\n" +
-                                             "        \"ringDuration\": %d,\n" +
-                                             "        \"applicationId\": \"%s\",\n" +
-                                             "        \"conferenceId\": \"%s\",\n" +
-                                             "        \"customData\": {\n" +
-                                             "          \"key1\": \"%s\",\n" +
-                                             "          \"key2\": \"%s\"\n" +
-                                             "        }\n" +
-                                             "      }\n" +
-                                             "  ],\n" +
-                                             "  \"paging\": {\n" +
-                                             "    \"page\": %d,\n" +
-                                             "    \"size\": %d,\n" +
-                                             "    \"totalPages\": %d,\n" +
-                                             "    \"totalResults\": %d\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"results\": [\n" +
+                                                 "    {\n" +
+                                                 "        \"id\": \"%s\",\n" +
+                                                 "        \"endpoint\": {\n" +
+                                                 "          \"phoneNumber\": \"%s\",\n" +
+                                                 "          \"type\": \"%s\"\n" +
+                                                 "        },\n" +
+                                                 "        \"from\": \"%s\",\n" +
+                                                 "        \"to\": \"%s\",\n" +
+                                                 "        \"direction\": \"%s\",\n" +
+                                                 "        \"state\": \"%s\",\n" +
+                                                 "        \"media\": {\n" +
+                                                 "          \"audio\": {\n" +
+                                                 "            \"muted\": %b,\n" +
+                                                 "            \"userMuted\": %b,\n" +
+                                                 "            \"deaf\": %b\n" +
+                                                 "          },\n" +
+                                                 "          \"video\": {\n" +
+                                                 "            \"camera\": %b,\n" +
+                                                 "            \"screenShare\": %b\n" +
+                                                 "          }\n" +
+                                                 "        },\n" +
+                                                 "        \"startTime\": \"%s\",\n" +
+                                                 "        \"answerTime\": \"%s\",\n" +
+                                                 "        \"endTime\": \"%s\",\n" +
+                                                 "        \"parentCallId\": \"%s\",\n" +
+                                                 "        \"machineDetection\": {\n" +
+                                                 "          \"detectionResult\": \"%s\"\n" +
+                                                 "        },\n" +
+                                                 "        \"ringDuration\": %d,\n" +
+                                                 "        \"applicationId\": \"%s\",\n" +
+                                                 "        \"conferenceId\": \"%s\",\n" +
+                                                 "        \"customData\": {\n" +
+                                                 "          \"key1\": \"%s\",\n" +
+                                                 "          \"key2\": \"%s\"\n" +
+                                                 "        }\n" +
+                                                 "      }\n" +
+                                                 "  ],\n" +
+                                                 "  \"paging\": {\n" +
+                                                 "    \"page\": %d,\n" +
+                                                 "    \"size\": %d,\n" +
+                                                 "    \"totalPages\": %d,\n" +
+                                                 "    \"totalResults\": %d\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenCallId,
                                              givenPhoneNumber,
                                              givenType,
@@ -304,9 +303,9 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CALLS,
-                Map.of(),
-                givenResponse
+            CALLS,
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -370,19 +369,19 @@ class CallsApiTest extends ApiTest {
         String givenParentCallId = "3ad8805e-d401-424e-9b03-e02a2016a5e2";
 
         String expectedRequest = String.format("{\n" +
-                                               "    \"endpoint\": {\n" +
-                                               "      \"phoneNumber\": \"%s\",\n" +
-                                               "      \"type\": \"%s\"\n" +
-                                               "    },\n" +
-                                               "    \"from\": \"%s\",\n" +
-                                               "    \"connectTimeout\": %d,\n" +
-                                               "    \"recording\": {\n" +
-                                               "      \"recordingType\": \"%s\"\n" +
-                                               "    },\n" +
-                                               "    \"maxDuration\": %d,\n" +
-                                               "    \"applicationId\": \"%s\",\n" +
-                                               "    \"parentCallId\": \"%s\"\n" +
-                                               "}\n",
+                                                   "    \"endpoint\": {\n" +
+                                                   "      \"phoneNumber\": \"%s\",\n" +
+                                                   "      \"type\": \"%s\"\n" +
+                                                   "    },\n" +
+                                                   "    \"from\": \"%s\",\n" +
+                                                   "    \"connectTimeout\": %d,\n" +
+                                                   "    \"recording\": {\n" +
+                                                   "      \"recordingType\": \"%s\"\n" +
+                                                   "    },\n" +
+                                                   "    \"maxDuration\": %d,\n" +
+                                                   "    \"applicationId\": \"%s\",\n" +
+                                                   "    \"parentCallId\": \"%s\"\n" +
+                                                   "}\n",
                                                givenPhoneNumber,
                                                givenType,
                                                givenFrom,
@@ -412,41 +411,41 @@ class CallsApiTest extends ApiTest {
         String givenKey2 = "value2";
 
         String givenResponse = String.format("{\n" +
-                                             "    \"id\": \"%s\",\n" +
-                                             "    \"endpoint\": {\n" +
-                                             "      \"phoneNumber\": \"%s\",\n" +
-                                             "      \"type\": \"%s\"\n" +
-                                             "    },\n" +
-                                             "    \"from\": \"%s\",\n" +
-                                             "    \"to\": \"%s\",\n" +
-                                             "    \"direction\": \"%s\",\n" +
-                                             "    \"state\": \"%s\",\n" +
-                                             "    \"media\": {\n" +
-                                             "      \"audio\": {\n" +
-                                             "        \"muted\": %b,\n" +
-                                             "        \"userMuted\": %b,\n" +
-                                             "        \"deaf\": %b\n" +
-                                             "      },\n" +
-                                             "      \"video\": {\n" +
-                                             "        \"camera\": %b,\n" +
-                                             "        \"screenShare\": %b\n" +
-                                             "      }\n" +
-                                             "    },\n" +
-                                             "    \"startTime\": \"%s\",\n" +
-                                             "    \"answerTime\": \"%s\",\n" +
-                                             "    \"endTime\": \"%s\",\n" +
-                                             "    \"parentCallId\": \"%s\",\n" +
-                                             "    \"machineDetection\": {\n" +
-                                             "      \"detectionResult\": \"%s\"\n" +
-                                             "    },\n" +
-                                             "    \"ringDuration\": %d,\n" +
-                                             "    \"applicationId\": \"%s\",\n" +
-                                             "    \"conferenceId\": \"%s\",\n" +
-                                             "    \"customData\": {\n" +
-                                             "      \"key1\": \"%s\",\n" +
-                                             "      \"key2\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  }\n",
+                                                 "    \"id\": \"%s\",\n" +
+                                                 "    \"endpoint\": {\n" +
+                                                 "      \"phoneNumber\": \"%s\",\n" +
+                                                 "      \"type\": \"%s\"\n" +
+                                                 "    },\n" +
+                                                 "    \"from\": \"%s\",\n" +
+                                                 "    \"to\": \"%s\",\n" +
+                                                 "    \"direction\": \"%s\",\n" +
+                                                 "    \"state\": \"%s\",\n" +
+                                                 "    \"media\": {\n" +
+                                                 "      \"audio\": {\n" +
+                                                 "        \"muted\": %b,\n" +
+                                                 "        \"userMuted\": %b,\n" +
+                                                 "        \"deaf\": %b\n" +
+                                                 "      },\n" +
+                                                 "      \"video\": {\n" +
+                                                 "        \"camera\": %b,\n" +
+                                                 "        \"screenShare\": %b\n" +
+                                                 "      }\n" +
+                                                 "    },\n" +
+                                                 "    \"startTime\": \"%s\",\n" +
+                                                 "    \"answerTime\": \"%s\",\n" +
+                                                 "    \"endTime\": \"%s\",\n" +
+                                                 "    \"parentCallId\": \"%s\",\n" +
+                                                 "    \"machineDetection\": {\n" +
+                                                 "      \"detectionResult\": \"%s\"\n" +
+                                                 "    },\n" +
+                                                 "    \"ringDuration\": %d,\n" +
+                                                 "    \"applicationId\": \"%s\",\n" +
+                                                 "    \"conferenceId\": \"%s\",\n" +
+                                                 "    \"customData\": {\n" +
+                                                 "      \"key1\": \"%s\",\n" +
+                                                 "      \"key2\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  }\n",
                                              givenCallId,
                                              givenPhoneNumber,
                                              givenType,
@@ -472,24 +471,24 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpPostRequest(
-                CALLS,
-                expectedRequest,
-                givenResponse,
-                201
+            CALLS,
+            expectedRequest,
+            givenResponse,
+            201
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallRequest request = new CallRequest()
-                .endpoint(new CallsPhoneEndpoint()
-                        .phoneNumber(givenPhoneNumber))
-                .from(givenFrom)
-                .connectTimeout(givenConnectTimeout)
-                .recording(new CallRecordingRequest()
-                        .recordingType(givenRecordingType))
-                .maxDuration(givenMaxDuration)
-                .applicationId(givenApplicationId)
-                .parentCallId(givenParentCallId);
+            .endpoint(new CallsPhoneEndpoint()
+                          .phoneNumber(givenPhoneNumber))
+            .from(givenFrom)
+            .connectTimeout(givenConnectTimeout)
+            .recording(new CallRecordingRequest()
+                           .recordingType(givenRecordingType))
+            .maxDuration(givenMaxDuration)
+            .applicationId(givenApplicationId)
+            .parentCallId(givenParentCallId);
 
         Consumer<Call> assertions = (response) -> {
             then(response).isNotNull();
@@ -556,41 +555,41 @@ class CallsApiTest extends ApiTest {
         String givenKey2 = "value2";
 
         String givenResponse = String.format("{\n" +
-                                             "    \"id\": \"%s\",\n" +
-                                             "    \"endpoint\": {\n" +
-                                             "      \"phoneNumber\": \"%s\",\n" +
-                                             "      \"type\": \"%s\"\n" +
-                                             "    },\n" +
-                                             "    \"from\": \"%s\",\n" +
-                                             "    \"to\": \"%s\",\n" +
-                                             "    \"direction\": \"%s\",\n" +
-                                             "    \"state\": \"%s\",\n" +
-                                             "    \"media\": {\n" +
-                                             "      \"audio\": {\n" +
-                                             "        \"muted\": %b,\n" +
-                                             "        \"userMuted\": %b,\n" +
-                                             "        \"deaf\": %b\n" +
-                                             "      },\n" +
-                                             "      \"video\": {\n" +
-                                             "        \"camera\": %b,\n" +
-                                             "        \"screenShare\": %b\n" +
-                                             "      }\n" +
-                                             "    },\n" +
-                                             "    \"startTime\": \"%s\",\n" +
-                                             "    \"answerTime\": \"%s\",\n" +
-                                             "    \"endTime\": \"%s\",\n" +
-                                             "    \"parentCallId\": \"%s\",\n" +
-                                             "    \"machineDetection\": {\n" +
-                                             "      \"detectionResult\": \"%s\"\n" +
-                                             "    },\n" +
-                                             "    \"ringDuration\": %d,\n" +
-                                             "    \"applicationId\": \"%s\",\n" +
-                                             "    \"conferenceId\": \"%s\",\n" +
-                                             "    \"customData\": {\n" +
-                                             "      \"key1\": \"%s\",\n" +
-                                             "      \"key2\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  }\n",
+                                                 "    \"id\": \"%s\",\n" +
+                                                 "    \"endpoint\": {\n" +
+                                                 "      \"phoneNumber\": \"%s\",\n" +
+                                                 "      \"type\": \"%s\"\n" +
+                                                 "    },\n" +
+                                                 "    \"from\": \"%s\",\n" +
+                                                 "    \"to\": \"%s\",\n" +
+                                                 "    \"direction\": \"%s\",\n" +
+                                                 "    \"state\": \"%s\",\n" +
+                                                 "    \"media\": {\n" +
+                                                 "      \"audio\": {\n" +
+                                                 "        \"muted\": %b,\n" +
+                                                 "        \"userMuted\": %b,\n" +
+                                                 "        \"deaf\": %b\n" +
+                                                 "      },\n" +
+                                                 "      \"video\": {\n" +
+                                                 "        \"camera\": %b,\n" +
+                                                 "        \"screenShare\": %b\n" +
+                                                 "      }\n" +
+                                                 "    },\n" +
+                                                 "    \"startTime\": \"%s\",\n" +
+                                                 "    \"answerTime\": \"%s\",\n" +
+                                                 "    \"endTime\": \"%s\",\n" +
+                                                 "    \"parentCallId\": \"%s\",\n" +
+                                                 "    \"machineDetection\": {\n" +
+                                                 "      \"detectionResult\": \"%s\"\n" +
+                                                 "    },\n" +
+                                                 "    \"ringDuration\": %d,\n" +
+                                                 "    \"applicationId\": \"%s\",\n" +
+                                                 "    \"conferenceId\": \"%s\",\n" +
+                                                 "    \"customData\": {\n" +
+                                                 "      \"key1\": \"%s\",\n" +
+                                                 "      \"key2\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  }\n",
                                              givenCallId,
                                              givenPhoneNumber,
                                              givenType,
@@ -616,9 +615,9 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CALL.replace("{callId}", givenCallId),
-                Map.of(),
-                givenResponse
+            CALL.replace("{callId}", givenCallId),
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -697,62 +696,62 @@ class CallsApiTest extends ApiTest {
         Long givenPageTotalResults = 0L;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"results\": [\n" +
-                                             "      {\n" +
-                                             "          \"callId\": \"%s\",\n" +
-                                             "          \"endpoint\": {\n" +
-                                             "            \"phoneNumber\": \"%s\",\n" +
-                                             "            \"type\": \"%s\"\n" +
-                                             "          },\n" +
-                                             "          \"from\": \"%s\",\n" +
-                                             "          \"to\": \"%s\",\n" +
-                                             "          \"direction\": \"%s\",\n" +
-                                             "          \"state\": \"%s\",\n" +
-                                             "          \"media\": {\n" +
-                                             "            \"audio\": {\n" +
-                                             "              \"muted\": %b,\n" +
-                                             "              \"userMuted\": %b,\n" +
-                                             "              \"deaf\": %b\n" +
-                                             "            },\n" +
-                                             "            \"video\": {\n" +
-                                             "              \"camera\": %b,\n" +
-                                             "              \"screenShare\": %b\n" +
-                                             "            }\n" +
-                                             "          },\n" +
-                                             "          \"startTime\": \"%s\",\n" +
-                                             "          \"answerTime\": \"%s\",\n" +
-                                             "          \"endTime\": \"%s\",\n" +
-                                             "          \"parentCallId\": \"%s\",\n" +
-                                             "          \"machineDetection\": {\n" +
-                                             "            \"detectionResult\": \"%s\"\n" +
-                                             "          },\n" +
-                                             "          \"applicationIds\": [\n" +
-                                             "          \"%s\"\n" +
-                                             "          ],\n" +
-                                             "          \"conferenceIds\": [\n" +
-                                             "          \"%s\"\n" +
-                                             "          ],\n" +
-                                             "          \"duration\": %d,\n" +
-                                             "          \"hasCameraVideo\": %b,\n" +
-                                             "          \"hasScreenshareVideo\": %b,\n" +
-                                             "          \"errorCode\": {\n" +
-                                             "              \"id\": %d,\n" +
-                                             "              \"name\": \"%s\",\n" +
-                                             "              \"description\": \"%s\"\n" +
-                                             "          },\n" +
-                                             "          \"customData\": {\n" +
-                                             "            \"key1\": \"%s\",\n" +
-                                             "            \"key2\": \"%s\"\n" +
-                                             "          }\n" +
-                                             "        }\n" +
-                                             "    ],\n" +
-                                             "    \"paging\": {\n" +
-                                             "      \"page\": %d,\n" +
-                                             "      \"size\": %d,\n" +
-                                             "      \"totalPages\": %d,\n" +
-                                             "      \"totalResults\": %d\n" +
-                                             "    }\n" +
-                                             "}\n",
+                                                 "  \"results\": [\n" +
+                                                 "      {\n" +
+                                                 "          \"callId\": \"%s\",\n" +
+                                                 "          \"endpoint\": {\n" +
+                                                 "            \"phoneNumber\": \"%s\",\n" +
+                                                 "            \"type\": \"%s\"\n" +
+                                                 "          },\n" +
+                                                 "          \"from\": \"%s\",\n" +
+                                                 "          \"to\": \"%s\",\n" +
+                                                 "          \"direction\": \"%s\",\n" +
+                                                 "          \"state\": \"%s\",\n" +
+                                                 "          \"media\": {\n" +
+                                                 "            \"audio\": {\n" +
+                                                 "              \"muted\": %b,\n" +
+                                                 "              \"userMuted\": %b,\n" +
+                                                 "              \"deaf\": %b\n" +
+                                                 "            },\n" +
+                                                 "            \"video\": {\n" +
+                                                 "              \"camera\": %b,\n" +
+                                                 "              \"screenShare\": %b\n" +
+                                                 "            }\n" +
+                                                 "          },\n" +
+                                                 "          \"startTime\": \"%s\",\n" +
+                                                 "          \"answerTime\": \"%s\",\n" +
+                                                 "          \"endTime\": \"%s\",\n" +
+                                                 "          \"parentCallId\": \"%s\",\n" +
+                                                 "          \"machineDetection\": {\n" +
+                                                 "            \"detectionResult\": \"%s\"\n" +
+                                                 "          },\n" +
+                                                 "          \"applicationIds\": [\n" +
+                                                 "          \"%s\"\n" +
+                                                 "          ],\n" +
+                                                 "          \"conferenceIds\": [\n" +
+                                                 "          \"%s\"\n" +
+                                                 "          ],\n" +
+                                                 "          \"duration\": %d,\n" +
+                                                 "          \"hasCameraVideo\": %b,\n" +
+                                                 "          \"hasScreenshareVideo\": %b,\n" +
+                                                 "          \"errorCode\": {\n" +
+                                                 "              \"id\": %d,\n" +
+                                                 "              \"name\": \"%s\",\n" +
+                                                 "              \"description\": \"%s\"\n" +
+                                                 "          },\n" +
+                                                 "          \"customData\": {\n" +
+                                                 "            \"key1\": \"%s\",\n" +
+                                                 "            \"key2\": \"%s\"\n" +
+                                                 "          }\n" +
+                                                 "        }\n" +
+                                                 "    ],\n" +
+                                                 "    \"paging\": {\n" +
+                                                 "      \"page\": %d,\n" +
+                                                 "      \"size\": %d,\n" +
+                                                 "      \"totalPages\": %d,\n" +
+                                                 "      \"totalResults\": %d\n" +
+                                                 "    }\n" +
+                                                 "}\n",
                                              givenCallId,
                                              givenPhoneNumber,
                                              givenType,
@@ -787,9 +786,9 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CALLS_HISTORY,
-                Map.of(),
-                givenResponse
+            CALLS_HISTORY,
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -875,54 +874,54 @@ class CallsApiTest extends ApiTest {
         String givenSender = "sender";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"callId\": \"%s\",\n" +
-                                             "  \"endpoint\": {\n" +
-                                             "    \"phoneNumber\": \"%s\",\n" +
-                                             "    \"type\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"from\": \"%s\",\n" +
-                                             "  \"to\": \"%s\",\n" +
-                                             "  \"direction\": \"%s\",\n" +
-                                             "  \"state\": \"%s\",\n" +
-                                             "  \"media\": {\n" +
-                                             "    \"audio\": {\n" +
-                                             "      \"muted\": %b,\n" +
-                                             "      \"userMuted\": %b,\n" +
-                                             "      \"deaf\": %b\n" +
-                                             "    },\n" +
-                                             "    \"video\": {\n" +
-                                             "      \"camera\": %b,\n" +
-                                             "      \"screenShare\": %b\n" +
-                                             "    }\n" +
-                                             "  },\n" +
-                                             "  \"startTime\": \"%s\",\n" +
-                                             "  \"answerTime\": \"%s\",\n" +
-                                             "  \"endTime\": \"%s\",\n" +
-                                             "  \"parentCallId\": \"%s\",\n" +
-                                             "  \"machineDetection\": {\n" +
-                                             "    \"detectionResult\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"applicationIds\": [\n" +
-                                             "  \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"conferenceIds\": [\n" +
-                                             "  \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"duration\": %d,\n" +
-                                             "  \"hasCameraVideo\": %b,\n" +
-                                             "  \"hasScreenshareVideo\": %b,\n" +
-                                             "  \"errorCode\": {\n" +
-                                             "      \"id\": %d,\n" +
-                                             "      \"name\": \"%s\",\n" +
-                                             "      \"description\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"customData\": {\n" +
-                                             "    \"key1\": \"%s\",\n" +
-                                             "    \"key2\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"dialogId\": \"%s\",\n" +
-                                             "  \"sender\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"callId\": \"%s\",\n" +
+                                                 "  \"endpoint\": {\n" +
+                                                 "    \"phoneNumber\": \"%s\",\n" +
+                                                 "    \"type\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"from\": \"%s\",\n" +
+                                                 "  \"to\": \"%s\",\n" +
+                                                 "  \"direction\": \"%s\",\n" +
+                                                 "  \"state\": \"%s\",\n" +
+                                                 "  \"media\": {\n" +
+                                                 "    \"audio\": {\n" +
+                                                 "      \"muted\": %b,\n" +
+                                                 "      \"userMuted\": %b,\n" +
+                                                 "      \"deaf\": %b\n" +
+                                                 "    },\n" +
+                                                 "    \"video\": {\n" +
+                                                 "      \"camera\": %b,\n" +
+                                                 "      \"screenShare\": %b\n" +
+                                                 "    }\n" +
+                                                 "  },\n" +
+                                                 "  \"startTime\": \"%s\",\n" +
+                                                 "  \"answerTime\": \"%s\",\n" +
+                                                 "  \"endTime\": \"%s\",\n" +
+                                                 "  \"parentCallId\": \"%s\",\n" +
+                                                 "  \"machineDetection\": {\n" +
+                                                 "    \"detectionResult\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"applicationIds\": [\n" +
+                                                 "  \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"conferenceIds\": [\n" +
+                                                 "  \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"duration\": %d,\n" +
+                                                 "  \"hasCameraVideo\": %b,\n" +
+                                                 "  \"hasScreenshareVideo\": %b,\n" +
+                                                 "  \"errorCode\": {\n" +
+                                                 "      \"id\": %d,\n" +
+                                                 "      \"name\": \"%s\",\n" +
+                                                 "      \"description\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"customData\": {\n" +
+                                                 "    \"key1\": \"%s\",\n" +
+                                                 "    \"key2\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"dialogId\": \"%s\",\n" +
+                                                 "  \"sender\": \"%s\"\n" +
+                                                 "}\n",
                                              givenCallId,
                                              givenPhoneNumber,
                                              givenType,
@@ -955,9 +954,9 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CALL_HISTORY.replace("{callId}", givenCallId),
-                Map.of(),
-                givenResponse
+            CALL_HISTORY.replace("{callId}", givenCallId),
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -1019,50 +1018,50 @@ class CallsApiTest extends ApiTest {
         String givenApplicationId = "61c060db2675060027d8c7a6";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"participants\": [\n" +
-                                             "    {\n" +
-                                             "      \"callId\": \"%s\",\n" +
-                                             "      \"endpoint\": {\n" +
-                                             "        \"phoneNumber\": \"%s\",\n" +
-                                             "        \"type\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"state\": \"%s\",\n" +
-                                             "      \"joinTime\": \"%s\",\n" +
-                                             "      \"media\": {\n" +
-                                             "        \"audio\": {\n" +
-                                             "          \"muted\": %b,\n" +
-                                             "          \"deaf\": %b\n" +
-                                             "        },\n" +
-                                             "        \"video\": {\n" +
-                                             "          \"camera\": %b,\n" +
-                                             "          \"screenShare\": %b\n" +
-                                             "        }\n" +
-                                             "      }\n" +
-                                             "    },\n" +
-                                             "    {\n" +
-                                             "      \"callId\": \"%s\",\n" +
-                                             "      \"endpoint\": {\n" +
-                                             "        \"phoneNumber\": \"%s\",\n" +
-                                             "        \"type\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"state\": \"%s\",\n" +
-                                             "      \"joinTime\": \"%s\",\n" +
-                                             "      \"media\": {\n" +
-                                             "        \"audio\": {\n" +
-                                             "          \"muted\": %b,\n" +
-                                             "          \"deaf\": %b\n" +
-                                             "        },\n" +
-                                             "        \"video\": {\n" +
-                                             "          \"camera\": %b,\n" +
-                                             "          \"screenShare\": %b\n" +
-                                             "        }\n" +
-                                             "      }\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"applicationId\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"participants\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"callId\": \"%s\",\n" +
+                                                 "      \"endpoint\": {\n" +
+                                                 "        \"phoneNumber\": \"%s\",\n" +
+                                                 "        \"type\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"state\": \"%s\",\n" +
+                                                 "      \"joinTime\": \"%s\",\n" +
+                                                 "      \"media\": {\n" +
+                                                 "        \"audio\": {\n" +
+                                                 "          \"muted\": %b,\n" +
+                                                 "          \"deaf\": %b\n" +
+                                                 "        },\n" +
+                                                 "        \"video\": {\n" +
+                                                 "          \"camera\": %b,\n" +
+                                                 "          \"screenShare\": %b\n" +
+                                                 "        }\n" +
+                                                 "      }\n" +
+                                                 "    },\n" +
+                                                 "    {\n" +
+                                                 "      \"callId\": \"%s\",\n" +
+                                                 "      \"endpoint\": {\n" +
+                                                 "        \"phoneNumber\": \"%s\",\n" +
+                                                 "        \"type\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"state\": \"%s\",\n" +
+                                                 "      \"joinTime\": \"%s\",\n" +
+                                                 "      \"media\": {\n" +
+                                                 "        \"audio\": {\n" +
+                                                 "          \"muted\": %b,\n" +
+                                                 "          \"deaf\": %b\n" +
+                                                 "        },\n" +
+                                                 "        \"video\": {\n" +
+                                                 "          \"camera\": %b,\n" +
+                                                 "          \"screenShare\": %b\n" +
+                                                 "        }\n" +
+                                                 "      }\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"applicationId\": \"%s\"\n" +
+                                                 "}\n",
                                              givenId,
                                              givenName,
                                              givenCallId1,
@@ -1087,25 +1086,25 @@ class CallsApiTest extends ApiTest {
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"callIds\": [\n" +
-                                               "    \"%s\",\n" +
-                                               "    \"%s\"\n" +
-                                               "  ]\n" +
-                                               "}\n",
+                                                   "  \"callIds\": [\n" +
+                                                   "    \"%s\",\n" +
+                                                   "    \"%s\"\n" +
+                                                   "  ]\n" +
+                                                   "}\n",
                                                givenCallId1,
                                                givenCallId2
         );
 
         setUpSuccessPostRequest(
-                CONNECT_CALLS,
-                expectedRequest,
-                givenResponse
+            CONNECT_CALLS,
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsConnectRequest request = new CallsConnectRequest()
-                .callIds(Set.of(givenCallId1, givenCallId2));
+            .callIds(Set.of(givenCallId1, givenCallId2));
 
         Consumer<CallsConference> assertions = (response) -> {
             then(response).isNotNull();
@@ -1167,8 +1166,8 @@ class CallsApiTest extends ApiTest {
         CallsParticipantState givenState = CallsParticipantState.JOINING;
         String givenJoinTime = "2022-05-01T14:25:45.0Z";
         OffsetDateTime givenJoinTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 5, 1, 14, 25, 45, 0),
-                ZoneOffset.ofHours(0));
+            LocalDateTime.of(2022, 5, 1, 14, 25, 45, 0),
+            ZoneOffset.ofHours(0));
         boolean givenAudioMuted = true;
         boolean givenAudioUserMuted = true;
         boolean givenAudioUserDeaf = true;
@@ -1188,14 +1187,14 @@ class CallsApiTest extends ApiTest {
         String givenAnswerTime = "2022-05-01T14:25:55.0+0000";
         String givenEndTime = "2022-05-01T14:27:40.0+0000";
         OffsetDateTime givenStartTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 5, 1, 14, 25, 45, 0),
-                ZoneOffset.ofHours(0));
+            LocalDateTime.of(2022, 5, 1, 14, 25, 45, 0),
+            ZoneOffset.ofHours(0));
         OffsetDateTime givenAnswerTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 5, 1, 14, 25, 55, 0),
-                ZoneOffset.ofHours(0));
+            LocalDateTime.of(2022, 5, 1, 14, 25, 55, 0),
+            ZoneOffset.ofHours(0));
         OffsetDateTime givenEndTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 5, 1, 14, 27, 40, 0),
-                ZoneOffset.ofHours(0));
+            LocalDateTime.of(2022, 5, 1, 14, 27, 40, 0),
+            ZoneOffset.ofHours(0));
         String givenParentCallId = "3ad8805e-d401-424e-9b03-e02a2016a5e2";
         CallsDetectionResult givenDetectionResult = CallsDetectionResult.HUMAN;
         String givenConferenceId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
@@ -1203,69 +1202,69 @@ class CallsApiTest extends ApiTest {
         String givenKey2 = "value2";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"conference\": {\n" +
-                                             "      \"id\": \"%s\",\n" +
-                                             "      \"name\": \"%s\",\n" +
-                                             "      \"participants\": [\n" +
-                                             "        {\n" +
-                                             "          \"callId\": \"%s\",\n" +
-                                             "          \"endpoint\": {\n" +
-                                             "            \"phoneNumber\": \"%s\",\n" +
-                                             "            \"type\": \"%s\"\n" +
-                                             "          },\n" +
-                                             "          \"state\": \"%s\",\n" +
-                                             "          \"joinTime\": \"%s\",\n" +
-                                             "          \"media\": {\n" +
-                                             "            \"audio\": {\n" +
-                                             "              \"muted\": %b,\n" +
-                                             "              \"userMuted\": %b,\n" +
-                                             "              \"deaf\": %b\n" +
-                                             "            },\n" +
-                                             "            \"video\": {\n" +
-                                             "              \"camera\": %b,\n" +
-                                             "              \"screenShare\": %b\n" +
-                                             "            }\n" +
-                                             "          }\n" +
-                                             "        }\n" +
-                                             "      ],\n" +
-                                             "      \"applicationId\": \"%s\"\n" +
-                                             "    },\n" +
-                                             "  \"call\": {\n" +
-                                             "      \"id\": \"%s\",\n" +
-                                             "      \"endpoint\": {\n" +
-                                             "        \"phoneNumber\": \"%s\",\n" +
-                                             "        \"type\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"from\": \"%s\",\n" +
-                                             "      \"to\": \"%s\",\n" +
-                                             "      \"direction\": \"%s\",\n" +
-                                             "      \"state\": \"%s\",\n" +
-                                             "      \"media\": {\n" +
-                                             "        \"audio\": {\n" +
-                                             "          \"muted\": %b,\n" +
-                                             "          \"userMuted\": %b,\n" +
-                                             "          \"deaf\": %b\n" +
-                                             "        },\n" +
-                                             "        \"video\": {\n" +
-                                             "          \"camera\": %b,\n" +
-                                             "          \"screenShare\": %b\n" +
-                                             "        }\n" +
-                                             "      },\n" +
-                                             "      \"startTime\": \"%s\",\n" +
-                                             "      \"answerTime\": \"%s\",\n" +
-                                             "      \"endTime\": \"%s\",\n" +
-                                             "      \"parentCallId\": \"%s\",\n" +
-                                             "      \"machineDetection\": {\n" +
-                                             "        \"detectionResult\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"applicationId\": \"%s\",\n" +
-                                             "      \"conferenceId\": \"%s\",\n" +
-                                             "      \"customData\": {\n" +
-                                             "        \"key1\": \"%s\",\n" +
-                                             "        \"key2\": \"%s\"\n" +
-                                             "      }\n" +
-                                             "    }\n" +
-                                             "}\n",
+                                                 "  \"conference\": {\n" +
+                                                 "      \"id\": \"%s\",\n" +
+                                                 "      \"name\": \"%s\",\n" +
+                                                 "      \"participants\": [\n" +
+                                                 "        {\n" +
+                                                 "          \"callId\": \"%s\",\n" +
+                                                 "          \"endpoint\": {\n" +
+                                                 "            \"phoneNumber\": \"%s\",\n" +
+                                                 "            \"type\": \"%s\"\n" +
+                                                 "          },\n" +
+                                                 "          \"state\": \"%s\",\n" +
+                                                 "          \"joinTime\": \"%s\",\n" +
+                                                 "          \"media\": {\n" +
+                                                 "            \"audio\": {\n" +
+                                                 "              \"muted\": %b,\n" +
+                                                 "              \"userMuted\": %b,\n" +
+                                                 "              \"deaf\": %b\n" +
+                                                 "            },\n" +
+                                                 "            \"video\": {\n" +
+                                                 "              \"camera\": %b,\n" +
+                                                 "              \"screenShare\": %b\n" +
+                                                 "            }\n" +
+                                                 "          }\n" +
+                                                 "        }\n" +
+                                                 "      ],\n" +
+                                                 "      \"applicationId\": \"%s\"\n" +
+                                                 "    },\n" +
+                                                 "  \"call\": {\n" +
+                                                 "      \"id\": \"%s\",\n" +
+                                                 "      \"endpoint\": {\n" +
+                                                 "        \"phoneNumber\": \"%s\",\n" +
+                                                 "        \"type\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"from\": \"%s\",\n" +
+                                                 "      \"to\": \"%s\",\n" +
+                                                 "      \"direction\": \"%s\",\n" +
+                                                 "      \"state\": \"%s\",\n" +
+                                                 "      \"media\": {\n" +
+                                                 "        \"audio\": {\n" +
+                                                 "          \"muted\": %b,\n" +
+                                                 "          \"userMuted\": %b,\n" +
+                                                 "          \"deaf\": %b\n" +
+                                                 "        },\n" +
+                                                 "        \"video\": {\n" +
+                                                 "          \"camera\": %b,\n" +
+                                                 "          \"screenShare\": %b\n" +
+                                                 "        }\n" +
+                                                 "      },\n" +
+                                                 "      \"startTime\": \"%s\",\n" +
+                                                 "      \"answerTime\": \"%s\",\n" +
+                                                 "      \"endTime\": \"%s\",\n" +
+                                                 "      \"parentCallId\": \"%s\",\n" +
+                                                 "      \"machineDetection\": {\n" +
+                                                 "        \"detectionResult\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"applicationId\": \"%s\",\n" +
+                                                 "      \"conferenceId\": \"%s\",\n" +
+                                                 "      \"customData\": {\n" +
+                                                 "        \"key1\": \"%s\",\n" +
+                                                 "        \"key2\": \"%s\"\n" +
+                                                 "      }\n" +
+                                                 "    }\n" +
+                                                 "}\n",
                                              givenId,
                                              givenName,
                                              givenCallId,
@@ -1305,15 +1304,15 @@ class CallsApiTest extends ApiTest {
         Boolean givenConnectOnEarlyMedia = false;
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"callRequest\": {\n" +
-                                               "    \"endpoint\": {\n" +
-                                               "      \"phoneNumber\": \"%s\",\n" +
-                                               "      \"type\": \"%s\"\n" +
-                                               "    },\n" +
-                                               "    \"from\": \"%s\"\n" +
-                                               "  },\n" +
-                                               "  \"connectOnEarlyMedia\": %b\n" +
-                                               "}\n",
+                                                   "  \"callRequest\": {\n" +
+                                                   "    \"endpoint\": {\n" +
+                                                   "      \"phoneNumber\": \"%s\",\n" +
+                                                   "      \"type\": \"%s\"\n" +
+                                                   "    },\n" +
+                                                   "    \"from\": \"%s\"\n" +
+                                                   "  },\n" +
+                                                   "  \"connectOnEarlyMedia\": %b\n" +
+                                                   "}\n",
                                                givenPhoneNumber,
                                                givenType,
                                                givenFrom,
@@ -1321,19 +1320,19 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessPostRequest(
-                CONNECT_CALL.replace("{callId}", givenId),
-                expectedRequest,
-                givenResponse
+            CONNECT_CALL.replace("{callId}", givenId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsConnectWithNewCallRequest request = new CallsConnectWithNewCallRequest()
-                .callRequest(new CallsActionCallRequest()
-                        .endpoint(new CallsPhoneEndpoint().phoneNumber(givenPhoneNumber))
-                        .from(givenFrom)
-                )
-                .connectOnEarlyMedia(givenConnectOnEarlyMedia);
+            .callRequest(new CallsActionCallRequest()
+                             .endpoint(new CallsPhoneEndpoint().phoneNumber(givenPhoneNumber))
+                             .from(givenFrom)
+            )
+            .connectOnEarlyMedia(givenConnectOnEarlyMedia);
 
         Consumer<CallsConferenceAndCall> assertions = response -> {
             then(response).isNotNull();
@@ -1395,18 +1394,18 @@ class CallsApiTest extends ApiTest {
             then(call.getParentCallId()).isEqualTo(givenParentCallId);
 
             then(call.getMachineDetection())
-                    .isNotNull()
-                    .extracting(CallsMachineDetectionProperties::getDetectionResult)
-                    .isEqualTo(givenDetectionResult);
+                .isNotNull()
+                .extracting(CallsMachineDetectionProperties::getDetectionResult)
+                .isEqualTo(givenDetectionResult);
 
             then(call.getApplicationId()).isEqualTo(givenApplicationId);
             then(call.getConferenceId()).isEqualTo(givenConferenceId);
             then(call.getCustomData())
-                    .isNotNull()
-                    .containsExactly(
-                            entry("key1", givenKey1),
-                            entry("key2", givenKey2)
-                    );
+                .isNotNull()
+                .containsExactly(
+                    entry("key1", givenKey1),
+                    entry("key2", givenKey2)
+                );
         };
 
         var call = api.connectWithNewCall(givenId, request);
@@ -1422,16 +1421,16 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         setUpEmptyPostRequest(
-                PRE_ANSWER_CALL.replace("{callId}", givenCallId),
-                Map.of(),
-                givenResponse,
-                200
+            PRE_ANSWER_CALL.replace("{callId}", givenCallId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -1454,42 +1453,42 @@ class CallsApiTest extends ApiTest {
         String givenCustomDataField = "custom";
         String givenCustomDataFieldValue = "data";
         Map<String, String> givenCustomData = Map.of(
-                givenCustomDataField, givenCustomDataFieldValue
+            givenCustomDataField, givenCustomDataFieldValue
         );
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"recording\": {\n" +
-                                               "    \"recordingType\": \"%s\"\n" +
-                                               "  },\n" +
-                                               "  \"customData\": {\n" +
-                                               "    \"%s\": \"%s\"\n" +
-                                               "  }\n" +
-                                               "}\n",
+                                                   "  \"recording\": {\n" +
+                                                   "    \"recordingType\": \"%s\"\n" +
+                                                   "  },\n" +
+                                                   "  \"customData\": {\n" +
+                                                   "    \"%s\": \"%s\"\n" +
+                                                   "  }\n" +
+                                                   "}\n",
                                                givenRecordingType,
                                                givenCustomDataField,
                                                givenCustomDataFieldValue
         );
 
         setUpSuccessPostRequest(
-                ANSWER_CALL.replace("{callId}", givenCallId),
-                expectedRequest,
-                givenResponse
+            ANSWER_CALL.replace("{callId}", givenCallId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsAnswerRequest request = new CallsAnswerRequest()
-                .recording(
-                        new CallRecordingRequest()
-                                .recordingType(givenRecordingType)
-                )
-                .customData(givenCustomData);
+            .recording(
+                new CallRecordingRequest()
+                    .recordingType(givenRecordingType)
+            )
+            .customData(givenCustomData);
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -1525,35 +1524,35 @@ class CallsApiTest extends ApiTest {
         String givenKey1 = "value1";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"endpoint\": {\n" +
-                                             "    \"phoneNumber\": \"%s\",\n" +
-                                             "    \"type\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"from\": \"%s\",\n" +
-                                             "  \"to\": \"%s\",\n" +
-                                             "  \"direction\": \"%s\",\n" +
-                                             "  \"state\": \"%s\",\n" +
-                                             "  \"media\": {\n" +
-                                             "    \"audio\": {\n" +
-                                             "      \"muted\": %b,\n" +
-                                             "      \"deaf\": %b\n" +
-                                             "    },\n" +
-                                             "    \"video\": {\n" +
-                                             "      \"camera\": %b,\n" +
-                                             "      \"screenShare\": %b\n" +
-                                             "    }\n" +
-                                             "  },\n" +
-                                             "  \"startTime\": \"%s\",\n" +
-                                             "  \"answerTime\": \"%s\",\n" +
-                                             "  \"ringDuration\": %d,\n" +
-                                             "  \"applicationId\": \"%s\",\n" +
-                                             "  \"conferenceId\": \"%s\",\n" +
-                                             "  \"customData\": {\n" +
-                                             "    \"key2\": \"%s\",\n" +
-                                             "    \"key1\": \"%s\"\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"endpoint\": {\n" +
+                                                 "    \"phoneNumber\": \"%s\",\n" +
+                                                 "    \"type\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"from\": \"%s\",\n" +
+                                                 "  \"to\": \"%s\",\n" +
+                                                 "  \"direction\": \"%s\",\n" +
+                                                 "  \"state\": \"%s\",\n" +
+                                                 "  \"media\": {\n" +
+                                                 "    \"audio\": {\n" +
+                                                 "      \"muted\": %b,\n" +
+                                                 "      \"deaf\": %b\n" +
+                                                 "    },\n" +
+                                                 "    \"video\": {\n" +
+                                                 "      \"camera\": %b,\n" +
+                                                 "      \"screenShare\": %b\n" +
+                                                 "    }\n" +
+                                                 "  },\n" +
+                                                 "  \"startTime\": \"%s\",\n" +
+                                                 "  \"answerTime\": \"%s\",\n" +
+                                                 "  \"ringDuration\": %d,\n" +
+                                                 "  \"applicationId\": \"%s\",\n" +
+                                                 "  \"conferenceId\": \"%s\",\n" +
+                                                 "  \"customData\": {\n" +
+                                                 "    \"key2\": \"%s\",\n" +
+                                                 "    \"key1\": \"%s\"\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenCallId,
                                              givenPhoneNumber,
                                              givenType,
@@ -1575,15 +1574,15 @@ class CallsApiTest extends ApiTest {
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"errorCode\": \"%s\"\n" +
-                                               "}\n",
+                                                   "  \"errorCode\": \"%s\"\n" +
+                                                   "}\n",
                                                givenErrorCode
         );
 
         setUpSuccessPostRequest(
-                HANGUP_CALL.replace("{callId}", givenCallId),
-                expectedRequest,
-                givenResponse
+            HANGUP_CALL.replace("{callId}", givenCallId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -1634,41 +1633,41 @@ class CallsApiTest extends ApiTest {
         String givenFileId = "100";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"loopCount\": %d,\n" +
-                                               "  \"content\": {\n" +
-                                               "    \"fileId\" : \"%s\",\n" +
-                                               "    \"type\": \"%s\"\n" +
-                                               "  }\n" +
-                                               "}\n",
+                                                   "  \"loopCount\": %d,\n" +
+                                                   "  \"content\": {\n" +
+                                                   "    \"fileId\" : \"%s\",\n" +
+                                                   "    \"type\": \"%s\"\n" +
+                                                   "  }\n" +
+                                                   "}\n",
                                                givenLoopCount,
                                                givenFileId,
                                                givenContentType
         );
 
         setUpSuccessPostRequest(
-                CALL_PLAY_FILE.replace("{callId}", givenCallId),
-                expectedRequest,
-                givenResponse
+            CALL_PLAY_FILE.replace("{callId}", givenCallId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsPlayRequest request = new CallsPlayRequest()
-                .loopCount(givenLoopCount)
-                .content(new CallsFilePlayContent()
-                        .fileId(givenFileId)
-                );
+            .loopCount(givenLoopCount)
+            .content(new CallsFilePlayContent()
+                         .fileId(givenFileId)
+            );
 
         Consumer<CallsActionResponse> assertions = response -> then(response)
-                .isNotNull()
-                .extracting(CallsActionResponse::getStatus)
-                .isEqualTo(givenStatus);
+            .isNotNull()
+            .extracting(CallsActionResponse::getStatus)
+            .isEqualTo(givenStatus);
 
         var call = api.callPlayFile(givenCallId, request);
         testSuccessfulCall(call::execute, assertions);
@@ -1684,16 +1683,16 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         setUpEmptyPostRequest(
-                CALL_STOP_PLAYING_FILE.replace("{callId}", givenCallId),
-                Map.of(),
-                givenResponse,
-                200
+            CALL_STOP_PLAYING_FILE.replace("{callId}", givenCallId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -1722,21 +1721,21 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"text\": \"%s\",\n" +
-                                               "  \"language\": \"%s\",\n" +
-                                               "  \"speechRate\": %f,\n" +
-                                               "  \"loopCount\": %d,\n" +
-                                               "  \"preferences\": {\n" +
-                                               "    \"voiceGender\": \"%s\",\n" +
-                                               "    \"voiceName\": \"%s\"\n" +
-                                               "  }\n" +
-                                               "}\n",
+                                                   "  \"text\": \"%s\",\n" +
+                                                   "  \"language\": \"%s\",\n" +
+                                                   "  \"speechRate\": %f,\n" +
+                                                   "  \"loopCount\": %d,\n" +
+                                                   "  \"preferences\": {\n" +
+                                                   "    \"voiceGender\": \"%s\",\n" +
+                                                   "    \"voiceName\": \"%s\"\n" +
+                                                   "  }\n" +
+                                                   "}\n",
                                                givenText,
                                                givenLanguage,
                                                givenSpeechRate,
@@ -1746,22 +1745,22 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessPostRequest(
-                CALL_SAY_TEXT.replace("{callId}", givenCallId),
-                expectedRequest,
-                givenResponse
+            CALL_SAY_TEXT.replace("{callId}", givenCallId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsSayRequest request = new CallsSayRequest()
-                .text(givenText)
-                .language(givenLanguage)
-                .speechRate(givenSpeechRate)
-                .loopCount(givenLoopCount)
-                .preferences(new CallsVoicePreferences()
-                        .voiceGender(givenCallsGender)
-                        .voiceName(givenVoiceName)
-                );
+            .text(givenText)
+            .language(givenLanguage)
+            .speechRate(givenSpeechRate)
+            .loopCount(givenLoopCount)
+            .preferences(new CallsVoicePreferences()
+                             .voiceGender(givenCallsGender)
+                             .voiceName(givenVoiceName)
+            );
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -1782,21 +1781,21 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"dtmf\": \"%s\"\n" +
-                                               "}\n",
+                                                   "  \"dtmf\": \"%s\"\n" +
+                                                   "}\n",
                                                givenDtmf
         );
 
         setUpSuccessPostRequest(
-                CALL_SEND_DTMF.replace("{callId}", givenCallId),
-                expectedRequest,
-                givenResponse
+            CALL_SEND_DTMF.replace("{callId}", givenCallId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -1824,33 +1823,33 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"maxLength\": %d,\n" +
-                                               "  \"timeout\": %d,\n" +
-                                               "  \"terminator\": \"%s\"\n" +
-                                               "}\n",
+                                                   "  \"maxLength\": %d,\n" +
+                                                   "  \"timeout\": %d,\n" +
+                                                   "  \"terminator\": \"%s\"\n" +
+                                                   "}\n",
                                                givenMaxLength,
                                                givenTimeout,
                                                givenTerminator
         );
 
         setUpSuccessPostRequest(
-                CALL_CAPTURE_DTMF.replace("{callId}", givenCallId),
-                expectedRequest,
-                givenResponse
+            CALL_CAPTURE_DTMF.replace("{callId}", givenCallId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsDtmfCaptureRequest request = new CallsDtmfCaptureRequest()
-                .maxLength(givenMaxLength)
-                .timeout(givenTimeout)
-                .terminator(givenTerminator);
+            .maxLength(givenMaxLength)
+            .timeout(givenTimeout)
+            .terminator(givenTerminator);
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -1866,8 +1865,8 @@ class CallsApiTest extends ApiTest {
     void shouldCaptureSpeech() {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}",
                                              givenStatus
         );
 
@@ -1877,14 +1876,14 @@ class CallsApiTest extends ApiTest {
         String expectedKeyPhrase1 = "phrase";
         String expectedKeyPhrase2 = "word";
         String expectedRequest = String.format("{\n" +
-                                               "  \"language\": \"%s\",\n" +
-                                               "  \"timeout\": %d,\n" +
-                                               "  \"maxSilence\": %d,\n" +
-                                               "  \"keyPhrases\": [\n" +
-                                               "    \"%s\",\n" +
-                                               "    \"%s\"\n" +
-                                               "  ]\n" +
-                                               "}",
+                                                   "  \"language\": \"%s\",\n" +
+                                                   "  \"timeout\": %d,\n" +
+                                                   "  \"maxSilence\": %d,\n" +
+                                                   "  \"keyPhrases\": [\n" +
+                                                   "    \"%s\",\n" +
+                                                   "    \"%s\"\n" +
+                                                   "  ]\n" +
+                                                   "}",
                                                expectedLanguage,
                                                expectedTimeout,
                                                expectedMaxSilence,
@@ -1895,19 +1894,19 @@ class CallsApiTest extends ApiTest {
         String givenCallId = "123";
 
         setUpSuccessPostRequest(
-                CALL_CAPTURE_SPEECH.replace("{callId}", givenCallId),
-                expectedRequest,
-                givenResponse
+            CALL_CAPTURE_SPEECH.replace("{callId}", givenCallId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         var callsSpeechCaptureRequest = new CallsSpeechCaptureRequest()
-                .language(expectedLanguage)
-                .timeout(expectedTimeout)
-                .maxSilence(expectedMaxSilence)
-                .addKeyPhrasesItem(expectedKeyPhrase1)
-                .addKeyPhrasesItem(expectedKeyPhrase2);
+            .language(expectedLanguage)
+            .timeout(expectedTimeout)
+            .maxSilence(expectedMaxSilence)
+            .addKeyPhrasesItem(expectedKeyPhrase1)
+            .addKeyPhrasesItem(expectedKeyPhrase2);
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -1926,7 +1925,7 @@ class CallsApiTest extends ApiTest {
         String givenCustomDataField = "custom";
         String givenCustomDataFieldValue = "data";
         Map<String, String> givenCustomData = Map.of(
-                givenCustomDataField, givenCustomDataFieldValue
+            givenCustomDataField, givenCustomDataFieldValue
         );
 
         CallsRecordingType givenRecordingType = CallsRecordingType.AUDIO;
@@ -1934,20 +1933,20 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"recording\": {\n" +
-                                               "    \"recordingType\": \"%s\",\n" +
-                                               "    \"customData\": {\n" +
-                                               "        \"%s\": \"%s\"\n" +
-                                               "    },\n" +
-                                               "    \"filePrefix\": \"%s\"\n" +
-                                               "  }\n" +
-                                               "}\n",
+                                                   "  \"recording\": {\n" +
+                                                   "    \"recordingType\": \"%s\",\n" +
+                                                   "    \"customData\": {\n" +
+                                                   "        \"%s\": \"%s\"\n" +
+                                                   "    },\n" +
+                                                   "    \"filePrefix\": \"%s\"\n" +
+                                                   "  }\n" +
+                                                   "}\n",
                                                givenRecordingType,
                                                givenCustomDataField,
                                                givenCustomDataFieldValue,
@@ -1955,19 +1954,19 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessPostRequest(
-                CALL_START_RECORDING.replace("{callId}", givenCallId),
-                expectedRequest,
-                givenResponse
+            CALL_START_RECORDING.replace("{callId}", givenCallId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsRecordingStartRequest request = new CallsRecordingStartRequest()
-                .recording(new CallsRecordingRequest()
-                        .recordingType(givenRecordingType)
-                        .customData(givenCustomData)
-                        .filePrefix(givenFilePrefix)
-                );
+            .recording(new CallsRecordingRequest()
+                           .recordingType(givenRecordingType)
+                           .customData(givenCustomData)
+                           .filePrefix(givenFilePrefix)
+            );
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -1986,16 +1985,16 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         setUpEmptyPostRequest(
-                CALL_STOP_RECORDING.replace("{callId}", givenCallId),
-                Map.of(),
-                givenResponse,
-                200
+            CALL_STOP_RECORDING.replace("{callId}", givenCallId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -2020,38 +2019,38 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"mediaStream\": {\n" +
-                                               "    \"audioProperties\": {\n" +
-                                               "      \"mediaStreamConfigId\": \"%s\",\n" +
-                                               "      \"replaceMedia\": %b\n" +
-                                               "    }\n" +
-                                               "  }\n" +
-                                               "}\n",
+                                                   "  \"mediaStream\": {\n" +
+                                                   "    \"audioProperties\": {\n" +
+                                                   "      \"mediaStreamConfigId\": \"%s\",\n" +
+                                                   "      \"replaceMedia\": %b\n" +
+                                                   "    }\n" +
+                                                   "  }\n" +
+                                                   "}\n",
                                                givenMediaStreamConfigId,
                                                givenReplaceMedia
         );
 
         setUpSuccessPostRequest(
-                START_MEDIA_STREAM.replace("{callId}", givenCallId),
-                expectedRequest,
-                givenResponse
+            START_MEDIA_STREAM.replace("{callId}", givenCallId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsStartMediaStreamRequest request = new CallsStartMediaStreamRequest()
-                .mediaStream(new CallsMediaStream()
-                        .audioProperties(new CallsMediaStreamAudioProperties()
-                                .mediaStreamConfigId(givenMediaStreamConfigId)
-                                .replaceMedia(givenReplaceMedia)
-                        )
-                );
+            .mediaStream(new CallsMediaStream()
+                             .audioProperties(new CallsMediaStreamAudioProperties()
+                                                  .mediaStreamConfigId(givenMediaStreamConfigId)
+                                                  .replaceMedia(givenReplaceMedia)
+                             )
+            );
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -2070,17 +2069,16 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
-
         setUpEmptyPostRequest(
-                STOP_MEDIA_STREAM.replace("{callId}", givenCallId),
-                Map.of(),
-                givenResponse,
-                200
+            STOP_MEDIA_STREAM.replace("{callId}", givenCallId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -2116,42 +2114,42 @@ class CallsApiTest extends ApiTest {
         Long givenPageTotalResults = 0L;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"results\": [\n" +
-                                             "    {\n" +
-                                             "      \"id\": \"%s\",\n" +
-                                             "      \"name\": \"%s\",\n" +
-                                             "      \"participants\": [\n" +
-                                             "        {\n" +
-                                             "          \"callId\": \"%s\",\n" +
-                                             "          \"endpoint\": {\n" +
-                                             "            \"phoneNumber\": \"%s\",\n" +
-                                             "            \"type\": \"%s\"\n" +
-                                             "          },\n" +
-                                             "          \"state\": \"%s\",\n" +
-                                             "          \"joinTime\": \"%s\",\n" +
-                                             "          \"media\": {\n" +
-                                             "            \"audio\": {\n" +
-                                             "              \"muted\": %b,\n" +
-                                             "              \"userMuted\": %b,\n" +
-                                             "              \"deaf\": %b\n" +
-                                             "            },\n" +
-                                             "            \"video\": {\n" +
-                                             "              \"camera\": %b,\n" +
-                                             "              \"screenShare\": %b\n" +
-                                             "            }\n" +
-                                             "          }\n" +
-                                             "        }\n" +
-                                             "      ],\n" +
-                                             "      \"applicationId\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"paging\": {\n" +
-                                             "    \"page\": %d,\n" +
-                                             "    \"size\": %d,\n" +
-                                             "    \"totalPages\": %d,\n" +
-                                             "    \"totalResults\": %d\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"results\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"id\": \"%s\",\n" +
+                                                 "      \"name\": \"%s\",\n" +
+                                                 "      \"participants\": [\n" +
+                                                 "        {\n" +
+                                                 "          \"callId\": \"%s\",\n" +
+                                                 "          \"endpoint\": {\n" +
+                                                 "            \"phoneNumber\": \"%s\",\n" +
+                                                 "            \"type\": \"%s\"\n" +
+                                                 "          },\n" +
+                                                 "          \"state\": \"%s\",\n" +
+                                                 "          \"joinTime\": \"%s\",\n" +
+                                                 "          \"media\": {\n" +
+                                                 "            \"audio\": {\n" +
+                                                 "              \"muted\": %b,\n" +
+                                                 "              \"userMuted\": %b,\n" +
+                                                 "              \"deaf\": %b\n" +
+                                                 "            },\n" +
+                                                 "            \"video\": {\n" +
+                                                 "              \"camera\": %b,\n" +
+                                                 "              \"screenShare\": %b\n" +
+                                                 "            }\n" +
+                                                 "          }\n" +
+                                                 "        }\n" +
+                                                 "      ],\n" +
+                                                 "      \"applicationId\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"paging\": {\n" +
+                                                 "    \"page\": %d,\n" +
+                                                 "    \"size\": %d,\n" +
+                                                 "    \"totalPages\": %d,\n" +
+                                                 "    \"totalResults\": %d\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenId,
                                              givenName,
                                              givenCallId,
@@ -2172,9 +2170,9 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CONFERENCES,
-                Map.of(),
-                givenResponse
+            CONFERENCES,
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -2243,37 +2241,37 @@ class CallsApiTest extends ApiTest {
         String givenCustomDataField = "custom";
         String givenCustomDataFieldValue = "data";
         Map<String, String> givenCustomData = Map.of(
-                givenCustomDataField, givenCustomDataFieldValue
+            givenCustomDataField, givenCustomDataFieldValue
         );
         String givenFilePrefix = "filePrefix";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"participants\": [\n" +
-                                             "    {\n" +
-                                             "      \"callId\": \"%s\",\n" +
-                                             "      \"endpoint\": {\n" +
-                                             "        \"phoneNumber\": \"%s\",\n" +
-                                             "        \"type\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"state\": \"%s\",\n" +
-                                             "      \"joinTime\": \"%s\",\n" +
-                                             "      \"media\": {\n" +
-                                             "        \"audio\": {\n" +
-                                             "          \"muted\": %b,\n" +
-                                             "          \"userMuted\": %b,\n" +
-                                             "          \"deaf\": %b\n" +
-                                             "        },\n" +
-                                             "        \"video\": {\n" +
-                                             "          \"camera\": %b,\n" +
-                                             "          \"screenShare\": %b\n" +
-                                             "        }\n" +
-                                             "      }\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"applicationId\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"participants\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"callId\": \"%s\",\n" +
+                                                 "      \"endpoint\": {\n" +
+                                                 "        \"phoneNumber\": \"%s\",\n" +
+                                                 "        \"type\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"state\": \"%s\",\n" +
+                                                 "      \"joinTime\": \"%s\",\n" +
+                                                 "      \"media\": {\n" +
+                                                 "        \"audio\": {\n" +
+                                                 "          \"muted\": %b,\n" +
+                                                 "          \"userMuted\": %b,\n" +
+                                                 "          \"deaf\": %b\n" +
+                                                 "        },\n" +
+                                                 "        \"video\": {\n" +
+                                                 "          \"camera\": %b,\n" +
+                                                 "          \"screenShare\": %b\n" +
+                                                 "        }\n" +
+                                                 "      }\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"applicationId\": \"%s\"\n" +
+                                                 "}\n",
                                              givenId,
                                              givenName,
                                              givenCallId,
@@ -2290,20 +2288,20 @@ class CallsApiTest extends ApiTest {
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"name\": \"%s\",\n" +
-                                               "  \"recording\": {\n" +
-                                               "    \"recordingType\": \"%s\",\n" +
-                                               "    \"conferenceComposition\": {\n" +
-                                               "      \"enabled\": %b\n" +
-                                               "    },\n" +
-                                               "    \"customData\": {\n" +
-                                               "      \"%s\": \"%s\"\n" +
-                                               "    },\n" +
-                                               "    \"filePrefix\": \"%s\"\n" +
-                                               "  },\n" +
-                                               "  \"maxDuration\": %d,\n" +
-                                               "  \"applicationId\": \"%s\"\n" +
-                                               "}\n",
+                                                   "  \"name\": \"%s\",\n" +
+                                                   "  \"recording\": {\n" +
+                                                   "    \"recordingType\": \"%s\",\n" +
+                                                   "    \"conferenceComposition\": {\n" +
+                                                   "      \"enabled\": %b\n" +
+                                                   "    },\n" +
+                                                   "    \"customData\": {\n" +
+                                                   "      \"%s\": \"%s\"\n" +
+                                                   "    },\n" +
+                                                   "    \"filePrefix\": \"%s\"\n" +
+                                                   "  },\n" +
+                                                   "  \"maxDuration\": %d,\n" +
+                                                   "  \"applicationId\": \"%s\"\n" +
+                                                   "}\n",
                                                givenName,
                                                givenRecordingType,
                                                givenCompositionEnabled,
@@ -2315,24 +2313,24 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpPostRequest(
-                CONFERENCES,
-                expectedRequest,
-                givenResponse,
-                201
+            CONFERENCES,
+            expectedRequest,
+            givenResponse,
+            201
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsConferenceRequest request = new CallsConferenceRequest()
-                .name(givenName)
-                .recording(new CallsConferenceRecordingRequest()
-                        .recordingType(givenRecordingType)
-                        .conferenceComposition(new CallsConferenceComposition().enabled(givenCompositionEnabled))
-                        .customData(givenCustomData)
-                        .filePrefix(givenFilePrefix)
-                )
-                .maxDuration(givenMaxDuration)
-                .applicationId(givenApplicationId);
+            .name(givenName)
+            .recording(new CallsConferenceRecordingRequest()
+                           .recordingType(givenRecordingType)
+                           .conferenceComposition(new CallsConferenceComposition().enabled(givenCompositionEnabled))
+                           .customData(givenCustomData)
+                           .filePrefix(givenFilePrefix)
+            )
+            .maxDuration(givenMaxDuration)
+            .applicationId(givenApplicationId);
 
         Consumer<CallsConference> assertions = (response) -> {
             then(response).isNotNull();
@@ -2384,32 +2382,32 @@ class CallsApiTest extends ApiTest {
         String givenApplicationId = "61c060db2675060027d8c7a6";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"participants\": [\n" +
-                                             "    {\n" +
-                                             "      \"callId\": \"%s\",\n" +
-                                             "      \"endpoint\": {\n" +
-                                             "        \"phoneNumber\": \"%s\",\n" +
-                                             "        \"type\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"state\": \"%s\",\n" +
-                                             "      \"joinTime\": \"%s\",\n" +
-                                             "      \"media\": {\n" +
-                                             "        \"audio\": {\n" +
-                                             "          \"muted\": %b,\n" +
-                                             "          \"userMuted\": %b,\n" +
-                                             "          \"deaf\": %b\n" +
-                                             "        },\n" +
-                                             "        \"video\": {\n" +
-                                             "          \"camera\": %b,\n" +
-                                             "          \"screenShare\": %b\n" +
-                                             "        }\n" +
-                                             "      }\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"applicationId\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"participants\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"callId\": \"%s\",\n" +
+                                                 "      \"endpoint\": {\n" +
+                                                 "        \"phoneNumber\": \"%s\",\n" +
+                                                 "        \"type\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"state\": \"%s\",\n" +
+                                                 "      \"joinTime\": \"%s\",\n" +
+                                                 "      \"media\": {\n" +
+                                                 "        \"audio\": {\n" +
+                                                 "          \"muted\": %b,\n" +
+                                                 "          \"userMuted\": %b,\n" +
+                                                 "          \"deaf\": %b\n" +
+                                                 "        },\n" +
+                                                 "        \"video\": {\n" +
+                                                 "          \"camera\": %b,\n" +
+                                                 "          \"screenShare\": %b\n" +
+                                                 "        }\n" +
+                                                 "      }\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"applicationId\": \"%s\"\n" +
+                                                 "}\n",
                                              givenId,
                                              givenName,
                                              givenCallId,
@@ -2426,9 +2424,9 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CONFERENCE.replace("{conferenceId}", givenId),
-                Map.of(),
-                givenResponse
+            CONFERENCE.replace("{conferenceId}", givenId),
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -2502,78 +2500,78 @@ class CallsApiTest extends ApiTest {
         String givenErrorCodeDescription = "The call has ended with hangup initiated by caller, callee or API";
 
         String givenResponse = String.format("{\n" +
-                                             "    \"results\": [\n" +
-                                             "        {\n" +
-                                             "          \"conferenceId\": \"%s\",\n" +
-                                             "          \"name\": \"%s\",\n" +
-                                             "          \"applicationId\": \"%s\",\n" +
-                                             "          \"startTime\": \"%s\",\n" +
-                                             "          \"endTime\": \"%s\",\n" +
-                                             "          \"duration\": %d,\n" +
-                                             "          \"sessions\": [\n" +
-                                             "            {\n" +
-                                             "              \"callId\": \"%s\",\n" +
-                                             "              \"joinTime\": \"%s\",\n" +
-                                             "              \"leaveTime\": \"%s\"\n" +
-                                             "            }\n" +
-                                             "          ],\n" +
-                                             "          \"recording\": {\n" +
-                                             "                \"composedFiles\": [\n" +
-                                             "                    {\n" +
-                                             "                      \"id\": \"%s\",\n" +
-                                             "                      \"name\": \"%s\",\n" +
-                                             "                      \"fileFormat\": \"%s\",\n" +
-                                             "                      \"size\": %d,\n" +
-                                             "                      \"creationMethod\": \"%s\",\n" +
-                                             "                      \"creationTime\": \"%s\",\n" +
-                                             "                      \"expirationTime\": \"%s\",\n" +
-                                             "                      \"duration\": %d,\n" +
-                                             "                      \"startTime\": \"%s\",\n" +
-                                             "                      \"endTime\": \"%s\"\n" +
-                                             "                    }\n" +
-                                             "                ],\n" +
-                                             "                \"callRecordings\": [\n" +
-                                             "                    {\n" +
-                                             "                      \"callId\": \"%s\",\n" +
-                                             "                      \"endpoint\": {\n" +
-                                             "                        \"phoneNumber\": \"%s\",\n" +
-                                             "                        \"type\": \"%s\"\n" +
-                                             "                      },\n" +
-                                             "                      \"direction\": \"%s\",\n" +
-                                             "                      \"files\": [\n" +
-                                             "                        {\n" +
-                                             "                          \"id\": \"%s\",\n" +
-                                             "                          \"name\": \"%s\",\n" +
-                                             "                          \"fileFormat\": \"%s\",\n" +
-                                             "                          \"size\": %d,\n" +
-                                             "                          \"creationMethod\": \"%s\",\n" +
-                                             "                          \"creationTime\": \"%s\",\n" +
-                                             "                          \"expirationTime\": \"%s\",\n" +
-                                             "                          \"duration\": %d,\n" +
-                                             "                          \"startTime\": \"%s\",\n" +
-                                             "                          \"endTime\": \"%s\",\n" +
-                                             "                          \"location\": \"%s\"\n" +
-                                             "                        }\n" +
-                                             "                      ],\n" +
-                                             "                      \"status\": \"%s\",\n" +
-                                             "                      \"reason\": \"%s\"\n" +
-                                             "                    }\n" +
-                                             "                ]\n" +
-                                             "            },\n" +
-                                             "            \"errorCode\": {\n" +
-                                             "              \"id\": %d,\n" +
-                                             "              \"name\": \"%s\",\n" +
-                                             "              \"description\": \"%s\"\n" +
-                                             "            }\n" +
-                                             "        }\n" +
-                                             "    ],\n" +
-                                             "    \"paging\": {\n" +
-                                             "      \"page\": %d,\n" +
-                                             "      \"size\": %d,\n" +
-                                             "      \"totalPages\": %d,\n" +
-                                             "      \"totalResults\": %d\n" +
-                                             "    }\n" +
-                                             "}\n",
+                                                 "    \"results\": [\n" +
+                                                 "        {\n" +
+                                                 "          \"conferenceId\": \"%s\",\n" +
+                                                 "          \"name\": \"%s\",\n" +
+                                                 "          \"applicationId\": \"%s\",\n" +
+                                                 "          \"startTime\": \"%s\",\n" +
+                                                 "          \"endTime\": \"%s\",\n" +
+                                                 "          \"duration\": %d,\n" +
+                                                 "          \"sessions\": [\n" +
+                                                 "            {\n" +
+                                                 "              \"callId\": \"%s\",\n" +
+                                                 "              \"joinTime\": \"%s\",\n" +
+                                                 "              \"leaveTime\": \"%s\"\n" +
+                                                 "            }\n" +
+                                                 "          ],\n" +
+                                                 "          \"recording\": {\n" +
+                                                 "                \"composedFiles\": [\n" +
+                                                 "                    {\n" +
+                                                 "                      \"id\": \"%s\",\n" +
+                                                 "                      \"name\": \"%s\",\n" +
+                                                 "                      \"fileFormat\": \"%s\",\n" +
+                                                 "                      \"size\": %d,\n" +
+                                                 "                      \"creationMethod\": \"%s\",\n" +
+                                                 "                      \"creationTime\": \"%s\",\n" +
+                                                 "                      \"expirationTime\": \"%s\",\n" +
+                                                 "                      \"duration\": %d,\n" +
+                                                 "                      \"startTime\": \"%s\",\n" +
+                                                 "                      \"endTime\": \"%s\"\n" +
+                                                 "                    }\n" +
+                                                 "                ],\n" +
+                                                 "                \"callRecordings\": [\n" +
+                                                 "                    {\n" +
+                                                 "                      \"callId\": \"%s\",\n" +
+                                                 "                      \"endpoint\": {\n" +
+                                                 "                        \"phoneNumber\": \"%s\",\n" +
+                                                 "                        \"type\": \"%s\"\n" +
+                                                 "                      },\n" +
+                                                 "                      \"direction\": \"%s\",\n" +
+                                                 "                      \"files\": [\n" +
+                                                 "                        {\n" +
+                                                 "                          \"id\": \"%s\",\n" +
+                                                 "                          \"name\": \"%s\",\n" +
+                                                 "                          \"fileFormat\": \"%s\",\n" +
+                                                 "                          \"size\": %d,\n" +
+                                                 "                          \"creationMethod\": \"%s\",\n" +
+                                                 "                          \"creationTime\": \"%s\",\n" +
+                                                 "                          \"expirationTime\": \"%s\",\n" +
+                                                 "                          \"duration\": %d,\n" +
+                                                 "                          \"startTime\": \"%s\",\n" +
+                                                 "                          \"endTime\": \"%s\",\n" +
+                                                 "                          \"location\": \"%s\"\n" +
+                                                 "                        }\n" +
+                                                 "                      ],\n" +
+                                                 "                      \"status\": \"%s\",\n" +
+                                                 "                      \"reason\": \"%s\"\n" +
+                                                 "                    }\n" +
+                                                 "                ]\n" +
+                                                 "            },\n" +
+                                                 "            \"errorCode\": {\n" +
+                                                 "              \"id\": %d,\n" +
+                                                 "              \"name\": \"%s\",\n" +
+                                                 "              \"description\": \"%s\"\n" +
+                                                 "            }\n" +
+                                                 "        }\n" +
+                                                 "    ],\n" +
+                                                 "    \"paging\": {\n" +
+                                                 "      \"page\": %d,\n" +
+                                                 "      \"size\": %d,\n" +
+                                                 "      \"totalPages\": %d,\n" +
+                                                 "      \"totalResults\": %d\n" +
+                                                 "    }\n" +
+                                                 "}\n",
                                              givenConferenceId,
                                              givenName,
                                              givenApplicationId,
@@ -2620,13 +2618,13 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CONFERENCES_HISTORY,
-                Map.of(
-                        "name", givenName,
-                        "callId", givenCallId,
-                        "applicationId", givenApplicationId
-                ),
-                givenResponse
+            CONFERENCES_HISTORY,
+            Map.of(
+                "name", givenName,
+                "callId", givenCallId,
+                "applicationId", givenApplicationId
+            ),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -2703,9 +2701,9 @@ class CallsApiTest extends ApiTest {
         };
 
         var call = api.getConferencesHistory()
-                .name(givenName)
-                .callId(givenCallId)
-                .applicationId(givenApplicationId);
+                      .name(givenName)
+                      .callId(givenCallId)
+                      .applicationId(givenApplicationId);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -2742,66 +2740,66 @@ class CallsApiTest extends ApiTest {
         String givenErrorCodeDescription = "The call has ended with hangup initiated by caller, callee or API";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"conferenceId\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"applicationId\": \"%s\",\n" +
-                                             "  \"startTime\": \"%s\",\n" +
-                                             "  \"endTime\": \"%s\",\n" +
-                                             "  \"duration\": %d,\n" +
-                                             "  \"sessions\": [\n" +
-                                             "    {\n" +
-                                             "      \"callId\": \"%s\",\n" +
-                                             "      \"joinTime\": \"%s\",\n" +
-                                             "      \"leaveTime\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"recording\": {\n" +
-                                             "    \"composedFiles\": [\n" +
-                                             "            {\n" +
-                                             "              \"id\": \"%s\",\n" +
-                                             "              \"name\": \"%s\",\n" +
-                                             "              \"fileFormat\": \"%s\",\n" +
-                                             "              \"size\": %d,\n" +
-                                             "              \"creationTime\": \"%s\",\n" +
-                                             "              \"duration\": %d,\n" +
-                                             "              \"startTime\": \"%s\",\n" +
-                                             "              \"endTime\": \"%s\"\n" +
-                                             "            }\n" +
-                                             "          ],\n" +
-                                             "    \"callRecordings\": [\n" +
-                                             "        {\n" +
-                                             "          \"callId\": \"%s\",\n" +
-                                             "          \"endpoint\": {\n" +
-                                             "            \"phoneNumber\": \"%s\",\n" +
-                                             "            \"type\": \"%s\"\n" +
-                                             "          },\n" +
-                                             "          \"direction\": \"%s\",\n" +
-                                             "          \"files\": [\n" +
-                                             "            {\n" +
-                                             "              \"id\": \"%s\",\n" +
-                                             "              \"name\": \"%s\",\n" +
-                                             "              \"fileFormat\": \"%s\",\n" +
-                                             "              \"size\": %d,\n" +
-                                             "              \"creationMethod\": \"%s\",\n" +
-                                             "              \"creationTime\": \"%s\",\n" +
-                                             "              \"expirationTime\": \"%s\",\n" +
-                                             "              \"duration\": %d,\n" +
-                                             "              \"startTime\": \"%s\",\n" +
-                                             "              \"endTime\": \"%s\",\n" +
-                                             "              \"location\": \"%s\"\n" +
-                                             "            }\n" +
-                                             "          ],\n" +
-                                             "          \"status\": \"%s\",\n" +
-                                             "          \"reason\": \"%s\"\n" +
-                                             "        }\n" +
-                                             "      ]\n" +
-                                             "  },\n" +
-                                             "  \"errorCode\": {\n" +
-                                             "    \"id\": %d,\n" +
-                                             "    \"name\": \"%s\",\n" +
-                                             "    \"description\": \"%s\"\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"conferenceId\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"applicationId\": \"%s\",\n" +
+                                                 "  \"startTime\": \"%s\",\n" +
+                                                 "  \"endTime\": \"%s\",\n" +
+                                                 "  \"duration\": %d,\n" +
+                                                 "  \"sessions\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"callId\": \"%s\",\n" +
+                                                 "      \"joinTime\": \"%s\",\n" +
+                                                 "      \"leaveTime\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"recording\": {\n" +
+                                                 "    \"composedFiles\": [\n" +
+                                                 "            {\n" +
+                                                 "              \"id\": \"%s\",\n" +
+                                                 "              \"name\": \"%s\",\n" +
+                                                 "              \"fileFormat\": \"%s\",\n" +
+                                                 "              \"size\": %d,\n" +
+                                                 "              \"creationTime\": \"%s\",\n" +
+                                                 "              \"duration\": %d,\n" +
+                                                 "              \"startTime\": \"%s\",\n" +
+                                                 "              \"endTime\": \"%s\"\n" +
+                                                 "            }\n" +
+                                                 "          ],\n" +
+                                                 "    \"callRecordings\": [\n" +
+                                                 "        {\n" +
+                                                 "          \"callId\": \"%s\",\n" +
+                                                 "          \"endpoint\": {\n" +
+                                                 "            \"phoneNumber\": \"%s\",\n" +
+                                                 "            \"type\": \"%s\"\n" +
+                                                 "          },\n" +
+                                                 "          \"direction\": \"%s\",\n" +
+                                                 "          \"files\": [\n" +
+                                                 "            {\n" +
+                                                 "              \"id\": \"%s\",\n" +
+                                                 "              \"name\": \"%s\",\n" +
+                                                 "              \"fileFormat\": \"%s\",\n" +
+                                                 "              \"size\": %d,\n" +
+                                                 "              \"creationMethod\": \"%s\",\n" +
+                                                 "              \"creationTime\": \"%s\",\n" +
+                                                 "              \"expirationTime\": \"%s\",\n" +
+                                                 "              \"duration\": %d,\n" +
+                                                 "              \"startTime\": \"%s\",\n" +
+                                                 "              \"endTime\": \"%s\",\n" +
+                                                 "              \"location\": \"%s\"\n" +
+                                                 "            }\n" +
+                                                 "          ],\n" +
+                                                 "          \"status\": \"%s\",\n" +
+                                                 "          \"reason\": \"%s\"\n" +
+                                                 "        }\n" +
+                                                 "      ]\n" +
+                                                 "  },\n" +
+                                                 "  \"errorCode\": {\n" +
+                                                 "    \"id\": %d,\n" +
+                                                 "    \"name\": \"%s\",\n" +
+                                                 "    \"description\": \"%s\"\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenConferenceId,
                                              givenName,
                                              givenApplicationId,
@@ -2845,9 +2843,9 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CONFERENCE_HISTORY.replace("{conferenceId}", givenConferenceId),
-                Map.of(),
-                givenResponse
+            CONFERENCE_HISTORY.replace("{conferenceId}", givenConferenceId),
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -2958,63 +2956,63 @@ class CallsApiTest extends ApiTest {
         Boolean givenConnectOnEarlyMedia = false;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"conference\": {\n" +
-                                             "      \"id\": \"%s\",\n" +
-                                             "      \"name\": \"%s\",\n" +
-                                             "      \"participants\": [\n" +
-                                             "        {\n" +
-                                             "          \"callId\": \"%s\",\n" +
-                                             "          \"endpoint\": {\n" +
-                                             "            \"phoneNumber\": \"%s\",\n" +
-                                             "            \"type\": \"%s\"\n" +
-                                             "          },\n" +
-                                             "          \"state\": \"%s\",\n" +
-                                             "          \"joinTime\": \"%s\",\n" +
-                                             "          \"media\": {\n" +
-                                             "            \"audio\": {\n" +
-                                             "              \"muted\": %b,\n" +
-                                             "              \"deaf\": %b\n" +
-                                             "            },\n" +
-                                             "            \"video\": {\n" +
-                                             "              \"camera\": %b,\n" +
-                                             "              \"screenShare\": %b\n" +
-                                             "            }\n" +
-                                             "          }\n" +
-                                             "        }\n" +
-                                             "      ],\n" +
-                                             "      \"applicationId\": \"%s\"\n" +
-                                             "    },\n" +
-                                             "  \"call\": {\n" +
-                                             "    \"id\": \"%s\",\n" +
-                                             "    \"endpoint\": {\n" +
-                                             "      \"phoneNumber\": \"%s\",\n" +
-                                             "      \"type\": \"%s\"\n" +
-                                             "    },\n" +
-                                             "    \"from\": \"%s\",\n" +
-                                             "    \"to\": \"%s\",\n" +
-                                             "    \"direction\": \"%s\",\n" +
-                                             "    \"state\": \"%s\",\n" +
-                                             "    \"media\": {\n" +
-                                             "      \"audio\": {\n" +
-                                             "        \"muted\": %b,\n" +
-                                             "        \"deaf\": %b\n" +
-                                             "      },\n" +
-                                             "      \"video\": {\n" +
-                                             "        \"camera\": %b,\n" +
-                                             "        \"screenShare\": %b\n" +
-                                             "      }\n" +
-                                             "    },\n" +
-                                             "    \"startTime\": \"%s\",\n" +
-                                             "    \"answerTime\": \"%s\",\n" +
-                                             "    \"ringDuration\": %d,\n" +
-                                             "    \"applicationId\": \"%s\",\n" +
-                                             "    \"conferenceId\": \"%s\",\n" +
-                                             "    \"customData\": {\n" +
-                                             "      \"key1\": \"%s\",\n" +
-                                             "      \"key2\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"conference\": {\n" +
+                                                 "      \"id\": \"%s\",\n" +
+                                                 "      \"name\": \"%s\",\n" +
+                                                 "      \"participants\": [\n" +
+                                                 "        {\n" +
+                                                 "          \"callId\": \"%s\",\n" +
+                                                 "          \"endpoint\": {\n" +
+                                                 "            \"phoneNumber\": \"%s\",\n" +
+                                                 "            \"type\": \"%s\"\n" +
+                                                 "          },\n" +
+                                                 "          \"state\": \"%s\",\n" +
+                                                 "          \"joinTime\": \"%s\",\n" +
+                                                 "          \"media\": {\n" +
+                                                 "            \"audio\": {\n" +
+                                                 "              \"muted\": %b,\n" +
+                                                 "              \"deaf\": %b\n" +
+                                                 "            },\n" +
+                                                 "            \"video\": {\n" +
+                                                 "              \"camera\": %b,\n" +
+                                                 "              \"screenShare\": %b\n" +
+                                                 "            }\n" +
+                                                 "          }\n" +
+                                                 "        }\n" +
+                                                 "      ],\n" +
+                                                 "      \"applicationId\": \"%s\"\n" +
+                                                 "    },\n" +
+                                                 "  \"call\": {\n" +
+                                                 "    \"id\": \"%s\",\n" +
+                                                 "    \"endpoint\": {\n" +
+                                                 "      \"phoneNumber\": \"%s\",\n" +
+                                                 "      \"type\": \"%s\"\n" +
+                                                 "    },\n" +
+                                                 "    \"from\": \"%s\",\n" +
+                                                 "    \"to\": \"%s\",\n" +
+                                                 "    \"direction\": \"%s\",\n" +
+                                                 "    \"state\": \"%s\",\n" +
+                                                 "    \"media\": {\n" +
+                                                 "      \"audio\": {\n" +
+                                                 "        \"muted\": %b,\n" +
+                                                 "        \"deaf\": %b\n" +
+                                                 "      },\n" +
+                                                 "      \"video\": {\n" +
+                                                 "        \"camera\": %b,\n" +
+                                                 "        \"screenShare\": %b\n" +
+                                                 "      }\n" +
+                                                 "    },\n" +
+                                                 "    \"startTime\": \"%s\",\n" +
+                                                 "    \"answerTime\": \"%s\",\n" +
+                                                 "    \"ringDuration\": %d,\n" +
+                                                 "    \"applicationId\": \"%s\",\n" +
+                                                 "    \"conferenceId\": \"%s\",\n" +
+                                                 "    \"customData\": {\n" +
+                                                 "      \"key1\": \"%s\",\n" +
+                                                 "      \"key2\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenId,
                                              givenName,
                                              givenCallId,
@@ -3048,15 +3046,15 @@ class CallsApiTest extends ApiTest {
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"callRequest\": {\n" +
-                                               "    \"endpoint\": {\n" +
-                                               "      \"phoneNumber\": \"%s\",\n" +
-                                               "      \"type\": \"%s\"\n" +
-                                               "    },\n" +
-                                               "    \"from\": \"%s\"\n" +
-                                               "  },\n" +
-                                               "  \"connectOnEarlyMedia\": %b\n" +
-                                               "}\n",
+                                                   "  \"callRequest\": {\n" +
+                                                   "    \"endpoint\": {\n" +
+                                                   "      \"phoneNumber\": \"%s\",\n" +
+                                                   "      \"type\": \"%s\"\n" +
+                                                   "    },\n" +
+                                                   "    \"from\": \"%s\"\n" +
+                                                   "  },\n" +
+                                                   "  \"connectOnEarlyMedia\": %b\n" +
+                                                   "}\n",
                                                givenPhoneNumber,
                                                givenType,
                                                givenFrom,
@@ -3064,27 +3062,27 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessPostRequest(
-                CONFERENCE_CALLS.replace("{conferenceId}", givenId),
-                expectedRequest,
-                givenResponse
+            CONFERENCE_CALLS.replace("{conferenceId}", givenId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsAddNewCallRequest request = new CallsAddNewCallRequest()
-                .callRequest(new CallsActionCallRequest()
-                        .endpoint(new CallsPhoneEndpoint().phoneNumber(givenPhoneNumber))
-                        .from(givenFrom)
-                )
-                .connectOnEarlyMedia(givenConnectOnEarlyMedia);
+            .callRequest(new CallsActionCallRequest()
+                             .endpoint(new CallsPhoneEndpoint().phoneNumber(givenPhoneNumber))
+                             .from(givenFrom)
+            )
+            .connectOnEarlyMedia(givenConnectOnEarlyMedia);
 
         Consumer<CallsConferenceAndCall> assertions = response -> {
             OffsetDateTime expectedTime = OffsetDateTime.of(
-                    LocalDateTime.of(
-                            LocalDate.of(2022, 5, 1),
-                            LocalTime.of(14, 25, 45)
-                    ),
-                    ZoneOffset.UTC
+                LocalDateTime.of(
+                    LocalDate.of(2022, 5, 1),
+                    LocalTime.of(14, 25, 45)
+                ),
+                ZoneOffset.UTC
             );
 
             then(response).isNotNull();
@@ -3149,11 +3147,11 @@ class CallsApiTest extends ApiTest {
             then(call.getApplicationId()).isEqualTo(givenApplicationId);
             then(call.getConferenceId()).isEqualTo(givenConferenceId);
             then(call.getCustomData())
-                    .isNotNull()
-                    .containsExactly(
-                            entry("key1", givenKey1),
-                            entry("key2", givenKey2)
-                    );
+                .isNotNull()
+                .containsExactly(
+                    entry("key1", givenKey1),
+                    entry("key2", givenKey2)
+                );
         };
 
         var call = api.addNewConferenceCall(givenConferenceId, request);
@@ -3180,32 +3178,32 @@ class CallsApiTest extends ApiTest {
         Boolean givenConnectOnEarlyMedia = false;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"participants\": [\n" +
-                                             "    {\n" +
-                                             "      \"callId\": \"%s\",\n" +
-                                             "      \"endpoint\": {\n" +
-                                             "        \"phoneNumber\": \"%s\",\n" +
-                                             "        \"type\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"state\": \"%s\",\n" +
-                                             "      \"joinTime\": \"%s\",\n" +
-                                             "      \"media\": {\n" +
-                                             "        \"audio\": {\n" +
-                                             "          \"muted\": %b,\n" +
-                                             "          \"userMuted\": %b,\n" +
-                                             "          \"deaf\": %b\n" +
-                                             "        },\n" +
-                                             "        \"video\": {\n" +
-                                             "          \"camera\": %b,\n" +
-                                             "          \"screenShare\": %b\n" +
-                                             "        }\n" +
-                                             "      }\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"applicationId\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"participants\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"callId\": \"%s\",\n" +
+                                                 "      \"endpoint\": {\n" +
+                                                 "        \"phoneNumber\": \"%s\",\n" +
+                                                 "        \"type\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"state\": \"%s\",\n" +
+                                                 "      \"joinTime\": \"%s\",\n" +
+                                                 "      \"media\": {\n" +
+                                                 "        \"audio\": {\n" +
+                                                 "          \"muted\": %b,\n" +
+                                                 "          \"userMuted\": %b,\n" +
+                                                 "          \"deaf\": %b\n" +
+                                                 "        },\n" +
+                                                 "        \"video\": {\n" +
+                                                 "          \"camera\": %b,\n" +
+                                                 "          \"screenShare\": %b\n" +
+                                                 "        }\n" +
+                                                 "      }\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"applicationId\": \"%s\"\n" +
+                                                 "}\n",
                                              givenId,
                                              givenName,
                                              givenCallId,
@@ -3222,24 +3220,24 @@ class CallsApiTest extends ApiTest {
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"connectOnEarlyMedia\": %b\n" +
-                                               "}\n",
+                                                   "  \"connectOnEarlyMedia\": %b\n" +
+                                                   "}\n",
                                                givenConnectOnEarlyMedia
         );
 
         setUpSuccessPutRequest(
-                CONFERENCE_CALL
-                        .replace("{conferenceId}", givenId)
-                        .replace("{callId}", givenCallId),
-                Map.of(),
-                expectedRequest,
-                givenResponse
+            CONFERENCE_CALL
+                .replace("{conferenceId}", givenId)
+                .replace("{callId}", givenCallId),
+            Map.of(),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsAddExistingCallRequest request = new CallsAddExistingCallRequest()
-                .connectOnEarlyMedia(givenConnectOnEarlyMedia);
+            .connectOnEarlyMedia(givenConnectOnEarlyMedia);
 
         Consumer<CallsConference> assertions = (response) -> {
             then(response).isNotNull();
@@ -3282,18 +3280,18 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         setUpNoRequestBodyDeleteRequest(
-                CONFERENCE_CALL
-                        .replace("{conferenceId}", givenId)
-                        .replace("{callId}", givenCallId),
-                Map.of(),
-                givenResponse,
-                200
+            CONFERENCE_CALL
+                .replace("{conferenceId}", givenId)
+                .replace("{callId}", givenCallId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -3325,32 +3323,32 @@ class CallsApiTest extends ApiTest {
         String givenApplicationId = "61c060db2675060027d8c7a6";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"participants\": [\n" +
-                                             "    {\n" +
-                                             "      \"callId\": \"%s\",\n" +
-                                             "      \"endpoint\": {\n" +
-                                             "        \"phoneNumber\": \"%s\",\n" +
-                                             "        \"type\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"state\": \"%s\",\n" +
-                                             "      \"joinTime\": \"%s\",\n" +
-                                             "      \"media\": {\n" +
-                                             "        \"audio\": {\n" +
-                                             "          \"muted\": %b,\n" +
-                                             "          \"userMuted\": %b,\n" +
-                                             "          \"deaf\": %b\n" +
-                                             "        },\n" +
-                                             "        \"video\": {\n" +
-                                             "          \"camera\": %b,\n" +
-                                             "          \"screenShare\": %b\n" +
-                                             "        }\n" +
-                                             "      }\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"applicationId\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"participants\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"callId\": \"%s\",\n" +
+                                                 "      \"endpoint\": {\n" +
+                                                 "        \"phoneNumber\": \"%s\",\n" +
+                                                 "        \"type\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"state\": \"%s\",\n" +
+                                                 "      \"joinTime\": \"%s\",\n" +
+                                                 "      \"media\": {\n" +
+                                                 "        \"audio\": {\n" +
+                                                 "          \"muted\": %b,\n" +
+                                                 "          \"userMuted\": %b,\n" +
+                                                 "          \"deaf\": %b\n" +
+                                                 "        },\n" +
+                                                 "        \"video\": {\n" +
+                                                 "          \"camera\": %b,\n" +
+                                                 "          \"screenShare\": %b\n" +
+                                                 "        }\n" +
+                                                 "      }\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"applicationId\": \"%s\"\n" +
+                                                 "}\n",
                                              givenId,
                                              givenName,
                                              givenCallId,
@@ -3366,10 +3364,10 @@ class CallsApiTest extends ApiTest {
                                              givenApplicationId);
 
         setUpEmptyPostRequest(
-                HANGUP_CONFERENCE.replace("{conferenceId}", givenId),
-                Map.of(),
-                givenResponse,
-                200
+            HANGUP_CONFERENCE.replace("{conferenceId}", givenId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -3418,41 +3416,41 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"loopCount\": %d,\n" +
-                                               "  \"content\": {\n" +
-                                               "    \"type\": \"%s\",\n" +
-                                               "    \"fileId\" : \"%s\"\n" +
-                                               "  }\n" +
-                                               "}\n",
+                                                   "  \"loopCount\": %d,\n" +
+                                                   "  \"content\": {\n" +
+                                                   "    \"type\": \"%s\",\n" +
+                                                   "    \"fileId\" : \"%s\"\n" +
+                                                   "  }\n" +
+                                                   "}\n",
                                                givenLoopCount,
                                                givenContentType,
                                                givenFileId
         );
 
         setUpSuccessPostRequest(
-                CONFERENCE_PLAY_FILE.replace("{conferenceId}", givenId),
-                expectedRequest,
-                givenResponse
+            CONFERENCE_PLAY_FILE.replace("{conferenceId}", givenId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsPlayRequest request = new CallsPlayRequest()
-                .loopCount(givenLoopCount)
-                .content(new CallsFilePlayContent()
-                        .fileId(givenFileId)
-                );
+            .loopCount(givenLoopCount)
+            .content(new CallsFilePlayContent()
+                         .fileId(givenFileId)
+            );
 
         Consumer<CallsActionResponse> assertions = response -> then(response)
-                .isNotNull()
-                .extracting(CallsActionResponse::getStatus)
-                .isEqualTo(givenStatus);
+            .isNotNull()
+            .extracting(CallsActionResponse::getStatus)
+            .isEqualTo(givenStatus);
 
         var call = api.conferencePlayFile(givenId, request);
         testSuccessfulCall(call::execute, assertions);
@@ -3473,21 +3471,21 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"text\": \"%s\",\n" +
-                                               "  \"language\": \"%s\",\n" +
-                                               "  \"speechRate\": %f,\n" +
-                                               "  \"loopCount\": %d,\n" +
-                                               "  \"preferences\": {\n" +
-                                               "    \"voiceGender\": \"%s\",\n" +
-                                               "    \"voiceName\": \"%s\"\n" +
-                                               "  }\n" +
-                                               "}\n",
+                                                   "  \"text\": \"%s\",\n" +
+                                                   "  \"language\": \"%s\",\n" +
+                                                   "  \"speechRate\": %f,\n" +
+                                                   "  \"loopCount\": %d,\n" +
+                                                   "  \"preferences\": {\n" +
+                                                   "    \"voiceGender\": \"%s\",\n" +
+                                                   "    \"voiceName\": \"%s\"\n" +
+                                                   "  }\n" +
+                                                   "}\n",
                                                givenText,
                                                givenLanguage,
                                                givenSpeechRate,
@@ -3497,22 +3495,22 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessPostRequest(
-                CONFERENCE_SAY_TEXT.replace("{conferenceId}", givenId),
-                expectedRequest,
-                givenResponse
+            CONFERENCE_SAY_TEXT.replace("{conferenceId}", givenId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsSayRequest request = new CallsSayRequest()
-                .text(givenText)
-                .language(givenLanguage)
-                .speechRate(givenSpeechRate)
-                .loopCount(givenLoopCount)
-                .preferences(new CallsVoicePreferences()
-                        .voiceGender(givenCallsGender)
-                        .voiceName(givenVoiceName)
-                );
+            .text(givenText)
+            .language(givenLanguage)
+            .speechRate(givenSpeechRate)
+            .loopCount(givenLoopCount)
+            .preferences(new CallsVoicePreferences()
+                             .voiceGender(givenCallsGender)
+                             .voiceName(givenVoiceName)
+            );
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -3531,16 +3529,16 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         setUpEmptyPostRequest(
-                CONFERENCE_STOP_PLAYING_FILE.replace("{conferenceId}", givenId),
-                Map.of(),
-                givenResponse,
-                200
+            CONFERENCE_STOP_PLAYING_FILE.replace("{conferenceId}", givenId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -3565,23 +3563,23 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         setUpEmptyPostRequest(
-                CONFERENCE_START_RECORDING.replace("{conferenceId}", givenId),
-                Map.of(),
-                givenResponse,
-                200
+            CONFERENCE_START_RECORDING.replace("{conferenceId}", givenId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsConferenceRecordingRequest request = new CallsConferenceRecordingRequest()
-                        .recordingType(givenRecordingType)
-                        .conferenceComposition(new CallsConferenceComposition().enabled(givenEnabled));
+            .recordingType(givenRecordingType)
+            .conferenceComposition(new CallsConferenceComposition().enabled(givenEnabled));
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -3600,16 +3598,16 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         setUpEmptyPostRequest(
-                CONFERENCE_STOP_RECORDING.replace("{conferenceId}", givenId),
-                Map.of(),
-                givenResponse,
-                200
+            CONFERENCE_STOP_RECORDING.replace("{conferenceId}", givenId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -3629,30 +3627,30 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         String expectedText = "This meeting will end in 5 minutes.";
         String expectedRequest = String.format("{\n" +
-                                               "  \"text\": \"%s\"\n" +
-                                               "}",
+                                                   "  \"text\": \"%s\"\n" +
+                                                   "}",
                                                expectedText
         );
 
         String givenConferenceId = "123";
         setUpPostRequest(
-                CONFERENCE_BROADCAST_WEBRTC_TEXT.replace("{conferenceId}", givenConferenceId),
-                expectedRequest,
-                givenResponse,
-                200
+            CONFERENCE_BROADCAST_WEBRTC_TEXT.replace("{conferenceId}", givenConferenceId),
+            expectedRequest,
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         var callsConferenceBroadcastWebrtcTextRequest = new CallsConferenceBroadcastWebrtcTextRequest()
-                .text(expectedText);
+            .text(expectedText);
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -3663,6 +3661,7 @@ class CallsApiTest extends ApiTest {
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
+
     @Test
     void shouldGetCallsFiles() {
         String givenId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
@@ -3679,25 +3678,25 @@ class CallsApiTest extends ApiTest {
         Long givenPageTotalResults = 0L;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"results\": [\n" +
-                                             "    {\n" +
-                                             "      \"id\": \"%s\",\n" +
-                                             "      \"name\": \"%s\",\n" +
-                                             "      \"fileFormat\": \"%s\",\n" +
-                                             "      \"size\": %d,\n" +
-                                             "      \"creationMethod\": \"%s\",\n" +
-                                             "      \"creationTime\": \"%s\",\n" +
-                                             "      \"expirationTime\": \"%s\",\n" +
-                                             "      \"duration\": %d\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"paging\": {\n" +
-                                             "    \"page\": %d,\n" +
-                                             "    \"size\": %d,\n" +
-                                             "    \"totalPages\": %d,\n" +
-                                             "    \"totalResults\": %d\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"results\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"id\": \"%s\",\n" +
+                                                 "      \"name\": \"%s\",\n" +
+                                                 "      \"fileFormat\": \"%s\",\n" +
+                                                 "      \"size\": %d,\n" +
+                                                 "      \"creationMethod\": \"%s\",\n" +
+                                                 "      \"creationTime\": \"%s\",\n" +
+                                                 "      \"expirationTime\": \"%s\",\n" +
+                                                 "      \"duration\": %d\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"paging\": {\n" +
+                                                 "    \"page\": %d,\n" +
+                                                 "    \"size\": %d,\n" +
+                                                 "    \"totalPages\": %d,\n" +
+                                                 "    \"totalResults\": %d\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenId,
                                              givenName,
                                              givenFileFormat,
@@ -3713,9 +3712,9 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CALLS_FILES,
-                Map.of(),
-                givenResponse
+            CALLS_FILES,
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -3763,15 +3762,15 @@ class CallsApiTest extends ApiTest {
         Files.writeString(tempFile.toPath(), givenAttachmentText);
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"fileFormat\": \"%s\",\n" +
-                                             "  \"size\": %d,\n" +
-                                             "  \"creationMethod\": \"%s\",\n" +
-                                             "  \"creationTime\": \"%s\",\n" +
-                                             "  \"expirationTime\": \"%s\",\n" +
-                                             "  \"duration\": %d\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"fileFormat\": \"%s\",\n" +
+                                                 "  \"size\": %d,\n" +
+                                                 "  \"creationMethod\": \"%s\",\n" +
+                                                 "  \"creationTime\": \"%s\",\n" +
+                                                 "  \"expirationTime\": \"%s\",\n" +
+                                                 "  \"duration\": %d\n" +
+                                                 "}\n",
                                              givenId,
                                              givenName,
                                              givenFileFormat,
@@ -3783,10 +3782,10 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpMultipartRequest(
-                CALLS_FILES,
-                List.of(new Multipart("file", givenAttachmentText)),
-                givenResponse,
-                200
+            CALLS_FILES,
+            List.of(new Multipart("file", givenAttachmentText)),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -3820,15 +3819,15 @@ class CallsApiTest extends ApiTest {
         Long givenDuration = 3L;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"fileFormat\": \"%s\",\n" +
-                                             "  \"size\": %d,\n" +
-                                             "  \"creationMethod\": \"%s\",\n" +
-                                             "  \"creationTime\": \"%s\",\n" +
-                                             "  \"expirationTime\": \"%s\",\n" +
-                                             "  \"duration\": %d\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"fileFormat\": \"%s\",\n" +
+                                                 "  \"size\": %d,\n" +
+                                                 "  \"creationMethod\": \"%s\",\n" +
+                                                 "  \"creationTime\": \"%s\",\n" +
+                                                 "  \"expirationTime\": \"%s\",\n" +
+                                                 "  \"duration\": %d\n" +
+                                                 "}\n",
                                              givenId,
                                              givenName,
                                              givenFileFormat,
@@ -3840,9 +3839,9 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CALLS_FILE.replace("{fileId}", givenId),
-                Map.of(),
-                givenResponse
+            CALLS_FILE.replace("{fileId}", givenId),
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -3876,15 +3875,15 @@ class CallsApiTest extends ApiTest {
         Long givenDuration = 3L;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"fileFormat\": \"%s\",\n" +
-                                             "  \"size\": %d,\n" +
-                                             "  \"creationMethod\": \"%s\",\n" +
-                                             "  \"creationTime\": \"%s\",\n" +
-                                             "  \"expirationTime\": \"%s\",\n" +
-                                             "  \"duration\": %d\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"fileFormat\": \"%s\",\n" +
+                                                 "  \"size\": %d,\n" +
+                                                 "  \"creationMethod\": \"%s\",\n" +
+                                                 "  \"creationTime\": \"%s\",\n" +
+                                                 "  \"expirationTime\": \"%s\",\n" +
+                                                 "  \"duration\": %d\n" +
+                                                 "}\n",
                                              givenId,
                                              givenName,
                                              givenFileFormat,
@@ -3896,10 +3895,10 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpNoRequestBodyDeleteRequest(
-                CALLS_FILE.replace("{fileId}", givenId),
-                Map.of(),
-                givenResponse,
-                200
+            CALLS_FILE.replace("{fileId}", givenId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -3932,29 +3931,29 @@ class CallsApiTest extends ApiTest {
         Long givenPageTotalResults = 0L;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"results\": [\n" +
-                                             "    {\n" +
-                                             "      \"id\": \"%s\",\n" +
-                                             "      \"url\": \"%s\",\n" +
-                                             "      \"securityConfig\": {\n" +
-                                             "        \"type\": \"%s\"\n" +
-                                             "      }\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"paging\": {\n" +
-                                             "    \"page\": %d,\n" +
-                                             "    \"size\": %d,\n" +
-                                             "    \"totalPages\": %d,\n" +
-                                             "    \"totalResults\": %d\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"results\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"id\": \"%s\",\n" +
+                                                 "      \"url\": \"%s\",\n" +
+                                                 "      \"securityConfig\": {\n" +
+                                                 "        \"type\": \"%s\"\n" +
+                                                 "      }\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"paging\": {\n" +
+                                                 "    \"page\": %d,\n" +
+                                                 "    \"size\": %d,\n" +
+                                                 "    \"totalPages\": %d,\n" +
+                                                 "    \"totalResults\": %d\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenId, givenUrl, givenType, givenPage, givenPageSize, givenPageTotalPages, givenPageTotalResults
         );
 
         setUpSuccessGetRequest(
-                MEDIA_STREAM_CONFIGS,
-                Map.of(),
-                givenResponse
+            MEDIA_STREAM_CONFIGS,
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -3986,17 +3985,17 @@ class CallsApiTest extends ApiTest {
         String givenUrl = "wss://example-websocket.com:3001";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"url\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"url\": \"%s\"\n" +
+                                                 "}\n",
                                              givenId,
                                              givenUrl
         );
 
         setUpSuccessGetRequest(
-                MEDIA_STREAM_CONFIG.replace("{mediaStreamConfigId}", givenId),
-                Map.of(),
-                givenResponse
+            MEDIA_STREAM_CONFIG.replace("{mediaStreamConfigId}", givenId),
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -4021,14 +4020,14 @@ class CallsApiTest extends ApiTest {
         String givenName = "name";
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"name\" : \"%s\",\n" +
-                                               "  \"url\": \"%s\",\n" +
-                                               "  \"securityConfig\": {\n" +
-                                               "    \"type\": \"%s\",\n" +
-                                               "    \"username\": \"%s\",\n" +
-                                               "    \"password\": \"%s\"\n" +
-                                               "  }\n" +
-                                               "}\n",
+                                                   "  \"name\" : \"%s\",\n" +
+                                                   "  \"url\": \"%s\",\n" +
+                                                   "  \"securityConfig\": {\n" +
+                                                   "    \"type\": \"%s\",\n" +
+                                                   "    \"username\": \"%s\",\n" +
+                                                   "    \"password\": \"%s\"\n" +
+                                                   "  }\n" +
+                                                   "}\n",
                                                givenName,
                                                givenUrl,
                                                givenType,
@@ -4039,14 +4038,14 @@ class CallsApiTest extends ApiTest {
         String givenId = "63467c6e2885a5389ba11d80";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"url\": \"%s\",\n" +
-                                             "  \"securityConfig\": {\n" +
-                                             "    \"type\": \"%s\",\n" +
-                                             "    \"username\": \"%s\",\n" +
-                                             "    \"password\": \"%s\"\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"url\": \"%s\",\n" +
+                                                 "  \"securityConfig\": {\n" +
+                                                 "    \"type\": \"%s\",\n" +
+                                                 "    \"username\": \"%s\",\n" +
+                                                 "    \"password\": \"%s\"\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenId,
                                              givenUrl,
                                              givenType,
@@ -4055,26 +4054,26 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpPostRequest(
-                MEDIA_STREAM_CONFIGS,
-                expectedRequest,
-                givenResponse,
-                201
+            MEDIA_STREAM_CONFIGS,
+            expectedRequest,
+            givenResponse,
+            201
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsMediaStreamConfigRequest request = new CallsMediaStreamConfigRequest()
-                .name(givenName)
-                .url(givenUrl)
-                .securityConfig(new BasicSecurityConfig()
-                        .username(givenUsername)
-                        .password(givenPassword)
-                );
+            .name(givenName)
+            .url(givenUrl)
+            .securityConfig(new BasicSecurityConfig()
+                                .username(givenUsername)
+                                .password(givenPassword)
+            );
 
         Consumer<CallsMediaStreamConfigResponse> assertions = response -> {
             CallsMediaStreamConfigResponse expectedConfig = new CallsMediaStreamConfigResponse()
-                    .id(givenId)
-                    .url(givenUrl);
+                .id(givenId)
+                .url(givenUrl);
             then(response).isEqualTo(expectedConfig);
         };
 
@@ -4093,13 +4092,13 @@ class CallsApiTest extends ApiTest {
         String givenPassword = "password";
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"url\": \"%s\",\n" +
-                                               "  \"securityConfig\": {\n" +
-                                               "    \"type\": \"%s\",\n" +
-                                               "    \"username\": \"%s\",\n" +
-                                               "    \"password\": \"%s\"\n" +
-                                               "  }\n" +
-                                               "}\n",
+                                                   "  \"url\": \"%s\",\n" +
+                                                   "  \"securityConfig\": {\n" +
+                                                   "    \"type\": \"%s\",\n" +
+                                                   "    \"username\": \"%s\",\n" +
+                                                   "    \"password\": \"%s\"\n" +
+                                                   "  }\n" +
+                                                   "}\n",
                                                givenUrl,
                                                givenType,
                                                givenUsername,
@@ -4107,14 +4106,14 @@ class CallsApiTest extends ApiTest {
         );
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"url\": \"%s\",\n" +
-                                             "  \"securityConfig\": {\n" +
-                                             "    \"type\": \"%s\",\n" +
-                                             "    \"username\": \"%s\",\n" +
-                                             "    \"password\": \"%s\"\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"url\": \"%s\",\n" +
+                                                 "  \"securityConfig\": {\n" +
+                                                 "    \"type\": \"%s\",\n" +
+                                                 "    \"username\": \"%s\",\n" +
+                                                 "    \"password\": \"%s\"\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenId,
                                              givenUrl,
                                              givenType,
@@ -4123,26 +4122,26 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpPutRequest(
-                MEDIA_STREAM_CONFIG.replace("{mediaStreamConfigId}", givenId),
-                Map.of(),
-                expectedRequest,
-                givenResponse,
-                200
+            MEDIA_STREAM_CONFIG.replace("{mediaStreamConfigId}", givenId),
+            Map.of(),
+            expectedRequest,
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsMediaStreamConfigRequest request = new CallsMediaStreamConfigRequest()
-                .url(givenUrl)
-                .securityConfig(new BasicSecurityConfig()
-                        .username(givenUsername)
-                        .password(givenPassword)
-                );
+            .url(givenUrl)
+            .securityConfig(new BasicSecurityConfig()
+                                .username(givenUsername)
+                                .password(givenPassword)
+            );
 
         Consumer<CallsMediaStreamConfigResponse> assertions = response -> {
             CallsMediaStreamConfigResponse expectedConfig = new CallsMediaStreamConfigResponse()
-                    .id(givenId)
-                    .url(givenUrl);
+                .id(givenId)
+                .url(givenUrl);
             then(response).isEqualTo(expectedConfig);
         };
 
@@ -4156,18 +4155,18 @@ class CallsApiTest extends ApiTest {
         String givenId = "63467c6e2885a5389ba11d80";
         String givenUrl = "wss://example-websocket.com:3001";
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"url\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"url\": \"%s\"\n" +
+                                                 "}\n",
                                              givenId,
                                              givenUrl
         );
 
         setUpNoRequestBodyDeleteRequest(
-                MEDIA_STREAM_CONFIG.replace("{mediaStreamConfigId}", givenId),
-                Map.of(),
-                givenResponse,
-                200
+            MEDIA_STREAM_CONFIG.replace("{mediaStreamConfigId}", givenId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -4208,40 +4207,40 @@ class CallsApiTest extends ApiTest {
         Long givenPageTotalResults = 0L;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"results\": [\n" +
-                                             "    {\n" +
-                                             "      \"callId\": \"%s\",\n" +
-                                             "      \"endpoint\": {\n" +
-                                             "        \"phoneNumber\": \"%s\",\n" +
-                                             "        \"type\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"direction\": \"%s\",\n" +
-                                             "      \"files\": [\n" +
-                                             "        {\n" +
-                                             "          \"id\": \"%s\",\n" +
-                                             "          \"name\": \"%s\",\n" +
-                                             "          \"fileFormat\": \"%s\",\n" +
-                                             "          \"size\": %d,\n" +
-                                             "          \"creationMethod\": \"%s\",\n" +
-                                             "          \"creationTime\": \"%s\",\n" +
-                                             "          \"expirationTime\": \"%s\",\n" +
-                                             "          \"duration\": %d,\n" +
-                                             "          \"startTime\": \"%s\",\n" +
-                                             "          \"endTime\": \"%s\",\n" +
-                                             "          \"location\": \"%s\"\n" +
-                                             "        }\n" +
-                                             "      ],\n" +
-                                             "      \"status\": \"%s\",\n" +
-                                             "      \"reason\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"paging\": {\n" +
-                                             "    \"page\": %d,\n" +
-                                             "    \"size\": %d,\n" +
-                                             "    \"totalPages\": %d,\n" +
-                                             "    \"totalResults\": %d\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"results\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"callId\": \"%s\",\n" +
+                                                 "      \"endpoint\": {\n" +
+                                                 "        \"phoneNumber\": \"%s\",\n" +
+                                                 "        \"type\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"direction\": \"%s\",\n" +
+                                                 "      \"files\": [\n" +
+                                                 "        {\n" +
+                                                 "          \"id\": \"%s\",\n" +
+                                                 "          \"name\": \"%s\",\n" +
+                                                 "          \"fileFormat\": \"%s\",\n" +
+                                                 "          \"size\": %d,\n" +
+                                                 "          \"creationMethod\": \"%s\",\n" +
+                                                 "          \"creationTime\": \"%s\",\n" +
+                                                 "          \"expirationTime\": \"%s\",\n" +
+                                                 "          \"duration\": %d,\n" +
+                                                 "          \"startTime\": \"%s\",\n" +
+                                                 "          \"endTime\": \"%s\",\n" +
+                                                 "          \"location\": \"%s\"\n" +
+                                                 "        }\n" +
+                                                 "      ],\n" +
+                                                 "      \"status\": \"%s\",\n" +
+                                                 "      \"reason\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"paging\": {\n" +
+                                                 "    \"page\": %d,\n" +
+                                                 "    \"size\": %d,\n" +
+                                                 "    \"totalPages\": %d,\n" +
+                                                 "    \"totalResults\": %d\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenId,
                                              givenPhoneNumber,
                                              givenType,
@@ -4266,9 +4265,9 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CALLS_RECORDINGS,
-                Map.of(),
-                givenResponse
+            CALLS_RECORDINGS,
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -4335,30 +4334,30 @@ class CallsApiTest extends ApiTest {
         String givenReason = "string";
 
         String givenResponse = String.format("    {\n" +
-                                             "      \"callId\": \"%s\",\n" +
-                                             "      \"endpoint\": {\n" +
-                                             "        \"phoneNumber\": \"%s\",\n" +
-                                             "        \"type\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"direction\": \"%s\",\n" +
-                                             "      \"files\": [\n" +
-                                             "        {\n" +
-                                             "          \"id\": \"%s\",\n" +
-                                             "          \"name\": \"%s\",\n" +
-                                             "          \"fileFormat\": \"%s\",\n" +
-                                             "          \"size\": %d,\n" +
-                                             "          \"creationMethod\": \"%s\",\n" +
-                                             "          \"creationTime\": \"%s\",\n" +
-                                             "          \"expirationTime\": \"%s\",\n" +
-                                             "          \"duration\": %d,\n" +
-                                             "          \"startTime\": \"%s\",\n" +
-                                             "          \"endTime\": \"%s\",\n" +
-                                             "          \"location\": \"%s\"\n" +
-                                             "        }\n" +
-                                             "      ],\n" +
-                                             "      \"status\": \"%s\",\n" +
-                                             "      \"reason\": \"%s\"\n" +
-                                             "    }\n",
+                                                 "      \"callId\": \"%s\",\n" +
+                                                 "      \"endpoint\": {\n" +
+                                                 "        \"phoneNumber\": \"%s\",\n" +
+                                                 "        \"type\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"direction\": \"%s\",\n" +
+                                                 "      \"files\": [\n" +
+                                                 "        {\n" +
+                                                 "          \"id\": \"%s\",\n" +
+                                                 "          \"name\": \"%s\",\n" +
+                                                 "          \"fileFormat\": \"%s\",\n" +
+                                                 "          \"size\": %d,\n" +
+                                                 "          \"creationMethod\": \"%s\",\n" +
+                                                 "          \"creationTime\": \"%s\",\n" +
+                                                 "          \"expirationTime\": \"%s\",\n" +
+                                                 "          \"duration\": %d,\n" +
+                                                 "          \"startTime\": \"%s\",\n" +
+                                                 "          \"endTime\": \"%s\",\n" +
+                                                 "          \"location\": \"%s\"\n" +
+                                                 "        }\n" +
+                                                 "      ],\n" +
+                                                 "      \"status\": \"%s\",\n" +
+                                                 "      \"reason\": \"%s\"\n" +
+                                                 "    }\n",
                                              givenId,
                                              givenPhoneNumber,
                                              givenType,
@@ -4379,9 +4378,9 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CALL_RECORDINGS.replace("{callId}", givenId),
-                Map.of(),
-                givenResponse
+            CALL_RECORDINGS.replace("{callId}", givenId),
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -4438,30 +4437,30 @@ class CallsApiTest extends ApiTest {
         String givenReason = "string";
 
         String givenResponse = String.format("    {\n" +
-                                             "      \"callId\": \"%s\",\n" +
-                                             "      \"endpoint\": {\n" +
-                                             "        \"phoneNumber\": \"%s\",\n" +
-                                             "        \"type\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"direction\": \"%s\",\n" +
-                                             "      \"files\": [\n" +
-                                             "        {\n" +
-                                             "          \"id\": \"%s\",\n" +
-                                             "          \"name\": \"%s\",\n" +
-                                             "          \"fileFormat\": \"%s\",\n" +
-                                             "          \"size\": %d,\n" +
-                                             "          \"creationMethod\": \"%s\",\n" +
-                                             "          \"creationTime\": \"%s\",\n" +
-                                             "          \"expirationTime\": \"%s\",\n" +
-                                             "          \"duration\": %d,\n" +
-                                             "          \"startTime\": \"%s\",\n" +
-                                             "          \"endTime\": \"%s\",\n" +
-                                             "          \"location\": \"%s\"\n" +
-                                             "        }\n" +
-                                             "      ],\n" +
-                                             "      \"status\": \"%s\",\n" +
-                                             "      \"reason\": \"%s\"\n" +
-                                             "    }\n",
+                                                 "      \"callId\": \"%s\",\n" +
+                                                 "      \"endpoint\": {\n" +
+                                                 "        \"phoneNumber\": \"%s\",\n" +
+                                                 "        \"type\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"direction\": \"%s\",\n" +
+                                                 "      \"files\": [\n" +
+                                                 "        {\n" +
+                                                 "          \"id\": \"%s\",\n" +
+                                                 "          \"name\": \"%s\",\n" +
+                                                 "          \"fileFormat\": \"%s\",\n" +
+                                                 "          \"size\": %d,\n" +
+                                                 "          \"creationMethod\": \"%s\",\n" +
+                                                 "          \"creationTime\": \"%s\",\n" +
+                                                 "          \"expirationTime\": \"%s\",\n" +
+                                                 "          \"duration\": %d,\n" +
+                                                 "          \"startTime\": \"%s\",\n" +
+                                                 "          \"endTime\": \"%s\",\n" +
+                                                 "          \"location\": \"%s\"\n" +
+                                                 "        }\n" +
+                                                 "      ],\n" +
+                                                 "      \"status\": \"%s\",\n" +
+                                                 "      \"reason\": \"%s\"\n" +
+                                                 "    }\n",
                                              givenId,
                                              givenPhoneNumber,
                                              givenType,
@@ -4482,10 +4481,10 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpNoRequestBodyDeleteRequest(
-                CALL_RECORDINGS.replace("{callId}", givenId),
-                Map.of(),
-                givenResponse,
-                200
+            CALL_RECORDINGS.replace("{callId}", givenId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         Consumer<CallRecording> assertions = (response) -> {
@@ -4549,62 +4548,62 @@ class CallsApiTest extends ApiTest {
         Long givenPageTotalResults = 0L;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"results\": [\n" +
-                                             "    {\n" +
-                                             "      \"conferenceId\": \"%s\",\n" +
-                                             "      \"conferenceName\": \"%s\",\n" +
-                                             "      \"applicationId\": \"%s\",\n" +
-                                             "      \"composedFiles\": [\n" +
-                                             "        {\n" +
-                                             "          \"id\": \"%s\",\n" +
-                                             "          \"name\": \"%s\",\n" +
-                                             "          \"fileFormat\": \"%s\",\n" +
-                                             "          \"size\": %d,\n" +
-                                             "          \"creationMethod\": \"%s\",\n" +
-                                             "          \"creationTime\": \"%s\",\n" +
-                                             "          \"expirationTime\": \"%s\",\n" +
-                                             "          \"duration\": %d,\n" +
-                                             "          \"startTime\": \"%s\",\n" +
-                                             "          \"endTime\": \"%s\",\n" +
-                                             "          \"location\": \"%s\"\n" +
-                                             "        }\n" +
-                                             "      ],\n" +
-                                             "      \"callRecordings\": [\n" +
-                                             "        {\n" +
-                                             "          \"callId\": \"%s\",\n" +
-                                             "          \"endpoint\": {\n" +
-                                             "            \"phoneNumber\": \"%s\",\n" +
-                                             "            \"type\": \"%s\"\n" +
-                                             "          },\n" +
-                                             "          \"direction\": \"%s\",\n" +
-                                             "          \"files\": [\n" +
-                                             "            {\n" +
-                                             "              \"id\": \"%s\",\n" +
-                                             "              \"name\": \"%s\",\n" +
-                                             "              \"fileFormat\": \"%s\",\n" +
-                                             "              \"size\": %d,\n" +
-                                             "              \"creationMethod\": \"%s\",\n" +
-                                             "              \"creationTime\": \"%s\",\n" +
-                                             "              \"expirationTime\": \"%s\",\n" +
-                                             "              \"duration\": %d,\n" +
-                                             "              \"startTime\": \"%s\",\n" +
-                                             "              \"endTime\": \"%s\",\n" +
-                                             "              \"location\": \"%s\"\n" +
-                                             "            }\n" +
-                                             "          ],\n" +
-                                             "          \"status\": \"%s\",\n" +
-                                             "          \"reason\": \"%s\"\n" +
-                                             "        }\n" +
-                                             "      ]\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"paging\": {\n" +
-                                             "    \"page\": %d,\n" +
-                                             "    \"size\": %d,\n" +
-                                             "    \"totalPages\": %d,\n" +
-                                             "    \"totalResults\": %d\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"results\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"conferenceId\": \"%s\",\n" +
+                                                 "      \"conferenceName\": \"%s\",\n" +
+                                                 "      \"applicationId\": \"%s\",\n" +
+                                                 "      \"composedFiles\": [\n" +
+                                                 "        {\n" +
+                                                 "          \"id\": \"%s\",\n" +
+                                                 "          \"name\": \"%s\",\n" +
+                                                 "          \"fileFormat\": \"%s\",\n" +
+                                                 "          \"size\": %d,\n" +
+                                                 "          \"creationMethod\": \"%s\",\n" +
+                                                 "          \"creationTime\": \"%s\",\n" +
+                                                 "          \"expirationTime\": \"%s\",\n" +
+                                                 "          \"duration\": %d,\n" +
+                                                 "          \"startTime\": \"%s\",\n" +
+                                                 "          \"endTime\": \"%s\",\n" +
+                                                 "          \"location\": \"%s\"\n" +
+                                                 "        }\n" +
+                                                 "      ],\n" +
+                                                 "      \"callRecordings\": [\n" +
+                                                 "        {\n" +
+                                                 "          \"callId\": \"%s\",\n" +
+                                                 "          \"endpoint\": {\n" +
+                                                 "            \"phoneNumber\": \"%s\",\n" +
+                                                 "            \"type\": \"%s\"\n" +
+                                                 "          },\n" +
+                                                 "          \"direction\": \"%s\",\n" +
+                                                 "          \"files\": [\n" +
+                                                 "            {\n" +
+                                                 "              \"id\": \"%s\",\n" +
+                                                 "              \"name\": \"%s\",\n" +
+                                                 "              \"fileFormat\": \"%s\",\n" +
+                                                 "              \"size\": %d,\n" +
+                                                 "              \"creationMethod\": \"%s\",\n" +
+                                                 "              \"creationTime\": \"%s\",\n" +
+                                                 "              \"expirationTime\": \"%s\",\n" +
+                                                 "              \"duration\": %d,\n" +
+                                                 "              \"startTime\": \"%s\",\n" +
+                                                 "              \"endTime\": \"%s\",\n" +
+                                                 "              \"location\": \"%s\"\n" +
+                                                 "            }\n" +
+                                                 "          ],\n" +
+                                                 "          \"status\": \"%s\",\n" +
+                                                 "          \"reason\": \"%s\"\n" +
+                                                 "        }\n" +
+                                                 "      ]\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"paging\": {\n" +
+                                                 "    \"page\": %d,\n" +
+                                                 "    \"size\": %d,\n" +
+                                                 "    \"totalPages\": %d,\n" +
+                                                 "    \"totalResults\": %d\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenConferenceId,
                                              givenConferenceName,
                                              givenApplicationId,
@@ -4643,9 +4642,9 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CONFERENCES_RECORDINGS,
-                Map.of(),
-                givenResponse
+            CONFERENCES_RECORDINGS,
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -4738,49 +4737,49 @@ class CallsApiTest extends ApiTest {
         String givenReason = "string";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"conferenceId\": \"%s\",\n" +
-                                             "  \"conferenceName\": \"%s\",\n" +
-                                             "  \"applicationId\": \"%s\",\n" +
-                                             "  \"composedFiles\": [\n" +
-                                             "    {\n" +
-                                             "      \"id\": \"%s\",\n" +
-                                             "      \"name\": \"%s\",\n" +
-                                             "      \"fileFormat\": \"%s\",\n" +
-                                             "      \"size\": %d,\n" +
-                                             "      \"creationTime\": \"%s\",\n" +
-                                             "      \"duration\": %d,\n" +
-                                             "      \"startTime\": \"%s\",\n" +
-                                             "      \"endTime\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"callRecordings\": [\n" +
-                                             "    {\n" +
-                                             "      \"callId\": \"%s\",\n" +
-                                             "      \"endpoint\": {\n" +
-                                             "        \"phoneNumber\": \"%s\",\n" +
-                                             "        \"type\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"direction\": \"%s\",\n" +
-                                             "      \"files\": [\n" +
-                                             "        {\n" +
-                                             "          \"id\": \"%s\",\n" +
-                                             "          \"name\": \"%s\",\n" +
-                                             "          \"fileFormat\": \"%s\",\n" +
-                                             "          \"size\": %d,\n" +
-                                             "          \"creationMethod\": \"%s\",\n" +
-                                             "          \"creationTime\": \"%s\",\n" +
-                                             "          \"expirationTime\": \"%s\",\n" +
-                                             "          \"duration\": %d,\n" +
-                                             "          \"startTime\": \"%s\",\n" +
-                                             "          \"endTime\": \"%s\",\n" +
-                                             "          \"location\": \"%s\"\n" +
-                                             "        }\n" +
-                                             "      ],\n" +
-                                             "      \"status\": \"%s\",\n" +
-                                             "      \"reason\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ]\n" +
-                                             "}\n",
+                                                 "  \"conferenceId\": \"%s\",\n" +
+                                                 "  \"conferenceName\": \"%s\",\n" +
+                                                 "  \"applicationId\": \"%s\",\n" +
+                                                 "  \"composedFiles\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"id\": \"%s\",\n" +
+                                                 "      \"name\": \"%s\",\n" +
+                                                 "      \"fileFormat\": \"%s\",\n" +
+                                                 "      \"size\": %d,\n" +
+                                                 "      \"creationTime\": \"%s\",\n" +
+                                                 "      \"duration\": %d,\n" +
+                                                 "      \"startTime\": \"%s\",\n" +
+                                                 "      \"endTime\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"callRecordings\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"callId\": \"%s\",\n" +
+                                                 "      \"endpoint\": {\n" +
+                                                 "        \"phoneNumber\": \"%s\",\n" +
+                                                 "        \"type\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"direction\": \"%s\",\n" +
+                                                 "      \"files\": [\n" +
+                                                 "        {\n" +
+                                                 "          \"id\": \"%s\",\n" +
+                                                 "          \"name\": \"%s\",\n" +
+                                                 "          \"fileFormat\": \"%s\",\n" +
+                                                 "          \"size\": %d,\n" +
+                                                 "          \"creationMethod\": \"%s\",\n" +
+                                                 "          \"creationTime\": \"%s\",\n" +
+                                                 "          \"expirationTime\": \"%s\",\n" +
+                                                 "          \"duration\": %d,\n" +
+                                                 "          \"startTime\": \"%s\",\n" +
+                                                 "          \"endTime\": \"%s\",\n" +
+                                                 "          \"location\": \"%s\"\n" +
+                                                 "        }\n" +
+                                                 "      ],\n" +
+                                                 "      \"status\": \"%s\",\n" +
+                                                 "      \"reason\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ]\n" +
+                                                 "}\n",
                                              givenConferenceId,
                                              givenConferenceName,
                                              givenApplicationId,
@@ -4812,9 +4811,9 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessGetRequest(
-                CONFERENCE_RECORDINGS.replace("{conferenceId}", givenConferenceId),
-                Map.of(),
-                givenResponse
+            CONFERENCE_RECORDINGS.replace("{conferenceId}", givenConferenceId),
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -4903,49 +4902,49 @@ class CallsApiTest extends ApiTest {
         String givenReason = "string";
 
         String givenResponse = String.format("    {\n" +
-                                             "      \"conferenceId\": \"%s\",\n" +
-                                             "      \"conferenceName\": \"%s\",\n" +
-                                             "      \"applicationId\": \"%s\",\n" +
-                                             "      \"composedFiles\": [\n" +
-                                             "        {\n" +
-                                             "          \"id\": \"%s\",\n" +
-                                             "          \"name\": \"%s\",\n" +
-                                             "          \"fileFormat\": \"%s\",\n" +
-                                             "          \"size\": %d,\n" +
-                                             "          \"creationTime\": \"%s\",\n" +
-                                             "          \"duration\": %d,\n" +
-                                             "          \"startTime\": \"%s\",\n" +
-                                             "          \"endTime\": \"%s\"\n" +
-                                             "        }\n" +
-                                             "      ],\n" +
-                                             "      \"callRecordings\": [\n" +
-                                             "        {\n" +
-                                             "          \"callId\": \"%s\",\n" +
-                                             "          \"endpoint\": {\n" +
-                                             "            \"phoneNumber\": \"%s\",\n" +
-                                             "            \"type\": \"%s\"\n" +
-                                             "          },\n" +
-                                             "          \"direction\": \"%s\",\n" +
-                                             "          \"files\": [\n" +
-                                             "            {\n" +
-                                             "              \"id\": \"%s\",\n" +
-                                             "              \"name\": \"%s\",\n" +
-                                             "              \"fileFormat\": \"%s\",\n" +
-                                             "              \"size\": %d,\n" +
-                                             "              \"creationMethod\": \"%s\",\n" +
-                                             "              \"creationTime\": \"%s\",\n" +
-                                             "              \"expirationTime\": \"%s\",\n" +
-                                             "              \"duration\": %d,\n" +
-                                             "              \"startTime\": \"%s\",\n" +
-                                             "              \"endTime\": \"%s\",\n" +
-                                             "              \"location\": \"%s\"\n" +
-                                             "            }\n" +
-                                             "          ],\n" +
-                                             "          \"status\": \"%s\",\n" +
-                                             "          \"reason\": \"%s\"\n" +
-                                             "        }\n" +
-                                             "      ]\n" +
-                                             "    }\n",
+                                                 "      \"conferenceId\": \"%s\",\n" +
+                                                 "      \"conferenceName\": \"%s\",\n" +
+                                                 "      \"applicationId\": \"%s\",\n" +
+                                                 "      \"composedFiles\": [\n" +
+                                                 "        {\n" +
+                                                 "          \"id\": \"%s\",\n" +
+                                                 "          \"name\": \"%s\",\n" +
+                                                 "          \"fileFormat\": \"%s\",\n" +
+                                                 "          \"size\": %d,\n" +
+                                                 "          \"creationTime\": \"%s\",\n" +
+                                                 "          \"duration\": %d,\n" +
+                                                 "          \"startTime\": \"%s\",\n" +
+                                                 "          \"endTime\": \"%s\"\n" +
+                                                 "        }\n" +
+                                                 "      ],\n" +
+                                                 "      \"callRecordings\": [\n" +
+                                                 "        {\n" +
+                                                 "          \"callId\": \"%s\",\n" +
+                                                 "          \"endpoint\": {\n" +
+                                                 "            \"phoneNumber\": \"%s\",\n" +
+                                                 "            \"type\": \"%s\"\n" +
+                                                 "          },\n" +
+                                                 "          \"direction\": \"%s\",\n" +
+                                                 "          \"files\": [\n" +
+                                                 "            {\n" +
+                                                 "              \"id\": \"%s\",\n" +
+                                                 "              \"name\": \"%s\",\n" +
+                                                 "              \"fileFormat\": \"%s\",\n" +
+                                                 "              \"size\": %d,\n" +
+                                                 "              \"creationMethod\": \"%s\",\n" +
+                                                 "              \"creationTime\": \"%s\",\n" +
+                                                 "              \"expirationTime\": \"%s\",\n" +
+                                                 "              \"duration\": %d,\n" +
+                                                 "              \"startTime\": \"%s\",\n" +
+                                                 "              \"endTime\": \"%s\",\n" +
+                                                 "              \"location\": \"%s\"\n" +
+                                                 "            }\n" +
+                                                 "          ],\n" +
+                                                 "          \"status\": \"%s\",\n" +
+                                                 "          \"reason\": \"%s\"\n" +
+                                                 "        }\n" +
+                                                 "      ]\n" +
+                                                 "    }\n",
                                              givenConferenceId,
                                              givenConferenceName,
                                              givenApplicationId,
@@ -4980,10 +4979,10 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpNoRequestBodyDeleteRequest(
-                CONFERENCE_RECORDINGS.replace("{conferenceId}", givenConferenceId),
-                Map.of(),
-                givenResponse,
-                200
+            CONFERENCE_RECORDINGS.replace("{conferenceId}", givenConferenceId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -5046,10 +5045,10 @@ class CallsApiTest extends ApiTest {
         String givenResponse = "";
 
         setUpGetRequestOctet(
-                CALLS_RECORDINGS_FILES.replace("{fileId}", givenId),
-                Map.of(),
-                givenResponse,
-                200
+            CALLS_RECORDINGS_FILES.replace("{fileId}", givenId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -5073,18 +5072,18 @@ class CallsApiTest extends ApiTest {
         CallsRecordingFileLocation givenLocation = CallsRecordingFileLocation.SFTP;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"fileFormat\": \"%s\",\n" +
-                                             "  \"size\": %d,\n" +
-                                             "  \"creationMethod\": \"%s\",\n" +
-                                             "  \"creationTime\": \"%s\",\n" +
-                                             "  \"expirationTime\": \"%s\",\n" +
-                                             "  \"duration\": %d,\n" +
-                                             "  \"startTime\": \"%s\",\n" +
-                                             "  \"endTime\": \"%s\",\n" +
-                                             "  \"location\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"fileFormat\": \"%s\",\n" +
+                                                 "  \"size\": %d,\n" +
+                                                 "  \"creationMethod\": \"%s\",\n" +
+                                                 "  \"creationTime\": \"%s\",\n" +
+                                                 "  \"expirationTime\": \"%s\",\n" +
+                                                 "  \"duration\": %d,\n" +
+                                                 "  \"startTime\": \"%s\",\n" +
+                                                 "  \"endTime\": \"%s\",\n" +
+                                                 "  \"location\": \"%s\"\n" +
+                                                 "}\n",
                                              givenFileId,
                                              givenName,
                                              givenFileFormat,
@@ -5099,10 +5098,10 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpNoRequestBodyDeleteRequest(
-                CALLS_RECORDINGS_FILES.replace("{fileId}", givenFileId),
-                Map.of(),
-                givenResponse,
-                200
+            CALLS_RECORDINGS_FILES.replace("{fileId}", givenFileId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -5136,21 +5135,21 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("        {\n" +
-                                             "          \"status\": \"%s\"\n" +
-                                             "        }\n",
+                                                 "          \"status\": \"%s\"\n" +
+                                                 "        }\n",
                                              givenStatus
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"deleteCallRecordings\": %b\n" +
-                                               "}\n",
+                                                   "  \"deleteCallRecordings\": %b\n" +
+                                                   "}\n",
                                                givenDeleteCallRecordings
         );
 
         setUpSuccessPostRequest(
-                COMPOSE_CONFERENCE_RECORDING.replace("{conferenceId}", givenConferenceId),
-                expectedRequest,
-                givenResponse
+            COMPOSE_CONFERENCE_RECORDING.replace("{conferenceId}", givenConferenceId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -5181,21 +5180,21 @@ class CallsApiTest extends ApiTest {
         String givenReason1 = "Created";
 
         String givenResponse = String.format("{\n" +
-                                             "    \"bulkId\" : \"%s\",\n" +
-                                             "    \"calls\" : [ {\n" +
-                                             "      \"applicationId\" : \"%s\",\n" +
-                                             "      \"callId\" : \"%s\",\n" +
-                                             "      \"externalId\" : \"%s\",\n" +
-                                             "      \"from\" : \"%s\",\n" +
-                                             "      \"endpoint\" : {\n" +
-                                             "        \"phoneNumber\" : \"%s\",\n" +
-                                             "        \"type\" : \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"status\" : \"%s\",\n" +
-                                             "      \"reason\" : \"%s\"\n" +
-                                             "    }\n" +
-                                             "    ]\n" +
-                                             "  }\n",
+                                                 "    \"bulkId\" : \"%s\",\n" +
+                                                 "    \"calls\" : [ {\n" +
+                                                 "      \"applicationId\" : \"%s\",\n" +
+                                                 "      \"callId\" : \"%s\",\n" +
+                                                 "      \"externalId\" : \"%s\",\n" +
+                                                 "      \"from\" : \"%s\",\n" +
+                                                 "      \"endpoint\" : {\n" +
+                                                 "        \"phoneNumber\" : \"%s\",\n" +
+                                                 "        \"type\" : \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"status\" : \"%s\",\n" +
+                                                 "      \"reason\" : \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "    ]\n" +
+                                                 "  }\n",
                                              givenBulkId,
                                              givenApplicationId1,
                                              givenCallId1,
@@ -5228,61 +5227,61 @@ class CallsApiTest extends ApiTest {
         String givenKey1 = "value1";
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"bulkId\" : \"%s\",\n" +
-                                               "  \"applicationId\" : \"%s\",\n" +
-                                               "  \"items\" : [\n" +
-                                               "  {\n" +
-                                               "    \"from\" : \"%s\",\n" +
-                                               "    \"callRequests\" : [\n" +
-                                               "        {\n" +
-                                               "          \"externalId\" : \"%s\",\n" +
-                                               "          \"endpoint\" : {\n" +
-                                               "            \"phoneNumber\": \"%s\",\n" +
-                                               "            \"type\": \"%s\"\n" +
-                                               "          }\n" +
-                                               "        }\n" +
-                                               "    ],\n" +
-                                               "    \"recording\" : {\n" +
-                                               "      \"recordingType\" : \"%s\"\n" +
-                                               "    },\n" +
-                                               "    \"machineDetection\" : {\n" +
-                                               "      \"enabled\" : %b\n" +
-                                               "    },\n" +
-                                               "    \"maxDuration\" : %d,\n" +
-                                               "    \"connectTimeout\" : %s,\n" +
-                                               "    \"callRate\" : {\n" +
-                                               "      \"maxCalls\" : %d,\n" +
-                                               "      \"timeUnit\" : \"%s\"\n" +
-                                               "    },\n" +
-                                               "    \"validityPeriod\" : %d,\n" +
-                                               "    \"retryOptions\" : {\n" +
-                                               "      \"minWaitPeriod\" : %d,\n" +
-                                               "      \"maxWaitPeriod\" : %d,\n" +
-                                               "      \"maxAttempts\" : %d\n" +
-                                               "    },\n" +
-                                               "    \"schedulingOptions\" : {\n" +
-                                               "      \"startTime\": \"%s\",\n" +
-                                               "      \"callingTimeWindow\" : {\n" +
-                                               "        \"from\" : {\n" +
-                                               "          \"hour\" : %d,\n" +
-                                               "          \"minute\" : %d\n" +
-                                               "        },\n" +
-                                               "        \"to\" : {\n" +
-                                               "          \"hour\" : %d,\n" +
-                                               "          \"minute\" : %d\n" +
-                                               "        },\n" +
-                                               "        \"days\" : [\n" +
-                                               "          \"%s\"\n" +
-                                               "        ]\n" +
-                                               "      }\n" +
-                                               "    },\n" +
-                                               "    \"customData\" : {\n" +
-                                               "      \"key2\" : \"%s\",\n" +
-                                               "      \"key1\" : \"%s\"\n" +
-                                               "    }\n" +
-                                               "  }\n" +
-                                               "  ]\n" +
-                                               "}\n",
+                                                   "  \"bulkId\" : \"%s\",\n" +
+                                                   "  \"applicationId\" : \"%s\",\n" +
+                                                   "  \"items\" : [\n" +
+                                                   "  {\n" +
+                                                   "    \"from\" : \"%s\",\n" +
+                                                   "    \"callRequests\" : [\n" +
+                                                   "        {\n" +
+                                                   "          \"externalId\" : \"%s\",\n" +
+                                                   "          \"endpoint\" : {\n" +
+                                                   "            \"phoneNumber\": \"%s\",\n" +
+                                                   "            \"type\": \"%s\"\n" +
+                                                   "          }\n" +
+                                                   "        }\n" +
+                                                   "    ],\n" +
+                                                   "    \"recording\" : {\n" +
+                                                   "      \"recordingType\" : \"%s\"\n" +
+                                                   "    },\n" +
+                                                   "    \"machineDetection\" : {\n" +
+                                                   "      \"enabled\" : %b\n" +
+                                                   "    },\n" +
+                                                   "    \"maxDuration\" : %d,\n" +
+                                                   "    \"connectTimeout\" : %s,\n" +
+                                                   "    \"callRate\" : {\n" +
+                                                   "      \"maxCalls\" : %d,\n" +
+                                                   "      \"timeUnit\" : \"%s\"\n" +
+                                                   "    },\n" +
+                                                   "    \"validityPeriod\" : %d,\n" +
+                                                   "    \"retryOptions\" : {\n" +
+                                                   "      \"minWaitPeriod\" : %d,\n" +
+                                                   "      \"maxWaitPeriod\" : %d,\n" +
+                                                   "      \"maxAttempts\" : %d\n" +
+                                                   "    },\n" +
+                                                   "    \"schedulingOptions\" : {\n" +
+                                                   "      \"startTime\": \"%s\",\n" +
+                                                   "      \"callingTimeWindow\" : {\n" +
+                                                   "        \"from\" : {\n" +
+                                                   "          \"hour\" : %d,\n" +
+                                                   "          \"minute\" : %d\n" +
+                                                   "        },\n" +
+                                                   "        \"to\" : {\n" +
+                                                   "          \"hour\" : %d,\n" +
+                                                   "          \"minute\" : %d\n" +
+                                                   "        },\n" +
+                                                   "        \"days\" : [\n" +
+                                                   "          \"%s\"\n" +
+                                                   "        ]\n" +
+                                                   "      }\n" +
+                                                   "    },\n" +
+                                                   "    \"customData\" : {\n" +
+                                                   "      \"key2\" : \"%s\",\n" +
+                                                   "      \"key1\" : \"%s\"\n" +
+                                                   "    }\n" +
+                                                   "  }\n" +
+                                                   "  ]\n" +
+                                                   "}\n",
                                                givenBulkId,
                                                givenApplicationId1,
                                                givenFrom1,
@@ -5301,10 +5300,10 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpPostRequest(
-                BULKS,
-                expectedRequest,
-                givenResponse,
-                201
+            BULKS,
+            expectedRequest,
+            givenResponse,
+            201
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -5326,33 +5325,39 @@ class CallsApiTest extends ApiTest {
         };
 
         CallBulkRequest voiceBulkRequest = new CallBulkRequest().bulkId(givenBulkId).applicationId(givenApplicationId1)
-                .items(List.of(
-                        new CallsBulkItem()
-                                .from(givenFrom1)
-                                .callRequests(List.of(
-                                        new CallsBulkCallRequest()
-                                                .endpoint(new CallsBulkPhoneEndpoint().phoneNumber(givenPhoneNumber1)
-                                                ).externalId(givenExternalId1)
-                                ))
-                                .recording(new CallRecordingRequest().recordingType(CallsRecordingType.AUDIO))
-                                .machineDetection(new CallsMachineDetectionRequest().enabled(givenMachineDetectionEnabled))
-                                .maxDuration(givenMaxDuration)
-                                .connectTimeout(givenConnectTimeout)
-                                .callRate(new CallRate().maxCalls(givenMaxCalls).timeUnit(CallRate.TimeUnitEnum.MINUTES))
-                                .validityPeriod(givenValidityPeriod)
-                                .retryOptions(new CallsRetryOptions()
-                                        .minWaitPeriod(givenMinWaitPeriod)
-                                        .maxWaitPeriod(givenMaxWaitPeriod)
-                                        .maxAttempts(givenMaxAttempts))
-                                .schedulingOptions(new CallsSchedulingOptions()
-                                        .startTime(givenStartTimeDateTime)
-                                        .callingTimeWindow(new CallsTimeWindow()
-                                                .from(new CallsTimeWindowPoint().hour(givenHourFrom).minute(givenMinuteFrom))
-                                                .to(new CallsTimeWindowPoint().hour(givenHourTo).minute(givenMinuteTo))
-                                                .days(List.of(CallsTimeWindow.DaysEnum.MONDAY))
-                                        ))
-                                .customData(Map.of("key2", givenKey2, "key1", givenKey1))
-                ));
+                                                                .items(List.of(
+                                                                    new CallsBulkItem()
+                                                                        .from(givenFrom1)
+                                                                        .callRequests(List.of(
+                                                                            new CallsBulkCallRequest()
+                                                                                .endpoint(new CallsBulkPhoneEndpoint().phoneNumber(givenPhoneNumber1)
+                                                                                ).externalId(givenExternalId1)
+                                                                        ))
+                                                                        .recording(new CallRecordingRequest().recordingType(CallsRecordingType.AUDIO))
+                                                                        .machineDetection(new CallsMachineDetectionRequest().enabled(
+                                                                            givenMachineDetectionEnabled))
+                                                                        .maxDuration(givenMaxDuration)
+                                                                        .connectTimeout(givenConnectTimeout)
+                                                                        .callRate(new CallRate().maxCalls(givenMaxCalls)
+                                                                                                .timeUnit(CallRate.TimeUnitEnum.MINUTES))
+                                                                        .validityPeriod(givenValidityPeriod)
+                                                                        .retryOptions(new CallsRetryOptions()
+                                                                                          .minWaitPeriod(givenMinWaitPeriod)
+                                                                                          .maxWaitPeriod(givenMaxWaitPeriod)
+                                                                                          .maxAttempts(givenMaxAttempts))
+                                                                        .schedulingOptions(new CallsSchedulingOptions()
+                                                                                               .startTime(givenStartTimeDateTime)
+                                                                                               .callingTimeWindow(new CallsTimeWindow()
+                                                                                                                      .from(new CallsTimeWindowPoint().hour(
+                                                                                                                                                          givenHourFrom)
+                                                                                                                                                      .minute(
+                                                                                                                                                          givenMinuteFrom))
+                                                                                                                      .to(new CallsTimeWindowPoint().hour(
+                                                                                                                          givenHourTo).minute(givenMinuteTo))
+                                                                                                                      .days(List.of(CallsTimeWindow.DaysEnum.MONDAY))
+                                                                                               ))
+                                                                        .customData(Map.of("key2", givenKey2, "key1", givenKey1))
+                                                                ));
         var call = api.createBulk(voiceBulkRequest);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
@@ -5365,19 +5370,19 @@ class CallsApiTest extends ApiTest {
         CallsStatus givenStatus = CallsStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"bulkId\": \"%s\",\n" +
-                                             "  \"startTime\": \"%s\",\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"bulkId\": \"%s\",\n" +
+                                                 "  \"startTime\": \"%s\",\n" +
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenBulkId,
                                              givenStartTime,
                                              givenStatus
         );
 
         setUpSuccessGetRequest(
-                BULK.replace("{bulkId}", givenBulkId),
-                Map.of(),
-                givenResponse
+            BULK.replace("{bulkId}", givenBulkId),
+            Map.of(),
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -5399,36 +5404,36 @@ class CallsApiTest extends ApiTest {
         String givenBulkId = "46ab0413-448f-4153-ada9-b68b14242dc3";
         String givenStartTime = "2022-11-01T12:00:00.000+0000";
         OffsetDateTime givenStartTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 11, 1, 12, 0, 0, 0),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2022, 11, 1, 12, 0, 0, 0),
+            ZoneOffset.ofHours(0)
         );
         CallsStatus givenStatus = CallsStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"bulkId\": \"%s\",\n" +
-                                             "  \"startTime\": \"%s\",\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"bulkId\": \"%s\",\n" +
+                                                 "  \"startTime\": \"%s\",\n" +
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenBulkId,
                                              givenStartTime,
                                              givenStatus
         );
         String expectedRequest = String.format("{\n" +
-                                               "  \"startTime\": \"%s\"\n" +
-                                               "}\n",
+                                                   "  \"startTime\": \"%s\"\n" +
+                                                   "}\n",
                                                givenStartTime
         );
 
         setUpSuccessPostRequest(
-                RESCHEDULE_BULK.replace("{bulkId}", givenBulkId),
-                expectedRequest,
-                givenResponse
+            RESCHEDULE_BULK.replace("{bulkId}", givenBulkId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsRescheduleRequest request = new CallsRescheduleRequest()
-                .startTime(givenStartTimeDateTime);
+            .startTime(givenStartTimeDateTime);
 
         Consumer<CallBulkStatus> assertions = (response) -> {
             then(response).isNotNull();
@@ -5449,20 +5454,20 @@ class CallsApiTest extends ApiTest {
         CallsStatus givenStatus = CallsStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"bulkId\": \"%s\",\n" +
-                                             "  \"startTime\": \"%s\",\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"bulkId\": \"%s\",\n" +
+                                                 "  \"startTime\": \"%s\",\n" +
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenBulkId,
                                              givenStartTime,
                                              givenStatus
         );
 
         setUpEmptyPostRequest(
-                PAUSE_BULK.replace("{bulkId}", givenBulkId),
-                Map.of(),
-                givenResponse,
-                200
+            PAUSE_BULK.replace("{bulkId}", givenBulkId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -5486,20 +5491,20 @@ class CallsApiTest extends ApiTest {
         CallsStatus givenStatus = CallsStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"bulkId\": \"%s\",\n" +
-                                             "  \"startTime\": \"%s\",\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"bulkId\": \"%s\",\n" +
+                                                 "  \"startTime\": \"%s\",\n" +
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenBulkId,
                                              givenStartTime,
                                              givenStatus
         );
 
         setUpEmptyPostRequest(
-                RESUME_BULK.replace("{bulkId}", givenBulkId),
-                Map.of(),
-                givenResponse,
-                200
+            RESUME_BULK.replace("{bulkId}", givenBulkId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -5523,20 +5528,20 @@ class CallsApiTest extends ApiTest {
         CallsStatus givenStatus = CallsStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"bulkId\": \"%s\",\n" +
-                                             "  \"startTime\": \"%s\",\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"bulkId\": \"%s\",\n" +
+                                                 "  \"startTime\": \"%s\",\n" +
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenBulkId,
                                              givenStartTime,
                                              givenStatus
         );
 
         setUpEmptyPostRequest(
-                CANCEL_BULK.replace("{bulkId}", givenBulkId),
-                Map.of(),
-                givenResponse,
-                200
+            CANCEL_BULK.replace("{bulkId}", givenBulkId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -5555,23 +5560,23 @@ class CallsApiTest extends ApiTest {
 
     @Test
     void shouldPostDialogCall() {
-        var givenId ="034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        var givenId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         var givenApplicationId = "61c060db2675060027d8c7a6";
         var givenState = CallsDialogState.ESTABLISHED;
         var givenStartTime = "2022-01-01T00:00:00.100+0000";
         OffsetDateTime givenStartTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 1, 1, 0, 0, 0, 100000000),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2022, 1, 1, 0, 0, 0, 100000000),
+            ZoneOffset.ofHours(0)
         );
         var givenEstablishTime = "2022-01-01T00:00:02.100+0000";
         OffsetDateTime givenEstablishTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 1, 1, 0, 0, 2, 100000000),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2022, 1, 1, 0, 0, 2, 100000000),
+            ZoneOffset.ofHours(0)
         );
         var givenEndTime = "2022-01-01T00:01:00.100+0000";
         OffsetDateTime givenEndTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 1, 1, 0, 1, 0, 100000000),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2022, 1, 1, 0, 1, 0, 100000000),
+            ZoneOffset.ofHours(0)
         );
 
         var givenSecondId = "d8d84155-3831-43fb-91c9-bb897149a79d";
@@ -5585,20 +5590,20 @@ class CallsApiTest extends ApiTest {
         var givenScreenShare = false;
         var givenSecondStartTime = "2022-01-01T00:00:00.100+0000";
         OffsetDateTime givenSecondStartTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 1, 1, 0, 0, 0, 100000000),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2022, 1, 1, 0, 0, 0, 100000000),
+            ZoneOffset.ofHours(0)
         );
 
         var givenAnswerTime = "2022-01-01T00:00:02.100+0000";
         OffsetDateTime givenAnswerTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 1, 1, 0, 0, 2, 100000000),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2022, 1, 1, 0, 0, 2, 100000000),
+            ZoneOffset.ofHours(0)
         );
 
         var givenSecondEndTime = "2022-01-01T00:01:00.100+0000";
         OffsetDateTime givenSecondEndTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 1, 1, 0, 1, 0, 100000000),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2022, 1, 1, 0, 1, 0, 100000000),
+            ZoneOffset.ofHours(0)
         );
 
         var givenRingDuration = 2;
@@ -5615,20 +5620,20 @@ class CallsApiTest extends ApiTest {
         var givenThirdScreenShare = false;
         var givenThirdStartTime = "2022-01-01T00:00:00.100+0000";
         OffsetDateTime givenThirdStartTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 1, 1, 0, 0, 0, 100000000),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2022, 1, 1, 0, 0, 0, 100000000),
+            ZoneOffset.ofHours(0)
         );
 
         var givenSecondAnswerTime = "2022-01-01T00:00:02.100+0000";
         OffsetDateTime givenSecondAnswerTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 1, 1, 0, 0, 2, 100000000),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2022, 1, 1, 0, 0, 2, 100000000),
+            ZoneOffset.ofHours(0)
         );
 
         var givenThirdEndTime = "2022-01-01T00:01:00.100+0000";
         OffsetDateTime givenThirdEndTimeDateTime = OffsetDateTime.of(
-                LocalDateTime.of(2022, 1, 1, 0, 1, 0, 100000000),
-                ZoneOffset.ofHours(0)
+            LocalDateTime.of(2022, 1, 1, 0, 1, 0, 100000000),
+            ZoneOffset.ofHours(0)
         );
 
         var givenSecondRingDuration = 2;
@@ -5636,63 +5641,63 @@ class CallsApiTest extends ApiTest {
         var givenSecondDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"applicationId\": \"%s\",\n" +
-                                             "  \"state\": \"%s\",\n" +
-                                             "  \"startTime\": \"%s\",\n" +
-                                             "  \"establishTime\": \"%s\",\n" +
-                                             "  \"endTime\": \"%s\",\n" +
-                                             "  \"parentCall\": {\n" +
-                                             "    \"id\": \"%s\",\n" +
-                                             "    \"endpoint\": {\n" +
-                                             "      \"type\": \"%s\",\n" +
-                                             "      \"phoneNumber\": \"%s\"\n" +
-                                             "    },\n" +
-                                             "    \"direction\": \"%s\",\n" +
-                                             "    \"state\": \"%s\",\n" +
-                                             "    \"media\": {\n" +
-                                             "      \"audio\": {\n" +
-                                             "        \"muted\": %b,\n" +
-                                             "        \"deaf\": %b\n" +
-                                             "      },\n" +
-                                             "      \"video\": {\n" +
-                                             "        \"camera\": %b,\n" +
-                                             "        \"screenShare\": %b\n" +
-                                             "      }\n" +
-                                             "    },\n" +
-                                             "    \"startTime\": \"%s\",\n" +
-                                             "    \"answerTime\": \"%s\",\n" +
-                                             "    \"endTime\": \"%s\",\n" +
-                                             "    \"ringDuration\": %d,\n" +
-                                             "    \"applicationId\": \"%s\",\n" +
-                                             "    \"dialogId\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"childCall\": {\n" +
-                                             "    \"id\": \"%s\",\n" +
-                                             "    \"endpoint\": {\n" +
-                                             "      \"type\": \"%s\",\n" +
-                                             "      \"phoneNumber\": \"%s\"\n" +
-                                             "    },\n" +
-                                             "    \"direction\": \"%s\",\n" +
-                                             "    \"state\": \"%s\",\n" +
-                                             "    \"media\": {\n" +
-                                             "      \"audio\": {\n" +
-                                             "        \"muted\": %b,\n" +
-                                             "        \"deaf\": %b\n" +
-                                             "      },\n" +
-                                             "      \"video\": {\n" +
-                                             "        \"camera\": %b,\n" +
-                                             "        \"screenShare\": %b\n" +
-                                             "      }\n" +
-                                             "    },\n" +
-                                             "    \"startTime\": \"%s\",\n" +
-                                             "    \"answerTime\": \"%s\",\n" +
-                                             "    \"endTime\": \"%s\",\n" +
-                                             "    \"ringDuration\": %d,\n" +
-                                             "    \"applicationId\": \"%s\",\n" +
-                                             "    \"dialogId\": \"%s\"\n" +
-                                             "  }\n" +
-                                             "}\n",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"applicationId\": \"%s\",\n" +
+                                                 "  \"state\": \"%s\",\n" +
+                                                 "  \"startTime\": \"%s\",\n" +
+                                                 "  \"establishTime\": \"%s\",\n" +
+                                                 "  \"endTime\": \"%s\",\n" +
+                                                 "  \"parentCall\": {\n" +
+                                                 "    \"id\": \"%s\",\n" +
+                                                 "    \"endpoint\": {\n" +
+                                                 "      \"type\": \"%s\",\n" +
+                                                 "      \"phoneNumber\": \"%s\"\n" +
+                                                 "    },\n" +
+                                                 "    \"direction\": \"%s\",\n" +
+                                                 "    \"state\": \"%s\",\n" +
+                                                 "    \"media\": {\n" +
+                                                 "      \"audio\": {\n" +
+                                                 "        \"muted\": %b,\n" +
+                                                 "        \"deaf\": %b\n" +
+                                                 "      },\n" +
+                                                 "      \"video\": {\n" +
+                                                 "        \"camera\": %b,\n" +
+                                                 "        \"screenShare\": %b\n" +
+                                                 "      }\n" +
+                                                 "    },\n" +
+                                                 "    \"startTime\": \"%s\",\n" +
+                                                 "    \"answerTime\": \"%s\",\n" +
+                                                 "    \"endTime\": \"%s\",\n" +
+                                                 "    \"ringDuration\": %d,\n" +
+                                                 "    \"applicationId\": \"%s\",\n" +
+                                                 "    \"dialogId\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"childCall\": {\n" +
+                                                 "    \"id\": \"%s\",\n" +
+                                                 "    \"endpoint\": {\n" +
+                                                 "      \"type\": \"%s\",\n" +
+                                                 "      \"phoneNumber\": \"%s\"\n" +
+                                                 "    },\n" +
+                                                 "    \"direction\": \"%s\",\n" +
+                                                 "    \"state\": \"%s\",\n" +
+                                                 "    \"media\": {\n" +
+                                                 "      \"audio\": {\n" +
+                                                 "        \"muted\": %b,\n" +
+                                                 "        \"deaf\": %b\n" +
+                                                 "      },\n" +
+                                                 "      \"video\": {\n" +
+                                                 "        \"camera\": %b,\n" +
+                                                 "        \"screenShare\": %b\n" +
+                                                 "      }\n" +
+                                                 "    },\n" +
+                                                 "    \"startTime\": \"%s\",\n" +
+                                                 "    \"answerTime\": \"%s\",\n" +
+                                                 "    \"endTime\": \"%s\",\n" +
+                                                 "    \"ringDuration\": %d,\n" +
+                                                 "    \"applicationId\": \"%s\",\n" +
+                                                 "    \"dialogId\": \"%s\"\n" +
+                                                 "  }\n" +
+                                                 "}\n",
                                              givenId,
                                              givenApplicationId,
                                              givenState,
@@ -5748,42 +5753,42 @@ class CallsApiTest extends ApiTest {
         String givenCustomDataField = "custom";
         String givenCustomDataFieldValue = "data";
         Map<String, String> givenCustomData = Map.of(
-                givenCustomDataField, givenCustomDataFieldValue
+            givenCustomDataField, givenCustomDataFieldValue
         );
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"parentCallId\": \"%s\",\n" +
-                                               "  \"childCallRequest\": {\n" +
-                                               "    \"endpoint\": {\n" +
-                                               "      \"type\": \"%s\",\n" +
-                                               "      \"phoneNumber\": \"%s\"\n" +
-                                               "    },\n" +
-                                               "    \"from\": \"%s\",\n" +
-                                               "    \"connectTimeout\": %d,\n" +
-                                               "    \"machineDetection\": {\n" +
-                                               "      \"enabled\": %b\n" +
-                                               "    },\n" +
-                                               "    \"customData\": {\n" +
-                                               "      \"key2\": \"%s\",\n" +
-                                               "      \"key1\": \"%s\"\n" +
-                                               "    }\n" +
-                                               "  },\n" +
-                                               "  \"recording\": {\n" +
-                                               "    \"recordingType\": \"%s\",\n" +
-                                               "    \"dialogComposition\": {\n" +
-                                               "      \"enabled\": %b\n" +
-                                               "    },\n" +
-                                               "    \"customData\": {\n" +
-                                               "        \"%s\": \"%s\"\n" +
-                                               "    },\n" +
-                                               "    \"filePrefix\": \"%s\"\n" +
-                                               "  },\n" +
-                                               "  \"maxDuration\": %d,\n" +
-                                               "  \"propagationOptions\": {\n" +
-                                               "    \"childCallHangup\": %b,\n" +
-                                               "    \"childCallRinging\": %b\n" +
-                                               "  }\n" +
-                                               "}\n",
+                                                   "  \"parentCallId\": \"%s\",\n" +
+                                                   "  \"childCallRequest\": {\n" +
+                                                   "    \"endpoint\": {\n" +
+                                                   "      \"type\": \"%s\",\n" +
+                                                   "      \"phoneNumber\": \"%s\"\n" +
+                                                   "    },\n" +
+                                                   "    \"from\": \"%s\",\n" +
+                                                   "    \"connectTimeout\": %d,\n" +
+                                                   "    \"machineDetection\": {\n" +
+                                                   "      \"enabled\": %b\n" +
+                                                   "    },\n" +
+                                                   "    \"customData\": {\n" +
+                                                   "      \"key2\": \"%s\",\n" +
+                                                   "      \"key1\": \"%s\"\n" +
+                                                   "    }\n" +
+                                                   "  },\n" +
+                                                   "  \"recording\": {\n" +
+                                                   "    \"recordingType\": \"%s\",\n" +
+                                                   "    \"dialogComposition\": {\n" +
+                                                   "      \"enabled\": %b\n" +
+                                                   "    },\n" +
+                                                   "    \"customData\": {\n" +
+                                                   "        \"%s\": \"%s\"\n" +
+                                                   "    },\n" +
+                                                   "    \"filePrefix\": \"%s\"\n" +
+                                                   "  },\n" +
+                                                   "  \"maxDuration\": %d,\n" +
+                                                   "  \"propagationOptions\": {\n" +
+                                                   "    \"childCallHangup\": %b,\n" +
+                                                   "    \"childCallRinging\": %b\n" +
+                                                   "  }\n" +
+                                                   "}\n",
                                                givenParentCallId,
                                                givenRequestType,
                                                givenRequestPhoneNumber,
@@ -5803,37 +5808,37 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpSuccessPostRequest(
-                DIALOGS,
-                expectedRequest,
-                givenResponse
+            DIALOGS,
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsDialogRequest request = new CallsDialogRequest()
-                                             .parentCallId(givenParentCallId)
-                                             .childCallRequest(new CallsDialogCallRequest()
-                                                     .endpoint(new CallsPhoneEndpoint()
-                                                             .phoneNumber(givenRequestPhoneNumber))
-                                                     .from(givenFrom)
-                                                     .connectTimeout(givenConnectTimeout)
-                                                     .machineDetection(new CallsMachineDetectionRequest()
-                                                             .enabled(givenEnabled))
-                                                     .customData(Map.of(
-                                                             "key2", givenKey2,
-                                                             "key1", givenKey1
-                                                     )))
-                                             .recording(new CallsDialogRecordingRequest()
-                                                     .recordingType(CallsRecordingType.AUDIO)
-                                                     .dialogComposition(new CallsDialogRecordingComposition()
-                                                             .enabled(givenRequestEnabled))
-                                                     .customData(givenCustomData)
-                                                     .filePrefix(givenFilePrefix))
-                                             .maxDuration(givenMaxDuration)
-                                             .propagationOptions(new CallsDialogPropagationOptions()
-                                                     .childCallHangup(givenChildCallHangup)
-                                                     .childCallRinging(givenCallRinging)
-                                             );
+            .parentCallId(givenParentCallId)
+            .childCallRequest(new CallsDialogCallRequest()
+                                  .endpoint(new CallsPhoneEndpoint()
+                                                .phoneNumber(givenRequestPhoneNumber))
+                                  .from(givenFrom)
+                                  .connectTimeout(givenConnectTimeout)
+                                  .machineDetection(new CallsMachineDetectionRequest()
+                                                        .enabled(givenEnabled))
+                                  .customData(Map.of(
+                                      "key2", givenKey2,
+                                      "key1", givenKey1
+                                  )))
+            .recording(new CallsDialogRecordingRequest()
+                           .recordingType(CallsRecordingType.AUDIO)
+                           .dialogComposition(new CallsDialogRecordingComposition()
+                                                  .enabled(givenRequestEnabled))
+                           .customData(givenCustomData)
+                           .filePrefix(givenFilePrefix))
+            .maxDuration(givenMaxDuration)
+            .propagationOptions(new CallsDialogPropagationOptions()
+                                    .childCallHangup(givenChildCallHangup)
+                                    .childCallRinging(givenCallRinging)
+            );
 
         Consumer<CallsDialogResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -5851,13 +5856,13 @@ class CallsApiTest extends ApiTest {
             then(response.getParentCall().getDirection()).isEqualTo(givenDirection);
             then(response.getParentCall().getState()).isEqualTo(givenSecondState);
             then(response.getParentCall().getMedia()).isEqualTo(
-                                                                new CallsMediaProperties()
-                                                                        .audio(new CallsAudioMediaProperties()
-                                                                                .muted(givenMuted)
-                                                                                .deaf(givenDeaf))
-                                                                        .video(new CallsVideoMediaProperties()
-                                                                                .camera(givenCamera)
-                                                                                .screenShare(givenScreenShare)));
+                new CallsMediaProperties()
+                    .audio(new CallsAudioMediaProperties()
+                               .muted(givenMuted)
+                               .deaf(givenDeaf))
+                    .video(new CallsVideoMediaProperties()
+                               .camera(givenCamera)
+                               .screenShare(givenScreenShare)));
             then(response.getParentCall().getStartTime()).isEqualTo(givenSecondStartTimeDateTime);
             then(response.getParentCall().getAnswerTime()).isEqualTo(givenAnswerTimeDateTime);
             then(response.getParentCall().getEndTime()).isEqualTo(givenSecondEndTimeDateTime);
@@ -5870,13 +5875,13 @@ class CallsApiTest extends ApiTest {
             then(response.getChildCall().getDirection()).isEqualTo(givenSecondDirection);
             then(response.getChildCall().getState()).isEqualTo(givenThirdState);
             then(response.getChildCall().getMedia()).isEqualTo(
-                                                                new CallsMediaProperties()
-                                                                        .audio(new CallsAudioMediaProperties()
-                                                                                .muted(givenSecondMuted)
-                                                                                .deaf(givenSecondDeaf))
-                                                                        .video(new CallsVideoMediaProperties()
-                                                                                .camera(givenSecondCamera)
-                                                                                .screenShare(givenThirdScreenShare)));
+                new CallsMediaProperties()
+                    .audio(new CallsAudioMediaProperties()
+                               .muted(givenSecondMuted)
+                               .deaf(givenSecondDeaf))
+                    .video(new CallsVideoMediaProperties()
+                               .camera(givenSecondCamera)
+                               .screenShare(givenThirdScreenShare)));
             then(response.getChildCall().getStartTime()).isEqualTo(givenThirdStartTimeDateTime);
             then(response.getChildCall().getAnswerTime()).isEqualTo(givenSecondAnswerTimeDateTime);
             then(response.getChildCall().getEndTime()).isEqualTo(givenThirdEndTimeDateTime);
@@ -5892,7 +5897,7 @@ class CallsApiTest extends ApiTest {
 
     @Test
     void shouldCreateDialogWithExistingCalls() {
-        String givenId ="034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        String givenId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenApplicationId = "61c060db2675060027d8c7a6";
         CallsDialogState givenState = CallsDialogState.ESTABLISHED;
         String givenStartTime = "2022-01-01T00:00:00.100+0000";
@@ -5939,63 +5944,63 @@ class CallsApiTest extends ApiTest {
         String givenChildDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"applicationId\": \"%s\",\n" +
-                                             "  \"state\": \"%s\",\n" +
-                                             "  \"startTime\": \"%s\",\n" +
-                                             "  \"establishTime\": \"%s\",\n" +
-                                             "  \"endTime\": \"%s\",\n" +
-                                             "  \"parentCall\": {\n" +
-                                             "    \"id\": \"%s\",\n" +
-                                             "    \"endpoint\": {\n" +
-                                             "      \"type\": \"%s\",\n" +
-                                             "      \"phoneNumber\": \"%s\"\n" +
-                                             "    },\n" +
-                                             "    \"direction\": \"%s\",\n" +
-                                             "    \"state\": \"%s\",\n" +
-                                             "    \"media\": {\n" +
-                                             "      \"audio\": {\n" +
-                                             "        \"muted\": %b,\n" +
-                                             "        \"deaf\": %b\n" +
-                                             "      },\n" +
-                                             "      \"video\": {\n" +
-                                             "        \"camera\": %b,\n" +
-                                             "        \"screenShare\": %b\n" +
-                                             "      }\n" +
-                                             "    },\n" +
-                                             "    \"startTime\": \"%s\",\n" +
-                                             "    \"answerTime\": \"%s\",\n" +
-                                             "    \"endTime\": \"%s\",\n" +
-                                             "    \"ringDuration\": %d,\n" +
-                                             "    \"applicationId\": \"%s\",\n" +
-                                             "    \"dialogId\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"childCall\": {\n" +
-                                             "    \"id\": \"%s\",\n" +
-                                             "    \"endpoint\": {\n" +
-                                             "      \"type\": \"%s\",\n" +
-                                             "      \"phoneNumber\": \"%s\"\n" +
-                                             "    },\n" +
-                                             "    \"direction\": \"%s\",\n" +
-                                             "    \"state\": \"%s\",\n" +
-                                             "    \"media\": {\n" +
-                                             "      \"audio\": {\n" +
-                                             "        \"muted\": %b,\n" +
-                                             "        \"deaf\": %b\n" +
-                                             "      },\n" +
-                                             "      \"video\": {\n" +
-                                             "        \"camera\": %b,\n" +
-                                             "        \"screenShare\": %b\n" +
-                                             "      }\n" +
-                                             "    },\n" +
-                                             "    \"startTime\": \"%s\",\n" +
-                                             "    \"answerTime\": \"%s\",\n" +
-                                             "    \"endTime\": \"%s\",\n" +
-                                             "    \"ringDuration\": %d,\n" +
-                                             "    \"applicationId\": \"%s\",\n" +
-                                             "    \"dialogId\": \"%s\"\n" +
-                                             "  }\n" +
-                                             "}",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"applicationId\": \"%s\",\n" +
+                                                 "  \"state\": \"%s\",\n" +
+                                                 "  \"startTime\": \"%s\",\n" +
+                                                 "  \"establishTime\": \"%s\",\n" +
+                                                 "  \"endTime\": \"%s\",\n" +
+                                                 "  \"parentCall\": {\n" +
+                                                 "    \"id\": \"%s\",\n" +
+                                                 "    \"endpoint\": {\n" +
+                                                 "      \"type\": \"%s\",\n" +
+                                                 "      \"phoneNumber\": \"%s\"\n" +
+                                                 "    },\n" +
+                                                 "    \"direction\": \"%s\",\n" +
+                                                 "    \"state\": \"%s\",\n" +
+                                                 "    \"media\": {\n" +
+                                                 "      \"audio\": {\n" +
+                                                 "        \"muted\": %b,\n" +
+                                                 "        \"deaf\": %b\n" +
+                                                 "      },\n" +
+                                                 "      \"video\": {\n" +
+                                                 "        \"camera\": %b,\n" +
+                                                 "        \"screenShare\": %b\n" +
+                                                 "      }\n" +
+                                                 "    },\n" +
+                                                 "    \"startTime\": \"%s\",\n" +
+                                                 "    \"answerTime\": \"%s\",\n" +
+                                                 "    \"endTime\": \"%s\",\n" +
+                                                 "    \"ringDuration\": %d,\n" +
+                                                 "    \"applicationId\": \"%s\",\n" +
+                                                 "    \"dialogId\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"childCall\": {\n" +
+                                                 "    \"id\": \"%s\",\n" +
+                                                 "    \"endpoint\": {\n" +
+                                                 "      \"type\": \"%s\",\n" +
+                                                 "      \"phoneNumber\": \"%s\"\n" +
+                                                 "    },\n" +
+                                                 "    \"direction\": \"%s\",\n" +
+                                                 "    \"state\": \"%s\",\n" +
+                                                 "    \"media\": {\n" +
+                                                 "      \"audio\": {\n" +
+                                                 "        \"muted\": %b,\n" +
+                                                 "        \"deaf\": %b\n" +
+                                                 "      },\n" +
+                                                 "      \"video\": {\n" +
+                                                 "        \"camera\": %b,\n" +
+                                                 "        \"screenShare\": %b\n" +
+                                                 "      }\n" +
+                                                 "    },\n" +
+                                                 "    \"startTime\": \"%s\",\n" +
+                                                 "    \"answerTime\": \"%s\",\n" +
+                                                 "    \"endTime\": \"%s\",\n" +
+                                                 "    \"ringDuration\": %d,\n" +
+                                                 "    \"applicationId\": \"%s\",\n" +
+                                                 "    \"dialogId\": \"%s\"\n" +
+                                                 "  }\n" +
+                                                 "}",
                                              givenId,
                                              givenApplicationId,
                                              givenState,
@@ -6044,23 +6049,23 @@ class CallsApiTest extends ApiTest {
         Boolean expectedChildCallRinging = false;
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"recording\": {\n" +
-                                               "    \"recordingType\": \"%s\",\n" +
-                                               "    \"dialogComposition\": {\n" +
-                                               "      \"enabled\": %b\n" +
-                                               "    },\n" +
-                                               "    \"customData\": {\n" +
-                                               "      \"property1\": \"%s\",\n" +
-                                               "      \"property2\": \"%s\"\n" +
-                                               "    },\n" +
-                                               "    \"filePrefix\": \"%s\"\n" +
-                                               "  },\n" +
-                                               "  \"maxDuration\": %d,\n" +
-                                               "  \"propagationOptions\": {\n" +
-                                               "    \"childCallHangup\": %b,\n" +
-                                               "    \"childCallRinging\": %b\n" +
-                                               "  }\n" +
-                                               "}",
+                                                   "  \"recording\": {\n" +
+                                                   "    \"recordingType\": \"%s\",\n" +
+                                                   "    \"dialogComposition\": {\n" +
+                                                   "      \"enabled\": %b\n" +
+                                                   "    },\n" +
+                                                   "    \"customData\": {\n" +
+                                                   "      \"property1\": \"%s\",\n" +
+                                                   "      \"property2\": \"%s\"\n" +
+                                                   "    },\n" +
+                                                   "    \"filePrefix\": \"%s\"\n" +
+                                                   "  },\n" +
+                                                   "  \"maxDuration\": %d,\n" +
+                                                   "  \"propagationOptions\": {\n" +
+                                                   "    \"childCallHangup\": %b,\n" +
+                                                   "    \"childCallRinging\": %b\n" +
+                                                   "  }\n" +
+                                                   "}",
                                                expectedRecordingType,
                                                expectedEnabled,
                                                expectedProperty1,
@@ -6075,35 +6080,35 @@ class CallsApiTest extends ApiTest {
         String givenChildCallId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
 
         setUpSuccessPostRequest(
-                DIALOGS_EXISTING_CALLS.replace("{parentCallId}", givenParentCallId).replace("{childCallId}", givenChildCallId),
-                expectedRequest,
-                givenResponse
+            DIALOGS_EXISTING_CALLS.replace("{parentCallId}", givenParentCallId).replace("{childCallId}", givenChildCallId),
+            expectedRequest,
+            givenResponse
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         var callsDialogRequest = new CallsDialogWithExistingCallRequest()
-                .recording(
-                        new CallsDialogRecordingRequest()
-                                .recordingType(expectedRecordingType)
-                                .dialogComposition(
-                                        new CallsDialogRecordingComposition()
-                                                .enabled(expectedEnabled)
-                                )
-                                .customData(
-                                        Map.of(
-                                                "property1", expectedProperty1,
-                                                "property2", expectedProperty2
-                                        )
-                                )
-                                .filePrefix(expectedFilePrefix)
-                )
-                .maxDuration(expectedMaxDuration)
-                .propagationOptions(
-                        new CallsDialogPropagationOptions()
-                                .childCallHangup(expectedChildCallHangup)
-                                .childCallRinging(expectedChildCallRinging)
-                );
+            .recording(
+                new CallsDialogRecordingRequest()
+                    .recordingType(expectedRecordingType)
+                    .dialogComposition(
+                        new CallsDialogRecordingComposition()
+                            .enabled(expectedEnabled)
+                    )
+                    .customData(
+                        Map.of(
+                            "property1", expectedProperty1,
+                            "property2", expectedProperty2
+                        )
+                    )
+                    .filePrefix(expectedFilePrefix)
+            )
+            .maxDuration(expectedMaxDuration)
+            .propagationOptions(
+                new CallsDialogPropagationOptions()
+                    .childCallHangup(expectedChildCallHangup)
+                    .childCallRinging(expectedChildCallRinging)
+            );
 
         Consumer<CallsDialogResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -6121,13 +6126,13 @@ class CallsApiTest extends ApiTest {
             then(response.getParentCall().getDirection()).isEqualTo(givenDirection);
             then(response.getParentCall().getState()).isEqualTo(givenParentState);
             then(response.getParentCall().getMedia()).isEqualTo(
-                    new CallsMediaProperties()
-                            .audio(new CallsAudioMediaProperties()
-                                           .muted(givenMuted)
-                                           .deaf(givenDeaf))
-                            .video(new CallsVideoMediaProperties()
-                                           .camera(givenCamera)
-                                           .screenShare(givenScreenShare)));
+                new CallsMediaProperties()
+                    .audio(new CallsAudioMediaProperties()
+                               .muted(givenMuted)
+                               .deaf(givenDeaf))
+                    .video(new CallsVideoMediaProperties()
+                               .camera(givenCamera)
+                               .screenShare(givenScreenShare)));
             then(response.getParentCall().getStartTime()).isEqualTo(givenParentStartTimeDate);
             then(response.getParentCall().getAnswerTime()).isEqualTo(givenParentAnswerTimeDate);
             then(response.getParentCall().getEndTime()).isEqualTo(givenParentEndTimeDate);
@@ -6140,13 +6145,13 @@ class CallsApiTest extends ApiTest {
             then(response.getChildCall().getDirection()).isEqualTo(givenChildDirection);
             then(response.getChildCall().getState()).isEqualTo(givenChildState);
             then(response.getChildCall().getMedia()).isEqualTo(
-                    new CallsMediaProperties()
-                            .audio(new CallsAudioMediaProperties()
-                                           .muted(givenChildMuted)
-                                           .deaf(givenChildDeaf))
-                            .video(new CallsVideoMediaProperties()
-                                           .camera(givenChildCamera)
-                                           .screenShare(givenChildScreenShare)));
+                new CallsMediaProperties()
+                    .audio(new CallsAudioMediaProperties()
+                               .muted(givenChildMuted)
+                               .deaf(givenChildDeaf))
+                    .video(new CallsVideoMediaProperties()
+                               .camera(givenChildCamera)
+                               .screenShare(givenChildScreenShare)));
             then(response.getChildCall().getStartTime()).isEqualTo(givenChildStartTimeDate);
             then(response.getChildCall().getAnswerTime()).isEqualTo(givenChildAnswerTimeDate);
             then(response.getChildCall().getEndTime()).isEqualTo(givenChildEndTimeDate);
@@ -6165,30 +6170,30 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"status\": \"%s\"\n" +
-                                             "}\n",
+                                                 "  \"status\": \"%s\"\n" +
+                                                 "}\n",
                                              givenStatus
         );
 
         String expectedText = "This dialog will end in 5 minutes.";
         String expectedRequest = String.format("{\n" +
-                                               "  \"text\": \"%s\"\n" +
-                                               "}",
+                                                   "  \"text\": \"%s\"\n" +
+                                                   "}",
                                                expectedText
         );
 
         String givenDialogId = "123";
         setUpPostRequest(
-                DIALOGS_BROADCAST_TEXT.replace("{dialogId}", givenDialogId),
-                expectedRequest,
-                givenResponse,
-                200
+            DIALOGS_BROADCAST_TEXT.replace("{dialogId}", givenDialogId),
+            expectedRequest,
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         var callsDialogBroadcastWebrtcTextRequest = new CallsDialogBroadcastWebrtcTextRequest()
-                .text(expectedText);
+            .text(expectedText);
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -6224,43 +6229,43 @@ class CallsApiTest extends ApiTest {
         Long givenTotalResults = 0L;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"results\": [\n" +
-                                             "    {\n" +
-                                             "      \"id\": \"%s\",\n" +
-                                             "      \"name\": \"%s\",\n" +
-                                             "      \"location\": \"%s\",\n" +
-                                             "      \"tls\": %b,\n" +
-                                             "      \"codecs\": [\n" +
-                                             "        \"%s\"\n" +
-                                             "      ],\n" +
-                                             "      \"dtmf\": \"%s\",\n" +
-                                             "      \"fax\": \"%s\",\n" +
-                                             "      \"numberFormat\": \"%s\",\n" +
-                                             "      \"internationalCallsAllowed\": %b,\n" +
-                                             "      \"channelLimit\": %d,\n" +
-                                             "      \"anonymization\": \"%s\",\n" +
-                                             "      \"billingPackage\": {\n" +
-                                             "        \"packageType\": \"%s\",\n" +
-                                             "        \"addressId\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"sbcHosts\": {\n" +
-                                             "        \"primary\": [\n" +
-                                             "          \"%s\"\n" +
-                                             "        ],\n" +
-                                             "        \"backup\": [\n" +
-                                             "          \"%s\"\n" +
-                                             "        ]\n" +
-                                             "      },\n" +
-                                             "      \"type\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"paging\": {\n" +
-                                             "    \"page\": %d,\n" +
-                                             "    \"size\": %d,\n" +
-                                             "    \"totalPages\": %d,\n" +
-                                             "    \"totalResults\": %d\n" +
-                                             "  }\n" +
-                                             "}",
+                                                 "  \"results\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"id\": \"%s\",\n" +
+                                                 "      \"name\": \"%s\",\n" +
+                                                 "      \"location\": \"%s\",\n" +
+                                                 "      \"tls\": %b,\n" +
+                                                 "      \"codecs\": [\n" +
+                                                 "        \"%s\"\n" +
+                                                 "      ],\n" +
+                                                 "      \"dtmf\": \"%s\",\n" +
+                                                 "      \"fax\": \"%s\",\n" +
+                                                 "      \"numberFormat\": \"%s\",\n" +
+                                                 "      \"internationalCallsAllowed\": %b,\n" +
+                                                 "      \"channelLimit\": %d,\n" +
+                                                 "      \"anonymization\": \"%s\",\n" +
+                                                 "      \"billingPackage\": {\n" +
+                                                 "        \"packageType\": \"%s\",\n" +
+                                                 "        \"addressId\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"sbcHosts\": {\n" +
+                                                 "        \"primary\": [\n" +
+                                                 "          \"%s\"\n" +
+                                                 "        ],\n" +
+                                                 "        \"backup\": [\n" +
+                                                 "          \"%s\"\n" +
+                                                 "        ]\n" +
+                                                 "      },\n" +
+                                                 "      \"type\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"paging\": {\n" +
+                                                 "    \"page\": %d,\n" +
+                                                 "    \"size\": %d,\n" +
+                                                 "    \"totalPages\": %d,\n" +
+                                                 "    \"totalResults\": %d\n" +
+                                                 "  }\n" +
+                                                 "}",
                                              givenId,
                                              givenName,
                                              givenLocation,
@@ -6288,14 +6293,14 @@ class CallsApiTest extends ApiTest {
         Integer givenSizeParameter = 20;
 
         setUpGetRequest(
-                SIP_TRUNKS,
-                Map.of(
-                        "name", givenNameParameter,
-                        "page", givenPageParameter.toString(),
-                        "size", givenSizeParameter.toString()
-                ),
-                givenResponse,
-                200
+            SIP_TRUNKS,
+            Map.of(
+                "name", givenNameParameter,
+                "page", givenPageParameter.toString(),
+                "size", givenSizeParameter.toString()
+            ),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -6363,43 +6368,43 @@ class CallsApiTest extends ApiTest {
         Boolean givenEnabled = false;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"location\": \"%s\",\n" +
-                                             "  \"tls\": %b,\n" +
-                                             "  \"codecs\": [\n" +
-                                             "    \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"dtmf\": \"%s\",\n" +
-                                             "  \"fax\": \"%s\",\n" +
-                                             "  \"numberFormat\": \"%s\",\n" +
-                                             "  \"internationalCallsAllowed\": %b,\n" +
-                                             "  \"channelLimit\": %d,\n" +
-                                             "  \"anonymization\": \"%s\",\n" +
-                                             "  \"billingPackage\": {\n" +
-                                             "    \"packageType\": \"%s\",\n" +
-                                             "    \"addressId\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"sbcHosts\": {\n" +
-                                             "    \"primary\": [\n" +
-                                             "      \"%s\"\n" +
-                                             "    ],\n" +
-                                             "    \"backup\": [\n" +
-                                             "      \"%s\"\n" +
-                                             "    ]\n" +
-                                             "  },\n" +
-                                             "  \"type\": \"%s\",\n" +
-                                             "  \"sourceHosts\": [\n" +
-                                             "    \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"destinationHosts\": [\n" +
-                                             "    \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"strategy\": \"%s\",\n" +
-                                             "  \"sipOptions\": {\n" +
-                                             "    \"enabled\": %b\n" +
-                                             "  }\n" +
-                                             "}",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"location\": \"%s\",\n" +
+                                                 "  \"tls\": %b,\n" +
+                                                 "  \"codecs\": [\n" +
+                                                 "    \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"dtmf\": \"%s\",\n" +
+                                                 "  \"fax\": \"%s\",\n" +
+                                                 "  \"numberFormat\": \"%s\",\n" +
+                                                 "  \"internationalCallsAllowed\": %b,\n" +
+                                                 "  \"channelLimit\": %d,\n" +
+                                                 "  \"anonymization\": \"%s\",\n" +
+                                                 "  \"billingPackage\": {\n" +
+                                                 "    \"packageType\": \"%s\",\n" +
+                                                 "    \"addressId\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"sbcHosts\": {\n" +
+                                                 "    \"primary\": [\n" +
+                                                 "      \"%s\"\n" +
+                                                 "    ],\n" +
+                                                 "    \"backup\": [\n" +
+                                                 "      \"%s\"\n" +
+                                                 "    ]\n" +
+                                                 "  },\n" +
+                                                 "  \"type\": \"%s\",\n" +
+                                                 "  \"sourceHosts\": [\n" +
+                                                 "    \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"destinationHosts\": [\n" +
+                                                 "    \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"strategy\": \"%s\",\n" +
+                                                 "  \"sipOptions\": {\n" +
+                                                 "    \"enabled\": %b\n" +
+                                                 "  }\n" +
+                                                 "}",
                                              givenId,
                                              givenName,
                                              givenLocation,
@@ -6441,34 +6446,34 @@ class CallsApiTest extends ApiTest {
         Boolean expectedEnabled = false;
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"type\": \"%s\",\n" +
-                                               "  \"name\": \"%s\",\n" +
-                                               "  \"location\": \"%s\",\n" +
-                                               "  \"tls\": %b,\n" +
-                                               "  \"codecs\": [\n" +
-                                               "    \"%s\"\n" +
-                                               "  ],\n" +
-                                               "  \"dtmf\": \"%s\",\n" +
-                                               "  \"fax\": \"%s\",\n" +
-                                               "  \"numberFormat\": \"%s\",\n" +
-                                               "  \"internationalCallsAllowed\": %b,\n" +
-                                               "  \"channelLimit\": %d,\n" +
-                                               "  \"anonymization\": \"%s\",\n" +
-                                               "  \"billingPackage\": {\n" +
-                                               "    \"packageType\": \"%s\",\n" +
-                                               "    \"addressId\": \"%s\"\n" +
-                                               "  },\n" +
-                                               "  \"sourceHosts\": [\n" +
-                                               "    \"%s\"\n" +
-                                               "  ],\n" +
-                                               "  \"destinationHosts\": [\n" +
-                                               "    \"%s\"\n" +
-                                               "  ],\n" +
-                                               "  \"strategy\": \"%s\",\n" +
-                                               "  \"sipOptions\": {\n" +
-                                               "    \"enabled\": %b\n" +
-                                               "  }\n" +
-                                               "}",
+                                                   "  \"type\": \"%s\",\n" +
+                                                   "  \"name\": \"%s\",\n" +
+                                                   "  \"location\": \"%s\",\n" +
+                                                   "  \"tls\": %b,\n" +
+                                                   "  \"codecs\": [\n" +
+                                                   "    \"%s\"\n" +
+                                                   "  ],\n" +
+                                                   "  \"dtmf\": \"%s\",\n" +
+                                                   "  \"fax\": \"%s\",\n" +
+                                                   "  \"numberFormat\": \"%s\",\n" +
+                                                   "  \"internationalCallsAllowed\": %b,\n" +
+                                                   "  \"channelLimit\": %d,\n" +
+                                                   "  \"anonymization\": \"%s\",\n" +
+                                                   "  \"billingPackage\": {\n" +
+                                                   "    \"packageType\": \"%s\",\n" +
+                                                   "    \"addressId\": \"%s\"\n" +
+                                                   "  },\n" +
+                                                   "  \"sourceHosts\": [\n" +
+                                                   "    \"%s\"\n" +
+                                                   "  ],\n" +
+                                                   "  \"destinationHosts\": [\n" +
+                                                   "    \"%s\"\n" +
+                                                   "  ],\n" +
+                                                   "  \"strategy\": \"%s\",\n" +
+                                                   "  \"sipOptions\": {\n" +
+                                                   "    \"enabled\": %b\n" +
+                                                   "  }\n" +
+                                                   "}",
                                                expectedType,
                                                expectedName,
                                                expectedLocation,
@@ -6489,50 +6494,50 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpPostRequest(
-                SIP_TRUNKS,
-                Map.of(),
-                expectedRequest,
-                givenResponse,
-                202
+            SIP_TRUNKS,
+            Map.of(),
+            expectedRequest,
+            givenResponse,
+            202
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsStaticSipTrunkRequest callsSipTrunkRequest = (CallsStaticSipTrunkRequest) new CallsStaticSipTrunkRequest()
-                .sourceHosts(
-                        List.of(
-                                expectedSourceHosts
-                        )
+            .sourceHosts(
+                List.of(
+                    expectedSourceHosts
                 )
-                .destinationHosts(
-                        List.of(
-                                expectedDestinationHosts
-                        )
+            )
+            .destinationHosts(
+                List.of(
+                    expectedDestinationHosts
                 )
-                .strategy(expectedStrategy)
-                .sipOptions(
-                        new CallsSipOptions()
-                                .enabled(expectedEnabled)
+            )
+            .strategy(expectedStrategy)
+            .sipOptions(
+                new CallsSipOptions()
+                    .enabled(expectedEnabled)
+            )
+            .tls(expectedTls)
+            .codecs(
+                List.of(
+                    expectedCodecs
                 )
-                .tls(expectedTls)
-                .codecs(
-                    List.of(
-                        expectedCodecs
-                    )
-                )
-                .anonymization(expectedAnonymization)
-                .dtmf(expectedDtmf)
-                .fax(expectedFax)
-                .numberFormat(expectedNumberFormat)
-                .internationalCallsAllowed(expectedInternationalCallsAllowed)
-                .channelLimit(expectedChannelLimit)
-                .billingPackage(
-                    new CallsBillingPackage()
-                        .packageType(expectedPackageType)
-                        .addressId(expectedAddressId)
-                )
-                .name(expectedName)
-                .location(expectedLocation);
+            )
+            .anonymization(expectedAnonymization)
+            .dtmf(expectedDtmf)
+            .fax(expectedFax)
+            .numberFormat(expectedNumberFormat)
+            .internationalCallsAllowed(expectedInternationalCallsAllowed)
+            .channelLimit(expectedChannelLimit)
+            .billingPackage(
+                new CallsBillingPackage()
+                    .packageType(expectedPackageType)
+                    .addressId(expectedAddressId)
+            )
+            .name(expectedName)
+            .location(expectedLocation);
 
         Consumer<CallsCreateSipTrunkResponse> assertions = (staticResponse) -> {
             CallsCreateStaticSipTrunkResponse response = (CallsCreateStaticSipTrunkResponse) staticResponse;
@@ -6592,43 +6597,43 @@ class CallsApiTest extends ApiTest {
         Boolean givenEnabled = false;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"location\": \"%s\",\n" +
-                                             "  \"tls\": %b,\n" +
-                                             "  \"codecs\": [\n" +
-                                             "    \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"dtmf\": \"%s\",\n" +
-                                             "  \"fax\": \"%s\",\n" +
-                                             "  \"numberFormat\": \"%s\",\n" +
-                                             "  \"internationalCallsAllowed\": %b,\n" +
-                                             "  \"channelLimit\": %d,\n" +
-                                             "  \"anonymization\": \"%s\",\n" +
-                                             "  \"billingPackage\": {\n" +
-                                             "    \"packageType\": \"%s\",\n" +
-                                             "    \"addressId\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"sbcHosts\": {\n" +
-                                             "    \"primary\": [\n" +
-                                             "      \"%s\"\n" +
-                                             "    ],\n" +
-                                             "    \"backup\": [\n" +
-                                             "      \"%s\"\n" +
-                                             "    ]\n" +
-                                             "  },\n" +
-                                             "  \"type\": \"%s\",\n" +
-                                             "  \"sourceHosts\": [\n" +
-                                             "    \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"destinationHosts\": [\n" +
-                                             "    \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"strategy\": \"%s\",\n" +
-                                             "  \"sipOptions\": {\n" +
-                                             "    \"enabled\": %b\n" +
-                                             "  }\n" +
-                                             "}",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"location\": \"%s\",\n" +
+                                                 "  \"tls\": %b,\n" +
+                                                 "  \"codecs\": [\n" +
+                                                 "    \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"dtmf\": \"%s\",\n" +
+                                                 "  \"fax\": \"%s\",\n" +
+                                                 "  \"numberFormat\": \"%s\",\n" +
+                                                 "  \"internationalCallsAllowed\": %b,\n" +
+                                                 "  \"channelLimit\": %d,\n" +
+                                                 "  \"anonymization\": \"%s\",\n" +
+                                                 "  \"billingPackage\": {\n" +
+                                                 "    \"packageType\": \"%s\",\n" +
+                                                 "    \"addressId\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"sbcHosts\": {\n" +
+                                                 "    \"primary\": [\n" +
+                                                 "      \"%s\"\n" +
+                                                 "    ],\n" +
+                                                 "    \"backup\": [\n" +
+                                                 "      \"%s\"\n" +
+                                                 "    ]\n" +
+                                                 "  },\n" +
+                                                 "  \"type\": \"%s\",\n" +
+                                                 "  \"sourceHosts\": [\n" +
+                                                 "    \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"destinationHosts\": [\n" +
+                                                 "    \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"strategy\": \"%s\",\n" +
+                                                 "  \"sipOptions\": {\n" +
+                                                 "    \"enabled\": %b\n" +
+                                                 "  }\n" +
+                                                 "}",
                                              givenId,
                                              givenName,
                                              givenLocation,
@@ -6654,10 +6659,10 @@ class CallsApiTest extends ApiTest {
         String givenSipTrunkId = "123";
 
         setUpGetRequest(
-                SIP_TRUNK.replace("{sipTrunkId}", givenSipTrunkId),
-                Map.of(),
-                givenResponse,
-                200
+            SIP_TRUNK.replace("{sipTrunkId}", givenSipTrunkId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -6720,43 +6725,43 @@ class CallsApiTest extends ApiTest {
         Boolean givenEnabled = false;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"location\": \"%s\",\n" +
-                                             "  \"tls\": %b,\n" +
-                                             "  \"codecs\": [\n" +
-                                             "    \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"dtmf\": \"%s\",\n" +
-                                             "  \"fax\": \"%s\",\n" +
-                                             "  \"numberFormat\": \"%s\",\n" +
-                                             "  \"internationalCallsAllowed\": %b,\n" +
-                                             "  \"channelLimit\": %d,\n" +
-                                             "  \"anonymization\": \"%s\",\n" +
-                                             "  \"billingPackage\": {\n" +
-                                             "    \"packageType\": \"%s\",\n" +
-                                             "    \"addressId\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"sbcHosts\": {\n" +
-                                             "    \"primary\": [\n" +
-                                             "      \"%s\"\n" +
-                                             "    ],\n" +
-                                             "    \"backup\": [\n" +
-                                             "      \"%s\"\n" +
-                                             "    ]\n" +
-                                             "  },\n" +
-                                             "  \"type\": \"%s\",\n" +
-                                             "  \"sourceHosts\": [\n" +
-                                             "    \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"destinationHosts\": [\n" +
-                                             "    \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"strategy\": \"%s\",\n" +
-                                             "  \"sipOptions\": {\n" +
-                                             "    \"enabled\": %b\n" +
-                                             "  }\n" +
-                                             "}",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"location\": \"%s\",\n" +
+                                                 "  \"tls\": %b,\n" +
+                                                 "  \"codecs\": [\n" +
+                                                 "    \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"dtmf\": \"%s\",\n" +
+                                                 "  \"fax\": \"%s\",\n" +
+                                                 "  \"numberFormat\": \"%s\",\n" +
+                                                 "  \"internationalCallsAllowed\": %b,\n" +
+                                                 "  \"channelLimit\": %d,\n" +
+                                                 "  \"anonymization\": \"%s\",\n" +
+                                                 "  \"billingPackage\": {\n" +
+                                                 "    \"packageType\": \"%s\",\n" +
+                                                 "    \"addressId\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"sbcHosts\": {\n" +
+                                                 "    \"primary\": [\n" +
+                                                 "      \"%s\"\n" +
+                                                 "    ],\n" +
+                                                 "    \"backup\": [\n" +
+                                                 "      \"%s\"\n" +
+                                                 "    ]\n" +
+                                                 "  },\n" +
+                                                 "  \"type\": \"%s\",\n" +
+                                                 "  \"sourceHosts\": [\n" +
+                                                 "    \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"destinationHosts\": [\n" +
+                                                 "    \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"strategy\": \"%s\",\n" +
+                                                 "  \"sipOptions\": {\n" +
+                                                 "    \"enabled\": %b\n" +
+                                                 "  }\n" +
+                                                 "}",
                                              givenId,
                                              givenName,
                                              givenLocation,
@@ -6794,28 +6799,28 @@ class CallsApiTest extends ApiTest {
         Boolean expectedEnabled = false;
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"type\": \"%s\",\n" +
-                                               "  \"name\": \"%s\",\n" +
-                                               "  \"codecs\": [\n" +
-                                               "    \"%s\"\n" +
-                                               "  ],\n" +
-                                               "  \"dtmf\": \"%s\",\n" +
-                                               "  \"fax\": \"%s\",\n" +
-                                               "  \"numberFormat\": \"%s\",\n" +
-                                               "  \"internationalCallsAllowed\": %b,\n" +
-                                               "  \"channelLimit\": %d,\n" +
-                                               "  \"anonymization\": \"%s\",\n" +
-                                               "  \"sourceHosts\": [\n" +
-                                               "    \"%s\"\n" +
-                                               "  ],\n" +
-                                               "  \"destinationHosts\": [\n" +
-                                               "    \"%s\"\n" +
-                                               "  ],\n" +
-                                               "  \"strategy\": \"%s\",\n" +
-                                               "  \"sipOptions\": {\n" +
-                                               "    \"enabled\": %b\n" +
-                                               "  }\n" +
-                                               "}",
+                                                   "  \"type\": \"%s\",\n" +
+                                                   "  \"name\": \"%s\",\n" +
+                                                   "  \"codecs\": [\n" +
+                                                   "    \"%s\"\n" +
+                                                   "  ],\n" +
+                                                   "  \"dtmf\": \"%s\",\n" +
+                                                   "  \"fax\": \"%s\",\n" +
+                                                   "  \"numberFormat\": \"%s\",\n" +
+                                                   "  \"internationalCallsAllowed\": %b,\n" +
+                                                   "  \"channelLimit\": %d,\n" +
+                                                   "  \"anonymization\": \"%s\",\n" +
+                                                   "  \"sourceHosts\": [\n" +
+                                                   "    \"%s\"\n" +
+                                                   "  ],\n" +
+                                                   "  \"destinationHosts\": [\n" +
+                                                   "    \"%s\"\n" +
+                                                   "  ],\n" +
+                                                   "  \"strategy\": \"%s\",\n" +
+                                                   "  \"sipOptions\": {\n" +
+                                                   "    \"enabled\": %b\n" +
+                                                   "  }\n" +
+                                                   "}",
                                                expectedType,
                                                expectedName,
                                                expectedCodecs,
@@ -6834,43 +6839,43 @@ class CallsApiTest extends ApiTest {
         String givenSipTrunkId = "123";
 
         setUpPutRequest(
-                SIP_TRUNK.replace("{sipTrunkId}", givenSipTrunkId),
-                Map.of(),
-                expectedRequest,
-                givenResponse,
-                202
+            SIP_TRUNK.replace("{sipTrunkId}", givenSipTrunkId),
+            Map.of(),
+            expectedRequest,
+            givenResponse,
+            202
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         CallsStaticSipTrunkUpdateRequest callsSipTrunkUpdateRequest = (CallsStaticSipTrunkUpdateRequest) new CallsStaticSipTrunkUpdateRequest()
-                .sourceHosts(
-                        List.of(
-                                expectedSourceHosts
-                        )
+            .sourceHosts(
+                List.of(
+                    expectedSourceHosts
                 )
-                .destinationHosts(
-                        List.of(
-                                expectedDestinationHosts
-                        )
+            )
+            .destinationHosts(
+                List.of(
+                    expectedDestinationHosts
                 )
-                .strategy(expectedStrategy)
-                .sipOptions(
-                        new CallsSipOptions()
-                                .enabled(expectedEnabled)
+            )
+            .strategy(expectedStrategy)
+            .sipOptions(
+                new CallsSipOptions()
+                    .enabled(expectedEnabled)
+            )
+            .name(expectedName)
+            .codecs(
+                List.of(
+                    expectedCodecs
                 )
-                .name(expectedName)
-                .codecs(
-                        List.of(
-                                expectedCodecs
-                        )
-                )
-                .dtmf(expectedDtmf)
-                .fax(expectedFax)
-                .numberFormat(expectedNumberFormat)
-                .internationalCallsAllowed(expectedInternationalCallsAllowed)
-                .channelLimit(expectedChannelLimit)
-                .anonymization(expectedAnonymization);
+            )
+            .dtmf(expectedDtmf)
+            .fax(expectedFax)
+            .numberFormat(expectedNumberFormat)
+            .internationalCallsAllowed(expectedInternationalCallsAllowed)
+            .channelLimit(expectedChannelLimit)
+            .anonymization(expectedAnonymization);
 
         Consumer<CallsSipTrunkResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -6930,43 +6935,43 @@ class CallsApiTest extends ApiTest {
         Boolean givenEnabled = false;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"location\": \"%s\",\n" +
-                                             "  \"tls\": %b,\n" +
-                                             "  \"codecs\": [\n" +
-                                             "    \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"dtmf\": \"%s\",\n" +
-                                             "  \"fax\": \"%s\",\n" +
-                                             "  \"numberFormat\": \"%s\",\n" +
-                                             "  \"internationalCallsAllowed\": %b,\n" +
-                                             "  \"channelLimit\": %d,\n" +
-                                             "  \"anonymization\": \"%s\",\n" +
-                                             "  \"billingPackage\": {\n" +
-                                             "    \"packageType\": \"%s\",\n" +
-                                             "    \"addressId\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"sbcHosts\": {\n" +
-                                             "    \"primary\": [\n" +
-                                             "      \"%s\"\n" +
-                                             "    ],\n" +
-                                             "    \"backup\": [\n" +
-                                             "      \"%s\"\n" +
-                                             "    ]\n" +
-                                             "  },\n" +
-                                             "  \"type\": \"%s\",\n" +
-                                             "  \"sourceHosts\": [\n" +
-                                             "    \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"destinationHosts\": [\n" +
-                                             "    \"%s\"\n" +
-                                             "  ],\n" +
-                                             "  \"strategy\": \"%s\",\n" +
-                                             "  \"sipOptions\": {\n" +
-                                             "    \"enabled\": %b\n" +
-                                             "  }\n" +
-                                             "}",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"location\": \"%s\",\n" +
+                                                 "  \"tls\": %b,\n" +
+                                                 "  \"codecs\": [\n" +
+                                                 "    \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"dtmf\": \"%s\",\n" +
+                                                 "  \"fax\": \"%s\",\n" +
+                                                 "  \"numberFormat\": \"%s\",\n" +
+                                                 "  \"internationalCallsAllowed\": %b,\n" +
+                                                 "  \"channelLimit\": %d,\n" +
+                                                 "  \"anonymization\": \"%s\",\n" +
+                                                 "  \"billingPackage\": {\n" +
+                                                 "    \"packageType\": \"%s\",\n" +
+                                                 "    \"addressId\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"sbcHosts\": {\n" +
+                                                 "    \"primary\": [\n" +
+                                                 "      \"%s\"\n" +
+                                                 "    ],\n" +
+                                                 "    \"backup\": [\n" +
+                                                 "      \"%s\"\n" +
+                                                 "    ]\n" +
+                                                 "  },\n" +
+                                                 "  \"type\": \"%s\",\n" +
+                                                 "  \"sourceHosts\": [\n" +
+                                                 "    \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"destinationHosts\": [\n" +
+                                                 "    \"%s\"\n" +
+                                                 "  ],\n" +
+                                                 "  \"strategy\": \"%s\",\n" +
+                                                 "  \"sipOptions\": {\n" +
+                                                 "    \"enabled\": %b\n" +
+                                                 "  }\n" +
+                                                 "}",
                                              givenId,
                                              givenName,
                                              givenLocation,
@@ -6992,10 +6997,10 @@ class CallsApiTest extends ApiTest {
         String givenSipTrunkId = "123";
 
         setUpNoRequestBodyDeleteRequest(
-                SIP_TRUNK.replace("{sipTrunkId}", givenSipTrunkId),
-                Map.of(),
-                givenResponse,
-                202
+            SIP_TRUNK.replace("{sipTrunkId}", givenSipTrunkId),
+            Map.of(),
+            givenResponse,
+            202
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -7037,18 +7042,18 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldGetSipTrunkStatus() {
         CallsSipTrunkAdminStatus givenAdminStatus = CallsSipTrunkAdminStatus.ENABLED;
-        CallsSipTrunkActionStatus givenActionStatus =  CallsSipTrunkActionStatus.CREATING;
+        CallsSipTrunkActionStatus givenActionStatus = CallsSipTrunkActionStatus.CREATING;
         String givenActionReason = "string";
         Integer givenActiveCalls = 0;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"adminStatus\": \"%s\",\n" +
-                                             "  \"actionStatus\": {\n" +
-                                             "    \"status\": \"%s\",\n" +
-                                             "    \"reason\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"activeCalls\": %d\n" +
-                                             "}",
+                                                 "  \"adminStatus\": \"%s\",\n" +
+                                                 "  \"actionStatus\": {\n" +
+                                                 "    \"status\": \"%s\",\n" +
+                                                 "    \"reason\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"activeCalls\": %d\n" +
+                                                 "}",
                                              givenAdminStatus,
                                              givenActionStatus,
                                              givenActionReason,
@@ -7058,10 +7063,10 @@ class CallsApiTest extends ApiTest {
         String givenSipTrunkId = "123";
 
         setUpGetRequest(
-                SIP_TRUNK_STATUS.replace("{sipTrunkId}", givenSipTrunkId),
-                Map.of(),
-                givenResponse,
-                200
+            SIP_TRUNK_STATUS.replace("{sipTrunkId}", givenSipTrunkId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -7084,33 +7089,33 @@ class CallsApiTest extends ApiTest {
         CallsSipTrunkAdminStatus givenAdminStatus = CallsSipTrunkAdminStatus.ENABLED;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"adminStatus\": \"%s\"\n" +
-                                             "}",
+                                                 "  \"adminStatus\": \"%s\"\n" +
+                                                 "}",
                                              givenAdminStatus
         );
 
         CallsSipTrunkAdminStatus expectedAdminStatus = CallsSipTrunkAdminStatus.ENABLED;
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"adminStatus\": \"%s\"\n" +
-                                               "}",
+                                                   "  \"adminStatus\": \"%s\"\n" +
+                                                   "}",
                                                expectedAdminStatus
         );
 
         String givenSipTrunkId = "123";
 
         setUpPostRequest(
-                SIP_TRUNK_STATUS.replace("{sipTrunkId}", givenSipTrunkId),
-                Map.of(),
-                expectedRequest,
-                givenResponse,
-                200
+            SIP_TRUNK_STATUS.replace("{sipTrunkId}", givenSipTrunkId),
+            Map.of(),
+            expectedRequest,
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         var callsSipTrunkStatusRequest = new CallsSipTrunkStatusRequest()
-                .adminStatus(expectedAdminStatus);
+            .adminStatus(expectedAdminStatus);
 
         Consumer<CallsSipTrunkStatusResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -7140,31 +7145,31 @@ class CallsApiTest extends ApiTest {
         Long givenTotalResults = 1L;
 
         String givenResponse = String.format("{\n" +
-                                             "  \"results\": [\n" +
-                                             "    {\n" +
-                                             "      \"id\": \"%s\",\n" +
-                                             "      \"name\": \"%s\",\n" +
-                                             "      \"street\": \"%s\",\n" +
-                                             "      \"city\": \"%s\",\n" +
-                                             "      \"postCode\": \"%s\",\n" +
-                                             "      \"suite\": \"%s\",\n" +
-                                             "      \"country\": {\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"code\": \"%s\"\n" +
-                                             "      },\n" +
-                                             "      \"region\": {\n" +
-                                             "        \"name\": \"%s\",\n" +
-                                             "        \"code\": \"%s\"\n" +
-                                             "      }\n" +
-                                             "    }\n" +
-                                             "  ],\n" +
-                                             "  \"paging\": {\n" +
-                                             "    \"page\": %d,\n" +
-                                             "    \"size\": %d,\n" +
-                                             "    \"totalPages\": %d,\n" +
-                                             "    \"totalResults\": %d\n" +
-                                             "  }\n" +
-                                             "}",
+                                                 "  \"results\": [\n" +
+                                                 "    {\n" +
+                                                 "      \"id\": \"%s\",\n" +
+                                                 "      \"name\": \"%s\",\n" +
+                                                 "      \"street\": \"%s\",\n" +
+                                                 "      \"city\": \"%s\",\n" +
+                                                 "      \"postCode\": \"%s\",\n" +
+                                                 "      \"suite\": \"%s\",\n" +
+                                                 "      \"country\": {\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"code\": \"%s\"\n" +
+                                                 "      },\n" +
+                                                 "      \"region\": {\n" +
+                                                 "        \"name\": \"%s\",\n" +
+                                                 "        \"code\": \"%s\"\n" +
+                                                 "      }\n" +
+                                                 "    }\n" +
+                                                 "  ],\n" +
+                                                 "  \"paging\": {\n" +
+                                                 "    \"page\": %d,\n" +
+                                                 "    \"size\": %d,\n" +
+                                                 "    \"totalPages\": %d,\n" +
+                                                 "    \"totalResults\": %d\n" +
+                                                 "  }\n" +
+                                                 "}",
                                              givenId,
                                              givenName,
                                              givenStreet,
@@ -7185,13 +7190,13 @@ class CallsApiTest extends ApiTest {
         Integer givenSizeParameter = 20;
 
         setUpGetRequest(
-                SIP_TRUNK_SERVICE_ADDRESSES,
-                Map.of(
-                        "page", "0",
-                        "size", "20"
-                ),
-                givenResponse,
-                200
+            SIP_TRUNK_SERVICE_ADDRESSES,
+            Map.of(
+                "page", "0",
+                "size", "20"
+            ),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -7241,21 +7246,21 @@ class CallsApiTest extends ApiTest {
         String givenRegionCode = "HR-01";
 
         String givenResponse = String.format(" {\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"street\": \"%s\",\n" +
-                                             "  \"city\": \"%s\",\n" +
-                                             "  \"postCode\": \"%s\",\n" +
-                                             "  \"suite\": \"%s\",\n" +
-                                             "  \"country\": {\n" +
-                                             "    \"name\": \"%s\",\n" +
-                                             "    \"code\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"region\": {\n" +
-                                             "    \"name\": \"%s\",\n" +
-                                             "    \"code\": \"%s\"\n" +
-                                             "  }\n" +
-                                             "}",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"street\": \"%s\",\n" +
+                                                 "  \"city\": \"%s\",\n" +
+                                                 "  \"postCode\": \"%s\",\n" +
+                                                 "  \"suite\": \"%s\",\n" +
+                                                 "  \"country\": {\n" +
+                                                 "    \"name\": \"%s\",\n" +
+                                                 "    \"code\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"region\": {\n" +
+                                                 "    \"name\": \"%s\",\n" +
+                                                 "    \"code\": \"%s\"\n" +
+                                                 "  }\n" +
+                                                 "}",
                                              givenId,
                                              givenName,
                                              givenStreet,
@@ -7277,14 +7282,14 @@ class CallsApiTest extends ApiTest {
         String expectedCountryRegionCode = "HR-01";
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"name\": \"%s\",\n" +
-                                               "  \"street\": \"%s\",\n" +
-                                               "  \"city\": \"%s\",\n" +
-                                               "  \"postCode\": \"%s\",\n" +
-                                               "  \"suite\": \"%s\",\n" +
-                                               "  \"countryCode\": \"%s\",\n" +
-                                               "  \"countryRegionCode\": \"%s\"\n" +
-                                               "}",
+                                                   "  \"name\": \"%s\",\n" +
+                                                   "  \"street\": \"%s\",\n" +
+                                                   "  \"city\": \"%s\",\n" +
+                                                   "  \"postCode\": \"%s\",\n" +
+                                                   "  \"suite\": \"%s\",\n" +
+                                                   "  \"countryCode\": \"%s\",\n" +
+                                                   "  \"countryRegionCode\": \"%s\"\n" +
+                                                   "}",
                                                expectedName,
                                                expectedStreet,
                                                expectedCity,
@@ -7295,22 +7300,22 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpPostRequest(
-                SIP_TRUNK_SERVICE_ADDRESSES,
-                expectedRequest,
-                givenResponse,
-                201
+            SIP_TRUNK_SERVICE_ADDRESSES,
+            expectedRequest,
+            givenResponse,
+            201
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         var callsPublicSipTrunkServiceAddressRequest = new CallsPublicSipTrunkServiceAddressRequest()
-                .name(expectedName)
-                .street(expectedStreet)
-                .city(expectedCity)
-                .postCode(expectedPostCode)
-                .suite(expectedSuite)
-                .countryCode(expectedCountryCode)
-                .countryRegionCode(expectedCountryRegionCode);
+            .name(expectedName)
+            .street(expectedStreet)
+            .city(expectedCity)
+            .postCode(expectedPostCode)
+            .suite(expectedSuite)
+            .countryCode(expectedCountryCode)
+            .countryRegionCode(expectedCountryRegionCode);
 
         Consumer<CallsPublicSipTrunkServiceAddress> assertions = (response) -> {
             then(response).isNotNull();
@@ -7349,21 +7354,21 @@ class CallsApiTest extends ApiTest {
         String givenRegionCode = "HR-01";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"street\": \"%s\",\n" +
-                                             "  \"city\": \"%s\",\n" +
-                                             "  \"postCode\": \"%s\",\n" +
-                                             "  \"suite\": \"%s\",\n" +
-                                             "  \"country\": {\n" +
-                                             "    \"name\": \"%s\",\n" +
-                                             "    \"code\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"region\": {\n" +
-                                             "    \"name\": \"%s\",\n" +
-                                             "    \"code\": \"%s\"\n" +
-                                             "  }\n" +
-                                             "}",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"street\": \"%s\",\n" +
+                                                 "  \"city\": \"%s\",\n" +
+                                                 "  \"postCode\": \"%s\",\n" +
+                                                 "  \"suite\": \"%s\",\n" +
+                                                 "  \"country\": {\n" +
+                                                 "    \"name\": \"%s\",\n" +
+                                                 "    \"code\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"region\": {\n" +
+                                                 "    \"name\": \"%s\",\n" +
+                                                 "    \"code\": \"%s\"\n" +
+                                                 "  }\n" +
+                                                 "}",
                                              givenId,
                                              givenName,
                                              givenStreet,
@@ -7379,10 +7384,10 @@ class CallsApiTest extends ApiTest {
         String givenSipTrunkServiceAddressId = "123";
 
         setUpGetRequest(
-                SIP_TRUNK_SERVICE_ADDRESS.replace("{sipTrunkServiceAddressId}", givenSipTrunkServiceAddressId),
-                Map.of(),
-                givenResponse,
-                200
+            SIP_TRUNK_SERVICE_ADDRESS.replace("{sipTrunkServiceAddressId}", givenSipTrunkServiceAddressId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -7423,21 +7428,21 @@ class CallsApiTest extends ApiTest {
         String givenRegionCode = "HR-01";
 
         String givenResponse = String.format(" {\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"street\": \"%s\",\n" +
-                                             "  \"city\": \"%s\",\n" +
-                                             "  \"postCode\": \"%s\",\n" +
-                                             "  \"suite\": \"%s\",\n" +
-                                             "  \"country\": {\n" +
-                                             "    \"name\": \"%s\",\n" +
-                                             "    \"code\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"region\": {\n" +
-                                             "    \"name\": \"%s\",\n" +
-                                             "    \"code\": \"%s\"\n" +
-                                             "  }\n" +
-                                             "}",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"street\": \"%s\",\n" +
+                                                 "  \"city\": \"%s\",\n" +
+                                                 "  \"postCode\": \"%s\",\n" +
+                                                 "  \"suite\": \"%s\",\n" +
+                                                 "  \"country\": {\n" +
+                                                 "    \"name\": \"%s\",\n" +
+                                                 "    \"code\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"region\": {\n" +
+                                                 "    \"name\": \"%s\",\n" +
+                                                 "    \"code\": \"%s\"\n" +
+                                                 "  }\n" +
+                                                 "}",
                                              givenId,
                                              givenName,
                                              givenStreet,
@@ -7459,14 +7464,14 @@ class CallsApiTest extends ApiTest {
         String expectedCountryRegionCode = "HR-01";
 
         String expectedRequest = String.format("{\n" +
-                                               "  \"name\": \"%s\",\n" +
-                                               "  \"street\": \"%s\",\n" +
-                                               "  \"city\": \"%s\",\n" +
-                                               "  \"postCode\": \"%s\",\n" +
-                                               "  \"suite\": \"%s\",\n" +
-                                               "  \"countryCode\": \"%s\",\n" +
-                                               "  \"countryRegionCode\": \"%s\"\n" +
-                                               "}",
+                                                   "  \"name\": \"%s\",\n" +
+                                                   "  \"street\": \"%s\",\n" +
+                                                   "  \"city\": \"%s\",\n" +
+                                                   "  \"postCode\": \"%s\",\n" +
+                                                   "  \"suite\": \"%s\",\n" +
+                                                   "  \"countryCode\": \"%s\",\n" +
+                                                   "  \"countryRegionCode\": \"%s\"\n" +
+                                                   "}",
                                                expectedName,
                                                expectedStreet,
                                                expectedCity,
@@ -7479,23 +7484,23 @@ class CallsApiTest extends ApiTest {
         String givenSipTrunkServiceAddressId = "123";
 
         setUpPutRequest(
-                SIP_TRUNK_SERVICE_ADDRESS.replace("{sipTrunkServiceAddressId}", givenSipTrunkServiceAddressId),
-                Map.of(),
-                expectedRequest,
-                givenResponse,
-                200
+            SIP_TRUNK_SERVICE_ADDRESS.replace("{sipTrunkServiceAddressId}", givenSipTrunkServiceAddressId),
+            Map.of(),
+            expectedRequest,
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
 
         var callsPublicSipTrunkServiceAddressRequest = new CallsPublicSipTrunkServiceAddressRequest()
-                .name(expectedName)
-                .street(expectedStreet)
-                .city(expectedCity)
-                .postCode(expectedPostCode)
-                .suite(expectedSuite)
-                .countryCode(expectedCountryCode)
-                .countryRegionCode(expectedCountryRegionCode);
+            .name(expectedName)
+            .street(expectedStreet)
+            .city(expectedCity)
+            .postCode(expectedPostCode)
+            .suite(expectedSuite)
+            .countryCode(expectedCountryCode)
+            .countryRegionCode(expectedCountryRegionCode);
 
         Consumer<CallsPublicSipTrunkServiceAddress> assertions = (response) -> {
             then(response).isNotNull();
@@ -7534,21 +7539,21 @@ class CallsApiTest extends ApiTest {
         String givenRegionCode = "HR-01";
 
         String givenResponse = String.format("{\n" +
-                                             "  \"id\": \"%s\",\n" +
-                                             "  \"name\": \"%s\",\n" +
-                                             "  \"street\": \"%s\",\n" +
-                                             "  \"city\": \"%s\",\n" +
-                                             "  \"postCode\": \"%s\",\n" +
-                                             "  \"suite\": \"%s\",\n" +
-                                             "  \"country\": {\n" +
-                                             "    \"name\": \"%s\",\n" +
-                                             "    \"code\": \"%s\"\n" +
-                                             "  },\n" +
-                                             "  \"region\": {\n" +
-                                             "    \"name\": \"%s\",\n" +
-                                             "    \"code\": \"%s\"\n" +
-                                             "  }\n" +
-                                             "}",
+                                                 "  \"id\": \"%s\",\n" +
+                                                 "  \"name\": \"%s\",\n" +
+                                                 "  \"street\": \"%s\",\n" +
+                                                 "  \"city\": \"%s\",\n" +
+                                                 "  \"postCode\": \"%s\",\n" +
+                                                 "  \"suite\": \"%s\",\n" +
+                                                 "  \"country\": {\n" +
+                                                 "    \"name\": \"%s\",\n" +
+                                                 "    \"code\": \"%s\"\n" +
+                                                 "  },\n" +
+                                                 "  \"region\": {\n" +
+                                                 "    \"name\": \"%s\",\n" +
+                                                 "    \"code\": \"%s\"\n" +
+                                                 "  }\n" +
+                                                 "}",
                                              givenId,
                                              givenName,
                                              givenStreet,
@@ -7564,10 +7569,10 @@ class CallsApiTest extends ApiTest {
         String givenSipTrunkServiceAddressId = "123";
 
         setUpNoRequestBodyDeleteRequest(
-                SIP_TRUNK_SERVICE_ADDRESS.replace("{sipTrunkServiceAddressId}", givenSipTrunkServiceAddressId),
-                Map.of(),
-                givenResponse,
-                200
+            SIP_TRUNK_SERVICE_ADDRESS.replace("{sipTrunkServiceAddressId}", givenSipTrunkServiceAddressId),
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -7604,22 +7609,22 @@ class CallsApiTest extends ApiTest {
         String givenCode3 = "GLP";
 
         String givenResponse = String.format("{\n" +
-                                             " \"countries\":\n" +
-                                             "  [\n" +
-                                             "   {\n" +
-                                             "     \"name\": \"%s\",\n" +
-                                             "     \"code\": \"%s\"\n" +
-                                             "   },\n" +
-                                             "   {\n" +
-                                             "     \"name\": \"%s\",\n" +
-                                             "     \"code\": \"%s\"\n" +
-                                             "   },\n" +
-                                             "   {\n" +
-                                             "     \"name\": \"%s\",\n" +
-                                             "     \"code\": \"%s\"\n" +
-                                             "   }\n" +
-                                             "  ]\n" +
-                                             "}",
+                                                 " \"countries\":\n" +
+                                                 "  [\n" +
+                                                 "   {\n" +
+                                                 "     \"name\": \"%s\",\n" +
+                                                 "     \"code\": \"%s\"\n" +
+                                                 "   },\n" +
+                                                 "   {\n" +
+                                                 "     \"name\": \"%s\",\n" +
+                                                 "     \"code\": \"%s\"\n" +
+                                                 "   },\n" +
+                                                 "   {\n" +
+                                                 "     \"name\": \"%s\",\n" +
+                                                 "     \"code\": \"%s\"\n" +
+                                                 "   }\n" +
+                                                 "  ]\n" +
+                                                 "}",
                                              givenName1,
                                              givenCode1,
                                              givenName2,
@@ -7629,10 +7634,10 @@ class CallsApiTest extends ApiTest {
         );
 
         setUpGetRequest(
-                SIP_TRUNK_COUNTRIES,
-                Map.of(),
-                givenResponse,
-                200
+            SIP_TRUNK_COUNTRIES,
+            Map.of(),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -7669,24 +7674,24 @@ class CallsApiTest extends ApiTest {
         String givenCountryCode3 = "HRV";
 
         String givenResponse = String.format("{ \"regions\":\n" +
-                                             "  [\n" +
-                                             "    {\n" +
-                                             "      \"name\": \"%s\",\n" +
-                                             "      \"code\": \"%s\",\n" +
-                                             "      \"countryCode\": \"%s\"\n" +
-                                             "    },\n" +
-                                             "    {\n" +
-                                             "      \"name\": \"%s\",\n" +
-                                             "      \"code\": \"%s\",\n" +
-                                             "      \"countryCode\": \"%s\"\n" +
-                                             "    },\n" +
-                                             "    {\n" +
-                                             "      \"name\": \"%s\",\n" +
-                                             "      \"code\": \"%s\",\n" +
-                                             "      \"countryCode\": \"%s\"\n" +
-                                             "    }\n" +
-                                             "  ]\n" +
-                                             "}",
+                                                 "  [\n" +
+                                                 "    {\n" +
+                                                 "      \"name\": \"%s\",\n" +
+                                                 "      \"code\": \"%s\",\n" +
+                                                 "      \"countryCode\": \"%s\"\n" +
+                                                 "    },\n" +
+                                                 "    {\n" +
+                                                 "      \"name\": \"%s\",\n" +
+                                                 "      \"code\": \"%s\",\n" +
+                                                 "      \"countryCode\": \"%s\"\n" +
+                                                 "    },\n" +
+                                                 "    {\n" +
+                                                 "      \"name\": \"%s\",\n" +
+                                                 "      \"code\": \"%s\",\n" +
+                                                 "      \"countryCode\": \"%s\"\n" +
+                                                 "    }\n" +
+                                                 "  ]\n" +
+                                                 "}",
                                              givenName1,
                                              givenCode1,
                                              givenCountryCode1,
@@ -7701,12 +7706,12 @@ class CallsApiTest extends ApiTest {
         String givenCountryCode = "HRV";
 
         setUpGetRequest(
-                SIP_TRUNK_REGIONS,
-                Map.of(
-                        "countryCode", givenCountryCode
-                ),
-                givenResponse,
-                200
+            SIP_TRUNK_REGIONS,
+            Map.of(
+                "countryCode", givenCountryCode
+            ),
+            givenResponse,
+            200
         );
 
         CallsApi api = new CallsApi(getApiClient());
@@ -7732,4 +7737,5 @@ class CallsApiTest extends ApiTest {
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
+
 }

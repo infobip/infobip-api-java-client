@@ -42,13 +42,14 @@ public final class ApiCallExecutor {
         try {
             Call asyncCall = call.execute(apiCallback);
             Awaitility.await()
-                    .atMost(Duration.ofSeconds(ASYNC_CALL_TIMEOUT_SECONDS))
-                    .pollInterval(Duration.ofMillis(ASYNC_CALL_POLL_INTERVAL_MILLIS))
-                    .until(() -> asyncCall.isExecuted() && callResultReference.get() != null);
+                      .atMost(Duration.ofSeconds(ASYNC_CALL_TIMEOUT_SECONDS))
+                      .pollInterval(Duration.ofMillis(ASYNC_CALL_POLL_INTERVAL_MILLIS))
+                      .until(() -> asyncCall.isExecuted() && callResultReference.get() != null);
         } catch (ApiException exception) {
             return new CallResultWithStatusCode<>(exception.responseStatusCode(), null, exception);
         }
 
         return callResultReference.get();
     }
+
 }
