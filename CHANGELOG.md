@@ -5,16 +5,12 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
-## [ [4.3.2](https://github.com/infobip/infobip-api-java-client/releases/tag/4.3.2) ] - 2024-07-09
-
-### Added
-* Added mock tests to verify the correctness of request payloads and response handling.
-* Added `awaitility` and `wiremock` test dependencies.
-
 ## [ [4.3.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.3.1) ] - 2024-06-05
 
 ### Added
 * Most recent [Infobip SMS API](https://www.infobip.com/docs/api/channels/sms) feature set.
+* Added mock tests to verify the correctness of request payloads and response handling.
+* Added `awaitility` and `wiremock` test dependencies.
 
 ### Changed
 * **Fixes and changes**
