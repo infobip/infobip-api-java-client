@@ -26,5 +26,5 @@ jobs:
           mvn -B verify sonar:sonar \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=infobip \
-          -Dsonar.projectKey=infobip_infobip-api-java-client \
+          -Dsonar.projectKey=infobip-api-java-client \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
