@@ -1,6 +1,6 @@
 name: SonarCloud analysis
 
-on: [push]
+on: [push, workflow_dispatch]
 
 jobs:
   sonarcloud:
