@@ -15,7 +15,6 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.P1GITHUBSONARUSER_SNYK_TOKEN }}
         with:
-          command: monitor
           args: --sarif-file-output=snyk.sarif
             --severity-threshold=high
       - name: Upload Results to GitHub Code Scanning
