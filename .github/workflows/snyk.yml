@@ -13,7 +13,7 @@ jobs:
       - name: Snyk vulnerability check
         uses: snyk/actions/maven-3-jdk-11@master
         env:
-          SNYK_TOKEN: ${{ secrets.P1GITHUBSONARUSER_SNYK_TOKEN }}
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --sarif-file-output=snyk.sarif
             --severity-threshold=high
