@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * Represents SmsBinaryContent model.
  */
-public class SmsBinaryContent {
+public class SmsBinaryContent implements SmsMessageContent {
 
     private Integer dataCoding;
 
@@ -107,7 +107,7 @@ public class SmsBinaryContent {
      * Sets hex.
      * <p>
      * Field description:
-     * Hexadecimal string. This is the representation of your binary data. Two hex digits represent one byte. They should be separated by the space character (Example: &#x60;0f c2 4a bf 34 13 ba&#x60;).
+     * Hexadecimal string. This is the representation of your binary data. Two hex digits represent one byte. They should be separated by the space character.
      * <p>
      * The field is required.
      *
@@ -123,7 +123,7 @@ public class SmsBinaryContent {
      * Returns hex.
      * <p>
      * Field description:
-     * Hexadecimal string. This is the representation of your binary data. Two hex digits represent one byte. They should be separated by the space character (Example: &#x60;0f c2 4a bf 34 13 ba&#x60;).
+     * Hexadecimal string. This is the representation of your binary data. Two hex digits represent one byte. They should be separated by the space character.
      * <p>
      * The field is required.
      *
@@ -138,7 +138,7 @@ public class SmsBinaryContent {
      * Sets hex.
      * <p>
      * Field description:
-     * Hexadecimal string. This is the representation of your binary data. Two hex digits represent one byte. They should be separated by the space character (Example: &#x60;0f c2 4a bf 34 13 ba&#x60;).
+     * Hexadecimal string. This is the representation of your binary data. Two hex digits represent one byte. They should be separated by the space character.
      * <p>
      * The field is required.
      *

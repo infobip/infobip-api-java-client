@@ -4855,14 +4855,12 @@ class CallsApiTest extends ApiTest {
                                 .maxAttempts(givenMaxAttempts))
                         .schedulingOptions(new CallsSchedulingOptions()
                                 .startTime(givenStartTimeDateTime)
-                                .callingTimeWindow(new CallsTimeWindow()
-                                        .from(new CallsTimeWindowPoint()
+                                .callingTimeWindow(new DeliveryTimeWindow()
+                                        .from(new DeliveryTime()
                                                 .hour(givenHourFrom)
                                                 .minute(givenMinuteFrom))
-                                        .to(new CallsTimeWindowPoint()
-                                                .hour(givenHourTo)
-                                                .minute(givenMinuteTo))
-                                        .days(List.of(CallsTimeWindow.DaysEnum.MONDAY))))
+                                        .to(new DeliveryTime().hour(givenHourTo).minute(givenMinuteTo))
+                                        .days(List.of(DeliveryDay.MONDAY))))
                         .customData(Map.of("key2", givenKey2, "key1", givenKey1))));
         var call = api.createBulk(voiceBulkRequest);
         testSuccessfulCall(call::execute, assertions);

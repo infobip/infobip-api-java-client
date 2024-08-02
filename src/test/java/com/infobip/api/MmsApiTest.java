@@ -39,7 +39,7 @@ class MmsApiTest extends ApiTest {
         String givenTitle = "This is sample subject";
         String givenErrorMessage = "string";
         String givenCallbackData = "string";
-        MmsDeliveryDay givenDay = MmsDeliveryDay.MONDAY;
+        DeliveryDay givenDay = DeliveryDay.MONDAY;
         Integer givenFromHour = 0;
         Integer givenFromMinute = 0;
         Integer givenToHour = 0;
@@ -149,10 +149,10 @@ class MmsApiTest extends ApiTest {
                 .bulkId(givenBulkId)
                 .messages(List.of(new MmsAdvancedMessage()
                         .callbackData(givenCallbackData)
-                        .deliveryTimeWindow(new MmsDeliveryTimeWindow()
+                        .deliveryTimeWindow(new DeliveryTimeWindow()
                                 .days(List.of(givenDay))
-                                .from(new MmsDeliveryTime().hour(givenFromHour).minute(givenFromMinute))
-                                .to(new MmsDeliveryTime().hour(givenToHour).minute(givenToMinute)))
+                                .from(new DeliveryTime().hour(givenFromHour).minute(givenFromMinute))
+                                .to(new DeliveryTime().hour(givenToHour).minute(givenToMinute)))
                         .addDestinationsItem(
                                 new MmsDestination().messageId(givenMessageId).to(givenTo))
                         .from(givenFrom)
@@ -196,8 +196,8 @@ class MmsApiTest extends ApiTest {
         String givenMessageId = "string";
         String givenTo = "string";
         String givenFrom = "string";
-        String givenSentAt = "string";
-        String givenDoneAt = "string";
+        String givenSentAt = "2023-01-01T17:42:05.390+0100";
+        String givenDoneAt = "2023-01-01T17:42:10.390+0100";
         Integer givenMmsCount = 0;
         String givenMccMnc = "string";
         String givenCallbackData = "string";
@@ -275,6 +275,9 @@ class MmsApiTest extends ApiTest {
                 givenEntityId,
                 givenApplicationId);
 
+        OffsetDateTime expectedSentAt = OffsetDateTime.of(2023, 1, 1, 17, 42, 5, 390_000_000, ZoneOffset.ofHours(1));
+        OffsetDateTime expectedDoneAt = OffsetDateTime.of(2023, 1, 1, 17, 42, 10, 390_000_000, ZoneOffset.ofHours(1));
+
         setUpSuccessGetRequest(REPORTS, Map.of(), givenResponse);
 
         MmsApi api = new MmsApi(getApiClient());
@@ -287,8 +290,8 @@ class MmsApiTest extends ApiTest {
             then(result.getMessageId()).isEqualTo(givenMessageId);
             then(result.getTo()).isEqualTo(givenTo);
             then(result.getFrom()).isEqualTo(givenFrom);
-            then(result.getSentAt()).isEqualTo(givenSentAt);
-            then(result.getDoneAt()).isEqualTo(givenDoneAt);
+            then(result.getSentAt()).isEqualTo(expectedSentAt);
+            then(result.getDoneAt()).isEqualTo(expectedDoneAt);
             then(result.getMmsCount()).isEqualTo(givenMmsCount);
             then(result.getMccMnc()).isEqualTo(givenMccMnc);
             then(result.getCallbackData()).isEqualTo(givenCallbackData);

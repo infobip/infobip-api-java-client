@@ -19,7 +19,7 @@ public class SmsTurkeyIysOptions {
 
     private Integer brandCode;
 
-    private SmsIysRecipientType recipientType;
+    private RecipientType recipientType;
 
     /**
      * Sets brandCode.
@@ -69,7 +69,7 @@ public class SmsTurkeyIysOptions {
      * @param recipientType
      * @return This {@link SmsTurkeyIysOptions instance}.
      */
-    public SmsTurkeyIysOptions recipientType(SmsIysRecipientType recipientType) {
+    public SmsTurkeyIysOptions recipientType(RecipientType recipientType) {
         this.recipientType = recipientType;
         return this;
     }
@@ -82,7 +82,7 @@ public class SmsTurkeyIysOptions {
      * @return recipientType
      */
     @JsonProperty("recipientType")
-    public SmsIysRecipientType getRecipientType() {
+    public RecipientType getRecipientType() {
         return recipientType;
     }
 
@@ -94,7 +94,7 @@ public class SmsTurkeyIysOptions {
      * @param recipientType
      */
     @JsonProperty("recipientType")
-    public void setRecipientType(SmsIysRecipientType recipientType) {
+    public void setRecipientType(RecipientType recipientType) {
         this.recipientType = recipientType;
     }
 

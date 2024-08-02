@@ -13,15 +13,20 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Recipient Type must be &#x60;TACIR&#x60; or &#x60;BIREYSEL&#x60;.
+ * Days of the week which are included in the delivery time window. At least one day must be provided. Separate multiple days with a comma.
  */
-public enum SmsIysRecipientType {
-    BIREYSEL("BIREYSEL"),
-    TACIR("TACIR");
+public enum DeliveryDay {
+    MONDAY("MONDAY"),
+    TUESDAY("TUESDAY"),
+    WEDNESDAY("WEDNESDAY"),
+    THURSDAY("THURSDAY"),
+    FRIDAY("FRIDAY"),
+    SATURDAY("SATURDAY"),
+    SUNDAY("SUNDAY");
 
     private final String value;
 
-    SmsIysRecipientType(String value) {
+    DeliveryDay(String value) {
         this.value = value;
     }
 
@@ -36,8 +41,8 @@ public enum SmsIysRecipientType {
     }
 
     @JsonCreator
-    public static SmsIysRecipientType fromValue(String value) {
-        for (SmsIysRecipientType enumElement : SmsIysRecipientType.values()) {
+    public static DeliveryDay fromValue(String value) {
+        for (DeliveryDay enumElement : DeliveryDay.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

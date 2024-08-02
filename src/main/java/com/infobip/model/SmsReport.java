@@ -46,6 +46,8 @@ public class SmsReport {
 
     private String applicationId;
 
+    private String campaignReferenceId;
+
     /**
      * Sets bulkId.
      * <p>
@@ -579,6 +581,46 @@ public class SmsReport {
         this.applicationId = applicationId;
     }
 
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @param campaignReferenceId
+     * @return This {@link SmsReport instance}.
+     */
+    public SmsReport campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -601,7 +643,8 @@ public class SmsReport {
                 && Objects.equals(this.status, smsReport.status)
                 && Objects.equals(this.error, smsReport.error)
                 && Objects.equals(this.entityId, smsReport.entityId)
-                && Objects.equals(this.applicationId, smsReport.applicationId);
+                && Objects.equals(this.applicationId, smsReport.applicationId)
+                && Objects.equals(this.campaignReferenceId, smsReport.campaignReferenceId);
     }
 
     @Override
@@ -620,7 +663,8 @@ public class SmsReport {
                 status,
                 error,
                 entityId,
-                applicationId);
+                applicationId,
+                campaignReferenceId);
     }
 
     @Override
@@ -670,6 +714,9 @@ public class SmsReport {
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
                 .append(newLine)
                 .append("}")
                 .toString();

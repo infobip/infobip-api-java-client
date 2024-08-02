@@ -21,7 +21,7 @@ public class ViberMessageOptions {
 
     private ViberValidityPeriod validityPeriod;
 
-    private ViberDeliveryTimeWindow deliveryTimeWindow;
+    private DeliveryTimeWindow deliveryTimeWindow;
 
     private ViberDefaultSmsFailover smsFailover;
 
@@ -101,7 +101,7 @@ public class ViberMessageOptions {
      * @param deliveryTimeWindow
      * @return This {@link ViberMessageOptions instance}.
      */
-    public ViberMessageOptions deliveryTimeWindow(ViberDeliveryTimeWindow deliveryTimeWindow) {
+    public ViberMessageOptions deliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
         return this;
     }
@@ -112,7 +112,7 @@ public class ViberMessageOptions {
      * @return deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public ViberDeliveryTimeWindow getDeliveryTimeWindow() {
+    public DeliveryTimeWindow getDeliveryTimeWindow() {
         return deliveryTimeWindow;
     }
 
@@ -122,7 +122,7 @@ public class ViberMessageOptions {
      * @param deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public void setDeliveryTimeWindow(ViberDeliveryTimeWindow deliveryTimeWindow) {
+    public void setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
     }
 

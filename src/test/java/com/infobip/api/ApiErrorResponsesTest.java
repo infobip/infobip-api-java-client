@@ -5,13 +5,9 @@ import static org.assertj.core.api.BDDAssertions.then;
 import com.infobip.ApiCallback;
 import com.infobip.ApiException;
 import com.infobip.ApiExceptionDetails;
-import com.infobip.model.SmsAdvancedTextualRequest;
-import com.infobip.model.SmsDestination;
-import com.infobip.model.SmsResponse;
-import com.infobip.model.SmsTextualMessage;
+import com.infobip.model.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,7 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class ApiErrorResponsesTest extends ApiTest {
 
-    private static final String SMS_API_ENDPOINT = "/sms/2/text/advanced";
+    private static final String SMS_API_ENDPOINT = "/sms/3/messages";
 
     @ParameterizedTest(name = "[{index}] Status code = {0}")
     @MethodSource("errorResponsesSource")
@@ -33,17 +29,19 @@ class ApiErrorResponsesTest extends ApiTest {
         String expectedRequest = String.format(
                 "{\n" + "  \"messages\": [\n"
                         + "    {\n"
+                        + "      \"sender\": \"%s\",\n"
                         + "      \"destinations\": [\n"
                         + "        {\n"
                         + "          \"to\": \"%s\"\n"
                         + "        }\n"
                         + "      ],\n"
-                        + "      \"from\": \"%s\",\n"
-                        + "      \"text\": \"%s\"\n"
+                        + "      \"content\": {\n"
+                        + "        \"text\": \"%s\"\n"
+                        + "      }\n"
                         + "    }\n"
                         + "  ]\n"
                         + "}",
-                givenTo, givenFrom, givenText);
+                givenFrom, givenTo, givenText);
 
         setUpPostRequest(SMS_API_ENDPOINT, expectedRequest, givenResponse, givenHttpStatusCode);
 
@@ -51,10 +49,12 @@ class ApiErrorResponsesTest extends ApiTest {
 
         SmsDestination destination = new SmsDestination().to(givenTo);
 
-        SmsTextualMessage message =
-                new SmsTextualMessage().from(givenFrom).text(givenText).destinations(List.of(destination));
+        SmsMessage message = new SmsMessage()
+                .sender("InfoSMS")
+                .destinations(List.of(destination))
+                .content(new SmsTextMessageContent().text(givenText));
 
-        SmsAdvancedTextualRequest request = new SmsAdvancedTextualRequest().messages(List.of(message));
+        SmsRequestEnvelope request = new SmsRequestEnvelope().messages(List.of(message));
 
         Consumer<ApiException> assertions = (apiException) -> {
             then(apiException).isNotNull();
@@ -63,11 +63,11 @@ class ApiErrorResponsesTest extends ApiTest {
             then(apiException.details()).isEqualTo(expectedDetails);
         };
 
-        testFailedCall(() -> sendSmsApi.sendSmsMessage(request).execute(), assertions);
+        testFailedCall(() -> sendSmsApi.sendSmsMessages(request).execute(), assertions);
 
         testFailedAsyncCall(
                 (ApiCallback<SmsResponse> apiCallback) ->
-                        sendSmsApi.sendSmsMessage(request).executeAsync(apiCallback),
+                        sendSmsApi.sendSmsMessages(request).executeAsync(apiCallback),
                 assertions);
     }
 
@@ -76,49 +76,63 @@ class ApiErrorResponsesTest extends ApiTest {
     }
 
     private static Arguments badRequestResponse() {
-        String badRequestResponse = "{\n" + "  \"requestError\": {\n"
-                + "    \"serviceException\": {\n"
-                + "      \"messageId\": \"BAD_REQUEST\",\n"
-                + "      \"text\": \"Bad request\",\n"
-                + "      \"validationErrors\": {\n"
-                + "        \"messages[0].text\": [\n"
-                + "          \"invalid text\"\n"
-                + "        ]\n"
-                + "      }\n"
-                + "    }\n"
-                + "  }\n"
-                + "}";
+        String badRequestResponse = "    {\n" + "      \"errorCode\": \"E400\",\n"
+                + "      \"description\": \"Request cannot be processed.\",\n"
+                + "      \"action\": \"Check the syntax, violations and adjust the request.\",\n"
+                + "      \"violations\": [],\n"
+                + "      \"resources\": [\n"
+                + "        {\n"
+                + "          \"name\": \"API endpoint documentation\",\n"
+                + "          \"url\": \"https://www.infobip.com/docs/api/send-sms-messages\"\n"
+                + "        }\n"
+                + "      ]\n"
+                + "    }\n";
 
-        var violation = new ApiExceptionDetails.Violation();
-        violation.setViolation("invalid text");
-        violation.setProperty("messages[0].text");
+        var resource = new ApiExceptionDetails.Resource();
+        resource.setName("API endpoint documentation");
+        resource.setUrl("https://www.infobip.com/docs/api/send-sms-messages");
+
         List<ApiExceptionDetails.Violation> violations = new ArrayList<>();
-        violations.add(violation);
+        List<ApiExceptionDetails.Resource> resources = new ArrayList<>();
+        resources.add(resource);
 
         ApiExceptionDetails expectedDetails = new ApiExceptionDetails();
-        expectedDetails.setMessageId("BAD_REQUEST");
-        expectedDetails.setText("Bad request");
-        expectedDetails.setValidationErrors(Map.of("messages[0].text", List.of("invalid text")));
         expectedDetails.setErrorCode("E400");
-        expectedDetails.setDescription("Bad request");
+        expectedDetails.setDescription("Request cannot be processed.");
+        expectedDetails.setAction("Check the syntax, violations and adjust the request.");
         expectedDetails.setViolations(violations);
+        expectedDetails.setResources(resources);
 
         return Arguments.of(400, badRequestResponse, expectedDetails);
     }
 
     private static Arguments internalServerErrorResponse() {
-        String serverErrorResponse = "{\n" + "  \"requestError\": {\n"
-                + "    \"serviceException\": {\n"
-                + "      \"messageId\": \"GENERAL_ERROR\",\n"
-                + "      \"text\": \"Something went wrong. Please contact support.\"\n"
+        String serverErrorResponse = "{\n" + "  \"errorCode\": \"E500\",\n"
+                + "  \"description\": \"Something went wrong.\",\n"
+                + "  \"action\": \"Contact the support.\",\n"
+                + "  \"violations\": [],\n"
+                + "  \"resources\": [\n"
+                + "    {\n"
+                + "      \"name\": \"API endpoint documentation\",\n"
+                + "      \"url\": \"https://www.infobip.com/docs/api/send-sms-messages\"\n"
                 + "    }\n"
-                + "  }\n"
+                + "  ]\n"
                 + "}";
+
+        var resource = new ApiExceptionDetails.Resource();
+        resource.setName("API endpoint documentation");
+        resource.setUrl("https://www.infobip.com/docs/api/send-sms-messages");
+
+        List<ApiExceptionDetails.Violation> violations = new ArrayList<>();
+        List<ApiExceptionDetails.Resource> resources = new ArrayList<>();
+        resources.add(resource);
+
         ApiExceptionDetails expectedDetails = new ApiExceptionDetails();
-        expectedDetails.setMessageId("GENERAL_ERROR");
-        expectedDetails.setText("Something went wrong. Please contact support.");
         expectedDetails.setErrorCode("E500");
-        expectedDetails.setDescription("Something went wrong. Please contact support.");
+        expectedDetails.setDescription("Something went wrong.");
+        expectedDetails.setAction("Contact the support.");
+        expectedDetails.setViolations(violations);
+        expectedDetails.setResources(resources);
 
         return Arguments.of(500, serverErrorResponse, expectedDetails);
     }

@@ -19,56 +19,11 @@ import java.util.Objects;
  */
 public class SmsWebhookInboundReportResponse {
 
-    private List<SmsWebhookInboundReport> results = null;
-
     private Integer messageCount;
 
     private Integer pendingMessageCount;
 
-    /**
-     * Sets results.
-     *
-     * @param results
-     * @return This {@link SmsWebhookInboundReportResponse instance}.
-     */
-    public SmsWebhookInboundReportResponse results(List<SmsWebhookInboundReport> results) {
-        this.results = results;
-        return this;
-    }
-
-    /**
-     * Adds and item into results.
-     *
-     * @param resultsItem The item to be added to the list.
-     * @return This {@link SmsWebhookInboundReportResponse instance}.
-     */
-    public SmsWebhookInboundReportResponse addResultsItem(SmsWebhookInboundReport resultsItem) {
-        if (this.results == null) {
-            this.results = new ArrayList<>();
-        }
-        this.results.add(resultsItem);
-        return this;
-    }
-
-    /**
-     * Returns results.
-     *
-     * @return results
-     */
-    @JsonProperty("results")
-    public List<SmsWebhookInboundReport> getResults() {
-        return results;
-    }
-
-    /**
-     * Sets results.
-     *
-     * @param results
-     */
-    @JsonProperty("results")
-    public void setResults(List<SmsWebhookInboundReport> results) {
-        this.results = results;
-    }
+    private List<SmsWebhookInboundReport> results = null;
 
     /**
      * Sets messageCount.
@@ -150,6 +105,51 @@ public class SmsWebhookInboundReportResponse {
         this.pendingMessageCount = pendingMessageCount;
     }
 
+    /**
+     * Sets results.
+     *
+     * @param results
+     * @return This {@link SmsWebhookInboundReportResponse instance}.
+     */
+    public SmsWebhookInboundReportResponse results(List<SmsWebhookInboundReport> results) {
+        this.results = results;
+        return this;
+    }
+
+    /**
+     * Adds and item into results.
+     *
+     * @param resultsItem The item to be added to the list.
+     * @return This {@link SmsWebhookInboundReportResponse instance}.
+     */
+    public SmsWebhookInboundReportResponse addResultsItem(SmsWebhookInboundReport resultsItem) {
+        if (this.results == null) {
+            this.results = new ArrayList<>();
+        }
+        this.results.add(resultsItem);
+        return this;
+    }
+
+    /**
+     * Returns results.
+     *
+     * @return results
+     */
+    @JsonProperty("results")
+    public List<SmsWebhookInboundReport> getResults() {
+        return results;
+    }
+
+    /**
+     * Sets results.
+     *
+     * @param results
+     */
+    @JsonProperty("results")
+    public void setResults(List<SmsWebhookInboundReport> results) {
+        this.results = results;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -159,14 +159,14 @@ public class SmsWebhookInboundReportResponse {
             return false;
         }
         SmsWebhookInboundReportResponse smsWebhookInboundReportResponse = (SmsWebhookInboundReportResponse) o;
-        return Objects.equals(this.results, smsWebhookInboundReportResponse.results)
-                && Objects.equals(this.messageCount, smsWebhookInboundReportResponse.messageCount)
-                && Objects.equals(this.pendingMessageCount, smsWebhookInboundReportResponse.pendingMessageCount);
+        return Objects.equals(this.messageCount, smsWebhookInboundReportResponse.messageCount)
+                && Objects.equals(this.pendingMessageCount, smsWebhookInboundReportResponse.pendingMessageCount)
+                && Objects.equals(this.results, smsWebhookInboundReportResponse.results);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(results, messageCount, pendingMessageCount);
+        return Objects.hash(messageCount, pendingMessageCount, results);
     }
 
     @Override
@@ -175,14 +175,14 @@ public class SmsWebhookInboundReportResponse {
         return new StringBuilder()
                 .append("class SmsWebhookInboundReportResponse {")
                 .append(newLine)
-                .append("    results: ")
-                .append(toIndentedString(results))
-                .append(newLine)
                 .append("    messageCount: ")
                 .append(toIndentedString(messageCount))
                 .append(newLine)
                 .append("    pendingMessageCount: ")
                 .append(toIndentedString(pendingMessageCount))
+                .append(newLine)
+                .append("    results: ")
+                .append(toIndentedString(results))
                 .append(newLine)
                 .append("}")
                 .toString();

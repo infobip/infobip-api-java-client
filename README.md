@@ -48,7 +48,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
       <groupId>com.infobip</groupId>
       <artifactId>infobip-api-java-client</artifactId>
-      <version>4.3.1</version>
+      <version>4.4.0</version>
 </dependency>
 ```
 
@@ -85,17 +85,18 @@ See below, a simple example of sending a single SMS message to a single recipien
 
 ```java
     SmsApi smsApi = new SmsApi(apiClient);
-    SmsTextualMessage smsMessage = new SmsTextualMessage()
-        .from("InfoSMS")
-        .addDestinationsItem(new SmsDestination().to("41793026727"))
-        .text("Hello World from infobip-api-java-client!");
 
-    SmsAdvancedTextualRequest smsMessageRequest = new SmsAdvancedTextualRequest()
-        .messages(List.of(smsMessage));
+    SmsMessage message = new SmsMessage()
+    .sender("InfoSMS")
+    .destinations(new SmsDestination().to("41793026727"))
+    .content(new SmsTextMessageContent().text("Hello World from infobip-api-java-client!"));
+
+    SmsRequestEnvelope smsMessageRequest = new SmsRequestEnvelope()
+        .messages(List.of(message));
 ```
 ```java
     try {
-        SmsResponse smsResponse = smsApi.sendSmsMessage(smsMessageRequest).execute();
+        SmsResponse smsResponse = smsApi.sendSmsMessages(smsMessageRequest).execute();
     } catch (ApiException apiException) {
         // HANDLE THE EXCEPTION
     }
@@ -103,7 +104,7 @@ See below, a simple example of sending a single SMS message to a single recipien
 
 For asynchronous processing, you can use the following approach:
 ```java
-    smsApi.sendSmsMessage(smsMessageRequest)
+    smsApi.sendSmsMessages(smsMessageRequest)
         .executeAsync(new ApiCallback<>() {
             @Override
             public void onSuccess(SmsResponse result, int responseStatusCode, Map<String, List<String>> responseHeaders) {
@@ -158,7 +159,7 @@ If you are for any reason unable to receive real-time delivery reports on your e
 Each request will return a batch of delivery reports - only once. See [documentation](https://www.infobip.com/docs/api/channels/sms/sms-messaging/logs-and-status-reports/get-outbound-sms-message-delivery-reports) for more details.
 
 ```java
-    SmsDeliveryResult deliveryReports = smsApi.getOutboundSmsMessageDeliveryReports()
+    SmsDeliveryReports deliveryReports = smsApi.getOutboundSmsMessageDeliveryReports()
             .bulkId(bulkId)
             .execute();
     for (SmsReport report : deliveryReports.getResults()) {
@@ -214,7 +215,7 @@ This code is auto generated, and we are unable to merge any pull request from he
 For anything that requires our imminent attention, contact us @ [support@infobip.com](mailto:support@infobip.com).
 
 [apidocs]: https://www.infobip.com/docs/api
-[freetrial]: https://www.infobip.com/docs/essentials/free-trial
+[freetrial]: https://www.infobip.com/docs/essentials/getting-started/free-trial
 [signup]: https://www.infobip.com/signup
 [semver]: https://semver.org
 [license]: LICENSE

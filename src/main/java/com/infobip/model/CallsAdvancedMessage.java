@@ -28,7 +28,7 @@ public class CallsAdvancedMessage {
 
     private String callbackData;
 
-    private CallsDeliveryTimeWindow deliveryTimeWindow;
+    private DeliveryTimeWindow deliveryTimeWindow;
 
     private List<CallsDestination> destinations = new ArrayList<>();
 
@@ -211,7 +211,7 @@ public class CallsAdvancedMessage {
      * Sets callbackData.
      * <p>
      * Field description:
-     * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 200 characters. Example:  &#x60;Text containing some additional data needed in Delivery Report&#x60;.
+     * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 700 characters. Example:  &#x60;Text containing some additional data needed in Delivery Report&#x60;.
      *
      * @param callbackData
      * @return This {@link CallsAdvancedMessage instance}.
@@ -225,7 +225,7 @@ public class CallsAdvancedMessage {
      * Returns callbackData.
      * <p>
      * Field description:
-     * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 200 characters. Example:  &#x60;Text containing some additional data needed in Delivery Report&#x60;.
+     * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 700 characters. Example:  &#x60;Text containing some additional data needed in Delivery Report&#x60;.
      *
      * @return callbackData
      */
@@ -238,7 +238,7 @@ public class CallsAdvancedMessage {
      * Sets callbackData.
      * <p>
      * Field description:
-     * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 200 characters. Example:  &#x60;Text containing some additional data needed in Delivery Report&#x60;.
+     * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 700 characters. Example:  &#x60;Text containing some additional data needed in Delivery Report&#x60;.
      *
      * @param callbackData
      */
@@ -253,7 +253,7 @@ public class CallsAdvancedMessage {
      * @param deliveryTimeWindow
      * @return This {@link CallsAdvancedMessage instance}.
      */
-    public CallsAdvancedMessage deliveryTimeWindow(CallsDeliveryTimeWindow deliveryTimeWindow) {
+    public CallsAdvancedMessage deliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
         return this;
     }
@@ -264,7 +264,7 @@ public class CallsAdvancedMessage {
      * @return deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public CallsDeliveryTimeWindow getDeliveryTimeWindow() {
+    public DeliveryTimeWindow getDeliveryTimeWindow() {
         return deliveryTimeWindow;
     }
 
@@ -274,7 +274,7 @@ public class CallsAdvancedMessage {
      * @param deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public void setDeliveryTimeWindow(CallsDeliveryTimeWindow deliveryTimeWindow) {
+    public void setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
     }
 

@@ -13,20 +13,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Days of the week which are included in the delivery time window. At least one day must be provided. Separate multiple days with a comma.
+ * Error group name that describes which category the error code belongs to.
  */
-public enum SmsDeliveryDay {
-    MONDAY("MONDAY"),
-    TUESDAY("TUESDAY"),
-    WEDNESDAY("WEDNESDAY"),
-    THURSDAY("THURSDAY"),
-    FRIDAY("FRIDAY"),
-    SATURDAY("SATURDAY"),
-    SUNDAY("SUNDAY");
+public enum SmsMessageErrorGroup {
+    OK("OK"),
+    HANDSET_ERRORS("HANDSET_ERRORS"),
+    USER_ERRORS("USER_ERRORS"),
+    OPERATOR_ERRORS("OPERATOR_ERRORS");
 
     private final String value;
 
-    SmsDeliveryDay(String value) {
+    SmsMessageErrorGroup(String value) {
         this.value = value;
     }
 
@@ -41,8 +38,8 @@ public enum SmsDeliveryDay {
     }
 
     @JsonCreator
-    public static SmsDeliveryDay fromValue(String value) {
-        for (SmsDeliveryDay enumElement : SmsDeliveryDay.values()) {
+    public static SmsMessageErrorGroup fromValue(String value) {
+        for (SmsMessageErrorGroup enumElement : SmsMessageErrorGroup.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

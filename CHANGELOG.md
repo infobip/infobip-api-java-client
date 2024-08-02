@@ -5,11 +5,32 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
-## [Unreleased]
+## [ [4.4.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.4.0) ] - 2024-08-02
+
+⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
+All changes, including breaking changes, are addressed and explained in the list bellow.
+If you find out that something was not addressed properly, please submit an issue.
 
 ### Added
+* Most recent [Infobip SMS API](https://www.infobip.com/docs/api/channels/sms) feature set.
+  * Introduced `/sms/3/messages (V3)`  replacing the `/sms/2/text/advanced (V2)` and `/sms/2/binary/advanced (V2)` endpoints.
+  * Introduced `/sms/3/reports (V3)` replacing `/sms/1/reports (V1)` endpoint.
+  * Introduced `/sms/3/logs (V3)` replacing `/sms/1/logs (V1)` endpoint.
 * Added mock tests to verify the correctness of request payloads and response handling.
 * Added `awaitility` and `wiremock` test dependencies.
+
+### Changed
+* **Fixes and changes**
+  * Changed 'sentAt', 'doneAt' field type in [MmsReport](src/main/java/com/infobip/model/MmsReport.java) from String to OffsetDateTime since it didn't correspond to the state of the endpoint.
+
+* **Removed classes and unified structures**
+  * Removed delivery time window configuration classes (`SmsDeliveryTimeWindow`, `MmsDeliveryTimeWindow`, `ViberDeliveryTimeWindow`, `CallRoutingAllowedTimeWindow`, `CallsDeliveryTimeWindow`, `SmsDeliveryTimeWindow`, `CallsTimeWindow`) in favor of a unified class: [DeliveryTimeWindow](src/main/java/com/infobip/model/DeliveryTimeWindow.java)
+  * Removed delivery time configuration classes (`SmsDeliveryTimeFrom`, `SmsDeliveryTimeTo`, `MmsDeliveryTime`, `ViberDeliveryTime`, `CallsTimeWindowPoint`, `WebRtcTimeOfDay`, `CallRoutingAllowedTimeFrom`, `CallRoutingAllowedTimeTo`, `WebRtcTimeOfDay`) in favor of a unified class: [DeliveryTime](src/main/java/com/infobip/model/DeliveryTime.java)
+  * Removed delivery day enumeration classes (`SmsDeliveryDay`, `MmsDeliveryDay`, `CallsDeliveryDay`, `CallRoutingAllowedDay`) in favor of a unified class: [DeliveryDay](src/main/java/com/infobip/model/DeliveryDay.java)
+  * Removed recipient type enumeration class (`SmsIysRecipientType`) in favor of a unified class: [RecipientType](src/main/java/com/infobip/model/RecipientType.java)
+
+* **Documentation**
+  * Fixed Javadoc.
 
 ## [ [4.3.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.3.1) ] - 2024-06-05
 

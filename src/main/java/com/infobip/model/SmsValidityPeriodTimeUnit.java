@@ -13,20 +13,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Represents CallsDeliveryDay enumeration.
+ * Message validity period time unit.
  */
-public enum CallsDeliveryDay {
-    MONDAY("MONDAY"),
-    TUESDAY("TUESDAY"),
-    WEDNESDAY("WEDNESDAY"),
-    THURSDAY("THURSDAY"),
-    FRIDAY("FRIDAY"),
-    SATURDAY("SATURDAY"),
-    SUNDAY("SUNDAY");
+public enum SmsValidityPeriodTimeUnit {
+    SECONDS("SECONDS"),
+    MINUTES("MINUTES"),
+    HOURS("HOURS");
 
     private final String value;
 
-    CallsDeliveryDay(String value) {
+    SmsValidityPeriodTimeUnit(String value) {
         this.value = value;
     }
 
@@ -41,8 +37,8 @@ public enum CallsDeliveryDay {
     }
 
     @JsonCreator
-    public static CallsDeliveryDay fromValue(String value) {
-        for (CallsDeliveryDay enumElement : CallsDeliveryDay.values()) {
+    public static SmsValidityPeriodTimeUnit fromValue(String value) {
+        for (SmsValidityPeriodTimeUnit enumElement : SmsValidityPeriodTimeUnit.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

@@ -15,22 +15,22 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents SmsLogsResponse model.
+ * Represents SmsDeliveryReports model.
  */
-public class SmsLogsResponse {
+public class SmsDeliveryReports {
 
-    private List<SmsLog> results = null;
+    private List<SmsDeliveryReport> results = null;
 
     /**
      * Sets results.
      * <p>
      * Field description:
-     * An array of message log results, one object per each message log entry.
+     * Collection of reports, one per every message.
      *
      * @param results
-     * @return This {@link SmsLogsResponse instance}.
+     * @return This {@link SmsDeliveryReports instance}.
      */
-    public SmsLogsResponse results(List<SmsLog> results) {
+    public SmsDeliveryReports results(List<SmsDeliveryReport> results) {
         this.results = results;
         return this;
     }
@@ -39,12 +39,12 @@ public class SmsLogsResponse {
      * Adds and item into results.
      * <p>
      * Field description:
-     * An array of message log results, one object per each message log entry.
+     * Collection of reports, one per every message.
      *
      * @param resultsItem The item to be added to the list.
-     * @return This {@link SmsLogsResponse instance}.
+     * @return This {@link SmsDeliveryReports instance}.
      */
-    public SmsLogsResponse addResultsItem(SmsLog resultsItem) {
+    public SmsDeliveryReports addResultsItem(SmsDeliveryReport resultsItem) {
         if (this.results == null) {
             this.results = new ArrayList<>();
         }
@@ -56,12 +56,12 @@ public class SmsLogsResponse {
      * Returns results.
      * <p>
      * Field description:
-     * An array of message log results, one object per each message log entry.
+     * Collection of reports, one per every message.
      *
      * @return results
      */
     @JsonProperty("results")
-    public List<SmsLog> getResults() {
+    public List<SmsDeliveryReport> getResults() {
         return results;
     }
 
@@ -69,12 +69,12 @@ public class SmsLogsResponse {
      * Sets results.
      * <p>
      * Field description:
-     * An array of message log results, one object per each message log entry.
+     * Collection of reports, one per every message.
      *
      * @param results
      */
     @JsonProperty("results")
-    public void setResults(List<SmsLog> results) {
+    public void setResults(List<SmsDeliveryReport> results) {
         this.results = results;
     }
 
@@ -86,8 +86,8 @@ public class SmsLogsResponse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SmsLogsResponse smsLogsResponse = (SmsLogsResponse) o;
-        return Objects.equals(this.results, smsLogsResponse.results);
+        SmsDeliveryReports smsDeliveryReports = (SmsDeliveryReports) o;
+        return Objects.equals(this.results, smsDeliveryReports.results);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class SmsLogsResponse {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class SmsLogsResponse {")
+                .append("class SmsDeliveryReports {")
                 .append(newLine)
                 .append("    results: ")
                 .append(toIndentedString(results))
