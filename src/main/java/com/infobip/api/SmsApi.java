@@ -10,7 +10,6 @@
 package com.infobip.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.google.common.annotations.Beta;
 import com.infobip.ApiCallback;
 import com.infobip.ApiClient;
 import com.infobip.ApiException;
@@ -298,7 +297,6 @@ public class SmsApi {
      * @return GetOutboundSmsMessageDeliveryReportsRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about the SMS channel and its use cases</a>
      */
-    @Beta
     public GetOutboundSmsMessageDeliveryReportsRequest getOutboundSmsMessageDeliveryReports() {
         return new GetOutboundSmsMessageDeliveryReportsRequest();
     }
@@ -591,7 +589,6 @@ public class SmsApi {
      * @return GetOutboundSmsMessageLogsRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about the SMS channel and its use cases</a>
      */
-    @Beta
     public GetOutboundSmsMessageLogsRequest getOutboundSmsMessageLogs() {
         return new GetOutboundSmsMessageLogsRequest();
     }
@@ -893,7 +890,6 @@ public class SmsApi {
      * @return SendSmsMessagesRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about the SMS channel and its use cases</a>
      */
-    @Beta
     public SendSmsMessagesRequest sendSmsMessages(SmsRequestEnvelope smsRequestEnvelope) {
         return new SendSmsMessagesRequest(smsRequestEnvelope);
     }
