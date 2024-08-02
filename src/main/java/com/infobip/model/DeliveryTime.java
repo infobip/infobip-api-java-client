@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * The exact time of day to enable call forwarding. Time is expressed in the &#x60;UTC&#x60; time zone. If not set, defaults to &#x60;00:00:00&#x60;.
+ * The exact time of the day. The time is expressed in the UTC time zone.
  */
-public class CallRoutingAllowedTimeFrom {
+public class DeliveryTime {
 
     private Integer hour;
 
@@ -25,14 +25,14 @@ public class CallRoutingAllowedTimeFrom {
      * Sets hour.
      * <p>
      * Field description:
-     * Hour when the time window opens.
+     * Hour when the time window opens when used in the &#x60;from&#x60; property or closes when used in the &#x60;to&#x60; property.
      * <p>
      * The field is required.
      *
      * @param hour
-     * @return This {@link CallRoutingAllowedTimeFrom instance}.
+     * @return This {@link DeliveryTime instance}.
      */
-    public CallRoutingAllowedTimeFrom hour(Integer hour) {
+    public DeliveryTime hour(Integer hour) {
         this.hour = hour;
         return this;
     }
@@ -41,7 +41,7 @@ public class CallRoutingAllowedTimeFrom {
      * Returns hour.
      * <p>
      * Field description:
-     * Hour when the time window opens.
+     * Hour when the time window opens when used in the &#x60;from&#x60; property or closes when used in the &#x60;to&#x60; property.
      * <p>
      * The field is required.
      *
@@ -56,7 +56,7 @@ public class CallRoutingAllowedTimeFrom {
      * Sets hour.
      * <p>
      * Field description:
-     * Hour when the time window opens.
+     * Hour when the time window opens when used in the &#x60;from&#x60; property or closes when used in the &#x60;to&#x60; property.
      * <p>
      * The field is required.
      *
@@ -71,14 +71,14 @@ public class CallRoutingAllowedTimeFrom {
      * Sets minute.
      * <p>
      * Field description:
-     * Minute when the time window opens.
+     * Minute when the time window opens when used in the &#x60;from&#x60; property or closes when used in the &#x60;to&#x60; property.
      * <p>
      * The field is required.
      *
      * @param minute
-     * @return This {@link CallRoutingAllowedTimeFrom instance}.
+     * @return This {@link DeliveryTime instance}.
      */
-    public CallRoutingAllowedTimeFrom minute(Integer minute) {
+    public DeliveryTime minute(Integer minute) {
         this.minute = minute;
         return this;
     }
@@ -87,7 +87,7 @@ public class CallRoutingAllowedTimeFrom {
      * Returns minute.
      * <p>
      * Field description:
-     * Minute when the time window opens.
+     * Minute when the time window opens when used in the &#x60;from&#x60; property or closes when used in the &#x60;to&#x60; property.
      * <p>
      * The field is required.
      *
@@ -102,7 +102,7 @@ public class CallRoutingAllowedTimeFrom {
      * Sets minute.
      * <p>
      * Field description:
-     * Minute when the time window opens.
+     * Minute when the time window opens when used in the &#x60;from&#x60; property or closes when used in the &#x60;to&#x60; property.
      * <p>
      * The field is required.
      *
@@ -121,9 +121,8 @@ public class CallRoutingAllowedTimeFrom {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallRoutingAllowedTimeFrom callRoutingAllowedTimeFrom = (CallRoutingAllowedTimeFrom) o;
-        return Objects.equals(this.hour, callRoutingAllowedTimeFrom.hour)
-                && Objects.equals(this.minute, callRoutingAllowedTimeFrom.minute);
+        DeliveryTime deliveryTime = (DeliveryTime) o;
+        return Objects.equals(this.hour, deliveryTime.hour) && Objects.equals(this.minute, deliveryTime.minute);
     }
 
     @Override
@@ -135,7 +134,7 @@ public class CallRoutingAllowedTimeFrom {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallRoutingAllowedTimeFrom {")
+                .append("class DeliveryTime {")
                 .append(newLine)
                 .append("    hour: ")
                 .append(toIndentedString(hour))

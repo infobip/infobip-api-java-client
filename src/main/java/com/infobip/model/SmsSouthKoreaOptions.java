@@ -17,9 +17,49 @@ import java.util.Objects;
  */
 public class SmsSouthKoreaOptions {
 
+    private String title;
+
     private Integer resellerCode;
 
-    private String title;
+    /**
+     * Sets title.
+     * <p>
+     * Field description:
+     * Title of the message.
+     *
+     * @param title
+     * @return This {@link SmsSouthKoreaOptions instance}.
+     */
+    public SmsSouthKoreaOptions title(String title) {
+        this.title = title;
+        return this;
+    }
+
+    /**
+     * Returns title.
+     * <p>
+     * Field description:
+     * Title of the message.
+     *
+     * @return title
+     */
+    @JsonProperty("title")
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Sets title.
+     * <p>
+     * Field description:
+     * Title of the message.
+     *
+     * @param title
+     */
+    @JsonProperty("title")
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     /**
      * Sets resellerCode.
@@ -61,46 +101,6 @@ public class SmsSouthKoreaOptions {
         this.resellerCode = resellerCode;
     }
 
-    /**
-     * Sets title.
-     * <p>
-     * Field description:
-     * Set the title or subject of a message. South Korea only.
-     *
-     * @param title
-     * @return This {@link SmsSouthKoreaOptions instance}.
-     */
-    public SmsSouthKoreaOptions title(String title) {
-        this.title = title;
-        return this;
-    }
-
-    /**
-     * Returns title.
-     * <p>
-     * Field description:
-     * Set the title or subject of a message. South Korea only.
-     *
-     * @return title
-     */
-    @JsonProperty("title")
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Sets title.
-     * <p>
-     * Field description:
-     * Set the title or subject of a message. South Korea only.
-     *
-     * @param title
-     */
-    @JsonProperty("title")
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -110,13 +110,13 @@ public class SmsSouthKoreaOptions {
             return false;
         }
         SmsSouthKoreaOptions smsSouthKoreaOptions = (SmsSouthKoreaOptions) o;
-        return Objects.equals(this.resellerCode, smsSouthKoreaOptions.resellerCode)
-                && Objects.equals(this.title, smsSouthKoreaOptions.title);
+        return Objects.equals(this.title, smsSouthKoreaOptions.title)
+                && Objects.equals(this.resellerCode, smsSouthKoreaOptions.resellerCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(resellerCode, title);
+        return Objects.hash(title, resellerCode);
     }
 
     @Override
@@ -125,11 +125,11 @@ public class SmsSouthKoreaOptions {
         return new StringBuilder()
                 .append("class SmsSouthKoreaOptions {")
                 .append(newLine)
-                .append("    resellerCode: ")
-                .append(toIndentedString(resellerCode))
-                .append(newLine)
                 .append("    title: ")
                 .append(toIndentedString(title))
+                .append(newLine)
+                .append("    resellerCode: ")
+                .append(toIndentedString(resellerCode))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -13,20 +13,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Allowed day.
+ * Language code for the correct character set. Possible values: &#x60;TR&#x60; for Turkish, &#x60;ES&#x60; for Spanish, &#x60;PT&#x60; for Portuguese, or &#x60;AUTODETECT&#x60; to let platform select the character set based on message content.
  */
-public enum CallRoutingAllowedDay {
-    MONDAY("MONDAY"),
-    TUESDAY("TUESDAY"),
-    WEDNESDAY("WEDNESDAY"),
-    THURSDAY("THURSDAY"),
-    FRIDAY("FRIDAY"),
-    SATURDAY("SATURDAY"),
-    SUNDAY("SUNDAY");
+public enum SmsLanguageCode {
+    NONE("NONE"),
+    TR("TR"),
+    ES("ES"),
+    PT("PT"),
+    AUTODETECT("AUTODETECT");
 
     private final String value;
 
-    CallRoutingAllowedDay(String value) {
+    SmsLanguageCode(String value) {
         this.value = value;
     }
 
@@ -41,8 +39,8 @@ public enum CallRoutingAllowedDay {
     }
 
     @JsonCreator
-    public static CallRoutingAllowedDay fromValue(String value) {
-        for (CallRoutingAllowedDay enumElement : CallRoutingAllowedDay.values()) {
+    public static SmsLanguageCode fromValue(String value) {
+        for (SmsLanguageCode enumElement : SmsLanguageCode.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }
