@@ -945,7 +945,7 @@ class SmsApiTest extends ApiTest {
             then(error2.getPermanent()).isEqualTo(givenErrorPermanent);
         };
 
-        var call = api.getOutboundSmsMessageDeliveryReportsV3();
+        var call = api.getOutboundSmsMessageDeliveryReports();
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -1138,7 +1138,7 @@ class SmsApiTest extends ApiTest {
         };
 
         var call = sendSmsApi
-                .getOutboundSmsMessageLogsV3()
+                .getOutboundSmsMessageLogs()
                 .bulkId(List.of(givenBulkId))
                 .sentSince(givenSentSinceString);
         testSuccessfulCall(call::execute, assertions);
@@ -1554,7 +1554,7 @@ class SmsApiTest extends ApiTest {
         };
 
         var call = sendSmsApi
-                .getOutboundSmsMessageDeliveryReportsV3()
+                .getOutboundSmsMessageDeliveryReports()
                 .bulkId(givenBulkId)
                 .messageId(messageIdParameter)
                 .limit(Integer.valueOf(limitParameter));

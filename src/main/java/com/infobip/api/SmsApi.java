@@ -147,7 +147,7 @@ public class SmsApi {
         return new GetInboundSmsMessagesRequest();
     }
 
-    private RequestDefinition getOutboundSmsMessageDeliveryReportsV3Definition(
+    private RequestDefinition getOutboundSmsMessageDeliveryReportsDefinition(
             String bulkId,
             String messageId,
             Integer limit,
@@ -180,9 +180,9 @@ public class SmsApi {
     }
 
     /**
-     * getOutboundSmsMessageDeliveryReportsV3 request builder class.
+     * getOutboundSmsMessageDeliveryReports request builder class.
      */
-    public class GetOutboundSmsMessageDeliveryReportsV3Request {
+    public class GetOutboundSmsMessageDeliveryReportsRequest {
         private String bulkId;
         private String messageId;
         private Integer limit;
@@ -190,15 +190,15 @@ public class SmsApi {
         private String applicationId;
         private String campaignReferenceId;
 
-        private GetOutboundSmsMessageDeliveryReportsV3Request() {}
+        private GetOutboundSmsMessageDeliveryReportsRequest() {}
 
         /**
          * Sets bulkId.
          *
          * @param bulkId The ID that uniquely identifies the request. Bulk ID will be received only when you send a message to more than one destination address. (optional)
-         * @return GetOutboundSmsMessageDeliveryReportsV3Request
+         * @return GetOutboundSmsMessageDeliveryReportsRequest
          */
-        public GetOutboundSmsMessageDeliveryReportsV3Request bulkId(String bulkId) {
+        public GetOutboundSmsMessageDeliveryReportsRequest bulkId(String bulkId) {
             this.bulkId = bulkId;
             return this;
         }
@@ -207,9 +207,9 @@ public class SmsApi {
          * Sets messageId.
          *
          * @param messageId The ID that uniquely identifies the message sent. (optional)
-         * @return GetOutboundSmsMessageDeliveryReportsV3Request
+         * @return GetOutboundSmsMessageDeliveryReportsRequest
          */
-        public GetOutboundSmsMessageDeliveryReportsV3Request messageId(String messageId) {
+        public GetOutboundSmsMessageDeliveryReportsRequest messageId(String messageId) {
             this.messageId = messageId;
             return this;
         }
@@ -218,9 +218,9 @@ public class SmsApi {
          * Sets limit.
          *
          * @param limit Maximum number of delivery reports to be returned. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access reports for the last 48h (optional, default to 50)
-         * @return GetOutboundSmsMessageDeliveryReportsV3Request
+         * @return GetOutboundSmsMessageDeliveryReportsRequest
          */
-        public GetOutboundSmsMessageDeliveryReportsV3Request limit(Integer limit) {
+        public GetOutboundSmsMessageDeliveryReportsRequest limit(Integer limit) {
             this.limit = limit;
             return this;
         }
@@ -229,9 +229,9 @@ public class SmsApi {
          * Sets entityId.
          *
          * @param entityId Entity id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
-         * @return GetOutboundSmsMessageDeliveryReportsV3Request
+         * @return GetOutboundSmsMessageDeliveryReportsRequest
          */
-        public GetOutboundSmsMessageDeliveryReportsV3Request entityId(String entityId) {
+        public GetOutboundSmsMessageDeliveryReportsRequest entityId(String entityId) {
             this.entityId = entityId;
             return this;
         }
@@ -240,9 +240,9 @@ public class SmsApi {
          * Sets applicationId.
          *
          * @param applicationId Application id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
-         * @return GetOutboundSmsMessageDeliveryReportsV3Request
+         * @return GetOutboundSmsMessageDeliveryReportsRequest
          */
-        public GetOutboundSmsMessageDeliveryReportsV3Request applicationId(String applicationId) {
+        public GetOutboundSmsMessageDeliveryReportsRequest applicationId(String applicationId) {
             this.applicationId = applicationId;
             return this;
         }
@@ -251,40 +251,40 @@ public class SmsApi {
          * Sets campaignReferenceId.
          *
          * @param campaignReferenceId ID of a campaign that was sent in the message. (optional)
-         * @return GetOutboundSmsMessageDeliveryReportsV3Request
+         * @return GetOutboundSmsMessageDeliveryReportsRequest
          */
-        public GetOutboundSmsMessageDeliveryReportsV3Request campaignReferenceId(String campaignReferenceId) {
+        public GetOutboundSmsMessageDeliveryReportsRequest campaignReferenceId(String campaignReferenceId) {
             this.campaignReferenceId = campaignReferenceId;
             return this;
         }
 
         /**
-         * Executes the getOutboundSmsMessageDeliveryReportsV3 request.
+         * Executes the getOutboundSmsMessageDeliveryReports request.
          *
          * @return SmsDeliveryReports The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public SmsDeliveryReports execute() throws ApiException {
-            RequestDefinition getOutboundSmsMessageDeliveryReportsV3Definition =
-                    getOutboundSmsMessageDeliveryReportsV3Definition(
+            RequestDefinition getOutboundSmsMessageDeliveryReportsDefinition =
+                    getOutboundSmsMessageDeliveryReportsDefinition(
                             bulkId, messageId, limit, entityId, applicationId, campaignReferenceId);
             return apiClient.execute(
-                    getOutboundSmsMessageDeliveryReportsV3Definition,
+                    getOutboundSmsMessageDeliveryReportsDefinition,
                     new TypeReference<SmsDeliveryReports>() {}.getType());
         }
 
         /**
-         * Executes the getOutboundSmsMessageDeliveryReportsV3 request asynchronously.
+         * Executes the getOutboundSmsMessageDeliveryReports request asynchronously.
          *
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<SmsDeliveryReports> callback) {
-            RequestDefinition getOutboundSmsMessageDeliveryReportsV3Definition =
-                    getOutboundSmsMessageDeliveryReportsV3Definition(
+            RequestDefinition getOutboundSmsMessageDeliveryReportsDefinition =
+                    getOutboundSmsMessageDeliveryReportsDefinition(
                             bulkId, messageId, limit, entityId, applicationId, campaignReferenceId);
             return apiClient.executeAsync(
-                    getOutboundSmsMessageDeliveryReportsV3Definition,
+                    getOutboundSmsMessageDeliveryReportsDefinition,
                     new TypeReference<SmsDeliveryReports>() {}.getType(),
                     callback);
         }
@@ -295,15 +295,15 @@ public class SmsApi {
      * <p>
      * If you are unable to receive real-time message delivery reports towards your endpoint for various reasons, we offer you an API method to fetch batches of message reports to confirm whether specific messages have been delivered. Each request towards this endpoint will return batches of the latest message reports. Please note they will be returned only once.
      *
-     * @return GetOutboundSmsMessageDeliveryReportsV3Request
+     * @return GetOutboundSmsMessageDeliveryReportsRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about the SMS channel and its use cases</a>
      */
     @Beta
-    public GetOutboundSmsMessageDeliveryReportsV3Request getOutboundSmsMessageDeliveryReportsV3() {
-        return new GetOutboundSmsMessageDeliveryReportsV3Request();
+    public GetOutboundSmsMessageDeliveryReportsRequest getOutboundSmsMessageDeliveryReports() {
+        return new GetOutboundSmsMessageDeliveryReportsRequest();
     }
 
-    private RequestDefinition getOutboundSmsMessageLogsV3Definition(
+    private RequestDefinition getOutboundSmsMessageLogsDefinition(
             String mcc,
             String mnc,
             String sender,
@@ -370,9 +370,9 @@ public class SmsApi {
     }
 
     /**
-     * getOutboundSmsMessageLogsV3 request builder class.
+     * getOutboundSmsMessageLogs request builder class.
      */
-    public class GetOutboundSmsMessageLogsV3Request {
+    public class GetOutboundSmsMessageLogsRequest {
         private String mcc;
         private String mnc;
         private String sender;
@@ -387,15 +387,15 @@ public class SmsApi {
         private String applicationId;
         private List<String> campaignReferenceId;
 
-        private GetOutboundSmsMessageLogsV3Request() {}
+        private GetOutboundSmsMessageLogsRequest() {}
 
         /**
          * Sets mcc.
          *
          * @param mcc Mobile Country Code. (optional)
-         * @return GetOutboundSmsMessageLogsV3Request
+         * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsV3Request mcc(String mcc) {
+        public GetOutboundSmsMessageLogsRequest mcc(String mcc) {
             this.mcc = mcc;
             return this;
         }
@@ -404,9 +404,9 @@ public class SmsApi {
          * Sets mnc.
          *
          * @param mnc Mobile Network Code. (optional)
-         * @return GetOutboundSmsMessageLogsV3Request
+         * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsV3Request mnc(String mnc) {
+        public GetOutboundSmsMessageLogsRequest mnc(String mnc) {
             this.mnc = mnc;
             return this;
         }
@@ -415,9 +415,9 @@ public class SmsApi {
          * Sets sender.
          *
          * @param sender The sender ID which can be alphanumeric or numeric. (optional)
-         * @return GetOutboundSmsMessageLogsV3Request
+         * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsV3Request sender(String sender) {
+        public GetOutboundSmsMessageLogsRequest sender(String sender) {
             this.sender = sender;
             return this;
         }
@@ -426,9 +426,9 @@ public class SmsApi {
          * Sets destination.
          *
          * @param destination Message destination address. (optional)
-         * @return GetOutboundSmsMessageLogsV3Request
+         * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsV3Request destination(String destination) {
+        public GetOutboundSmsMessageLogsRequest destination(String destination) {
             this.destination = destination;
             return this;
         }
@@ -437,9 +437,9 @@ public class SmsApi {
          * Sets bulkId.
          *
          * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. May contain multiple comma-separated values. Maximum length 2048 characters. (optional)
-         * @return GetOutboundSmsMessageLogsV3Request
+         * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsV3Request bulkId(List<String> bulkId) {
+        public GetOutboundSmsMessageLogsRequest bulkId(List<String> bulkId) {
             this.bulkId = bulkId;
             return this;
         }
@@ -448,9 +448,9 @@ public class SmsApi {
          * Sets messageId.
          *
          * @param messageId Unique message ID for which a log is requested. May contain multiple comma-separated values. Maximum length 2048 characters. (optional)
-         * @return GetOutboundSmsMessageLogsV3Request
+         * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsV3Request messageId(List<String> messageId) {
+        public GetOutboundSmsMessageLogsRequest messageId(List<String> messageId) {
             this.messageId = messageId;
             return this;
         }
@@ -459,9 +459,9 @@ public class SmsApi {
          * Sets generalStatus.
          *
          * @param generalStatus  (optional)
-         * @return GetOutboundSmsMessageLogsV3Request
+         * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsV3Request generalStatus(SmsMessageGeneralStatus generalStatus) {
+        public GetOutboundSmsMessageLogsRequest generalStatus(SmsMessageGeneralStatus generalStatus) {
             this.generalStatus = generalStatus;
             return this;
         }
@@ -470,9 +470,9 @@ public class SmsApi {
          * Sets sentSince.
          *
          * @param sentSince The logs will only include messages sent after this date. Use it together with sentUntil to return a time range or if you want to fetch more than 1000 logs allowed per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
-         * @return GetOutboundSmsMessageLogsV3Request
+         * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsV3Request sentSince(String sentSince) {
+        public GetOutboundSmsMessageLogsRequest sentSince(String sentSince) {
             this.sentSince = sentSince;
             return this;
         }
@@ -481,9 +481,9 @@ public class SmsApi {
          * Sets sentUntil.
          *
          * @param sentUntil The logs will only include messages sent before this date. Use it together with sentSince to return a time range or if you want to fetch more than 1000 logs allowed per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
-         * @return GetOutboundSmsMessageLogsV3Request
+         * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsV3Request sentUntil(String sentUntil) {
+        public GetOutboundSmsMessageLogsRequest sentUntil(String sentUntil) {
             this.sentUntil = sentUntil;
             return this;
         }
@@ -492,9 +492,9 @@ public class SmsApi {
          * Sets limit.
          *
          * @param limit Maximum number of messages to include in logs. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access logs for the last 48h. If you want to fetch more than 1000 logs allowed per call, use sentBefore and sentUntil to retrieve them in pages. (optional, default to 50)
-         * @return GetOutboundSmsMessageLogsV3Request
+         * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsV3Request limit(Integer limit) {
+        public GetOutboundSmsMessageLogsRequest limit(Integer limit) {
             this.limit = limit;
             return this;
         }
@@ -503,9 +503,9 @@ public class SmsApi {
          * Sets entityId.
          *
          * @param entityId Entity id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
-         * @return GetOutboundSmsMessageLogsV3Request
+         * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsV3Request entityId(String entityId) {
+        public GetOutboundSmsMessageLogsRequest entityId(String entityId) {
             this.entityId = entityId;
             return this;
         }
@@ -514,9 +514,9 @@ public class SmsApi {
          * Sets applicationId.
          *
          * @param applicationId Application id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
-         * @return GetOutboundSmsMessageLogsV3Request
+         * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsV3Request applicationId(String applicationId) {
+        public GetOutboundSmsMessageLogsRequest applicationId(String applicationId) {
             this.applicationId = applicationId;
             return this;
         }
@@ -525,21 +525,21 @@ public class SmsApi {
          * Sets campaignReferenceId.
          *
          * @param campaignReferenceId ID of a campaign that was sent in the message. May contain multiple comma-separated values. (optional)
-         * @return GetOutboundSmsMessageLogsV3Request
+         * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsV3Request campaignReferenceId(List<String> campaignReferenceId) {
+        public GetOutboundSmsMessageLogsRequest campaignReferenceId(List<String> campaignReferenceId) {
             this.campaignReferenceId = campaignReferenceId;
             return this;
         }
 
         /**
-         * Executes the getOutboundSmsMessageLogsV3 request.
+         * Executes the getOutboundSmsMessageLogs request.
          *
          * @return SmsLogsResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public SmsLogsResponse execute() throws ApiException {
-            RequestDefinition getOutboundSmsMessageLogsV3Definition = getOutboundSmsMessageLogsV3Definition(
+            RequestDefinition getOutboundSmsMessageLogsDefinition = getOutboundSmsMessageLogsDefinition(
                     mcc,
                     mnc,
                     sender,
@@ -554,17 +554,17 @@ public class SmsApi {
                     applicationId,
                     campaignReferenceId);
             return apiClient.execute(
-                    getOutboundSmsMessageLogsV3Definition, new TypeReference<SmsLogsResponse>() {}.getType());
+                    getOutboundSmsMessageLogsDefinition, new TypeReference<SmsLogsResponse>() {}.getType());
         }
 
         /**
-         * Executes the getOutboundSmsMessageLogsV3 request asynchronously.
+         * Executes the getOutboundSmsMessageLogs request asynchronously.
          *
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<SmsLogsResponse> callback) {
-            RequestDefinition getOutboundSmsMessageLogsV3Definition = getOutboundSmsMessageLogsV3Definition(
+            RequestDefinition getOutboundSmsMessageLogsDefinition = getOutboundSmsMessageLogsDefinition(
                     mcc,
                     mnc,
                     sender,
@@ -579,7 +579,7 @@ public class SmsApi {
                     applicationId,
                     campaignReferenceId);
             return apiClient.executeAsync(
-                    getOutboundSmsMessageLogsV3Definition, new TypeReference<SmsLogsResponse>() {}.getType(), callback);
+                    getOutboundSmsMessageLogsDefinition, new TypeReference<SmsLogsResponse>() {}.getType(), callback);
         }
     }
 
@@ -588,12 +588,12 @@ public class SmsApi {
      * <p>
      * Use this method for displaying logs, for example, in the user interface. Available are the logs for the last 48 hours and you can only retrieve maximum of 1000 logs per call. See [message delivery reports](#channels/sms/get-outbound-sms-message-delivery-reports-v3) if your use case is to verify message delivery.
      *
-     * @return GetOutboundSmsMessageLogsV3Request
+     * @return GetOutboundSmsMessageLogsRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about the SMS channel and its use cases</a>
      */
     @Beta
-    public GetOutboundSmsMessageLogsV3Request getOutboundSmsMessageLogsV3() {
-        return new GetOutboundSmsMessageLogsV3Request();
+    public GetOutboundSmsMessageLogsRequest getOutboundSmsMessageLogs() {
+        return new GetOutboundSmsMessageLogsRequest();
     }
 
     private RequestDefinition getScheduledSmsMessagesDefinition(String bulkId) {
