@@ -18,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum CallsPlayContentType {
     FILE("FILE"),
     URL("URL"),
-    RECORDING("RECORDING");
+    RECORDING("RECORDING"),
+    TEXT("TEXT");
 
     private final String value;
 

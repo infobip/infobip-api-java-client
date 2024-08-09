@@ -17,6 +17,8 @@ import java.util.Objects;
  */
 public class WhatsAppUrlButtonApiData extends WhatsAppButtonApiData {
 
+    private String text;
+
     private String url;
 
     private String example;
@@ -26,6 +28,52 @@ public class WhatsAppUrlButtonApiData extends WhatsAppButtonApiData {
      */
     public WhatsAppUrlButtonApiData() {
         super("URL");
+    }
+
+    /**
+     * Sets text.
+     * <p>
+     * Field description:
+     * Button text.
+     * <p>
+     * The field is required.
+     *
+     * @param text
+     * @return This {@link WhatsAppUrlButtonApiData instance}.
+     */
+    public WhatsAppUrlButtonApiData text(String text) {
+        this.text = text;
+        return this;
+    }
+
+    /**
+     * Returns text.
+     * <p>
+     * Field description:
+     * Button text.
+     * <p>
+     * The field is required.
+     *
+     * @return text
+     */
+    @JsonProperty("text")
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * Sets text.
+     * <p>
+     * Field description:
+     * Button text.
+     * <p>
+     * The field is required.
+     *
+     * @param text
+     */
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
     }
 
     /**
@@ -123,14 +171,15 @@ public class WhatsAppUrlButtonApiData extends WhatsAppButtonApiData {
             return false;
         }
         WhatsAppUrlButtonApiData whatsAppUrlButtonApiData = (WhatsAppUrlButtonApiData) o;
-        return Objects.equals(this.url, whatsAppUrlButtonApiData.url)
+        return Objects.equals(this.text, whatsAppUrlButtonApiData.text)
+                && Objects.equals(this.url, whatsAppUrlButtonApiData.url)
                 && Objects.equals(this.example, whatsAppUrlButtonApiData.example)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, example, super.hashCode());
+        return Objects.hash(text, url, example, super.hashCode());
     }
 
     @Override
@@ -141,6 +190,9 @@ public class WhatsAppUrlButtonApiData extends WhatsAppButtonApiData {
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
+                .append(newLine)
+                .append("    text: ")
+                .append(toIndentedString(text))
                 .append(newLine)
                 .append("    url: ")
                 .append(toIndentedString(url))

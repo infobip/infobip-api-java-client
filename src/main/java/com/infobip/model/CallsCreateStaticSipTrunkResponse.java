@@ -19,6 +19,18 @@ import java.util.Objects;
  */
 public class CallsCreateStaticSipTrunkResponse extends CallsCreateSipTrunkResponse {
 
+    private Boolean tls;
+
+    private List<CallsAudioCodec> codecs = null;
+
+    private CallsDtmfType dtmf;
+
+    private CallsFaxType fax;
+
+    private CallsNumberPresentationFormat numberFormat;
+
+    private CallsAnonymizationType anonymization;
+
     private List<String> sourceHosts = null;
 
     private List<String> destinationHosts = null;
@@ -32,6 +44,227 @@ public class CallsCreateStaticSipTrunkResponse extends CallsCreateSipTrunkRespon
      */
     public CallsCreateStaticSipTrunkResponse() {
         super("STATIC");
+    }
+
+    /**
+     * Sets tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @param tls
+     * @return This {@link CallsCreateStaticSipTrunkResponse instance}.
+     */
+    public CallsCreateStaticSipTrunkResponse tls(Boolean tls) {
+        this.tls = tls;
+        return this;
+    }
+
+    /**
+     * Returns tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @return tls
+     */
+    @JsonProperty("tls")
+    public Boolean getTls() {
+        return tls;
+    }
+
+    /**
+     * Sets tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @param tls
+     */
+    @JsonProperty("tls")
+    public void setTls(Boolean tls) {
+        this.tls = tls;
+    }
+
+    /**
+     * Sets codecs.
+     * <p>
+     * Field description:
+     * List of audio codecs supported by a SIP trunk.
+     *
+     * @param codecs
+     * @return This {@link CallsCreateStaticSipTrunkResponse instance}.
+     */
+    public CallsCreateStaticSipTrunkResponse codecs(List<CallsAudioCodec> codecs) {
+        this.codecs = codecs;
+        return this;
+    }
+
+    /**
+     * Adds and item into codecs.
+     * <p>
+     * Field description:
+     * List of audio codecs supported by a SIP trunk.
+     *
+     * @param codecsItem The item to be added to the list.
+     * @return This {@link CallsCreateStaticSipTrunkResponse instance}.
+     */
+    public CallsCreateStaticSipTrunkResponse addCodecsItem(CallsAudioCodec codecsItem) {
+        if (this.codecs == null) {
+            this.codecs = new ArrayList<>();
+        }
+        this.codecs.add(codecsItem);
+        return this;
+    }
+
+    /**
+     * Returns codecs.
+     * <p>
+     * Field description:
+     * List of audio codecs supported by a SIP trunk.
+     *
+     * @return codecs
+     */
+    @JsonProperty("codecs")
+    public List<CallsAudioCodec> getCodecs() {
+        return codecs;
+    }
+
+    /**
+     * Sets codecs.
+     * <p>
+     * Field description:
+     * List of audio codecs supported by a SIP trunk.
+     *
+     * @param codecs
+     */
+    @JsonProperty("codecs")
+    public void setCodecs(List<CallsAudioCodec> codecs) {
+        this.codecs = codecs;
+    }
+
+    /**
+     * Sets dtmf.
+     *
+     * @param dtmf
+     * @return This {@link CallsCreateStaticSipTrunkResponse instance}.
+     */
+    public CallsCreateStaticSipTrunkResponse dtmf(CallsDtmfType dtmf) {
+        this.dtmf = dtmf;
+        return this;
+    }
+
+    /**
+     * Returns dtmf.
+     *
+     * @return dtmf
+     */
+    @JsonProperty("dtmf")
+    public CallsDtmfType getDtmf() {
+        return dtmf;
+    }
+
+    /**
+     * Sets dtmf.
+     *
+     * @param dtmf
+     */
+    @JsonProperty("dtmf")
+    public void setDtmf(CallsDtmfType dtmf) {
+        this.dtmf = dtmf;
+    }
+
+    /**
+     * Sets fax.
+     *
+     * @param fax
+     * @return This {@link CallsCreateStaticSipTrunkResponse instance}.
+     */
+    public CallsCreateStaticSipTrunkResponse fax(CallsFaxType fax) {
+        this.fax = fax;
+        return this;
+    }
+
+    /**
+     * Returns fax.
+     *
+     * @return fax
+     */
+    @JsonProperty("fax")
+    public CallsFaxType getFax() {
+        return fax;
+    }
+
+    /**
+     * Sets fax.
+     *
+     * @param fax
+     */
+    @JsonProperty("fax")
+    public void setFax(CallsFaxType fax) {
+        this.fax = fax;
+    }
+
+    /**
+     * Sets numberFormat.
+     *
+     * @param numberFormat
+     * @return This {@link CallsCreateStaticSipTrunkResponse instance}.
+     */
+    public CallsCreateStaticSipTrunkResponse numberFormat(CallsNumberPresentationFormat numberFormat) {
+        this.numberFormat = numberFormat;
+        return this;
+    }
+
+    /**
+     * Returns numberFormat.
+     *
+     * @return numberFormat
+     */
+    @JsonProperty("numberFormat")
+    public CallsNumberPresentationFormat getNumberFormat() {
+        return numberFormat;
+    }
+
+    /**
+     * Sets numberFormat.
+     *
+     * @param numberFormat
+     */
+    @JsonProperty("numberFormat")
+    public void setNumberFormat(CallsNumberPresentationFormat numberFormat) {
+        this.numberFormat = numberFormat;
+    }
+
+    /**
+     * Sets anonymization.
+     *
+     * @param anonymization
+     * @return This {@link CallsCreateStaticSipTrunkResponse instance}.
+     */
+    public CallsCreateStaticSipTrunkResponse anonymization(CallsAnonymizationType anonymization) {
+        this.anonymization = anonymization;
+        return this;
+    }
+
+    /**
+     * Returns anonymization.
+     *
+     * @return anonymization
+     */
+    @JsonProperty("anonymization")
+    public CallsAnonymizationType getAnonymization() {
+        return anonymization;
+    }
+
+    /**
+     * Sets anonymization.
+     *
+     * @param anonymization
+     */
+    @JsonProperty("anonymization")
+    public void setAnonymization(CallsAnonymizationType anonymization) {
+        this.anonymization = anonymization;
     }
 
     /**
@@ -219,7 +452,13 @@ public class CallsCreateStaticSipTrunkResponse extends CallsCreateSipTrunkRespon
             return false;
         }
         CallsCreateStaticSipTrunkResponse callsCreateStaticSipTrunkResponse = (CallsCreateStaticSipTrunkResponse) o;
-        return Objects.equals(this.sourceHosts, callsCreateStaticSipTrunkResponse.sourceHosts)
+        return Objects.equals(this.tls, callsCreateStaticSipTrunkResponse.tls)
+                && Objects.equals(this.codecs, callsCreateStaticSipTrunkResponse.codecs)
+                && Objects.equals(this.dtmf, callsCreateStaticSipTrunkResponse.dtmf)
+                && Objects.equals(this.fax, callsCreateStaticSipTrunkResponse.fax)
+                && Objects.equals(this.numberFormat, callsCreateStaticSipTrunkResponse.numberFormat)
+                && Objects.equals(this.anonymization, callsCreateStaticSipTrunkResponse.anonymization)
+                && Objects.equals(this.sourceHosts, callsCreateStaticSipTrunkResponse.sourceHosts)
                 && Objects.equals(this.destinationHosts, callsCreateStaticSipTrunkResponse.destinationHosts)
                 && Objects.equals(this.strategy, callsCreateStaticSipTrunkResponse.strategy)
                 && Objects.equals(this.sipOptions, callsCreateStaticSipTrunkResponse.sipOptions)
@@ -228,7 +467,18 @@ public class CallsCreateStaticSipTrunkResponse extends CallsCreateSipTrunkRespon
 
     @Override
     public int hashCode() {
-        return Objects.hash(sourceHosts, destinationHosts, strategy, sipOptions, super.hashCode());
+        return Objects.hash(
+                tls,
+                codecs,
+                dtmf,
+                fax,
+                numberFormat,
+                anonymization,
+                sourceHosts,
+                destinationHosts,
+                strategy,
+                sipOptions,
+                super.hashCode());
     }
 
     @Override
@@ -239,6 +489,24 @@ public class CallsCreateStaticSipTrunkResponse extends CallsCreateSipTrunkRespon
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
+                .append(newLine)
+                .append("    tls: ")
+                .append(toIndentedString(tls))
+                .append(newLine)
+                .append("    codecs: ")
+                .append(toIndentedString(codecs))
+                .append(newLine)
+                .append("    dtmf: ")
+                .append(toIndentedString(dtmf))
+                .append(newLine)
+                .append("    fax: ")
+                .append(toIndentedString(fax))
+                .append(newLine)
+                .append("    numberFormat: ")
+                .append(toIndentedString(numberFormat))
+                .append(newLine)
+                .append("    anonymization: ")
+                .append(toIndentedString(anonymization))
                 .append(newLine)
                 .append("    sourceHosts: ")
                 .append(toIndentedString(sourceHosts))

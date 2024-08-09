@@ -33,6 +33,10 @@ public class EmailValidationResponse {
 
     private String reason;
 
+    private String detailedReasons;
+
+    private String risk;
+
     /**
      * Sets to.
      * <p>
@@ -335,6 +339,86 @@ public class EmailValidationResponse {
         this.reason = reason;
     }
 
+    /**
+     * Sets detailedReasons.
+     * <p>
+     * Field description:
+     * Is provided when validMailbox is &#39;unknown&#39; or &#39;false&#39; and lists reasons clarifying why validMailbox has that status.
+     *
+     * @param detailedReasons
+     * @return This {@link EmailValidationResponse instance}.
+     */
+    public EmailValidationResponse detailedReasons(String detailedReasons) {
+        this.detailedReasons = detailedReasons;
+        return this;
+    }
+
+    /**
+     * Returns detailedReasons.
+     * <p>
+     * Field description:
+     * Is provided when validMailbox is &#39;unknown&#39; or &#39;false&#39; and lists reasons clarifying why validMailbox has that status.
+     *
+     * @return detailedReasons
+     */
+    @JsonProperty("detailedReasons")
+    public String getDetailedReasons() {
+        return detailedReasons;
+    }
+
+    /**
+     * Sets detailedReasons.
+     * <p>
+     * Field description:
+     * Is provided when validMailbox is &#39;unknown&#39; or &#39;false&#39; and lists reasons clarifying why validMailbox has that status.
+     *
+     * @param detailedReasons
+     */
+    @JsonProperty("detailedReasons")
+    public void setDetailedReasons(String detailedReasons) {
+        this.detailedReasons = detailedReasons;
+    }
+
+    /**
+     * Sets risk.
+     * <p>
+     * Field description:
+     * Returns one of the following values: &#39;High&#39;, &#39;Medium&#39;, &#39;Low&#39; or &#39;Unknown&#39;. High risk addresses have very high chances of bouncing (and potentially damaging the sender&#39;s reputation), whereas low risk addresses have very low chances of bouncing and damaging the sender&#39;s reputation.
+     *
+     * @param risk
+     * @return This {@link EmailValidationResponse instance}.
+     */
+    public EmailValidationResponse risk(String risk) {
+        this.risk = risk;
+        return this;
+    }
+
+    /**
+     * Returns risk.
+     * <p>
+     * Field description:
+     * Returns one of the following values: &#39;High&#39;, &#39;Medium&#39;, &#39;Low&#39; or &#39;Unknown&#39;. High risk addresses have very high chances of bouncing (and potentially damaging the sender&#39;s reputation), whereas low risk addresses have very low chances of bouncing and damaging the sender&#39;s reputation.
+     *
+     * @return risk
+     */
+    @JsonProperty("risk")
+    public String getRisk() {
+        return risk;
+    }
+
+    /**
+     * Sets risk.
+     * <p>
+     * Field description:
+     * Returns one of the following values: &#39;High&#39;, &#39;Medium&#39;, &#39;Low&#39; or &#39;Unknown&#39;. High risk addresses have very high chances of bouncing (and potentially damaging the sender&#39;s reputation), whereas low risk addresses have very low chances of bouncing and damaging the sender&#39;s reputation.
+     *
+     * @param risk
+     */
+    @JsonProperty("risk")
+    public void setRisk(String risk) {
+        this.risk = risk;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -351,12 +435,24 @@ public class EmailValidationResponse {
                 && Objects.equals(this.didYouMean, emailValidationResponse.didYouMean)
                 && Objects.equals(this.disposable, emailValidationResponse.disposable)
                 && Objects.equals(this.roleBased, emailValidationResponse.roleBased)
-                && Objects.equals(this.reason, emailValidationResponse.reason);
+                && Objects.equals(this.reason, emailValidationResponse.reason)
+                && Objects.equals(this.detailedReasons, emailValidationResponse.detailedReasons)
+                && Objects.equals(this.risk, emailValidationResponse.risk);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(to, validMailbox, validSyntax, catchAll, didYouMean, disposable, roleBased, reason);
+        return Objects.hash(
+                to,
+                validMailbox,
+                validSyntax,
+                catchAll,
+                didYouMean,
+                disposable,
+                roleBased,
+                reason,
+                detailedReasons,
+                risk);
     }
 
     @Override
@@ -388,6 +484,12 @@ public class EmailValidationResponse {
                 .append(newLine)
                 .append("    reason: ")
                 .append(toIndentedString(reason))
+                .append(newLine)
+                .append("    detailedReasons: ")
+                .append(toIndentedString(detailedReasons))
+                .append(newLine)
+                .append("    risk: ")
+                .append(toIndentedString(risk))
                 .append(newLine)
                 .append("}")
                 .toString();

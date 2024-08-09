@@ -10,12 +10,23 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.Objects;
 
 /**
  * Media information of included referral.
  */
-public class WhatsAppWebhookReferralMedia {
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "type",
+        visible = true)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = WhatsAppWebhookReferralMediaImage.class, name = "IMAGE"),
+    @JsonSubTypes.Type(value = WhatsAppWebhookReferralMediaVideo.class, name = "VIDEO"),
+})
+public abstract class WhatsAppWebhookReferralMedia {
 
     protected final WhatsAppWebhookMediaType type;
 
@@ -26,56 +37,16 @@ public class WhatsAppWebhookReferralMedia {
         this.type = WhatsAppWebhookMediaType.fromValue(type);
     }
 
-    private String url;
-
     /**
      * Returns type.
+     * <p>
+     * The field is required.
      *
      * @return type
      */
     @JsonProperty("type")
     public WhatsAppWebhookMediaType getType() {
         return type;
-    }
-
-    /**
-     * Sets url.
-     * <p>
-     * Field description:
-     * URL that leads to the video that end user saw and clicked.
-     *
-     * @param url
-     * @return This {@link WhatsAppWebhookReferralMedia instance}.
-     */
-    public WhatsAppWebhookReferralMedia url(String url) {
-        this.url = url;
-        return this;
-    }
-
-    /**
-     * Returns url.
-     * <p>
-     * Field description:
-     * URL that leads to the video that end user saw and clicked.
-     *
-     * @return url
-     */
-    @JsonProperty("url")
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * Sets url.
-     * <p>
-     * Field description:
-     * URL that leads to the video that end user saw and clicked.
-     *
-     * @param url
-     */
-    @JsonProperty("url")
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     @Override
@@ -87,13 +58,12 @@ public class WhatsAppWebhookReferralMedia {
             return false;
         }
         WhatsAppWebhookReferralMedia whatsAppWebhookReferralMedia = (WhatsAppWebhookReferralMedia) o;
-        return Objects.equals(this.type, whatsAppWebhookReferralMedia.type)
-                && Objects.equals(this.url, whatsAppWebhookReferralMedia.url);
+        return Objects.equals(this.type, whatsAppWebhookReferralMedia.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, url);
+        return Objects.hash(type);
     }
 
     @Override
@@ -104,9 +74,6 @@ public class WhatsAppWebhookReferralMedia {
                 .append(newLine)
                 .append("    type: ")
                 .append(toIndentedString(type))
-                .append(newLine)
-                .append("    url: ")
-                .append(toIndentedString(url))
                 .append(newLine)
                 .append("}")
                 .toString();

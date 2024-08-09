@@ -24,6 +24,8 @@ public class CallsConferenceRecording {
 
     private String conferenceName;
 
+    private String callsConfigurationId;
+
     private String applicationId;
 
     private List<CallsRecordingFile> composedFiles = null;
@@ -112,6 +114,46 @@ public class CallsConferenceRecording {
     @JsonProperty("conferenceName")
     public void setConferenceName(String conferenceName) {
         this.conferenceName = conferenceName;
+    }
+
+    /**
+     * Sets callsConfigurationId.
+     * <p>
+     * Field description:
+     * Calls Configuration ID.
+     *
+     * @param callsConfigurationId
+     * @return This {@link CallsConferenceRecording instance}.
+     */
+    public CallsConferenceRecording callsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+        return this;
+    }
+
+    /**
+     * Returns callsConfigurationId.
+     * <p>
+     * Field description:
+     * Calls Configuration ID.
+     *
+     * @return callsConfigurationId
+     */
+    @JsonProperty("callsConfigurationId")
+    public String getCallsConfigurationId() {
+        return callsConfigurationId;
+    }
+
+    /**
+     * Sets callsConfigurationId.
+     * <p>
+     * Field description:
+     * Calls Configuration ID.
+     *
+     * @param callsConfigurationId
+     */
+    @JsonProperty("callsConfigurationId")
+    public void setCallsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
     }
 
     /**
@@ -359,6 +401,7 @@ public class CallsConferenceRecording {
         CallsConferenceRecording callsConferenceRecording = (CallsConferenceRecording) o;
         return Objects.equals(this.conferenceId, callsConferenceRecording.conferenceId)
                 && Objects.equals(this.conferenceName, callsConferenceRecording.conferenceName)
+                && Objects.equals(this.callsConfigurationId, callsConferenceRecording.callsConfigurationId)
                 && Objects.equals(this.applicationId, callsConferenceRecording.applicationId)
                 && Objects.equals(this.composedFiles, callsConferenceRecording.composedFiles)
                 && Objects.equals(this.callRecordings, callsConferenceRecording.callRecordings)
@@ -369,7 +412,14 @@ public class CallsConferenceRecording {
     @Override
     public int hashCode() {
         return Objects.hash(
-                conferenceId, conferenceName, applicationId, composedFiles, callRecordings, startTime, endTime);
+                conferenceId,
+                conferenceName,
+                callsConfigurationId,
+                applicationId,
+                composedFiles,
+                callRecordings,
+                startTime,
+                endTime);
     }
 
     @Override
@@ -383,6 +433,9 @@ public class CallsConferenceRecording {
                 .append(newLine)
                 .append("    conferenceName: ")
                 .append(toIndentedString(conferenceName))
+                .append(newLine)
+                .append("    callsConfigurationId: ")
+                .append(toIndentedString(callsConfigurationId))
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))

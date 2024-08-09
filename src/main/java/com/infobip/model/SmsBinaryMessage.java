@@ -83,7 +83,7 @@ public class SmsBinaryMessage {
      * Sets callbackData.
      * <p>
      * Field description:
-     * Additional client data that will be sent on the notifyUrl. The maximum value is 4000 characters.
+     * Additional data that can be used for identifying, managing, or monitoring a message. Data included here will also be automatically included in the message [Delivery Report](#channels/sms/get-outbound-sms-message-delivery-reports). The maximum value is 4000 characters.
      *
      * @param callbackData
      * @return This {@link SmsBinaryMessage instance}.
@@ -97,7 +97,7 @@ public class SmsBinaryMessage {
      * Returns callbackData.
      * <p>
      * Field description:
-     * Additional client data that will be sent on the notifyUrl. The maximum value is 4000 characters.
+     * Additional data that can be used for identifying, managing, or monitoring a message. Data included here will also be automatically included in the message [Delivery Report](#channels/sms/get-outbound-sms-message-delivery-reports). The maximum value is 4000 characters.
      *
      * @return callbackData
      */
@@ -110,7 +110,7 @@ public class SmsBinaryMessage {
      * Sets callbackData.
      * <p>
      * Field description:
-     * Additional client data that will be sent on the notifyUrl. The maximum value is 4000 characters.
+     * Additional data that can be used for identifying, managing, or monitoring a message. Data included here will also be automatically included in the message [Delivery Report](#channels/sms/get-outbound-sms-message-delivery-reports). The maximum value is 4000 characters.
      *
      * @param callbackData
      */

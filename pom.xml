@@ -4,7 +4,7 @@
 
     <groupId>com.infobip</groupId>
     <artifactId>infobip-api-java-client</artifactId>
-    <version>4.1.1</version>
+    <version>4.3.1</version>
     <packaging>jar</packaging>
 
     <name>infobip-api-java-client</name>
@@ -177,7 +177,7 @@
                     <plugin>
                         <groupId>com.rudikershaw.gitbuildhook</groupId>
                         <artifactId>git-build-hook-maven-plugin</artifactId>
-                        <version>3.4.1</version>
+                        <version>3.5.0</version>
                         <configuration>
                             <installHooks>
                                 <!-- The location of a git hook to install into the default hooks directory. -->

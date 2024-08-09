@@ -29,6 +29,8 @@ public class WebRtcCallLinkConfigRequest {
 
     private String subdomainId;
 
+    private WebRtcWebhook webhook;
+
     /**
      * Sets name.
      * <p>
@@ -248,6 +250,37 @@ public class WebRtcCallLinkConfigRequest {
         this.subdomainId = subdomainId;
     }
 
+    /**
+     * Sets webhook.
+     *
+     * @param webhook
+     * @return This {@link WebRtcCallLinkConfigRequest instance}.
+     */
+    public WebRtcCallLinkConfigRequest webhook(WebRtcWebhook webhook) {
+        this.webhook = webhook;
+        return this;
+    }
+
+    /**
+     * Returns webhook.
+     *
+     * @return webhook
+     */
+    @JsonProperty("webhook")
+    public WebRtcWebhook getWebhook() {
+        return webhook;
+    }
+
+    /**
+     * Sets webhook.
+     *
+     * @param webhook
+     */
+    @JsonProperty("webhook")
+    public void setWebhook(WebRtcWebhook webhook) {
+        this.webhook = webhook;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -262,12 +295,13 @@ public class WebRtcCallLinkConfigRequest {
                 && Objects.equals(this.callOptions, webRtcCallLinkConfigRequest.callOptions)
                 && Objects.equals(this.theme, webRtcCallLinkConfigRequest.theme)
                 && Objects.equals(this.isDefault, webRtcCallLinkConfigRequest.isDefault)
-                && Objects.equals(this.subdomainId, webRtcCallLinkConfigRequest.subdomainId);
+                && Objects.equals(this.subdomainId, webRtcCallLinkConfigRequest.subdomainId)
+                && Objects.equals(this.webhook, webRtcCallLinkConfigRequest.webhook);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, initialOptions, callOptions, theme, isDefault, subdomainId);
+        return Objects.hash(name, initialOptions, callOptions, theme, isDefault, subdomainId, webhook);
     }
 
     @Override
@@ -293,6 +327,9 @@ public class WebRtcCallLinkConfigRequest {
                 .append(newLine)
                 .append("    subdomainId: ")
                 .append(toIndentedString(subdomainId))
+                .append(newLine)
+                .append("    webhook: ")
+                .append(toIndentedString(webhook))
                 .append(newLine)
                 .append("}")
                 .toString();

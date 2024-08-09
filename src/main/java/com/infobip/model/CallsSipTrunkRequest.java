@@ -12,8 +12,6 @@ package com.infobip.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -25,6 +23,7 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = CallsProviderSipTrunkRequest.class, name = "PROVIDER"),
     @JsonSubTypes.Type(value = CallsRegisteredSipTrunkRequest.class, name = "REGISTERED"),
     @JsonSubTypes.Type(value = CallsStaticSipTrunkRequest.class, name = "STATIC"),
 })
@@ -43,21 +42,9 @@ public abstract class CallsSipTrunkRequest {
 
     private CallsSipTrunkLocation location;
 
-    private Boolean tls;
-
-    private List<CallsAudioCodec> codecs = null;
-
-    private CallsDtmfType dtmf;
-
-    private CallsFaxType fax;
-
-    private CallsNumberPresentationFormat numberFormat;
-
     private Boolean internationalCallsAllowed;
 
     private Integer channelLimit;
-
-    private CallsAnonymizationType anonymization;
 
     private CallsBillingPackage billingPackage;
 
@@ -155,196 +142,6 @@ public abstract class CallsSipTrunkRequest {
     }
 
     /**
-     * Sets tls.
-     * <p>
-     * Field description:
-     * Indicates whether communication is secured by the TLS protocol.
-     *
-     * @param tls
-     * @return This {@link CallsSipTrunkRequest instance}.
-     */
-    public CallsSipTrunkRequest tls(Boolean tls) {
-        this.tls = tls;
-        return this;
-    }
-
-    /**
-     * Returns tls.
-     * <p>
-     * Field description:
-     * Indicates whether communication is secured by the TLS protocol.
-     *
-     * @return tls
-     */
-    @JsonProperty("tls")
-    public Boolean getTls() {
-        return tls;
-    }
-
-    /**
-     * Sets tls.
-     * <p>
-     * Field description:
-     * Indicates whether communication is secured by the TLS protocol.
-     *
-     * @param tls
-     */
-    @JsonProperty("tls")
-    public void setTls(Boolean tls) {
-        this.tls = tls;
-    }
-
-    /**
-     * Sets codecs.
-     * <p>
-     * Field description:
-     * List of audio codecs supported by a SIP trunk.
-     *
-     * @param codecs
-     * @return This {@link CallsSipTrunkRequest instance}.
-     */
-    public CallsSipTrunkRequest codecs(List<CallsAudioCodec> codecs) {
-        this.codecs = codecs;
-        return this;
-    }
-
-    /**
-     * Adds and item into codecs.
-     * <p>
-     * Field description:
-     * List of audio codecs supported by a SIP trunk.
-     *
-     * @param codecsItem The item to be added to the list.
-     * @return This {@link CallsSipTrunkRequest instance}.
-     */
-    public CallsSipTrunkRequest addCodecsItem(CallsAudioCodec codecsItem) {
-        if (this.codecs == null) {
-            this.codecs = new ArrayList<>();
-        }
-        this.codecs.add(codecsItem);
-        return this;
-    }
-
-    /**
-     * Returns codecs.
-     * <p>
-     * Field description:
-     * List of audio codecs supported by a SIP trunk.
-     *
-     * @return codecs
-     */
-    @JsonProperty("codecs")
-    public List<CallsAudioCodec> getCodecs() {
-        return codecs;
-    }
-
-    /**
-     * Sets codecs.
-     * <p>
-     * Field description:
-     * List of audio codecs supported by a SIP trunk.
-     *
-     * @param codecs
-     */
-    @JsonProperty("codecs")
-    public void setCodecs(List<CallsAudioCodec> codecs) {
-        this.codecs = codecs;
-    }
-
-    /**
-     * Sets dtmf.
-     *
-     * @param dtmf
-     * @return This {@link CallsSipTrunkRequest instance}.
-     */
-    public CallsSipTrunkRequest dtmf(CallsDtmfType dtmf) {
-        this.dtmf = dtmf;
-        return this;
-    }
-
-    /**
-     * Returns dtmf.
-     *
-     * @return dtmf
-     */
-    @JsonProperty("dtmf")
-    public CallsDtmfType getDtmf() {
-        return dtmf;
-    }
-
-    /**
-     * Sets dtmf.
-     *
-     * @param dtmf
-     */
-    @JsonProperty("dtmf")
-    public void setDtmf(CallsDtmfType dtmf) {
-        this.dtmf = dtmf;
-    }
-
-    /**
-     * Sets fax.
-     *
-     * @param fax
-     * @return This {@link CallsSipTrunkRequest instance}.
-     */
-    public CallsSipTrunkRequest fax(CallsFaxType fax) {
-        this.fax = fax;
-        return this;
-    }
-
-    /**
-     * Returns fax.
-     *
-     * @return fax
-     */
-    @JsonProperty("fax")
-    public CallsFaxType getFax() {
-        return fax;
-    }
-
-    /**
-     * Sets fax.
-     *
-     * @param fax
-     */
-    @JsonProperty("fax")
-    public void setFax(CallsFaxType fax) {
-        this.fax = fax;
-    }
-
-    /**
-     * Sets numberFormat.
-     *
-     * @param numberFormat
-     * @return This {@link CallsSipTrunkRequest instance}.
-     */
-    public CallsSipTrunkRequest numberFormat(CallsNumberPresentationFormat numberFormat) {
-        this.numberFormat = numberFormat;
-        return this;
-    }
-
-    /**
-     * Returns numberFormat.
-     *
-     * @return numberFormat
-     */
-    @JsonProperty("numberFormat")
-    public CallsNumberPresentationFormat getNumberFormat() {
-        return numberFormat;
-    }
-
-    /**
-     * Sets numberFormat.
-     *
-     * @param numberFormat
-     */
-    @JsonProperty("numberFormat")
-    public void setNumberFormat(CallsNumberPresentationFormat numberFormat) {
-        this.numberFormat = numberFormat;
-    }
-
-    /**
      * Sets internationalCallsAllowed.
      * <p>
      * Field description:
@@ -431,37 +228,6 @@ public abstract class CallsSipTrunkRequest {
     }
 
     /**
-     * Sets anonymization.
-     *
-     * @param anonymization
-     * @return This {@link CallsSipTrunkRequest instance}.
-     */
-    public CallsSipTrunkRequest anonymization(CallsAnonymizationType anonymization) {
-        this.anonymization = anonymization;
-        return this;
-    }
-
-    /**
-     * Returns anonymization.
-     *
-     * @return anonymization
-     */
-    @JsonProperty("anonymization")
-    public CallsAnonymizationType getAnonymization() {
-        return anonymization;
-    }
-
-    /**
-     * Sets anonymization.
-     *
-     * @param anonymization
-     */
-    @JsonProperty("anonymization")
-    public void setAnonymization(CallsAnonymizationType anonymization) {
-        this.anonymization = anonymization;
-    }
-
-    /**
      * Sets billingPackage.
      * <p>
      * The field is required.
@@ -510,32 +276,14 @@ public abstract class CallsSipTrunkRequest {
         return Objects.equals(this.type, callsSipTrunkRequest.type)
                 && Objects.equals(this.name, callsSipTrunkRequest.name)
                 && Objects.equals(this.location, callsSipTrunkRequest.location)
-                && Objects.equals(this.tls, callsSipTrunkRequest.tls)
-                && Objects.equals(this.codecs, callsSipTrunkRequest.codecs)
-                && Objects.equals(this.dtmf, callsSipTrunkRequest.dtmf)
-                && Objects.equals(this.fax, callsSipTrunkRequest.fax)
-                && Objects.equals(this.numberFormat, callsSipTrunkRequest.numberFormat)
                 && Objects.equals(this.internationalCallsAllowed, callsSipTrunkRequest.internationalCallsAllowed)
                 && Objects.equals(this.channelLimit, callsSipTrunkRequest.channelLimit)
-                && Objects.equals(this.anonymization, callsSipTrunkRequest.anonymization)
                 && Objects.equals(this.billingPackage, callsSipTrunkRequest.billingPackage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                type,
-                name,
-                location,
-                tls,
-                codecs,
-                dtmf,
-                fax,
-                numberFormat,
-                internationalCallsAllowed,
-                channelLimit,
-                anonymization,
-                billingPackage);
+        return Objects.hash(type, name, location, internationalCallsAllowed, channelLimit, billingPackage);
     }
 
     @Override
@@ -553,29 +301,11 @@ public abstract class CallsSipTrunkRequest {
                 .append("    location: ")
                 .append(toIndentedString(location))
                 .append(newLine)
-                .append("    tls: ")
-                .append(toIndentedString(tls))
-                .append(newLine)
-                .append("    codecs: ")
-                .append(toIndentedString(codecs))
-                .append(newLine)
-                .append("    dtmf: ")
-                .append(toIndentedString(dtmf))
-                .append(newLine)
-                .append("    fax: ")
-                .append(toIndentedString(fax))
-                .append(newLine)
-                .append("    numberFormat: ")
-                .append(toIndentedString(numberFormat))
-                .append(newLine)
                 .append("    internationalCallsAllowed: ")
                 .append(toIndentedString(internationalCallsAllowed))
                 .append(newLine)
                 .append("    channelLimit: ")
                 .append(toIndentedString(channelLimit))
-                .append(newLine)
-                .append("    anonymization: ")
-                .append(toIndentedString(anonymization))
                 .append(newLine)
                 .append("    billingPackage: ")
                 .append(toIndentedString(billingPackage))

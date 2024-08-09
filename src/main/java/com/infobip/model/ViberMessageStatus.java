@@ -104,7 +104,7 @@ public class ViberMessageStatus {
      * Sets id.
      * <p>
      * Field description:
-     * Status ID.
+     * Status code ID.
      *
      * @param id
      * @return This {@link ViberMessageStatus instance}.
@@ -118,7 +118,7 @@ public class ViberMessageStatus {
      * Returns id.
      * <p>
      * Field description:
-     * Status ID.
+     * Status code ID.
      *
      * @return id
      */
@@ -131,7 +131,7 @@ public class ViberMessageStatus {
      * Sets id.
      * <p>
      * Field description:
-     * Status ID.
+     * Status code ID.
      *
      * @param id
      */
@@ -144,7 +144,7 @@ public class ViberMessageStatus {
      * Sets name.
      * <p>
      * Field description:
-     * [Status name](https://www.infobip.com/docs/essentials/response-status-and-error-codes#api-status-codes).
+     * [Status code](https://www.infobip.com/docs/essentials/response-status-and-error-codes#api-status-codes) name.
      *
      * @param name
      * @return This {@link ViberMessageStatus instance}.
@@ -158,7 +158,7 @@ public class ViberMessageStatus {
      * Returns name.
      * <p>
      * Field description:
-     * [Status name](https://www.infobip.com/docs/essentials/response-status-and-error-codes#api-status-codes).
+     * [Status code](https://www.infobip.com/docs/essentials/response-status-and-error-codes#api-status-codes) name.
      *
      * @return name
      */
@@ -171,7 +171,7 @@ public class ViberMessageStatus {
      * Sets name.
      * <p>
      * Field description:
-     * [Status name](https://www.infobip.com/docs/essentials/response-status-and-error-codes#api-status-codes).
+     * [Status code](https://www.infobip.com/docs/essentials/response-status-and-error-codes#api-status-codes) name.
      *
      * @param name
      */
@@ -224,7 +224,7 @@ public class ViberMessageStatus {
      * Sets action.
      * <p>
      * Field description:
-     * Action that should be taken to recover from the error.
+     * Action to take to recover from the error.
      *
      * @param action
      * @return This {@link ViberMessageStatus instance}.
@@ -238,7 +238,7 @@ public class ViberMessageStatus {
      * Returns action.
      * <p>
      * Field description:
-     * Action that should be taken to recover from the error.
+     * Action to take to recover from the error.
      *
      * @return action
      */
@@ -251,7 +251,7 @@ public class ViberMessageStatus {
      * Sets action.
      * <p>
      * Field description:
-     * Action that should be taken to recover from the error.
+     * Action to take to recover from the error.
      *
      * @param action
      */

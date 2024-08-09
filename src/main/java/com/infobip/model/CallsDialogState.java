@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum CallsDialogState {
     CREATED("CREATED"),
+    PRE_ESTABLISHED("PRE_ESTABLISHED"),
     ESTABLISHED("ESTABLISHED"),
     FINISHED("FINISHED"),
     FAILED("FAILED");

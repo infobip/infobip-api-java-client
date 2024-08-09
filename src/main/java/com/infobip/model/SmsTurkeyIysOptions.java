@@ -9,9 +9,7 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
@@ -21,41 +19,7 @@ public class SmsTurkeyIysOptions {
 
     private Integer brandCode;
 
-    /**
-     * Recipient Type must be &#x60;TACIR&#x60; or &#x60;BIREYSEL&#x60;.
-     */
-    public enum RecipientTypeEnum {
-        BIREYSEL("BIREYSEL"),
-        TACIR("TACIR");
-
-        private String value;
-
-        RecipientTypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static RecipientTypeEnum fromValue(String value) {
-            for (RecipientTypeEnum enumElement : RecipientTypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private RecipientTypeEnum recipientType;
+    private SmsIysRecipientType recipientType;
 
     /**
      * Sets brandCode.
@@ -100,15 +64,12 @@ public class SmsTurkeyIysOptions {
     /**
      * Sets recipientType.
      * <p>
-     * Field description:
-     * Recipient Type must be &#x60;TACIR&#x60; or &#x60;BIREYSEL&#x60;.
-     * <p>
      * The field is required.
      *
      * @param recipientType
      * @return This {@link SmsTurkeyIysOptions instance}.
      */
-    public SmsTurkeyIysOptions recipientType(RecipientTypeEnum recipientType) {
+    public SmsTurkeyIysOptions recipientType(SmsIysRecipientType recipientType) {
         this.recipientType = recipientType;
         return this;
     }
@@ -116,30 +77,24 @@ public class SmsTurkeyIysOptions {
     /**
      * Returns recipientType.
      * <p>
-     * Field description:
-     * Recipient Type must be &#x60;TACIR&#x60; or &#x60;BIREYSEL&#x60;.
-     * <p>
      * The field is required.
      *
      * @return recipientType
      */
     @JsonProperty("recipientType")
-    public RecipientTypeEnum getRecipientType() {
+    public SmsIysRecipientType getRecipientType() {
         return recipientType;
     }
 
     /**
      * Sets recipientType.
      * <p>
-     * Field description:
-     * Recipient Type must be &#x60;TACIR&#x60; or &#x60;BIREYSEL&#x60;.
-     * <p>
      * The field is required.
      *
      * @param recipientType
      */
     @JsonProperty("recipientType")
-    public void setRecipientType(RecipientTypeEnum recipientType) {
+    public void setRecipientType(SmsIysRecipientType recipientType) {
         this.recipientType = recipientType;
     }
 

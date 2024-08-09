@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents MessageError model.
+ * Indicates whether the error occurred during the query execution.
  */
 public class MessageError {
 
@@ -31,6 +31,9 @@ public class MessageError {
 
     /**
      * Sets groupId.
+     * <p>
+     * Field description:
+     * Error group ID.
      *
      * @param groupId
      * @return This {@link MessageError instance}.
@@ -42,6 +45,9 @@ public class MessageError {
 
     /**
      * Returns groupId.
+     * <p>
+     * Field description:
+     * Error group ID.
      *
      * @return groupId
      */
@@ -52,6 +58,9 @@ public class MessageError {
 
     /**
      * Sets groupId.
+     * <p>
+     * Field description:
+     * Error group ID.
      *
      * @param groupId
      */
@@ -62,6 +71,9 @@ public class MessageError {
 
     /**
      * Sets groupName.
+     * <p>
+     * Field description:
+     * Error group name.
      *
      * @param groupName
      * @return This {@link MessageError instance}.
@@ -73,6 +85,9 @@ public class MessageError {
 
     /**
      * Returns groupName.
+     * <p>
+     * Field description:
+     * Error group name.
      *
      * @return groupName
      */
@@ -83,6 +98,9 @@ public class MessageError {
 
     /**
      * Sets groupName.
+     * <p>
+     * Field description:
+     * Error group name.
      *
      * @param groupName
      */
@@ -93,6 +111,9 @@ public class MessageError {
 
     /**
      * Sets id.
+     * <p>
+     * Field description:
+     * Error ID.
      *
      * @param id
      * @return This {@link MessageError instance}.
@@ -104,6 +125,9 @@ public class MessageError {
 
     /**
      * Returns id.
+     * <p>
+     * Field description:
+     * Error ID.
      *
      * @return id
      */
@@ -114,6 +138,9 @@ public class MessageError {
 
     /**
      * Sets id.
+     * <p>
+     * Field description:
+     * Error ID.
      *
      * @param id
      */
@@ -124,6 +151,9 @@ public class MessageError {
 
     /**
      * Sets name.
+     * <p>
+     * Field description:
+     * Error name.
      *
      * @param name
      * @return This {@link MessageError instance}.
@@ -135,6 +165,9 @@ public class MessageError {
 
     /**
      * Returns name.
+     * <p>
+     * Field description:
+     * Error name.
      *
      * @return name
      */
@@ -145,6 +178,9 @@ public class MessageError {
 
     /**
      * Sets name.
+     * <p>
+     * Field description:
+     * Error name.
      *
      * @param name
      */
@@ -155,6 +191,9 @@ public class MessageError {
 
     /**
      * Sets description.
+     * <p>
+     * Field description:
+     * Human-readable description of the error.
      *
      * @param description
      * @return This {@link MessageError instance}.
@@ -166,6 +205,9 @@ public class MessageError {
 
     /**
      * Returns description.
+     * <p>
+     * Field description:
+     * Human-readable description of the error.
      *
      * @return description
      */
@@ -176,6 +218,9 @@ public class MessageError {
 
     /**
      * Sets description.
+     * <p>
+     * Field description:
+     * Human-readable description of the error.
      *
      * @param description
      */
@@ -186,6 +231,9 @@ public class MessageError {
 
     /**
      * Sets permanent.
+     * <p>
+     * Field description:
+     * Indicator of whether the error is permanent.
      *
      * @param permanent
      * @return This {@link MessageError instance}.
@@ -197,6 +245,9 @@ public class MessageError {
 
     /**
      * Returns permanent.
+     * <p>
+     * Field description:
+     * Indicator of whether the error is permanent.
      *
      * @return permanent
      */
@@ -207,6 +258,9 @@ public class MessageError {
 
     /**
      * Sets permanent.
+     * <p>
+     * Field description:
+     * Indicator of whether the error is permanent.
      *
      * @param permanent
      */

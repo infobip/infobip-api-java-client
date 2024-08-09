@@ -9,9 +9,7 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
@@ -23,122 +21,17 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
 
     private String paymentId;
 
-    /**
-     * Status of the transaction.
-     */
-    public enum StatusEnum {
-        PENDING("PENDING"),
-        FAILED("FAILED"),
-        SUCCESS("SUCCESS"),
-        CANCELED("CANCELED"),
-        UNKNOWN("UNKNOWN");
+    private WhatsAppPaymentTransactionStatus status;
 
-        private String value;
-
-        StatusEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static StatusEnum fromValue(String value) {
-            for (StatusEnum enumElement : StatusEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private StatusEnum status;
-
-    /**
-     * Currency of the payment.
-     */
-    public enum CurrencyEnum {
-        INR("INR"),
-        BRL("BRL"),
-        UNKNOWN("UNKNOWN");
-
-        private String value;
-
-        CurrencyEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static CurrencyEnum fromValue(String value) {
-            for (CurrencyEnum enumElement : CurrencyEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private CurrencyEnum currency;
+    private WhatsAppPaymentCurrency currency;
 
     private WhatsAppWebhookPaymentAmount totalAmount;
 
     private String transactionId;
 
-    /**
-     * Type of the transaction.
-     */
-    public enum TransactionTypeEnum {
-        UPI("UPI"),
-        BR("BR"),
-        UNKNOWN("UNKNOWN");
+    private WhatsAppPaymentTransactionType transactionType;
 
-        private String value;
-
-        TransactionTypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TransactionTypeEnum fromValue(String value) {
-            for (TransactionTypeEnum enumElement : TransactionTypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private TransactionTypeEnum transactionType;
+    private WhatsAppContext context;
 
     /**
      * Constructs a new {@link WhatsAppWebhookPaymentConfirmationContent} instance.
@@ -198,8 +91,6 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
      * <p>
      * Field description:
      * Unique identifier of the payment.
-     * <p>
-     * The field is required.
      *
      * @param paymentId
      * @return This {@link WhatsAppWebhookPaymentConfirmationContent instance}.
@@ -214,8 +105,6 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
      * <p>
      * Field description:
      * Unique identifier of the payment.
-     * <p>
-     * The field is required.
      *
      * @return paymentId
      */
@@ -229,8 +118,6 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
      * <p>
      * Field description:
      * Unique identifier of the payment.
-     * <p>
-     * The field is required.
      *
      * @param paymentId
      */
@@ -242,15 +129,12 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
     /**
      * Sets status.
      * <p>
-     * Field description:
-     * Status of the transaction.
-     * <p>
      * The field is required.
      *
      * @param status
      * @return This {@link WhatsAppWebhookPaymentConfirmationContent instance}.
      */
-    public WhatsAppWebhookPaymentConfirmationContent status(StatusEnum status) {
+    public WhatsAppWebhookPaymentConfirmationContent status(WhatsAppPaymentTransactionStatus status) {
         this.status = status;
         return this;
     }
@@ -258,45 +142,36 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
     /**
      * Returns status.
      * <p>
-     * Field description:
-     * Status of the transaction.
-     * <p>
      * The field is required.
      *
      * @return status
      */
     @JsonProperty("status")
-    public StatusEnum getStatus() {
+    public WhatsAppPaymentTransactionStatus getStatus() {
         return status;
     }
 
     /**
      * Sets status.
      * <p>
-     * Field description:
-     * Status of the transaction.
-     * <p>
      * The field is required.
      *
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(StatusEnum status) {
+    public void setStatus(WhatsAppPaymentTransactionStatus status) {
         this.status = status;
     }
 
     /**
      * Sets currency.
      * <p>
-     * Field description:
-     * Currency of the payment.
-     * <p>
      * The field is required.
      *
      * @param currency
      * @return This {@link WhatsAppWebhookPaymentConfirmationContent instance}.
      */
-    public WhatsAppWebhookPaymentConfirmationContent currency(CurrencyEnum currency) {
+    public WhatsAppWebhookPaymentConfirmationContent currency(WhatsAppPaymentCurrency currency) {
         this.currency = currency;
         return this;
     }
@@ -304,30 +179,24 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
     /**
      * Returns currency.
      * <p>
-     * Field description:
-     * Currency of the payment.
-     * <p>
      * The field is required.
      *
      * @return currency
      */
     @JsonProperty("currency")
-    public CurrencyEnum getCurrency() {
+    public WhatsAppPaymentCurrency getCurrency() {
         return currency;
     }
 
     /**
      * Sets currency.
      * <p>
-     * Field description:
-     * Currency of the payment.
-     * <p>
      * The field is required.
      *
      * @param currency
      */
     @JsonProperty("currency")
-    public void setCurrency(CurrencyEnum currency) {
+    public void setCurrency(WhatsAppPaymentCurrency currency) {
         this.currency = currency;
     }
 
@@ -417,15 +286,12 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
     /**
      * Sets transactionType.
      * <p>
-     * Field description:
-     * Type of the transaction.
-     * <p>
      * The field is required.
      *
      * @param transactionType
      * @return This {@link WhatsAppWebhookPaymentConfirmationContent instance}.
      */
-    public WhatsAppWebhookPaymentConfirmationContent transactionType(TransactionTypeEnum transactionType) {
+    public WhatsAppWebhookPaymentConfirmationContent transactionType(WhatsAppPaymentTransactionType transactionType) {
         this.transactionType = transactionType;
         return this;
     }
@@ -433,31 +299,56 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
     /**
      * Returns transactionType.
      * <p>
-     * Field description:
-     * Type of the transaction.
-     * <p>
      * The field is required.
      *
      * @return transactionType
      */
     @JsonProperty("transactionType")
-    public TransactionTypeEnum getTransactionType() {
+    public WhatsAppPaymentTransactionType getTransactionType() {
         return transactionType;
     }
 
     /**
      * Sets transactionType.
      * <p>
-     * Field description:
-     * Type of the transaction.
-     * <p>
      * The field is required.
      *
      * @param transactionType
      */
     @JsonProperty("transactionType")
-    public void setTransactionType(TransactionTypeEnum transactionType) {
+    public void setTransactionType(WhatsAppPaymentTransactionType transactionType) {
         this.transactionType = transactionType;
+    }
+
+    /**
+     * Sets context.
+     *
+     * @param context
+     * @return This {@link WhatsAppWebhookPaymentConfirmationContent instance}.
+     */
+    public WhatsAppWebhookPaymentConfirmationContent context(WhatsAppContext context) {
+        this.context = context;
+        return this;
+    }
+
+    /**
+     * Returns context.
+     *
+     * @return context
+     */
+    @JsonProperty("context")
+    public WhatsAppContext getContext() {
+        return context;
+    }
+
+    /**
+     * Sets context.
+     *
+     * @param context
+     */
+    @JsonProperty("context")
+    public void setContext(WhatsAppContext context) {
+        this.context = context;
     }
 
     @Override
@@ -477,6 +368,7 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
                 && Objects.equals(this.totalAmount, whatsAppWebhookPaymentConfirmationContent.totalAmount)
                 && Objects.equals(this.transactionId, whatsAppWebhookPaymentConfirmationContent.transactionId)
                 && Objects.equals(this.transactionType, whatsAppWebhookPaymentConfirmationContent.transactionType)
+                && Objects.equals(this.context, whatsAppWebhookPaymentConfirmationContent.context)
                 && super.equals(o);
     }
 
@@ -490,6 +382,7 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
                 totalAmount,
                 transactionId,
                 transactionType,
+                context,
                 super.hashCode());
     }
 
@@ -522,6 +415,9 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
                 .append(newLine)
                 .append("    transactionType: ")
                 .append(toIndentedString(transactionType))
+                .append(newLine)
+                .append("    context: ")
+                .append(toIndentedString(context))
                 .append(newLine)
                 .append("}")
                 .toString();

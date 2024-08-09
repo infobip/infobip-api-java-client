@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * The list of the results for this page.
+ * Represents CallsDialogLogResponse model.
  */
 public class CallsDialogLogResponse {
 

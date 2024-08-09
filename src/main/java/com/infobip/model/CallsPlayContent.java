@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.Objects;
 
 /**
- * Audio content to play. It can either be previously uploaded file or a file from a URL.
+ * Represents CallsPlayContent model.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -25,6 +25,7 @@ import java.util.Objects;
 @JsonSubTypes({
     @JsonSubTypes.Type(value = CallsFilePlayContent.class, name = "FILE"),
     @JsonSubTypes.Type(value = CallsRecordingPlayContent.class, name = "RECORDING"),
+    @JsonSubTypes.Type(value = CallsTextPlayContent.class, name = "TEXT"),
     @JsonSubTypes.Type(value = CallsUrlPlayContent.class, name = "URL"),
 })
 public abstract class CallsPlayContent {

@@ -9,51 +9,15 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
  * Information about the referral which is either a Facebook ad or a post that triggered the message.
  */
 public class WhatsAppWebhookReferral {
-    /**
-     * Indicates the source of the referral. Takes the value of &#x60;UNKNOWN&#x60; if there&#39;s no value or the value is different from &#x60;AD&#x60; or &#x60;POST&#x60;.
-     */
-    public enum SourceTypeEnum {
-        AD("AD"),
-        POST("POST"),
-        UNKNOWN("UNKNOWN");
 
-        private String value;
-
-        SourceTypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static SourceTypeEnum fromValue(String value) {
-            for (SourceTypeEnum enumElement : SourceTypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private SourceTypeEnum sourceType;
+    private WhatsAppWebhookReferralSourceType sourceType;
 
     private String sourceId;
 
@@ -63,20 +27,19 @@ public class WhatsAppWebhookReferral {
 
     private String body;
 
-    private String ctwaClickId;
-
     private WhatsAppWebhookReferralMedia referralMedia;
+
+    private String ctwaClickId;
 
     /**
      * Sets sourceType.
      * <p>
-     * Field description:
-     * Indicates the source of the referral. Takes the value of &#x60;UNKNOWN&#x60; if there&#39;s no value or the value is different from &#x60;AD&#x60; or &#x60;POST&#x60;.
+     * The field is required.
      *
      * @param sourceType
      * @return This {@link WhatsAppWebhookReferral instance}.
      */
-    public WhatsAppWebhookReferral sourceType(SourceTypeEnum sourceType) {
+    public WhatsAppWebhookReferral sourceType(WhatsAppWebhookReferralSourceType sourceType) {
         this.sourceType = sourceType;
         return this;
     }
@@ -84,26 +47,24 @@ public class WhatsAppWebhookReferral {
     /**
      * Returns sourceType.
      * <p>
-     * Field description:
-     * Indicates the source of the referral. Takes the value of &#x60;UNKNOWN&#x60; if there&#39;s no value or the value is different from &#x60;AD&#x60; or &#x60;POST&#x60;.
+     * The field is required.
      *
      * @return sourceType
      */
     @JsonProperty("sourceType")
-    public SourceTypeEnum getSourceType() {
+    public WhatsAppWebhookReferralSourceType getSourceType() {
         return sourceType;
     }
 
     /**
      * Sets sourceType.
      * <p>
-     * Field description:
-     * Indicates the source of the referral. Takes the value of &#x60;UNKNOWN&#x60; if there&#39;s no value or the value is different from &#x60;AD&#x60; or &#x60;POST&#x60;.
+     * The field is required.
      *
      * @param sourceType
      */
     @JsonProperty("sourceType")
-    public void setSourceType(SourceTypeEnum sourceType) {
+    public void setSourceType(WhatsAppWebhookReferralSourceType sourceType) {
         this.sourceType = sourceType;
     }
 
@@ -152,6 +113,8 @@ public class WhatsAppWebhookReferral {
      * <p>
      * Field description:
      * The URL that leads to a Facebook ad or a post.
+     * <p>
+     * The field is required.
      *
      * @param sourceUrl
      * @return This {@link WhatsAppWebhookReferral instance}.
@@ -166,6 +129,8 @@ public class WhatsAppWebhookReferral {
      * <p>
      * Field description:
      * The URL that leads to a Facebook ad or a post.
+     * <p>
+     * The field is required.
      *
      * @return sourceUrl
      */
@@ -179,6 +144,8 @@ public class WhatsAppWebhookReferral {
      * <p>
      * Field description:
      * The URL that leads to a Facebook ad or a post.
+     * <p>
+     * The field is required.
      *
      * @param sourceUrl
      */
@@ -268,6 +235,37 @@ public class WhatsAppWebhookReferral {
     }
 
     /**
+     * Sets referralMedia.
+     *
+     * @param referralMedia
+     * @return This {@link WhatsAppWebhookReferral instance}.
+     */
+    public WhatsAppWebhookReferral referralMedia(WhatsAppWebhookReferralMedia referralMedia) {
+        this.referralMedia = referralMedia;
+        return this;
+    }
+
+    /**
+     * Returns referralMedia.
+     *
+     * @return referralMedia
+     */
+    @JsonProperty("referralMedia")
+    public WhatsAppWebhookReferralMedia getReferralMedia() {
+        return referralMedia;
+    }
+
+    /**
+     * Sets referralMedia.
+     *
+     * @param referralMedia
+     */
+    @JsonProperty("referralMedia")
+    public void setReferralMedia(WhatsAppWebhookReferralMedia referralMedia) {
+        this.referralMedia = referralMedia;
+    }
+
+    /**
      * Sets ctwaClickId.
      * <p>
      * Field description:
@@ -307,37 +305,6 @@ public class WhatsAppWebhookReferral {
         this.ctwaClickId = ctwaClickId;
     }
 
-    /**
-     * Sets referralMedia.
-     *
-     * @param referralMedia
-     * @return This {@link WhatsAppWebhookReferral instance}.
-     */
-    public WhatsAppWebhookReferral referralMedia(WhatsAppWebhookReferralMedia referralMedia) {
-        this.referralMedia = referralMedia;
-        return this;
-    }
-
-    /**
-     * Returns referralMedia.
-     *
-     * @return referralMedia
-     */
-    @JsonProperty("referralMedia")
-    public WhatsAppWebhookReferralMedia getReferralMedia() {
-        return referralMedia;
-    }
-
-    /**
-     * Sets referralMedia.
-     *
-     * @param referralMedia
-     */
-    @JsonProperty("referralMedia")
-    public void setReferralMedia(WhatsAppWebhookReferralMedia referralMedia) {
-        this.referralMedia = referralMedia;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -352,13 +319,13 @@ public class WhatsAppWebhookReferral {
                 && Objects.equals(this.sourceUrl, whatsAppWebhookReferral.sourceUrl)
                 && Objects.equals(this.headline, whatsAppWebhookReferral.headline)
                 && Objects.equals(this.body, whatsAppWebhookReferral.body)
-                && Objects.equals(this.ctwaClickId, whatsAppWebhookReferral.ctwaClickId)
-                && Objects.equals(this.referralMedia, whatsAppWebhookReferral.referralMedia);
+                && Objects.equals(this.referralMedia, whatsAppWebhookReferral.referralMedia)
+                && Objects.equals(this.ctwaClickId, whatsAppWebhookReferral.ctwaClickId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sourceType, sourceId, sourceUrl, headline, body, ctwaClickId, referralMedia);
+        return Objects.hash(sourceType, sourceId, sourceUrl, headline, body, referralMedia, ctwaClickId);
     }
 
     @Override
@@ -382,11 +349,11 @@ public class WhatsAppWebhookReferral {
                 .append("    body: ")
                 .append(toIndentedString(body))
                 .append(newLine)
-                .append("    ctwaClickId: ")
-                .append(toIndentedString(ctwaClickId))
-                .append(newLine)
                 .append("    referralMedia: ")
                 .append(toIndentedString(referralMedia))
+                .append(newLine)
+                .append("    ctwaClickId: ")
+                .append(toIndentedString(ctwaClickId))
                 .append(newLine)
                 .append("}")
                 .toString();

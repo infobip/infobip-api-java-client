@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Country.
+ * Country name.
  */
 public enum WhatsAppBeneficiaryCountry {
     INDIA("INDIA");

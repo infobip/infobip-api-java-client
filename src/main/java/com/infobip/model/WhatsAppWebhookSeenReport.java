@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * Represents WhatsAppWebhookSeenReport model.
+ * Collection of reports, one per every message.
  */
 public class WhatsAppWebhookSeenReport {
 
@@ -116,7 +116,7 @@ public class WhatsAppWebhookSeenReport {
      * Sets to.
      * <p>
      * Field description:
-     * Registered WhatsApp business number.
+     * Sender provided during the activation process.
      *
      * @param to
      * @return This {@link WhatsAppWebhookSeenReport instance}.
@@ -130,7 +130,7 @@ public class WhatsAppWebhookSeenReport {
      * Returns to.
      * <p>
      * Field description:
-     * Registered WhatsApp business number.
+     * Sender provided during the activation process.
      *
      * @return to
      */
@@ -143,7 +143,7 @@ public class WhatsAppWebhookSeenReport {
      * Sets to.
      * <p>
      * Field description:
-     * Registered WhatsApp business number.
+     * Sender provided during the activation process.
      *
      * @param to
      */

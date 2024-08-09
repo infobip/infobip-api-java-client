@@ -7704,7 +7704,7 @@ public class CallsApi {
     /**
      * Upload audio file.
      * <p>
-     * Upload an audio file. Uploaded files can be played on calls or conferences.
+     * Upload an audio file. Uploaded files can be played on calls, dialogs or conferences. The file will be removed if it is not used for 30 days.
      *
      * @param _file  (required)
      * @return UploadCallsAudioFileRequest

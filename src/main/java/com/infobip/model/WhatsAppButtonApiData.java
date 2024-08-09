@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons and a phone number button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
+ * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, a phone number button and &#x60;copy code&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -25,6 +25,7 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = WhatsAppCopyCodeDefaultButtonApiData.class, name = "COPY_CODE"),
     @JsonSubTypes.Type(value = WhatsAppPhoneNumberButtonApiData.class, name = "PHONE_NUMBER"),
     @JsonSubTypes.Type(value = WhatsAppQuickReplyButtonApiData.class, name = "QUICK_REPLY"),
     @JsonSubTypes.Type(value = WhatsAppUrlButtonApiData.class, name = "URL"),
@@ -36,7 +37,8 @@ public abstract class WhatsAppButtonApiData {
     public enum TypeEnum {
         PHONE_NUMBER("PHONE_NUMBER"),
         URL("URL"),
-        QUICK_REPLY("QUICK_REPLY");
+        QUICK_REPLY("QUICK_REPLY"),
+        COPY_CODE("COPY_CODE");
 
         private String value;
 
@@ -74,8 +76,6 @@ public abstract class WhatsAppButtonApiData {
         this.type = TypeEnum.fromValue(type);
     }
 
-    private String text;
-
     /**
      * Returns type.
      *
@@ -84,52 +84,6 @@ public abstract class WhatsAppButtonApiData {
     @JsonProperty("type")
     public TypeEnum getType() {
         return type;
-    }
-
-    /**
-     * Sets text.
-     * <p>
-     * Field description:
-     * Button text.
-     * <p>
-     * The field is required.
-     *
-     * @param text
-     * @return This {@link WhatsAppButtonApiData instance}.
-     */
-    public WhatsAppButtonApiData text(String text) {
-        this.text = text;
-        return this;
-    }
-
-    /**
-     * Returns text.
-     * <p>
-     * Field description:
-     * Button text.
-     * <p>
-     * The field is required.
-     *
-     * @return text
-     */
-    @JsonProperty("text")
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * Sets text.
-     * <p>
-     * Field description:
-     * Button text.
-     * <p>
-     * The field is required.
-     *
-     * @param text
-     */
-    @JsonProperty("text")
-    public void setText(String text) {
-        this.text = text;
     }
 
     @Override
@@ -141,13 +95,12 @@ public abstract class WhatsAppButtonApiData {
             return false;
         }
         WhatsAppButtonApiData whatsAppButtonApiData = (WhatsAppButtonApiData) o;
-        return Objects.equals(this.type, whatsAppButtonApiData.type)
-                && Objects.equals(this.text, whatsAppButtonApiData.text);
+        return Objects.equals(this.type, whatsAppButtonApiData.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, text);
+        return Objects.hash(type);
     }
 
     @Override
@@ -158,9 +111,6 @@ public abstract class WhatsAppButtonApiData {
                 .append(newLine)
                 .append("    type: ")
                 .append(toIndentedString(type))
-                .append(newLine)
-                .append("    text: ")
-                .append(toIndentedString(text))
                 .append(newLine)
                 .append("}")
                 .toString();

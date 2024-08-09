@@ -29,7 +29,7 @@ public class ViberResponseDetails {
      * Sets messageId.
      * <p>
      * Field description:
-     * Unique message ID. If not passed, it will be automatically generated and returned in a response.
+     * Unique message ID. If not provided, it will be auto-generated and returned in the API response.
      *
      * @param messageId
      * @return This {@link ViberResponseDetails instance}.
@@ -43,7 +43,7 @@ public class ViberResponseDetails {
      * Returns messageId.
      * <p>
      * Field description:
-     * Unique message ID. If not passed, it will be automatically generated and returned in a response.
+     * Unique message ID. If not provided, it will be auto-generated and returned in the API response.
      *
      * @return messageId
      */
@@ -56,7 +56,7 @@ public class ViberResponseDetails {
      * Sets messageId.
      * <p>
      * Field description:
-     * Unique message ID. If not passed, it will be automatically generated and returned in a response.
+     * Unique message ID. If not provided, it will be auto-generated and returned in the API response.
      *
      * @param messageId
      */
@@ -100,7 +100,7 @@ public class ViberResponseDetails {
      * Sets destination.
      * <p>
      * Field description:
-     * The destination address of the message.
+     * The destination address of the message, i.e., its recipient.
      *
      * @param destination
      * @return This {@link ViberResponseDetails instance}.
@@ -114,7 +114,7 @@ public class ViberResponseDetails {
      * Returns destination.
      * <p>
      * Field description:
-     * The destination address of the message.
+     * The destination address of the message, i.e., its recipient.
      *
      * @return destination
      */
@@ -127,7 +127,7 @@ public class ViberResponseDetails {
      * Sets destination.
      * <p>
      * Field description:
-     * The destination address of the message.
+     * The destination address of the message, i.e., its recipient.
      *
      * @param destination
      */

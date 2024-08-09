@@ -25,6 +25,8 @@ public class CallsConference {
 
     private List<CallsParticipant> participants = null;
 
+    private String callsConfigurationId;
+
     private String applicationId;
 
     /**
@@ -165,6 +167,46 @@ public class CallsConference {
     }
 
     /**
+     * Sets callsConfigurationId.
+     * <p>
+     * Field description:
+     * Calls Configuration ID.
+     *
+     * @param callsConfigurationId
+     * @return This {@link CallsConference instance}.
+     */
+    public CallsConference callsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+        return this;
+    }
+
+    /**
+     * Returns callsConfigurationId.
+     * <p>
+     * Field description:
+     * Calls Configuration ID.
+     *
+     * @return callsConfigurationId
+     */
+    @JsonProperty("callsConfigurationId")
+    public String getCallsConfigurationId() {
+        return callsConfigurationId;
+    }
+
+    /**
+     * Sets callsConfigurationId.
+     * <p>
+     * Field description:
+     * Calls Configuration ID.
+     *
+     * @param callsConfigurationId
+     */
+    @JsonProperty("callsConfigurationId")
+    public void setCallsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+    }
+
+    /**
      * Sets applicationId.
      * <p>
      * Field description:
@@ -216,12 +258,13 @@ public class CallsConference {
         return Objects.equals(this.id, callsConference.id)
                 && Objects.equals(this.name, callsConference.name)
                 && Objects.equals(this.participants, callsConference.participants)
+                && Objects.equals(this.callsConfigurationId, callsConference.callsConfigurationId)
                 && Objects.equals(this.applicationId, callsConference.applicationId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, participants, applicationId);
+        return Objects.hash(id, name, participants, callsConfigurationId, applicationId);
     }
 
     @Override
@@ -238,6 +281,9 @@ public class CallsConference {
                 .append(newLine)
                 .append("    participants: ")
                 .append(toIndentedString(participants))
+                .append(newLine)
+                .append("    callsConfigurationId: ")
+                .append(toIndentedString(callsConfigurationId))
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))

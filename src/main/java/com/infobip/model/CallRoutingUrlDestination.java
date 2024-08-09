@@ -23,7 +23,7 @@ public class CallRoutingUrlDestination extends CallRoutingDestination {
 
     private String url;
 
-    private CallRoutingUrlSecurityConfig securityConfig;
+    private SecurityConfig securityConfig;
 
     /**
      * Constructs a new {@link CallRoutingUrlDestination} instance.
@@ -164,7 +164,7 @@ public class CallRoutingUrlDestination extends CallRoutingDestination {
      * @param securityConfig
      * @return This {@link CallRoutingUrlDestination instance}.
      */
-    public CallRoutingUrlDestination securityConfig(CallRoutingUrlSecurityConfig securityConfig) {
+    public CallRoutingUrlDestination securityConfig(SecurityConfig securityConfig) {
         this.securityConfig = securityConfig;
         return this;
     }
@@ -175,7 +175,7 @@ public class CallRoutingUrlDestination extends CallRoutingDestination {
      * @return securityConfig
      */
     @JsonProperty("securityConfig")
-    public CallRoutingUrlSecurityConfig getSecurityConfig() {
+    public SecurityConfig getSecurityConfig() {
         return securityConfig;
     }
 
@@ -185,7 +185,7 @@ public class CallRoutingUrlDestination extends CallRoutingDestination {
      * @param securityConfig
      */
     @JsonProperty("securityConfig")
-    public void setSecurityConfig(CallRoutingUrlSecurityConfig securityConfig) {
+    public void setSecurityConfig(SecurityConfig securityConfig) {
         this.securityConfig = securityConfig;
     }
 

@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class WhatsAppWebhookInboundMessageResult {
 
-    private List<WhatsAppWebhookInboundMessageData> results = null;
+    private List<WhatsAppWebhookInboundMessageData> results = new ArrayList<>();
 
     private Integer messageCount;
 
@@ -30,6 +30,8 @@ public class WhatsAppWebhookInboundMessageResult {
      * <p>
      * Field description:
      * Collection of reports, one per every received message.
+     * <p>
+     * The field is required.
      *
      * @param results
      * @return This {@link WhatsAppWebhookInboundMessageResult instance}.
@@ -44,6 +46,8 @@ public class WhatsAppWebhookInboundMessageResult {
      * <p>
      * Field description:
      * Collection of reports, one per every received message.
+     * <p>
+     * The field is required.
      *
      * @param resultsItem The item to be added to the list.
      * @return This {@link WhatsAppWebhookInboundMessageResult instance}.
@@ -61,6 +65,8 @@ public class WhatsAppWebhookInboundMessageResult {
      * <p>
      * Field description:
      * Collection of reports, one per every received message.
+     * <p>
+     * The field is required.
      *
      * @return results
      */
@@ -74,6 +80,8 @@ public class WhatsAppWebhookInboundMessageResult {
      * <p>
      * Field description:
      * Collection of reports, one per every received message.
+     * <p>
+     * The field is required.
      *
      * @param results
      */
@@ -86,7 +94,9 @@ public class WhatsAppWebhookInboundMessageResult {
      * Sets messageCount.
      * <p>
      * Field description:
-     * Number of returned messages in this request.
+     * The number of messages returned in the results array.
+     * <p>
+     * The field is required.
      *
      * @param messageCount
      * @return This {@link WhatsAppWebhookInboundMessageResult instance}.
@@ -100,7 +110,9 @@ public class WhatsAppWebhookInboundMessageResult {
      * Returns messageCount.
      * <p>
      * Field description:
-     * Number of returned messages in this request.
+     * The number of messages returned in the results array.
+     * <p>
+     * The field is required.
      *
      * @return messageCount
      */
@@ -113,7 +125,9 @@ public class WhatsAppWebhookInboundMessageResult {
      * Sets messageCount.
      * <p>
      * Field description:
-     * Number of returned messages in this request.
+     * The number of messages returned in the results array.
+     * <p>
+     * The field is required.
      *
      * @param messageCount
      */
@@ -126,7 +140,9 @@ public class WhatsAppWebhookInboundMessageResult {
      * Sets pendingMessageCount.
      * <p>
      * Field description:
-     * Number of remaining new messages on Infobip servers ready to be returned in the next request.
+     * The number of messages that have not been pulled in.
+     * <p>
+     * The field is required.
      *
      * @param pendingMessageCount
      * @return This {@link WhatsAppWebhookInboundMessageResult instance}.
@@ -140,7 +156,9 @@ public class WhatsAppWebhookInboundMessageResult {
      * Returns pendingMessageCount.
      * <p>
      * Field description:
-     * Number of remaining new messages on Infobip servers ready to be returned in the next request.
+     * The number of messages that have not been pulled in.
+     * <p>
+     * The field is required.
      *
      * @return pendingMessageCount
      */
@@ -153,7 +171,9 @@ public class WhatsAppWebhookInboundMessageResult {
      * Sets pendingMessageCount.
      * <p>
      * Field description:
-     * Number of remaining new messages on Infobip servers ready to be returned in the next request.
+     * The number of messages that have not been pulled in.
+     * <p>
+     * The field is required.
      *
      * @param pendingMessageCount
      */

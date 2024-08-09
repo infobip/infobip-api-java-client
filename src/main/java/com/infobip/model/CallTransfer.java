@@ -70,8 +70,6 @@ public class CallTransfer {
      * <p>
      * Field description:
      * Criteria for establishing call transfer, if &#x60;dtmf&#x60; is evaluated.
-     * <p>
-     * The field is required.
      *
      * @param equals
      * @return This {@link CallTransfer instance}.
@@ -86,8 +84,6 @@ public class CallTransfer {
      * <p>
      * Field description:
      * Criteria for establishing call transfer, if &#x60;dtmf&#x60; is evaluated.
-     * <p>
-     * The field is required.
      *
      * @return equals
      */
@@ -101,8 +97,6 @@ public class CallTransfer {
      * <p>
      * Field description:
      * Criteria for establishing call transfer, if &#x60;dtmf&#x60; is evaluated.
-     * <p>
-     * The field is required.
      *
      * @param equals
      */

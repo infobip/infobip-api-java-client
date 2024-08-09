@@ -41,6 +41,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * Number which sent the message.
+     * <p>
+     * The field is required.
      *
      * @param from
      * @return This {@link ViberWebhookInboundReport instance}.
@@ -55,6 +57,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * Number which sent the message.
+     * <p>
+     * The field is required.
      *
      * @return from
      */
@@ -68,6 +72,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * Number which sent the message.
+     * <p>
+     * The field is required.
      *
      * @param from
      */
@@ -81,6 +87,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * Sender provided during the activation process.
+     * <p>
+     * The field is required.
      *
      * @param to
      * @return This {@link ViberWebhookInboundReport instance}.
@@ -95,6 +103,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * Sender provided during the activation process.
+     * <p>
+     * The field is required.
      *
      * @return to
      */
@@ -108,6 +118,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * Sender provided during the activation process.
+     * <p>
+     * The field is required.
      *
      * @param to
      */
@@ -121,6 +133,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * Integration type.
+     * <p>
+     * The field is required.
      *
      * @param integrationType
      * @return This {@link ViberWebhookInboundReport instance}.
@@ -135,6 +149,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * Integration type.
+     * <p>
+     * The field is required.
      *
      * @return integrationType
      */
@@ -148,6 +164,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * Integration type.
+     * <p>
+     * The field is required.
      *
      * @param integrationType
      */
@@ -161,6 +179,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * Date and time when Infobip received the message.
+     * <p>
+     * The field is required.
      *
      * @param receivedAt
      * @return This {@link ViberWebhookInboundReport instance}.
@@ -175,6 +195,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * Date and time when Infobip received the message.
+     * <p>
+     * The field is required.
      *
      * @return receivedAt
      */
@@ -188,6 +210,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * Date and time when Infobip received the message.
+     * <p>
+     * The field is required.
      *
      * @param receivedAt
      */
@@ -201,6 +225,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * The ID that uniquely identifies the received message.
+     * <p>
+     * The field is required.
      *
      * @param messageId
      * @return This {@link ViberWebhookInboundReport instance}.
@@ -215,6 +241,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * The ID that uniquely identifies the received message.
+     * <p>
+     * The field is required.
      *
      * @return messageId
      */
@@ -228,6 +256,8 @@ public class ViberWebhookInboundReport {
      * <p>
      * Field description:
      * The ID that uniquely identifies the received message.
+     * <p>
+     * The field is required.
      *
      * @param messageId
      */
@@ -318,6 +348,8 @@ public class ViberWebhookInboundReport {
 
     /**
      * Sets message.
+     * <p>
+     * The field is required.
      *
      * @param message
      * @return This {@link ViberWebhookInboundReport instance}.
@@ -329,6 +361,8 @@ public class ViberWebhookInboundReport {
 
     /**
      * Returns message.
+     * <p>
+     * The field is required.
      *
      * @return message
      */
@@ -339,6 +373,8 @@ public class ViberWebhookInboundReport {
 
     /**
      * Sets message.
+     * <p>
+     * The field is required.
      *
      * @param message
      */
@@ -349,6 +385,8 @@ public class ViberWebhookInboundReport {
 
     /**
      * Sets price.
+     * <p>
+     * The field is required.
      *
      * @param price
      * @return This {@link ViberWebhookInboundReport instance}.
@@ -360,6 +398,8 @@ public class ViberWebhookInboundReport {
 
     /**
      * Returns price.
+     * <p>
+     * The field is required.
      *
      * @return price
      */
@@ -370,6 +410,8 @@ public class ViberWebhookInboundReport {
 
     /**
      * Sets price.
+     * <p>
+     * The field is required.
      *
      * @param price
      */

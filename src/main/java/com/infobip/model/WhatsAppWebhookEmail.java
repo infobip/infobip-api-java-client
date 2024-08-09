@@ -15,14 +15,14 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * Represents WhatsAppWebhookEmail model.
+ * Array of emails information.
  */
 public class WhatsAppWebhookEmail {
 
     private String email;
 
     /**
-     * Type of an email
+     * Type of the email. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
      */
     public enum TypeEnum {
         HOME("HOME"),
@@ -61,7 +61,7 @@ public class WhatsAppWebhookEmail {
      * Sets email.
      * <p>
      * Field description:
-     * Email of a contact.
+     * Contact&#39;s email.
      *
      * @param email
      * @return This {@link WhatsAppWebhookEmail instance}.
@@ -75,7 +75,7 @@ public class WhatsAppWebhookEmail {
      * Returns email.
      * <p>
      * Field description:
-     * Email of a contact.
+     * Contact&#39;s email.
      *
      * @return email
      */
@@ -88,7 +88,7 @@ public class WhatsAppWebhookEmail {
      * Sets email.
      * <p>
      * Field description:
-     * Email of a contact.
+     * Contact&#39;s email.
      *
      * @param email
      */
@@ -101,7 +101,7 @@ public class WhatsAppWebhookEmail {
      * Sets type.
      * <p>
      * Field description:
-     * Type of an email
+     * Type of the email. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
      *
      * @param type
      * @return This {@link WhatsAppWebhookEmail instance}.
@@ -115,7 +115,7 @@ public class WhatsAppWebhookEmail {
      * Returns type.
      * <p>
      * Field description:
-     * Type of an email
+     * Type of the email. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
      *
      * @return type
      */
@@ -128,7 +128,7 @@ public class WhatsAppWebhookEmail {
      * Sets type.
      * <p>
      * Field description:
-     * Type of an email
+     * Type of the email. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
      *
      * @param type
      */

@@ -21,7 +21,7 @@ public class ViberWebhooks {
 
     private String contentType;
 
-    private Object callbackData;
+    private String callbackData;
 
     /**
      * Sets delivery.
@@ -98,12 +98,12 @@ public class ViberWebhooks {
      * Sets callbackData.
      * <p>
      * Field description:
-     * Callback data sent through &#x60;callbackData&#x60; field.
+     * Additional data that can be used for identifying, managing, or monitoring a message. Data included here will also be automatically included in the message Delivery Report. The maximum value is 4000 characters.
      *
      * @param callbackData
      * @return This {@link ViberWebhooks instance}.
      */
-    public ViberWebhooks callbackData(Object callbackData) {
+    public ViberWebhooks callbackData(String callbackData) {
         this.callbackData = callbackData;
         return this;
     }
@@ -112,12 +112,12 @@ public class ViberWebhooks {
      * Returns callbackData.
      * <p>
      * Field description:
-     * Callback data sent through &#x60;callbackData&#x60; field.
+     * Additional data that can be used for identifying, managing, or monitoring a message. Data included here will also be automatically included in the message Delivery Report. The maximum value is 4000 characters.
      *
      * @return callbackData
      */
     @JsonProperty("callbackData")
-    public Object getCallbackData() {
+    public String getCallbackData() {
         return callbackData;
     }
 
@@ -125,12 +125,12 @@ public class ViberWebhooks {
      * Sets callbackData.
      * <p>
      * Field description:
-     * Callback data sent through &#x60;callbackData&#x60; field.
+     * Additional data that can be used for identifying, managing, or monitoring a message. Data included here will also be automatically included in the message Delivery Report. The maximum value is 4000 characters.
      *
      * @param callbackData
      */
     @JsonProperty("callbackData")
-    public void setCallbackData(Object callbackData) {
+    public void setCallbackData(String callbackData) {
         this.callbackData = callbackData;
     }
 

@@ -74,6 +74,8 @@ public abstract class ViberInboundContent {
 
     /**
      * Returns type.
+     * <p>
+     * The field is required.
      *
      * @return type
      */
