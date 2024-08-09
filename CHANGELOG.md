@@ -10,6 +10,11 @@ and this library adheres to [Semantic Versioning](http://semver.org/) as mention
 ### Added
 * Added mock tests to verify the correctness of request payloads and response handling.
 * Added `awaitility` and `wiremock` test dependencies.
+* `snyk.yml` workflow, which serves the purpose of identifying and addressing dependency vulnerabilities in the project.
+* `sonar.yml` workflow to analyze the source code, enhancing code quality and maintainability.
+* `git-build-hook-maven-plugin` plugin into the project, providing support for Git hooks.
+* `pre-commit.sh` hook, which automatically executes `mvn spotless:apply` prior to each commit, ensuring code formatting consistency.
+
 
 ## [ [4.3.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.3.1) ] - 2024-06-05
 
