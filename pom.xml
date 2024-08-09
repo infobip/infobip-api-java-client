@@ -44,6 +44,8 @@
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
         <assertj-core.version>3.24.2</assertj-core.version>
         <guava.version>32.1.2-jre</guava.version>
+        <wiremock.version>2.27.2</wiremock.version>
+        <awaitility.version>4.2.0</awaitility.version>
     </properties>
 
     <build>
@@ -246,6 +248,18 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-jdk14</artifactId>
             <version>${slf4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>${wiremock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
