@@ -13,20 +13,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Days of the week which are included in the delivery time window. At least one day must be provided. Separate multiple days with a comma.
+ * Recipient Type must be &#x60;TACIR&#x60; or &#x60;BIREYSEL&#x60;.
  */
-public enum ViberDeliveryDay {
-    MONDAY("MONDAY"),
-    TUESDAY("TUESDAY"),
-    WEDNESDAY("WEDNESDAY"),
-    THURSDAY("THURSDAY"),
-    FRIDAY("FRIDAY"),
-    SATURDAY("SATURDAY"),
-    SUNDAY("SUNDAY");
+public enum RecipientType {
+    BIREYSEL("BIREYSEL"),
+    TACIR("TACIR");
 
     private final String value;
 
-    ViberDeliveryDay(String value) {
+    RecipientType(String value) {
         this.value = value;
     }
 
@@ -41,8 +36,8 @@ public enum ViberDeliveryDay {
     }
 
     @JsonCreator
-    public static ViberDeliveryDay fromValue(String value) {
-        for (ViberDeliveryDay enumElement : ViberDeliveryDay.values()) {
+    public static RecipientType fromValue(String value) {
+        for (RecipientType enumElement : RecipientType.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

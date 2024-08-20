@@ -21,7 +21,7 @@ public class CallsClickToCallMessage {
 
     private String audioFileUrl;
 
-    private CallsDeliveryTimeWindow deliveryTimeWindow;
+    private DeliveryTimeWindow deliveryTimeWindow;
 
     private String destinationA;
 
@@ -139,7 +139,7 @@ public class CallsClickToCallMessage {
      * @param deliveryTimeWindow
      * @return This {@link CallsClickToCallMessage instance}.
      */
-    public CallsClickToCallMessage deliveryTimeWindow(CallsDeliveryTimeWindow deliveryTimeWindow) {
+    public CallsClickToCallMessage deliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
         return this;
     }
@@ -150,7 +150,7 @@ public class CallsClickToCallMessage {
      * @return deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public CallsDeliveryTimeWindow getDeliveryTimeWindow() {
+    public DeliveryTimeWindow getDeliveryTimeWindow() {
         return deliveryTimeWindow;
     }
 
@@ -160,7 +160,7 @@ public class CallsClickToCallMessage {
      * @param deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public void setDeliveryTimeWindow(CallsDeliveryTimeWindow deliveryTimeWindow) {
+    public void setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
     }
 

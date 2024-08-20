@@ -15,53 +15,13 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents SmsResponse model.
+ * Represents SmsRequestEnvelope model.
  */
-public class SmsResponse {
+public class SmsRequestEnvelope {
 
-    private String bulkId;
+    private List<SmsMessage> messages = new ArrayList<>();
 
-    private List<SmsResponseDetails> messages = new ArrayList<>();
-
-    /**
-     * Sets bulkId.
-     * <p>
-     * Field description:
-     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. If not provided, it will be auto-generated and returned in the API response. Typically used for fetching delivery reports and message logs.
-     *
-     * @param bulkId
-     * @return This {@link SmsResponse instance}.
-     */
-    public SmsResponse bulkId(String bulkId) {
-        this.bulkId = bulkId;
-        return this;
-    }
-
-    /**
-     * Returns bulkId.
-     * <p>
-     * Field description:
-     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. If not provided, it will be auto-generated and returned in the API response. Typically used for fetching delivery reports and message logs.
-     *
-     * @return bulkId
-     */
-    @JsonProperty("bulkId")
-    public String getBulkId() {
-        return bulkId;
-    }
-
-    /**
-     * Sets bulkId.
-     * <p>
-     * Field description:
-     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. If not provided, it will be auto-generated and returned in the API response. Typically used for fetching delivery reports and message logs.
-     *
-     * @param bulkId
-     */
-    @JsonProperty("bulkId")
-    public void setBulkId(String bulkId) {
-        this.bulkId = bulkId;
-    }
+    private SmsMessageRequestOptions options;
 
     /**
      * Sets messages.
@@ -72,9 +32,9 @@ public class SmsResponse {
      * The field is required.
      *
      * @param messages
-     * @return This {@link SmsResponse instance}.
+     * @return This {@link SmsRequestEnvelope instance}.
      */
-    public SmsResponse messages(List<SmsResponseDetails> messages) {
+    public SmsRequestEnvelope messages(List<SmsMessage> messages) {
         this.messages = messages;
         return this;
     }
@@ -88,9 +48,9 @@ public class SmsResponse {
      * The field is required.
      *
      * @param messagesItem The item to be added to the list.
-     * @return This {@link SmsResponse instance}.
+     * @return This {@link SmsRequestEnvelope instance}.
      */
-    public SmsResponse addMessagesItem(SmsResponseDetails messagesItem) {
+    public SmsRequestEnvelope addMessagesItem(SmsMessage messagesItem) {
         if (this.messages == null) {
             this.messages = new ArrayList<>();
         }
@@ -109,7 +69,7 @@ public class SmsResponse {
      * @return messages
      */
     @JsonProperty("messages")
-    public List<SmsResponseDetails> getMessages() {
+    public List<SmsMessage> getMessages() {
         return messages;
     }
 
@@ -124,8 +84,39 @@ public class SmsResponse {
      * @param messages
      */
     @JsonProperty("messages")
-    public void setMessages(List<SmsResponseDetails> messages) {
+    public void setMessages(List<SmsMessage> messages) {
         this.messages = messages;
+    }
+
+    /**
+     * Sets options.
+     *
+     * @param options
+     * @return This {@link SmsRequestEnvelope instance}.
+     */
+    public SmsRequestEnvelope options(SmsMessageRequestOptions options) {
+        this.options = options;
+        return this;
+    }
+
+    /**
+     * Returns options.
+     *
+     * @return options
+     */
+    @JsonProperty("options")
+    public SmsMessageRequestOptions getOptions() {
+        return options;
+    }
+
+    /**
+     * Sets options.
+     *
+     * @param options
+     */
+    @JsonProperty("options")
+    public void setOptions(SmsMessageRequestOptions options) {
+        this.options = options;
     }
 
     @Override
@@ -136,26 +127,27 @@ public class SmsResponse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SmsResponse smsResponse = (SmsResponse) o;
-        return Objects.equals(this.bulkId, smsResponse.bulkId) && Objects.equals(this.messages, smsResponse.messages);
+        SmsRequestEnvelope smsRequestEnvelope = (SmsRequestEnvelope) o;
+        return Objects.equals(this.messages, smsRequestEnvelope.messages)
+                && Objects.equals(this.options, smsRequestEnvelope.options);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bulkId, messages);
+        return Objects.hash(messages, options);
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class SmsResponse {")
-                .append(newLine)
-                .append("    bulkId: ")
-                .append(toIndentedString(bulkId))
+                .append("class SmsRequestEnvelope {")
                 .append(newLine)
                 .append("    messages: ")
                 .append(toIndentedString(messages))
+                .append(newLine)
+                .append("    options: ")
+                .append(toIndentedString(options))
                 .append(newLine)
                 .append("}")
                 .toString();
