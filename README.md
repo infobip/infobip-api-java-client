@@ -87,9 +87,9 @@ See below, a simple example of sending a single SMS message to a single recipien
     SmsApi smsApi = new SmsApi(apiClient);
 
     SmsMessage message = new SmsMessage()
-    .sender("InfoSMS")
-    .addDestinationsItem(new SmsDestination().to("41793026727"))
-    .content(new SmsTextMessageContent().text("Hello World from infobip-api-java-client!"));
+        .sender("InfoSMS")
+        .addDestinationsItem(new SmsDestination().to("41793026727"))
+        .content(new SmsTextMessageContent().text("Hello World from infobip-api-java-client!"));
 
     SmsRequestEnvelope smsMessageRequest = new SmsRequestEnvelope()
         .messages(List.of(message));
