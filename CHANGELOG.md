@@ -21,6 +21,7 @@ and this library adheres to [Semantic Versioning](http://semver.org/) as mention
 * Bumped `junit-jupiter` version to `5.11.0`
 * Bumped `guava` version to `33.3.0-jre`
 * Bumped `maven-gpg-plugin` version to `3.2.5`
+* Bumped `spotless-maven-plugin` version to `2.43.0`
 
 ## [ [4.3.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.3.1) ] - 2024-06-05
 
