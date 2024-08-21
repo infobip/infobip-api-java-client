@@ -15,6 +15,12 @@ and this library adheres to [Semantic Versioning](http://semver.org/) as mention
 * `git-build-hook-maven-plugin` plugin into the project, providing support for Git hooks.
 * `pre-commit.sh` hook, which automatically executes `mvn spotless:apply` prior to each commit, ensuring code formatting consistency.
 
+### Changed
+* Bumped `jackson` version to `2.17.0`
+* Bumped `slf4j-api` version to `2.0.16`
+* Bumped `junit-jupiter` version to `5.11.0`
+* Bumped `guava` version to `33.3.0-jre`
+* Bumped `maven-gpg-plugin` version to `3.2.5`
 
 ## [ [4.3.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.3.1) ] - 2024-06-05
 
