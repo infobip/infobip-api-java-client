@@ -5,11 +5,23 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
-## [Unreleased]
+## [ [4.3.2](https://github.com/infobip/infobip-api-java-client/releases/tag/4.3.2) ] - 2024-08-22
 
 ### Added
 * Added mock tests to verify the correctness of request payloads and response handling.
 * Added `awaitility` and `wiremock` test dependencies.
+* `snyk.yml` workflow, which serves the purpose of identifying and addressing dependency vulnerabilities in the project.
+* `sonar.yml` workflow to analyze the source code, enhancing code quality and maintainability.
+* `git-build-hook-maven-plugin` plugin into the project, providing support for Git hooks.
+* `pre-commit.sh` hook, which automatically executes `mvn spotless:apply` prior to each commit, ensuring code formatting consistency.
+
+### Changed
+* Bumped `jackson` version to `2.17.0`
+* Bumped `slf4j-api` version to `2.0.16`
+* Bumped `junit-jupiter` version to `5.11.0`
+* Bumped `guava` version to `33.3.0-jre`
+* Bumped `maven-gpg-plugin` version to `3.2.5`
+* Bumped `spotless-maven-plugin` version to `2.43.0`
 
 ## [ [4.3.1](https://github.com/infobip/infobip-api-java-client/releases/tag/4.3.1) ] - 2024-06-05
 
