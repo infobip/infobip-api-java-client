@@ -26,7 +26,7 @@ Providing the following information will increase the chances of your issue bein
 
 If you want to provide the solution to the issue yourself, you are free to do that as well 😊
 We welcome and encourage any effort from the community to take part in solving the issues.
-For more details on how to properly provide bugfixes, please check the [Pull request](#-pull-request) section.
+For more details on how to properly provide bugfixes, please check the [Pull request](#%EF%B8%8F-pull-request) section.
 
 ## 🚀 Enhancements/Suggestions/Improvements
 
@@ -44,7 +44,7 @@ please follow these guidelines to help us understand your proposal and evaluate 
     * **Additional Context:** Share any examples, mockups, screenshots, or links to similar implementations (if applicable).
 * **Stay Focused and Specific** - try to keep your enhancement idea focused on a single problem or feature. If you have multiple ideas, consider creating separate issues for each to make the discussion easier to follow.
 * **Be Open to Feedback** - we encourage healthy discussion about proposed enhancements. Be open to feedback, as maintainers and other contributors may have questions or alternative suggestions.
-* **Contribute the Enhancement** - if you want implement your suggestion or if you're interested in working on the other people's enhancements yourself, please check the [Pull request](#-pull-request) section on how to do that.
+* **Contribute the Enhancement** - if you want implement your suggestion or if you're interested in working on the other people's enhancements yourself, please check the [Pull request](#%EF%B8%8F-pull-request) section on how to do that.
 
 ## ℹ️ Asking for General Help
 
