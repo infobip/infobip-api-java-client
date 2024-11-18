@@ -25,7 +25,7 @@ public class MessagesApiPlatform {
      * Sets entityId.
      * <p>
      * Field description:
-     * Required to use entity in a send request for outbound traffic. Returned in notification events. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @param entityId
      * @return This {@link MessagesApiPlatform instance}.
@@ -39,7 +39,7 @@ public class MessagesApiPlatform {
      * Returns entityId.
      * <p>
      * Field description:
-     * Required to use entity in a send request for outbound traffic. Returned in notification events. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @return entityId
      */
@@ -52,7 +52,7 @@ public class MessagesApiPlatform {
      * Sets entityId.
      * <p>
      * Field description:
-     * Required to use entity in a send request for outbound traffic. Returned in notification events. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @param entityId
      */
@@ -65,7 +65,7 @@ public class MessagesApiPlatform {
      * Sets applicationId.
      * <p>
      * Field description:
-     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @param applicationId
      * @return This {@link MessagesApiPlatform instance}.
@@ -79,7 +79,7 @@ public class MessagesApiPlatform {
      * Returns applicationId.
      * <p>
      * Field description:
-     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @return applicationId
      */
@@ -92,7 +92,7 @@ public class MessagesApiPlatform {
      * Sets applicationId.
      * <p>
      * Field description:
-     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @param applicationId
      */

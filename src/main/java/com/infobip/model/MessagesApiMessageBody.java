@@ -24,10 +24,14 @@ import java.util.Objects;
         visible = true)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = MessagesApiMessageAuthenticationRequestBody.class, name = "AUTHENTICATION_REQUEST"),
+    @JsonSubTypes.Type(value = MessagesApiMessageCarouselBody.class, name = "CAROUSEL"),
+    @JsonSubTypes.Type(value = MessagesApiMessageContactBody.class, name = "CONTACT"),
     @JsonSubTypes.Type(value = MessagesApiMessageDocumentBody.class, name = "DOCUMENT"),
     @JsonSubTypes.Type(value = MessagesApiMessageImageBody.class, name = "IMAGE"),
     @JsonSubTypes.Type(value = MessagesApiMessageListBody.class, name = "LIST"),
+    @JsonSubTypes.Type(value = MessagesApiMessageLocationBody.class, name = "LOCATION"),
     @JsonSubTypes.Type(value = MessagesApiMessageRichLinkBody.class, name = "RICH_LINK"),
+    @JsonSubTypes.Type(value = MessagesApiMessageStickerBody.class, name = "STICKER"),
     @JsonSubTypes.Type(value = MessagesApiMessageTextBody.class, name = "TEXT"),
     @JsonSubTypes.Type(value = MessagesApiMessageVideoBody.class, name = "VIDEO"),
 })

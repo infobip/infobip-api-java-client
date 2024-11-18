@@ -23,7 +23,12 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = MessagesApiTemplateCatalogButton.class, name = "CATALOG"),
+    @JsonSubTypes.Type(value = MessagesApiTemplateCopyCodeButton.class, name = "COPY_CODE"),
+    @JsonSubTypes.Type(value = MessagesApiTemplateFlowButton.class, name = "FLOW"),
+    @JsonSubTypes.Type(value = MessagesApiTemplateMultiProductButton.class, name = "MULTI_PRODUCT"),
     @JsonSubTypes.Type(value = MessagesApiTemplateOpenUrlButton.class, name = "OPEN_URL"),
+    @JsonSubTypes.Type(value = MessagesApiTemplatePhoneNumberButton.class, name = "PHONE_NUMBER"),
     @JsonSubTypes.Type(value = MessagesApiTemplateQuickReplyButton.class, name = "QUICK_REPLY"),
 })
 public abstract class MessagesApiTemplateButton {

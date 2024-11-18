@@ -17,7 +17,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum MessagesApiTemplateButtonType {
     QUICK_REPLY("QUICK_REPLY"),
-    OPEN_URL("OPEN_URL");
+    OPEN_URL("OPEN_URL"),
+    PHONE_NUMBER("PHONE_NUMBER"),
+    FLOW("FLOW"),
+    COPY_CODE("COPY_CODE"),
+    CATALOG("CATALOG"),
+    MULTI_PRODUCT("MULTI_PRODUCT");
 
     private final String value;
 

@@ -17,7 +17,49 @@ import java.util.Objects;
  */
 public class MessagesApiSouthKoreaOptions {
 
+    private String title;
+
     private Integer resellerCode;
+
+    /**
+     * Sets title.
+     * <p>
+     * Field description:
+     * Title of the message.
+     *
+     * @param title
+     * @return This {@link MessagesApiSouthKoreaOptions instance}.
+     */
+    public MessagesApiSouthKoreaOptions title(String title) {
+        this.title = title;
+        return this;
+    }
+
+    /**
+     * Returns title.
+     * <p>
+     * Field description:
+     * Title of the message.
+     *
+     * @return title
+     */
+    @JsonProperty("title")
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Sets title.
+     * <p>
+     * Field description:
+     * Title of the message.
+     *
+     * @param title
+     */
+    @JsonProperty("title")
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     /**
      * Sets resellerCode.
@@ -68,12 +110,13 @@ public class MessagesApiSouthKoreaOptions {
             return false;
         }
         MessagesApiSouthKoreaOptions messagesApiSouthKoreaOptions = (MessagesApiSouthKoreaOptions) o;
-        return Objects.equals(this.resellerCode, messagesApiSouthKoreaOptions.resellerCode);
+        return Objects.equals(this.title, messagesApiSouthKoreaOptions.title)
+                && Objects.equals(this.resellerCode, messagesApiSouthKoreaOptions.resellerCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(resellerCode);
+        return Objects.hash(title, resellerCode);
     }
 
     @Override
@@ -81,6 +124,9 @@ public class MessagesApiSouthKoreaOptions {
         String newLine = System.lineSeparator();
         return new StringBuilder()
                 .append("class MessagesApiSouthKoreaOptions {")
+                .append(newLine)
+                .append("    title: ")
+                .append(toIndentedString(title))
                 .append(newLine)
                 .append("    resellerCode: ")
                 .append(toIndentedString(resellerCode))

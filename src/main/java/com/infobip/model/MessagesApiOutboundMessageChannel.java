@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Failover channel.
+ * Messaging channel used for sending a message.
  */
 public enum MessagesApiOutboundMessageChannel {
     SMS("SMS"),
@@ -23,7 +23,6 @@ public enum MessagesApiOutboundMessageChannel {
     VIBER_BOT("VIBER_BOT"),
     RCS("RCS"),
     APPLE_MB("APPLE_MB"),
-    GBM("GBM"),
     INSTAGRAM_DM("INSTAGRAM_DM"),
     LINE_ON("LINE_ON"),
     MESSENGER("MESSENGER");

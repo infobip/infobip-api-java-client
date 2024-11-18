@@ -19,6 +19,8 @@ public class MessagesApiRequestOptions {
 
     private MessagesApiRequestScheduleOptions schedule;
 
+    private MessagesApiUrlOptions tracking;
+
     /**
      * Sets schedule.
      *
@@ -50,6 +52,37 @@ public class MessagesApiRequestOptions {
         this.schedule = schedule;
     }
 
+    /**
+     * Sets tracking.
+     *
+     * @param tracking
+     * @return This {@link MessagesApiRequestOptions instance}.
+     */
+    public MessagesApiRequestOptions tracking(MessagesApiUrlOptions tracking) {
+        this.tracking = tracking;
+        return this;
+    }
+
+    /**
+     * Returns tracking.
+     *
+     * @return tracking
+     */
+    @JsonProperty("tracking")
+    public MessagesApiUrlOptions getTracking() {
+        return tracking;
+    }
+
+    /**
+     * Sets tracking.
+     *
+     * @param tracking
+     */
+    @JsonProperty("tracking")
+    public void setTracking(MessagesApiUrlOptions tracking) {
+        this.tracking = tracking;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -59,12 +92,13 @@ public class MessagesApiRequestOptions {
             return false;
         }
         MessagesApiRequestOptions messagesApiRequestOptions = (MessagesApiRequestOptions) o;
-        return Objects.equals(this.schedule, messagesApiRequestOptions.schedule);
+        return Objects.equals(this.schedule, messagesApiRequestOptions.schedule)
+                && Objects.equals(this.tracking, messagesApiRequestOptions.tracking);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(schedule);
+        return Objects.hash(schedule, tracking);
     }
 
     @Override
@@ -75,6 +109,9 @@ public class MessagesApiRequestOptions {
                 .append(newLine)
                 .append("    schedule: ")
                 .append(toIndentedString(schedule))
+                .append(newLine)
+                .append("    tracking: ")
+                .append(toIndentedString(tracking))
                 .append(newLine)
                 .append("}")
                 .toString();

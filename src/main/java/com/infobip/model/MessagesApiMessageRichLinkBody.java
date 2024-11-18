@@ -23,6 +23,8 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
 
     private String url;
 
+    private Boolean isVideo;
+
     private String thumbnailUrl;
 
     private String buttonText;
@@ -130,7 +132,7 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
      * Sets url.
      * <p>
      * Field description:
-     * URL of the rich link. It can be image or video. When you provide it with &#x60;thumbnailUrl&#x60; then it will be mapped as a video, otherwise - as an image.
+     * URL of the rich link. It can be image or video. When you provide it with &#x60;isVideo&#x3D;true&#x60; then it will be mapped as a video, otherwise - as an image.
      * <p>
      * The field is required.
      *
@@ -146,7 +148,7 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
      * Returns url.
      * <p>
      * Field description:
-     * URL of the rich link. It can be image or video. When you provide it with &#x60;thumbnailUrl&#x60; then it will be mapped as a video, otherwise - as an image.
+     * URL of the rich link. It can be image or video. When you provide it with &#x60;isVideo&#x3D;true&#x60; then it will be mapped as a video, otherwise - as an image.
      * <p>
      * The field is required.
      *
@@ -161,7 +163,7 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
      * Sets url.
      * <p>
      * Field description:
-     * URL of the rich link. It can be image or video. When you provide it with &#x60;thumbnailUrl&#x60; then it will be mapped as a video, otherwise - as an image.
+     * URL of the rich link. It can be image or video. When you provide it with &#x60;isVideo&#x3D;true&#x60; then it will be mapped as a video, otherwise - as an image.
      * <p>
      * The field is required.
      *
@@ -173,10 +175,50 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
     }
 
     /**
+     * Sets isVideo.
+     * <p>
+     * Field description:
+     * Indicates if provided &#x60;url&#x60; is a video.
+     *
+     * @param isVideo
+     * @return This {@link MessagesApiMessageRichLinkBody instance}.
+     */
+    public MessagesApiMessageRichLinkBody isVideo(Boolean isVideo) {
+        this.isVideo = isVideo;
+        return this;
+    }
+
+    /**
+     * Returns isVideo.
+     * <p>
+     * Field description:
+     * Indicates if provided &#x60;url&#x60; is a video.
+     *
+     * @return isVideo
+     */
+    @JsonProperty("isVideo")
+    public Boolean getIsVideo() {
+        return isVideo;
+    }
+
+    /**
+     * Sets isVideo.
+     * <p>
+     * Field description:
+     * Indicates if provided &#x60;url&#x60; is a video.
+     *
+     * @param isVideo
+     */
+    @JsonProperty("isVideo")
+    public void setIsVideo(Boolean isVideo) {
+        this.isVideo = isVideo;
+    }
+
+    /**
      * Sets thumbnailUrl.
      * <p>
      * Field description:
-     * URL of the thumbnail image. If you add this, then we use as thumbnail image for video you provided in &#x60;url&#x60;.
+     * URL of the thumbnail image. If you add this, then we use as thumbnail image for video you provided in &#x60;url&#x60;. Applicable only when &#x60;isVideo&#x3D;true&#x60;.
      *
      * @param thumbnailUrl
      * @return This {@link MessagesApiMessageRichLinkBody instance}.
@@ -190,7 +232,7 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
      * Returns thumbnailUrl.
      * <p>
      * Field description:
-     * URL of the thumbnail image. If you add this, then we use as thumbnail image for video you provided in &#x60;url&#x60;.
+     * URL of the thumbnail image. If you add this, then we use as thumbnail image for video you provided in &#x60;url&#x60;. Applicable only when &#x60;isVideo&#x3D;true&#x60;.
      *
      * @return thumbnailUrl
      */
@@ -203,7 +245,7 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
      * Sets thumbnailUrl.
      * <p>
      * Field description:
-     * URL of the thumbnail image. If you add this, then we use as thumbnail image for video you provided in &#x60;url&#x60;.
+     * URL of the thumbnail image. If you add this, then we use as thumbnail image for video you provided in &#x60;url&#x60;. Applicable only when &#x60;isVideo&#x3D;true&#x60;.
      *
      * @param thumbnailUrl
      */
@@ -264,6 +306,7 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
         return Objects.equals(this.redirectUrl, messagesApiMessageRichLinkBody.redirectUrl)
                 && Objects.equals(this.text, messagesApiMessageRichLinkBody.text)
                 && Objects.equals(this.url, messagesApiMessageRichLinkBody.url)
+                && Objects.equals(this.isVideo, messagesApiMessageRichLinkBody.isVideo)
                 && Objects.equals(this.thumbnailUrl, messagesApiMessageRichLinkBody.thumbnailUrl)
                 && Objects.equals(this.buttonText, messagesApiMessageRichLinkBody.buttonText)
                 && super.equals(o);
@@ -271,7 +314,7 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
 
     @Override
     public int hashCode() {
-        return Objects.hash(redirectUrl, text, url, thumbnailUrl, buttonText, super.hashCode());
+        return Objects.hash(redirectUrl, text, url, isVideo, thumbnailUrl, buttonText, super.hashCode());
     }
 
     @Override
@@ -291,6 +334,9 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
                 .append(newLine)
                 .append("    url: ")
                 .append(toIndentedString(url))
+                .append(newLine)
+                .append("    isVideo: ")
+                .append(toIndentedString(isVideo))
                 .append(newLine)
                 .append("    thumbnailUrl: ")
                 .append(toIndentedString(thumbnailUrl))

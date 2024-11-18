@@ -23,7 +23,7 @@ public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInn
 
     private String sender;
 
-    private List<MessagesApiToDestination> destinations = new ArrayList<>();
+    private List<MessagesApiMessageDestination> destinations = new ArrayList<>();
 
     private MessagesApiTemplate template;
 
@@ -32,6 +32,8 @@ public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInn
     private MessagesApiMessageOptions options;
 
     private MessagesApiWebhooks webhooks;
+
+    private List<MessagesApiBaseFailover> failover = null;
 
     /**
      * Sets channel.
@@ -120,14 +122,14 @@ public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInn
      * Sets destinations.
      * <p>
      * Field description:
-     * Array of destination objects for where template messages are being sent. A valid destination is required.
+     * Array of destination objects for where messages are being sent. A valid destination is required.
      * <p>
      * The field is required.
      *
      * @param destinations
      * @return This {@link MessagesApiTemplateMessage instance}.
      */
-    public MessagesApiTemplateMessage destinations(List<MessagesApiToDestination> destinations) {
+    public MessagesApiTemplateMessage destinations(List<MessagesApiMessageDestination> destinations) {
         this.destinations = destinations;
         return this;
     }
@@ -136,14 +138,14 @@ public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInn
      * Adds and item into destinations.
      * <p>
      * Field description:
-     * Array of destination objects for where template messages are being sent. A valid destination is required.
+     * Array of destination objects for where messages are being sent. A valid destination is required.
      * <p>
      * The field is required.
      *
      * @param destinationsItem The item to be added to the list.
      * @return This {@link MessagesApiTemplateMessage instance}.
      */
-    public MessagesApiTemplateMessage addDestinationsItem(MessagesApiToDestination destinationsItem) {
+    public MessagesApiTemplateMessage addDestinationsItem(MessagesApiMessageDestination destinationsItem) {
         if (this.destinations == null) {
             this.destinations = new ArrayList<>();
         }
@@ -155,14 +157,14 @@ public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInn
      * Returns destinations.
      * <p>
      * Field description:
-     * Array of destination objects for where template messages are being sent. A valid destination is required.
+     * Array of destination objects for where messages are being sent. A valid destination is required.
      * <p>
      * The field is required.
      *
      * @return destinations
      */
     @JsonProperty("destinations")
-    public List<MessagesApiToDestination> getDestinations() {
+    public List<MessagesApiMessageDestination> getDestinations() {
         return destinations;
     }
 
@@ -170,14 +172,14 @@ public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInn
      * Sets destinations.
      * <p>
      * Field description:
-     * Array of destination objects for where template messages are being sent. A valid destination is required.
+     * Array of destination objects for where messages are being sent. A valid destination is required.
      * <p>
      * The field is required.
      *
      * @param destinations
      */
     @JsonProperty("destinations")
-    public void setDestinations(List<MessagesApiToDestination> destinations) {
+    public void setDestinations(List<MessagesApiMessageDestination> destinations) {
         this.destinations = destinations;
     }
 
@@ -311,6 +313,63 @@ public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInn
         this.webhooks = webhooks;
     }
 
+    /**
+     * Sets failover.
+     * <p>
+     * Field description:
+     * Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. Make sure to provide correct sender and destinations specified as &#x60;Channels Destination&#x60; for each channel.
+     *
+     * @param failover
+     * @return This {@link MessagesApiTemplateMessage instance}.
+     */
+    public MessagesApiTemplateMessage failover(List<MessagesApiBaseFailover> failover) {
+        this.failover = failover;
+        return this;
+    }
+
+    /**
+     * Adds and item into failover.
+     * <p>
+     * Field description:
+     * Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. Make sure to provide correct sender and destinations specified as &#x60;Channels Destination&#x60; for each channel.
+     *
+     * @param failoverItem The item to be added to the list.
+     * @return This {@link MessagesApiTemplateMessage instance}.
+     */
+    public MessagesApiTemplateMessage addFailoverItem(MessagesApiBaseFailover failoverItem) {
+        if (this.failover == null) {
+            this.failover = new ArrayList<>();
+        }
+        this.failover.add(failoverItem);
+        return this;
+    }
+
+    /**
+     * Returns failover.
+     * <p>
+     * Field description:
+     * Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. Make sure to provide correct sender and destinations specified as &#x60;Channels Destination&#x60; for each channel.
+     *
+     * @return failover
+     */
+    @JsonProperty("failover")
+    public List<MessagesApiBaseFailover> getFailover() {
+        return failover;
+    }
+
+    /**
+     * Sets failover.
+     * <p>
+     * Field description:
+     * Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. Make sure to provide correct sender and destinations specified as &#x60;Channels Destination&#x60; for each channel.
+     *
+     * @param failover
+     */
+    @JsonProperty("failover")
+    public void setFailover(List<MessagesApiBaseFailover> failover) {
+        this.failover = failover;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -326,12 +385,13 @@ public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInn
                 && Objects.equals(this.template, messagesApiTemplateMessage.template)
                 && Objects.equals(this.content, messagesApiTemplateMessage.content)
                 && Objects.equals(this.options, messagesApiTemplateMessage.options)
-                && Objects.equals(this.webhooks, messagesApiTemplateMessage.webhooks);
+                && Objects.equals(this.webhooks, messagesApiTemplateMessage.webhooks)
+                && Objects.equals(this.failover, messagesApiTemplateMessage.failover);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(channel, sender, destinations, template, content, options, webhooks);
+        return Objects.hash(channel, sender, destinations, template, content, options, webhooks, failover);
     }
 
     @Override
@@ -360,6 +420,9 @@ public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInn
                 .append(newLine)
                 .append("    webhooks: ")
                 .append(toIndentedString(webhooks))
+                .append(newLine)
+                .append("    failover: ")
+                .append(toIndentedString(failover))
                 .append(newLine)
                 .append("}")
                 .toString();

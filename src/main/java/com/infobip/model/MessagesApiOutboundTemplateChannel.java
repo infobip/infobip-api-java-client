@@ -13,9 +13,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Messaging channel used for sending a template message.
+ * Messaging channel used for sending a message.
  */
 public enum MessagesApiOutboundTemplateChannel {
+    APPLE_MB("APPLE_MB"),
+    RCS("RCS"),
     WHATSAPP("WHATSAPP");
 
     private final String value;

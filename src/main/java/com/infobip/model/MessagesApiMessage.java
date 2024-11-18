@@ -31,7 +31,7 @@ public class MessagesApiMessage implements MessagesApiRequestMessagesInner {
 
     private MessagesApiWebhooks webhooks;
 
-    private List<MessagesApiFailover> failover = null;
+    private List<MessagesApiBaseFailover> failover = null;
 
     /**
      * Sets channel.
@@ -289,7 +289,7 @@ public class MessagesApiMessage implements MessagesApiRequestMessagesInner {
      * @param failover
      * @return This {@link MessagesApiMessage instance}.
      */
-    public MessagesApiMessage failover(List<MessagesApiFailover> failover) {
+    public MessagesApiMessage failover(List<MessagesApiBaseFailover> failover) {
         this.failover = failover;
         return this;
     }
@@ -303,7 +303,7 @@ public class MessagesApiMessage implements MessagesApiRequestMessagesInner {
      * @param failoverItem The item to be added to the list.
      * @return This {@link MessagesApiMessage instance}.
      */
-    public MessagesApiMessage addFailoverItem(MessagesApiFailover failoverItem) {
+    public MessagesApiMessage addFailoverItem(MessagesApiBaseFailover failoverItem) {
         if (this.failover == null) {
             this.failover = new ArrayList<>();
         }
@@ -320,7 +320,7 @@ public class MessagesApiMessage implements MessagesApiRequestMessagesInner {
      * @return failover
      */
     @JsonProperty("failover")
-    public List<MessagesApiFailover> getFailover() {
+    public List<MessagesApiBaseFailover> getFailover() {
         return failover;
     }
 
@@ -333,7 +333,7 @@ public class MessagesApiMessage implements MessagesApiRequestMessagesInner {
      * @param failover
      */
     @JsonProperty("failover")
-    public void setFailover(List<MessagesApiFailover> failover) {
+    public void setFailover(List<MessagesApiBaseFailover> failover) {
         this.failover = failover;
     }
 
