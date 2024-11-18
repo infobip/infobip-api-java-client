@@ -120,60 +120,56 @@ class MessagesApiTest extends ApiTest {
         String givenTo = "111111111";
         String givenMessageText = "May the Force be with you.";
         String givenTextType = "TEXT";
-        String givenDescription = "Request can be sent through '/messages' endpoint and should be accepted by our platform.";
+        String givenDescription =
+                "Request can be sent through '/messages' endpoint and should be accepted by our platform.";
         String givenAction = "No action is required, but it is recommended to check and address any violations.";
         String givenProperty = "messages[0].metadata";
         String givenViolation = "Unknown property";
 
         String givenResponse = String.format(
-            "{\n" +
-                "  \"description\": \"%s\",\n" +
-                "  \"action\": \"%s\",\n" +
-                "  \"skippableViolations\": [\n" +
-                "    {\n" +
-                "      \"property\": \"%s\",\n" +
-                "      \"violation\": \"%s\"\n" +
-                "    }\n" +
-                "  ]\n" +
-                "}",
-            givenDescription, givenAction, givenProperty, givenViolation);
+                "{\n" + "  \"description\": \"%s\",\n"
+                        + "  \"action\": \"%s\",\n"
+                        + "  \"skippableViolations\": [\n"
+                        + "    {\n"
+                        + "      \"property\": \"%s\",\n"
+                        + "      \"violation\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenDescription, givenAction, givenProperty, givenViolation);
 
         String expectedRequest = String.format(
-            "{\n" +
-                "  \"messages\": [\n" +
-                "    {\n" +
-                "      \"channel\": \"%s\",\n" +
-                "      \"sender\": \"%s\",\n" +
-                "      \"destinations\": [\n" +
-                "        {\n" +
-                "          \"to\": \"%s\"\n" +
-                "        }\n" +
-                "      ],\n" +
-                "      \"content\": {\n" +
-                "        \"body\": {\n" +
-                "          \"text\": \"%s\",\n" +
-                "          \"type\": \"%s\"\n" +
-                "        }\n" +
-                "      }\n" +
-                "    }\n" +
-                "  ]\n" +
-                "}",
-            givenChannel, givenSender, givenTo, givenMessageText, givenTextType);
+                "{\n" + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"channel\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"content\": {\n"
+                        + "        \"body\": {\n"
+                        + "          \"text\": \"%s\",\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        }\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenChannel, givenSender, givenTo, givenMessageText, givenTextType);
 
         setUpSuccessPostRequest(VALIDATE, expectedRequest, givenResponse);
 
         MessagesApi api = new MessagesApi(getApiClient());
 
         var request = new MessagesApiRequest()
-            .messages(List.of(new MessagesApiMessage()
-                                  .channel(givenChannel)
-                                  .sender(givenSender)
-                                  .destinations(List.of(new MessagesApiToDestination().to(givenTo)))
-                                  .content(new MessagesApiMessageContent()
-                                               .body(new MessagesApiMessageTextBody()
-                                                         .text(givenMessageText))
-                                  ))
-            );
+                .messages(List.of(new MessagesApiMessage()
+                        .channel(givenChannel)
+                        .sender(givenSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(givenTo)))
+                        .content(new MessagesApiMessageContent()
+                                .body(new MessagesApiMessageTextBody().text(givenMessageText)))));
 
         Consumer<MessagesApiValidationOkResponse> assertions = (response) -> {
             then(response).isNotNull();
