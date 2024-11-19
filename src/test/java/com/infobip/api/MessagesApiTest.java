@@ -536,7 +536,6 @@ class MessagesApiTest extends ApiTest {
         String expectedDestination = "48123098765";
         String expectedText = "Text message 123";
         String expectedCleanText = "Text message";
-        Integer expectedMessageCount = 1;
         String expectedType = "TEXT";
         String expectedReceivedAt = "2020-02-06T14:18:29.797+0000";
         String expectedMessageId = "ABEGVUGWh3gEAgo-sLTvmQCS5kwjhsy";
