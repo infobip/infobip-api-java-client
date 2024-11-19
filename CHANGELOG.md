@@ -5,6 +5,23 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [4.4.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.4.0) ] - 2024-11-19
+
+⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
+All changes, including breaking changes, are addressed and explained in the list bellow.
+If you find out that something was not addressed properly, please submit an issue.
+
+### Added
+* Most recent feature set for:
+  * [Infobip Messages API](https://www.infobip.com/docs/api/platform/messages-api)
+
+### Changed
+* **Fixes and changes**
+  * Changed 'description' field name in [MessagesApiMessageListBody](src/main/java/com/infobip/model/MessagesApiMessageListBody.java) to 'subtext'.
+  * Removed 'messageCount' field in [MessagesApiWebhookEventTextContent](src/main/java/com/infobip/model/MessagesApiWebhookEventTextContent.java) since it didn't correspond to the state of the endpoint.
+* **Documentation**
+  * Fixed Javadoc.
+
 ## [ [4.3.2](https://github.com/infobip/infobip-api-java-client/releases/tag/4.3.2) ] - 2024-08-22
 
 ### Added
@@ -44,7 +61,7 @@ All changes, including breaking changes, are addressed and explained in the list
 If you find out that something was not addressed properly, please submit an issue.
 
 ### Added
-* Support for [Infobip Messages API](https://www.infobip.com/docs/api/channels/voice/routing).
+* Support for [Infobip Messages API](https://www.infobip.com/docs/api/platform/messages-api).
 * Most recent feature set for:
   * [Infobip Call Routing API](https://www.infobip.com/docs/api/channels/voice/routing)
   * [Infobip Call Link API](https://www.infobip.com/docs/api/channels/webrtc-calls/call-link)

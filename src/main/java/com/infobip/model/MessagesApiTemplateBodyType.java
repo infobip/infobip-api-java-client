@@ -16,7 +16,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Represents MessagesApiTemplateBodyType enumeration.
  */
 public enum MessagesApiTemplateBodyType {
-    TEXT("TEXT");
+    TEXT("TEXT"),
+    CAROUSEL("CAROUSEL");
 
     private final String value;
 

@@ -13,13 +13,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. Make sure to provide correct sender and destinations specified as &#x60;Channels Destination&#x60; for each channel.
+ * Configuration of a single failover step
  */
-public class MessagesApiFailover {
+public class MessagesApiFailover implements MessagesApiBaseFailover {
 
     private MessagesApiOutboundMessageChannel channel;
 
     private String sender;
+
+    private MessagesApiMessageContent content;
 
     private MessagesApiValidityPeriod validityPeriod;
 
@@ -107,6 +109,37 @@ public class MessagesApiFailover {
     }
 
     /**
+     * Sets content.
+     *
+     * @param content
+     * @return This {@link MessagesApiFailover instance}.
+     */
+    public MessagesApiFailover content(MessagesApiMessageContent content) {
+        this.content = content;
+        return this;
+    }
+
+    /**
+     * Returns content.
+     *
+     * @return content
+     */
+    @JsonProperty("content")
+    public MessagesApiMessageContent getContent() {
+        return content;
+    }
+
+    /**
+     * Sets content.
+     *
+     * @param content
+     */
+    @JsonProperty("content")
+    public void setContent(MessagesApiMessageContent content) {
+        this.content = content;
+    }
+
+    /**
      * Sets validityPeriod.
      *
      * @param validityPeriod
@@ -148,12 +181,13 @@ public class MessagesApiFailover {
         MessagesApiFailover messagesApiFailover = (MessagesApiFailover) o;
         return Objects.equals(this.channel, messagesApiFailover.channel)
                 && Objects.equals(this.sender, messagesApiFailover.sender)
+                && Objects.equals(this.content, messagesApiFailover.content)
                 && Objects.equals(this.validityPeriod, messagesApiFailover.validityPeriod);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(channel, sender, validityPeriod);
+        return Objects.hash(channel, sender, content, validityPeriod);
     }
 
     @Override
@@ -167,6 +201,9 @@ public class MessagesApiFailover {
                 .append(newLine)
                 .append("    sender: ")
                 .append(toIndentedString(sender))
+                .append(newLine)
+                .append("    content: ")
+                .append(toIndentedString(content))
                 .append(newLine)
                 .append("    validityPeriod: ")
                 .append(toIndentedString(validityPeriod))

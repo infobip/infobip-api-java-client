@@ -23,8 +23,6 @@ public class MessagesApiWebhookEventTextContent extends MessagesApiWebhookEventC
 
     private String keyword;
 
-    private Integer messageCount;
-
     /**
      * Constructs a new {@link MessagesApiWebhookEventTextContent} instance.
      */
@@ -164,46 +162,6 @@ public class MessagesApiWebhookEventTextContent extends MessagesApiWebhookEventC
         this.keyword = keyword;
     }
 
-    /**
-     * Sets messageCount.
-     * <p>
-     * Field description:
-     * (Only for SMS) Number of smaller messages the actual SMS got split into due to the SMS character limit.
-     *
-     * @param messageCount
-     * @return This {@link MessagesApiWebhookEventTextContent instance}.
-     */
-    public MessagesApiWebhookEventTextContent messageCount(Integer messageCount) {
-        this.messageCount = messageCount;
-        return this;
-    }
-
-    /**
-     * Returns messageCount.
-     * <p>
-     * Field description:
-     * (Only for SMS) Number of smaller messages the actual SMS got split into due to the SMS character limit.
-     *
-     * @return messageCount
-     */
-    @JsonProperty("messageCount")
-    public Integer getMessageCount() {
-        return messageCount;
-    }
-
-    /**
-     * Sets messageCount.
-     * <p>
-     * Field description:
-     * (Only for SMS) Number of smaller messages the actual SMS got split into due to the SMS character limit.
-     *
-     * @param messageCount
-     */
-    @JsonProperty("messageCount")
-    public void setMessageCount(Integer messageCount) {
-        this.messageCount = messageCount;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -216,13 +174,12 @@ public class MessagesApiWebhookEventTextContent extends MessagesApiWebhookEventC
         return Objects.equals(this.text, messagesApiWebhookEventTextContent.text)
                 && Objects.equals(this.cleanText, messagesApiWebhookEventTextContent.cleanText)
                 && Objects.equals(this.keyword, messagesApiWebhookEventTextContent.keyword)
-                && Objects.equals(this.messageCount, messagesApiWebhookEventTextContent.messageCount)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, cleanText, keyword, messageCount, super.hashCode());
+        return Objects.hash(text, cleanText, keyword, super.hashCode());
     }
 
     @Override
@@ -242,9 +199,6 @@ public class MessagesApiWebhookEventTextContent extends MessagesApiWebhookEventC
                 .append(newLine)
                 .append("    keyword: ")
                 .append(toIndentedString(keyword))
-                .append(newLine)
-                .append("    messageCount: ")
-                .append(toIndentedString(messageCount))
                 .append(newLine)
                 .append("}")
                 .toString();

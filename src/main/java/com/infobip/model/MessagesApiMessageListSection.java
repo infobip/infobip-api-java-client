@@ -23,7 +23,7 @@ public class MessagesApiMessageListSection {
 
     private Boolean multipleSelection;
 
-    private List<MessagesApiMessageListItem> items = null;
+    private List<MessagesApiMessageListItem> items = new ArrayList<>();
 
     /**
      * Sets sectionTitle.
@@ -116,6 +116,8 @@ public class MessagesApiMessageListSection {
      * <p>
      * Field description:
      * List Items.
+     * <p>
+     * The field is required.
      *
      * @param items
      * @return This {@link MessagesApiMessageListSection instance}.
@@ -130,6 +132,8 @@ public class MessagesApiMessageListSection {
      * <p>
      * Field description:
      * List Items.
+     * <p>
+     * The field is required.
      *
      * @param itemsItem The item to be added to the list.
      * @return This {@link MessagesApiMessageListSection instance}.
@@ -147,6 +151,8 @@ public class MessagesApiMessageListSection {
      * <p>
      * Field description:
      * List Items.
+     * <p>
+     * The field is required.
      *
      * @return items
      */
@@ -160,6 +166,8 @@ public class MessagesApiMessageListSection {
      * <p>
      * Field description:
      * List Items.
+     * <p>
+     * The field is required.
      *
      * @param items
      */

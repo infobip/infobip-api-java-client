@@ -21,7 +21,7 @@ public class MessagesApiMessageListBody extends MessagesApiMessageBody {
 
     private String text;
 
-    private String description;
+    private String subtext;
 
     private String imageUrl;
 
@@ -81,43 +81,43 @@ public class MessagesApiMessageListBody extends MessagesApiMessageBody {
     }
 
     /**
-     * Sets description.
+     * Sets subtext.
      * <p>
      * Field description:
-     * Description.
+     * Subtext to be sent.
      *
-     * @param description
+     * @param subtext
      * @return This {@link MessagesApiMessageListBody instance}.
      */
-    public MessagesApiMessageListBody description(String description) {
-        this.description = description;
+    public MessagesApiMessageListBody subtext(String subtext) {
+        this.subtext = subtext;
         return this;
     }
 
     /**
-     * Returns description.
+     * Returns subtext.
      * <p>
      * Field description:
-     * Description.
+     * Subtext to be sent.
      *
-     * @return description
+     * @return subtext
      */
-    @JsonProperty("description")
-    public String getDescription() {
-        return description;
+    @JsonProperty("subtext")
+    public String getSubtext() {
+        return subtext;
     }
 
     /**
-     * Sets description.
+     * Sets subtext.
      * <p>
      * Field description:
-     * Description.
+     * Subtext to be sent.
      *
-     * @param description
+     * @param subtext
      */
-    @JsonProperty("description")
-    public void setDescription(String description) {
-        this.description = description;
+    @JsonProperty("subtext")
+    public void setSubtext(String subtext) {
+        this.subtext = subtext;
     }
 
     /**
@@ -235,7 +235,7 @@ public class MessagesApiMessageListBody extends MessagesApiMessageBody {
         }
         MessagesApiMessageListBody messagesApiMessageListBody = (MessagesApiMessageListBody) o;
         return Objects.equals(this.text, messagesApiMessageListBody.text)
-                && Objects.equals(this.description, messagesApiMessageListBody.description)
+                && Objects.equals(this.subtext, messagesApiMessageListBody.subtext)
                 && Objects.equals(this.imageUrl, messagesApiMessageListBody.imageUrl)
                 && Objects.equals(this.sections, messagesApiMessageListBody.sections)
                 && super.equals(o);
@@ -243,7 +243,7 @@ public class MessagesApiMessageListBody extends MessagesApiMessageBody {
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, description, imageUrl, sections, super.hashCode());
+        return Objects.hash(text, subtext, imageUrl, sections, super.hashCode());
     }
 
     @Override
@@ -258,8 +258,8 @@ public class MessagesApiMessageListBody extends MessagesApiMessageBody {
                 .append("    text: ")
                 .append(toIndentedString(text))
                 .append(newLine)
-                .append("    description: ")
-                .append(toIndentedString(description))
+                .append("    subtext: ")
+                .append(toIndentedString(subtext))
                 .append(newLine)
                 .append("    imageUrl: ")
                 .append(toIndentedString(imageUrl))

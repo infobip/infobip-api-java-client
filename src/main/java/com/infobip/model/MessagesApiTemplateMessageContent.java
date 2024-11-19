@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Content of a template message.
+ * Content of the message.
  */
 public class MessagesApiTemplateMessageContent {
 
@@ -24,6 +24,8 @@ public class MessagesApiTemplateMessageContent {
     private MessagesApiTemplateBody body;
 
     private List<MessagesApiTemplateButton> buttons = null;
+
+    private String expirationTime;
 
     /**
      * Sets header.
@@ -144,6 +146,46 @@ public class MessagesApiTemplateMessageContent {
         this.buttons = buttons;
     }
 
+    /**
+     * Sets expirationTime.
+     * <p>
+     * Field description:
+     * Expiration time of a limited-time offer template message. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
+     *
+     * @param expirationTime
+     * @return This {@link MessagesApiTemplateMessageContent instance}.
+     */
+    public MessagesApiTemplateMessageContent expirationTime(String expirationTime) {
+        this.expirationTime = expirationTime;
+        return this;
+    }
+
+    /**
+     * Returns expirationTime.
+     * <p>
+     * Field description:
+     * Expiration time of a limited-time offer template message. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
+     *
+     * @return expirationTime
+     */
+    @JsonProperty("expirationTime")
+    public String getExpirationTime() {
+        return expirationTime;
+    }
+
+    /**
+     * Sets expirationTime.
+     * <p>
+     * Field description:
+     * Expiration time of a limited-time offer template message. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
+     *
+     * @param expirationTime
+     */
+    @JsonProperty("expirationTime")
+    public void setExpirationTime(String expirationTime) {
+        this.expirationTime = expirationTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -155,12 +197,13 @@ public class MessagesApiTemplateMessageContent {
         MessagesApiTemplateMessageContent messagesApiTemplateMessageContent = (MessagesApiTemplateMessageContent) o;
         return Objects.equals(this.header, messagesApiTemplateMessageContent.header)
                 && Objects.equals(this.body, messagesApiTemplateMessageContent.body)
-                && Objects.equals(this.buttons, messagesApiTemplateMessageContent.buttons);
+                && Objects.equals(this.buttons, messagesApiTemplateMessageContent.buttons)
+                && Objects.equals(this.expirationTime, messagesApiTemplateMessageContent.expirationTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(header, body, buttons);
+        return Objects.hash(header, body, buttons, expirationTime);
     }
 
     @Override
@@ -177,6 +220,9 @@ public class MessagesApiTemplateMessageContent {
                 .append(newLine)
                 .append("    buttons: ")
                 .append(toIndentedString(buttons))
+                .append(newLine)
+                .append("    expirationTime: ")
+                .append(toIndentedString(expirationTime))
                 .append(newLine)
                 .append("}")
                 .toString();

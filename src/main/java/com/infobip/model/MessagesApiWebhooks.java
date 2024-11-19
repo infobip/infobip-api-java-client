@@ -23,6 +23,8 @@ public class MessagesApiWebhooks {
 
     private String callbackData;
 
+    private MessagesApiSeenStatusReporting seen;
+
     /**
      * Sets delivery.
      *
@@ -98,7 +100,7 @@ public class MessagesApiWebhooks {
      * Sets callbackData.
      * <p>
      * Field description:
-     * Additional data that can be used for identifying, managing, or monitoring a message. Data included here will also be automatically included in the message Delivery Report. The maximum value is 4000 characters.
+     * Additional data that can be used for identifying, managing, or monitoring a message. Data included here will also be automatically included in the message Delivery Report and Seen Report. The maximum value is 4000 characters.
      *
      * @param callbackData
      * @return This {@link MessagesApiWebhooks instance}.
@@ -112,7 +114,7 @@ public class MessagesApiWebhooks {
      * Returns callbackData.
      * <p>
      * Field description:
-     * Additional data that can be used for identifying, managing, or monitoring a message. Data included here will also be automatically included in the message Delivery Report. The maximum value is 4000 characters.
+     * Additional data that can be used for identifying, managing, or monitoring a message. Data included here will also be automatically included in the message Delivery Report and Seen Report. The maximum value is 4000 characters.
      *
      * @return callbackData
      */
@@ -125,13 +127,44 @@ public class MessagesApiWebhooks {
      * Sets callbackData.
      * <p>
      * Field description:
-     * Additional data that can be used for identifying, managing, or monitoring a message. Data included here will also be automatically included in the message Delivery Report. The maximum value is 4000 characters.
+     * Additional data that can be used for identifying, managing, or monitoring a message. Data included here will also be automatically included in the message Delivery Report and Seen Report. The maximum value is 4000 characters.
      *
      * @param callbackData
      */
     @JsonProperty("callbackData")
     public void setCallbackData(String callbackData) {
         this.callbackData = callbackData;
+    }
+
+    /**
+     * Sets seen.
+     *
+     * @param seen
+     * @return This {@link MessagesApiWebhooks instance}.
+     */
+    public MessagesApiWebhooks seen(MessagesApiSeenStatusReporting seen) {
+        this.seen = seen;
+        return this;
+    }
+
+    /**
+     * Returns seen.
+     *
+     * @return seen
+     */
+    @JsonProperty("seen")
+    public MessagesApiSeenStatusReporting getSeen() {
+        return seen;
+    }
+
+    /**
+     * Sets seen.
+     *
+     * @param seen
+     */
+    @JsonProperty("seen")
+    public void setSeen(MessagesApiSeenStatusReporting seen) {
+        this.seen = seen;
     }
 
     @Override
@@ -145,12 +178,13 @@ public class MessagesApiWebhooks {
         MessagesApiWebhooks messagesApiWebhooks = (MessagesApiWebhooks) o;
         return Objects.equals(this.delivery, messagesApiWebhooks.delivery)
                 && Objects.equals(this.contentType, messagesApiWebhooks.contentType)
-                && Objects.equals(this.callbackData, messagesApiWebhooks.callbackData);
+                && Objects.equals(this.callbackData, messagesApiWebhooks.callbackData)
+                && Objects.equals(this.seen, messagesApiWebhooks.seen);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(delivery, contentType, callbackData);
+        return Objects.hash(delivery, contentType, callbackData, seen);
     }
 
     @Override
@@ -167,6 +201,9 @@ public class MessagesApiWebhooks {
                 .append(newLine)
                 .append("    callbackData: ")
                 .append(toIndentedString(callbackData))
+                .append(newLine)
+                .append("    seen: ")
+                .append(toIndentedString(seen))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -23,6 +23,7 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = MessagesApiTemplateCarouselBody.class, name = "CAROUSEL"),
     @JsonSubTypes.Type(value = MessagesApiTemplateTextBody.class, name = "TEXT"),
 })
 public abstract class MessagesApiTemplateBody {

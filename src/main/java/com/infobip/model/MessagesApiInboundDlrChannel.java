@@ -23,7 +23,6 @@ public enum MessagesApiInboundDlrChannel {
     VIBER_BOT("VIBER_BOT"),
     RCS("RCS"),
     APPLE_MB("APPLE_MB"),
-    GBM("GBM"),
     INSTAGRAM_DM("INSTAGRAM_DM"),
     LINE_ON("LINE_ON"),
     MESSENGER("MESSENGER");

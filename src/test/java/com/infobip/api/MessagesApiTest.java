@@ -14,6 +14,7 @@ class MessagesApiTest extends ApiTest {
 
     private static final String MESSAGES = "/messages-api/1/messages";
     private static final String EVENTS = "/messages-api/1/events";
+    private static final String VALIDATE = "/messages-api/1/messages/validate";
 
     @Test
     void shouldSendTextMessages() {
@@ -108,6 +109,81 @@ class MessagesApiTest extends ApiTest {
         };
 
         var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendValidateMessagesApiMessage() {
+        MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
+        String givenSender = "447491163443";
+        String givenTo = "111111111";
+        String givenMessageText = "May the Force be with you.";
+        String givenTextType = "TEXT";
+        String givenDescription =
+                "Request can be sent through '/messages' endpoint and should be accepted by our platform.";
+        String givenAction = "No action is required, but it is recommended to check and address any violations.";
+        String givenProperty = "messages[0].metadata";
+        String givenViolation = "Unknown property";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"description\": \"%s\",\n"
+                        + "  \"action\": \"%s\",\n"
+                        + "  \"skippableViolations\": [\n"
+                        + "    {\n"
+                        + "      \"property\": \"%s\",\n"
+                        + "      \"violation\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenDescription, givenAction, givenProperty, givenViolation);
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"channel\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"content\": {\n"
+                        + "        \"body\": {\n"
+                        + "          \"text\": \"%s\",\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        }\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenChannel, givenSender, givenTo, givenMessageText, givenTextType);
+
+        setUpSuccessPostRequest(VALIDATE, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        var request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiMessage()
+                        .channel(givenChannel)
+                        .sender(givenSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(givenTo)))
+                        .content(new MessagesApiMessageContent()
+                                .body(new MessagesApiMessageTextBody().text(givenMessageText)))));
+
+        Consumer<MessagesApiValidationOkResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getDescription()).isEqualTo(givenDescription);
+            then(response.getAction()).isEqualTo(givenAction);
+            then(response.getSkippableViolations()).isNotNull();
+            var violations = response.getSkippableViolations();
+            then(violations.size()).isEqualTo(1);
+            var violation = violations.get(0);
+            then(violation.getProperty()).isEqualTo(givenProperty);
+            then(violation.getViolation()).isEqualTo(givenViolation);
+        };
+
+        var call = api.validateMessagesApiMessage(request);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -460,7 +536,6 @@ class MessagesApiTest extends ApiTest {
         String expectedDestination = "48123098765";
         String expectedText = "Text message 123";
         String expectedCleanText = "Text message";
-        Integer expectedMessageCount = 1;
         String expectedType = "TEXT";
         String expectedReceivedAt = "2020-02-06T14:18:29.797+0000";
         String expectedMessageId = "ABEGVUGWh3gEAgo-sLTvmQCS5kwjhsy";
@@ -478,7 +553,6 @@ class MessagesApiTest extends ApiTest {
                         + "        {\n"
                         + "          \"text\": \"%s\",\n"
                         + "          \"cleanText\": \"%s\",\n"
-                        + "          \"messageCount\": %d,\n"
                         + "          \"type\": \"%s\"\n"
                         + "        }\n"
                         + "      ],\n"
@@ -497,7 +571,6 @@ class MessagesApiTest extends ApiTest {
                 expectedDestination,
                 expectedText,
                 expectedCleanText,
-                expectedMessageCount,
                 expectedType,
                 expectedReceivedAt,
                 expectedMessageId,
@@ -527,7 +600,6 @@ class MessagesApiTest extends ApiTest {
                 messagesApiWebhookEvent.getContent().get(0);
         then(messageContent.getText()).isEqualTo(expectedText);
         then(messageContent.getCleanText()).isEqualTo(expectedCleanText);
-        then(messageContent.getMessageCount()).isEqualTo(expectedMessageCount);
         then(messagesApiWebhookEvent.getReceivedAt()).isEqualTo(expectedReceivedAtDateTime);
         then(messagesApiWebhookEvent.getMessageId()).isEqualTo(expectedMessageId);
         var messagePlatform = messagesApiWebhookEvent.getPlatform();

@@ -21,6 +21,8 @@ public class MessagesApiTemplate {
 
     private String language;
 
+    private String referenceId;
+
     /**
      * Sets templateName.
      * <p>
@@ -72,8 +74,6 @@ public class MessagesApiTemplate {
      * <p>
      * Field description:
      * Language of the template.
-     * <p>
-     * The field is required.
      *
      * @param language
      * @return This {@link MessagesApiTemplate instance}.
@@ -88,8 +88,6 @@ public class MessagesApiTemplate {
      * <p>
      * Field description:
      * Language of the template.
-     * <p>
-     * The field is required.
      *
      * @return language
      */
@@ -103,14 +101,52 @@ public class MessagesApiTemplate {
      * <p>
      * Field description:
      * Language of the template.
-     * <p>
-     * The field is required.
      *
      * @param language
      */
     @JsonProperty("language")
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    /**
+     * Sets referenceId.
+     * <p>
+     * Field description:
+     * Reference field (used only in Apple) to provide context of what the message is for (e.g. order number, case identifier, etc).
+     *
+     * @param referenceId
+     * @return This {@link MessagesApiTemplate instance}.
+     */
+    public MessagesApiTemplate referenceId(String referenceId) {
+        this.referenceId = referenceId;
+        return this;
+    }
+
+    /**
+     * Returns referenceId.
+     * <p>
+     * Field description:
+     * Reference field (used only in Apple) to provide context of what the message is for (e.g. order number, case identifier, etc).
+     *
+     * @return referenceId
+     */
+    @JsonProperty("referenceId")
+    public String getReferenceId() {
+        return referenceId;
+    }
+
+    /**
+     * Sets referenceId.
+     * <p>
+     * Field description:
+     * Reference field (used only in Apple) to provide context of what the message is for (e.g. order number, case identifier, etc).
+     *
+     * @param referenceId
+     */
+    @JsonProperty("referenceId")
+    public void setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
     }
 
     @Override
@@ -123,12 +159,13 @@ public class MessagesApiTemplate {
         }
         MessagesApiTemplate messagesApiTemplate = (MessagesApiTemplate) o;
         return Objects.equals(this.templateName, messagesApiTemplate.templateName)
-                && Objects.equals(this.language, messagesApiTemplate.language);
+                && Objects.equals(this.language, messagesApiTemplate.language)
+                && Objects.equals(this.referenceId, messagesApiTemplate.referenceId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(templateName, language);
+        return Objects.hash(templateName, language, referenceId);
     }
 
     @Override
@@ -142,6 +179,9 @@ public class MessagesApiTemplate {
                 .append(newLine)
                 .append("    language: ")
                 .append(toIndentedString(language))
+                .append(newLine)
+                .append("    referenceId: ")
+                .append(toIndentedString(referenceId))
                 .append(newLine)
                 .append("}")
                 .toString();

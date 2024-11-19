@@ -25,6 +25,7 @@ import java.util.Objects;
 @JsonSubTypes({
     @JsonSubTypes.Type(value = MessagesApiMessageOpenUrlButton.class, name = "OPEN_URL"),
     @JsonSubTypes.Type(value = MessagesApiMessageReplyButton.class, name = "REPLY"),
+    @JsonSubTypes.Type(value = MessagesApiMessageRequestLocationButton.class, name = "REQUEST_LOCATION"),
 })
 public abstract class MessagesApiMessageButton {
 

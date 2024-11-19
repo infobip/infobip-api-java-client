@@ -10,6 +10,7 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
@@ -18,6 +19,10 @@ import java.util.Objects;
 public class MessagesApiRequestScheduleOptions {
 
     private String bulkId;
+
+    private OffsetDateTime sendAt;
+
+    private MessagesApiSendingSpeedLimit sendingSpeedLimit;
 
     /**
      * Sets bulkId.
@@ -59,6 +64,77 @@ public class MessagesApiRequestScheduleOptions {
         this.bulkId = bulkId;
     }
 
+    /**
+     * Sets sendAt.
+     * <p>
+     * Field description:
+     * Date and time when the message is to be sent. Used for scheduled messages. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;, and can only be scheduled for no later than 180 days in advance.
+     *
+     * @param sendAt
+     * @return This {@link MessagesApiRequestScheduleOptions instance}.
+     */
+    public MessagesApiRequestScheduleOptions sendAt(OffsetDateTime sendAt) {
+        this.sendAt = sendAt;
+        return this;
+    }
+
+    /**
+     * Returns sendAt.
+     * <p>
+     * Field description:
+     * Date and time when the message is to be sent. Used for scheduled messages. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;, and can only be scheduled for no later than 180 days in advance.
+     *
+     * @return sendAt
+     */
+    @JsonProperty("sendAt")
+    public OffsetDateTime getSendAt() {
+        return sendAt;
+    }
+
+    /**
+     * Sets sendAt.
+     * <p>
+     * Field description:
+     * Date and time when the message is to be sent. Used for scheduled messages. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;, and can only be scheduled for no later than 180 days in advance.
+     *
+     * @param sendAt
+     */
+    @JsonProperty("sendAt")
+    public void setSendAt(OffsetDateTime sendAt) {
+        this.sendAt = sendAt;
+    }
+
+    /**
+     * Sets sendingSpeedLimit.
+     *
+     * @param sendingSpeedLimit
+     * @return This {@link MessagesApiRequestScheduleOptions instance}.
+     */
+    public MessagesApiRequestScheduleOptions sendingSpeedLimit(MessagesApiSendingSpeedLimit sendingSpeedLimit) {
+        this.sendingSpeedLimit = sendingSpeedLimit;
+        return this;
+    }
+
+    /**
+     * Returns sendingSpeedLimit.
+     *
+     * @return sendingSpeedLimit
+     */
+    @JsonProperty("sendingSpeedLimit")
+    public MessagesApiSendingSpeedLimit getSendingSpeedLimit() {
+        return sendingSpeedLimit;
+    }
+
+    /**
+     * Sets sendingSpeedLimit.
+     *
+     * @param sendingSpeedLimit
+     */
+    @JsonProperty("sendingSpeedLimit")
+    public void setSendingSpeedLimit(MessagesApiSendingSpeedLimit sendingSpeedLimit) {
+        this.sendingSpeedLimit = sendingSpeedLimit;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -68,12 +144,14 @@ public class MessagesApiRequestScheduleOptions {
             return false;
         }
         MessagesApiRequestScheduleOptions messagesApiRequestScheduleOptions = (MessagesApiRequestScheduleOptions) o;
-        return Objects.equals(this.bulkId, messagesApiRequestScheduleOptions.bulkId);
+        return Objects.equals(this.bulkId, messagesApiRequestScheduleOptions.bulkId)
+                && Objects.equals(this.sendAt, messagesApiRequestScheduleOptions.sendAt)
+                && Objects.equals(this.sendingSpeedLimit, messagesApiRequestScheduleOptions.sendingSpeedLimit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bulkId);
+        return Objects.hash(bulkId, sendAt, sendingSpeedLimit);
     }
 
     @Override
@@ -84,6 +162,12 @@ public class MessagesApiRequestScheduleOptions {
                 .append(newLine)
                 .append("    bulkId: ")
                 .append(toIndentedString(bulkId))
+                .append(newLine)
+                .append("    sendAt: ")
+                .append(toIndentedString(sendAt))
+                .append(newLine)
+                .append("    sendingSpeedLimit: ")
+                .append(toIndentedString(sendingSpeedLimit))
                 .append(newLine)
                 .append("}")
                 .toString();

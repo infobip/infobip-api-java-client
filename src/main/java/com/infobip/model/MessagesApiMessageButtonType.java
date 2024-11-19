@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum MessagesApiMessageButtonType {
     REPLY("REPLY"),
-    OPEN_URL("OPEN_URL");
+    OPEN_URL("OPEN_URL"),
+    REQUEST_LOCATION("REQUEST_LOCATION");
 
     private final String value;
 

@@ -38,6 +38,8 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
 
     private MessagesApiPlatform platform;
 
+    private String campaignReferenceId;
+
     /**
      * Constructs a new {@link MessagesApiWebhookEvent} instance.
      */
@@ -442,6 +444,46 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
         this.platform = platform;
     }
 
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the MT message
+     *
+     * @param campaignReferenceId
+     * @return This {@link MessagesApiWebhookEvent instance}.
+     */
+    public MessagesApiWebhookEvent campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the MT message
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the MT message
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -460,6 +502,7 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
                 && Objects.equals(this.pairedMessageId, messagesApiWebhookEvent.pairedMessageId)
                 && Objects.equals(this.callbackData, messagesApiWebhookEvent.callbackData)
                 && Objects.equals(this.platform, messagesApiWebhookEvent.platform)
+                && Objects.equals(this.campaignReferenceId, messagesApiWebhookEvent.campaignReferenceId)
                 && super.equals(o);
     }
 
@@ -475,6 +518,7 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
                 pairedMessageId,
                 callbackData,
                 platform,
+                campaignReferenceId,
                 super.hashCode());
     }
 
@@ -513,6 +557,9 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
                 .append(newLine)
                 .append("    platform: ")
                 .append(toIndentedString(platform))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
                 .append(newLine)
                 .append("}")
                 .toString();

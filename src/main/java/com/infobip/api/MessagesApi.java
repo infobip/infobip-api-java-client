@@ -10,7 +10,6 @@
 package com.infobip.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.google.common.annotations.Beta;
 import com.infobip.ApiCallback;
 import com.infobip.ApiClient;
 import com.infobip.ApiException;
@@ -18,6 +17,7 @@ import com.infobip.RequestDefinition;
 import com.infobip.model.MessagesApiEventRequest;
 import com.infobip.model.MessagesApiRequest;
 import com.infobip.model.MessagesApiResponse;
+import com.infobip.model.MessagesApiValidationOkResponse;
 import java.util.Objects;
 
 /**
@@ -93,7 +93,6 @@ public class MessagesApi {
      * @return SendMessagesApiEventsRequest
      * @see <a href="https://www.infobip.com/docs/messages-api">Learn more about the Messages API and use cases</a>
      */
-    @Beta
     public SendMessagesApiEventsRequest sendMessagesApiEvents(MessagesApiEventRequest messagesApiEventRequest) {
         return new SendMessagesApiEventsRequest(messagesApiEventRequest);
     }
@@ -153,8 +152,71 @@ public class MessagesApi {
      * @return SendMessagesApiMessageRequest
      * @see <a href="https://www.infobip.com/docs/messages-api">Learn more about the Messages API and use cases</a>
      */
-    @Beta
     public SendMessagesApiMessageRequest sendMessagesApiMessage(MessagesApiRequest messagesApiRequest) {
         return new SendMessagesApiMessageRequest(messagesApiRequest);
+    }
+
+    private RequestDefinition validateMessagesApiMessageDefinition(MessagesApiRequest messagesApiRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/messages-api/1/messages/validate")
+                .body(messagesApiRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * validateMessagesApiMessage request builder class.
+     */
+    public class ValidateMessagesApiMessageRequest {
+        private final MessagesApiRequest messagesApiRequest;
+
+        private ValidateMessagesApiMessageRequest(MessagesApiRequest messagesApiRequest) {
+            this.messagesApiRequest = Objects.requireNonNull(
+                    messagesApiRequest, "The required parameter 'messagesApiRequest' is missing.");
+        }
+
+        /**
+         * Executes the validateMessagesApiMessage request.
+         *
+         * @return MessagesApiValidationOkResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public MessagesApiValidationOkResponse execute() throws ApiException {
+            RequestDefinition validateMessagesApiMessageDefinition =
+                    validateMessagesApiMessageDefinition(messagesApiRequest);
+            return apiClient.execute(
+                    validateMessagesApiMessageDefinition,
+                    new TypeReference<MessagesApiValidationOkResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the validateMessagesApiMessage request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<MessagesApiValidationOkResponse> callback) {
+            RequestDefinition validateMessagesApiMessageDefinition =
+                    validateMessagesApiMessageDefinition(messagesApiRequest);
+            return apiClient.executeAsync(
+                    validateMessagesApiMessageDefinition,
+                    new TypeReference<MessagesApiValidationOkResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Validate a Messages API message.
+     * <p>
+     * Perform a detailed validation of Messages API messages. This endpoint executes more specific checks than the &#x60;/messages&#x60; endpoint such as: possible channel-specific validations, verification of each failover step and unknown fields. Returns &#x60;200 OK&#x60; when the request would be accepted by the platform or &#x60;400 BAD_REQUEST&#x60; when it may fail at any point. Use this endpoint to validate messages before sending them to catch potential issues early.
+     *
+     * @param messagesApiRequest  (required)
+     * @return ValidateMessagesApiMessageRequest
+     * @see <a href="https://www.infobip.com/docs/messages-api">Learn more about the Messages API and use cases</a>
+     */
+    public ValidateMessagesApiMessageRequest validateMessagesApiMessage(MessagesApiRequest messagesApiRequest) {
+        return new ValidateMessagesApiMessageRequest(messagesApiRequest);
     }
 }

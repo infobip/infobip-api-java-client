@@ -22,7 +22,11 @@ public enum MessagesApiMessageBodyType {
     DOCUMENT("DOCUMENT"),
     RICH_LINK("RICH_LINK"),
     AUTHENTICATION_REQUEST("AUTHENTICATION_REQUEST"),
-    LIST("LIST");
+    LIST("LIST"),
+    CAROUSEL("CAROUSEL"),
+    LOCATION("LOCATION"),
+    CONTACT("CONTACT"),
+    STICKER("STICKER");
 
     private final String value;
 

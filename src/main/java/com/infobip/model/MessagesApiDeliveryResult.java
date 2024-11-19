@@ -49,6 +49,8 @@ public class MessagesApiDeliveryResult {
 
     private Integer networkId;
 
+    private String campaignReferenceId;
+
     /**
      * Sets event.
      * <p>
@@ -136,7 +138,7 @@ public class MessagesApiDeliveryResult {
      * Sets sender.
      * <p>
      * Field description:
-     * Identifier (usually number) of the party which sent the message.
+     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
      * <p>
      * The field is required.
      *
@@ -152,7 +154,7 @@ public class MessagesApiDeliveryResult {
      * Returns sender.
      * <p>
      * Field description:
-     * Identifier (usually number) of the party which sent the message.
+     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
      * <p>
      * The field is required.
      *
@@ -167,7 +169,7 @@ public class MessagesApiDeliveryResult {
      * Sets sender.
      * <p>
      * Field description:
-     * Identifier (usually number) of the party which sent the message.
+     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
      * <p>
      * The field is required.
      *
@@ -182,7 +184,7 @@ public class MessagesApiDeliveryResult {
      * Sets destination.
      * <p>
      * Field description:
-     * Sender provided during the activation process.
+     * Message destination address.
      * <p>
      * The field is required.
      *
@@ -198,7 +200,7 @@ public class MessagesApiDeliveryResult {
      * Returns destination.
      * <p>
      * Field description:
-     * Sender provided during the activation process.
+     * Message destination address.
      * <p>
      * The field is required.
      *
@@ -213,7 +215,7 @@ public class MessagesApiDeliveryResult {
      * Sets destination.
      * <p>
      * Field description:
-     * Sender provided during the activation process.
+     * Message destination address.
      * <p>
      * The field is required.
      *
@@ -274,7 +276,7 @@ public class MessagesApiDeliveryResult {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Tells when the message was finished processing by Infobip (ie. delivered to destination, delivered to destination network, etc.).
+     * Tells when the message was finished processing by Infobip (ie. delivered to destination, delivered to destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      * <p>
      * The field is required.
      *
@@ -290,7 +292,7 @@ public class MessagesApiDeliveryResult {
      * Returns doneAt.
      * <p>
      * Field description:
-     * Tells when the message was finished processing by Infobip (ie. delivered to destination, delivered to destination network, etc.).
+     * Tells when the message was finished processing by Infobip (ie. delivered to destination, delivered to destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      * <p>
      * The field is required.
      *
@@ -305,7 +307,7 @@ public class MessagesApiDeliveryResult {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Tells when the message was finished processing by Infobip (ie. delivered to destination, delivered to destination network, etc.).
+     * Tells when the message was finished processing by Infobip (ie. delivered to destination, delivered to destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
      * <p>
      * The field is required.
      *
@@ -719,6 +721,46 @@ public class MessagesApiDeliveryResult {
         this.networkId = networkId;
     }
 
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     * @return This {@link MessagesApiDeliveryResult instance}.
+     */
+    public MessagesApiDeliveryResult campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -743,7 +785,8 @@ public class MessagesApiDeliveryResult {
                 && Objects.equals(this.platform, messagesApiDeliveryResult.platform)
                 && Objects.equals(this.deviceDetails, messagesApiDeliveryResult.deviceDetails)
                 && Objects.equals(this.mccMnc, messagesApiDeliveryResult.mccMnc)
-                && Objects.equals(this.networkId, messagesApiDeliveryResult.networkId);
+                && Objects.equals(this.networkId, messagesApiDeliveryResult.networkId)
+                && Objects.equals(this.campaignReferenceId, messagesApiDeliveryResult.campaignReferenceId);
     }
 
     @Override
@@ -764,7 +807,8 @@ public class MessagesApiDeliveryResult {
                 platform,
                 deviceDetails,
                 mccMnc,
-                networkId);
+                networkId,
+                campaignReferenceId);
     }
 
     @Override
@@ -820,6 +864,9 @@ public class MessagesApiDeliveryResult {
                 .append(newLine)
                 .append("    networkId: ")
                 .append(toIndentedString(networkId))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
                 .append(newLine)
                 .append("}")
                 .toString();
