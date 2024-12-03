@@ -21,13 +21,13 @@ public class SmsResponse {
 
     private String bulkId;
 
-    private List<SmsResponseDetails> messages = null;
+    private List<SmsResponseDetails> messages = new ArrayList<>();
 
     /**
      * Sets bulkId.
      * <p>
      * Field description:
-     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. Typically, used to fetch [delivery reports](#channels/sms/get-outbound-sms-message-delivery-reports) and [message logs](#channels/sms/get-outbound-sms-message-logs).
+     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. If not provided, it will be auto-generated and returned in the API response. Typically used for fetching delivery reports and message logs.
      *
      * @param bulkId
      * @return This {@link SmsResponse instance}.
@@ -41,7 +41,7 @@ public class SmsResponse {
      * Returns bulkId.
      * <p>
      * Field description:
-     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. Typically, used to fetch [delivery reports](#channels/sms/get-outbound-sms-message-delivery-reports) and [message logs](#channels/sms/get-outbound-sms-message-logs).
+     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. If not provided, it will be auto-generated and returned in the API response. Typically used for fetching delivery reports and message logs.
      *
      * @return bulkId
      */
@@ -54,7 +54,7 @@ public class SmsResponse {
      * Sets bulkId.
      * <p>
      * Field description:
-     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. Typically, used to fetch [delivery reports](#channels/sms/get-outbound-sms-message-delivery-reports) and [message logs](#channels/sms/get-outbound-sms-message-logs).
+     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. If not provided, it will be auto-generated and returned in the API response. Typically used for fetching delivery reports and message logs.
      *
      * @param bulkId
      */
@@ -68,6 +68,8 @@ public class SmsResponse {
      * <p>
      * Field description:
      * An array of message objects of a single message or multiple messages sent under one bulk ID.
+     * <p>
+     * The field is required.
      *
      * @param messages
      * @return This {@link SmsResponse instance}.
@@ -82,6 +84,8 @@ public class SmsResponse {
      * <p>
      * Field description:
      * An array of message objects of a single message or multiple messages sent under one bulk ID.
+     * <p>
+     * The field is required.
      *
      * @param messagesItem The item to be added to the list.
      * @return This {@link SmsResponse instance}.
@@ -99,6 +103,8 @@ public class SmsResponse {
      * <p>
      * Field description:
      * An array of message objects of a single message or multiple messages sent under one bulk ID.
+     * <p>
+     * The field is required.
      *
      * @return messages
      */
@@ -112,6 +118,8 @@ public class SmsResponse {
      * <p>
      * Field description:
      * An array of message objects of a single message or multiple messages sent under one bulk ID.
+     * <p>
+     * The field is required.
      *
      * @param messages
      */

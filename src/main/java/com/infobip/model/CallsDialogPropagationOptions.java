@@ -21,6 +21,8 @@ public class CallsDialogPropagationOptions {
 
     private Boolean childCallRinging;
 
+    private RingbackGeneration ringbackGeneration;
+
     /**
      * Sets childCallHangup.
      * <p>
@@ -65,7 +67,7 @@ public class CallsDialogPropagationOptions {
      * Sets childCallRinging.
      * <p>
      * Field description:
-     * Flag indicating if a child call&#39;s ringing should be propagated to the parent call. The parent call must be &#x60;INBOUND&#x60;.
+     * Flag indicating if a child call&#39;s ringing should be propagated to the parent call. The parent call must be &#x60;INBOUND&#x60;. Cannot be &#x60;true&#x60; when &#x60;ringbackGeneration&#x60; is enabled.
      *
      * @param childCallRinging
      * @return This {@link CallsDialogPropagationOptions instance}.
@@ -79,7 +81,7 @@ public class CallsDialogPropagationOptions {
      * Returns childCallRinging.
      * <p>
      * Field description:
-     * Flag indicating if a child call&#39;s ringing should be propagated to the parent call. The parent call must be &#x60;INBOUND&#x60;.
+     * Flag indicating if a child call&#39;s ringing should be propagated to the parent call. The parent call must be &#x60;INBOUND&#x60;. Cannot be &#x60;true&#x60; when &#x60;ringbackGeneration&#x60; is enabled.
      *
      * @return childCallRinging
      */
@@ -92,13 +94,44 @@ public class CallsDialogPropagationOptions {
      * Sets childCallRinging.
      * <p>
      * Field description:
-     * Flag indicating if a child call&#39;s ringing should be propagated to the parent call. The parent call must be &#x60;INBOUND&#x60;.
+     * Flag indicating if a child call&#39;s ringing should be propagated to the parent call. The parent call must be &#x60;INBOUND&#x60;. Cannot be &#x60;true&#x60; when &#x60;ringbackGeneration&#x60; is enabled.
      *
      * @param childCallRinging
      */
     @JsonProperty("childCallRinging")
     public void setChildCallRinging(Boolean childCallRinging) {
         this.childCallRinging = childCallRinging;
+    }
+
+    /**
+     * Sets ringbackGeneration.
+     *
+     * @param ringbackGeneration
+     * @return This {@link CallsDialogPropagationOptions instance}.
+     */
+    public CallsDialogPropagationOptions ringbackGeneration(RingbackGeneration ringbackGeneration) {
+        this.ringbackGeneration = ringbackGeneration;
+        return this;
+    }
+
+    /**
+     * Returns ringbackGeneration.
+     *
+     * @return ringbackGeneration
+     */
+    @JsonProperty("ringbackGeneration")
+    public RingbackGeneration getRingbackGeneration() {
+        return ringbackGeneration;
+    }
+
+    /**
+     * Sets ringbackGeneration.
+     *
+     * @param ringbackGeneration
+     */
+    @JsonProperty("ringbackGeneration")
+    public void setRingbackGeneration(RingbackGeneration ringbackGeneration) {
+        this.ringbackGeneration = ringbackGeneration;
     }
 
     @Override
@@ -111,12 +144,13 @@ public class CallsDialogPropagationOptions {
         }
         CallsDialogPropagationOptions callsDialogPropagationOptions = (CallsDialogPropagationOptions) o;
         return Objects.equals(this.childCallHangup, callsDialogPropagationOptions.childCallHangup)
-                && Objects.equals(this.childCallRinging, callsDialogPropagationOptions.childCallRinging);
+                && Objects.equals(this.childCallRinging, callsDialogPropagationOptions.childCallRinging)
+                && Objects.equals(this.ringbackGeneration, callsDialogPropagationOptions.ringbackGeneration);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(childCallHangup, childCallRinging);
+        return Objects.hash(childCallHangup, childCallRinging, ringbackGeneration);
     }
 
     @Override
@@ -130,6 +164,9 @@ public class CallsDialogPropagationOptions {
                 .append(newLine)
                 .append("    childCallRinging: ")
                 .append(toIndentedString(childCallRinging))
+                .append(newLine)
+                .append("    ringbackGeneration: ")
+                .append(toIndentedString(ringbackGeneration))
                 .append(newLine)
                 .append("}")
                 .toString();

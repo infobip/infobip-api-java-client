@@ -22,7 +22,9 @@ public class CallsDialogRecordingResponse {
 
     private String dialogId;
 
-    private String applicationId;
+    private String callsConfigurationId;
+
+    private CallsPlatform platform;
 
     private List<CallsRecordingFile> composedFiles = null;
 
@@ -73,43 +75,74 @@ public class CallsDialogRecordingResponse {
     }
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecordingResponse applicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public CallsDialogRecordingResponse callsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
         return this;
     }
 
     /**
-     * Returns applicationId.
+     * Returns callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      *
-     * @return applicationId
+     * @return callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
+    @JsonProperty("callsConfigurationId")
+    public String getCallsConfigurationId() {
+        return callsConfigurationId;
     }
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("callsConfigurationId")
+    public void setCallsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     * @return This {@link CallsDialogRecordingResponse instance}.
+     */
+    public CallsDialogRecordingResponse platform(CallsPlatform platform) {
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * Returns platform.
+     *
+     * @return platform
+     */
+    @JsonProperty("platform")
+    public CallsPlatform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     */
+    @JsonProperty("platform")
+    public void setPlatform(CallsPlatform platform) {
+        this.platform = platform;
     }
 
     /**
@@ -316,7 +349,8 @@ public class CallsDialogRecordingResponse {
         }
         CallsDialogRecordingResponse callsDialogRecordingResponse = (CallsDialogRecordingResponse) o;
         return Objects.equals(this.dialogId, callsDialogRecordingResponse.dialogId)
-                && Objects.equals(this.applicationId, callsDialogRecordingResponse.applicationId)
+                && Objects.equals(this.callsConfigurationId, callsDialogRecordingResponse.callsConfigurationId)
+                && Objects.equals(this.platform, callsDialogRecordingResponse.platform)
                 && Objects.equals(this.composedFiles, callsDialogRecordingResponse.composedFiles)
                 && Objects.equals(this.callRecordings, callsDialogRecordingResponse.callRecordings)
                 && Objects.equals(this.startTime, callsDialogRecordingResponse.startTime)
@@ -325,7 +359,8 @@ public class CallsDialogRecordingResponse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(dialogId, applicationId, composedFiles, callRecordings, startTime, endTime);
+        return Objects.hash(
+                dialogId, callsConfigurationId, platform, composedFiles, callRecordings, startTime, endTime);
     }
 
     @Override
@@ -337,8 +372,11 @@ public class CallsDialogRecordingResponse {
                 .append("    dialogId: ")
                 .append(toIndentedString(dialogId))
                 .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    callsConfigurationId: ")
+                .append(toIndentedString(callsConfigurationId))
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("    composedFiles: ")
                 .append(toIndentedString(composedFiles))

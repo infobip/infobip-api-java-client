@@ -20,7 +20,7 @@ public class CallsSchedulingOptions {
 
     private OffsetDateTime startTime;
 
-    private CallsTimeWindow callingTimeWindow;
+    private DeliveryTimeWindow callingTimeWindow;
 
     /**
      * Sets startTime.
@@ -68,7 +68,7 @@ public class CallsSchedulingOptions {
      * @param callingTimeWindow
      * @return This {@link CallsSchedulingOptions instance}.
      */
-    public CallsSchedulingOptions callingTimeWindow(CallsTimeWindow callingTimeWindow) {
+    public CallsSchedulingOptions callingTimeWindow(DeliveryTimeWindow callingTimeWindow) {
         this.callingTimeWindow = callingTimeWindow;
         return this;
     }
@@ -79,7 +79,7 @@ public class CallsSchedulingOptions {
      * @return callingTimeWindow
      */
     @JsonProperty("callingTimeWindow")
-    public CallsTimeWindow getCallingTimeWindow() {
+    public DeliveryTimeWindow getCallingTimeWindow() {
         return callingTimeWindow;
     }
 
@@ -89,7 +89,7 @@ public class CallsSchedulingOptions {
      * @param callingTimeWindow
      */
     @JsonProperty("callingTimeWindow")
-    public void setCallingTimeWindow(CallsTimeWindow callingTimeWindow) {
+    public void setCallingTimeWindow(DeliveryTimeWindow callingTimeWindow) {
         this.callingTimeWindow = callingTimeWindow;
     }
 

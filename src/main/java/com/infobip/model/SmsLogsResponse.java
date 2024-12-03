@@ -25,7 +25,7 @@ public class SmsLogsResponse {
      * Sets results.
      * <p>
      * Field description:
-     * Collection of logs.
+     * An array of message log results, one object per each message log entry.
      *
      * @param results
      * @return This {@link SmsLogsResponse instance}.
@@ -39,7 +39,7 @@ public class SmsLogsResponse {
      * Adds and item into results.
      * <p>
      * Field description:
-     * Collection of logs.
+     * An array of message log results, one object per each message log entry.
      *
      * @param resultsItem The item to be added to the list.
      * @return This {@link SmsLogsResponse instance}.
@@ -56,7 +56,7 @@ public class SmsLogsResponse {
      * Returns results.
      * <p>
      * Field description:
-     * Collection of logs.
+     * An array of message log results, one object per each message log entry.
      *
      * @return results
      */
@@ -69,7 +69,7 @@ public class SmsLogsResponse {
      * Sets results.
      * <p>
      * Field description:
-     * Collection of logs.
+     * An array of message log results, one object per each message log entry.
      *
      * @param results
      */

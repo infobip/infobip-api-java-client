@@ -19,6 +19,12 @@ class VoiceApiTest extends ApiTest {
     private static final String MULTIPLE = "/tts/3/multi";
     private static final String ADVANCED = "/tts/3/advanced";
     private static final String VOICE_LANGUAGE = "/tts/3/voices/{language}";
+    private static final String VOICE_REPORTS = "/voice/1/reports";
+    private static final String VOICE_LOGS = "/tts/3/logs";
+    private static final String IVR_FILES = "/voice/ivr/1/files";
+    private static final String VOICE_SCENARIOS = "/voice/ivr/1/scenarios";
+    private static final String VOICE_SCENARIO = "/voice/ivr/1/scenarios/{id}";
+    private static final String LAUNCH_IVR_SCENARIO = "/voice/ivr/1/messages";
 
     @Test
     void shouldGetSentBulks() {
@@ -389,6 +395,801 @@ class VoiceApiTest extends ApiTest {
         };
 
         var call = api.getVoices(givenLanguage);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetVoiceDeliveryReports() {
+        String givenBulkId = "8c20f086-d82b-48cc-b2b3-3ca5f7aca9fb";
+        String givenMessageId = "ff4804ef-6ab6-4abd-984d-ab3b1387e852";
+        String givenFrom = "385333444";
+        String givenTo = "385981178";
+        String givenSentAt = "2018-06-25T13:38:14.730+0000";
+        String givenMccMnc = "21901";
+        String givenCallbackData = "DLR callback data";
+        String givenFeature = "Voice-message";
+        String givenStartTime = "2018-06-25T13:38:15.000+0000";
+        String givenAnswerTime = "2018-06-25T13:38:25.000+0000";
+        String givenEndTime = "2018-06-25T13:38:28.316+0000";
+        int givenDuration = 10;
+        int givenChargedDuration = 30;
+        double givenFileDuration = 19.3;
+        String givenDtmfCodes = "3, 9";
+        String givenScenarioId = "333";
+        String givenScenarioName = "Scenario name";
+        String givenCollectedDtmfs = "{\"myFirstVar\":\"3\",\"mySecondVar\":\"9\"}";
+        double givenPricePerSecond = 0.01;
+        String givenCurrency = "EUR";
+        int givenStatusGroupId = 3;
+        String givenStatusGroupName = "DELIVERED";
+        int givenStatusId = 5;
+        String givenStatusName = "DELIVERED_TO_HANDSET";
+        String givenStatusDescription = "Message delivered to handset";
+        int givenErrorGroupId = 0;
+        String givenErrorGroupName = "OK";
+        int givenErrorId = 5000;
+        String givenErrorName = "VOICE_ANSWERED";
+        String givenErrorDescription = "Call answered by human";
+        boolean givenErrorPermanent = true;
+
+        String givenResponse = String.format(
+                "{ \"results\": [\n" + "  {\n"
+                        + "    \"bulkId\": \"%s\",\n"
+                        + "    \"messageId\": \"%s\",\n"
+                        + "    \"from\": \"%s\",\n"
+                        + "    \"to\": \"%s\",\n"
+                        + "    \"sentAt\": \"%s\",\n"
+                        + "    \"mccMnc\": \"%s\",\n"
+                        + "    \"callbackData\": \"%s\",\n"
+                        + "    \"voiceCall\": {\n"
+                        + "      \"feature\": \"%s\",\n"
+                        + "      \"startTime\": \"%s\",\n"
+                        + "      \"answerTime\": \"%s\",\n"
+                        + "      \"endTime\": \"%s\",\n"
+                        + "      \"duration\": %d,\n"
+                        + "      \"chargedDuration\": %d,\n"
+                        + "      \"fileDuration\": %.1f,\n"
+                        + "      \"ivr\": {\n"
+                        + "        \"scenarioId\": \"%s\",\n"
+                        + "        \"scenarioName\": \"%s\"\n"
+                        + "      }\n"
+                        + "    },\n"
+                        + "    \"price\": {\n"
+                        + "      \"pricePerSecond\": %.2f,\n"
+                        + "      \"currency\": \"%s\"\n"
+                        + "    },\n"
+                        + "    \"status\": {\n"
+                        + "      \"groupId\": %d,\n"
+                        + "      \"groupName\": \"%s\",\n"
+                        + "      \"id\": %d,\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"description\": \"%s\"\n"
+                        + "    },\n"
+                        + "    \"error\": {\n"
+                        + "      \"groupId\": %d,\n"
+                        + "      \"groupName\": \"%s\",\n"
+                        + "      \"id\": %d,\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"description\": \"%s\",\n"
+                        + "      \"permanent\": %b\n"
+                        + "    }\n"
+                        + "  }\n"
+                        + "]}",
+                givenBulkId,
+                givenMessageId,
+                givenFrom,
+                givenTo,
+                givenSentAt,
+                givenMccMnc,
+                givenCallbackData,
+                givenFeature,
+                givenStartTime,
+                givenAnswerTime,
+                givenEndTime,
+                givenDuration,
+                givenChargedDuration,
+                givenFileDuration,
+                givenScenarioId,
+                givenScenarioName,
+                givenPricePerSecond,
+                givenCurrency,
+                givenStatusGroupId,
+                givenStatusGroupName,
+                givenStatusId,
+                givenStatusName,
+                givenStatusDescription,
+                givenErrorGroupId,
+                givenErrorGroupName,
+                givenErrorId,
+                givenErrorName,
+                givenErrorDescription,
+                givenErrorPermanent);
+
+        setUpGetRequest(VOICE_REPORTS, Map.of(), givenResponse, 200);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        Consumer<CallsReportResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getResults().size()).isEqualTo(1);
+            var result = response.getResults().get(0);
+            then(result.getBulkId()).isEqualTo(givenBulkId);
+            then(result.getMessageId()).isEqualTo(givenMessageId);
+            then(result.getFrom()).isEqualTo(givenFrom);
+            then(result.getTo()).isEqualTo(givenTo);
+            then(result.getSentAt()).isEqualTo(givenSentAt);
+            then(result.getMccMnc()).isEqualTo(givenMccMnc);
+            then(result.getCallbackData()).isEqualTo(givenCallbackData);
+            var voiceCall = result.getVoiceCall();
+            then(voiceCall.getFeature()).isEqualTo(givenFeature);
+            then(voiceCall.getStartTime()).isEqualTo(givenStartTime);
+            then(voiceCall.getAnswerTime()).isEqualTo(givenAnswerTime);
+            then(voiceCall.getEndTime()).isEqualTo(givenEndTime);
+            then(voiceCall.getDuration()).isEqualTo(givenDuration);
+            then(voiceCall.getChargedDuration()).isEqualTo(givenChargedDuration);
+            then(voiceCall.getFileDuration()).isEqualTo(givenFileDuration);
+            var ivr = voiceCall.getIvr();
+            then(ivr.getScenarioId()).isEqualTo(givenScenarioId);
+            then(ivr.getScenarioName()).isEqualTo(givenScenarioName);
+            then(ivr.getCollectedMappedDtmfs()).isNull();
+            then(ivr.getSpokenInput()).isNull();
+            then(ivr.getMatchedSpokenInput()).isNull();
+            var price = result.getPrice();
+            then(price.getPricePerSecond()).isEqualTo(givenPricePerSecond);
+            then(price.getCurrency()).isEqualTo(givenCurrency);
+            var status = result.getStatus();
+            then(status.getGroupId()).isEqualTo(givenStatusGroupId);
+            then(status.getGroupName()).isEqualTo(givenStatusGroupName);
+            then(status.getId()).isEqualTo(givenStatusId);
+            then(status.getName()).isEqualTo(givenStatusName);
+            then(status.getDescription()).isEqualTo(givenStatusDescription);
+            var error = result.getError();
+            then(error.getGroupId()).isEqualTo(givenErrorGroupId);
+            then(error.getGroupName()).isEqualTo(givenErrorGroupName);
+            then(error.getId()).isEqualTo(givenErrorId);
+            then(error.getName()).isEqualTo(givenErrorName);
+            then(error.getDescription()).isEqualTo(givenErrorDescription);
+            then(error.getPermanent()).isEqualTo(givenErrorPermanent);
+        };
+
+        var voice = api.getVoiceDeliveryReports();
+        testSuccessfulCall(voice::execute, assertions);
+        testSuccessfulAsyncCall(voice::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetVoiceLogs() {
+        String givenBulkId = "06479ba3-5977-47f6-9346-fee0369bc76b";
+        String givenMessageId = "1f21d8d7-f306-4f53-9f6e-eddfce9849ea";
+        String givenTo = "41793026727";
+        String givenFrom = "41793026700";
+        String givenText = "Test voice message.";
+        String givenSentAt = "2022-12-06T13:37:15Z";
+        OffsetDateTime givenSentAtDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2022, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
+
+        String givenDoneAt = "2022-12-06T13:37:15Z";
+        OffsetDateTime givenDoneAtDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2022, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
+
+        int givenDuration = 10;
+        String givenMccMnc = "22801";
+        double givenPricePerSecond = 0.01;
+        String givenCurrency = "EUR";
+        int givenStatusGroupId = 3;
+        String givenStatusGroupName = "DELIVERED";
+        int givenStatusId = 5;
+        String givenStatusName = "DELIVERED_TO_HANDSET";
+        String givenStatusDescription = "Message delivered to handset";
+        int givenErrorGroupId = 0;
+        String givenErrorGroupName = "OK";
+        int givenErrorId = 5003;
+        String givenErrorName = "EC_VOICE_NO_ANSWER";
+        String givenErrorDescription = "User was notified, but did not answer call";
+        boolean givenErrorPermanent = true;
+
+        String givenResponse = String.format(
+                "{ \"results\": [\n" + "  {\n"
+                        + "    \"bulkId\": \"%s\",\n"
+                        + "    \"messageId\": \"%s\",\n"
+                        + "    \"to\": \"%s\",\n"
+                        + "    \"from\": \"%s\",\n"
+                        + "    \"text\": \"%s\",\n"
+                        + "    \"sentAt\": \"%s\",\n"
+                        + "    \"doneAt\": \"%s\",\n"
+                        + "    \"duration\": %d,\n"
+                        + "    \"mccMnc\": \"%s\",\n"
+                        + "    \"price\": {\n"
+                        + "      \"pricePerSecond\": %.2f,\n"
+                        + "      \"currency\": \"%s\"\n"
+                        + "    },\n"
+                        + "    \"status\": {\n"
+                        + "      \"groupId\": %d,\n"
+                        + "      \"groupName\": \"%s\",\n"
+                        + "      \"id\": %d,\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"description\": \"%s\"\n"
+                        + "    },\n"
+                        + "    \"error\": {\n"
+                        + "      \"groupId\": %d,\n"
+                        + "      \"groupName\": \"%s\",\n"
+                        + "      \"id\": %d,\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"description\": \"%s\",\n"
+                        + "      \"permanent\": %b\n"
+                        + "    }\n"
+                        + "  }\n"
+                        + "]}",
+                givenBulkId,
+                givenMessageId,
+                givenTo,
+                givenFrom,
+                givenText,
+                givenSentAt,
+                givenDoneAt,
+                givenDuration,
+                givenMccMnc,
+                givenPricePerSecond,
+                givenCurrency,
+                givenStatusGroupId,
+                givenStatusGroupName,
+                givenStatusId,
+                givenStatusName,
+                givenStatusDescription,
+                givenErrorGroupId,
+                givenErrorGroupName,
+                givenErrorId,
+                givenErrorName,
+                givenErrorDescription,
+                givenErrorPermanent);
+
+        setUpGetRequest(VOICE_LOGS, Map.of(), givenResponse, 200);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        Consumer<CallsLogsResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getResults().size()).isEqualTo(1);
+            var result = response.getResults().get(0);
+            then(result.getBulkId()).isEqualTo(givenBulkId);
+            then(result.getMessageId()).isEqualTo(givenMessageId);
+            then(result.getTo()).isEqualTo(givenTo);
+            then(result.getFrom()).isEqualTo(givenFrom);
+            then(result.getText()).isEqualTo(givenText);
+            then(result.getSentAt()).isEqualTo(givenSentAtDateTime);
+            then(result.getDoneAt()).isEqualTo(givenDoneAtDateTime);
+            then(result.getDuration()).isEqualTo(givenDuration);
+            then(result.getMccMnc()).isEqualTo(givenMccMnc);
+            var price = result.getPrice();
+            then(price.getPricePerSecond()).isEqualTo(givenPricePerSecond);
+            then(price.getCurrency()).isEqualTo(givenCurrency);
+            var status = result.getStatus();
+            then(status.getGroupId()).isEqualTo(givenStatusGroupId);
+            then(status.getGroupName()).isEqualTo(givenStatusGroupName);
+            then(status.getId()).isEqualTo(givenStatusId);
+            then(status.getName()).isEqualTo(givenStatusName);
+            then(status.getDescription()).isEqualTo(givenStatusDescription);
+            var error = result.getError();
+            then(error.getGroupId()).isEqualTo(givenErrorGroupId);
+            then(error.getGroupName()).isEqualTo(givenErrorGroupName);
+            then(error.getId()).isEqualTo(givenErrorId);
+            then(error.getName()).isEqualTo(givenErrorName);
+            then(error.getDescription()).isEqualTo(givenErrorDescription);
+            then(error.getPermanent()).isEqualTo(givenErrorPermanent);
+        };
+
+        var call = api.getSentVoiceLogs();
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSearchVoiceIvrRecordedFiles() {
+        String givenMessageId1 = "453e161a-fe4f-4f3c-80c0-ab520de9a969";
+        String givenFrom1 = "442032864231";
+        String givenTo1 = "38712345678";
+        String givenScenarioId1 = "C9CE33CF130511D8E333C1260BABA309";
+        String givenGroupId1 = "#/script/1";
+        String givenUrl1 =
+                "/voice/ivr/1/files/3C67336FA555A606C85FA9637906A6AB98436B7AFC65D857A416F6521D39F8F0E1D3D2469FF580D8968D3DD89A2DB561";
+
+        String givenRecordedAt1 = "2022-12-06T13:37:15Z";
+        OffsetDateTime givenRecordedAt1DateTime =
+                OffsetDateTime.of(LocalDateTime.of(2022, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
+
+        String givenMessageId2 = "05b2859d-85c6-4068-9347-2e563b5c9cf4";
+        String givenFrom2 = "442032864231";
+        String givenTo2 = "38712345678";
+        String givenScenarioId2 = "4A6177C9B92039306F1F091708851A2E";
+        String givenGroupId2 = "#/script/1";
+        String givenUrl2 =
+                "/voice/ivr/1/files/305DE72BA11D81D1BAED75BFC46706761580BDEC2218C22628447FD3814E7913D3058E4ECBFD6F55C80E976235EEB111";
+        String givenRecordedAt2 = "2023-12-06T13:37:15Z";
+        OffsetDateTime givenRecordedAt2DateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
+
+        String givenResponse = String.format(
+                "[{ \"files\": [\n" + "  {\n"
+                        + "    \"messageId\": \"%s\",\n"
+                        + "    \"from\": \"%s\",\n"
+                        + "    \"to\": \"%s\",\n"
+                        + "    \"scenarioId\": \"%s\",\n"
+                        + "    \"groupId\": \"%s\",\n"
+                        + "    \"url\": \"%s\",\n"
+                        + "    \"recordedAt\": \"%s\"\n"
+                        + "  },\n"
+                        + "  {\n"
+                        + "    \"messageId\": \"%s\",\n"
+                        + "    \"from\": \"%s\",\n"
+                        + "    \"to\": \"%s\",\n"
+                        + "    \"scenarioId\": \"%s\",\n"
+                        + "    \"groupId\": \"%s\",\n"
+                        + "    \"url\": \"%s\",\n"
+                        + "    \"recordedAt\": \"%s\"\n"
+                        + "  }\n"
+                        + "]}]",
+                givenMessageId1,
+                givenFrom1,
+                givenTo1,
+                givenScenarioId1,
+                givenGroupId1,
+                givenUrl1,
+                givenRecordedAt1,
+                givenMessageId2,
+                givenFrom2,
+                givenTo2,
+                givenScenarioId2,
+                givenGroupId2,
+                givenUrl2,
+                givenRecordedAt2);
+
+        setUpGetRequest(IVR_FILES, Map.of(), givenResponse, 200);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        Consumer<List<CallsRecordedAudioFilesResponse>> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.get(0).getFiles().size()).isEqualTo(2);
+            var file1 = response.get(0).getFiles().get(0);
+            then(file1.getMessageId()).isEqualTo(givenMessageId1);
+            then(file1.getFrom()).isEqualTo(givenFrom1);
+            then(file1.getTo()).isEqualTo(givenTo1);
+            then(file1.getScenarioId()).isEqualTo(givenScenarioId1);
+            then(file1.getGroupId()).isEqualTo(givenGroupId1);
+            then(file1.getUrl()).isEqualTo(givenUrl1);
+            then(file1.getRecordedAt()).isEqualTo(givenRecordedAt1DateTime);
+            var file2 = response.get(0).getFiles().get(1);
+            then(file2.getMessageId()).isEqualTo(givenMessageId2);
+            then(file2.getFrom()).isEqualTo(givenFrom2);
+            then(file2.getTo()).isEqualTo(givenTo2);
+            then(file2.getScenarioId()).isEqualTo(givenScenarioId2);
+            then(file2.getGroupId()).isEqualTo(givenGroupId2);
+            then(file2.getUrl()).isEqualTo(givenUrl2);
+            then(file2.getRecordedAt()).isEqualTo(givenRecordedAt2DateTime);
+        };
+
+        var call = api.searchVoiceIvrRecordedFiles();
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetVoiceIvrScenario() {
+        String givenId = "E83E787CF2613450157ADA3476171E3F";
+        String givenName = "scenario";
+        String givenDescription = "";
+        String givenCreateTime = "2023-12-06T13:37:15Z";
+        OffsetDateTime givenCreateTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
+
+        String givenUpdateTime = null;
+        List<String> givenScript = List.of("repeated list of actions corresponding request object");
+
+        String givenResponse = String.format(
+                "[{\n" + "  \"id\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"description\": \"%s\",\n"
+                        + "  \"createTime\": \"%s\",\n"
+                        + "  \"updateTime\": %s,\n"
+                        + "  \"script\": [\n"
+                        + "    \"%s\"\n"
+                        + "  ]\n"
+                        + "}]",
+                givenId,
+                givenName,
+                givenDescription,
+                givenCreateTime,
+                givenUpdateTime,
+                String.join("\", \"", givenScript));
+
+        setUpGetRequest("/voice/ivr/1/scenarios", Map.of(), givenResponse, 200);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        Consumer<List<CallsSearchResponse>> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.get(0)).isNotNull();
+            then(response.get(0).getId()).isEqualTo(givenId);
+            then(response.get(0).getName()).isEqualTo(givenName);
+            then(response.get(0).getDescription()).isEqualTo(givenDescription);
+            then(response.get(0).getCreateTime()).isEqualTo(givenCreateTimeDateTime);
+            then(response.get(0).getUpdateTime()).isNull();
+            then(response.get(0).getScript()).isEqualTo(givenScript);
+        };
+
+        var call = api.searchVoiceIvrScenarios();
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetVoiceIvrScenarioById() {
+        String givenId = "E83E787CF2613450157ADA3476171E3F";
+        String givenName = "scenario";
+        String givenDescription = "";
+        String givenCreateTime = "2023-12-06T13:37:15Z";
+        OffsetDateTime givenCreateTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
+
+        String givenUpdateTime = null;
+        List<String> givenScript = List.of("repeated list of actions corresponding request object");
+
+        String givenResponse = String.format(
+                "{\n" + "  \"id\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"description\": \"%s\",\n"
+                        + "  \"createTime\": \"%s\",\n"
+                        + "  \"updateTime\": %s,\n"
+                        + "  \"script\": [\n"
+                        + "    \"%s\"\n"
+                        + "  ]\n"
+                        + "}",
+                givenId,
+                givenName,
+                givenDescription,
+                givenCreateTime,
+                givenUpdateTime,
+                String.join("\", \"", givenScript));
+
+        setUpGetRequest(VOICE_SCENARIO.replace("{id}", givenId), Map.of(), givenResponse, 200);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        Consumer<CallsUpdateScenarioResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo(givenId);
+            then(response.getName()).isEqualTo(givenName);
+            then(response.getDescription()).isEqualTo(givenDescription);
+            then(response.getCreateTime()).isEqualTo(givenCreateTimeDateTime);
+            then(response.getUpdateTime()).isNull();
+            then(response.getScript()).isEqualTo(givenScript);
+        };
+
+        var call = api.getAVoiceIvrScenario(givenId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldCreateVoiceIvrScenario() {
+        String givenId = "E83E787CF2613450157ADA3476171E3F";
+        String givenName = "scenario";
+        String givenDescription = "";
+        String givenCreateTime = "2023-12-06T13:37:15Z";
+        OffsetDateTime givenCreateTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
+        String givenUpdateTime = null;
+        Integer givenActionId = 1;
+        CallsDial script = new CallsDial().actionId(givenActionId);
+
+        String givenRequest = String.format(
+                "{\n" + "  \"name\": \"%s\",\n"
+                        + "  \"description\": \"%s\",\n"
+                        + "  \"script\": [\n"
+                        + "    {\n"
+                        + "      \"actionId\": %d\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenName, givenDescription, givenActionId);
+
+        String givenResponse = String.format(
+                "{\n" + "  \"id\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"description\": \"%s\",\n"
+                        + "  \"createTime\": \"%s\",\n"
+                        + "  \"updateTime\": %s,\n"
+                        + "  \"script\": [\n"
+                        + "    {\n"
+                        + "      \"actionId\": %d\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime, givenActionId);
+
+        setUpPostRequest(VOICE_SCENARIOS, givenRequest, givenResponse, 200);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        CallsUpdateScenarioRequest request = new CallsUpdateScenarioRequest()
+                .name(givenName)
+                .description(givenDescription)
+                .script(List.of(script));
+
+        Consumer<CallsUpdateScenarioResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo(givenId);
+            then(response.getName()).isEqualTo(givenName);
+            then(response.getDescription()).isEqualTo(givenDescription);
+            then(response.getCreateTime()).isEqualTo(givenCreateTimeDateTime);
+            then(response.getUpdateTime()).isNull();
+            then(response.getScript()).isNotNull();
+        };
+
+        var call = api.createAVoiceIvrScenario(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldUpdateVoiceIvrScenario() {
+        String givenId = "E83E787CF2613450157ADA3476171E3F";
+        String givenName = "Call API";
+        String givenDescription = "Perform a POST request to provided URL with headers and payload.";
+        String givenRequestUrl = "https://requestb.in/12345";
+        CallsHttpMethod givenRequestMethod = CallsHttpMethod.POST;
+        String givenRequestHeaderKey = "content-type";
+        String givenRequestHeaderValue = "application/json";
+        String givenRequestBodyPayload = "payload";
+        String givenCreateTime = "2023-12-06T13:37:15Z";
+        OffsetDateTime givenCreateTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
+        String givenUpdateTime = null;
+        List<String> givenScript = List.of("repeated list of actions corresponding request object");
+
+        String givenRequest = String.format(
+                "{\n" + "  \"name\": \"%s\",\n"
+                        + "  \"description\": \"%s\",\n"
+                        + "  \"script\": [\n"
+                        + "    {\n"
+                        + "      \"request\": \"%s\",\n"
+                        + "      \"options\": {\n"
+                        + "        \"method\": \"%s\",\n"
+                        + "        \"headers\": {\n"
+                        + "          \"%s\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"body\": \"%s\"\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenName,
+                givenDescription,
+                givenRequestUrl,
+                givenRequestMethod,
+                givenRequestHeaderKey,
+                givenRequestHeaderValue,
+                givenRequestBodyPayload);
+
+        String givenResponse = String.format(
+                "{\n" + "  \"id\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"description\": \"%s\",\n"
+                        + "  \"createTime\": \"%s\",\n"
+                        + "  \"updateTime\": %s,\n"
+                        + "  \"script\": [\n"
+                        + "    \"%s\"\n"
+                        + "  ]\n"
+                        + "}",
+                givenId,
+                givenName,
+                givenDescription,
+                givenCreateTime,
+                givenUpdateTime,
+                String.join("\", \"", givenScript));
+
+        setUpPutRequest(VOICE_SCENARIO.replace("{id}", givenId), Map.of(), givenRequest, givenResponse, 200);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        CallsUpdateScenarioRequest request = new CallsUpdateScenarioRequest()
+                .name(givenName)
+                .description(givenDescription)
+                .script(List.of(new CallsCallApi()
+                        .request(givenRequestUrl)
+                        .options(new CallsCallApiOptions()
+                                .method(givenRequestMethod)
+                                .headers(Map.of(givenRequestHeaderKey, givenRequestHeaderValue))
+                                .body(givenRequestBodyPayload))));
+
+        Consumer<CallsUpdateScenarioResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo(givenId);
+            then(response.getName()).isEqualTo(givenName);
+            then(response.getDescription()).isEqualTo(givenDescription);
+            then(response.getCreateTime()).isEqualTo(givenCreateTimeDateTime);
+            then(response.getUpdateTime()).isNull();
+            then(response.getScript()).isEqualTo(givenScript);
+        };
+
+        var call = api.updateVoiceIvrScenario(givenId, request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDeleteVoiceIvrScenario() {
+        String givenId = "E83E787CF2613450157ADA3476171E3F";
+
+        String givenResponse = "{}";
+
+        setUpNoRequestBodyDeleteRequest(VOICE_SCENARIO.replace("{id}", givenId), Map.of(), givenResponse, 200);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        Consumer<String> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response).isEqualTo(givenResponse);
+        };
+
+        var call = api.deleteAVoiceIvrScenario(givenId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldLaunchIvrScenario() {
+        String givenBulkId = "BULK-ID-123-xyz";
+        String givenScenarioId = "6298AA7707903A4ED680B436929681AD";
+        String givenFrom = "41793026700";
+        String givenTo1 = "41793026727";
+        String givenTo2 = "41793026731";
+        String givenNotifyUrl = "https://www.example.com/voice/advanced";
+        String givenNotifyContentType = "application/json";
+        String givenCallbackData = "DLR callback data";
+        int givenValidityPeriod = 720;
+        String givenSendAt = "2023-12-06T13:37:15.000+0000";
+        OffsetDateTime givenSendAtDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
+
+        int givenRetryMinPeriod = 1;
+        int givenRetryMaxPeriod = 5;
+        int givenRetryMaxCount = 5;
+        boolean givenRecord = false;
+        int givenDeliveryFromHour = 6;
+        int givenDeliveryFromMinute = 0;
+        int givenDeliveryToHour = 15;
+        int givenDeliveryToMinute = 30;
+        DeliveryDay monday = DeliveryDay.MONDAY;
+        List<DeliveryDay> givenDeliveryDays = List.of(monday);
+
+        String givenRequest = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"scenarioId\": \"%s\",\n"
+                        + "      \"from\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        { \"to\": \"%s\" },\n"
+                        + "        { \"to\": \"%s\" }\n"
+                        + "      ],\n"
+                        + "      \"notifyUrl\": \"%s\",\n"
+                        + "      \"notifyContentType\": \"%s\",\n"
+                        + "      \"callbackData\": \"%s\",\n"
+                        + "      \"validityPeriod\": %d,\n"
+                        + "      \"sendAt\": \"%s\",\n"
+                        + "      \"retry\": {\n"
+                        + "        \"minPeriod\": %d,\n"
+                        + "        \"maxPeriod\": %d,\n"
+                        + "        \"maxCount\": %d\n"
+                        + "      },\n"
+                        + "      \"record\": %b,\n"
+                        + "      \"deliveryTimeWindow\": {\n"
+                        + "        \"from\": { \"hour\": %d, \"minute\": %d },\n"
+                        + "        \"to\": { \"hour\": %d, \"minute\": %d },\n"
+                        + "        \"days\": [ \"%s\" ]\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId,
+                givenScenarioId,
+                givenFrom,
+                givenTo1,
+                givenTo2,
+                givenNotifyUrl,
+                givenNotifyContentType,
+                givenCallbackData,
+                givenValidityPeriod,
+                givenSendAt,
+                givenRetryMinPeriod,
+                givenRetryMaxPeriod,
+                givenRetryMaxCount,
+                givenRecord,
+                givenDeliveryFromHour,
+                givenDeliveryFromMinute,
+                givenDeliveryToHour,
+                givenDeliveryToMinute,
+                monday);
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 1,\n"
+                        + "        \"groupName\": \"PENDING\",\n"
+                        + "        \"id\": 26,\n"
+                        + "        \"name\": \"PENDING_ACCEPTED\",\n"
+                        + "        \"description\": \"Message accepted, pending for delivery.\"\n"
+                        + "      },\n"
+                        + "      \"messageId\": \"4242f196ba50-a356-2f91-831c4aa55f351ed2\"\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 1,\n"
+                        + "        \"groupName\": \"PENDING\",\n"
+                        + "        \"id\": 26,\n"
+                        + "        \"name\": \"PENDING_ACCEPTED\",\n"
+                        + "        \"description\": \"Message accepted, pending for delivery.\"\n"
+                        + "      },\n"
+                        + "      \"messageId\": \"5f35f896ba50-a356-43a4-91cd81b85f8c689\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId, givenTo1, givenTo2);
+
+        setUpPostRequest(LAUNCH_IVR_SCENARIO, givenRequest, givenResponse, 200);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        CallsLaunchScenarioRequest request = new CallsLaunchScenarioRequest()
+                .bulkId(givenBulkId)
+                .messages(List.of(new CallsIvrMessage()
+                        .scenarioId(givenScenarioId)
+                        .from(givenFrom)
+                        .destinations(List.of(new CallsDestination().to(givenTo1), new CallsDestination().to(givenTo2)))
+                        .notifyUrl(givenNotifyUrl)
+                        .notifyContentType(givenNotifyContentType)
+                        .callbackData(givenCallbackData)
+                        .validityPeriod(givenValidityPeriod)
+                        .sendAt(givenSendAtDateTime)
+                        .retry(new CallsRetry()
+                                .minPeriod(givenRetryMinPeriod)
+                                .maxPeriod(givenRetryMaxPeriod)
+                                .maxCount(givenRetryMaxCount))
+                        .record(givenRecord)
+                        .deliveryTimeWindow(new DeliveryTimeWindow()
+                                .from(new DeliveryTime()
+                                        .hour(givenDeliveryFromHour)
+                                        .minute(givenDeliveryFromMinute))
+                                .to(new DeliveryTime().hour(givenDeliveryToHour).minute(givenDeliveryToMinute))
+                                .days(givenDeliveryDays))));
+
+        Consumer<CallsVoiceResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages().size()).isEqualTo(2);
+            var message1 = response.getMessages().get(0);
+            then(message1.getTo()).isEqualTo(givenTo1);
+            then(message1.getStatus().getGroupId()).isEqualTo(1);
+            then(message1.getStatus().getGroupName()).isEqualTo("PENDING");
+            then(message1.getStatus().getId()).isEqualTo(26);
+            then(message1.getStatus().getName()).isEqualTo("PENDING_ACCEPTED");
+            then(message1.getStatus().getDescription()).isEqualTo("Message accepted, pending for delivery.");
+            var message2 = response.getMessages().get(1);
+            then(message2.getTo()).isEqualTo(givenTo2);
+            then(message2.getStatus().getGroupId()).isEqualTo(1);
+            then(message2.getStatus().getGroupName()).isEqualTo("PENDING");
+            then(message2.getStatus().getId()).isEqualTo(26);
+            then(message2.getStatus().getName()).isEqualTo("PENDING_ACCEPTED");
+            then(message2.getStatus().getDescription()).isEqualTo("Message accepted, pending for delivery.");
+        };
+
+        var call = api.sendVoiceMessagesWithAnIvrScenario(request);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }

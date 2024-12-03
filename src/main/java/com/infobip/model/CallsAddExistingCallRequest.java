@@ -19,11 +19,13 @@ public class CallsAddExistingCallRequest {
 
     private Boolean connectOnEarlyMedia;
 
+    private RingbackGeneration ringbackGeneration;
+
     /**
      * Sets connectOnEarlyMedia.
      * <p>
      * Field description:
-     * Indicates whether to add an existing call on early media. Otherwise, the call will be added after being established. This field is applicable for &#x60;OUTBOUND&#x60; calls only.
+     * Indicates whether to add an existing call on early media. Otherwise, the call will be added after being established. This field is applicable for &#x60;OUTBOUND&#x60; calls only. Cannot be &#x60;true&#x60; when &#x60;ringbackGeneration&#x60; is enabled.
      *
      * @param connectOnEarlyMedia
      * @return This {@link CallsAddExistingCallRequest instance}.
@@ -37,7 +39,7 @@ public class CallsAddExistingCallRequest {
      * Returns connectOnEarlyMedia.
      * <p>
      * Field description:
-     * Indicates whether to add an existing call on early media. Otherwise, the call will be added after being established. This field is applicable for &#x60;OUTBOUND&#x60; calls only.
+     * Indicates whether to add an existing call on early media. Otherwise, the call will be added after being established. This field is applicable for &#x60;OUTBOUND&#x60; calls only. Cannot be &#x60;true&#x60; when &#x60;ringbackGeneration&#x60; is enabled.
      *
      * @return connectOnEarlyMedia
      */
@@ -50,13 +52,44 @@ public class CallsAddExistingCallRequest {
      * Sets connectOnEarlyMedia.
      * <p>
      * Field description:
-     * Indicates whether to add an existing call on early media. Otherwise, the call will be added after being established. This field is applicable for &#x60;OUTBOUND&#x60; calls only.
+     * Indicates whether to add an existing call on early media. Otherwise, the call will be added after being established. This field is applicable for &#x60;OUTBOUND&#x60; calls only. Cannot be &#x60;true&#x60; when &#x60;ringbackGeneration&#x60; is enabled.
      *
      * @param connectOnEarlyMedia
      */
     @JsonProperty("connectOnEarlyMedia")
     public void setConnectOnEarlyMedia(Boolean connectOnEarlyMedia) {
         this.connectOnEarlyMedia = connectOnEarlyMedia;
+    }
+
+    /**
+     * Sets ringbackGeneration.
+     *
+     * @param ringbackGeneration
+     * @return This {@link CallsAddExistingCallRequest instance}.
+     */
+    public CallsAddExistingCallRequest ringbackGeneration(RingbackGeneration ringbackGeneration) {
+        this.ringbackGeneration = ringbackGeneration;
+        return this;
+    }
+
+    /**
+     * Returns ringbackGeneration.
+     *
+     * @return ringbackGeneration
+     */
+    @JsonProperty("ringbackGeneration")
+    public RingbackGeneration getRingbackGeneration() {
+        return ringbackGeneration;
+    }
+
+    /**
+     * Sets ringbackGeneration.
+     *
+     * @param ringbackGeneration
+     */
+    @JsonProperty("ringbackGeneration")
+    public void setRingbackGeneration(RingbackGeneration ringbackGeneration) {
+        this.ringbackGeneration = ringbackGeneration;
     }
 
     @Override
@@ -68,12 +101,13 @@ public class CallsAddExistingCallRequest {
             return false;
         }
         CallsAddExistingCallRequest callsAddExistingCallRequest = (CallsAddExistingCallRequest) o;
-        return Objects.equals(this.connectOnEarlyMedia, callsAddExistingCallRequest.connectOnEarlyMedia);
+        return Objects.equals(this.connectOnEarlyMedia, callsAddExistingCallRequest.connectOnEarlyMedia)
+                && Objects.equals(this.ringbackGeneration, callsAddExistingCallRequest.ringbackGeneration);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(connectOnEarlyMedia);
+        return Objects.hash(connectOnEarlyMedia, ringbackGeneration);
     }
 
     @Override
@@ -84,6 +118,9 @@ public class CallsAddExistingCallRequest {
                 .append(newLine)
                 .append("    connectOnEarlyMedia: ")
                 .append(toIndentedString(connectOnEarlyMedia))
+                .append(newLine)
+                .append("    ringbackGeneration: ")
+                .append(toIndentedString(ringbackGeneration))
                 .append(newLine)
                 .append("}")
                 .toString();

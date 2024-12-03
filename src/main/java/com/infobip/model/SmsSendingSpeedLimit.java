@@ -19,7 +19,7 @@ public class SmsSendingSpeedLimit {
 
     private Integer amount;
 
-    private SmsSpeedLimitTimeUnit timeUnit;
+    private SpeedLimitTimeUnit timeUnit;
 
     /**
      * Sets amount.
@@ -73,7 +73,7 @@ public class SmsSendingSpeedLimit {
      * @param timeUnit
      * @return This {@link SmsSendingSpeedLimit instance}.
      */
-    public SmsSendingSpeedLimit timeUnit(SmsSpeedLimitTimeUnit timeUnit) {
+    public SmsSendingSpeedLimit timeUnit(SpeedLimitTimeUnit timeUnit) {
         this.timeUnit = timeUnit;
         return this;
     }
@@ -84,7 +84,7 @@ public class SmsSendingSpeedLimit {
      * @return timeUnit
      */
     @JsonProperty("timeUnit")
-    public SmsSpeedLimitTimeUnit getTimeUnit() {
+    public SpeedLimitTimeUnit getTimeUnit() {
         return timeUnit;
     }
 
@@ -94,7 +94,7 @@ public class SmsSendingSpeedLimit {
      * @param timeUnit
      */
     @JsonProperty("timeUnit")
-    public void setTimeUnit(SmsSpeedLimitTimeUnit timeUnit) {
+    public void setTimeUnit(SpeedLimitTimeUnit timeUnit) {
         this.timeUnit = timeUnit;
     }
 

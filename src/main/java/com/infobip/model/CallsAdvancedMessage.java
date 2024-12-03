@@ -28,7 +28,7 @@ public class CallsAdvancedMessage {
 
     private String callbackData;
 
-    private CallsDeliveryTimeWindow deliveryTimeWindow;
+    private DeliveryTimeWindow deliveryTimeWindow;
 
     private List<CallsDestination> destinations = new ArrayList<>();
 
@@ -49,8 +49,6 @@ public class CallsAdvancedMessage {
     private String notifyUrl;
 
     private Integer pause;
-
-    private Boolean record;
 
     private String repeatDtmf;
 
@@ -211,7 +209,7 @@ public class CallsAdvancedMessage {
      * Sets callbackData.
      * <p>
      * Field description:
-     * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 200 characters. Example:  &#x60;Text containing some additional data needed in Delivery Report&#x60;.
+     * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 700 characters. Example:  &#x60;Text containing some additional data needed in Delivery Report&#x60;.
      *
      * @param callbackData
      * @return This {@link CallsAdvancedMessage instance}.
@@ -225,7 +223,7 @@ public class CallsAdvancedMessage {
      * Returns callbackData.
      * <p>
      * Field description:
-     * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 200 characters. Example:  &#x60;Text containing some additional data needed in Delivery Report&#x60;.
+     * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 700 characters. Example:  &#x60;Text containing some additional data needed in Delivery Report&#x60;.
      *
      * @return callbackData
      */
@@ -238,7 +236,7 @@ public class CallsAdvancedMessage {
      * Sets callbackData.
      * <p>
      * Field description:
-     * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 200 characters. Example:  &#x60;Text containing some additional data needed in Delivery Report&#x60;.
+     * Additional client&#39;s data that will be sent on the notifyUrl. The maximum value is 700 characters. Example:  &#x60;Text containing some additional data needed in Delivery Report&#x60;.
      *
      * @param callbackData
      */
@@ -253,7 +251,7 @@ public class CallsAdvancedMessage {
      * @param deliveryTimeWindow
      * @return This {@link CallsAdvancedMessage instance}.
      */
-    public CallsAdvancedMessage deliveryTimeWindow(CallsDeliveryTimeWindow deliveryTimeWindow) {
+    public CallsAdvancedMessage deliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
         return this;
     }
@@ -264,7 +262,7 @@ public class CallsAdvancedMessage {
      * @return deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public CallsDeliveryTimeWindow getDeliveryTimeWindow() {
+    public DeliveryTimeWindow getDeliveryTimeWindow() {
         return deliveryTimeWindow;
     }
 
@@ -274,7 +272,7 @@ public class CallsAdvancedMessage {
      * @param deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public void setDeliveryTimeWindow(CallsDeliveryTimeWindow deliveryTimeWindow) {
+    public void setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
     }
 
@@ -704,46 +702,6 @@ public class CallsAdvancedMessage {
     }
 
     /**
-     * Sets record.
-     * <p>
-     * Field description:
-     * Record the call and expose it to client as URL inside the delivery report. Can be &#x60;true&#x60; or &#x60;false&#x60;.
-     *
-     * @param record
-     * @return This {@link CallsAdvancedMessage instance}.
-     */
-    public CallsAdvancedMessage record(Boolean record) {
-        this.record = record;
-        return this;
-    }
-
-    /**
-     * Returns record.
-     * <p>
-     * Field description:
-     * Record the call and expose it to client as URL inside the delivery report. Can be &#x60;true&#x60; or &#x60;false&#x60;.
-     *
-     * @return record
-     */
-    @JsonProperty("record")
-    public Boolean getRecord() {
-        return record;
-    }
-
-    /**
-     * Sets record.
-     * <p>
-     * Field description:
-     * Record the call and expose it to client as URL inside the delivery report. Can be &#x60;true&#x60; or &#x60;false&#x60;.
-     *
-     * @param record
-     */
-    @JsonProperty("record")
-    public void setRecord(Boolean record) {
-        this.record = record;
-    }
-
-    /**
      * Sets repeatDtmf.
      * <p>
      * Field description:
@@ -1100,7 +1058,6 @@ public class CallsAdvancedMessage {
                 && Objects.equals(this.notifyContentVersion, callsAdvancedMessage.notifyContentVersion)
                 && Objects.equals(this.notifyUrl, callsAdvancedMessage.notifyUrl)
                 && Objects.equals(this.pause, callsAdvancedMessage.pause)
-                && Objects.equals(this.record, callsAdvancedMessage.record)
                 && Objects.equals(this.repeatDtmf, callsAdvancedMessage.repeatDtmf)
                 && Objects.equals(this.retry, callsAdvancedMessage.retry)
                 && Objects.equals(this.ringTimeout, callsAdvancedMessage.ringTimeout)
@@ -1130,7 +1087,6 @@ public class CallsAdvancedMessage {
                 notifyContentVersion,
                 notifyUrl,
                 pause,
-                record,
                 repeatDtmf,
                 retry,
                 ringTimeout,
@@ -1192,9 +1148,6 @@ public class CallsAdvancedMessage {
                 .append(newLine)
                 .append("    pause: ")
                 .append(toIndentedString(pause))
-                .append(newLine)
-                .append("    record: ")
-                .append(toIndentedString(record))
                 .append(newLine)
                 .append("    repeatDtmf: ")
                 .append(toIndentedString(repeatDtmf))

@@ -16,7 +16,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Provider type.
  */
 public enum CallsPegasusProviderTrunkType {
-    FRESHWORKS("FRESHWORKS");
+    FRESHWORKS("FRESHWORKS"),
+    GENESYS_CLOUD("GENESYS_CLOUD"),
+    CISCO_WEBEX("CISCO_WEBEX");
 
     private final String value;
 

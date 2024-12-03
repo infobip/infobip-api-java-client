@@ -25,7 +25,7 @@ public class CallRoutingSearchCriteria {
      * Sets to.
      * <p>
      * Field description:
-     * Number regex used to match criteria.
+     * Phone number or regular expression pattern representing the phone number. Applies to all search criteria types except &#x60;WEBRTC&#x60;. Examples: &#x60;41793026727&#x60;, &#x60;41793(.+)&#x60;.
      *
      * @param to
      * @return This {@link CallRoutingSearchCriteria instance}.
@@ -39,7 +39,7 @@ public class CallRoutingSearchCriteria {
      * Returns to.
      * <p>
      * Field description:
-     * Number regex used to match criteria.
+     * Phone number or regular expression pattern representing the phone number. Applies to all search criteria types except &#x60;WEBRTC&#x60;. Examples: &#x60;41793026727&#x60;, &#x60;41793(.+)&#x60;.
      *
      * @return to
      */
@@ -52,7 +52,7 @@ public class CallRoutingSearchCriteria {
      * Sets to.
      * <p>
      * Field description:
-     * Number regex used to match criteria.
+     * Phone number or regular expression pattern representing the phone number. Applies to all search criteria types except &#x60;WEBRTC&#x60;. Examples: &#x60;41793026727&#x60;, &#x60;41793(.+)&#x60;.
      *
      * @param to
      */

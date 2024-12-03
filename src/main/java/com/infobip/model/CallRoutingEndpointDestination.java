@@ -29,7 +29,7 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
 
     private CallRoutingRecording recording;
 
-    private List<CallRoutingAllowedTimeWindow> allowedTimeWindows = null;
+    private List<DeliveryTimeWindow> allowedTimeWindows = null;
 
     /**
      * Constructs a new {@link CallRoutingEndpointDestination} instance.
@@ -235,7 +235,7 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
      * @param allowedTimeWindows
      * @return This {@link CallRoutingEndpointDestination instance}.
      */
-    public CallRoutingEndpointDestination allowedTimeWindows(List<CallRoutingAllowedTimeWindow> allowedTimeWindows) {
+    public CallRoutingEndpointDestination allowedTimeWindows(List<DeliveryTimeWindow> allowedTimeWindows) {
         this.allowedTimeWindows = allowedTimeWindows;
         return this;
     }
@@ -249,8 +249,7 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
      * @param allowedTimeWindowsItem The item to be added to the list.
      * @return This {@link CallRoutingEndpointDestination instance}.
      */
-    public CallRoutingEndpointDestination addAllowedTimeWindowsItem(
-            CallRoutingAllowedTimeWindow allowedTimeWindowsItem) {
+    public CallRoutingEndpointDestination addAllowedTimeWindowsItem(DeliveryTimeWindow allowedTimeWindowsItem) {
         if (this.allowedTimeWindows == null) {
             this.allowedTimeWindows = new ArrayList<>();
         }
@@ -267,7 +266,7 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
      * @return allowedTimeWindows
      */
     @JsonProperty("allowedTimeWindows")
-    public List<CallRoutingAllowedTimeWindow> getAllowedTimeWindows() {
+    public List<DeliveryTimeWindow> getAllowedTimeWindows() {
         return allowedTimeWindows;
     }
 
@@ -280,7 +279,7 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
      * @param allowedTimeWindows
      */
     @JsonProperty("allowedTimeWindows")
-    public void setAllowedTimeWindows(List<CallRoutingAllowedTimeWindow> allowedTimeWindows) {
+    public void setAllowedTimeWindows(List<DeliveryTimeWindow> allowedTimeWindows) {
         this.allowedTimeWindows = allowedTimeWindows;
     }
 

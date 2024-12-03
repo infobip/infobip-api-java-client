@@ -13,17 +13,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Geolocation data such as Country, City, Latitude and Longitude. This data will be available only for opens and clicks.
+ * Geolocation data such as Country and  City. This data will be available only for opens, clicks and unsubscribes.
  */
 public class EmailWebhookGeoLocation {
 
     private String countryName;
 
     private String city;
-
-    private String latitude;
-
-    private String longitude;
 
     /**
      * Sets countryName.
@@ -47,7 +43,7 @@ public class EmailWebhookGeoLocation {
      *
      * @return countryName
      */
-    @JsonProperty("country_name")
+    @JsonProperty("countryName")
     public String getCountryName() {
         return countryName;
     }
@@ -60,7 +56,7 @@ public class EmailWebhookGeoLocation {
      *
      * @param countryName
      */
-    @JsonProperty("country_name")
+    @JsonProperty("countryName")
     public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
@@ -105,86 +101,6 @@ public class EmailWebhookGeoLocation {
         this.city = city;
     }
 
-    /**
-     * Sets latitude.
-     * <p>
-     * Field description:
-     * Latitude of the action originating device.
-     *
-     * @param latitude
-     * @return This {@link EmailWebhookGeoLocation instance}.
-     */
-    public EmailWebhookGeoLocation latitude(String latitude) {
-        this.latitude = latitude;
-        return this;
-    }
-
-    /**
-     * Returns latitude.
-     * <p>
-     * Field description:
-     * Latitude of the action originating device.
-     *
-     * @return latitude
-     */
-    @JsonProperty("latitude")
-    public String getLatitude() {
-        return latitude;
-    }
-
-    /**
-     * Sets latitude.
-     * <p>
-     * Field description:
-     * Latitude of the action originating device.
-     *
-     * @param latitude
-     */
-    @JsonProperty("latitude")
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    /**
-     * Sets longitude.
-     * <p>
-     * Field description:
-     * Longitude of the action originating device.
-     *
-     * @param longitude
-     * @return This {@link EmailWebhookGeoLocation instance}.
-     */
-    public EmailWebhookGeoLocation longitude(String longitude) {
-        this.longitude = longitude;
-        return this;
-    }
-
-    /**
-     * Returns longitude.
-     * <p>
-     * Field description:
-     * Longitude of the action originating device.
-     *
-     * @return longitude
-     */
-    @JsonProperty("longitude")
-    public String getLongitude() {
-        return longitude;
-    }
-
-    /**
-     * Sets longitude.
-     * <p>
-     * Field description:
-     * Longitude of the action originating device.
-     *
-     * @param longitude
-     */
-    @JsonProperty("longitude")
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -195,14 +111,12 @@ public class EmailWebhookGeoLocation {
         }
         EmailWebhookGeoLocation emailWebhookGeoLocation = (EmailWebhookGeoLocation) o;
         return Objects.equals(this.countryName, emailWebhookGeoLocation.countryName)
-                && Objects.equals(this.city, emailWebhookGeoLocation.city)
-                && Objects.equals(this.latitude, emailWebhookGeoLocation.latitude)
-                && Objects.equals(this.longitude, emailWebhookGeoLocation.longitude);
+                && Objects.equals(this.city, emailWebhookGeoLocation.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(countryName, city, latitude, longitude);
+        return Objects.hash(countryName, city);
     }
 
     @Override
@@ -216,12 +130,6 @@ public class EmailWebhookGeoLocation {
                 .append(newLine)
                 .append("    city: ")
                 .append(toIndentedString(city))
-                .append(newLine)
-                .append("    latitude: ")
-                .append(toIndentedString(latitude))
-                .append(newLine)
-                .append("    longitude: ")
-                .append(toIndentedString(longitude))
                 .append(newLine)
                 .append("}")
                 .toString();

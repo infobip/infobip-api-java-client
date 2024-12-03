@@ -21,6 +21,8 @@ public class CallsAddNewCallRequest {
 
     private Boolean connectOnEarlyMedia;
 
+    private RingbackGeneration ringbackGeneration;
+
     /**
      * Sets callRequest.
      * <p>
@@ -62,7 +64,7 @@ public class CallsAddNewCallRequest {
      * Sets connectOnEarlyMedia.
      * <p>
      * Field description:
-     * Indicates whether to connect a new call on early media. Otherwise, the call will be connected after being established.
+     * Indicates whether to connect a new call on early media. Otherwise, the call will be connected after being established. Cannot be &#x60;true&#x60; when &#x60;ringbackGeneration&#x60; is enabled.
      *
      * @param connectOnEarlyMedia
      * @return This {@link CallsAddNewCallRequest instance}.
@@ -76,7 +78,7 @@ public class CallsAddNewCallRequest {
      * Returns connectOnEarlyMedia.
      * <p>
      * Field description:
-     * Indicates whether to connect a new call on early media. Otherwise, the call will be connected after being established.
+     * Indicates whether to connect a new call on early media. Otherwise, the call will be connected after being established. Cannot be &#x60;true&#x60; when &#x60;ringbackGeneration&#x60; is enabled.
      *
      * @return connectOnEarlyMedia
      */
@@ -89,13 +91,44 @@ public class CallsAddNewCallRequest {
      * Sets connectOnEarlyMedia.
      * <p>
      * Field description:
-     * Indicates whether to connect a new call on early media. Otherwise, the call will be connected after being established.
+     * Indicates whether to connect a new call on early media. Otherwise, the call will be connected after being established. Cannot be &#x60;true&#x60; when &#x60;ringbackGeneration&#x60; is enabled.
      *
      * @param connectOnEarlyMedia
      */
     @JsonProperty("connectOnEarlyMedia")
     public void setConnectOnEarlyMedia(Boolean connectOnEarlyMedia) {
         this.connectOnEarlyMedia = connectOnEarlyMedia;
+    }
+
+    /**
+     * Sets ringbackGeneration.
+     *
+     * @param ringbackGeneration
+     * @return This {@link CallsAddNewCallRequest instance}.
+     */
+    public CallsAddNewCallRequest ringbackGeneration(RingbackGeneration ringbackGeneration) {
+        this.ringbackGeneration = ringbackGeneration;
+        return this;
+    }
+
+    /**
+     * Returns ringbackGeneration.
+     *
+     * @return ringbackGeneration
+     */
+    @JsonProperty("ringbackGeneration")
+    public RingbackGeneration getRingbackGeneration() {
+        return ringbackGeneration;
+    }
+
+    /**
+     * Sets ringbackGeneration.
+     *
+     * @param ringbackGeneration
+     */
+    @JsonProperty("ringbackGeneration")
+    public void setRingbackGeneration(RingbackGeneration ringbackGeneration) {
+        this.ringbackGeneration = ringbackGeneration;
     }
 
     @Override
@@ -108,12 +141,13 @@ public class CallsAddNewCallRequest {
         }
         CallsAddNewCallRequest callsAddNewCallRequest = (CallsAddNewCallRequest) o;
         return Objects.equals(this.callRequest, callsAddNewCallRequest.callRequest)
-                && Objects.equals(this.connectOnEarlyMedia, callsAddNewCallRequest.connectOnEarlyMedia);
+                && Objects.equals(this.connectOnEarlyMedia, callsAddNewCallRequest.connectOnEarlyMedia)
+                && Objects.equals(this.ringbackGeneration, callsAddNewCallRequest.ringbackGeneration);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(callRequest, connectOnEarlyMedia);
+        return Objects.hash(callRequest, connectOnEarlyMedia, ringbackGeneration);
     }
 
     @Override
@@ -127,6 +161,9 @@ public class CallsAddNewCallRequest {
                 .append(newLine)
                 .append("    connectOnEarlyMedia: ")
                 .append(toIndentedString(connectOnEarlyMedia))
+                .append(newLine)
+                .append("    ringbackGeneration: ")
+                .append(toIndentedString(ringbackGeneration))
                 .append(newLine)
                 .append("}")
                 .toString();

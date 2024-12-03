@@ -11,53 +11,32 @@ class StringRepresentationTest {
     @Test
     void shouldGenerateProperSmsTextualMessageRepresentation() {
         // given
-        var givenIncludeSmsCountInResponse = false;
-
-        SmsAdvancedTextualRequest request = new SmsAdvancedTextualRequest()
-                .messages(List.of(new SmsTextualMessage()
-                        .from("ServiceSMS")
+        SmsRequest request = new SmsRequest()
+                .messages(List.of(new SmsMessage()
+                        .sender("InfoSMS")
                         .destinations(List.of(new SmsDestination().to("385991112222")))
-                        .text("Hello world from Infobip API Client: https://www.infobip.com/docs/sdk.")))
-                .urlOptions(new SmsUrlOptions().shortenUrl(true))
-                .includeSmsCountInResponse(givenIncludeSmsCountInResponse);
-
+                        .content(new SmsTextContent().text("This is a sample message"))));
         // when
         String representation = request.toString();
 
         // then
         then(representation)
-                .isEqualToIgnoringNewLines("class SmsAdvancedTextualRequest {\n" + "    bulkId: null\n"
-                        + "    messages: [class SmsTextualMessage {\n"
-                        + "        callbackData: null\n"
-                        + "        deliveryTimeWindow: null\n"
+                .isEqualToIgnoringNewLines("class SmsRequest {\n" + "    messages: [class SmsMessage {\n"
+                        + "        sender: InfoSMS\n"
                         + "        destinations: [class SmsDestination {\n"
-                        + "            messageId: null\n"
                         + "            to: 385991112222\n"
+                        + "            messageId: null\n"
+                        + "            networkId: null\n"
                         + "        }]\n"
-                        + "        flash: null\n"
-                        + "        from: ServiceSMS\n"
-                        + "        intermediateReport: null\n"
-                        + "        language: null\n"
-                        + "        notifyContentType: null\n"
-                        + "        notifyUrl: null\n"
-                        + "        regional: null\n"
-                        + "        sendAt: null\n"
-                        + "        text: Hello world from Infobip API Client: https://www.infobip.com/docs/sdk.\n"
-                        + "        transliteration: null\n"
-                        + "        validityPeriod: null\n"
-                        + "        entityId: null\n"
-                        + "        applicationId: null\n"
+                        + "        content: class SmsTextContent {\n"
+                        + "            text: This is a sample message\n"
+                        + "            transliteration: null\n"
+                        + "            language: null\n"
+                        + "        }\n"
+                        + "        options: null\n"
+                        + "        webhooks: null\n"
                         + "    }]\n"
-                        + "    sendingSpeedLimit: null\n"
-                        + "    urlOptions: class SmsUrlOptions {\n"
-                        + "        shortenUrl: true\n"
-                        + "        trackClicks: null\n"
-                        + "        trackingUrl: null\n"
-                        + "        removeProtocol: null\n"
-                        + "        customDomain: null\n"
-                        + "    }\n"
-                        + "    tracking: null\n"
-                        + "    includeSmsCountInResponse: false\n"
+                        + "    options: null\n"
                         + "}");
     }
 

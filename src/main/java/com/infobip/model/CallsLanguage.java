@@ -73,7 +73,9 @@ public enum CallsLanguage {
     TR("tr"),
     UK("uk"),
     VI("vi"),
-    WLS("wls");
+    WLS("wls"),
+    AR_MA("ar-ma"),
+    UR_PK("ur-pk");
 
     private final String value;
 

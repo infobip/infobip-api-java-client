@@ -21,6 +21,14 @@ public class CallsVoice {
 
     private String gender;
 
+    private String supplier;
+
+    private Boolean ssmlSupported;
+
+    private Boolean isDefault;
+
+    private Boolean isNeural;
+
     /**
      * Sets name.
      * <p>
@@ -101,6 +109,166 @@ public class CallsVoice {
         this.gender = gender;
     }
 
+    /**
+     * Sets supplier.
+     * <p>
+     * Field description:
+     * Name of the supplier for text to speech synthesis.
+     *
+     * @param supplier
+     * @return This {@link CallsVoice instance}.
+     */
+    public CallsVoice supplier(String supplier) {
+        this.supplier = supplier;
+        return this;
+    }
+
+    /**
+     * Returns supplier.
+     * <p>
+     * Field description:
+     * Name of the supplier for text to speech synthesis.
+     *
+     * @return supplier
+     */
+    @JsonProperty("supplier")
+    public String getSupplier() {
+        return supplier;
+    }
+
+    /**
+     * Sets supplier.
+     * <p>
+     * Field description:
+     * Name of the supplier for text to speech synthesis.
+     *
+     * @param supplier
+     */
+    @JsonProperty("supplier")
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+
+    /**
+     * Sets ssmlSupported.
+     * <p>
+     * Field description:
+     * Indicates if SSML is supported.
+     *
+     * @param ssmlSupported
+     * @return This {@link CallsVoice instance}.
+     */
+    public CallsVoice ssmlSupported(Boolean ssmlSupported) {
+        this.ssmlSupported = ssmlSupported;
+        return this;
+    }
+
+    /**
+     * Returns ssmlSupported.
+     * <p>
+     * Field description:
+     * Indicates if SSML is supported.
+     *
+     * @return ssmlSupported
+     */
+    @JsonProperty("ssmlSupported")
+    public Boolean getSsmlSupported() {
+        return ssmlSupported;
+    }
+
+    /**
+     * Sets ssmlSupported.
+     * <p>
+     * Field description:
+     * Indicates if SSML is supported.
+     *
+     * @param ssmlSupported
+     */
+    @JsonProperty("ssmlSupported")
+    public void setSsmlSupported(Boolean ssmlSupported) {
+        this.ssmlSupported = ssmlSupported;
+    }
+
+    /**
+     * Sets isDefault.
+     * <p>
+     * Field description:
+     * Indicates whether voice is default voice for a given language. If voice is not chosen for the language, then default voice will be used.
+     *
+     * @param isDefault
+     * @return This {@link CallsVoice instance}.
+     */
+    public CallsVoice isDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
+        return this;
+    }
+
+    /**
+     * Returns isDefault.
+     * <p>
+     * Field description:
+     * Indicates whether voice is default voice for a given language. If voice is not chosen for the language, then default voice will be used.
+     *
+     * @return isDefault
+     */
+    @JsonProperty("isDefault")
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    /**
+     * Sets isDefault.
+     * <p>
+     * Field description:
+     * Indicates whether voice is default voice for a given language. If voice is not chosen for the language, then default voice will be used.
+     *
+     * @param isDefault
+     */
+    @JsonProperty("isDefault")
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+
+    /**
+     * Sets isNeural.
+     * <p>
+     * Field description:
+     * Indicates whether voice is neural. Using neural voice will generate additional cost.
+     *
+     * @param isNeural
+     * @return This {@link CallsVoice instance}.
+     */
+    public CallsVoice isNeural(Boolean isNeural) {
+        this.isNeural = isNeural;
+        return this;
+    }
+
+    /**
+     * Returns isNeural.
+     * <p>
+     * Field description:
+     * Indicates whether voice is neural. Using neural voice will generate additional cost.
+     *
+     * @return isNeural
+     */
+    @JsonProperty("isNeural")
+    public Boolean getIsNeural() {
+        return isNeural;
+    }
+
+    /**
+     * Sets isNeural.
+     * <p>
+     * Field description:
+     * Indicates whether voice is neural. Using neural voice will generate additional cost.
+     *
+     * @param isNeural
+     */
+    @JsonProperty("isNeural")
+    public void setIsNeural(Boolean isNeural) {
+        this.isNeural = isNeural;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -110,12 +278,17 @@ public class CallsVoice {
             return false;
         }
         CallsVoice callsVoice = (CallsVoice) o;
-        return Objects.equals(this.name, callsVoice.name) && Objects.equals(this.gender, callsVoice.gender);
+        return Objects.equals(this.name, callsVoice.name)
+                && Objects.equals(this.gender, callsVoice.gender)
+                && Objects.equals(this.supplier, callsVoice.supplier)
+                && Objects.equals(this.ssmlSupported, callsVoice.ssmlSupported)
+                && Objects.equals(this.isDefault, callsVoice.isDefault)
+                && Objects.equals(this.isNeural, callsVoice.isNeural);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, gender);
+        return Objects.hash(name, gender, supplier, ssmlSupported, isDefault, isNeural);
     }
 
     @Override
@@ -129,6 +302,18 @@ public class CallsVoice {
                 .append(newLine)
                 .append("    gender: ")
                 .append(toIndentedString(gender))
+                .append(newLine)
+                .append("    supplier: ")
+                .append(toIndentedString(supplier))
+                .append(newLine)
+                .append("    ssmlSupported: ")
+                .append(toIndentedString(ssmlSupported))
+                .append(newLine)
+                .append("    isDefault: ")
+                .append(toIndentedString(isDefault))
+                .append(newLine)
+                .append("    isNeural: ")
+                .append(toIndentedString(isNeural))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -19,17 +19,17 @@ public class SmsResponseDetails {
 
     private String messageId;
 
-    private MessageStatus status;
+    private SmsMessageStatus status;
 
-    private String to;
+    private String destination;
 
-    private Integer smsCount;
+    private SmsMessageResponseDetails details;
 
     /**
      * Sets messageId.
      * <p>
      * Field description:
-     * Unique message ID. If not passed, it will be automatically generated and returned in a response.
+     * Unique message ID. If not provided, it will be auto-generated and returned in the API response.
      *
      * @param messageId
      * @return This {@link SmsResponseDetails instance}.
@@ -43,7 +43,7 @@ public class SmsResponseDetails {
      * Returns messageId.
      * <p>
      * Field description:
-     * Unique message ID. If not passed, it will be automatically generated and returned in a response.
+     * Unique message ID. If not provided, it will be auto-generated and returned in the API response.
      *
      * @return messageId
      */
@@ -56,7 +56,7 @@ public class SmsResponseDetails {
      * Sets messageId.
      * <p>
      * Field description:
-     * Unique message ID. If not passed, it will be automatically generated and returned in a response.
+     * Unique message ID. If not provided, it will be auto-generated and returned in the API response.
      *
      * @param messageId
      */
@@ -71,7 +71,7 @@ public class SmsResponseDetails {
      * @param status
      * @return This {@link SmsResponseDetails instance}.
      */
-    public SmsResponseDetails status(MessageStatus status) {
+    public SmsResponseDetails status(SmsMessageStatus status) {
         this.status = status;
         return this;
     }
@@ -82,7 +82,7 @@ public class SmsResponseDetails {
      * @return status
      */
     @JsonProperty("status")
-    public MessageStatus getStatus() {
+    public SmsMessageStatus getStatus() {
         return status;
     }
 
@@ -92,88 +92,79 @@ public class SmsResponseDetails {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(MessageStatus status) {
+    public void setStatus(SmsMessageStatus status) {
         this.status = status;
     }
 
     /**
-     * Sets to.
+     * Sets destination.
      * <p>
      * Field description:
-     * The destination address of the message.
+     * The destination address of the message, i.e., its recipient.
      *
-     * @param to
+     * @param destination
      * @return This {@link SmsResponseDetails instance}.
      */
-    public SmsResponseDetails to(String to) {
-        this.to = to;
+    public SmsResponseDetails destination(String destination) {
+        this.destination = destination;
         return this;
     }
 
     /**
-     * Returns to.
+     * Returns destination.
      * <p>
      * Field description:
-     * The destination address of the message.
+     * The destination address of the message, i.e., its recipient.
      *
-     * @return to
+     * @return destination
      */
-    @JsonProperty("to")
-    public String getTo() {
-        return to;
+    @JsonProperty("destination")
+    public String getDestination() {
+        return destination;
     }
 
     /**
-     * Sets to.
+     * Sets destination.
      * <p>
      * Field description:
-     * The destination address of the message.
+     * The destination address of the message, i.e., its recipient.
      *
-     * @param to
+     * @param destination
      */
-    @JsonProperty("to")
-    public void setTo(String to) {
-        this.to = to;
+    @JsonProperty("destination")
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
     /**
-     * Sets smsCount.
-     * <p>
-     * Field description:
-     * This is the total count of SMS submitted in the request. SMS messages have a character limit and messages longer than that limit will be split into multiple SMS and reflected in the total count of SMS submitted.
+     * Sets details.
      *
-     * @param smsCount
+     * @param details
      * @return This {@link SmsResponseDetails instance}.
      */
-    public SmsResponseDetails smsCount(Integer smsCount) {
-        this.smsCount = smsCount;
+    public SmsResponseDetails details(SmsMessageResponseDetails details) {
+        this.details = details;
         return this;
     }
 
     /**
-     * Returns smsCount.
-     * <p>
-     * Field description:
-     * This is the total count of SMS submitted in the request. SMS messages have a character limit and messages longer than that limit will be split into multiple SMS and reflected in the total count of SMS submitted.
+     * Returns details.
      *
-     * @return smsCount
+     * @return details
      */
-    @JsonProperty("smsCount")
-    public Integer getSmsCount() {
-        return smsCount;
+    @JsonProperty("details")
+    public SmsMessageResponseDetails getDetails() {
+        return details;
     }
 
     /**
-     * Sets smsCount.
-     * <p>
-     * Field description:
-     * This is the total count of SMS submitted in the request. SMS messages have a character limit and messages longer than that limit will be split into multiple SMS and reflected in the total count of SMS submitted.
+     * Sets details.
      *
-     * @param smsCount
+     * @param details
      */
-    @JsonProperty("smsCount")
-    public void setSmsCount(Integer smsCount) {
-        this.smsCount = smsCount;
+    @JsonProperty("details")
+    public void setDetails(SmsMessageResponseDetails details) {
+        this.details = details;
     }
 
     @Override
@@ -187,13 +178,13 @@ public class SmsResponseDetails {
         SmsResponseDetails smsResponseDetails = (SmsResponseDetails) o;
         return Objects.equals(this.messageId, smsResponseDetails.messageId)
                 && Objects.equals(this.status, smsResponseDetails.status)
-                && Objects.equals(this.to, smsResponseDetails.to)
-                && Objects.equals(this.smsCount, smsResponseDetails.smsCount);
+                && Objects.equals(this.destination, smsResponseDetails.destination)
+                && Objects.equals(this.details, smsResponseDetails.details);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageId, status, to, smsCount);
+        return Objects.hash(messageId, status, destination, details);
     }
 
     @Override
@@ -208,11 +199,11 @@ public class SmsResponseDetails {
                 .append("    status: ")
                 .append(toIndentedString(status))
                 .append(newLine)
-                .append("    to: ")
-                .append(toIndentedString(to))
+                .append("    destination: ")
+                .append(toIndentedString(destination))
                 .append(newLine)
-                .append("    smsCount: ")
-                .append(toIndentedString(smsCount))
+                .append("    details: ")
+                .append(toIndentedString(details))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -38,7 +38,7 @@ public class CallsStaticSipTrunkUpdateRequest extends CallsSipTrunkUpdateRequest
      * Sets sourceHosts.
      * <p>
      * Field description:
-     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source hosts can be send in 2 formats: IP address without port or domain without port.
+     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source hosts can be sent in 2 formats: IP address without port or domain without port.
      *
      * @param sourceHosts
      * @return This {@link CallsStaticSipTrunkUpdateRequest instance}.
@@ -52,7 +52,7 @@ public class CallsStaticSipTrunkUpdateRequest extends CallsSipTrunkUpdateRequest
      * Adds and item into sourceHosts.
      * <p>
      * Field description:
-     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source hosts can be send in 2 formats: IP address without port or domain without port.
+     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source hosts can be sent in 2 formats: IP address without port or domain without port.
      *
      * @param sourceHostsItem The item to be added to the list.
      * @return This {@link CallsStaticSipTrunkUpdateRequest instance}.
@@ -69,7 +69,7 @@ public class CallsStaticSipTrunkUpdateRequest extends CallsSipTrunkUpdateRequest
      * Returns sourceHosts.
      * <p>
      * Field description:
-     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source hosts can be send in 2 formats: IP address without port or domain without port.
+     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source hosts can be sent in 2 formats: IP address without port or domain without port.
      *
      * @return sourceHosts
      */
@@ -82,7 +82,7 @@ public class CallsStaticSipTrunkUpdateRequest extends CallsSipTrunkUpdateRequest
      * Sets sourceHosts.
      * <p>
      * Field description:
-     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source hosts can be send in 2 formats: IP address without port or domain without port.
+     * List of SIP trunk source hosts. If empty, destination host list must not be empty. Source hosts can be sent in 2 formats: IP address without port or domain without port.
      *
      * @param sourceHosts
      */

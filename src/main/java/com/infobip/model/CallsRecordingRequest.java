@@ -72,7 +72,7 @@ public class CallsRecordingRequest {
      * Sets maxSilence.
      * <p>
      * Field description:
-     * Silence duration, in seconds, before the recording stops.
+     * Silence duration, in seconds, before the recording stops. (If this field is set the recording can&#39;t be stopped by the [stop recording endpoint](#call-stop-recording).)
      *
      * @param maxSilence
      * @return This {@link CallsRecordingRequest instance}.
@@ -86,7 +86,7 @@ public class CallsRecordingRequest {
      * Returns maxSilence.
      * <p>
      * Field description:
-     * Silence duration, in seconds, before the recording stops.
+     * Silence duration, in seconds, before the recording stops. (If this field is set the recording can&#39;t be stopped by the [stop recording endpoint](#call-stop-recording).)
      *
      * @return maxSilence
      */
@@ -99,7 +99,7 @@ public class CallsRecordingRequest {
      * Sets maxSilence.
      * <p>
      * Field description:
-     * Silence duration, in seconds, before the recording stops.
+     * Silence duration, in seconds, before the recording stops. (If this field is set the recording can&#39;t be stopped by the [stop recording endpoint](#call-stop-recording).)
      *
      * @param maxSilence
      */
@@ -152,7 +152,7 @@ public class CallsRecordingRequest {
      * Sets maxDuration.
      * <p>
      * Field description:
-     * Maximum recording duration in seconds.
+     * Maximum recording duration in seconds.  (If this field is set the recording can&#39;t be stopped by the [stop recording endpoint](#call-stop-recording).)
      *
      * @param maxDuration
      * @return This {@link CallsRecordingRequest instance}.
@@ -166,7 +166,7 @@ public class CallsRecordingRequest {
      * Returns maxDuration.
      * <p>
      * Field description:
-     * Maximum recording duration in seconds.
+     * Maximum recording duration in seconds.  (If this field is set the recording can&#39;t be stopped by the [stop recording endpoint](#call-stop-recording).)
      *
      * @return maxDuration
      */
@@ -179,7 +179,7 @@ public class CallsRecordingRequest {
      * Sets maxDuration.
      * <p>
      * Field description:
-     * Maximum recording duration in seconds.
+     * Maximum recording duration in seconds.  (If this field is set the recording can&#39;t be stopped by the [stop recording endpoint](#call-stop-recording).)
      *
      * @param maxDuration
      */

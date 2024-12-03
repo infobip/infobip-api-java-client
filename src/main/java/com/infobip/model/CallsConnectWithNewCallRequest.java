@@ -21,6 +21,8 @@ public class CallsConnectWithNewCallRequest {
 
     private Boolean connectOnEarlyMedia;
 
+    private RingbackGeneration ringbackGeneration;
+
     private CallsActionConferenceRequest conferenceRequest;
 
     /**
@@ -58,7 +60,7 @@ public class CallsConnectWithNewCallRequest {
      * Sets connectOnEarlyMedia.
      * <p>
      * Field description:
-     * Indicates whether to connect calls on early media. Otherwise, the calls are connected after being established.
+     * Indicates whether to connect calls on early media. Otherwise, the calls are connected after being established. Cannot be &#x60;true&#x60; when &#x60;ringbackGeneration&#x60; is enabled.
      *
      * @param connectOnEarlyMedia
      * @return This {@link CallsConnectWithNewCallRequest instance}.
@@ -72,7 +74,7 @@ public class CallsConnectWithNewCallRequest {
      * Returns connectOnEarlyMedia.
      * <p>
      * Field description:
-     * Indicates whether to connect calls on early media. Otherwise, the calls are connected after being established.
+     * Indicates whether to connect calls on early media. Otherwise, the calls are connected after being established. Cannot be &#x60;true&#x60; when &#x60;ringbackGeneration&#x60; is enabled.
      *
      * @return connectOnEarlyMedia
      */
@@ -85,13 +87,44 @@ public class CallsConnectWithNewCallRequest {
      * Sets connectOnEarlyMedia.
      * <p>
      * Field description:
-     * Indicates whether to connect calls on early media. Otherwise, the calls are connected after being established.
+     * Indicates whether to connect calls on early media. Otherwise, the calls are connected after being established. Cannot be &#x60;true&#x60; when &#x60;ringbackGeneration&#x60; is enabled.
      *
      * @param connectOnEarlyMedia
      */
     @JsonProperty("connectOnEarlyMedia")
     public void setConnectOnEarlyMedia(Boolean connectOnEarlyMedia) {
         this.connectOnEarlyMedia = connectOnEarlyMedia;
+    }
+
+    /**
+     * Sets ringbackGeneration.
+     *
+     * @param ringbackGeneration
+     * @return This {@link CallsConnectWithNewCallRequest instance}.
+     */
+    public CallsConnectWithNewCallRequest ringbackGeneration(RingbackGeneration ringbackGeneration) {
+        this.ringbackGeneration = ringbackGeneration;
+        return this;
+    }
+
+    /**
+     * Returns ringbackGeneration.
+     *
+     * @return ringbackGeneration
+     */
+    @JsonProperty("ringbackGeneration")
+    public RingbackGeneration getRingbackGeneration() {
+        return ringbackGeneration;
+    }
+
+    /**
+     * Sets ringbackGeneration.
+     *
+     * @param ringbackGeneration
+     */
+    @JsonProperty("ringbackGeneration")
+    public void setRingbackGeneration(RingbackGeneration ringbackGeneration) {
+        this.ringbackGeneration = ringbackGeneration;
     }
 
     /**
@@ -136,12 +169,13 @@ public class CallsConnectWithNewCallRequest {
         CallsConnectWithNewCallRequest callsConnectWithNewCallRequest = (CallsConnectWithNewCallRequest) o;
         return Objects.equals(this.callRequest, callsConnectWithNewCallRequest.callRequest)
                 && Objects.equals(this.connectOnEarlyMedia, callsConnectWithNewCallRequest.connectOnEarlyMedia)
+                && Objects.equals(this.ringbackGeneration, callsConnectWithNewCallRequest.ringbackGeneration)
                 && Objects.equals(this.conferenceRequest, callsConnectWithNewCallRequest.conferenceRequest);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(callRequest, connectOnEarlyMedia, conferenceRequest);
+        return Objects.hash(callRequest, connectOnEarlyMedia, ringbackGeneration, conferenceRequest);
     }
 
     @Override
@@ -155,6 +189,9 @@ public class CallsConnectWithNewCallRequest {
                 .append(newLine)
                 .append("    connectOnEarlyMedia: ")
                 .append(toIndentedString(connectOnEarlyMedia))
+                .append(newLine)
+                .append("    ringbackGeneration: ")
+                .append(toIndentedString(ringbackGeneration))
                 .append(newLine)
                 .append("    conferenceRequest: ")
                 .append(toIndentedString(conferenceRequest))

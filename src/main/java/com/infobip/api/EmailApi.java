@@ -16,13 +16,17 @@ import com.infobip.ApiException;
 import com.infobip.Parameter;
 import com.infobip.RequestDefinition;
 import com.infobip.model.EmailAddDomainRequest;
+import com.infobip.model.EmailAddSuppressionRequest;
 import com.infobip.model.EmailAllDomainsResponse;
+import com.infobip.model.EmailApiGetSuppressionType;
 import com.infobip.model.EmailBulkRescheduleRequest;
 import com.infobip.model.EmailBulkRescheduleResponse;
 import com.infobip.model.EmailBulkScheduleResponse;
 import com.infobip.model.EmailBulkStatusResponse;
 import com.infobip.model.EmailBulkUpdateStatusRequest;
 import com.infobip.model.EmailBulkUpdateStatusResponse;
+import com.infobip.model.EmailDeleteSuppressionRequest;
+import com.infobip.model.EmailDomainInfoPageResponse;
 import com.infobip.model.EmailDomainIpRequest;
 import com.infobip.model.EmailDomainIpResponse;
 import com.infobip.model.EmailDomainResponse;
@@ -31,6 +35,7 @@ import com.infobip.model.EmailReportsResult;
 import com.infobip.model.EmailReturnPathAddressRequest;
 import com.infobip.model.EmailSendResponse;
 import com.infobip.model.EmailSimpleApiResponse;
+import com.infobip.model.EmailSuppressionInfoPageResponse;
 import com.infobip.model.EmailTrackingEventRequest;
 import com.infobip.model.EmailValidationRequest;
 import com.infobip.model.EmailValidationResponse;
@@ -110,6 +115,60 @@ public class EmailApi {
      */
     public AddDomainRequest addDomain(EmailAddDomainRequest emailAddDomainRequest) {
         return new AddDomainRequest(emailAddDomainRequest);
+    }
+
+    private RequestDefinition addSuppressionsDefinition(EmailAddSuppressionRequest emailAddSuppressionRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/email/1/suppressions")
+                .body(emailAddSuppressionRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * addSuppressions request builder class.
+     */
+    public class AddSuppressionsRequest {
+        private final EmailAddSuppressionRequest emailAddSuppressionRequest;
+
+        private AddSuppressionsRequest(EmailAddSuppressionRequest emailAddSuppressionRequest) {
+            this.emailAddSuppressionRequest = Objects.requireNonNull(
+                    emailAddSuppressionRequest, "The required parameter 'emailAddSuppressionRequest' is missing.");
+        }
+
+        /**
+         * Executes the addSuppressions request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition addSuppressionsDefinition = addSuppressionsDefinition(emailAddSuppressionRequest);
+            apiClient.execute(addSuppressionsDefinition);
+        }
+
+        /**
+         * Executes the addSuppressions request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition addSuppressionsDefinition = addSuppressionsDefinition(emailAddSuppressionRequest);
+            return apiClient.executeAsync(addSuppressionsDefinition, callback);
+        }
+    }
+
+    /**
+     * Add suppressions.
+     * <p>
+     * This method allows you to add email addresses to the suppression list. It accepts suppression requests, saves them asynchronously, and automatically ignores any duplicate entries.
+     *
+     * @param emailAddSuppressionRequest  (required)
+     * @return AddSuppressionsRequest
+     */
+    public AddSuppressionsRequest addSuppressions(EmailAddSuppressionRequest emailAddSuppressionRequest) {
+        return new AddSuppressionsRequest(emailAddSuppressionRequest);
     }
 
     private RequestDefinition assignIpToDomainDefinition(EmailDomainIpRequest emailDomainIpRequest) {
@@ -222,6 +281,64 @@ public class EmailApi {
      */
     public DeleteDomainRequest deleteDomain(String domainName) {
         return new DeleteDomainRequest(domainName);
+    }
+
+    private RequestDefinition deleteSuppressionsDefinition(
+            EmailDeleteSuppressionRequest emailDeleteSuppressionRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("DELETE", "/email/1/suppressions")
+                .body(emailDeleteSuppressionRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * deleteSuppressions request builder class.
+     */
+    public class DeleteSuppressionsRequest {
+        private final EmailDeleteSuppressionRequest emailDeleteSuppressionRequest;
+
+        private DeleteSuppressionsRequest(EmailDeleteSuppressionRequest emailDeleteSuppressionRequest) {
+            this.emailDeleteSuppressionRequest = Objects.requireNonNull(
+                    emailDeleteSuppressionRequest,
+                    "The required parameter 'emailDeleteSuppressionRequest' is missing.");
+        }
+
+        /**
+         * Executes the deleteSuppressions request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition deleteSuppressionsDefinition =
+                    deleteSuppressionsDefinition(emailDeleteSuppressionRequest);
+            apiClient.execute(deleteSuppressionsDefinition);
+        }
+
+        /**
+         * Executes the deleteSuppressions request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition deleteSuppressionsDefinition =
+                    deleteSuppressionsDefinition(emailDeleteSuppressionRequest);
+            return apiClient.executeAsync(deleteSuppressionsDefinition, callback);
+        }
+    }
+
+    /**
+     * Delete suppressions.
+     * <p>
+     * This method allows you to delete email addresses from the suppression list. It accepts delete suppression requests and asynchronously deletes them.
+     *
+     * @param emailDeleteSuppressionRequest  (required)
+     * @return DeleteSuppressionsRequest
+     */
+    public DeleteSuppressionsRequest deleteSuppressions(EmailDeleteSuppressionRequest emailDeleteSuppressionRequest) {
+        return new DeleteSuppressionsRequest(emailDeleteSuppressionRequest);
     }
 
     private RequestDefinition getAllDomainIpsDefinition(String domainName) {
@@ -470,8 +587,94 @@ public class EmailApi {
         return new GetDomainDetailsRequest(domainName);
     }
 
+    private RequestDefinition getDomainsDefinition(Integer page, Integer size) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/suppressions/domains")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (page != null) {
+            builder.addQueryParameter(new Parameter("page", page));
+        }
+        if (size != null) {
+            builder.addQueryParameter(new Parameter("size", size));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getDomains request builder class.
+     */
+    public class GetDomainsRequest {
+        private Integer page;
+        private Integer size;
+
+        private GetDomainsRequest() {}
+
+        /**
+         * Sets page.
+         *
+         * @param page Requested page number. (optional, default to 0)
+         * @return GetDomainsRequest
+         */
+        public GetDomainsRequest page(Integer page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Sets size.
+         *
+         * @param size Requested page size. (optional, default to 100)
+         * @return GetDomainsRequest
+         */
+        public GetDomainsRequest size(Integer size) {
+            this.size = size;
+            return this;
+        }
+
+        /**
+         * Executes the getDomains request.
+         *
+         * @return EmailDomainInfoPageResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public EmailDomainInfoPageResponse execute() throws ApiException {
+            RequestDefinition getDomainsDefinition = getDomainsDefinition(page, size);
+            return apiClient.execute(
+                    getDomainsDefinition, new TypeReference<EmailDomainInfoPageResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getDomains request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<EmailDomainInfoPageResponse> callback) {
+            RequestDefinition getDomainsDefinition = getDomainsDefinition(page, size);
+            return apiClient.executeAsync(
+                    getDomainsDefinition, new TypeReference<EmailDomainInfoPageResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get suppression domains.
+     * <p>
+     * This method allows you to get domains that can be managed for suppressions and are either owned or have granted permissions.
+     *
+     * @return GetDomainsRequest
+     */
+    public GetDomainsRequest getDomains() {
+        return new GetDomainsRequest();
+    }
+
     private RequestDefinition getEmailDeliveryReportsDefinition(
-            String bulkId, String messageId, Integer limit, String applicationId, String entityId) {
+            String bulkId,
+            String messageId,
+            String campaignReferenceId,
+            Integer limit,
+            String applicationId,
+            String entityId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/reports")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -481,6 +684,9 @@ public class EmailApi {
         }
         if (messageId != null) {
             builder.addQueryParameter(new Parameter("messageId", messageId));
+        }
+        if (campaignReferenceId != null) {
+            builder.addQueryParameter(new Parameter("campaignReferenceId", campaignReferenceId));
         }
         if (limit != null) {
             builder.addQueryParameter(new Parameter("limit", limit));
@@ -500,6 +706,7 @@ public class EmailApi {
     public class GetEmailDeliveryReportsRequest {
         private String bulkId;
         private String messageId;
+        private String campaignReferenceId;
         private Integer limit;
         private String applicationId;
         private String entityId;
@@ -525,6 +732,17 @@ public class EmailApi {
          */
         public GetEmailDeliveryReportsRequest messageId(String messageId) {
             this.messageId = messageId;
+            return this;
+        }
+
+        /**
+         * Sets campaignReferenceId.
+         *
+         * @param campaignReferenceId The ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns. (optional)
+         * @return GetEmailDeliveryReportsRequest
+         */
+        public GetEmailDeliveryReportsRequest campaignReferenceId(String campaignReferenceId) {
+            this.campaignReferenceId = campaignReferenceId;
             return this;
         }
 
@@ -568,8 +786,8 @@ public class EmailApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public EmailReportsResult execute() throws ApiException {
-            RequestDefinition getEmailDeliveryReportsDefinition =
-                    getEmailDeliveryReportsDefinition(bulkId, messageId, limit, applicationId, entityId);
+            RequestDefinition getEmailDeliveryReportsDefinition = getEmailDeliveryReportsDefinition(
+                    bulkId, messageId, campaignReferenceId, limit, applicationId, entityId);
             return apiClient.execute(
                     getEmailDeliveryReportsDefinition, new TypeReference<EmailReportsResult>() {}.getType());
         }
@@ -581,8 +799,8 @@ public class EmailApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<EmailReportsResult> callback) {
-            RequestDefinition getEmailDeliveryReportsDefinition =
-                    getEmailDeliveryReportsDefinition(bulkId, messageId, limit, applicationId, entityId);
+            RequestDefinition getEmailDeliveryReportsDefinition = getEmailDeliveryReportsDefinition(
+                    bulkId, messageId, campaignReferenceId, limit, applicationId, entityId);
             return apiClient.executeAsync(
                     getEmailDeliveryReportsDefinition, new TypeReference<EmailReportsResult>() {}.getType(), callback);
         }
@@ -604,6 +822,7 @@ public class EmailApi {
             String from,
             String to,
             String bulkId,
+            String campaignReferenceId,
             String generalStatus,
             OffsetDateTime sentSince,
             OffsetDateTime sentUntil,
@@ -625,6 +844,9 @@ public class EmailApi {
         }
         if (bulkId != null) {
             builder.addQueryParameter(new Parameter("bulkId", bulkId));
+        }
+        if (campaignReferenceId != null) {
+            builder.addQueryParameter(new Parameter("campaignReferenceId", campaignReferenceId));
         }
         if (generalStatus != null) {
             builder.addQueryParameter(new Parameter("generalStatus", generalStatus));
@@ -655,6 +877,7 @@ public class EmailApi {
         private String from;
         private String to;
         private String bulkId;
+        private String campaignReferenceId;
         private String generalStatus;
         private OffsetDateTime sentSince;
         private OffsetDateTime sentUntil;
@@ -705,6 +928,17 @@ public class EmailApi {
          */
         public GetEmailLogsRequest bulkId(String bulkId) {
             this.bulkId = bulkId;
+            return this;
+        }
+
+        /**
+         * Sets campaignReferenceId.
+         *
+         * @param campaignReferenceId The ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns. (optional)
+         * @return GetEmailLogsRequest
+         */
+        public GetEmailLogsRequest campaignReferenceId(String campaignReferenceId) {
+            this.campaignReferenceId = campaignReferenceId;
             return this;
         }
 
@@ -782,7 +1016,17 @@ public class EmailApi {
          */
         public EmailLogsResponse execute() throws ApiException {
             RequestDefinition getEmailLogsDefinition = getEmailLogsDefinition(
-                    messageId, from, to, bulkId, generalStatus, sentSince, sentUntil, limit, applicationId, entityId);
+                    messageId,
+                    from,
+                    to,
+                    bulkId,
+                    campaignReferenceId,
+                    generalStatus,
+                    sentSince,
+                    sentUntil,
+                    limit,
+                    applicationId,
+                    entityId);
             return apiClient.execute(getEmailLogsDefinition, new TypeReference<EmailLogsResponse>() {}.getType());
         }
 
@@ -794,7 +1038,17 @@ public class EmailApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<EmailLogsResponse> callback) {
             RequestDefinition getEmailLogsDefinition = getEmailLogsDefinition(
-                    messageId, from, to, bulkId, generalStatus, sentSince, sentUntil, limit, applicationId, entityId);
+                    messageId,
+                    from,
+                    to,
+                    bulkId,
+                    campaignReferenceId,
+                    generalStatus,
+                    sentSince,
+                    sentUntil,
+                    limit,
+                    applicationId,
+                    entityId);
             return apiClient.executeAsync(
                     getEmailLogsDefinition, new TypeReference<EmailLogsResponse>() {}.getType(), callback);
         }
@@ -929,6 +1183,172 @@ public class EmailApi {
      */
     public GetScheduledEmailsRequest getScheduledEmails(String bulkId) {
         return new GetScheduledEmailsRequest(bulkId);
+    }
+
+    private RequestDefinition getSuppressionsDefinition(
+            String domainName,
+            EmailApiGetSuppressionType type,
+            String emailAddress,
+            String recipientDomain,
+            OffsetDateTime createdDateFrom,
+            OffsetDateTime createdDateTo,
+            Integer page,
+            Integer size) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/suppressions")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (domainName != null) {
+            builder.addQueryParameter(new Parameter("domainName", domainName));
+        }
+        if (type != null) {
+            builder.addQueryParameter(new Parameter("type", type));
+        }
+        if (emailAddress != null) {
+            builder.addQueryParameter(new Parameter("emailAddress", emailAddress));
+        }
+        if (recipientDomain != null) {
+            builder.addQueryParameter(new Parameter("recipientDomain", recipientDomain));
+        }
+        if (createdDateFrom != null) {
+            builder.addQueryParameter(new Parameter("createdDateFrom", createdDateFrom));
+        }
+        if (createdDateTo != null) {
+            builder.addQueryParameter(new Parameter("createdDateTo", createdDateTo));
+        }
+        if (page != null) {
+            builder.addQueryParameter(new Parameter("page", page));
+        }
+        if (size != null) {
+            builder.addQueryParameter(new Parameter("size", size));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getSuppressions request builder class.
+     */
+    public class GetSuppressionsRequest {
+        private final String domainName;
+        private final EmailApiGetSuppressionType type;
+        private String emailAddress;
+        private String recipientDomain;
+        private OffsetDateTime createdDateFrom;
+        private OffsetDateTime createdDateTo;
+        private Integer page;
+        private Integer size;
+
+        private GetSuppressionsRequest(String domainName, EmailApiGetSuppressionType type) {
+            this.domainName = Objects.requireNonNull(domainName, "The required parameter 'domainName' is missing.");
+            this.type = Objects.requireNonNull(type, "The required parameter 'type' is missing.");
+        }
+
+        /**
+         * Sets emailAddress.
+         *
+         * @param emailAddress Email address that is suppressed. (optional)
+         * @return GetSuppressionsRequest
+         */
+        public GetSuppressionsRequest emailAddress(String emailAddress) {
+            this.emailAddress = emailAddress;
+            return this;
+        }
+
+        /**
+         * Sets recipientDomain.
+         *
+         * @param recipientDomain Recipient domain that is suppressed. (optional)
+         * @return GetSuppressionsRequest
+         */
+        public GetSuppressionsRequest recipientDomain(String recipientDomain) {
+            this.recipientDomain = recipientDomain;
+            return this;
+        }
+
+        /**
+         * Sets createdDateFrom.
+         *
+         * @param createdDateFrom Start date for searching suppressions. (optional)
+         * @return GetSuppressionsRequest
+         */
+        public GetSuppressionsRequest createdDateFrom(OffsetDateTime createdDateFrom) {
+            this.createdDateFrom = createdDateFrom;
+            return this;
+        }
+
+        /**
+         * Sets createdDateTo.
+         *
+         * @param createdDateTo End date for searching suppressions. (optional)
+         * @return GetSuppressionsRequest
+         */
+        public GetSuppressionsRequest createdDateTo(OffsetDateTime createdDateTo) {
+            this.createdDateTo = createdDateTo;
+            return this;
+        }
+
+        /**
+         * Sets page.
+         *
+         * @param page Requested page number. (optional, default to 0)
+         * @return GetSuppressionsRequest
+         */
+        public GetSuppressionsRequest page(Integer page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Sets size.
+         *
+         * @param size Requested page size. (optional, default to 100)
+         * @return GetSuppressionsRequest
+         */
+        public GetSuppressionsRequest size(Integer size) {
+            this.size = size;
+            return this;
+        }
+
+        /**
+         * Executes the getSuppressions request.
+         *
+         * @return EmailSuppressionInfoPageResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public EmailSuppressionInfoPageResponse execute() throws ApiException {
+            RequestDefinition getSuppressionsDefinition = getSuppressionsDefinition(
+                    domainName, type, emailAddress, recipientDomain, createdDateFrom, createdDateTo, page, size);
+            return apiClient.execute(
+                    getSuppressionsDefinition, new TypeReference<EmailSuppressionInfoPageResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getSuppressions request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<EmailSuppressionInfoPageResponse> callback) {
+            RequestDefinition getSuppressionsDefinition = getSuppressionsDefinition(
+                    domainName, type, emailAddress, recipientDomain, createdDateFrom, createdDateTo, page, size);
+            return apiClient.executeAsync(
+                    getSuppressionsDefinition,
+                    new TypeReference<EmailSuppressionInfoPageResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get suppressions.
+     * <p>
+     * This method retrieves the suppressions for domains that are owned or have permissions granted.
+     *
+     * @param domainName Name of the requested domain. (required)
+     * @param type Type of suppression. (required)
+     * @return GetSuppressionsRequest
+     */
+    public GetSuppressionsRequest getSuppressions(String domainName, EmailApiGetSuppressionType type) {
+        return new GetSuppressionsRequest(domainName, type);
     }
 
     private RequestDefinition removeIpFromDomainDefinition(String domainName, String ipAddress) {
@@ -1087,6 +1507,7 @@ public class EmailApi {
             String trackingUrl,
             String bulkId,
             String messageId,
+            String campaignReferenceId,
             String replyTo,
             String defaultPlaceholders,
             Boolean preserveRecipients,
@@ -1094,8 +1515,10 @@ public class EmailApi {
             String landingPagePlaceholders,
             String landingPageId,
             String templateLanguageVersion,
+            String clientPriority,
             String applicationId,
-            String entityId) {
+            String entityId,
+            String headers) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/email/3/send")
                 .requiresAuthentication(true)
                 .accept("application/json")
@@ -1164,6 +1587,9 @@ public class EmailApi {
         if (messageId != null) {
             builder.addFormParameter(new Parameter("messageId", messageId));
         }
+        if (campaignReferenceId != null) {
+            builder.addFormParameter(new Parameter("campaignReferenceId", campaignReferenceId));
+        }
         if (replyTo != null) {
             builder.addFormParameter(new Parameter("replyTo", replyTo));
         }
@@ -1185,11 +1611,17 @@ public class EmailApi {
         if (templateLanguageVersion != null) {
             builder.addFormParameter(new Parameter("templateLanguageVersion", templateLanguageVersion));
         }
+        if (clientPriority != null) {
+            builder.addFormParameter(new Parameter("clientPriority", clientPriority));
+        }
         if (applicationId != null) {
             builder.addFormParameter(new Parameter("applicationId", applicationId));
         }
         if (entityId != null) {
             builder.addFormParameter(new Parameter("entityId", entityId));
+        }
+        if (headers != null) {
+            builder.addFormParameter(new Parameter("headers", headers));
         }
         return builder.build();
     }
@@ -1219,6 +1651,7 @@ public class EmailApi {
         private String trackingUrl;
         private String bulkId;
         private String messageId;
+        private String campaignReferenceId;
         private String replyTo;
         private String defaultPlaceholders;
         private Boolean preserveRecipients;
@@ -1226,8 +1659,10 @@ public class EmailApi {
         private String landingPagePlaceholders;
         private String landingPageId;
         private String templateLanguageVersion;
+        private String clientPriority;
         private String applicationId;
         private String entityId;
+        private String headers;
 
         private SendEmailRequest(List<String> to) {
             this.to = Objects.requireNonNull(to, "The required parameter 'to' is missing.");
@@ -1247,7 +1682,7 @@ public class EmailApi {
         /**
          * Sets cc.
          *
-         * @param cc CC recipient email address.  Note: Maximum number of recipients per request is 1000 overall including to, cc and bcc field. (optional)
+         * @param cc CC recipient email address. As optional feature on this field, a specific placeholder can be defined whose value will apply only for this destination.  Note: Maximum number of recipients per request is 1000 overall including to, cc and bcc field. (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest cc(List<String> cc) {
@@ -1258,7 +1693,7 @@ public class EmailApi {
         /**
          * Sets bcc.
          *
-         * @param bcc BCC recipient email address.  Note: Maximum number of recipients per request is 1000 overall including to, cc and bcc field. (optional)
+         * @param bcc BCC recipient email address. As optional feature on this field, a specific placeholder can be defined whose value will apply only for this destination.  Note: Maximum number of recipients per request is 1000 overall including to, cc and bcc field. (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest bcc(List<String> bcc) {
@@ -1401,7 +1836,7 @@ public class EmailApi {
         /**
          * Sets trackClicks.
          *
-         * @param trackClicks This parameter enables or disables track click feature. (optional)
+         * @param trackClicks This parameter enables or disables track click feature.  Note: Option to disable click tracking per URL is available. For detailed usage, please refer to the [documentation](https://www.infobip.com/docs/email/tracking-service#disable-click-tracking-on-urls). (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest trackClicks(Boolean trackClicks) {
@@ -1450,6 +1885,17 @@ public class EmailApi {
          */
         public SendEmailRequest messageId(String messageId) {
             this.messageId = messageId;
+            return this;
+        }
+
+        /**
+         * Sets campaignReferenceId.
+         *
+         * @param campaignReferenceId The ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns. (optional)
+         * @return SendEmailRequest
+         */
+        public SendEmailRequest campaignReferenceId(String campaignReferenceId) {
+            this.campaignReferenceId = campaignReferenceId;
             return this;
         }
 
@@ -1511,7 +1957,7 @@ public class EmailApi {
         /**
          * Sets landingPageId.
          *
-         * @param landingPageId The ID of an opt out landing page to be used and displayed once an end user clicks the unsubscribe link. If not present, default opt out landing page will be displayed. Create a landing page in your Infobip account and use its ID, e.g., &#x60;#1_23456&#x60;. (optional)
+         * @param landingPageId The ID of an opt out landing page to be used and displayed once an end user clicks the unsubscribe link. If not present, default opt out landing page will be displayed. Create a landing page in your Infobip account and use its ID, e.g., &#x60;1_23456&#x60;. (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest landingPageId(String landingPageId) {
@@ -1527,6 +1973,17 @@ public class EmailApi {
          */
         public SendEmailRequest templateLanguageVersion(String templateLanguageVersion) {
             this.templateLanguageVersion = templateLanguageVersion;
+            return this;
+        }
+
+        /**
+         * Sets clientPriority.
+         *
+         * @param clientPriority Adds a priority rating to this email message. Allowed values are &#x60;HIGH&#x60;, &#x60;STANDARD&#x60; and &#x60;LOW&#x60;. Messages with a higher priority value sent by your account are prioritized over messages with a lower priority value sent by your account. If no priority value is provided, messages will be treated with &#x60;STANDARD&#x60; priority by default. (optional)
+         * @return SendEmailRequest
+         */
+        public SendEmailRequest clientPriority(String clientPriority) {
+            this.clientPriority = clientPriority;
             return this;
         }
 
@@ -1549,6 +2006,17 @@ public class EmailApi {
          */
         public SendEmailRequest entityId(String entityId) {
             this.entityId = entityId;
+            return this;
+        }
+
+        /**
+         * Sets headers.
+         *
+         * @param headers Additional email headers for customization that can be provided in a form of JSON. Example: &#x60;headers&#x3D;{\\\&quot;X-CustomHeader\\\&quot;: \\\&quot;Header value\\\&quot;}&#x60;.  There are a few exceptions of headers which are not adjustable through this option: &#x60;To&#x60;, &#x60;Cc&#x60;, &#x60;Bcc&#x60;, &#x60;From&#x60;, &#x60;Subject&#x60;,&#x60;Content-Type&#x60;, &#x60;DKIM-Signature&#x60;, &#x60;Content-Transfer-Encoding&#x60;, &#x60;Return-Path&#x60;, &#x60;MIME-Version&#x60; (optional)
+         * @return SendEmailRequest
+         */
+        public SendEmailRequest headers(String headers) {
+            this.headers = headers;
             return this;
         }
 
@@ -1581,6 +2049,7 @@ public class EmailApi {
                     trackingUrl,
                     bulkId,
                     messageId,
+                    campaignReferenceId,
                     replyTo,
                     defaultPlaceholders,
                     preserveRecipients,
@@ -1588,8 +2057,10 @@ public class EmailApi {
                     landingPagePlaceholders,
                     landingPageId,
                     templateLanguageVersion,
+                    clientPriority,
                     applicationId,
-                    entityId);
+                    entityId,
+                    headers);
             return apiClient.execute(sendEmailDefinition, new TypeReference<EmailSendResponse>() {}.getType());
         }
 
@@ -1622,6 +2093,7 @@ public class EmailApi {
                     trackingUrl,
                     bulkId,
                     messageId,
+                    campaignReferenceId,
                     replyTo,
                     defaultPlaceholders,
                     preserveRecipients,
@@ -1629,8 +2101,10 @@ public class EmailApi {
                     landingPagePlaceholders,
                     landingPageId,
                     templateLanguageVersion,
+                    clientPriority,
                     applicationId,
-                    entityId);
+                    entityId,
+                    headers);
             return apiClient.executeAsync(
                     sendEmailDefinition, new TypeReference<EmailSendResponse>() {}.getType(), callback);
         }

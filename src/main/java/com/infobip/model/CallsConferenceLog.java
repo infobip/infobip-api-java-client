@@ -24,9 +24,7 @@ public class CallsConferenceLog {
 
     private String name;
 
-    private String callsConfigurationId;
-
-    private String applicationId;
+    private CallsPlatform platform;
 
     private OffsetDateTime startTime;
 
@@ -121,83 +119,34 @@ public class CallsConferenceLog {
     }
 
     /**
-     * Sets callsConfigurationId.
-     * <p>
-     * Field description:
-     * Calls Configuration ID.
+     * Sets platform.
      *
-     * @param callsConfigurationId
+     * @param platform
      * @return This {@link CallsConferenceLog instance}.
      */
-    public CallsConferenceLog callsConfigurationId(String callsConfigurationId) {
-        this.callsConfigurationId = callsConfigurationId;
+    public CallsConferenceLog platform(CallsPlatform platform) {
+        this.platform = platform;
         return this;
     }
 
     /**
-     * Returns callsConfigurationId.
-     * <p>
-     * Field description:
-     * Calls Configuration ID.
+     * Returns platform.
      *
-     * @return callsConfigurationId
+     * @return platform
      */
-    @JsonProperty("callsConfigurationId")
-    public String getCallsConfigurationId() {
-        return callsConfigurationId;
+    @JsonProperty("platform")
+    public CallsPlatform getPlatform() {
+        return platform;
     }
 
     /**
-     * Sets callsConfigurationId.
-     * <p>
-     * Field description:
-     * Calls Configuration ID.
+     * Sets platform.
      *
-     * @param callsConfigurationId
+     * @param platform
      */
-    @JsonProperty("callsConfigurationId")
-    public void setCallsConfigurationId(String callsConfigurationId) {
-        this.callsConfigurationId = callsConfigurationId;
-    }
-
-    /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Application ID.
-     *
-     * @param applicationId
-     * @return This {@link CallsConferenceLog instance}.
-     */
-    public CallsConferenceLog applicationId(String applicationId) {
-        this.applicationId = applicationId;
-        return this;
-    }
-
-    /**
-     * Returns applicationId.
-     * <p>
-     * Field description:
-     * Application ID.
-     *
-     * @return applicationId
-     */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Application ID.
-     *
-     * @param applicationId
-     */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("platform")
+    public void setPlatform(CallsPlatform platform) {
+        this.platform = platform;
     }
 
     /**
@@ -450,8 +399,7 @@ public class CallsConferenceLog {
         CallsConferenceLog callsConferenceLog = (CallsConferenceLog) o;
         return Objects.equals(this.conferenceId, callsConferenceLog.conferenceId)
                 && Objects.equals(this.name, callsConferenceLog.name)
-                && Objects.equals(this.callsConfigurationId, callsConferenceLog.callsConfigurationId)
-                && Objects.equals(this.applicationId, callsConferenceLog.applicationId)
+                && Objects.equals(this.platform, callsConferenceLog.platform)
                 && Objects.equals(this.startTime, callsConferenceLog.startTime)
                 && Objects.equals(this.endTime, callsConferenceLog.endTime)
                 && Objects.equals(this.duration, callsConferenceLog.duration)
@@ -462,17 +410,7 @@ public class CallsConferenceLog {
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                conferenceId,
-                name,
-                callsConfigurationId,
-                applicationId,
-                startTime,
-                endTime,
-                duration,
-                sessions,
-                recording,
-                errorCode);
+        return Objects.hash(conferenceId, name, platform, startTime, endTime, duration, sessions, recording, errorCode);
     }
 
     @Override
@@ -487,11 +425,8 @@ public class CallsConferenceLog {
                 .append("    name: ")
                 .append(toIndentedString(name))
                 .append(newLine)
-                .append("    callsConfigurationId: ")
-                .append(toIndentedString(callsConfigurationId))
-                .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("    startTime: ")
                 .append(toIndentedString(startTime))

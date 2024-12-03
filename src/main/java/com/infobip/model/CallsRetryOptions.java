@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Specifies options to retry establishing a call: if the first attempt fails, until successful call establishment, or until &#x60;validityPeriod&#x60; or &#x60;maxCount&#x60; is reached.
+ * Used to determine whether to retry the delivery of a bulk call if the initial attempt fails. Additional retries will occur based on the schedule defined by the _minWaitPeriod_ and _maxWaitPeriod_ parameters, as well as the platform&#39;s internal retry logic. If _minWaitPeriod_ differs from _maxWaitPeriod_, the delivery will be retried according to the following schedule: after 1 minute, 2 minutes, 5 minutes, 10 minutes, 20 minutes, 30 minutes, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, and 24 hours, or until _maxWaitPeriod_ is reached. Once the retry attempt for _maxWaitPeriod_ is reached, _maxWaitPeriod_ will be used for all subsequent retries. If _minWaitPeriod_ and _maxWaitPeriod_ are defined as equal values, the period between retries will be equal to this value. Bulk call delivery will be retried until successful delivery, call validity expiration, or reaching the _maxAttempts_ value.
  */
 public class CallsRetryOptions {
 
@@ -27,7 +27,7 @@ public class CallsRetryOptions {
      * Sets minWaitPeriod.
      * <p>
      * Field description:
-     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to establish the call again.
+     * Defines the minimum waiting time (in minutes) after the previous failed attempt before trying to establish the call again. Supported values are 1 minute, 2 minutes, 5 minutes, 10 minutes, 20 minutes, 30 minutes, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, and 24 hours. If entered a value that is not in the list but is smaller than 24 hours, the next bigger value from the list will be used. If a value larger than 24 hours is entered, 24 hours will be used.
      *
      * @param minWaitPeriod
      * @return This {@link CallsRetryOptions instance}.
@@ -41,7 +41,7 @@ public class CallsRetryOptions {
      * Returns minWaitPeriod.
      * <p>
      * Field description:
-     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to establish the call again.
+     * Defines the minimum waiting time (in minutes) after the previous failed attempt before trying to establish the call again. Supported values are 1 minute, 2 minutes, 5 minutes, 10 minutes, 20 minutes, 30 minutes, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, and 24 hours. If entered a value that is not in the list but is smaller than 24 hours, the next bigger value from the list will be used. If a value larger than 24 hours is entered, 24 hours will be used.
      *
      * @return minWaitPeriod
      */
@@ -54,7 +54,7 @@ public class CallsRetryOptions {
      * Sets minWaitPeriod.
      * <p>
      * Field description:
-     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to establish the call again.
+     * Defines the minimum waiting time (in minutes) after the previous failed attempt before trying to establish the call again. Supported values are 1 minute, 2 minutes, 5 minutes, 10 minutes, 20 minutes, 30 minutes, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, and 24 hours. If entered a value that is not in the list but is smaller than 24 hours, the next bigger value from the list will be used. If a value larger than 24 hours is entered, 24 hours will be used.
      *
      * @param minWaitPeriod
      */
@@ -67,7 +67,7 @@ public class CallsRetryOptions {
      * Sets maxWaitPeriod.
      * <p>
      * Field description:
-     * Defines the maximum waiting time (in minutes) after the previous failed attempt to try to establish the call again.
+     * Defines the maximum waiting time (in minutes) after the previous failed attempt before trying to establish the call again. Supported values are 1 minute, 2 minutes, 5 minutes, 10 minutes, 20 minutes, 30 minutes, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, and 24 hours. If entered a value that is not in the list but is smaller than 24 hours, the next bigger value from the list will be used. If a value larger than 24 hours is entered, 24 hours will be used.
      *
      * @param maxWaitPeriod
      * @return This {@link CallsRetryOptions instance}.
@@ -81,7 +81,7 @@ public class CallsRetryOptions {
      * Returns maxWaitPeriod.
      * <p>
      * Field description:
-     * Defines the maximum waiting time (in minutes) after the previous failed attempt to try to establish the call again.
+     * Defines the maximum waiting time (in minutes) after the previous failed attempt before trying to establish the call again. Supported values are 1 minute, 2 minutes, 5 minutes, 10 minutes, 20 minutes, 30 minutes, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, and 24 hours. If entered a value that is not in the list but is smaller than 24 hours, the next bigger value from the list will be used. If a value larger than 24 hours is entered, 24 hours will be used.
      *
      * @return maxWaitPeriod
      */
@@ -94,7 +94,7 @@ public class CallsRetryOptions {
      * Sets maxWaitPeriod.
      * <p>
      * Field description:
-     * Defines the maximum waiting time (in minutes) after the previous failed attempt to try to establish the call again.
+     * Defines the maximum waiting time (in minutes) after the previous failed attempt before trying to establish the call again. Supported values are 1 minute, 2 minutes, 5 minutes, 10 minutes, 20 minutes, 30 minutes, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, and 24 hours. If entered a value that is not in the list but is smaller than 24 hours, the next bigger value from the list will be used. If a value larger than 24 hours is entered, 24 hours will be used.
      *
      * @param maxWaitPeriod
      */
@@ -107,7 +107,7 @@ public class CallsRetryOptions {
      * Sets maxAttempts.
      * <p>
      * Field description:
-     * Specifies the maximum number of retry attempts.
+     * Defines the maximum number of retry attempts. The maximum value is &#x60;4&#x60;. If a value higher than &#x60;4&#x60; is entered, it will be set to &#x60;4&#x60;.
      *
      * @param maxAttempts
      * @return This {@link CallsRetryOptions instance}.
@@ -121,7 +121,7 @@ public class CallsRetryOptions {
      * Returns maxAttempts.
      * <p>
      * Field description:
-     * Specifies the maximum number of retry attempts.
+     * Defines the maximum number of retry attempts. The maximum value is &#x60;4&#x60;. If a value higher than &#x60;4&#x60; is entered, it will be set to &#x60;4&#x60;.
      *
      * @return maxAttempts
      */
@@ -134,7 +134,7 @@ public class CallsRetryOptions {
      * Sets maxAttempts.
      * <p>
      * Field description:
-     * Specifies the maximum number of retry attempts.
+     * Defines the maximum number of retry attempts. The maximum value is &#x60;4&#x60;. If a value higher than &#x60;4&#x60; is entered, it will be set to &#x60;4&#x60;.
      *
      * @param maxAttempts
      */

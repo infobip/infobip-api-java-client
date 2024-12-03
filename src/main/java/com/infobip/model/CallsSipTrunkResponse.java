@@ -25,6 +25,7 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = CallsProviderSipTrunkResponse.class, name = "PROVIDER"),
     @JsonSubTypes.Type(value = CallsRegisteredSipTrunkResponse.class, name = "REGISTERED"),
     @JsonSubTypes.Type(value = CallsStaticSipTrunkResponse.class, name = "STATIC"),
 })
