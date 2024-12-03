@@ -360,65 +360,65 @@ public class ViberMessageOptions {
         }
         ViberMessageOptions viberMessageOptions = (ViberMessageOptions) o;
         return Objects.equals(this.platform, viberMessageOptions.platform)
-            && Objects.equals(this.validityPeriod, viberMessageOptions.validityPeriod)
-            && Objects.equals(this.deliveryTimeWindow, viberMessageOptions.deliveryTimeWindow)
-            && Objects.equals(this.campaignReferenceId, viberMessageOptions.campaignReferenceId)
-            && Objects.equals(this.smsFailover, viberMessageOptions.smsFailover)
-            && Objects.equals(this.trackingData, viberMessageOptions.trackingData)
-            && Objects.equals(this.label, viberMessageOptions.label)
-            && Objects.equals(this.applySessionRate, viberMessageOptions.applySessionRate)
-            && Objects.equals(this.toPrimaryDeviceOnly, viberMessageOptions.toPrimaryDeviceOnly);
+                && Objects.equals(this.validityPeriod, viberMessageOptions.validityPeriod)
+                && Objects.equals(this.deliveryTimeWindow, viberMessageOptions.deliveryTimeWindow)
+                && Objects.equals(this.campaignReferenceId, viberMessageOptions.campaignReferenceId)
+                && Objects.equals(this.smsFailover, viberMessageOptions.smsFailover)
+                && Objects.equals(this.trackingData, viberMessageOptions.trackingData)
+                && Objects.equals(this.label, viberMessageOptions.label)
+                && Objects.equals(this.applySessionRate, viberMessageOptions.applySessionRate)
+                && Objects.equals(this.toPrimaryDeviceOnly, viberMessageOptions.toPrimaryDeviceOnly);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-            platform,
-            validityPeriod,
-            deliveryTimeWindow,
-            campaignReferenceId,
-            smsFailover,
-            trackingData,
-            label,
-            applySessionRate,
-            toPrimaryDeviceOnly);
+                platform,
+                validityPeriod,
+                deliveryTimeWindow,
+                campaignReferenceId,
+                smsFailover,
+                trackingData,
+                label,
+                applySessionRate,
+                toPrimaryDeviceOnly);
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-            .append("class ViberMessageOptions {")
-            .append(newLine)
-            .append("    platform: ")
-            .append(toIndentedString(platform))
-            .append(newLine)
-            .append("    validityPeriod: ")
-            .append(toIndentedString(validityPeriod))
-            .append(newLine)
-            .append("    deliveryTimeWindow: ")
-            .append(toIndentedString(deliveryTimeWindow))
-            .append(newLine)
-            .append("    campaignReferenceId: ")
-            .append(toIndentedString(campaignReferenceId))
-            .append(newLine)
-            .append("    smsFailover: ")
-            .append(toIndentedString(smsFailover))
-            .append(newLine)
-            .append("    trackingData: ")
-            .append(toIndentedString(trackingData))
-            .append(newLine)
-            .append("    label: ")
-            .append(toIndentedString(label))
-            .append(newLine)
-            .append("    applySessionRate: ")
-            .append(toIndentedString(applySessionRate))
-            .append(newLine)
-            .append("    toPrimaryDeviceOnly: ")
-            .append(toIndentedString(toPrimaryDeviceOnly))
-            .append(newLine)
-            .append("}")
-            .toString();
+                .append("class ViberMessageOptions {")
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
+                .append(newLine)
+                .append("    validityPeriod: ")
+                .append(toIndentedString(validityPeriod))
+                .append(newLine)
+                .append("    deliveryTimeWindow: ")
+                .append(toIndentedString(deliveryTimeWindow))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
+                .append(newLine)
+                .append("    smsFailover: ")
+                .append(toIndentedString(smsFailover))
+                .append(newLine)
+                .append("    trackingData: ")
+                .append(toIndentedString(trackingData))
+                .append(newLine)
+                .append("    label: ")
+                .append(toIndentedString(label))
+                .append(newLine)
+                .append("    applySessionRate: ")
+                .append(toIndentedString(applySessionRate))
+                .append(newLine)
+                .append("    toPrimaryDeviceOnly: ")
+                .append(toIndentedString(toPrimaryDeviceOnly))
+                .append(newLine)
+                .append("}")
+                .toString();
     }
 
     private String toIndentedString(Object o) {

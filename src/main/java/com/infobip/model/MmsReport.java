@@ -589,90 +589,90 @@ public class MmsReport {
         }
         MmsReport mmsReport = (MmsReport) o;
         return Objects.equals(this.bulkId, mmsReport.bulkId)
-            && Objects.equals(this.messageId, mmsReport.messageId)
-            && Objects.equals(this.to, mmsReport.to)
-            && Objects.equals(this.from, mmsReport.from)
-            && Objects.equals(this.sentAt, mmsReport.sentAt)
-            && Objects.equals(this.doneAt, mmsReport.doneAt)
-            && Objects.equals(this.mmsCount, mmsReport.mmsCount)
-            && Objects.equals(this.mccMnc, mmsReport.mccMnc)
-            && Objects.equals(this.callbackData, mmsReport.callbackData)
-            && Objects.equals(this.price, mmsReport.price)
-            && Objects.equals(this.status, mmsReport.status)
-            && Objects.equals(this.error, mmsReport.error)
-            && Objects.equals(this.entityId, mmsReport.entityId)
-            && Objects.equals(this.applicationId, mmsReport.applicationId);
+                && Objects.equals(this.messageId, mmsReport.messageId)
+                && Objects.equals(this.to, mmsReport.to)
+                && Objects.equals(this.from, mmsReport.from)
+                && Objects.equals(this.sentAt, mmsReport.sentAt)
+                && Objects.equals(this.doneAt, mmsReport.doneAt)
+                && Objects.equals(this.mmsCount, mmsReport.mmsCount)
+                && Objects.equals(this.mccMnc, mmsReport.mccMnc)
+                && Objects.equals(this.callbackData, mmsReport.callbackData)
+                && Objects.equals(this.price, mmsReport.price)
+                && Objects.equals(this.status, mmsReport.status)
+                && Objects.equals(this.error, mmsReport.error)
+                && Objects.equals(this.entityId, mmsReport.entityId)
+                && Objects.equals(this.applicationId, mmsReport.applicationId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-            bulkId,
-            messageId,
-            to,
-            from,
-            sentAt,
-            doneAt,
-            mmsCount,
-            mccMnc,
-            callbackData,
-            price,
-            status,
-            error,
-            entityId,
-            applicationId);
+                bulkId,
+                messageId,
+                to,
+                from,
+                sentAt,
+                doneAt,
+                mmsCount,
+                mccMnc,
+                callbackData,
+                price,
+                status,
+                error,
+                entityId,
+                applicationId);
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-            .append("class MmsReport {")
-            .append(newLine)
-            .append("    bulkId: ")
-            .append(toIndentedString(bulkId))
-            .append(newLine)
-            .append("    messageId: ")
-            .append(toIndentedString(messageId))
-            .append(newLine)
-            .append("    to: ")
-            .append(toIndentedString(to))
-            .append(newLine)
-            .append("    from: ")
-            .append(toIndentedString(from))
-            .append(newLine)
-            .append("    sentAt: ")
-            .append(toIndentedString(sentAt))
-            .append(newLine)
-            .append("    doneAt: ")
-            .append(toIndentedString(doneAt))
-            .append(newLine)
-            .append("    mmsCount: ")
-            .append(toIndentedString(mmsCount))
-            .append(newLine)
-            .append("    mccMnc: ")
-            .append(toIndentedString(mccMnc))
-            .append(newLine)
-            .append("    callbackData: ")
-            .append(toIndentedString(callbackData))
-            .append(newLine)
-            .append("    price: ")
-            .append(toIndentedString(price))
-            .append(newLine)
-            .append("    status: ")
-            .append(toIndentedString(status))
-            .append(newLine)
-            .append("    error: ")
-            .append(toIndentedString(error))
-            .append(newLine)
-            .append("    entityId: ")
-            .append(toIndentedString(entityId))
-            .append(newLine)
-            .append("    applicationId: ")
-            .append(toIndentedString(applicationId))
-            .append(newLine)
-            .append("}")
-            .toString();
+                .append("class MmsReport {")
+                .append(newLine)
+                .append("    bulkId: ")
+                .append(toIndentedString(bulkId))
+                .append(newLine)
+                .append("    messageId: ")
+                .append(toIndentedString(messageId))
+                .append(newLine)
+                .append("    to: ")
+                .append(toIndentedString(to))
+                .append(newLine)
+                .append("    from: ")
+                .append(toIndentedString(from))
+                .append(newLine)
+                .append("    sentAt: ")
+                .append(toIndentedString(sentAt))
+                .append(newLine)
+                .append("    doneAt: ")
+                .append(toIndentedString(doneAt))
+                .append(newLine)
+                .append("    mmsCount: ")
+                .append(toIndentedString(mmsCount))
+                .append(newLine)
+                .append("    mccMnc: ")
+                .append(toIndentedString(mccMnc))
+                .append(newLine)
+                .append("    callbackData: ")
+                .append(toIndentedString(callbackData))
+                .append(newLine)
+                .append("    price: ")
+                .append(toIndentedString(price))
+                .append(newLine)
+                .append("    status: ")
+                .append(toIndentedString(status))
+                .append(newLine)
+                .append("    error: ")
+                .append(toIndentedString(error))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("}")
+                .toString();
     }
 
     private String toIndentedString(Object o) {

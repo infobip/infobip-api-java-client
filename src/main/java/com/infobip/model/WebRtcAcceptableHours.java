@@ -93,7 +93,7 @@ public class WebRtcAcceptableHours {
         }
         WebRtcAcceptableHours webRtcAcceptableHours = (WebRtcAcceptableHours) o;
         return Objects.equals(this.start, webRtcAcceptableHours.start)
-            && Objects.equals(this.end, webRtcAcceptableHours.end);
+                && Objects.equals(this.end, webRtcAcceptableHours.end);
     }
 
     @Override
@@ -105,16 +105,16 @@ public class WebRtcAcceptableHours {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-            .append("class WebRtcAcceptableHours {")
-            .append(newLine)
-            .append("    start: ")
-            .append(toIndentedString(start))
-            .append(newLine)
-            .append("    end: ")
-            .append(toIndentedString(end))
-            .append(newLine)
-            .append("}")
-            .toString();
+                .append("class WebRtcAcceptableHours {")
+                .append(newLine)
+                .append("    start: ")
+                .append(toIndentedString(start))
+                .append(newLine)
+                .append("    end: ")
+                .append(toIndentedString(end))
+                .append(newLine)
+                .append("}")
+                .toString();
     }
 
     private String toIndentedString(Object o) {
