@@ -31,6 +31,8 @@ public class EmailWebhookTrackReport {
 
     private String bulkId;
 
+    private String callbackData;
+
     private EmailWebhookRecipientInfo recipientInfo;
 
     private EmailWebhookGeoLocation geoLocation;
@@ -159,7 +161,7 @@ public class EmailWebhookTrackReport {
      * Sets url.
      * <p>
      * Field description:
-     * The link the recipient has clicked. This attribute will only be present only if the event is of the type &#x60;CLICKED&#x60;.
+     * The link the recipient has clicked. This attribute will only be present if the event is of the type &#x60;CLICKED&#x60;.
      *
      * @param url
      * @return This {@link EmailWebhookTrackReport instance}.
@@ -173,7 +175,7 @@ public class EmailWebhookTrackReport {
      * Returns url.
      * <p>
      * Field description:
-     * The link the recipient has clicked. This attribute will only be present only if the event is of the type &#x60;CLICKED&#x60;.
+     * The link the recipient has clicked. This attribute will only be present if the event is of the type &#x60;CLICKED&#x60;.
      *
      * @return url
      */
@@ -186,7 +188,7 @@ public class EmailWebhookTrackReport {
      * Sets url.
      * <p>
      * Field description:
-     * The link the recipient has clicked. This attribute will only be present only if the event is of the type &#x60;CLICKED&#x60;.
+     * The link the recipient has clicked. This attribute will only be present if the event is of the type &#x60;CLICKED&#x60;.
      *
      * @param url
      */
@@ -316,6 +318,46 @@ public class EmailWebhookTrackReport {
     }
 
     /**
+     * Sets callbackData.
+     * <p>
+     * Field description:
+     * The callback data sent through the callbackData field in your fully featured Email message.
+     *
+     * @param callbackData
+     * @return This {@link EmailWebhookTrackReport instance}.
+     */
+    public EmailWebhookTrackReport callbackData(String callbackData) {
+        this.callbackData = callbackData;
+        return this;
+    }
+
+    /**
+     * Returns callbackData.
+     * <p>
+     * Field description:
+     * The callback data sent through the callbackData field in your fully featured Email message.
+     *
+     * @return callbackData
+     */
+    @JsonProperty("callbackData")
+    public String getCallbackData() {
+        return callbackData;
+    }
+
+    /**
+     * Sets callbackData.
+     * <p>
+     * Field description:
+     * The callback data sent through the callbackData field in your fully featured Email message.
+     *
+     * @param callbackData
+     */
+    @JsonProperty("callbackData")
+    public void setCallbackData(String callbackData) {
+        this.callbackData = callbackData;
+    }
+
+    /**
      * Sets recipientInfo.
      *
      * @param recipientInfo
@@ -393,6 +435,7 @@ public class EmailWebhookTrackReport {
                 && Objects.equals(this.sendDateTime, emailWebhookTrackReport.sendDateTime)
                 && Objects.equals(this.messageId, emailWebhookTrackReport.messageId)
                 && Objects.equals(this.bulkId, emailWebhookTrackReport.bulkId)
+                && Objects.equals(this.callbackData, emailWebhookTrackReport.callbackData)
                 && Objects.equals(this.recipientInfo, emailWebhookTrackReport.recipientInfo)
                 && Objects.equals(this.geoLocation, emailWebhookTrackReport.geoLocation);
     }
@@ -400,7 +443,16 @@ public class EmailWebhookTrackReport {
     @Override
     public int hashCode() {
         return Objects.hash(
-                notificationType, domain, recipient, url, sendDateTime, messageId, bulkId, recipientInfo, geoLocation);
+                notificationType,
+                domain,
+                recipient,
+                url,
+                sendDateTime,
+                messageId,
+                bulkId,
+                callbackData,
+                recipientInfo,
+                geoLocation);
     }
 
     @Override
@@ -429,6 +481,9 @@ public class EmailWebhookTrackReport {
                 .append(newLine)
                 .append("    bulkId: ")
                 .append(toIndentedString(bulkId))
+                .append(newLine)
+                .append("    callbackData: ")
+                .append(toIndentedString(callbackData))
                 .append(newLine)
                 .append("    recipientInfo: ")
                 .append(toIndentedString(recipientInfo))

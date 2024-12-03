@@ -22,7 +22,7 @@ public class MmsAdvancedMessage {
 
     private String callbackData;
 
-    private MmsDeliveryTimeWindow deliveryTimeWindow;
+    private DeliveryTimeWindow deliveryTimeWindow;
 
     private List<MmsDestination> destinations = new ArrayList<>();
 
@@ -92,7 +92,7 @@ public class MmsAdvancedMessage {
      * @param deliveryTimeWindow
      * @return This {@link MmsAdvancedMessage instance}.
      */
-    public MmsAdvancedMessage deliveryTimeWindow(MmsDeliveryTimeWindow deliveryTimeWindow) {
+    public MmsAdvancedMessage deliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
         return this;
     }
@@ -103,7 +103,7 @@ public class MmsAdvancedMessage {
      * @return deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public MmsDeliveryTimeWindow getDeliveryTimeWindow() {
+    public DeliveryTimeWindow getDeliveryTimeWindow() {
         return deliveryTimeWindow;
     }
 
@@ -113,7 +113,7 @@ public class MmsAdvancedMessage {
      * @param deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public void setDeliveryTimeWindow(MmsDeliveryTimeWindow deliveryTimeWindow) {
+    public void setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
     }
 
@@ -480,6 +480,9 @@ public class MmsAdvancedMessage {
 
     /**
      * Sets title.
+     * <p>
+     * Field description:
+     * Message title.
      *
      * @param title
      * @return This {@link MmsAdvancedMessage instance}.
@@ -491,6 +494,9 @@ public class MmsAdvancedMessage {
 
     /**
      * Returns title.
+     * <p>
+     * Field description:
+     * Message title.
      *
      * @return title
      */
@@ -501,6 +507,9 @@ public class MmsAdvancedMessage {
 
     /**
      * Sets title.
+     * <p>
+     * Field description:
+     * Message title.
      *
      * @param title
      */
@@ -599,85 +608,85 @@ public class MmsAdvancedMessage {
         }
         MmsAdvancedMessage mmsAdvancedMessage = (MmsAdvancedMessage) o;
         return Objects.equals(this.callbackData, mmsAdvancedMessage.callbackData)
-                && Objects.equals(this.deliveryTimeWindow, mmsAdvancedMessage.deliveryTimeWindow)
-                && Objects.equals(this.destinations, mmsAdvancedMessage.destinations)
-                && Objects.equals(this.from, mmsAdvancedMessage.from)
-                && Objects.equals(this.intermediateReport, mmsAdvancedMessage.intermediateReport)
-                && Objects.equals(this.notifyUrl, mmsAdvancedMessage.notifyUrl)
-                && Objects.equals(this.regional, mmsAdvancedMessage.regional)
-                && Objects.equals(this.sendAt, mmsAdvancedMessage.sendAt)
-                && Objects.equals(this.messageSegments, mmsAdvancedMessage.messageSegments)
-                && Objects.equals(this.validityPeriod, mmsAdvancedMessage.validityPeriod)
-                && Objects.equals(this.title, mmsAdvancedMessage.title)
-                && Objects.equals(this.entityId, mmsAdvancedMessage.entityId)
-                && Objects.equals(this.applicationId, mmsAdvancedMessage.applicationId);
+            && Objects.equals(this.deliveryTimeWindow, mmsAdvancedMessage.deliveryTimeWindow)
+            && Objects.equals(this.destinations, mmsAdvancedMessage.destinations)
+            && Objects.equals(this.from, mmsAdvancedMessage.from)
+            && Objects.equals(this.intermediateReport, mmsAdvancedMessage.intermediateReport)
+            && Objects.equals(this.notifyUrl, mmsAdvancedMessage.notifyUrl)
+            && Objects.equals(this.regional, mmsAdvancedMessage.regional)
+            && Objects.equals(this.sendAt, mmsAdvancedMessage.sendAt)
+            && Objects.equals(this.messageSegments, mmsAdvancedMessage.messageSegments)
+            && Objects.equals(this.validityPeriod, mmsAdvancedMessage.validityPeriod)
+            && Objects.equals(this.title, mmsAdvancedMessage.title)
+            && Objects.equals(this.entityId, mmsAdvancedMessage.entityId)
+            && Objects.equals(this.applicationId, mmsAdvancedMessage.applicationId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                callbackData,
-                deliveryTimeWindow,
-                destinations,
-                from,
-                intermediateReport,
-                notifyUrl,
-                regional,
-                sendAt,
-                messageSegments,
-                validityPeriod,
-                title,
-                entityId,
-                applicationId);
+            callbackData,
+            deliveryTimeWindow,
+            destinations,
+            from,
+            intermediateReport,
+            notifyUrl,
+            regional,
+            sendAt,
+            messageSegments,
+            validityPeriod,
+            title,
+            entityId,
+            applicationId);
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class MmsAdvancedMessage {")
-                .append(newLine)
-                .append("    callbackData: ")
-                .append(toIndentedString(callbackData))
-                .append(newLine)
-                .append("    deliveryTimeWindow: ")
-                .append(toIndentedString(deliveryTimeWindow))
-                .append(newLine)
-                .append("    destinations: ")
-                .append(toIndentedString(destinations))
-                .append(newLine)
-                .append("    from: ")
-                .append(toIndentedString(from))
-                .append(newLine)
-                .append("    intermediateReport: ")
-                .append(toIndentedString(intermediateReport))
-                .append(newLine)
-                .append("    notifyUrl: ")
-                .append(toIndentedString(notifyUrl))
-                .append(newLine)
-                .append("    regional: ")
-                .append(toIndentedString(regional))
-                .append(newLine)
-                .append("    sendAt: ")
-                .append(toIndentedString(sendAt))
-                .append(newLine)
-                .append("    messageSegments: ")
-                .append(toIndentedString(messageSegments))
-                .append(newLine)
-                .append("    validityPeriod: ")
-                .append(toIndentedString(validityPeriod))
-                .append(newLine)
-                .append("    title: ")
-                .append(toIndentedString(title))
-                .append(newLine)
-                .append("    entityId: ")
-                .append(toIndentedString(entityId))
-                .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
-                .append(newLine)
-                .append("}")
-                .toString();
+            .append("class MmsAdvancedMessage {")
+            .append(newLine)
+            .append("    callbackData: ")
+            .append(toIndentedString(callbackData))
+            .append(newLine)
+            .append("    deliveryTimeWindow: ")
+            .append(toIndentedString(deliveryTimeWindow))
+            .append(newLine)
+            .append("    destinations: ")
+            .append(toIndentedString(destinations))
+            .append(newLine)
+            .append("    from: ")
+            .append(toIndentedString(from))
+            .append(newLine)
+            .append("    intermediateReport: ")
+            .append(toIndentedString(intermediateReport))
+            .append(newLine)
+            .append("    notifyUrl: ")
+            .append(toIndentedString(notifyUrl))
+            .append(newLine)
+            .append("    regional: ")
+            .append(toIndentedString(regional))
+            .append(newLine)
+            .append("    sendAt: ")
+            .append(toIndentedString(sendAt))
+            .append(newLine)
+            .append("    messageSegments: ")
+            .append(toIndentedString(messageSegments))
+            .append(newLine)
+            .append("    validityPeriod: ")
+            .append(toIndentedString(validityPeriod))
+            .append(newLine)
+            .append("    title: ")
+            .append(toIndentedString(title))
+            .append(newLine)
+            .append("    entityId: ")
+            .append(toIndentedString(entityId))
+            .append(newLine)
+            .append("    applicationId: ")
+            .append(toIndentedString(applicationId))
+            .append(newLine)
+            .append("}")
+            .toString();
     }
 
     private String toIndentedString(Object o) {

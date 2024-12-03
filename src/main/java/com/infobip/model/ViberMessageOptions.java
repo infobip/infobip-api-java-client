@@ -21,7 +21,9 @@ public class ViberMessageOptions {
 
     private ViberValidityPeriod validityPeriod;
 
-    private ViberDeliveryTimeWindow deliveryTimeWindow;
+    private DeliveryTimeWindow deliveryTimeWindow;
+
+    private String campaignReferenceId;
 
     private ViberDefaultSmsFailover smsFailover;
 
@@ -101,7 +103,7 @@ public class ViberMessageOptions {
      * @param deliveryTimeWindow
      * @return This {@link ViberMessageOptions instance}.
      */
-    public ViberMessageOptions deliveryTimeWindow(ViberDeliveryTimeWindow deliveryTimeWindow) {
+    public ViberMessageOptions deliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
         return this;
     }
@@ -112,7 +114,7 @@ public class ViberMessageOptions {
      * @return deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public ViberDeliveryTimeWindow getDeliveryTimeWindow() {
+    public DeliveryTimeWindow getDeliveryTimeWindow() {
         return deliveryTimeWindow;
     }
 
@@ -122,8 +124,48 @@ public class ViberMessageOptions {
      * @param deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public void setDeliveryTimeWindow(ViberDeliveryTimeWindow deliveryTimeWindow) {
+    public void setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @param campaignReferenceId
+     * @return This {@link ViberMessageOptions instance}.
+     */
+    public ViberMessageOptions campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
     }
 
     /**
@@ -318,60 +360,65 @@ public class ViberMessageOptions {
         }
         ViberMessageOptions viberMessageOptions = (ViberMessageOptions) o;
         return Objects.equals(this.platform, viberMessageOptions.platform)
-                && Objects.equals(this.validityPeriod, viberMessageOptions.validityPeriod)
-                && Objects.equals(this.deliveryTimeWindow, viberMessageOptions.deliveryTimeWindow)
-                && Objects.equals(this.smsFailover, viberMessageOptions.smsFailover)
-                && Objects.equals(this.trackingData, viberMessageOptions.trackingData)
-                && Objects.equals(this.label, viberMessageOptions.label)
-                && Objects.equals(this.applySessionRate, viberMessageOptions.applySessionRate)
-                && Objects.equals(this.toPrimaryDeviceOnly, viberMessageOptions.toPrimaryDeviceOnly);
+            && Objects.equals(this.validityPeriod, viberMessageOptions.validityPeriod)
+            && Objects.equals(this.deliveryTimeWindow, viberMessageOptions.deliveryTimeWindow)
+            && Objects.equals(this.campaignReferenceId, viberMessageOptions.campaignReferenceId)
+            && Objects.equals(this.smsFailover, viberMessageOptions.smsFailover)
+            && Objects.equals(this.trackingData, viberMessageOptions.trackingData)
+            && Objects.equals(this.label, viberMessageOptions.label)
+            && Objects.equals(this.applySessionRate, viberMessageOptions.applySessionRate)
+            && Objects.equals(this.toPrimaryDeviceOnly, viberMessageOptions.toPrimaryDeviceOnly);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                platform,
-                validityPeriod,
-                deliveryTimeWindow,
-                smsFailover,
-                trackingData,
-                label,
-                applySessionRate,
-                toPrimaryDeviceOnly);
+            platform,
+            validityPeriod,
+            deliveryTimeWindow,
+            campaignReferenceId,
+            smsFailover,
+            trackingData,
+            label,
+            applySessionRate,
+            toPrimaryDeviceOnly);
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class ViberMessageOptions {")
-                .append(newLine)
-                .append("    platform: ")
-                .append(toIndentedString(platform))
-                .append(newLine)
-                .append("    validityPeriod: ")
-                .append(toIndentedString(validityPeriod))
-                .append(newLine)
-                .append("    deliveryTimeWindow: ")
-                .append(toIndentedString(deliveryTimeWindow))
-                .append(newLine)
-                .append("    smsFailover: ")
-                .append(toIndentedString(smsFailover))
-                .append(newLine)
-                .append("    trackingData: ")
-                .append(toIndentedString(trackingData))
-                .append(newLine)
-                .append("    label: ")
-                .append(toIndentedString(label))
-                .append(newLine)
-                .append("    applySessionRate: ")
-                .append(toIndentedString(applySessionRate))
-                .append(newLine)
-                .append("    toPrimaryDeviceOnly: ")
-                .append(toIndentedString(toPrimaryDeviceOnly))
-                .append(newLine)
-                .append("}")
-                .toString();
+            .append("class ViberMessageOptions {")
+            .append(newLine)
+            .append("    platform: ")
+            .append(toIndentedString(platform))
+            .append(newLine)
+            .append("    validityPeriod: ")
+            .append(toIndentedString(validityPeriod))
+            .append(newLine)
+            .append("    deliveryTimeWindow: ")
+            .append(toIndentedString(deliveryTimeWindow))
+            .append(newLine)
+            .append("    campaignReferenceId: ")
+            .append(toIndentedString(campaignReferenceId))
+            .append(newLine)
+            .append("    smsFailover: ")
+            .append(toIndentedString(smsFailover))
+            .append(newLine)
+            .append("    trackingData: ")
+            .append(toIndentedString(trackingData))
+            .append(newLine)
+            .append("    label: ")
+            .append(toIndentedString(label))
+            .append(newLine)
+            .append("    applySessionRate: ")
+            .append(toIndentedString(applySessionRate))
+            .append(newLine)
+            .append("    toPrimaryDeviceOnly: ")
+            .append(toIndentedString(toPrimaryDeviceOnly))
+            .append(newLine)
+            .append("}")
+            .toString();
     }
 
     private String toIndentedString(Object o) {

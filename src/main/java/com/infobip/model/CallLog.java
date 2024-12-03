@@ -11,11 +11,7 @@ package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Represents CallLog model.
@@ -48,7 +44,7 @@ public class CallLog {
 
     private List<String> callsConfigurationIds = null;
 
-    private List<String> applicationIds = null;
+    private CallsPlatform platform;
 
     private List<String> conferenceIds = null;
 
@@ -65,6 +61,8 @@ public class CallLog {
     private String dialogId;
 
     private String sender;
+
+    private CallsHangupSource hangupSource;
 
     /**
      * Sets callId.
@@ -574,60 +572,34 @@ public class CallLog {
     }
 
     /**
-     * Sets applicationIds.
-     * <p>
-     * Field description:
-     * IDs of the applications used during the call.
+     * Sets platform.
      *
-     * @param applicationIds
+     * @param platform
      * @return This {@link CallLog instance}.
      */
-    public CallLog applicationIds(List<String> applicationIds) {
-        this.applicationIds = applicationIds;
+    public CallLog platform(CallsPlatform platform) {
+        this.platform = platform;
         return this;
     }
 
     /**
-     * Adds and item into applicationIds.
-     * <p>
-     * Field description:
-     * IDs of the applications used during the call.
+     * Returns platform.
      *
-     * @param applicationIdsItem The item to be added to the list.
-     * @return This {@link CallLog instance}.
+     * @return platform
      */
-    public CallLog addApplicationIdsItem(String applicationIdsItem) {
-        if (this.applicationIds == null) {
-            this.applicationIds = new ArrayList<>();
-        }
-        this.applicationIds.add(applicationIdsItem);
-        return this;
+    @JsonProperty("platform")
+    public CallsPlatform getPlatform() {
+        return platform;
     }
 
     /**
-     * Returns applicationIds.
-     * <p>
-     * Field description:
-     * IDs of the applications used during the call.
+     * Sets platform.
      *
-     * @return applicationIds
+     * @param platform
      */
-    @JsonProperty("applicationIds")
-    public List<String> getApplicationIds() {
-        return applicationIds;
-    }
-
-    /**
-     * Sets applicationIds.
-     * <p>
-     * Field description:
-     * IDs of the applications used during the call.
-     *
-     * @param applicationIds
-     */
-    @JsonProperty("applicationIds")
-    public void setApplicationIds(List<String> applicationIds) {
-        this.applicationIds = applicationIds;
+    @JsonProperty("platform")
+    public void setPlatform(CallsPlatform platform) {
+        this.platform = platform;
     }
 
     /**
@@ -976,6 +948,37 @@ public class CallLog {
         this.sender = sender;
     }
 
+    /**
+     * Sets hangupSource.
+     *
+     * @param hangupSource
+     * @return This {@link CallLog instance}.
+     */
+    public CallLog hangupSource(CallsHangupSource hangupSource) {
+        this.hangupSource = hangupSource;
+        return this;
+    }
+
+    /**
+     * Returns hangupSource.
+     *
+     * @return hangupSource
+     */
+    @JsonProperty("hangupSource")
+    public CallsHangupSource getHangupSource() {
+        return hangupSource;
+    }
+
+    /**
+     * Sets hangupSource.
+     *
+     * @param hangupSource
+     */
+    @JsonProperty("hangupSource")
+    public void setHangupSource(CallsHangupSource hangupSource) {
+        this.hangupSource = hangupSource;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -998,7 +1001,7 @@ public class CallLog {
                 && Objects.equals(this.machineDetection, callLog.machineDetection)
                 && Objects.equals(this.ringDuration, callLog.ringDuration)
                 && Objects.equals(this.callsConfigurationIds, callLog.callsConfigurationIds)
-                && Objects.equals(this.applicationIds, callLog.applicationIds)
+                && Objects.equals(this.platform, callLog.platform)
                 && Objects.equals(this.conferenceIds, callLog.conferenceIds)
                 && Objects.equals(this.duration, callLog.duration)
                 && Objects.equals(this.hasCameraVideo, callLog.hasCameraVideo)
@@ -1006,7 +1009,8 @@ public class CallLog {
                 && Objects.equals(this.errorCode, callLog.errorCode)
                 && Objects.equals(this.customData, callLog.customData)
                 && Objects.equals(this.dialogId, callLog.dialogId)
-                && Objects.equals(this.sender, callLog.sender);
+                && Objects.equals(this.sender, callLog.sender)
+                && Objects.equals(this.hangupSource, callLog.hangupSource);
     }
 
     @Override
@@ -1025,7 +1029,7 @@ public class CallLog {
                 machineDetection,
                 ringDuration,
                 callsConfigurationIds,
-                applicationIds,
+                platform,
                 conferenceIds,
                 duration,
                 hasCameraVideo,
@@ -1033,7 +1037,8 @@ public class CallLog {
                 errorCode,
                 customData,
                 dialogId,
-                sender);
+                sender,
+                hangupSource);
     }
 
     @Override
@@ -1081,8 +1086,8 @@ public class CallLog {
                 .append("    callsConfigurationIds: ")
                 .append(toIndentedString(callsConfigurationIds))
                 .append(newLine)
-                .append("    applicationIds: ")
-                .append(toIndentedString(applicationIds))
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("    conferenceIds: ")
                 .append(toIndentedString(conferenceIds))
@@ -1107,6 +1112,9 @@ public class CallLog {
                 .append(newLine)
                 .append("    sender: ")
                 .append(toIndentedString(sender))
+                .append(newLine)
+                .append("    hangupSource: ")
+                .append(toIndentedString(hangupSource))
                 .append(newLine)
                 .append("}")
                 .toString();

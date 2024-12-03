@@ -19,26 +19,32 @@ import java.util.Objects;
  */
 public class SmsDeliveryResult {
 
-    private List<SmsReport> results = null;
+    private List<SmsDeliveryReport> results = null;
 
     /**
      * Sets results.
+     * <p>
+     * Field description:
+     * Collection of reports, one per every message.
      *
      * @param results
      * @return This {@link SmsDeliveryResult instance}.
      */
-    public SmsDeliveryResult results(List<SmsReport> results) {
+    public SmsDeliveryResult results(List<SmsDeliveryReport> results) {
         this.results = results;
         return this;
     }
 
     /**
      * Adds and item into results.
+     * <p>
+     * Field description:
+     * Collection of reports, one per every message.
      *
      * @param resultsItem The item to be added to the list.
      * @return This {@link SmsDeliveryResult instance}.
      */
-    public SmsDeliveryResult addResultsItem(SmsReport resultsItem) {
+    public SmsDeliveryResult addResultsItem(SmsDeliveryReport resultsItem) {
         if (this.results == null) {
             this.results = new ArrayList<>();
         }
@@ -48,21 +54,27 @@ public class SmsDeliveryResult {
 
     /**
      * Returns results.
+     * <p>
+     * Field description:
+     * Collection of reports, one per every message.
      *
      * @return results
      */
     @JsonProperty("results")
-    public List<SmsReport> getResults() {
+    public List<SmsDeliveryReport> getResults() {
         return results;
     }
 
     /**
      * Sets results.
+     * <p>
+     * Field description:
+     * Collection of reports, one per every message.
      *
      * @param results
      */
     @JsonProperty("results")
-    public void setResults(List<SmsReport> results) {
+    public void setResults(List<SmsDeliveryReport> results) {
         this.results = results;
     }
 

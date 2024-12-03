@@ -20,7 +20,9 @@ public class CallsDialogResponse {
 
     private String id;
 
-    private String applicationId;
+    private String callsConfigurationId;
+
+    private CallsPlatform platform;
 
     private CallsDialogState state;
 
@@ -75,43 +77,74 @@ public class CallsDialogResponse {
     }
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      * @return This {@link CallsDialogResponse instance}.
      */
-    public CallsDialogResponse applicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public CallsDialogResponse callsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
         return this;
     }
 
     /**
-     * Returns applicationId.
+     * Returns callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      *
-     * @return applicationId
+     * @return callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
+    @JsonProperty("callsConfigurationId")
+    public String getCallsConfigurationId() {
+        return callsConfigurationId;
     }
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("callsConfigurationId")
+    public void setCallsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     * @return This {@link CallsDialogResponse instance}.
+     */
+    public CallsDialogResponse platform(CallsPlatform platform) {
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * Returns platform.
+     *
+     * @return platform
+     */
+    @JsonProperty("platform")
+    public CallsPlatform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     */
+    @JsonProperty("platform")
+    public void setPlatform(CallsPlatform platform) {
+        this.platform = platform;
     }
 
     /**
@@ -337,7 +370,8 @@ public class CallsDialogResponse {
         }
         CallsDialogResponse callsDialogResponse = (CallsDialogResponse) o;
         return Objects.equals(this.id, callsDialogResponse.id)
-                && Objects.equals(this.applicationId, callsDialogResponse.applicationId)
+                && Objects.equals(this.callsConfigurationId, callsDialogResponse.callsConfigurationId)
+                && Objects.equals(this.platform, callsDialogResponse.platform)
                 && Objects.equals(this.state, callsDialogResponse.state)
                 && Objects.equals(this.startTime, callsDialogResponse.startTime)
                 && Objects.equals(this.establishTime, callsDialogResponse.establishTime)
@@ -348,7 +382,8 @@ public class CallsDialogResponse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, applicationId, state, startTime, establishTime, endTime, parentCall, childCall);
+        return Objects.hash(
+                id, callsConfigurationId, platform, state, startTime, establishTime, endTime, parentCall, childCall);
     }
 
     @Override
@@ -360,8 +395,11 @@ public class CallsDialogResponse {
                 .append("    id: ")
                 .append(toIndentedString(id))
                 .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    callsConfigurationId: ")
+                .append(toIndentedString(callsConfigurationId))
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("    state: ")
                 .append(toIndentedString(state))

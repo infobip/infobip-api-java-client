@@ -21,7 +21,9 @@ public class CallBulkRequest {
 
     private String bulkId;
 
-    private String applicationId;
+    private String callsConfigurationId;
+
+    private CallsPlatform platform;
 
     private List<CallsBulkItem> items = new ArrayList<>();
 
@@ -66,49 +68,80 @@ public class CallBulkRequest {
     }
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      * <p>
      * The field is required.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      * @return This {@link CallBulkRequest instance}.
      */
-    public CallBulkRequest applicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public CallBulkRequest callsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
         return this;
     }
 
     /**
-     * Returns applicationId.
+     * Returns callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      * <p>
      * The field is required.
      *
-     * @return applicationId
+     * @return callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
+    @JsonProperty("callsConfigurationId")
+    public String getCallsConfigurationId() {
+        return callsConfigurationId;
     }
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      * <p>
      * The field is required.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("callsConfigurationId")
+    public void setCallsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     * @return This {@link CallBulkRequest instance}.
+     */
+    public CallBulkRequest platform(CallsPlatform platform) {
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * Returns platform.
+     *
+     * @return platform
+     */
+    @JsonProperty("platform")
+    public CallsPlatform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     */
+    @JsonProperty("platform")
+    public void setPlatform(CallsPlatform platform) {
+        this.platform = platform;
     }
 
     /**
@@ -186,13 +219,14 @@ public class CallBulkRequest {
         }
         CallBulkRequest callBulkRequest = (CallBulkRequest) o;
         return Objects.equals(this.bulkId, callBulkRequest.bulkId)
-                && Objects.equals(this.applicationId, callBulkRequest.applicationId)
+                && Objects.equals(this.callsConfigurationId, callBulkRequest.callsConfigurationId)
+                && Objects.equals(this.platform, callBulkRequest.platform)
                 && Objects.equals(this.items, callBulkRequest.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bulkId, applicationId, items);
+        return Objects.hash(bulkId, callsConfigurationId, platform, items);
     }
 
     @Override
@@ -204,8 +238,11 @@ public class CallBulkRequest {
                 .append("    bulkId: ")
                 .append(toIndentedString(bulkId))
                 .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    callsConfigurationId: ")
+                .append(toIndentedString(callsConfigurationId))
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("    items: ")
                 .append(toIndentedString(items))

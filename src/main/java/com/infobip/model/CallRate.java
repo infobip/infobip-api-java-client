@@ -9,9 +9,7 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
@@ -21,43 +19,7 @@ public class CallRate {
 
     private Integer maxCalls;
 
-    /**
-     * Defines a time unit used for calculating call creation rate.
-     */
-    public enum TimeUnitEnum {
-        SECONDS("SECONDS"),
-        MINUTES("MINUTES"),
-        HOURS("HOURS"),
-        DAYS("DAYS");
-
-        private String value;
-
-        TimeUnitEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TimeUnitEnum fromValue(String value) {
-            for (TimeUnitEnum enumElement : TimeUnitEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private TimeUnitEnum timeUnit;
+    private CallsTimeUnit timeUnit;
 
     /**
      * Sets maxCalls.
@@ -101,41 +63,32 @@ public class CallRate {
 
     /**
      * Sets timeUnit.
-     * <p>
-     * Field description:
-     * Defines a time unit used for calculating call creation rate.
      *
      * @param timeUnit
      * @return This {@link CallRate instance}.
      */
-    public CallRate timeUnit(TimeUnitEnum timeUnit) {
+    public CallRate timeUnit(CallsTimeUnit timeUnit) {
         this.timeUnit = timeUnit;
         return this;
     }
 
     /**
      * Returns timeUnit.
-     * <p>
-     * Field description:
-     * Defines a time unit used for calculating call creation rate.
      *
      * @return timeUnit
      */
     @JsonProperty("timeUnit")
-    public TimeUnitEnum getTimeUnit() {
+    public CallsTimeUnit getTimeUnit() {
         return timeUnit;
     }
 
     /**
      * Sets timeUnit.
-     * <p>
-     * Field description:
-     * Defines a time unit used for calculating call creation rate.
      *
      * @param timeUnit
      */
     @JsonProperty("timeUnit")
-    public void setTimeUnit(TimeUnitEnum timeUnit) {
+    public void setTimeUnit(CallsTimeUnit timeUnit) {
         this.timeUnit = timeUnit;
     }
 

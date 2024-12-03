@@ -75,7 +75,7 @@ public class CallRoutingRouteRequest {
      * Sets criteria.
      * <p>
      * Field description:
-     * List of criteria that should match a route. For a route to match, any criterion should be met.
+     * List of criteria used to match a route. For a route to match, any criterion should be met.
      *
      * @param criteria
      * @return This {@link CallRoutingRouteRequest instance}.
@@ -89,7 +89,7 @@ public class CallRoutingRouteRequest {
      * Adds and item into criteria.
      * <p>
      * Field description:
-     * List of criteria that should match a route. For a route to match, any criterion should be met.
+     * List of criteria used to match a route. For a route to match, any criterion should be met.
      *
      * @param criteriaItem The item to be added to the list.
      * @return This {@link CallRoutingRouteRequest instance}.
@@ -106,7 +106,7 @@ public class CallRoutingRouteRequest {
      * Returns criteria.
      * <p>
      * Field description:
-     * List of criteria that should match a route. For a route to match, any criterion should be met.
+     * List of criteria used to match a route. For a route to match, any criterion should be met.
      *
      * @return criteria
      */
@@ -119,7 +119,7 @@ public class CallRoutingRouteRequest {
      * Sets criteria.
      * <p>
      * Field description:
-     * List of criteria that should match a route. For a route to match, any criterion should be met.
+     * List of criteria used to match a route. For a route to match, any criterion should be met.
      *
      * @param criteria
      */

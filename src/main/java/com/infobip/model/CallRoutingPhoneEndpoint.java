@@ -30,7 +30,7 @@ public class CallRoutingPhoneEndpoint extends CallRoutingEndpoint {
      * Sets phoneNumber.
      * <p>
      * Field description:
-     * Phone number. Defaults to &#x60;to&#x60; value used in inbound call.
+     * Phone number in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Defaults to &#x60;to&#x60; value used in inbound call.
      *
      * @param phoneNumber
      * @return This {@link CallRoutingPhoneEndpoint instance}.
@@ -44,7 +44,7 @@ public class CallRoutingPhoneEndpoint extends CallRoutingEndpoint {
      * Returns phoneNumber.
      * <p>
      * Field description:
-     * Phone number. Defaults to &#x60;to&#x60; value used in inbound call.
+     * Phone number in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Defaults to &#x60;to&#x60; value used in inbound call.
      *
      * @return phoneNumber
      */
@@ -57,7 +57,7 @@ public class CallRoutingPhoneEndpoint extends CallRoutingEndpoint {
      * Sets phoneNumber.
      * <p>
      * Field description:
-     * Phone number. Defaults to &#x60;to&#x60; value used in inbound call.
+     * Phone number in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Defaults to &#x60;to&#x60; value used in inbound call.
      *
      * @param phoneNumber
      */

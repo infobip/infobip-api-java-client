@@ -9,9 +9,7 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
@@ -19,7 +17,9 @@ import java.util.Objects;
  */
 public class CallsBulkCall {
 
-    private String applicationId;
+    private String callsConfigurationId;
+
+    private CallsPlatform platform;
 
     private String callId;
 
@@ -29,84 +29,79 @@ public class CallsBulkCall {
 
     private CallsBulkEndpoint endpoint;
 
-    /**
-     * Action status.
-     */
-    public enum StatusEnum {
-        PENDING("PENDING"),
-        IN_PROGRESS("IN_PROGRESS"),
-        COMPLETED("COMPLETED"),
-        FAILED("FAILED");
-
-        private String value;
-
-        StatusEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static StatusEnum fromValue(String value) {
-            for (StatusEnum enumElement : StatusEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private StatusEnum status;
+    private CallsActionStatus status;
 
     private String reason;
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      * @return This {@link CallsBulkCall instance}.
      */
-    public CallsBulkCall applicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public CallsBulkCall callsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
         return this;
     }
 
     /**
-     * Returns applicationId.
+     * Returns callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      *
-     * @return applicationId
+     * @return callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
+    @JsonProperty("callsConfigurationId")
+    public String getCallsConfigurationId() {
+        return callsConfigurationId;
     }
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("callsConfigurationId")
+    public void setCallsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     * @return This {@link CallsBulkCall instance}.
+     */
+    public CallsBulkCall platform(CallsPlatform platform) {
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * Returns platform.
+     *
+     * @return platform
+     */
+    @JsonProperty("platform")
+    public CallsPlatform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     */
+    @JsonProperty("platform")
+    public void setPlatform(CallsPlatform platform) {
+        this.platform = platform;
     }
 
     /**
@@ -262,41 +257,32 @@ public class CallsBulkCall {
 
     /**
      * Sets status.
-     * <p>
-     * Field description:
-     * Action status.
      *
      * @param status
      * @return This {@link CallsBulkCall instance}.
      */
-    public CallsBulkCall status(StatusEnum status) {
+    public CallsBulkCall status(CallsActionStatus status) {
         this.status = status;
         return this;
     }
 
     /**
      * Returns status.
-     * <p>
-     * Field description:
-     * Action status.
      *
      * @return status
      */
     @JsonProperty("status")
-    public StatusEnum getStatus() {
+    public CallsActionStatus getStatus() {
         return status;
     }
 
     /**
      * Sets status.
-     * <p>
-     * Field description:
-     * Action status.
      *
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(StatusEnum status) {
+    public void setStatus(CallsActionStatus status) {
         this.status = status;
     }
 
@@ -349,7 +335,8 @@ public class CallsBulkCall {
             return false;
         }
         CallsBulkCall callsBulkCall = (CallsBulkCall) o;
-        return Objects.equals(this.applicationId, callsBulkCall.applicationId)
+        return Objects.equals(this.callsConfigurationId, callsBulkCall.callsConfigurationId)
+                && Objects.equals(this.platform, callsBulkCall.platform)
                 && Objects.equals(this.callId, callsBulkCall.callId)
                 && Objects.equals(this.externalId, callsBulkCall.externalId)
                 && Objects.equals(this.from, callsBulkCall.from)
@@ -360,7 +347,7 @@ public class CallsBulkCall {
 
     @Override
     public int hashCode() {
-        return Objects.hash(applicationId, callId, externalId, from, endpoint, status, reason);
+        return Objects.hash(callsConfigurationId, platform, callId, externalId, from, endpoint, status, reason);
     }
 
     @Override
@@ -369,8 +356,11 @@ public class CallsBulkCall {
         return new StringBuilder()
                 .append("class CallsBulkCall {")
                 .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    callsConfigurationId: ")
+                .append(toIndentedString(callsConfigurationId))
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("    callId: ")
                 .append(toIndentedString(callId))

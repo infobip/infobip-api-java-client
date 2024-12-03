@@ -17,9 +17,9 @@ import java.util.Objects;
  */
 public class WebRtcAcceptableHours {
 
-    private WebRtcTimeOfDay start;
+    private DeliveryTime start;
 
-    private WebRtcTimeOfDay end;
+    private DeliveryTime end;
 
     /**
      * Sets start.
@@ -27,7 +27,7 @@ public class WebRtcAcceptableHours {
      * @param start
      * @return This {@link WebRtcAcceptableHours instance}.
      */
-    public WebRtcAcceptableHours start(WebRtcTimeOfDay start) {
+    public WebRtcAcceptableHours start(DeliveryTime start) {
         this.start = start;
         return this;
     }
@@ -38,7 +38,7 @@ public class WebRtcAcceptableHours {
      * @return start
      */
     @JsonProperty("start")
-    public WebRtcTimeOfDay getStart() {
+    public DeliveryTime getStart() {
         return start;
     }
 
@@ -48,7 +48,7 @@ public class WebRtcAcceptableHours {
      * @param start
      */
     @JsonProperty("start")
-    public void setStart(WebRtcTimeOfDay start) {
+    public void setStart(DeliveryTime start) {
         this.start = start;
     }
 
@@ -58,7 +58,7 @@ public class WebRtcAcceptableHours {
      * @param end
      * @return This {@link WebRtcAcceptableHours instance}.
      */
-    public WebRtcAcceptableHours end(WebRtcTimeOfDay end) {
+    public WebRtcAcceptableHours end(DeliveryTime end) {
         this.end = end;
         return this;
     }
@@ -69,7 +69,7 @@ public class WebRtcAcceptableHours {
      * @return end
      */
     @JsonProperty("end")
-    public WebRtcTimeOfDay getEnd() {
+    public DeliveryTime getEnd() {
         return end;
     }
 
@@ -79,7 +79,7 @@ public class WebRtcAcceptableHours {
      * @param end
      */
     @JsonProperty("end")
-    public void setEnd(WebRtcTimeOfDay end) {
+    public void setEnd(DeliveryTime end) {
         this.end = end;
     }
 
@@ -93,7 +93,7 @@ public class WebRtcAcceptableHours {
         }
         WebRtcAcceptableHours webRtcAcceptableHours = (WebRtcAcceptableHours) o;
         return Objects.equals(this.start, webRtcAcceptableHours.start)
-                && Objects.equals(this.end, webRtcAcceptableHours.end);
+            && Objects.equals(this.end, webRtcAcceptableHours.end);
     }
 
     @Override
@@ -105,16 +105,16 @@ public class WebRtcAcceptableHours {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class WebRtcAcceptableHours {")
-                .append(newLine)
-                .append("    start: ")
-                .append(toIndentedString(start))
-                .append(newLine)
-                .append("    end: ")
-                .append(toIndentedString(end))
-                .append(newLine)
-                .append("}")
-                .toString();
+            .append("class WebRtcAcceptableHours {")
+            .append(newLine)
+            .append("    start: ")
+            .append(toIndentedString(start))
+            .append(newLine)
+            .append("    end: ")
+            .append(toIndentedString(end))
+            .append(newLine)
+            .append("}")
+            .toString();
     }
 
     private String toIndentedString(Object o) {

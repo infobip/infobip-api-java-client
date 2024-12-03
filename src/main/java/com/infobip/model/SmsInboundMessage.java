@@ -22,6 +22,8 @@ public class SmsInboundMessage {
 
     private String callbackData;
 
+    private String campaignReferenceId;
+
     private String cleanText;
 
     private String entityId;
@@ -120,6 +122,46 @@ public class SmsInboundMessage {
     @JsonProperty("callbackData")
     public void setCallbackData(String callbackData) {
         this.callbackData = callbackData;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @param campaignReferenceId
+     * @return This {@link SmsInboundMessage instance}.
+     */
+    public SmsInboundMessage campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
     }
 
     /**
@@ -524,6 +566,7 @@ public class SmsInboundMessage {
         SmsInboundMessage smsInboundMessage = (SmsInboundMessage) o;
         return Objects.equals(this.applicationId, smsInboundMessage.applicationId)
                 && Objects.equals(this.callbackData, smsInboundMessage.callbackData)
+                && Objects.equals(this.campaignReferenceId, smsInboundMessage.campaignReferenceId)
                 && Objects.equals(this.cleanText, smsInboundMessage.cleanText)
                 && Objects.equals(this.entityId, smsInboundMessage.entityId)
                 && Objects.equals(this.from, smsInboundMessage.from)
@@ -541,6 +584,7 @@ public class SmsInboundMessage {
         return Objects.hash(
                 applicationId,
                 callbackData,
+                campaignReferenceId,
                 cleanText,
                 entityId,
                 from,
@@ -564,6 +608,9 @@ public class SmsInboundMessage {
                 .append(newLine)
                 .append("    callbackData: ")
                 .append(toIndentedString(callbackData))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
                 .append(newLine)
                 .append("    cleanText: ")
                 .append(toIndentedString(cleanText))

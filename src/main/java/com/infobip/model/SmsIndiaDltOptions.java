@@ -21,6 +21,8 @@ public class SmsIndiaDltOptions {
 
     private String principalEntityId;
 
+    private String telemarketerId;
+
     /**
      * Sets contentTemplateId.
      * <p>
@@ -107,6 +109,46 @@ public class SmsIndiaDltOptions {
         this.principalEntityId = principalEntityId;
     }
 
+    /**
+     * Sets telemarketerId.
+     * <p>
+     * Field description:
+     * Your assigned Telemarketer ID. (required for Aggregators)
+     *
+     * @param telemarketerId
+     * @return This {@link SmsIndiaDltOptions instance}.
+     */
+    public SmsIndiaDltOptions telemarketerId(String telemarketerId) {
+        this.telemarketerId = telemarketerId;
+        return this;
+    }
+
+    /**
+     * Returns telemarketerId.
+     * <p>
+     * Field description:
+     * Your assigned Telemarketer ID. (required for Aggregators)
+     *
+     * @return telemarketerId
+     */
+    @JsonProperty("telemarketerId")
+    public String getTelemarketerId() {
+        return telemarketerId;
+    }
+
+    /**
+     * Sets telemarketerId.
+     * <p>
+     * Field description:
+     * Your assigned Telemarketer ID. (required for Aggregators)
+     *
+     * @param telemarketerId
+     */
+    @JsonProperty("telemarketerId")
+    public void setTelemarketerId(String telemarketerId) {
+        this.telemarketerId = telemarketerId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -117,12 +159,13 @@ public class SmsIndiaDltOptions {
         }
         SmsIndiaDltOptions smsIndiaDltOptions = (SmsIndiaDltOptions) o;
         return Objects.equals(this.contentTemplateId, smsIndiaDltOptions.contentTemplateId)
-                && Objects.equals(this.principalEntityId, smsIndiaDltOptions.principalEntityId);
+                && Objects.equals(this.principalEntityId, smsIndiaDltOptions.principalEntityId)
+                && Objects.equals(this.telemarketerId, smsIndiaDltOptions.telemarketerId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(contentTemplateId, principalEntityId);
+        return Objects.hash(contentTemplateId, principalEntityId, telemarketerId);
     }
 
     @Override
@@ -136,6 +179,9 @@ public class SmsIndiaDltOptions {
                 .append(newLine)
                 .append("    principalEntityId: ")
                 .append(toIndentedString(principalEntityId))
+                .append(newLine)
+                .append("    telemarketerId: ")
+                .append(toIndentedString(telemarketerId))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -30,7 +30,7 @@ public class CallRoutingPhoneCriteria extends CallRoutingCriteria {
      * Sets from.
      * <p>
      * Field description:
-     * Number regex used to match criteria.
+     * Phone number or regular expression pattern representing the phone number. Examples: &#x60;41793026727&#x60;, &#x60;41793(.+)&#x60;.
      *
      * @param from
      * @return This {@link CallRoutingPhoneCriteria instance}.
@@ -44,7 +44,7 @@ public class CallRoutingPhoneCriteria extends CallRoutingCriteria {
      * Returns from.
      * <p>
      * Field description:
-     * Number regex used to match criteria.
+     * Phone number or regular expression pattern representing the phone number. Examples: &#x60;41793026727&#x60;, &#x60;41793(.+)&#x60;.
      *
      * @return from
      */
@@ -57,7 +57,7 @@ public class CallRoutingPhoneCriteria extends CallRoutingCriteria {
      * Sets from.
      * <p>
      * Field description:
-     * Number regex used to match criteria.
+     * Phone number or regular expression pattern representing the phone number. Examples: &#x60;41793026727&#x60;, &#x60;41793(.+)&#x60;.
      *
      * @param from
      */
