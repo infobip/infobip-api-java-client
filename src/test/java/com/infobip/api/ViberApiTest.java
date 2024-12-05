@@ -567,7 +567,7 @@ class ViberApiTest extends ApiTest {
                         .validityPeriod(givenFailoverValidityPeriod)
                         .validityPeriodTimeUnit(givenFailoverValidityPeriodTimeUnit))
                 .notifyUrl(givenNotifyUrl)
-                .urlOptions(new ViberUrlOptions()
+                .urlOptions(new UrlOptions()
                         .shortenUrl(givenShortenUrl)
                         .trackClicks(givenTrackClicks)
                         .trackingUrl(givenTrackingUrl)

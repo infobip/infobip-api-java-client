@@ -19,7 +19,7 @@ public class ViberRegionalOptions {
 
     private ViberIndiaDltOptions indiaDlt;
 
-    private ViberTurkeyIysOptions turkeyIys;
+    private TurkeyIysOptions turkeyIys;
 
     private ViberSouthKoreaOptions southKorea;
 
@@ -60,7 +60,7 @@ public class ViberRegionalOptions {
      * @param turkeyIys
      * @return This {@link ViberRegionalOptions instance}.
      */
-    public ViberRegionalOptions turkeyIys(ViberTurkeyIysOptions turkeyIys) {
+    public ViberRegionalOptions turkeyIys(TurkeyIysOptions turkeyIys) {
         this.turkeyIys = turkeyIys;
         return this;
     }
@@ -71,7 +71,7 @@ public class ViberRegionalOptions {
      * @return turkeyIys
      */
     @JsonProperty("turkeyIys")
-    public ViberTurkeyIysOptions getTurkeyIys() {
+    public TurkeyIysOptions getTurkeyIys() {
         return turkeyIys;
     }
 
@@ -81,7 +81,7 @@ public class ViberRegionalOptions {
      * @param turkeyIys
      */
     @JsonProperty("turkeyIys")
-    public void setTurkeyIys(ViberTurkeyIysOptions turkeyIys) {
+    public void setTurkeyIys(TurkeyIysOptions turkeyIys) {
         this.turkeyIys = turkeyIys;
     }
 

@@ -25,7 +25,7 @@ public class CallsConferenceRequest {
 
     private String callsConfigurationId;
 
-    private CallsPlatform platform;
+    private Platform platform;
 
     /**
      * Sets name.
@@ -190,7 +190,7 @@ public class CallsConferenceRequest {
      * @param platform
      * @return This {@link CallsConferenceRequest instance}.
      */
-    public CallsConferenceRequest platform(CallsPlatform platform) {
+    public CallsConferenceRequest platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -201,7 +201,7 @@ public class CallsConferenceRequest {
      * @return platform
      */
     @JsonProperty("platform")
-    public CallsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -211,7 +211,7 @@ public class CallsConferenceRequest {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(CallsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

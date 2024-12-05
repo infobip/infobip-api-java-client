@@ -15,13 +15,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * Recipient Type must be &#x60;TACIR&#x60; or &#x60;BIREYSEL&#x60;.
  */
-public enum RecipientType {
+public enum IysRecipientType {
     BIREYSEL("BIREYSEL"),
     TACIR("TACIR");
 
     private final String value;
 
-    RecipientType(String value) {
+    IysRecipientType(String value) {
         this.value = value;
     }
 
@@ -36,8 +36,8 @@ public enum RecipientType {
     }
 
     @JsonCreator
-    public static RecipientType fromValue(String value) {
-        for (RecipientType enumElement : RecipientType.values()) {
+    public static IysRecipientType fromValue(String value) {
+        for (IysRecipientType enumElement : IysRecipientType.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

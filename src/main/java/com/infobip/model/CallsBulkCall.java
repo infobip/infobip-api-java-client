@@ -19,7 +19,7 @@ public class CallsBulkCall {
 
     private String callsConfigurationId;
 
-    private CallsPlatform platform;
+    private Platform platform;
 
     private String callId;
 
@@ -79,7 +79,7 @@ public class CallsBulkCall {
      * @param platform
      * @return This {@link CallsBulkCall instance}.
      */
-    public CallsBulkCall platform(CallsPlatform platform) {
+    public CallsBulkCall platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -90,7 +90,7 @@ public class CallsBulkCall {
      * @return platform
      */
     @JsonProperty("platform")
-    public CallsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -100,7 +100,7 @@ public class CallsBulkCall {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(CallsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

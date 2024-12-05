@@ -13,15 +13,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Type of suppression.
+ * Represents EmailGetSuppressionType enumeration.
  */
-public enum EmailApiAddDeleteSuppressionType {
+public enum EmailGetSuppressionType {
     BOUNCE("BOUNCE"),
-    COMPLAINT("COMPLAINT");
+    COMPLAINT("COMPLAINT"),
+    OVER_QUOTA("OVER_QUOTA");
 
     private final String value;
 
-    EmailApiAddDeleteSuppressionType(String value) {
+    EmailGetSuppressionType(String value) {
         this.value = value;
     }
 
@@ -36,8 +37,8 @@ public enum EmailApiAddDeleteSuppressionType {
     }
 
     @JsonCreator
-    public static EmailApiAddDeleteSuppressionType fromValue(String value) {
-        for (EmailApiAddDeleteSuppressionType enumElement : EmailApiAddDeleteSuppressionType.values()) {
+    public static EmailGetSuppressionType fromValue(String value) {
+        for (EmailGetSuppressionType enumElement : EmailGetSuppressionType.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

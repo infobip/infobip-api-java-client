@@ -44,7 +44,7 @@ public class CallLog {
 
     private List<String> callsConfigurationIds = null;
 
-    private CallsPlatform platform;
+    private Platform platform;
 
     private List<String> conferenceIds = null;
 
@@ -577,7 +577,7 @@ public class CallLog {
      * @param platform
      * @return This {@link CallLog instance}.
      */
-    public CallLog platform(CallsPlatform platform) {
+    public CallLog platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -588,7 +588,7 @@ public class CallLog {
      * @return platform
      */
     @JsonProperty("platform")
-    public CallsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -598,7 +598,7 @@ public class CallLog {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(CallsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

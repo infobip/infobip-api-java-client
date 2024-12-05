@@ -42,7 +42,9 @@ public class ViberWebhookReport {
 
     private String callbackData;
 
-    private ViberPlatform platform;
+    private Platform platform;
+
+    private String campaignReferenceId;
 
     /**
      * Sets bulkId.
@@ -503,7 +505,7 @@ public class ViberWebhookReport {
      * @param platform
      * @return This {@link ViberWebhookReport instance}.
      */
-    public ViberWebhookReport platform(ViberPlatform platform) {
+    public ViberWebhookReport platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -514,7 +516,7 @@ public class ViberWebhookReport {
      * @return platform
      */
     @JsonProperty("platform")
-    public ViberPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -524,8 +526,48 @@ public class ViberWebhookReport {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(ViberPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     * @return This {@link ViberWebhookReport instance}.
+     */
+    public ViberWebhookReport campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
     }
 
     @Override
@@ -549,7 +591,8 @@ public class ViberWebhookReport {
                 && Objects.equals(this.messageCount, viberWebhookReport.messageCount)
                 && Objects.equals(this.mccMnc, viberWebhookReport.mccMnc)
                 && Objects.equals(this.callbackData, viberWebhookReport.callbackData)
-                && Objects.equals(this.platform, viberWebhookReport.platform);
+                && Objects.equals(this.platform, viberWebhookReport.platform)
+                && Objects.equals(this.campaignReferenceId, viberWebhookReport.campaignReferenceId);
     }
 
     @Override
@@ -567,7 +610,8 @@ public class ViberWebhookReport {
                 messageCount,
                 mccMnc,
                 callbackData,
-                platform);
+                platform,
+                campaignReferenceId);
     }
 
     @Override
@@ -614,6 +658,9 @@ public class ViberWebhookReport {
                 .append(newLine)
                 .append("    platform: ")
                 .append(toIndentedString(platform))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
                 .append(newLine)
                 .append("}")
                 .toString();

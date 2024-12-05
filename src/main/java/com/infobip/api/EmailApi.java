@@ -18,7 +18,6 @@ import com.infobip.RequestDefinition;
 import com.infobip.model.EmailAddDomainRequest;
 import com.infobip.model.EmailAddSuppressionRequest;
 import com.infobip.model.EmailAllDomainsResponse;
-import com.infobip.model.EmailApiGetSuppressionType;
 import com.infobip.model.EmailBulkRescheduleRequest;
 import com.infobip.model.EmailBulkRescheduleResponse;
 import com.infobip.model.EmailBulkScheduleResponse;
@@ -30,6 +29,7 @@ import com.infobip.model.EmailDomainInfoPageResponse;
 import com.infobip.model.EmailDomainIpRequest;
 import com.infobip.model.EmailDomainIpResponse;
 import com.infobip.model.EmailDomainResponse;
+import com.infobip.model.EmailGetSuppressionType;
 import com.infobip.model.EmailLogsResponse;
 import com.infobip.model.EmailReportsResult;
 import com.infobip.model.EmailReturnPathAddressRequest;
@@ -1187,7 +1187,7 @@ public class EmailApi {
 
     private RequestDefinition getSuppressionsDefinition(
             String domainName,
-            EmailApiGetSuppressionType type,
+            EmailGetSuppressionType type,
             String emailAddress,
             String recipientDomain,
             OffsetDateTime createdDateFrom,
@@ -1230,7 +1230,7 @@ public class EmailApi {
      */
     public class GetSuppressionsRequest {
         private final String domainName;
-        private final EmailApiGetSuppressionType type;
+        private final EmailGetSuppressionType type;
         private String emailAddress;
         private String recipientDomain;
         private OffsetDateTime createdDateFrom;
@@ -1238,7 +1238,7 @@ public class EmailApi {
         private Integer page;
         private Integer size;
 
-        private GetSuppressionsRequest(String domainName, EmailApiGetSuppressionType type) {
+        private GetSuppressionsRequest(String domainName, EmailGetSuppressionType type) {
             this.domainName = Objects.requireNonNull(domainName, "The required parameter 'domainName' is missing.");
             this.type = Objects.requireNonNull(type, "The required parameter 'type' is missing.");
         }
@@ -1347,7 +1347,7 @@ public class EmailApi {
      * @param type Type of suppression. (required)
      * @return GetSuppressionsRequest
      */
-    public GetSuppressionsRequest getSuppressions(String domainName, EmailApiGetSuppressionType type) {
+    public GetSuppressionsRequest getSuppressions(String domainName, EmailGetSuppressionType type) {
         return new GetSuppressionsRequest(domainName, type);
     }
 

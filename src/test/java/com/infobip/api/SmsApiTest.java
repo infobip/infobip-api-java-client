@@ -1140,7 +1140,7 @@ class SmsApiTest extends ApiTest {
         var call = sendSmsApi
                 .getOutboundSmsMessageLogs()
                 .bulkId(List.of(givenBulkId))
-                .sentSince(givenSentSinceString);
+                .sentSince(givenSentSinceDateTime);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }

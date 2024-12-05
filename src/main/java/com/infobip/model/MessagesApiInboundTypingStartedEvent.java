@@ -32,7 +32,7 @@ public class MessagesApiInboundTypingStartedEvent extends MessagesApiInboundEven
 
     private String callbackData;
 
-    private MessagesApiPlatform platform;
+    private Platform platform;
 
     /**
      * Constructs a new {@link MessagesApiInboundTypingStartedEvent} instance.
@@ -348,7 +348,7 @@ public class MessagesApiInboundTypingStartedEvent extends MessagesApiInboundEven
      * @param platform
      * @return This {@link MessagesApiInboundTypingStartedEvent instance}.
      */
-    public MessagesApiInboundTypingStartedEvent platform(MessagesApiPlatform platform) {
+    public MessagesApiInboundTypingStartedEvent platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -359,7 +359,7 @@ public class MessagesApiInboundTypingStartedEvent extends MessagesApiInboundEven
      * @return platform
      */
     @JsonProperty("platform")
-    public MessagesApiPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -369,7 +369,7 @@ public class MessagesApiInboundTypingStartedEvent extends MessagesApiInboundEven
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(MessagesApiPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

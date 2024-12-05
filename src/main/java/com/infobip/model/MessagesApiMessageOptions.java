@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class MessagesApiMessageOptions {
 
-    private MessagesApiPlatform platform;
+    private Platform platform;
 
     private MessagesApiValidityPeriod validityPeriod;
 
@@ -33,7 +33,7 @@ public class MessagesApiMessageOptions {
      * @param platform
      * @return This {@link MessagesApiMessageOptions instance}.
      */
-    public MessagesApiMessageOptions platform(MessagesApiPlatform platform) {
+    public MessagesApiMessageOptions platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -44,7 +44,7 @@ public class MessagesApiMessageOptions {
      * @return platform
      */
     @JsonProperty("platform")
-    public MessagesApiPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -54,7 +54,7 @@ public class MessagesApiMessageOptions {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(MessagesApiPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

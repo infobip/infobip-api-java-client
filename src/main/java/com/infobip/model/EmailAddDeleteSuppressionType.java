@@ -13,15 +13,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Recipient Type must be &#x60;TACIR&#x60; or &#x60;BIREYSEL&#x60;.
+ * Type of suppression.
  */
-public enum MessagesApiRecipientType {
-    BIREYSEL("BIREYSEL"),
-    TACIR("TACIR");
+public enum EmailAddDeleteSuppressionType {
+    BOUNCE("BOUNCE"),
+    COMPLAINT("COMPLAINT");
 
     private final String value;
 
-    MessagesApiRecipientType(String value) {
+    EmailAddDeleteSuppressionType(String value) {
         this.value = value;
     }
 
@@ -36,8 +36,8 @@ public enum MessagesApiRecipientType {
     }
 
     @JsonCreator
-    public static MessagesApiRecipientType fromValue(String value) {
-        for (MessagesApiRecipientType enumElement : MessagesApiRecipientType.values()) {
+    public static EmailAddDeleteSuppressionType fromValue(String value) {
+        for (EmailAddDeleteSuppressionType enumElement : EmailAddDeleteSuppressionType.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

@@ -22,7 +22,7 @@ public class CallsDialogLogResponse {
 
     private String callsConfigurationId;
 
-    private CallsPlatform platform;
+    private Platform platform;
 
     private CallsDialogState state;
 
@@ -128,7 +128,7 @@ public class CallsDialogLogResponse {
      * @param platform
      * @return This {@link CallsDialogLogResponse instance}.
      */
-    public CallsDialogLogResponse platform(CallsPlatform platform) {
+    public CallsDialogLogResponse platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -139,7 +139,7 @@ public class CallsDialogLogResponse {
      * @return platform
      */
     @JsonProperty("platform")
-    public CallsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -149,7 +149,7 @@ public class CallsDialogLogResponse {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(CallsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

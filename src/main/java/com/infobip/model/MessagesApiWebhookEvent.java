@@ -36,7 +36,7 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
 
     private String callbackData;
 
-    private MessagesApiPlatform platform;
+    private Platform platform;
 
     private String campaignReferenceId;
 
@@ -419,7 +419,7 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
      * @param platform
      * @return This {@link MessagesApiWebhookEvent instance}.
      */
-    public MessagesApiWebhookEvent platform(MessagesApiPlatform platform) {
+    public MessagesApiWebhookEvent platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -430,7 +430,7 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
      * @return platform
      */
     @JsonProperty("platform")
-    public MessagesApiPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -440,7 +440,7 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(MessagesApiPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

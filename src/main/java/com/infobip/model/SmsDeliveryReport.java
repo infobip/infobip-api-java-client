@@ -42,7 +42,7 @@ public class SmsDeliveryReport {
 
     private String callbackData;
 
-    private SmsPlatform platform;
+    private Platform platform;
 
     private String campaignReferenceId;
 
@@ -505,7 +505,7 @@ public class SmsDeliveryReport {
      * @param platform
      * @return This {@link SmsDeliveryReport instance}.
      */
-    public SmsDeliveryReport platform(SmsPlatform platform) {
+    public SmsDeliveryReport platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -516,7 +516,7 @@ public class SmsDeliveryReport {
      * @return platform
      */
     @JsonProperty("platform")
-    public SmsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -526,7 +526,7 @@ public class SmsDeliveryReport {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(SmsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

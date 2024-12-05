@@ -19,7 +19,7 @@ public class EmailDomainInfo {
 
     private String domainName;
 
-    private EmailApiDomainAccess dataAccess;
+    private EmailDomainAccess dataAccess;
 
     private Boolean readBounces;
 
@@ -89,7 +89,7 @@ public class EmailDomainInfo {
      * @param dataAccess
      * @return This {@link EmailDomainInfo instance}.
      */
-    public EmailDomainInfo dataAccess(EmailApiDomainAccess dataAccess) {
+    public EmailDomainInfo dataAccess(EmailDomainAccess dataAccess) {
         this.dataAccess = dataAccess;
         return this;
     }
@@ -102,7 +102,7 @@ public class EmailDomainInfo {
      * @return dataAccess
      */
     @JsonProperty("dataAccess")
-    public EmailApiDomainAccess getDataAccess() {
+    public EmailDomainAccess getDataAccess() {
         return dataAccess;
     }
 
@@ -114,7 +114,7 @@ public class EmailDomainInfo {
      * @param dataAccess
      */
     @JsonProperty("dataAccess")
-    public void setDataAccess(EmailApiDomainAccess dataAccess) {
+    public void setDataAccess(EmailDomainAccess dataAccess) {
         this.dataAccess = dataAccess;
     }
 

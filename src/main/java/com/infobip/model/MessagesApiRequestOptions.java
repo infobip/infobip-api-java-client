@@ -19,7 +19,7 @@ public class MessagesApiRequestOptions {
 
     private MessagesApiRequestScheduleOptions schedule;
 
-    private MessagesApiUrlOptions tracking;
+    private UrlOptions tracking;
 
     /**
      * Sets schedule.
@@ -58,7 +58,7 @@ public class MessagesApiRequestOptions {
      * @param tracking
      * @return This {@link MessagesApiRequestOptions instance}.
      */
-    public MessagesApiRequestOptions tracking(MessagesApiUrlOptions tracking) {
+    public MessagesApiRequestOptions tracking(UrlOptions tracking) {
         this.tracking = tracking;
         return this;
     }
@@ -69,7 +69,7 @@ public class MessagesApiRequestOptions {
      * @return tracking
      */
     @JsonProperty("tracking")
-    public MessagesApiUrlOptions getTracking() {
+    public UrlOptions getTracking() {
         return tracking;
     }
 
@@ -79,7 +79,7 @@ public class MessagesApiRequestOptions {
      * @param tracking
      */
     @JsonProperty("tracking")
-    public void setTracking(MessagesApiUrlOptions tracking) {
+    public void setTracking(UrlOptions tracking) {
         this.tracking = tracking;
     }
 

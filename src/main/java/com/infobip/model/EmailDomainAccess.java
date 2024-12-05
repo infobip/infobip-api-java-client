@@ -13,15 +13,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Recipient Type must be &#x60;TACIR&#x60; or &#x60;BIREYSEL&#x60;.
+ * Represents the access level for the domain. Domain can be either owned or have granted permissions.
  */
-public enum ViberRecipientType {
-    BIREYSEL("BIREYSEL"),
-    TACIR("TACIR");
+public enum EmailDomainAccess {
+    OWNER("OWNER"),
+    GRANTED("GRANTED");
 
     private final String value;
 
-    ViberRecipientType(String value) {
+    EmailDomainAccess(String value) {
         this.value = value;
     }
 
@@ -36,8 +36,8 @@ public enum ViberRecipientType {
     }
 
     @JsonCreator
-    public static ViberRecipientType fromValue(String value) {
-        for (ViberRecipientType enumElement : ViberRecipientType.values()) {
+    public static EmailDomainAccess fromValue(String value) {
+        for (EmailDomainAccess enumElement : EmailDomainAccess.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

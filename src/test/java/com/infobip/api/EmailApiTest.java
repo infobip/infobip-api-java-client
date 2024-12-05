@@ -36,7 +36,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldGetAllDomainIps() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         String givenIpAddress = "11.11.11.1";
         Boolean givenDedicated = true;
         Integer givenAssignedDomainCount = 1;
@@ -78,7 +78,7 @@ class EmailApiTest extends ApiTest {
     void shouldAssignIpToDomain() {
         String givenResult = "OK";
 
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         String givenIpAddress = "11.11.11.1";
 
         String givenResponse = String.format("{\n" + "  \"result\": \"%s\"\n" + "}\n", givenResult);
@@ -107,7 +107,7 @@ class EmailApiTest extends ApiTest {
     @Test
     void shouldRemoveIpFromDomain() {
         String givenResult = "OK";
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         String givenIpAddress = "11.11.11.1";
 
         String givenResponse = String.format("{\n" + "  \"result\": \"%s\"\n" + "}\n", givenResult);
@@ -134,7 +134,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldAddDomain() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         EmailAddDomainRequest.DkimKeyLengthEnum givenDkimKeyLength =
                 EmailAddDomainRequest.DkimKeyLengthEnum.NUMBER_1024;
 
@@ -229,7 +229,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldGetAllDomains() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         Integer givenPaging = 0;
         Long givenDomainId = 1L;
         Boolean givenActive = false;
@@ -327,7 +327,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldGetDomainDetails() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         Long givenDomainId = 1L;
         Boolean givenActive = false;
         Boolean givenTracking = true;
@@ -399,7 +399,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldDeleteDomain() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         int givenStatusCode = 204;
 
         setUpNoResponseBodyDeleteRequest(DOMAIN.replace("{domainName}", givenDomainName), Map.of(), givenStatusCode);
@@ -412,7 +412,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldUpdateTrackingEvents() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         Long givenDomainId = 1L;
         Boolean givenActive = false;
         Boolean givenTracking = true;
@@ -496,7 +496,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldVerifyDomain() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         int givenStatusCode = 202;
 
         setUpNoContentPostRequest(DOMAIN_VERIFY.replace("{domainName}", givenDomainName), givenStatusCode);
@@ -1087,9 +1087,9 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldGetEmailSuppressions() {
-        String givenDomainName = "marketing.com";
+        String givenDomainName = "example.com";
         String givenEmailAddress = "jane.smith@somecompany.com";
-        EmailApiGetSuppressionType givenType = EmailApiGetSuppressionType.BOUNCE;
+        EmailGetSuppressionType givenType = EmailGetSuppressionType.BOUNCE;
         String givenCreatedDate = "2024-08-14T14:02:17.366";
         String givenReason = "550 5.1.1 <jane.smith@somecompany.com>: user does not exist";
         int givenPage = 0;
@@ -1137,11 +1137,11 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldAddEmailSuppressions() {
-        String givenDomainName1 = "somedomain.com";
+        String givenDomainName1 = "example.com";
         List<String> givenEmailAddresses1 = List.of("jane.smith@somecompany.com", "john.doe@somecompany.com");
-        EmailApiAddDeleteSuppressionType givenType = EmailApiAddDeleteSuppressionType.BOUNCE;
+        EmailAddDeleteSuppressionType givenType = EmailAddDeleteSuppressionType.BOUNCE;
 
-        String givenDomainName2 = "marketing.com";
+        String givenDomainName2 = "example.com";
         List<String> givenEmailAddresses2 = List.of("john.smith@somecompany.com", "john.perry@gmail.com");
 
         String expectedRequest = String.format(
@@ -1182,11 +1182,11 @@ class EmailApiTest extends ApiTest {
                         new EmailAddSuppression()
                                 .domainName(givenDomainName1)
                                 .emailAddress(givenEmailAddresses1)
-                                .type(EmailApiAddDeleteSuppressionType.BOUNCE),
+                                .type(EmailAddDeleteSuppressionType.BOUNCE),
                         new EmailAddSuppression()
                                 .domainName(givenDomainName2)
                                 .emailAddress(givenEmailAddresses2)
-                                .type(EmailApiAddDeleteSuppressionType.BOUNCE)));
+                                .type(EmailAddDeleteSuppressionType.BOUNCE)));
 
         var call = api.addSuppressions(request);
         testSuccessfulCallWithNoBody(call::executeAsync, 204);
@@ -1194,11 +1194,11 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldDeleteEmailSuppressions() {
-        String givenDomainName1 = "somedomain.com";
+        String givenDomainName1 = "example.com";
         List<String> givenEmailAddresses1 = List.of("jane.smith@somecompany.com", "john.doe@somecompany.com");
-        EmailApiAddDeleteSuppressionType givenType = EmailApiAddDeleteSuppressionType.BOUNCE;
+        EmailAddDeleteSuppressionType givenType = EmailAddDeleteSuppressionType.BOUNCE;
 
-        String givenDomainName2 = "marketing.com";
+        String givenDomainName2 = "example.com";
         List<String> givenEmailAddresses2 = List.of("john.smith@somecompany.com", "john.perry@gmail.com");
 
         String expectedRequest = String.format(
@@ -1239,11 +1239,11 @@ class EmailApiTest extends ApiTest {
                         new EmailDeleteSuppression()
                                 .domainName(givenDomainName1)
                                 .emailAddress(givenEmailAddresses1)
-                                .type(EmailApiAddDeleteSuppressionType.BOUNCE),
+                                .type(EmailAddDeleteSuppressionType.BOUNCE),
                         new EmailDeleteSuppression()
                                 .domainName(givenDomainName2)
                                 .emailAddress(givenEmailAddresses2)
-                                .type(EmailApiAddDeleteSuppressionType.BOUNCE)));
+                                .type(EmailAddDeleteSuppressionType.BOUNCE)));
 
         var call = api.deleteSuppressions(request);
         testSuccessfulCallWithNoBody(call::executeAsync, 204);
@@ -1251,8 +1251,8 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldGetSuppressionDomains() {
-        String givenDomainName1 = "somedomain.com";
-        EmailApiDomainAccess givenDataAccess1 = EmailApiDomainAccess.OWNER;
+        String givenDomainName1 = "example.com";
+        EmailDomainAccess givenDataAccess1 = EmailDomainAccess.OWNER;
         boolean givenReadBounces1 = true;
         boolean givenCreateBounces1 = true;
         boolean givenDeleteBounces1 = true;
@@ -1261,8 +1261,8 @@ class EmailApiTest extends ApiTest {
         boolean givenDeleteComplaints1 = true;
         boolean givenReadOverquotas1 = true;
 
-        String givenDomainName2 = "marketing.com";
-        EmailApiDomainAccess givenDataAccess2 = EmailApiDomainAccess.GRANTED;
+        String givenDomainName2 = "example.com";
+        EmailDomainAccess givenDataAccess2 = EmailDomainAccess.GRANTED;
         boolean givenReadBounces2 = true;
         boolean givenCreateBounces2 = true;
         boolean givenDeleteBounces2 = false;
@@ -1335,7 +1335,7 @@ class EmailApiTest extends ApiTest {
 
             var result1 = response.getResults().get(0);
             then(result1.getDomainName()).isEqualTo(givenDomainName1);
-            then(result1.getDataAccess()).isEqualTo(EmailApiDomainAccess.OWNER);
+            then(result1.getDataAccess()).isEqualTo(EmailDomainAccess.OWNER);
             then(result1.getReadBounces()).isEqualTo(givenReadBounces1);
             then(result1.getCreateBounces()).isEqualTo(givenCreateBounces1);
             then(result1.getDeleteBounces()).isEqualTo(givenDeleteBounces1);

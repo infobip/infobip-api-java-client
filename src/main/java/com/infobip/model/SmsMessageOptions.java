@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class SmsMessageOptions {
 
-    private SmsPlatform platform;
+    private Platform platform;
 
     private SmsValidityPeriod validityPeriod;
 
@@ -35,7 +35,7 @@ public class SmsMessageOptions {
      * @param platform
      * @return This {@link SmsMessageOptions instance}.
      */
-    public SmsMessageOptions platform(SmsPlatform platform) {
+    public SmsMessageOptions platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -46,7 +46,7 @@ public class SmsMessageOptions {
      * @return platform
      */
     @JsonProperty("platform")
-    public SmsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -56,7 +56,7 @@ public class SmsMessageOptions {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(SmsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

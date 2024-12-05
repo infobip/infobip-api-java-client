@@ -48,7 +48,7 @@ public class Call {
 
     private String callsConfigurationId;
 
-    private CallsPlatform platform;
+    private Platform platform;
 
     private String conferenceId;
 
@@ -583,7 +583,7 @@ public class Call {
      * @param platform
      * @return This {@link Call instance}.
      */
-    public Call platform(CallsPlatform platform) {
+    public Call platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -594,7 +594,7 @@ public class Call {
      * @return platform
      */
     @JsonProperty("platform")
-    public CallsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -604,7 +604,7 @@ public class Call {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(CallsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

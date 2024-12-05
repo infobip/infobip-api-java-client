@@ -13,16 +13,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Represents EmailApiGetSuppressionType enumeration.
+ * Recording status provided if recording was attempted.
  */
-public enum EmailApiGetSuppressionType {
-    BOUNCE("BOUNCE"),
-    COMPLAINT("COMPLAINT"),
-    OVER_QUOTA("OVER_QUOTA");
+public enum CallsNumberMaskingRecordingStatus {
+    HOSTED("HOSTED"),
+    SFTP("SFTP"),
+    FAILED("FAILED");
 
     private final String value;
 
-    EmailApiGetSuppressionType(String value) {
+    CallsNumberMaskingRecordingStatus(String value) {
         this.value = value;
     }
 
@@ -37,8 +37,8 @@ public enum EmailApiGetSuppressionType {
     }
 
     @JsonCreator
-    public static EmailApiGetSuppressionType fromValue(String value) {
-        for (EmailApiGetSuppressionType enumElement : EmailApiGetSuppressionType.values()) {
+    public static CallsNumberMaskingRecordingStatus fromValue(String value) {
+        for (CallsNumberMaskingRecordingStatus enumElement : CallsNumberMaskingRecordingStatus.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

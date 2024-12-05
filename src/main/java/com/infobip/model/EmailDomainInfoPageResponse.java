@@ -21,7 +21,7 @@ public class EmailDomainInfoPageResponse {
 
     private List<EmailDomainInfo> results = new ArrayList<>();
 
-    private EmailApiPageDetails paging;
+    private EmailPageDetails paging;
 
     /**
      * Sets results.
@@ -96,7 +96,7 @@ public class EmailDomainInfoPageResponse {
      * @param paging
      * @return This {@link EmailDomainInfoPageResponse instance}.
      */
-    public EmailDomainInfoPageResponse paging(EmailApiPageDetails paging) {
+    public EmailDomainInfoPageResponse paging(EmailPageDetails paging) {
         this.paging = paging;
         return this;
     }
@@ -109,7 +109,7 @@ public class EmailDomainInfoPageResponse {
      * @return paging
      */
     @JsonProperty("paging")
-    public EmailApiPageDetails getPaging() {
+    public EmailPageDetails getPaging() {
         return paging;
     }
 
@@ -121,7 +121,7 @@ public class EmailDomainInfoPageResponse {
      * @param paging
      */
     @JsonProperty("paging")
-    public void setPaging(EmailApiPageDetails paging) {
+    public void setPaging(EmailPageDetails paging) {
         this.paging = paging;
     }
 

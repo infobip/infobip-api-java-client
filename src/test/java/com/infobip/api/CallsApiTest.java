@@ -92,8 +92,7 @@ class CallsApiTest extends ApiTest {
         String givenCustomDataFieldValue = "data";
         String givenEntityId = "entityId";
         String givenDestinationApplicationId = "61c060db2675060027d8c7a6";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenDestinationApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenDestinationApplicationId);
         Map<String, String> givenCustomData = Map.of(givenCustomDataField, givenCustomDataFieldValue);
 
         String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}\n", givenStatus);
@@ -196,8 +195,7 @@ class CallsApiTest extends ApiTest {
         CallEndpointType givenType = CallEndpointType.PHONE;
         String givenEntityId = "entityId";
         String givenApplicationId = "61c060db2675060027d8c7a6";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
         String givenFrom = "44790123456";
         String givenTo = "44790987654";
         CallDirection givenDirection = CallDirection.INBOUND;
@@ -359,8 +357,7 @@ class CallsApiTest extends ApiTest {
         Integer givenMaxDuration = 28800;
         String givenEntityId = "entityId";
         String givenApplicationId = "61c060db2675060027d8c7a6";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
         String givenParentCallId = "3ad8805e-d401-424e-9b03-e02a2016a5e2";
 
         String expectedRequest = String.format(
@@ -530,8 +527,8 @@ class CallsApiTest extends ApiTest {
         CallEndpointType givenType = CallEndpointType.PHONE;
         String givenApplicationId = "61c060db2675060027d8c7a6";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().applicationId(givenApplicationId).entityId(givenEntityId);
+        Platform givenPlatform =
+                new Platform().applicationId(givenApplicationId).entityId(givenEntityId);
         String givenFrom = "44790123456";
         String givenTo = "44790987654";
         CallDirection givenDirection = CallDirection.INBOUND;
@@ -691,8 +688,7 @@ class CallsApiTest extends ApiTest {
         Integer givenPageTotalPages = 0;
         Long givenPageTotalResults = 0L;
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"results\": [\n"
@@ -808,9 +804,7 @@ class CallsApiTest extends ApiTest {
             then(result.getParentCallId()).isEqualTo(givenParentCallId);
             then(result.getMachineDetection()).isNotNull();
             then(result.getMachineDetection().getDetectionResult()).isEqualTo(givenDetectionResult);
-            //            then(result.getApplicationIds()).isNotNull();
-            //            then(result.getApplicationIds().size()).isEqualTo(1);
-            //            then(result.getApplicationIds().get(0)).isEqualTo(givenApplicationId);
+            then(result.getPlatform()).isEqualTo(givenPlatform);
             then(result.getConferenceIds()).isNotNull();
             then(result.getConferenceIds().size()).isEqualTo(1);
             then(result.getConferenceIds().get(0)).isEqualTo(givenConferenceId);
@@ -869,8 +863,7 @@ class CallsApiTest extends ApiTest {
         String givenDialogId = "dialogId";
         String givenSender = "sender";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"callId\": \"%s\",\n"
@@ -1012,8 +1005,7 @@ class CallsApiTest extends ApiTest {
         Boolean givenVideoScreenShare = true;
         String givenApplicationId = "61c060db2675060027d8c7a6";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -1187,8 +1179,7 @@ class CallsApiTest extends ApiTest {
         String givenKey1 = "value1";
         String givenKey2 = "value2";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"conference\": {\n"
@@ -1477,8 +1468,7 @@ class CallsApiTest extends ApiTest {
         Integer givenRingDuration = 2;
         String givenEntityId = "entityId";
         String givenApplicationId = "61c060db2675060027d8c7a6";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
         String givenConferenceId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenKey2 = "value2";
         String givenKey1 = "value1";
@@ -1947,8 +1937,7 @@ class CallsApiTest extends ApiTest {
         Integer givenPageTotalPages = 0;
         Long givenPageTotalResults = 0L;
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"results\": [\n"
@@ -2079,8 +2068,7 @@ class CallsApiTest extends ApiTest {
         Map<String, String> givenCustomData = Map.of(givenCustomDataField, givenCustomDataFieldValue);
         String givenFilePrefix = "filePrefix";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -2218,8 +2206,7 @@ class CallsApiTest extends ApiTest {
         Boolean givenVideoScreenShare = true;
         String givenApplicationId = "61c060db2675060027d8c7a6";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -2337,8 +2324,7 @@ class CallsApiTest extends ApiTest {
         String givenErrorCodeName = "NORMAL_HANGUP";
         String givenErrorCodeDescription = "The call has ended with hangup initiated by caller, callee or API";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
         CallsSftpUploadStatus sftpUploadStatus = CallsSftpUploadStatus.UPLOADED;
 
         String givenResponse = String.format(
@@ -2578,8 +2564,7 @@ class CallsApiTest extends ApiTest {
         String givenErrorCodeName = "NORMAL_HANGUP";
         String givenErrorCodeDescription = "The call has ended with hangup initiated by caller, callee or API";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"conferenceId\": \"%s\",\n"
@@ -2791,8 +2776,7 @@ class CallsApiTest extends ApiTest {
         String givenKey1 = "value1";
         String givenKey2 = "value2";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         Boolean givenConnectOnEarlyMedia = false;
 
@@ -3004,8 +2988,7 @@ class CallsApiTest extends ApiTest {
         Boolean givenVideoScreenShare = true;
         String givenApplicationId = "61c060db2675060027d8c7a6";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         Boolean givenConnectOnEarlyMedia = false;
 
@@ -3144,8 +3127,7 @@ class CallsApiTest extends ApiTest {
         Boolean givenVideoScreenShare = true;
         String givenApplicationId = "61c060db2675060027d8c7a6";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -4196,8 +4178,7 @@ class CallsApiTest extends ApiTest {
         String givenApplicationId = "string";
         String givenFileId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
@@ -4390,8 +4371,7 @@ class CallsApiTest extends ApiTest {
         String givenConferenceName = "string";
         String givenApplicationId = "string";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
         String givenFileId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
@@ -4574,8 +4554,7 @@ class CallsApiTest extends ApiTest {
         CallsRecordingStatus givenStatus = CallsRecordingStatus.SUCCESSFUL;
         String givenReason = "string";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "    {\n" + "      \"conferenceId\": \"%s\",\n"
@@ -4884,8 +4863,7 @@ class CallsApiTest extends ApiTest {
         Integer givenMinuteTo = 0;
         String givenKey2 = "value2";
         String givenKey1 = "value1";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId1);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId1);
 
         String expectedRequest = String.format(
                 "{\n" + "  \"bulkId\" : \"%s\",\n"
@@ -5221,8 +5199,7 @@ class CallsApiTest extends ApiTest {
         var givenSecondRingDuration = 2;
         var givenSecondDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -5533,8 +5510,7 @@ class CallsApiTest extends ApiTest {
         Integer givenChildRingDuration = 2;
         String givenChildDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenEntityId = "entityId";
-        CallsPlatform givenPlatform =
-                new CallsPlatform().entityId(givenEntityId).applicationId(givenApplicationId);
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"

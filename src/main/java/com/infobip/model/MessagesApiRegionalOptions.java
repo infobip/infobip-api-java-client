@@ -19,7 +19,7 @@ public class MessagesApiRegionalOptions {
 
     private MessagesApiIndiaDltOptions indiaDlt;
 
-    private MessagesApiTurkeyIysOptions turkeyIys;
+    private TurkeyIysOptions turkeyIys;
 
     private MessagesApiSouthKoreaOptions southKorea;
 
@@ -60,7 +60,7 @@ public class MessagesApiRegionalOptions {
      * @param turkeyIys
      * @return This {@link MessagesApiRegionalOptions instance}.
      */
-    public MessagesApiRegionalOptions turkeyIys(MessagesApiTurkeyIysOptions turkeyIys) {
+    public MessagesApiRegionalOptions turkeyIys(TurkeyIysOptions turkeyIys) {
         this.turkeyIys = turkeyIys;
         return this;
     }
@@ -71,7 +71,7 @@ public class MessagesApiRegionalOptions {
      * @return turkeyIys
      */
     @JsonProperty("turkeyIys")
-    public MessagesApiTurkeyIysOptions getTurkeyIys() {
+    public TurkeyIysOptions getTurkeyIys() {
         return turkeyIys;
     }
 
@@ -81,7 +81,7 @@ public class MessagesApiRegionalOptions {
      * @param turkeyIys
      */
     @JsonProperty("turkeyIys")
-    public void setTurkeyIys(MessagesApiTurkeyIysOptions turkeyIys) {
+    public void setTurkeyIys(TurkeyIysOptions turkeyIys) {
         this.turkeyIys = turkeyIys;
     }
 

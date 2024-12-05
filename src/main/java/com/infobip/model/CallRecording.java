@@ -34,7 +34,7 @@ public class CallRecording {
 
     private String callsConfigurationId;
 
-    private CallsPlatform platform;
+    private Platform platform;
 
     private OffsetDateTime startTime;
 
@@ -322,7 +322,7 @@ public class CallRecording {
      * @param platform
      * @return This {@link CallRecording instance}.
      */
-    public CallRecording platform(CallsPlatform platform) {
+    public CallRecording platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -333,7 +333,7 @@ public class CallRecording {
      * @return platform
      */
     @JsonProperty("platform")
-    public CallsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -343,7 +343,7 @@ public class CallRecording {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(CallsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class ViberMessageOptions {
 
-    private ViberPlatform platform;
+    private Platform platform;
 
     private ViberValidityPeriod validityPeriod;
 
@@ -41,7 +41,7 @@ public class ViberMessageOptions {
      * @param platform
      * @return This {@link ViberMessageOptions instance}.
      */
-    public ViberMessageOptions platform(ViberPlatform platform) {
+    public ViberMessageOptions platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -52,7 +52,7 @@ public class ViberMessageOptions {
      * @return platform
      */
     @JsonProperty("platform")
-    public ViberPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -62,7 +62,7 @@ public class ViberMessageOptions {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(ViberPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

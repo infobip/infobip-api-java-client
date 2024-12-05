@@ -24,7 +24,7 @@ public class CallsDialogRecordingResponse {
 
     private String callsConfigurationId;
 
-    private CallsPlatform platform;
+    private Platform platform;
 
     private List<CallsRecordingFile> composedFiles = null;
 
@@ -120,7 +120,7 @@ public class CallsDialogRecordingResponse {
      * @param platform
      * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecordingResponse platform(CallsPlatform platform) {
+    public CallsDialogRecordingResponse platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -131,7 +131,7 @@ public class CallsDialogRecordingResponse {
      * @return platform
      */
     @JsonProperty("platform")
-    public CallsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -141,7 +141,7 @@ public class CallsDialogRecordingResponse {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(CallsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * Platform options. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
  */
-public class CallsPlatform {
+public class Platform {
 
     private String entityId;
 
@@ -25,12 +25,12 @@ public class CallsPlatform {
      * Sets entityId.
      * <p>
      * Field description:
-     * Required to use entity in a send request for outbound traffic. Returned in notification events. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @param entityId
-     * @return This {@link CallsPlatform instance}.
+     * @return This {@link Platform instance}.
      */
-    public CallsPlatform entityId(String entityId) {
+    public Platform entityId(String entityId) {
         this.entityId = entityId;
         return this;
     }
@@ -39,7 +39,7 @@ public class CallsPlatform {
      * Returns entityId.
      * <p>
      * Field description:
-     * Required to use entity in a send request for outbound traffic. Returned in notification events. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @return entityId
      */
@@ -52,7 +52,7 @@ public class CallsPlatform {
      * Sets entityId.
      * <p>
      * Field description:
-     * Required to use entity in a send request for outbound traffic. Returned in notification events. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @param entityId
      */
@@ -65,12 +65,12 @@ public class CallsPlatform {
      * Sets applicationId.
      * <p>
      * Field description:
-     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @param applicationId
-     * @return This {@link CallsPlatform instance}.
+     * @return This {@link Platform instance}.
      */
-    public CallsPlatform applicationId(String applicationId) {
+    public Platform applicationId(String applicationId) {
         this.applicationId = applicationId;
         return this;
     }
@@ -79,7 +79,7 @@ public class CallsPlatform {
      * Returns applicationId.
      * <p>
      * Field description:
-     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @return applicationId
      */
@@ -92,7 +92,7 @@ public class CallsPlatform {
      * Sets applicationId.
      * <p>
      * Field description:
-     * Required for application use in a send request for outbound traffic. Returned in notification events. For more details, see [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @param applicationId
      */
@@ -109,9 +109,9 @@ public class CallsPlatform {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallsPlatform callsPlatform = (CallsPlatform) o;
-        return Objects.equals(this.entityId, callsPlatform.entityId)
-                && Objects.equals(this.applicationId, callsPlatform.applicationId);
+        Platform platform = (Platform) o;
+        return Objects.equals(this.entityId, platform.entityId)
+                && Objects.equals(this.applicationId, platform.applicationId);
     }
 
     @Override
@@ -123,7 +123,7 @@ public class CallsPlatform {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallsPlatform {")
+                .append("class Platform {")
                 .append(newLine)
                 .append("    entityId: ")
                 .append(toIndentedString(entityId))

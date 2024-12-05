@@ -23,7 +23,7 @@ public class CallBulkRequest {
 
     private String callsConfigurationId;
 
-    private CallsPlatform platform;
+    private Platform platform;
 
     private List<CallsBulkItem> items = new ArrayList<>();
 
@@ -119,7 +119,7 @@ public class CallBulkRequest {
      * @param platform
      * @return This {@link CallBulkRequest instance}.
      */
-    public CallBulkRequest platform(CallsPlatform platform) {
+    public CallBulkRequest platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -130,7 +130,7 @@ public class CallBulkRequest {
      * @return platform
      */
     @JsonProperty("platform")
-    public CallsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -140,7 +140,7 @@ public class CallBulkRequest {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(CallsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

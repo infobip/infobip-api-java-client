@@ -15,11 +15,11 @@ import java.util.Objects;
 /**
  * IYS regulations specific parameters required for sending promotional SMS to phone numbers registered in Turkey.
  */
-public class MessagesApiTurkeyIysOptions {
+public class TurkeyIysOptions {
 
     private Integer brandCode;
 
-    private MessagesApiRecipientType recipientType;
+    private IysRecipientType recipientType;
 
     /**
      * Sets brandCode.
@@ -28,9 +28,9 @@ public class MessagesApiTurkeyIysOptions {
      * Brand code is an ID of the company based on a company VAT number. If not provided in request, default value is used from your Infobip account.
      *
      * @param brandCode
-     * @return This {@link MessagesApiTurkeyIysOptions instance}.
+     * @return This {@link TurkeyIysOptions instance}.
      */
-    public MessagesApiTurkeyIysOptions brandCode(Integer brandCode) {
+    public TurkeyIysOptions brandCode(Integer brandCode) {
         this.brandCode = brandCode;
         return this;
     }
@@ -67,9 +67,9 @@ public class MessagesApiTurkeyIysOptions {
      * The field is required.
      *
      * @param recipientType
-     * @return This {@link MessagesApiTurkeyIysOptions instance}.
+     * @return This {@link TurkeyIysOptions instance}.
      */
-    public MessagesApiTurkeyIysOptions recipientType(MessagesApiRecipientType recipientType) {
+    public TurkeyIysOptions recipientType(IysRecipientType recipientType) {
         this.recipientType = recipientType;
         return this;
     }
@@ -82,7 +82,7 @@ public class MessagesApiTurkeyIysOptions {
      * @return recipientType
      */
     @JsonProperty("recipientType")
-    public MessagesApiRecipientType getRecipientType() {
+    public IysRecipientType getRecipientType() {
         return recipientType;
     }
 
@@ -94,7 +94,7 @@ public class MessagesApiTurkeyIysOptions {
      * @param recipientType
      */
     @JsonProperty("recipientType")
-    public void setRecipientType(MessagesApiRecipientType recipientType) {
+    public void setRecipientType(IysRecipientType recipientType) {
         this.recipientType = recipientType;
     }
 
@@ -106,9 +106,9 @@ public class MessagesApiTurkeyIysOptions {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        MessagesApiTurkeyIysOptions messagesApiTurkeyIysOptions = (MessagesApiTurkeyIysOptions) o;
-        return Objects.equals(this.brandCode, messagesApiTurkeyIysOptions.brandCode)
-                && Objects.equals(this.recipientType, messagesApiTurkeyIysOptions.recipientType);
+        TurkeyIysOptions smsTurkeyIysOptions = (TurkeyIysOptions) o;
+        return Objects.equals(this.brandCode, smsTurkeyIysOptions.brandCode)
+                && Objects.equals(this.recipientType, smsTurkeyIysOptions.recipientType);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class MessagesApiTurkeyIysOptions {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class MessagesApiTurkeyIysOptions {")
+                .append("class SmsTurkeyIysOptions {")
                 .append(newLine)
                 .append("    brandCode: ")
                 .append(toIndentedString(brandCode))

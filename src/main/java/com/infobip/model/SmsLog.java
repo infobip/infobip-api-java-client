@@ -38,7 +38,7 @@ public class SmsLog {
 
     private SmsMessageError error;
 
-    private SmsPlatform platform;
+    private Platform platform;
 
     private SmsMessageContent content;
 
@@ -425,7 +425,7 @@ public class SmsLog {
      * @param platform
      * @return This {@link SmsLog instance}.
      */
-    public SmsLog platform(SmsPlatform platform) {
+    public SmsLog platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -436,7 +436,7 @@ public class SmsLog {
      * @return platform
      */
     @JsonProperty("platform")
-    public SmsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -446,7 +446,7 @@ public class SmsLog {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(SmsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

@@ -21,7 +21,7 @@ public class CallsApplicationTransferRequest {
 
     private String destinationCallsConfigurationId;
 
-    private CallsPlatform platform;
+    private Platform platform;
 
     private Integer timeout;
 
@@ -79,7 +79,7 @@ public class CallsApplicationTransferRequest {
      * @param platform
      * @return This {@link CallsApplicationTransferRequest instance}.
      */
-    public CallsApplicationTransferRequest platform(CallsPlatform platform) {
+    public CallsApplicationTransferRequest platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -90,7 +90,7 @@ public class CallsApplicationTransferRequest {
      * @return platform
      */
     @JsonProperty("platform")
-    public CallsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -100,7 +100,7 @@ public class CallsApplicationTransferRequest {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(CallsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

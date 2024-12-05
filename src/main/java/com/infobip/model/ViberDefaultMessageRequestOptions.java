@@ -19,7 +19,7 @@ public class ViberDefaultMessageRequestOptions {
 
     private ViberMessageRequestSchedulingSettings schedule;
 
-    private ViberUrlOptions tracking;
+    private UrlOptions tracking;
 
     /**
      * Sets schedule.
@@ -58,7 +58,7 @@ public class ViberDefaultMessageRequestOptions {
      * @param tracking
      * @return This {@link ViberDefaultMessageRequestOptions instance}.
      */
-    public ViberDefaultMessageRequestOptions tracking(ViberUrlOptions tracking) {
+    public ViberDefaultMessageRequestOptions tracking(UrlOptions tracking) {
         this.tracking = tracking;
         return this;
     }
@@ -69,7 +69,7 @@ public class ViberDefaultMessageRequestOptions {
      * @return tracking
      */
     @JsonProperty("tracking")
-    public ViberUrlOptions getTracking() {
+    public UrlOptions getTracking() {
         return tracking;
     }
 
@@ -79,7 +79,7 @@ public class ViberDefaultMessageRequestOptions {
      * @param tracking
      */
     @JsonProperty("tracking")
-    public void setTracking(ViberUrlOptions tracking) {
+    public void setTracking(UrlOptions tracking) {
         this.tracking = tracking;
     }
 

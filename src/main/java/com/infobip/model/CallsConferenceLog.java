@@ -24,7 +24,7 @@ public class CallsConferenceLog {
 
     private String name;
 
-    private CallsPlatform platform;
+    private Platform platform;
 
     private OffsetDateTime startTime;
 
@@ -124,7 +124,7 @@ public class CallsConferenceLog {
      * @param platform
      * @return This {@link CallsConferenceLog instance}.
      */
-    public CallsConferenceLog platform(CallsPlatform platform) {
+    public CallsConferenceLog platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -135,7 +135,7 @@ public class CallsConferenceLog {
      * @return platform
      */
     @JsonProperty("platform")
-    public CallsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -145,7 +145,7 @@ public class CallsConferenceLog {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(CallsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

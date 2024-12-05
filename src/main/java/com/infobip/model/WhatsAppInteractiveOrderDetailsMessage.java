@@ -29,7 +29,7 @@ public class WhatsAppInteractiveOrderDetailsMessage {
 
     private String notifyUrl;
 
-    private WhatsAppUrlOptions urlOptions;
+    private UrlOptions urlOptions;
 
     private String entityId;
 
@@ -290,7 +290,7 @@ public class WhatsAppInteractiveOrderDetailsMessage {
      * @param urlOptions
      * @return This {@link WhatsAppInteractiveOrderDetailsMessage instance}.
      */
-    public WhatsAppInteractiveOrderDetailsMessage urlOptions(WhatsAppUrlOptions urlOptions) {
+    public WhatsAppInteractiveOrderDetailsMessage urlOptions(UrlOptions urlOptions) {
         this.urlOptions = urlOptions;
         return this;
     }
@@ -301,7 +301,7 @@ public class WhatsAppInteractiveOrderDetailsMessage {
      * @return urlOptions
      */
     @JsonProperty("urlOptions")
-    public WhatsAppUrlOptions getUrlOptions() {
+    public UrlOptions getUrlOptions() {
         return urlOptions;
     }
 
@@ -311,7 +311,7 @@ public class WhatsAppInteractiveOrderDetailsMessage {
      * @param urlOptions
      */
     @JsonProperty("urlOptions")
-    public void setUrlOptions(WhatsAppUrlOptions urlOptions) {
+    public void setUrlOptions(UrlOptions urlOptions) {
         this.urlOptions = urlOptions;
     }
 

@@ -41,7 +41,7 @@ public class MessagesApiDeliveryResult {
 
     private MessageError error;
 
-    private MessagesApiPlatform platform;
+    private Platform platform;
 
     private String deviceDetails;
 
@@ -576,7 +576,7 @@ public class MessagesApiDeliveryResult {
      * @param platform
      * @return This {@link MessagesApiDeliveryResult instance}.
      */
-    public MessagesApiDeliveryResult platform(MessagesApiPlatform platform) {
+    public MessagesApiDeliveryResult platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -587,7 +587,7 @@ public class MessagesApiDeliveryResult {
      * @return platform
      */
     @JsonProperty("platform")
-    public MessagesApiPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -597,7 +597,7 @@ public class MessagesApiDeliveryResult {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(MessagesApiPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

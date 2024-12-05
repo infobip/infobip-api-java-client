@@ -37,7 +37,7 @@ public class CallRequest {
 
     private String callsConfigurationId;
 
-    private CallsPlatform platform;
+    private Platform platform;
 
     private String parentCallId;
 
@@ -416,7 +416,7 @@ public class CallRequest {
      * @param platform
      * @return This {@link CallRequest instance}.
      */
-    public CallRequest platform(CallsPlatform platform) {
+    public CallRequest platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -427,7 +427,7 @@ public class CallRequest {
      * @return platform
      */
     @JsonProperty("platform")
-    public CallsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -437,7 +437,7 @@ public class CallRequest {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(CallsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

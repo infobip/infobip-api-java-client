@@ -23,7 +23,7 @@ public class EmailAddSuppression {
 
     private List<String> emailAddress = new ArrayList<>();
 
-    private EmailApiAddDeleteSuppressionType type;
+    private EmailAddDeleteSuppressionType type;
 
     /**
      * Sets domainName.
@@ -144,7 +144,7 @@ public class EmailAddSuppression {
      * @param type
      * @return This {@link EmailAddSuppression instance}.
      */
-    public EmailAddSuppression type(EmailApiAddDeleteSuppressionType type) {
+    public EmailAddSuppression type(EmailAddDeleteSuppressionType type) {
         this.type = type;
         return this;
     }
@@ -157,7 +157,7 @@ public class EmailAddSuppression {
      * @return type
      */
     @JsonProperty("type")
-    public EmailApiAddDeleteSuppressionType getType() {
+    public EmailAddDeleteSuppressionType getType() {
         return type;
     }
 
@@ -169,7 +169,7 @@ public class EmailAddSuppression {
      * @param type
      */
     @JsonProperty("type")
-    public void setType(EmailApiAddDeleteSuppressionType type) {
+    public void setType(EmailAddDeleteSuppressionType type) {
         this.type = type;
     }
 

@@ -26,7 +26,7 @@ public class CallsConferenceRecording {
 
     private String callsConfigurationId;
 
-    private CallsPlatform platform;
+    private Platform platform;
 
     private List<CallsRecordingFile> composedFiles = null;
 
@@ -162,7 +162,7 @@ public class CallsConferenceRecording {
      * @param platform
      * @return This {@link CallsConferenceRecording instance}.
      */
-    public CallsConferenceRecording platform(CallsPlatform platform) {
+    public CallsConferenceRecording platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -173,7 +173,7 @@ public class CallsConferenceRecording {
      * @return platform
      */
     @JsonProperty("platform")
-    public CallsPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -183,7 +183,7 @@ public class CallsConferenceRecording {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(CallsPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

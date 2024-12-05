@@ -19,6 +19,8 @@ import com.infobip.model.CallsAdvancedBody;
 import com.infobip.model.CallsBulkRequest;
 import com.infobip.model.CallsBulkResponse;
 import com.infobip.model.CallsBulkStatusResponse;
+import com.infobip.model.CallsCredentialsBody;
+import com.infobip.model.CallsCredentialsResponse;
 import com.infobip.model.CallsGetVoicesResponse;
 import com.infobip.model.CallsIpCoreGeneralStatus;
 import com.infobip.model.CallsLaunchScenarioRequest;
@@ -27,10 +29,14 @@ import com.infobip.model.CallsMultiBody;
 import com.infobip.model.CallsRecordedAudioFilesResponse;
 import com.infobip.model.CallsReportResponse;
 import com.infobip.model.CallsSearchResponse;
+import com.infobip.model.CallsSetupBody;
+import com.infobip.model.CallsSetupResponse;
 import com.infobip.model.CallsSingleBody;
 import com.infobip.model.CallsUpdateScenarioRequest;
 import com.infobip.model.CallsUpdateScenarioResponse;
 import com.infobip.model.CallsUpdateStatusRequest;
+import com.infobip.model.CallsUploadBody;
+import com.infobip.model.CallsUploadResponse;
 import com.infobip.model.CallsVoiceResponse;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -115,6 +121,132 @@ public class VoiceApi {
         return new CreateAVoiceIvrScenarioRequest(callsUpdateScenarioRequest);
     }
 
+    private RequestDefinition createNumberMaskingConfigurationDefinition(CallsSetupBody callsSetupBody) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/voice/masking/2/config")
+                .body(callsSetupBody)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * createNumberMaskingConfiguration request builder class.
+     */
+    public class CreateNumberMaskingConfigurationRequest {
+        private final CallsSetupBody callsSetupBody;
+
+        private CreateNumberMaskingConfigurationRequest(CallsSetupBody callsSetupBody) {
+            this.callsSetupBody =
+                    Objects.requireNonNull(callsSetupBody, "The required parameter 'callsSetupBody' is missing.");
+        }
+
+        /**
+         * Executes the createNumberMaskingConfiguration request.
+         *
+         * @return CallsSetupResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsSetupResponse execute() throws ApiException {
+            RequestDefinition createNumberMaskingConfigurationDefinition =
+                    createNumberMaskingConfigurationDefinition(callsSetupBody);
+            return apiClient.execute(
+                    createNumberMaskingConfigurationDefinition, new TypeReference<CallsSetupResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the createNumberMaskingConfiguration request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsSetupResponse> callback) {
+            RequestDefinition createNumberMaskingConfigurationDefinition =
+                    createNumberMaskingConfigurationDefinition(callsSetupBody);
+            return apiClient.executeAsync(
+                    createNumberMaskingConfigurationDefinition,
+                    new TypeReference<CallsSetupResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Create number masking configuration.
+     * <p>
+     * This method allows you to create masking configuration.
+     *
+     * @param callsSetupBody  (required)
+     * @return CreateNumberMaskingConfigurationRequest
+     */
+    public CreateNumberMaskingConfigurationRequest createNumberMaskingConfiguration(CallsSetupBody callsSetupBody) {
+        return new CreateNumberMaskingConfigurationRequest(callsSetupBody);
+    }
+
+    private RequestDefinition createNumberMaskingCredentialsDefinition(CallsCredentialsBody callsCredentialsBody) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/voice/masking/2/credentials")
+                .body(callsCredentialsBody)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * createNumberMaskingCredentials request builder class.
+     */
+    public class CreateNumberMaskingCredentialsRequest {
+        private final CallsCredentialsBody callsCredentialsBody;
+
+        private CreateNumberMaskingCredentialsRequest(CallsCredentialsBody callsCredentialsBody) {
+            this.callsCredentialsBody = Objects.requireNonNull(
+                    callsCredentialsBody, "The required parameter 'callsCredentialsBody' is missing.");
+        }
+
+        /**
+         * Executes the createNumberMaskingCredentials request.
+         *
+         * @return CallsCredentialsResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsCredentialsResponse execute() throws ApiException {
+            RequestDefinition createNumberMaskingCredentialsDefinition =
+                    createNumberMaskingCredentialsDefinition(callsCredentialsBody);
+            return apiClient.execute(
+                    createNumberMaskingCredentialsDefinition,
+                    new TypeReference<CallsCredentialsResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the createNumberMaskingCredentials request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsCredentialsResponse> callback) {
+            RequestDefinition createNumberMaskingCredentialsDefinition =
+                    createNumberMaskingCredentialsDefinition(callsCredentialsBody);
+            return apiClient.executeAsync(
+                    createNumberMaskingCredentialsDefinition,
+                    new TypeReference<CallsCredentialsResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Create number masking credentials.
+     * <p>
+     * This method allows you to create Voice number masking credentials.
+     *
+     * @param callsCredentialsBody  (required)
+     * @return CreateNumberMaskingCredentialsRequest
+     */
+    public CreateNumberMaskingCredentialsRequest createNumberMaskingCredentials(
+            CallsCredentialsBody callsCredentialsBody) {
+        return new CreateNumberMaskingCredentialsRequest(callsCredentialsBody);
+    }
+
     private RequestDefinition deleteAVoiceIvrScenarioDefinition(String id) {
         RequestDefinition.Builder builder = RequestDefinition.builder("DELETE", "/voice/ivr/1/scenarios/{id}")
                 .requiresAuthentication(true)
@@ -170,6 +302,113 @@ public class VoiceApi {
      */
     public DeleteAVoiceIvrScenarioRequest deleteAVoiceIvrScenario(String id) {
         return new DeleteAVoiceIvrScenarioRequest(id);
+    }
+
+    private RequestDefinition deleteNumberMaskingConfigurationDefinition(String key) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("DELETE", "/voice/masking/2/config/{key}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (key != null) {
+            builder.addPathParameter(new Parameter("key", key));
+        }
+        return builder.build();
+    }
+
+    /**
+     * deleteNumberMaskingConfiguration request builder class.
+     */
+    public class DeleteNumberMaskingConfigurationRequest {
+        private final String key;
+
+        private DeleteNumberMaskingConfigurationRequest(String key) {
+            this.key = Objects.requireNonNull(key, "The required parameter 'key' is missing.");
+        }
+
+        /**
+         * Executes the deleteNumberMaskingConfiguration request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition deleteNumberMaskingConfigurationDefinition =
+                    deleteNumberMaskingConfigurationDefinition(key);
+            apiClient.execute(deleteNumberMaskingConfigurationDefinition);
+        }
+
+        /**
+         * Executes the deleteNumberMaskingConfiguration request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition deleteNumberMaskingConfigurationDefinition =
+                    deleteNumberMaskingConfigurationDefinition(key);
+            return apiClient.executeAsync(deleteNumberMaskingConfigurationDefinition, callback);
+        }
+    }
+
+    /**
+     * Delete number masking configuration.
+     * <p>
+     * This method allows you to delete a Voice number masking configuration.
+     *
+     * @param key Masking configuration identifier. (required)
+     * @return DeleteNumberMaskingConfigurationRequest
+     */
+    public DeleteNumberMaskingConfigurationRequest deleteNumberMaskingConfiguration(String key) {
+        return new DeleteNumberMaskingConfigurationRequest(key);
+    }
+
+    private RequestDefinition deleteNumberMaskingCredentialsDefinition() {
+        RequestDefinition.Builder builder = RequestDefinition.builder("DELETE", "/voice/masking/2/credentials")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * deleteNumberMaskingCredentials request builder class.
+     */
+    public class DeleteNumberMaskingCredentialsRequest {
+
+        private DeleteNumberMaskingCredentialsRequest() {}
+
+        /**
+         * Executes the deleteNumberMaskingCredentials request.
+         *
+         * @return Object The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public Object execute() throws ApiException {
+            RequestDefinition deleteNumberMaskingCredentialsDefinition = deleteNumberMaskingCredentialsDefinition();
+            return apiClient.execute(
+                    deleteNumberMaskingCredentialsDefinition, new TypeReference<Object>() {}.getType());
+        }
+
+        /**
+         * Executes the deleteNumberMaskingCredentials request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Object> callback) {
+            RequestDefinition deleteNumberMaskingCredentialsDefinition = deleteNumberMaskingCredentialsDefinition();
+            return apiClient.executeAsync(
+                    deleteNumberMaskingCredentialsDefinition, new TypeReference<Object>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Delete number masking credentials.
+     * <p>
+     * This method allows you to delete Voice number masking credentials.
+     *
+     * @return DeleteNumberMaskingCredentialsRequest
+     */
+    public DeleteNumberMaskingCredentialsRequest deleteNumberMaskingCredentials() {
+        return new DeleteNumberMaskingCredentialsRequest();
     }
 
     private RequestDefinition getAVoiceIvrScenarioDefinition(String id) {
@@ -230,6 +469,173 @@ public class VoiceApi {
      */
     public GetAVoiceIvrScenarioRequest getAVoiceIvrScenario(String id) {
         return new GetAVoiceIvrScenarioRequest(id);
+    }
+
+    private RequestDefinition getNumberMaskingConfigurationDefinition(String key) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/voice/masking/2/config/{key}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (key != null) {
+            builder.addPathParameter(new Parameter("key", key));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getNumberMaskingConfiguration request builder class.
+     */
+    public class GetNumberMaskingConfigurationRequest {
+        private final String key;
+
+        private GetNumberMaskingConfigurationRequest(String key) {
+            this.key = Objects.requireNonNull(key, "The required parameter 'key' is missing.");
+        }
+
+        /**
+         * Executes the getNumberMaskingConfiguration request.
+         *
+         * @return CallsSetupResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsSetupResponse execute() throws ApiException {
+            RequestDefinition getNumberMaskingConfigurationDefinition = getNumberMaskingConfigurationDefinition(key);
+            return apiClient.execute(
+                    getNumberMaskingConfigurationDefinition, new TypeReference<CallsSetupResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getNumberMaskingConfiguration request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsSetupResponse> callback) {
+            RequestDefinition getNumberMaskingConfigurationDefinition = getNumberMaskingConfigurationDefinition(key);
+            return apiClient.executeAsync(
+                    getNumberMaskingConfigurationDefinition,
+                    new TypeReference<CallsSetupResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get number masking configuration.
+     * <p>
+     * This method allows you to get a Voice number masking configuration.
+     *
+     * @param key Masking configuration identifier. (required)
+     * @return GetNumberMaskingConfigurationRequest
+     */
+    public GetNumberMaskingConfigurationRequest getNumberMaskingConfiguration(String key) {
+        return new GetNumberMaskingConfigurationRequest(key);
+    }
+
+    private RequestDefinition getNumberMaskingConfigurationsDefinition() {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/voice/masking/2/config")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * getNumberMaskingConfigurations request builder class.
+     */
+    public class GetNumberMaskingConfigurationsRequest {
+
+        private GetNumberMaskingConfigurationsRequest() {}
+
+        /**
+         * Executes the getNumberMaskingConfigurations request.
+         *
+         * @return List&lt;CallsSetupResponse&gt; The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public List<CallsSetupResponse> execute() throws ApiException {
+            RequestDefinition getNumberMaskingConfigurationsDefinition = getNumberMaskingConfigurationsDefinition();
+            return apiClient.execute(
+                    getNumberMaskingConfigurationsDefinition,
+                    new TypeReference<List<CallsSetupResponse>>() {}.getType());
+        }
+
+        /**
+         * Executes the getNumberMaskingConfigurations request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<List<CallsSetupResponse>> callback) {
+            RequestDefinition getNumberMaskingConfigurationsDefinition = getNumberMaskingConfigurationsDefinition();
+            return apiClient.executeAsync(
+                    getNumberMaskingConfigurationsDefinition,
+                    new TypeReference<List<CallsSetupResponse>>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get number masking configurations.
+     * <p>
+     * This method allows you to get all voice number masking configurations.
+     *
+     * @return GetNumberMaskingConfigurationsRequest
+     */
+    public GetNumberMaskingConfigurationsRequest getNumberMaskingConfigurations() {
+        return new GetNumberMaskingConfigurationsRequest();
+    }
+
+    private RequestDefinition getNumberMaskingCredentialsDefinition() {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/voice/masking/2/credentials")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * getNumberMaskingCredentials request builder class.
+     */
+    public class GetNumberMaskingCredentialsRequest {
+
+        private GetNumberMaskingCredentialsRequest() {}
+
+        /**
+         * Executes the getNumberMaskingCredentials request.
+         *
+         * @return CallsCredentialsResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsCredentialsResponse execute() throws ApiException {
+            RequestDefinition getNumberMaskingCredentialsDefinition = getNumberMaskingCredentialsDefinition();
+            return apiClient.execute(
+                    getNumberMaskingCredentialsDefinition, new TypeReference<CallsCredentialsResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getNumberMaskingCredentials request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsCredentialsResponse> callback) {
+            RequestDefinition getNumberMaskingCredentialsDefinition = getNumberMaskingCredentialsDefinition();
+            return apiClient.executeAsync(
+                    getNumberMaskingCredentialsDefinition,
+                    new TypeReference<CallsCredentialsResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get number masking credentials.
+     * <p>
+     * This method allows you to get Voice number masking credentials.
+     *
+     * @return GetNumberMaskingCredentialsRequest
+     */
+    public GetNumberMaskingCredentialsRequest getNumberMaskingCredentials() {
+        return new GetNumberMaskingCredentialsRequest();
     }
 
     private RequestDefinition getSentBulksDefinition(String bulkId) {
@@ -1375,6 +1781,139 @@ public class VoiceApi {
         return new SendVoiceMessagesWithAnIvrScenarioRequest(callsLaunchScenarioRequest);
     }
 
+    private RequestDefinition updateNumberMaskingConfigurationDefinition(String key, CallsSetupBody callsSetupBody) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("PUT", "/voice/masking/2/config/{key}")
+                .body(callsSetupBody)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (key != null) {
+            builder.addPathParameter(new Parameter("key", key));
+        }
+        return builder.build();
+    }
+
+    /**
+     * updateNumberMaskingConfiguration request builder class.
+     */
+    public class UpdateNumberMaskingConfigurationRequest {
+        private final String key;
+        private final CallsSetupBody callsSetupBody;
+
+        private UpdateNumberMaskingConfigurationRequest(String key, CallsSetupBody callsSetupBody) {
+            this.key = Objects.requireNonNull(key, "The required parameter 'key' is missing.");
+            this.callsSetupBody =
+                    Objects.requireNonNull(callsSetupBody, "The required parameter 'callsSetupBody' is missing.");
+        }
+
+        /**
+         * Executes the updateNumberMaskingConfiguration request.
+         *
+         * @return CallsSetupResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsSetupResponse execute() throws ApiException {
+            RequestDefinition updateNumberMaskingConfigurationDefinition =
+                    updateNumberMaskingConfigurationDefinition(key, callsSetupBody);
+            return apiClient.execute(
+                    updateNumberMaskingConfigurationDefinition, new TypeReference<CallsSetupResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the updateNumberMaskingConfiguration request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsSetupResponse> callback) {
+            RequestDefinition updateNumberMaskingConfigurationDefinition =
+                    updateNumberMaskingConfigurationDefinition(key, callsSetupBody);
+            return apiClient.executeAsync(
+                    updateNumberMaskingConfigurationDefinition,
+                    new TypeReference<CallsSetupResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Update number masking configuration.
+     * <p>
+     * This method allows you to update a Voice number masking configuration.
+     *
+     * @param key Masking configuration identifier. (required)
+     * @param callsSetupBody  (required)
+     * @return UpdateNumberMaskingConfigurationRequest
+     */
+    public UpdateNumberMaskingConfigurationRequest updateNumberMaskingConfiguration(
+            String key, CallsSetupBody callsSetupBody) {
+        return new UpdateNumberMaskingConfigurationRequest(key, callsSetupBody);
+    }
+
+    private RequestDefinition updateNumberMaskingCredentialsDefinition(CallsCredentialsBody callsCredentialsBody) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("PUT", "/voice/masking/2/credentials")
+                .body(callsCredentialsBody)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * updateNumberMaskingCredentials request builder class.
+     */
+    public class UpdateNumberMaskingCredentialsRequest {
+        private final CallsCredentialsBody callsCredentialsBody;
+
+        private UpdateNumberMaskingCredentialsRequest(CallsCredentialsBody callsCredentialsBody) {
+            this.callsCredentialsBody = Objects.requireNonNull(
+                    callsCredentialsBody, "The required parameter 'callsCredentialsBody' is missing.");
+        }
+
+        /**
+         * Executes the updateNumberMaskingCredentials request.
+         *
+         * @return CallsCredentialsResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsCredentialsResponse execute() throws ApiException {
+            RequestDefinition updateNumberMaskingCredentialsDefinition =
+                    updateNumberMaskingCredentialsDefinition(callsCredentialsBody);
+            return apiClient.execute(
+                    updateNumberMaskingCredentialsDefinition,
+                    new TypeReference<CallsCredentialsResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the updateNumberMaskingCredentials request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsCredentialsResponse> callback) {
+            RequestDefinition updateNumberMaskingCredentialsDefinition =
+                    updateNumberMaskingCredentialsDefinition(callsCredentialsBody);
+            return apiClient.executeAsync(
+                    updateNumberMaskingCredentialsDefinition,
+                    new TypeReference<CallsCredentialsResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Update number masking credentials.
+     * <p>
+     * This method allows you to update Voice number masking credentials.
+     *
+     * @param callsCredentialsBody  (required)
+     * @return UpdateNumberMaskingCredentialsRequest
+     */
+    public UpdateNumberMaskingCredentialsRequest updateNumberMaskingCredentials(
+            CallsCredentialsBody callsCredentialsBody) {
+        return new UpdateNumberMaskingCredentialsRequest(callsCredentialsBody);
+    }
+
     private RequestDefinition updateVoiceIvrScenarioDefinition(
             String id, CallsUpdateScenarioRequest callsUpdateScenarioRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder("PUT", "/voice/ivr/1/scenarios/{id}")
@@ -1443,5 +1982,62 @@ public class VoiceApi {
     public UpdateVoiceIvrScenarioRequest updateVoiceIvrScenario(
             String id, CallsUpdateScenarioRequest callsUpdateScenarioRequest) {
         return new UpdateVoiceIvrScenarioRequest(id, callsUpdateScenarioRequest);
+    }
+
+    private RequestDefinition uploadAudioFilesDefinition(CallsUploadBody callsUploadBody) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/voice/masking/1/upload")
+                .body(callsUploadBody)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * uploadAudioFiles request builder class.
+     */
+    public class UploadAudioFilesRequest {
+        private final CallsUploadBody callsUploadBody;
+
+        private UploadAudioFilesRequest(CallsUploadBody callsUploadBody) {
+            this.callsUploadBody =
+                    Objects.requireNonNull(callsUploadBody, "The required parameter 'callsUploadBody' is missing.");
+        }
+
+        /**
+         * Executes the uploadAudioFiles request.
+         *
+         * @return CallsUploadResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsUploadResponse execute() throws ApiException {
+            RequestDefinition uploadAudioFilesDefinition = uploadAudioFilesDefinition(callsUploadBody);
+            return apiClient.execute(uploadAudioFilesDefinition, new TypeReference<CallsUploadResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the uploadAudioFiles request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsUploadResponse> callback) {
+            RequestDefinition uploadAudioFilesDefinition = uploadAudioFilesDefinition(callsUploadBody);
+            return apiClient.executeAsync(
+                    uploadAudioFilesDefinition, new TypeReference<CallsUploadResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Upload audio files.
+     * <p>
+     * This method allows uploading audio files that can be used on Infobip Voice platform. The method accepts either a URL or an uploaded audio file in the request body. Using both or neither will cause the request to be rejected.
+     *
+     * @param callsUploadBody  (required)
+     * @return UploadAudioFilesRequest
+     */
+    public UploadAudioFilesRequest uploadAudioFiles(CallsUploadBody callsUploadBody) {
+        return new UploadAudioFilesRequest(callsUploadBody);
     }
 }

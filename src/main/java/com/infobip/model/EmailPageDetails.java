@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * Paging response.
  */
-public class EmailApiPageDetails {
+public class EmailPageDetails {
 
     private Integer page;
 
@@ -30,9 +30,9 @@ public class EmailApiPageDetails {
      * The field is required.
      *
      * @param page
-     * @return This {@link EmailApiPageDetails instance}.
+     * @return This {@link EmailPageDetails instance}.
      */
-    public EmailApiPageDetails page(Integer page) {
+    public EmailPageDetails page(Integer page) {
         this.page = page;
         return this;
     }
@@ -76,9 +76,9 @@ public class EmailApiPageDetails {
      * The field is required.
      *
      * @param size
-     * @return This {@link EmailApiPageDetails instance}.
+     * @return This {@link EmailPageDetails instance}.
      */
-    public EmailApiPageDetails size(Integer size) {
+    public EmailPageDetails size(Integer size) {
         this.size = size;
         return this;
     }
@@ -121,9 +121,8 @@ public class EmailApiPageDetails {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        EmailApiPageDetails emailApiPageDetails = (EmailApiPageDetails) o;
-        return Objects.equals(this.page, emailApiPageDetails.page)
-                && Objects.equals(this.size, emailApiPageDetails.size);
+        EmailPageDetails emailPageDetails = (EmailPageDetails) o;
+        return Objects.equals(this.page, emailPageDetails.page) && Objects.equals(this.size, emailPageDetails.size);
     }
 
     @Override
@@ -135,7 +134,7 @@ public class EmailApiPageDetails {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class EmailApiPageDetails {")
+                .append("class EmailPageDetails {")
                 .append(newLine)
                 .append("    page: ")
                 .append(toIndentedString(page))

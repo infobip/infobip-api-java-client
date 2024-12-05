@@ -10,7 +10,6 @@
 package com.infobip.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.google.common.annotations.Beta;
 import com.infobip.ApiCallback;
 import com.infobip.ApiClient;
 import com.infobip.ApiException;
@@ -28,6 +27,7 @@ import com.infobip.model.SmsPreviewResponse;
 import com.infobip.model.SmsRequest;
 import com.infobip.model.SmsResponse;
 import com.infobip.model.SmsUpdateStatusRequest;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -314,7 +314,6 @@ public class SmsApi {
      * @return GetOutboundSmsMessageDeliveryReportsRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about the SMS channel and its use cases</a>
      */
-    @Beta
     public GetOutboundSmsMessageDeliveryReportsRequest getOutboundSmsMessageDeliveryReports() {
         return new GetOutboundSmsMessageDeliveryReportsRequest();
     }
@@ -327,8 +326,8 @@ public class SmsApi {
             List<String> bulkId,
             List<String> messageId,
             MessageGeneralStatus generalStatus,
-            String sentSince,
-            String sentUntil,
+            OffsetDateTime sentSince,
+            OffsetDateTime sentUntil,
             Integer limit,
             String entityId,
             String applicationId,
@@ -396,8 +395,8 @@ public class SmsApi {
         private List<String> bulkId;
         private List<String> messageId;
         private MessageGeneralStatus generalStatus;
-        private String sentSince;
-        private String sentUntil;
+        private OffsetDateTime sentSince;
+        private OffsetDateTime sentUntil;
         private Integer limit;
         private String entityId;
         private String applicationId;
@@ -488,7 +487,7 @@ public class SmsApi {
          * @param sentSince The logs will only include messages sent after this date. Use it together with sentUntil to return a time range or if you want to fetch more than 1000 logs allowed per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
          * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsRequest sentSince(String sentSince) {
+        public GetOutboundSmsMessageLogsRequest sentSince(OffsetDateTime sentSince) {
             this.sentSince = sentSince;
             return this;
         }
@@ -499,7 +498,7 @@ public class SmsApi {
          * @param sentUntil The logs will only include messages sent before this date. Use it together with sentSince to return a time range or if you want to fetch more than 1000 logs allowed per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
          * @return GetOutboundSmsMessageLogsRequest
          */
-        public GetOutboundSmsMessageLogsRequest sentUntil(String sentUntil) {
+        public GetOutboundSmsMessageLogsRequest sentUntil(OffsetDateTime sentUntil) {
             this.sentUntil = sentUntil;
             return this;
         }
@@ -607,7 +606,6 @@ public class SmsApi {
      * @return GetOutboundSmsMessageLogsRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about the SMS channel and its use cases</a>
      */
-    @Beta
     public GetOutboundSmsMessageLogsRequest getOutboundSmsMessageLogs() {
         return new GetOutboundSmsMessageLogsRequest();
     }
@@ -908,7 +906,6 @@ public class SmsApi {
      * @return SendSmsMessagesRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about the SMS channel and its use cases</a>
      */
-    @Beta
     public SendSmsMessagesRequest sendSmsMessages(SmsRequest smsRequest) {
         return new SendSmsMessagesRequest(smsRequest);
     }
