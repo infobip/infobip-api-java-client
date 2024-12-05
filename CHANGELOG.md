@@ -22,13 +22,18 @@ If you find out that something was not addressed properly, please submit an issu
 ### Changed
 * **Fixes and changes**
   * Changed 'sentAt', 'doneAt' field type in [MmsReport](src/main/java/com/infobip/model/MmsReport.java) from String to OffsetDateTime since it didn't correspond to the state of the endpoint.
+  * Across all voice models, the 'applicationId' field has been removed and replaced with the 'platform' field, as it better reflects the state of the endpoint.
 
 * **Removed classes and unified structures**
   * Removed delivery time window configuration classes (`SmsDeliveryTimeWindow`, `MmsDeliveryTimeWindow`, `ViberDeliveryTimeWindow`, `CallRoutingAllowedTimeWindow`, `CallsDeliveryTimeWindow`, `SmsDeliveryTimeWindow`, `CallsTimeWindow`) in favor of a unified class: [DeliveryTimeWindow](src/main/java/com/infobip/model/DeliveryTimeWindow.java)
   * Removed delivery time configuration classes (`SmsDeliveryTimeFrom`, `SmsDeliveryTimeTo`, `MmsDeliveryTime`, `ViberDeliveryTime`, `CallsTimeWindowPoint`, `WebRtcTimeOfDay`, `CallRoutingAllowedTimeFrom`, `CallRoutingAllowedTimeTo`, `WebRtcTimeOfDay`) in favor of a unified class: [DeliveryTime](src/main/java/com/infobip/model/DeliveryTime.java)
+  * Removed URL options configuration classes (`MessagesApiUrlOptions`, `ViberUrlOptions`, `WhatsAppUrlOptions`) in favor of a unified class: [UrlOptions](src/main/java/com/infobip/model/UrlOptions.java)
+  * Removed platform configuration class (`ViberPlatform`, `MessagesApiPlatform`) in favor of a unified class: [Platform](src/main/java/com/infobip/model/Platform.java)
+  * Removed TurkeyIys options configuration classes (`MessagesApiTurkeyIysOptions`, `ViberTurkeyIysOptions`, `SmsTurkeyIysOptions`) in favor of a unified class: [TurkeyIysOptions](src/main/java/com/infobip/model/TurkeyIysOptions.java)
   * Removed delivery day enumeration classes (`SmsDeliveryDay`, `MmsDeliveryDay`, `CallsDeliveryDay`, `CallRoutingAllowedDay`) in favor of a unified class: [DeliveryDay](src/main/java/com/infobip/model/DeliveryDay.java)
-  * Removed recipient type enumeration class (`SmsIysRecipientType`) in favor of a unified class: [RecipientType](src/main/java/com/infobip/model/RecipientType.java)
-
+  * Removed recipient type enumeration classes (`SmsIysRecipientType`, `ViberRecipientType`, `MessagesApiRecipientType`) in favor of a unified class: [IysRecipientType](src/main/java/com/infobip/model/IysRecipientType.java)
+  * Removed validity period configuration classes (`ViberValidityPeriod`, `MessagesApiValidityPeriod`) in favor of a unified class: [IysRecipientType](src/main/java/com/infobip/model/IysRecipientType.java)
+  * Removed validity period time unit enumeration classes (`ViberValidityPeriodTimeUnit`, `MessagesApiValidityPeriodTimeUnit`) in favor of a unified class: [IysRecipientType](src/main/java/com/infobip/model/IysRecipientType.java)
 
 ## [ [4.4.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.4.0) ] - 2024-11-19
 
