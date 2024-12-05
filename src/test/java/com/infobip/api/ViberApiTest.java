@@ -45,7 +45,7 @@ class ViberApiTest extends ApiTest {
         String givenFailoverFrom = "SMS Sender Number";
         String givenFailoverText = "Failover message text";
         Integer givenFailoverValidityPeriod = 2;
-        ViberValidityPeriodTimeUnit givenFailoverValidityPeriodTimeUnit = ViberValidityPeriodTimeUnit.HOURS;
+        ValidityPeriodTimeUnit givenFailoverValidityPeriodTimeUnit = ValidityPeriodTimeUnit.HOURS;
         var givenApplicationId = "applicationId";
         var givenEntityId = "entity";
 
@@ -194,7 +194,7 @@ class ViberApiTest extends ApiTest {
         String givenFailoverFrom = "SMS Sender Number";
         String givenFailoverText = "Failover message text";
         Integer givenFailoverValidityPeriod = 2;
-        ViberValidityPeriodTimeUnit givenFailoverValidityPeriodTimeUnit = ViberValidityPeriodTimeUnit.HOURS;
+        ValidityPeriodTimeUnit givenFailoverValidityPeriodTimeUnit = ValidityPeriodTimeUnit.HOURS;
         var givenApplicationId = "applicationId";
         var givenEntityId = "entityId";
 
@@ -328,7 +328,7 @@ class ViberApiTest extends ApiTest {
         String givenFailoverFrom = "SMS Sender Number";
         String givenFailoverText = "Failover message text";
         Integer givenFailoverValidityPeriod = 2;
-        ViberValidityPeriodTimeUnit givenFailoverValidityPeriodTimeUnit = ViberValidityPeriodTimeUnit.HOURS;
+        ValidityPeriodTimeUnit givenFailoverValidityPeriodTimeUnit = ValidityPeriodTimeUnit.HOURS;
         var givenEntityId = "entity";
         var givenApplicationId = "application";
 
@@ -457,7 +457,7 @@ class ViberApiTest extends ApiTest {
         String givenFailoverFrom = "SMS Sender Number";
         String givenFailoverText = "Failover message text";
         Integer givenFailoverValidityPeriod = 2;
-        ViberValidityPeriodTimeUnit givenFailoverValidityPeriodTimeUnit = ViberValidityPeriodTimeUnit.HOURS;
+        ValidityPeriodTimeUnit givenFailoverValidityPeriodTimeUnit = ValidityPeriodTimeUnit.HOURS;
         String givenNotifyUrl = "string";
         Boolean givenShortenUrl = true;
         Boolean givenTrackClicks = true;

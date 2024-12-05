@@ -19,7 +19,7 @@ public class MessagesApiEventOptions {
 
     private Platform platform;
 
-    private MessagesApiValidityPeriod validityPeriod;
+    private ValidityPeriod validityPeriod;
 
     /**
      * Sets platform.
@@ -58,7 +58,7 @@ public class MessagesApiEventOptions {
      * @param validityPeriod
      * @return This {@link MessagesApiEventOptions instance}.
      */
-    public MessagesApiEventOptions validityPeriod(MessagesApiValidityPeriod validityPeriod) {
+    public MessagesApiEventOptions validityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
         return this;
     }
@@ -69,7 +69,7 @@ public class MessagesApiEventOptions {
      * @return validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public MessagesApiValidityPeriod getValidityPeriod() {
+    public ValidityPeriod getValidityPeriod() {
         return validityPeriod;
     }
 
@@ -79,7 +79,7 @@ public class MessagesApiEventOptions {
      * @param validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public void setValidityPeriod(MessagesApiValidityPeriod validityPeriod) {
+    public void setValidityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
     }
 

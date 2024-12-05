@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Message validity period. Once expired, the message won&#39;t be sent. Validity period longer than 48h is not supported. If exceeded, it will be automatically set to 48h.
+ * Message validity period. Once expired, the message won&#39;t be sent. Validity period longer than 48h is not supported. If exceeded, it will be automatically set to 48h. Minimal value is 10 seconds.
  */
-public class SmsValidityPeriod {
+public class ValidityPeriod {
 
     private Integer amount;
 
@@ -30,9 +30,9 @@ public class SmsValidityPeriod {
      * The field is required.
      *
      * @param amount
-     * @return This {@link SmsValidityPeriod instance}.
+     * @return This {@link ValidityPeriod instance}.
      */
-    public SmsValidityPeriod amount(Integer amount) {
+    public ValidityPeriod amount(Integer amount) {
         this.amount = amount;
         return this;
     }
@@ -71,9 +71,9 @@ public class SmsValidityPeriod {
      * Sets timeUnit.
      *
      * @param timeUnit
-     * @return This {@link SmsValidityPeriod instance}.
+     * @return This {@link ValidityPeriod instance}.
      */
-    public SmsValidityPeriod timeUnit(ValidityPeriodTimeUnit timeUnit) {
+    public ValidityPeriod timeUnit(ValidityPeriodTimeUnit timeUnit) {
         this.timeUnit = timeUnit;
         return this;
     }
@@ -106,9 +106,9 @@ public class SmsValidityPeriod {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SmsValidityPeriod smsValidityPeriod = (SmsValidityPeriod) o;
-        return Objects.equals(this.amount, smsValidityPeriod.amount)
-                && Objects.equals(this.timeUnit, smsValidityPeriod.timeUnit);
+        ValidityPeriod messagesApiValidityPeriod = (ValidityPeriod) o;
+        return Objects.equals(this.amount, messagesApiValidityPeriod.amount)
+                && Objects.equals(this.timeUnit, messagesApiValidityPeriod.timeUnit);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class SmsValidityPeriod {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class SmsValidityPeriod {")
+                .append("class MessagesApiValidityPeriod {")
                 .append(newLine)
                 .append("    amount: ")
                 .append(toIndentedString(amount))

@@ -379,7 +379,7 @@ class SmsApiTest extends ApiTest {
                         .transliteration(givenTransliteration)
                         .language(new SmsLanguageV3().languageCode(givenLanguageCode)))
                 .options(new SmsMessageOptions()
-                        .validityPeriod(new SmsValidityPeriod()
+                        .validityPeriod(new ValidityPeriod()
                                 .timeUnit(givenValidityPeriodTimeUnit)
                                 .amount(givenValidityPeriod))
                         .campaignReferenceId(givenCampaingReferenceId))
@@ -580,7 +580,7 @@ class SmsApiTest extends ApiTest {
                         .dataCoding(givenDataCodingMessage1)
                         .esmClass(givenEsmClassMessage1))
                 .options(new SmsMessageOptions()
-                        .validityPeriod(new SmsValidityPeriod()
+                        .validityPeriod(new ValidityPeriod()
                                 .amount(givenValidityPeriodMessage1)
                                 .timeUnit(givenValidityPeriodTimeUnit)));
 

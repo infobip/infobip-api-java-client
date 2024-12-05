@@ -19,7 +19,7 @@ public class ViberMessageOptions {
 
     private Platform platform;
 
-    private ViberValidityPeriod validityPeriod;
+    private ValidityPeriod validityPeriod;
 
     private DeliveryTimeWindow deliveryTimeWindow;
 
@@ -72,7 +72,7 @@ public class ViberMessageOptions {
      * @param validityPeriod
      * @return This {@link ViberMessageOptions instance}.
      */
-    public ViberMessageOptions validityPeriod(ViberValidityPeriod validityPeriod) {
+    public ViberMessageOptions validityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
         return this;
     }
@@ -83,7 +83,7 @@ public class ViberMessageOptions {
      * @return validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public ViberValidityPeriod getValidityPeriod() {
+    public ValidityPeriod getValidityPeriod() {
         return validityPeriod;
     }
 
@@ -93,7 +93,7 @@ public class ViberMessageOptions {
      * @param validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public void setValidityPeriod(ViberValidityPeriod validityPeriod) {
+    public void setValidityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
     }
 

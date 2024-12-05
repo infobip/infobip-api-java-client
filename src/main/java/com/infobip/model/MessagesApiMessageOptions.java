@@ -19,7 +19,7 @@ public class MessagesApiMessageOptions {
 
     private Platform platform;
 
-    private MessagesApiValidityPeriod validityPeriod;
+    private ValidityPeriod validityPeriod;
 
     private Boolean adaptationMode;
 
@@ -64,7 +64,7 @@ public class MessagesApiMessageOptions {
      * @param validityPeriod
      * @return This {@link MessagesApiMessageOptions instance}.
      */
-    public MessagesApiMessageOptions validityPeriod(MessagesApiValidityPeriod validityPeriod) {
+    public MessagesApiMessageOptions validityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
         return this;
     }
@@ -75,7 +75,7 @@ public class MessagesApiMessageOptions {
      * @return validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public MessagesApiValidityPeriod getValidityPeriod() {
+    public ValidityPeriod getValidityPeriod() {
         return validityPeriod;
     }
 
@@ -85,7 +85,7 @@ public class MessagesApiMessageOptions {
      * @param validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public void setValidityPeriod(MessagesApiValidityPeriod validityPeriod) {
+    public void setValidityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
     }
 

@@ -19,7 +19,7 @@ public class SmsMessageOptions {
 
     private Platform platform;
 
-    private SmsValidityPeriod validityPeriod;
+    private ValidityPeriod validityPeriod;
 
     private DeliveryTimeWindow deliveryTimeWindow;
 
@@ -66,7 +66,7 @@ public class SmsMessageOptions {
      * @param validityPeriod
      * @return This {@link SmsMessageOptions instance}.
      */
-    public SmsMessageOptions validityPeriod(SmsValidityPeriod validityPeriod) {
+    public SmsMessageOptions validityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
         return this;
     }
@@ -77,7 +77,7 @@ public class SmsMessageOptions {
      * @return validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public SmsValidityPeriod getValidityPeriod() {
+    public ValidityPeriod getValidityPeriod() {
         return validityPeriod;
     }
 
@@ -87,7 +87,7 @@ public class SmsMessageOptions {
      * @param validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public void setValidityPeriod(SmsValidityPeriod validityPeriod) {
+    public void setValidityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
     }
 

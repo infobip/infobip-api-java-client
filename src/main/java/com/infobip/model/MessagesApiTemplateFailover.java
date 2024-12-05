@@ -25,7 +25,7 @@ public class MessagesApiTemplateFailover implements MessagesApiBaseFailover {
 
     private MessagesApiTemplateMessageContent content;
 
-    private MessagesApiValidityPeriod validityPeriod;
+    private ValidityPeriod validityPeriod;
 
     /**
      * Sets channel.
@@ -184,7 +184,7 @@ public class MessagesApiTemplateFailover implements MessagesApiBaseFailover {
      * @param validityPeriod
      * @return This {@link MessagesApiTemplateFailover instance}.
      */
-    public MessagesApiTemplateFailover validityPeriod(MessagesApiValidityPeriod validityPeriod) {
+    public MessagesApiTemplateFailover validityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
         return this;
     }
@@ -195,7 +195,7 @@ public class MessagesApiTemplateFailover implements MessagesApiBaseFailover {
      * @return validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public MessagesApiValidityPeriod getValidityPeriod() {
+    public ValidityPeriod getValidityPeriod() {
         return validityPeriod;
     }
 
@@ -205,7 +205,7 @@ public class MessagesApiTemplateFailover implements MessagesApiBaseFailover {
      * @param validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public void setValidityPeriod(MessagesApiValidityPeriod validityPeriod) {
+    public void setValidityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
     }
 

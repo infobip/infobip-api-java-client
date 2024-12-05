@@ -23,7 +23,7 @@ public class ViberSmsFailover {
 
     private Integer validityPeriod;
 
-    private ViberValidityPeriodTimeUnit validityPeriodTimeUnit;
+    private ValidityPeriodTimeUnit validityPeriodTimeUnit;
 
     /**
      * Sets from.
@@ -163,7 +163,7 @@ public class ViberSmsFailover {
      * @param validityPeriodTimeUnit
      * @return This {@link ViberSmsFailover instance}.
      */
-    public ViberSmsFailover validityPeriodTimeUnit(ViberValidityPeriodTimeUnit validityPeriodTimeUnit) {
+    public ViberSmsFailover validityPeriodTimeUnit(ValidityPeriodTimeUnit validityPeriodTimeUnit) {
         this.validityPeriodTimeUnit = validityPeriodTimeUnit;
         return this;
     }
@@ -174,7 +174,7 @@ public class ViberSmsFailover {
      * @return validityPeriodTimeUnit
      */
     @JsonProperty("validityPeriodTimeUnit")
-    public ViberValidityPeriodTimeUnit getValidityPeriodTimeUnit() {
+    public ValidityPeriodTimeUnit getValidityPeriodTimeUnit() {
         return validityPeriodTimeUnit;
     }
 
@@ -184,7 +184,7 @@ public class ViberSmsFailover {
      * @param validityPeriodTimeUnit
      */
     @JsonProperty("validityPeriodTimeUnit")
-    public void setValidityPeriodTimeUnit(ViberValidityPeriodTimeUnit validityPeriodTimeUnit) {
+    public void setValidityPeriodTimeUnit(ValidityPeriodTimeUnit validityPeriodTimeUnit) {
         this.validityPeriodTimeUnit = validityPeriodTimeUnit;
     }
 
