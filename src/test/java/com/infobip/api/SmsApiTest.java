@@ -974,6 +974,8 @@ class SmsApiTest extends ApiTest {
         String givenCurrencyMessage2 = "HRK";
         var givenApplicationId = "applicationId";
         var givenEntityId = "entityId";
+        var givenTextContent = "hello";
+        var givenContent = new SmsTextContent().text(givenTextContent);
 
         String givenResponse = String.format(
                 "{" + "  \"results\": ["
@@ -1014,6 +1016,9 @@ class SmsApiTest extends ApiTest {
                         + "      \"destination\": \"%s\","
                         + "      \"sentAt\": \"%s\","
                         + "      \"doneAt\": \"%s\","
+                        + "      \"content\": {"
+                        + "        \"text\": \"%s\""
+                        + "      },"
                         + "      \"smsCount\": %d,"
                         + "      \"price\": {"
                         + "        \"pricePerMessage\": %g,"
@@ -1063,6 +1068,7 @@ class SmsApiTest extends ApiTest {
                 givenToMessage2,
                 givenSendAtMessage2,
                 givenDoneAtMessage2,
+                givenTextContent,
                 givenSmsCountMessage2,
                 givenPricePerMessageMessage2,
                 givenCurrencyMessage2,
@@ -1130,7 +1136,7 @@ class SmsApiTest extends ApiTest {
             then(anotherLog.getSentAt()).isEqualTo(expectedSendAtMessage2);
             then(anotherLog.getDoneAt()).isEqualTo(expectedDoneAtMessage2);
             then(anotherLog.getSender()).isNull();
-            then(anotherLog.getContent()).isNull();
+            then(anotherLog.getContent()).isEqualTo(givenContent);
             then(anotherLog.getMccMnc()).isNull();
             thenPriceIsEqualTo(anotherLog.getPrice(), givenPricePerMessageMessage2, givenCurrencyMessage2);
             thenStatusIsDelivered(anotherLog.getStatus());
