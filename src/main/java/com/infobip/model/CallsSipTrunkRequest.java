@@ -29,18 +29,20 @@ import java.util.Objects;
 })
 public abstract class CallsSipTrunkRequest {
 
-    protected final CallsPegasusSipTrunkType type;
+    protected final CallsSipTrunkType type;
 
     /**
      * Constructs a new {@link CallsSipTrunkRequest} instance.
      */
     public CallsSipTrunkRequest(String type) {
-        this.type = CallsPegasusSipTrunkType.fromValue(type);
+        this.type = CallsSipTrunkType.fromValue(type);
     }
 
     private String name;
 
     private CallsSipTrunkLocation location;
+
+    private Boolean tls;
 
     private Boolean internationalCallsAllowed;
 
@@ -54,7 +56,7 @@ public abstract class CallsSipTrunkRequest {
      * @return type
      */
     @JsonProperty("type")
-    public CallsPegasusSipTrunkType getType() {
+    public CallsSipTrunkType getType() {
         return type;
     }
 
@@ -106,8 +108,6 @@ public abstract class CallsSipTrunkRequest {
 
     /**
      * Sets location.
-     * <p>
-     * The field is required.
      *
      * @param location
      * @return This {@link CallsSipTrunkRequest instance}.
@@ -119,8 +119,6 @@ public abstract class CallsSipTrunkRequest {
 
     /**
      * Returns location.
-     * <p>
-     * The field is required.
      *
      * @return location
      */
@@ -131,14 +129,52 @@ public abstract class CallsSipTrunkRequest {
 
     /**
      * Sets location.
-     * <p>
-     * The field is required.
      *
      * @param location
      */
     @JsonProperty("location")
     public void setLocation(CallsSipTrunkLocation location) {
         this.location = location;
+    }
+
+    /**
+     * Sets tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @param tls
+     * @return This {@link CallsSipTrunkRequest instance}.
+     */
+    public CallsSipTrunkRequest tls(Boolean tls) {
+        this.tls = tls;
+        return this;
+    }
+
+    /**
+     * Returns tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @return tls
+     */
+    @JsonProperty("tls")
+    public Boolean getTls() {
+        return tls;
+    }
+
+    /**
+     * Sets tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @param tls
+     */
+    @JsonProperty("tls")
+    public void setTls(Boolean tls) {
+        this.tls = tls;
     }
 
     /**
@@ -276,6 +312,7 @@ public abstract class CallsSipTrunkRequest {
         return Objects.equals(this.type, callsSipTrunkRequest.type)
                 && Objects.equals(this.name, callsSipTrunkRequest.name)
                 && Objects.equals(this.location, callsSipTrunkRequest.location)
+                && Objects.equals(this.tls, callsSipTrunkRequest.tls)
                 && Objects.equals(this.internationalCallsAllowed, callsSipTrunkRequest.internationalCallsAllowed)
                 && Objects.equals(this.channelLimit, callsSipTrunkRequest.channelLimit)
                 && Objects.equals(this.billingPackage, callsSipTrunkRequest.billingPackage);
@@ -283,7 +320,7 @@ public abstract class CallsSipTrunkRequest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, name, location, internationalCallsAllowed, channelLimit, billingPackage);
+        return Objects.hash(type, name, location, tls, internationalCallsAllowed, channelLimit, billingPackage);
     }
 
     @Override
@@ -300,6 +337,9 @@ public abstract class CallsSipTrunkRequest {
                 .append(newLine)
                 .append("    location: ")
                 .append(toIndentedString(location))
+                .append(newLine)
+                .append("    tls: ")
+                .append(toIndentedString(tls))
                 .append(newLine)
                 .append("    internationalCallsAllowed: ")
                 .append(toIndentedString(internationalCallsAllowed))

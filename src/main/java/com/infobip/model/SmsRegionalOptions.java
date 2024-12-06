@@ -19,7 +19,7 @@ public class SmsRegionalOptions {
 
     private SmsIndiaDltOptions indiaDlt;
 
-    private SmsTurkeyIysOptions turkeyIys;
+    private TurkeyIysOptions turkeyIys;
 
     private SmsSouthKoreaOptions southKorea;
 
@@ -60,7 +60,7 @@ public class SmsRegionalOptions {
      * @param turkeyIys
      * @return This {@link SmsRegionalOptions instance}.
      */
-    public SmsRegionalOptions turkeyIys(SmsTurkeyIysOptions turkeyIys) {
+    public SmsRegionalOptions turkeyIys(TurkeyIysOptions turkeyIys) {
         this.turkeyIys = turkeyIys;
         return this;
     }
@@ -71,7 +71,7 @@ public class SmsRegionalOptions {
      * @return turkeyIys
      */
     @JsonProperty("turkeyIys")
-    public SmsTurkeyIysOptions getTurkeyIys() {
+    public TurkeyIysOptions getTurkeyIys() {
         return turkeyIys;
     }
 
@@ -81,7 +81,7 @@ public class SmsRegionalOptions {
      * @param turkeyIys
      */
     @JsonProperty("turkeyIys")
-    public void setTurkeyIys(SmsTurkeyIysOptions turkeyIys) {
+    public void setTurkeyIys(TurkeyIysOptions turkeyIys) {
         this.turkeyIys = turkeyIys;
     }
 

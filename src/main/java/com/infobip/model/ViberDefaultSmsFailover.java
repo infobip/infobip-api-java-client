@@ -21,7 +21,7 @@ public class ViberDefaultSmsFailover {
 
     private String text;
 
-    private ViberValidityPeriod validityPeriod;
+    private ValidityPeriod validityPeriod;
 
     private ViberRegionalOptions regional;
 
@@ -111,7 +111,7 @@ public class ViberDefaultSmsFailover {
      * @param validityPeriod
      * @return This {@link ViberDefaultSmsFailover instance}.
      */
-    public ViberDefaultSmsFailover validityPeriod(ViberValidityPeriod validityPeriod) {
+    public ViberDefaultSmsFailover validityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
         return this;
     }
@@ -122,7 +122,7 @@ public class ViberDefaultSmsFailover {
      * @return validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public ViberValidityPeriod getValidityPeriod() {
+    public ValidityPeriod getValidityPeriod() {
         return validityPeriod;
     }
 
@@ -132,7 +132,7 @@ public class ViberDefaultSmsFailover {
      * @param validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public void setValidityPeriod(ViberValidityPeriod validityPeriod) {
+    public void setValidityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
     }
 

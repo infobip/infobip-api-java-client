@@ -17,9 +17,9 @@ import java.util.Objects;
  */
 public class MessagesApiMessageOptions {
 
-    private MessagesApiPlatform platform;
+    private Platform platform;
 
-    private MessagesApiValidityPeriod validityPeriod;
+    private ValidityPeriod validityPeriod;
 
     private Boolean adaptationMode;
 
@@ -33,7 +33,7 @@ public class MessagesApiMessageOptions {
      * @param platform
      * @return This {@link MessagesApiMessageOptions instance}.
      */
-    public MessagesApiMessageOptions platform(MessagesApiPlatform platform) {
+    public MessagesApiMessageOptions platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -44,7 +44,7 @@ public class MessagesApiMessageOptions {
      * @return platform
      */
     @JsonProperty("platform")
-    public MessagesApiPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -54,7 +54,7 @@ public class MessagesApiMessageOptions {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(MessagesApiPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 
@@ -64,7 +64,7 @@ public class MessagesApiMessageOptions {
      * @param validityPeriod
      * @return This {@link MessagesApiMessageOptions instance}.
      */
-    public MessagesApiMessageOptions validityPeriod(MessagesApiValidityPeriod validityPeriod) {
+    public MessagesApiMessageOptions validityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
         return this;
     }
@@ -75,7 +75,7 @@ public class MessagesApiMessageOptions {
      * @return validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public MessagesApiValidityPeriod getValidityPeriod() {
+    public ValidityPeriod getValidityPeriod() {
         return validityPeriod;
     }
 
@@ -85,7 +85,7 @@ public class MessagesApiMessageOptions {
      * @param validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public void setValidityPeriod(MessagesApiValidityPeriod validityPeriod) {
+    public void setValidityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
     }
 

@@ -9,4 +9,12 @@
 
 package com.infobip.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = MessagesApiTemplateFailover.class, name = "TEMPLATE_FAILOVER"),
+    @JsonSubTypes.Type(value = MessagesApiFailover.class, name = "FAILOVER")
+})
 public interface MessagesApiBaseFailover {}

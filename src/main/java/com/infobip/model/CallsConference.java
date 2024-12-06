@@ -27,7 +27,7 @@ public class CallsConference {
 
     private String callsConfigurationId;
 
-    private String applicationId;
+    private Platform platform;
 
     /**
      * Sets id.
@@ -207,43 +207,34 @@ public class CallsConference {
     }
 
     /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Application ID.
+     * Sets platform.
      *
-     * @param applicationId
+     * @param platform
      * @return This {@link CallsConference instance}.
      */
-    public CallsConference applicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public CallsConference platform(Platform platform) {
+        this.platform = platform;
         return this;
     }
 
     /**
-     * Returns applicationId.
-     * <p>
-     * Field description:
-     * Application ID.
+     * Returns platform.
      *
-     * @return applicationId
+     * @return platform
      */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
+    @JsonProperty("platform")
+    public Platform getPlatform() {
+        return platform;
     }
 
     /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Application ID.
+     * Sets platform.
      *
-     * @param applicationId
+     * @param platform
      */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("platform")
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     @Override
@@ -259,12 +250,12 @@ public class CallsConference {
                 && Objects.equals(this.name, callsConference.name)
                 && Objects.equals(this.participants, callsConference.participants)
                 && Objects.equals(this.callsConfigurationId, callsConference.callsConfigurationId)
-                && Objects.equals(this.applicationId, callsConference.applicationId);
+                && Objects.equals(this.platform, callsConference.platform);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, participants, callsConfigurationId, applicationId);
+        return Objects.hash(id, name, participants, callsConfigurationId, platform);
     }
 
     @Override
@@ -285,8 +276,8 @@ public class CallsConference {
                 .append("    callsConfigurationId: ")
                 .append(toIndentedString(callsConfigurationId))
                 .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("}")
                 .toString();

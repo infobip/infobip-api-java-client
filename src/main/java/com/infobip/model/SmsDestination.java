@@ -17,9 +17,57 @@ import java.util.Objects;
  */
 public class SmsDestination {
 
+    private String to;
+
     private String messageId;
 
-    private String to;
+    private Integer networkId;
+
+    /**
+     * Sets to.
+     * <p>
+     * Field description:
+     * The destination address of the message.
+     * <p>
+     * The field is required.
+     *
+     * @param to
+     * @return This {@link SmsDestination instance}.
+     */
+    public SmsDestination to(String to) {
+        this.to = to;
+        return this;
+    }
+
+    /**
+     * Returns to.
+     * <p>
+     * Field description:
+     * The destination address of the message.
+     * <p>
+     * The field is required.
+     *
+     * @return to
+     */
+    @JsonProperty("to")
+    public String getTo() {
+        return to;
+    }
+
+    /**
+     * Sets to.
+     * <p>
+     * Field description:
+     * The destination address of the message.
+     * <p>
+     * The field is required.
+     *
+     * @param to
+     */
+    @JsonProperty("to")
+    public void setTo(String to) {
+        this.to = to;
+    }
 
     /**
      * Sets messageId.
@@ -62,49 +110,43 @@ public class SmsDestination {
     }
 
     /**
-     * Sets to.
+     * Sets networkId.
      * <p>
      * Field description:
-     * Message destination address. Addresses must be in international format (Example: &#x60;41793026727&#x60;).
-     * <p>
-     * The field is required.
+     * Available in US and Canada only if networkId is known for Network Operator of the destination. Returned in [SMS message delivery reports](https://www.infobip.com/docs/api/channels/sms/sms-messaging/logs-and-status-reports) and [Inbound SMS](https://www.infobip.com/docs/api/channels/sms/sms-messaging/inbound-sms); contact Infobip Support to enable.
      *
-     * @param to
+     * @param networkId
      * @return This {@link SmsDestination instance}.
      */
-    public SmsDestination to(String to) {
-        this.to = to;
+    public SmsDestination networkId(Integer networkId) {
+        this.networkId = networkId;
         return this;
     }
 
     /**
-     * Returns to.
+     * Returns networkId.
      * <p>
      * Field description:
-     * Message destination address. Addresses must be in international format (Example: &#x60;41793026727&#x60;).
-     * <p>
-     * The field is required.
+     * Available in US and Canada only if networkId is known for Network Operator of the destination. Returned in [SMS message delivery reports](https://www.infobip.com/docs/api/channels/sms/sms-messaging/logs-and-status-reports) and [Inbound SMS](https://www.infobip.com/docs/api/channels/sms/sms-messaging/inbound-sms); contact Infobip Support to enable.
      *
-     * @return to
+     * @return networkId
      */
-    @JsonProperty("to")
-    public String getTo() {
-        return to;
+    @JsonProperty("networkId")
+    public Integer getNetworkId() {
+        return networkId;
     }
 
     /**
-     * Sets to.
+     * Sets networkId.
      * <p>
      * Field description:
-     * Message destination address. Addresses must be in international format (Example: &#x60;41793026727&#x60;).
-     * <p>
-     * The field is required.
+     * Available in US and Canada only if networkId is known for Network Operator of the destination. Returned in [SMS message delivery reports](https://www.infobip.com/docs/api/channels/sms/sms-messaging/logs-and-status-reports) and [Inbound SMS](https://www.infobip.com/docs/api/channels/sms/sms-messaging/inbound-sms); contact Infobip Support to enable.
      *
-     * @param to
+     * @param networkId
      */
-    @JsonProperty("to")
-    public void setTo(String to) {
-        this.to = to;
+    @JsonProperty("networkId")
+    public void setNetworkId(Integer networkId) {
+        this.networkId = networkId;
     }
 
     @Override
@@ -116,12 +158,14 @@ public class SmsDestination {
             return false;
         }
         SmsDestination smsDestination = (SmsDestination) o;
-        return Objects.equals(this.messageId, smsDestination.messageId) && Objects.equals(this.to, smsDestination.to);
+        return Objects.equals(this.to, smsDestination.to)
+                && Objects.equals(this.messageId, smsDestination.messageId)
+                && Objects.equals(this.networkId, smsDestination.networkId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageId, to);
+        return Objects.hash(to, messageId, networkId);
     }
 
     @Override
@@ -130,11 +174,14 @@ public class SmsDestination {
         return new StringBuilder()
                 .append("class SmsDestination {")
                 .append(newLine)
+                .append("    to: ")
+                .append(toIndentedString(to))
+                .append(newLine)
                 .append("    messageId: ")
                 .append(toIndentedString(messageId))
                 .append(newLine)
-                .append("    to: ")
-                .append(toIndentedString(to))
+                .append("    networkId: ")
+                .append(toIndentedString(networkId))
                 .append(newLine)
                 .append("}")
                 .toString();

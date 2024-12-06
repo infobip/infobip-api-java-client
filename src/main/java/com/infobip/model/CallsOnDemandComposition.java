@@ -19,11 +19,13 @@ public class CallsOnDemandComposition {
 
     private Boolean deleteCallRecordings;
 
+    private CallsMultiChannel multiChannel;
+
     /**
      * Sets deleteCallRecordings.
      * <p>
      * Field description:
-     * Indicates whether to delete call recordings after composition. If set to &#39;true&#39; then call recordings will be deleted after composition. Otherwise, call recordings will be available, alongside with composed file.
+     * Indicates whether to delete individual files for the call recordings after composition. If set to &#39;true&#39; then files from the call recordings will be deleted after composition. Otherwise, files from the call recordings will be available, alongside with composed file.
      *
      * @param deleteCallRecordings
      * @return This {@link CallsOnDemandComposition instance}.
@@ -37,7 +39,7 @@ public class CallsOnDemandComposition {
      * Returns deleteCallRecordings.
      * <p>
      * Field description:
-     * Indicates whether to delete call recordings after composition. If set to &#39;true&#39; then call recordings will be deleted after composition. Otherwise, call recordings will be available, alongside with composed file.
+     * Indicates whether to delete individual files for the call recordings after composition. If set to &#39;true&#39; then files from the call recordings will be deleted after composition. Otherwise, files from the call recordings will be available, alongside with composed file.
      *
      * @return deleteCallRecordings
      */
@@ -50,13 +52,44 @@ public class CallsOnDemandComposition {
      * Sets deleteCallRecordings.
      * <p>
      * Field description:
-     * Indicates whether to delete call recordings after composition. If set to &#39;true&#39; then call recordings will be deleted after composition. Otherwise, call recordings will be available, alongside with composed file.
+     * Indicates whether to delete individual files for the call recordings after composition. If set to &#39;true&#39; then files from the call recordings will be deleted after composition. Otherwise, files from the call recordings will be available, alongside with composed file.
      *
      * @param deleteCallRecordings
      */
     @JsonProperty("deleteCallRecordings")
     public void setDeleteCallRecordings(Boolean deleteCallRecordings) {
         this.deleteCallRecordings = deleteCallRecordings;
+    }
+
+    /**
+     * Sets multiChannel.
+     *
+     * @param multiChannel
+     * @return This {@link CallsOnDemandComposition instance}.
+     */
+    public CallsOnDemandComposition multiChannel(CallsMultiChannel multiChannel) {
+        this.multiChannel = multiChannel;
+        return this;
+    }
+
+    /**
+     * Returns multiChannel.
+     *
+     * @return multiChannel
+     */
+    @JsonProperty("multiChannel")
+    public CallsMultiChannel getMultiChannel() {
+        return multiChannel;
+    }
+
+    /**
+     * Sets multiChannel.
+     *
+     * @param multiChannel
+     */
+    @JsonProperty("multiChannel")
+    public void setMultiChannel(CallsMultiChannel multiChannel) {
+        this.multiChannel = multiChannel;
     }
 
     @Override
@@ -68,12 +101,13 @@ public class CallsOnDemandComposition {
             return false;
         }
         CallsOnDemandComposition callsOnDemandComposition = (CallsOnDemandComposition) o;
-        return Objects.equals(this.deleteCallRecordings, callsOnDemandComposition.deleteCallRecordings);
+        return Objects.equals(this.deleteCallRecordings, callsOnDemandComposition.deleteCallRecordings)
+                && Objects.equals(this.multiChannel, callsOnDemandComposition.multiChannel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deleteCallRecordings);
+        return Objects.hash(deleteCallRecordings, multiChannel);
     }
 
     @Override
@@ -84,6 +118,9 @@ public class CallsOnDemandComposition {
                 .append(newLine)
                 .append("    deleteCallRecordings: ")
                 .append(toIndentedString(deleteCallRecordings))
+                .append(newLine)
+                .append("    multiChannel: ")
+                .append(toIndentedString(multiChannel))
                 .append(newLine)
                 .append("}")
                 .toString();

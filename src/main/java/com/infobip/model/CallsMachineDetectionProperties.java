@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -18,6 +20,8 @@ import java.util.Objects;
 public class CallsMachineDetectionProperties {
 
     private CallsDetectionResult detectionResult;
+
+    private Map<String, String> customData = null;
 
     /**
      * Sets detectionResult.
@@ -50,6 +54,64 @@ public class CallsMachineDetectionProperties {
         this.detectionResult = detectionResult;
     }
 
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Custom data.
+     *
+     * @param customData
+     * @return This {@link CallsMachineDetectionProperties instance}.
+     */
+    public CallsMachineDetectionProperties customData(Map<String, String> customData) {
+        this.customData = customData;
+        return this;
+    }
+
+    /**
+     * Puts and entry into customData.
+     * <p>
+     * Field description:
+     * Custom data.
+     *
+     * @param key The given key.
+     * @param customDataItem The item to be associated with the given key.
+     * @return This {@link CallsMachineDetectionProperties instance}.
+     */
+    public CallsMachineDetectionProperties putCustomDataItem(String key, String customDataItem) {
+        if (this.customData == null) {
+            this.customData = new HashMap<>();
+        }
+        this.customData.put(key, customDataItem);
+        return this;
+    }
+
+    /**
+     * Returns customData.
+     * <p>
+     * Field description:
+     * Custom data.
+     *
+     * @return customData
+     */
+    @JsonProperty("customData")
+    public Map<String, String> getCustomData() {
+        return customData;
+    }
+
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Custom data.
+     *
+     * @param customData
+     */
+    @JsonProperty("customData")
+    public void setCustomData(Map<String, String> customData) {
+        this.customData = customData;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -59,12 +121,13 @@ public class CallsMachineDetectionProperties {
             return false;
         }
         CallsMachineDetectionProperties callsMachineDetectionProperties = (CallsMachineDetectionProperties) o;
-        return Objects.equals(this.detectionResult, callsMachineDetectionProperties.detectionResult);
+        return Objects.equals(this.detectionResult, callsMachineDetectionProperties.detectionResult)
+                && Objects.equals(this.customData, callsMachineDetectionProperties.customData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(detectionResult);
+        return Objects.hash(detectionResult, customData);
     }
 
     @Override
@@ -75,6 +138,9 @@ public class CallsMachineDetectionProperties {
                 .append(newLine)
                 .append("    detectionResult: ")
                 .append(toIndentedString(detectionResult))
+                .append(newLine)
+                .append("    customData: ")
+                .append(toIndentedString(customData))
                 .append(newLine)
                 .append("}")
                 .toString();

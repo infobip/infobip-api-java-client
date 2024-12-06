@@ -34,7 +34,7 @@ public class CallRecording {
 
     private String callsConfigurationId;
 
-    private String applicationId;
+    private Platform platform;
 
     private OffsetDateTime startTime;
 
@@ -317,43 +317,34 @@ public class CallRecording {
     }
 
     /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Application ID.
+     * Sets platform.
      *
-     * @param applicationId
+     * @param platform
      * @return This {@link CallRecording instance}.
      */
-    public CallRecording applicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public CallRecording platform(Platform platform) {
+        this.platform = platform;
         return this;
     }
 
     /**
-     * Returns applicationId.
-     * <p>
-     * Field description:
-     * Application ID.
+     * Returns platform.
      *
-     * @return applicationId
+     * @return platform
      */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
+    @JsonProperty("platform")
+    public Platform getPlatform() {
+        return platform;
     }
 
     /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Application ID.
+     * Sets platform.
      *
-     * @param applicationId
+     * @param platform
      */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("platform")
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     /**
@@ -452,7 +443,7 @@ public class CallRecording {
                 && Objects.equals(this.status, callRecording.status)
                 && Objects.equals(this.reason, callRecording.reason)
                 && Objects.equals(this.callsConfigurationId, callRecording.callsConfigurationId)
-                && Objects.equals(this.applicationId, callRecording.applicationId)
+                && Objects.equals(this.platform, callRecording.platform)
                 && Objects.equals(this.startTime, callRecording.startTime)
                 && Objects.equals(this.endTime, callRecording.endTime);
     }
@@ -460,16 +451,7 @@ public class CallRecording {
     @Override
     public int hashCode() {
         return Objects.hash(
-                callId,
-                endpoint,
-                direction,
-                files,
-                status,
-                reason,
-                callsConfigurationId,
-                applicationId,
-                startTime,
-                endTime);
+                callId, endpoint, direction, files, status, reason, callsConfigurationId, platform, startTime, endTime);
     }
 
     @Override
@@ -499,8 +481,8 @@ public class CallRecording {
                 .append("    callsConfigurationId: ")
                 .append(toIndentedString(callsConfigurationId))
                 .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("    startTime: ")
                 .append(toIndentedString(startTime))

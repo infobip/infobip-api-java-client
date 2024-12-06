@@ -87,7 +87,7 @@ Basically, that is just an endpoint implemented on your side where you will acce
 ```java
     @PostMapping("/incoming-messages")
     public void receiveMessages(HttpServletRequest request) throws IOException {
-        MessagesApiIncomingMessage messages = new JSON().deserialize(request.inputStream(), MessagesApiIncomingMessage.class);
+        MessagesApiIncomingMessage messages = new JSON().deserialize(request.getInputStream(), MessagesApiIncomingMessage.class);
         for (MessagesApiInboundEvent messageData : messages.getResults()) {
             switch (messageData.getEvent()) {
                 case MO:

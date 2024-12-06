@@ -10,6 +10,7 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
@@ -25,9 +26,9 @@ public class MmsReport {
 
     private String from;
 
-    private String sentAt;
+    private OffsetDateTime sentAt;
 
-    private String doneAt;
+    private OffsetDateTime doneAt;
 
     private Integer mmsCount;
 
@@ -214,7 +215,7 @@ public class MmsReport {
      * @param sentAt
      * @return This {@link MmsReport instance}.
      */
-    public MmsReport sentAt(String sentAt) {
+    public MmsReport sentAt(OffsetDateTime sentAt) {
         this.sentAt = sentAt;
         return this;
     }
@@ -228,7 +229,7 @@ public class MmsReport {
      * @return sentAt
      */
     @JsonProperty("sentAt")
-    public String getSentAt() {
+    public OffsetDateTime getSentAt() {
         return sentAt;
     }
 
@@ -241,7 +242,7 @@ public class MmsReport {
      * @param sentAt
      */
     @JsonProperty("sentAt")
-    public void setSentAt(String sentAt) {
+    public void setSentAt(OffsetDateTime sentAt) {
         this.sentAt = sentAt;
     }
 
@@ -254,7 +255,7 @@ public class MmsReport {
      * @param doneAt
      * @return This {@link MmsReport instance}.
      */
-    public MmsReport doneAt(String doneAt) {
+    public MmsReport doneAt(OffsetDateTime doneAt) {
         this.doneAt = doneAt;
         return this;
     }
@@ -268,7 +269,7 @@ public class MmsReport {
      * @return doneAt
      */
     @JsonProperty("doneAt")
-    public String getDoneAt() {
+    public OffsetDateTime getDoneAt() {
         return doneAt;
     }
 
@@ -281,7 +282,7 @@ public class MmsReport {
      * @param doneAt
      */
     @JsonProperty("doneAt")
-    public void setDoneAt(String doneAt) {
+    public void setDoneAt(OffsetDateTime doneAt) {
         this.doneAt = doneAt;
     }
 

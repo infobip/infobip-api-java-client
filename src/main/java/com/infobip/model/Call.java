@@ -48,7 +48,7 @@ public class Call {
 
     private String callsConfigurationId;
 
-    private String applicationId;
+    private Platform platform;
 
     private String conferenceId;
 
@@ -578,43 +578,34 @@ public class Call {
     }
 
     /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Current application ID.
+     * Sets platform.
      *
-     * @param applicationId
+     * @param platform
      * @return This {@link Call instance}.
      */
-    public Call applicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public Call platform(Platform platform) {
+        this.platform = platform;
         return this;
     }
 
     /**
-     * Returns applicationId.
-     * <p>
-     * Field description:
-     * Current application ID.
+     * Returns platform.
      *
-     * @return applicationId
+     * @return platform
      */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
+    @JsonProperty("platform")
+    public Platform getPlatform() {
+        return platform;
     }
 
     /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Current application ID.
+     * Sets platform.
      *
-     * @param applicationId
+     * @param platform
      */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("platform")
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     /**
@@ -778,7 +769,7 @@ public class Call {
                 && Objects.equals(this.machineDetection, call.machineDetection)
                 && Objects.equals(this.ringDuration, call.ringDuration)
                 && Objects.equals(this.callsConfigurationId, call.callsConfigurationId)
-                && Objects.equals(this.applicationId, call.applicationId)
+                && Objects.equals(this.platform, call.platform)
                 && Objects.equals(this.conferenceId, call.conferenceId)
                 && Objects.equals(this.customData, call.customData)
                 && Objects.equals(this.dialogId, call.dialogId);
@@ -801,7 +792,7 @@ public class Call {
                 machineDetection,
                 ringDuration,
                 callsConfigurationId,
-                applicationId,
+                platform,
                 conferenceId,
                 customData,
                 dialogId);
@@ -855,8 +846,8 @@ public class Call {
                 .append("    callsConfigurationId: ")
                 .append(toIndentedString(callsConfigurationId))
                 .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("    conferenceId: ")
                 .append(toIndentedString(conferenceId))

@@ -35,7 +35,9 @@ public class CallRequest {
 
     private Map<String, String> customData = null;
 
-    private String applicationId;
+    private String callsConfigurationId;
+
+    private Platform platform;
 
     private String parentCallId;
 
@@ -363,49 +365,80 @@ public class CallRequest {
     }
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      * <p>
      * The field is required.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      * @return This {@link CallRequest instance}.
      */
-    public CallRequest applicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public CallRequest callsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
         return this;
     }
 
     /**
-     * Returns applicationId.
+     * Returns callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      * <p>
      * The field is required.
      *
-     * @return applicationId
+     * @return callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
+    @JsonProperty("callsConfigurationId")
+    public String getCallsConfigurationId() {
+        return callsConfigurationId;
     }
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      * <p>
      * The field is required.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("callsConfigurationId")
+    public void setCallsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     * @return This {@link CallRequest instance}.
+     */
+    public CallRequest platform(Platform platform) {
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * Returns platform.
+     *
+     * @return platform
+     */
+    @JsonProperty("platform")
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     */
+    @JsonProperty("platform")
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     /**
@@ -465,7 +498,8 @@ public class CallRequest {
                 && Objects.equals(this.machineDetection, callRequest.machineDetection)
                 && Objects.equals(this.maxDuration, callRequest.maxDuration)
                 && Objects.equals(this.customData, callRequest.customData)
-                && Objects.equals(this.applicationId, callRequest.applicationId)
+                && Objects.equals(this.callsConfigurationId, callRequest.callsConfigurationId)
+                && Objects.equals(this.platform, callRequest.platform)
                 && Objects.equals(this.parentCallId, callRequest.parentCallId);
     }
 
@@ -480,7 +514,8 @@ public class CallRequest {
                 machineDetection,
                 maxDuration,
                 customData,
-                applicationId,
+                callsConfigurationId,
+                platform,
                 parentCallId);
     }
 
@@ -514,8 +549,11 @@ public class CallRequest {
                 .append("    customData: ")
                 .append(toIndentedString(customData))
                 .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    callsConfigurationId: ")
+                .append(toIndentedString(callsConfigurationId))
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("    parentCallId: ")
                 .append(toIndentedString(parentCallId))

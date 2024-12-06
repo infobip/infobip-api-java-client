@@ -9,11 +9,9 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
@@ -30,87 +28,24 @@ import java.util.Objects;
 })
 public abstract class CallRoutingDestination {
 
-    private Integer weight;
-
     private Integer priority;
 
-    /**
-     * Represents type enumeration.
-     */
-    public enum TypeEnum {
-        APPLICATION("APPLICATION"),
-        ENDPOINT("ENDPOINT"),
-        URL("URL");
-
-        private String value;
-
-        TypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TypeEnum fromValue(String value) {
-            for (TypeEnum enumElement : TypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    protected final TypeEnum type;
+    protected final CallRoutingDestinationType type;
 
     /**
      * Constructs a new {@link CallRoutingDestination} instance.
      */
     public CallRoutingDestination(String type) {
-        this.type = TypeEnum.fromValue(type);
+        this.type = CallRoutingDestinationType.fromValue(type);
     }
 
-    /**
-     * Sets weight.
-     *
-     * @param weight
-     * @return This {@link CallRoutingDestination instance}.
-     */
-    public CallRoutingDestination weight(Integer weight) {
-        this.weight = weight;
-        return this;
-    }
-
-    /**
-     * Returns weight.
-     *
-     * @return weight
-     */
-    @JsonProperty("weight")
-    public Integer getWeight() {
-        return weight;
-    }
-
-    /**
-     * Sets weight.
-     *
-     * @param weight
-     */
-    @JsonProperty("weight")
-    public void setWeight(Integer weight) {
-        this.weight = weight;
-    }
+    private Integer weight;
 
     /**
      * Sets priority.
+     * <p>
+     * Field description:
+     * Priority of the destination within a route. Destinations with lower value have higher priority. Either all or no destination need to have this value defined.
      *
      * @param priority
      * @return This {@link CallRoutingDestination instance}.
@@ -122,6 +57,9 @@ public abstract class CallRoutingDestination {
 
     /**
      * Returns priority.
+     * <p>
+     * Field description:
+     * Priority of the destination within a route. Destinations with lower value have higher priority. Either all or no destination need to have this value defined.
      *
      * @return priority
      */
@@ -132,6 +70,9 @@ public abstract class CallRoutingDestination {
 
     /**
      * Sets priority.
+     * <p>
+     * Field description:
+     * Priority of the destination within a route. Destinations with lower value have higher priority. Either all or no destination need to have this value defined.
      *
      * @param priority
      */
@@ -148,8 +89,48 @@ public abstract class CallRoutingDestination {
      * @return type
      */
     @JsonProperty("type")
-    public TypeEnum getType() {
+    public CallRoutingDestinationType getType() {
         return type;
+    }
+
+    /**
+     * Sets weight.
+     * <p>
+     * Field description:
+     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
+     *
+     * @param weight
+     * @return This {@link CallRoutingDestination instance}.
+     */
+    public CallRoutingDestination weight(Integer weight) {
+        this.weight = weight;
+        return this;
+    }
+
+    /**
+     * Returns weight.
+     * <p>
+     * Field description:
+     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
+     *
+     * @return weight
+     */
+    @JsonProperty("weight")
+    public Integer getWeight() {
+        return weight;
+    }
+
+    /**
+     * Sets weight.
+     * <p>
+     * Field description:
+     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
+     *
+     * @param weight
+     */
+    @JsonProperty("weight")
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 
     @Override
@@ -161,14 +142,14 @@ public abstract class CallRoutingDestination {
             return false;
         }
         CallRoutingDestination callRoutingDestination = (CallRoutingDestination) o;
-        return Objects.equals(this.weight, callRoutingDestination.weight)
-                && Objects.equals(this.priority, callRoutingDestination.priority)
-                && Objects.equals(this.type, callRoutingDestination.type);
+        return Objects.equals(this.priority, callRoutingDestination.priority)
+                && Objects.equals(this.type, callRoutingDestination.type)
+                && Objects.equals(this.weight, callRoutingDestination.weight);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(weight, priority, type);
+        return Objects.hash(priority, type, weight);
     }
 
     @Override
@@ -177,14 +158,14 @@ public abstract class CallRoutingDestination {
         return new StringBuilder()
                 .append("class CallRoutingDestination {")
                 .append(newLine)
-                .append("    weight: ")
-                .append(toIndentedString(weight))
-                .append(newLine)
                 .append("    priority: ")
                 .append(toIndentedString(priority))
                 .append(newLine)
                 .append("    type: ")
                 .append(toIndentedString(type))
+                .append(newLine)
+                .append("    weight: ")
+                .append(toIndentedString(weight))
                 .append(newLine)
                 .append("}")
                 .toString();

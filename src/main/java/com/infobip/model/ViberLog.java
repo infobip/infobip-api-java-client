@@ -38,9 +38,11 @@ public class ViberLog {
 
     private ViberMessageError error;
 
-    private ViberPlatform platform;
+    private Platform platform;
 
     private ViberOutboundContent content;
+
+    private String campaignReferenceId;
 
     /**
      * Sets sender.
@@ -421,7 +423,7 @@ public class ViberLog {
      * @param platform
      * @return This {@link ViberLog instance}.
      */
-    public ViberLog platform(ViberPlatform platform) {
+    public ViberLog platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -432,7 +434,7 @@ public class ViberLog {
      * @return platform
      */
     @JsonProperty("platform")
-    public ViberPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -442,7 +444,7 @@ public class ViberLog {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(ViberPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 
@@ -477,6 +479,46 @@ public class ViberLog {
         this.content = content;
     }
 
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     * @return This {@link ViberLog instance}.
+     */
+    public ViberLog campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -497,7 +539,8 @@ public class ViberLog {
                 && Objects.equals(this.status, viberLog.status)
                 && Objects.equals(this.error, viberLog.error)
                 && Objects.equals(this.platform, viberLog.platform)
-                && Objects.equals(this.content, viberLog.content);
+                && Objects.equals(this.content, viberLog.content)
+                && Objects.equals(this.campaignReferenceId, viberLog.campaignReferenceId);
     }
 
     @Override
@@ -514,7 +557,8 @@ public class ViberLog {
                 status,
                 error,
                 platform,
-                content);
+                content,
+                campaignReferenceId);
     }
 
     @Override
@@ -558,6 +602,9 @@ public class ViberLog {
                 .append(newLine)
                 .append("    content: ")
                 .append(toIndentedString(content))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
                 .append(newLine)
                 .append("}")
                 .toString();

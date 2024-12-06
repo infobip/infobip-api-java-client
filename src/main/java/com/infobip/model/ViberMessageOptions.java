@@ -17,11 +17,13 @@ import java.util.Objects;
  */
 public class ViberMessageOptions {
 
-    private ViberPlatform platform;
+    private Platform platform;
 
-    private ViberValidityPeriod validityPeriod;
+    private ValidityPeriod validityPeriod;
 
-    private ViberDeliveryTimeWindow deliveryTimeWindow;
+    private DeliveryTimeWindow deliveryTimeWindow;
+
+    private String campaignReferenceId;
 
     private ViberDefaultSmsFailover smsFailover;
 
@@ -39,7 +41,7 @@ public class ViberMessageOptions {
      * @param platform
      * @return This {@link ViberMessageOptions instance}.
      */
-    public ViberMessageOptions platform(ViberPlatform platform) {
+    public ViberMessageOptions platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -50,7 +52,7 @@ public class ViberMessageOptions {
      * @return platform
      */
     @JsonProperty("platform")
-    public ViberPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -60,7 +62,7 @@ public class ViberMessageOptions {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(ViberPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 
@@ -70,7 +72,7 @@ public class ViberMessageOptions {
      * @param validityPeriod
      * @return This {@link ViberMessageOptions instance}.
      */
-    public ViberMessageOptions validityPeriod(ViberValidityPeriod validityPeriod) {
+    public ViberMessageOptions validityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
         return this;
     }
@@ -81,7 +83,7 @@ public class ViberMessageOptions {
      * @return validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public ViberValidityPeriod getValidityPeriod() {
+    public ValidityPeriod getValidityPeriod() {
         return validityPeriod;
     }
 
@@ -91,7 +93,7 @@ public class ViberMessageOptions {
      * @param validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public void setValidityPeriod(ViberValidityPeriod validityPeriod) {
+    public void setValidityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
     }
 
@@ -101,7 +103,7 @@ public class ViberMessageOptions {
      * @param deliveryTimeWindow
      * @return This {@link ViberMessageOptions instance}.
      */
-    public ViberMessageOptions deliveryTimeWindow(ViberDeliveryTimeWindow deliveryTimeWindow) {
+    public ViberMessageOptions deliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
         return this;
     }
@@ -112,7 +114,7 @@ public class ViberMessageOptions {
      * @return deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public ViberDeliveryTimeWindow getDeliveryTimeWindow() {
+    public DeliveryTimeWindow getDeliveryTimeWindow() {
         return deliveryTimeWindow;
     }
 
@@ -122,8 +124,48 @@ public class ViberMessageOptions {
      * @param deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public void setDeliveryTimeWindow(ViberDeliveryTimeWindow deliveryTimeWindow) {
+    public void setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @param campaignReferenceId
+     * @return This {@link ViberMessageOptions instance}.
+     */
+    public ViberMessageOptions campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
     }
 
     /**
@@ -320,6 +362,7 @@ public class ViberMessageOptions {
         return Objects.equals(this.platform, viberMessageOptions.platform)
                 && Objects.equals(this.validityPeriod, viberMessageOptions.validityPeriod)
                 && Objects.equals(this.deliveryTimeWindow, viberMessageOptions.deliveryTimeWindow)
+                && Objects.equals(this.campaignReferenceId, viberMessageOptions.campaignReferenceId)
                 && Objects.equals(this.smsFailover, viberMessageOptions.smsFailover)
                 && Objects.equals(this.trackingData, viberMessageOptions.trackingData)
                 && Objects.equals(this.label, viberMessageOptions.label)
@@ -333,6 +376,7 @@ public class ViberMessageOptions {
                 platform,
                 validityPeriod,
                 deliveryTimeWindow,
+                campaignReferenceId,
                 smsFailover,
                 trackingData,
                 label,
@@ -354,6 +398,9 @@ public class ViberMessageOptions {
                 .append(newLine)
                 .append("    deliveryTimeWindow: ")
                 .append(toIndentedString(deliveryTimeWindow))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
                 .append(newLine)
                 .append("    smsFailover: ")
                 .append(toIndentedString(smsFailover))

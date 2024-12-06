@@ -31,13 +31,13 @@ public abstract class CallsCreateSipTrunkResponse {
 
     private String id;
 
-    protected final CallsPegasusSipTrunkType type;
+    protected final CallsSipTrunkType type;
 
     /**
      * Constructs a new {@link CallsCreateSipTrunkResponse} instance.
      */
     public CallsCreateSipTrunkResponse(String type) {
-        this.type = CallsPegasusSipTrunkType.fromValue(type);
+        this.type = CallsSipTrunkType.fromValue(type);
     }
 
     private String name;
@@ -98,7 +98,7 @@ public abstract class CallsCreateSipTrunkResponse {
      * @return type
      */
     @JsonProperty("type")
-    public CallsPegasusSipTrunkType getType() {
+    public CallsSipTrunkType getType() {
         return type;
     }
 

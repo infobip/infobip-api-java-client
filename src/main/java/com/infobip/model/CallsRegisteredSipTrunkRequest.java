@@ -19,8 +19,6 @@ import java.util.Objects;
  */
 public class CallsRegisteredSipTrunkRequest extends CallsSipTrunkRequest {
 
-    private Boolean tls;
-
     private List<CallsAudioCodec> codecs = null;
 
     private CallsDtmfType dtmf;
@@ -38,46 +36,6 @@ public class CallsRegisteredSipTrunkRequest extends CallsSipTrunkRequest {
      */
     public CallsRegisteredSipTrunkRequest() {
         super("REGISTERED");
-    }
-
-    /**
-     * Sets tls.
-     * <p>
-     * Field description:
-     * Indicates whether communication is secured by the TLS protocol.
-     *
-     * @param tls
-     * @return This {@link CallsRegisteredSipTrunkRequest instance}.
-     */
-    public CallsRegisteredSipTrunkRequest tls(Boolean tls) {
-        this.tls = tls;
-        return this;
-    }
-
-    /**
-     * Returns tls.
-     * <p>
-     * Field description:
-     * Indicates whether communication is secured by the TLS protocol.
-     *
-     * @return tls
-     */
-    @JsonProperty("tls")
-    public Boolean getTls() {
-        return tls;
-    }
-
-    /**
-     * Sets tls.
-     * <p>
-     * Field description:
-     * Indicates whether communication is secured by the TLS protocol.
-     *
-     * @param tls
-     */
-    @JsonProperty("tls")
-    public void setTls(Boolean tls) {
-        this.tls = tls;
     }
 
     /**
@@ -310,8 +268,7 @@ public class CallsRegisteredSipTrunkRequest extends CallsSipTrunkRequest {
             return false;
         }
         CallsRegisteredSipTrunkRequest callsRegisteredSipTrunkRequest = (CallsRegisteredSipTrunkRequest) o;
-        return Objects.equals(this.tls, callsRegisteredSipTrunkRequest.tls)
-                && Objects.equals(this.codecs, callsRegisteredSipTrunkRequest.codecs)
+        return Objects.equals(this.codecs, callsRegisteredSipTrunkRequest.codecs)
                 && Objects.equals(this.dtmf, callsRegisteredSipTrunkRequest.dtmf)
                 && Objects.equals(this.fax, callsRegisteredSipTrunkRequest.fax)
                 && Objects.equals(this.numberFormat, callsRegisteredSipTrunkRequest.numberFormat)
@@ -322,8 +279,7 @@ public class CallsRegisteredSipTrunkRequest extends CallsSipTrunkRequest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                tls, codecs, dtmf, fax, numberFormat, anonymization, inviteAuthentication, super.hashCode());
+        return Objects.hash(codecs, dtmf, fax, numberFormat, anonymization, inviteAuthentication, super.hashCode());
     }
 
     @Override
@@ -334,9 +290,6 @@ public class CallsRegisteredSipTrunkRequest extends CallsSipTrunkRequest {
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
-                .append(newLine)
-                .append("    tls: ")
-                .append(toIndentedString(tls))
                 .append(newLine)
                 .append("    codecs: ")
                 .append(toIndentedString(codecs))

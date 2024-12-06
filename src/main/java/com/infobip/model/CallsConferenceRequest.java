@@ -23,7 +23,9 @@ public class CallsConferenceRequest {
 
     private Integer maxDuration;
 
-    private String applicationId;
+    private String callsConfigurationId;
+
+    private Platform platform;
 
     /**
      * Sets name.
@@ -137,49 +139,80 @@ public class CallsConferenceRequest {
     }
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      * <p>
      * The field is required.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      * @return This {@link CallsConferenceRequest instance}.
      */
-    public CallsConferenceRequest applicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public CallsConferenceRequest callsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
         return this;
     }
 
     /**
-     * Returns applicationId.
+     * Returns callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      * <p>
      * The field is required.
      *
-     * @return applicationId
+     * @return callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
+    @JsonProperty("callsConfigurationId")
+    public String getCallsConfigurationId() {
+        return callsConfigurationId;
     }
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Calls Configuration ID.
      * <p>
      * The field is required.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("callsConfigurationId")
+    public void setCallsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     * @return This {@link CallsConferenceRequest instance}.
+     */
+    public CallsConferenceRequest platform(Platform platform) {
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * Returns platform.
+     *
+     * @return platform
+     */
+    @JsonProperty("platform")
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     */
+    @JsonProperty("platform")
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     @Override
@@ -194,12 +227,13 @@ public class CallsConferenceRequest {
         return Objects.equals(this.name, callsConferenceRequest.name)
                 && Objects.equals(this.recording, callsConferenceRequest.recording)
                 && Objects.equals(this.maxDuration, callsConferenceRequest.maxDuration)
-                && Objects.equals(this.applicationId, callsConferenceRequest.applicationId);
+                && Objects.equals(this.callsConfigurationId, callsConferenceRequest.callsConfigurationId)
+                && Objects.equals(this.platform, callsConferenceRequest.platform);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, recording, maxDuration, applicationId);
+        return Objects.hash(name, recording, maxDuration, callsConfigurationId, platform);
     }
 
     @Override
@@ -217,8 +251,11 @@ public class CallsConferenceRequest {
                 .append("    maxDuration: ")
                 .append(toIndentedString(maxDuration))
                 .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    callsConfigurationId: ")
+                .append(toIndentedString(callsConfigurationId))
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("}")
                 .toString();

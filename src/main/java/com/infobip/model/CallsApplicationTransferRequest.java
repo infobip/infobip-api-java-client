@@ -19,56 +19,89 @@ import java.util.Objects;
  */
 public class CallsApplicationTransferRequest {
 
-    private String destinationApplicationId;
+    private String destinationCallsConfigurationId;
+
+    private Platform platform;
 
     private Integer timeout;
 
     private Map<String, String> customData = null;
 
     /**
-     * Sets destinationApplicationId.
+     * Sets destinationCallsConfigurationId.
      * <p>
      * Field description:
-     * ID of the application to which the call is to be transferred.
+     * ID of the calls configuration to which the call is to be transferred.
      * <p>
      * The field is required.
      *
-     * @param destinationApplicationId
+     * @param destinationCallsConfigurationId
      * @return This {@link CallsApplicationTransferRequest instance}.
      */
-    public CallsApplicationTransferRequest destinationApplicationId(String destinationApplicationId) {
-        this.destinationApplicationId = destinationApplicationId;
+    public CallsApplicationTransferRequest destinationCallsConfigurationId(String destinationCallsConfigurationId) {
+        this.destinationCallsConfigurationId = destinationCallsConfigurationId;
         return this;
     }
 
     /**
-     * Returns destinationApplicationId.
+     * Returns destinationCallsConfigurationId.
      * <p>
      * Field description:
-     * ID of the application to which the call is to be transferred.
+     * ID of the calls configuration to which the call is to be transferred.
      * <p>
      * The field is required.
      *
-     * @return destinationApplicationId
+     * @return destinationCallsConfigurationId
      */
-    @JsonProperty("destinationApplicationId")
-    public String getDestinationApplicationId() {
-        return destinationApplicationId;
+    @JsonProperty("destinationCallsConfigurationId")
+    public String getDestinationCallsConfigurationId() {
+        return destinationCallsConfigurationId;
     }
 
     /**
-     * Sets destinationApplicationId.
+     * Sets destinationCallsConfigurationId.
      * <p>
      * Field description:
-     * ID of the application to which the call is to be transferred.
+     * ID of the calls configuration to which the call is to be transferred.
      * <p>
      * The field is required.
      *
-     * @param destinationApplicationId
+     * @param destinationCallsConfigurationId
      */
-    @JsonProperty("destinationApplicationId")
-    public void setDestinationApplicationId(String destinationApplicationId) {
-        this.destinationApplicationId = destinationApplicationId;
+    @JsonProperty("destinationCallsConfigurationId")
+    public void setDestinationCallsConfigurationId(String destinationCallsConfigurationId) {
+        this.destinationCallsConfigurationId = destinationCallsConfigurationId;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     * @return This {@link CallsApplicationTransferRequest instance}.
+     */
+    public CallsApplicationTransferRequest platform(Platform platform) {
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * Returns platform.
+     *
+     * @return platform
+     */
+    @JsonProperty("platform")
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     */
+    @JsonProperty("platform")
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     /**
@@ -178,14 +211,17 @@ public class CallsApplicationTransferRequest {
             return false;
         }
         CallsApplicationTransferRequest callsApplicationTransferRequest = (CallsApplicationTransferRequest) o;
-        return Objects.equals(this.destinationApplicationId, callsApplicationTransferRequest.destinationApplicationId)
+        return Objects.equals(
+                        this.destinationCallsConfigurationId,
+                        callsApplicationTransferRequest.destinationCallsConfigurationId)
+                && Objects.equals(this.platform, callsApplicationTransferRequest.platform)
                 && Objects.equals(this.timeout, callsApplicationTransferRequest.timeout)
                 && Objects.equals(this.customData, callsApplicationTransferRequest.customData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(destinationApplicationId, timeout, customData);
+        return Objects.hash(destinationCallsConfigurationId, platform, timeout, customData);
     }
 
     @Override
@@ -194,8 +230,11 @@ public class CallsApplicationTransferRequest {
         return new StringBuilder()
                 .append("class CallsApplicationTransferRequest {")
                 .append(newLine)
-                .append("    destinationApplicationId: ")
-                .append(toIndentedString(destinationApplicationId))
+                .append("    destinationCallsConfigurationId: ")
+                .append(toIndentedString(destinationCallsConfigurationId))
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("    timeout: ")
                 .append(toIndentedString(timeout))

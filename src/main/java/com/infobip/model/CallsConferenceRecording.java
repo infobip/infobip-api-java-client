@@ -26,7 +26,7 @@ public class CallsConferenceRecording {
 
     private String callsConfigurationId;
 
-    private String applicationId;
+    private Platform platform;
 
     private List<CallsRecordingFile> composedFiles = null;
 
@@ -157,43 +157,34 @@ public class CallsConferenceRecording {
     }
 
     /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Application ID.
+     * Sets platform.
      *
-     * @param applicationId
+     * @param platform
      * @return This {@link CallsConferenceRecording instance}.
      */
-    public CallsConferenceRecording applicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public CallsConferenceRecording platform(Platform platform) {
+        this.platform = platform;
         return this;
     }
 
     /**
-     * Returns applicationId.
-     * <p>
-     * Field description:
-     * Application ID.
+     * Returns platform.
      *
-     * @return applicationId
+     * @return platform
      */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
+    @JsonProperty("platform")
+    public Platform getPlatform() {
+        return platform;
     }
 
     /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Application ID.
+     * Sets platform.
      *
-     * @param applicationId
+     * @param platform
      */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("platform")
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     /**
@@ -402,7 +393,7 @@ public class CallsConferenceRecording {
         return Objects.equals(this.conferenceId, callsConferenceRecording.conferenceId)
                 && Objects.equals(this.conferenceName, callsConferenceRecording.conferenceName)
                 && Objects.equals(this.callsConfigurationId, callsConferenceRecording.callsConfigurationId)
-                && Objects.equals(this.applicationId, callsConferenceRecording.applicationId)
+                && Objects.equals(this.platform, callsConferenceRecording.platform)
                 && Objects.equals(this.composedFiles, callsConferenceRecording.composedFiles)
                 && Objects.equals(this.callRecordings, callsConferenceRecording.callRecordings)
                 && Objects.equals(this.startTime, callsConferenceRecording.startTime)
@@ -415,7 +406,7 @@ public class CallsConferenceRecording {
                 conferenceId,
                 conferenceName,
                 callsConfigurationId,
-                applicationId,
+                platform,
                 composedFiles,
                 callRecordings,
                 startTime,
@@ -437,8 +428,8 @@ public class CallsConferenceRecording {
                 .append("    callsConfigurationId: ")
                 .append(toIndentedString(callsConfigurationId))
                 .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("    composedFiles: ")
                 .append(toIndentedString(composedFiles))

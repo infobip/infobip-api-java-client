@@ -83,25 +83,39 @@ class CallsApiTest extends ApiTest {
     private static final String SIP_TRUNK_COUNTRIES = "/calls/1/sip-trunks/service-addresses/countries";
     private static final String SIP_TRUNK_REGIONS = "/calls/1/sip-trunks/service-addresses/countries/regions";
 
+    private static final String SIP_TRUNK_RESET_PASSWORD = "/calls/1/sip-trunks/{sipTrunkId}/reset-password";
+    private static final String TRANSCRIPTION_START = "/calls/1/calls/{callId}/start-transcription";
+    private static final String TRANSCRIPTION_STOP = "/calls/1/calls/{callId}/stop-transcription";
+
     @Test
     void shouldApplicationTransfer() {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
-        String givenDestinationApplicationId = "61c060db2675060027d8c7a6";
         Integer givenTimeout = 20;
         String givenCustomDataField = "custom";
         String givenCustomDataFieldValue = "data";
+        String givenEntityId = "entityId";
+        String givenDestinationApplicationId = "61c060db2675060027d8c7a6";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenDestinationApplicationId);
         Map<String, String> givenCustomData = Map.of(givenCustomDataField, givenCustomDataFieldValue);
 
         String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}\n", givenStatus);
         String expectedRequest = String.format(
-                "{\n" + "  \"destinationApplicationId\": \"%s\",\n"
+                "{\n"
+                        + "  \"platform\": {\n"
+                        + "     \"applicationId\": \"%s\",\n"
+                        + "     \"entityId\": \"%s\"\n"
+                        + "  },\n"
                         + "  \"timeout\": %d,\n"
                         + "  \"customData\": {\n"
                         + "      \"%s\": \"%s\"\n"
                         + "  }\n"
                         + "}\n",
-                givenDestinationApplicationId, givenTimeout, givenCustomDataField, givenCustomDataFieldValue);
+                givenDestinationApplicationId,
+                givenEntityId,
+                givenTimeout,
+                givenCustomDataField,
+                givenCustomDataFieldValue);
 
         setUpSuccessPostRequest(
                 APPLICATION_TRANSFER.replace("{callId}", givenDestinationApplicationId),
@@ -111,7 +125,7 @@ class CallsApiTest extends ApiTest {
         CallsApi api = new CallsApi(getApiClient());
 
         CallsApplicationTransferRequest request = new CallsApplicationTransferRequest()
-                .destinationApplicationId(givenDestinationApplicationId)
+                .platform(givenPlatform)
                 .timeout(givenTimeout)
                 .customData(givenCustomData);
 
@@ -183,7 +197,9 @@ class CallsApiTest extends ApiTest {
         String givenCallId = "string";
         String givenPhoneNumber = "41792030000";
         CallEndpointType givenType = CallEndpointType.PHONE;
+        String givenEntityId = "entityId";
         String givenApplicationId = "61c060db2675060027d8c7a6";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
         String givenFrom = "44790123456";
         String givenTo = "44790987654";
         CallDirection givenDirection = CallDirection.INBOUND;
@@ -238,7 +254,10 @@ class CallsApiTest extends ApiTest {
                         + "          \"detectionResult\": \"%s\"\n"
                         + "        },\n"
                         + "        \"ringDuration\": %d,\n"
-                        + "        \"applicationId\": \"%s\",\n"
+                        + "        \"platform\": {\n"
+                        + "          \"applicationId\": \"%s\",\n"
+                        + "          \"entityId\": \"%s\"\n"
+                        + "        },\n"
                         + "        \"conferenceId\": \"%s\",\n"
                         + "        \"customData\": {\n"
                         + "          \"key1\": \"%s\",\n"
@@ -272,6 +291,7 @@ class CallsApiTest extends ApiTest {
                 givenDetectionResult,
                 givenRingDuration,
                 givenApplicationId,
+                givenEntityId,
                 givenConferenceId,
                 givenKey1,
                 givenKey2,
@@ -314,7 +334,7 @@ class CallsApiTest extends ApiTest {
             then(result.getMachineDetection()).isNotNull();
             then(result.getMachineDetection().getDetectionResult()).isEqualTo(givenDetectionResult);
             then(result.getRingDuration()).isEqualTo(givenRingDuration);
-            then(result.getApplicationId()).isEqualTo(givenApplicationId);
+            then(result.getPlatform()).isEqualTo(givenPlatform);
             then(result.getConferenceId()).isEqualTo(givenConferenceId);
             then(result.getCustomData()).isNotNull();
             then(result.getCustomData().get("key1")).isEqualTo(givenKey1);
@@ -339,7 +359,9 @@ class CallsApiTest extends ApiTest {
         Integer givenConnectTimeout = 0;
         CallsRecordingType givenRecordingType = CallsRecordingType.AUDIO;
         Integer givenMaxDuration = 28800;
+        String givenEntityId = "entityId";
         String givenApplicationId = "61c060db2675060027d8c7a6";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
         String givenParentCallId = "3ad8805e-d401-424e-9b03-e02a2016a5e2";
 
         String expectedRequest = String.format(
@@ -353,7 +375,10 @@ class CallsApiTest extends ApiTest {
                         + "      \"recordingType\": \"%s\"\n"
                         + "    },\n"
                         + "    \"maxDuration\": %d,\n"
-                        + "    \"applicationId\": \"%s\",\n"
+                        + "    \"platform\": {\n"
+                        + "      \"applicationId\": \"%s\",\n"
+                        + "      \"entityId\": \"%s\"\n"
+                        + "    },\n"
                         + "    \"parentCallId\": \"%s\"\n"
                         + "}\n",
                 givenPhoneNumber,
@@ -363,6 +388,7 @@ class CallsApiTest extends ApiTest {
                 givenRecordingType,
                 givenMaxDuration,
                 givenApplicationId,
+                givenEntityId,
                 givenParentCallId);
 
         String givenCallId = "string";
@@ -412,7 +438,10 @@ class CallsApiTest extends ApiTest {
                         + "      \"detectionResult\": \"%s\"\n"
                         + "    },\n"
                         + "    \"ringDuration\": %d,\n"
-                        + "    \"applicationId\": \"%s\",\n"
+                        + "    \"platform\": {\n"
+                        + "      \"applicationId\": \"%s\",\n"
+                        + "      \"entityId\": \"%s\"\n"
+                        + "    },\n"
                         + "    \"conferenceId\": \"%s\",\n"
                         + "    \"customData\": {\n"
                         + "      \"key1\": \"%s\",\n"
@@ -438,6 +467,7 @@ class CallsApiTest extends ApiTest {
                 givenDetectionResult,
                 givenRingDuration,
                 givenApplicationId,
+                givenEntityId,
                 givenConferenceId,
                 givenKey1,
                 givenKey2);
@@ -452,7 +482,7 @@ class CallsApiTest extends ApiTest {
                 .connectTimeout(givenConnectTimeout)
                 .recording(new CallRecordingRequest().recordingType(givenRecordingType))
                 .maxDuration(givenMaxDuration)
-                .applicationId(givenApplicationId)
+                .platform(givenPlatform)
                 .parentCallId(givenParentCallId);
 
         Consumer<Call> assertions = (response) -> {
@@ -482,7 +512,7 @@ class CallsApiTest extends ApiTest {
             then(response.getMachineDetection()).isNotNull();
             then(response.getMachineDetection().getDetectionResult()).isEqualTo(givenDetectionResult);
             then(response.getRingDuration()).isEqualTo(givenRingDuration);
-            then(response.getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isEqualTo(givenPlatform);
             then(response.getConferenceId()).isEqualTo(givenConferenceId);
             then(response.getCustomData()).isNotNull();
             then(response.getCustomData().get("key1")).isEqualTo(givenKey1);
@@ -500,6 +530,9 @@ class CallsApiTest extends ApiTest {
         String givenPhoneNumber = "41792030000";
         CallEndpointType givenType = CallEndpointType.PHONE;
         String givenApplicationId = "61c060db2675060027d8c7a6";
+        String givenEntityId = "entityId";
+        Platform givenPlatform =
+                new Platform().applicationId(givenApplicationId).entityId(givenEntityId);
         String givenFrom = "44790123456";
         String givenTo = "44790987654";
         CallDirection givenDirection = CallDirection.INBOUND;
@@ -548,7 +581,10 @@ class CallsApiTest extends ApiTest {
                         + "      \"detectionResult\": \"%s\"\n"
                         + "    },\n"
                         + "    \"ringDuration\": %d,\n"
-                        + "    \"applicationId\": \"%s\",\n"
+                        + "    \"platform\": {\n"
+                        + "      \"applicationId\": \"%s\",\n"
+                        + "      \"entityId\": \"%s\"\n"
+                        + "    },\n"
                         + "    \"conferenceId\": \"%s\",\n"
                         + "    \"customData\": {\n"
                         + "      \"key1\": \"%s\",\n"
@@ -574,6 +610,7 @@ class CallsApiTest extends ApiTest {
                 givenDetectionResult,
                 givenRingDuration,
                 givenApplicationId,
+                givenEntityId,
                 givenConferenceId,
                 givenKey1,
                 givenKey2);
@@ -609,7 +646,7 @@ class CallsApiTest extends ApiTest {
             then(response.getMachineDetection()).isNotNull();
             then(response.getMachineDetection().getDetectionResult()).isEqualTo(givenDetectionResult);
             then(response.getRingDuration()).isEqualTo(givenRingDuration);
-            then(response.getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isEqualTo(givenPlatform);
             then(response.getConferenceId()).isEqualTo(givenConferenceId);
             then(response.getCustomData()).isNotNull();
             then(response.getCustomData().get("key1")).isEqualTo(givenKey1);
@@ -654,6 +691,8 @@ class CallsApiTest extends ApiTest {
         Integer givenPageSize = 1;
         Integer givenPageTotalPages = 0;
         Long givenPageTotalResults = 0L;
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"results\": [\n"
@@ -685,9 +724,10 @@ class CallsApiTest extends ApiTest {
                         + "          \"machineDetection\": {\n"
                         + "            \"detectionResult\": \"%s\"\n"
                         + "          },\n"
-                        + "          \"applicationIds\": [\n"
-                        + "          \"%s\"\n"
-                        + "          ],\n"
+                        + "          \"platform\": {\n"
+                        + "            \"applicationId\": \"%s\",\n"
+                        + "            \"entityId\": \"%s\"\n"
+                        + "          },\n"
                         + "          \"conferenceIds\": [\n"
                         + "          \"%s\"\n"
                         + "          ],\n"
@@ -730,6 +770,7 @@ class CallsApiTest extends ApiTest {
                 givenParentCallId,
                 givenDetectionResult,
                 givenApplicationId,
+                givenEntityId,
                 givenConferenceId,
                 givenDuration,
                 givenHasCameraVideo,
@@ -767,9 +808,7 @@ class CallsApiTest extends ApiTest {
             then(result.getParentCallId()).isEqualTo(givenParentCallId);
             then(result.getMachineDetection()).isNotNull();
             then(result.getMachineDetection().getDetectionResult()).isEqualTo(givenDetectionResult);
-            then(result.getApplicationIds()).isNotNull();
-            then(result.getApplicationIds().size()).isEqualTo(1);
-            then(result.getApplicationIds().get(0)).isEqualTo(givenApplicationId);
+            then(result.getPlatform()).isEqualTo(givenPlatform);
             then(result.getConferenceIds()).isNotNull();
             then(result.getConferenceIds().size()).isEqualTo(1);
             then(result.getConferenceIds().get(0)).isEqualTo(givenConferenceId);
@@ -827,6 +866,8 @@ class CallsApiTest extends ApiTest {
         String givenKey2 = "value2";
         String givenDialogId = "dialogId";
         String givenSender = "sender";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"callId\": \"%s\",\n"
@@ -856,9 +897,10 @@ class CallsApiTest extends ApiTest {
                         + "  \"machineDetection\": {\n"
                         + "    \"detectionResult\": \"%s\"\n"
                         + "  },\n"
-                        + "  \"applicationIds\": [\n"
-                        + "  \"%s\"\n"
-                        + "  ],\n"
+                        + "  \"platform\": {\n"
+                        + "     \"applicationId\": \"%s\",\n"
+                        + "     \"entityId\": \"%s\"\n"
+                        + "  },\n"
                         + "  \"conferenceIds\": [\n"
                         + "  \"%s\"\n"
                         + "  ],\n"
@@ -895,6 +937,7 @@ class CallsApiTest extends ApiTest {
                 givenParentCallId,
                 givenDetectionResult,
                 givenApplicationId,
+                givenEntityId,
                 givenConferenceId,
                 givenDuration,
                 givenHasCameraVideo,
@@ -927,9 +970,8 @@ class CallsApiTest extends ApiTest {
             then(response.getParentCallId()).isEqualTo(givenParentCallId);
             then(response.getMachineDetection()).isNotNull();
             then(response.getMachineDetection().getDetectionResult()).isEqualTo(givenDetectionResult);
-            then(response.getApplicationIds()).isNotNull();
-            then(response.getApplicationIds().size()).isEqualTo(1);
-            then(response.getApplicationIds().get(0)).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isNotNull();
+            then(response.getPlatform()).isEqualTo(givenPlatform);
             then(response.getConferenceIds()).isNotNull();
             then(response.getConferenceIds().size()).isEqualTo(1);
             then(response.getConferenceIds().get(0)).isEqualTo(givenConferenceId);
@@ -966,6 +1008,8 @@ class CallsApiTest extends ApiTest {
         Boolean givenVideoCamera = true;
         Boolean givenVideoScreenShare = true;
         String givenApplicationId = "61c060db2675060027d8c7a6";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -1010,7 +1054,10 @@ class CallsApiTest extends ApiTest {
                         + "      }\n"
                         + "    }\n"
                         + "  ],\n"
-                        + "  \"applicationId\": \"%s\"\n"
+                        + "  \"platform\": {\n"
+                        + "    \"applicationId\": \"%s\",\n"
+                        + "    \"entityId\": \"%s\"\n"
+                        + "  }\n"
                         + "}\n",
                 givenId,
                 givenName,
@@ -1032,7 +1079,8 @@ class CallsApiTest extends ApiTest {
                 givenAudioUserDeaf,
                 givenVideoCamera,
                 givenVideoScreenShare,
-                givenApplicationId);
+                givenApplicationId,
+                givenEntityId);
 
         String expectedRequest = String.format(
                 "{\n" + "  \"callIds\": [\n" + "    \"%s\",\n" + "    \"%s\"\n" + "  ]\n" + "}\n",
@@ -1086,7 +1134,7 @@ class CallsApiTest extends ApiTest {
             then(video2.getCamera()).isEqualTo(givenVideoCamera);
             then(video2.getScreenShare()).isEqualTo(givenVideoScreenShare);
 
-            then(response.getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isEqualTo(givenPlatform);
         };
 
         var call = api.connectCalls(request);
@@ -1134,6 +1182,8 @@ class CallsApiTest extends ApiTest {
         String givenConferenceId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenKey1 = "value1";
         String givenKey2 = "value2";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"conference\": {\n"
@@ -1161,7 +1211,10 @@ class CallsApiTest extends ApiTest {
                         + "          }\n"
                         + "        }\n"
                         + "      ],\n"
-                        + "      \"applicationId\": \"%s\"\n"
+                        + "      \"platform\": {\n"
+                        + "        \"applicationId\": \"%s\",\n"
+                        + "        \"entityId\": \"%s\"\n"
+                        + "      }\n"
                         + "    },\n"
                         + "  \"call\": {\n"
                         + "      \"id\": \"%s\",\n"
@@ -1191,7 +1244,10 @@ class CallsApiTest extends ApiTest {
                         + "      \"machineDetection\": {\n"
                         + "        \"detectionResult\": \"%s\"\n"
                         + "      },\n"
-                        + "      \"applicationId\": \"%s\",\n"
+                        + "      \"platform\": {\n"
+                        + "        \"applicationId\": \"%s\",\n"
+                        + "        \"entityId\": \"%s\"\n"
+                        + "      },\n"
                         + "      \"conferenceId\": \"%s\",\n"
                         + "      \"customData\": {\n"
                         + "        \"key1\": \"%s\",\n"
@@ -1212,6 +1268,7 @@ class CallsApiTest extends ApiTest {
                 givenVideoCamera,
                 givenVideoScreenShare,
                 givenApplicationId,
+                givenEntityId,
                 givenCallId,
                 givenPhoneNumber,
                 givenType,
@@ -1230,6 +1287,7 @@ class CallsApiTest extends ApiTest {
                 givenParentCallId,
                 givenDetectionResult,
                 givenApplicationId,
+                givenEntityId,
                 givenConferenceId,
                 givenKey1,
                 givenKey2);
@@ -1290,7 +1348,7 @@ class CallsApiTest extends ApiTest {
             var video = media.getVideo();
             then(video.getCamera()).isEqualTo(givenVideoCamera);
             then(video.getScreenShare()).isEqualTo(givenVideoScreenShare);
-            then(conference.getApplicationId()).isEqualTo(givenApplicationId);
+            then(conference.getPlatform()).isEqualTo(givenPlatform);
             then(response.getCall()).isNotNull();
 
             var call = response.getCall();
@@ -1322,7 +1380,7 @@ class CallsApiTest extends ApiTest {
                     .extracting(CallsMachineDetectionProperties::getDetectionResult)
                     .isEqualTo(givenDetectionResult);
 
-            then(call.getApplicationId()).isEqualTo(givenApplicationId);
+            then(call.getPlatform()).isEqualTo(givenPlatform);
             then(call.getConferenceId()).isEqualTo(givenConferenceId);
             then(call.getCustomData()).isNotNull().containsExactly(entry("key1", givenKey1), entry("key2", givenKey2));
         };
@@ -1412,7 +1470,9 @@ class CallsApiTest extends ApiTest {
         String givenStartTime = "2022-01-01T00:00:00.100Z";
         String givenAnswerTime = "2022-01-01T00:00:00.100Z";
         Integer givenRingDuration = 2;
+        String givenEntityId = "entityId";
         String givenApplicationId = "61c060db2675060027d8c7a6";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
         String givenConferenceId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenKey2 = "value2";
         String givenKey1 = "value1";
@@ -1440,7 +1500,10 @@ class CallsApiTest extends ApiTest {
                         + "  \"startTime\": \"%s\",\n"
                         + "  \"answerTime\": \"%s\",\n"
                         + "  \"ringDuration\": %d,\n"
-                        + "  \"applicationId\": \"%s\",\n"
+                        + "  \"platform\": {\n"
+                        + "    \"applicationId\": \"%s\",\n"
+                        + "    \"entityId\": \"%s\"\n"
+                        + "  },\n"
                         + "  \"conferenceId\": \"%s\",\n"
                         + "  \"customData\": {\n"
                         + "    \"key2\": \"%s\",\n"
@@ -1462,6 +1525,7 @@ class CallsApiTest extends ApiTest {
                 givenAnswerTime,
                 givenRingDuration,
                 givenApplicationId,
+                givenEntityId,
                 givenConferenceId,
                 givenKey2,
                 givenKey1);
@@ -1494,7 +1558,7 @@ class CallsApiTest extends ApiTest {
             then(response.getStartTime()).isEqualTo(givenStartTime);
             then(response.getAnswerTime()).isEqualTo(givenAnswerTime);
             then(response.getRingDuration()).isEqualTo(givenRingDuration);
-            then(response.getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isEqualTo(givenPlatform);
             then(response.getConferenceId()).isEqualTo(givenConferenceId);
             then(response.getCustomData()).isNotNull();
             var customData = response.getCustomData();
@@ -1579,7 +1643,7 @@ class CallsApiTest extends ApiTest {
         Double givenSpeechRate = 0.5;
         Integer givenLoopCount = 0;
         CallsGender givenCallsGender = CallsGender.FEMALE;
-        CallVoice givenVoiceName = CallVoice.HODA;
+        CallVoice givenVoiceName = CallVoice.DARINA;
 
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
@@ -1876,6 +1940,8 @@ class CallsApiTest extends ApiTest {
         Integer givenPageSize = 1;
         Integer givenPageTotalPages = 0;
         Long givenPageTotalResults = 0L;
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"results\": [\n"
@@ -1904,7 +1970,10 @@ class CallsApiTest extends ApiTest {
                         + "          }\n"
                         + "        }\n"
                         + "      ],\n"
-                        + "      \"applicationId\": \"%s\"\n"
+                        + "      \"platform\": {\n"
+                        + "         \"applicationId\": \"%s\",\n"
+                        + "         \"entityId\": \"%s\"\n"
+                        + "      }\n"
                         + "    }\n"
                         + "  ],\n"
                         + "  \"paging\": {\n"
@@ -1927,6 +1996,7 @@ class CallsApiTest extends ApiTest {
                 givenVideoCamera,
                 givenVideoScreenShare,
                 givenApplicationId,
+                givenEntityId,
                 givenPage,
                 givenPageSize,
                 givenPageTotalPages,
@@ -1965,7 +2035,7 @@ class CallsApiTest extends ApiTest {
             var video = media.getVideo();
             then(video.getCamera()).isEqualTo(givenVideoCamera);
             then(video.getScreenShare()).isEqualTo(givenVideoScreenShare);
-            then(result.getApplicationId()).isEqualTo(givenApplicationId);
+            then(result.getPlatform()).isEqualTo(givenPlatform);
             var paging = response.getPaging();
             then(paging.getPage()).isEqualTo(givenPage);
             then(paging.getSize()).isEqualTo(givenPageSize);
@@ -2001,6 +2071,8 @@ class CallsApiTest extends ApiTest {
         String givenCustomDataFieldValue = "data";
         Map<String, String> givenCustomData = Map.of(givenCustomDataField, givenCustomDataFieldValue);
         String givenFilePrefix = "filePrefix";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -2027,7 +2099,10 @@ class CallsApiTest extends ApiTest {
                         + "      }\n"
                         + "    }\n"
                         + "  ],\n"
-                        + "  \"applicationId\": \"%s\"\n"
+                        + "  \"platform\": {\n"
+                        + "     \"applicationId\": \"%s\",\n"
+                        + "     \"entityId\": \"%s\"\n"
+                        + "  }\n"
                         + "}\n",
                 givenId,
                 givenName,
@@ -2041,7 +2116,8 @@ class CallsApiTest extends ApiTest {
                 givenAudioUserDeaf,
                 givenVideoCamera,
                 givenVideoScreenShare,
-                givenApplicationId);
+                givenApplicationId,
+                givenEntityId);
 
         String expectedRequest = String.format(
                 "{\n" + "  \"name\": \"%s\",\n"
@@ -2056,7 +2132,10 @@ class CallsApiTest extends ApiTest {
                         + "    \"filePrefix\": \"%s\"\n"
                         + "  },\n"
                         + "  \"maxDuration\": %d,\n"
-                        + "  \"applicationId\": \"%s\"\n"
+                        + "  \"platform\": {\n"
+                        + "     \"applicationId\": \"%s\",\n"
+                        + "     \"entityId\": \"%s\"\n"
+                        + "  }\n"
                         + "}\n",
                 givenName,
                 givenRecordingType,
@@ -2065,7 +2144,8 @@ class CallsApiTest extends ApiTest {
                 givenCustomDataFieldValue,
                 givenFilePrefix,
                 givenMaxDuration,
-                givenApplicationId);
+                givenApplicationId,
+                givenEntityId);
 
         setUpPostRequest(CONFERENCES, expectedRequest, givenResponse, 201);
 
@@ -2079,7 +2159,7 @@ class CallsApiTest extends ApiTest {
                         .customData(givenCustomData)
                         .filePrefix(givenFilePrefix))
                 .maxDuration(givenMaxDuration)
-                .applicationId(givenApplicationId);
+                .platform(givenPlatform);
 
         Consumer<CallsConference> assertions = (response) -> {
             then(response).isNotNull();
@@ -2106,7 +2186,7 @@ class CallsApiTest extends ApiTest {
             var video = media.getVideo();
             then(video.getCamera()).isEqualTo(givenVideoCamera);
             then(video.getScreenShare()).isEqualTo(givenVideoScreenShare);
-            then(response.getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isEqualTo(givenPlatform);
         };
 
         var call = api.createConference(request);
@@ -2129,6 +2209,8 @@ class CallsApiTest extends ApiTest {
         Boolean givenVideoCamera = true;
         Boolean givenVideoScreenShare = true;
         String givenApplicationId = "61c060db2675060027d8c7a6";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -2155,7 +2237,10 @@ class CallsApiTest extends ApiTest {
                         + "      }\n"
                         + "    }\n"
                         + "  ],\n"
-                        + "  \"applicationId\": \"%s\"\n"
+                        + "  \"platform\": {\n"
+                        + "     \"applicationId\": \"%s\",\n"
+                        + "     \"entityId\": \"%s\"\n"
+                        + "  }\n"
                         + "}\n",
                 givenId,
                 givenName,
@@ -2169,7 +2254,8 @@ class CallsApiTest extends ApiTest {
                 givenAudioUserDeaf,
                 givenVideoCamera,
                 givenVideoScreenShare,
-                givenApplicationId);
+                givenApplicationId,
+                givenEntityId);
 
         setUpSuccessGetRequest(CONFERENCE.replace("{conferenceId}", givenId), Map.of(), givenResponse);
 
@@ -2200,7 +2286,7 @@ class CallsApiTest extends ApiTest {
             var video = media.getVideo();
             then(video.getCamera()).isEqualTo(givenVideoCamera);
             then(video.getScreenShare()).isEqualTo(givenVideoScreenShare);
-            then(response.getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isEqualTo(givenPlatform);
         };
 
         var call = api.getConference(givenId);
@@ -2226,7 +2312,6 @@ class CallsApiTest extends ApiTest {
         String givenFileName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
-        CallsCreationMethod givenCreationMethod = CallsCreationMethod.RECORDED;
         String givenCreationTime = "2022-05-01T14:25:45.143Z";
         String givenExpirationTime = "2022-06-01T14:25:45.143Z";
         Long givenFilesDuration = 3L;
@@ -2242,13 +2327,19 @@ class CallsApiTest extends ApiTest {
         Integer givenErrorCodeId = 10000;
         String givenErrorCodeName = "NORMAL_HANGUP";
         String givenErrorCodeDescription = "The call has ended with hangup initiated by caller, callee or API";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
+        CallsSftpUploadStatus sftpUploadStatus = CallsSftpUploadStatus.UPLOADED;
 
         String givenResponse = String.format(
                 "{\n" + "    \"results\": [\n"
                         + "        {\n"
                         + "          \"conferenceId\": \"%s\",\n"
                         + "          \"name\": \"%s\",\n"
-                        + "          \"applicationId\": \"%s\",\n"
+                        + "          \"platform\": {\n"
+                        + "            \"applicationId\": \"%s\",\n"
+                        + "            \"entityId\": \"%s\"\n"
+                        + "          },\n"
                         + "          \"startTime\": \"%s\",\n"
                         + "          \"endTime\": \"%s\",\n"
                         + "          \"duration\": %d,\n"
@@ -2266,7 +2357,7 @@ class CallsApiTest extends ApiTest {
                         + "                      \"name\": \"%s\",\n"
                         + "                      \"fileFormat\": \"%s\",\n"
                         + "                      \"size\": %d,\n"
-                        + "                      \"creationMethod\": \"%s\",\n"
+                        + "                      \"sftpUploadStatus\": \"%s\",\n"
                         + "                      \"creationTime\": \"%s\",\n"
                         + "                      \"expirationTime\": \"%s\",\n"
                         + "                      \"duration\": %d,\n"
@@ -2288,7 +2379,7 @@ class CallsApiTest extends ApiTest {
                         + "                          \"name\": \"%s\",\n"
                         + "                          \"fileFormat\": \"%s\",\n"
                         + "                          \"size\": %d,\n"
-                        + "                          \"creationMethod\": \"%s\",\n"
+                        + "                          \"sftpUploadStatus\": \"%s\",\n"
                         + "                          \"creationTime\": \"%s\",\n"
                         + "                          \"expirationTime\": \"%s\",\n"
                         + "                          \"duration\": %d,\n"
@@ -2319,6 +2410,7 @@ class CallsApiTest extends ApiTest {
                 givenConferenceId,
                 givenName,
                 givenApplicationId,
+                givenEntityId,
                 givenStartTime,
                 givenEndTime,
                 givenDuration,
@@ -2329,7 +2421,7 @@ class CallsApiTest extends ApiTest {
                 givenFileName,
                 givenFileFormat,
                 givenSize,
-                givenCreationMethod,
+                sftpUploadStatus,
                 givenCreationTime,
                 givenExpirationTime,
                 givenFilesDuration,
@@ -2343,7 +2435,7 @@ class CallsApiTest extends ApiTest {
                 givenFileName,
                 givenFileFormat,
                 givenSize,
-                givenCreationMethod,
+                sftpUploadStatus,
                 givenCreationTime,
                 givenExpirationTime,
                 givenFilesDuration,
@@ -2378,7 +2470,7 @@ class CallsApiTest extends ApiTest {
             var result = results.get(0);
             then(result.getConferenceId()).isEqualTo(givenConferenceId);
             then(result.getName()).isEqualTo(givenName);
-            then(result.getApplicationId()).isEqualTo(givenApplicationId);
+            then(result.getPlatform()).isEqualTo(givenPlatform);
             then(result.getStartTime()).isEqualTo(givenStartTime);
             then(result.getEndTime()).isEqualTo(givenEndTime);
             then(result.getDuration()).isEqualTo(givenDuration);
@@ -2397,9 +2489,8 @@ class CallsApiTest extends ApiTest {
             then(file.getName()).isEqualTo(givenFileName);
             then(file.getFileFormat()).isEqualTo(givenFileFormat);
             then(file.getSize()).isEqualTo(givenSize);
-            then(file.getCreationMethod()).isEqualTo(givenCreationMethod);
+            then(file.getSftpUploadStatus()).isEqualTo(sftpUploadStatus);
             then(file.getCreationTime()).isEqualTo(givenCreationTime);
-            then(file.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(file.getDuration()).isEqualTo(givenFilesDuration);
             then(file.getStartTime()).isEqualTo(givenFilesStartTime);
             then(file.getEndTime()).isEqualTo(givenFilesEndTime);
@@ -2420,9 +2511,8 @@ class CallsApiTest extends ApiTest {
             then(callRecordingFile.getName()).isEqualTo(givenFileName);
             then(callRecordingFile.getFileFormat()).isEqualTo(givenFileFormat);
             then(callRecordingFile.getSize()).isEqualTo(givenSize);
-            then(callRecordingFile.getCreationMethod()).isEqualTo(givenCreationMethod);
+            then(callRecordingFile.getSftpUploadStatus()).isEqualTo(sftpUploadStatus);
             then(callRecordingFile.getCreationTime()).isEqualTo(givenCreationTime);
-            then(callRecordingFile.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(callRecordingFile.getDuration()).isEqualTo(givenFilesDuration);
             then(callRecordingFile.getStartTime()).isEqualTo(givenFilesStartTime);
             then(callRecordingFile.getEndTime()).isEqualTo(givenFilesEndTime);
@@ -2465,7 +2555,7 @@ class CallsApiTest extends ApiTest {
         String givenFileName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
-        CallsCreationMethod givenCreationMethod = CallsCreationMethod.RECORDED;
+        CallsSftpUploadStatus givenSftpUploadStatus = CallsSftpUploadStatus.UPLOADED;
         String givenCreationTime = "2022-05-01T14:25:45.143Z";
         String givenExpirationTime = "2022-06-01T14:25:45.143Z";
         Long givenFilesDuration = 3L;
@@ -2477,11 +2567,16 @@ class CallsApiTest extends ApiTest {
         Integer givenErrorCodeId = 10000;
         String givenErrorCodeName = "NORMAL_HANGUP";
         String givenErrorCodeDescription = "The call has ended with hangup initiated by caller, callee or API";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"conferenceId\": \"%s\",\n"
                         + "  \"name\": \"%s\",\n"
-                        + "  \"applicationId\": \"%s\",\n"
+                        + "  \"platform\": {\n"
+                        + "     \"applicationId\": \"%s\",\n"
+                        + "     \"entityId\": \"%s\"\n"
+                        + "  },\n"
                         + "  \"startTime\": \"%s\",\n"
                         + "  \"endTime\": \"%s\",\n"
                         + "  \"duration\": %d,\n"
@@ -2519,7 +2614,7 @@ class CallsApiTest extends ApiTest {
                         + "              \"name\": \"%s\",\n"
                         + "              \"fileFormat\": \"%s\",\n"
                         + "              \"size\": %d,\n"
-                        + "              \"creationMethod\": \"%s\",\n"
+                        + "              \"sftpUploadStatus\": \"%s\",\n"
                         + "              \"creationTime\": \"%s\",\n"
                         + "              \"expirationTime\": \"%s\",\n"
                         + "              \"duration\": %d,\n"
@@ -2542,6 +2637,7 @@ class CallsApiTest extends ApiTest {
                 givenConferenceId,
                 givenName,
                 givenApplicationId,
+                givenEntityId,
                 givenStartTime,
                 givenEndTime,
                 givenDuration,
@@ -2564,7 +2660,7 @@ class CallsApiTest extends ApiTest {
                 givenFileName,
                 givenFileFormat,
                 givenSize,
-                givenCreationMethod,
+                givenSftpUploadStatus,
                 givenCreationTime,
                 givenExpirationTime,
                 givenFilesDuration,
@@ -2586,7 +2682,7 @@ class CallsApiTest extends ApiTest {
             then(response).isNotNull();
             then(response.getConferenceId()).isEqualTo(givenConferenceId);
             then(response.getName()).isEqualTo(givenName);
-            then(response.getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isEqualTo(givenPlatform);
             then(response.getStartTime()).isEqualTo(givenStartTime);
             then(response.getEndTime()).isEqualTo(givenEndTime);
             then(response.getDuration()).isEqualTo(givenDuration);
@@ -2636,9 +2732,8 @@ class CallsApiTest extends ApiTest {
             then(callRecordingFile.getName()).isEqualTo(givenFileName);
             then(callRecordingFile.getFileFormat()).isEqualTo(givenFileFormat);
             then(callRecordingFile.getSize()).isEqualTo(givenSize);
-            then(callRecordingFile.getCreationMethod()).isEqualTo(givenCreationMethod);
+            then(callRecordingFile.getSftpUploadStatus()).isEqualTo(givenSftpUploadStatus);
             then(callRecordingFile.getCreationTime()).isEqualTo(givenCreationTime);
-            then(callRecordingFile.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(callRecordingFile.getDuration()).isEqualTo(givenFilesDuration);
             then(callRecordingFile.getStartTime()).isEqualTo(givenFilesStartTime);
             then(callRecordingFile.getEndTime()).isEqualTo(givenFilesEndTime);
@@ -2684,6 +2779,8 @@ class CallsApiTest extends ApiTest {
         String givenConferenceId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenKey1 = "value1";
         String givenKey2 = "value2";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         Boolean givenConnectOnEarlyMedia = false;
 
@@ -2712,7 +2809,10 @@ class CallsApiTest extends ApiTest {
                         + "          }\n"
                         + "        }\n"
                         + "      ],\n"
-                        + "      \"applicationId\": \"%s\"\n"
+                        + "      \"platform\": {\n"
+                        + "         \"applicationId\": \"%s\",\n"
+                        + "         \"entityId\": \"%s\"\n"
+                        + "      }\n"
                         + "    },\n"
                         + "  \"call\": {\n"
                         + "    \"id\": \"%s\",\n"
@@ -2737,7 +2837,10 @@ class CallsApiTest extends ApiTest {
                         + "    \"startTime\": \"%s\",\n"
                         + "    \"answerTime\": \"%s\",\n"
                         + "    \"ringDuration\": %d,\n"
-                        + "    \"applicationId\": \"%s\",\n"
+                        + "    \"platform\": {\n"
+                        + "      \"applicationId\": \"%s\",\n"
+                        + "       \"entityId\": \"%s\"\n"
+                        + "    },\n"
                         + "    \"conferenceId\": \"%s\",\n"
                         + "    \"customData\": {\n"
                         + "      \"key1\": \"%s\",\n"
@@ -2757,6 +2860,7 @@ class CallsApiTest extends ApiTest {
                 givenVideoCamera,
                 givenVideoScreenShare,
                 givenApplicationId,
+                givenEntityId,
                 givenCallId,
                 givenPhoneNumber,
                 givenType,
@@ -2772,6 +2876,7 @@ class CallsApiTest extends ApiTest {
                 givenTime,
                 givenRingDuration,
                 givenApplicationId,
+                givenEntityId,
                 givenConferenceId,
                 givenKey1,
                 givenKey2);
@@ -2834,7 +2939,7 @@ class CallsApiTest extends ApiTest {
             var video = media.getVideo();
             then(video.getCamera()).isEqualTo(givenVideoCamera);
             then(video.getScreenShare()).isEqualTo(givenVideoScreenShare);
-            then(conference.getApplicationId()).isEqualTo(givenApplicationId);
+            then(conference.getPlatform()).isEqualTo(givenPlatform);
 
             var call = response.getCall();
             then(call.getId()).isEqualTo(givenCallId);
@@ -2861,7 +2966,7 @@ class CallsApiTest extends ApiTest {
             then(call.getStartTime()).isEqualTo(expectedTime);
             then(call.getAnswerTime()).isEqualTo(expectedTime);
             then(call.getRingDuration()).isEqualTo(givenRingDuration);
-            then(call.getApplicationId()).isEqualTo(givenApplicationId);
+            then(call.getPlatform()).isEqualTo(givenPlatform);
             then(call.getConferenceId()).isEqualTo(givenConferenceId);
             then(call.getCustomData()).isNotNull().containsExactly(entry("key1", givenKey1), entry("key2", givenKey2));
         };
@@ -2886,6 +2991,8 @@ class CallsApiTest extends ApiTest {
         Boolean givenVideoCamera = true;
         Boolean givenVideoScreenShare = true;
         String givenApplicationId = "61c060db2675060027d8c7a6";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         Boolean givenConnectOnEarlyMedia = false;
 
@@ -2914,7 +3021,10 @@ class CallsApiTest extends ApiTest {
                         + "      }\n"
                         + "    }\n"
                         + "  ],\n"
-                        + "  \"applicationId\": \"%s\"\n"
+                        + "  \"platform\": {\n"
+                        + "     \"applicationId\": \"%s\",\n"
+                        + "     \"entityId\": \"%s\"\n"
+                        + "  }\n"
                         + "}\n",
                 givenId,
                 givenName,
@@ -2928,7 +3038,8 @@ class CallsApiTest extends ApiTest {
                 givenAudioUserDeaf,
                 givenVideoCamera,
                 givenVideoScreenShare,
-                givenApplicationId);
+                givenApplicationId,
+                givenEntityId);
 
         String expectedRequest =
                 String.format("{\n" + "  \"connectOnEarlyMedia\": %b\n" + "}\n", givenConnectOnEarlyMedia);
@@ -2969,7 +3080,7 @@ class CallsApiTest extends ApiTest {
             var video = media.getVideo();
             then(video.getCamera()).isEqualTo(givenVideoCamera);
             then(video.getScreenShare()).isEqualTo(givenVideoScreenShare);
-            then(response.getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isEqualTo(givenPlatform);
         };
 
         var call = api.addExistingConferenceCall(givenId, givenCallId, request);
@@ -3019,6 +3130,8 @@ class CallsApiTest extends ApiTest {
         Boolean givenVideoCamera = true;
         Boolean givenVideoScreenShare = true;
         String givenApplicationId = "61c060db2675060027d8c7a6";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -3045,7 +3158,10 @@ class CallsApiTest extends ApiTest {
                         + "      }\n"
                         + "    }\n"
                         + "  ],\n"
-                        + "  \"applicationId\": \"%s\"\n"
+                        + "  \"platform\": {\n"
+                        + "     \"applicationId\": \"%s\",\n"
+                        + "     \"entityId\": \"%s\"\n"
+                        + "  }\n"
                         + "}\n",
                 givenId,
                 givenName,
@@ -3059,7 +3175,8 @@ class CallsApiTest extends ApiTest {
                 givenAudioUserDeaf,
                 givenVideoCamera,
                 givenVideoScreenShare,
-                givenApplicationId);
+                givenApplicationId,
+                givenEntityId);
 
         setUpEmptyPostRequest(HANGUP_CONFERENCE.replace("{conferenceId}", givenId), Map.of(), givenResponse, 200);
 
@@ -3090,7 +3207,7 @@ class CallsApiTest extends ApiTest {
             var video = media.getVideo();
             then(video.getCamera()).isEqualTo(givenVideoCamera);
             then(video.getScreenShare()).isEqualTo(givenVideoScreenShare);
-            then(response.getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isEqualTo(givenPlatform);
         };
 
         var call = api.hangupConference(givenId);
@@ -3147,7 +3264,7 @@ class CallsApiTest extends ApiTest {
         Double givenSpeechRate = 0.5;
         Integer givenLoopCount = 0;
         CallsGender givenCallsGender = CallsGender.FEMALE;
-        CallVoice givenVoiceName = CallVoice.HODA;
+        CallVoice givenVoiceName = CallVoice.ABIGAIL;
 
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
@@ -3749,7 +3866,7 @@ class CallsApiTest extends ApiTest {
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
-        CallsCreationMethod givenCreationMethod = CallsCreationMethod.RECORDED;
+        CallsSftpUploadStatus givenSftpUploadStatus = CallsSftpUploadStatus.UPLOADED;
         String givenCreationTime = "2022-05-01T14:25:45.143Z";
         String givenExpirationTime = "2022-06-01T14:25:45.143Z";
         Long givenDuration = 3L;
@@ -3778,7 +3895,7 @@ class CallsApiTest extends ApiTest {
                         + "          \"name\": \"%s\",\n"
                         + "          \"fileFormat\": \"%s\",\n"
                         + "          \"size\": %d,\n"
-                        + "          \"creationMethod\": \"%s\",\n"
+                        + "          \"sftpUploadStatus\": \"%s\",\n"
                         + "          \"creationTime\": \"%s\",\n"
                         + "          \"expirationTime\": \"%s\",\n"
                         + "          \"duration\": %d,\n"
@@ -3806,7 +3923,7 @@ class CallsApiTest extends ApiTest {
                 givenName,
                 givenFileFormat,
                 givenSize,
-                givenCreationMethod,
+                givenSftpUploadStatus,
                 givenCreationTime,
                 givenExpirationTime,
                 givenDuration,
@@ -3843,9 +3960,8 @@ class CallsApiTest extends ApiTest {
             then(file.getName()).isEqualTo(givenName);
             then(file.getFileFormat()).isEqualTo(givenFileFormat);
             then(file.getSize()).isEqualTo(givenSize);
-            then(file.getCreationMethod()).isEqualTo(givenCreationMethod);
+            then(file.getSftpUploadStatus()).isEqualTo(givenSftpUploadStatus);
             then(file.getCreationTime()).isEqualTo(givenCreationTime);
-            then(file.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(file.getDuration()).isEqualTo(givenDuration);
             then(file.getStartTime()).isEqualTo(givenStartTime);
             then(file.getEndTime()).isEqualTo(givenEndTime);
@@ -3875,7 +3991,7 @@ class CallsApiTest extends ApiTest {
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
-        CallsCreationMethod givenCreationMethod = CallsCreationMethod.RECORDED;
+        CallsSftpUploadStatus givenSftpUploadStatus = CallsSftpUploadStatus.UPLOADED;
         String givenCreationTime = "2022-05-01T14:25:45.143Z";
         String givenExpirationTime = "2022-06-01T14:25:45.143Z";
         Long givenDuration = 3L;
@@ -3898,7 +4014,7 @@ class CallsApiTest extends ApiTest {
                         + "          \"name\": \"%s\",\n"
                         + "          \"fileFormat\": \"%s\",\n"
                         + "          \"size\": %d,\n"
-                        + "          \"creationMethod\": \"%s\",\n"
+                        + "          \"sftpUploadStatus\": \"%s\",\n"
                         + "          \"creationTime\": \"%s\",\n"
                         + "          \"expirationTime\": \"%s\",\n"
                         + "          \"duration\": %d,\n"
@@ -3918,7 +4034,7 @@ class CallsApiTest extends ApiTest {
                 givenName,
                 givenFileFormat,
                 givenSize,
-                givenCreationMethod,
+                givenSftpUploadStatus,
                 givenCreationTime,
                 givenExpirationTime,
                 givenDuration,
@@ -3947,9 +4063,8 @@ class CallsApiTest extends ApiTest {
             then(file.getName()).isEqualTo(givenName);
             then(file.getFileFormat()).isEqualTo(givenFileFormat);
             then(file.getSize()).isEqualTo(givenSize);
-            then(file.getCreationMethod()).isEqualTo(givenCreationMethod);
+            then(file.getSftpUploadStatus()).isEqualTo(givenSftpUploadStatus);
             then(file.getCreationTime()).isEqualTo(givenCreationTime);
-            then(file.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(file.getDuration()).isEqualTo(givenDuration);
             then(file.getStartTime()).isEqualTo(givenStartTime);
             then(file.getEndTime()).isEqualTo(givenEndTime);
@@ -3973,7 +4088,7 @@ class CallsApiTest extends ApiTest {
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
-        CallsCreationMethod givenCreationMethod = CallsCreationMethod.RECORDED;
+        CallsSftpUploadStatus givenSftpUploadStatus = CallsSftpUploadStatus.UPLOADED;
         String givenCreationTime = "2022-05-01T14:25:45.143Z";
         String givenExpirationTime = "2022-06-01T14:25:45.143Z";
         Long givenDuration = 3L;
@@ -3996,7 +4111,7 @@ class CallsApiTest extends ApiTest {
                         + "          \"name\": \"%s\",\n"
                         + "          \"fileFormat\": \"%s\",\n"
                         + "          \"size\": %d,\n"
-                        + "          \"creationMethod\": \"%s\",\n"
+                        + "          \"sftpUploadStatus\": \"%s\",\n"
                         + "          \"creationTime\": \"%s\",\n"
                         + "          \"expirationTime\": \"%s\",\n"
                         + "          \"duration\": %d,\n"
@@ -4016,7 +4131,7 @@ class CallsApiTest extends ApiTest {
                 givenName,
                 givenFileFormat,
                 givenSize,
-                givenCreationMethod,
+                givenSftpUploadStatus,
                 givenCreationTime,
                 givenExpirationTime,
                 givenDuration,
@@ -4043,9 +4158,8 @@ class CallsApiTest extends ApiTest {
             then(file.getName()).isEqualTo(givenName);
             then(file.getFileFormat()).isEqualTo(givenFileFormat);
             then(file.getSize()).isEqualTo(givenSize);
-            then(file.getCreationMethod()).isEqualTo(givenCreationMethod);
+            then(file.getSftpUploadStatus()).isEqualTo(givenSftpUploadStatus);
             then(file.getCreationTime()).isEqualTo(givenCreationTime);
-            then(file.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(file.getDuration()).isEqualTo(givenDuration);
             then(file.getStartTime()).isEqualTo(givenStartTime);
             then(file.getEndTime()).isEqualTo(givenEndTime);
@@ -4067,6 +4181,9 @@ class CallsApiTest extends ApiTest {
         String givenConferenceName = "string";
         String givenApplicationId = "string";
         String givenFileId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
+
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
@@ -4087,20 +4204,24 @@ class CallsApiTest extends ApiTest {
         Integer givenPageSize = 1;
         Integer givenPageTotalPages = 0;
         Long givenPageTotalResults = 0L;
+        CallsSftpUploadStatus givenSftpUploadStatus = CallsSftpUploadStatus.UPLOADED;
 
         String givenResponse = String.format(
                 "{\n" + "  \"results\": [\n"
                         + "    {\n"
                         + "      \"conferenceId\": \"%s\",\n"
                         + "      \"conferenceName\": \"%s\",\n"
-                        + "      \"applicationId\": \"%s\",\n"
+                        + "      \"platform\": {\n"
+                        + "         \"applicationId\": \"%s\",\n"
+                        + "         \"entityId\": \"%s\"\n"
+                        + "      },\n"
                         + "      \"composedFiles\": [\n"
                         + "        {\n"
                         + "          \"id\": \"%s\",\n"
                         + "          \"name\": \"%s\",\n"
                         + "          \"fileFormat\": \"%s\",\n"
                         + "          \"size\": %d,\n"
-                        + "          \"creationMethod\": \"%s\",\n"
+                        + "          \"sftpUploadStatus\": \"%s\",\n"
                         + "          \"creationTime\": \"%s\",\n"
                         + "          \"expirationTime\": \"%s\",\n"
                         + "          \"duration\": %d,\n"
@@ -4123,7 +4244,7 @@ class CallsApiTest extends ApiTest {
                         + "              \"name\": \"%s\",\n"
                         + "              \"fileFormat\": \"%s\",\n"
                         + "              \"size\": %d,\n"
-                        + "              \"creationMethod\": \"%s\",\n"
+                        + "              \"sftpUploadStatus\": \"%s\",\n"
                         + "              \"creationTime\": \"%s\",\n"
                         + "              \"expirationTime\": \"%s\",\n"
                         + "              \"duration\": %d,\n"
@@ -4148,11 +4269,12 @@ class CallsApiTest extends ApiTest {
                 givenConferenceId,
                 givenConferenceName,
                 givenApplicationId,
+                givenEntityId,
                 givenFileId,
                 givenName,
                 givenFileFormat,
                 givenSize,
-                givenCreationMethod,
+                givenSftpUploadStatus,
                 givenCreationTime,
                 givenExpirationTime,
                 givenDuration,
@@ -4167,7 +4289,7 @@ class CallsApiTest extends ApiTest {
                 givenName,
                 givenFileFormat,
                 givenSize,
-                givenCreationMethod,
+                givenSftpUploadStatus,
                 givenCreationTime,
                 givenExpirationTime,
                 givenDuration,
@@ -4193,7 +4315,7 @@ class CallsApiTest extends ApiTest {
             var result = results.get(0);
             then(result.getConferenceId()).isEqualTo(givenConferenceId);
             then(result.getConferenceName()).isEqualTo(givenConferenceName);
-            then(result.getApplicationId()).isEqualTo(givenApplicationId);
+            then(result.getPlatform()).isEqualTo(givenPlatform);
             then(result.getComposedFiles()).isNotNull();
             var composedFiles = result.getComposedFiles();
             then(composedFiles.size()).isEqualTo(1);
@@ -4202,9 +4324,8 @@ class CallsApiTest extends ApiTest {
             then(file.getName()).isEqualTo(givenName);
             then(file.getFileFormat()).isEqualTo(givenFileFormat);
             then(file.getSize()).isEqualTo(givenSize);
-            then(file.getCreationMethod()).isEqualTo(givenCreationMethod);
+            then(file.getSftpUploadStatus()).isEqualTo(givenSftpUploadStatus);
             then(file.getCreationTime()).isEqualTo(givenCreationTime);
-            then(file.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(file.getDuration()).isEqualTo(givenDuration);
             then(file.getStartTime()).isEqualTo(givenStartTime);
             then(file.getEndTime()).isEqualTo(givenEndTime);
@@ -4227,9 +4348,8 @@ class CallsApiTest extends ApiTest {
             then(callRecordingFile.getName()).isEqualTo(givenName);
             then(callRecordingFile.getFileFormat()).isEqualTo(givenFileFormat);
             then(callRecordingFile.getSize()).isEqualTo(givenSize);
-            then(callRecordingFile.getCreationMethod()).isEqualTo(givenCreationMethod);
+            then(callRecordingFile.getSftpUploadStatus()).isEqualTo(givenSftpUploadStatus);
             then(callRecordingFile.getCreationTime()).isEqualTo(givenCreationTime);
-            then(callRecordingFile.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(callRecordingFile.getDuration()).isEqualTo(givenDuration);
             then(callRecordingFile.getStartTime()).isEqualTo(givenStartTime);
             then(callRecordingFile.getEndTime()).isEqualTo(givenEndTime);
@@ -4254,11 +4374,13 @@ class CallsApiTest extends ApiTest {
         String givenConferenceId = "string";
         String givenConferenceName = "string";
         String givenApplicationId = "string";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
         String givenFileId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
-        CallsCreationMethod givenCreationMethod = CallsCreationMethod.RECORDED;
+        CallsSftpUploadStatus givenSftpUploadStatus = CallsSftpUploadStatus.UPLOADED;
         String givenCreationTime = "2022-05-01T14:25:45.143Z";
         String givenExpirationTime = "2022-06-01T14:25:45.143Z";
         Long givenDuration = 3L;
@@ -4275,7 +4397,10 @@ class CallsApiTest extends ApiTest {
         String givenResponse = String.format(
                 "{\n" + "  \"conferenceId\": \"%s\",\n"
                         + "  \"conferenceName\": \"%s\",\n"
-                        + "  \"applicationId\": \"%s\",\n"
+                        + "  \"platform\": {\n"
+                        + "     \"applicationId\": \"%s\",\n"
+                        + "     \"entityId\": \"%s\"\n"
+                        + "  },\n"
                         + "  \"composedFiles\": [\n"
                         + "    {\n"
                         + "      \"id\": \"%s\",\n"
@@ -4302,7 +4427,7 @@ class CallsApiTest extends ApiTest {
                         + "          \"name\": \"%s\",\n"
                         + "          \"fileFormat\": \"%s\",\n"
                         + "          \"size\": %d,\n"
-                        + "          \"creationMethod\": \"%s\",\n"
+                        + "          \"sftpUploadStatus\": \"%s\",\n"
                         + "          \"creationTime\": \"%s\",\n"
                         + "          \"expirationTime\": \"%s\",\n"
                         + "          \"duration\": %d,\n"
@@ -4319,6 +4444,7 @@ class CallsApiTest extends ApiTest {
                 givenConferenceId,
                 givenConferenceName,
                 givenApplicationId,
+                givenEntityId,
                 givenFileId,
                 givenName,
                 givenFileFormat,
@@ -4335,7 +4461,7 @@ class CallsApiTest extends ApiTest {
                 givenName,
                 givenFileFormat,
                 givenSize,
-                givenCreationMethod,
+                givenSftpUploadStatus,
                 givenCreationTime,
                 givenExpirationTime,
                 givenDuration,
@@ -4354,7 +4480,7 @@ class CallsApiTest extends ApiTest {
             then(response).isNotNull();
             then(response.getConferenceId()).isEqualTo(givenConferenceId);
             then(response.getConferenceName()).isEqualTo(givenConferenceName);
-            then(response.getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isEqualTo(givenPlatform);
             then(response.getComposedFiles()).isNotNull();
 
             var composedFiles = response.getComposedFiles();
@@ -4393,9 +4519,8 @@ class CallsApiTest extends ApiTest {
             then(callRecordingFile.getName()).isEqualTo(givenName);
             then(callRecordingFile.getFileFormat()).isEqualTo(givenFileFormat);
             then(callRecordingFile.getSize()).isEqualTo(givenSize);
-            then(callRecordingFile.getCreationMethod()).isEqualTo(givenCreationMethod);
+            then(callRecordingFile.getSftpUploadStatus()).isEqualTo(givenSftpUploadStatus);
             then(callRecordingFile.getCreationTime()).isEqualTo(givenCreationTime);
-            then(callRecordingFile.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(callRecordingFile.getDuration()).isEqualTo(givenDuration);
             then(callRecordingFile.getStartTime()).isEqualTo(givenStartTime);
             then(callRecordingFile.getEndTime()).isEqualTo(givenEndTime);
@@ -4419,7 +4544,7 @@ class CallsApiTest extends ApiTest {
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
-        CallsCreationMethod givenCreationMethod = CallsCreationMethod.RECORDED;
+        CallsSftpUploadStatus givenSftpUploadStatus = CallsSftpUploadStatus.UPLOADED;
         String givenCreationTime = "2022-05-01T14:25:45.143Z";
         String givenExpirationTime = "2022-06-01T14:25:45.143Z";
         Long givenDuration = 3L;
@@ -4432,11 +4557,16 @@ class CallsApiTest extends ApiTest {
         CallDirection givenDirection = CallDirection.INBOUND;
         CallsRecordingStatus givenStatus = CallsRecordingStatus.SUCCESSFUL;
         String givenReason = "string";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "    {\n" + "      \"conferenceId\": \"%s\",\n"
                         + "      \"conferenceName\": \"%s\",\n"
-                        + "      \"applicationId\": \"%s\",\n"
+                        + "      \"platform\": {\n"
+                        + "         \"applicationId\": \"%s\",\n"
+                        + "         \"entityId\": \"%s\"\n"
+                        + "      },\n"
                         + "      \"composedFiles\": [\n"
                         + "        {\n"
                         + "          \"id\": \"%s\",\n"
@@ -4463,7 +4593,7 @@ class CallsApiTest extends ApiTest {
                         + "              \"name\": \"%s\",\n"
                         + "              \"fileFormat\": \"%s\",\n"
                         + "              \"size\": %d,\n"
-                        + "              \"creationMethod\": \"%s\",\n"
+                        + "              \"sftpUploadStatus\": \"%s\",\n"
                         + "              \"creationTime\": \"%s\",\n"
                         + "              \"expirationTime\": \"%s\",\n"
                         + "              \"duration\": %d,\n"
@@ -4480,6 +4610,7 @@ class CallsApiTest extends ApiTest {
                 givenConferenceId,
                 givenConferenceName,
                 givenApplicationId,
+                givenEntityId,
                 givenFileId,
                 givenName,
                 givenFileFormat,
@@ -4496,7 +4627,7 @@ class CallsApiTest extends ApiTest {
                 givenName,
                 givenFileFormat,
                 givenSize,
-                givenCreationMethod,
+                givenSftpUploadStatus,
                 givenCreationTime,
                 givenExpirationTime,
                 givenDuration,
@@ -4515,7 +4646,7 @@ class CallsApiTest extends ApiTest {
             then(response).isNotNull();
             then(response.getConferenceId()).isEqualTo(givenConferenceId);
             then(response.getConferenceName()).isEqualTo(givenConferenceName);
-            then(response.getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isEqualTo(givenPlatform);
             then(response.getComposedFiles()).isNotNull();
             var files = response.getComposedFiles();
             then(files.size()).isEqualTo(1);
@@ -4547,9 +4678,8 @@ class CallsApiTest extends ApiTest {
             then(recordingFile.getName()).isEqualTo(givenName);
             then(recordingFile.getFileFormat()).isEqualTo(givenFileFormat);
             then(recordingFile.getSize()).isEqualTo(givenSize);
-            then(recordingFile.getCreationMethod()).isEqualTo(givenCreationMethod);
+            then(recordingFile.getSftpUploadStatus()).isEqualTo(givenSftpUploadStatus);
             then(recordingFile.getCreationTime()).isEqualTo(givenCreationTime);
-            then(recordingFile.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(recordingFile.getDuration()).isEqualTo(givenDuration);
             then(recordingFile.getStartTime()).isEqualTo(givenStartTime);
             then(recordingFile.getEndTime()).isEqualTo(givenEndTime);
@@ -4582,7 +4712,7 @@ class CallsApiTest extends ApiTest {
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
-        CallsCreationMethod givenCreationMethod = CallsCreationMethod.RECORDED;
+        CallsSftpUploadStatus givenSftpUploadStatus = CallsSftpUploadStatus.UPLOADED;
         String givenCreationTime = "2022-05-01T14:25:45.143Z";
         String givenExpirationTime = "2022-06-01T14:25:45.143Z";
         Long givenDuration = 3L;
@@ -4595,7 +4725,7 @@ class CallsApiTest extends ApiTest {
                         + "  \"name\": \"%s\",\n"
                         + "  \"fileFormat\": \"%s\",\n"
                         + "  \"size\": %d,\n"
-                        + "  \"creationMethod\": \"%s\",\n"
+                        + "  \"sftpUploadStatus\": \"%s\",\n"
                         + "  \"creationTime\": \"%s\",\n"
                         + "  \"expirationTime\": \"%s\",\n"
                         + "  \"duration\": %d,\n"
@@ -4607,7 +4737,7 @@ class CallsApiTest extends ApiTest {
                 givenName,
                 givenFileFormat,
                 givenSize,
-                givenCreationMethod,
+                givenSftpUploadStatus,
                 givenCreationTime,
                 givenExpirationTime,
                 givenDuration,
@@ -4626,9 +4756,8 @@ class CallsApiTest extends ApiTest {
             then(response.getName()).isEqualTo(givenName);
             then(response.getFileFormat()).isEqualTo(givenFileFormat);
             then(response.getSize()).isEqualTo(givenSize);
-            then(response.getCreationMethod()).isEqualTo(givenCreationMethod);
+            then(response.getSftpUploadStatus()).isEqualTo(givenSftpUploadStatus);
             then(response.getCreationTime()).isEqualTo(givenCreationTime);
-            then(response.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(response.getDuration()).isEqualTo(givenDuration);
             then(response.getStartTime()).isEqualTo(givenStartTime);
             then(response.getEndTime()).isEqualTo(givenEndTime);
@@ -4684,13 +4813,17 @@ class CallsApiTest extends ApiTest {
         String givenFrom1 = "41793026834";
         String givenPhoneNumber1 = "41792036727";
         CallEndpointType givenType1 = CallEndpointType.PHONE;
-        CallsBulkCall.StatusEnum givenStatus1 = CallsBulkCall.StatusEnum.COMPLETED;
+        CallsActionStatus givenStatus1 = CallsActionStatus.COMPLETED;
         String givenReason1 = "Created";
+        String givenEntityId = "entityId";
 
         String givenResponse = String.format(
                 "{\n" + "    \"bulkId\" : \"%s\",\n"
                         + "    \"calls\" : [ {\n"
-                        + "      \"applicationId\" : \"%s\",\n"
+                        + "      \"platform\": {\n"
+                        + "        \"applicationId\": \"%s\",\n"
+                        + "        \"entityId\": \"%s\"\n"
+                        + "      },\n"
                         + "      \"callId\" : \"%s\",\n"
                         + "      \"externalId\" : \"%s\",\n"
                         + "      \"from\" : \"%s\",\n"
@@ -4705,6 +4838,7 @@ class CallsApiTest extends ApiTest {
                         + "  }\n",
                 givenBulkId,
                 givenApplicationId1,
+                givenEntityId,
                 givenCallId1,
                 givenExternalId1,
                 givenFrom1,
@@ -4733,10 +4867,14 @@ class CallsApiTest extends ApiTest {
         Integer givenMinuteTo = 0;
         String givenKey2 = "value2";
         String givenKey1 = "value1";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId1);
 
         String expectedRequest = String.format(
                 "{\n" + "  \"bulkId\" : \"%s\",\n"
-                        + "  \"applicationId\" : \"%s\",\n"
+                        + "  \"platform\": {\n"
+                        + "     \"applicationId\": \"%s\",\n"
+                        + "     \"entityId\": \"%s\"\n"
+                        + "  },\n"
                         + "  \"items\" : [\n"
                         + "  {\n"
                         + "    \"from\" : \"%s\",\n"
@@ -4792,6 +4930,7 @@ class CallsApiTest extends ApiTest {
                         + "}\n",
                 givenBulkId,
                 givenApplicationId1,
+                givenEntityId,
                 givenFrom1,
                 givenExternalId1,
                 givenPhoneNumber1,
@@ -4826,7 +4965,7 @@ class CallsApiTest extends ApiTest {
             then(calls.size()).isEqualTo(1);
 
             var call1 = calls.get(0);
-            then(call1.getApplicationId()).isEqualTo(givenApplicationId1);
+            then(call1.getPlatform()).isEqualTo(givenPlatform);
             then(call1.getCallId()).isEqualTo(givenCallId1);
             then(call1.getExternalId()).isEqualTo(givenExternalId1);
             then(call1.getFrom()).isEqualTo(givenFrom1);
@@ -4837,7 +4976,7 @@ class CallsApiTest extends ApiTest {
 
         CallBulkRequest voiceBulkRequest = new CallBulkRequest()
                 .bulkId(givenBulkId)
-                .applicationId(givenApplicationId1)
+                .platform(givenPlatform)
                 .items(List.of(new CallsBulkItem()
                         .from(givenFrom1)
                         .callRequests(List.of(new CallsBulkCallRequest()
@@ -4847,7 +4986,7 @@ class CallsApiTest extends ApiTest {
                         .machineDetection(new CallsMachineDetectionRequest().enabled(givenMachineDetectionEnabled))
                         .maxDuration(givenMaxDuration)
                         .connectTimeout(givenConnectTimeout)
-                        .callRate(new CallRate().maxCalls(givenMaxCalls).timeUnit(CallRate.TimeUnitEnum.MINUTES))
+                        .callRate(new CallRate().maxCalls(givenMaxCalls).timeUnit(CallsTimeUnit.MINUTES))
                         .validityPeriod(givenValidityPeriod)
                         .retryOptions(new CallsRetryOptions()
                                 .minWaitPeriod(givenMinWaitPeriod)
@@ -4855,14 +4994,12 @@ class CallsApiTest extends ApiTest {
                                 .maxAttempts(givenMaxAttempts))
                         .schedulingOptions(new CallsSchedulingOptions()
                                 .startTime(givenStartTimeDateTime)
-                                .callingTimeWindow(new CallsTimeWindow()
-                                        .from(new CallsTimeWindowPoint()
+                                .callingTimeWindow(new DeliveryTimeWindow()
+                                        .from(new DeliveryTime()
                                                 .hour(givenHourFrom)
                                                 .minute(givenMinuteFrom))
-                                        .to(new CallsTimeWindowPoint()
-                                                .hour(givenHourTo)
-                                                .minute(givenMinuteTo))
-                                        .days(List.of(CallsTimeWindow.DaysEnum.MONDAY))))
+                                        .to(new DeliveryTime().hour(givenHourTo).minute(givenMinuteTo))
+                                        .days(List.of(DeliveryDay.MONDAY))))
                         .customData(Map.of("key2", givenKey2, "key1", givenKey1))));
         var call = api.createBulk(voiceBulkRequest);
         testSuccessfulCall(call::execute, assertions);
@@ -5041,7 +5178,6 @@ class CallsApiTest extends ApiTest {
                 OffsetDateTime.of(LocalDateTime.of(2022, 1, 1, 0, 1, 0, 100000000), ZoneOffset.ofHours(0));
 
         var givenRingDuration = 2;
-        var givenSecondApplicationId = "61c060db2675060027d8c7a6";
         var givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         var givenThirdId = "3ad8805e-d401-424e-9b03-e02a2016a5e2";
         var givenSecondType = "PHONE";
@@ -5065,12 +5201,16 @@ class CallsApiTest extends ApiTest {
                 OffsetDateTime.of(LocalDateTime.of(2022, 1, 1, 0, 1, 0, 100000000), ZoneOffset.ofHours(0));
 
         var givenSecondRingDuration = 2;
-        var givenThirdApplicationId = "61c060db2675060027d8c7a6";
         var givenSecondDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
-                        + "  \"applicationId\": \"%s\",\n"
+                        + "  \"platform\": {\n"
+                        + "     \"applicationId\": \"%s\",\n"
+                        + "     \"entityId\": \"%s\"\n"
+                        + "  },\n"
                         + "  \"state\": \"%s\",\n"
                         + "  \"startTime\": \"%s\",\n"
                         + "  \"establishTime\": \"%s\",\n"
@@ -5097,7 +5237,10 @@ class CallsApiTest extends ApiTest {
                         + "    \"answerTime\": \"%s\",\n"
                         + "    \"endTime\": \"%s\",\n"
                         + "    \"ringDuration\": %d,\n"
-                        + "    \"applicationId\": \"%s\",\n"
+                        + "    \"platform\": {\n"
+                        + "       \"applicationId\": \"%s\",\n"
+                        + "       \"entityId\": \"%s\"\n"
+                        + "    },\n"
                         + "    \"dialogId\": \"%s\"\n"
                         + "  },\n"
                         + "  \"childCall\": {\n"
@@ -5122,12 +5265,16 @@ class CallsApiTest extends ApiTest {
                         + "    \"answerTime\": \"%s\",\n"
                         + "    \"endTime\": \"%s\",\n"
                         + "    \"ringDuration\": %d,\n"
-                        + "    \"applicationId\": \"%s\",\n"
+                        + "    \"platform\": {\n"
+                        + "       \"applicationId\": \"%s\",\n"
+                        + "       \"entityId\": \"%s\"\n"
+                        + "    },\n"
                         + "    \"dialogId\": \"%s\"\n"
                         + "  }\n"
                         + "}\n",
                 givenId,
                 givenApplicationId,
+                givenEntityId,
                 givenState,
                 givenStartTime,
                 givenEstablishTime,
@@ -5145,7 +5292,8 @@ class CallsApiTest extends ApiTest {
                 givenAnswerTime,
                 givenSecondEndTime,
                 givenRingDuration,
-                givenSecondApplicationId,
+                givenApplicationId,
+                givenEntityId,
                 givenDialogId,
                 givenThirdId,
                 givenSecondType,
@@ -5160,7 +5308,8 @@ class CallsApiTest extends ApiTest {
                 givenSecondAnswerTime,
                 givenThirdEndTime,
                 givenSecondRingDuration,
-                givenThirdApplicationId,
+                givenApplicationId,
+                givenEntityId,
                 givenSecondDialogId);
 
         var givenParentCallId = "d8d84155-3831-43fb-91c9-bb897149a79d";
@@ -5258,7 +5407,7 @@ class CallsApiTest extends ApiTest {
         Consumer<CallsDialogResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getId()).isEqualTo(givenId);
-            then(response.getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isEqualTo(givenPlatform);
             then(response.getState()).isEqualTo(givenState);
             then(response.getStartTime()).isEqualTo(givenStartTimeDateTime);
             then(response.getEstablishTime()).isEqualTo(givenEstablishTimeDateTime);
@@ -5283,7 +5432,7 @@ class CallsApiTest extends ApiTest {
             then(response.getParentCall().getAnswerTime()).isEqualTo(givenAnswerTimeDateTime);
             then(response.getParentCall().getEndTime()).isEqualTo(givenSecondEndTimeDateTime);
             then(response.getParentCall().getRingDuration()).isEqualTo(givenRingDuration);
-            then(response.getParentCall().getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getParentCall().getPlatform()).isEqualTo(givenPlatform);
             then(response.getParentCall().getDialogId()).isEqualTo(givenDialogId);
             then(response.getChildCall()).isNotNull();
             then(response.getChildCall().getId()).isEqualTo(givenThirdId);
@@ -5303,7 +5452,7 @@ class CallsApiTest extends ApiTest {
             then(response.getChildCall().getAnswerTime()).isEqualTo(givenSecondAnswerTimeDateTime);
             then(response.getChildCall().getEndTime()).isEqualTo(givenThirdEndTimeDateTime);
             then(response.getChildCall().getRingDuration()).isEqualTo(givenSecondRingDuration);
-            then(response.getChildCall().getApplicationId()).isEqualTo(givenThirdApplicationId);
+            then(response.getChildCall().getPlatform()).isEqualTo(givenPlatform);
             then(response.getChildCall().getDialogId()).isEqualTo(givenSecondDialogId);
         };
 
@@ -5343,7 +5492,6 @@ class CallsApiTest extends ApiTest {
         OffsetDateTime givenParentEndTimeDate =
                 OffsetDateTime.of(2022, 1, 1, 0, 1, 0, 100_000_000, ZoneOffset.ofHours(0));
         Integer givenRingDuration = 2;
-        String givenParentApplicationId = "61c060db2675060027d8c7a6";
         String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenChildId = "3ad8805e-d401-424e-9b03-e02a2016a5e2";
         String givenChildType = "PHONE";
@@ -5364,12 +5512,16 @@ class CallsApiTest extends ApiTest {
         OffsetDateTime givenChildEndTimeDate =
                 OffsetDateTime.of(2022, 1, 1, 0, 1, 0, 100_000_000, ZoneOffset.ofHours(0));
         Integer givenChildRingDuration = 2;
-        String givenChildApplicationId = "61c060db2675060027d8c7a6";
         String givenChildDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
-                        + "  \"applicationId\": \"%s\",\n"
+                        + "  \"platform\": {\n"
+                        + "     \"applicationId\": \"%s\",\n"
+                        + "     \"entityId\": \"%s\"\n"
+                        + "  },\n"
                         + "  \"state\": \"%s\",\n"
                         + "  \"startTime\": \"%s\",\n"
                         + "  \"establishTime\": \"%s\",\n"
@@ -5396,7 +5548,10 @@ class CallsApiTest extends ApiTest {
                         + "    \"answerTime\": \"%s\",\n"
                         + "    \"endTime\": \"%s\",\n"
                         + "    \"ringDuration\": %d,\n"
-                        + "    \"applicationId\": \"%s\",\n"
+                        + "    \"platform\": {\n"
+                        + "       \"applicationId\": \"%s\",\n"
+                        + "       \"entityId\": \"%s\"\n"
+                        + "    },\n"
                         + "    \"dialogId\": \"%s\"\n"
                         + "  },\n"
                         + "  \"childCall\": {\n"
@@ -5421,12 +5576,16 @@ class CallsApiTest extends ApiTest {
                         + "    \"answerTime\": \"%s\",\n"
                         + "    \"endTime\": \"%s\",\n"
                         + "    \"ringDuration\": %d,\n"
-                        + "    \"applicationId\": \"%s\",\n"
+                        + "    \"platform\": {\n"
+                        + "       \"applicationId\": \"%s\",\n"
+                        + "       \"entityId\": \"%s\"\n"
+                        + "    },\n"
                         + "    \"dialogId\": \"%s\"\n"
                         + "  }\n"
                         + "}",
                 givenId,
                 givenApplicationId,
+                givenEntityId,
                 givenState,
                 givenStartTime,
                 givenEstablishTime,
@@ -5444,7 +5603,8 @@ class CallsApiTest extends ApiTest {
                 givenParentAnswerTime,
                 givenParentEndTime,
                 givenRingDuration,
-                givenParentApplicationId,
+                givenApplicationId,
+                givenEntityId,
                 givenDialogId,
                 givenChildId,
                 givenChildType,
@@ -5459,7 +5619,8 @@ class CallsApiTest extends ApiTest {
                 givenChildAnswerTime,
                 givenChildEndTime,
                 givenChildRingDuration,
-                givenChildApplicationId,
+                givenApplicationId,
+                givenEntityId,
                 givenChildDialogId);
 
         CallsRecordingType expectedRecordingType = CallsRecordingType.AUDIO;
@@ -5526,7 +5687,7 @@ class CallsApiTest extends ApiTest {
         Consumer<CallsDialogResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getId()).isEqualTo(givenId);
-            then(response.getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getPlatform()).isEqualTo(givenPlatform);
             then(response.getState()).isEqualTo(givenState);
             then(response.getStartTime()).isEqualTo(givenStartTimeDate);
             then(response.getEstablishTime()).isEqualTo(givenEstablishTimeDate);
@@ -5551,7 +5712,7 @@ class CallsApiTest extends ApiTest {
             then(response.getParentCall().getAnswerTime()).isEqualTo(givenParentAnswerTimeDate);
             then(response.getParentCall().getEndTime()).isEqualTo(givenParentEndTimeDate);
             then(response.getParentCall().getRingDuration()).isEqualTo(givenRingDuration);
-            then(response.getParentCall().getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getParentCall().getPlatform()).isEqualTo(givenPlatform);
             then(response.getParentCall().getDialogId()).isEqualTo(givenDialogId);
             then(response.getChildCall()).isNotNull();
             then(response.getChildCall().getId()).isEqualTo(givenChildId);
@@ -5571,7 +5732,7 @@ class CallsApiTest extends ApiTest {
             then(response.getChildCall().getAnswerTime()).isEqualTo(givenChildAnswerTimeDate);
             then(response.getChildCall().getEndTime()).isEqualTo(givenChildEndTimeDate);
             then(response.getChildCall().getRingDuration()).isEqualTo(givenChildRingDuration);
-            then(response.getChildCall().getApplicationId()).isEqualTo(givenChildApplicationId);
+            then(response.getChildCall().getPlatform()).isEqualTo(givenPlatform);
             then(response.getChildCall().getDialogId()).isEqualTo(givenChildDialogId);
         };
 
@@ -5624,7 +5785,7 @@ class CallsApiTest extends ApiTest {
         String givenAddressId = "string";
         String givenPrimary = "string";
         String givenBackup = "string";
-        CallsPegasusSipTrunkType givenType = CallsPegasusSipTrunkType.STATIC;
+        CallsSipTrunkType givenType = CallsSipTrunkType.STATIC;
         Integer givenPage = 0;
         Integer givenSize = 1;
         Integer givenTotalPages = 0;
@@ -5760,7 +5921,7 @@ class CallsApiTest extends ApiTest {
         String givenAddressId = "string";
         String givenPrimary = "string";
         String givenBackup = "string";
-        CallsPegasusSipTrunkType givenType = CallsPegasusSipTrunkType.STATIC;
+        CallsSipTrunkType givenType = CallsSipTrunkType.STATIC;
         String givenSourceHosts = "string";
         String givenDestinationHosts = "string";
         CallsSelectionStrategy givenStrategy = CallsSelectionStrategy.FAILOVER;
@@ -5899,7 +6060,6 @@ class CallsApiTest extends ApiTest {
                 .destinationHosts(List.of(expectedDestinationHosts))
                 .strategy(expectedStrategy)
                 .sipOptions(new CallsSipOptions().enabled(expectedEnabled))
-                .tls(expectedTls)
                 .codecs(List.of(expectedCodecs))
                 .anonymization(expectedAnonymization)
                 .dtmf(expectedDtmf)
@@ -5911,7 +6071,8 @@ class CallsApiTest extends ApiTest {
                         .packageType(expectedPackageType)
                         .addressId(expectedAddressId))
                 .name(expectedName)
-                .location(expectedLocation);
+                .location(expectedLocation)
+                .tls(expectedTls);
 
         Consumer<CallsCreateSipTrunkResponse> assertions = (staticResponse) -> {
             CallsCreateStaticSipTrunkResponse response = (CallsCreateStaticSipTrunkResponse) staticResponse;
@@ -5964,7 +6125,7 @@ class CallsApiTest extends ApiTest {
         String givenAddressId = "string";
         String givenPrimary = "string";
         String givenBackup = "string";
-        CallsPegasusSipTrunkType givenType = CallsPegasusSipTrunkType.STATIC;
+        CallsSipTrunkType givenType = CallsSipTrunkType.STATIC;
         String givenSourceHosts = "string";
         String givenDestinationHosts = "string";
         CallsSelectionStrategy givenStrategy = CallsSelectionStrategy.FAILOVER;
@@ -6086,7 +6247,7 @@ class CallsApiTest extends ApiTest {
         String givenAddressId = "string";
         String givenPrimary = "string";
         String givenBackup = "string";
-        CallsPegasusSipTrunkType givenType = CallsPegasusSipTrunkType.STATIC;
+        CallsSipTrunkType givenType = CallsSipTrunkType.STATIC;
         String givenSourceHosts = "string";
         String givenDestinationHosts = "string";
         CallsSelectionStrategy givenStrategy = CallsSelectionStrategy.FAILOVER;
@@ -6151,7 +6312,7 @@ class CallsApiTest extends ApiTest {
                 givenStrategy,
                 givenEnabled);
 
-        CallsPegasusSipTrunkType expectedType = CallsPegasusSipTrunkType.STATIC;
+        CallsSipTrunkType expectedType = CallsSipTrunkType.STATIC;
         String expectedName = "string";
         CallsAudioCodec expectedCodecs = CallsAudioCodec.PCMU;
         CallsDtmfType expectedDtmf = CallsDtmfType.RFC2833;
@@ -6275,7 +6436,7 @@ class CallsApiTest extends ApiTest {
         String givenAddressId = "string";
         String givenPrimary = "string";
         String givenBackup = "string";
-        CallsPegasusSipTrunkType givenType = CallsPegasusSipTrunkType.STATIC;
+        CallsSipTrunkType givenType = CallsSipTrunkType.STATIC;
         String givenSourceHosts = "string";
         String givenDestinationHosts = "string";
         CallsSelectionStrategy givenStrategy = CallsSelectionStrategy.FAILOVER;
@@ -7020,6 +7181,87 @@ class CallsApiTest extends ApiTest {
         };
 
         var call = api.getRegions(givenCountryCode);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldResetSipTrunkPassword() {
+        String sipTrunkId = "426c8402-691c-11ee-8c99-0242ac120002";
+        String givenUsername = "426c8402-691c-11ee-8c99-0242ac120002";
+        String givenPassword = "fkZ1921tM87";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"username\": \"%s\",\n" + "  \"password\": \"%s\"\n" + "}", givenUsername, givenPassword);
+
+        setUpEmptyPostRequest(
+                SIP_TRUNK_RESET_PASSWORD.replace("{sipTrunkId}", sipTrunkId), Map.of(), givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsSipTrunkRegistrationCredentials> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getUsername()).isEqualTo(givenUsername);
+            then(response.getPassword()).isEqualTo(givenPassword);
+        };
+
+        var call = api.resetSipTrunkPassword(sipTrunkId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldStartTranscription() {
+        String callId = "12345";
+        CallsLanguage givenLanguage = CallsLanguage.AR;
+        boolean givenSendInterimResults = false;
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"transcription\": {\n"
+                        + "    \"language\": \"%s\",\n"
+                        + "    \"sendInterimResults\": %b\n"
+                        + "  }\n"
+                        + "}",
+                givenLanguage, givenSendInterimResults);
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+
+        setUpPostRequest(TRANSCRIPTION_START.replace("{callId}", callId), expectedRequest, givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        CallsStartTranscriptionRequest request = new CallsStartTranscriptionRequest()
+                .transcription(
+                        new CallsTranscription().language(givenLanguage).sendInterimResults(givenSendInterimResults));
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.callStartTranscription(callId, request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldStopTranscription() {
+        String callId = "12345";
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+
+        setUpEmptyPostRequest(TRANSCRIPTION_STOP.replace("{callId}", callId), Map.of(), givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.callStopTranscription(callId);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }

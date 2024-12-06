@@ -39,7 +39,7 @@ public class ViberTextMessage {
 
     private String notifyUrl;
 
-    private ViberUrlOptions urlOptions;
+    private UrlOptions urlOptions;
 
     private String entityId;
 
@@ -482,7 +482,7 @@ public class ViberTextMessage {
      * @param urlOptions
      * @return This {@link ViberTextMessage instance}.
      */
-    public ViberTextMessage urlOptions(ViberUrlOptions urlOptions) {
+    public ViberTextMessage urlOptions(UrlOptions urlOptions) {
         this.urlOptions = urlOptions;
         return this;
     }
@@ -493,7 +493,7 @@ public class ViberTextMessage {
      * @return urlOptions
      */
     @JsonProperty("urlOptions")
-    public ViberUrlOptions getUrlOptions() {
+    public UrlOptions getUrlOptions() {
         return urlOptions;
     }
 
@@ -503,7 +503,7 @@ public class ViberTextMessage {
      * @param urlOptions
      */
     @JsonProperty("urlOptions")
-    public void setUrlOptions(ViberUrlOptions urlOptions) {
+    public void setUrlOptions(UrlOptions urlOptions) {
         this.urlOptions = urlOptions;
     }
 

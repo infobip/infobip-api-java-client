@@ -31,10 +31,12 @@ class EmailApiTest extends ApiTest {
     private static final String IPS = "/email/1/ips";
     private static final String DOMAIN_IPS = "/email/1/domain-ips";
     private static final String RETURN_PATH = "/email/1/domains/{domainName}/return-path";
+    private static final String EMAIL_SUPPRESSION = "/email/1/suppressions";
+    private static final String EMAIL_SUPPRESSION_DOMAINS = "/email/1/suppressions/domains";
 
     @Test
     void shouldGetAllDomainIps() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         String givenIpAddress = "11.11.11.1";
         Boolean givenDedicated = true;
         Integer givenAssignedDomainCount = 1;
@@ -76,7 +78,7 @@ class EmailApiTest extends ApiTest {
     void shouldAssignIpToDomain() {
         String givenResult = "OK";
 
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         String givenIpAddress = "11.11.11.1";
 
         String givenResponse = String.format("{\n" + "  \"result\": \"%s\"\n" + "}\n", givenResult);
@@ -105,7 +107,7 @@ class EmailApiTest extends ApiTest {
     @Test
     void shouldRemoveIpFromDomain() {
         String givenResult = "OK";
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         String givenIpAddress = "11.11.11.1";
 
         String givenResponse = String.format("{\n" + "  \"result\": \"%s\"\n" + "}\n", givenResult);
@@ -132,7 +134,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldAddDomain() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         EmailAddDomainRequest.DkimKeyLengthEnum givenDkimKeyLength =
                 EmailAddDomainRequest.DkimKeyLengthEnum.NUMBER_1024;
 
@@ -227,7 +229,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldGetAllDomains() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         Integer givenPaging = 0;
         Long givenDomainId = 1L;
         Boolean givenActive = false;
@@ -325,7 +327,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldGetDomainDetails() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         Long givenDomainId = 1L;
         Boolean givenActive = false;
         Boolean givenTracking = true;
@@ -397,7 +399,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldDeleteDomain() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         int givenStatusCode = 204;
 
         setUpNoResponseBodyDeleteRequest(DOMAIN.replace("{domainName}", givenDomainName), Map.of(), givenStatusCode);
@@ -410,7 +412,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldUpdateTrackingEvents() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         Long givenDomainId = 1L;
         Boolean givenActive = false;
         Boolean givenTracking = true;
@@ -494,7 +496,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldVerifyDomain() {
-        String givenDomainName = "newDomain.com";
+        String givenDomainName = "example.com";
         int givenStatusCode = 202;
 
         setUpNoContentPostRequest(DOMAIN_VERIFY.replace("{domainName}", givenDomainName), givenStatusCode);
@@ -1081,5 +1083,285 @@ class EmailApiTest extends ApiTest {
         then(reportResponse).isNotNull();
         then(reportResponse.getRecipientInfo().getClass()).isEqualTo(EmailWebhookRecipientInfo.class);
         then(reportResponse.getGeoLocation().getClass()).isEqualTo(EmailWebhookGeoLocation.class);
+    }
+
+    @Test
+    void shouldGetEmailSuppressions() {
+        String givenDomainName = "example.com";
+        String givenEmailAddress = "jane.smith@somecompany.com";
+        EmailGetSuppressionType givenType = EmailGetSuppressionType.BOUNCE;
+        String givenCreatedDate = "2024-08-14T14:02:17.366";
+        String givenReason = "550 5.1.1 <jane.smith@somecompany.com>: user does not exist";
+        int givenPage = 0;
+        int givenSize = 100;
+
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"domainName\": \"%s\",\n"
+                        + "      \"emailAddress\": \"%s\",\n"
+                        + "      \"type\": \"%s\",\n"
+                        + "      \"createdDate\": \"%s\",\n"
+                        + "      \"reason\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"paging\": {\n"
+                        + "    \"page\": %d,\n"
+                        + "    \"size\": %d\n"
+                        + "  }\n"
+                        + "}",
+                givenDomainName, givenEmailAddress, givenType, givenCreatedDate, givenReason, givenPage, givenSize);
+
+        setUpGetRequest(EMAIL_SUPPRESSION, Map.of(), givenResponse, 200);
+
+        EmailApi api = new EmailApi(getApiClient());
+
+        Consumer<EmailSuppressionInfoPageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getResults().size()).isEqualTo(1);
+            var result = response.getResults().get(0);
+            then(result.getDomainName()).isEqualTo(givenDomainName);
+            then(result.getEmailAddress()).isEqualTo(givenEmailAddress);
+            then(result.getType()).isEqualTo(givenType.toString());
+            then(result.getCreatedDate()).isEqualTo(givenCreatedDate);
+            then(result.getReason()).isEqualTo(givenReason);
+            var paging = response.getPaging();
+            then(paging.getPage()).isEqualTo(givenPage);
+            then(paging.getSize()).isEqualTo(givenSize);
+        };
+
+        var call = api.getSuppressions(givenDomainName, givenType);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldAddEmailSuppressions() {
+        String givenDomainName1 = "example.com";
+        List<String> givenEmailAddresses1 = List.of("jane.smith@somecompany.com", "john.doe@somecompany.com");
+        EmailAddDeleteSuppressionType givenType = EmailAddDeleteSuppressionType.BOUNCE;
+
+        String givenDomainName2 = "example.com";
+        List<String> givenEmailAddresses2 = List.of("john.smith@somecompany.com", "john.perry@gmail.com");
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"suppressions\": [\n"
+                        + "    {\n"
+                        + "      \"domainName\": \"%s\",\n"
+                        + "      \"emailAddress\": [\n"
+                        + "        \"%s\",\n"
+                        + "        \"%s\"\n"
+                        + "      ],\n"
+                        + "      \"type\": \"%s\"\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"domainName\": \"%s\",\n"
+                        + "      \"emailAddress\": [\n"
+                        + "        \"%s\",\n"
+                        + "        \"%s\"\n"
+                        + "      ],\n"
+                        + "      \"type\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenDomainName1,
+                givenEmailAddresses1.get(0),
+                givenEmailAddresses1.get(1),
+                givenType,
+                givenDomainName2,
+                givenEmailAddresses2.get(0),
+                givenEmailAddresses2.get(1),
+                givenType);
+
+        setUpNoResponseBodyPostRequest(EMAIL_SUPPRESSION, Map.of(), expectedRequest, 204);
+
+        EmailApi api = new EmailApi(getApiClient());
+
+        EmailAddSuppressionRequest request = new EmailAddSuppressionRequest()
+                .suppressions(List.of(
+                        new EmailAddSuppression()
+                                .domainName(givenDomainName1)
+                                .emailAddress(givenEmailAddresses1)
+                                .type(EmailAddDeleteSuppressionType.BOUNCE),
+                        new EmailAddSuppression()
+                                .domainName(givenDomainName2)
+                                .emailAddress(givenEmailAddresses2)
+                                .type(EmailAddDeleteSuppressionType.BOUNCE)));
+
+        var call = api.addSuppressions(request);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldDeleteEmailSuppressions() {
+        String givenDomainName1 = "example.com";
+        List<String> givenEmailAddresses1 = List.of("jane.smith@somecompany.com", "john.doe@somecompany.com");
+        EmailAddDeleteSuppressionType givenType = EmailAddDeleteSuppressionType.BOUNCE;
+
+        String givenDomainName2 = "example.com";
+        List<String> givenEmailAddresses2 = List.of("john.smith@somecompany.com", "john.perry@gmail.com");
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"suppressions\": [\n"
+                        + "    {\n"
+                        + "      \"domainName\": \"%s\",\n"
+                        + "      \"emailAddress\": [\n"
+                        + "        \"%s\",\n"
+                        + "        \"%s\"\n"
+                        + "      ],\n"
+                        + "      \"type\": \"%s\"\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"domainName\": \"%s\",\n"
+                        + "      \"emailAddress\": [\n"
+                        + "        \"%s\",\n"
+                        + "        \"%s\"\n"
+                        + "      ],\n"
+                        + "      \"type\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenDomainName1,
+                givenEmailAddresses1.get(0),
+                givenEmailAddresses1.get(1),
+                givenType,
+                givenDomainName2,
+                givenEmailAddresses2.get(0),
+                givenEmailAddresses2.get(1),
+                givenType);
+
+        setUpNoResponseBodyDeleteRequest(EMAIL_SUPPRESSION, Map.of(), expectedRequest, 204);
+
+        EmailApi api = new EmailApi(getApiClient());
+
+        EmailDeleteSuppressionRequest request = new EmailDeleteSuppressionRequest()
+                .suppressions(List.of(
+                        new EmailDeleteSuppression()
+                                .domainName(givenDomainName1)
+                                .emailAddress(givenEmailAddresses1)
+                                .type(EmailAddDeleteSuppressionType.BOUNCE),
+                        new EmailDeleteSuppression()
+                                .domainName(givenDomainName2)
+                                .emailAddress(givenEmailAddresses2)
+                                .type(EmailAddDeleteSuppressionType.BOUNCE)));
+
+        var call = api.deleteSuppressions(request);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldGetSuppressionDomains() {
+        String givenDomainName1 = "example.com";
+        EmailDomainAccess givenDataAccess1 = EmailDomainAccess.OWNER;
+        boolean givenReadBounces1 = true;
+        boolean givenCreateBounces1 = true;
+        boolean givenDeleteBounces1 = true;
+        boolean givenReadComplaints1 = true;
+        boolean givenCreateComplaints1 = true;
+        boolean givenDeleteComplaints1 = true;
+        boolean givenReadOverquotas1 = true;
+
+        String givenDomainName2 = "example.com";
+        EmailDomainAccess givenDataAccess2 = EmailDomainAccess.GRANTED;
+        boolean givenReadBounces2 = true;
+        boolean givenCreateBounces2 = true;
+        boolean givenDeleteBounces2 = false;
+        boolean givenReadComplaints2 = true;
+        boolean givenCreateComplaints2 = false;
+        boolean givenDeleteComplaints2 = false;
+        boolean givenReadOverquotas2 = false;
+
+        int givenPage = 0;
+        int givenSize = 100;
+
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"domainName\": \"%s\",\n"
+                        + "      \"dataAccess\": \"%s\",\n"
+                        + "      \"readBounces\": %b,\n"
+                        + "      \"createBounces\": %b,\n"
+                        + "      \"deleteBounces\": %b,\n"
+                        + "      \"readComplaints\": %b,\n"
+                        + "      \"createComplaints\": %b,\n"
+                        + "      \"deleteComplaints\": %b,\n"
+                        + "      \"readOverquotas\": %b\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"domainName\": \"%s\",\n"
+                        + "      \"dataAccess\": \"%s\",\n"
+                        + "      \"readBounces\": %b,\n"
+                        + "      \"createBounces\": %b,\n"
+                        + "      \"deleteBounces\": %b,\n"
+                        + "      \"readComplaints\": %b,\n"
+                        + "      \"createComplaints\": %b,\n"
+                        + "      \"deleteComplaints\": %b,\n"
+                        + "      \"readOverquotas\": %b\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"paging\": {\n"
+                        + "    \"page\": %d,\n"
+                        + "    \"size\": %d\n"
+                        + "  }\n"
+                        + "}",
+                givenDomainName1,
+                givenDataAccess1,
+                givenReadBounces1,
+                givenCreateBounces1,
+                givenDeleteBounces1,
+                givenReadComplaints1,
+                givenCreateComplaints1,
+                givenDeleteComplaints1,
+                givenReadOverquotas1,
+                givenDomainName2,
+                givenDataAccess2,
+                givenReadBounces2,
+                givenCreateBounces2,
+                givenDeleteBounces2,
+                givenReadComplaints2,
+                givenCreateComplaints2,
+                givenDeleteComplaints2,
+                givenReadOverquotas2,
+                givenPage,
+                givenSize);
+
+        setUpGetRequest(EMAIL_SUPPRESSION_DOMAINS, Map.of(), givenResponse, 200);
+
+        EmailApi api = new EmailApi(getApiClient());
+
+        Consumer<EmailDomainInfoPageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getResults().size()).isEqualTo(2);
+
+            var result1 = response.getResults().get(0);
+            then(result1.getDomainName()).isEqualTo(givenDomainName1);
+            then(result1.getDataAccess()).isEqualTo(EmailDomainAccess.OWNER);
+            then(result1.getReadBounces()).isEqualTo(givenReadBounces1);
+            then(result1.getCreateBounces()).isEqualTo(givenCreateBounces1);
+            then(result1.getDeleteBounces()).isEqualTo(givenDeleteBounces1);
+            then(result1.getReadComplaints()).isEqualTo(givenReadComplaints1);
+            then(result1.getCreateComplaints()).isEqualTo(givenCreateComplaints1);
+            then(result1.getDeleteComplaints()).isEqualTo(givenDeleteComplaints1);
+            then(result1.getReadOverquotas()).isEqualTo(givenReadOverquotas1);
+
+            var result2 = response.getResults().get(1);
+            then(result2.getDomainName()).isEqualTo(givenDomainName2);
+            then(result2.getDataAccess()).isEqualTo(givenDataAccess2);
+            then(result2.getReadBounces()).isEqualTo(givenReadBounces2);
+            then(result2.getCreateBounces()).isEqualTo(givenCreateBounces2);
+            then(result2.getDeleteBounces()).isEqualTo(givenDeleteBounces2);
+            then(result2.getReadComplaints()).isEqualTo(givenReadComplaints2);
+            then(result2.getCreateComplaints()).isEqualTo(givenCreateComplaints2);
+            then(result2.getDeleteComplaints()).isEqualTo(givenDeleteComplaints2);
+            then(result2.getReadOverquotas()).isEqualTo(givenReadOverquotas2);
+
+            var paging = response.getPaging();
+            then(paging.getPage()).isEqualTo(givenPage);
+            then(paging.getSize()).isEqualTo(givenSize);
+        };
+
+        var call = api.getDomains();
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
 }

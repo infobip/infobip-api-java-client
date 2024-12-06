@@ -22,7 +22,7 @@ public class MmsAdvancedMessage {
 
     private String callbackData;
 
-    private MmsDeliveryTimeWindow deliveryTimeWindow;
+    private DeliveryTimeWindow deliveryTimeWindow;
 
     private List<MmsDestination> destinations = new ArrayList<>();
 
@@ -92,7 +92,7 @@ public class MmsAdvancedMessage {
      * @param deliveryTimeWindow
      * @return This {@link MmsAdvancedMessage instance}.
      */
-    public MmsAdvancedMessage deliveryTimeWindow(MmsDeliveryTimeWindow deliveryTimeWindow) {
+    public MmsAdvancedMessage deliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
         return this;
     }
@@ -103,7 +103,7 @@ public class MmsAdvancedMessage {
      * @return deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public MmsDeliveryTimeWindow getDeliveryTimeWindow() {
+    public DeliveryTimeWindow getDeliveryTimeWindow() {
         return deliveryTimeWindow;
     }
 
@@ -113,7 +113,7 @@ public class MmsAdvancedMessage {
      * @param deliveryTimeWindow
      */
     @JsonProperty("deliveryTimeWindow")
-    public void setDeliveryTimeWindow(MmsDeliveryTimeWindow deliveryTimeWindow) {
+    public void setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
         this.deliveryTimeWindow = deliveryTimeWindow;
     }
 
@@ -480,6 +480,9 @@ public class MmsAdvancedMessage {
 
     /**
      * Sets title.
+     * <p>
+     * Field description:
+     * Message title.
      *
      * @param title
      * @return This {@link MmsAdvancedMessage instance}.
@@ -491,6 +494,9 @@ public class MmsAdvancedMessage {
 
     /**
      * Returns title.
+     * <p>
+     * Field description:
+     * Message title.
      *
      * @return title
      */
@@ -501,6 +507,9 @@ public class MmsAdvancedMessage {
 
     /**
      * Sets title.
+     * <p>
+     * Field description:
+     * Message title.
      *
      * @param title
      */

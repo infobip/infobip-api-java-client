@@ -75,11 +75,13 @@ import com.infobip.model.CallsPreAnswerRequest;
 import com.infobip.model.CallsPublicSipTrunkServiceAddress;
 import com.infobip.model.CallsPublicSipTrunkServiceAddressRequest;
 import com.infobip.model.CallsRecordingFile;
+import com.infobip.model.CallsRecordingLocation;
 import com.infobip.model.CallsRecordingStartRequest;
 import com.infobip.model.CallsRegionList;
 import com.infobip.model.CallsRescheduleRequest;
 import com.infobip.model.CallsSayRequest;
 import com.infobip.model.CallsSipTrunkPage;
+import com.infobip.model.CallsSipTrunkRegistrationCredentials;
 import com.infobip.model.CallsSipTrunkRequest;
 import com.infobip.model.CallsSipTrunkResponse;
 import com.infobip.model.CallsSipTrunkServiceAddressPage;
@@ -88,6 +90,7 @@ import com.infobip.model.CallsSipTrunkStatusResponse;
 import com.infobip.model.CallsSipTrunkUpdateRequest;
 import com.infobip.model.CallsSpeechCaptureRequest;
 import com.infobip.model.CallsStartMediaStreamRequest;
+import com.infobip.model.CallsStartTranscriptionRequest;
 import com.infobip.model.CallsStopPlayRequest;
 import com.infobip.model.CallsUpdateRequest;
 import java.io.File;
@@ -918,6 +921,77 @@ public class CallsApi {
         return new CallStartRecordingRequest(callId, callsRecordingStartRequest);
     }
 
+    private RequestDefinition callStartTranscriptionDefinition(
+            String callId, CallsStartTranscriptionRequest callsStartTranscriptionRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/calls/1/calls/{callId}/start-transcription")
+                .body(callsStartTranscriptionRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (callId != null) {
+            builder.addPathParameter(new Parameter("callId", callId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * callStartTranscription request builder class.
+     */
+    public class CallStartTranscriptionRequest {
+        private final String callId;
+        private final CallsStartTranscriptionRequest callsStartTranscriptionRequest;
+
+        private CallStartTranscriptionRequest(
+                String callId, CallsStartTranscriptionRequest callsStartTranscriptionRequest) {
+            this.callId = Objects.requireNonNull(callId, "The required parameter 'callId' is missing.");
+            this.callsStartTranscriptionRequest = Objects.requireNonNull(
+                    callsStartTranscriptionRequest,
+                    "The required parameter 'callsStartTranscriptionRequest' is missing.");
+        }
+
+        /**
+         * Executes the callStartTranscription request.
+         *
+         * @return CallsActionResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsActionResponse execute() throws ApiException {
+            RequestDefinition callStartTranscriptionDefinition =
+                    callStartTranscriptionDefinition(callId, callsStartTranscriptionRequest);
+            return apiClient.execute(
+                    callStartTranscriptionDefinition, new TypeReference<CallsActionResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the callStartTranscription request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
+            RequestDefinition callStartTranscriptionDefinition =
+                    callStartTranscriptionDefinition(callId, callsStartTranscriptionRequest);
+            return apiClient.executeAsync(
+                    callStartTranscriptionDefinition, new TypeReference<CallsActionResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Start transcription.
+     * <p>
+     * Start call transcription.
+     *
+     * @param callId Call ID. (required)
+     * @param callsStartTranscriptionRequest  (required)
+     * @return CallStartTranscriptionRequest
+     */
+    public CallStartTranscriptionRequest callStartTranscription(
+            String callId, CallsStartTranscriptionRequest callsStartTranscriptionRequest) {
+        return new CallStartTranscriptionRequest(callId, callsStartTranscriptionRequest);
+    }
+
     private RequestDefinition callStopPlayingFileDefinition(String callId, CallsStopPlayRequest callsStopPlayRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/calls/{callId}/stop-play")
                 .body(callsStopPlayRequest)
@@ -1042,6 +1116,65 @@ public class CallsApi {
         return new CallStopRecordingRequest(callId);
     }
 
+    private RequestDefinition callStopTranscriptionDefinition(String callId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/calls/1/calls/{callId}/stop-transcription")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (callId != null) {
+            builder.addPathParameter(new Parameter("callId", callId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * callStopTranscription request builder class.
+     */
+    public class CallStopTranscriptionRequest {
+        private final String callId;
+
+        private CallStopTranscriptionRequest(String callId) {
+            this.callId = Objects.requireNonNull(callId, "The required parameter 'callId' is missing.");
+        }
+
+        /**
+         * Executes the callStopTranscription request.
+         *
+         * @return CallsActionResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsActionResponse execute() throws ApiException {
+            RequestDefinition callStopTranscriptionDefinition = callStopTranscriptionDefinition(callId);
+            return apiClient.execute(
+                    callStopTranscriptionDefinition, new TypeReference<CallsActionResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the callStopTranscription request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
+            RequestDefinition callStopTranscriptionDefinition = callStopTranscriptionDefinition(callId);
+            return apiClient.executeAsync(
+                    callStopTranscriptionDefinition, new TypeReference<CallsActionResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Stop transcription.
+     * <p>
+     * Stop call transcription.
+     *
+     * @param callId Call ID. (required)
+     * @return CallStopTranscriptionRequest
+     */
+    public CallStopTranscriptionRequest callStopTranscription(String callId) {
+        return new CallStopTranscriptionRequest(callId);
+    }
+
     private RequestDefinition cancelBulkDefinition(String bulkId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/bulks/{bulkId}/cancel")
                 .requiresAuthentication(true)
@@ -1100,7 +1233,7 @@ public class CallsApi {
     }
 
     private RequestDefinition composeConferenceRecordingDefinition(
-            String conferenceId, CallsOnDemandComposition callsOnDemandComposition, String location) {
+            String conferenceId, CallsOnDemandComposition callsOnDemandComposition, CallsRecordingLocation location) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "POST", "/calls/1/recordings/conferences/{conferenceId}/compose")
                 .body(callsOnDemandComposition)
@@ -1123,7 +1256,7 @@ public class CallsApi {
     public class ComposeConferenceRecordingRequest {
         private final String conferenceId;
         private final CallsOnDemandComposition callsOnDemandComposition;
-        private String location;
+        private CallsRecordingLocation location;
 
         private ComposeConferenceRecordingRequest(
                 String conferenceId, CallsOnDemandComposition callsOnDemandComposition) {
@@ -1139,7 +1272,7 @@ public class CallsApi {
          * @param location Recording location. (optional)
          * @return ComposeConferenceRecordingRequest
          */
-        public ComposeConferenceRecordingRequest location(String location) {
+        public ComposeConferenceRecordingRequest location(CallsRecordingLocation location) {
             this.location = location;
             return this;
         }
@@ -1188,7 +1321,7 @@ public class CallsApi {
     }
 
     private RequestDefinition composeDialogRecordingDefinition(
-            String dialogId, CallsOnDemandComposition callsOnDemandComposition, String location) {
+            String dialogId, CallsOnDemandComposition callsOnDemandComposition, CallsRecordingLocation location) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "POST", "/calls/1/recordings/dialogs/{dialogId}/compose")
                 .body(callsOnDemandComposition)
@@ -1211,7 +1344,7 @@ public class CallsApi {
     public class ComposeDialogRecordingRequest {
         private final String dialogId;
         private final CallsOnDemandComposition callsOnDemandComposition;
-        private String location;
+        private CallsRecordingLocation location;
 
         private ComposeDialogRecordingRequest(String dialogId, CallsOnDemandComposition callsOnDemandComposition) {
             this.dialogId = Objects.requireNonNull(dialogId, "The required parameter 'dialogId' is missing.");
@@ -1225,7 +1358,7 @@ public class CallsApi {
          * @param location Recording location. (optional)
          * @return ComposeDialogRecordingRequest
          */
-        public ComposeDialogRecordingRequest location(String location) {
+        public ComposeDialogRecordingRequest location(CallsRecordingLocation location) {
             this.location = location;
             return this;
         }
@@ -2305,7 +2438,7 @@ public class CallsApi {
         return new CreateSipTrunkServiceAddressRequest(callsPublicSipTrunkServiceAddressRequest);
     }
 
-    private RequestDefinition deleteCallRecordingsDefinition(String callId, String location) {
+    private RequestDefinition deleteCallRecordingsDefinition(String callId, CallsRecordingLocation location) {
         RequestDefinition.Builder builder = RequestDefinition.builder("DELETE", "/calls/1/recordings/calls/{callId}")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -2324,7 +2457,7 @@ public class CallsApi {
      */
     public class DeleteCallRecordingsRequest {
         private final String callId;
-        private String location;
+        private CallsRecordingLocation location;
 
         private DeleteCallRecordingsRequest(String callId) {
             this.callId = Objects.requireNonNull(callId, "The required parameter 'callId' is missing.");
@@ -2336,7 +2469,7 @@ public class CallsApi {
          * @param location Recording location. (optional)
          * @return DeleteCallRecordingsRequest
          */
-        public DeleteCallRecordingsRequest location(String location) {
+        public DeleteCallRecordingsRequest location(CallsRecordingLocation location) {
             this.location = location;
             return this;
         }
@@ -2434,7 +2567,8 @@ public class CallsApi {
         return new DeleteCallsFileRequest(fileId);
     }
 
-    private RequestDefinition deleteConferenceRecordingsDefinition(String conferenceId, String location) {
+    private RequestDefinition deleteConferenceRecordingsDefinition(
+            String conferenceId, CallsRecordingLocation location) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "DELETE", "/calls/1/recordings/conferences/{conferenceId}")
                 .requiresAuthentication(true)
@@ -2454,7 +2588,7 @@ public class CallsApi {
      */
     public class DeleteConferenceRecordingsRequest {
         private final String conferenceId;
-        private String location;
+        private CallsRecordingLocation location;
 
         private DeleteConferenceRecordingsRequest(String conferenceId) {
             this.conferenceId =
@@ -2467,7 +2601,7 @@ public class CallsApi {
          * @param location Recording location. (optional)
          * @return DeleteConferenceRecordingsRequest
          */
-        public DeleteConferenceRecordingsRequest location(String location) {
+        public DeleteConferenceRecordingsRequest location(CallsRecordingLocation location) {
             this.location = location;
             return this;
         }
@@ -2513,7 +2647,7 @@ public class CallsApi {
         return new DeleteConferenceRecordingsRequest(conferenceId);
     }
 
-    private RequestDefinition deleteDialogRecordingsDefinition(String dialogId, String location) {
+    private RequestDefinition deleteDialogRecordingsDefinition(String dialogId, CallsRecordingLocation location) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "DELETE", "/calls/1/recordings/dialogs/{dialogId}")
                 .requiresAuthentication(true)
@@ -2533,7 +2667,7 @@ public class CallsApi {
      */
     public class DeleteDialogRecordingsRequest {
         private final String dialogId;
-        private String location;
+        private CallsRecordingLocation location;
 
         private DeleteDialogRecordingsRequest(String dialogId) {
             this.dialogId = Objects.requireNonNull(dialogId, "The required parameter 'dialogId' is missing.");
@@ -2545,7 +2679,7 @@ public class CallsApi {
          * @param location Recording location. (optional)
          * @return DeleteDialogRecordingsRequest
          */
-        public DeleteDialogRecordingsRequest location(String location) {
+        public DeleteDialogRecordingsRequest location(CallsRecordingLocation location) {
             this.location = location;
             return this;
         }
@@ -2654,7 +2788,7 @@ public class CallsApi {
         return new DeleteMediaStreamConfigRequest(mediaStreamConfigId);
     }
 
-    private RequestDefinition deleteRecordingFileDefinition(String fileId, String location) {
+    private RequestDefinition deleteRecordingFileDefinition(String fileId, CallsRecordingLocation location) {
         RequestDefinition.Builder builder = RequestDefinition.builder("DELETE", "/calls/1/recordings/files/{fileId}")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -2673,7 +2807,7 @@ public class CallsApi {
      */
     public class DeleteRecordingFileRequest {
         private final String fileId;
-        private String location;
+        private CallsRecordingLocation location;
 
         private DeleteRecordingFileRequest(String fileId) {
             this.fileId = Objects.requireNonNull(fileId, "The required parameter 'fileId' is missing.");
@@ -2685,7 +2819,7 @@ public class CallsApi {
          * @param location Recording location. (optional)
          * @return DeleteRecordingFileRequest
          */
-        public DeleteRecordingFileRequest location(String location) {
+        public DeleteRecordingFileRequest location(CallsRecordingLocation location) {
             this.location = location;
             return this;
         }
@@ -3234,7 +3368,8 @@ public class CallsApi {
         return new DialogStopRecordingRequest(dialogId);
     }
 
-    private RequestDefinition downloadRecordingFileDefinition(String fileId, String location) {
+    private RequestDefinition downloadRecordingFileDefinition(
+            String fileId, CallsRecordingLocation location, String range) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/recordings/files/{fileId}")
                 .requiresAuthentication(true)
                 .accept("application/octet-stream");
@@ -3245,6 +3380,9 @@ public class CallsApi {
         if (location != null) {
             builder.addQueryParameter(new Parameter("location", location));
         }
+        if (range != null) {
+            builder.addHeaderParameter(new Parameter("Range", range));
+        }
         return builder.build();
     }
 
@@ -3253,7 +3391,8 @@ public class CallsApi {
      */
     public class DownloadRecordingFileRequest {
         private final String fileId;
-        private String location;
+        private CallsRecordingLocation location;
+        private String range;
 
         private DownloadRecordingFileRequest(String fileId) {
             this.fileId = Objects.requireNonNull(fileId, "The required parameter 'fileId' is missing.");
@@ -3265,8 +3404,19 @@ public class CallsApi {
          * @param location Recording location. (optional)
          * @return DownloadRecordingFileRequest
          */
-        public DownloadRecordingFileRequest location(String location) {
+        public DownloadRecordingFileRequest location(CallsRecordingLocation location) {
             this.location = location;
+            return this;
+        }
+
+        /**
+         * Sets range.
+         *
+         * @param range Range header specifies range of bytes to be returned by the response. If range header is not specified, response will return a complete file. (optional)
+         * @return DownloadRecordingFileRequest
+         */
+        public DownloadRecordingFileRequest range(String range) {
+            this.range = range;
             return this;
         }
 
@@ -3277,7 +3427,8 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public File execute() throws ApiException {
-            RequestDefinition downloadRecordingFileDefinition = downloadRecordingFileDefinition(fileId, location);
+            RequestDefinition downloadRecordingFileDefinition =
+                    downloadRecordingFileDefinition(fileId, location, range);
             return apiClient.execute(downloadRecordingFileDefinition, new TypeReference<File>() {}.getType());
         }
 
@@ -3288,7 +3439,8 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<File> callback) {
-            RequestDefinition downloadRecordingFileDefinition = downloadRecordingFileDefinition(fileId, location);
+            RequestDefinition downloadRecordingFileDefinition =
+                    downloadRecordingFileDefinition(fileId, location, range);
             return apiClient.executeAsync(
                     downloadRecordingFileDefinition, new TypeReference<File>() {}.getType(), callback);
         }
@@ -3476,7 +3628,7 @@ public class CallsApi {
         return new GetCallHistoryRequest(callId);
     }
 
-    private RequestDefinition getCallRecordingsDefinition(String callId, String location) {
+    private RequestDefinition getCallRecordingsDefinition(String callId, CallsRecordingLocation location) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/recordings/calls/{callId}")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -3495,7 +3647,7 @@ public class CallsApi {
      */
     public class GetCallRecordingsRequest {
         private final String callId;
-        private String location;
+        private CallsRecordingLocation location;
 
         private GetCallRecordingsRequest(String callId) {
             this.callId = Objects.requireNonNull(callId, "The required parameter 'callId' is missing.");
@@ -3507,7 +3659,7 @@ public class CallsApi {
          * @param location Recording location. (optional)
          * @return GetCallRecordingsRequest
          */
-        public GetCallRecordingsRequest location(String location) {
+        public GetCallRecordingsRequest location(CallsRecordingLocation location) {
             this.location = location;
             return this;
         }
@@ -3550,6 +3702,7 @@ public class CallsApi {
 
     private RequestDefinition getCallsDefinition(
             CallEndpointType type,
+            String callsConfigurationId,
             String applicationId,
             String from,
             String to,
@@ -3567,6 +3720,9 @@ public class CallsApi {
 
         if (type != null) {
             builder.addQueryParameter(new Parameter("type", type));
+        }
+        if (callsConfigurationId != null) {
+            builder.addQueryParameter(new Parameter("callsConfigurationId", callsConfigurationId));
         }
         if (applicationId != null) {
             builder.addQueryParameter(new Parameter("applicationId", applicationId));
@@ -3609,6 +3765,7 @@ public class CallsApi {
      */
     public class GetCallsRequest {
         private CallEndpointType type;
+        private String callsConfigurationId;
         private String applicationId;
         private String from;
         private String to;
@@ -3631,6 +3788,17 @@ public class CallsApi {
          */
         public GetCallsRequest type(CallEndpointType type) {
             this.type = type;
+            return this;
+        }
+
+        /**
+         * Sets callsConfigurationId.
+         *
+         * @param callsConfigurationId Calls Configuration ID. (optional)
+         * @return GetCallsRequest
+         */
+        public GetCallsRequest callsConfigurationId(String callsConfigurationId) {
+            this.callsConfigurationId = callsConfigurationId;
             return this;
         }
 
@@ -3764,6 +3932,7 @@ public class CallsApi {
         public CallPage execute() throws ApiException {
             RequestDefinition getCallsDefinition = getCallsDefinition(
                     type,
+                    callsConfigurationId,
                     applicationId,
                     from,
                     to,
@@ -3787,6 +3956,7 @@ public class CallsApi {
         public okhttp3.Call executeAsync(ApiCallback<CallPage> callback) {
             RequestDefinition getCallsDefinition = getCallsDefinition(
                     type,
+                    callsConfigurationId,
                     applicationId,
                     from,
                     to,
@@ -3952,6 +4122,7 @@ public class CallsApi {
 
     private RequestDefinition getCallsHistoryDefinition(
             CallEndpointType type,
+            String callsConfigurationId,
             String applicationId,
             String from,
             String to,
@@ -3970,6 +4141,9 @@ public class CallsApi {
 
         if (type != null) {
             builder.addQueryParameter(new Parameter("type", type));
+        }
+        if (callsConfigurationId != null) {
+            builder.addQueryParameter(new Parameter("callsConfigurationId", callsConfigurationId));
         }
         if (applicationId != null) {
             builder.addQueryParameter(new Parameter("applicationId", applicationId));
@@ -4015,6 +4189,7 @@ public class CallsApi {
      */
     public class GetCallsHistoryRequest {
         private CallEndpointType type;
+        private String callsConfigurationId;
         private String applicationId;
         private String from;
         private String to;
@@ -4038,6 +4213,17 @@ public class CallsApi {
          */
         public GetCallsHistoryRequest type(CallEndpointType type) {
             this.type = type;
+            return this;
+        }
+
+        /**
+         * Sets callsConfigurationId.
+         *
+         * @param callsConfigurationId Calls Configuration ID. (optional)
+         * @return GetCallsHistoryRequest
+         */
+        public GetCallsHistoryRequest callsConfigurationId(String callsConfigurationId) {
+            this.callsConfigurationId = callsConfigurationId;
             return this;
         }
 
@@ -4182,6 +4368,7 @@ public class CallsApi {
         public CallLogPage execute() throws ApiException {
             RequestDefinition getCallsHistoryDefinition = getCallsHistoryDefinition(
                     type,
+                    callsConfigurationId,
                     applicationId,
                     from,
                     to,
@@ -4206,6 +4393,7 @@ public class CallsApi {
         public okhttp3.Call executeAsync(ApiCallback<CallLogPage> callback) {
             RequestDefinition getCallsHistoryDefinition = getCallsHistoryDefinition(
                     type,
+                    callsConfigurationId,
                     applicationId,
                     from,
                     to,
@@ -4236,13 +4424,15 @@ public class CallsApi {
 
     private RequestDefinition getCallsRecordingsDefinition(
             String callId,
+            String callsConfigurationId,
             String applicationId,
+            String entityId,
             String endpointIdentifier,
             OffsetDateTime startTimeAfter,
             OffsetDateTime endTimeBefore,
             CallDirection direction,
             CallEndpointType endpointType,
-            String location,
+            CallsRecordingLocation location,
             Integer page,
             Integer size) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/recordings/calls")
@@ -4252,8 +4442,14 @@ public class CallsApi {
         if (callId != null) {
             builder.addQueryParameter(new Parameter("callId", callId));
         }
+        if (callsConfigurationId != null) {
+            builder.addQueryParameter(new Parameter("callsConfigurationId", callsConfigurationId));
+        }
         if (applicationId != null) {
             builder.addQueryParameter(new Parameter("applicationId", applicationId));
+        }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
         }
         if (endpointIdentifier != null) {
             builder.addQueryParameter(new Parameter("endpointIdentifier", endpointIdentifier));
@@ -4287,13 +4483,15 @@ public class CallsApi {
      */
     public class GetCallsRecordingsRequest {
         private String callId;
+        private String callsConfigurationId;
         private String applicationId;
+        private String entityId;
         private String endpointIdentifier;
         private OffsetDateTime startTimeAfter;
         private OffsetDateTime endTimeBefore;
         private CallDirection direction;
         private CallEndpointType endpointType;
-        private String location;
+        private CallsRecordingLocation location;
         private Integer page;
         private Integer size;
 
@@ -4311,6 +4509,17 @@ public class CallsApi {
         }
 
         /**
+         * Sets callsConfigurationId.
+         *
+         * @param callsConfigurationId Calls Configuration ID. (optional)
+         * @return GetCallsRecordingsRequest
+         */
+        public GetCallsRecordingsRequest callsConfigurationId(String callsConfigurationId) {
+            this.callsConfigurationId = callsConfigurationId;
+            return this;
+        }
+
+        /**
          * Sets applicationId.
          *
          * @param applicationId Application ID. (optional)
@@ -4318,6 +4527,17 @@ public class CallsApi {
          */
         public GetCallsRecordingsRequest applicationId(String applicationId) {
             this.applicationId = applicationId;
+            return this;
+        }
+
+        /**
+         * Sets entityId.
+         *
+         * @param entityId Entity ID. (optional)
+         * @return GetCallsRecordingsRequest
+         */
+        public GetCallsRecordingsRequest entityId(String entityId) {
+            this.entityId = entityId;
             return this;
         }
 
@@ -4382,7 +4602,7 @@ public class CallsApi {
          * @param location Recording location. (optional)
          * @return GetCallsRecordingsRequest
          */
-        public GetCallsRecordingsRequest location(String location) {
+        public GetCallsRecordingsRequest location(CallsRecordingLocation location) {
             this.location = location;
             return this;
         }
@@ -4418,7 +4638,9 @@ public class CallsApi {
         public CallRecordingPage execute() throws ApiException {
             RequestDefinition getCallsRecordingsDefinition = getCallsRecordingsDefinition(
                     callId,
+                    callsConfigurationId,
                     applicationId,
+                    entityId,
                     endpointIdentifier,
                     startTimeAfter,
                     endTimeBefore,
@@ -4439,7 +4661,9 @@ public class CallsApi {
         public okhttp3.Call executeAsync(ApiCallback<CallRecordingPage> callback) {
             RequestDefinition getCallsRecordingsDefinition = getCallsRecordingsDefinition(
                     callId,
+                    callsConfigurationId,
                     applicationId,
+                    entityId,
                     endpointIdentifier,
                     startTimeAfter,
                     endTimeBefore,
@@ -4582,7 +4806,7 @@ public class CallsApi {
         return new GetConferenceHistoryRequest(conferenceId);
     }
 
-    private RequestDefinition getConferenceRecordingsDefinition(String conferenceId, String location) {
+    private RequestDefinition getConferenceRecordingsDefinition(String conferenceId, CallsRecordingLocation location) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "GET", "/calls/1/recordings/conferences/{conferenceId}")
                 .requiresAuthentication(true)
@@ -4602,7 +4826,7 @@ public class CallsApi {
      */
     public class GetConferenceRecordingsRequest {
         private final String conferenceId;
-        private String location;
+        private CallsRecordingLocation location;
 
         private GetConferenceRecordingsRequest(String conferenceId) {
             this.conferenceId =
@@ -4615,7 +4839,7 @@ public class CallsApi {
          * @param location Recording location. (optional)
          * @return GetConferenceRecordingsRequest
          */
-        public GetConferenceRecordingsRequest location(String location) {
+        public GetConferenceRecordingsRequest location(CallsRecordingLocation location) {
             this.location = location;
             return this;
         }
@@ -4664,6 +4888,7 @@ public class CallsApi {
     private RequestDefinition getConferencesDefinition(
             String name,
             String callId,
+            String callsConfigurationId,
             String applicationId,
             OffsetDateTime startTimeAfter,
             Integer page,
@@ -4677,6 +4902,9 @@ public class CallsApi {
         }
         if (callId != null) {
             builder.addQueryParameter(new Parameter("callId", callId));
+        }
+        if (callsConfigurationId != null) {
+            builder.addQueryParameter(new Parameter("callsConfigurationId", callsConfigurationId));
         }
         if (applicationId != null) {
             builder.addQueryParameter(new Parameter("applicationId", applicationId));
@@ -4699,6 +4927,7 @@ public class CallsApi {
     public class GetConferencesRequest {
         private String name;
         private String callId;
+        private String callsConfigurationId;
         private String applicationId;
         private OffsetDateTime startTimeAfter;
         private Integer page;
@@ -4725,6 +4954,17 @@ public class CallsApi {
          */
         public GetConferencesRequest callId(String callId) {
             this.callId = callId;
+            return this;
+        }
+
+        /**
+         * Sets callsConfigurationId.
+         *
+         * @param callsConfigurationId Calls Configuration ID. (optional)
+         * @return GetConferencesRequest
+         */
+        public GetConferencesRequest callsConfigurationId(String callsConfigurationId) {
+            this.callsConfigurationId = callsConfigurationId;
             return this;
         }
 
@@ -4779,8 +5019,8 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public CallsConferencePage execute() throws ApiException {
-            RequestDefinition getConferencesDefinition =
-                    getConferencesDefinition(name, callId, applicationId, startTimeAfter, page, size);
+            RequestDefinition getConferencesDefinition = getConferencesDefinition(
+                    name, callId, callsConfigurationId, applicationId, startTimeAfter, page, size);
             return apiClient.execute(getConferencesDefinition, new TypeReference<CallsConferencePage>() {}.getType());
         }
 
@@ -4791,8 +5031,8 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsConferencePage> callback) {
-            RequestDefinition getConferencesDefinition =
-                    getConferencesDefinition(name, callId, applicationId, startTimeAfter, page, size);
+            RequestDefinition getConferencesDefinition = getConferencesDefinition(
+                    name, callId, callsConfigurationId, applicationId, startTimeAfter, page, size);
             return apiClient.executeAsync(
                     getConferencesDefinition, new TypeReference<CallsConferencePage>() {}.getType(), callback);
         }
@@ -4812,6 +5052,7 @@ public class CallsApi {
     private RequestDefinition getConferencesHistoryDefinition(
             String name,
             String callId,
+            String callsConfigurationId,
             String applicationId,
             OffsetDateTime startTimeAfter,
             OffsetDateTime endTimeBefore,
@@ -4826,6 +5067,9 @@ public class CallsApi {
         }
         if (callId != null) {
             builder.addQueryParameter(new Parameter("callId", callId));
+        }
+        if (callsConfigurationId != null) {
+            builder.addQueryParameter(new Parameter("callsConfigurationId", callsConfigurationId));
         }
         if (applicationId != null) {
             builder.addQueryParameter(new Parameter("applicationId", applicationId));
@@ -4851,6 +5095,7 @@ public class CallsApi {
     public class GetConferencesHistoryRequest {
         private String name;
         private String callId;
+        private String callsConfigurationId;
         private String applicationId;
         private OffsetDateTime startTimeAfter;
         private OffsetDateTime endTimeBefore;
@@ -4878,6 +5123,17 @@ public class CallsApi {
          */
         public GetConferencesHistoryRequest callId(String callId) {
             this.callId = callId;
+            return this;
+        }
+
+        /**
+         * Sets callsConfigurationId.
+         *
+         * @param callsConfigurationId Calls Configuration ID. (optional)
+         * @return GetConferencesHistoryRequest
+         */
+        public GetConferencesHistoryRequest callsConfigurationId(String callsConfigurationId) {
+            this.callsConfigurationId = callsConfigurationId;
             return this;
         }
 
@@ -4944,7 +5200,7 @@ public class CallsApi {
          */
         public CallsConferenceLogPage execute() throws ApiException {
             RequestDefinition getConferencesHistoryDefinition = getConferencesHistoryDefinition(
-                    name, callId, applicationId, startTimeAfter, endTimeBefore, page, size);
+                    name, callId, callsConfigurationId, applicationId, startTimeAfter, endTimeBefore, page, size);
             return apiClient.execute(
                     getConferencesHistoryDefinition, new TypeReference<CallsConferenceLogPage>() {}.getType());
         }
@@ -4957,7 +5213,7 @@ public class CallsApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsConferenceLogPage> callback) {
             RequestDefinition getConferencesHistoryDefinition = getConferencesHistoryDefinition(
-                    name, callId, applicationId, startTimeAfter, endTimeBefore, page, size);
+                    name, callId, callsConfigurationId, applicationId, startTimeAfter, endTimeBefore, page, size);
             return apiClient.executeAsync(
                     getConferencesHistoryDefinition,
                     new TypeReference<CallsConferenceLogPage>() {}.getType(),
@@ -4978,13 +5234,17 @@ public class CallsApi {
 
     private RequestDefinition getConferencesRecordingsDefinition(
             String conferenceId,
+            String callsConfigurationId,
             String applicationId,
+            String entityId,
             String conferenceName,
             String callId,
+            CallEndpointType callEndpointType,
+            String callEndpointIdentifier,
             OffsetDateTime startTimeAfter,
             OffsetDateTime endTimeBefore,
             Boolean composition,
-            String location,
+            CallsRecordingLocation location,
             Integer page,
             Integer size) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/recordings/conferences")
@@ -4994,14 +5254,26 @@ public class CallsApi {
         if (conferenceId != null) {
             builder.addQueryParameter(new Parameter("conferenceId", conferenceId));
         }
+        if (callsConfigurationId != null) {
+            builder.addQueryParameter(new Parameter("callsConfigurationId", callsConfigurationId));
+        }
         if (applicationId != null) {
             builder.addQueryParameter(new Parameter("applicationId", applicationId));
+        }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
         }
         if (conferenceName != null) {
             builder.addQueryParameter(new Parameter("conferenceName", conferenceName));
         }
         if (callId != null) {
             builder.addQueryParameter(new Parameter("callId", callId));
+        }
+        if (callEndpointType != null) {
+            builder.addQueryParameter(new Parameter("callEndpointType", callEndpointType));
+        }
+        if (callEndpointIdentifier != null) {
+            builder.addQueryParameter(new Parameter("callEndpointIdentifier", callEndpointIdentifier));
         }
         if (startTimeAfter != null) {
             builder.addQueryParameter(new Parameter("startTimeAfter", startTimeAfter));
@@ -5029,13 +5301,17 @@ public class CallsApi {
      */
     public class GetConferencesRecordingsRequest {
         private String conferenceId;
+        private String callsConfigurationId;
         private String applicationId;
+        private String entityId;
         private String conferenceName;
         private String callId;
+        private CallEndpointType callEndpointType;
+        private String callEndpointIdentifier;
         private OffsetDateTime startTimeAfter;
         private OffsetDateTime endTimeBefore;
         private Boolean composition;
-        private String location;
+        private CallsRecordingLocation location;
         private Integer page;
         private Integer size;
 
@@ -5053,6 +5329,17 @@ public class CallsApi {
         }
 
         /**
+         * Sets callsConfigurationId.
+         *
+         * @param callsConfigurationId Calls Configuration ID. (optional)
+         * @return GetConferencesRecordingsRequest
+         */
+        public GetConferencesRecordingsRequest callsConfigurationId(String callsConfigurationId) {
+            this.callsConfigurationId = callsConfigurationId;
+            return this;
+        }
+
+        /**
          * Sets applicationId.
          *
          * @param applicationId Application ID. (optional)
@@ -5060,6 +5347,17 @@ public class CallsApi {
          */
         public GetConferencesRecordingsRequest applicationId(String applicationId) {
             this.applicationId = applicationId;
+            return this;
+        }
+
+        /**
+         * Sets entityId.
+         *
+         * @param entityId Entity ID. (optional)
+         * @return GetConferencesRecordingsRequest
+         */
+        public GetConferencesRecordingsRequest entityId(String entityId) {
+            this.entityId = entityId;
             return this;
         }
 
@@ -5082,6 +5380,28 @@ public class CallsApi {
          */
         public GetConferencesRecordingsRequest callId(String callId) {
             this.callId = callId;
+            return this;
+        }
+
+        /**
+         * Sets callEndpointType.
+         *
+         * @param callEndpointType Filter all conference recordings where calls with endpoint type were included in the recording. (optional)
+         * @return GetConferencesRecordingsRequest
+         */
+        public GetConferencesRecordingsRequest callEndpointType(CallEndpointType callEndpointType) {
+            this.callEndpointType = callEndpointType;
+            return this;
+        }
+
+        /**
+         * Sets callEndpointIdentifier.
+         *
+         * @param callEndpointIdentifier Filter all conference recordings where calls with endpoint identifier were included in the recording. (optional)
+         * @return GetConferencesRecordingsRequest
+         */
+        public GetConferencesRecordingsRequest callEndpointIdentifier(String callEndpointIdentifier) {
+            this.callEndpointIdentifier = callEndpointIdentifier;
             return this;
         }
 
@@ -5124,7 +5444,7 @@ public class CallsApi {
          * @param location Recording location. (optional)
          * @return GetConferencesRecordingsRequest
          */
-        public GetConferencesRecordingsRequest location(String location) {
+        public GetConferencesRecordingsRequest location(CallsRecordingLocation location) {
             this.location = location;
             return this;
         }
@@ -5160,9 +5480,13 @@ public class CallsApi {
         public CallsConferenceRecordingPage execute() throws ApiException {
             RequestDefinition getConferencesRecordingsDefinition = getConferencesRecordingsDefinition(
                     conferenceId,
+                    callsConfigurationId,
                     applicationId,
+                    entityId,
                     conferenceName,
                     callId,
+                    callEndpointType,
+                    callEndpointIdentifier,
                     startTimeAfter,
                     endTimeBefore,
                     composition,
@@ -5182,9 +5506,13 @@ public class CallsApi {
         public okhttp3.Call executeAsync(ApiCallback<CallsConferenceRecordingPage> callback) {
             RequestDefinition getConferencesRecordingsDefinition = getConferencesRecordingsDefinition(
                     conferenceId,
+                    callsConfigurationId,
                     applicationId,
+                    entityId,
                     conferenceName,
                     callId,
+                    callEndpointType,
+                    callEndpointIdentifier,
                     startTimeAfter,
                     endTimeBefore,
                     composition,
@@ -5375,7 +5703,7 @@ public class CallsApi {
         return new GetDialogHistoryRequest(dialogId);
     }
 
-    private RequestDefinition getDialogRecordingsDefinition(String dialogId, String location) {
+    private RequestDefinition getDialogRecordingsDefinition(String dialogId, CallsRecordingLocation location) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/recordings/dialogs/{dialogId}")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -5394,7 +5722,7 @@ public class CallsApi {
      */
     public class GetDialogRecordingsRequest {
         private final String dialogId;
-        private String location;
+        private CallsRecordingLocation location;
 
         private GetDialogRecordingsRequest(String dialogId) {
             this.dialogId = Objects.requireNonNull(dialogId, "The required parameter 'dialogId' is missing.");
@@ -5406,7 +5734,7 @@ public class CallsApi {
          * @param location Recording location. (optional)
          * @return GetDialogRecordingsRequest
          */
-        public GetDialogRecordingsRequest location(String location) {
+        public GetDialogRecordingsRequest location(CallsRecordingLocation location) {
             this.location = location;
             return this;
         }
@@ -5451,6 +5779,7 @@ public class CallsApi {
     }
 
     private RequestDefinition getDialogsDefinition(
+            String callsConfigurationId,
             String applicationId,
             CallsDialogState state,
             String parentCallId,
@@ -5462,6 +5791,9 @@ public class CallsApi {
                 .requiresAuthentication(true)
                 .accept("application/json");
 
+        if (callsConfigurationId != null) {
+            builder.addQueryParameter(new Parameter("callsConfigurationId", callsConfigurationId));
+        }
         if (applicationId != null) {
             builder.addQueryParameter(new Parameter("applicationId", applicationId));
         }
@@ -5490,6 +5822,7 @@ public class CallsApi {
      * getDialogs request builder class.
      */
     public class GetDialogsRequest {
+        private String callsConfigurationId;
         private String applicationId;
         private CallsDialogState state;
         private String parentCallId;
@@ -5499,6 +5832,17 @@ public class CallsApi {
         private Integer size;
 
         private GetDialogsRequest() {}
+
+        /**
+         * Sets callsConfigurationId.
+         *
+         * @param callsConfigurationId Calls Configuration ID. (optional)
+         * @return GetDialogsRequest
+         */
+        public GetDialogsRequest callsConfigurationId(String callsConfigurationId) {
+            this.callsConfigurationId = callsConfigurationId;
+            return this;
+        }
 
         /**
          * Sets applicationId.
@@ -5584,8 +5928,8 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public CallsDialogPage execute() throws ApiException {
-            RequestDefinition getDialogsDefinition =
-                    getDialogsDefinition(applicationId, state, parentCallId, childCallId, startTimeAfter, page, size);
+            RequestDefinition getDialogsDefinition = getDialogsDefinition(
+                    callsConfigurationId, applicationId, state, parentCallId, childCallId, startTimeAfter, page, size);
             return apiClient.execute(getDialogsDefinition, new TypeReference<CallsDialogPage>() {}.getType());
         }
 
@@ -5596,8 +5940,8 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsDialogPage> callback) {
-            RequestDefinition getDialogsDefinition =
-                    getDialogsDefinition(applicationId, state, parentCallId, childCallId, startTimeAfter, page, size);
+            RequestDefinition getDialogsDefinition = getDialogsDefinition(
+                    callsConfigurationId, applicationId, state, parentCallId, childCallId, startTimeAfter, page, size);
             return apiClient.executeAsync(
                     getDialogsDefinition, new TypeReference<CallsDialogPage>() {}.getType(), callback);
         }
@@ -5615,6 +5959,7 @@ public class CallsApi {
     }
 
     private RequestDefinition getDialogsHistoryDefinition(
+            String callsConfigurationId,
             String applicationId,
             CallsDialogState state,
             String parentCallId,
@@ -5627,6 +5972,9 @@ public class CallsApi {
                 .requiresAuthentication(true)
                 .accept("application/json");
 
+        if (callsConfigurationId != null) {
+            builder.addQueryParameter(new Parameter("callsConfigurationId", callsConfigurationId));
+        }
         if (applicationId != null) {
             builder.addQueryParameter(new Parameter("applicationId", applicationId));
         }
@@ -5658,6 +6006,7 @@ public class CallsApi {
      * getDialogsHistory request builder class.
      */
     public class GetDialogsHistoryRequest {
+        private String callsConfigurationId;
         private String applicationId;
         private CallsDialogState state;
         private String parentCallId;
@@ -5668,6 +6017,17 @@ public class CallsApi {
         private Integer size;
 
         private GetDialogsHistoryRequest() {}
+
+        /**
+         * Sets callsConfigurationId.
+         *
+         * @param callsConfigurationId Calls Configuration ID. (optional)
+         * @return GetDialogsHistoryRequest
+         */
+        public GetDialogsHistoryRequest callsConfigurationId(String callsConfigurationId) {
+            this.callsConfigurationId = callsConfigurationId;
+            return this;
+        }
 
         /**
          * Sets applicationId.
@@ -5765,7 +6125,15 @@ public class CallsApi {
          */
         public CallsDialogLogPage execute() throws ApiException {
             RequestDefinition getDialogsHistoryDefinition = getDialogsHistoryDefinition(
-                    applicationId, state, parentCallId, childCallId, startTimeAfter, endTimeBefore, page, size);
+                    callsConfigurationId,
+                    applicationId,
+                    state,
+                    parentCallId,
+                    childCallId,
+                    startTimeAfter,
+                    endTimeBefore,
+                    page,
+                    size);
             return apiClient.execute(getDialogsHistoryDefinition, new TypeReference<CallsDialogLogPage>() {}.getType());
         }
 
@@ -5777,7 +6145,15 @@ public class CallsApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsDialogLogPage> callback) {
             RequestDefinition getDialogsHistoryDefinition = getDialogsHistoryDefinition(
-                    applicationId, state, parentCallId, childCallId, startTimeAfter, endTimeBefore, page, size);
+                    callsConfigurationId,
+                    applicationId,
+                    state,
+                    parentCallId,
+                    childCallId,
+                    startTimeAfter,
+                    endTimeBefore,
+                    page,
+                    size);
             return apiClient.executeAsync(
                     getDialogsHistoryDefinition, new TypeReference<CallsDialogLogPage>() {}.getType(), callback);
         }
@@ -5796,12 +6172,16 @@ public class CallsApi {
 
     private RequestDefinition getDialogsRecordingsDefinition(
             String dialogId,
+            String callsConfigurationId,
             String applicationId,
+            String entityId,
             String callId,
+            CallEndpointType callEndpointType,
+            String callEndpointIdentifier,
             OffsetDateTime startTimeAfter,
             OffsetDateTime endTimeBefore,
             Boolean composition,
-            String location,
+            CallsRecordingLocation location,
             Integer page,
             Integer size) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/recordings/dialogs")
@@ -5811,11 +6191,23 @@ public class CallsApi {
         if (dialogId != null) {
             builder.addQueryParameter(new Parameter("dialogId", dialogId));
         }
+        if (callsConfigurationId != null) {
+            builder.addQueryParameter(new Parameter("callsConfigurationId", callsConfigurationId));
+        }
         if (applicationId != null) {
             builder.addQueryParameter(new Parameter("applicationId", applicationId));
         }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
+        }
         if (callId != null) {
             builder.addQueryParameter(new Parameter("callId", callId));
+        }
+        if (callEndpointType != null) {
+            builder.addQueryParameter(new Parameter("callEndpointType", callEndpointType));
+        }
+        if (callEndpointIdentifier != null) {
+            builder.addQueryParameter(new Parameter("callEndpointIdentifier", callEndpointIdentifier));
         }
         if (startTimeAfter != null) {
             builder.addQueryParameter(new Parameter("startTimeAfter", startTimeAfter));
@@ -5843,12 +6235,16 @@ public class CallsApi {
      */
     public class GetDialogsRecordingsRequest {
         private String dialogId;
+        private String callsConfigurationId;
         private String applicationId;
+        private String entityId;
         private String callId;
+        private CallEndpointType callEndpointType;
+        private String callEndpointIdentifier;
         private OffsetDateTime startTimeAfter;
         private OffsetDateTime endTimeBefore;
         private Boolean composition;
-        private String location;
+        private CallsRecordingLocation location;
         private Integer page;
         private Integer size;
 
@@ -5866,6 +6262,17 @@ public class CallsApi {
         }
 
         /**
+         * Sets callsConfigurationId.
+         *
+         * @param callsConfigurationId Calls Configuration ID. (optional)
+         * @return GetDialogsRecordingsRequest
+         */
+        public GetDialogsRecordingsRequest callsConfigurationId(String callsConfigurationId) {
+            this.callsConfigurationId = callsConfigurationId;
+            return this;
+        }
+
+        /**
          * Sets applicationId.
          *
          * @param applicationId Application ID. (optional)
@@ -5877,6 +6284,17 @@ public class CallsApi {
         }
 
         /**
+         * Sets entityId.
+         *
+         * @param entityId Entity ID. (optional)
+         * @return GetDialogsRecordingsRequest
+         */
+        public GetDialogsRecordingsRequest entityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
+
+        /**
          * Sets callId.
          *
          * @param callId Filter all dialog recordings where call ID was included in the recording. (optional)
@@ -5884,6 +6302,28 @@ public class CallsApi {
          */
         public GetDialogsRecordingsRequest callId(String callId) {
             this.callId = callId;
+            return this;
+        }
+
+        /**
+         * Sets callEndpointType.
+         *
+         * @param callEndpointType Filter all dialog recordings where calls with endpoint type were included in the recording. (optional)
+         * @return GetDialogsRecordingsRequest
+         */
+        public GetDialogsRecordingsRequest callEndpointType(CallEndpointType callEndpointType) {
+            this.callEndpointType = callEndpointType;
+            return this;
+        }
+
+        /**
+         * Sets callEndpointIdentifier.
+         *
+         * @param callEndpointIdentifier Filter all dialog recordings where calls with endpoint identifier were included in the recording. (optional)
+         * @return GetDialogsRecordingsRequest
+         */
+        public GetDialogsRecordingsRequest callEndpointIdentifier(String callEndpointIdentifier) {
+            this.callEndpointIdentifier = callEndpointIdentifier;
             return this;
         }
 
@@ -5926,7 +6366,7 @@ public class CallsApi {
          * @param location Recording location. (optional)
          * @return GetDialogsRecordingsRequest
          */
-        public GetDialogsRecordingsRequest location(String location) {
+        public GetDialogsRecordingsRequest location(CallsRecordingLocation location) {
             this.location = location;
             return this;
         }
@@ -5961,7 +6401,19 @@ public class CallsApi {
          */
         public CallsDialogRecordingPage execute() throws ApiException {
             RequestDefinition getDialogsRecordingsDefinition = getDialogsRecordingsDefinition(
-                    dialogId, applicationId, callId, startTimeAfter, endTimeBefore, composition, location, page, size);
+                    dialogId,
+                    callsConfigurationId,
+                    applicationId,
+                    entityId,
+                    callId,
+                    callEndpointType,
+                    callEndpointIdentifier,
+                    startTimeAfter,
+                    endTimeBefore,
+                    composition,
+                    location,
+                    page,
+                    size);
             return apiClient.execute(
                     getDialogsRecordingsDefinition, new TypeReference<CallsDialogRecordingPage>() {}.getType());
         }
@@ -5974,7 +6426,19 @@ public class CallsApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsDialogRecordingPage> callback) {
             RequestDefinition getDialogsRecordingsDefinition = getDialogsRecordingsDefinition(
-                    dialogId, applicationId, callId, startTimeAfter, endTimeBefore, composition, location, page, size);
+                    dialogId,
+                    callsConfigurationId,
+                    applicationId,
+                    entityId,
+                    callId,
+                    callEndpointType,
+                    callEndpointIdentifier,
+                    startTimeAfter,
+                    endTimeBefore,
+                    composition,
+                    location,
+                    page,
+                    size);
             return apiClient.executeAsync(
                     getDialogsRecordingsDefinition,
                     new TypeReference<CallsDialogRecordingPage>() {}.getType(),
@@ -6984,6 +7448,68 @@ public class CallsApi {
         return new RescheduleBulkRequest(bulkId, callsRescheduleRequest);
     }
 
+    private RequestDefinition resetSipTrunkPasswordDefinition(String sipTrunkId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/calls/1/sip-trunks/{sipTrunkId}/reset-password")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sipTrunkId != null) {
+            builder.addPathParameter(new Parameter("sipTrunkId", sipTrunkId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * resetSipTrunkPassword request builder class.
+     */
+    public class ResetSipTrunkPasswordRequest {
+        private final String sipTrunkId;
+
+        private ResetSipTrunkPasswordRequest(String sipTrunkId) {
+            this.sipTrunkId = Objects.requireNonNull(sipTrunkId, "The required parameter 'sipTrunkId' is missing.");
+        }
+
+        /**
+         * Executes the resetSipTrunkPassword request.
+         *
+         * @return CallsSipTrunkRegistrationCredentials The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsSipTrunkRegistrationCredentials execute() throws ApiException {
+            RequestDefinition resetSipTrunkPasswordDefinition = resetSipTrunkPasswordDefinition(sipTrunkId);
+            return apiClient.execute(
+                    resetSipTrunkPasswordDefinition,
+                    new TypeReference<CallsSipTrunkRegistrationCredentials>() {}.getType());
+        }
+
+        /**
+         * Executes the resetSipTrunkPassword request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsSipTrunkRegistrationCredentials> callback) {
+            RequestDefinition resetSipTrunkPasswordDefinition = resetSipTrunkPasswordDefinition(sipTrunkId);
+            return apiClient.executeAsync(
+                    resetSipTrunkPasswordDefinition,
+                    new TypeReference<CallsSipTrunkRegistrationCredentials>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Reset registered SIP trunk password.
+     * <p>
+     * Reset password. Applicable only for &#x60;REGISTERED&#x60; SIP trunks.
+     *
+     * @param sipTrunkId Sip Trunk ID. (required)
+     * @return ResetSipTrunkPasswordRequest
+     */
+    public ResetSipTrunkPasswordRequest resetSipTrunkPassword(String sipTrunkId) {
+        return new ResetSipTrunkPasswordRequest(sipTrunkId);
+    }
+
     private RequestDefinition resumeBulkDefinition(String bulkId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/bulks/{bulkId}/resume")
                 .requiresAuthentication(true)
@@ -7704,7 +8230,7 @@ public class CallsApi {
     /**
      * Upload audio file.
      * <p>
-     * Upload an audio file. Uploaded files can be played on calls, dialogs or conferences. The file will be removed if it is not used for 30 days.
+     * Upload an audio file. Uploaded files can be played on calls, dialogs or conferences. The file will be removed if it is not used for 90 days.
      *
      * @param _file  (required)
      * @return UploadCallsAudioFileRequest

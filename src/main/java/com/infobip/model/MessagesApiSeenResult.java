@@ -35,7 +35,7 @@ public class MessagesApiSeenResult {
 
     private String callbackData;
 
-    private MessagesApiPlatform platform;
+    private Platform platform;
 
     private String campaignReferenceId;
 
@@ -444,7 +444,7 @@ public class MessagesApiSeenResult {
      * @param platform
      * @return This {@link MessagesApiSeenResult instance}.
      */
-    public MessagesApiSeenResult platform(MessagesApiPlatform platform) {
+    public MessagesApiSeenResult platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -455,7 +455,7 @@ public class MessagesApiSeenResult {
      * @return platform
      */
     @JsonProperty("platform")
-    public MessagesApiPlatform getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -465,7 +465,7 @@ public class MessagesApiSeenResult {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(MessagesApiPlatform platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

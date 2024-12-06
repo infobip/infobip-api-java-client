@@ -37,7 +37,7 @@ public class ViberFileMessage {
 
     private String notifyUrl;
 
-    private ViberUrlOptions urlOptions;
+    private UrlOptions urlOptions;
 
     private String entityId;
 
@@ -440,7 +440,7 @@ public class ViberFileMessage {
      * @param urlOptions
      * @return This {@link ViberFileMessage instance}.
      */
-    public ViberFileMessage urlOptions(ViberUrlOptions urlOptions) {
+    public ViberFileMessage urlOptions(UrlOptions urlOptions) {
         this.urlOptions = urlOptions;
         return this;
     }
@@ -451,7 +451,7 @@ public class ViberFileMessage {
      * @return urlOptions
      */
     @JsonProperty("urlOptions")
-    public ViberUrlOptions getUrlOptions() {
+    public UrlOptions getUrlOptions() {
         return urlOptions;
     }
 
@@ -461,7 +461,7 @@ public class ViberFileMessage {
      * @param urlOptions
      */
     @JsonProperty("urlOptions")
-    public void setUrlOptions(ViberUrlOptions urlOptions) {
+    public void setUrlOptions(UrlOptions urlOptions) {
         this.urlOptions = urlOptions;
     }
 

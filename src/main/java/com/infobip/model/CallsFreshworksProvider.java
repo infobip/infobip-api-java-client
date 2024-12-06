@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * Represents CallsFreshworksProvider model.
  */
-public class CallsFreshworksProvider extends CallsPegasusProvider {
+public class CallsFreshworksProvider extends CallsProvider {
 
     private String accountSid;
 

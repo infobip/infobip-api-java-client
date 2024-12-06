@@ -29,7 +29,7 @@ public class WhatsAppMessage {
 
     private String notifyUrl;
 
-    private WhatsAppUrlOptions urlOptions;
+    private UrlOptions urlOptions;
 
     private WhatsAppFailover smsFailover;
 
@@ -292,7 +292,7 @@ public class WhatsAppMessage {
      * @param urlOptions
      * @return This {@link WhatsAppMessage instance}.
      */
-    public WhatsAppMessage urlOptions(WhatsAppUrlOptions urlOptions) {
+    public WhatsAppMessage urlOptions(UrlOptions urlOptions) {
         this.urlOptions = urlOptions;
         return this;
     }
@@ -303,7 +303,7 @@ public class WhatsAppMessage {
      * @return urlOptions
      */
     @JsonProperty("urlOptions")
-    public WhatsAppUrlOptions getUrlOptions() {
+    public UrlOptions getUrlOptions() {
         return urlOptions;
     }
 
@@ -313,7 +313,7 @@ public class WhatsAppMessage {
      * @param urlOptions
      */
     @JsonProperty("urlOptions")
-    public void setUrlOptions(WhatsAppUrlOptions urlOptions) {
+    public void setUrlOptions(UrlOptions urlOptions) {
         this.urlOptions = urlOptions;
     }
 

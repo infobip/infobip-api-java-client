@@ -11,6 +11,8 @@ package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -26,11 +28,7 @@ public class CallsRecordingFile {
 
     private Long size;
 
-    private CallsCreationMethod creationMethod;
-
     private OffsetDateTime creationTime;
-
-    private OffsetDateTime expirationTime;
 
     private Long duration;
 
@@ -39,6 +37,10 @@ public class CallsRecordingFile {
     private OffsetDateTime endTime;
 
     private CallsRecordingFileLocation location;
+
+    private CallsSftpUploadStatus sftpUploadStatus;
+
+    private Map<String, String> customData = null;
 
     /**
      * Sets id.
@@ -204,37 +206,6 @@ public class CallsRecordingFile {
     }
 
     /**
-     * Sets creationMethod.
-     *
-     * @param creationMethod
-     * @return This {@link CallsRecordingFile instance}.
-     */
-    public CallsRecordingFile creationMethod(CallsCreationMethod creationMethod) {
-        this.creationMethod = creationMethod;
-        return this;
-    }
-
-    /**
-     * Returns creationMethod.
-     *
-     * @return creationMethod
-     */
-    @JsonProperty("creationMethod")
-    public CallsCreationMethod getCreationMethod() {
-        return creationMethod;
-    }
-
-    /**
-     * Sets creationMethod.
-     *
-     * @param creationMethod
-     */
-    @JsonProperty("creationMethod")
-    public void setCreationMethod(CallsCreationMethod creationMethod) {
-        this.creationMethod = creationMethod;
-    }
-
-    /**
      * Sets creationTime.
      * <p>
      * Field description:
@@ -272,46 +243,6 @@ public class CallsRecordingFile {
     @JsonProperty("creationTime")
     public void setCreationTime(OffsetDateTime creationTime) {
         this.creationTime = creationTime;
-    }
-
-    /**
-     * Sets expirationTime.
-     * <p>
-     * Field description:
-     * File expiration time.
-     *
-     * @param expirationTime
-     * @return This {@link CallsRecordingFile instance}.
-     */
-    public CallsRecordingFile expirationTime(OffsetDateTime expirationTime) {
-        this.expirationTime = expirationTime;
-        return this;
-    }
-
-    /**
-     * Returns expirationTime.
-     * <p>
-     * Field description:
-     * File expiration time.
-     *
-     * @return expirationTime
-     */
-    @JsonProperty("expirationTime")
-    public OffsetDateTime getExpirationTime() {
-        return expirationTime;
-    }
-
-    /**
-     * Sets expirationTime.
-     * <p>
-     * Field description:
-     * File expiration time.
-     *
-     * @param expirationTime
-     */
-    @JsonProperty("expirationTime")
-    public void setExpirationTime(OffsetDateTime expirationTime) {
-        this.expirationTime = expirationTime;
     }
 
     /**
@@ -465,6 +396,95 @@ public class CallsRecordingFile {
         this.location = location;
     }
 
+    /**
+     * Sets sftpUploadStatus.
+     *
+     * @param sftpUploadStatus
+     * @return This {@link CallsRecordingFile instance}.
+     */
+    public CallsRecordingFile sftpUploadStatus(CallsSftpUploadStatus sftpUploadStatus) {
+        this.sftpUploadStatus = sftpUploadStatus;
+        return this;
+    }
+
+    /**
+     * Returns sftpUploadStatus.
+     *
+     * @return sftpUploadStatus
+     */
+    @JsonProperty("sftpUploadStatus")
+    public CallsSftpUploadStatus getSftpUploadStatus() {
+        return sftpUploadStatus;
+    }
+
+    /**
+     * Sets sftpUploadStatus.
+     *
+     * @param sftpUploadStatus
+     */
+    @JsonProperty("sftpUploadStatus")
+    public void setSftpUploadStatus(CallsSftpUploadStatus sftpUploadStatus) {
+        this.sftpUploadStatus = sftpUploadStatus;
+    }
+
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Custom data.
+     *
+     * @param customData
+     * @return This {@link CallsRecordingFile instance}.
+     */
+    public CallsRecordingFile customData(Map<String, String> customData) {
+        this.customData = customData;
+        return this;
+    }
+
+    /**
+     * Puts and entry into customData.
+     * <p>
+     * Field description:
+     * Custom data.
+     *
+     * @param key The given key.
+     * @param customDataItem The item to be associated with the given key.
+     * @return This {@link CallsRecordingFile instance}.
+     */
+    public CallsRecordingFile putCustomDataItem(String key, String customDataItem) {
+        if (this.customData == null) {
+            this.customData = new HashMap<>();
+        }
+        this.customData.put(key, customDataItem);
+        return this;
+    }
+
+    /**
+     * Returns customData.
+     * <p>
+     * Field description:
+     * Custom data.
+     *
+     * @return customData
+     */
+    @JsonProperty("customData")
+    public Map<String, String> getCustomData() {
+        return customData;
+    }
+
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Custom data.
+     *
+     * @param customData
+     */
+    @JsonProperty("customData")
+    public void setCustomData(Map<String, String> customData) {
+        this.customData = customData;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -478,13 +498,13 @@ public class CallsRecordingFile {
                 && Objects.equals(this.name, callsRecordingFile.name)
                 && Objects.equals(this.fileFormat, callsRecordingFile.fileFormat)
                 && Objects.equals(this.size, callsRecordingFile.size)
-                && Objects.equals(this.creationMethod, callsRecordingFile.creationMethod)
                 && Objects.equals(this.creationTime, callsRecordingFile.creationTime)
-                && Objects.equals(this.expirationTime, callsRecordingFile.expirationTime)
                 && Objects.equals(this.duration, callsRecordingFile.duration)
                 && Objects.equals(this.startTime, callsRecordingFile.startTime)
                 && Objects.equals(this.endTime, callsRecordingFile.endTime)
-                && Objects.equals(this.location, callsRecordingFile.location);
+                && Objects.equals(this.location, callsRecordingFile.location)
+                && Objects.equals(this.sftpUploadStatus, callsRecordingFile.sftpUploadStatus)
+                && Objects.equals(this.customData, callsRecordingFile.customData);
     }
 
     @Override
@@ -494,13 +514,13 @@ public class CallsRecordingFile {
                 name,
                 fileFormat,
                 size,
-                creationMethod,
                 creationTime,
-                expirationTime,
                 duration,
                 startTime,
                 endTime,
-                location);
+                location,
+                sftpUploadStatus,
+                customData);
     }
 
     @Override
@@ -521,14 +541,8 @@ public class CallsRecordingFile {
                 .append("    size: ")
                 .append(toIndentedString(size))
                 .append(newLine)
-                .append("    creationMethod: ")
-                .append(toIndentedString(creationMethod))
-                .append(newLine)
                 .append("    creationTime: ")
                 .append(toIndentedString(creationTime))
-                .append(newLine)
-                .append("    expirationTime: ")
-                .append(toIndentedString(expirationTime))
                 .append(newLine)
                 .append("    duration: ")
                 .append(toIndentedString(duration))
@@ -541,6 +555,12 @@ public class CallsRecordingFile {
                 .append(newLine)
                 .append("    location: ")
                 .append(toIndentedString(location))
+                .append(newLine)
+                .append("    sftpUploadStatus: ")
+                .append(toIndentedString(sftpUploadStatus))
+                .append(newLine)
+                .append("    customData: ")
+                .append(toIndentedString(customData))
                 .append(newLine)
                 .append("}")
                 .toString();

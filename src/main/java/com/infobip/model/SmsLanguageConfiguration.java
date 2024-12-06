@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class SmsLanguageConfiguration {
 
-    private SmsLanguage language;
+    private SmsPreviewLanguage language;
 
     private String transliteration;
 
@@ -27,7 +27,7 @@ public class SmsLanguageConfiguration {
      * @param language
      * @return This {@link SmsLanguageConfiguration instance}.
      */
-    public SmsLanguageConfiguration language(SmsLanguage language) {
+    public SmsLanguageConfiguration language(SmsPreviewLanguage language) {
         this.language = language;
         return this;
     }
@@ -38,7 +38,7 @@ public class SmsLanguageConfiguration {
      * @return language
      */
     @JsonProperty("language")
-    public SmsLanguage getLanguage() {
+    public SmsPreviewLanguage getLanguage() {
         return language;
     }
 
@@ -48,7 +48,7 @@ public class SmsLanguageConfiguration {
      * @param language
      */
     @JsonProperty("language")
-    public void setLanguage(SmsLanguage language) {
+    public void setLanguage(SmsPreviewLanguage language) {
         this.language = language;
     }
 
