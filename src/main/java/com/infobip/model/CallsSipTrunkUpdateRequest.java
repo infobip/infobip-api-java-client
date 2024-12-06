@@ -30,13 +30,13 @@ import java.util.Objects;
 })
 public abstract class CallsSipTrunkUpdateRequest {
 
-    protected final CallsPegasusSipTrunkType type;
+    protected final CallsSipTrunkType type;
 
     /**
      * Constructs a new {@link CallsSipTrunkUpdateRequest} instance.
      */
     public CallsSipTrunkUpdateRequest(String type) {
-        this.type = CallsPegasusSipTrunkType.fromValue(type);
+        this.type = CallsSipTrunkType.fromValue(type);
     }
 
     private String name;
@@ -61,7 +61,7 @@ public abstract class CallsSipTrunkUpdateRequest {
      * @return type
      */
     @JsonProperty("type")
-    public CallsPegasusSipTrunkType getType() {
+    public CallsSipTrunkType getType() {
         return type;
     }
 

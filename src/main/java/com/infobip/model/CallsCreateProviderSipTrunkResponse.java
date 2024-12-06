@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class CallsCreateProviderSipTrunkResponse extends CallsCreateSipTrunkResponse {
 
-    private CallsPegasusProvider provider;
+    private CallsProvider provider;
 
     /**
      * Constructs a new {@link CallsCreateProviderSipTrunkResponse} instance.
@@ -32,7 +32,7 @@ public class CallsCreateProviderSipTrunkResponse extends CallsCreateSipTrunkResp
      * @param provider
      * @return This {@link CallsCreateProviderSipTrunkResponse instance}.
      */
-    public CallsCreateProviderSipTrunkResponse provider(CallsPegasusProvider provider) {
+    public CallsCreateProviderSipTrunkResponse provider(CallsProvider provider) {
         this.provider = provider;
         return this;
     }
@@ -43,7 +43,7 @@ public class CallsCreateProviderSipTrunkResponse extends CallsCreateSipTrunkResp
      * @return provider
      */
     @JsonProperty("provider")
-    public CallsPegasusProvider getProvider() {
+    public CallsProvider getProvider() {
         return provider;
     }
 
@@ -53,7 +53,7 @@ public class CallsCreateProviderSipTrunkResponse extends CallsCreateSipTrunkResp
      * @param provider
      */
     @JsonProperty("provider")
-    public void setProvider(CallsPegasusProvider provider) {
+    public void setProvider(CallsProvider provider) {
         this.provider = provider;
     }
 

@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents CallsSetupBody model.
+ * Represents NumberMaskingSetupBody model.
  */
-public class CallsSetupBody {
+public class NumberMaskingSetupBody {
 
     private String name;
 
@@ -38,9 +38,9 @@ public class CallsSetupBody {
      * The field is required.
      *
      * @param name
-     * @return This {@link CallsSetupBody instance}.
+     * @return This {@link NumberMaskingSetupBody instance}.
      */
-    public CallsSetupBody name(String name) {
+    public NumberMaskingSetupBody name(String name) {
         this.name = name;
         return this;
     }
@@ -84,9 +84,9 @@ public class CallsSetupBody {
      * The field is required.
      *
      * @param callbackUrl
-     * @return This {@link CallsSetupBody instance}.
+     * @return This {@link NumberMaskingSetupBody instance}.
      */
-    public CallsSetupBody callbackUrl(String callbackUrl) {
+    public NumberMaskingSetupBody callbackUrl(String callbackUrl) {
         this.callbackUrl = callbackUrl;
         return this;
     }
@@ -128,9 +128,9 @@ public class CallsSetupBody {
      * Client&#39;s URL for status report delivery after the call is finished.
      *
      * @param statusUrl
-     * @return This {@link CallsSetupBody instance}.
+     * @return This {@link NumberMaskingSetupBody instance}.
      */
-    public CallsSetupBody statusUrl(String statusUrl) {
+    public NumberMaskingSetupBody statusUrl(String statusUrl) {
         this.statusUrl = statusUrl;
         return this;
     }
@@ -168,9 +168,9 @@ public class CallsSetupBody {
      * If callbackUrl is unavailable this one will be called instead.
      *
      * @param backupCallbackUrl
-     * @return This {@link CallsSetupBody instance}.
+     * @return This {@link NumberMaskingSetupBody instance}.
      */
-    public CallsSetupBody backupCallbackUrl(String backupCallbackUrl) {
+    public NumberMaskingSetupBody backupCallbackUrl(String backupCallbackUrl) {
         this.backupCallbackUrl = backupCallbackUrl;
         return this;
     }
@@ -208,9 +208,9 @@ public class CallsSetupBody {
      * If statusUrl is unavailable this one will be called instead.
      *
      * @param backupStatusUrl
-     * @return This {@link CallsSetupBody instance}.
+     * @return This {@link NumberMaskingSetupBody instance}.
      */
-    public CallsSetupBody backupStatusUrl(String backupStatusUrl) {
+    public NumberMaskingSetupBody backupStatusUrl(String backupStatusUrl) {
         this.backupStatusUrl = backupStatusUrl;
         return this;
     }
@@ -248,9 +248,9 @@ public class CallsSetupBody {
      * Masking configuration description
      *
      * @param description
-     * @return This {@link CallsSetupBody instance}.
+     * @return This {@link NumberMaskingSetupBody instance}.
      */
-    public CallsSetupBody description(String description) {
+    public NumberMaskingSetupBody description(String description) {
         this.description = description;
         return this;
     }
@@ -289,13 +289,13 @@ public class CallsSetupBody {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallsSetupBody callsSetupBody = (CallsSetupBody) o;
-        return Objects.equals(this.name, callsSetupBody.name)
-                && Objects.equals(this.callbackUrl, callsSetupBody.callbackUrl)
-                && Objects.equals(this.statusUrl, callsSetupBody.statusUrl)
-                && Objects.equals(this.backupCallbackUrl, callsSetupBody.backupCallbackUrl)
-                && Objects.equals(this.backupStatusUrl, callsSetupBody.backupStatusUrl)
-                && Objects.equals(this.description, callsSetupBody.description);
+        NumberMaskingSetupBody numberMaskingSetupBody = (NumberMaskingSetupBody) o;
+        return Objects.equals(this.name, numberMaskingSetupBody.name)
+                && Objects.equals(this.callbackUrl, numberMaskingSetupBody.callbackUrl)
+                && Objects.equals(this.statusUrl, numberMaskingSetupBody.statusUrl)
+                && Objects.equals(this.backupCallbackUrl, numberMaskingSetupBody.backupCallbackUrl)
+                && Objects.equals(this.backupStatusUrl, numberMaskingSetupBody.backupStatusUrl)
+                && Objects.equals(this.description, numberMaskingSetupBody.description);
     }
 
     @Override
@@ -307,7 +307,7 @@ public class CallsSetupBody {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallsSetupBody {")
+                .append("class NumberMaskingSetupBody {")
                 .append(newLine)
                 .append("    name: ")
                 .append(toIndentedString(name))

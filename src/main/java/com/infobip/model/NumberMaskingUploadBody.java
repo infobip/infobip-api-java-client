@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents CallsUploadBody model.
+ * Represents NumberMaskingUploadBody model.
  */
-public class CallsUploadBody {
+public class NumberMaskingUploadBody {
 
     private String url;
 
@@ -30,9 +30,9 @@ public class CallsUploadBody {
      * URL of your voice file location. Max size of the file is 4MB. The acceptable file format is mp3.
      *
      * @param url
-     * @return This {@link CallsUploadBody instance}.
+     * @return This {@link NumberMaskingUploadBody instance}.
      */
-    public CallsUploadBody url(String url) {
+    public NumberMaskingUploadBody url(String url) {
         this.url = url;
         return this;
     }
@@ -70,9 +70,9 @@ public class CallsUploadBody {
      * Encoded (Base64) value of mp3 file can be included instead of the file location URL.
      *
      * @param content
-     * @return This {@link CallsUploadBody instance}.
+     * @return This {@link NumberMaskingUploadBody instance}.
      */
-    public CallsUploadBody content(List<byte[]> content) {
+    public NumberMaskingUploadBody content(List<byte[]> content) {
         this.content = content;
         return this;
     }
@@ -84,9 +84,9 @@ public class CallsUploadBody {
      * Encoded (Base64) value of mp3 file can be included instead of the file location URL.
      *
      * @param contentItem The item to be added to the list.
-     * @return This {@link CallsUploadBody instance}.
+     * @return This {@link NumberMaskingUploadBody instance}.
      */
-    public CallsUploadBody addContentItem(byte[] contentItem) {
+    public NumberMaskingUploadBody addContentItem(byte[] contentItem) {
         if (this.content == null) {
             this.content = new ArrayList<>();
         }
@@ -128,8 +128,9 @@ public class CallsUploadBody {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallsUploadBody callsUploadBody = (CallsUploadBody) o;
-        return Objects.equals(this.url, callsUploadBody.url) && Objects.equals(this.content, callsUploadBody.content);
+        NumberMaskingUploadBody numberMaskingUploadBody = (NumberMaskingUploadBody) o;
+        return Objects.equals(this.url, numberMaskingUploadBody.url)
+                && Objects.equals(this.content, numberMaskingUploadBody.content);
     }
 
     @Override
@@ -141,7 +142,7 @@ public class CallsUploadBody {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallsUploadBody {")
+                .append("class NumberMaskingUploadBody {")
                 .append(newLine)
                 .append("    url: ")
                 .append(toIndentedString(url))

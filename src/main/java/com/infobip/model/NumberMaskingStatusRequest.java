@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * Status request.
  */
-public class CallsStatusRequest {
+public class NumberMaskingStatusRequest {
 
     private String action;
 
@@ -53,7 +53,7 @@ public class CallsStatusRequest {
 
     private Boolean recordCalleeAnnouncement;
 
-    private CallsNumberMaskingRecordingStatus recordingStatus;
+    private NumberMaskingRecordingStatus recordingStatus;
 
     private String clientReferenceId;
 
@@ -64,9 +64,9 @@ public class CallsStatusRequest {
      * Requested action (dial, audio, captureDtmf).
      *
      * @param action
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest action(String action) {
+    public NumberMaskingStatusRequest action(String action) {
         this.action = action;
         return this;
     }
@@ -104,9 +104,9 @@ public class CallsStatusRequest {
      * Caller phone number.
      *
      * @param from
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest from(String from) {
+    public NumberMaskingStatusRequest from(String from) {
         this.from = from;
         return this;
     }
@@ -144,9 +144,9 @@ public class CallsStatusRequest {
      * Called phone number.
      *
      * @param to
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest to(String to) {
+    public NumberMaskingStatusRequest to(String to) {
         this.to = to;
         return this;
     }
@@ -184,9 +184,9 @@ public class CallsStatusRequest {
      * Called party phone number that the call is transferred to.
      *
      * @param transferTo
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest transferTo(String transferTo) {
+    public NumberMaskingStatusRequest transferTo(String transferTo) {
         this.transferTo = transferTo;
         return this;
     }
@@ -224,9 +224,9 @@ public class CallsStatusRequest {
      * Duration of the outbound call shown in seconds
      *
      * @param duration
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest duration(Integer duration) {
+    public NumberMaskingStatusRequest duration(Integer duration) {
         this.duration = duration;
         return this;
     }
@@ -264,9 +264,9 @@ public class CallsStatusRequest {
      * Call status which can be: answered, busy, no answer, failed or congestion
      *
      * @param status
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest status(String status) {
+    public NumberMaskingStatusRequest status(String status) {
         this.status = status;
         return this;
     }
@@ -304,9 +304,9 @@ public class CallsStatusRequest {
      * Unique identifier for correlation with inbound call, available in Callback and Status requests.
      *
      * @param nmCorrelationId
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest nmCorrelationId(String nmCorrelationId) {
+    public NumberMaskingStatusRequest nmCorrelationId(String nmCorrelationId) {
         this.nmCorrelationId = nmCorrelationId;
         return this;
     }
@@ -344,9 +344,9 @@ public class CallsStatusRequest {
      * Identifier of the file played to the caller.
      *
      * @param fileID
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest fileID(String fileID) {
+    public NumberMaskingStatusRequest fileID(String fileID) {
         this.fileID = fileID;
         return this;
     }
@@ -384,9 +384,9 @@ public class CallsStatusRequest {
      * The URL of the file played to the caller.
      *
      * @param fileUrl
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest fileUrl(String fileUrl) {
+    public NumberMaskingStatusRequest fileUrl(String fileUrl) {
         this.fileUrl = fileUrl;
         return this;
     }
@@ -424,9 +424,9 @@ public class CallsStatusRequest {
      * Date and time when ringing started.
      *
      * @param ringingTime
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest ringingTime(String ringingTime) {
+    public NumberMaskingStatusRequest ringingTime(String ringingTime) {
         this.ringingTime = ringingTime;
         return this;
     }
@@ -464,9 +464,9 @@ public class CallsStatusRequest {
      * Date and time when the call was answered.
      *
      * @param answeredTime
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest answeredTime(String answeredTime) {
+    public NumberMaskingStatusRequest answeredTime(String answeredTime) {
         this.answeredTime = answeredTime;
         return this;
     }
@@ -504,9 +504,9 @@ public class CallsStatusRequest {
      * Unique identifier of the call record, available for both Callback and Status requests.
      *
      * @param correlationId
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest correlationId(String correlationId) {
+    public NumberMaskingStatusRequest correlationId(String correlationId) {
         this.correlationId = correlationId;
         return this;
     }
@@ -544,9 +544,9 @@ public class CallsStatusRequest {
      * Duration of the inbound call shown in seconds.
      *
      * @param inboundDuration
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest inboundDuration(Integer inboundDuration) {
+    public NumberMaskingStatusRequest inboundDuration(Integer inboundDuration) {
         this.inboundDuration = inboundDuration;
         return this;
     }
@@ -584,9 +584,9 @@ public class CallsStatusRequest {
      * The duration of the outbound part of the number masking session, where the voice billing model (1/1, 15/15,...) has been applied to the calculatedDuration.
      *
      * @param calculatedDuration
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest calculatedDuration(Integer calculatedDuration) {
+    public NumberMaskingStatusRequest calculatedDuration(Integer calculatedDuration) {
         this.calculatedDuration = calculatedDuration;
         return this;
     }
@@ -624,9 +624,9 @@ public class CallsStatusRequest {
      * This is the price per second for the outbound part of the number masking session, with the price being expressed in cents per second.
      *
      * @param pricePerSecond
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest pricePerSecond(Double pricePerSecond) {
+    public NumberMaskingStatusRequest pricePerSecond(Double pricePerSecond) {
         this.pricePerSecond = pricePerSecond;
         return this;
     }
@@ -664,9 +664,9 @@ public class CallsStatusRequest {
      * The currency in which the price is expressed.
      *
      * @param currency
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest currency(String currency) {
+    public NumberMaskingStatusRequest currency(String currency) {
         this.currency = currency;
         return this;
     }
@@ -704,9 +704,9 @@ public class CallsStatusRequest {
      * ID of a recording file of a call.
      *
      * @param recordingFileId
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest recordingFileId(String recordingFileId) {
+    public NumberMaskingStatusRequest recordingFileId(String recordingFileId) {
         this.recordingFileId = recordingFileId;
         return this;
     }
@@ -744,9 +744,9 @@ public class CallsStatusRequest {
      * Flag that indicates if callee announcement is included in recording file.
      *
      * @param recordCalleeAnnouncement
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest recordCalleeAnnouncement(Boolean recordCalleeAnnouncement) {
+    public NumberMaskingStatusRequest recordCalleeAnnouncement(Boolean recordCalleeAnnouncement) {
         this.recordCalleeAnnouncement = recordCalleeAnnouncement;
         return this;
     }
@@ -781,9 +781,9 @@ public class CallsStatusRequest {
      * Sets recordingStatus.
      *
      * @param recordingStatus
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest recordingStatus(CallsNumberMaskingRecordingStatus recordingStatus) {
+    public NumberMaskingStatusRequest recordingStatus(NumberMaskingRecordingStatus recordingStatus) {
         this.recordingStatus = recordingStatus;
         return this;
     }
@@ -794,7 +794,7 @@ public class CallsStatusRequest {
      * @return recordingStatus
      */
     @JsonProperty("recordingStatus")
-    public CallsNumberMaskingRecordingStatus getRecordingStatus() {
+    public NumberMaskingRecordingStatus getRecordingStatus() {
         return recordingStatus;
     }
 
@@ -804,7 +804,7 @@ public class CallsStatusRequest {
      * @param recordingStatus
      */
     @JsonProperty("recordingStatus")
-    public void setRecordingStatus(CallsNumberMaskingRecordingStatus recordingStatus) {
+    public void setRecordingStatus(NumberMaskingRecordingStatus recordingStatus) {
         this.recordingStatus = recordingStatus;
     }
 
@@ -815,9 +815,9 @@ public class CallsStatusRequest {
      * Client-defined ID of a valid file name. Used to correlate a call with this reference. If recording is enabled and files are stored in the SFTP server, that ID will be used as a file name instead.
      *
      * @param clientReferenceId
-     * @return This {@link CallsStatusRequest instance}.
+     * @return This {@link NumberMaskingStatusRequest instance}.
      */
-    public CallsStatusRequest clientReferenceId(String clientReferenceId) {
+    public NumberMaskingStatusRequest clientReferenceId(String clientReferenceId) {
         this.clientReferenceId = clientReferenceId;
         return this;
     }
@@ -856,27 +856,27 @@ public class CallsStatusRequest {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallsStatusRequest callsStatusRequest = (CallsStatusRequest) o;
-        return Objects.equals(this.action, callsStatusRequest.action)
-                && Objects.equals(this.from, callsStatusRequest.from)
-                && Objects.equals(this.to, callsStatusRequest.to)
-                && Objects.equals(this.transferTo, callsStatusRequest.transferTo)
-                && Objects.equals(this.duration, callsStatusRequest.duration)
-                && Objects.equals(this.status, callsStatusRequest.status)
-                && Objects.equals(this.nmCorrelationId, callsStatusRequest.nmCorrelationId)
-                && Objects.equals(this.fileID, callsStatusRequest.fileID)
-                && Objects.equals(this.fileUrl, callsStatusRequest.fileUrl)
-                && Objects.equals(this.ringingTime, callsStatusRequest.ringingTime)
-                && Objects.equals(this.answeredTime, callsStatusRequest.answeredTime)
-                && Objects.equals(this.correlationId, callsStatusRequest.correlationId)
-                && Objects.equals(this.inboundDuration, callsStatusRequest.inboundDuration)
-                && Objects.equals(this.calculatedDuration, callsStatusRequest.calculatedDuration)
-                && Objects.equals(this.pricePerSecond, callsStatusRequest.pricePerSecond)
-                && Objects.equals(this.currency, callsStatusRequest.currency)
-                && Objects.equals(this.recordingFileId, callsStatusRequest.recordingFileId)
-                && Objects.equals(this.recordCalleeAnnouncement, callsStatusRequest.recordCalleeAnnouncement)
-                && Objects.equals(this.recordingStatus, callsStatusRequest.recordingStatus)
-                && Objects.equals(this.clientReferenceId, callsStatusRequest.clientReferenceId);
+        NumberMaskingStatusRequest numberMaskingStatusRequest = (NumberMaskingStatusRequest) o;
+        return Objects.equals(this.action, numberMaskingStatusRequest.action)
+                && Objects.equals(this.from, numberMaskingStatusRequest.from)
+                && Objects.equals(this.to, numberMaskingStatusRequest.to)
+                && Objects.equals(this.transferTo, numberMaskingStatusRequest.transferTo)
+                && Objects.equals(this.duration, numberMaskingStatusRequest.duration)
+                && Objects.equals(this.status, numberMaskingStatusRequest.status)
+                && Objects.equals(this.nmCorrelationId, numberMaskingStatusRequest.nmCorrelationId)
+                && Objects.equals(this.fileID, numberMaskingStatusRequest.fileID)
+                && Objects.equals(this.fileUrl, numberMaskingStatusRequest.fileUrl)
+                && Objects.equals(this.ringingTime, numberMaskingStatusRequest.ringingTime)
+                && Objects.equals(this.answeredTime, numberMaskingStatusRequest.answeredTime)
+                && Objects.equals(this.correlationId, numberMaskingStatusRequest.correlationId)
+                && Objects.equals(this.inboundDuration, numberMaskingStatusRequest.inboundDuration)
+                && Objects.equals(this.calculatedDuration, numberMaskingStatusRequest.calculatedDuration)
+                && Objects.equals(this.pricePerSecond, numberMaskingStatusRequest.pricePerSecond)
+                && Objects.equals(this.currency, numberMaskingStatusRequest.currency)
+                && Objects.equals(this.recordingFileId, numberMaskingStatusRequest.recordingFileId)
+                && Objects.equals(this.recordCalleeAnnouncement, numberMaskingStatusRequest.recordCalleeAnnouncement)
+                && Objects.equals(this.recordingStatus, numberMaskingStatusRequest.recordingStatus)
+                && Objects.equals(this.clientReferenceId, numberMaskingStatusRequest.clientReferenceId);
     }
 
     @Override
@@ -908,7 +908,7 @@ public class CallsStatusRequest {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallsStatusRequest {")
+                .append("class NumberMaskingStatusRequest {")
                 .append(newLine)
                 .append("    action: ")
                 .append(toIndentedString(action))

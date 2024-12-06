@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents CallsCredentialsBody model.
+ * Represents NumberMaskingCredentialsBody model.
  */
-public class CallsCredentialsBody {
+public class NumberMaskingCredentialsBody {
 
     private String apiId;
 
@@ -30,9 +30,9 @@ public class CallsCredentialsBody {
      * The field is required.
      *
      * @param apiId
-     * @return This {@link CallsCredentialsBody instance}.
+     * @return This {@link NumberMaskingCredentialsBody instance}.
      */
-    public CallsCredentialsBody apiId(String apiId) {
+    public NumberMaskingCredentialsBody apiId(String apiId) {
         this.apiId = apiId;
         return this;
     }
@@ -76,9 +76,9 @@ public class CallsCredentialsBody {
      * The field is required.
      *
      * @param key
-     * @return This {@link CallsCredentialsBody instance}.
+     * @return This {@link NumberMaskingCredentialsBody instance}.
      */
-    public CallsCredentialsBody key(String key) {
+    public NumberMaskingCredentialsBody key(String key) {
         this.key = key;
         return this;
     }
@@ -121,9 +121,9 @@ public class CallsCredentialsBody {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallsCredentialsBody callsCredentialsBody = (CallsCredentialsBody) o;
-        return Objects.equals(this.apiId, callsCredentialsBody.apiId)
-                && Objects.equals(this.key, callsCredentialsBody.key);
+        NumberMaskingCredentialsBody numberMaskingCredentialsBody = (NumberMaskingCredentialsBody) o;
+        return Objects.equals(this.apiId, numberMaskingCredentialsBody.apiId)
+                && Objects.equals(this.key, numberMaskingCredentialsBody.key);
     }
 
     @Override
@@ -135,7 +135,7 @@ public class CallsCredentialsBody {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallsCredentialsBody {")
+                .append("class NumberMaskingCredentialsBody {")
                 .append(newLine)
                 .append("    apiId: ")
                 .append(toIndentedString(apiId))

@@ -83,6 +83,10 @@ class CallsApiTest extends ApiTest {
     private static final String SIP_TRUNK_COUNTRIES = "/calls/1/sip-trunks/service-addresses/countries";
     private static final String SIP_TRUNK_REGIONS = "/calls/1/sip-trunks/service-addresses/countries/regions";
 
+    private static final String SIP_TRUNK_RESET_PASSWORD = "/calls/1/sip-trunks/{sipTrunkId}/reset-password";
+    private static final String TRANSCRIPTION_START = "/calls/1/calls/{callId}/start-transcription";
+    private static final String TRANSCRIPTION_STOP = "/calls/1/calls/{callId}/stop-transcription";
+
     @Test
     void shouldApplicationTransfer() {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
@@ -5781,7 +5785,7 @@ class CallsApiTest extends ApiTest {
         String givenAddressId = "string";
         String givenPrimary = "string";
         String givenBackup = "string";
-        CallsPegasusSipTrunkType givenType = CallsPegasusSipTrunkType.STATIC;
+        CallsSipTrunkType givenType = CallsSipTrunkType.STATIC;
         Integer givenPage = 0;
         Integer givenSize = 1;
         Integer givenTotalPages = 0;
@@ -5917,7 +5921,7 @@ class CallsApiTest extends ApiTest {
         String givenAddressId = "string";
         String givenPrimary = "string";
         String givenBackup = "string";
-        CallsPegasusSipTrunkType givenType = CallsPegasusSipTrunkType.STATIC;
+        CallsSipTrunkType givenType = CallsSipTrunkType.STATIC;
         String givenSourceHosts = "string";
         String givenDestinationHosts = "string";
         CallsSelectionStrategy givenStrategy = CallsSelectionStrategy.FAILOVER;
@@ -6121,7 +6125,7 @@ class CallsApiTest extends ApiTest {
         String givenAddressId = "string";
         String givenPrimary = "string";
         String givenBackup = "string";
-        CallsPegasusSipTrunkType givenType = CallsPegasusSipTrunkType.STATIC;
+        CallsSipTrunkType givenType = CallsSipTrunkType.STATIC;
         String givenSourceHosts = "string";
         String givenDestinationHosts = "string";
         CallsSelectionStrategy givenStrategy = CallsSelectionStrategy.FAILOVER;
@@ -6243,7 +6247,7 @@ class CallsApiTest extends ApiTest {
         String givenAddressId = "string";
         String givenPrimary = "string";
         String givenBackup = "string";
-        CallsPegasusSipTrunkType givenType = CallsPegasusSipTrunkType.STATIC;
+        CallsSipTrunkType givenType = CallsSipTrunkType.STATIC;
         String givenSourceHosts = "string";
         String givenDestinationHosts = "string";
         CallsSelectionStrategy givenStrategy = CallsSelectionStrategy.FAILOVER;
@@ -6308,7 +6312,7 @@ class CallsApiTest extends ApiTest {
                 givenStrategy,
                 givenEnabled);
 
-        CallsPegasusSipTrunkType expectedType = CallsPegasusSipTrunkType.STATIC;
+        CallsSipTrunkType expectedType = CallsSipTrunkType.STATIC;
         String expectedName = "string";
         CallsAudioCodec expectedCodecs = CallsAudioCodec.PCMU;
         CallsDtmfType expectedDtmf = CallsDtmfType.RFC2833;
@@ -6432,7 +6436,7 @@ class CallsApiTest extends ApiTest {
         String givenAddressId = "string";
         String givenPrimary = "string";
         String givenBackup = "string";
-        CallsPegasusSipTrunkType givenType = CallsPegasusSipTrunkType.STATIC;
+        CallsSipTrunkType givenType = CallsSipTrunkType.STATIC;
         String givenSourceHosts = "string";
         String givenDestinationHosts = "string";
         CallsSelectionStrategy givenStrategy = CallsSelectionStrategy.FAILOVER;
@@ -7177,6 +7181,87 @@ class CallsApiTest extends ApiTest {
         };
 
         var call = api.getRegions(givenCountryCode);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldResetSipTrunkPassword() {
+        String sipTrunkId = "426c8402-691c-11ee-8c99-0242ac120002";
+        String givenUsername = "426c8402-691c-11ee-8c99-0242ac120002";
+        String givenPassword = "fkZ1921tM87";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"username\": \"%s\",\n" + "  \"password\": \"%s\"\n" + "}", givenUsername, givenPassword);
+
+        setUpEmptyPostRequest(
+                SIP_TRUNK_RESET_PASSWORD.replace("{sipTrunkId}", sipTrunkId), Map.of(), givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsSipTrunkRegistrationCredentials> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getUsername()).isEqualTo(givenUsername);
+            then(response.getPassword()).isEqualTo(givenPassword);
+        };
+
+        var call = api.resetSipTrunkPassword(sipTrunkId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldStartTranscription() {
+        String callId = "12345";
+        CallsLanguage givenLanguage = CallsLanguage.AR;
+        boolean givenSendInterimResults = false;
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"transcription\": {\n"
+                        + "    \"language\": \"%s\",\n"
+                        + "    \"sendInterimResults\": %b\n"
+                        + "  }\n"
+                        + "}",
+                givenLanguage, givenSendInterimResults);
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+
+        setUpPostRequest(TRANSCRIPTION_START.replace("{callId}", callId), expectedRequest, givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        CallsStartTranscriptionRequest request = new CallsStartTranscriptionRequest()
+                .transcription(
+                        new CallsTranscription().language(givenLanguage).sendInterimResults(givenSendInterimResults));
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.callStartTranscription(callId, request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldStopTranscription() {
+        String callId = "12345";
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+
+        setUpEmptyPostRequest(TRANSCRIPTION_STOP.replace("{callId}", callId), Map.of(), givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.callStopTranscription(callId);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }

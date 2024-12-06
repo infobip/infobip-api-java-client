@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * Represents CallsCiscoWebexProvider model.
  */
-public class CallsCiscoWebexProvider extends CallsPegasusProvider {
+public class CallsCiscoWebexProvider extends CallsProvider {
 
     private String ciscoUUID;
 

@@ -15,14 +15,14 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * Provider type.
  */
-public enum CallsPegasusProviderTrunkType {
+public enum CallsProviderTrunkType {
     FRESHWORKS("FRESHWORKS"),
     GENESYS_CLOUD("GENESYS_CLOUD"),
     CISCO_WEBEX("CISCO_WEBEX");
 
     private final String value;
 
-    CallsPegasusProviderTrunkType(String value) {
+    CallsProviderTrunkType(String value) {
         this.value = value;
     }
 
@@ -37,8 +37,8 @@ public enum CallsPegasusProviderTrunkType {
     }
 
     @JsonCreator
-    public static CallsPegasusProviderTrunkType fromValue(String value) {
-        for (CallsPegasusProviderTrunkType enumElement : CallsPegasusProviderTrunkType.values()) {
+    public static CallsProviderTrunkType fromValue(String value) {
+        for (CallsProviderTrunkType enumElement : CallsProviderTrunkType.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

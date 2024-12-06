@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents CallsCredentialsResponse model.
+ * Represents NumberMaskingCredentialsResponse model.
  */
-public class CallsCredentialsResponse {
+public class NumberMaskingCredentialsResponse {
 
     private String apiId;
 
@@ -28,9 +28,9 @@ public class CallsCredentialsResponse {
      * The first part of the generate Authorization header.
      *
      * @param apiId
-     * @return This {@link CallsCredentialsResponse instance}.
+     * @return This {@link NumberMaskingCredentialsResponse instance}.
      */
-    public CallsCredentialsResponse apiId(String apiId) {
+    public NumberMaskingCredentialsResponse apiId(String apiId) {
         this.apiId = apiId;
         return this;
     }
@@ -68,9 +68,9 @@ public class CallsCredentialsResponse {
      * Used to generate the second part of the Authorization header.
      *
      * @param key
-     * @return This {@link CallsCredentialsResponse instance}.
+     * @return This {@link NumberMaskingCredentialsResponse instance}.
      */
-    public CallsCredentialsResponse key(String key) {
+    public NumberMaskingCredentialsResponse key(String key) {
         this.key = key;
         return this;
     }
@@ -109,9 +109,9 @@ public class CallsCredentialsResponse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallsCredentialsResponse callsCredentialsResponse = (CallsCredentialsResponse) o;
-        return Objects.equals(this.apiId, callsCredentialsResponse.apiId)
-                && Objects.equals(this.key, callsCredentialsResponse.key);
+        NumberMaskingCredentialsResponse numberMaskingCredentialsResponse = (NumberMaskingCredentialsResponse) o;
+        return Objects.equals(this.apiId, numberMaskingCredentialsResponse.apiId)
+                && Objects.equals(this.key, numberMaskingCredentialsResponse.key);
     }
 
     @Override
@@ -123,7 +123,7 @@ public class CallsCredentialsResponse {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallsCredentialsResponse {")
+                .append("class NumberMaskingCredentialsResponse {")
                 .append(newLine)
                 .append("    apiId: ")
                 .append(toIndentedString(apiId))

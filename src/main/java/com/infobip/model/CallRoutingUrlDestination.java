@@ -17,10 +17,6 @@ import java.util.Objects;
  */
 public class CallRoutingUrlDestination extends CallRoutingDestination {
 
-    private Integer priority;
-
-    private Integer weight;
-
     private String url;
 
     private SecurityConfig securityConfig;
@@ -30,86 +26,6 @@ public class CallRoutingUrlDestination extends CallRoutingDestination {
      */
     public CallRoutingUrlDestination() {
         super("URL");
-    }
-
-    /**
-     * Sets priority.
-     * <p>
-     * Field description:
-     * Priority of the destination within a route. Destinations with lower value have higher priority. Either all or no destination need to have this value defined.
-     *
-     * @param priority
-     * @return This {@link CallRoutingUrlDestination instance}.
-     */
-    public CallRoutingUrlDestination priority(Integer priority) {
-        this.priority = priority;
-        return this;
-    }
-
-    /**
-     * Returns priority.
-     * <p>
-     * Field description:
-     * Priority of the destination within a route. Destinations with lower value have higher priority. Either all or no destination need to have this value defined.
-     *
-     * @return priority
-     */
-    @JsonProperty("priority")
-    public Integer getPriority() {
-        return priority;
-    }
-
-    /**
-     * Sets priority.
-     * <p>
-     * Field description:
-     * Priority of the destination within a route. Destinations with lower value have higher priority. Either all or no destination need to have this value defined.
-     *
-     * @param priority
-     */
-    @JsonProperty("priority")
-    public void setPriority(Integer priority) {
-        this.priority = priority;
-    }
-
-    /**
-     * Sets weight.
-     * <p>
-     * Field description:
-     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
-     *
-     * @param weight
-     * @return This {@link CallRoutingUrlDestination instance}.
-     */
-    public CallRoutingUrlDestination weight(Integer weight) {
-        this.weight = weight;
-        return this;
-    }
-
-    /**
-     * Returns weight.
-     * <p>
-     * Field description:
-     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
-     *
-     * @return weight
-     */
-    @JsonProperty("weight")
-    public Integer getWeight() {
-        return weight;
-    }
-
-    /**
-     * Sets weight.
-     * <p>
-     * Field description:
-     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
-     *
-     * @param weight
-     */
-    @JsonProperty("weight")
-    public void setWeight(Integer weight) {
-        this.weight = weight;
     }
 
     /**
@@ -198,16 +114,14 @@ public class CallRoutingUrlDestination extends CallRoutingDestination {
             return false;
         }
         CallRoutingUrlDestination callRoutingUrlDestination = (CallRoutingUrlDestination) o;
-        return Objects.equals(this.priority, callRoutingUrlDestination.priority)
-                && Objects.equals(this.weight, callRoutingUrlDestination.weight)
-                && Objects.equals(this.url, callRoutingUrlDestination.url)
+        return Objects.equals(this.url, callRoutingUrlDestination.url)
                 && Objects.equals(this.securityConfig, callRoutingUrlDestination.securityConfig)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(priority, weight, url, securityConfig, super.hashCode());
+        return Objects.hash(url, securityConfig, super.hashCode());
     }
 
     @Override
@@ -218,12 +132,6 @@ public class CallRoutingUrlDestination extends CallRoutingDestination {
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
-                .append(newLine)
-                .append("    priority: ")
-                .append(toIndentedString(priority))
-                .append(newLine)
-                .append("    weight: ")
-                .append(toIndentedString(weight))
                 .append(newLine)
                 .append("    url: ")
                 .append(toIndentedString(url))

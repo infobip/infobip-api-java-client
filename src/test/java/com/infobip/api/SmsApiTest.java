@@ -377,7 +377,7 @@ class SmsApiTest extends ApiTest {
                 .content(new SmsTextContent()
                         .text(givenText)
                         .transliteration(givenTransliteration)
-                        .language(new SmsLanguageV3().languageCode(givenLanguageCode)))
+                        .language(new SmsLanguage().languageCode(givenLanguageCode)))
                 .options(new SmsMessageOptions()
                         .validityPeriod(new ValidityPeriod()
                                 .timeUnit(givenValidityPeriodTimeUnit)

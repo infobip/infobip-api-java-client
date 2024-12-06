@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents CallsUploadResponse model.
+ * Represents NumberMaskingUploadResponse model.
  */
-public class CallsUploadResponse {
+public class NumberMaskingUploadResponse {
 
     private String fileId;
 
@@ -26,9 +26,9 @@ public class CallsUploadResponse {
      * Id of the uploaded audio file.
      *
      * @param fileId
-     * @return This {@link CallsUploadResponse instance}.
+     * @return This {@link NumberMaskingUploadResponse instance}.
      */
-    public CallsUploadResponse fileId(String fileId) {
+    public NumberMaskingUploadResponse fileId(String fileId) {
         this.fileId = fileId;
         return this;
     }
@@ -67,8 +67,8 @@ public class CallsUploadResponse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallsUploadResponse callsUploadResponse = (CallsUploadResponse) o;
-        return Objects.equals(this.fileId, callsUploadResponse.fileId);
+        NumberMaskingUploadResponse numberMaskingUploadResponse = (NumberMaskingUploadResponse) o;
+        return Objects.equals(this.fileId, numberMaskingUploadResponse.fileId);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class CallsUploadResponse {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallsUploadResponse {")
+                .append("class NumberMaskingUploadResponse {")
                 .append(newLine)
                 .append("    fileId: ")
                 .append(toIndentedString(fileId))

@@ -15,14 +15,14 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * SIP trunk type.
  */
-public enum CallsPegasusSipTrunkType {
+public enum CallsSipTrunkType {
     STATIC("STATIC"),
     REGISTERED("REGISTERED"),
     PROVIDER("PROVIDER");
 
     private final String value;
 
-    CallsPegasusSipTrunkType(String value) {
+    CallsSipTrunkType(String value) {
         this.value = value;
     }
 
@@ -37,8 +37,8 @@ public enum CallsPegasusSipTrunkType {
     }
 
     @JsonCreator
-    public static CallsPegasusSipTrunkType fromValue(String value) {
-        for (CallsPegasusSipTrunkType enumElement : CallsPegasusSipTrunkType.values()) {
+    public static CallsSipTrunkType fromValue(String value) {
+        for (CallsSipTrunkType enumElement : CallsSipTrunkType.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

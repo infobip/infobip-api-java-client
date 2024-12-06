@@ -21,7 +21,7 @@ public class SmsTextContent implements SmsMessageContent {
 
     private SmsTransliterationCode transliteration;
 
-    private SmsLanguageV3 language;
+    private SmsLanguage language;
 
     /**
      * Sets text.
@@ -106,7 +106,7 @@ public class SmsTextContent implements SmsMessageContent {
      * @param language
      * @return This {@link SmsTextContent instance}.
      */
-    public SmsTextContent language(SmsLanguageV3 language) {
+    public SmsTextContent language(SmsLanguage language) {
         this.language = language;
         return this;
     }
@@ -117,7 +117,7 @@ public class SmsTextContent implements SmsMessageContent {
      * @return language
      */
     @JsonProperty("language")
-    public SmsLanguageV3 getLanguage() {
+    public SmsLanguage getLanguage() {
         return language;
     }
 
@@ -127,7 +127,7 @@ public class SmsTextContent implements SmsMessageContent {
      * @param language
      */
     @JsonProperty("language")
-    public void setLanguage(SmsLanguageV3 language) {
+    public void setLanguage(SmsLanguage language) {
         this.language = language;
     }
 

@@ -14,9 +14,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * Represents CallsSetupResponse model.
+ * Represents NumberMaskingSetupResponse model.
  */
-public class CallsSetupResponse {
+public class NumberMaskingSetupResponse {
 
     private String key;
 
@@ -43,9 +43,9 @@ public class CallsSetupResponse {
      * Use to connect masking configuration with Voice-enabled number.
      *
      * @param key
-     * @return This {@link CallsSetupResponse instance}.
+     * @return This {@link NumberMaskingSetupResponse instance}.
      */
-    public CallsSetupResponse key(String key) {
+    public NumberMaskingSetupResponse key(String key) {
         this.key = key;
         return this;
     }
@@ -83,9 +83,9 @@ public class CallsSetupResponse {
      * Unique configuration name. Alphanumeric, max length 100.
      *
      * @param name
-     * @return This {@link CallsSetupResponse instance}.
+     * @return This {@link NumberMaskingSetupResponse instance}.
      */
-    public CallsSetupResponse name(String name) {
+    public NumberMaskingSetupResponse name(String name) {
         this.name = name;
         return this;
     }
@@ -123,9 +123,9 @@ public class CallsSetupResponse {
      * Client&#39;s URL that will be called on each inbound call to related Number masking Voice number in order to get instructions of how to handle incoming calls. Instructions are a result of mapping logic implemented on your side according to your business case.
      *
      * @param callbackUrl
-     * @return This {@link CallsSetupResponse instance}.
+     * @return This {@link NumberMaskingSetupResponse instance}.
      */
-    public CallsSetupResponse callbackUrl(String callbackUrl) {
+    public NumberMaskingSetupResponse callbackUrl(String callbackUrl) {
         this.callbackUrl = callbackUrl;
         return this;
     }
@@ -163,9 +163,9 @@ public class CallsSetupResponse {
      * Client&#39;s URL for status report delivery after the call is finished.
      *
      * @param statusUrl
-     * @return This {@link CallsSetupResponse instance}.
+     * @return This {@link NumberMaskingSetupResponse instance}.
      */
-    public CallsSetupResponse statusUrl(String statusUrl) {
+    public NumberMaskingSetupResponse statusUrl(String statusUrl) {
         this.statusUrl = statusUrl;
         return this;
     }
@@ -203,9 +203,9 @@ public class CallsSetupResponse {
      * If callbackUrl is unavailable this one will be called instead.
      *
      * @param backupCallbackUrl
-     * @return This {@link CallsSetupResponse instance}.
+     * @return This {@link NumberMaskingSetupResponse instance}.
      */
-    public CallsSetupResponse backupCallbackUrl(String backupCallbackUrl) {
+    public NumberMaskingSetupResponse backupCallbackUrl(String backupCallbackUrl) {
         this.backupCallbackUrl = backupCallbackUrl;
         return this;
     }
@@ -243,9 +243,9 @@ public class CallsSetupResponse {
      * If statusUrl is unavailable this one will be called instead.
      *
      * @param backupStatusUrl
-     * @return This {@link CallsSetupResponse instance}.
+     * @return This {@link NumberMaskingSetupResponse instance}.
      */
-    public CallsSetupResponse backupStatusUrl(String backupStatusUrl) {
+    public NumberMaskingSetupResponse backupStatusUrl(String backupStatusUrl) {
         this.backupStatusUrl = backupStatusUrl;
         return this;
     }
@@ -283,9 +283,9 @@ public class CallsSetupResponse {
      * Masking configuration description
      *
      * @param description
-     * @return This {@link CallsSetupResponse instance}.
+     * @return This {@link NumberMaskingSetupResponse instance}.
      */
-    public CallsSetupResponse description(String description) {
+    public NumberMaskingSetupResponse description(String description) {
         this.description = description;
         return this;
     }
@@ -323,9 +323,9 @@ public class CallsSetupResponse {
      * Date and time when masking configuration is created.
      *
      * @param insertDateTime
-     * @return This {@link CallsSetupResponse instance}.
+     * @return This {@link NumberMaskingSetupResponse instance}.
      */
-    public CallsSetupResponse insertDateTime(OffsetDateTime insertDateTime) {
+    public NumberMaskingSetupResponse insertDateTime(OffsetDateTime insertDateTime) {
         this.insertDateTime = insertDateTime;
         return this;
     }
@@ -363,9 +363,9 @@ public class CallsSetupResponse {
      * Date and time when masking configuration was last modified.
      *
      * @param updateDateTime
-     * @return This {@link CallsSetupResponse instance}.
+     * @return This {@link NumberMaskingSetupResponse instance}.
      */
-    public CallsSetupResponse updateDateTime(OffsetDateTime updateDateTime) {
+    public NumberMaskingSetupResponse updateDateTime(OffsetDateTime updateDateTime) {
         this.updateDateTime = updateDateTime;
         return this;
     }
@@ -404,16 +404,16 @@ public class CallsSetupResponse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallsSetupResponse callsSetupResponse = (CallsSetupResponse) o;
-        return Objects.equals(this.key, callsSetupResponse.key)
-                && Objects.equals(this.name, callsSetupResponse.name)
-                && Objects.equals(this.callbackUrl, callsSetupResponse.callbackUrl)
-                && Objects.equals(this.statusUrl, callsSetupResponse.statusUrl)
-                && Objects.equals(this.backupCallbackUrl, callsSetupResponse.backupCallbackUrl)
-                && Objects.equals(this.backupStatusUrl, callsSetupResponse.backupStatusUrl)
-                && Objects.equals(this.description, callsSetupResponse.description)
-                && Objects.equals(this.insertDateTime, callsSetupResponse.insertDateTime)
-                && Objects.equals(this.updateDateTime, callsSetupResponse.updateDateTime);
+        NumberMaskingSetupResponse numberMaskingSetupResponse = (NumberMaskingSetupResponse) o;
+        return Objects.equals(this.key, numberMaskingSetupResponse.key)
+                && Objects.equals(this.name, numberMaskingSetupResponse.name)
+                && Objects.equals(this.callbackUrl, numberMaskingSetupResponse.callbackUrl)
+                && Objects.equals(this.statusUrl, numberMaskingSetupResponse.statusUrl)
+                && Objects.equals(this.backupCallbackUrl, numberMaskingSetupResponse.backupCallbackUrl)
+                && Objects.equals(this.backupStatusUrl, numberMaskingSetupResponse.backupStatusUrl)
+                && Objects.equals(this.description, numberMaskingSetupResponse.description)
+                && Objects.equals(this.insertDateTime, numberMaskingSetupResponse.insertDateTime)
+                && Objects.equals(this.updateDateTime, numberMaskingSetupResponse.updateDateTime);
     }
 
     @Override
@@ -434,7 +434,7 @@ public class CallsSetupResponse {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallsSetupResponse {")
+                .append("class NumberMaskingSetupResponse {")
                 .append(newLine)
                 .append("    key: ")
                 .append(toIndentedString(key))

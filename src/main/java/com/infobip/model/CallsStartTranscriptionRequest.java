@@ -10,42 +10,44 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.Objects;
 
 /**
- * Represents CallsPegasusProvider model.
+ * Represents CallsStartTranscriptionRequest model.
  */
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.EXISTING_PROPERTY,
-        property = "type",
-        visible = true)
-@JsonSubTypes({
-    @JsonSubTypes.Type(value = CallsCiscoWebexProvider.class, name = "CISCO_WEBEX"),
-    @JsonSubTypes.Type(value = CallsFreshworksProvider.class, name = "FRESHWORKS"),
-    @JsonSubTypes.Type(value = CallsGenesysCloudProvider.class, name = "GENESYS_CLOUD"),
-})
-public abstract class CallsPegasusProvider {
+public class CallsStartTranscriptionRequest {
 
-    protected final CallsPegasusProviderTrunkType type;
+    private CallsTranscription transcription;
 
     /**
-     * Constructs a new {@link CallsPegasusProvider} instance.
+     * Sets transcription.
+     *
+     * @param transcription
+     * @return This {@link CallsStartTranscriptionRequest instance}.
      */
-    public CallsPegasusProvider(String type) {
-        this.type = CallsPegasusProviderTrunkType.fromValue(type);
+    public CallsStartTranscriptionRequest transcription(CallsTranscription transcription) {
+        this.transcription = transcription;
+        return this;
     }
 
     /**
-     * Returns type.
+     * Returns transcription.
      *
-     * @return type
+     * @return transcription
      */
-    @JsonProperty("type")
-    public CallsPegasusProviderTrunkType getType() {
-        return type;
+    @JsonProperty("transcription")
+    public CallsTranscription getTranscription() {
+        return transcription;
+    }
+
+    /**
+     * Sets transcription.
+     *
+     * @param transcription
+     */
+    @JsonProperty("transcription")
+    public void setTranscription(CallsTranscription transcription) {
+        this.transcription = transcription;
     }
 
     @Override
@@ -56,23 +58,23 @@ public abstract class CallsPegasusProvider {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallsPegasusProvider callsPegasusProvider = (CallsPegasusProvider) o;
-        return Objects.equals(this.type, callsPegasusProvider.type);
+        CallsStartTranscriptionRequest callsStartTranscriptionRequest = (CallsStartTranscriptionRequest) o;
+        return Objects.equals(this.transcription, callsStartTranscriptionRequest.transcription);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type);
+        return Objects.hash(transcription);
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallsPegasusProvider {")
+                .append("class CallsStartTranscriptionRequest {")
                 .append(newLine)
-                .append("    type: ")
-                .append(toIndentedString(type))
+                .append("    transcription: ")
+                .append(toIndentedString(transcription))
                 .append(newLine)
                 .append("}")
                 .toString();

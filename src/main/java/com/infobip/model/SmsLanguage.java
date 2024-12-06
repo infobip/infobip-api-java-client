@@ -13,50 +13,125 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents SmsLanguage model.
+ * Sets the language parameters for the message being sent.
  */
 public class SmsLanguage {
 
-    private String languageCode;
+    private SmsLanguageCode languageCode;
+
+    private Boolean singleShift;
+
+    private Boolean lockingShift;
 
     /**
      * Sets languageCode.
-     * <p>
-     * Field description:
-     * Language code for the correct character set. Possible values: &#x60;TR&#x60; for Turkish, &#x60;ES&#x60; for Spanish, &#x60;PT&#x60; for Portuguese, or &#x60;AUTODETECT&#x60; to let platform select the character set based on message content.
      *
      * @param languageCode
      * @return This {@link SmsLanguage instance}.
      */
-    public SmsLanguage languageCode(String languageCode) {
+    public SmsLanguage languageCode(SmsLanguageCode languageCode) {
         this.languageCode = languageCode;
         return this;
     }
 
     /**
      * Returns languageCode.
-     * <p>
-     * Field description:
-     * Language code for the correct character set. Possible values: &#x60;TR&#x60; for Turkish, &#x60;ES&#x60; for Spanish, &#x60;PT&#x60; for Portuguese, or &#x60;AUTODETECT&#x60; to let platform select the character set based on message content.
      *
      * @return languageCode
      */
     @JsonProperty("languageCode")
-    public String getLanguageCode() {
+    public SmsLanguageCode getLanguageCode() {
         return languageCode;
     }
 
     /**
      * Sets languageCode.
-     * <p>
-     * Field description:
-     * Language code for the correct character set. Possible values: &#x60;TR&#x60; for Turkish, &#x60;ES&#x60; for Spanish, &#x60;PT&#x60; for Portuguese, or &#x60;AUTODETECT&#x60; to let platform select the character set based on message content.
      *
      * @param languageCode
      */
     @JsonProperty("languageCode")
-    public void setLanguageCode(String languageCode) {
+    public void setLanguageCode(SmsLanguageCode languageCode) {
         this.languageCode = languageCode;
+    }
+
+    /**
+     * Sets singleShift.
+     * <p>
+     * Field description:
+     * Uses a single shift table which enhances only the extension table of the GSM default alphabet. Allows you to selectively improve character support without altering the entire message.
+     *
+     * @param singleShift
+     * @return This {@link SmsLanguage instance}.
+     */
+    public SmsLanguage singleShift(Boolean singleShift) {
+        this.singleShift = singleShift;
+        return this;
+    }
+
+    /**
+     * Returns singleShift.
+     * <p>
+     * Field description:
+     * Uses a single shift table which enhances only the extension table of the GSM default alphabet. Allows you to selectively improve character support without altering the entire message.
+     *
+     * @return singleShift
+     */
+    @JsonProperty("singleShift")
+    public Boolean getSingleShift() {
+        return singleShift;
+    }
+
+    /**
+     * Sets singleShift.
+     * <p>
+     * Field description:
+     * Uses a single shift table which enhances only the extension table of the GSM default alphabet. Allows you to selectively improve character support without altering the entire message.
+     *
+     * @param singleShift
+     */
+    @JsonProperty("singleShift")
+    public void setSingleShift(Boolean singleShift) {
+        this.singleShift = singleShift;
+    }
+
+    /**
+     * Sets lockingShift.
+     * <p>
+     * Field description:
+     * Uses a locking shift table which allows you to represent characters beyond the standard GSM default alphabet. This flexibility enables better language support.
+     *
+     * @param lockingShift
+     * @return This {@link SmsLanguage instance}.
+     */
+    public SmsLanguage lockingShift(Boolean lockingShift) {
+        this.lockingShift = lockingShift;
+        return this;
+    }
+
+    /**
+     * Returns lockingShift.
+     * <p>
+     * Field description:
+     * Uses a locking shift table which allows you to represent characters beyond the standard GSM default alphabet. This flexibility enables better language support.
+     *
+     * @return lockingShift
+     */
+    @JsonProperty("lockingShift")
+    public Boolean getLockingShift() {
+        return lockingShift;
+    }
+
+    /**
+     * Sets lockingShift.
+     * <p>
+     * Field description:
+     * Uses a locking shift table which allows you to represent characters beyond the standard GSM default alphabet. This flexibility enables better language support.
+     *
+     * @param lockingShift
+     */
+    @JsonProperty("lockingShift")
+    public void setLockingShift(Boolean lockingShift) {
+        this.lockingShift = lockingShift;
     }
 
     @Override
@@ -68,12 +143,14 @@ public class SmsLanguage {
             return false;
         }
         SmsLanguage smsLanguage = (SmsLanguage) o;
-        return Objects.equals(this.languageCode, smsLanguage.languageCode);
+        return Objects.equals(this.languageCode, smsLanguage.languageCode)
+                && Objects.equals(this.singleShift, smsLanguage.singleShift)
+                && Objects.equals(this.lockingShift, smsLanguage.lockingShift);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(languageCode);
+        return Objects.hash(languageCode, singleShift, lockingShift);
     }
 
     @Override
@@ -84,6 +161,12 @@ public class SmsLanguage {
                 .append(newLine)
                 .append("    languageCode: ")
                 .append(toIndentedString(languageCode))
+                .append(newLine)
+                .append("    singleShift: ")
+                .append(toIndentedString(singleShift))
+                .append(newLine)
+                .append("    lockingShift: ")
+                .append(toIndentedString(lockingShift))
                 .append(newLine)
                 .append("}")
                 .toString();

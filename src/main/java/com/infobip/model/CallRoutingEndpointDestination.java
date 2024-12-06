@@ -21,10 +21,6 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
 
     private CallRoutingEndpoint value;
 
-    private Integer priority;
-
-    private Integer weight;
-
     private Integer connectTimeout;
 
     private CallRoutingRecording recording;
@@ -73,86 +69,6 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
     @JsonProperty("value")
     public void setValue(CallRoutingEndpoint value) {
         this.value = value;
-    }
-
-    /**
-     * Sets priority.
-     * <p>
-     * Field description:
-     * Priority of the destination within a route. Destinations with lower value have higher priority. Either all or no destination need to have this value defined.
-     *
-     * @param priority
-     * @return This {@link CallRoutingEndpointDestination instance}.
-     */
-    public CallRoutingEndpointDestination priority(Integer priority) {
-        this.priority = priority;
-        return this;
-    }
-
-    /**
-     * Returns priority.
-     * <p>
-     * Field description:
-     * Priority of the destination within a route. Destinations with lower value have higher priority. Either all or no destination need to have this value defined.
-     *
-     * @return priority
-     */
-    @JsonProperty("priority")
-    public Integer getPriority() {
-        return priority;
-    }
-
-    /**
-     * Sets priority.
-     * <p>
-     * Field description:
-     * Priority of the destination within a route. Destinations with lower value have higher priority. Either all or no destination need to have this value defined.
-     *
-     * @param priority
-     */
-    @JsonProperty("priority")
-    public void setPriority(Integer priority) {
-        this.priority = priority;
-    }
-
-    /**
-     * Sets weight.
-     * <p>
-     * Field description:
-     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
-     *
-     * @param weight
-     * @return This {@link CallRoutingEndpointDestination instance}.
-     */
-    public CallRoutingEndpointDestination weight(Integer weight) {
-        this.weight = weight;
-        return this;
-    }
-
-    /**
-     * Returns weight.
-     * <p>
-     * Field description:
-     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
-     *
-     * @return weight
-     */
-    @JsonProperty("weight")
-    public Integer getWeight() {
-        return weight;
-    }
-
-    /**
-     * Sets weight.
-     * <p>
-     * Field description:
-     * Weight of the destination within a route. It specifies how much traffic is handled by destination relative to other destinations within the same priority level. Values are evaluated relative to each other and they don&#39;t need to add up to 100. Either all or no destination need to have this value defined.
-     *
-     * @param weight
-     */
-    @JsonProperty("weight")
-    public void setWeight(Integer weight) {
-        this.weight = weight;
     }
 
     /**
@@ -293,8 +209,6 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
         }
         CallRoutingEndpointDestination callRoutingEndpointDestination = (CallRoutingEndpointDestination) o;
         return Objects.equals(this.value, callRoutingEndpointDestination.value)
-                && Objects.equals(this.priority, callRoutingEndpointDestination.priority)
-                && Objects.equals(this.weight, callRoutingEndpointDestination.weight)
                 && Objects.equals(this.connectTimeout, callRoutingEndpointDestination.connectTimeout)
                 && Objects.equals(this.recording, callRoutingEndpointDestination.recording)
                 && Objects.equals(this.allowedTimeWindows, callRoutingEndpointDestination.allowedTimeWindows)
@@ -303,7 +217,7 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, priority, weight, connectTimeout, recording, allowedTimeWindows, super.hashCode());
+        return Objects.hash(value, connectTimeout, recording, allowedTimeWindows, super.hashCode());
     }
 
     @Override
@@ -317,12 +231,6 @@ public class CallRoutingEndpointDestination extends CallRoutingDestination {
                 .append(newLine)
                 .append("    value: ")
                 .append(toIndentedString(value))
-                .append(newLine)
-                .append("    priority: ")
-                .append(toIndentedString(priority))
-                .append(newLine)
-                .append("    weight: ")
-                .append(toIndentedString(weight))
                 .append(newLine)
                 .append("    connectTimeout: ")
                 .append(toIndentedString(connectTimeout))

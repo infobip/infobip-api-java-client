@@ -15,14 +15,14 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * Recording status provided if recording was attempted.
  */
-public enum CallsNumberMaskingRecordingStatus {
+public enum NumberMaskingRecordingStatus {
     HOSTED("HOSTED"),
     SFTP("SFTP"),
     FAILED("FAILED");
 
     private final String value;
 
-    CallsNumberMaskingRecordingStatus(String value) {
+    NumberMaskingRecordingStatus(String value) {
         this.value = value;
     }
 
@@ -37,8 +37,8 @@ public enum CallsNumberMaskingRecordingStatus {
     }
 
     @JsonCreator
-    public static CallsNumberMaskingRecordingStatus fromValue(String value) {
-        for (CallsNumberMaskingRecordingStatus enumElement : CallsNumberMaskingRecordingStatus.values()) {
+    public static NumberMaskingRecordingStatus fromValue(String value) {
+        for (NumberMaskingRecordingStatus enumElement : NumberMaskingRecordingStatus.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

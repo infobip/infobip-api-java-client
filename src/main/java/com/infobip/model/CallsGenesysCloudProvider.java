@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * Represents CallsGenesysCloudProvider model.
  */
-public class CallsGenesysCloudProvider extends CallsPegasusProvider {
+public class CallsGenesysCloudProvider extends CallsProvider {
 
     private CallsGenesysCloudRegion region;
 
