@@ -135,8 +135,20 @@ Bulk ID is received only when you send a message to more than one destination ad
 ```
 
 #### Receive sent SMS report
-For each SMS that you send out, we can send you a message delivery report in real time. All you need to do is specify your endpoint when sending SMS in the `notifyUrl` field within `SmsTextualMessage`, or subscribe for reports by contacting our support team at support@infobip.com.
-e.g. `https://{yourDomain}/delivery-reports`
+For every SMS you send, we can provide real-time delivery reports. To receive these reports, you can specify an endpoint URL when sending your SMS or subscribe to delivery reports via our support team (support@infobip.com). The endpoint URL should be specified in the `webhooks.delivery.url` field of your request. For example:
+
+```java
+    String notifyUrl = "https://www.example.com/sms/advanced";
+
+    SmsWebhooks smsWebhooks = new SmsWebhooks()
+    .delivery(new SmsMessageDeliveryReporting()
+                  .url(notifyUrl)
+                  .intermediateReport(true)
+                  .notify(true)
+    );
+
+    SmsMessage smsMessage = new SmsMessage().webhooks(smsWebhooks);
+```
 
 You can use data models from the library and the pre-configured `com.infobip.JSON` serializer.
 
