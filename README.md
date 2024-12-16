@@ -48,7 +48,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
     <groupId>com.infobip</groupId>
     <artifactId>infobip-api-java-client</artifactId>
-    <version>5.0.0</version>
+    <version>5.1.0</version>
 </dependency>
 ```
 
@@ -204,6 +204,9 @@ For WhatsApp quick start guide, view [these examples](whatsapp.md).
 
 #### Messages API
 For Messages API quick start guide, view [these examples](messages-api.md).
+
+#### Moments
+For Moments quick start guide, view [these examples](moments.md).
 
 ## Ask for help
 
