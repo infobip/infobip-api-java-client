@@ -186,6 +186,7 @@ Example of webhook implementation with Spring Web framework:
     @PostMapping("/incoming-sms")
     public void receiveSms(HttpServletRequest request) throws IOException {
         SmsInboundMessageResult messages = new JSON().deserialize(request.getInputStream(), SmsInboundMessageResult.class);
+        
         for (SmsInboundMessage message : messages.getResults()) {
             System.out.println(message.getFrom() + " - " + message.getCleanText());
         }
@@ -206,7 +207,7 @@ Feel free to open issues on the repository for any encountered problem or featur
 
 This code is auto generated, and we are unable to merge any pull request from here, but we will review and implement changes directly within our pipeline, as described in the `CONTRIBUTING` [file][contributing]. 
 
-For anything that requires our imminent attention, contact us @ [support@infobip.com](mailto:support@infobip.com).
+For anything that requires our imminent attention, contact us @ [test@infobip.com](mailto:support@infobip.com).
 
 [apidocs]: https://www.infobip.com/docs/api
 [freetrial]: https://www.infobip.com/docs/essentials/free-trial
