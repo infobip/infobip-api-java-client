@@ -22,19 +22,16 @@ You can now create an instance of `FlowApi` which allows you to manage your flow
 To add participants to a flow, you can use the following code:
 
 ````java
-    Long campaignId = 123L;
-    String notifyUrl = "https://example.com";
-    String callbackData = "Callback Data";
-    String identifier = "370329180020364";
-
-    FlowPersonUniqueFieldType personUniqueFieldType = FlowPersonUniqueFieldType.FACEBOOK;
-    FlowParticipant givenParticipant = new FlowParticipant()
-        .identifyBy(new FlowPersonUniqueField().identifier(identifier).type(personUniqueFieldType));
+    Long campaignId = 200000000000001L;
 
     FlowAddFlowParticipantsRequest request = new FlowAddFlowParticipantsRequest()
-        .addParticipantsItem(givenParticipant)
-        .notifyUrl(notifyUrl)
-        .callbackData(callbackData);
+        .addParticipantsItem(new FlowParticipant()
+                                 .identifyBy(new FlowPersonUniqueField()
+                                                 .identifier("test@example.com")
+                                                 .type(FlowPersonUniqueFieldType.EMAIL)
+                                 )
+                                 .variables(Map.of("orderNumber", 1167873391)))
+        .notifyUrl("https://example.com");
 
     flowApi.addFlowParticipants(campaignId, request)
         .execute();
@@ -45,7 +42,6 @@ To add participants to a flow, you can use the following code:
 To fetch a report to confirm that all persons have been successfully added to the flow, you can use the following code:
 
 ````java
-    Long campaignId = 123L;
     String givenOperationId = "03f2d474-0508-46bf-9f3d-d8e2c28adaea";
 
     flowApi.getFlowParticipantsAddedReport(campaignId, givenOperationId)
@@ -57,9 +53,9 @@ To fetch a report to confirm that all persons have been successfully added to th
 To remove a person from a flow, you can use the following code:
 
 ````java
-    Long campaignId = 123L;
-
+    String externalId = "8edb24b5-0319-48cd-a1d9-1e8bc5d577ab";
     flowApi.removePeopleFromFlow(campaignId)
+        .externalId(externalId)
         .execute();
 ````
 
@@ -69,7 +65,7 @@ To remove a person from a flow, you can use the following code:
 You can now create an instance of `FormsApi` which allows you to manage your forms.
 
 ````java
-    FormsApi formsApi = new FlowApi(apiClient);
+    FormsApi formsApi = new FormsApi(apiClient);
 ````
 
 ### Get forms
@@ -77,7 +73,7 @@ You can now create an instance of `FormsApi` which allows you to manage your for
 To get all forms, you can use the following code:
 
 ````java
-    FormsResponse response = formsApi
+    FormsResponse formsResponse = formsApi
         .getForms()
         .execute();
 ````
@@ -89,7 +85,7 @@ To get a specific form by ID, you can use the following code:
 ````java
     String formId = "cec5dfd2-4238-48e0-933b-9acbdb2e6f5f";
 
-    FormsResponseContent response = formsApi
+    FormsResponseContent formResponse = formsApi
         .getForm(formId)
         .execute();
 ````
@@ -99,8 +95,7 @@ To get a specific form by ID, you can use the following code:
 To increase the view counter of a specific form, you can use the following code:
 
 ````java
-    String formId = "cec5dfd2-4238-48e0-933b-9acbdb2e6f5f";
-    FormsStatusResponse response = formsApi
+    FormsStatusResponse status = formsApi
         .incrementViewCount(formId)
         .execute();
 ````
@@ -110,16 +105,14 @@ To increase the view counter of a specific form, you can use the following code:
 To submit data to a specific form, you can use the following code:
 
 ````java
-    var firstValue = 26;
-    var secondValue = true;
-    
-    String formId = "cec5dfd2-4238-48e0-933b-9acbdb2e6f5f";
     Map<String, Object> formDataRequest = Map.of(
-        "firstValue", firstValue,
-        "secondValue", secondValue
+        "first_name", "John",
+        "last_name", "Doe",
+        "company", "Infobip",
+        "email", "info@example.com"
     );
 
-    FormsStatusResponse response = formsApi
+    FormsStatusResponse status = formsApi
             .submitFormData(formId, formDataRequest)
             .execute();
 ````
