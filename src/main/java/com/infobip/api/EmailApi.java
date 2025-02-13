@@ -26,16 +26,22 @@ import com.infobip.model.EmailBulkUpdateStatusRequest;
 import com.infobip.model.EmailBulkUpdateStatusResponse;
 import com.infobip.model.EmailDeleteSuppressionRequest;
 import com.infobip.model.EmailDomainInfoPageResponse;
-import com.infobip.model.EmailDomainIpRequest;
-import com.infobip.model.EmailDomainIpResponse;
+import com.infobip.model.EmailDomainIpPoolAssignApiRequest;
+import com.infobip.model.EmailDomainIpPoolUpdateApiRequest;
 import com.infobip.model.EmailDomainResponse;
-import com.infobip.model.EmailGetSuppressionType;
+import com.infobip.model.EmailIpDetailResponse;
+import com.infobip.model.EmailIpDomainResponse;
+import com.infobip.model.EmailIpPoolAssignIpApiRequest;
+import com.infobip.model.EmailIpPoolCreateApiRequest;
+import com.infobip.model.EmailIpPoolDetailResponse;
+import com.infobip.model.EmailIpPoolResponse;
+import com.infobip.model.EmailIpResponse;
 import com.infobip.model.EmailLogsResponse;
 import com.infobip.model.EmailReportsResult;
 import com.infobip.model.EmailReturnPathAddressRequest;
 import com.infobip.model.EmailSendResponse;
-import com.infobip.model.EmailSimpleApiResponse;
 import com.infobip.model.EmailSuppressionInfoPageResponse;
+import com.infobip.model.EmailSuppressionType;
 import com.infobip.model.EmailTrackingEventRequest;
 import com.infobip.model.EmailValidationRequest;
 import com.infobip.model.EmailValidationResponse;
@@ -171,9 +177,142 @@ public class EmailApi {
         return new AddSuppressionsRequest(emailAddSuppressionRequest);
     }
 
-    private RequestDefinition assignIpToDomainDefinition(EmailDomainIpRequest emailDomainIpRequest) {
-        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/email/1/domain-ips")
-                .body(emailDomainIpRequest)
+    private RequestDefinition assignIpToPoolDefinition(
+            String poolId, EmailIpPoolAssignIpApiRequest emailIpPoolAssignIpApiRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/email/1/ip-management/pools/{poolId}/ips")
+                .body(emailIpPoolAssignIpApiRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (poolId != null) {
+            builder.addPathParameter(new Parameter("poolId", poolId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * assignIpToPool request builder class.
+     */
+    public class AssignIpToPoolRequest {
+        private final String poolId;
+        private final EmailIpPoolAssignIpApiRequest emailIpPoolAssignIpApiRequest;
+
+        private AssignIpToPoolRequest(String poolId, EmailIpPoolAssignIpApiRequest emailIpPoolAssignIpApiRequest) {
+            this.poolId = Objects.requireNonNull(poolId, "The required parameter 'poolId' is missing.");
+            this.emailIpPoolAssignIpApiRequest = Objects.requireNonNull(
+                    emailIpPoolAssignIpApiRequest,
+                    "The required parameter 'emailIpPoolAssignIpApiRequest' is missing.");
+        }
+
+        /**
+         * Executes the assignIpToPool request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition assignIpToPoolDefinition =
+                    assignIpToPoolDefinition(poolId, emailIpPoolAssignIpApiRequest);
+            apiClient.execute(assignIpToPoolDefinition);
+        }
+
+        /**
+         * Executes the assignIpToPool request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition assignIpToPoolDefinition =
+                    assignIpToPoolDefinition(poolId, emailIpPoolAssignIpApiRequest);
+            return apiClient.executeAsync(assignIpToPoolDefinition, callback);
+        }
+    }
+
+    /**
+     * Assign IP to pool.
+     * <p>
+     * Assign provided dedicated IP to the provided IP pool.
+     *
+     * @param poolId IP pool identifier. (required)
+     * @param emailIpPoolAssignIpApiRequest  (required)
+     * @return AssignIpToPoolRequest
+     */
+    public AssignIpToPoolRequest assignIpToPool(
+            String poolId, EmailIpPoolAssignIpApiRequest emailIpPoolAssignIpApiRequest) {
+        return new AssignIpToPoolRequest(poolId, emailIpPoolAssignIpApiRequest);
+    }
+
+    private RequestDefinition assignPoolToDomainDefinition(
+            Long domainId, EmailDomainIpPoolAssignApiRequest emailDomainIpPoolAssignApiRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/email/1/ip-management/domains/{domainId}/pools")
+                .body(emailDomainIpPoolAssignApiRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (domainId != null) {
+            builder.addPathParameter(new Parameter("domainId", domainId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * assignPoolToDomain request builder class.
+     */
+    public class AssignPoolToDomainRequest {
+        private final Long domainId;
+        private final EmailDomainIpPoolAssignApiRequest emailDomainIpPoolAssignApiRequest;
+
+        private AssignPoolToDomainRequest(
+                Long domainId, EmailDomainIpPoolAssignApiRequest emailDomainIpPoolAssignApiRequest) {
+            this.domainId = Objects.requireNonNull(domainId, "The required parameter 'domainId' is missing.");
+            this.emailDomainIpPoolAssignApiRequest = Objects.requireNonNull(
+                    emailDomainIpPoolAssignApiRequest,
+                    "The required parameter 'emailDomainIpPoolAssignApiRequest' is missing.");
+        }
+
+        /**
+         * Executes the assignPoolToDomain request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition assignPoolToDomainDefinition =
+                    assignPoolToDomainDefinition(domainId, emailDomainIpPoolAssignApiRequest);
+            apiClient.execute(assignPoolToDomainDefinition);
+        }
+
+        /**
+         * Executes the assignPoolToDomain request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition assignPoolToDomainDefinition =
+                    assignPoolToDomainDefinition(domainId, emailDomainIpPoolAssignApiRequest);
+            return apiClient.executeAsync(assignPoolToDomainDefinition, callback);
+        }
+    }
+
+    /**
+     * Assign IP pool to domain.
+     * <p>
+     * Assign an IP pool to the provided domain.
+     *
+     * @param domainId Domain identifier. (required)
+     * @param emailDomainIpPoolAssignApiRequest  (required)
+     * @return AssignPoolToDomainRequest
+     */
+    public AssignPoolToDomainRequest assignPoolToDomain(
+            Long domainId, EmailDomainIpPoolAssignApiRequest emailDomainIpPoolAssignApiRequest) {
+        return new AssignPoolToDomainRequest(domainId, emailDomainIpPoolAssignApiRequest);
+    }
+
+    private RequestDefinition createIpPoolDefinition(EmailIpPoolCreateApiRequest emailIpPoolCreateApiRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/email/1/ip-management/pools")
+                .body(emailIpPoolCreateApiRequest)
                 .requiresAuthentication(true)
                 .accept("application/json")
                 .contentType("application/json");
@@ -182,51 +321,50 @@ public class EmailApi {
     }
 
     /**
-     * assignIpToDomain request builder class.
+     * createIpPool request builder class.
      */
-    public class AssignIpToDomainRequest {
-        private final EmailDomainIpRequest emailDomainIpRequest;
+    public class CreateIpPoolRequest {
+        private final EmailIpPoolCreateApiRequest emailIpPoolCreateApiRequest;
 
-        private AssignIpToDomainRequest(EmailDomainIpRequest emailDomainIpRequest) {
-            this.emailDomainIpRequest = Objects.requireNonNull(
-                    emailDomainIpRequest, "The required parameter 'emailDomainIpRequest' is missing.");
+        private CreateIpPoolRequest(EmailIpPoolCreateApiRequest emailIpPoolCreateApiRequest) {
+            this.emailIpPoolCreateApiRequest = Objects.requireNonNull(
+                    emailIpPoolCreateApiRequest, "The required parameter 'emailIpPoolCreateApiRequest' is missing.");
         }
 
         /**
-         * Executes the assignIpToDomain request.
+         * Executes the createIpPool request.
          *
-         * @return EmailSimpleApiResponse The deserialized response.
+         * @return EmailIpPoolResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public EmailSimpleApiResponse execute() throws ApiException {
-            RequestDefinition assignIpToDomainDefinition = assignIpToDomainDefinition(emailDomainIpRequest);
-            return apiClient.execute(
-                    assignIpToDomainDefinition, new TypeReference<EmailSimpleApiResponse>() {}.getType());
+        public EmailIpPoolResponse execute() throws ApiException {
+            RequestDefinition createIpPoolDefinition = createIpPoolDefinition(emailIpPoolCreateApiRequest);
+            return apiClient.execute(createIpPoolDefinition, new TypeReference<EmailIpPoolResponse>() {}.getType());
         }
 
         /**
-         * Executes the assignIpToDomain request asynchronously.
+         * Executes the createIpPool request asynchronously.
          *
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<EmailSimpleApiResponse> callback) {
-            RequestDefinition assignIpToDomainDefinition = assignIpToDomainDefinition(emailDomainIpRequest);
+        public okhttp3.Call executeAsync(ApiCallback<EmailIpPoolResponse> callback) {
+            RequestDefinition createIpPoolDefinition = createIpPoolDefinition(emailIpPoolCreateApiRequest);
             return apiClient.executeAsync(
-                    assignIpToDomainDefinition, new TypeReference<EmailSimpleApiResponse>() {}.getType(), callback);
+                    createIpPoolDefinition, new TypeReference<EmailIpPoolResponse>() {}.getType(), callback);
         }
     }
 
     /**
-     * Assign dedicated ip address to the provided domain for the account id.
+     * Create IP pool.
      * <p>
-     * Assign dedicated ip address to the provided domain for the account id.
+     * Create a new IP pool.
      *
-     * @param emailDomainIpRequest  (required)
-     * @return AssignIpToDomainRequest
+     * @param emailIpPoolCreateApiRequest  (required)
+     * @return CreateIpPoolRequest
      */
-    public AssignIpToDomainRequest assignIpToDomain(EmailDomainIpRequest emailDomainIpRequest) {
-        return new AssignIpToDomainRequest(emailDomainIpRequest);
+    public CreateIpPoolRequest createIpPool(EmailIpPoolCreateApiRequest emailIpPoolCreateApiRequest) {
+        return new CreateIpPoolRequest(emailIpPoolCreateApiRequest);
     }
 
     private RequestDefinition deleteDomainDefinition(String domainName) {
@@ -281,6 +419,60 @@ public class EmailApi {
      */
     public DeleteDomainRequest deleteDomain(String domainName) {
         return new DeleteDomainRequest(domainName);
+    }
+
+    private RequestDefinition deleteIpPoolDefinition(String poolId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("DELETE", "/email/1/ip-management/pools/{poolId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (poolId != null) {
+            builder.addPathParameter(new Parameter("poolId", poolId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * deleteIpPool request builder class.
+     */
+    public class DeleteIpPoolRequest {
+        private final String poolId;
+
+        private DeleteIpPoolRequest(String poolId) {
+            this.poolId = Objects.requireNonNull(poolId, "The required parameter 'poolId' is missing.");
+        }
+
+        /**
+         * Executes the deleteIpPool request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition deleteIpPoolDefinition = deleteIpPoolDefinition(poolId);
+            apiClient.execute(deleteIpPoolDefinition);
+        }
+
+        /**
+         * Executes the deleteIpPool request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition deleteIpPoolDefinition = deleteIpPoolDefinition(poolId);
+            return apiClient.executeAsync(deleteIpPoolDefinition, callback);
+        }
+    }
+
+    /**
+     * Delete IP pool.
+     * <p>
+     * Delete provided IP pool. Deleting an IP pool also deletes any assigned IPs and any assignments to domains.
+     *
+     * @param poolId IP pool identifier. (required)
+     * @return DeleteIpPoolRequest
+     */
+    public DeleteIpPoolRequest deleteIpPool(String poolId) {
+        return new DeleteIpPoolRequest(poolId);
     }
 
     private RequestDefinition deleteSuppressionsDefinition(
@@ -339,64 +531,6 @@ public class EmailApi {
      */
     public DeleteSuppressionsRequest deleteSuppressions(EmailDeleteSuppressionRequest emailDeleteSuppressionRequest) {
         return new DeleteSuppressionsRequest(emailDeleteSuppressionRequest);
-    }
-
-    private RequestDefinition getAllDomainIpsDefinition(String domainName) {
-        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/domain-ips")
-                .requiresAuthentication(true)
-                .accept("application/json");
-
-        if (domainName != null) {
-            builder.addQueryParameter(new Parameter("domainName", domainName));
-        }
-        return builder.build();
-    }
-
-    /**
-     * getAllDomainIps request builder class.
-     */
-    public class GetAllDomainIpsRequest {
-        private final String domainName;
-
-        private GetAllDomainIpsRequest(String domainName) {
-            this.domainName = Objects.requireNonNull(domainName, "The required parameter 'domainName' is missing.");
-        }
-
-        /**
-         * Executes the getAllDomainIps request.
-         *
-         * @return EmailDomainIpResponse The deserialized response.
-         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
-         */
-        public EmailDomainIpResponse execute() throws ApiException {
-            RequestDefinition getAllDomainIpsDefinition = getAllDomainIpsDefinition(domainName);
-            return apiClient.execute(
-                    getAllDomainIpsDefinition, new TypeReference<EmailDomainIpResponse>() {}.getType());
-        }
-
-        /**
-         * Executes the getAllDomainIps request asynchronously.
-         *
-         * @param callback The {@link ApiCallback} to be invoked.
-         * @return The {@link okhttp3.Call} associated with the API request.
-         */
-        public okhttp3.Call executeAsync(ApiCallback<EmailDomainIpResponse> callback) {
-            RequestDefinition getAllDomainIpsDefinition = getAllDomainIpsDefinition(domainName);
-            return apiClient.executeAsync(
-                    getAllDomainIpsDefinition, new TypeReference<EmailDomainIpResponse>() {}.getType(), callback);
-        }
-    }
-
-    /**
-     * List all dedicated ips for domain and for provided account id.
-     * <p>
-     * Fetch all dedicated ips for domain and provided account id.
-     *
-     * @param domainName Name of the domain. (required)
-     * @return GetAllDomainIpsRequest
-     */
-    public GetAllDomainIpsRequest getAllDomainIps(String domainName) {
-        return new GetAllDomainIpsRequest(domainName);
     }
 
     private RequestDefinition getAllDomainsDefinition(Integer size, Integer page) {
@@ -481,7 +615,7 @@ public class EmailApi {
     }
 
     private RequestDefinition getAllIpsDefinition() {
-        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/ips")
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/ip-management/ips")
                 .requiresAuthentication(true)
                 .accept("application/json");
 
@@ -498,12 +632,12 @@ public class EmailApi {
         /**
          * Executes the getAllIps request.
          *
-         * @return EmailDomainIpResponse The deserialized response.
+         * @return List&lt;EmailIpResponse&gt; The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public EmailDomainIpResponse execute() throws ApiException {
+        public List<EmailIpResponse> execute() throws ApiException {
             RequestDefinition getAllIpsDefinition = getAllIpsDefinition();
-            return apiClient.execute(getAllIpsDefinition, new TypeReference<EmailDomainIpResponse>() {}.getType());
+            return apiClient.execute(getAllIpsDefinition, new TypeReference<List<EmailIpResponse>>() {}.getType());
         }
 
         /**
@@ -512,17 +646,17 @@ public class EmailApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<EmailDomainIpResponse> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<List<EmailIpResponse>> callback) {
             RequestDefinition getAllIpsDefinition = getAllIpsDefinition();
             return apiClient.executeAsync(
-                    getAllIpsDefinition, new TypeReference<EmailDomainIpResponse>() {}.getType(), callback);
+                    getAllIpsDefinition, new TypeReference<List<EmailIpResponse>>() {}.getType(), callback);
         }
     }
 
     /**
-     * List all dedicated ips for provided account id.
+     * Get IPs.
      * <p>
-     * Fetch all dedicated ips for the provided account id.
+     * Returns all the dedicated IP addresses owned by this account.
      *
      * @return GetAllIpsRequest
      */
@@ -1065,6 +1199,243 @@ public class EmailApi {
         return new GetEmailLogsRequest();
     }
 
+    private RequestDefinition getIpDetailsDefinition(String ipId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/ip-management/ips/{ipId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (ipId != null) {
+            builder.addPathParameter(new Parameter("ipId", ipId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getIpDetails request builder class.
+     */
+    public class GetIpDetailsRequest {
+        private final String ipId;
+
+        private GetIpDetailsRequest(String ipId) {
+            this.ipId = Objects.requireNonNull(ipId, "The required parameter 'ipId' is missing.");
+        }
+
+        /**
+         * Executes the getIpDetails request.
+         *
+         * @return EmailIpDetailResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public EmailIpDetailResponse execute() throws ApiException {
+            RequestDefinition getIpDetailsDefinition = getIpDetailsDefinition(ipId);
+            return apiClient.execute(getIpDetailsDefinition, new TypeReference<EmailIpDetailResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getIpDetails request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<EmailIpDetailResponse> callback) {
+            RequestDefinition getIpDetailsDefinition = getIpDetailsDefinition(ipId);
+            return apiClient.executeAsync(
+                    getIpDetailsDefinition, new TypeReference<EmailIpDetailResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get IP.
+     * <p>
+     * Get detailed information about provided dedicated IP.
+     *
+     * @param ipId Dedicated IP identifier. (required)
+     * @return GetIpDetailsRequest
+     */
+    public GetIpDetailsRequest getIpDetails(String ipId) {
+        return new GetIpDetailsRequest(ipId);
+    }
+
+    private RequestDefinition getIpDomainDefinition(Long domainId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "GET", "/email/1/ip-management/domains/{domainId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (domainId != null) {
+            builder.addPathParameter(new Parameter("domainId", domainId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getIpDomain request builder class.
+     */
+    public class GetIpDomainRequest {
+        private final Long domainId;
+
+        private GetIpDomainRequest(Long domainId) {
+            this.domainId = Objects.requireNonNull(domainId, "The required parameter 'domainId' is missing.");
+        }
+
+        /**
+         * Executes the getIpDomain request.
+         *
+         * @return EmailIpDomainResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public EmailIpDomainResponse execute() throws ApiException {
+            RequestDefinition getIpDomainDefinition = getIpDomainDefinition(domainId);
+            return apiClient.execute(getIpDomainDefinition, new TypeReference<EmailIpDomainResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getIpDomain request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<EmailIpDomainResponse> callback) {
+            RequestDefinition getIpDomainDefinition = getIpDomainDefinition(domainId);
+            return apiClient.executeAsync(
+                    getIpDomainDefinition, new TypeReference<EmailIpDomainResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get domain.
+     * <p>
+     * Get detailed information for provided domain such as assigned pools and their IPs.
+     *
+     * @param domainId Domain identifier. (required)
+     * @return GetIpDomainRequest
+     */
+    public GetIpDomainRequest getIpDomain(Long domainId) {
+        return new GetIpDomainRequest(domainId);
+    }
+
+    private RequestDefinition getIpPoolDefinition(String poolId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/ip-management/pools/{poolId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (poolId != null) {
+            builder.addPathParameter(new Parameter("poolId", poolId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getIpPool request builder class.
+     */
+    public class GetIpPoolRequest {
+        private final String poolId;
+
+        private GetIpPoolRequest(String poolId) {
+            this.poolId = Objects.requireNonNull(poolId, "The required parameter 'poolId' is missing.");
+        }
+
+        /**
+         * Executes the getIpPool request.
+         *
+         * @return EmailIpPoolDetailResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public EmailIpPoolDetailResponse execute() throws ApiException {
+            RequestDefinition getIpPoolDefinition = getIpPoolDefinition(poolId);
+            return apiClient.execute(getIpPoolDefinition, new TypeReference<EmailIpPoolDetailResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getIpPool request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<EmailIpPoolDetailResponse> callback) {
+            RequestDefinition getIpPoolDefinition = getIpPoolDefinition(poolId);
+            return apiClient.executeAsync(
+                    getIpPoolDefinition, new TypeReference<EmailIpPoolDetailResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get IP pool.
+     * <p>
+     * Get detailed information about a provided IP pool.
+     *
+     * @param poolId IP pool identifier. (required)
+     * @return GetIpPoolRequest
+     */
+    public GetIpPoolRequest getIpPool(String poolId) {
+        return new GetIpPoolRequest(poolId);
+    }
+
+    private RequestDefinition getIpPoolsDefinition(String name) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/ip-management/pools")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (name != null) {
+            builder.addQueryParameter(new Parameter("name", name));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getIpPools request builder class.
+     */
+    public class GetIpPoolsRequest {
+        private String name;
+
+        private GetIpPoolsRequest() {}
+
+        /**
+         * Sets name.
+         *
+         * @param name IP pool name. (optional)
+         * @return GetIpPoolsRequest
+         */
+        public GetIpPoolsRequest name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * Executes the getIpPools request.
+         *
+         * @return List&lt;EmailIpPoolResponse&gt; The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public List<EmailIpPoolResponse> execute() throws ApiException {
+            RequestDefinition getIpPoolsDefinition = getIpPoolsDefinition(name);
+            return apiClient.execute(getIpPoolsDefinition, new TypeReference<List<EmailIpPoolResponse>>() {}.getType());
+        }
+
+        /**
+         * Executes the getIpPools request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<List<EmailIpPoolResponse>> callback) {
+            RequestDefinition getIpPoolsDefinition = getIpPoolsDefinition(name);
+            return apiClient.executeAsync(
+                    getIpPoolsDefinition, new TypeReference<List<EmailIpPoolResponse>>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get IP pools.
+     * <p>
+     * Returns all the pools that are owned (created) by this account.
+     *
+     * @return GetIpPoolsRequest
+     */
+    public GetIpPoolsRequest getIpPools() {
+        return new GetIpPoolsRequest();
+    }
+
     private RequestDefinition getScheduledEmailStatusesDefinition(String bulkId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/bulks/status")
                 .requiresAuthentication(true)
@@ -1187,7 +1558,7 @@ public class EmailApi {
 
     private RequestDefinition getSuppressionsDefinition(
             String domainName,
-            EmailGetSuppressionType type,
+            EmailSuppressionType type,
             String emailAddress,
             String recipientDomain,
             OffsetDateTime createdDateFrom,
@@ -1230,7 +1601,7 @@ public class EmailApi {
      */
     public class GetSuppressionsRequest {
         private final String domainName;
-        private final EmailGetSuppressionType type;
+        private final EmailSuppressionType type;
         private String emailAddress;
         private String recipientDomain;
         private OffsetDateTime createdDateFrom;
@@ -1238,7 +1609,7 @@ public class EmailApi {
         private Integer page;
         private Integer size;
 
-        private GetSuppressionsRequest(String domainName, EmailGetSuppressionType type) {
+        private GetSuppressionsRequest(String domainName, EmailSuppressionType type) {
             this.domainName = Objects.requireNonNull(domainName, "The required parameter 'domainName' is missing.");
             this.type = Objects.requireNonNull(type, "The required parameter 'type' is missing.");
         }
@@ -1347,72 +1718,130 @@ public class EmailApi {
      * @param type Type of suppression. (required)
      * @return GetSuppressionsRequest
      */
-    public GetSuppressionsRequest getSuppressions(String domainName, EmailGetSuppressionType type) {
+    public GetSuppressionsRequest getSuppressions(String domainName, EmailSuppressionType type) {
         return new GetSuppressionsRequest(domainName, type);
     }
 
-    private RequestDefinition removeIpFromDomainDefinition(String domainName, String ipAddress) {
-        RequestDefinition.Builder builder = RequestDefinition.builder("DELETE", "/email/1/domain-ips")
+    private RequestDefinition removeIpFromPoolDefinition(String poolId, String ipId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "DELETE", "/email/1/ip-management/pools/{poolId}/ips/{ipId}")
                 .requiresAuthentication(true)
                 .accept("application/json");
 
-        if (domainName != null) {
-            builder.addQueryParameter(new Parameter("domainName", domainName));
+        if (poolId != null) {
+            builder.addPathParameter(new Parameter("poolId", poolId));
         }
-        if (ipAddress != null) {
-            builder.addQueryParameter(new Parameter("ipAddress", ipAddress));
+        if (ipId != null) {
+            builder.addPathParameter(new Parameter("ipId", ipId));
         }
         return builder.build();
     }
 
     /**
-     * removeIpFromDomain request builder class.
+     * removeIpFromPool request builder class.
      */
-    public class RemoveIpFromDomainRequest {
-        private final String domainName;
-        private final String ipAddress;
+    public class RemoveIpFromPoolRequest {
+        private final String poolId;
+        private final String ipId;
 
-        private RemoveIpFromDomainRequest(String domainName, String ipAddress) {
-            this.domainName = Objects.requireNonNull(domainName, "The required parameter 'domainName' is missing.");
-            this.ipAddress = Objects.requireNonNull(ipAddress, "The required parameter 'ipAddress' is missing.");
+        private RemoveIpFromPoolRequest(String poolId, String ipId) {
+            this.poolId = Objects.requireNonNull(poolId, "The required parameter 'poolId' is missing.");
+            this.ipId = Objects.requireNonNull(ipId, "The required parameter 'ipId' is missing.");
         }
 
         /**
-         * Executes the removeIpFromDomain request.
-         *
-         * @return EmailSimpleApiResponse The deserialized response.
+         * Executes the removeIpFromPool request
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public EmailSimpleApiResponse execute() throws ApiException {
-            RequestDefinition removeIpFromDomainDefinition = removeIpFromDomainDefinition(domainName, ipAddress);
-            return apiClient.execute(
-                    removeIpFromDomainDefinition, new TypeReference<EmailSimpleApiResponse>() {}.getType());
+        public void execute() throws ApiException {
+            RequestDefinition removeIpFromPoolDefinition = removeIpFromPoolDefinition(poolId, ipId);
+            apiClient.execute(removeIpFromPoolDefinition);
         }
 
         /**
-         * Executes the removeIpFromDomain request asynchronously.
+         * Executes the removeIpFromPool request asynchronously.
          *
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<EmailSimpleApiResponse> callback) {
-            RequestDefinition removeIpFromDomainDefinition = removeIpFromDomainDefinition(domainName, ipAddress);
-            return apiClient.executeAsync(
-                    removeIpFromDomainDefinition, new TypeReference<EmailSimpleApiResponse>() {}.getType(), callback);
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition removeIpFromPoolDefinition = removeIpFromPoolDefinition(poolId, ipId);
+            return apiClient.executeAsync(removeIpFromPoolDefinition, callback);
         }
     }
 
     /**
-     * Remove dedicated ip address from the provided domain.
+     * Unassign IP from pool.
      * <p>
-     * Remove dedicated ip address from the provided domain.
+     * Unassign provided IP from the specific pool.
      *
-     * @param domainName Name of the domain. (required)
-     * @param ipAddress Dedicated ip address. (required)
-     * @return RemoveIpFromDomainRequest
+     * @param poolId IP pool identifier. (required)
+     * @param ipId Dedicated IP identifier. (required)
+     * @return RemoveIpFromPoolRequest
      */
-    public RemoveIpFromDomainRequest removeIpFromDomain(String domainName, String ipAddress) {
-        return new RemoveIpFromDomainRequest(domainName, ipAddress);
+    public RemoveIpFromPoolRequest removeIpFromPool(String poolId, String ipId) {
+        return new RemoveIpFromPoolRequest(poolId, ipId);
+    }
+
+    private RequestDefinition removeIpPoolFromDomainDefinition(Long domainId, String poolId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "DELETE", "/email/1/ip-management/domains/{domainId}/pools/{poolId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (domainId != null) {
+            builder.addPathParameter(new Parameter("domainId", domainId));
+        }
+        if (poolId != null) {
+            builder.addPathParameter(new Parameter("poolId", poolId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * removeIpPoolFromDomain request builder class.
+     */
+    public class RemoveIpPoolFromDomainRequest {
+        private final Long domainId;
+        private final String poolId;
+
+        private RemoveIpPoolFromDomainRequest(Long domainId, String poolId) {
+            this.domainId = Objects.requireNonNull(domainId, "The required parameter 'domainId' is missing.");
+            this.poolId = Objects.requireNonNull(poolId, "The required parameter 'poolId' is missing.");
+        }
+
+        /**
+         * Executes the removeIpPoolFromDomain request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition removeIpPoolFromDomainDefinition = removeIpPoolFromDomainDefinition(domainId, poolId);
+            apiClient.execute(removeIpPoolFromDomainDefinition);
+        }
+
+        /**
+         * Executes the removeIpPoolFromDomain request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition removeIpPoolFromDomainDefinition = removeIpPoolFromDomainDefinition(domainId, poolId);
+            return apiClient.executeAsync(removeIpPoolFromDomainDefinition, callback);
+        }
+    }
+
+    /**
+     * Unassign IP pool from domain.
+     * <p>
+     * Unassign a specified pool from the provided domain.
+     *
+     * @param domainId Domain identifier. (required)
+     * @param poolId IP pool identifier. (required)
+     * @return RemoveIpPoolFromDomainRequest
+     */
+    public RemoveIpPoolFromDomainRequest removeIpPoolFromDomain(Long domainId, String poolId) {
+        return new RemoveIpPoolFromDomainRequest(domainId, poolId);
     }
 
     private RequestDefinition rescheduleEmailsDefinition(
@@ -2120,6 +2549,143 @@ public class EmailApi {
      */
     public SendEmailRequest sendEmail(List<String> to) {
         return new SendEmailRequest(to);
+    }
+
+    private RequestDefinition updateDomainPoolPriorityDefinition(
+            Long domainId, String poolId, EmailDomainIpPoolUpdateApiRequest emailDomainIpPoolUpdateApiRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "PUT", "/email/1/ip-management/domains/{domainId}/pools/{poolId}")
+                .body(emailDomainIpPoolUpdateApiRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (domainId != null) {
+            builder.addPathParameter(new Parameter("domainId", domainId));
+        }
+        if (poolId != null) {
+            builder.addPathParameter(new Parameter("poolId", poolId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * updateDomainPoolPriority request builder class.
+     */
+    public class UpdateDomainPoolPriorityRequest {
+        private final Long domainId;
+        private final String poolId;
+        private final EmailDomainIpPoolUpdateApiRequest emailDomainIpPoolUpdateApiRequest;
+
+        private UpdateDomainPoolPriorityRequest(
+                Long domainId, String poolId, EmailDomainIpPoolUpdateApiRequest emailDomainIpPoolUpdateApiRequest) {
+            this.domainId = Objects.requireNonNull(domainId, "The required parameter 'domainId' is missing.");
+            this.poolId = Objects.requireNonNull(poolId, "The required parameter 'poolId' is missing.");
+            this.emailDomainIpPoolUpdateApiRequest = Objects.requireNonNull(
+                    emailDomainIpPoolUpdateApiRequest,
+                    "The required parameter 'emailDomainIpPoolUpdateApiRequest' is missing.");
+        }
+
+        /**
+         * Executes the updateDomainPoolPriority request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition updateDomainPoolPriorityDefinition =
+                    updateDomainPoolPriorityDefinition(domainId, poolId, emailDomainIpPoolUpdateApiRequest);
+            apiClient.execute(updateDomainPoolPriorityDefinition);
+        }
+
+        /**
+         * Executes the updateDomainPoolPriority request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition updateDomainPoolPriorityDefinition =
+                    updateDomainPoolPriorityDefinition(domainId, poolId, emailDomainIpPoolUpdateApiRequest);
+            return apiClient.executeAsync(updateDomainPoolPriorityDefinition, callback);
+        }
+    }
+
+    /**
+     * Update IP pool sending priority.
+     * <p>
+     * Update specified pool&#39;s sending priority for the provided domain.
+     *
+     * @param domainId Domain identifier. (required)
+     * @param poolId IP pool identifier. (required)
+     * @param emailDomainIpPoolUpdateApiRequest  (required)
+     * @return UpdateDomainPoolPriorityRequest
+     */
+    public UpdateDomainPoolPriorityRequest updateDomainPoolPriority(
+            Long domainId, String poolId, EmailDomainIpPoolUpdateApiRequest emailDomainIpPoolUpdateApiRequest) {
+        return new UpdateDomainPoolPriorityRequest(domainId, poolId, emailDomainIpPoolUpdateApiRequest);
+    }
+
+    private RequestDefinition updateIpPoolDefinition(
+            String poolId, EmailIpPoolCreateApiRequest emailIpPoolCreateApiRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("PUT", "/email/1/ip-management/pools/{poolId}")
+                .body(emailIpPoolCreateApiRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (poolId != null) {
+            builder.addPathParameter(new Parameter("poolId", poolId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * updateIpPool request builder class.
+     */
+    public class UpdateIpPoolRequest {
+        private final String poolId;
+        private final EmailIpPoolCreateApiRequest emailIpPoolCreateApiRequest;
+
+        private UpdateIpPoolRequest(String poolId, EmailIpPoolCreateApiRequest emailIpPoolCreateApiRequest) {
+            this.poolId = Objects.requireNonNull(poolId, "The required parameter 'poolId' is missing.");
+            this.emailIpPoolCreateApiRequest = Objects.requireNonNull(
+                    emailIpPoolCreateApiRequest, "The required parameter 'emailIpPoolCreateApiRequest' is missing.");
+        }
+
+        /**
+         * Executes the updateIpPool request.
+         *
+         * @return EmailIpPoolResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public EmailIpPoolResponse execute() throws ApiException {
+            RequestDefinition updateIpPoolDefinition = updateIpPoolDefinition(poolId, emailIpPoolCreateApiRequest);
+            return apiClient.execute(updateIpPoolDefinition, new TypeReference<EmailIpPoolResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the updateIpPool request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<EmailIpPoolResponse> callback) {
+            RequestDefinition updateIpPoolDefinition = updateIpPoolDefinition(poolId, emailIpPoolCreateApiRequest);
+            return apiClient.executeAsync(
+                    updateIpPoolDefinition, new TypeReference<EmailIpPoolResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Update IP pool.
+     * <p>
+     * Update a provided IP pool.
+     *
+     * @param poolId IP pool identifier. (required)
+     * @param emailIpPoolCreateApiRequest  (required)
+     * @return UpdateIpPoolRequest
+     */
+    public UpdateIpPoolRequest updateIpPool(String poolId, EmailIpPoolCreateApiRequest emailIpPoolCreateApiRequest) {
+        return new UpdateIpPoolRequest(poolId, emailIpPoolCreateApiRequest);
     }
 
     private RequestDefinition updateReturnPathDefinition(

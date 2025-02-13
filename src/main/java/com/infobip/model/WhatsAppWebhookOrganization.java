@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Contains information about contact&#39;s company.
+ * Organization information.
  */
 public class WhatsAppWebhookOrganization {
 
@@ -67,7 +67,7 @@ public class WhatsAppWebhookOrganization {
      * Sets department.
      * <p>
      * Field description:
-     * Department name.
+     * Description name.
      *
      * @param department
      * @return This {@link WhatsAppWebhookOrganization instance}.
@@ -81,7 +81,7 @@ public class WhatsAppWebhookOrganization {
      * Returns department.
      * <p>
      * Field description:
-     * Department name.
+     * Description name.
      *
      * @return department
      */
@@ -94,7 +94,7 @@ public class WhatsAppWebhookOrganization {
      * Sets department.
      * <p>
      * Field description:
-     * Department name.
+     * Description name.
      *
      * @param department
      */
@@ -107,7 +107,7 @@ public class WhatsAppWebhookOrganization {
      * Sets title.
      * <p>
      * Field description:
-     * Title value.
+     * Title.
      *
      * @param title
      * @return This {@link WhatsAppWebhookOrganization instance}.
@@ -121,7 +121,7 @@ public class WhatsAppWebhookOrganization {
      * Returns title.
      * <p>
      * Field description:
-     * Title value.
+     * Title.
      *
      * @return title
      */
@@ -134,7 +134,7 @@ public class WhatsAppWebhookOrganization {
      * Sets title.
      * <p>
      * Field description:
-     * Title value.
+     * Title.
      *
      * @param title
      */

@@ -9,9 +9,7 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
@@ -25,42 +23,7 @@ public class WhatsAppPhoneNumberRequest {
 
     private String displayName;
 
-    /**
-     * Type of the phone number. It specifies verification type.
-     */
-    public enum TypeEnum {
-        EXTERNAL_SMS("EXTERNAL_SMS"),
-        EXTERNAL_VOICE("EXTERNAL_VOICE"),
-        INFOBIP_OWNED("INFOBIP_OWNED");
-
-        private String value;
-
-        TypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TypeEnum fromValue(String value) {
-            for (TypeEnum enumElement : TypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private TypeEnum type;
+    private WhatsAppNumberType type;
 
     private String locale = "en_US";
 
@@ -205,15 +168,12 @@ public class WhatsAppPhoneNumberRequest {
     /**
      * Sets type.
      * <p>
-     * Field description:
-     * Type of the phone number. It specifies verification type.
-     * <p>
      * The field is required.
      *
      * @param type
      * @return This {@link WhatsAppPhoneNumberRequest instance}.
      */
-    public WhatsAppPhoneNumberRequest type(TypeEnum type) {
+    public WhatsAppPhoneNumberRequest type(WhatsAppNumberType type) {
         this.type = type;
         return this;
     }
@@ -221,30 +181,24 @@ public class WhatsAppPhoneNumberRequest {
     /**
      * Returns type.
      * <p>
-     * Field description:
-     * Type of the phone number. It specifies verification type.
-     * <p>
      * The field is required.
      *
      * @return type
      */
     @JsonProperty("type")
-    public TypeEnum getType() {
+    public WhatsAppNumberType getType() {
         return type;
     }
 
     /**
      * Sets type.
      * <p>
-     * Field description:
-     * Type of the phone number. It specifies verification type.
-     * <p>
      * The field is required.
      *
      * @param type
      */
     @JsonProperty("type")
-    public void setType(TypeEnum type) {
+    public void setType(WhatsAppNumberType type) {
         this.type = type;
     }
 

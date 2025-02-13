@@ -14,9 +14,9 @@ import com.infobip.ApiCallback;
 import com.infobip.ApiClient;
 import com.infobip.ApiException;
 import com.infobip.RequestDefinition;
+import com.infobip.model.MessageResponse;
 import com.infobip.model.MessagesApiEventRequest;
 import com.infobip.model.MessagesApiRequest;
-import com.infobip.model.MessagesApiResponse;
 import com.infobip.model.MessagesApiValidationOkResponse;
 import java.util.Objects;
 
@@ -60,14 +60,14 @@ public class MessagesApi {
         /**
          * Executes the sendMessagesApiEvents request.
          *
-         * @return MessagesApiResponse The deserialized response.
+         * @return MessageResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public MessagesApiResponse execute() throws ApiException {
+        public MessageResponse execute() throws ApiException {
             RequestDefinition sendMessagesApiEventsDefinition =
                     sendMessagesApiEventsDefinition(messagesApiEventRequest);
             return apiClient.execute(
-                    sendMessagesApiEventsDefinition, new TypeReference<MessagesApiResponse>() {}.getType());
+                    sendMessagesApiEventsDefinition, new TypeReference<MessageResponse>() {}.getType());
         }
 
         /**
@@ -76,11 +76,11 @@ public class MessagesApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<MessagesApiResponse> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<MessageResponse> callback) {
             RequestDefinition sendMessagesApiEventsDefinition =
                     sendMessagesApiEventsDefinition(messagesApiEventRequest);
             return apiClient.executeAsync(
-                    sendMessagesApiEventsDefinition, new TypeReference<MessagesApiResponse>() {}.getType(), callback);
+                    sendMessagesApiEventsDefinition, new TypeReference<MessageResponse>() {}.getType(), callback);
         }
     }
 
@@ -121,13 +121,13 @@ public class MessagesApi {
         /**
          * Executes the sendMessagesApiMessage request.
          *
-         * @return MessagesApiResponse The deserialized response.
+         * @return MessageResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public MessagesApiResponse execute() throws ApiException {
+        public MessageResponse execute() throws ApiException {
             RequestDefinition sendMessagesApiMessageDefinition = sendMessagesApiMessageDefinition(messagesApiRequest);
             return apiClient.execute(
-                    sendMessagesApiMessageDefinition, new TypeReference<MessagesApiResponse>() {}.getType());
+                    sendMessagesApiMessageDefinition, new TypeReference<MessageResponse>() {}.getType());
         }
 
         /**
@@ -136,10 +136,10 @@ public class MessagesApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<MessagesApiResponse> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<MessageResponse> callback) {
             RequestDefinition sendMessagesApiMessageDefinition = sendMessagesApiMessageDefinition(messagesApiRequest);
             return apiClient.executeAsync(
-                    sendMessagesApiMessageDefinition, new TypeReference<MessagesApiResponse>() {}.getType(), callback);
+                    sendMessagesApiMessageDefinition, new TypeReference<MessageResponse>() {}.getType(), callback);
         }
     }
 

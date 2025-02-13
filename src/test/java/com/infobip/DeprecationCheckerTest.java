@@ -158,7 +158,7 @@ class DeprecationCheckerTest {
                 GIVEN_DEPRECATED_ENDPOINT_METHOD,
                 GIVEN_DEPRECATED_ENDPOINT_PATH,
                 SUPPORT_EMAIL);
-        thenDeprecationNoticeIsLogged(logRecords, expectedDeprecationNotice);
+        thenDeprecationNoticeIsLoggedWithSunset(logRecords, expectedDeprecationNotice);
         actualResponse.close();
     }
 
@@ -207,7 +207,7 @@ class DeprecationCheckerTest {
                 GIVEN_DEPRECATED_ENDPOINT_METHOD,
                 GIVEN_DEPRECATED_ENDPOINT_PATH,
                 SUPPORT_EMAIL);
-        thenDeprecationNoticeIsLogged(logRecords, expectedDeprecationNotice);
+        thenDeprecationNoticeIsLoggedWithSunset(logRecords, expectedDeprecationNotice);
         actualResponse.close();
     }
 
@@ -265,6 +265,12 @@ class DeprecationCheckerTest {
     }
 
     private void thenDeprecationNoticeIsLogged(List<LogRecord> logRecords, String expectedDeprecationNotice) {
+        then(logRecords)
+                .extracting(LogRecord::getLevel, LogRecord::getMessage)
+                .containsExactly(tuple(Level.INFO, expectedDeprecationNotice));
+    }
+
+    private void thenDeprecationNoticeIsLoggedWithSunset(List<LogRecord> logRecords, String expectedDeprecationNotice) {
         then(logRecords)
                 .extracting(LogRecord::getLevel, LogRecord::getMessage)
                 .containsExactly(tuple(Level.WARNING, expectedDeprecationNotice));

@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -23,7 +25,7 @@ public class CallsCollectOptions {
 
     private CallsSendToReports sendToReports;
 
-    private Object mappedValues;
+    private Map<String, Object> mappedValues = null;
 
     /**
      * Sets maxInputLength.
@@ -145,8 +147,26 @@ public class CallsCollectOptions {
      * @param mappedValues
      * @return This {@link CallsCollectOptions instance}.
      */
-    public CallsCollectOptions mappedValues(Object mappedValues) {
+    public CallsCollectOptions mappedValues(Map<String, Object> mappedValues) {
         this.mappedValues = mappedValues;
+        return this;
+    }
+
+    /**
+     * Puts and entry into mappedValues.
+     * <p>
+     * Field description:
+     * Map of expected collected DTMF values with some real meaning. (Example: if you have multilingual IVR, and option for users to press 1 to enter \&quot;English\&quot; menu, you can define {\&quot;1\&quot;:\&quot;English\&quot;}, so the reporting and analysis will be easier). When this option is defined additional variable is present in the scenario. If you set your collect action variable name to myVar, then you will get additional variable myVar_Meaning containing the mapped value for a collected DTMF.
+     *
+     * @param key The given key.
+     * @param mappedValuesItem The item to be associated with the given key.
+     * @return This {@link CallsCollectOptions instance}.
+     */
+    public CallsCollectOptions putMappedValuesItem(String key, Object mappedValuesItem) {
+        if (this.mappedValues == null) {
+            this.mappedValues = new HashMap<>();
+        }
+        this.mappedValues.put(key, mappedValuesItem);
         return this;
     }
 
@@ -159,7 +179,7 @@ public class CallsCollectOptions {
      * @return mappedValues
      */
     @JsonProperty("mappedValues")
-    public Object getMappedValues() {
+    public Map<String, Object> getMappedValues() {
         return mappedValues;
     }
 
@@ -172,7 +192,7 @@ public class CallsCollectOptions {
      * @param mappedValues
      */
     @JsonProperty("mappedValues")
-    public void setMappedValues(Object mappedValues) {
+    public void setMappedValues(Map<String, Object> mappedValues) {
         this.mappedValues = mappedValues;
     }
 

@@ -31,6 +31,8 @@ public class WebRtcCallOptions {
 
     private Boolean settings;
 
+    private Boolean recordingIndicator;
+
     /**
      * Sets mute.
      * <p>
@@ -311,6 +313,46 @@ public class WebRtcCallOptions {
         this.settings = settings;
     }
 
+    /**
+     * Sets recordingIndicator.
+     * <p>
+     * Field description:
+     * User will be able to see if the call is being recorded.
+     *
+     * @param recordingIndicator
+     * @return This {@link WebRtcCallOptions instance}.
+     */
+    public WebRtcCallOptions recordingIndicator(Boolean recordingIndicator) {
+        this.recordingIndicator = recordingIndicator;
+        return this;
+    }
+
+    /**
+     * Returns recordingIndicator.
+     * <p>
+     * Field description:
+     * User will be able to see if the call is being recorded.
+     *
+     * @return recordingIndicator
+     */
+    @JsonProperty("recordingIndicator")
+    public Boolean getRecordingIndicator() {
+        return recordingIndicator;
+    }
+
+    /**
+     * Sets recordingIndicator.
+     * <p>
+     * Field description:
+     * User will be able to see if the call is being recorded.
+     *
+     * @param recordingIndicator
+     */
+    @JsonProperty("recordingIndicator")
+    public void setRecordingIndicator(Boolean recordingIndicator) {
+        this.recordingIndicator = recordingIndicator;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -326,12 +368,14 @@ public class WebRtcCallOptions {
                 && Objects.equals(this.switchCameraFacingMode, webRtcCallOptions.switchCameraFacingMode)
                 && Objects.equals(this.dialPad, webRtcCallOptions.dialPad)
                 && Objects.equals(this.chat, webRtcCallOptions.chat)
-                && Objects.equals(this.settings, webRtcCallOptions.settings);
+                && Objects.equals(this.settings, webRtcCallOptions.settings)
+                && Objects.equals(this.recordingIndicator, webRtcCallOptions.recordingIndicator);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mute, screenShare, camera, switchCameraFacingMode, dialPad, chat, settings);
+        return Objects.hash(
+                mute, screenShare, camera, switchCameraFacingMode, dialPad, chat, settings, recordingIndicator);
     }
 
     @Override
@@ -360,6 +404,9 @@ public class WebRtcCallOptions {
                 .append(newLine)
                 .append("    settings: ")
                 .append(toIndentedString(settings))
+                .append(newLine)
+                .append("    recordingIndicator: ")
+                .append(toIndentedString(recordingIndicator))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -9,9 +9,7 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,46 +28,7 @@ public class WebRtcValidityWindow {
 
     private WebRtcAcceptableHours acceptableHours;
 
-    /**
-     * Specify the days a link can be used. It is every day of the week, by default.
-     */
-    public enum AcceptableDaysEnum {
-        MONDAY("MONDAY"),
-        TUESDAY("TUESDAY"),
-        WEDNESDAY("WEDNESDAY"),
-        THURSDAY("THURSDAY"),
-        FRIDAY("FRIDAY"),
-        SATURDAY("SATURDAY"),
-        SUNDAY("SUNDAY");
-
-        private String value;
-
-        AcceptableDaysEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static AcceptableDaysEnum fromValue(String value) {
-            for (AcceptableDaysEnum enumElement : AcceptableDaysEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private List<AcceptableDaysEnum> acceptableDays = null;
+    private List<DeliveryDay> acceptableDays = null;
 
     /**
      * Sets oneTime.
@@ -231,7 +190,7 @@ public class WebRtcValidityWindow {
      * @param acceptableDays
      * @return This {@link WebRtcValidityWindow instance}.
      */
-    public WebRtcValidityWindow acceptableDays(List<AcceptableDaysEnum> acceptableDays) {
+    public WebRtcValidityWindow acceptableDays(List<DeliveryDay> acceptableDays) {
         this.acceptableDays = acceptableDays;
         return this;
     }
@@ -245,7 +204,7 @@ public class WebRtcValidityWindow {
      * @param acceptableDaysItem The item to be added to the list.
      * @return This {@link WebRtcValidityWindow instance}.
      */
-    public WebRtcValidityWindow addAcceptableDaysItem(AcceptableDaysEnum acceptableDaysItem) {
+    public WebRtcValidityWindow addAcceptableDaysItem(DeliveryDay acceptableDaysItem) {
         if (this.acceptableDays == null) {
             this.acceptableDays = new ArrayList<>();
         }
@@ -262,7 +221,7 @@ public class WebRtcValidityWindow {
      * @return acceptableDays
      */
     @JsonProperty("acceptableDays")
-    public List<AcceptableDaysEnum> getAcceptableDays() {
+    public List<DeliveryDay> getAcceptableDays() {
         return acceptableDays;
     }
 
@@ -275,7 +234,7 @@ public class WebRtcValidityWindow {
      * @param acceptableDays
      */
     @JsonProperty("acceptableDays")
-    public void setAcceptableDays(List<AcceptableDaysEnum> acceptableDays) {
+    public void setAcceptableDays(List<DeliveryDay> acceptableDays) {
         this.acceptableDays = acceptableDays;
     }
 

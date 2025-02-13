@@ -9,11 +9,9 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
@@ -27,53 +25,19 @@ import java.util.Objects;
 @JsonSubTypes({
     @JsonSubTypes.Type(value = ViberOutboundFileContent.class, name = "FILE"),
     @JsonSubTypes.Type(value = ViberOutboundImageContent.class, name = "IMAGE"),
+    @JsonSubTypes.Type(value = ViberOutboundOtpTemplateContent.class, name = "OTP_TEMPLATE"),
     @JsonSubTypes.Type(value = ViberOutboundTextContent.class, name = "TEXT"),
     @JsonSubTypes.Type(value = ViberOutboundVideoContent.class, name = "VIDEO"),
 })
 public abstract class ViberOutboundContent {
-    /**
-     * Represents type enumeration.
-     */
-    public enum TypeEnum {
-        TEXT("TEXT"),
-        IMAGE("IMAGE"),
-        VIDEO("VIDEO"),
-        FILE("FILE");
 
-        private String value;
-
-        TypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TypeEnum fromValue(String value) {
-            for (TypeEnum enumElement : TypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    protected final TypeEnum type;
+    protected final ViberOutboundContentType type;
 
     /**
      * Constructs a new {@link ViberOutboundContent} instance.
      */
     public ViberOutboundContent(String type) {
-        this.type = TypeEnum.fromValue(type);
+        this.type = ViberOutboundContentType.fromValue(type);
     }
 
     /**
@@ -84,7 +48,7 @@ public abstract class ViberOutboundContent {
      * @return type
      */
     @JsonProperty("type")
-    public TypeEnum getType() {
+    public ViberOutboundContentType getType() {
         return type;
     }
 

@@ -57,7 +57,9 @@ public class WhatsAppTemplateEditPublicApiRequest {
 
     private Object structure;
 
-    private WhatsAppEditValidityPeriod validityPeriod;
+    private ValidityPeriod validityPeriod;
+
+    private Platform platform;
 
     /**
      * Sets category.
@@ -145,7 +147,7 @@ public class WhatsAppTemplateEditPublicApiRequest {
      * @param validityPeriod
      * @return This {@link WhatsAppTemplateEditPublicApiRequest instance}.
      */
-    public WhatsAppTemplateEditPublicApiRequest validityPeriod(WhatsAppEditValidityPeriod validityPeriod) {
+    public WhatsAppTemplateEditPublicApiRequest validityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
         return this;
     }
@@ -156,7 +158,7 @@ public class WhatsAppTemplateEditPublicApiRequest {
      * @return validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public WhatsAppEditValidityPeriod getValidityPeriod() {
+    public ValidityPeriod getValidityPeriod() {
         return validityPeriod;
     }
 
@@ -166,8 +168,39 @@ public class WhatsAppTemplateEditPublicApiRequest {
      * @param validityPeriod
      */
     @JsonProperty("validityPeriod")
-    public void setValidityPeriod(WhatsAppEditValidityPeriod validityPeriod) {
+    public void setValidityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     * @return This {@link WhatsAppTemplateEditPublicApiRequest instance}.
+     */
+    public WhatsAppTemplateEditPublicApiRequest platform(Platform platform) {
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * Returns platform.
+     *
+     * @return platform
+     */
+    @JsonProperty("platform")
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     */
+    @JsonProperty("platform")
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     @Override
@@ -182,12 +215,13 @@ public class WhatsAppTemplateEditPublicApiRequest {
                 (WhatsAppTemplateEditPublicApiRequest) o;
         return Objects.equals(this.category, whatsAppTemplateEditPublicApiRequest.category)
                 && Objects.equals(this.structure, whatsAppTemplateEditPublicApiRequest.structure)
-                && Objects.equals(this.validityPeriod, whatsAppTemplateEditPublicApiRequest.validityPeriod);
+                && Objects.equals(this.validityPeriod, whatsAppTemplateEditPublicApiRequest.validityPeriod)
+                && Objects.equals(this.platform, whatsAppTemplateEditPublicApiRequest.platform);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(category, structure, validityPeriod);
+        return Objects.hash(category, structure, validityPeriod, platform);
     }
 
     @Override
@@ -204,6 +238,9 @@ public class WhatsAppTemplateEditPublicApiRequest {
                 .append(newLine)
                 .append("    validityPeriod: ")
                 .append(toIndentedString(validityPeriod))
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("}")
                 .toString();

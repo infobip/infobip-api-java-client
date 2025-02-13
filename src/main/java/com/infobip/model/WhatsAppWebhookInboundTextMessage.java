@@ -19,10 +19,6 @@ public class WhatsAppWebhookInboundTextMessage extends WhatsAppWebhookInboundMes
 
     private String text;
 
-    private WhatsAppContext context;
-
-    private WhatsAppWebhookReferral referral;
-
     /**
      * Constructs a new {@link WhatsAppWebhookInboundTextMessage} instance.
      */
@@ -35,8 +31,6 @@ public class WhatsAppWebhookInboundTextMessage extends WhatsAppWebhookInboundMes
      * <p>
      * Field description:
      * Content of the end user&#39;s message.
-     * <p>
-     * The field is required.
      *
      * @param text
      * @return This {@link WhatsAppWebhookInboundTextMessage instance}.
@@ -51,8 +45,6 @@ public class WhatsAppWebhookInboundTextMessage extends WhatsAppWebhookInboundMes
      * <p>
      * Field description:
      * Content of the end user&#39;s message.
-     * <p>
-     * The field is required.
      *
      * @return text
      */
@@ -66,76 +58,12 @@ public class WhatsAppWebhookInboundTextMessage extends WhatsAppWebhookInboundMes
      * <p>
      * Field description:
      * Content of the end user&#39;s message.
-     * <p>
-     * The field is required.
      *
      * @param text
      */
     @JsonProperty("text")
     public void setText(String text) {
         this.text = text;
-    }
-
-    /**
-     * Sets context.
-     *
-     * @param context
-     * @return This {@link WhatsAppWebhookInboundTextMessage instance}.
-     */
-    public WhatsAppWebhookInboundTextMessage context(WhatsAppContext context) {
-        this.context = context;
-        return this;
-    }
-
-    /**
-     * Returns context.
-     *
-     * @return context
-     */
-    @JsonProperty("context")
-    public WhatsAppContext getContext() {
-        return context;
-    }
-
-    /**
-     * Sets context.
-     *
-     * @param context
-     */
-    @JsonProperty("context")
-    public void setContext(WhatsAppContext context) {
-        this.context = context;
-    }
-
-    /**
-     * Sets referral.
-     *
-     * @param referral
-     * @return This {@link WhatsAppWebhookInboundTextMessage instance}.
-     */
-    public WhatsAppWebhookInboundTextMessage referral(WhatsAppWebhookReferral referral) {
-        this.referral = referral;
-        return this;
-    }
-
-    /**
-     * Returns referral.
-     *
-     * @return referral
-     */
-    @JsonProperty("referral")
-    public WhatsAppWebhookReferral getReferral() {
-        return referral;
-    }
-
-    /**
-     * Sets referral.
-     *
-     * @param referral
-     */
-    @JsonProperty("referral")
-    public void setReferral(WhatsAppWebhookReferral referral) {
-        this.referral = referral;
     }
 
     @Override
@@ -147,15 +75,12 @@ public class WhatsAppWebhookInboundTextMessage extends WhatsAppWebhookInboundMes
             return false;
         }
         WhatsAppWebhookInboundTextMessage whatsAppWebhookInboundTextMessage = (WhatsAppWebhookInboundTextMessage) o;
-        return Objects.equals(this.text, whatsAppWebhookInboundTextMessage.text)
-                && Objects.equals(this.context, whatsAppWebhookInboundTextMessage.context)
-                && Objects.equals(this.referral, whatsAppWebhookInboundTextMessage.referral)
-                && super.equals(o);
+        return Objects.equals(this.text, whatsAppWebhookInboundTextMessage.text) && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, context, referral, super.hashCode());
+        return Objects.hash(text, super.hashCode());
     }
 
     @Override
@@ -169,12 +94,6 @@ public class WhatsAppWebhookInboundTextMessage extends WhatsAppWebhookInboundMes
                 .append(newLine)
                 .append("    text: ")
                 .append(toIndentedString(text))
-                .append(newLine)
-                .append("    context: ")
-                .append(toIndentedString(context))
-                .append(newLine)
-                .append("    referral: ")
-                .append(toIndentedString(referral))
                 .append(newLine)
                 .append("}")
                 .toString();

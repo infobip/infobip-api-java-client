@@ -10,11 +10,14 @@
 package com.infobip.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.infobip.*;
+import com.infobip.ApiCallback;
+import com.infobip.ApiClient;
+import com.infobip.ApiException;
+import com.infobip.Parameter;
+import com.infobip.RequestDefinition;
 import com.infobip.model.FlowAddFlowParticipantsRequest;
 import com.infobip.model.FlowAddFlowParticipantsResponse;
 import com.infobip.model.FlowParticipantsReportResponse;
-import com.infobip.model.FlowPersonRequest;
 import java.util.Objects;
 
 /**
@@ -104,30 +107,6 @@ public class FlowApi {
     public AddFlowParticipantsRequest addFlowParticipants(
             Long campaignId, FlowAddFlowParticipantsRequest flowAddFlowParticipantsRequest) {
         return new AddFlowParticipantsRequest(campaignId, flowAddFlowParticipantsRequest);
-    }
-
-    private RequestDefinition addPeopleToFlowDefinition(
-            Long campaignId, FlowPersonRequest flowPersonRequest, String phone, String email, String externalId) {
-        RequestDefinition.Builder builder = RequestDefinition.builder(
-                        "POST", "/communication/1/flows/{campaignId}/participants")
-                .body(flowPersonRequest)
-                .requiresAuthentication(true)
-                .accept("application/json")
-                .contentType("application/json");
-
-        if (campaignId != null) {
-            builder.addPathParameter(new Parameter("campaignId", campaignId));
-        }
-        if (phone != null) {
-            builder.addQueryParameter(new Parameter("phone", phone));
-        }
-        if (email != null) {
-            builder.addQueryParameter(new Parameter("email", email));
-        }
-        if (externalId != null) {
-            builder.addQueryParameter(new Parameter("externalId", externalId));
-        }
-        return builder.build();
     }
 
     private RequestDefinition getFlowParticipantsAddedReportDefinition(Long campaignId, String operationId) {

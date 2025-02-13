@@ -66,9 +66,7 @@ public class CallsDialogCallRequest {
      * Sets from.
      * <p>
      * Field description:
-     * Caller identifier. Must be a number in the [E.164](https://en.wikipedia.org/wiki/E.164) format for calls to &#x60;PHONE&#x60;, a string for calls to &#x60;WEBRTC&#x60; or &#x60;SIP&#x60;, and a Viber Voice number for calls to &#x60;VIBER&#x60;.
-     * <p>
-     * The field is required.
+     * Caller identifier. Must be a number in the [E.164](https://en.wikipedia.org/wiki/E.164) format for calls to &#x60;PHONE&#x60;, a string for calls to &#x60;WEBRTC&#x60; or &#x60;SIP&#x60;, and a Viber Voice number for calls to &#x60;VIBER&#x60;. Field is mandatory for &#x60;VIBER&#x60; endpoint and calls to emergency numbers.
      *
      * @param from
      * @return This {@link CallsDialogCallRequest instance}.
@@ -82,9 +80,7 @@ public class CallsDialogCallRequest {
      * Returns from.
      * <p>
      * Field description:
-     * Caller identifier. Must be a number in the [E.164](https://en.wikipedia.org/wiki/E.164) format for calls to &#x60;PHONE&#x60;, a string for calls to &#x60;WEBRTC&#x60; or &#x60;SIP&#x60;, and a Viber Voice number for calls to &#x60;VIBER&#x60;.
-     * <p>
-     * The field is required.
+     * Caller identifier. Must be a number in the [E.164](https://en.wikipedia.org/wiki/E.164) format for calls to &#x60;PHONE&#x60;, a string for calls to &#x60;WEBRTC&#x60; or &#x60;SIP&#x60;, and a Viber Voice number for calls to &#x60;VIBER&#x60;. Field is mandatory for &#x60;VIBER&#x60; endpoint and calls to emergency numbers.
      *
      * @return from
      */
@@ -97,9 +93,7 @@ public class CallsDialogCallRequest {
      * Sets from.
      * <p>
      * Field description:
-     * Caller identifier. Must be a number in the [E.164](https://en.wikipedia.org/wiki/E.164) format for calls to &#x60;PHONE&#x60;, a string for calls to &#x60;WEBRTC&#x60; or &#x60;SIP&#x60;, and a Viber Voice number for calls to &#x60;VIBER&#x60;.
-     * <p>
-     * The field is required.
+     * Caller identifier. Must be a number in the [E.164](https://en.wikipedia.org/wiki/E.164) format for calls to &#x60;PHONE&#x60;, a string for calls to &#x60;WEBRTC&#x60; or &#x60;SIP&#x60;, and a Viber Voice number for calls to &#x60;VIBER&#x60;. Field is mandatory for &#x60;VIBER&#x60; endpoint and calls to emergency numbers.
      *
      * @param from
      */

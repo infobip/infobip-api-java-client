@@ -101,7 +101,7 @@ public class WhatsAppTemplateDataContent {
      * Sets buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60; or &#x60;copy code&#x60; buttonshave been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60;, &#x60;copy code&#x60; or &#x60;flow&#x60;  buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button. When &#x60;flow&#x60;, &#x60;catalog&#x60;, &#x60;multi product&#x60; or &#x60;order details&#x60; button is used it needs to be the only button.
      *
      * @param buttons
      * @return This {@link WhatsAppTemplateDataContent instance}.
@@ -115,7 +115,7 @@ public class WhatsAppTemplateDataContent {
      * Adds and item into buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60; or &#x60;copy code&#x60; buttonshave been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60;, &#x60;copy code&#x60; or &#x60;flow&#x60;  buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button. When &#x60;flow&#x60;, &#x60;catalog&#x60;, &#x60;multi product&#x60; or &#x60;order details&#x60; button is used it needs to be the only button.
      *
      * @param buttonsItem The item to be added to the list.
      * @return This {@link WhatsAppTemplateDataContent instance}.
@@ -132,7 +132,7 @@ public class WhatsAppTemplateDataContent {
      * Returns buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60; or &#x60;copy code&#x60; buttonshave been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60;, &#x60;copy code&#x60; or &#x60;flow&#x60;  buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button. When &#x60;flow&#x60;, &#x60;catalog&#x60;, &#x60;multi product&#x60; or &#x60;order details&#x60; button is used it needs to be the only button.
      *
      * @return buttons
      */
@@ -145,7 +145,7 @@ public class WhatsAppTemplateDataContent {
      * Sets buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60; or &#x60;copy code&#x60; buttonshave been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60;, &#x60;copy code&#x60; or &#x60;flow&#x60;  buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button. When &#x60;flow&#x60;, &#x60;catalog&#x60;, &#x60;multi product&#x60; or &#x60;order details&#x60; button is used it needs to be the only button.
      *
      * @param buttons
      */

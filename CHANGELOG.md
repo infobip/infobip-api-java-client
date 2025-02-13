@@ -5,6 +5,153 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [6.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/5.2.0) ] - 2025-02-13
+
+🎉 **NEW Major Version of `infobip-api-java-client`.**
+
+⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
+All changes, including breaking changes, are addressed and explained in the list bellow.
+If you find out that something was not addressed properly, please submit an issue.
+
+
+### Added
+* Most recent feature set for:
+    * [Infobip Messages API](https://www.infobip.com/docs/api/platform/messages-api).
+        * Footer support for Messages API Message. For additional details check Messages API documentation.
+        * Add calendar event button support for Messages API Message. For additional details check Messages API documentation.
+        * Card options for Carousel and Rich Link body types in Messages API Message. For additional details check Messages API documentation.
+    * [Infobip Voice API](https://www.infobip.com/docs/api/channels/voice).
+        * Support for Calls Configuration.
+    * [Infobip SMS API](https://www.infobip.com/docs/api/channels/sms).
+    * [Infobip 2FA API](https://www.infobip.com/docs/api/platform/2fa).
+    * [Infobip Email API](https://www.infobip.com/docs/api/channels/email).
+        * Support for Email IP Management instead of set of deprecated Email IP endpoints. Check [Email API documentation](https://www.infobip.com/docs/api/channels/email) for additional details.
+    * [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp).
+    * [Infobip Viber API](https://www.infobip.com/docs/api/channels/viber).
+    * [Infobip WebRTC API](https://www.infobip.com/docs/api/channels/webrtc-calls).
+    * [Infobip Moments](https://www.infobip.com/docs/api/customer-engagement/moments).
+    * [Infobip MMS API](https://www.infobip.com/docs/api/channels/mms).
+        * Introduced `/mms/2/messages (V2)`  replacing the `/mms/1/advanced (V1)` endpoint.
+        * Introduced `/mms/2/reports (V2)` replacing `/mms/1/reports (V1)` endpoint.
+        * Introduced `/mms/2/logs (V2)` replacing `/mms/1/logs (V1)` endpoint.
+* **Added** new Calls error code type: `MACHINE_DETECTED`.
+* **Added** support for `CallsProviderSipTrunkUpdateRequest`.
+
+
+### Changed
+
+- General
+  - **Unified** `MessageResponse`, `MessageResponseDetails`, `MessageGroupError`, `SendingSpeedLimit` and `SpeedLimitTimeUnit`.
+  - **Updated** `MessagesApiMessageGeneralStatus` – Adjustments due to API updates.
+  - Adjusted the `DeprecationChecker` class to log info instead of warnings when an endpoint is deprecated and no sunset date is defined.
+
+- Mms API
+  - Introduced the new `MmsMessage` class to replace `MmsAdvancedMessage`, reflecting the latest state of the API for MMS messaging.
+    Updated request classes by replacing `MmsAdvancedRequest` with the new `MmsRequest` class, reflecting the latest state of the API.
+  - Updated sending message function: use `sendMmsMessages` instead of `sendMmsMessage`.
+
+- Voice API
+  -  Adjusted IVR models in script processing:
+      - **Updated** `CallsUpdateScenarioRequest.script` field type from `List<CallsScriptInner>` → `String`.
+      - **Updated** `CallsSearchResponse.script` and `else` fields type from `List<Object>` → `String`.
+      - **Updated** `CallsUpdateScenarioResponse.script` field type from `Object` → `String`.
+  - **Updated** `CallsCallApiOptions.headers` field type from `Object` → `Map<String, Object>`.
+  - **Updated** `CallsCollectOptions.mappedValues` field type from `Object` → `Map<String, Object>`.
+  - **Updated** `CallsGetVoicesResponses.voices` field type from `List<CallsVoice>` → `List<CallsSynthesisVoice>`.
+  - **Updated** `CallsSearchResponse.lastUsageDate` field type from `OffsetDateTime` → `String`.
+  - **Updated** `CallsSpeechCaptureRequest.language` field type from `CallsLanguage` → `CallTranscriptionLanguage`.
+  - **Updated** `CallsTranscription.language` field type from `CallsLanguage` → `CallTranscriptionLanguage`.
+  - **Updated** `CallsUpdateScenarioResponse.lastUsageDate` field type from `OffsetDateTime` → `String`.
+  - **Removed** `CallsVoice` – Certain fields removed due to API updates.
+  - **Removed** `CallRoutingUrlSecurityConfigType` – Unified into `SecurityConfigType` enumeration class.
+  - **Removed** `CallsUrlSecurityConfigType` – Unified into `SecurityConfigType` enumeration class.
+  - **Fixed** Number Masking content schema when uploading audio files.
+  - **Fixed** Number Masking UTC date-time deserialization in setup response model.
+  - **Fixed**: Replaced body content in `ConferencePlayFileRequest` from `CallsPlayRequest` to `CallsConferencePlayRequest`.
+
+- Email API
+  - **Updated** `EmailSuppressionInfo.createdDate` field type from `String` → `OffsetDateTime`.
+  - **Removed** `EmailSingleMessageStatus` – Now integrated into the unified `MessageStatus` class.
+  - **Updated** `EmailAddDeleteSuppressionType` – Pending further clarification.
+
+- Messaging API
+  - **Removed** `MessagesApiRequestOptions` – Now replaced by `MessagesApiDefaultMessageRequestOptions` class.
+  - **Removed** `MessagesApiSpeedLimitTimeUnit` – Now replaced by the unified `SpeedLimitTimeUnit` class.
+
+- Viber API
+  - **Removed** `ViberMessageRequestSchedulingSettings` – Now use `ViberRequestSchedulingSettings`.
+  - **Updated** `ViberInboundContent.typeEnum` → `ViberInboundContentType`.
+  - **Updated** `ViberOutboundContent.typeEnum` → `ViberOutboundContentType`.
+  - **Removed** `ViberMessageStatus` – Now unified into `MessageStatus`.
+  - **Removed** `ViberSpeedLimitTimeUnit` – Now unified into `SpeedLimitTimeUnit`.
+  - **Removed** `ViberWebhookInboundReport` – Now use `ViberInboundMessageViberInboundContent`.
+
+- WhatsApp API
+  - **Removed** unsupported enumeration values from `WhatsAppWebhookType`.
+  - **Updated** `WhatsAppWebhookReferralMediaVideo`, `WhatsAppWebhookReferralMediaImage`, `WhatsAppWebhookMediaVideo` – Introduced new `type` field, no longer extending `WhatsappWebhookReferalMedia`.
+  - **Refactored** `WhatsAppWebhookReferralMedia` – Changed from an abstract class to a normal class.
+  - **Removed** `context` field from various `WhatsAppWebhook` message types:
+    - `WhatsAppWebhookQuickReplyContent`
+    - `WhatsAppWebhookListReplyContent`
+    - `WhatsAppWebhookInboundAudioMessage`
+    - `WhatsAppWebhookButtonReplyContent`
+    - `WhatsAppWebhookInboundVoiceMessage`
+    - `WhatsAppWebhookInboundVideoMessage`
+    - `WhatsAppWebhookInboundTextMessage`
+    - `WhatsAppWebhookInboundStickerMessage`
+    - `WhatsAppWebhookInboundLocationMessage`
+    - `WhatsAppWebhookInboundImageMessage`
+    - `WhatsAppWebhookInboundDocumentMessage`
+    - `WhatsAppWebhookInboundContactMessage`
+  - **Removed** `integrationType`, `pairedMessageId`, and `callbackData` fields from `WhatsAppWebhookInboundMessageData`.
+  - **Removed** `INFECTED_CONTENT`, `INTERACTIVE_EXTENSION_REPLY`, `UNSUPPORTED` subtypes from `WhatsAppWebhookInboundMessage` abstract class.
+  - **Replaced** `WhatsAppValidityPeriodTimeUnit` class with `ValidityPeriodTimeUnit`.
+  - **Removed** no longer supported 50 business-initiated conversations messaging tear limit for WhatsApp senders.
+  - **Updated** `WhatsAppPhoneNumberRequest.typeEnum` → `WhatsAppPhoneNumberTypeEnum`.
+  - **Updated** `WhatsAppOtpRequest.typeEnum` → `WhatsAppNumberType`.
+  - **Removed** `structure` field from `WhatsAppDefaultUtilityTemplatePublicApiRequest`.
+  - **Removed** `structure` field from `WhatsAppTemplatePublicApiRequest`.
+  - **Removed** `groupId` field from `WhatsAppContext`.
+  - **Refactored** `WhatsAppDefaultTemplateStructureApiData` – Now an implementation of `WhatsAppTemplateStructureApiData`.
+  - **Refactored** `WhatsAppAuthenticationTemplateStructureApiData` – Now an implementation of `WhatsAppTemplateStructureApiData`.
+
+- WebRTC API
+  - **Updated** `WebRtcValidityWindow.acceptableDays` typeEnum → `DeliveryDay`.
+  - **Removed** `applicationId` field from `WebRtcTokenRequestModel`.
+  - **Updated** `WebRtcValidityWindow.LayoutsEnum` → `WebRtcLayout`.
+  - **Updated** `WebRtcLocalization.typeEnum` → `WebRtcLocalizationType`.
+  - **Updated** `WebRtcWebRtcDestination` → `WebRtcCallsDestination`.
+  - **Removed** `fcmServerKey` field from `WebRtcAndroidPushNotificationConfig`.
+
+### Removed:
+  - Deprecated functions for sending Viber `Image`, `File`, and `Text` messages have been removed. Use `ViberApi.sendViberMessages` to send messages.
+  - All the Calls IVR script related class and from now on all the scripts are processed as `String`:
+    - `CallsCallApi`
+    - `CallsCapture`
+    - `CallsCollect`
+    - `CallsDial`
+    - `CallsDialToMany`
+    - `CallsDialToWebRTC`
+    - `CallsDialToConversations`
+    - `CallsForEach`
+    - `CallsGoTo`
+    - `CallsHangup`
+    - `CallsIfThenElse`
+    - `CallsMachineDetection`
+    - `CallsPause`
+    - `CallsPlay`
+    - `CallsPlayFromRecording`
+    - `CallsRecord`
+    - `CallsRepeatUntil`
+    - `CallsRepeatWhile`
+    - `CallsSay`
+    - `CallsSendSms`
+    - `CallsSetVariable`
+    - `CallsSwitchCase`
+    - `CallsWhileDo`
+
+These changes align the SDK with the current API specification, ensuring consistency and reliability in future updates.
+
 ## [ [5.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/5.1.0) ] - 2024-12-16
 
 ### Added
@@ -93,7 +240,6 @@ If you find out that something was not addressed properly, please submit an issu
 
 * **Documentation**
   * Fixed Javadoc.
-
 
 ## [ [4.3.0](https://github.com/infobip/infobip-api-java-client/releases/tag/4.3.0) ] - 2024-03-19
 

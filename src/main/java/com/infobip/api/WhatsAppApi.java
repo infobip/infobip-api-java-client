@@ -26,12 +26,14 @@ import com.infobip.model.WhatsAppIdentityConfirmation;
 import com.infobip.model.WhatsAppIdentityInfo;
 import com.infobip.model.WhatsAppImageMessage;
 import com.infobip.model.WhatsAppInteractiveButtonsMessage;
+import com.infobip.model.WhatsAppInteractiveFlowMessage;
 import com.infobip.model.WhatsAppInteractiveListMessage;
 import com.infobip.model.WhatsAppInteractiveLocationRequestMessage;
 import com.infobip.model.WhatsAppInteractiveMultiProductMessage;
 import com.infobip.model.WhatsAppInteractiveOrderDetailsMessage;
 import com.infobip.model.WhatsAppInteractiveOrderStatusMessage;
 import com.infobip.model.WhatsAppInteractiveProductMessage;
+import com.infobip.model.WhatsAppInteractiveUrlButtonMessage;
 import com.infobip.model.WhatsAppLocationMessage;
 import com.infobip.model.WhatsAppOtpRequest;
 import com.infobip.model.WhatsAppPayment;
@@ -1077,6 +1079,74 @@ public class WhatsAppApi {
         return new GetWhatsappTemplateRequest(sender, id);
     }
 
+    private RequestDefinition getWhatsappUpiPaymentStatusDefinition(String sender, String paymentId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "GET", "/whatsapp/1/senders/{sender}/payments/upi/{paymentId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        if (paymentId != null) {
+            builder.addPathParameter(new Parameter("paymentId", paymentId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getWhatsappUpiPaymentStatus request builder class.
+     */
+    public class GetWhatsappUpiPaymentStatusRequest {
+        private final String sender;
+        private final String paymentId;
+
+        private GetWhatsappUpiPaymentStatusRequest(String sender, String paymentId) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this.paymentId = Objects.requireNonNull(paymentId, "The required parameter 'paymentId' is missing.");
+        }
+
+        /**
+         * Executes the getWhatsappUpiPaymentStatus request.
+         *
+         * @return WhatsAppPayment The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppPayment execute() throws ApiException {
+            RequestDefinition getWhatsappUpiPaymentStatusDefinition =
+                    getWhatsappUpiPaymentStatusDefinition(sender, paymentId);
+            return apiClient.execute(
+                    getWhatsappUpiPaymentStatusDefinition, new TypeReference<WhatsAppPayment>() {}.getType());
+        }
+
+        /**
+         * Executes the getWhatsappUpiPaymentStatus request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppPayment> callback) {
+            RequestDefinition getWhatsappUpiPaymentStatusDefinition =
+                    getWhatsappUpiPaymentStatusDefinition(sender, paymentId);
+            return apiClient.executeAsync(
+                    getWhatsappUpiPaymentStatusDefinition, new TypeReference<WhatsAppPayment>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get India UPI PayU/Razorpay payment status.
+     * <p>
+     * Get India UPI PayU/Razor payment and transaction status.
+     *
+     * @param sender Registered WhatsApp sender number. Must be in international format. (required)
+     * @param paymentId Unique identifier of the payment. (required)
+     * @return GetWhatsappUpiPaymentStatusRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public GetWhatsappUpiPaymentStatusRequest getWhatsappUpiPaymentStatus(String sender, String paymentId) {
+        return new GetWhatsappUpiPaymentStatusRequest(sender, paymentId);
+    }
+
     private RequestDefinition getWhatsappUpiPayuPaymentStatusDefinition(String sender, String paymentId) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "GET", "/whatsapp/1/senders/{sender}/payments/upi/payu/{paymentId}")
@@ -2120,6 +2190,74 @@ public class WhatsAppApi {
         return new SendWhatsAppVideoMessageRequest(whatsAppVideoMessage);
     }
 
+    private RequestDefinition sendWhatsappInteractiveFlowMessageDefinition(
+            WhatsAppInteractiveFlowMessage whatsAppInteractiveFlowMessage) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/whatsapp/1/message/interactive/flow")
+                .body(whatsAppInteractiveFlowMessage)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * sendWhatsappInteractiveFlowMessage request builder class.
+     */
+    public class SendWhatsappInteractiveFlowMessageRequest {
+        private final WhatsAppInteractiveFlowMessage whatsAppInteractiveFlowMessage;
+
+        private SendWhatsappInteractiveFlowMessageRequest(
+                WhatsAppInteractiveFlowMessage whatsAppInteractiveFlowMessage) {
+            this.whatsAppInteractiveFlowMessage = Objects.requireNonNull(
+                    whatsAppInteractiveFlowMessage,
+                    "The required parameter 'whatsAppInteractiveFlowMessage' is missing.");
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveFlowMessage request.
+         *
+         * @return WhatsAppSingleMessageInfo The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppSingleMessageInfo execute() throws ApiException {
+            RequestDefinition sendWhatsappInteractiveFlowMessageDefinition =
+                    sendWhatsappInteractiveFlowMessageDefinition(whatsAppInteractiveFlowMessage);
+            return apiClient.execute(
+                    sendWhatsappInteractiveFlowMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType());
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveFlowMessage request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppSingleMessageInfo> callback) {
+            RequestDefinition sendWhatsappInteractiveFlowMessageDefinition =
+                    sendWhatsappInteractiveFlowMessageDefinition(whatsAppInteractiveFlowMessage);
+            return apiClient.executeAsync(
+                    sendWhatsappInteractiveFlowMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Send WhatsApp interactive flow message.
+     * <p>
+     * Send an interactive flow message to a single recipient. Interactive flow messages can only be successfully delivered if the recipient has contacted the business within the last 24 hours, otherwise [template message](#channels/whatsapp/send-whatsapp-template-message) should be used. &lt;br/&gt; The API response will not contain the final delivery status, use [Delivery Reports](#channels/whatsapp/receive-whatsapp-delivery-reports) instead.
+     *
+     * @param whatsAppInteractiveFlowMessage  (required)
+     * @return SendWhatsappInteractiveFlowMessageRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public SendWhatsappInteractiveFlowMessageRequest sendWhatsappInteractiveFlowMessage(
+            WhatsAppInteractiveFlowMessage whatsAppInteractiveFlowMessage) {
+        return new SendWhatsappInteractiveFlowMessageRequest(whatsAppInteractiveFlowMessage);
+    }
+
     private RequestDefinition sendWhatsappInteractiveLocationRequestMessageDefinition(
             WhatsAppInteractiveLocationRequestMessage whatsAppInteractiveLocationRequestMessage) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
@@ -2325,6 +2463,75 @@ public class WhatsAppApi {
     public SendWhatsappInteractiveOrderStatusMessageRequest sendWhatsappInteractiveOrderStatusMessage(
             WhatsAppInteractiveOrderStatusMessage whatsAppInteractiveOrderStatusMessage) {
         return new SendWhatsappInteractiveOrderStatusMessageRequest(whatsAppInteractiveOrderStatusMessage);
+    }
+
+    private RequestDefinition sendWhatsappInteractiveUrlButtonMessageDefinition(
+            WhatsAppInteractiveUrlButtonMessage whatsAppInteractiveUrlButtonMessage) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/whatsapp/1/message/interactive/url-button")
+                .body(whatsAppInteractiveUrlButtonMessage)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * sendWhatsappInteractiveUrlButtonMessage request builder class.
+     */
+    public class SendWhatsappInteractiveUrlButtonMessageRequest {
+        private final WhatsAppInteractiveUrlButtonMessage whatsAppInteractiveUrlButtonMessage;
+
+        private SendWhatsappInteractiveUrlButtonMessageRequest(
+                WhatsAppInteractiveUrlButtonMessage whatsAppInteractiveUrlButtonMessage) {
+            this.whatsAppInteractiveUrlButtonMessage = Objects.requireNonNull(
+                    whatsAppInteractiveUrlButtonMessage,
+                    "The required parameter 'whatsAppInteractiveUrlButtonMessage' is missing.");
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveUrlButtonMessage request.
+         *
+         * @return WhatsAppSingleMessageInfo The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppSingleMessageInfo execute() throws ApiException {
+            RequestDefinition sendWhatsappInteractiveUrlButtonMessageDefinition =
+                    sendWhatsappInteractiveUrlButtonMessageDefinition(whatsAppInteractiveUrlButtonMessage);
+            return apiClient.execute(
+                    sendWhatsappInteractiveUrlButtonMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType());
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveUrlButtonMessage request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppSingleMessageInfo> callback) {
+            RequestDefinition sendWhatsappInteractiveUrlButtonMessageDefinition =
+                    sendWhatsappInteractiveUrlButtonMessageDefinition(whatsAppInteractiveUrlButtonMessage);
+            return apiClient.executeAsync(
+                    sendWhatsappInteractiveUrlButtonMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Send WhatsApp interactive url button message.
+     * <p>
+     * Send an interactive url button message to a single recipient.
+     *
+     * @param whatsAppInteractiveUrlButtonMessage  (required)
+     * @return SendWhatsappInteractiveUrlButtonMessageRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public SendWhatsappInteractiveUrlButtonMessageRequest sendWhatsappInteractiveUrlButtonMessage(
+            WhatsAppInteractiveUrlButtonMessage whatsAppInteractiveUrlButtonMessage) {
+        return new SendWhatsappInteractiveUrlButtonMessageRequest(whatsAppInteractiveUrlButtonMessage);
     }
 
     private RequestDefinition updateWhatsappSenderBusinessInfoDefinition(

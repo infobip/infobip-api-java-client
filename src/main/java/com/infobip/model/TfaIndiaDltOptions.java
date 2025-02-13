@@ -21,6 +21,8 @@ public class TfaIndiaDltOptions {
 
     private String principalEntityId;
 
+    private String teleMarketerId;
+
     /**
      * Sets contentTemplateId.
      * <p>
@@ -107,6 +109,46 @@ public class TfaIndiaDltOptions {
         this.principalEntityId = principalEntityId;
     }
 
+    /**
+     * Sets teleMarketerId.
+     * <p>
+     * Field description:
+     * Your assigned Telemarketer ID (required for Aggregators).
+     *
+     * @param teleMarketerId
+     * @return This {@link TfaIndiaDltOptions instance}.
+     */
+    public TfaIndiaDltOptions teleMarketerId(String teleMarketerId) {
+        this.teleMarketerId = teleMarketerId;
+        return this;
+    }
+
+    /**
+     * Returns teleMarketerId.
+     * <p>
+     * Field description:
+     * Your assigned Telemarketer ID (required for Aggregators).
+     *
+     * @return teleMarketerId
+     */
+    @JsonProperty("teleMarketerId")
+    public String getTeleMarketerId() {
+        return teleMarketerId;
+    }
+
+    /**
+     * Sets teleMarketerId.
+     * <p>
+     * Field description:
+     * Your assigned Telemarketer ID (required for Aggregators).
+     *
+     * @param teleMarketerId
+     */
+    @JsonProperty("teleMarketerId")
+    public void setTeleMarketerId(String teleMarketerId) {
+        this.teleMarketerId = teleMarketerId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -117,12 +159,13 @@ public class TfaIndiaDltOptions {
         }
         TfaIndiaDltOptions tfaIndiaDltOptions = (TfaIndiaDltOptions) o;
         return Objects.equals(this.contentTemplateId, tfaIndiaDltOptions.contentTemplateId)
-                && Objects.equals(this.principalEntityId, tfaIndiaDltOptions.principalEntityId);
+                && Objects.equals(this.principalEntityId, tfaIndiaDltOptions.principalEntityId)
+                && Objects.equals(this.teleMarketerId, tfaIndiaDltOptions.teleMarketerId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(contentTemplateId, principalEntityId);
+        return Objects.hash(contentTemplateId, principalEntityId, teleMarketerId);
     }
 
     @Override
@@ -136,6 +179,9 @@ public class TfaIndiaDltOptions {
                 .append(newLine)
                 .append("    principalEntityId: ")
                 .append(toIndentedString(principalEntityId))
+                .append(newLine)
+                .append("    teleMarketerId: ")
+                .append(toIndentedString(teleMarketerId))
                 .append(newLine)
                 .append("}")
                 .toString();

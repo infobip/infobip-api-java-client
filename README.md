@@ -32,6 +32,7 @@ The current version of this library includes this subset of Infobip products:
 * [WhatsApp](https://www.infobip.com/docs/api/channels/whatsapp)
 * [Viber](https://www.infobip.com/docs/api/channels/viber)
 * [Messages API](https://www.infobip.com/docs/api/platform/messages-api)
+* [Moments API](https://www.infobip.com/docs/api/customer-engagement/moments)
 
 ## General Info
 For `infobip-api-java-client` versioning we use [Semantic Versioning][semver] scheme.
@@ -48,7 +49,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
     <groupId>com.infobip</groupId>
     <artifactId>infobip-api-java-client</artifactId>
-    <version>5.1.0</version>
+    <version>6.0.0</version>
 </dependency>
 ```
 
@@ -212,7 +213,7 @@ For Moments quick start guide, view [these examples](moments.md).
 
 Feel free to open issues on the repository for any encountered problem or feature request. For pull requests, go to the `CONTRIBUTING` [file][contributing] related to it. This code is auto generated, and we are unable to merge any pull requests form here.
 
-This code is auto generated, and we are unable to merge any pull request from here, but we will review and implement changes directly within our pipeline, as described in the `CONTRIBUTING` [file][contributing]. 
+This code is auto generated, and we are unable to merge any pull request from here, but we will review and implement changes directly within our pipeline, as described in the `CONTRIBUTING` [file][contributing].
 
 For anything that requires our imminent attention, contact us @ [support@infobip.com](mailto:support@infobip.com).
 

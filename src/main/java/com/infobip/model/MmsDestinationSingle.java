@@ -13,13 +13,59 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents MmsDestinationSingle model.
+ * ---
  */
-public class MmsDestinationSingle {
+public class MmsDestinationSingle implements MmsDestination {
+
+    private String to;
 
     private String messageId;
 
-    private String to;
+    /**
+     * Sets to.
+     * <p>
+     * Field description:
+     * The destination address of the message.
+     * <p>
+     * The field is required.
+     *
+     * @param to
+     * @return This {@link MmsDestinationSingle instance}.
+     */
+    public MmsDestinationSingle to(String to) {
+        this.to = to;
+        return this;
+    }
+
+    /**
+     * Returns to.
+     * <p>
+     * Field description:
+     * The destination address of the message.
+     * <p>
+     * The field is required.
+     *
+     * @return to
+     */
+    @JsonProperty("to")
+    public String getTo() {
+        return to;
+    }
+
+    /**
+     * Sets to.
+     * <p>
+     * Field description:
+     * The destination address of the message.
+     * <p>
+     * The field is required.
+     *
+     * @param to
+     */
+    @JsonProperty("to")
+    public void setTo(String to) {
+        this.to = to;
+    }
 
     /**
      * Sets messageId.
@@ -61,52 +107,6 @@ public class MmsDestinationSingle {
         this.messageId = messageId;
     }
 
-    /**
-     * Sets to.
-     * <p>
-     * Field description:
-     * Message destination address. Addresses must be in international format (Example: &#x60;41793026727&#x60;).
-     * <p>
-     * The field is required.
-     *
-     * @param to
-     * @return This {@link MmsDestinationSingle instance}.
-     */
-    public MmsDestinationSingle to(String to) {
-        this.to = to;
-        return this;
-    }
-
-    /**
-     * Returns to.
-     * <p>
-     * Field description:
-     * Message destination address. Addresses must be in international format (Example: &#x60;41793026727&#x60;).
-     * <p>
-     * The field is required.
-     *
-     * @return to
-     */
-    @JsonProperty("to")
-    public String getTo() {
-        return to;
-    }
-
-    /**
-     * Sets to.
-     * <p>
-     * Field description:
-     * Message destination address. Addresses must be in international format (Example: &#x60;41793026727&#x60;).
-     * <p>
-     * The field is required.
-     *
-     * @param to
-     */
-    @JsonProperty("to")
-    public void setTo(String to) {
-        this.to = to;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -116,13 +116,13 @@ public class MmsDestinationSingle {
             return false;
         }
         MmsDestinationSingle mmsDestinationSingle = (MmsDestinationSingle) o;
-        return Objects.equals(this.messageId, mmsDestinationSingle.messageId)
-                && Objects.equals(this.to, mmsDestinationSingle.to);
+        return Objects.equals(this.to, mmsDestinationSingle.to)
+                && Objects.equals(this.messageId, mmsDestinationSingle.messageId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageId, to);
+        return Objects.hash(to, messageId);
     }
 
     @Override
@@ -131,11 +131,11 @@ public class MmsDestinationSingle {
         return new StringBuilder()
                 .append("class MmsDestinationSingle {")
                 .append(newLine)
-                .append("    messageId: ")
-                .append(toIndentedString(messageId))
-                .append(newLine)
                 .append("    to: ")
                 .append(toIndentedString(to))
+                .append(newLine)
+                .append("    messageId: ")
+                .append(toIndentedString(messageId))
                 .append(newLine)
                 .append("}")
                 .toString();

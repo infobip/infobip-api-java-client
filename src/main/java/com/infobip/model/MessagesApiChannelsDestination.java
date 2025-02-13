@@ -19,7 +19,49 @@ import java.util.Objects;
  */
 public class MessagesApiChannelsDestination implements MessagesApiMessageDestination {
 
+    private String messageId;
+
     private List<MessagesApiChannelDestination> byChannel = new ArrayList<>();
+
+    /**
+     * Sets messageId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the message sent. If failover is defined, then it will be applied to each message in failover flow.
+     *
+     * @param messageId
+     * @return This {@link MessagesApiChannelsDestination instance}.
+     */
+    public MessagesApiChannelsDestination messageId(String messageId) {
+        this.messageId = messageId;
+        return this;
+    }
+
+    /**
+     * Returns messageId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the message sent. If failover is defined, then it will be applied to each message in failover flow.
+     *
+     * @return messageId
+     */
+    @JsonProperty("messageId")
+    public String getMessageId() {
+        return messageId;
+    }
+
+    /**
+     * Sets messageId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the message sent. If failover is defined, then it will be applied to each message in failover flow.
+     *
+     * @param messageId
+     */
+    @JsonProperty("messageId")
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
 
     /**
      * Sets byChannel.
@@ -95,12 +137,13 @@ public class MessagesApiChannelsDestination implements MessagesApiMessageDestina
             return false;
         }
         MessagesApiChannelsDestination messagesApiChannelsDestination = (MessagesApiChannelsDestination) o;
-        return Objects.equals(this.byChannel, messagesApiChannelsDestination.byChannel);
+        return Objects.equals(this.messageId, messagesApiChannelsDestination.messageId)
+                && Objects.equals(this.byChannel, messagesApiChannelsDestination.byChannel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(byChannel);
+        return Objects.hash(messageId, byChannel);
     }
 
     @Override
@@ -108,6 +151,9 @@ public class MessagesApiChannelsDestination implements MessagesApiMessageDestina
         String newLine = System.lineSeparator();
         return new StringBuilder()
                 .append("class MessagesApiChannelsDestination {")
+                .append(newLine)
+                .append("    messageId: ")
+                .append(toIndentedString(messageId))
                 .append(newLine)
                 .append("    byChannel: ")
                 .append(toIndentedString(byChannel))

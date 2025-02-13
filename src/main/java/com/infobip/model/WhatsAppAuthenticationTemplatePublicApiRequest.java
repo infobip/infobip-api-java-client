@@ -19,6 +19,8 @@ public class WhatsAppAuthenticationTemplatePublicApiRequest extends WhatsAppTemp
 
     private WhatsAppAuthenticationTemplateStructureApiData structure;
 
+    private WhatsAppValidityPeriodApiData validityPeriod;
+
     /**
      * Constructs a new {@link WhatsAppAuthenticationTemplatePublicApiRequest} instance.
      */
@@ -64,6 +66,37 @@ public class WhatsAppAuthenticationTemplatePublicApiRequest extends WhatsAppTemp
         this.structure = structure;
     }
 
+    /**
+     * Sets validityPeriod.
+     *
+     * @param validityPeriod
+     * @return This {@link WhatsAppAuthenticationTemplatePublicApiRequest instance}.
+     */
+    public WhatsAppAuthenticationTemplatePublicApiRequest validityPeriod(WhatsAppValidityPeriodApiData validityPeriod) {
+        this.validityPeriod = validityPeriod;
+        return this;
+    }
+
+    /**
+     * Returns validityPeriod.
+     *
+     * @return validityPeriod
+     */
+    @JsonProperty("validityPeriod")
+    public WhatsAppValidityPeriodApiData getValidityPeriod() {
+        return validityPeriod;
+    }
+
+    /**
+     * Sets validityPeriod.
+     *
+     * @param validityPeriod
+     */
+    @JsonProperty("validityPeriod")
+    public void setValidityPeriod(WhatsAppValidityPeriodApiData validityPeriod) {
+        this.validityPeriod = validityPeriod;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -75,12 +108,13 @@ public class WhatsAppAuthenticationTemplatePublicApiRequest extends WhatsAppTemp
         WhatsAppAuthenticationTemplatePublicApiRequest whatsAppAuthenticationTemplatePublicApiRequest =
                 (WhatsAppAuthenticationTemplatePublicApiRequest) o;
         return Objects.equals(this.structure, whatsAppAuthenticationTemplatePublicApiRequest.structure)
+                && Objects.equals(this.validityPeriod, whatsAppAuthenticationTemplatePublicApiRequest.validityPeriod)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(structure, super.hashCode());
+        return Objects.hash(structure, validityPeriod, super.hashCode());
     }
 
     @Override
@@ -94,6 +128,9 @@ public class WhatsAppAuthenticationTemplatePublicApiRequest extends WhatsAppTemp
                 .append(newLine)
                 .append("    structure: ")
                 .append(toIndentedString(structure))
+                .append(newLine)
+                .append("    validityPeriod: ")
+                .append(toIndentedString(validityPeriod))
                 .append(newLine)
                 .append("}")
                 .toString();

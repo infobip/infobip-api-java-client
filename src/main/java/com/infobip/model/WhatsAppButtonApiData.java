@@ -25,7 +25,10 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = WhatsAppCatalogButtonApiData.class, name = "CATALOG"),
     @JsonSubTypes.Type(value = WhatsAppCopyCodeDefaultButtonApiData.class, name = "COPY_CODE"),
+    @JsonSubTypes.Type(value = WhatsAppFlowButtonApiData.class, name = "FLOW"),
+    @JsonSubTypes.Type(value = WhatsAppMultiProductButtonApiData.class, name = "MULTI_PRODUCT"),
     @JsonSubTypes.Type(value = WhatsAppPhoneNumberButtonApiData.class, name = "PHONE_NUMBER"),
     @JsonSubTypes.Type(value = WhatsAppQuickReplyButtonApiData.class, name = "QUICK_REPLY"),
     @JsonSubTypes.Type(value = WhatsAppUrlButtonApiData.class, name = "URL"),
@@ -38,7 +41,10 @@ public abstract class WhatsAppButtonApiData {
         PHONE_NUMBER("PHONE_NUMBER"),
         URL("URL"),
         QUICK_REPLY("QUICK_REPLY"),
-        COPY_CODE("COPY_CODE");
+        COPY_CODE("COPY_CODE"),
+        FLOW("FLOW"),
+        CATALOG("CATALOG"),
+        MULTI_PRODUCT("MULTI_PRODUCT");
 
         private String value;
 

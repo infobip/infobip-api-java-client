@@ -26,11 +26,11 @@ public class CallsUpdateScenarioResponse {
 
     private String name;
 
-    private Object script;
+    private String script;
 
     private OffsetDateTime updateTime;
 
-    private OffsetDateTime lastUsageDate;
+    private String lastUsageDate;
 
     /**
      * Sets createTime.
@@ -194,41 +194,32 @@ public class CallsUpdateScenarioResponse {
 
     /**
      * Sets script.
-     * <p>
-     * Field description:
-     * The list of scenario actions.
      *
      * @param script
      * @return This {@link CallsUpdateScenarioResponse instance}.
      */
-    public CallsUpdateScenarioResponse script(Object script) {
+    public CallsUpdateScenarioResponse script(String script) {
         this.script = script;
         return this;
     }
 
     /**
      * Returns script.
-     * <p>
-     * Field description:
-     * The list of scenario actions.
      *
      * @return script
      */
     @JsonProperty("script")
-    public Object getScript() {
+    public String getScript() {
         return script;
     }
 
     /**
      * Sets script.
-     * <p>
-     * Field description:
-     * The list of scenario actions.
      *
      * @param script
      */
     @JsonProperty("script")
-    public void setScript(Object script) {
+    public void setScript(String script) {
         this.script = script;
     }
 
@@ -281,7 +272,7 @@ public class CallsUpdateScenarioResponse {
      * @param lastUsageDate
      * @return This {@link CallsUpdateScenarioResponse instance}.
      */
-    public CallsUpdateScenarioResponse lastUsageDate(OffsetDateTime lastUsageDate) {
+    public CallsUpdateScenarioResponse lastUsageDate(String lastUsageDate) {
         this.lastUsageDate = lastUsageDate;
         return this;
     }
@@ -295,7 +286,7 @@ public class CallsUpdateScenarioResponse {
      * @return lastUsageDate
      */
     @JsonProperty("lastUsageDate")
-    public OffsetDateTime getLastUsageDate() {
+    public String getLastUsageDate() {
         return lastUsageDate;
     }
 
@@ -308,7 +299,7 @@ public class CallsUpdateScenarioResponse {
      * @param lastUsageDate
      */
     @JsonProperty("lastUsageDate")
-    public void setLastUsageDate(OffsetDateTime lastUsageDate) {
+    public void setLastUsageDate(String lastUsageDate) {
         this.lastUsageDate = lastUsageDate;
     }
 

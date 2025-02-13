@@ -70,6 +70,8 @@ public class ViberDefaultSmsFailover {
      * <p>
      * Field description:
      * Content of the message being sent.
+     * <p>
+     * The field is required.
      *
      * @param text
      * @return This {@link ViberDefaultSmsFailover instance}.
@@ -84,6 +86,8 @@ public class ViberDefaultSmsFailover {
      * <p>
      * Field description:
      * Content of the message being sent.
+     * <p>
+     * The field is required.
      *
      * @return text
      */
@@ -97,6 +101,8 @@ public class ViberDefaultSmsFailover {
      * <p>
      * Field description:
      * Content of the message being sent.
+     * <p>
+     * The field is required.
      *
      * @param text
      */

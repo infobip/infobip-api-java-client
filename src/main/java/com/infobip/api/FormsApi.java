@@ -10,8 +10,16 @@
 package com.infobip.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.infobip.*;
-import com.infobip.model.*;
+import com.infobip.ApiCallback;
+import com.infobip.ApiClient;
+import com.infobip.ApiException;
+import com.infobip.Parameter;
+import com.infobip.RequestDefinition;
+import com.infobip.model.FormsResponse;
+import com.infobip.model.FormsResponseContent;
+import com.infobip.model.FormsStatus;
+import com.infobip.model.FormsStatusResponse;
+import com.infobip.model.FormsType;
 import java.util.Map;
 import java.util.Objects;
 

@@ -17,63 +17,15 @@ import java.util.Objects;
  */
 public class WhatsAppWebhookInboundAudioMessage extends WhatsAppWebhookInboundMessage {
 
-    private String url;
-
     private String caption;
 
-    private WhatsAppContext context;
+    private String url;
 
     /**
      * Constructs a new {@link WhatsAppWebhookInboundAudioMessage} instance.
      */
     public WhatsAppWebhookInboundAudioMessage() {
         super("AUDIO");
-    }
-
-    /**
-     * Sets url.
-     * <p>
-     * Field description:
-     * URL for media download.
-     * <p>
-     * The field is required.
-     *
-     * @param url
-     * @return This {@link WhatsAppWebhookInboundAudioMessage instance}.
-     */
-    public WhatsAppWebhookInboundAudioMessage url(String url) {
-        this.url = url;
-        return this;
-    }
-
-    /**
-     * Returns url.
-     * <p>
-     * Field description:
-     * URL for media download.
-     * <p>
-     * The field is required.
-     *
-     * @return url
-     */
-    @JsonProperty("url")
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * Sets url.
-     * <p>
-     * Field description:
-     * URL for media download.
-     * <p>
-     * The field is required.
-     *
-     * @param url
-     */
-    @JsonProperty("url")
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     /**
@@ -117,34 +69,43 @@ public class WhatsAppWebhookInboundAudioMessage extends WhatsAppWebhookInboundMe
     }
 
     /**
-     * Sets context.
+     * Sets url.
+     * <p>
+     * Field description:
+     * Url for media download.
      *
-     * @param context
+     * @param url
      * @return This {@link WhatsAppWebhookInboundAudioMessage instance}.
      */
-    public WhatsAppWebhookInboundAudioMessage context(WhatsAppContext context) {
-        this.context = context;
+    public WhatsAppWebhookInboundAudioMessage url(String url) {
+        this.url = url;
         return this;
     }
 
     /**
-     * Returns context.
+     * Returns url.
+     * <p>
+     * Field description:
+     * Url for media download.
      *
-     * @return context
+     * @return url
      */
-    @JsonProperty("context")
-    public WhatsAppContext getContext() {
-        return context;
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
     }
 
     /**
-     * Sets context.
+     * Sets url.
+     * <p>
+     * Field description:
+     * Url for media download.
      *
-     * @param context
+     * @param url
      */
-    @JsonProperty("context")
-    public void setContext(WhatsAppContext context) {
-        this.context = context;
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
@@ -156,15 +117,14 @@ public class WhatsAppWebhookInboundAudioMessage extends WhatsAppWebhookInboundMe
             return false;
         }
         WhatsAppWebhookInboundAudioMessage whatsAppWebhookInboundAudioMessage = (WhatsAppWebhookInboundAudioMessage) o;
-        return Objects.equals(this.url, whatsAppWebhookInboundAudioMessage.url)
-                && Objects.equals(this.caption, whatsAppWebhookInboundAudioMessage.caption)
-                && Objects.equals(this.context, whatsAppWebhookInboundAudioMessage.context)
+        return Objects.equals(this.caption, whatsAppWebhookInboundAudioMessage.caption)
+                && Objects.equals(this.url, whatsAppWebhookInboundAudioMessage.url)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, caption, context, super.hashCode());
+        return Objects.hash(caption, url, super.hashCode());
     }
 
     @Override
@@ -176,14 +136,11 @@ public class WhatsAppWebhookInboundAudioMessage extends WhatsAppWebhookInboundMe
                 .append("    ")
                 .append(toIndentedString(super.toString()))
                 .append(newLine)
-                .append("    url: ")
-                .append(toIndentedString(url))
-                .append(newLine)
                 .append("    caption: ")
                 .append(toIndentedString(caption))
                 .append(newLine)
-                .append("    context: ")
-                .append(toIndentedString(context))
+                .append("    url: ")
+                .append(toIndentedString(url))
                 .append(newLine)
                 .append("}")
                 .toString();

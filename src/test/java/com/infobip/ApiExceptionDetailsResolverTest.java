@@ -45,6 +45,30 @@ class ApiExceptionDetailsResolverTest {
     }
 
     @Test
+    void shouldProperlyResolveDetailsForForbiddenResponse() {
+        // given
+        var givenApiExceptionDetails = getApiExceptionDetailsForbiddenWithOldFields();
+        var expectedViolation = new ApiExceptionDetails.Violation();
+        expectedViolation.setProperty("message");
+        expectedViolation.setViolation(
+                givenApiExceptionDetails.getValidationErrors().get("message").get(0));
+        var anotherExpectedViolation = new ApiExceptionDetails.Violation();
+        anotherExpectedViolation.setProperty("message");
+        anotherExpectedViolation.setViolation(
+                givenApiExceptionDetails.getValidationErrors().get("message").get(1));
+
+        // when
+        var expectedApiExceptionDetails = apiExceptionDetailsResolver.resolveDetails(givenApiExceptionDetails);
+
+        // then
+        then(expectedApiExceptionDetails.getErrorCode()).isEqualTo("E403");
+        then(expectedApiExceptionDetails.getDescription()).isEqualTo(givenApiExceptionDetails.getText());
+        then(expectedApiExceptionDetails.getAction()).isNull();
+        then(expectedApiExceptionDetails.getViolations()).containsExactly(expectedViolation, anotherExpectedViolation);
+        then(expectedApiExceptionDetails.getResources()).isNull();
+    }
+
+    @Test
     void shouldNotResolveDetailsIfValuesAreNotProvided() {
         // given
         var givenApiExceptionDetails = getApiExceptionDetailsWithNewFields();
@@ -72,6 +96,14 @@ class ApiExceptionDetailsResolverTest {
         var apiExceptionDetails = new ApiExceptionDetails();
         apiExceptionDetails.setMessageId("BAD_REQUEST");
         apiExceptionDetails.setText("Bad request");
+        apiExceptionDetails.setValidationErrors(Map.of("message", List.of("must not be empty", "must not be null")));
+        return apiExceptionDetails;
+    }
+
+    private ApiExceptionDetails getApiExceptionDetailsForbiddenWithOldFields() {
+        var apiExceptionDetails = new ApiExceptionDetails();
+        apiExceptionDetails.setMessageId("FORBIDDEN");
+        apiExceptionDetails.setText("Forbidden");
         apiExceptionDetails.setValidationErrors(Map.of("message", List.of("must not be empty", "must not be null")));
         return apiExceptionDetails;
     }

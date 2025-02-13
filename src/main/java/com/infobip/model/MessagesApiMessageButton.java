@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.Objects;
 
 /**
- * List of buttons for the message.
+ * List of buttons of the message.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -23,6 +23,7 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = MessagesApiMessageAddCalendarEventButton.class, name = "ADD_CALENDAR_EVENT"),
     @JsonSubTypes.Type(value = MessagesApiMessageOpenUrlButton.class, name = "OPEN_URL"),
     @JsonSubTypes.Type(value = MessagesApiMessageReplyButton.class, name = "REPLY"),
     @JsonSubTypes.Type(value = MessagesApiMessageRequestLocationButton.class, name = "REQUEST_LOCATION"),

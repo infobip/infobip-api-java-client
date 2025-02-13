@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION)
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = MessagesApiTemplateFailover.class, name = "TEMPLATE_FAILOVER"),
-    @JsonSubTypes.Type(value = MessagesApiFailover.class, name = "FAILOVER")
+    @JsonSubTypes.Type(value = MessagesApiFailover.class),
+    @JsonSubTypes.Type(value = MessagesApiTemplateFailover.class)
 })
 public interface MessagesApiBaseFailover {}

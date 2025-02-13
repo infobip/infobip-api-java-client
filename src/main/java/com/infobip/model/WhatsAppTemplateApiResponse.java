@@ -14,10 +14,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * Represents WhatsAppTemplateApiResponse model.
+ * The list of the results for this page.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -89,6 +90,12 @@ public abstract class WhatsAppTemplateApiResponse {
     }
 
     private QualityEnum quality;
+
+    private Platform platform;
+
+    private OffsetDateTime createdAt;
+
+    private OffsetDateTime lastUpdatedAt;
 
     /**
      * Sets id.
@@ -359,6 +366,117 @@ public abstract class WhatsAppTemplateApiResponse {
         this.quality = quality;
     }
 
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     * @return This {@link WhatsAppTemplateApiResponse instance}.
+     */
+    public WhatsAppTemplateApiResponse platform(Platform platform) {
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * Returns platform.
+     *
+     * @return platform
+     */
+    @JsonProperty("platform")
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     */
+    @JsonProperty("platform")
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
+    }
+
+    /**
+     * Sets createdAt.
+     * <p>
+     * Field description:
+     * Creation date of the template.
+     *
+     * @param createdAt
+     * @return This {@link WhatsAppTemplateApiResponse instance}.
+     */
+    public WhatsAppTemplateApiResponse createdAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    /**
+     * Returns createdAt.
+     * <p>
+     * Field description:
+     * Creation date of the template.
+     *
+     * @return createdAt
+     */
+    @JsonProperty("createdAt")
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * Sets createdAt.
+     * <p>
+     * Field description:
+     * Creation date of the template.
+     *
+     * @param createdAt
+     */
+    @JsonProperty("createdAt")
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    /**
+     * Sets lastUpdatedAt.
+     * <p>
+     * Field description:
+     * Last update date of the template.
+     *
+     * @param lastUpdatedAt
+     * @return This {@link WhatsAppTemplateApiResponse instance}.
+     */
+    public WhatsAppTemplateApiResponse lastUpdatedAt(OffsetDateTime lastUpdatedAt) {
+        this.lastUpdatedAt = lastUpdatedAt;
+        return this;
+    }
+
+    /**
+     * Returns lastUpdatedAt.
+     * <p>
+     * Field description:
+     * Last update date of the template.
+     *
+     * @return lastUpdatedAt
+     */
+    @JsonProperty("lastUpdatedAt")
+    public OffsetDateTime getLastUpdatedAt() {
+        return lastUpdatedAt;
+    }
+
+    /**
+     * Sets lastUpdatedAt.
+     * <p>
+     * Field description:
+     * Last update date of the template.
+     *
+     * @param lastUpdatedAt
+     */
+    @JsonProperty("lastUpdatedAt")
+    public void setLastUpdatedAt(OffsetDateTime lastUpdatedAt) {
+        this.lastUpdatedAt = lastUpdatedAt;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -375,12 +493,26 @@ public abstract class WhatsAppTemplateApiResponse {
                 && Objects.equals(this.status, whatsAppTemplateApiResponse.status)
                 && Objects.equals(this.category, whatsAppTemplateApiResponse.category)
                 && Objects.equals(this.structure, whatsAppTemplateApiResponse.structure)
-                && Objects.equals(this.quality, whatsAppTemplateApiResponse.quality);
+                && Objects.equals(this.quality, whatsAppTemplateApiResponse.quality)
+                && Objects.equals(this.platform, whatsAppTemplateApiResponse.platform)
+                && Objects.equals(this.createdAt, whatsAppTemplateApiResponse.createdAt)
+                && Objects.equals(this.lastUpdatedAt, whatsAppTemplateApiResponse.lastUpdatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, businessAccountId, name, language, status, category, structure, quality);
+        return Objects.hash(
+                id,
+                businessAccountId,
+                name,
+                language,
+                status,
+                category,
+                structure,
+                quality,
+                platform,
+                createdAt,
+                lastUpdatedAt);
     }
 
     @Override
@@ -412,6 +544,15 @@ public abstract class WhatsAppTemplateApiResponse {
                 .append(newLine)
                 .append("    quality: ")
                 .append(toIndentedString(quality))
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
+                .append(newLine)
+                .append("    createdAt: ")
+                .append(toIndentedString(createdAt))
+                .append(newLine)
+                .append("    lastUpdatedAt: ")
+                .append(toIndentedString(lastUpdatedAt))
                 .append(newLine)
                 .append("}")
                 .toString();

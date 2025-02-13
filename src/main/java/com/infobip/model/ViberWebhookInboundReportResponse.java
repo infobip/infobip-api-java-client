@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class ViberWebhookInboundReportResponse {
 
-    private List<ViberWebhookInboundReport> results = new ArrayList<>();
+    private List<ViberInboundMessageViberInboundContent> results = null;
 
     private Integer messageCount;
 
@@ -29,14 +29,12 @@ public class ViberWebhookInboundReportResponse {
      * Sets results.
      * <p>
      * Field description:
-     * Collection of reports, one per every received message.
-     * <p>
-     * The field is required.
+     * Collection of mobile originated messages.
      *
      * @param results
      * @return This {@link ViberWebhookInboundReportResponse instance}.
      */
-    public ViberWebhookInboundReportResponse results(List<ViberWebhookInboundReport> results) {
+    public ViberWebhookInboundReportResponse results(List<ViberInboundMessageViberInboundContent> results) {
         this.results = results;
         return this;
     }
@@ -45,14 +43,12 @@ public class ViberWebhookInboundReportResponse {
      * Adds and item into results.
      * <p>
      * Field description:
-     * Collection of reports, one per every received message.
-     * <p>
-     * The field is required.
+     * Collection of mobile originated messages.
      *
      * @param resultsItem The item to be added to the list.
      * @return This {@link ViberWebhookInboundReportResponse instance}.
      */
-    public ViberWebhookInboundReportResponse addResultsItem(ViberWebhookInboundReport resultsItem) {
+    public ViberWebhookInboundReportResponse addResultsItem(ViberInboundMessageViberInboundContent resultsItem) {
         if (this.results == null) {
             this.results = new ArrayList<>();
         }
@@ -64,14 +60,12 @@ public class ViberWebhookInboundReportResponse {
      * Returns results.
      * <p>
      * Field description:
-     * Collection of reports, one per every received message.
-     * <p>
-     * The field is required.
+     * Collection of mobile originated messages.
      *
      * @return results
      */
     @JsonProperty("results")
-    public List<ViberWebhookInboundReport> getResults() {
+    public List<ViberInboundMessageViberInboundContent> getResults() {
         return results;
     }
 
@@ -79,14 +73,12 @@ public class ViberWebhookInboundReportResponse {
      * Sets results.
      * <p>
      * Field description:
-     * Collection of reports, one per every received message.
-     * <p>
-     * The field is required.
+     * Collection of mobile originated messages.
      *
      * @param results
      */
     @JsonProperty("results")
-    public void setResults(List<ViberWebhookInboundReport> results) {
+    public void setResults(List<ViberInboundMessageViberInboundContent> results) {
         this.results = results;
     }
 
@@ -95,8 +87,6 @@ public class ViberWebhookInboundReportResponse {
      * <p>
      * Field description:
      * The number of messages returned in the results array.
-     * <p>
-     * The field is required.
      *
      * @param messageCount
      * @return This {@link ViberWebhookInboundReportResponse instance}.
@@ -111,8 +101,6 @@ public class ViberWebhookInboundReportResponse {
      * <p>
      * Field description:
      * The number of messages returned in the results array.
-     * <p>
-     * The field is required.
      *
      * @return messageCount
      */
@@ -126,8 +114,6 @@ public class ViberWebhookInboundReportResponse {
      * <p>
      * Field description:
      * The number of messages returned in the results array.
-     * <p>
-     * The field is required.
      *
      * @param messageCount
      */
@@ -141,8 +127,6 @@ public class ViberWebhookInboundReportResponse {
      * <p>
      * Field description:
      * The number of messages that have not been pulled in.
-     * <p>
-     * The field is required.
      *
      * @param pendingMessageCount
      * @return This {@link ViberWebhookInboundReportResponse instance}.
@@ -157,8 +141,6 @@ public class ViberWebhookInboundReportResponse {
      * <p>
      * Field description:
      * The number of messages that have not been pulled in.
-     * <p>
-     * The field is required.
      *
      * @return pendingMessageCount
      */
@@ -172,8 +154,6 @@ public class ViberWebhookInboundReportResponse {
      * <p>
      * Field description:
      * The number of messages that have not been pulled in.
-     * <p>
-     * The field is required.
      *
      * @param pendingMessageCount
      */

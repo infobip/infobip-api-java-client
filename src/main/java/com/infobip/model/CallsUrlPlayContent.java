@@ -19,6 +19,8 @@ public class CallsUrlPlayContent extends CallsPlayContent {
 
     private String fileUrl;
 
+    private Integer cacheDuration;
+
     /**
      * Constructs a new {@link CallsUrlPlayContent} instance.
      */
@@ -63,6 +65,37 @@ public class CallsUrlPlayContent extends CallsPlayContent {
         this.fileUrl = fileUrl;
     }
 
+    /**
+     * Sets cacheDuration.
+     *
+     * @param cacheDuration
+     * @return This {@link CallsUrlPlayContent instance}.
+     */
+    public CallsUrlPlayContent cacheDuration(Integer cacheDuration) {
+        this.cacheDuration = cacheDuration;
+        return this;
+    }
+
+    /**
+     * Returns cacheDuration.
+     *
+     * @return cacheDuration
+     */
+    @JsonProperty("cacheDuration")
+    public Integer getCacheDuration() {
+        return cacheDuration;
+    }
+
+    /**
+     * Sets cacheDuration.
+     *
+     * @param cacheDuration
+     */
+    @JsonProperty("cacheDuration")
+    public void setCacheDuration(Integer cacheDuration) {
+        this.cacheDuration = cacheDuration;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -72,12 +105,14 @@ public class CallsUrlPlayContent extends CallsPlayContent {
             return false;
         }
         CallsUrlPlayContent callsUrlPlayContent = (CallsUrlPlayContent) o;
-        return Objects.equals(this.fileUrl, callsUrlPlayContent.fileUrl) && super.equals(o);
+        return Objects.equals(this.fileUrl, callsUrlPlayContent.fileUrl)
+                && Objects.equals(this.cacheDuration, callsUrlPlayContent.cacheDuration)
+                && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fileUrl, super.hashCode());
+        return Objects.hash(fileUrl, cacheDuration, super.hashCode());
     }
 
     @Override
@@ -91,6 +126,9 @@ public class CallsUrlPlayContent extends CallsPlayContent {
                 .append(newLine)
                 .append("    fileUrl: ")
                 .append(toIndentedString(fileUrl))
+                .append(newLine)
+                .append("    cacheDuration: ")
+                .append(toIndentedString(cacheDuration))
                 .append(newLine)
                 .append("}")
                 .toString();

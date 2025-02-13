@@ -29,6 +29,8 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
 
     private String buttonText;
 
+    private MessagesApiMessageCardOptions cardOptions;
+
     /**
      * Constructs a new {@link MessagesApiMessageRichLinkBody} instance.
      */
@@ -294,6 +296,37 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
         this.buttonText = buttonText;
     }
 
+    /**
+     * Sets cardOptions.
+     *
+     * @param cardOptions
+     * @return This {@link MessagesApiMessageRichLinkBody instance}.
+     */
+    public MessagesApiMessageRichLinkBody cardOptions(MessagesApiMessageCardOptions cardOptions) {
+        this.cardOptions = cardOptions;
+        return this;
+    }
+
+    /**
+     * Returns cardOptions.
+     *
+     * @return cardOptions
+     */
+    @JsonProperty("cardOptions")
+    public MessagesApiMessageCardOptions getCardOptions() {
+        return cardOptions;
+    }
+
+    /**
+     * Sets cardOptions.
+     *
+     * @param cardOptions
+     */
+    @JsonProperty("cardOptions")
+    public void setCardOptions(MessagesApiMessageCardOptions cardOptions) {
+        this.cardOptions = cardOptions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -309,12 +342,13 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
                 && Objects.equals(this.isVideo, messagesApiMessageRichLinkBody.isVideo)
                 && Objects.equals(this.thumbnailUrl, messagesApiMessageRichLinkBody.thumbnailUrl)
                 && Objects.equals(this.buttonText, messagesApiMessageRichLinkBody.buttonText)
+                && Objects.equals(this.cardOptions, messagesApiMessageRichLinkBody.cardOptions)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(redirectUrl, text, url, isVideo, thumbnailUrl, buttonText, super.hashCode());
+        return Objects.hash(redirectUrl, text, url, isVideo, thumbnailUrl, buttonText, cardOptions, super.hashCode());
     }
 
     @Override
@@ -343,6 +377,9 @@ public class MessagesApiMessageRichLinkBody extends MessagesApiMessageBody {
                 .append(newLine)
                 .append("    buttonText: ")
                 .append(toIndentedString(buttonText))
+                .append(newLine)
+                .append("    cardOptions: ")
+                .append(toIndentedString(cardOptions))
                 .append(newLine)
                 .append("}")
                 .toString();

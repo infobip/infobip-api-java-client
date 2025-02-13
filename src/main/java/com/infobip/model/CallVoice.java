@@ -141,6 +141,9 @@ public enum CallVoice {
     MAI_BETA_("Mai (beta)"),
     TUAN_BETA_("Tuan (beta)"),
     GWYNETH("Gwyneth"),
+    AARYA("Aarya"),
+    ARJUN("Arjun"),
+    REVATI("Revati"),
     HAMED_NEURAL_("Hamed (neural)"),
     SALMA_NEURAL_("Salma (neural)"),
     SHAKIR_NEURAL_("Shakir (neural)"),
@@ -429,7 +432,9 @@ public enum CallVoice {
     MOUNA_NEURAL_("Mouna (neural)"),
     JAMAL_NEURAL_("Jamal (neural)"),
     UZMA_NEURAL_("Uzma (neural)"),
-    ASAD_NEURAL_("Asad (neural)");
+    ASAD_NEURAL_("Asad (neural)"),
+    AAROHI_NEURAL_("Aarohi (neural)"),
+    MANOHAR_NEURAL_("Manohar (neural)");
 
     private final String value;
 

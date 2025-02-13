@@ -10,7 +10,11 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Bulk item list.
@@ -44,8 +48,6 @@ public class CallsBulkItem {
      * <p>
      * Field description:
      * Caller identifier. Must be a number in the [E.164](https://en.wikipedia.org/wiki/E.164) format.
-     * <p>
-     * The field is required.
      *
      * @param from
      * @return This {@link CallsBulkItem instance}.
@@ -60,8 +62,6 @@ public class CallsBulkItem {
      * <p>
      * Field description:
      * Caller identifier. Must be a number in the [E.164](https://en.wikipedia.org/wiki/E.164) format.
-     * <p>
-     * The field is required.
      *
      * @return from
      */
@@ -75,8 +75,6 @@ public class CallsBulkItem {
      * <p>
      * Field description:
      * Caller identifier. Must be a number in the [E.164](https://en.wikipedia.org/wiki/E.164) format.
-     * <p>
-     * The field is required.
      *
      * @param from
      */

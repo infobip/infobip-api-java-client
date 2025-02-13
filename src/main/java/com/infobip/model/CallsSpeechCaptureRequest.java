@@ -19,7 +19,7 @@ import java.util.Set;
  */
 public class CallsSpeechCaptureRequest {
 
-    private CallsLanguage language;
+    private CallTranscriptionLanguage language;
 
     private Integer timeout;
 
@@ -35,7 +35,7 @@ public class CallsSpeechCaptureRequest {
      * @param language
      * @return This {@link CallsSpeechCaptureRequest instance}.
      */
-    public CallsSpeechCaptureRequest language(CallsLanguage language) {
+    public CallsSpeechCaptureRequest language(CallTranscriptionLanguage language) {
         this.language = language;
         return this;
     }
@@ -48,7 +48,7 @@ public class CallsSpeechCaptureRequest {
      * @return language
      */
     @JsonProperty("language")
-    public CallsLanguage getLanguage() {
+    public CallTranscriptionLanguage getLanguage() {
         return language;
     }
 
@@ -60,7 +60,7 @@ public class CallsSpeechCaptureRequest {
      * @param language
      */
     @JsonProperty("language")
-    public void setLanguage(CallsLanguage language) {
+    public void setLanguage(CallTranscriptionLanguage language) {
         this.language = language;
     }
 

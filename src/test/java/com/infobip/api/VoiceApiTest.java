@@ -780,28 +780,23 @@ class VoiceApiTest extends ApiTest {
         String givenName = "scenario";
         String givenDescription = "";
         String givenCreateTime = "2023-12-06T13:37:15Z";
+        String givenDial = "dial";
+        Integer givenActionId = 1;
         OffsetDateTime givenCreateTimeDateTime =
                 OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
 
         String givenUpdateTime = null;
-        List<String> givenScript = List.of("repeated list of actions corresponding request object");
 
+        String script = String.format("[{'dial': '%s', 'actionId': %d}]", givenDial, givenActionId);
         String givenResponse = String.format(
                 "[{\n" + "  \"id\": \"%s\",\n"
                         + "  \"name\": \"%s\",\n"
                         + "  \"description\": \"%s\",\n"
                         + "  \"createTime\": \"%s\",\n"
                         + "  \"updateTime\": %s,\n"
-                        + "  \"script\": [\n"
-                        + "    \"%s\"\n"
-                        + "  ]\n"
+                        + "  \"script\": \"%s\"\n"
                         + "}]",
-                givenId,
-                givenName,
-                givenDescription,
-                givenCreateTime,
-                givenUpdateTime,
-                String.join("\", \"", givenScript));
+                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime, script);
 
         setUpGetRequest("/voice/ivr/1/scenarios", Map.of(), givenResponse, 200);
 
@@ -815,10 +810,56 @@ class VoiceApiTest extends ApiTest {
             then(response.get(0).getDescription()).isEqualTo(givenDescription);
             then(response.get(0).getCreateTime()).isEqualTo(givenCreateTimeDateTime);
             then(response.get(0).getUpdateTime()).isNull();
-            then(response.get(0).getScript()).isEqualTo(givenScript);
+            then(response.get(0).getScript()).isEqualTo(script);
         };
 
         var call = api.searchVoiceIvrScenarios();
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldCreateCallApiVoiceIvrScenario() {
+        String script =
+                "[ { 'request': 'https://example.com/api/12345', 'options': { 'method': 'POST', 'headers': { 'content-type': 'application/json' }, 'body': { 'payload': '${to} finished the IVR.' } } } ]";
+
+        String givenRequest = String.format(
+                "{\n" + "  \"name\": \"Call API\",\n"
+                        + "  \"description\": \"Perform a POST request to provided URL with headers and payload.\",\n"
+                        + "  \"script\": \"%s\"\n"
+                        + "}",
+                script);
+
+        String givenResponse = String.format(
+                "{\n" + "  \"id\": \"E83E787CF2613450157ADA3476171E3F\",\n"
+                        + "  \"name\": \"Call API\",\n"
+                        + "  \"description\": \"Perform a POST request to provided URL with headers and payload.\",\n"
+                        + "  \"script\": \"%s\",\n"
+                        + "  \"createTime\": \"2024-11-09T17:00:00.000+01:00\"\n"
+                        + "}",
+                script);
+
+        setUpSuccessPostRequest(VOICE_SCENARIOS, givenRequest, givenResponse);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        CallsUpdateScenarioRequest request = new CallsUpdateScenarioRequest()
+                .name("Call API")
+                .description("Perform a POST request to provided URL with headers and payload.")
+                .script(script);
+
+        Consumer<CallsUpdateScenarioResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo("E83E787CF2613450157ADA3476171E3F");
+            then(response.getName()).isEqualTo("Call API");
+            then(response.getDescription())
+                    .isEqualTo("Perform a POST request to provided URL with headers and payload.");
+            then(response.getCreateTime()).isEqualTo("2024-11-09T17:00:00.000+01:00");
+            then(response.getScript()).isNotNull();
+            then(response.getScript()).isEqualTo(script);
+        };
+
+        var call = api.createAVoiceIvrScenario(request);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -833,7 +874,9 @@ class VoiceApiTest extends ApiTest {
                 OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
 
         String givenUpdateTime = null;
-        List<String> givenScript = List.of("repeated list of actions corresponding request object");
+        String givenDial = "dial";
+        Integer givenActionId = 1;
+        String script = String.format("[{'dial': '%s', 'actionId': %d}]", givenDial, givenActionId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -841,16 +884,9 @@ class VoiceApiTest extends ApiTest {
                         + "  \"description\": \"%s\",\n"
                         + "  \"createTime\": \"%s\",\n"
                         + "  \"updateTime\": %s,\n"
-                        + "  \"script\": [\n"
-                        + "    \"%s\"\n"
-                        + "  ]\n"
+                        + "  \"script\": \"%s\"\n"
                         + "}",
-                givenId,
-                givenName,
-                givenDescription,
-                givenCreateTime,
-                givenUpdateTime,
-                String.join("\", \"", givenScript));
+                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime, script);
 
         setUpGetRequest(VOICE_SCENARIO.replace("{id}", givenId), Map.of(), givenResponse, 200);
 
@@ -863,7 +899,7 @@ class VoiceApiTest extends ApiTest {
             then(response.getDescription()).isEqualTo(givenDescription);
             then(response.getCreateTime()).isEqualTo(givenCreateTimeDateTime);
             then(response.getUpdateTime()).isNull();
-            then(response.getScript()).isEqualTo(givenScript);
+            then(response.getScript()).isEqualTo(script);
         };
 
         var call = api.getAVoiceIvrScenario(givenId);
@@ -881,18 +917,12 @@ class VoiceApiTest extends ApiTest {
                 OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
         String givenUpdateTime = null;
         Integer givenActionId = 1;
-        CallsDial script = new CallsDial().actionId(givenActionId);
+        String givenDial = "dial";
+        String script = String.format("[{'dial': '%s', 'actionId': %d}]", givenDial, givenActionId);
 
         String givenRequest = String.format(
-                "{\n" + "  \"name\": \"%s\",\n"
-                        + "  \"description\": \"%s\",\n"
-                        + "  \"script\": [\n"
-                        + "    {\n"
-                        + "      \"actionId\": %d\n"
-                        + "    }\n"
-                        + "  ]\n"
-                        + "}",
-                givenName, givenDescription, givenActionId);
+                "{\n" + "  \"name\": \"%s\",\n" + "  \"description\": \"%s\",\n" + "  \"script\": \"%s\"\n" + "}",
+                givenName, givenDescription, script);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -900,13 +930,9 @@ class VoiceApiTest extends ApiTest {
                         + "  \"description\": \"%s\",\n"
                         + "  \"createTime\": \"%s\",\n"
                         + "  \"updateTime\": %s,\n"
-                        + "  \"script\": [\n"
-                        + "    {\n"
-                        + "      \"actionId\": %d\n"
-                        + "    }\n"
-                        + "  ]\n"
+                        + "  \"script\": \"%s\"\n"
                         + "}",
-                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime, givenActionId);
+                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime, script);
 
         setUpPostRequest(VOICE_SCENARIOS, givenRequest, givenResponse, 200);
 
@@ -915,7 +941,7 @@ class VoiceApiTest extends ApiTest {
         CallsUpdateScenarioRequest request = new CallsUpdateScenarioRequest()
                 .name(givenName)
                 .description(givenDescription)
-                .script(List.of(script));
+                .script(script);
 
         Consumer<CallsUpdateScenarioResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -924,7 +950,7 @@ class VoiceApiTest extends ApiTest {
             then(response.getDescription()).isEqualTo(givenDescription);
             then(response.getCreateTime()).isEqualTo(givenCreateTimeDateTime);
             then(response.getUpdateTime()).isNull();
-            then(response.getScript()).isNotNull();
+            then(response.getScript()).isEqualTo(script);
         };
 
         var call = api.createAVoiceIvrScenario(request);
@@ -937,40 +963,16 @@ class VoiceApiTest extends ApiTest {
         String givenId = "E83E787CF2613450157ADA3476171E3F";
         String givenName = "Call API";
         String givenDescription = "Perform a POST request to provided URL with headers and payload.";
-        String givenRequestUrl = "https://requestb.in/12345";
-        CallsHttpMethod givenRequestMethod = CallsHttpMethod.POST;
-        String givenRequestHeaderKey = "content-type";
-        String givenRequestHeaderValue = "application/json";
-        String givenRequestBodyPayload = "payload";
         String givenCreateTime = "2023-12-06T13:37:15Z";
         OffsetDateTime givenCreateTimeDateTime =
                 OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
         String givenUpdateTime = null;
-        List<String> givenScript = List.of("repeated list of actions corresponding request object");
+        String script =
+                "[ { 'request': 'https://example.com/api/12345', 'options': { 'method': 'POST', 'headers': { 'content-type': 'application/json' }, 'body': { 'payload': '${to} finished the IVR.' } } } ]";
 
         String givenRequest = String.format(
-                "{\n" + "  \"name\": \"%s\",\n"
-                        + "  \"description\": \"%s\",\n"
-                        + "  \"script\": [\n"
-                        + "    {\n"
-                        + "      \"request\": \"%s\",\n"
-                        + "      \"options\": {\n"
-                        + "        \"method\": \"%s\",\n"
-                        + "        \"headers\": {\n"
-                        + "          \"%s\": \"%s\"\n"
-                        + "        },\n"
-                        + "        \"body\": \"%s\"\n"
-                        + "      }\n"
-                        + "    }\n"
-                        + "  ]\n"
-                        + "}",
-                givenName,
-                givenDescription,
-                givenRequestUrl,
-                givenRequestMethod,
-                givenRequestHeaderKey,
-                givenRequestHeaderValue,
-                givenRequestBodyPayload);
+                "{\n" + "  \"name\": \"%s\",\n" + "  \"description\": \"%s\",\n" + "  \"script\": \"%s\"\n" + "}",
+                givenName, givenDescription, script);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -978,16 +980,9 @@ class VoiceApiTest extends ApiTest {
                         + "  \"description\": \"%s\",\n"
                         + "  \"createTime\": \"%s\",\n"
                         + "  \"updateTime\": %s,\n"
-                        + "  \"script\": [\n"
-                        + "    \"%s\"\n"
-                        + "  ]\n"
+                        + "  \"script\": \"%s\"\n"
                         + "}",
-                givenId,
-                givenName,
-                givenDescription,
-                givenCreateTime,
-                givenUpdateTime,
-                String.join("\", \"", givenScript));
+                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime, script);
 
         setUpPutRequest(VOICE_SCENARIO.replace("{id}", givenId), Map.of(), givenRequest, givenResponse, 200);
 
@@ -996,12 +991,7 @@ class VoiceApiTest extends ApiTest {
         CallsUpdateScenarioRequest request = new CallsUpdateScenarioRequest()
                 .name(givenName)
                 .description(givenDescription)
-                .script(List.of(new CallsCallApi()
-                        .request(givenRequestUrl)
-                        .options(new CallsCallApiOptions()
-                                .method(givenRequestMethod)
-                                .headers(Map.of(givenRequestHeaderKey, givenRequestHeaderValue))
-                                .body(givenRequestBodyPayload))));
+                .script(script);
 
         Consumer<CallsUpdateScenarioResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -1010,7 +1000,7 @@ class VoiceApiTest extends ApiTest {
             then(response.getDescription()).isEqualTo(givenDescription);
             then(response.getCreateTime()).isEqualTo(givenCreateTimeDateTime);
             then(response.getUpdateTime()).isNull();
-            then(response.getScript()).isEqualTo(givenScript);
+            then(response.getScript()).isEqualTo(script);
         };
 
         var call = api.updateVoiceIvrScenario(givenId, request);
@@ -1034,8 +1024,7 @@ class VoiceApiTest extends ApiTest {
         };
 
         var call = api.deleteAVoiceIvrScenario(givenId);
-        testSuccessfulCall(call::execute, assertions);
-        testSuccessfulAsyncCall(call::executeAsync, assertions);
+        testSuccessfulCallWithNoBody(call::executeAsync, 200);
     }
 
     @Test

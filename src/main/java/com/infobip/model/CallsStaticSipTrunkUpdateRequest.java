@@ -25,6 +25,16 @@ public class CallsStaticSipTrunkUpdateRequest extends CallsSipTrunkUpdateRequest
 
     private CallsSelectionStrategy strategy;
 
+    private List<CallsAudioCodec> codecs = null;
+
+    private CallsDtmfType dtmf;
+
+    private CallsFaxType fax;
+
+    private CallsAnonymizationType anonymization;
+
+    private CallsNumberPresentationFormat numberFormat;
+
     private CallsSipOptions sipOptions;
 
     /**
@@ -180,6 +190,187 @@ public class CallsStaticSipTrunkUpdateRequest extends CallsSipTrunkUpdateRequest
     }
 
     /**
+     * Sets codecs.
+     * <p>
+     * Field description:
+     * List of audio codecs supported by a SIP trunk.
+     *
+     * @param codecs
+     * @return This {@link CallsStaticSipTrunkUpdateRequest instance}.
+     */
+    public CallsStaticSipTrunkUpdateRequest codecs(List<CallsAudioCodec> codecs) {
+        this.codecs = codecs;
+        return this;
+    }
+
+    /**
+     * Adds and item into codecs.
+     * <p>
+     * Field description:
+     * List of audio codecs supported by a SIP trunk.
+     *
+     * @param codecsItem The item to be added to the list.
+     * @return This {@link CallsStaticSipTrunkUpdateRequest instance}.
+     */
+    public CallsStaticSipTrunkUpdateRequest addCodecsItem(CallsAudioCodec codecsItem) {
+        if (this.codecs == null) {
+            this.codecs = new ArrayList<>();
+        }
+        this.codecs.add(codecsItem);
+        return this;
+    }
+
+    /**
+     * Returns codecs.
+     * <p>
+     * Field description:
+     * List of audio codecs supported by a SIP trunk.
+     *
+     * @return codecs
+     */
+    @JsonProperty("codecs")
+    public List<CallsAudioCodec> getCodecs() {
+        return codecs;
+    }
+
+    /**
+     * Sets codecs.
+     * <p>
+     * Field description:
+     * List of audio codecs supported by a SIP trunk.
+     *
+     * @param codecs
+     */
+    @JsonProperty("codecs")
+    public void setCodecs(List<CallsAudioCodec> codecs) {
+        this.codecs = codecs;
+    }
+
+    /**
+     * Sets dtmf.
+     *
+     * @param dtmf
+     * @return This {@link CallsStaticSipTrunkUpdateRequest instance}.
+     */
+    public CallsStaticSipTrunkUpdateRequest dtmf(CallsDtmfType dtmf) {
+        this.dtmf = dtmf;
+        return this;
+    }
+
+    /**
+     * Returns dtmf.
+     *
+     * @return dtmf
+     */
+    @JsonProperty("dtmf")
+    public CallsDtmfType getDtmf() {
+        return dtmf;
+    }
+
+    /**
+     * Sets dtmf.
+     *
+     * @param dtmf
+     */
+    @JsonProperty("dtmf")
+    public void setDtmf(CallsDtmfType dtmf) {
+        this.dtmf = dtmf;
+    }
+
+    /**
+     * Sets fax.
+     *
+     * @param fax
+     * @return This {@link CallsStaticSipTrunkUpdateRequest instance}.
+     */
+    public CallsStaticSipTrunkUpdateRequest fax(CallsFaxType fax) {
+        this.fax = fax;
+        return this;
+    }
+
+    /**
+     * Returns fax.
+     *
+     * @return fax
+     */
+    @JsonProperty("fax")
+    public CallsFaxType getFax() {
+        return fax;
+    }
+
+    /**
+     * Sets fax.
+     *
+     * @param fax
+     */
+    @JsonProperty("fax")
+    public void setFax(CallsFaxType fax) {
+        this.fax = fax;
+    }
+
+    /**
+     * Sets anonymization.
+     *
+     * @param anonymization
+     * @return This {@link CallsStaticSipTrunkUpdateRequest instance}.
+     */
+    public CallsStaticSipTrunkUpdateRequest anonymization(CallsAnonymizationType anonymization) {
+        this.anonymization = anonymization;
+        return this;
+    }
+
+    /**
+     * Returns anonymization.
+     *
+     * @return anonymization
+     */
+    @JsonProperty("anonymization")
+    public CallsAnonymizationType getAnonymization() {
+        return anonymization;
+    }
+
+    /**
+     * Sets anonymization.
+     *
+     * @param anonymization
+     */
+    @JsonProperty("anonymization")
+    public void setAnonymization(CallsAnonymizationType anonymization) {
+        this.anonymization = anonymization;
+    }
+
+    /**
+     * Sets numberFormat.
+     *
+     * @param numberFormat
+     * @return This {@link CallsStaticSipTrunkUpdateRequest instance}.
+     */
+    public CallsStaticSipTrunkUpdateRequest numberFormat(CallsNumberPresentationFormat numberFormat) {
+        this.numberFormat = numberFormat;
+        return this;
+    }
+
+    /**
+     * Returns numberFormat.
+     *
+     * @return numberFormat
+     */
+    @JsonProperty("numberFormat")
+    public CallsNumberPresentationFormat getNumberFormat() {
+        return numberFormat;
+    }
+
+    /**
+     * Sets numberFormat.
+     *
+     * @param numberFormat
+     */
+    @JsonProperty("numberFormat")
+    public void setNumberFormat(CallsNumberPresentationFormat numberFormat) {
+        this.numberFormat = numberFormat;
+    }
+
+    /**
      * Sets sipOptions.
      *
      * @param sipOptions
@@ -222,13 +413,28 @@ public class CallsStaticSipTrunkUpdateRequest extends CallsSipTrunkUpdateRequest
         return Objects.equals(this.sourceHosts, callsStaticSipTrunkUpdateRequest.sourceHosts)
                 && Objects.equals(this.destinationHosts, callsStaticSipTrunkUpdateRequest.destinationHosts)
                 && Objects.equals(this.strategy, callsStaticSipTrunkUpdateRequest.strategy)
+                && Objects.equals(this.codecs, callsStaticSipTrunkUpdateRequest.codecs)
+                && Objects.equals(this.dtmf, callsStaticSipTrunkUpdateRequest.dtmf)
+                && Objects.equals(this.fax, callsStaticSipTrunkUpdateRequest.fax)
+                && Objects.equals(this.anonymization, callsStaticSipTrunkUpdateRequest.anonymization)
+                && Objects.equals(this.numberFormat, callsStaticSipTrunkUpdateRequest.numberFormat)
                 && Objects.equals(this.sipOptions, callsStaticSipTrunkUpdateRequest.sipOptions)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sourceHosts, destinationHosts, strategy, sipOptions, super.hashCode());
+        return Objects.hash(
+                sourceHosts,
+                destinationHosts,
+                strategy,
+                codecs,
+                dtmf,
+                fax,
+                anonymization,
+                numberFormat,
+                sipOptions,
+                super.hashCode());
     }
 
     @Override
@@ -248,6 +454,21 @@ public class CallsStaticSipTrunkUpdateRequest extends CallsSipTrunkUpdateRequest
                 .append(newLine)
                 .append("    strategy: ")
                 .append(toIndentedString(strategy))
+                .append(newLine)
+                .append("    codecs: ")
+                .append(toIndentedString(codecs))
+                .append(newLine)
+                .append("    dtmf: ")
+                .append(toIndentedString(dtmf))
+                .append(newLine)
+                .append("    fax: ")
+                .append(toIndentedString(fax))
+                .append(newLine)
+                .append("    anonymization: ")
+                .append(toIndentedString(anonymization))
+                .append(newLine)
+                .append("    numberFormat: ")
+                .append(toIndentedString(numberFormat))
                 .append(newLine)
                 .append("    sipOptions: ")
                 .append(toIndentedString(sipOptions))

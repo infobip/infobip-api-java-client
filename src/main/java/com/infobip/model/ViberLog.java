@@ -34,7 +34,7 @@ public class ViberLog {
 
     private MessagePrice price;
 
-    private ViberMessageStatus status;
+    private MessageStatus status;
 
     private ViberMessageError error;
 
@@ -361,7 +361,7 @@ public class ViberLog {
      * @param status
      * @return This {@link ViberLog instance}.
      */
-    public ViberLog status(ViberMessageStatus status) {
+    public ViberLog status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -372,7 +372,7 @@ public class ViberLog {
      * @return status
      */
     @JsonProperty("status")
-    public ViberMessageStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -382,7 +382,7 @@ public class ViberLog {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(ViberMessageStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 

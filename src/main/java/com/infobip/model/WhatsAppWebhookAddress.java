@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * Array of addresses information.
+ * Represents WhatsAppWebhookAddress model.
  */
 public class WhatsAppWebhookAddress {
 
@@ -32,7 +32,7 @@ public class WhatsAppWebhookAddress {
     private String countryCode;
 
     /**
-     * Type of the address. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
+     * Type of an address.
      */
     public enum TypeEnum {
         HOME("HOME"),
@@ -191,7 +191,7 @@ public class WhatsAppWebhookAddress {
      * Sets zip.
      * <p>
      * Field description:
-     * Zip code value.
+     * Zip value.
      *
      * @param zip
      * @return This {@link WhatsAppWebhookAddress instance}.
@@ -205,7 +205,7 @@ public class WhatsAppWebhookAddress {
      * Returns zip.
      * <p>
      * Field description:
-     * Zip code value.
+     * Zip value.
      *
      * @return zip
      */
@@ -218,7 +218,7 @@ public class WhatsAppWebhookAddress {
      * Sets zip.
      * <p>
      * Field description:
-     * Zip code value.
+     * Zip value.
      *
      * @param zip
      */
@@ -311,7 +311,7 @@ public class WhatsAppWebhookAddress {
      * Sets type.
      * <p>
      * Field description:
-     * Type of the address. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
+     * Type of an address.
      *
      * @param type
      * @return This {@link WhatsAppWebhookAddress instance}.
@@ -325,7 +325,7 @@ public class WhatsAppWebhookAddress {
      * Returns type.
      * <p>
      * Field description:
-     * Type of the address. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
+     * Type of an address.
      *
      * @return type
      */
@@ -338,7 +338,7 @@ public class WhatsAppWebhookAddress {
      * Sets type.
      * <p>
      * Field description:
-     * Type of the address. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
+     * Type of an address.
      *
      * @param type
      */

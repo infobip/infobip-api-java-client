@@ -17,11 +17,53 @@ import java.util.Objects;
  */
 public class MessagesApiMessageListItem {
 
+    private String id;
+
     private String text;
 
     private String description;
 
     private String imageUrl;
+
+    /**
+     * Sets id.
+     * <p>
+     * Field description:
+     * Item ID (supported only by WhatsApp), has to be unique for each item.
+     *
+     * @param id
+     * @return This {@link MessagesApiMessageListItem instance}.
+     */
+    public MessagesApiMessageListItem id(String id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
+     * Returns id.
+     * <p>
+     * Field description:
+     * Item ID (supported only by WhatsApp), has to be unique for each item.
+     *
+     * @return id
+     */
+    @JsonProperty("id")
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Sets id.
+     * <p>
+     * Field description:
+     * Item ID (supported only by WhatsApp), has to be unique for each item.
+     *
+     * @param id
+     */
+    @JsonProperty("id")
+    public void setId(String id) {
+        this.id = id;
+    }
 
     /**
      * Sets text.
@@ -158,14 +200,15 @@ public class MessagesApiMessageListItem {
             return false;
         }
         MessagesApiMessageListItem messagesApiMessageListItem = (MessagesApiMessageListItem) o;
-        return Objects.equals(this.text, messagesApiMessageListItem.text)
+        return Objects.equals(this.id, messagesApiMessageListItem.id)
+                && Objects.equals(this.text, messagesApiMessageListItem.text)
                 && Objects.equals(this.description, messagesApiMessageListItem.description)
                 && Objects.equals(this.imageUrl, messagesApiMessageListItem.imageUrl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, description, imageUrl);
+        return Objects.hash(id, text, description, imageUrl);
     }
 
     @Override
@@ -173,6 +216,9 @@ public class MessagesApiMessageListItem {
         String newLine = System.lineSeparator();
         return new StringBuilder()
                 .append("class MessagesApiMessageListItem {")
+                .append(newLine)
+                .append("    id: ")
+                .append(toIndentedString(id))
                 .append(newLine)
                 .append("    text: ")
                 .append(toIndentedString(text))

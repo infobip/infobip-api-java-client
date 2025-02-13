@@ -17,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum WhatsAppSenderLimit {
     LIMIT_NA("LIMIT_NA"),
-    LIMIT_50("LIMIT_50"),
     LIMIT_250("LIMIT_250"),
     LIMIT_1K("LIMIT_1K"),
     LIMIT_10K("LIMIT_10K"),

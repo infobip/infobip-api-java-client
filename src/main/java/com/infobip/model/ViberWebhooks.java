@@ -23,6 +23,8 @@ public class ViberWebhooks {
 
     private String callbackData;
 
+    private ViberSeenStatusReporting seen;
+
     /**
      * Sets delivery.
      *
@@ -134,6 +136,37 @@ public class ViberWebhooks {
         this.callbackData = callbackData;
     }
 
+    /**
+     * Sets seen.
+     *
+     * @param seen
+     * @return This {@link ViberWebhooks instance}.
+     */
+    public ViberWebhooks seen(ViberSeenStatusReporting seen) {
+        this.seen = seen;
+        return this;
+    }
+
+    /**
+     * Returns seen.
+     *
+     * @return seen
+     */
+    @JsonProperty("seen")
+    public ViberSeenStatusReporting getSeen() {
+        return seen;
+    }
+
+    /**
+     * Sets seen.
+     *
+     * @param seen
+     */
+    @JsonProperty("seen")
+    public void setSeen(ViberSeenStatusReporting seen) {
+        this.seen = seen;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -145,12 +178,13 @@ public class ViberWebhooks {
         ViberWebhooks viberWebhooks = (ViberWebhooks) o;
         return Objects.equals(this.delivery, viberWebhooks.delivery)
                 && Objects.equals(this.contentType, viberWebhooks.contentType)
-                && Objects.equals(this.callbackData, viberWebhooks.callbackData);
+                && Objects.equals(this.callbackData, viberWebhooks.callbackData)
+                && Objects.equals(this.seen, viberWebhooks.seen);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(delivery, contentType, callbackData);
+        return Objects.hash(delivery, contentType, callbackData, seen);
     }
 
     @Override
@@ -167,6 +201,9 @@ public class ViberWebhooks {
                 .append(newLine)
                 .append("    callbackData: ")
                 .append(toIndentedString(callbackData))
+                .append(newLine)
+                .append("    seen: ")
+                .append(toIndentedString(seen))
                 .append(newLine)
                 .append("}")
                 .toString();

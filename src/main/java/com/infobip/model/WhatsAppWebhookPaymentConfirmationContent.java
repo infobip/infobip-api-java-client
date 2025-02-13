@@ -31,8 +31,6 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
 
     private WhatsAppPaymentTransactionType transactionType;
 
-    private WhatsAppContext context;
-
     /**
      * Constructs a new {@link WhatsAppWebhookPaymentConfirmationContent} instance.
      */
@@ -91,6 +89,8 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
      * <p>
      * Field description:
      * Unique identifier of the payment.
+     * <p>
+     * The field is required.
      *
      * @param paymentId
      * @return This {@link WhatsAppWebhookPaymentConfirmationContent instance}.
@@ -105,6 +105,8 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
      * <p>
      * Field description:
      * Unique identifier of the payment.
+     * <p>
+     * The field is required.
      *
      * @return paymentId
      */
@@ -118,6 +120,8 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
      * <p>
      * Field description:
      * Unique identifier of the payment.
+     * <p>
+     * The field is required.
      *
      * @param paymentId
      */
@@ -320,37 +324,6 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
         this.transactionType = transactionType;
     }
 
-    /**
-     * Sets context.
-     *
-     * @param context
-     * @return This {@link WhatsAppWebhookPaymentConfirmationContent instance}.
-     */
-    public WhatsAppWebhookPaymentConfirmationContent context(WhatsAppContext context) {
-        this.context = context;
-        return this;
-    }
-
-    /**
-     * Returns context.
-     *
-     * @return context
-     */
-    @JsonProperty("context")
-    public WhatsAppContext getContext() {
-        return context;
-    }
-
-    /**
-     * Sets context.
-     *
-     * @param context
-     */
-    @JsonProperty("context")
-    public void setContext(WhatsAppContext context) {
-        this.context = context;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -368,7 +341,6 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
                 && Objects.equals(this.totalAmount, whatsAppWebhookPaymentConfirmationContent.totalAmount)
                 && Objects.equals(this.transactionId, whatsAppWebhookPaymentConfirmationContent.transactionId)
                 && Objects.equals(this.transactionType, whatsAppWebhookPaymentConfirmationContent.transactionType)
-                && Objects.equals(this.context, whatsAppWebhookPaymentConfirmationContent.context)
                 && super.equals(o);
     }
 
@@ -382,7 +354,6 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
                 totalAmount,
                 transactionId,
                 transactionType,
-                context,
                 super.hashCode());
     }
 
@@ -415,9 +386,6 @@ public class WhatsAppWebhookPaymentConfirmationContent extends WhatsAppWebhookIn
                 .append(newLine)
                 .append("    transactionType: ")
                 .append(toIndentedString(transactionType))
-                .append(newLine)
-                .append("    context: ")
-                .append(toIndentedString(context))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -32,6 +32,8 @@ public class ViberSeenReport {
 
     private String entityId;
 
+    private String campaignReferenceId;
+
     /**
      * Sets messageId.
      * <p>
@@ -312,6 +314,46 @@ public class ViberSeenReport {
         this.entityId = entityId;
     }
 
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     * @return This {@link ViberSeenReport instance}.
+     */
+    public ViberSeenReport campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -327,12 +369,13 @@ public class ViberSeenReport {
                 && Objects.equals(this.sentAt, viberSeenReport.sentAt)
                 && Objects.equals(this.seenAt, viberSeenReport.seenAt)
                 && Objects.equals(this.applicationId, viberSeenReport.applicationId)
-                && Objects.equals(this.entityId, viberSeenReport.entityId);
+                && Objects.equals(this.entityId, viberSeenReport.entityId)
+                && Objects.equals(this.campaignReferenceId, viberSeenReport.campaignReferenceId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageId, from, to, sentAt, seenAt, applicationId, entityId);
+        return Objects.hash(messageId, from, to, sentAt, seenAt, applicationId, entityId, campaignReferenceId);
     }
 
     @Override
@@ -361,6 +404,9 @@ public class ViberSeenReport {
                 .append(newLine)
                 .append("    entityId: ")
                 .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
                 .append(newLine)
                 .append("}")
                 .toString();

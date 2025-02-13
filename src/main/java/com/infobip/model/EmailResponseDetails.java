@@ -21,7 +21,7 @@ public class EmailResponseDetails {
 
     private String messageId;
 
-    private EmailSingleMessageStatus status;
+    private MessageStatus status;
 
     /**
      * Sets to.
@@ -109,7 +109,7 @@ public class EmailResponseDetails {
      * @param status
      * @return This {@link EmailResponseDetails instance}.
      */
-    public EmailResponseDetails status(EmailSingleMessageStatus status) {
+    public EmailResponseDetails status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -120,7 +120,7 @@ public class EmailResponseDetails {
      * @return status
      */
     @JsonProperty("status")
-    public EmailSingleMessageStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -130,7 +130,7 @@ public class EmailResponseDetails {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(EmailSingleMessageStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 

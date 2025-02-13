@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class ViberDefaultMessageRequestOptions {
 
-    private ViberMessageRequestSchedulingSettings schedule;
+    private ViberRequestSchedulingSettings schedule;
 
     private UrlOptions tracking;
 
@@ -27,7 +27,7 @@ public class ViberDefaultMessageRequestOptions {
      * @param schedule
      * @return This {@link ViberDefaultMessageRequestOptions instance}.
      */
-    public ViberDefaultMessageRequestOptions schedule(ViberMessageRequestSchedulingSettings schedule) {
+    public ViberDefaultMessageRequestOptions schedule(ViberRequestSchedulingSettings schedule) {
         this.schedule = schedule;
         return this;
     }
@@ -38,7 +38,7 @@ public class ViberDefaultMessageRequestOptions {
      * @return schedule
      */
     @JsonProperty("schedule")
-    public ViberMessageRequestSchedulingSettings getSchedule() {
+    public ViberRequestSchedulingSettings getSchedule() {
         return schedule;
     }
 
@@ -48,7 +48,7 @@ public class ViberDefaultMessageRequestOptions {
      * @param schedule
      */
     @JsonProperty("schedule")
-    public void setSchedule(ViberMessageRequestSchedulingSettings schedule) {
+    public void setSchedule(ViberRequestSchedulingSettings schedule) {
         this.schedule = schedule;
     }
 

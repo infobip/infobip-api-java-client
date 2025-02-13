@@ -21,8 +21,6 @@ public class WhatsAppWebhookButtonReplyContent extends WhatsAppWebhookInboundMes
 
     private String title;
 
-    private WhatsAppContext context;
-
     /**
      * Constructs a new {@link WhatsAppWebhookButtonReplyContent} instance.
      */
@@ -122,37 +120,6 @@ public class WhatsAppWebhookButtonReplyContent extends WhatsAppWebhookInboundMes
         this.title = title;
     }
 
-    /**
-     * Sets context.
-     *
-     * @param context
-     * @return This {@link WhatsAppWebhookButtonReplyContent instance}.
-     */
-    public WhatsAppWebhookButtonReplyContent context(WhatsAppContext context) {
-        this.context = context;
-        return this;
-    }
-
-    /**
-     * Returns context.
-     *
-     * @return context
-     */
-    @JsonProperty("context")
-    public WhatsAppContext getContext() {
-        return context;
-    }
-
-    /**
-     * Sets context.
-     *
-     * @param context
-     */
-    @JsonProperty("context")
-    public void setContext(WhatsAppContext context) {
-        this.context = context;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -164,13 +131,12 @@ public class WhatsAppWebhookButtonReplyContent extends WhatsAppWebhookInboundMes
         WhatsAppWebhookButtonReplyContent whatsAppWebhookButtonReplyContent = (WhatsAppWebhookButtonReplyContent) o;
         return Objects.equals(this.id, whatsAppWebhookButtonReplyContent.id)
                 && Objects.equals(this.title, whatsAppWebhookButtonReplyContent.title)
-                && Objects.equals(this.context, whatsAppWebhookButtonReplyContent.context)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, context, super.hashCode());
+        return Objects.hash(id, title, super.hashCode());
     }
 
     @Override
@@ -187,9 +153,6 @@ public class WhatsAppWebhookButtonReplyContent extends WhatsAppWebhookInboundMes
                 .append(newLine)
                 .append("    title: ")
                 .append(toIndentedString(title))
-                .append(newLine)
-                .append("    context: ")
-                .append(toIndentedString(context))
                 .append(newLine)
                 .append("}")
                 .toString();

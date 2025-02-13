@@ -1867,7 +1867,7 @@ class WhatsAppApiTest extends ApiTest {
         String givenSender2 = "441134960001";
         WhatsAppSenderQualityRating givenQualityRating2 = WhatsAppSenderQualityRating.LOW;
         WhatsAppSenderStatus givenStatus2 = WhatsAppSenderStatus.BANNED;
-        WhatsAppSenderLimit givenCurrentLimit2 = WhatsAppSenderLimit.LIMIT_50;
+        WhatsAppSenderLimit givenCurrentLimit2 = WhatsAppSenderLimit.LIMIT_250;
         String givenLastUpdated2 = "2022-02-18T08:12:26.420Z";
 
         String givenResponse = String.format(
@@ -2045,7 +2045,7 @@ class WhatsAppApiTest extends ApiTest {
         String expectedCountryCode = "44";
         String expectedPhoneNumber = "7796344125";
         String expectedDisplayName = "Infobip";
-        WhatsAppPhoneNumberRequest.TypeEnum expectedType = WhatsAppPhoneNumberRequest.TypeEnum.EXTERNAL_SMS;
+        WhatsAppNumberType expectedType = WhatsAppNumberType.SMS;
         String expectedLocale = "en_US";
         String expectedRequest = String.format(
                 "{\n" + "  \"countryCode\": \"%s\",\n"
@@ -2084,7 +2084,7 @@ class WhatsAppApiTest extends ApiTest {
 
     @Test
     void shouldRetryWhatsAppSenderVerification() {
-        WhatsAppOtpRequest.TypeEnum expectedType = WhatsAppOtpRequest.TypeEnum.SMS;
+        WhatsAppNumberType expectedType = WhatsAppNumberType.SMS;
         String expectedLocale = "en_US";
         String expectedRequest = String.format(
                 "{\n" + "  \"type\": \"%s\",\n" + "  \"locale\": \"%s\"\n" + "}", expectedType, expectedLocale);

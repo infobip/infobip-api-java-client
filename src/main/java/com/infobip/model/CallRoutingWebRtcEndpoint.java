@@ -30,9 +30,7 @@ public class CallRoutingWebRtcEndpoint extends CallRoutingEndpoint {
      * Sets identity.
      * <p>
      * Field description:
-     * The unique identity used to present a user on the Infobip WebRTC platform.
-     * <p>
-     * The field is required.
+     * The unique identity used to present a user on the Infobip WebRTC platform. Defaults to &#x60;to&#x60; value used in inbound call.
      *
      * @param identity
      * @return This {@link CallRoutingWebRtcEndpoint instance}.
@@ -46,9 +44,7 @@ public class CallRoutingWebRtcEndpoint extends CallRoutingEndpoint {
      * Returns identity.
      * <p>
      * Field description:
-     * The unique identity used to present a user on the Infobip WebRTC platform.
-     * <p>
-     * The field is required.
+     * The unique identity used to present a user on the Infobip WebRTC platform. Defaults to &#x60;to&#x60; value used in inbound call.
      *
      * @return identity
      */
@@ -61,9 +57,7 @@ public class CallRoutingWebRtcEndpoint extends CallRoutingEndpoint {
      * Sets identity.
      * <p>
      * Field description:
-     * The unique identity used to present a user on the Infobip WebRTC platform.
-     * <p>
-     * The field is required.
+     * The unique identity used to present a user on the Infobip WebRTC platform. Defaults to &#x60;to&#x60; value used in inbound call.
      *
      * @param identity
      */

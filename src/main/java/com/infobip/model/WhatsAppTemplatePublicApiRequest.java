@@ -81,9 +81,9 @@ public abstract class WhatsAppTemplatePublicApiRequest {
 
     private Boolean allowCategoryChange;
 
-    private Object structure;
+    private WhatsAppTemplateStructureApiData structure;
 
-    private WhatsAppValidityPeriodApiData validityPeriod;
+    private Platform platform;
 
     /**
      * Sets name.
@@ -231,7 +231,7 @@ public abstract class WhatsAppTemplatePublicApiRequest {
      * @param structure
      * @return This {@link WhatsAppTemplatePublicApiRequest instance}.
      */
-    public WhatsAppTemplatePublicApiRequest structure(Object structure) {
+    public WhatsAppTemplatePublicApiRequest structure(WhatsAppTemplateStructureApiData structure) {
         this.structure = structure;
         return this;
     }
@@ -244,7 +244,7 @@ public abstract class WhatsAppTemplatePublicApiRequest {
      * @return structure
      */
     @JsonProperty("structure")
-    public Object getStructure() {
+    public WhatsAppTemplateStructureApiData getStructure() {
         return structure;
     }
 
@@ -256,39 +256,39 @@ public abstract class WhatsAppTemplatePublicApiRequest {
      * @param structure
      */
     @JsonProperty("structure")
-    public void setStructure(Object structure) {
+    public void setStructure(WhatsAppTemplateStructureApiData structure) {
         this.structure = structure;
     }
 
     /**
-     * Sets validityPeriod.
+     * Sets platform.
      *
-     * @param validityPeriod
+     * @param platform
      * @return This {@link WhatsAppTemplatePublicApiRequest instance}.
      */
-    public WhatsAppTemplatePublicApiRequest validityPeriod(WhatsAppValidityPeriodApiData validityPeriod) {
-        this.validityPeriod = validityPeriod;
+    public WhatsAppTemplatePublicApiRequest platform(Platform platform) {
+        this.platform = platform;
         return this;
     }
 
     /**
-     * Returns validityPeriod.
+     * Returns platform.
      *
-     * @return validityPeriod
+     * @return platform
      */
-    @JsonProperty("validityPeriod")
-    public WhatsAppValidityPeriodApiData getValidityPeriod() {
-        return validityPeriod;
+    @JsonProperty("platform")
+    public Platform getPlatform() {
+        return platform;
     }
 
     /**
-     * Sets validityPeriod.
+     * Sets platform.
      *
-     * @param validityPeriod
+     * @param platform
      */
-    @JsonProperty("validityPeriod")
-    public void setValidityPeriod(WhatsAppValidityPeriodApiData validityPeriod) {
-        this.validityPeriod = validityPeriod;
+    @JsonProperty("platform")
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     @Override
@@ -305,12 +305,12 @@ public abstract class WhatsAppTemplatePublicApiRequest {
                 && Objects.equals(this.category, whatsAppTemplatePublicApiRequest.category)
                 && Objects.equals(this.allowCategoryChange, whatsAppTemplatePublicApiRequest.allowCategoryChange)
                 && Objects.equals(this.structure, whatsAppTemplatePublicApiRequest.structure)
-                && Objects.equals(this.validityPeriod, whatsAppTemplatePublicApiRequest.validityPeriod);
+                && Objects.equals(this.platform, whatsAppTemplatePublicApiRequest.platform);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, language, category, allowCategoryChange, structure, validityPeriod);
+        return Objects.hash(name, language, category, allowCategoryChange, structure, platform);
     }
 
     @Override
@@ -334,8 +334,8 @@ public abstract class WhatsAppTemplatePublicApiRequest {
                 .append("    structure: ")
                 .append(toIndentedString(structure))
                 .append(newLine)
-                .append("    validityPeriod: ")
-                .append(toIndentedString(validityPeriod))
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("}")
                 .toString();

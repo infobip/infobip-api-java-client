@@ -10,8 +10,6 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -23,7 +21,7 @@ public class CallsUpdateScenarioRequest {
 
     private String description;
 
-    private List<CallsScriptInner> script = new ArrayList<>();
+    private String script;
 
     /**
      * Sets name.
@@ -114,65 +112,37 @@ public class CallsUpdateScenarioRequest {
     /**
      * Sets script.
      * <p>
-     * Field description:
-     * Array of IVR actions defining scenario. NOTE: Answering Machine Detection, Call Recording and Speech Recognition (used for Capture action) are add-on features. To enable these add-ons, please contact our [sales](https://www.infobip.com/contact) organisation.
-     * <p>
      * The field is required.
      *
      * @param script
      * @return This {@link CallsUpdateScenarioRequest instance}.
      */
-    public CallsUpdateScenarioRequest script(List<CallsScriptInner> script) {
+    public CallsUpdateScenarioRequest script(String script) {
         this.script = script;
-        return this;
-    }
-
-    /**
-     * Adds and item into script.
-     * <p>
-     * Field description:
-     * Array of IVR actions defining scenario. NOTE: Answering Machine Detection, Call Recording and Speech Recognition (used for Capture action) are add-on features. To enable these add-ons, please contact our [sales](https://www.infobip.com/contact) organisation.
-     * <p>
-     * The field is required.
-     *
-     * @param scriptItem The item to be added to the list.
-     * @return This {@link CallsUpdateScenarioRequest instance}.
-     */
-    public CallsUpdateScenarioRequest addScriptItem(CallsScriptInner scriptItem) {
-        if (this.script == null) {
-            this.script = new ArrayList<>();
-        }
-        this.script.add(scriptItem);
         return this;
     }
 
     /**
      * Returns script.
      * <p>
-     * Field description:
-     * Array of IVR actions defining scenario. NOTE: Answering Machine Detection, Call Recording and Speech Recognition (used for Capture action) are add-on features. To enable these add-ons, please contact our [sales](https://www.infobip.com/contact) organisation.
-     * <p>
      * The field is required.
      *
      * @return script
      */
     @JsonProperty("script")
-    public List<CallsScriptInner> getScript() {
+    public String getScript() {
         return script;
     }
 
     /**
      * Sets script.
      * <p>
-     * Field description:
-     * Array of IVR actions defining scenario. NOTE: Answering Machine Detection, Call Recording and Speech Recognition (used for Capture action) are add-on features. To enable these add-ons, please contact our [sales](https://www.infobip.com/contact) organisation.
-     * <p>
      * The field is required.
      *
      * @param script
      */
     @JsonProperty("script")
-    public void setScript(List<CallsScriptInner> script) {
+    public void setScript(String script) {
         this.script = script;
     }
 

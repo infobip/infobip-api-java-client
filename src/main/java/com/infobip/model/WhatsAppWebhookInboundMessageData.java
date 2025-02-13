@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * Collection of reports, one per every received message.
+ * Represents WhatsAppWebhookInboundMessageData model.
  */
 public class WhatsAppWebhookInboundMessageData {
 
@@ -22,19 +22,15 @@ public class WhatsAppWebhookInboundMessageData {
 
     private String to;
 
-    private String integrationType;
-
     private OffsetDateTime receivedAt;
 
     private String messageId;
 
-    private String pairedMessageId;
-
-    private String callbackData;
+    private MessagePrice price;
 
     private WhatsAppWebhookInboundMessage message;
 
-    private MessagePrice price;
+    private WhatsAppWebhookContactName contact;
 
     /**
      * Sets from.
@@ -114,46 +110,6 @@ public class WhatsAppWebhookInboundMessageData {
     @JsonProperty("to")
     public void setTo(String to) {
         this.to = to;
-    }
-
-    /**
-     * Sets integrationType.
-     * <p>
-     * Field description:
-     * Integration type.
-     *
-     * @param integrationType
-     * @return This {@link WhatsAppWebhookInboundMessageData instance}.
-     */
-    public WhatsAppWebhookInboundMessageData integrationType(String integrationType) {
-        this.integrationType = integrationType;
-        return this;
-    }
-
-    /**
-     * Returns integrationType.
-     * <p>
-     * Field description:
-     * Integration type.
-     *
-     * @return integrationType
-     */
-    @JsonProperty("integrationType")
-    public String getIntegrationType() {
-        return integrationType;
-    }
-
-    /**
-     * Sets integrationType.
-     * <p>
-     * Field description:
-     * Integration type.
-     *
-     * @param integrationType
-     */
-    @JsonProperty("integrationType")
-    public void setIntegrationType(String integrationType) {
-        this.integrationType = integrationType;
     }
 
     /**
@@ -237,83 +193,34 @@ public class WhatsAppWebhookInboundMessageData {
     }
 
     /**
-     * Sets pairedMessageId.
-     * <p>
-     * Field description:
-     * Message ID of paired outgoing message if matched by Infobip platform.
+     * Sets price.
      *
-     * @param pairedMessageId
+     * @param price
      * @return This {@link WhatsAppWebhookInboundMessageData instance}.
      */
-    public WhatsAppWebhookInboundMessageData pairedMessageId(String pairedMessageId) {
-        this.pairedMessageId = pairedMessageId;
+    public WhatsAppWebhookInboundMessageData price(MessagePrice price) {
+        this.price = price;
         return this;
     }
 
     /**
-     * Returns pairedMessageId.
-     * <p>
-     * Field description:
-     * Message ID of paired outgoing message if matched by Infobip platform.
+     * Returns price.
      *
-     * @return pairedMessageId
+     * @return price
      */
-    @JsonProperty("pairedMessageId")
-    public String getPairedMessageId() {
-        return pairedMessageId;
+    @JsonProperty("price")
+    public MessagePrice getPrice() {
+        return price;
     }
 
     /**
-     * Sets pairedMessageId.
-     * <p>
-     * Field description:
-     * Message ID of paired outgoing message if matched by Infobip platform.
+     * Sets price.
      *
-     * @param pairedMessageId
+     * @param price
      */
-    @JsonProperty("pairedMessageId")
-    public void setPairedMessageId(String pairedMessageId) {
-        this.pairedMessageId = pairedMessageId;
-    }
-
-    /**
-     * Sets callbackData.
-     * <p>
-     * Field description:
-     * Callback data sent through ‛callbackData‛ field when sending message.
-     *
-     * @param callbackData
-     * @return This {@link WhatsAppWebhookInboundMessageData instance}.
-     */
-    public WhatsAppWebhookInboundMessageData callbackData(String callbackData) {
-        this.callbackData = callbackData;
-        return this;
-    }
-
-    /**
-     * Returns callbackData.
-     * <p>
-     * Field description:
-     * Callback data sent through ‛callbackData‛ field when sending message.
-     *
-     * @return callbackData
-     */
-    @JsonProperty("callbackData")
-    public String getCallbackData() {
-        return callbackData;
-    }
-
-    /**
-     * Sets callbackData.
-     * <p>
-     * Field description:
-     * Callback data sent through ‛callbackData‛ field when sending message.
-     *
-     * @param callbackData
-     */
-    @JsonProperty("callbackData")
-    public void setCallbackData(String callbackData) {
-        this.callbackData = callbackData;
+    @JsonProperty("price")
+    public void setPrice(MessagePrice price) {
+        this.price = price;
     }
 
     /**
@@ -348,34 +255,43 @@ public class WhatsAppWebhookInboundMessageData {
     }
 
     /**
-     * Sets price.
+     * Sets contact.
+     * <p>
+     * Field description:
+     * Information about recipient.
      *
-     * @param price
+     * @param contact
      * @return This {@link WhatsAppWebhookInboundMessageData instance}.
      */
-    public WhatsAppWebhookInboundMessageData price(MessagePrice price) {
-        this.price = price;
+    public WhatsAppWebhookInboundMessageData contact(WhatsAppWebhookContactName contact) {
+        this.contact = contact;
         return this;
     }
 
     /**
-     * Returns price.
+     * Returns contact.
+     * <p>
+     * Field description:
+     * Information about recipient.
      *
-     * @return price
+     * @return contact
      */
-    @JsonProperty("price")
-    public MessagePrice getPrice() {
-        return price;
+    @JsonProperty("contact")
+    public WhatsAppWebhookContactName getContact() {
+        return contact;
     }
 
     /**
-     * Sets price.
+     * Sets contact.
+     * <p>
+     * Field description:
+     * Information about recipient.
      *
-     * @param price
+     * @param contact
      */
-    @JsonProperty("price")
-    public void setPrice(MessagePrice price) {
-        this.price = price;
+    @JsonProperty("contact")
+    public void setContact(WhatsAppWebhookContactName contact) {
+        this.contact = contact;
     }
 
     @Override
@@ -389,19 +305,16 @@ public class WhatsAppWebhookInboundMessageData {
         WhatsAppWebhookInboundMessageData whatsAppWebhookInboundMessageData = (WhatsAppWebhookInboundMessageData) o;
         return Objects.equals(this.from, whatsAppWebhookInboundMessageData.from)
                 && Objects.equals(this.to, whatsAppWebhookInboundMessageData.to)
-                && Objects.equals(this.integrationType, whatsAppWebhookInboundMessageData.integrationType)
                 && Objects.equals(this.receivedAt, whatsAppWebhookInboundMessageData.receivedAt)
                 && Objects.equals(this.messageId, whatsAppWebhookInboundMessageData.messageId)
-                && Objects.equals(this.pairedMessageId, whatsAppWebhookInboundMessageData.pairedMessageId)
-                && Objects.equals(this.callbackData, whatsAppWebhookInboundMessageData.callbackData)
+                && Objects.equals(this.price, whatsAppWebhookInboundMessageData.price)
                 && Objects.equals(this.message, whatsAppWebhookInboundMessageData.message)
-                && Objects.equals(this.price, whatsAppWebhookInboundMessageData.price);
+                && Objects.equals(this.contact, whatsAppWebhookInboundMessageData.contact);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                from, to, integrationType, receivedAt, messageId, pairedMessageId, callbackData, message, price);
+        return Objects.hash(from, to, receivedAt, messageId, price, message, contact);
     }
 
     @Override
@@ -416,26 +329,20 @@ public class WhatsAppWebhookInboundMessageData {
                 .append("    to: ")
                 .append(toIndentedString(to))
                 .append(newLine)
-                .append("    integrationType: ")
-                .append(toIndentedString(integrationType))
-                .append(newLine)
                 .append("    receivedAt: ")
                 .append(toIndentedString(receivedAt))
                 .append(newLine)
                 .append("    messageId: ")
                 .append(toIndentedString(messageId))
                 .append(newLine)
-                .append("    pairedMessageId: ")
-                .append(toIndentedString(pairedMessageId))
-                .append(newLine)
-                .append("    callbackData: ")
-                .append(toIndentedString(callbackData))
+                .append("    price: ")
+                .append(toIndentedString(price))
                 .append(newLine)
                 .append("    message: ")
                 .append(toIndentedString(message))
                 .append(newLine)
-                .append("    price: ")
-                .append(toIndentedString(price))
+                .append("    contact: ")
+                .append(toIndentedString(contact))
                 .append(newLine)
                 .append("}")
                 .toString();

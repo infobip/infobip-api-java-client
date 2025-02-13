@@ -17,53 +17,11 @@ import java.util.Objects;
  */
 public class WhatsAppContext {
 
-    private String from;
-
     private String id;
 
-    private String groupId;
+    private String from;
 
     private WhatsAppWebhookReferredProduct referredProduct;
-
-    /**
-     * Sets from.
-     * <p>
-     * Field description:
-     * End user&#39;s phone number.
-     *
-     * @param from
-     * @return This {@link WhatsAppContext instance}.
-     */
-    public WhatsAppContext from(String from) {
-        this.from = from;
-        return this;
-    }
-
-    /**
-     * Returns from.
-     * <p>
-     * Field description:
-     * End user&#39;s phone number.
-     *
-     * @return from
-     */
-    @JsonProperty("from")
-    public String getFrom() {
-        return from;
-    }
-
-    /**
-     * Sets from.
-     * <p>
-     * Field description:
-     * End user&#39;s phone number.
-     *
-     * @param from
-     */
-    @JsonProperty("from")
-    public void setFrom(String from) {
-        this.from = from;
-    }
 
     /**
      * Sets id.
@@ -106,43 +64,43 @@ public class WhatsAppContext {
     }
 
     /**
-     * Sets groupId.
+     * Sets from.
      * <p>
      * Field description:
-     * GroupId of the message to which the end user responded.
+     * End user&#39;s phone number.
      *
-     * @param groupId
+     * @param from
      * @return This {@link WhatsAppContext instance}.
      */
-    public WhatsAppContext groupId(String groupId) {
-        this.groupId = groupId;
+    public WhatsAppContext from(String from) {
+        this.from = from;
         return this;
     }
 
     /**
-     * Returns groupId.
+     * Returns from.
      * <p>
      * Field description:
-     * GroupId of the message to which the end user responded.
+     * End user&#39;s phone number.
      *
-     * @return groupId
+     * @return from
      */
-    @JsonProperty("groupId")
-    public String getGroupId() {
-        return groupId;
+    @JsonProperty("from")
+    public String getFrom() {
+        return from;
     }
 
     /**
-     * Sets groupId.
+     * Sets from.
      * <p>
      * Field description:
-     * GroupId of the message to which the end user responded.
+     * End user&#39;s phone number.
      *
-     * @param groupId
+     * @param from
      */
-    @JsonProperty("groupId")
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
+    @JsonProperty("from")
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     /**
@@ -185,15 +143,14 @@ public class WhatsAppContext {
             return false;
         }
         WhatsAppContext whatsAppContext = (WhatsAppContext) o;
-        return Objects.equals(this.from, whatsAppContext.from)
-                && Objects.equals(this.id, whatsAppContext.id)
-                && Objects.equals(this.groupId, whatsAppContext.groupId)
+        return Objects.equals(this.id, whatsAppContext.id)
+                && Objects.equals(this.from, whatsAppContext.from)
                 && Objects.equals(this.referredProduct, whatsAppContext.referredProduct);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, id, groupId, referredProduct);
+        return Objects.hash(id, from, referredProduct);
     }
 
     @Override
@@ -202,14 +159,11 @@ public class WhatsAppContext {
         return new StringBuilder()
                 .append("class WhatsAppContext {")
                 .append(newLine)
-                .append("    from: ")
-                .append(toIndentedString(from))
-                .append(newLine)
                 .append("    id: ")
                 .append(toIndentedString(id))
                 .append(newLine)
-                .append("    groupId: ")
-                .append(toIndentedString(groupId))
+                .append("    from: ")
+                .append(toIndentedString(from))
                 .append(newLine)
                 .append("    referredProduct: ")
                 .append(toIndentedString(referredProduct))

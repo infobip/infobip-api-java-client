@@ -19,7 +19,7 @@ public class ViberMessageError {
 
     private Integer groupId;
 
-    private ViberMessageErrorGroup groupName;
+    private MessageErrorGroup groupName;
 
     private Integer id;
 
@@ -75,7 +75,7 @@ public class ViberMessageError {
      * @param groupName
      * @return This {@link ViberMessageError instance}.
      */
-    public ViberMessageError groupName(ViberMessageErrorGroup groupName) {
+    public ViberMessageError groupName(MessageErrorGroup groupName) {
         this.groupName = groupName;
         return this;
     }
@@ -86,7 +86,7 @@ public class ViberMessageError {
      * @return groupName
      */
     @JsonProperty("groupName")
-    public ViberMessageErrorGroup getGroupName() {
+    public MessageErrorGroup getGroupName() {
         return groupName;
     }
 
@@ -96,7 +96,7 @@ public class ViberMessageError {
      * @param groupName
      */
     @JsonProperty("groupName")
-    public void setGroupName(ViberMessageErrorGroup groupName) {
+    public void setGroupName(MessageErrorGroup groupName) {
         this.groupName = groupName;
     }
 

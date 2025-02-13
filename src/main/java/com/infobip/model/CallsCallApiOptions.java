@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -19,7 +21,7 @@ public class CallsCallApiOptions {
 
     private CallsHttpMethod method;
 
-    private Object headers;
+    private Map<String, Object> headers = null;
 
     private String body;
 
@@ -71,8 +73,26 @@ public class CallsCallApiOptions {
      * @param headers
      * @return This {@link CallsCallApiOptions instance}.
      */
-    public CallsCallApiOptions headers(Object headers) {
+    public CallsCallApiOptions headers(Map<String, Object> headers) {
         this.headers = headers;
+        return this;
+    }
+
+    /**
+     * Puts and entry into headers.
+     * <p>
+     * Field description:
+     * HTTP headers
+     *
+     * @param key The given key.
+     * @param headersItem The item to be associated with the given key.
+     * @return This {@link CallsCallApiOptions instance}.
+     */
+    public CallsCallApiOptions putHeadersItem(String key, Object headersItem) {
+        if (this.headers == null) {
+            this.headers = new HashMap<>();
+        }
+        this.headers.put(key, headersItem);
         return this;
     }
 
@@ -85,7 +105,7 @@ public class CallsCallApiOptions {
      * @return headers
      */
     @JsonProperty("headers")
-    public Object getHeaders() {
+    public Map<String, Object> getHeaders() {
         return headers;
     }
 
@@ -98,7 +118,7 @@ public class CallsCallApiOptions {
      * @param headers
      */
     @JsonProperty("headers")
-    public void setHeaders(Object headers) {
+    public void setHeaders(Map<String, Object> headers) {
         this.headers = headers;
     }
 

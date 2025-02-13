@@ -35,6 +35,8 @@ public class EmailDomainInfo {
 
     private Boolean readOverquotas;
 
+    private Boolean deleteOverquotas;
+
     /**
      * Sets domainName.
      * <p>
@@ -440,6 +442,52 @@ public class EmailDomainInfo {
         this.readOverquotas = readOverquotas;
     }
 
+    /**
+     * Sets deleteOverquotas.
+     * <p>
+     * Field description:
+     * Delete overquotas permission.
+     * <p>
+     * The field is required.
+     *
+     * @param deleteOverquotas
+     * @return This {@link EmailDomainInfo instance}.
+     */
+    public EmailDomainInfo deleteOverquotas(Boolean deleteOverquotas) {
+        this.deleteOverquotas = deleteOverquotas;
+        return this;
+    }
+
+    /**
+     * Returns deleteOverquotas.
+     * <p>
+     * Field description:
+     * Delete overquotas permission.
+     * <p>
+     * The field is required.
+     *
+     * @return deleteOverquotas
+     */
+    @JsonProperty("deleteOverquotas")
+    public Boolean getDeleteOverquotas() {
+        return deleteOverquotas;
+    }
+
+    /**
+     * Sets deleteOverquotas.
+     * <p>
+     * Field description:
+     * Delete overquotas permission.
+     * <p>
+     * The field is required.
+     *
+     * @param deleteOverquotas
+     */
+    @JsonProperty("deleteOverquotas")
+    public void setDeleteOverquotas(Boolean deleteOverquotas) {
+        this.deleteOverquotas = deleteOverquotas;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -457,7 +505,8 @@ public class EmailDomainInfo {
                 && Objects.equals(this.readComplaints, emailDomainInfo.readComplaints)
                 && Objects.equals(this.createComplaints, emailDomainInfo.createComplaints)
                 && Objects.equals(this.deleteComplaints, emailDomainInfo.deleteComplaints)
-                && Objects.equals(this.readOverquotas, emailDomainInfo.readOverquotas);
+                && Objects.equals(this.readOverquotas, emailDomainInfo.readOverquotas)
+                && Objects.equals(this.deleteOverquotas, emailDomainInfo.deleteOverquotas);
     }
 
     @Override
@@ -471,7 +520,8 @@ public class EmailDomainInfo {
                 readComplaints,
                 createComplaints,
                 deleteComplaints,
-                readOverquotas);
+                readOverquotas,
+                deleteOverquotas);
     }
 
     @Override
@@ -506,6 +556,9 @@ public class EmailDomainInfo {
                 .append(newLine)
                 .append("    readOverquotas: ")
                 .append(toIndentedString(readOverquotas))
+                .append(newLine)
+                .append("    deleteOverquotas: ")
+                .append(toIndentedString(deleteOverquotas))
                 .append(newLine)
                 .append("}")
                 .toString();

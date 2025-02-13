@@ -13,10 +13,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Error code to hang up with. There are rules for using error codes.  &#x60;NORMAL_HANGUP&#x60; - Call needs to be established.  &#x60;NO_ANSWER&#x60; - Call cannot be established.  &#x60;BUSY&#x60; - Call cannot be established.  &#x60;CANCELLED&#x60; - Call cannot be established and must be &#x60;INBOUND&#x60; call  &#x60;REJECTED&#x60; - Call cannot be established and must be &#x60;OUTBOUND&#x60; call.  &#x60;FORBIDDEN&#x60; - Call cannot be established.  &#x60;DESTINATION_NOT_FOUND&#x60; - Call cannot be established and must be &#x60;OUTBOUND&#x60;  &#x60;DESTINATION_UNAVAILABLE&#x60; - Call cannot be established and must be &#x60;OUTBOUND&#x60;.  &#x60;INVALID_DESTINATION&#x60; - Call needs to be established and must be &#x60;OUTBOUND&#x60;.  &#x60;SERVICE_UNAVAILABLE&#x60; - Call cannot to be established.
+ * Error code to hang up with. There are rules for using error codes.  &#x60;NORMAL_HANGUP&#x60; - Call needs to be established.  &#x60;MACHINE_DETECTED&#x60; - Call needs to be established and must be &#x60;OUTBOUND&#x60;.  &#x60;NO_ANSWER&#x60; - Call cannot be established.  &#x60;BUSY&#x60; - Call cannot be established.  &#x60;CANCELLED&#x60; - Call cannot be established.  &#x60;REJECTED&#x60; - Call cannot be established.  &#x60;FORBIDDEN&#x60; - Call cannot be established.  &#x60;DESTINATION_NOT_FOUND&#x60; - Call cannot be established.  &#x60;DESTINATION_UNAVAILABLE&#x60; - Call cannot be established.  &#x60;INVALID_DESTINATION&#x60; - Call cannot be established.  &#x60;SERVICE_UNAVAILABLE&#x60; - Call cannot be established.
  */
 public enum CallsErrorCode {
     NORMAL_HANGUP("NORMAL_HANGUP"),
+    MACHINE_DETECTED("MACHINE_DETECTED"),
     NO_ANSWER("NO_ANSWER"),
     BUSY("BUSY"),
     CANCELLED("CANCELLED"),

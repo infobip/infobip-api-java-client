@@ -15,17 +15,13 @@ import com.infobip.ApiClient;
 import com.infobip.ApiException;
 import com.infobip.Parameter;
 import com.infobip.RequestDefinition;
-import com.infobip.model.ViberBulkMessageInfo;
-import com.infobip.model.ViberBulkTextMessage;
-import com.infobip.model.ViberFileMessage;
-import com.infobip.model.ViberImageMessage;
+import com.infobip.model.MessageGeneralStatus;
+import com.infobip.model.MessageResponse;
 import com.infobip.model.ViberLogsResponse;
-import com.infobip.model.ViberMessageGeneralStatus;
 import com.infobip.model.ViberRequest;
-import com.infobip.model.ViberResponse;
-import com.infobip.model.ViberSingleMessageInfo;
-import com.infobip.model.ViberVideoMessage;
 import com.infobip.model.ViberWebhookReportsResponse;
+import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -45,7 +41,12 @@ public class ViberApi {
     }
 
     private RequestDefinition getOutboundViberMessageDeliveryReportsDefinition(
-            String bulkId, String messageId, Integer limit, String entityId, String applicationId) {
+            String bulkId,
+            String messageId,
+            Integer limit,
+            String entityId,
+            String applicationId,
+            String campaignReferenceId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/viber/2/reports")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -65,6 +66,9 @@ public class ViberApi {
         if (applicationId != null) {
             builder.addQueryParameter(new Parameter("applicationId", applicationId));
         }
+        if (campaignReferenceId != null) {
+            builder.addQueryParameter(new Parameter("campaignReferenceId", campaignReferenceId));
+        }
         return builder.build();
     }
 
@@ -77,6 +81,7 @@ public class ViberApi {
         private Integer limit;
         private String entityId;
         private String applicationId;
+        private String campaignReferenceId;
 
         private GetOutboundViberMessageDeliveryReportsRequest() {}
 
@@ -136,6 +141,17 @@ public class ViberApi {
         }
 
         /**
+         * Sets campaignReferenceId.
+         *
+         * @param campaignReferenceId ID of a campaign that was sent in the message. (optional)
+         * @return GetOutboundViberMessageDeliveryReportsRequest
+         */
+        public GetOutboundViberMessageDeliveryReportsRequest campaignReferenceId(String campaignReferenceId) {
+            this.campaignReferenceId = campaignReferenceId;
+            return this;
+        }
+
+        /**
          * Executes the getOutboundViberMessageDeliveryReports request.
          *
          * @return ViberWebhookReportsResponse The deserialized response.
@@ -143,7 +159,8 @@ public class ViberApi {
          */
         public ViberWebhookReportsResponse execute() throws ApiException {
             RequestDefinition getOutboundViberMessageDeliveryReportsDefinition =
-                    getOutboundViberMessageDeliveryReportsDefinition(bulkId, messageId, limit, entityId, applicationId);
+                    getOutboundViberMessageDeliveryReportsDefinition(
+                            bulkId, messageId, limit, entityId, applicationId, campaignReferenceId);
             return apiClient.execute(
                     getOutboundViberMessageDeliveryReportsDefinition,
                     new TypeReference<ViberWebhookReportsResponse>() {}.getType());
@@ -157,7 +174,8 @@ public class ViberApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<ViberWebhookReportsResponse> callback) {
             RequestDefinition getOutboundViberMessageDeliveryReportsDefinition =
-                    getOutboundViberMessageDeliveryReportsDefinition(bulkId, messageId, limit, entityId, applicationId);
+                    getOutboundViberMessageDeliveryReportsDefinition(
+                            bulkId, messageId, limit, entityId, applicationId, campaignReferenceId);
             return apiClient.executeAsync(
                     getOutboundViberMessageDeliveryReportsDefinition,
                     new TypeReference<ViberWebhookReportsResponse>() {}.getType(),
@@ -180,14 +198,15 @@ public class ViberApi {
     private RequestDefinition getOutboundViberMessageLogsDefinition(
             String sender,
             String destination,
-            String bulkId,
-            String messageId,
-            ViberMessageGeneralStatus generalStatus,
-            String sentSince,
-            String sentUntil,
-            String limit,
+            List<String> bulkId,
+            List<String> messageId,
+            MessageGeneralStatus generalStatus,
+            OffsetDateTime sentSince,
+            OffsetDateTime sentUntil,
+            Integer limit,
             String entityId,
-            String applicationId) {
+            String applicationId,
+            List<String> campaignReferenceId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/viber/2/logs")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -199,10 +218,14 @@ public class ViberApi {
             builder.addQueryParameter(new Parameter("destination", destination));
         }
         if (bulkId != null) {
-            builder.addQueryParameter(new Parameter("bulkId", bulkId));
+            for (var parameterItem : bulkId) {
+                builder.addQueryParameter(new Parameter("bulkId", parameterItem));
+            }
         }
         if (messageId != null) {
-            builder.addQueryParameter(new Parameter("messageId", messageId));
+            for (var parameterItem : messageId) {
+                builder.addQueryParameter(new Parameter("messageId", parameterItem));
+            }
         }
         if (generalStatus != null) {
             builder.addQueryParameter(new Parameter("generalStatus", generalStatus));
@@ -222,6 +245,11 @@ public class ViberApi {
         if (applicationId != null) {
             builder.addQueryParameter(new Parameter("applicationId", applicationId));
         }
+        if (campaignReferenceId != null) {
+            for (var parameterItem : campaignReferenceId) {
+                builder.addQueryParameter(new Parameter("campaignReferenceId", parameterItem));
+            }
+        }
         return builder.build();
     }
 
@@ -231,14 +259,15 @@ public class ViberApi {
     public class GetOutboundViberMessageLogsRequest {
         private String sender;
         private String destination;
-        private String bulkId;
-        private String messageId;
-        private ViberMessageGeneralStatus generalStatus;
-        private String sentSince;
-        private String sentUntil;
-        private String limit;
+        private List<String> bulkId;
+        private List<String> messageId;
+        private MessageGeneralStatus generalStatus;
+        private OffsetDateTime sentSince;
+        private OffsetDateTime sentUntil;
+        private Integer limit;
         private String entityId;
         private String applicationId;
+        private List<String> campaignReferenceId;
 
         private GetOutboundViberMessageLogsRequest() {}
 
@@ -267,10 +296,10 @@ public class ViberApi {
         /**
          * Sets bulkId.
          *
-         * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. (optional)
+         * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. May contain multiple comma-separated values. Maximum length 2048 characters. (optional)
          * @return GetOutboundViberMessageLogsRequest
          */
-        public GetOutboundViberMessageLogsRequest bulkId(String bulkId) {
+        public GetOutboundViberMessageLogsRequest bulkId(List<String> bulkId) {
             this.bulkId = bulkId;
             return this;
         }
@@ -278,10 +307,10 @@ public class ViberApi {
         /**
          * Sets messageId.
          *
-         * @param messageId Unique message ID for which a log is requested. (optional)
+         * @param messageId Unique message ID for which a log is requested. May contain multiple comma-separated values. Maximum length 2048 characters. (optional)
          * @return GetOutboundViberMessageLogsRequest
          */
-        public GetOutboundViberMessageLogsRequest messageId(String messageId) {
+        public GetOutboundViberMessageLogsRequest messageId(List<String> messageId) {
             this.messageId = messageId;
             return this;
         }
@@ -292,7 +321,7 @@ public class ViberApi {
          * @param generalStatus  (optional)
          * @return GetOutboundViberMessageLogsRequest
          */
-        public GetOutboundViberMessageLogsRequest generalStatus(ViberMessageGeneralStatus generalStatus) {
+        public GetOutboundViberMessageLogsRequest generalStatus(MessageGeneralStatus generalStatus) {
             this.generalStatus = generalStatus;
             return this;
         }
@@ -303,7 +332,7 @@ public class ViberApi {
          * @param sentSince The logs will only include messages sent after this date. Use it together with sentUntil to return a time range or if you want to fetch more than 1000 logs allowed per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
          * @return GetOutboundViberMessageLogsRequest
          */
-        public GetOutboundViberMessageLogsRequest sentSince(String sentSince) {
+        public GetOutboundViberMessageLogsRequest sentSince(OffsetDateTime sentSince) {
             this.sentSince = sentSince;
             return this;
         }
@@ -311,10 +340,10 @@ public class ViberApi {
         /**
          * Sets sentUntil.
          *
-         * @param sentUntil The logs will only include messages sent before this date. Use it together with sentBefore to return a time range or if you want to fetch more than 1000 logs allowed per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
+         * @param sentUntil The logs will only include messages sent before this date. Use it together with sentSince to return a time range or if you want to fetch more than 1000 logs allowed per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
          * @return GetOutboundViberMessageLogsRequest
          */
-        public GetOutboundViberMessageLogsRequest sentUntil(String sentUntil) {
+        public GetOutboundViberMessageLogsRequest sentUntil(OffsetDateTime sentUntil) {
             this.sentUntil = sentUntil;
             return this;
         }
@@ -325,7 +354,7 @@ public class ViberApi {
          * @param limit Maximum number of messages to include in logs. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access logs for the last 48h. If you want to fetch more than 1000 logs allowed per call, use sentBefore and sentUntil to retrieve them in pages. (optional, default to 50)
          * @return GetOutboundViberMessageLogsRequest
          */
-        public GetOutboundViberMessageLogsRequest limit(String limit) {
+        public GetOutboundViberMessageLogsRequest limit(Integer limit) {
             this.limit = limit;
             return this;
         }
@@ -353,6 +382,17 @@ public class ViberApi {
         }
 
         /**
+         * Sets campaignReferenceId.
+         *
+         * @param campaignReferenceId ID of a campaign that was sent in the message. May contain multiple comma-separated values. (optional)
+         * @return GetOutboundViberMessageLogsRequest
+         */
+        public GetOutboundViberMessageLogsRequest campaignReferenceId(List<String> campaignReferenceId) {
+            this.campaignReferenceId = campaignReferenceId;
+            return this;
+        }
+
+        /**
          * Executes the getOutboundViberMessageLogs request.
          *
          * @return ViberLogsResponse The deserialized response.
@@ -369,7 +409,8 @@ public class ViberApi {
                     sentUntil,
                     limit,
                     entityId,
-                    applicationId);
+                    applicationId,
+                    campaignReferenceId);
             return apiClient.execute(
                     getOutboundViberMessageLogsDefinition, new TypeReference<ViberLogsResponse>() {}.getType());
         }
@@ -391,7 +432,8 @@ public class ViberApi {
                     sentUntil,
                     limit,
                     entityId,
-                    applicationId);
+                    applicationId,
+                    campaignReferenceId);
             return apiClient.executeAsync(
                     getOutboundViberMessageLogsDefinition,
                     new TypeReference<ViberLogsResponse>() {}.getType(),
@@ -408,138 +450,6 @@ public class ViberApi {
      */
     public GetOutboundViberMessageLogsRequest getOutboundViberMessageLogs() {
         return new GetOutboundViberMessageLogsRequest();
-    }
-
-    private RequestDefinition sendViberFileMessageDefinition(ViberFileMessage viberFileMessage) {
-        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/viber/1/message/file")
-                .body(viberFileMessage)
-                .requiresAuthentication(true)
-                .accept("application/json")
-                .contentType("application/json");
-
-        return builder.build();
-    }
-
-    /**
-     * sendViberFileMessage request builder class.
-     */
-    public class SendViberFileMessageRequest {
-        private final ViberFileMessage viberFileMessage;
-
-        private SendViberFileMessageRequest(ViberFileMessage viberFileMessage) {
-            this.viberFileMessage =
-                    Objects.requireNonNull(viberFileMessage, "The required parameter 'viberFileMessage' is missing.");
-        }
-
-        /**
-         * Executes the sendViberFileMessage request.
-         *
-         * @return ViberSingleMessageInfo The deserialized response.
-         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
-         * @deprecated
-         */
-        @Deprecated
-        public ViberSingleMessageInfo execute() throws ApiException {
-            RequestDefinition sendViberFileMessageDefinition = sendViberFileMessageDefinition(viberFileMessage);
-            return apiClient.execute(
-                    sendViberFileMessageDefinition, new TypeReference<ViberSingleMessageInfo>() {}.getType());
-        }
-
-        /**
-         * Executes the sendViberFileMessage request asynchronously.
-         *
-         * @param callback The {@link ApiCallback} to be invoked.
-         * @return The {@link okhttp3.Call} associated with the API request.
-         * @deprecated
-         */
-        @Deprecated
-        public okhttp3.Call executeAsync(ApiCallback<ViberSingleMessageInfo> callback) {
-            RequestDefinition sendViberFileMessageDefinition = sendViberFileMessageDefinition(viberFileMessage);
-            return apiClient.executeAsync(
-                    sendViberFileMessageDefinition, new TypeReference<ViberSingleMessageInfo>() {}.getType(), callback);
-        }
-    }
-
-    /**
-     * Send Viber file message.
-     * <p>
-     * Send a file message to a single recipient.
-     *
-     * @param viberFileMessage  (required)
-     * @return SendViberFileMessageRequest
-     * @deprecated
-     * @see <a href="https://www.infobip.com/docs/viber">Learn more about Viber channel and use cases</a>
-     */
-    @Deprecated
-    public SendViberFileMessageRequest sendViberFileMessage(ViberFileMessage viberFileMessage) {
-        return new SendViberFileMessageRequest(viberFileMessage);
-    }
-
-    private RequestDefinition sendViberImageMessageDefinition(ViberImageMessage viberImageMessage) {
-        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/viber/1/message/image")
-                .body(viberImageMessage)
-                .requiresAuthentication(true)
-                .accept("application/json")
-                .contentType("application/json");
-
-        return builder.build();
-    }
-
-    /**
-     * sendViberImageMessage request builder class.
-     */
-    public class SendViberImageMessageRequest {
-        private final ViberImageMessage viberImageMessage;
-
-        private SendViberImageMessageRequest(ViberImageMessage viberImageMessage) {
-            this.viberImageMessage =
-                    Objects.requireNonNull(viberImageMessage, "The required parameter 'viberImageMessage' is missing.");
-        }
-
-        /**
-         * Executes the sendViberImageMessage request.
-         *
-         * @return ViberSingleMessageInfo The deserialized response.
-         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
-         * @deprecated
-         */
-        @Deprecated
-        public ViberSingleMessageInfo execute() throws ApiException {
-            RequestDefinition sendViberImageMessageDefinition = sendViberImageMessageDefinition(viberImageMessage);
-            return apiClient.execute(
-                    sendViberImageMessageDefinition, new TypeReference<ViberSingleMessageInfo>() {}.getType());
-        }
-
-        /**
-         * Executes the sendViberImageMessage request asynchronously.
-         *
-         * @param callback The {@link ApiCallback} to be invoked.
-         * @return The {@link okhttp3.Call} associated with the API request.
-         * @deprecated
-         */
-        @Deprecated
-        public okhttp3.Call executeAsync(ApiCallback<ViberSingleMessageInfo> callback) {
-            RequestDefinition sendViberImageMessageDefinition = sendViberImageMessageDefinition(viberImageMessage);
-            return apiClient.executeAsync(
-                    sendViberImageMessageDefinition,
-                    new TypeReference<ViberSingleMessageInfo>() {}.getType(),
-                    callback);
-        }
-    }
-
-    /**
-     * Send Viber image message.
-     * <p>
-     * Send an image message to a single recipient.
-     *
-     * @param viberImageMessage  (required)
-     * @return SendViberImageMessageRequest
-     * @deprecated
-     * @see <a href="https://www.infobip.com/docs/viber">Learn more about Viber channel and use cases</a>
-     */
-    @Deprecated
-    public SendViberImageMessageRequest sendViberImageMessage(ViberImageMessage viberImageMessage) {
-        return new SendViberImageMessageRequest(viberImageMessage);
     }
 
     private RequestDefinition sendViberMessagesDefinition(ViberRequest viberRequest) {
@@ -566,12 +476,12 @@ public class ViberApi {
         /**
          * Executes the sendViberMessages request.
          *
-         * @return ViberResponse The deserialized response.
+         * @return MessageResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public ViberResponse execute() throws ApiException {
+        public MessageResponse execute() throws ApiException {
             RequestDefinition sendViberMessagesDefinition = sendViberMessagesDefinition(viberRequest);
-            return apiClient.execute(sendViberMessagesDefinition, new TypeReference<ViberResponse>() {}.getType());
+            return apiClient.execute(sendViberMessagesDefinition, new TypeReference<MessageResponse>() {}.getType());
         }
 
         /**
@@ -580,10 +490,10 @@ public class ViberApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<ViberResponse> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<MessageResponse> callback) {
             RequestDefinition sendViberMessagesDefinition = sendViberMessagesDefinition(viberRequest);
             return apiClient.executeAsync(
-                    sendViberMessagesDefinition, new TypeReference<ViberResponse>() {}.getType(), callback);
+                    sendViberMessagesDefinition, new TypeReference<MessageResponse>() {}.getType(), callback);
         }
     }
 
@@ -598,137 +508,5 @@ public class ViberApi {
      */
     public SendViberMessagesRequest sendViberMessages(ViberRequest viberRequest) {
         return new SendViberMessagesRequest(viberRequest);
-    }
-
-    private RequestDefinition sendViberTextMessageDefinition(ViberBulkTextMessage viberBulkTextMessage) {
-        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/viber/1/message/text")
-                .body(viberBulkTextMessage)
-                .requiresAuthentication(true)
-                .accept("application/json")
-                .contentType("application/json");
-
-        return builder.build();
-    }
-
-    /**
-     * sendViberTextMessage request builder class.
-     */
-    public class SendViberTextMessageRequest {
-        private final ViberBulkTextMessage viberBulkTextMessage;
-
-        private SendViberTextMessageRequest(ViberBulkTextMessage viberBulkTextMessage) {
-            this.viberBulkTextMessage = Objects.requireNonNull(
-                    viberBulkTextMessage, "The required parameter 'viberBulkTextMessage' is missing.");
-        }
-
-        /**
-         * Executes the sendViberTextMessage request.
-         *
-         * @return ViberBulkMessageInfo The deserialized response.
-         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
-         * @deprecated
-         */
-        @Deprecated
-        public ViberBulkMessageInfo execute() throws ApiException {
-            RequestDefinition sendViberTextMessageDefinition = sendViberTextMessageDefinition(viberBulkTextMessage);
-            return apiClient.execute(
-                    sendViberTextMessageDefinition, new TypeReference<ViberBulkMessageInfo>() {}.getType());
-        }
-
-        /**
-         * Executes the sendViberTextMessage request asynchronously.
-         *
-         * @param callback The {@link ApiCallback} to be invoked.
-         * @return The {@link okhttp3.Call} associated with the API request.
-         * @deprecated
-         */
-        @Deprecated
-        public okhttp3.Call executeAsync(ApiCallback<ViberBulkMessageInfo> callback) {
-            RequestDefinition sendViberTextMessageDefinition = sendViberTextMessageDefinition(viberBulkTextMessage);
-            return apiClient.executeAsync(
-                    sendViberTextMessageDefinition, new TypeReference<ViberBulkMessageInfo>() {}.getType(), callback);
-        }
-    }
-
-    /**
-     * Send Viber text message(s).
-     * <p>
-     * Send one or many text message(s) possibly to multiple recipients.
-     *
-     * @param viberBulkTextMessage  (required)
-     * @return SendViberTextMessageRequest
-     * @deprecated
-     * @see <a href="https://www.infobip.com/docs/viber">Learn more about Viber channel and use cases</a>
-     */
-    @Deprecated
-    public SendViberTextMessageRequest sendViberTextMessage(ViberBulkTextMessage viberBulkTextMessage) {
-        return new SendViberTextMessageRequest(viberBulkTextMessage);
-    }
-
-    private RequestDefinition sendViberVideoMessageDefinition(ViberVideoMessage viberVideoMessage) {
-        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/viber/1/message/video")
-                .body(viberVideoMessage)
-                .requiresAuthentication(true)
-                .accept("application/json")
-                .contentType("application/json");
-
-        return builder.build();
-    }
-
-    /**
-     * sendViberVideoMessage request builder class.
-     */
-    public class SendViberVideoMessageRequest {
-        private final ViberVideoMessage viberVideoMessage;
-
-        private SendViberVideoMessageRequest(ViberVideoMessage viberVideoMessage) {
-            this.viberVideoMessage =
-                    Objects.requireNonNull(viberVideoMessage, "The required parameter 'viberVideoMessage' is missing.");
-        }
-
-        /**
-         * Executes the sendViberVideoMessage request.
-         *
-         * @return ViberSingleMessageInfo The deserialized response.
-         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
-         * @deprecated
-         */
-        @Deprecated
-        public ViberSingleMessageInfo execute() throws ApiException {
-            RequestDefinition sendViberVideoMessageDefinition = sendViberVideoMessageDefinition(viberVideoMessage);
-            return apiClient.execute(
-                    sendViberVideoMessageDefinition, new TypeReference<ViberSingleMessageInfo>() {}.getType());
-        }
-
-        /**
-         * Executes the sendViberVideoMessage request asynchronously.
-         *
-         * @param callback The {@link ApiCallback} to be invoked.
-         * @return The {@link okhttp3.Call} associated with the API request.
-         * @deprecated
-         */
-        @Deprecated
-        public okhttp3.Call executeAsync(ApiCallback<ViberSingleMessageInfo> callback) {
-            RequestDefinition sendViberVideoMessageDefinition = sendViberVideoMessageDefinition(viberVideoMessage);
-            return apiClient.executeAsync(
-                    sendViberVideoMessageDefinition,
-                    new TypeReference<ViberSingleMessageInfo>() {}.getType(),
-                    callback);
-        }
-    }
-
-    /**
-     * Send Viber video message.
-     * <p>
-     * Send a video message to a single recipient.
-     *
-     * @param viberVideoMessage  (required)
-     * @return SendViberVideoMessageRequest
-     * @deprecated
-     * @see <a href="https://www.infobip.com/docs/viber">Learn more about Viber channel and use cases</a>
-     */
-    @Deprecated
-    public SendViberVideoMessageRequest sendViberVideoMessage(ViberVideoMessage viberVideoMessage) {
-        return new SendViberVideoMessageRequest(viberVideoMessage);
     }
 }

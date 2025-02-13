@@ -27,7 +27,7 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = WebRtcConversationsDestination.class, name = "CONVERSATIONS"),
     @JsonSubTypes.Type(value = WebRtcPhoneDestination.class, name = "PHONE"),
     @JsonSubTypes.Type(value = WebRtcRoomDestination.class, name = "ROOM"),
-    @JsonSubTypes.Type(value = WebRtcWebRtcDestination.class, name = "WEBRTC"),
+    @JsonSubTypes.Type(value = WebRtcCallsDestination.class, name = "WEBRTC"),
 })
 public abstract class WebRtcDestination {
 

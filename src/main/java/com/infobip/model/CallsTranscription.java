@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class CallsTranscription {
 
-    private CallsLanguage language;
+    private CallTranscriptionLanguage language;
 
     private Boolean sendInterimResults;
 
@@ -29,7 +29,7 @@ public class CallsTranscription {
      * @param language
      * @return This {@link CallsTranscription instance}.
      */
-    public CallsTranscription language(CallsLanguage language) {
+    public CallsTranscription language(CallTranscriptionLanguage language) {
         this.language = language;
         return this;
     }
@@ -42,7 +42,7 @@ public class CallsTranscription {
      * @return language
      */
     @JsonProperty("language")
-    public CallsLanguage getLanguage() {
+    public CallTranscriptionLanguage getLanguage() {
         return language;
     }
 
@@ -54,7 +54,7 @@ public class CallsTranscription {
      * @param language
      */
     @JsonProperty("language")
-    public void setLanguage(CallsLanguage language) {
+    public void setLanguage(CallTranscriptionLanguage language) {
         this.language = language;
     }
 

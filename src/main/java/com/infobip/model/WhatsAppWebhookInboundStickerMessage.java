@@ -19,10 +19,6 @@ public class WhatsAppWebhookInboundStickerMessage extends WhatsAppWebhookInbound
 
     private String url;
 
-    private WhatsAppContext context;
-
-    private WhatsAppWebhookReferral referral;
-
     /**
      * Constructs a new {@link WhatsAppWebhookInboundStickerMessage} instance.
      */
@@ -34,9 +30,7 @@ public class WhatsAppWebhookInboundStickerMessage extends WhatsAppWebhookInbound
      * Sets url.
      * <p>
      * Field description:
-     * URL for media download.
-     * <p>
-     * The field is required.
+     * Url for media download.
      *
      * @param url
      * @return This {@link WhatsAppWebhookInboundStickerMessage instance}.
@@ -50,9 +44,7 @@ public class WhatsAppWebhookInboundStickerMessage extends WhatsAppWebhookInbound
      * Returns url.
      * <p>
      * Field description:
-     * URL for media download.
-     * <p>
-     * The field is required.
+     * Url for media download.
      *
      * @return url
      */
@@ -65,77 +57,13 @@ public class WhatsAppWebhookInboundStickerMessage extends WhatsAppWebhookInbound
      * Sets url.
      * <p>
      * Field description:
-     * URL for media download.
-     * <p>
-     * The field is required.
+     * Url for media download.
      *
      * @param url
      */
     @JsonProperty("url")
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    /**
-     * Sets context.
-     *
-     * @param context
-     * @return This {@link WhatsAppWebhookInboundStickerMessage instance}.
-     */
-    public WhatsAppWebhookInboundStickerMessage context(WhatsAppContext context) {
-        this.context = context;
-        return this;
-    }
-
-    /**
-     * Returns context.
-     *
-     * @return context
-     */
-    @JsonProperty("context")
-    public WhatsAppContext getContext() {
-        return context;
-    }
-
-    /**
-     * Sets context.
-     *
-     * @param context
-     */
-    @JsonProperty("context")
-    public void setContext(WhatsAppContext context) {
-        this.context = context;
-    }
-
-    /**
-     * Sets referral.
-     *
-     * @param referral
-     * @return This {@link WhatsAppWebhookInboundStickerMessage instance}.
-     */
-    public WhatsAppWebhookInboundStickerMessage referral(WhatsAppWebhookReferral referral) {
-        this.referral = referral;
-        return this;
-    }
-
-    /**
-     * Returns referral.
-     *
-     * @return referral
-     */
-    @JsonProperty("referral")
-    public WhatsAppWebhookReferral getReferral() {
-        return referral;
-    }
-
-    /**
-     * Sets referral.
-     *
-     * @param referral
-     */
-    @JsonProperty("referral")
-    public void setReferral(WhatsAppWebhookReferral referral) {
-        this.referral = referral;
     }
 
     @Override
@@ -148,15 +76,12 @@ public class WhatsAppWebhookInboundStickerMessage extends WhatsAppWebhookInbound
         }
         WhatsAppWebhookInboundStickerMessage whatsAppWebhookInboundStickerMessage =
                 (WhatsAppWebhookInboundStickerMessage) o;
-        return Objects.equals(this.url, whatsAppWebhookInboundStickerMessage.url)
-                && Objects.equals(this.context, whatsAppWebhookInboundStickerMessage.context)
-                && Objects.equals(this.referral, whatsAppWebhookInboundStickerMessage.referral)
-                && super.equals(o);
+        return Objects.equals(this.url, whatsAppWebhookInboundStickerMessage.url) && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, context, referral, super.hashCode());
+        return Objects.hash(url, super.hashCode());
     }
 
     @Override
@@ -170,12 +95,6 @@ public class WhatsAppWebhookInboundStickerMessage extends WhatsAppWebhookInbound
                 .append(newLine)
                 .append("    url: ")
                 .append(toIndentedString(url))
-                .append(newLine)
-                .append("    context: ")
-                .append(toIndentedString(context))
-                .append(newLine)
-                .append("    referral: ")
-                .append(toIndentedString(referral))
                 .append(newLine)
                 .append("}")
                 .toString();
