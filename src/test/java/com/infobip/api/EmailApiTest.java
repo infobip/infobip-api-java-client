@@ -578,8 +578,8 @@ class EmailApiTest extends ApiTest {
         String givenMessageId = "somExternalMessageId0";
         String givenAnotherMessageId = "someExternalMessageId1";
 
-        String givenFrom = "Jane Smith <jane.smith@somecompany.com>";
-        String givenReplyTo = "all.replies@somedomain.com";
+        String givenFrom = "Jane Smith <jane.smith@example.com>";
+        String givenReplyTo = "all.replies@example.com";
         String givenSubject = "Mail subject text";
         String givenText = "Mail body text";
         String givenHtml = "<h1>Html body</h1><p>Rich HTML message body.</p>";
@@ -696,7 +696,7 @@ class EmailApiTest extends ApiTest {
         OffsetDateTime expectedDoneAt = OffsetDateTime.of(LocalDateTime.of(2021, 8, 25, 16, 11), ZoneOffset.ofHours(5));
         String givenBulkId = "csdstgteet4fath2pclbq";
         String givenMessageId = "45653761-3a88-4060-869e-ae372adc7a51";
-        String givenTo = "john.doe@email.com";
+        String givenTo = "john.doe@example.com";
 
         String expectedResponse = String.format(
                 "{\n" + "  \"results\": [\n"
@@ -924,8 +924,8 @@ class EmailApiTest extends ApiTest {
     @Test
     void shouldParseUserEvents() {
         String givenRequest = "{\n" + "   \"notificationType\": \"OPENED\",\n"
-                + "   \"domain\": \"mydomain.com\",\n"
-                + "   \"recipient\": \"john.doe@somedomain.com\",\n"
+                + "   \"domain\": \"example.com\",\n"
+                + "   \"recipient\": \"john.doe@example.com\",\n"
                 + "   \"sendDateTime\": 1599542877689,\n"
                 + "   \"messageId\": \"14b734recsf69n8zkao5\",\n"
                 + "   \"bulkId\": \"ikzzmbhu6223bxkhmyrj\",\n"
@@ -952,11 +952,11 @@ class EmailApiTest extends ApiTest {
     @Test
     void shouldGetEmailSuppressions() {
         String givenDomainName = "example.com";
-        String givenEmailAddress = "jane.smith@somecompany.com";
+        String givenEmailAddress = "jane.smith@example.com";
         EmailSuppressionType givenType = EmailSuppressionType.BOUNCE;
         String givenCreatedDate = "2024-08-14T14:02:17.366Z";
         OffsetDateTime givenCreatedDateTime = OffsetDateTime.parse(givenCreatedDate);
-        String givenReason = "550 5.1.1 <jane.smith@somecompany.com>: user does not exist";
+        String givenReason = "550 5.1.1 <jane.smith@example.com>: user does not exist";
         int givenPage = 0;
         int givenSize = 100;
 
@@ -1007,11 +1007,11 @@ class EmailApiTest extends ApiTest {
     @Test
     void shouldAddEmailSuppressions() {
         String givenDomainName1 = "example.com";
-        List<String> givenEmailAddresses1 = List.of("jane.smith@somecompany.com", "john.doe@somecompany.com");
+        List<String> givenEmailAddresses1 = List.of("jane.smith@example.com", "john.doe@example.com");
         EmailAddSuppressionType givenType = EmailAddSuppressionType.BOUNCE;
 
         String givenDomainName2 = "example.com";
-        List<String> givenEmailAddresses2 = List.of("john.smith@somecompany.com", "john.perry@gmail.com");
+        List<String> givenEmailAddresses2 = List.of("john.smith@example.com", "john.perry@example.com");
 
         String expectedRequest = String.format(
                 "{\n" + "  \"suppressions\": [\n"
@@ -1064,11 +1064,11 @@ class EmailApiTest extends ApiTest {
     @Test
     void shouldDeleteEmailSuppressions() {
         String givenDomainName1 = "example.com";
-        List<String> givenEmailAddresses1 = List.of("jane.smith@somecompany.com", "john.doe@somecompany.com");
+        List<String> givenEmailAddresses1 = List.of("jane.smith@example.com", "john.doe@example.com");
         EmailAddSuppressionType givenType = EmailAddSuppressionType.BOUNCE;
 
         String givenDomainName2 = "example.com";
-        List<String> givenEmailAddresses2 = List.of("john.smith@somecompany.com", "john.perry@gmail.com");
+        List<String> givenEmailAddresses2 = List.of("john.smith@example.com", "john.perry@example.com");
 
         String expectedRequest = String.format(
                 "{\n" + "  \"suppressions\": [\n"

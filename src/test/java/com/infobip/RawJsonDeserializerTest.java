@@ -40,9 +40,6 @@ class RawJsonDeserializerTest {
         // given
         String json = "{\"rawJson\": {\"key\":\"value\"}}";
         ObjectMapper objectMapper = new ObjectMapper();
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(Object.class, new RawJsonDeserializer());
-        objectMapper.registerModule(module);
 
         // when
         TestObject result = objectMapper.readValue(json, TestObject.class);

@@ -36,7 +36,7 @@ If you find out that something was not addressed properly, please submit an issu
         * Introduced `/mms/2/logs (V2)` replacing `/mms/1/logs (V1)` endpoint.
 * **Added** new Calls error code type: `MACHINE_DETECTED`.
 * **Added** support for `CallsProviderSipTrunkUpdateRequest`.
-* Created `RawJsonDeserializer` to handle raw JSON deserialization.
+* **Created** `RawJsonDeserializer` to handle raw JSON deserialization.
 
 
 ### Changed
@@ -56,8 +56,6 @@ If you find out that something was not addressed properly, please submit an issu
       - **Updated** `CallsUpdateScenarioRequest.script` field type from `List<CallsScriptInner>` → `String`.
       - **Updated** `CallsSearchResponse.script` and `else` fields type from `List<Object>` → `String`.
       - **Updated** `CallsUpdateScenarioResponse.script` field type from `Object` → `String`.
-  - **Updated** `CallsCallApiOptions.headers` field type from `Object` → `Map<String, Object>`.
-  - **Updated** `CallsCollectOptions.mappedValues` field type from `Object` → `Map<String, Object>`.
   - **Updated** `CallsGetVoicesResponses.voices` field type from `List<CallsVoice>` → `List<CallsSynthesisVoice>`.
   - **Updated** `CallsSearchResponse.lastUsageDate` field type from `OffsetDateTime` → `String`.
   - **Updated** `CallsSpeechCaptureRequest.language` field type from `CallsLanguage` → `CallTranscriptionLanguage`.
