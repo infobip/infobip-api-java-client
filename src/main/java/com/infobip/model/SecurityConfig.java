@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.Objects;
 
 /**
- * Security settings object holding the authentication settings necessary to access your webhook.
+ * Webhook security config.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,

@@ -136,7 +136,7 @@ final class DeprecationChecker {
         }
 
         void deprecated() {
-            LOGGER.warn(
+            LOGGER.info(
                     "The endpoint {} {} is deprecated. "
                             + "Please consider updating the library or reaching out to {} for assistance.",
                     deprecatedEndpointMethod,

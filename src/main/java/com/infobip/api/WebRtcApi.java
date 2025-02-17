@@ -532,6 +532,79 @@ public class WebRtcApi {
         return new GetPushConfigurationsRequest(page, size);
     }
 
+    private RequestDefinition patchPushConfigurationDefinition(
+            String id, WebRtcPushConfigurationRequest webRtcPushConfigurationRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("PATCH", "/webrtc/1/webrtc-push-config/{id}")
+                .body(webRtcPushConfigurationRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (id != null) {
+            builder.addPathParameter(new Parameter("id", id));
+        }
+        return builder.build();
+    }
+
+    /**
+     * patchPushConfiguration request builder class.
+     */
+    public class PatchPushConfigurationRequest {
+        private final String id;
+        private final WebRtcPushConfigurationRequest webRtcPushConfigurationRequest;
+
+        private PatchPushConfigurationRequest(
+                String id, WebRtcPushConfigurationRequest webRtcPushConfigurationRequest) {
+            this.id = Objects.requireNonNull(id, "The required parameter 'id' is missing.");
+            this.webRtcPushConfigurationRequest = Objects.requireNonNull(
+                    webRtcPushConfigurationRequest,
+                    "The required parameter 'webRtcPushConfigurationRequest' is missing.");
+        }
+
+        /**
+         * Executes the patchPushConfiguration request.
+         *
+         * @return WebRtcPushConfigurationResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WebRtcPushConfigurationResponse execute() throws ApiException {
+            RequestDefinition patchPushConfigurationDefinition =
+                    patchPushConfigurationDefinition(id, webRtcPushConfigurationRequest);
+            return apiClient.execute(
+                    patchPushConfigurationDefinition,
+                    new TypeReference<WebRtcPushConfigurationResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the patchPushConfiguration request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WebRtcPushConfigurationResponse> callback) {
+            RequestDefinition patchPushConfigurationDefinition =
+                    patchPushConfigurationDefinition(id, webRtcPushConfigurationRequest);
+            return apiClient.executeAsync(
+                    patchPushConfigurationDefinition,
+                    new TypeReference<WebRtcPushConfigurationResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Patch WebRTC push configuration.
+     * <p>
+     * Change only specific fields of the WebRTC push configuration. Fields left out of the request will remain unchanged.
+     *
+     * @param id Id of the WebRTC push configuration to patch. (required)
+     * @param webRtcPushConfigurationRequest  (required)
+     * @return PatchPushConfigurationRequest
+     */
+    public PatchPushConfigurationRequest patchPushConfiguration(
+            String id, WebRtcPushConfigurationRequest webRtcPushConfigurationRequest) {
+        return new PatchPushConfigurationRequest(id, webRtcPushConfigurationRequest);
+    }
+
     private RequestDefinition savePushConfigurationDefinition(
             WebRtcPushConfigurationRequest webRtcPushConfigurationRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/webrtc/1/webrtc-push-config")

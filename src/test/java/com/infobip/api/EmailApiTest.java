@@ -13,6 +13,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
@@ -33,104 +34,6 @@ class EmailApiTest extends ApiTest {
     private static final String RETURN_PATH = "/email/1/domains/{domainName}/return-path";
     private static final String EMAIL_SUPPRESSION = "/email/1/suppressions";
     private static final String EMAIL_SUPPRESSION_DOMAINS = "/email/1/suppressions/domains";
-
-    @Test
-    void shouldGetAllDomainIps() {
-        String givenDomainName = "example.com";
-        String givenIpAddress = "11.11.11.1";
-        Boolean givenDedicated = true;
-        Integer givenAssignedDomainCount = 1;
-        String givenStatus = "ASSIGNABLE";
-
-        String givenResponse = String.format(
-                "{\n" + "  \"result\": [\n"
-                        + "    {\n"
-                        + "      \"ipAddress\": \"%s\",\n"
-                        + "      \"dedicated\": %b,\n"
-                        + "      \"assignedDomainCount\": %d,\n"
-                        + "      \"status\": \"%s\"\n"
-                        + "    }\n"
-                        + "  ]\n"
-                        + "}\n",
-                givenIpAddress, givenDedicated, givenAssignedDomainCount, givenStatus);
-
-        setUpSuccessGetRequest(DOMAIN_IPS, Map.of(), givenResponse);
-
-        EmailApi api = new EmailApi(getApiClient());
-
-        Consumer<EmailDomainIpResponse> assertions = (response) -> {
-            then(response).isNotNull();
-            then(response.getResult()).isNotNull();
-            then(response.getResult().size()).isEqualTo(1);
-            var result = response.getResult().get(0);
-            then(result.getIpAddress()).isEqualTo(givenIpAddress);
-            then(result.getDedicated()).isEqualTo(givenDedicated);
-            then(result.getAssignedDomainCount()).isEqualTo(givenAssignedDomainCount);
-            then(result.getStatus()).isEqualTo(givenStatus);
-        };
-
-        var call = api.getAllDomainIps(givenDomainName);
-        testSuccessfulCall(call::execute, assertions);
-        testSuccessfulAsyncCall(call::executeAsync, assertions);
-    }
-
-    @Test
-    void shouldAssignIpToDomain() {
-        String givenResult = "OK";
-
-        String givenDomainName = "example.com";
-        String givenIpAddress = "11.11.11.1";
-
-        String givenResponse = String.format("{\n" + "  \"result\": \"%s\"\n" + "}\n", givenResult);
-
-        String expectedRequest = String.format(
-                "{\n" + "  \"domainName\": \"%s\",\n" + "  \"ipAddress\": \"%s\"\n" + "}\n",
-                givenDomainName, givenIpAddress);
-
-        setUpSuccessPostRequest(DOMAIN_IPS, expectedRequest, givenResponse);
-
-        EmailApi api = new EmailApi(getApiClient());
-
-        EmailDomainIpRequest request =
-                new EmailDomainIpRequest().domainName(givenDomainName).ipAddress(givenIpAddress);
-
-        Consumer<EmailSimpleApiResponse> assertions = (response) -> {
-            then(response).isNotNull();
-            then(response.getResult()).isEqualTo(givenResult);
-        };
-
-        var call = api.assignIpToDomain(request);
-        testSuccessfulCall(call::execute, assertions);
-        testSuccessfulAsyncCall(call::executeAsync, assertions);
-    }
-
-    @Test
-    void shouldRemoveIpFromDomain() {
-        String givenResult = "OK";
-        String givenDomainName = "example.com";
-        String givenIpAddress = "11.11.11.1";
-
-        String givenResponse = String.format("{\n" + "  \"result\": \"%s\"\n" + "}\n", givenResult);
-
-        setUpNoRequestBodyDeleteRequest(
-                DOMAIN_IPS,
-                Map.of(
-                        "domainName", givenDomainName,
-                        "ipAddress", givenIpAddress),
-                givenResponse,
-                200);
-
-        EmailApi api = new EmailApi(getApiClient());
-
-        Consumer<EmailSimpleApiResponse> assertions = (response) -> {
-            then(response).isNotNull();
-            then(response.getResult()).isEqualTo(givenResult);
-        };
-
-        var call = api.removeIpFromDomain(givenDomainName, givenIpAddress);
-        testSuccessfulCall(call::execute, assertions);
-        testSuccessfulAsyncCall(call::executeAsync, assertions);
-    }
 
     @Test
     void shouldAddDomain() {
@@ -508,45 +411,6 @@ class EmailApiTest extends ApiTest {
     }
 
     @Test
-    void shouldGetAllIps() {
-        String givenIpAddress = "11.11.11.1";
-        Boolean givenDedicated = true;
-        Integer givenAssignedDomainCount = 1;
-        String givenStatus = "ASSIGNABLE";
-
-        String givenResponse = String.format(
-                "{\n" + "  \"result\": [\n"
-                        + "    {\n"
-                        + "      \"ipAddress\": \"%s\",\n"
-                        + "      \"dedicated\": %b,\n"
-                        + "      \"assignedDomainCount\": %d,\n"
-                        + "      \"status\": \"%s\"\n"
-                        + "    }\n"
-                        + "  ]\n"
-                        + "}\n",
-                givenIpAddress, givenDedicated, givenAssignedDomainCount, givenStatus);
-
-        setUpSuccessGetRequest(IPS, Map.of(), givenResponse);
-
-        EmailApi api = new EmailApi(getApiClient());
-
-        Consumer<EmailDomainIpResponse> assertions = (response) -> {
-            then(response).isNotNull();
-            then(response.getResult()).isNotNull();
-            then(response.getResult().size()).isEqualTo(1);
-            var result = response.getResult().get(0);
-            then(result.getIpAddress()).isEqualTo(givenIpAddress);
-            then(result.getDedicated()).isEqualTo(givenDedicated);
-            then(result.getAssignedDomainCount()).isEqualTo(givenAssignedDomainCount);
-            then(result.getStatus()).isEqualTo(givenStatus);
-        };
-
-        var call = api.getAllIps();
-        testSuccessfulCall(call::execute, assertions);
-        testSuccessfulAsyncCall(call::executeAsync, assertions);
-    }
-
-    @Test
     void shouldValidateEmail() {
         String givenTo = "john.smith@abc.com";
         Boolean givenValidSyntax = true;
@@ -714,8 +578,8 @@ class EmailApiTest extends ApiTest {
         String givenMessageId = "somExternalMessageId0";
         String givenAnotherMessageId = "someExternalMessageId1";
 
-        String givenFrom = "Jane Smith <jane.smith@somecompany.com>";
-        String givenReplyTo = "all.replies@somedomain.com";
+        String givenFrom = "Jane Smith <jane.smith@example.com>";
+        String givenReplyTo = "all.replies@example.com";
         String givenSubject = "Mail subject text";
         String givenText = "Mail body text";
         String givenHtml = "<h1>Html body</h1><p>Rich HTML message body.</p>";
@@ -790,7 +654,7 @@ class EmailApiTest extends ApiTest {
             var messages = response.getMessages();
             then(messages).isNotNull();
             then(messages).hasSize(2);
-            var expectedStatus = new EmailSingleMessageStatus()
+            var expectedStatus = new MessageStatus()
                     .groupId(givenGroupId)
                     .groupName(givenGroupName)
                     .id(givenId)
@@ -832,7 +696,7 @@ class EmailApiTest extends ApiTest {
         OffsetDateTime expectedDoneAt = OffsetDateTime.of(LocalDateTime.of(2021, 8, 25, 16, 11), ZoneOffset.ofHours(5));
         String givenBulkId = "csdstgteet4fath2pclbq";
         String givenMessageId = "45653761-3a88-4060-869e-ae372adc7a51";
-        String givenTo = "john.doe@email.com";
+        String givenTo = "john.doe@example.com";
 
         String expectedResponse = String.format(
                 "{\n" + "  \"results\": [\n"
@@ -1060,8 +924,8 @@ class EmailApiTest extends ApiTest {
     @Test
     void shouldParseUserEvents() {
         String givenRequest = "{\n" + "   \"notificationType\": \"OPENED\",\n"
-                + "   \"domain\": \"mydomain.com\",\n"
-                + "   \"recipient\": \"john.doe@somedomain.com\",\n"
+                + "   \"domain\": \"example.com\",\n"
+                + "   \"recipient\": \"john.doe@example.com\",\n"
                 + "   \"sendDateTime\": 1599542877689,\n"
                 + "   \"messageId\": \"14b734recsf69n8zkao5\",\n"
                 + "   \"bulkId\": \"ikzzmbhu6223bxkhmyrj\",\n"
@@ -1088,10 +952,11 @@ class EmailApiTest extends ApiTest {
     @Test
     void shouldGetEmailSuppressions() {
         String givenDomainName = "example.com";
-        String givenEmailAddress = "jane.smith@somecompany.com";
-        EmailGetSuppressionType givenType = EmailGetSuppressionType.BOUNCE;
-        String givenCreatedDate = "2024-08-14T14:02:17.366";
-        String givenReason = "550 5.1.1 <jane.smith@somecompany.com>: user does not exist";
+        String givenEmailAddress = "jane.smith@example.com";
+        EmailSuppressionType givenType = EmailSuppressionType.BOUNCE;
+        String givenCreatedDate = "2024-08-14T14:02:17.366Z";
+        OffsetDateTime givenCreatedDateTime = OffsetDateTime.parse(givenCreatedDate);
+        String givenReason = "550 5.1.1 <jane.smith@example.com>: user does not exist";
         int givenPage = 0;
         int givenSize = 100;
 
@@ -1112,7 +977,11 @@ class EmailApiTest extends ApiTest {
                         + "}",
                 givenDomainName, givenEmailAddress, givenType, givenCreatedDate, givenReason, givenPage, givenSize);
 
-        setUpGetRequest(EMAIL_SUPPRESSION, Map.of(), givenResponse, 200);
+        setUpGetRequest(
+                "/email/1/suppressions",
+                Map.of("domainName", givenDomainName, "type", givenType.toString()),
+                givenResponse,
+                200);
 
         EmailApi api = new EmailApi(getApiClient());
 
@@ -1123,7 +992,7 @@ class EmailApiTest extends ApiTest {
             then(result.getDomainName()).isEqualTo(givenDomainName);
             then(result.getEmailAddress()).isEqualTo(givenEmailAddress);
             then(result.getType()).isEqualTo(givenType.toString());
-            then(result.getCreatedDate()).isEqualTo(givenCreatedDate);
+            then(result.getCreatedDate()).isEqualTo(givenCreatedDateTime);
             then(result.getReason()).isEqualTo(givenReason);
             var paging = response.getPaging();
             then(paging.getPage()).isEqualTo(givenPage);
@@ -1138,11 +1007,11 @@ class EmailApiTest extends ApiTest {
     @Test
     void shouldAddEmailSuppressions() {
         String givenDomainName1 = "example.com";
-        List<String> givenEmailAddresses1 = List.of("jane.smith@somecompany.com", "john.doe@somecompany.com");
-        EmailAddDeleteSuppressionType givenType = EmailAddDeleteSuppressionType.BOUNCE;
+        List<String> givenEmailAddresses1 = List.of("jane.smith@example.com", "john.doe@example.com");
+        EmailAddSuppressionType givenType = EmailAddSuppressionType.BOUNCE;
 
         String givenDomainName2 = "example.com";
-        List<String> givenEmailAddresses2 = List.of("john.smith@somecompany.com", "john.perry@gmail.com");
+        List<String> givenEmailAddresses2 = List.of("john.smith@example.com", "john.perry@example.com");
 
         String expectedRequest = String.format(
                 "{\n" + "  \"suppressions\": [\n"
@@ -1182,11 +1051,11 @@ class EmailApiTest extends ApiTest {
                         new EmailAddSuppression()
                                 .domainName(givenDomainName1)
                                 .emailAddress(givenEmailAddresses1)
-                                .type(EmailAddDeleteSuppressionType.BOUNCE),
+                                .type(EmailAddSuppressionType.BOUNCE),
                         new EmailAddSuppression()
                                 .domainName(givenDomainName2)
                                 .emailAddress(givenEmailAddresses2)
-                                .type(EmailAddDeleteSuppressionType.BOUNCE)));
+                                .type(EmailAddSuppressionType.BOUNCE)));
 
         var call = api.addSuppressions(request);
         testSuccessfulCallWithNoBody(call::executeAsync, 204);
@@ -1195,11 +1064,11 @@ class EmailApiTest extends ApiTest {
     @Test
     void shouldDeleteEmailSuppressions() {
         String givenDomainName1 = "example.com";
-        List<String> givenEmailAddresses1 = List.of("jane.smith@somecompany.com", "john.doe@somecompany.com");
-        EmailAddDeleteSuppressionType givenType = EmailAddDeleteSuppressionType.BOUNCE;
+        List<String> givenEmailAddresses1 = List.of("jane.smith@example.com", "john.doe@example.com");
+        EmailAddSuppressionType givenType = EmailAddSuppressionType.BOUNCE;
 
         String givenDomainName2 = "example.com";
-        List<String> givenEmailAddresses2 = List.of("john.smith@somecompany.com", "john.perry@gmail.com");
+        List<String> givenEmailAddresses2 = List.of("john.smith@example.com", "john.perry@example.com");
 
         String expectedRequest = String.format(
                 "{\n" + "  \"suppressions\": [\n"
@@ -1239,11 +1108,11 @@ class EmailApiTest extends ApiTest {
                         new EmailDeleteSuppression()
                                 .domainName(givenDomainName1)
                                 .emailAddress(givenEmailAddresses1)
-                                .type(EmailAddDeleteSuppressionType.BOUNCE),
+                                .type(EmailSuppressionType.BOUNCE),
                         new EmailDeleteSuppression()
                                 .domainName(givenDomainName2)
                                 .emailAddress(givenEmailAddresses2)
-                                .type(EmailAddDeleteSuppressionType.BOUNCE)));
+                                .type(EmailSuppressionType.BOUNCE)));
 
         var call = api.deleteSuppressions(request);
         testSuccessfulCallWithNoBody(call::executeAsync, 204);
@@ -1361,6 +1230,108 @@ class EmailApiTest extends ApiTest {
         };
 
         var call = api.getDomains();
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetIps() {
+        String givenResponse = "[\n" + "  {\n"
+                + "    \"id\": \"DB3F9D439088BF73F5560443C8054AC4\",\n"
+                + "    \"ip\": \"198.51.100.0\"\n"
+                + "  }\n"
+                + "]";
+
+        setUpSuccessGetRequest("/email/1/ip-management/ips", Map.of(), givenResponse);
+
+        EmailApi api = new EmailApi(getApiClient());
+
+        Consumer<List<EmailIpResponse>> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response).hasSize(1);
+            EmailIpResponse ipResponse = response.get(0);
+            then(ipResponse.getId()).isEqualTo("DB3F9D439088BF73F5560443C8054AC4");
+            then(ipResponse.getIp()).isEqualTo("198.51.100.0");
+        };
+
+        var call = api.getAllIps();
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetIpDetails() {
+        String givenResponse = "{\n" + "  \"id\": \"DB3F9D439088BF73F5560443C8054AC4\",\n"
+                + "  \"ip\": \"198.51.100.0\",\n"
+                + "  \"pools\": [\n"
+                + "    {\n"
+                + "      \"id\": \"08A3A7608750CC6E6080325A6ADF45B6\",\n"
+                + "      \"name\": \"IP pool name\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+
+        String ipId = "DB3F9D439088BF73F5560443C8054AC4";
+        setUpSuccessGetRequest("/email/1/ip-management/ips/" + ipId, Map.of(), givenResponse);
+
+        EmailApi api = new EmailApi(getApiClient());
+
+        Consumer<EmailIpDetailResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo("DB3F9D439088BF73F5560443C8054AC4");
+            then(response.getIp()).isEqualTo("198.51.100.0");
+            then(response.getPools()).hasSize(1);
+            Set<EmailIpPoolResponse> poolResponses = response.getPools();
+            var poolResponse = poolResponses.iterator().next();
+            then(poolResponse.getId()).isEqualTo("08A3A7608750CC6E6080325A6ADF45B6");
+            then(poolResponse.getName()).isEqualTo("IP pool name");
+        };
+
+        var call = api.getIpDetails(ipId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldIpManagementGetDomainDetails() {
+        String givenResponse = "{\n" + "  \"id\": 1,\n"
+                + "  \"name\": \"example.com\",\n"
+                + "  \"pools\": [\n"
+                + "    {\n"
+                + "      \"id\": \"08A3A7608750CC6E6080325A6ADF45B6\",\n"
+                + "      \"name\": \"IP pool name\",\n"
+                + "      \"priority\": 0,\n"
+                + "      \"ips\": [\n"
+                + "        {\n"
+                + "          \"id\": \"DB3F9D439088BF73F5560443C8054AC4\",\n"
+                + "          \"ip\": \"198.51.100.0\"\n"
+                + "        }\n"
+                + "      ]\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+
+        Long domainId = 1L;
+        setUpSuccessGetRequest("/email/1/ip-management/domains/" + domainId, Map.of(), givenResponse);
+
+        EmailApi api = new EmailApi(getApiClient());
+
+        Consumer<EmailIpDomainResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo(1);
+            then(response.getName()).isEqualTo("example.com");
+            then(response.getPools()).hasSize(1);
+            EmailDomainIpApiPool poolResponse = response.getPools().iterator().next();
+            then(poolResponse.getId()).isEqualTo("08A3A7608750CC6E6080325A6ADF45B6");
+            then(poolResponse.getName()).isEqualTo("IP pool name");
+            then(poolResponse.getPriority()).isEqualTo(0);
+            then(poolResponse.getIps()).hasSize(1);
+            EmailIpResponse ipResponse = poolResponse.getIps().iterator().next();
+            then(ipResponse.getId()).isEqualTo("DB3F9D439088BF73F5560443C8054AC4");
+            then(ipResponse.getIp()).isEqualTo("198.51.100.0");
+        };
+
+        var call = api.getIpDomain(domainId);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }

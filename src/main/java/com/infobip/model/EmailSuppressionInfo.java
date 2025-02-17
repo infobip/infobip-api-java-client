@@ -10,6 +10,7 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
@@ -23,7 +24,7 @@ public class EmailSuppressionInfo {
 
     private String type;
 
-    private String createdDate;
+    private OffsetDateTime createdDate;
 
     private String reason;
 
@@ -176,7 +177,7 @@ public class EmailSuppressionInfo {
      * @param createdDate
      * @return This {@link EmailSuppressionInfo instance}.
      */
-    public EmailSuppressionInfo createdDate(String createdDate) {
+    public EmailSuppressionInfo createdDate(OffsetDateTime createdDate) {
         this.createdDate = createdDate;
         return this;
     }
@@ -192,7 +193,7 @@ public class EmailSuppressionInfo {
      * @return createdDate
      */
     @JsonProperty("createdDate")
-    public String getCreatedDate() {
+    public OffsetDateTime getCreatedDate() {
         return createdDate;
     }
 
@@ -207,7 +208,7 @@ public class EmailSuppressionInfo {
      * @param createdDate
      */
     @JsonProperty("createdDate")
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(OffsetDateTime createdDate) {
         this.createdDate = createdDate;
     }
 

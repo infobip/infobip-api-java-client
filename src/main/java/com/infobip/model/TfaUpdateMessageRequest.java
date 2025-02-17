@@ -33,6 +33,8 @@ public class TfaUpdateMessageRequest {
 
     private Double speechRate;
 
+    private String voiceName;
+
     /**
      * Sets language.
      *
@@ -326,6 +328,46 @@ public class TfaUpdateMessageRequest {
         this.speechRate = speechRate;
     }
 
+    /**
+     * Sets voiceName.
+     * <p>
+     * Field description:
+     * Defines the voice that will be used for the chosen language (example: Joanna). For each supported language, we may offer different voices (learn more [here](https://www.infobip.com/docs/voice-and-video/reference#text-to-speech-languages)). You can use this [method](https://www.infobip.com/docs/api/channels/voice/voice-message/get-voices) to retrieve all voices for the given language. If not defined, it will default to the standard voice for the selected language (if available). If the standard voice is not available, the request will fail. To avoid that, you can choose one of the neural voices (charges will apply).
+     *
+     * @param voiceName
+     * @return This {@link TfaUpdateMessageRequest instance}.
+     */
+    public TfaUpdateMessageRequest voiceName(String voiceName) {
+        this.voiceName = voiceName;
+        return this;
+    }
+
+    /**
+     * Returns voiceName.
+     * <p>
+     * Field description:
+     * Defines the voice that will be used for the chosen language (example: Joanna). For each supported language, we may offer different voices (learn more [here](https://www.infobip.com/docs/voice-and-video/reference#text-to-speech-languages)). You can use this [method](https://www.infobip.com/docs/api/channels/voice/voice-message/get-voices) to retrieve all voices for the given language. If not defined, it will default to the standard voice for the selected language (if available). If the standard voice is not available, the request will fail. To avoid that, you can choose one of the neural voices (charges will apply).
+     *
+     * @return voiceName
+     */
+    @JsonProperty("voiceName")
+    public String getVoiceName() {
+        return voiceName;
+    }
+
+    /**
+     * Sets voiceName.
+     * <p>
+     * Field description:
+     * Defines the voice that will be used for the chosen language (example: Joanna). For each supported language, we may offer different voices (learn more [here](https://www.infobip.com/docs/voice-and-video/reference#text-to-speech-languages)). You can use this [method](https://www.infobip.com/docs/api/channels/voice/voice-message/get-voices) to retrieve all voices for the given language. If not defined, it will default to the standard voice for the selected language (if available). If the standard voice is not available, the request will fail. To avoid that, you can choose one of the neural voices (charges will apply).
+     *
+     * @param voiceName
+     */
+    @JsonProperty("voiceName")
+    public void setVoiceName(String voiceName) {
+        this.voiceName = voiceName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -342,12 +384,14 @@ public class TfaUpdateMessageRequest {
                 && Objects.equals(this.regional, tfaUpdateMessageRequest.regional)
                 && Objects.equals(this.repeatDTMF, tfaUpdateMessageRequest.repeatDTMF)
                 && Objects.equals(this.senderId, tfaUpdateMessageRequest.senderId)
-                && Objects.equals(this.speechRate, tfaUpdateMessageRequest.speechRate);
+                && Objects.equals(this.speechRate, tfaUpdateMessageRequest.speechRate)
+                && Objects.equals(this.voiceName, tfaUpdateMessageRequest.voiceName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(language, messageText, pinLength, pinType, regional, repeatDTMF, senderId, speechRate);
+        return Objects.hash(
+                language, messageText, pinLength, pinType, regional, repeatDTMF, senderId, speechRate, voiceName);
     }
 
     @Override
@@ -379,6 +423,9 @@ public class TfaUpdateMessageRequest {
                 .append(newLine)
                 .append("    speechRate: ")
                 .append(toIndentedString(speechRate))
+                .append(newLine)
+                .append("    voiceName: ")
+                .append(toIndentedString(voiceName))
                 .append(newLine)
                 .append("}")
                 .toString();

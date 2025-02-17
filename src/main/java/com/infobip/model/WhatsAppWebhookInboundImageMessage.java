@@ -17,65 +17,15 @@ import java.util.Objects;
  */
 public class WhatsAppWebhookInboundImageMessage extends WhatsAppWebhookInboundMessage {
 
-    private String url;
-
     private String caption;
 
-    private WhatsAppContext context;
-
-    private WhatsAppWebhookReferral referral;
+    private String url;
 
     /**
      * Constructs a new {@link WhatsAppWebhookInboundImageMessage} instance.
      */
     public WhatsAppWebhookInboundImageMessage() {
         super("IMAGE");
-    }
-
-    /**
-     * Sets url.
-     * <p>
-     * Field description:
-     * URL for media download.
-     * <p>
-     * The field is required.
-     *
-     * @param url
-     * @return This {@link WhatsAppWebhookInboundImageMessage instance}.
-     */
-    public WhatsAppWebhookInboundImageMessage url(String url) {
-        this.url = url;
-        return this;
-    }
-
-    /**
-     * Returns url.
-     * <p>
-     * Field description:
-     * URL for media download.
-     * <p>
-     * The field is required.
-     *
-     * @return url
-     */
-    @JsonProperty("url")
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * Sets url.
-     * <p>
-     * Field description:
-     * URL for media download.
-     * <p>
-     * The field is required.
-     *
-     * @param url
-     */
-    @JsonProperty("url")
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     /**
@@ -119,65 +69,43 @@ public class WhatsAppWebhookInboundImageMessage extends WhatsAppWebhookInboundMe
     }
 
     /**
-     * Sets context.
+     * Sets url.
+     * <p>
+     * Field description:
+     * Url for media download.
      *
-     * @param context
+     * @param url
      * @return This {@link WhatsAppWebhookInboundImageMessage instance}.
      */
-    public WhatsAppWebhookInboundImageMessage context(WhatsAppContext context) {
-        this.context = context;
+    public WhatsAppWebhookInboundImageMessage url(String url) {
+        this.url = url;
         return this;
     }
 
     /**
-     * Returns context.
+     * Returns url.
+     * <p>
+     * Field description:
+     * Url for media download.
      *
-     * @return context
+     * @return url
      */
-    @JsonProperty("context")
-    public WhatsAppContext getContext() {
-        return context;
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
     }
 
     /**
-     * Sets context.
+     * Sets url.
+     * <p>
+     * Field description:
+     * Url for media download.
      *
-     * @param context
+     * @param url
      */
-    @JsonProperty("context")
-    public void setContext(WhatsAppContext context) {
-        this.context = context;
-    }
-
-    /**
-     * Sets referral.
-     *
-     * @param referral
-     * @return This {@link WhatsAppWebhookInboundImageMessage instance}.
-     */
-    public WhatsAppWebhookInboundImageMessage referral(WhatsAppWebhookReferral referral) {
-        this.referral = referral;
-        return this;
-    }
-
-    /**
-     * Returns referral.
-     *
-     * @return referral
-     */
-    @JsonProperty("referral")
-    public WhatsAppWebhookReferral getReferral() {
-        return referral;
-    }
-
-    /**
-     * Sets referral.
-     *
-     * @param referral
-     */
-    @JsonProperty("referral")
-    public void setReferral(WhatsAppWebhookReferral referral) {
-        this.referral = referral;
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
@@ -189,16 +117,14 @@ public class WhatsAppWebhookInboundImageMessage extends WhatsAppWebhookInboundMe
             return false;
         }
         WhatsAppWebhookInboundImageMessage whatsAppWebhookInboundImageMessage = (WhatsAppWebhookInboundImageMessage) o;
-        return Objects.equals(this.url, whatsAppWebhookInboundImageMessage.url)
-                && Objects.equals(this.caption, whatsAppWebhookInboundImageMessage.caption)
-                && Objects.equals(this.context, whatsAppWebhookInboundImageMessage.context)
-                && Objects.equals(this.referral, whatsAppWebhookInboundImageMessage.referral)
+        return Objects.equals(this.caption, whatsAppWebhookInboundImageMessage.caption)
+                && Objects.equals(this.url, whatsAppWebhookInboundImageMessage.url)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, caption, context, referral, super.hashCode());
+        return Objects.hash(caption, url, super.hashCode());
     }
 
     @Override
@@ -210,17 +136,11 @@ public class WhatsAppWebhookInboundImageMessage extends WhatsAppWebhookInboundMe
                 .append("    ")
                 .append(toIndentedString(super.toString()))
                 .append(newLine)
-                .append("    url: ")
-                .append(toIndentedString(url))
-                .append(newLine)
                 .append("    caption: ")
                 .append(toIndentedString(caption))
                 .append(newLine)
-                .append("    context: ")
-                .append(toIndentedString(context))
-                .append(newLine)
-                .append("    referral: ")
-                .append(toIndentedString(referral))
+                .append("    url: ")
+                .append(toIndentedString(url))
                 .append(newLine)
                 .append("}")
                 .toString();

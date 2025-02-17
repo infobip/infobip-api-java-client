@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * Represents WhatsAppInteractiveOrderBrazilPaymentDetails model.
  */
-public class WhatsAppInteractiveOrderBrazilPaymentDetails extends WhatsAppInteractiveOrderPaymentDetails {
+public class WhatsAppInteractiveOrderBrazilPaymentDetails extends WhatsAppInteractiveAllowedOrderPaymentDetails {
 
     private String id;
 

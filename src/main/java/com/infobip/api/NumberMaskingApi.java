@@ -10,8 +10,17 @@
 package com.infobip.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.infobip.*;
-import com.infobip.model.*;
+import com.infobip.ApiCallback;
+import com.infobip.ApiClient;
+import com.infobip.ApiException;
+import com.infobip.Parameter;
+import com.infobip.RequestDefinition;
+import com.infobip.model.NumberMaskingCredentialsBody;
+import com.infobip.model.NumberMaskingCredentialsResponse;
+import com.infobip.model.NumberMaskingSetupBody;
+import com.infobip.model.NumberMaskingSetupResponse;
+import com.infobip.model.NumberMaskingUploadBody;
+import com.infobip.model.NumberMaskingUploadResponse;
 import java.util.List;
 import java.util.Objects;
 
@@ -233,15 +242,12 @@ public class NumberMaskingApi {
         private DeleteNumberMaskingCredentialsRequest() {}
 
         /**
-         * Executes the deleteNumberMaskingCredentials request.
-         *
-         * @return Object The deserialized response.
+         * Executes the deleteNumberMaskingCredentials request
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public Object execute() throws ApiException {
+        public void execute() throws ApiException {
             RequestDefinition deleteNumberMaskingCredentialsDefinition = deleteNumberMaskingCredentialsDefinition();
-            return apiClient.execute(
-                    deleteNumberMaskingCredentialsDefinition, new TypeReference<Object>() {}.getType());
+            apiClient.execute(deleteNumberMaskingCredentialsDefinition);
         }
 
         /**
@@ -250,10 +256,9 @@ public class NumberMaskingApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<Object> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
             RequestDefinition deleteNumberMaskingCredentialsDefinition = deleteNumberMaskingCredentialsDefinition();
-            return apiClient.executeAsync(
-                    deleteNumberMaskingCredentialsDefinition, new TypeReference<Object>() {}.getType(), callback);
+            return apiClient.executeAsync(deleteNumberMaskingCredentialsDefinition, callback);
         }
     }
 

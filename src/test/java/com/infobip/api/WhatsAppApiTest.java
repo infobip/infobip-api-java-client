@@ -51,6 +51,7 @@ class WhatsAppApiTest extends ApiTest {
             "/whatsapp/1/embedded-signup/registrations/senders/{sender}/verification";
     private static final String INDIA_PAYMENT = "/whatsapp/1/senders/{sender}/payments/upi/payu/{paymentId}";
     private static final String BRAZIL_PAYMENT = "/whatsapp/1/senders/{sender}/payments/br/{paymentId}";
+    private static final String UPI_PAYMENT_STATUS = "/whatsapp/1/senders/{sender}/payments/upi/{paymentId}";
 
     @Test
     void shouldGetWhatsappIdentity() {
@@ -82,6 +83,57 @@ class WhatsAppApiTest extends ApiTest {
         };
 
         var call = api.getWhatsAppIdentity(givenSender, givenUserNumber);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetWhatsappUpiPaymentStatus() {
+        String givenSender = "447796344125";
+        String givenPaymentId = "5653923468715475";
+
+        String givenResponse = "{\n" + "  \"referenceId\": \"72123248136\",\n"
+                + "  \"paymentId\": \"16085194825\",\n"
+                + "  \"paymentStatus\": \"CAPTURED\",\n"
+                + "  \"currency\": \"INR\",\n"
+                + "  \"totalAmountValue\": 21000,\n"
+                + "  \"totalAmountOffset\": 100,\n"
+                + "  \"transactions\": [\n"
+                + "    {\n"
+                + "      \"id\": \"27194245144\",\n"
+                + "      \"type\": \"UPI\",\n"
+                + "      \"status\": \"SUCCESS\",\n"
+                + "      \"createdTimestamp\": \"2023-01-01T00:00:00.000+00:00\",\n"
+                + "      \"updatedTimestamp\": \"2023-01-01T01:00:00.000+00:00\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+
+        setUpSuccessGetRequest(
+                UPI_PAYMENT_STATUS.replace("{sender}", givenSender).replace("{paymentId}", givenPaymentId),
+                Map.of(),
+                givenResponse);
+
+        WhatsAppApi api = new WhatsAppApi(getApiClient());
+
+        Consumer<WhatsAppPayment> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getReferenceId()).isEqualTo("72123248136");
+            then(response.getPaymentId()).isEqualTo("16085194825");
+            then(response.getPaymentStatus()).isEqualTo(WhatsAppPaymentStatus.CAPTURED);
+            then(response.getCurrency()).isEqualTo(WhatsAppPaymentCurrency.INR);
+            then(response.getTotalAmountValue()).isEqualTo(21000);
+            then(response.getTotalAmountOffset()).isEqualTo(100);
+            then(response.getTransactions().size()).isEqualTo(1);
+            var transaction = response.getTransactions().get(0);
+            then(transaction.getId()).isEqualTo("27194245144");
+            then(transaction.getType()).isEqualTo(WhatsAppPaymentTransactionType.UPI);
+            then(transaction.getStatus()).isEqualTo(WhatsAppPaymentTransactionStatus.SUCCESS);
+            then(transaction.getCreatedTimestamp()).isEqualTo(OffsetDateTime.parse("2023-01-01T00:00:00.000+00:00"));
+            then(transaction.getUpdatedTimestamp()).isEqualTo(OffsetDateTime.parse("2023-01-01T01:00:00.000+00:00"));
+        };
+
+        var call = api.getWhatsappUpiPaymentStatus(givenSender, givenPaymentId);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -1867,7 +1919,7 @@ class WhatsAppApiTest extends ApiTest {
         String givenSender2 = "441134960001";
         WhatsAppSenderQualityRating givenQualityRating2 = WhatsAppSenderQualityRating.LOW;
         WhatsAppSenderStatus givenStatus2 = WhatsAppSenderStatus.BANNED;
-        WhatsAppSenderLimit givenCurrentLimit2 = WhatsAppSenderLimit.LIMIT_50;
+        WhatsAppSenderLimit givenCurrentLimit2 = WhatsAppSenderLimit.LIMIT_250;
         String givenLastUpdated2 = "2022-02-18T08:12:26.420Z";
 
         String givenResponse = String.format(
@@ -2045,7 +2097,7 @@ class WhatsAppApiTest extends ApiTest {
         String expectedCountryCode = "44";
         String expectedPhoneNumber = "7796344125";
         String expectedDisplayName = "Infobip";
-        WhatsAppPhoneNumberRequest.TypeEnum expectedType = WhatsAppPhoneNumberRequest.TypeEnum.EXTERNAL_SMS;
+        WhatsAppNumberType expectedType = WhatsAppNumberType.SMS;
         String expectedLocale = "en_US";
         String expectedRequest = String.format(
                 "{\n" + "  \"countryCode\": \"%s\",\n"
@@ -2084,7 +2136,7 @@ class WhatsAppApiTest extends ApiTest {
 
     @Test
     void shouldRetryWhatsAppSenderVerification() {
-        WhatsAppOtpRequest.TypeEnum expectedType = WhatsAppOtpRequest.TypeEnum.SMS;
+        WhatsAppNumberType expectedType = WhatsAppNumberType.SMS;
         String expectedLocale = "en_US";
         String expectedRequest = String.format(
                 "{\n" + "  \"type\": \"%s\",\n" + "  \"locale\": \"%s\"\n" + "}", expectedType, expectedLocale);

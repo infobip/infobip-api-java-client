@@ -9,11 +9,9 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
@@ -29,47 +27,14 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = WebRtcPresetLocalization.class, name = "PRESET"),
 })
 public abstract class WebRtcLocalization {
-    /**
-     * Represents type enumeration.
-     */
-    public enum TypeEnum {
-        BROWSER_DETECTED("BROWSER_DETECTED"),
-        PRESET("PRESET");
 
-        private String value;
-
-        TypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TypeEnum fromValue(String value) {
-            for (TypeEnum enumElement : TypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    protected final TypeEnum type;
+    protected final WebRtcLocalizationType type;
 
     /**
      * Constructs a new {@link WebRtcLocalization} instance.
      */
     public WebRtcLocalization(String type) {
-        this.type = TypeEnum.fromValue(type);
+        this.type = WebRtcLocalizationType.fromValue(type);
     }
 
     /**
@@ -78,7 +43,7 @@ public abstract class WebRtcLocalization {
      * @return type
      */
     @JsonProperty("type")
-    public TypeEnum getType() {
+    public WebRtcLocalizationType getType() {
         return type;
     }
 

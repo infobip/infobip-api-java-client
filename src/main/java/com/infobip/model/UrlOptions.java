@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Sets up [URL shortening](https://www.infobip.com/docs/url-shortening) and tracking feature. Does not apply to channels that do not support it: Instagram, LINE, Messenger, Viber Bot.
+ * Sets up [URL shortening](https://www.infobip.com/docs/url-shortening) and tracking feature.
  */
 public class UrlOptions {
 

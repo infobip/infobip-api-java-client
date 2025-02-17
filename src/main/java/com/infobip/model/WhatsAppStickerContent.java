@@ -23,7 +23,7 @@ public class WhatsAppStickerContent {
      * Sets mediaUrl.
      * <p>
      * Field description:
-     * URL of a sticker sent in a WhatsApp message. Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported sticker type is &#x60;WebP&#x60;. Sticker file should be 512x512 pixels. Maximum sticker size is 100KB.
+     * URL of a sticker sent in a WhatsApp message. Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported sticker type is &#x60;WebP&#x60;. Sticker file should be 512x512 pixels. Maximum size is 100KB for static sticker and 500KB for animated sticker.
      * <p>
      * The field is required.
      *
@@ -39,7 +39,7 @@ public class WhatsAppStickerContent {
      * Returns mediaUrl.
      * <p>
      * Field description:
-     * URL of a sticker sent in a WhatsApp message. Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported sticker type is &#x60;WebP&#x60;. Sticker file should be 512x512 pixels. Maximum sticker size is 100KB.
+     * URL of a sticker sent in a WhatsApp message. Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported sticker type is &#x60;WebP&#x60;. Sticker file should be 512x512 pixels. Maximum size is 100KB for static sticker and 500KB for animated sticker.
      * <p>
      * The field is required.
      *
@@ -54,7 +54,7 @@ public class WhatsAppStickerContent {
      * Sets mediaUrl.
      * <p>
      * Field description:
-     * URL of a sticker sent in a WhatsApp message. Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported sticker type is &#x60;WebP&#x60;. Sticker file should be 512x512 pixels. Maximum sticker size is 100KB.
+     * URL of a sticker sent in a WhatsApp message. Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported sticker type is &#x60;WebP&#x60;. Sticker file should be 512x512 pixels. Maximum size is 100KB for static sticker and 500KB for animated sticker.
      * <p>
      * The field is required.
      *

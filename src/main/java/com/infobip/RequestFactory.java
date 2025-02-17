@@ -22,11 +22,11 @@ import okhttp3.*;
 import okhttp3.internal.http.HttpMethod;
 
 /**
- * Request factory class. It should only be used internally by {@link com.infobip.ApiClient}.
+ * Request factory class. It should only be used internally by {@link ApiClient}.
  */
 final class RequestFactory {
 
-    private static final String USER_AGENT_HEADER_VALUE = "infobip-api-client-java/5.1.0";
+    private static final String USER_AGENT_HEADER_VALUE = "infobip-api-client-java/6.0.0";
 
     private final ApiKey apiKey;
     private final BaseUrl baseUrl;

@@ -34,7 +34,7 @@ public class WebRtcRoomDestination extends WebRtcDestination {
      * Sets roomName.
      * <p>
      * Field description:
-     * Name of a room.
+     * Name of a meeting room. Note that using the same roomName across different Call Link URLs will result in all participants joining the same meeting room. To create separate meeting rooms, ensure each room name is unique.
      * <p>
      * The field is required.
      *
@@ -50,7 +50,7 @@ public class WebRtcRoomDestination extends WebRtcDestination {
      * Returns roomName.
      * <p>
      * Field description:
-     * Name of a room.
+     * Name of a meeting room. Note that using the same roomName across different Call Link URLs will result in all participants joining the same meeting room. To create separate meeting rooms, ensure each room name is unique.
      * <p>
      * The field is required.
      *
@@ -65,7 +65,7 @@ public class WebRtcRoomDestination extends WebRtcDestination {
      * Sets roomName.
      * <p>
      * Field description:
-     * Name of a room.
+     * Name of a meeting room. Note that using the same roomName across different Call Link URLs will result in all participants joining the same meeting room. To create separate meeting rooms, ensure each room name is unique.
      * <p>
      * The field is required.
      *

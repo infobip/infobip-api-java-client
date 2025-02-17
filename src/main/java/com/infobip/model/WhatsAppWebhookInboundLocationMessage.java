@@ -17,71 +17,21 @@ import java.util.Objects;
  */
 public class WhatsAppWebhookInboundLocationMessage extends WhatsAppWebhookInboundMessage {
 
-    private Double latitude;
-
     private Double longitude;
 
-    private String address;
+    private Double latitude;
 
     private String name;
 
+    private String address;
+
     private String url;
-
-    private WhatsAppContext context;
-
-    private WhatsAppWebhookReferral referral;
 
     /**
      * Constructs a new {@link WhatsAppWebhookInboundLocationMessage} instance.
      */
     public WhatsAppWebhookInboundLocationMessage() {
         super("LOCATION");
-    }
-
-    /**
-     * Sets latitude.
-     * <p>
-     * Field description:
-     * Latitude. The value must be between -180 and 180.
-     * <p>
-     * The field is required.
-     *
-     * @param latitude
-     * @return This {@link WhatsAppWebhookInboundLocationMessage instance}.
-     */
-    public WhatsAppWebhookInboundLocationMessage latitude(Double latitude) {
-        this.latitude = latitude;
-        return this;
-    }
-
-    /**
-     * Returns latitude.
-     * <p>
-     * Field description:
-     * Latitude. The value must be between -180 and 180.
-     * <p>
-     * The field is required.
-     *
-     * @return latitude
-     */
-    @JsonProperty("latitude")
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    /**
-     * Sets latitude.
-     * <p>
-     * Field description:
-     * Latitude. The value must be between -180 and 180.
-     * <p>
-     * The field is required.
-     *
-     * @param latitude
-     */
-    @JsonProperty("latitude")
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
     }
 
     /**
@@ -131,43 +81,49 @@ public class WhatsAppWebhookInboundLocationMessage extends WhatsAppWebhookInboun
     }
 
     /**
-     * Sets address.
+     * Sets latitude.
      * <p>
      * Field description:
-     * Location address.
+     * Latitude. The value must be between -180 and 180.
+     * <p>
+     * The field is required.
      *
-     * @param address
+     * @param latitude
      * @return This {@link WhatsAppWebhookInboundLocationMessage instance}.
      */
-    public WhatsAppWebhookInboundLocationMessage address(String address) {
-        this.address = address;
+    public WhatsAppWebhookInboundLocationMessage latitude(Double latitude) {
+        this.latitude = latitude;
         return this;
     }
 
     /**
-     * Returns address.
+     * Returns latitude.
      * <p>
      * Field description:
-     * Location address.
+     * Latitude. The value must be between -180 and 180.
+     * <p>
+     * The field is required.
      *
-     * @return address
+     * @return latitude
      */
-    @JsonProperty("address")
-    public String getAddress() {
-        return address;
+    @JsonProperty("latitude")
+    public Double getLatitude() {
+        return latitude;
     }
 
     /**
-     * Sets address.
+     * Sets latitude.
      * <p>
      * Field description:
-     * Location address.
+     * Latitude. The value must be between -180 and 180.
+     * <p>
+     * The field is required.
      *
-     * @param address
+     * @param latitude
      */
-    @JsonProperty("address")
-    public void setAddress(String address) {
-        this.address = address;
+    @JsonProperty("latitude")
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
     /**
@@ -211,6 +167,46 @@ public class WhatsAppWebhookInboundLocationMessage extends WhatsAppWebhookInboun
     }
 
     /**
+     * Sets address.
+     * <p>
+     * Field description:
+     * Location address.
+     *
+     * @param address
+     * @return This {@link WhatsAppWebhookInboundLocationMessage instance}.
+     */
+    public WhatsAppWebhookInboundLocationMessage address(String address) {
+        this.address = address;
+        return this;
+    }
+
+    /**
+     * Returns address.
+     * <p>
+     * Field description:
+     * Location address.
+     *
+     * @return address
+     */
+    @JsonProperty("address")
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * Sets address.
+     * <p>
+     * Field description:
+     * Location address.
+     *
+     * @param address
+     */
+    @JsonProperty("address")
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    /**
      * Sets url.
      * <p>
      * Field description:
@@ -250,68 +246,6 @@ public class WhatsAppWebhookInboundLocationMessage extends WhatsAppWebhookInboun
         this.url = url;
     }
 
-    /**
-     * Sets context.
-     *
-     * @param context
-     * @return This {@link WhatsAppWebhookInboundLocationMessage instance}.
-     */
-    public WhatsAppWebhookInboundLocationMessage context(WhatsAppContext context) {
-        this.context = context;
-        return this;
-    }
-
-    /**
-     * Returns context.
-     *
-     * @return context
-     */
-    @JsonProperty("context")
-    public WhatsAppContext getContext() {
-        return context;
-    }
-
-    /**
-     * Sets context.
-     *
-     * @param context
-     */
-    @JsonProperty("context")
-    public void setContext(WhatsAppContext context) {
-        this.context = context;
-    }
-
-    /**
-     * Sets referral.
-     *
-     * @param referral
-     * @return This {@link WhatsAppWebhookInboundLocationMessage instance}.
-     */
-    public WhatsAppWebhookInboundLocationMessage referral(WhatsAppWebhookReferral referral) {
-        this.referral = referral;
-        return this;
-    }
-
-    /**
-     * Returns referral.
-     *
-     * @return referral
-     */
-    @JsonProperty("referral")
-    public WhatsAppWebhookReferral getReferral() {
-        return referral;
-    }
-
-    /**
-     * Sets referral.
-     *
-     * @param referral
-     */
-    @JsonProperty("referral")
-    public void setReferral(WhatsAppWebhookReferral referral) {
-        this.referral = referral;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -322,19 +256,17 @@ public class WhatsAppWebhookInboundLocationMessage extends WhatsAppWebhookInboun
         }
         WhatsAppWebhookInboundLocationMessage whatsAppWebhookInboundLocationMessage =
                 (WhatsAppWebhookInboundLocationMessage) o;
-        return Objects.equals(this.latitude, whatsAppWebhookInboundLocationMessage.latitude)
-                && Objects.equals(this.longitude, whatsAppWebhookInboundLocationMessage.longitude)
-                && Objects.equals(this.address, whatsAppWebhookInboundLocationMessage.address)
+        return Objects.equals(this.longitude, whatsAppWebhookInboundLocationMessage.longitude)
+                && Objects.equals(this.latitude, whatsAppWebhookInboundLocationMessage.latitude)
                 && Objects.equals(this.name, whatsAppWebhookInboundLocationMessage.name)
+                && Objects.equals(this.address, whatsAppWebhookInboundLocationMessage.address)
                 && Objects.equals(this.url, whatsAppWebhookInboundLocationMessage.url)
-                && Objects.equals(this.context, whatsAppWebhookInboundLocationMessage.context)
-                && Objects.equals(this.referral, whatsAppWebhookInboundLocationMessage.referral)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(latitude, longitude, address, name, url, context, referral, super.hashCode());
+        return Objects.hash(longitude, latitude, name, address, url, super.hashCode());
     }
 
     @Override
@@ -346,26 +278,20 @@ public class WhatsAppWebhookInboundLocationMessage extends WhatsAppWebhookInboun
                 .append("    ")
                 .append(toIndentedString(super.toString()))
                 .append(newLine)
-                .append("    latitude: ")
-                .append(toIndentedString(latitude))
-                .append(newLine)
                 .append("    longitude: ")
                 .append(toIndentedString(longitude))
                 .append(newLine)
-                .append("    address: ")
-                .append(toIndentedString(address))
+                .append("    latitude: ")
+                .append(toIndentedString(latitude))
                 .append(newLine)
                 .append("    name: ")
                 .append(toIndentedString(name))
                 .append(newLine)
+                .append("    address: ")
+                .append(toIndentedString(address))
+                .append(newLine)
                 .append("    url: ")
                 .append(toIndentedString(url))
-                .append(newLine)
-                .append("    context: ")
-                .append(toIndentedString(context))
-                .append(newLine)
-                .append("    referral: ")
-                .append(toIndentedString(referral))
                 .append(newLine)
                 .append("}")
                 .toString();

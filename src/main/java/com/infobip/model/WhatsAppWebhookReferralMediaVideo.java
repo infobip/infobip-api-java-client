@@ -15,15 +15,41 @@ import java.util.Objects;
 /**
  * Represents WhatsAppWebhookReferralMediaVideo model.
  */
-public class WhatsAppWebhookReferralMediaVideo extends WhatsAppWebhookReferralMedia {
+public class WhatsAppWebhookReferralMediaVideo {
+
+    private WhatsAppWebhookMediaType type;
 
     private String url;
 
     /**
-     * Constructs a new {@link WhatsAppWebhookReferralMediaVideo} instance.
+     * Sets type.
+     *
+     * @param type
+     * @return This {@link WhatsAppWebhookReferralMediaVideo instance}.
      */
-    public WhatsAppWebhookReferralMediaVideo() {
-        super("VIDEO");
+    public WhatsAppWebhookReferralMediaVideo type(WhatsAppWebhookMediaType type) {
+        this.type = type;
+        return this;
+    }
+
+    /**
+     * Returns type.
+     *
+     * @return type
+     */
+    @JsonProperty("type")
+    public WhatsAppWebhookMediaType getType() {
+        return type;
+    }
+
+    /**
+     * Sets type.
+     *
+     * @param type
+     */
+    @JsonProperty("type")
+    public void setType(WhatsAppWebhookMediaType type) {
+        this.type = type;
     }
 
     /**
@@ -31,8 +57,6 @@ public class WhatsAppWebhookReferralMediaVideo extends WhatsAppWebhookReferralMe
      * <p>
      * Field description:
      * URL that leads to the video that end user saw and clicked.
-     * <p>
-     * The field is required.
      *
      * @param url
      * @return This {@link WhatsAppWebhookReferralMediaVideo instance}.
@@ -47,8 +71,6 @@ public class WhatsAppWebhookReferralMediaVideo extends WhatsAppWebhookReferralMe
      * <p>
      * Field description:
      * URL that leads to the video that end user saw and clicked.
-     * <p>
-     * The field is required.
      *
      * @return url
      */
@@ -62,8 +84,6 @@ public class WhatsAppWebhookReferralMediaVideo extends WhatsAppWebhookReferralMe
      * <p>
      * Field description:
      * URL that leads to the video that end user saw and clicked.
-     * <p>
-     * The field is required.
      *
      * @param url
      */
@@ -81,12 +101,13 @@ public class WhatsAppWebhookReferralMediaVideo extends WhatsAppWebhookReferralMe
             return false;
         }
         WhatsAppWebhookReferralMediaVideo whatsAppWebhookReferralMediaVideo = (WhatsAppWebhookReferralMediaVideo) o;
-        return Objects.equals(this.url, whatsAppWebhookReferralMediaVideo.url) && super.equals(o);
+        return Objects.equals(this.type, whatsAppWebhookReferralMediaVideo.type)
+                && Objects.equals(this.url, whatsAppWebhookReferralMediaVideo.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, super.hashCode());
+        return Objects.hash(type, url);
     }
 
     @Override
@@ -95,8 +116,8 @@ public class WhatsAppWebhookReferralMediaVideo extends WhatsAppWebhookReferralMe
         return new StringBuilder()
                 .append("class WhatsAppWebhookReferralMediaVideo {")
                 .append(newLine)
-                .append("    ")
-                .append(toIndentedString(super.toString()))
+                .append("    type: ")
+                .append(toIndentedString(type))
                 .append(newLine)
                 .append("    url: ")
                 .append(toIndentedString(url))

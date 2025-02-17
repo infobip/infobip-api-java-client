@@ -23,7 +23,11 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = WhatsAppTemplateCatalogButtonContent.class, name = "CATALOG"),
     @JsonSubTypes.Type(value = WhatsAppTemplateCopyCodeButtonContent.class, name = "COPY_CODE"),
+    @JsonSubTypes.Type(value = WhatsAppTemplateFlowButtonContent.class, name = "FLOW"),
+    @JsonSubTypes.Type(value = WhatsAppTemplateMultiProductButtonContent.class, name = "MULTI_PRODUCT"),
+    @JsonSubTypes.Type(value = WhatsAppTemplateOrderDetailsButtonContent.class, name = "ORDER_DETAILS"),
     @JsonSubTypes.Type(value = WhatsAppTemplateQuickReplyButtonContent.class, name = "QUICK_REPLY"),
     @JsonSubTypes.Type(value = WhatsAppTemplateUrlButtonContent.class, name = "URL"),
 })

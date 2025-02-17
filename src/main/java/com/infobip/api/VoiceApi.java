@@ -32,6 +32,7 @@ import com.infobip.model.CallsUpdateScenarioRequest;
 import com.infobip.model.CallsUpdateScenarioResponse;
 import com.infobip.model.CallsUpdateStatusRequest;
 import com.infobip.model.CallsVoiceResponse;
+import java.io.File;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -137,14 +138,12 @@ public class VoiceApi {
         }
 
         /**
-         * Executes the deleteAVoiceIvrScenario request.
-         *
-         * @return String The deserialized response.
+         * Executes the deleteAVoiceIvrScenario request
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public String execute() throws ApiException {
+        public void execute() throws ApiException {
             RequestDefinition deleteAVoiceIvrScenarioDefinition = deleteAVoiceIvrScenarioDefinition(id);
-            return apiClient.execute(deleteAVoiceIvrScenarioDefinition, new TypeReference<String>() {}.getType());
+            apiClient.execute(deleteAVoiceIvrScenarioDefinition);
         }
 
         /**
@@ -153,10 +152,9 @@ public class VoiceApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<String> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
             RequestDefinition deleteAVoiceIvrScenarioDefinition = deleteAVoiceIvrScenarioDefinition(id);
-            return apiClient.executeAsync(
-                    deleteAVoiceIvrScenarioDefinition, new TypeReference<String>() {}.getType(), callback);
+            return apiClient.executeAsync(deleteAVoiceIvrScenarioDefinition, callback);
         }
     }
 
@@ -170,6 +168,63 @@ public class VoiceApi {
      */
     public DeleteAVoiceIvrScenarioRequest deleteAVoiceIvrScenario(String id) {
         return new DeleteAVoiceIvrScenarioRequest(id);
+    }
+
+    private RequestDefinition downloadVoiceIvrRecordedFileDefinition(String id) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/voice/ivr/1/files/{id}")
+                .requiresAuthentication(true)
+                .accept("application/octet-stream");
+
+        if (id != null) {
+            builder.addPathParameter(new Parameter("id", id));
+        }
+        return builder.build();
+    }
+
+    /**
+     * downloadVoiceIvrRecordedFile request builder class.
+     */
+    public class DownloadVoiceIvrRecordedFileRequest {
+        private final String id;
+
+        private DownloadVoiceIvrRecordedFileRequest(String id) {
+            this.id = Objects.requireNonNull(id, "The required parameter 'id' is missing.");
+        }
+
+        /**
+         * Executes the downloadVoiceIvrRecordedFile request.
+         *
+         * @return File The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public File execute() throws ApiException {
+            RequestDefinition downloadVoiceIvrRecordedFileDefinition = downloadVoiceIvrRecordedFileDefinition(id);
+            return apiClient.execute(downloadVoiceIvrRecordedFileDefinition, new TypeReference<File>() {}.getType());
+        }
+
+        /**
+         * Executes the downloadVoiceIvrRecordedFile request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<File> callback) {
+            RequestDefinition downloadVoiceIvrRecordedFileDefinition = downloadVoiceIvrRecordedFileDefinition(id);
+            return apiClient.executeAsync(
+                    downloadVoiceIvrRecordedFileDefinition, new TypeReference<File>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Download Voice IVR Recorded File..
+     * <p>
+     * This method allows you to download Voice IVR Recorded Audio File. The returned audio data is encoded as PCM 16bit 8kHz WAVE audio. The files are available on Infobip servers for 2 months.
+     *
+     * @param id File ID to download. (required)
+     * @return DownloadVoiceIvrRecordedFileRequest
+     */
+    public DownloadVoiceIvrRecordedFileRequest downloadVoiceIvrRecordedFile(String id) {
+        return new DownloadVoiceIvrRecordedFileRequest(id);
     }
 
     private RequestDefinition getAVoiceIvrScenarioDefinition(String id) {
@@ -988,8 +1043,8 @@ public class VoiceApi {
             Integer pageSize,
             String name,
             String label,
-            OffsetDateTime lastUsageDateSince,
-            OffsetDateTime lastUsageDateUntil) {
+            String lastUsageDateSince,
+            String lastUsageDateUntil) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/voice/ivr/1/scenarios")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -1023,8 +1078,8 @@ public class VoiceApi {
         private Integer pageSize;
         private String name;
         private String label;
-        private OffsetDateTime lastUsageDateSince;
-        private OffsetDateTime lastUsageDateUntil;
+        private String lastUsageDateSince;
+        private String lastUsageDateUntil;
 
         private SearchVoiceIvrScenariosRequest() {}
 
@@ -1078,7 +1133,7 @@ public class VoiceApi {
          * @param lastUsageDateSince Lower limit of last usage date in &#x60;yyyy-MM-dd&#x60; format. Note: For scenarios where &#x60;lastUsageDate&#x60; is &#x60;null&#x60;, filtering matches &#x60;createTime&#x60;. (optional)
          * @return SearchVoiceIvrScenariosRequest
          */
-        public SearchVoiceIvrScenariosRequest lastUsageDateSince(OffsetDateTime lastUsageDateSince) {
+        public SearchVoiceIvrScenariosRequest lastUsageDateSince(String lastUsageDateSince) {
             this.lastUsageDateSince = lastUsageDateSince;
             return this;
         }
@@ -1089,7 +1144,7 @@ public class VoiceApi {
          * @param lastUsageDateUntil Upper limit of last usage date &#x60;yyyy-MM-dd&#x60; format. Note: For scenarios where &#x60;lastUsageDate&#x60; is &#x60;null&#x60;, filtering matches &#x60;createTime&#x60;. (optional)
          * @return SearchVoiceIvrScenariosRequest
          */
-        public SearchVoiceIvrScenariosRequest lastUsageDateUntil(OffsetDateTime lastUsageDateUntil) {
+        public SearchVoiceIvrScenariosRequest lastUsageDateUntil(String lastUsageDateUntil) {
             this.lastUsageDateUntil = lastUsageDateUntil;
             return this;
         }

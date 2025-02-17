@@ -19,7 +19,7 @@ public class SmsMessageError {
 
     private Integer groupId;
 
-    private SmsMessageErrorGroup groupName;
+    private MessageErrorGroup groupName;
 
     private Integer id;
 
@@ -75,7 +75,7 @@ public class SmsMessageError {
      * @param groupName
      * @return This {@link SmsMessageError instance}.
      */
-    public SmsMessageError groupName(SmsMessageErrorGroup groupName) {
+    public SmsMessageError groupName(MessageErrorGroup groupName) {
         this.groupName = groupName;
         return this;
     }
@@ -86,7 +86,7 @@ public class SmsMessageError {
      * @return groupName
      */
     @JsonProperty("groupName")
-    public SmsMessageErrorGroup getGroupName() {
+    public MessageErrorGroup getGroupName() {
         return groupName;
     }
 
@@ -96,7 +96,7 @@ public class SmsMessageError {
      * @param groupName
      */
     @JsonProperty("groupName")
-    public void setGroupName(SmsMessageErrorGroup groupName) {
+    public void setGroupName(MessageErrorGroup groupName) {
         this.groupName = groupName;
     }
 

@@ -14,592 +14,16 @@ import org.junit.jupiter.api.Test;
 
 class ViberApiTest extends ApiTest {
 
-    private static final String SEND_VIBER_TEXT_MESSAGE = "/viber/1/message/text";
-    private static final String SEND_VIBER_IMAGE_MESSAGE = "/viber/1/message/image";
-    private static final String SEND_VIBER_FILE_MESSAGE = "/viber/1/message/file";
-    private static final String SEND_VIBER_VIDEO_MESSAGE = "/viber/1/message/video";
     private static final String SEND_VIBER_MESSAGES = "/viber/2/messages";
     private static final String GET_VIBER_REPORTS = "/viber/2/reports";
     private static final String GET_VIBER_LOGS = "/viber/2/logs";
-
-    @Test
-    void shouldSendViberTextMessage() {
-        String givenBulkId = "ABC-100";
-        String givenTo = "385977666618";
-        Integer givenMessageCount = 1;
-        String givenMessageId = "06df139a-7eb5-4a6e-902e-40e892210455";
-        Integer givenGroupId = 1;
-        String givenGroupName = "PENDING";
-        Integer givenId = 7;
-        String givenName = "PENDING_ENROUTE";
-        String givenDescription = "Message sent to next instance";
-        String givenAction = "https://www.infobip.com/";
-        String givenFrom = "ACCOUNT-123";
-        String givenText = "Some text";
-        String givenTitle = "Click on me!";
-        String givenCallbackData = "Callback data";
-        String givenTrackingData = "Tracking data";
-        Boolean givenApplySessionRate = false;
-        Boolean givenToPrimaryDeviceOnly = false;
-        ViberLabel givenLabel = ViberLabel.TRANSACTIONAL;
-        String givenFailoverFrom = "SMS Sender Number";
-        String givenFailoverText = "Failover message text";
-        Integer givenFailoverValidityPeriod = 2;
-        ValidityPeriodTimeUnit givenFailoverValidityPeriodTimeUnit = ValidityPeriodTimeUnit.HOURS;
-        var givenApplicationId = "applicationId";
-        var givenEntityId = "entity";
-
-        String givenResponse = String.format(
-                "{\n" + "  \"messages\": [\n"
-                        + "    {\n"
-                        + "      \"to\": \"%s\",\n"
-                        + "      \"messageCount\": %d,\n"
-                        + "      \"messageId\": \"%s\",\n"
-                        + "      \"status\": {\n"
-                        + "        \"groupId\": %d,\n"
-                        + "        \"groupName\": \"%s\",\n"
-                        + "        \"id\": %d,\n"
-                        + "        \"name\": \"%s\",\n"
-                        + "        \"description\": \"%s\",\n"
-                        + "        \"action\": \"%s\"\n"
-                        + "      }\n"
-                        + "    }\n"
-                        + "  ],\n"
-                        + "  \"bulkId\": \"%s\"\n"
-                        + "}\n",
-                givenTo,
-                givenMessageCount,
-                givenMessageId,
-                givenGroupId,
-                givenGroupName,
-                givenId,
-                givenName,
-                givenDescription,
-                givenAction,
-                givenBulkId);
-
-        String expectedRequest = String.format(
-                "{\n" + "  \"messages\": [\n"
-                        + "    {\n"
-                        + "      \"from\": \"%s\",\n"
-                        + "      \"to\": \"%s\",\n"
-                        + "      \"messageId\": \"%s\",\n"
-                        + "      \"content\": {\n"
-                        + "        \"text\": \"%s\",\n"
-                        + "        \"button\": {\n"
-                        + "          \"title\": \"%s\",\n"
-                        + "          \"action\": \"%s\"\n"
-                        + "        }\n"
-                        + "      },\n"
-                        + "      \"callbackData\": \"%s\",\n"
-                        + "      \"trackingData\": \"%s\",\n"
-                        + "      \"applySessionRate\": %b,\n"
-                        + "      \"toPrimaryDeviceOnly\": %b,\n"
-                        + "      \"label\": \"%s\",\n"
-                        + "      \"smsFailover\": {\n"
-                        + "        \"from\": \"%s\",\n"
-                        + "        \"text\": \"%s\",\n"
-                        + "        \"validityPeriod\": %d,\n"
-                        + "        \"validityPeriodTimeUnit\": \"%s\"\n"
-                        + "      },\n"
-                        + "      \"entityId\" : \"%s\",\n"
-                        + "      \"applicationId\" : \"%s\"\n"
-                        + "    }\n"
-                        + "  ]\n"
-                        + "}\n",
-                givenFrom,
-                givenTo,
-                givenMessageId,
-                givenText,
-                givenTitle,
-                givenAction,
-                givenCallbackData,
-                givenTrackingData,
-                givenApplySessionRate,
-                givenToPrimaryDeviceOnly,
-                givenLabel,
-                givenFailoverFrom,
-                givenFailoverText,
-                givenFailoverValidityPeriod,
-                givenFailoverValidityPeriodTimeUnit,
-                givenEntityId,
-                givenApplicationId);
-
-        setUpSuccessPostRequest(SEND_VIBER_TEXT_MESSAGE, Map.of(), expectedRequest, givenResponse);
-
-        ViberApi api = new ViberApi(getApiClient());
-
-        ViberBulkTextMessage request = new ViberBulkTextMessage()
-                .messages(List.of(new ViberTextMessage()
-                        .from(givenFrom)
-                        .to(givenTo)
-                        .applicationId(givenApplicationId)
-                        .entityId(givenEntityId)
-                        .messageId(givenMessageId)
-                        .content(new ViberTextContent()
-                                .text(givenText)
-                                .button(new ViberButton().title(givenTitle).action(givenAction)))
-                        .callbackData(givenCallbackData)
-                        .trackingData(givenTrackingData)
-                        .applySessionRate(givenApplySessionRate)
-                        .toPrimaryDeviceOnly(givenToPrimaryDeviceOnly)
-                        .label(givenLabel)
-                        .smsFailover(new ViberSmsFailover()
-                                .from(givenFailoverFrom)
-                                .text(givenFailoverText)
-                                .validityPeriod(givenFailoverValidityPeriod)
-                                .validityPeriodTimeUnit(givenFailoverValidityPeriodTimeUnit))));
-
-        ViberSingleMessageInfo expectedMessageInfo = new ViberSingleMessageInfo()
-                .to(givenTo)
-                .messageCount(givenMessageCount)
-                .messageId(givenMessageId)
-                .status(new ViberSingleMessageStatus()
-                        .groupId(givenGroupId)
-                        .groupName(givenGroupName)
-                        .id(givenId)
-                        .name(givenName)
-                        .description(givenDescription)
-                        .action(givenAction));
-
-        ViberBulkMessageInfo expectedResponse =
-                new ViberBulkMessageInfo().addMessagesItem(expectedMessageInfo).bulkId(givenBulkId);
-
-        Consumer<ViberBulkMessageInfo> assertions = response -> then(response).isEqualTo(expectedResponse);
-
-        var call = api.sendViberTextMessage(request);
-        testSuccessfulCall(call::execute, assertions);
-        testSuccessfulAsyncCall(call::executeAsync, assertions);
-    }
-
-    @Test
-    void shouldSendViberImageMessage() {
-        String givenTo = "385977666618";
-        Integer givenMessageCount = 1;
-        String givenMessageId = "06df139a-7eb5-4a6e-902e-40e892210455";
-        Integer givenGroupId = 1;
-        String givenGroupName = "PENDING";
-        Integer givenId = 7;
-        String givenName = "PENDING_ENROUTE";
-        String givenDescription = "Message sent to next instance";
-        String givenAction = "https://www.infobip.com/";
-        String givenFrom = "ACCOUNT-123";
-        String givenText = "Some text";
-        String givenMediaUrl = "https://example.com/image.png";
-        String givenTitle = "Click on me!";
-        String givenCallbackData = "Callback data";
-        String givenTrackingData = "Tracking data";
-        Boolean givenApplySessionRate = false;
-        ViberLabel givenLabel = ViberLabel.TRANSACTIONAL;
-        String givenFailoverFrom = "SMS Sender Number";
-        String givenFailoverText = "Failover message text";
-        Integer givenFailoverValidityPeriod = 2;
-        ValidityPeriodTimeUnit givenFailoverValidityPeriodTimeUnit = ValidityPeriodTimeUnit.HOURS;
-        var givenApplicationId = "applicationId";
-        var givenEntityId = "entityId";
-
-        String givenResponse = String.format(
-                "{\n" + "  \"to\": \"%s\",\n"
-                        + "  \"messageCount\": %d,\n"
-                        + "  \"messageId\": \"%s\",\n"
-                        + "  \"status\": {\n"
-                        + "    \"groupId\": %d,\n"
-                        + "    \"groupName\": \"%s\",\n"
-                        + "    \"id\": %d,\n"
-                        + "    \"name\": \"%s\",\n"
-                        + "    \"description\": \"%s\",\n"
-                        + "    \"action\": \"%s\"\n"
-                        + "  }\n"
-                        + "}\n",
-                givenTo,
-                givenMessageCount,
-                givenMessageId,
-                givenGroupId,
-                givenGroupName,
-                givenId,
-                givenName,
-                givenDescription,
-                givenAction);
-
-        String expectedRequest = String.format(
-                "{\n" + "  \"from\": \"%s\",\n"
-                        + "  \"to\": \"%s\",\n"
-                        + "  \"messageId\": \"%s\",\n"
-                        + "  \"content\": {\n"
-                        + "    \"text\": \"%s\",\n"
-                        + "    \"mediaUrl\": \"%s\",\n"
-                        + "    \"button\": {\n"
-                        + "      \"title\": \"%s\",\n"
-                        + "      \"action\": \"%s\"\n"
-                        + "    }\n"
-                        + "  },\n"
-                        + "  \"callbackData\": \"%s\",\n"
-                        + "  \"trackingData\": \"%s\",\n"
-                        + "  \"applySessionRate\": %b,\n"
-                        + "  \"label\": \"%s\",\n"
-                        + "  \"smsFailover\": {\n"
-                        + "    \"from\": \"%s\",\n"
-                        + "    \"text\": \"%s\",\n"
-                        + "    \"validityPeriod\": %d,\n"
-                        + "    \"validityPeriodTimeUnit\": \"%s\"\n"
-                        + "  },\n"
-                        + "  \"entityId\" : \"%s\",\n"
-                        + "  \"applicationId\" : \"%s\"\n"
-                        + "}\n",
-                givenFrom,
-                givenTo,
-                givenMessageId,
-                givenText,
-                givenMediaUrl,
-                givenTitle,
-                givenAction,
-                givenCallbackData,
-                givenTrackingData,
-                givenApplySessionRate,
-                givenLabel,
-                givenFailoverFrom,
-                givenFailoverText,
-                givenFailoverValidityPeriod,
-                givenFailoverValidityPeriodTimeUnit,
-                givenEntityId,
-                givenApplicationId);
-
-        setUpSuccessPostRequest(SEND_VIBER_IMAGE_MESSAGE, Map.of(), expectedRequest, givenResponse);
-
-        ViberApi api = new ViberApi(getApiClient());
-
-        ViberImageMessage request = new ViberImageMessage()
-                .from(givenFrom)
-                .to(givenTo)
-                .entityId(givenEntityId)
-                .applicationId(givenApplicationId)
-                .messageId(givenMessageId)
-                .content(new ViberImageContent()
-                        .text(givenText)
-                        .mediaUrl(givenMediaUrl)
-                        .button(new ViberButton().title(givenTitle).action(givenAction)))
-                .callbackData(givenCallbackData)
-                .trackingData(givenTrackingData)
-                .applySessionRate(givenApplySessionRate)
-                .label(givenLabel)
-                .smsFailover(new ViberSmsFailover()
-                        .from(givenFailoverFrom)
-                        .text(givenFailoverText)
-                        .validityPeriod(givenFailoverValidityPeriod)
-                        .validityPeriodTimeUnit(givenFailoverValidityPeriodTimeUnit));
-
-        Consumer<ViberSingleMessageInfo> assertions = (response) -> {
-            then(response).isNotNull();
-            then(response.getTo()).isEqualTo(givenTo);
-            then(response.getMessageCount()).isEqualTo(givenMessageCount);
-            then(response.getMessageId()).isEqualTo(givenMessageId);
-            then(response.getStatus()).isNotNull();
-            var status = response.getStatus();
-            then(status.getGroupId()).isEqualTo(givenGroupId);
-            then(status.getGroupName()).isEqualTo(givenGroupName);
-            then(status.getId()).isEqualTo(givenId);
-            then(status.getName()).isEqualTo(givenName);
-            then(status.getDescription()).isEqualTo(givenDescription);
-            then(status.getAction()).isEqualTo(givenAction);
-        };
-
-        var call = api.sendViberImageMessage(request);
-        testSuccessfulCall(call::execute, assertions);
-        testSuccessfulAsyncCall(call::executeAsync, assertions);
-    }
-
-    @Test
-    void shouldSendViberFileMessage() {
-        String givenTo = "385977666618";
-        Integer givenMessageCount = 1;
-        String givenMessageId = "06df139a-7eb5-4a6e-902e-40e892210455";
-        Integer givenGroupId = 1;
-        String givenGroupName = "PENDING";
-        Integer givenId = 7;
-        String givenName = "PENDING_ENROUTE";
-        String givenDescription = "Message sent to next instance";
-        String givenAction = "https://www.infobip.com/";
-        String givenFrom = "ACCOUNT-123";
-        String givenMediaUrl = "https://example.com/image.png";
-        String givenCallbackData = "Callback data";
-        String givenTrackingData = "Tracking data";
-        Boolean givenApplySessionRate = false;
-        ViberLabel givenLabel = ViberLabel.TRANSACTIONAL;
-        String givenFailoverFrom = "SMS Sender Number";
-        String givenFailoverText = "Failover message text";
-        Integer givenFailoverValidityPeriod = 2;
-        ValidityPeriodTimeUnit givenFailoverValidityPeriodTimeUnit = ValidityPeriodTimeUnit.HOURS;
-        var givenEntityId = "entity";
-        var givenApplicationId = "application";
-
-        String givenResponse = String.format(
-                "{\n" + "  \"to\": \"%s\",\n"
-                        + "  \"messageCount\": %d,\n"
-                        + "  \"messageId\": \"%s\",\n"
-                        + "  \"status\": {\n"
-                        + "    \"groupId\": %d,\n"
-                        + "    \"groupName\": \"%s\",\n"
-                        + "    \"id\": %d,\n"
-                        + "    \"name\": \"%s\",\n"
-                        + "    \"description\": \"%s\",\n"
-                        + "    \"action\": \"%s\"\n"
-                        + "  }\n"
-                        + "}\n",
-                givenTo,
-                givenMessageCount,
-                givenMessageId,
-                givenGroupId,
-                givenGroupName,
-                givenId,
-                givenName,
-                givenDescription,
-                givenAction);
-
-        String givenFileName = "sample_file.pdf";
-
-        String expectedRequest = String.format(
-                "{\n" + "  \"from\": \"%s\",\n"
-                        + "  \"to\": \"%s\",\n"
-                        + "  \"messageId\": \"%s\",\n"
-                        + "  \"content\": {\n"
-                        + "    \"filename\": \"%s\",\n"
-                        + "    \"mediaUrl\": \"%s\"\n"
-                        + "  },\n"
-                        + "  \"callbackData\": \"%s\",\n"
-                        + "  \"trackingData\": \"%s\",\n"
-                        + "  \"applySessionRate\": %b,\n"
-                        + "  \"label\": \"%s\",\n"
-                        + "  \"smsFailover\": {\n"
-                        + "    \"from\": \"%s\",\n"
-                        + "    \"text\": \"%s\",\n"
-                        + "    \"validityPeriod\": %d,\n"
-                        + "    \"validityPeriodTimeUnit\": \"%s\"\n"
-                        + "  },\n"
-                        + "  \"entityId\" : \"entity\",\n"
-                        + "  \"applicationId\" : \"application\"\n"
-                        + "}\n",
-                givenFrom,
-                givenTo,
-                givenMessageId,
-                givenFileName,
-                givenMediaUrl,
-                givenCallbackData,
-                givenTrackingData,
-                givenApplySessionRate,
-                givenLabel,
-                givenFailoverFrom,
-                givenFailoverText,
-                givenFailoverValidityPeriod,
-                givenFailoverValidityPeriodTimeUnit,
-                givenEntityId,
-                givenApplicationId);
-
-        setUpSuccessPostRequest(SEND_VIBER_FILE_MESSAGE, Map.of(), expectedRequest, givenResponse);
-
-        ViberApi api = new ViberApi(getApiClient());
-
-        ViberFileMessage request = new ViberFileMessage()
-                .from(givenFrom)
-                .entityId(givenEntityId)
-                .applicationId(givenApplicationId)
-                .to(givenTo)
-                .messageId(givenMessageId)
-                .content(new ViberFileContent().filename(givenFileName).mediaUrl(givenMediaUrl))
-                .callbackData(givenCallbackData)
-                .trackingData(givenTrackingData)
-                .applySessionRate(givenApplySessionRate)
-                .label(givenLabel)
-                .smsFailover(new ViberSmsFailover()
-                        .from(givenFailoverFrom)
-                        .text(givenFailoverText)
-                        .validityPeriod(givenFailoverValidityPeriod)
-                        .validityPeriodTimeUnit(givenFailoverValidityPeriodTimeUnit));
-
-        Consumer<ViberSingleMessageInfo> assertions = (response) -> {
-            then(response).isNotNull();
-            then(response.getTo()).isEqualTo(givenTo);
-            then(response.getMessageCount()).isEqualTo(givenMessageCount);
-            then(response.getMessageId()).isEqualTo(givenMessageId);
-            then(response.getStatus()).isNotNull();
-            var status = response.getStatus();
-            then(status.getGroupId()).isEqualTo(givenGroupId);
-            then(status.getGroupName()).isEqualTo(givenGroupName);
-            then(status.getId()).isEqualTo(givenId);
-            then(status.getName()).isEqualTo(givenName);
-            then(status.getDescription()).isEqualTo(givenDescription);
-            then(status.getAction()).isEqualTo(givenAction);
-        };
-
-        var call = api.sendViberFileMessage(request);
-        testSuccessfulCall(call::execute, assertions);
-        testSuccessfulAsyncCall(call::executeAsync, assertions);
-    }
-
-    @Test
-    void shouldSendViberVideoMessage() {
-        String givenTo = "385977666618";
-        Integer givenMessageCount = 1;
-        String givenMessageId = "06df139a-7eb5-4a6e-902e-40e892210455";
-        Integer givenGroupId = 1;
-        String givenGroupName = "PENDING";
-        Integer givenId = 7;
-        String givenName = "PENDING_ENROUTE";
-        String givenDescription = "Message sent to next instance";
-        String givenAction = "https://www.infobip.com/";
-        String givenFrom = "ACCOUNT-123";
-        String givenText = "Some text";
-        String givenMediaUrl = "https://example.com/image.png";
-        String givenThumbnailUrl = "string";
-        Integer givenMediaDuration = 1;
-        String givenButtonTitle = "string";
-        String givenCallbackData = "Callback data";
-        String givenTrackingData = "Tracking data";
-        String givenFailoverFrom = "SMS Sender Number";
-        String givenFailoverText = "Failover message text";
-        Integer givenFailoverValidityPeriod = 2;
-        ValidityPeriodTimeUnit givenFailoverValidityPeriodTimeUnit = ValidityPeriodTimeUnit.HOURS;
-        String givenNotifyUrl = "string";
-        Boolean givenShortenUrl = true;
-        Boolean givenTrackClicks = true;
-        String givenTrackingUrl = "string";
-        Boolean givenRemoveProtocol = false;
-        String givenCustomDomain = "string";
-        var givenApplicationId = "application";
-        var givenEntityId = "entity";
-
-        String givenResponse = String.format(
-                "{\n" + "  \"to\": \"%s\",\n"
-                        + "  \"messageCount\": %d,\n"
-                        + "  \"messageId\": \"%s\",\n"
-                        + "  \"status\": {\n"
-                        + "    \"groupId\": %d,\n"
-                        + "    \"groupName\": \"%s\",\n"
-                        + "    \"id\": %d,\n"
-                        + "    \"name\": \"%s\",\n"
-                        + "    \"description\": \"%s\",\n"
-                        + "    \"action\": \"%s\"\n"
-                        + "  }\n"
-                        + "}\n",
-                givenTo,
-                givenMessageCount,
-                givenMessageId,
-                givenGroupId,
-                givenGroupName,
-                givenId,
-                givenName,
-                givenDescription,
-                givenAction);
-
-        String expectedRequest = String.format(
-                "{\n" + "  \"from\": \"%s\",\n"
-                        + "  \"to\": \"%s\",\n"
-                        + "  \"messageId\": \"%s\",\n"
-                        + "  \"content\": {\n"
-                        + "    \"text\": \"%s\",\n"
-                        + "    \"mediaUrl\": \"%s\",\n"
-                        + "    \"thumbnailUrl\": \"%s\",\n"
-                        + "    \"mediaDuration\": %d,\n"
-                        + "    \"buttonTitle\": \"%s\"\n"
-                        + "  },\n"
-                        + "  \"callbackData\": \"%s\",\n"
-                        + "  \"trackingData\": \"%s\",\n"
-                        + "  \"smsFailover\": {\n"
-                        + "    \"from\": \"%s\",\n"
-                        + "    \"text\": \"%s\",\n"
-                        + "    \"validityPeriod\": %d,\n"
-                        + "    \"validityPeriodTimeUnit\": \"%s\"\n"
-                        + "  },\n"
-                        + "  \"notifyUrl\": \"%s\",\n"
-                        + "  \"urlOptions\": {\n"
-                        + "    \"shortenUrl\": %b,\n"
-                        + "    \"trackClicks\": %b,\n"
-                        + "    \"trackingUrl\": \"%s\",\n"
-                        + "    \"removeProtocol\": %b,\n"
-                        + "    \"customDomain\": \"%s\"\n"
-                        + "  },\n"
-                        + "  \"entityId\" : \"%s\",\n"
-                        + "  \"applicationId\" : \"%s\"\n"
-                        + "}\n",
-                givenFrom,
-                givenTo,
-                givenMessageId,
-                givenText,
-                givenMediaUrl,
-                givenThumbnailUrl,
-                givenMediaDuration,
-                givenButtonTitle,
-                givenCallbackData,
-                givenTrackingData,
-                givenFailoverFrom,
-                givenFailoverText,
-                givenFailoverValidityPeriod,
-                givenFailoverValidityPeriodTimeUnit,
-                givenNotifyUrl,
-                givenShortenUrl,
-                givenTrackClicks,
-                givenTrackingUrl,
-                givenRemoveProtocol,
-                givenCustomDomain,
-                givenEntityId,
-                givenApplicationId);
-
-        setUpSuccessPostRequest(SEND_VIBER_VIDEO_MESSAGE, Map.of(), expectedRequest, givenResponse);
-
-        ViberApi api = new ViberApi(getApiClient());
-
-        ViberVideoMessage request = new ViberVideoMessage()
-                .from(givenFrom)
-                .to(givenTo)
-                .applicationId(givenApplicationId)
-                .entityId(givenEntityId)
-                .messageId(givenMessageId)
-                .content(new ViberVideoContent()
-                        .text(givenText)
-                        .mediaUrl(givenMediaUrl)
-                        .thumbnailUrl(givenThumbnailUrl)
-                        .mediaDuration(givenMediaDuration)
-                        .buttonTitle(givenButtonTitle))
-                .callbackData(givenCallbackData)
-                .trackingData(givenTrackingData)
-                .smsFailover(new ViberSmsFailover()
-                        .from(givenFailoverFrom)
-                        .text(givenFailoverText)
-                        .validityPeriod(givenFailoverValidityPeriod)
-                        .validityPeriodTimeUnit(givenFailoverValidityPeriodTimeUnit))
-                .notifyUrl(givenNotifyUrl)
-                .urlOptions(new UrlOptions()
-                        .shortenUrl(givenShortenUrl)
-                        .trackClicks(givenTrackClicks)
-                        .trackingUrl(givenTrackingUrl)
-                        .removeProtocol(givenRemoveProtocol)
-                        .customDomain(givenCustomDomain));
-
-        Consumer<ViberSingleMessageInfo> assertions = (response) -> {
-            then(response).isNotNull();
-            then(response.getTo()).isEqualTo(givenTo);
-            then(response.getMessageCount()).isEqualTo(givenMessageCount);
-            then(response.getMessageId()).isEqualTo(givenMessageId);
-            then(response.getStatus()).isNotNull();
-            var status = response.getStatus();
-            then(status.getGroupId()).isEqualTo(givenGroupId);
-            then(status.getGroupName()).isEqualTo(givenGroupName);
-            then(status.getId()).isEqualTo(givenId);
-            then(status.getName()).isEqualTo(givenName);
-            then(status.getDescription()).isEqualTo(givenDescription);
-            then(status.getAction()).isEqualTo(givenAction);
-        };
-
-        var call = api.sendViberVideoMessage(request);
-        testSuccessfulCall(call::execute, assertions);
-        testSuccessfulAsyncCall(call::executeAsync, assertions);
-    }
 
     @Test
     void shouldSendNewViberTextMessage() {
         String givenBulkId = "a28dd97c-2222-4fcf-99f1-0b557ed381da";
         String givenMessageId = "a28dd97c-1ffb-4fcf-99f1-0b557ed381da";
         Integer givenGroupId = 1;
-        ViberMessageGeneralStatus givenGroupName = ViberMessageGeneralStatus.PENDING;
+        String givenGroupName = "PENDING";
         Integer givenId = 7;
         String givenName = "PENDING_ENROUTE";
         String givenDescription = "Message sent to next instance";
@@ -700,7 +124,7 @@ class ViberApiTest extends ApiTest {
                         .toPrimaryDeviceOnly(expectedToPrimaryDeviceOnly));
         ViberRequest viberRequest = new ViberRequest().addMessagesItem(viberMessage);
 
-        Consumer<ViberResponse> assertions = (response) -> {
+        Consumer<MessageResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getBulkId()).isEqualTo(givenBulkId);
             then(response.getMessages().size()).isEqualTo(1);
@@ -709,7 +133,7 @@ class ViberApiTest extends ApiTest {
             then(message.getStatus()).isNotNull();
             var status = message.getStatus();
             then(status.getGroupId()).isEqualTo(givenGroupId);
-            then(status.getGroupName()).isEqualTo(ViberMessageGeneralStatus.PENDING);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
             then(status.getId()).isEqualTo(givenId);
             then(status.getName()).isEqualTo(givenName);
             then(status.getDescription()).isEqualTo(givenDescription);
@@ -726,7 +150,7 @@ class ViberApiTest extends ApiTest {
         String givenBulkId = "a28dd97c-2222-4fcf-99f1-0b557ed381da";
         String givenMessageId = "a28dd97c-1ffb-4fcf-99f1-0b557ed381da";
         Integer givenGroupId = 1;
-        ViberMessageGeneralStatus givenGroupName = ViberMessageGeneralStatus.PENDING;
+        String givenGroupName = "PENDING";
         Integer givenId = 7;
         String givenName = "PENDING_ENROUTE";
         String givenDescription = "Message sent to next instance";
@@ -806,7 +230,7 @@ class ViberApiTest extends ApiTest {
 
         ViberRequest viberRequest = new ViberRequest().addMessagesItem(viberMessage);
 
-        Consumer<ViberResponse> assertions = (response) -> {
+        Consumer<MessageResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getBulkId()).isEqualTo(givenBulkId);
             then(response.getMessages().size()).isEqualTo(1);
@@ -815,7 +239,7 @@ class ViberApiTest extends ApiTest {
             then(message.getStatus()).isNotNull();
             var status = message.getStatus();
             then(status.getGroupId()).isEqualTo(givenGroupId);
-            then(status.getGroupName()).isEqualTo(ViberMessageGeneralStatus.PENDING);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
             then(status.getId()).isEqualTo(givenId);
             then(status.getName()).isEqualTo(givenName);
             then(status.getDescription()).isEqualTo(givenDescription);
@@ -832,7 +256,7 @@ class ViberApiTest extends ApiTest {
         String givenBulkId = "a28dd97c-2222-4fcf-99f1-0b557ed381da";
         String givenMessageId = "a28dd97c-1ffb-4fcf-99f1-0b557ed381da";
         Integer givenGroupId = 1;
-        ViberMessageGeneralStatus givenGroupName = ViberMessageGeneralStatus.PENDING;
+        String givenGroupName = "PENDING";
         Integer givenId = 7;
         String givenName = "PENDING_ENROUTE";
         String givenDescription = "Message sent to next instance";
@@ -915,7 +339,7 @@ class ViberApiTest extends ApiTest {
 
         ViberRequest viberRequest = new ViberRequest().addMessagesItem(viberMessage);
 
-        Consumer<ViberResponse> assertions = (response) -> {
+        Consumer<MessageResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getBulkId()).isEqualTo(givenBulkId);
             then(response.getMessages().size()).isEqualTo(1);
@@ -924,7 +348,7 @@ class ViberApiTest extends ApiTest {
             then(message.getStatus()).isNotNull();
             var status = message.getStatus();
             then(status.getGroupId()).isEqualTo(givenGroupId);
-            then(status.getGroupName()).isEqualTo(ViberMessageGeneralStatus.PENDING);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
             then(status.getId()).isEqualTo(givenId);
             then(status.getName()).isEqualTo(givenName);
             then(status.getDescription()).isEqualTo(givenDescription);
@@ -941,7 +365,7 @@ class ViberApiTest extends ApiTest {
         String givenBulkId = "a28dd97c-2222-4fcf-99f1-0b557ed381da";
         String givenMessageId = "a28dd97c-1ffb-4fcf-99f1-0b557ed381da";
         Integer givenGroupId = 1;
-        ViberMessageGeneralStatus givenGroupName = ViberMessageGeneralStatus.PENDING;
+        String givenGroupName = "PENDING";
         Integer givenId = 7;
         String givenName = "PENDING_ENROUTE";
         String givenDescription = "Message sent to next instance";
@@ -1008,7 +432,7 @@ class ViberApiTest extends ApiTest {
 
         ViberRequest viberRequest = new ViberRequest().addMessagesItem(viberMessage);
 
-        Consumer<ViberResponse> assertions = (response) -> {
+        Consumer<MessageResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getBulkId()).isEqualTo(givenBulkId);
             then(response.getMessages().size()).isEqualTo(1);
@@ -1017,7 +441,7 @@ class ViberApiTest extends ApiTest {
             then(message.getStatus()).isNotNull();
             var status = message.getStatus();
             then(status.getGroupId()).isEqualTo(givenGroupId);
-            then(status.getGroupName()).isEqualTo(ViberMessageGeneralStatus.PENDING);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
             then(status.getId()).isEqualTo(givenId);
             then(status.getName()).isEqualTo(givenName);
             then(status.getDescription()).isEqualTo(givenDescription);
@@ -1035,13 +459,13 @@ class ViberApiTest extends ApiTest {
         Double givenPricePerMessage = 0.0;
         String givenCurrency = "string";
         Integer givenGroupId = 1;
-        ViberMessageGeneralStatus givenGroupName = ViberMessageGeneralStatus.PENDING;
+        String givenGroupName = "PENDING";
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
         String givenAction = "string";
         Integer givenErrorGroupId = 0;
-        ViberMessageErrorGroup givenErrorGroupName = ViberMessageErrorGroup.OK;
+        MessageErrorGroup givenErrorGroupName = MessageErrorGroup.OK;
         Integer givenErrorId = 0;
         String givenErrorName = "string";
         String givenErrorDescription = "string";
@@ -1165,6 +589,7 @@ class ViberApiTest extends ApiTest {
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
 
+    // TODO: Fix this test
     @Test
     void shouldGetOutboundViberMessageLogs() {
         String givenSender = "string";
@@ -1177,13 +602,13 @@ class ViberApiTest extends ApiTest {
         Double givenPricePerMessage = 0.0;
         String givenCurrency = "EUR";
         Integer givenGroupId = 1;
-        ViberMessageGeneralStatus givenGroupName = ViberMessageGeneralStatus.PENDING;
+        String givenGroupName = "PENDING";
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
         String givenAction = "string";
         Integer givenErrorGroupId = 0;
-        ViberMessageErrorGroup givenErrorGroupName = ViberMessageErrorGroup.OK;
+        MessageErrorGroup givenErrorGroupName = MessageErrorGroup.OK;
         Integer givenErrorId = 0;
         String givenErrorName = "string";
         String givenErrorDescription = "string";
@@ -1292,6 +717,13 @@ class ViberApiTest extends ApiTest {
             then(result.getMessageCount()).isEqualTo(givenMessageCount);
         };
 
+        String givenSentSinceString = "2019-11-09T16:00:00.000+0000";
+        String givenSentUntilString = "2019-11-09T16:00:00.000+0000";
+        OffsetDateTime givenSentSince =
+                OffsetDateTime.of(LocalDateTime.of(2019, 11, 9, 16, 0, 0), ZoneOffset.ofHours(0));
+        OffsetDateTime givenSentUntil =
+                OffsetDateTime.of(LocalDateTime.of(2019, 11, 9, 16, 0, 0), ZoneOffset.ofHours(0));
+
         setUpSuccessGetRequest(
                 GET_VIBER_LOGS,
                 Map.of(
@@ -1300,22 +732,22 @@ class ViberApiTest extends ApiTest {
                         "sender", "sender",
                         "destination", "destination",
                         "generalStatus", "DELIVERED",
-                        "sentSince", "2020-02-22T17:42:05.390+01:00",
-                        "sentUntil", "2020-02-22T17:42:05.390+01:00",
+                        "sentSince", givenSentSinceString,
+                        "sentUntil", givenSentUntilString,
                         "limit", "50",
                         "entityId", "entityId",
                         "applicationId", "applicationId"),
                 givenResponse);
 
         var call = api.getOutboundViberMessageLogs()
-                .bulkId("BULK-ID-123-xyz")
-                .messageId("MESSAGE-ID-123-xyz")
+                .bulkId(List.of("BULK-ID-123-xyz"))
+                .messageId(List.of("MESSAGE-ID-123-xyz"))
                 .sender("sender")
                 .destination("destination")
-                .generalStatus(ViberMessageGeneralStatus.DELIVERED)
-                .sentSince("2020-02-22T17:42:05.390+01:00")
-                .sentUntil("2020-02-22T17:42:05.390+01:00")
-                .limit("50")
+                .generalStatus(MessageGeneralStatus.DELIVERED)
+                .sentSince(givenSentSince)
+                .sentUntil(givenSentUntil)
+                .limit(50)
                 .entityId("entityId")
                 .applicationId("applicationId");
         testSuccessfulCall(call::execute, assertions);
@@ -1423,16 +855,16 @@ class ViberApiTest extends ApiTest {
                 .error(new ViberMessageError()
                         .id(givenErrorId)
                         .groupId(givenErrorGroupId)
-                        .groupName(ViberMessageErrorGroup.valueOf(givenErrorGroupName))
+                        .groupName(MessageErrorGroup.valueOf(givenErrorGroupName))
                         .name(givenErrorName)
                         .description(givenErrorDescription)
                         .permanent(givenErrorPermanent))
-                .status(new ViberMessageStatus()
+                .status(new MessageStatus()
                         .id(givenStatusId)
                         .name(givenStatusName)
                         .description(givenStatusDescription)
                         .groupId(givenStatusGroupId)
-                        .groupName(ViberMessageGeneralStatus.valueOf(givenStatusGroupName)));
+                        .groupName(givenStatusGroupName));
         var expectedReportResponse = new ViberWebhookReportsResponse().addResultsItem(expectedReport);
 
         then(deliveryResult).isEqualTo(expectedReportResponse);
@@ -1458,7 +890,7 @@ class ViberApiTest extends ApiTest {
         String givenRequest = String.format(
                 "{\n" + "  \"results\": [\n"
                         + "    {\n"
-                        + "      \"from\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
                         + "      \"to\": \"%s\",\n"
                         + "      \"integrationType\": \"%s\",\n"
                         + "      \"receivedAt\": \"%s\",\n"
@@ -1500,8 +932,8 @@ class ViberApiTest extends ApiTest {
         var expectedSentAt =
                 OffsetDateTime.of(LocalDateTime.of(2020, 4, 1, 11, 2, 43, 594_000_000), ZoneOffset.ofHours(0));
 
-        var viberResultViberInboundContent = new ViberWebhookInboundReport()
-                .from(givenFrom)
+        var viberResultViberInboundContent = new ViberInboundMessageViberInboundContent()
+                .sender(givenFrom)
                 .to(givenTo)
                 .integrationType(givenIntegrationType)
                 .receivedAt(expectedSentAt)
@@ -1540,7 +972,7 @@ class ViberApiTest extends ApiTest {
         String givenRequest = String.format(
                 "{\n" + "  \"results\": [\n"
                         + "    {\n"
-                        + "      \"from\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
                         + "      \"to\": \"%s\",\n"
                         + "      \"integrationType\": \"%s\",\n"
                         + "      \"receivedAt\": \"%s\",\n"
@@ -1584,8 +1016,8 @@ class ViberApiTest extends ApiTest {
         var expectedSentAt =
                 OffsetDateTime.of(LocalDateTime.of(2020, 4, 1, 11, 2, 43, 594_000_000), ZoneOffset.ofHours(0));
 
-        var viberResultViberInboundContent = new ViberWebhookInboundReport()
-                .from(givenFrom)
+        var viberResultViberInboundContent = new ViberInboundMessageViberInboundContent()
+                .sender(givenFrom)
                 .to(givenTo)
                 .integrationType(givenIntegrationType)
                 .receivedAt(expectedSentAt)

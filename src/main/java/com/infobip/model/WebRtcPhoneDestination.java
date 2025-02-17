@@ -23,6 +23,8 @@ public class WebRtcPhoneDestination extends WebRtcDestination {
 
     private String displayName;
 
+    private WebRtcHangupRestriction hangupRestriction;
+
     /**
      * Constructs a new {@link WebRtcPhoneDestination} instance.
      */
@@ -156,6 +158,37 @@ public class WebRtcPhoneDestination extends WebRtcDestination {
         this.displayName = displayName;
     }
 
+    /**
+     * Sets hangupRestriction.
+     *
+     * @param hangupRestriction
+     * @return This {@link WebRtcPhoneDestination instance}.
+     */
+    public WebRtcPhoneDestination hangupRestriction(WebRtcHangupRestriction hangupRestriction) {
+        this.hangupRestriction = hangupRestriction;
+        return this;
+    }
+
+    /**
+     * Returns hangupRestriction.
+     *
+     * @return hangupRestriction
+     */
+    @JsonProperty("hangupRestriction")
+    public WebRtcHangupRestriction getHangupRestriction() {
+        return hangupRestriction;
+    }
+
+    /**
+     * Sets hangupRestriction.
+     *
+     * @param hangupRestriction
+     */
+    @JsonProperty("hangupRestriction")
+    public void setHangupRestriction(WebRtcHangupRestriction hangupRestriction) {
+        this.hangupRestriction = hangupRestriction;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -168,12 +201,13 @@ public class WebRtcPhoneDestination extends WebRtcDestination {
         return Objects.equals(this.phoneNumber, webRtcPhoneDestination.phoneNumber)
                 && Objects.equals(this.from, webRtcPhoneDestination.from)
                 && Objects.equals(this.displayName, webRtcPhoneDestination.displayName)
+                && Objects.equals(this.hangupRestriction, webRtcPhoneDestination.hangupRestriction)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(phoneNumber, from, displayName, super.hashCode());
+        return Objects.hash(phoneNumber, from, displayName, hangupRestriction, super.hashCode());
     }
 
     @Override
@@ -193,6 +227,9 @@ public class WebRtcPhoneDestination extends WebRtcDestination {
                 .append(newLine)
                 .append("    displayName: ")
                 .append(toIndentedString(displayName))
+                .append(newLine)
+                .append("    hangupRestriction: ")
+                .append(toIndentedString(hangupRestriction))
                 .append(newLine)
                 .append("}")
                 .toString();

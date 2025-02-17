@@ -17,55 +17,15 @@ import java.util.Objects;
  */
 public class WebRtcAndroidPushNotificationConfig {
 
-    private String fcmServerKey;
-
     private String privateKeyJson;
-
-    /**
-     * Sets fcmServerKey.
-     * <p>
-     * Field description:
-     * Optional. Required if privateKeyJson is not set. FCM server key used to enable Android push notifications.
-     *
-     * @param fcmServerKey
-     * @return This {@link WebRtcAndroidPushNotificationConfig instance}.
-     */
-    public WebRtcAndroidPushNotificationConfig fcmServerKey(String fcmServerKey) {
-        this.fcmServerKey = fcmServerKey;
-        return this;
-    }
-
-    /**
-     * Returns fcmServerKey.
-     * <p>
-     * Field description:
-     * Optional. Required if privateKeyJson is not set. FCM server key used to enable Android push notifications.
-     *
-     * @return fcmServerKey
-     */
-    @JsonProperty("fcmServerKey")
-    public String getFcmServerKey() {
-        return fcmServerKey;
-    }
-
-    /**
-     * Sets fcmServerKey.
-     * <p>
-     * Field description:
-     * Optional. Required if privateKeyJson is not set. FCM server key used to enable Android push notifications.
-     *
-     * @param fcmServerKey
-     */
-    @JsonProperty("fcmServerKey")
-    public void setFcmServerKey(String fcmServerKey) {
-        this.fcmServerKey = fcmServerKey;
-    }
 
     /**
      * Sets privateKeyJson.
      * <p>
      * Field description:
-     * Optional. Required if fcmServerKey is not set. Private key JSON file used to enable Android push notifications.
+     * Private key JSON file used to enable Android push notifications.
+     * <p>
+     * The field is required.
      *
      * @param privateKeyJson
      * @return This {@link WebRtcAndroidPushNotificationConfig instance}.
@@ -79,7 +39,9 @@ public class WebRtcAndroidPushNotificationConfig {
      * Returns privateKeyJson.
      * <p>
      * Field description:
-     * Optional. Required if fcmServerKey is not set. Private key JSON file used to enable Android push notifications.
+     * Private key JSON file used to enable Android push notifications.
+     * <p>
+     * The field is required.
      *
      * @return privateKeyJson
      */
@@ -92,7 +54,9 @@ public class WebRtcAndroidPushNotificationConfig {
      * Sets privateKeyJson.
      * <p>
      * Field description:
-     * Optional. Required if fcmServerKey is not set. Private key JSON file used to enable Android push notifications.
+     * Private key JSON file used to enable Android push notifications.
+     * <p>
+     * The field is required.
      *
      * @param privateKeyJson
      */
@@ -111,13 +75,12 @@ public class WebRtcAndroidPushNotificationConfig {
         }
         WebRtcAndroidPushNotificationConfig webRtcAndroidPushNotificationConfig =
                 (WebRtcAndroidPushNotificationConfig) o;
-        return Objects.equals(this.fcmServerKey, webRtcAndroidPushNotificationConfig.fcmServerKey)
-                && Objects.equals(this.privateKeyJson, webRtcAndroidPushNotificationConfig.privateKeyJson);
+        return Objects.equals(this.privateKeyJson, webRtcAndroidPushNotificationConfig.privateKeyJson);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fcmServerKey, privateKeyJson);
+        return Objects.hash(privateKeyJson);
     }
 
     @Override
@@ -125,9 +88,6 @@ public class WebRtcAndroidPushNotificationConfig {
         String newLine = System.lineSeparator();
         return new StringBuilder()
                 .append("class WebRtcAndroidPushNotificationConfig {")
-                .append(newLine)
-                .append("    fcmServerKey: ")
-                .append(toIndentedString(fcmServerKey))
                 .append(newLine)
                 .append("    privateKeyJson: ")
                 .append(toIndentedString(privateKeyJson))

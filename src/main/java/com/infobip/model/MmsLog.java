@@ -11,123 +11,201 @@ package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
- * Results.
+ * An array of message log results, one object per each message log entry.
  */
 public class MmsLog {
 
-    private String from;
+    private String title;
 
-    private String to;
+    private String mccMnc;
+
+    private String sender;
+
+    private String destination;
 
     private String bulkId;
 
     private String messageId;
 
-    private String title;
-
-    private List<MmsLogsMessageSegment> messageSegments = null;
-
     private OffsetDateTime sentAt;
 
     private OffsetDateTime doneAt;
 
-    private Integer mmsCount;
-
-    private String mccMnc;
+    private Integer messageCount;
 
     private MessagePrice price;
 
     private MessageStatus status;
 
-    private MessageError error;
+    private MmsMessageError error;
 
-    private String applicationId;
+    private Platform platform;
 
-    private String entityId;
+    private MmsOutboundContent content;
+
+    private String campaignReferenceId;
 
     /**
-     * Sets from.
+     * Sets title.
      * <p>
      * Field description:
-     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
+     * Message title.
      *
-     * @param from
+     * @param title
      * @return This {@link MmsLog instance}.
      */
-    public MmsLog from(String from) {
-        this.from = from;
+    public MmsLog title(String title) {
+        this.title = title;
         return this;
     }
 
     /**
-     * Returns from.
+     * Returns title.
      * <p>
      * Field description:
-     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
+     * Message title.
      *
-     * @return from
+     * @return title
      */
-    @JsonProperty("from")
-    public String getFrom() {
-        return from;
+    @JsonProperty("title")
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * Sets from.
+     * Sets title.
      * <p>
      * Field description:
-     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
+     * Message title.
      *
-     * @param from
+     * @param title
      */
-    @JsonProperty("from")
-    public void setFrom(String from) {
-        this.from = from;
+    @JsonProperty("title")
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
-     * Sets to.
+     * Sets mccMnc.
      * <p>
      * Field description:
-     * Message destination address.
+     * Mobile country and network codes.
      *
-     * @param to
+     * @param mccMnc
      * @return This {@link MmsLog instance}.
      */
-    public MmsLog to(String to) {
-        this.to = to;
+    public MmsLog mccMnc(String mccMnc) {
+        this.mccMnc = mccMnc;
         return this;
     }
 
     /**
-     * Returns to.
+     * Returns mccMnc.
      * <p>
      * Field description:
-     * Message destination address.
+     * Mobile country and network codes.
      *
-     * @return to
+     * @return mccMnc
      */
-    @JsonProperty("to")
-    public String getTo() {
-        return to;
+    @JsonProperty("mccMnc")
+    public String getMccMnc() {
+        return mccMnc;
     }
 
     /**
-     * Sets to.
+     * Sets mccMnc.
+     * <p>
+     * Field description:
+     * Mobile country and network codes.
+     *
+     * @param mccMnc
+     */
+    @JsonProperty("mccMnc")
+    public void setMccMnc(String mccMnc) {
+        this.mccMnc = mccMnc;
+    }
+
+    /**
+     * Sets sender.
+     * <p>
+     * Field description:
+     * The sender ID which can be alphanumeric or numeric.
+     *
+     * @param sender
+     * @return This {@link MmsLog instance}.
+     */
+    public MmsLog sender(String sender) {
+        this.sender = sender;
+        return this;
+    }
+
+    /**
+     * Returns sender.
+     * <p>
+     * Field description:
+     * The sender ID which can be alphanumeric or numeric.
+     *
+     * @return sender
+     */
+    @JsonProperty("sender")
+    public String getSender() {
+        return sender;
+    }
+
+    /**
+     * Sets sender.
+     * <p>
+     * Field description:
+     * The sender ID which can be alphanumeric or numeric.
+     *
+     * @param sender
+     */
+    @JsonProperty("sender")
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    /**
+     * Sets destination.
      * <p>
      * Field description:
      * Message destination address.
      *
-     * @param to
+     * @param destination
+     * @return This {@link MmsLog instance}.
      */
-    @JsonProperty("to")
-    public void setTo(String to) {
-        this.to = to;
+    public MmsLog destination(String destination) {
+        this.destination = destination;
+        return this;
+    }
+
+    /**
+     * Returns destination.
+     * <p>
+     * Field description:
+     * Message destination address.
+     *
+     * @return destination
+     */
+    @JsonProperty("destination")
+    public String getDestination() {
+        return destination;
+    }
+
+    /**
+     * Sets destination.
+     * <p>
+     * Field description:
+     * Message destination address.
+     *
+     * @param destination
+     */
+    @JsonProperty("destination")
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
     /**
@@ -174,7 +252,7 @@ public class MmsLog {
      * Sets messageId.
      * <p>
      * Field description:
-     * Unique message ID.
+     * Unique message ID for which a log is requested.
      *
      * @param messageId
      * @return This {@link MmsLog instance}.
@@ -188,7 +266,7 @@ public class MmsLog {
      * Returns messageId.
      * <p>
      * Field description:
-     * Unique message ID.
+     * Unique message ID for which a log is requested.
      *
      * @return messageId
      */
@@ -201,7 +279,7 @@ public class MmsLog {
      * Sets messageId.
      * <p>
      * Field description:
-     * Unique message ID.
+     * Unique message ID for which a log is requested.
      *
      * @param messageId
      */
@@ -211,107 +289,10 @@ public class MmsLog {
     }
 
     /**
-     * Sets title.
-     * <p>
-     * Field description:
-     * Message title.
-     *
-     * @param title
-     * @return This {@link MmsLog instance}.
-     */
-    public MmsLog title(String title) {
-        this.title = title;
-        return this;
-    }
-
-    /**
-     * Returns title.
-     * <p>
-     * Field description:
-     * Message title.
-     *
-     * @return title
-     */
-    @JsonProperty("title")
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Sets title.
-     * <p>
-     * Field description:
-     * Message title.
-     *
-     * @param title
-     */
-    @JsonProperty("title")
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
-     * Sets messageSegments.
-     * <p>
-     * Field description:
-     * Content of the message being sent.
-     *
-     * @param messageSegments
-     * @return This {@link MmsLog instance}.
-     */
-    public MmsLog messageSegments(List<MmsLogsMessageSegment> messageSegments) {
-        this.messageSegments = messageSegments;
-        return this;
-    }
-
-    /**
-     * Adds and item into messageSegments.
-     * <p>
-     * Field description:
-     * Content of the message being sent.
-     *
-     * @param messageSegmentsItem The item to be added to the list.
-     * @return This {@link MmsLog instance}.
-     */
-    public MmsLog addMessageSegmentsItem(MmsLogsMessageSegment messageSegmentsItem) {
-        if (this.messageSegments == null) {
-            this.messageSegments = new ArrayList<>();
-        }
-        this.messageSegments.add(messageSegmentsItem);
-        return this;
-    }
-
-    /**
-     * Returns messageSegments.
-     * <p>
-     * Field description:
-     * Content of the message being sent.
-     *
-     * @return messageSegments
-     */
-    @JsonProperty("messageSegments")
-    public List<MmsLogsMessageSegment> getMessageSegments() {
-        return messageSegments;
-    }
-
-    /**
-     * Sets messageSegments.
-     * <p>
-     * Field description:
-     * Content of the message being sent.
-     *
-     * @param messageSegments
-     */
-    @JsonProperty("messageSegments")
-    public void setMessageSegments(List<MmsLogsMessageSegment> messageSegments) {
-        this.messageSegments = messageSegments;
-    }
-
-    /**
      * Sets sentAt.
      * <p>
      * Field description:
-     * Date and time when the message was sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @param sentAt
      * @return This {@link MmsLog instance}.
@@ -325,7 +306,7 @@ public class MmsLog {
      * Returns sentAt.
      * <p>
      * Field description:
-     * Date and time when the message was sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @return sentAt
      */
@@ -338,7 +319,7 @@ public class MmsLog {
      * Sets sentAt.
      * <p>
      * Field description:
-     * Date and time when the message was sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @param sentAt
      */
@@ -351,7 +332,7 @@ public class MmsLog {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, network, etc.). Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @param doneAt
      * @return This {@link MmsLog instance}.
@@ -365,7 +346,7 @@ public class MmsLog {
      * Returns doneAt.
      * <p>
      * Field description:
-     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, network, etc.). Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @return doneAt
      */
@@ -378,7 +359,7 @@ public class MmsLog {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, delivered to the destination network, etc.). Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, network, etc.). Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @param doneAt
      */
@@ -388,83 +369,43 @@ public class MmsLog {
     }
 
     /**
-     * Sets mmsCount.
+     * Sets messageCount.
      * <p>
      * Field description:
-     * The number of parts the message content was split into.
+     * The number of messages content was split to.
      *
-     * @param mmsCount
+     * @param messageCount
      * @return This {@link MmsLog instance}.
      */
-    public MmsLog mmsCount(Integer mmsCount) {
-        this.mmsCount = mmsCount;
+    public MmsLog messageCount(Integer messageCount) {
+        this.messageCount = messageCount;
         return this;
     }
 
     /**
-     * Returns mmsCount.
+     * Returns messageCount.
      * <p>
      * Field description:
-     * The number of parts the message content was split into.
+     * The number of messages content was split to.
      *
-     * @return mmsCount
+     * @return messageCount
      */
-    @JsonProperty("mmsCount")
-    public Integer getMmsCount() {
-        return mmsCount;
+    @JsonProperty("messageCount")
+    public Integer getMessageCount() {
+        return messageCount;
     }
 
     /**
-     * Sets mmsCount.
+     * Sets messageCount.
      * <p>
      * Field description:
-     * The number of parts the message content was split into.
+     * The number of messages content was split to.
      *
-     * @param mmsCount
+     * @param messageCount
      */
-    @JsonProperty("mmsCount")
-    public void setMmsCount(Integer mmsCount) {
-        this.mmsCount = mmsCount;
-    }
-
-    /**
-     * Sets mccMnc.
-     * <p>
-     * Field description:
-     * Mobile country and network codes.
-     *
-     * @param mccMnc
-     * @return This {@link MmsLog instance}.
-     */
-    public MmsLog mccMnc(String mccMnc) {
-        this.mccMnc = mccMnc;
-        return this;
-    }
-
-    /**
-     * Returns mccMnc.
-     * <p>
-     * Field description:
-     * Mobile country and network codes.
-     *
-     * @return mccMnc
-     */
-    @JsonProperty("mccMnc")
-    public String getMccMnc() {
-        return mccMnc;
-    }
-
-    /**
-     * Sets mccMnc.
-     * <p>
-     * Field description:
-     * Mobile country and network codes.
-     *
-     * @param mccMnc
-     */
-    @JsonProperty("mccMnc")
-    public void setMccMnc(String mccMnc) {
-        this.mccMnc = mccMnc;
+    @JsonProperty("messageCount")
+    public void setMessageCount(Integer messageCount) {
+        this.messageCount = messageCount;
     }
 
     /**
@@ -535,7 +476,7 @@ public class MmsLog {
      * @param error
      * @return This {@link MmsLog instance}.
      */
-    public MmsLog error(MessageError error) {
+    public MmsLog error(MmsMessageError error) {
         this.error = error;
         return this;
     }
@@ -546,7 +487,7 @@ public class MmsLog {
      * @return error
      */
     @JsonProperty("error")
-    public MessageError getError() {
+    public MmsMessageError getError() {
         return error;
     }
 
@@ -556,88 +497,110 @@ public class MmsLog {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(MessageError error) {
+    public void setError(MmsMessageError error) {
         this.error = error;
     }
 
     /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * The application used when sending the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Sets platform.
      *
-     * @param applicationId
+     * @param platform
      * @return This {@link MmsLog instance}.
      */
-    public MmsLog applicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public MmsLog platform(Platform platform) {
+        this.platform = platform;
         return this;
     }
 
     /**
-     * Returns applicationId.
-     * <p>
-     * Field description:
-     * The application used when sending the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Returns platform.
      *
-     * @return applicationId
+     * @return platform
      */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
+    @JsonProperty("platform")
+    public Platform getPlatform() {
+        return platform;
     }
 
     /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * The application used when sending the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Sets platform.
      *
-     * @param applicationId
+     * @param platform
      */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("platform")
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     /**
-     * Sets entityId.
-     * <p>
-     * Field description:
-     * The entity used when sending the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Sets content.
      *
-     * @param entityId
+     * @param content
      * @return This {@link MmsLog instance}.
      */
-    public MmsLog entityId(String entityId) {
-        this.entityId = entityId;
+    public MmsLog content(MmsOutboundContent content) {
+        this.content = content;
         return this;
     }
 
     /**
-     * Returns entityId.
-     * <p>
-     * Field description:
-     * The entity used when sending the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Returns content.
      *
-     * @return entityId
+     * @return content
      */
-    @JsonProperty("entityId")
-    public String getEntityId() {
-        return entityId;
+    @JsonProperty("content")
+    public MmsOutboundContent getContent() {
+        return content;
     }
 
     /**
-     * Sets entityId.
+     * Sets content.
+     *
+     * @param content
+     */
+    @JsonProperty("content")
+    public void setContent(MmsOutboundContent content) {
+        this.content = content;
+    }
+
+    /**
+     * Sets campaignReferenceId.
      * <p>
      * Field description:
-     * The entity used when sending the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * ID of a campaign that was sent in the message.
      *
-     * @param entityId
+     * @param campaignReferenceId
+     * @return This {@link MmsLog instance}.
      */
-    @JsonProperty("entityId")
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
+    public MmsLog campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
     }
 
     @Override
@@ -649,41 +612,41 @@ public class MmsLog {
             return false;
         }
         MmsLog mmsLog = (MmsLog) o;
-        return Objects.equals(this.from, mmsLog.from)
-                && Objects.equals(this.to, mmsLog.to)
+        return Objects.equals(this.title, mmsLog.title)
+                && Objects.equals(this.mccMnc, mmsLog.mccMnc)
+                && Objects.equals(this.sender, mmsLog.sender)
+                && Objects.equals(this.destination, mmsLog.destination)
                 && Objects.equals(this.bulkId, mmsLog.bulkId)
                 && Objects.equals(this.messageId, mmsLog.messageId)
-                && Objects.equals(this.title, mmsLog.title)
-                && Objects.equals(this.messageSegments, mmsLog.messageSegments)
                 && Objects.equals(this.sentAt, mmsLog.sentAt)
                 && Objects.equals(this.doneAt, mmsLog.doneAt)
-                && Objects.equals(this.mmsCount, mmsLog.mmsCount)
-                && Objects.equals(this.mccMnc, mmsLog.mccMnc)
+                && Objects.equals(this.messageCount, mmsLog.messageCount)
                 && Objects.equals(this.price, mmsLog.price)
                 && Objects.equals(this.status, mmsLog.status)
                 && Objects.equals(this.error, mmsLog.error)
-                && Objects.equals(this.applicationId, mmsLog.applicationId)
-                && Objects.equals(this.entityId, mmsLog.entityId);
+                && Objects.equals(this.platform, mmsLog.platform)
+                && Objects.equals(this.content, mmsLog.content)
+                && Objects.equals(this.campaignReferenceId, mmsLog.campaignReferenceId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                from,
-                to,
+                title,
+                mccMnc,
+                sender,
+                destination,
                 bulkId,
                 messageId,
-                title,
-                messageSegments,
                 sentAt,
                 doneAt,
-                mmsCount,
-                mccMnc,
+                messageCount,
                 price,
                 status,
                 error,
-                applicationId,
-                entityId);
+                platform,
+                content,
+                campaignReferenceId);
     }
 
     @Override
@@ -692,11 +655,17 @@ public class MmsLog {
         return new StringBuilder()
                 .append("class MmsLog {")
                 .append(newLine)
-                .append("    from: ")
-                .append(toIndentedString(from))
+                .append("    title: ")
+                .append(toIndentedString(title))
                 .append(newLine)
-                .append("    to: ")
-                .append(toIndentedString(to))
+                .append("    mccMnc: ")
+                .append(toIndentedString(mccMnc))
+                .append(newLine)
+                .append("    sender: ")
+                .append(toIndentedString(sender))
+                .append(newLine)
+                .append("    destination: ")
+                .append(toIndentedString(destination))
                 .append(newLine)
                 .append("    bulkId: ")
                 .append(toIndentedString(bulkId))
@@ -704,23 +673,14 @@ public class MmsLog {
                 .append("    messageId: ")
                 .append(toIndentedString(messageId))
                 .append(newLine)
-                .append("    title: ")
-                .append(toIndentedString(title))
-                .append(newLine)
-                .append("    messageSegments: ")
-                .append(toIndentedString(messageSegments))
-                .append(newLine)
                 .append("    sentAt: ")
                 .append(toIndentedString(sentAt))
                 .append(newLine)
                 .append("    doneAt: ")
                 .append(toIndentedString(doneAt))
                 .append(newLine)
-                .append("    mmsCount: ")
-                .append(toIndentedString(mmsCount))
-                .append(newLine)
-                .append("    mccMnc: ")
-                .append(toIndentedString(mccMnc))
+                .append("    messageCount: ")
+                .append(toIndentedString(messageCount))
                 .append(newLine)
                 .append("    price: ")
                 .append(toIndentedString(price))
@@ -731,11 +691,14 @@ public class MmsLog {
                 .append("    error: ")
                 .append(toIndentedString(error))
                 .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
-                .append("    entityId: ")
-                .append(toIndentedString(entityId))
+                .append("    content: ")
+                .append(toIndentedString(content))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
                 .append(newLine)
                 .append("}")
                 .toString();

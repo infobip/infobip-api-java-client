@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class WhatsAppInteractiveOrderDetailsActionContent {
 
-    private WhatsAppInteractiveOrderPaymentDetails payment;
+    private WhatsAppInteractiveAllowedOrderPaymentDetails payment;
 
     private String paymentConfiguration;
 
@@ -37,7 +37,7 @@ public class WhatsAppInteractiveOrderDetailsActionContent {
      * @param payment
      * @return This {@link WhatsAppInteractiveOrderDetailsActionContent instance}.
      */
-    public WhatsAppInteractiveOrderDetailsActionContent payment(WhatsAppInteractiveOrderPaymentDetails payment) {
+    public WhatsAppInteractiveOrderDetailsActionContent payment(WhatsAppInteractiveAllowedOrderPaymentDetails payment) {
         this.payment = payment;
         return this;
     }
@@ -50,7 +50,7 @@ public class WhatsAppInteractiveOrderDetailsActionContent {
      * @return payment
      */
     @JsonProperty("payment")
-    public WhatsAppInteractiveOrderPaymentDetails getPayment() {
+    public WhatsAppInteractiveAllowedOrderPaymentDetails getPayment() {
         return payment;
     }
 
@@ -62,7 +62,7 @@ public class WhatsAppInteractiveOrderDetailsActionContent {
      * @param payment
      */
     @JsonProperty("payment")
-    public void setPayment(WhatsAppInteractiveOrderPaymentDetails payment) {
+    public void setPayment(WhatsAppInteractiveAllowedOrderPaymentDetails payment) {
         this.payment = payment;
     }
 
@@ -70,9 +70,7 @@ public class WhatsAppInteractiveOrderDetailsActionContent {
      * Sets paymentConfiguration.
      * <p>
      * Field description:
-     * Name of the WhatsApp payment configuration to be used for this order.
-     * <p>
-     * The field is required.
+     * Name of the WhatsApp payment configuration to be used for this order. Can be omitted for Brazil PIX and must be omitted for Brazil link payment.
      *
      * @param paymentConfiguration
      * @return This {@link WhatsAppInteractiveOrderDetailsActionContent instance}.
@@ -86,9 +84,7 @@ public class WhatsAppInteractiveOrderDetailsActionContent {
      * Returns paymentConfiguration.
      * <p>
      * Field description:
-     * Name of the WhatsApp payment configuration to be used for this order.
-     * <p>
-     * The field is required.
+     * Name of the WhatsApp payment configuration to be used for this order. Can be omitted for Brazil PIX and must be omitted for Brazil link payment.
      *
      * @return paymentConfiguration
      */
@@ -101,9 +97,7 @@ public class WhatsAppInteractiveOrderDetailsActionContent {
      * Sets paymentConfiguration.
      * <p>
      * Field description:
-     * Name of the WhatsApp payment configuration to be used for this order.
-     * <p>
-     * The field is required.
+     * Name of the WhatsApp payment configuration to be used for this order. Can be omitted for Brazil PIX and must be omitted for Brazil link payment.
      *
      * @param paymentConfiguration
      */

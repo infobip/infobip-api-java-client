@@ -245,7 +245,7 @@ public class NumberMaskingSetupBody {
      * Sets description.
      * <p>
      * Field description:
-     * Masking configuration description
+     * Masking configuration description.
      *
      * @param description
      * @return This {@link NumberMaskingSetupBody instance}.
@@ -259,7 +259,7 @@ public class NumberMaskingSetupBody {
      * Returns description.
      * <p>
      * Field description:
-     * Masking configuration description
+     * Masking configuration description.
      *
      * @return description
      */
@@ -272,7 +272,7 @@ public class NumberMaskingSetupBody {
      * Sets description.
      * <p>
      * Field description:
-     * Masking configuration description
+     * Masking configuration description.
      *
      * @param description
      */

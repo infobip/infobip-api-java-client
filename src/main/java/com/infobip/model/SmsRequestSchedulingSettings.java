@@ -22,7 +22,7 @@ public class SmsRequestSchedulingSettings {
 
     private OffsetDateTime sendAt;
 
-    private SmsSendingSpeedLimit sendingSpeedLimit;
+    private SendingSpeedLimit sendingSpeedLimit;
 
     /**
      * Sets bulkId.
@@ -110,7 +110,7 @@ public class SmsRequestSchedulingSettings {
      * @param sendingSpeedLimit
      * @return This {@link SmsRequestSchedulingSettings instance}.
      */
-    public SmsRequestSchedulingSettings sendingSpeedLimit(SmsSendingSpeedLimit sendingSpeedLimit) {
+    public SmsRequestSchedulingSettings sendingSpeedLimit(SendingSpeedLimit sendingSpeedLimit) {
         this.sendingSpeedLimit = sendingSpeedLimit;
         return this;
     }
@@ -121,7 +121,7 @@ public class SmsRequestSchedulingSettings {
      * @return sendingSpeedLimit
      */
     @JsonProperty("sendingSpeedLimit")
-    public SmsSendingSpeedLimit getSendingSpeedLimit() {
+    public SendingSpeedLimit getSendingSpeedLimit() {
         return sendingSpeedLimit;
     }
 
@@ -131,7 +131,7 @@ public class SmsRequestSchedulingSettings {
      * @param sendingSpeedLimit
      */
     @JsonProperty("sendingSpeedLimit")
-    public void setSendingSpeedLimit(SmsSendingSpeedLimit sendingSpeedLimit) {
+    public void setSendingSpeedLimit(SendingSpeedLimit sendingSpeedLimit) {
         this.sendingSpeedLimit = sendingSpeedLimit;
     }
 

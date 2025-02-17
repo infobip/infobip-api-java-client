@@ -39,10 +39,15 @@ import com.infobip.model.CallsConferenceBroadcastWebrtcTextRequest;
 import com.infobip.model.CallsConferenceLog;
 import com.infobip.model.CallsConferenceLogPage;
 import com.infobip.model.CallsConferencePage;
+import com.infobip.model.CallsConferencePlayRequest;
 import com.infobip.model.CallsConferenceRecording;
 import com.infobip.model.CallsConferenceRecordingPage;
 import com.infobip.model.CallsConferenceRecordingRequest;
 import com.infobip.model.CallsConferenceRequest;
+import com.infobip.model.CallsConfigurationCreateRequest;
+import com.infobip.model.CallsConfigurationPage;
+import com.infobip.model.CallsConfigurationResponse;
+import com.infobip.model.CallsConfigurationUpdateRequest;
 import com.infobip.model.CallsConnectRequest;
 import com.infobip.model.CallsConnectWithNewCallRequest;
 import com.infobip.model.CallsCountryList;
@@ -1479,10 +1484,11 @@ public class CallsApi {
         return new ConferenceBroadcastWebrtcTextRequest(conferenceId, callsConferenceBroadcastWebrtcTextRequest);
     }
 
-    private RequestDefinition conferencePlayFileDefinition(String conferenceId, CallsPlayRequest callsPlayRequest) {
+    private RequestDefinition conferencePlayFileDefinition(
+            String conferenceId, CallsConferencePlayRequest callsConferencePlayRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "POST", "/calls/1/conferences/{conferenceId}/play")
-                .body(callsPlayRequest)
+                .body(callsConferencePlayRequest)
                 .requiresAuthentication(true)
                 .accept("application/json")
                 .contentType("application/json");
@@ -1498,13 +1504,13 @@ public class CallsApi {
      */
     public class ConferencePlayFileRequest {
         private final String conferenceId;
-        private final CallsPlayRequest callsPlayRequest;
+        private final CallsConferencePlayRequest callsConferencePlayRequest;
 
-        private ConferencePlayFileRequest(String conferenceId, CallsPlayRequest callsPlayRequest) {
+        private ConferencePlayFileRequest(String conferenceId, CallsConferencePlayRequest callsConferencePlayRequest) {
             this.conferenceId =
                     Objects.requireNonNull(conferenceId, "The required parameter 'conferenceId' is missing.");
-            this.callsPlayRequest =
-                    Objects.requireNonNull(callsPlayRequest, "The required parameter 'callsPlayRequest' is missing.");
+            this.callsConferencePlayRequest = Objects.requireNonNull(
+                    callsConferencePlayRequest, "The required parameter 'callsConferencePlayRequest' is missing.");
         }
 
         /**
@@ -1515,7 +1521,7 @@ public class CallsApi {
          */
         public CallsActionResponse execute() throws ApiException {
             RequestDefinition conferencePlayFileDefinition =
-                    conferencePlayFileDefinition(conferenceId, callsPlayRequest);
+                    conferencePlayFileDefinition(conferenceId, callsConferencePlayRequest);
             return apiClient.execute(
                     conferencePlayFileDefinition, new TypeReference<CallsActionResponse>() {}.getType());
         }
@@ -1528,7 +1534,7 @@ public class CallsApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
             RequestDefinition conferencePlayFileDefinition =
-                    conferencePlayFileDefinition(conferenceId, callsPlayRequest);
+                    conferencePlayFileDefinition(conferenceId, callsConferencePlayRequest);
             return apiClient.executeAsync(
                     conferencePlayFileDefinition, new TypeReference<CallsActionResponse>() {}.getType(), callback);
         }
@@ -1540,11 +1546,12 @@ public class CallsApi {
      * Play an audio file on a conference.
      *
      * @param conferenceId Conference ID. (required)
-     * @param callsPlayRequest  (required)
+     * @param callsConferencePlayRequest  (required)
      * @return ConferencePlayFileRequest
      */
-    public ConferencePlayFileRequest conferencePlayFile(String conferenceId, CallsPlayRequest callsPlayRequest) {
-        return new ConferencePlayFileRequest(conferenceId, callsPlayRequest);
+    public ConferencePlayFileRequest conferencePlayFile(
+            String conferenceId, CallsConferencePlayRequest callsConferencePlayRequest) {
+        return new ConferencePlayFileRequest(conferenceId, callsConferencePlayRequest);
     }
 
     private RequestDefinition conferenceSayTextDefinition(String conferenceId, CallsSayRequest callsSayRequest) {
@@ -2047,6 +2054,71 @@ public class CallsApi {
         return new CreateCallRequest(callRequest);
     }
 
+    private RequestDefinition createCallsConfigurationDefinition(
+            CallsConfigurationCreateRequest callsConfigurationCreateRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/configurations")
+                .body(callsConfigurationCreateRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * createCallsConfiguration request builder class.
+     */
+    public class CreateCallsConfigurationRequest {
+        private final CallsConfigurationCreateRequest callsConfigurationCreateRequest;
+
+        private CreateCallsConfigurationRequest(CallsConfigurationCreateRequest callsConfigurationCreateRequest) {
+            this.callsConfigurationCreateRequest = Objects.requireNonNull(
+                    callsConfigurationCreateRequest,
+                    "The required parameter 'callsConfigurationCreateRequest' is missing.");
+        }
+
+        /**
+         * Executes the createCallsConfiguration request.
+         *
+         * @return CallsConfigurationResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsConfigurationResponse execute() throws ApiException {
+            RequestDefinition createCallsConfigurationDefinition =
+                    createCallsConfigurationDefinition(callsConfigurationCreateRequest);
+            return apiClient.execute(
+                    createCallsConfigurationDefinition, new TypeReference<CallsConfigurationResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the createCallsConfiguration request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsConfigurationResponse> callback) {
+            RequestDefinition createCallsConfigurationDefinition =
+                    createCallsConfigurationDefinition(callsConfigurationCreateRequest);
+            return apiClient.executeAsync(
+                    createCallsConfigurationDefinition,
+                    new TypeReference<CallsConfigurationResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Create calls configuration.
+     * <p>
+     * Create calls configuration.
+     *
+     * @param callsConfigurationCreateRequest  (required)
+     * @return CreateCallsConfigurationRequest
+     */
+    public CreateCallsConfigurationRequest createCallsConfiguration(
+            CallsConfigurationCreateRequest callsConfigurationCreateRequest) {
+        return new CreateCallsConfigurationRequest(callsConfigurationCreateRequest);
+    }
+
     private RequestDefinition createConferenceDefinition(CallsConferenceRequest callsConferenceRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/conferences")
                 .body(callsConferenceRequest)
@@ -2508,6 +2580,70 @@ public class CallsApi {
      */
     public DeleteCallRecordingsRequest deleteCallRecordings(String callId) {
         return new DeleteCallRecordingsRequest(callId);
+    }
+
+    private RequestDefinition deleteCallsConfigurationDefinition(String callsConfigurationId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "DELETE", "/calls/1/configurations/{callsConfigurationId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (callsConfigurationId != null) {
+            builder.addPathParameter(new Parameter("callsConfigurationId", callsConfigurationId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * deleteCallsConfiguration request builder class.
+     */
+    public class DeleteCallsConfigurationRequest {
+        private final String callsConfigurationId;
+
+        private DeleteCallsConfigurationRequest(String callsConfigurationId) {
+            this.callsConfigurationId = Objects.requireNonNull(
+                    callsConfigurationId, "The required parameter 'callsConfigurationId' is missing.");
+        }
+
+        /**
+         * Executes the deleteCallsConfiguration request.
+         *
+         * @return CallsConfigurationResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsConfigurationResponse execute() throws ApiException {
+            RequestDefinition deleteCallsConfigurationDefinition =
+                    deleteCallsConfigurationDefinition(callsConfigurationId);
+            return apiClient.execute(
+                    deleteCallsConfigurationDefinition, new TypeReference<CallsConfigurationResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the deleteCallsConfiguration request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsConfigurationResponse> callback) {
+            RequestDefinition deleteCallsConfigurationDefinition =
+                    deleteCallsConfigurationDefinition(callsConfigurationId);
+            return apiClient.executeAsync(
+                    deleteCallsConfigurationDefinition,
+                    new TypeReference<CallsConfigurationResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Delete calls configuration.
+     * <p>
+     * Delete calls configuration.
+     *
+     * @param callsConfigurationId Calls configuration ID. (required)
+     * @return DeleteCallsConfigurationRequest
+     */
+    public DeleteCallsConfigurationRequest deleteCallsConfiguration(String callsConfigurationId) {
+        return new DeleteCallsConfigurationRequest(callsConfigurationId);
     }
 
     private RequestDefinition deleteCallsFileDefinition(String fileId) {
@@ -3619,7 +3755,7 @@ public class CallsApi {
     /**
      * Get call history.
      * <p>
-     * Get a single call history. Call history retention period is 3 months.
+     * Get a single call history. Call history retention period is 5 days.
      *
      * @param callId Call ID. (required)
      * @return GetCallHistoryRequest
@@ -3981,6 +4117,151 @@ public class CallsApi {
      */
     public GetCallsRequest getCalls() {
         return new GetCallsRequest();
+    }
+
+    private RequestDefinition getCallsConfigurationDefinition(String callsConfigurationId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "GET", "/calls/1/configurations/{callsConfigurationId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (callsConfigurationId != null) {
+            builder.addPathParameter(new Parameter("callsConfigurationId", callsConfigurationId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getCallsConfiguration request builder class.
+     */
+    public class GetCallsConfigurationRequest {
+        private final String callsConfigurationId;
+
+        private GetCallsConfigurationRequest(String callsConfigurationId) {
+            this.callsConfigurationId = Objects.requireNonNull(
+                    callsConfigurationId, "The required parameter 'callsConfigurationId' is missing.");
+        }
+
+        /**
+         * Executes the getCallsConfiguration request.
+         *
+         * @return CallsConfigurationResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsConfigurationResponse execute() throws ApiException {
+            RequestDefinition getCallsConfigurationDefinition = getCallsConfigurationDefinition(callsConfigurationId);
+            return apiClient.execute(
+                    getCallsConfigurationDefinition, new TypeReference<CallsConfigurationResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getCallsConfiguration request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsConfigurationResponse> callback) {
+            RequestDefinition getCallsConfigurationDefinition = getCallsConfigurationDefinition(callsConfigurationId);
+            return apiClient.executeAsync(
+                    getCallsConfigurationDefinition,
+                    new TypeReference<CallsConfigurationResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get calls configuration.
+     * <p>
+     * Get a single calls configuration.
+     *
+     * @param callsConfigurationId Calls configuration ID. (required)
+     * @return GetCallsConfigurationRequest
+     */
+    public GetCallsConfigurationRequest getCallsConfiguration(String callsConfigurationId) {
+        return new GetCallsConfigurationRequest(callsConfigurationId);
+    }
+
+    private RequestDefinition getCallsConfigurationsDefinition(Integer page, Integer size) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/calls/1/configurations")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (page != null) {
+            builder.addQueryParameter(new Parameter("page", page));
+        }
+        if (size != null) {
+            builder.addQueryParameter(new Parameter("size", size));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getCallsConfigurations request builder class.
+     */
+    public class GetCallsConfigurationsRequest {
+        private Integer page;
+        private Integer size;
+
+        private GetCallsConfigurationsRequest() {}
+
+        /**
+         * Sets page.
+         *
+         * @param page Results page to retrieve (0..N). (optional, default to 0)
+         * @return GetCallsConfigurationsRequest
+         */
+        public GetCallsConfigurationsRequest page(Integer page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Sets size.
+         *
+         * @param size Number of records per page. (optional, default to 20)
+         * @return GetCallsConfigurationsRequest
+         */
+        public GetCallsConfigurationsRequest size(Integer size) {
+            this.size = size;
+            return this;
+        }
+
+        /**
+         * Executes the getCallsConfigurations request.
+         *
+         * @return CallsConfigurationPage The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsConfigurationPage execute() throws ApiException {
+            RequestDefinition getCallsConfigurationsDefinition = getCallsConfigurationsDefinition(page, size);
+            return apiClient.execute(
+                    getCallsConfigurationsDefinition, new TypeReference<CallsConfigurationPage>() {}.getType());
+        }
+
+        /**
+         * Executes the getCallsConfigurations request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsConfigurationPage> callback) {
+            RequestDefinition getCallsConfigurationsDefinition = getCallsConfigurationsDefinition(page, size);
+            return apiClient.executeAsync(
+                    getCallsConfigurationsDefinition,
+                    new TypeReference<CallsConfigurationPage>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get calls configurations.
+     * <p>
+     * Get calls configurations.
+     *
+     * @return GetCallsConfigurationsRequest
+     */
+    public GetCallsConfigurationsRequest getCallsConfigurations() {
+        return new GetCallsConfigurationsRequest();
     }
 
     private RequestDefinition getCallsFileDefinition(String fileId) {
@@ -4414,7 +4695,7 @@ public class CallsApi {
     /**
      * Get calls history.
      * <p>
-     * Get calls history with pagination. Calls history retention period is 3 months.
+     * Get calls history with pagination. Calls history retention period is 5 days.
      *
      * @return GetCallsHistoryRequest
      */
@@ -4797,7 +5078,7 @@ public class CallsApi {
     /**
      * Get conference history.
      * <p>
-     * Get a single conference history. Conference history retention period is 3 months.
+     * Get a single conference history. Conference history retention period is 5 days.
      *
      * @param conferenceId Conference ID. (required)
      * @return GetConferenceHistoryRequest
@@ -5224,7 +5505,7 @@ public class CallsApi {
     /**
      * Get conferences history.
      * <p>
-     * Get conferences history with pagination. Conferences history retention period is 3 months.
+     * Get conferences history with pagination. Conferences history retention period is 5 days.
      *
      * @return GetConferencesHistoryRequest
      */
@@ -5694,7 +5975,7 @@ public class CallsApi {
     /**
      * Get dialog history.
      * <p>
-     * Get a single dialog history. Dialog history retention period is 3 months.
+     * Get a single dialog history. Dialog history retention period is 5 days.
      *
      * @param dialogId Dialog ID. (required)
      * @return GetDialogHistoryRequest
@@ -6162,7 +6443,7 @@ public class CallsApi {
     /**
      * Get dialogs history.
      * <p>
-     * Get dialogs history with pagination. Dialogs history retention period is 3 months.
+     * Get dialogs history with pagination. Dialogs history retention period is 5 days.
      *
      * @return GetDialogsHistoryRequest
      */
@@ -7818,6 +8099,80 @@ public class CallsApi {
      */
     public StopMediaStreamRequest stopMediaStream(String callId) {
         return new StopMediaStreamRequest(callId);
+    }
+
+    private RequestDefinition updateCallsConfigurationDefinition(
+            String callsConfigurationId, CallsConfigurationUpdateRequest callsConfigurationUpdateRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "PUT", "/calls/1/configurations/{callsConfigurationId}")
+                .body(callsConfigurationUpdateRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (callsConfigurationId != null) {
+            builder.addPathParameter(new Parameter("callsConfigurationId", callsConfigurationId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * updateCallsConfiguration request builder class.
+     */
+    public class UpdateCallsConfigurationRequest {
+        private final String callsConfigurationId;
+        private final CallsConfigurationUpdateRequest callsConfigurationUpdateRequest;
+
+        private UpdateCallsConfigurationRequest(
+                String callsConfigurationId, CallsConfigurationUpdateRequest callsConfigurationUpdateRequest) {
+            this.callsConfigurationId = Objects.requireNonNull(
+                    callsConfigurationId, "The required parameter 'callsConfigurationId' is missing.");
+            this.callsConfigurationUpdateRequest = Objects.requireNonNull(
+                    callsConfigurationUpdateRequest,
+                    "The required parameter 'callsConfigurationUpdateRequest' is missing.");
+        }
+
+        /**
+         * Executes the updateCallsConfiguration request.
+         *
+         * @return CallsConfigurationResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsConfigurationResponse execute() throws ApiException {
+            RequestDefinition updateCallsConfigurationDefinition =
+                    updateCallsConfigurationDefinition(callsConfigurationId, callsConfigurationUpdateRequest);
+            return apiClient.execute(
+                    updateCallsConfigurationDefinition, new TypeReference<CallsConfigurationResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the updateCallsConfiguration request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsConfigurationResponse> callback) {
+            RequestDefinition updateCallsConfigurationDefinition =
+                    updateCallsConfigurationDefinition(callsConfigurationId, callsConfigurationUpdateRequest);
+            return apiClient.executeAsync(
+                    updateCallsConfigurationDefinition,
+                    new TypeReference<CallsConfigurationResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Update calls configuration.
+     * <p>
+     * Update calls configuration.
+     *
+     * @param callsConfigurationId Calls configuration ID. (required)
+     * @param callsConfigurationUpdateRequest  (required)
+     * @return UpdateCallsConfigurationRequest
+     */
+    public UpdateCallsConfigurationRequest updateCallsConfiguration(
+            String callsConfigurationId, CallsConfigurationUpdateRequest callsConfigurationUpdateRequest) {
+        return new UpdateCallsConfigurationRequest(callsConfigurationId, callsConfigurationUpdateRequest);
     }
 
     private RequestDefinition updateConferenceDefinition(String conferenceId, CallsUpdateRequest callsUpdateRequest) {

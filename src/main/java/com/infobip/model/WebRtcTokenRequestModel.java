@@ -19,8 +19,6 @@ public class WebRtcTokenRequestModel {
 
     private String identity;
 
-    private String applicationId;
-
     private String displayName;
 
     private WebRtcCapabilities capabilities;
@@ -71,46 +69,6 @@ public class WebRtcTokenRequestModel {
     @JsonProperty("identity")
     public void setIdentity(String identity) {
         this.identity = identity;
-    }
-
-    /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Application ID to be used for calls. Web and In-App application represents one-stop place for all your configuration, including push notifications, dynamic destination resolving and all other Web and In-App Calls features.
-     *
-     * @param applicationId
-     * @return This {@link WebRtcTokenRequestModel instance}.
-     */
-    public WebRtcTokenRequestModel applicationId(String applicationId) {
-        this.applicationId = applicationId;
-        return this;
-    }
-
-    /**
-     * Returns applicationId.
-     * <p>
-     * Field description:
-     * Application ID to be used for calls. Web and In-App application represents one-stop place for all your configuration, including push notifications, dynamic destination resolving and all other Web and In-App Calls features.
-     *
-     * @return applicationId
-     */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Application ID to be used for calls. Web and In-App application represents one-stop place for all your configuration, including push notifications, dynamic destination resolving and all other Web and In-App Calls features.
-     *
-     * @param applicationId
-     */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
     }
 
     /**
@@ -234,7 +192,6 @@ public class WebRtcTokenRequestModel {
         }
         WebRtcTokenRequestModel webRtcTokenRequestModel = (WebRtcTokenRequestModel) o;
         return Objects.equals(this.identity, webRtcTokenRequestModel.identity)
-                && Objects.equals(this.applicationId, webRtcTokenRequestModel.applicationId)
                 && Objects.equals(this.displayName, webRtcTokenRequestModel.displayName)
                 && Objects.equals(this.capabilities, webRtcTokenRequestModel.capabilities)
                 && Objects.equals(this.timeToLive, webRtcTokenRequestModel.timeToLive);
@@ -242,7 +199,7 @@ public class WebRtcTokenRequestModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(identity, applicationId, displayName, capabilities, timeToLive);
+        return Objects.hash(identity, displayName, capabilities, timeToLive);
     }
 
     @Override
@@ -253,9 +210,6 @@ public class WebRtcTokenRequestModel {
                 .append(newLine)
                 .append("    identity: ")
                 .append(toIndentedString(identity))
-                .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
                 .append(newLine)
                 .append("    displayName: ")
                 .append(toIndentedString(displayName))

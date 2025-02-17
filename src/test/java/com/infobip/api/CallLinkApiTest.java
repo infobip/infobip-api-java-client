@@ -119,7 +119,7 @@ class CallLinkApiTest extends ApiTest {
                         .id(givenId)
                         .identity(givenIdentity)
                         .displayName(givenDisplayName)
-                        .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity))
+                        .destination(new WebRtcCallsDestination().identity(givenDestinationIdentity))
                         .customData(Map.of(
                                 "city", givenCustomDataCity,
                                 "language", givenCustomDataLanguage))
@@ -132,7 +132,7 @@ class CallLinkApiTest extends ApiTest {
                         .id(givenId)
                         .identity(givenIdentity)
                         .displayName(givenDisplayName)
-                        .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity)))
+                        .destination(new WebRtcCallsDestination().identity(givenDestinationIdentity)))
                 .paging(new PageInfo()
                         .page(givenPagingPage)
                         .size(givenPagingSize)
@@ -192,7 +192,7 @@ class CallLinkApiTest extends ApiTest {
         var callLinkApi = new CallLinkApi(getApiClient());
 
         var request = new WebRtcCallLinkRequest()
-                .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity))
+                .destination(new WebRtcCallsDestination().identity(givenDestinationIdentity))
                 .validityWindow(new WebRtcValidityWindow()
                         .oneTime(givenValidityWindowOneTime)
                         .startTime(givenValidityWindowStartTimeDateTime)
@@ -233,7 +233,7 @@ class CallLinkApiTest extends ApiTest {
         var givenAcceptableHoursStartMinute = 0;
         var givenAcceptableHoursEndHour = 0;
         var givenAcceptableHoursEndMinute = 0;
-        var givenAcceptableDays = WebRtcValidityWindow.AcceptableDaysEnum.MONDAY;
+        var givenAcceptableDays = DeliveryDay.MONDAY;
 
         var givenCallLinkConfigId = "638dbdc6ecede164c3799d04";
         String givenResponse = String.format(
@@ -299,7 +299,7 @@ class CallLinkApiTest extends ApiTest {
                 .identity(givenIdentity)
                 .displayName(givenDisplayName)
                 .showIdentity(givenShowIdentity)
-                .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity))
+                .destination(new WebRtcCallsDestination().identity(givenDestinationIdentity))
                 .customData(Map.of(
                         "city", givenCustomDataCity,
                         "language", givenCustomDataLanguage))
@@ -314,7 +314,7 @@ class CallLinkApiTest extends ApiTest {
                                 .end(new DeliveryTime()
                                         .hour(givenAcceptableHoursEndHour)
                                         .minute(givenAcceptableHoursEndMinute)))
-                        .acceptableDays(List.of(WebRtcValidityWindow.AcceptableDaysEnum.MONDAY)))
+                        .acceptableDays(List.of(DeliveryDay.MONDAY)))
                 .callLinkConfigId(givenCallLinkConfigId);
 
         Consumer<WebRtcCallLink> assertions = response -> then(response).isEqualTo(expectedResponse);
@@ -349,7 +349,7 @@ class CallLinkApiTest extends ApiTest {
         var givenAcceptableHoursStartMinute = 0;
         var givenAcceptableHoursEndHour = 0;
         var givenAcceptableHoursEndMinute = 0;
-        var givenAcceptableDays = WebRtcValidityWindow.AcceptableDaysEnum.MONDAY;
+        var givenAcceptableDays = DeliveryDay.MONDAY;
 
         var givenCallLinkConfigId = "638dbdc6ecede164c3799d04";
         String givenResponse = String.format(
@@ -415,7 +415,7 @@ class CallLinkApiTest extends ApiTest {
                 .identity(givenIdentity)
                 .displayName(givenDisplayName)
                 .showIdentity(givenShowIdentity)
-                .destination(new WebRtcWebRtcDestination().identity(givenDestinationIdentity))
+                .destination(new WebRtcCallsDestination().identity(givenDestinationIdentity))
                 .customData(Map.of(
                         "city", givenCustomDataCity,
                         "language", givenCustomDataLanguage))
@@ -430,7 +430,7 @@ class CallLinkApiTest extends ApiTest {
                                 .end(new DeliveryTime()
                                         .hour(givenAcceptableHoursEndHour)
                                         .minute(givenAcceptableHoursEndMinute)))
-                        .acceptableDays(List.of(WebRtcValidityWindow.AcceptableDaysEnum.MONDAY)))
+                        .acceptableDays(List.of(DeliveryDay.MONDAY)))
                 .callLinkConfigId(givenCallLinkConfigId);
 
         Consumer<WebRtcCallLink> assertions = response -> then(response).isEqualTo(expectedResponse);

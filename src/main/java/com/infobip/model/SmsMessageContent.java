@@ -13,8 +13,5 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION)
-@JsonSubTypes({
-    @JsonSubTypes.Type(value = SmsTextContent.class, name = "TEXT"),
-    @JsonSubTypes.Type(value = SmsBinaryContent.class, name = "BINARY")
-})
+@JsonSubTypes({@JsonSubTypes.Type(value = SmsBinaryContent.class), @JsonSubTypes.Type(value = SmsTextContent.class)})
 public interface SmsMessageContent {}

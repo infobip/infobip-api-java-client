@@ -21,8 +21,6 @@ public class WhatsAppWebhookQuickReplyContent extends WhatsAppWebhookInboundMess
 
     private String payload;
 
-    private WhatsAppContext context;
-
     /**
      * Constructs a new {@link WhatsAppWebhookQuickReplyContent} instance.
      */
@@ -122,37 +120,6 @@ public class WhatsAppWebhookQuickReplyContent extends WhatsAppWebhookInboundMess
         this.payload = payload;
     }
 
-    /**
-     * Sets context.
-     *
-     * @param context
-     * @return This {@link WhatsAppWebhookQuickReplyContent instance}.
-     */
-    public WhatsAppWebhookQuickReplyContent context(WhatsAppContext context) {
-        this.context = context;
-        return this;
-    }
-
-    /**
-     * Returns context.
-     *
-     * @return context
-     */
-    @JsonProperty("context")
-    public WhatsAppContext getContext() {
-        return context;
-    }
-
-    /**
-     * Sets context.
-     *
-     * @param context
-     */
-    @JsonProperty("context")
-    public void setContext(WhatsAppContext context) {
-        this.context = context;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -164,13 +131,12 @@ public class WhatsAppWebhookQuickReplyContent extends WhatsAppWebhookInboundMess
         WhatsAppWebhookQuickReplyContent whatsAppWebhookQuickReplyContent = (WhatsAppWebhookQuickReplyContent) o;
         return Objects.equals(this.text, whatsAppWebhookQuickReplyContent.text)
                 && Objects.equals(this.payload, whatsAppWebhookQuickReplyContent.payload)
-                && Objects.equals(this.context, whatsAppWebhookQuickReplyContent.context)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, payload, context, super.hashCode());
+        return Objects.hash(text, payload, super.hashCode());
     }
 
     @Override
@@ -187,9 +153,6 @@ public class WhatsAppWebhookQuickReplyContent extends WhatsAppWebhookInboundMess
                 .append(newLine)
                 .append("    payload: ")
                 .append(toIndentedString(payload))
-                .append(newLine)
-                .append("    context: ")
-                .append(toIndentedString(context))
                 .append(newLine)
                 .append("}")
                 .toString();

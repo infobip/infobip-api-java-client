@@ -27,6 +27,8 @@ public class MessagesApiMessageCarouselCardBody {
 
     private String thumbnailUrl;
 
+    private MessagesApiMessageCardOptions cardOptions;
+
     /**
      * Sets title.
      * <p>
@@ -239,6 +241,37 @@ public class MessagesApiMessageCarouselCardBody {
         this.thumbnailUrl = thumbnailUrl;
     }
 
+    /**
+     * Sets cardOptions.
+     *
+     * @param cardOptions
+     * @return This {@link MessagesApiMessageCarouselCardBody instance}.
+     */
+    public MessagesApiMessageCarouselCardBody cardOptions(MessagesApiMessageCardOptions cardOptions) {
+        this.cardOptions = cardOptions;
+        return this;
+    }
+
+    /**
+     * Returns cardOptions.
+     *
+     * @return cardOptions
+     */
+    @JsonProperty("cardOptions")
+    public MessagesApiMessageCardOptions getCardOptions() {
+        return cardOptions;
+    }
+
+    /**
+     * Sets cardOptions.
+     *
+     * @param cardOptions
+     */
+    @JsonProperty("cardOptions")
+    public void setCardOptions(MessagesApiMessageCardOptions cardOptions) {
+        this.cardOptions = cardOptions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -252,12 +285,13 @@ public class MessagesApiMessageCarouselCardBody {
                 && Objects.equals(this.text, messagesApiMessageCarouselCardBody.text)
                 && Objects.equals(this.url, messagesApiMessageCarouselCardBody.url)
                 && Objects.equals(this.isVideo, messagesApiMessageCarouselCardBody.isVideo)
-                && Objects.equals(this.thumbnailUrl, messagesApiMessageCarouselCardBody.thumbnailUrl);
+                && Objects.equals(this.thumbnailUrl, messagesApiMessageCarouselCardBody.thumbnailUrl)
+                && Objects.equals(this.cardOptions, messagesApiMessageCarouselCardBody.cardOptions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, text, url, isVideo, thumbnailUrl);
+        return Objects.hash(title, text, url, isVideo, thumbnailUrl, cardOptions);
     }
 
     @Override
@@ -280,6 +314,9 @@ public class MessagesApiMessageCarouselCardBody {
                 .append(newLine)
                 .append("    thumbnailUrl: ")
                 .append(toIndentedString(thumbnailUrl))
+                .append(newLine)
+                .append("    cardOptions: ")
+                .append(toIndentedString(cardOptions))
                 .append(newLine)
                 .append("}")
                 .toString();

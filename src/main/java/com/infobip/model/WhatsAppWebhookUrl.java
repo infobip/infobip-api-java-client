@@ -15,14 +15,14 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * Array of urls information.
+ * Represents WhatsAppWebhookUrl model.
  */
 public class WhatsAppWebhookUrl {
 
     private String url;
 
     /**
-     * Type of the url. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
+     * Type of a URL.
      */
     public enum TypeEnum {
         HOME("HOME"),
@@ -61,7 +61,7 @@ public class WhatsAppWebhookUrl {
      * Sets url.
      * <p>
      * Field description:
-     * Contact&#39;s url.
+     * Contact URL.
      *
      * @param url
      * @return This {@link WhatsAppWebhookUrl instance}.
@@ -75,7 +75,7 @@ public class WhatsAppWebhookUrl {
      * Returns url.
      * <p>
      * Field description:
-     * Contact&#39;s url.
+     * Contact URL.
      *
      * @return url
      */
@@ -88,7 +88,7 @@ public class WhatsAppWebhookUrl {
      * Sets url.
      * <p>
      * Field description:
-     * Contact&#39;s url.
+     * Contact URL.
      *
      * @param url
      */
@@ -101,7 +101,7 @@ public class WhatsAppWebhookUrl {
      * Sets type.
      * <p>
      * Field description:
-     * Type of the url. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
+     * Type of a URL.
      *
      * @param type
      * @return This {@link WhatsAppWebhookUrl instance}.
@@ -115,7 +115,7 @@ public class WhatsAppWebhookUrl {
      * Returns type.
      * <p>
      * Field description:
-     * Type of the url. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
+     * Type of a URL.
      *
      * @return type
      */
@@ -128,7 +128,7 @@ public class WhatsAppWebhookUrl {
      * Sets type.
      * <p>
      * Field description:
-     * Type of the url. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
+     * Type of a URL.
      *
      * @param type
      */

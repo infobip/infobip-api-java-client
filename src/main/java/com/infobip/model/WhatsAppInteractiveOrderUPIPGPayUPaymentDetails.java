@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * Represents WhatsAppInteractiveOrderUPIPGPayUPaymentDetails model.
  */
-public class WhatsAppInteractiveOrderUPIPGPayUPaymentDetails extends WhatsAppInteractiveOrderPaymentDetails {
+public class WhatsAppInteractiveOrderUPIPGPayUPaymentDetails extends WhatsAppInteractiveAllowedOrderPaymentDetails {
 
     private String id;
 

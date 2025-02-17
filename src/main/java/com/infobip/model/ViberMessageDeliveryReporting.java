@@ -21,6 +21,8 @@ public class ViberMessageDeliveryReporting {
 
     private Boolean intermediateReport;
 
+    private Boolean notify;
+
     /**
      * Sets url.
      * <p>
@@ -101,6 +103,46 @@ public class ViberMessageDeliveryReporting {
         this.intermediateReport = intermediateReport;
     }
 
+    /**
+     * Sets notify.
+     * <p>
+     * Field description:
+     * Notify enables you to specify your preferences for receiving DLRs. If set to false, no DLR will be sent. Note: When no webhook is specified in the request and notify is set to &#39;true&#39; or not defined, your Subscription settings will apply.
+     *
+     * @param notify
+     * @return This {@link ViberMessageDeliveryReporting instance}.
+     */
+    public ViberMessageDeliveryReporting notify(Boolean notify) {
+        this.notify = notify;
+        return this;
+    }
+
+    /**
+     * Returns notify.
+     * <p>
+     * Field description:
+     * Notify enables you to specify your preferences for receiving DLRs. If set to false, no DLR will be sent. Note: When no webhook is specified in the request and notify is set to &#39;true&#39; or not defined, your Subscription settings will apply.
+     *
+     * @return notify
+     */
+    @JsonProperty("notify")
+    public Boolean getNotify() {
+        return notify;
+    }
+
+    /**
+     * Sets notify.
+     * <p>
+     * Field description:
+     * Notify enables you to specify your preferences for receiving DLRs. If set to false, no DLR will be sent. Note: When no webhook is specified in the request and notify is set to &#39;true&#39; or not defined, your Subscription settings will apply.
+     *
+     * @param notify
+     */
+    @JsonProperty("notify")
+    public void setNotify(Boolean notify) {
+        this.notify = notify;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -111,12 +153,13 @@ public class ViberMessageDeliveryReporting {
         }
         ViberMessageDeliveryReporting viberMessageDeliveryReporting = (ViberMessageDeliveryReporting) o;
         return Objects.equals(this.url, viberMessageDeliveryReporting.url)
-                && Objects.equals(this.intermediateReport, viberMessageDeliveryReporting.intermediateReport);
+                && Objects.equals(this.intermediateReport, viberMessageDeliveryReporting.intermediateReport)
+                && Objects.equals(this.notify, viberMessageDeliveryReporting.notify);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, intermediateReport);
+        return Objects.hash(url, intermediateReport, notify);
     }
 
     @Override
@@ -130,6 +173,9 @@ public class ViberMessageDeliveryReporting {
                 .append(newLine)
                 .append("    intermediateReport: ")
                 .append(toIndentedString(intermediateReport))
+                .append(newLine)
+                .append("    notify: ")
+                .append(toIndentedString(notify))
                 .append(newLine)
                 .append("}")
                 .toString();

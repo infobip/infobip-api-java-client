@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * An array of contacts sent in a WhatsApp message.
+ * Represents WhatsAppWebhookContact model.
  */
 public class WhatsAppWebhookContact {
 
@@ -38,7 +38,7 @@ public class WhatsAppWebhookContact {
      * Sets addresses.
      * <p>
      * Field description:
-     * Array of addresses information.
+     * Address information.
      *
      * @param addresses
      * @return This {@link WhatsAppWebhookContact instance}.
@@ -52,7 +52,7 @@ public class WhatsAppWebhookContact {
      * Adds and item into addresses.
      * <p>
      * Field description:
-     * Array of addresses information.
+     * Address information.
      *
      * @param addressesItem The item to be added to the list.
      * @return This {@link WhatsAppWebhookContact instance}.
@@ -69,7 +69,7 @@ public class WhatsAppWebhookContact {
      * Returns addresses.
      * <p>
      * Field description:
-     * Array of addresses information.
+     * Address information.
      *
      * @return addresses
      */
@@ -82,7 +82,7 @@ public class WhatsAppWebhookContact {
      * Sets addresses.
      * <p>
      * Field description:
-     * Array of addresses information.
+     * Address information.
      *
      * @param addresses
      */
@@ -95,7 +95,7 @@ public class WhatsAppWebhookContact {
      * Sets birthday.
      * <p>
      * Field description:
-     * Date of birth in &#x60;YYYY-MM-DD&#x60; format.
+     * Birthday information, YYYY-MM-DD formatted string.
      *
      * @param birthday
      * @return This {@link WhatsAppWebhookContact instance}.
@@ -109,7 +109,7 @@ public class WhatsAppWebhookContact {
      * Returns birthday.
      * <p>
      * Field description:
-     * Date of birth in &#x60;YYYY-MM-DD&#x60; format.
+     * Birthday information, YYYY-MM-DD formatted string.
      *
      * @return birthday
      */
@@ -122,7 +122,7 @@ public class WhatsAppWebhookContact {
      * Sets birthday.
      * <p>
      * Field description:
-     * Date of birth in &#x60;YYYY-MM-DD&#x60; format.
+     * Birthday information, YYYY-MM-DD formatted string.
      *
      * @param birthday
      */
@@ -135,7 +135,7 @@ public class WhatsAppWebhookContact {
      * Sets emails.
      * <p>
      * Field description:
-     * Array of emails information.
+     * Email information.
      *
      * @param emails
      * @return This {@link WhatsAppWebhookContact instance}.
@@ -149,7 +149,7 @@ public class WhatsAppWebhookContact {
      * Adds and item into emails.
      * <p>
      * Field description:
-     * Array of emails information.
+     * Email information.
      *
      * @param emailsItem The item to be added to the list.
      * @return This {@link WhatsAppWebhookContact instance}.
@@ -166,7 +166,7 @@ public class WhatsAppWebhookContact {
      * Returns emails.
      * <p>
      * Field description:
-     * Array of emails information.
+     * Email information.
      *
      * @return emails
      */
@@ -179,7 +179,7 @@ public class WhatsAppWebhookContact {
      * Sets emails.
      * <p>
      * Field description:
-     * Array of emails information.
+     * Email information.
      *
      * @param emails
      */
@@ -254,7 +254,7 @@ public class WhatsAppWebhookContact {
      * Sets phones.
      * <p>
      * Field description:
-     * Array of phones information.
+     * Phone information.
      *
      * @param phones
      * @return This {@link WhatsAppWebhookContact instance}.
@@ -268,7 +268,7 @@ public class WhatsAppWebhookContact {
      * Adds and item into phones.
      * <p>
      * Field description:
-     * Array of phones information.
+     * Phone information.
      *
      * @param phonesItem The item to be added to the list.
      * @return This {@link WhatsAppWebhookContact instance}.
@@ -285,7 +285,7 @@ public class WhatsAppWebhookContact {
      * Returns phones.
      * <p>
      * Field description:
-     * Array of phones information.
+     * Phone information.
      *
      * @return phones
      */
@@ -298,7 +298,7 @@ public class WhatsAppWebhookContact {
      * Sets phones.
      * <p>
      * Field description:
-     * Array of phones information.
+     * Phone information.
      *
      * @param phones
      */
@@ -311,7 +311,7 @@ public class WhatsAppWebhookContact {
      * Sets urls.
      * <p>
      * Field description:
-     * Array of urls information.
+     * URL information.
      *
      * @param urls
      * @return This {@link WhatsAppWebhookContact instance}.
@@ -325,7 +325,7 @@ public class WhatsAppWebhookContact {
      * Adds and item into urls.
      * <p>
      * Field description:
-     * Array of urls information.
+     * URL information.
      *
      * @param urlsItem The item to be added to the list.
      * @return This {@link WhatsAppWebhookContact instance}.
@@ -342,7 +342,7 @@ public class WhatsAppWebhookContact {
      * Returns urls.
      * <p>
      * Field description:
-     * Array of urls information.
+     * URL information.
      *
      * @return urls
      */
@@ -355,7 +355,7 @@ public class WhatsAppWebhookContact {
      * Sets urls.
      * <p>
      * Field description:
-     * Array of urls information.
+     * URL information.
      *
      * @param urls
      */

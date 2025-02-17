@@ -9,9 +9,7 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,41 +25,7 @@ public class WebRtcTheme {
 
     private WebRtcColors colors;
 
-    /**
-     * Represents layout during the call.When GRID layout is selected, multiple video streams are displayed simultaneously and user can spotlight specific video stream.When SOLO layout is selected, an user can see only his video streams.If there are more than one layout in this list, the first one will be initially selected, and users can change it during the call.The default layout will be set to GRID.
-     */
-    public enum LayoutsEnum {
-        SOLO("SOLO"),
-        GRID("GRID");
-
-        private String value;
-
-        LayoutsEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static LayoutsEnum fromValue(String value) {
-            for (LayoutsEnum enumElement : LayoutsEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private List<LayoutsEnum> layouts = null;
+    private List<WebRtcLayout> layouts = null;
 
     private WebRtcLocalization localization;
 
@@ -167,7 +131,7 @@ public class WebRtcTheme {
      * @param layouts
      * @return This {@link WebRtcTheme instance}.
      */
-    public WebRtcTheme layouts(List<LayoutsEnum> layouts) {
+    public WebRtcTheme layouts(List<WebRtcLayout> layouts) {
         this.layouts = layouts;
         return this;
     }
@@ -181,7 +145,7 @@ public class WebRtcTheme {
      * @param layoutsItem The item to be added to the list.
      * @return This {@link WebRtcTheme instance}.
      */
-    public WebRtcTheme addLayoutsItem(LayoutsEnum layoutsItem) {
+    public WebRtcTheme addLayoutsItem(WebRtcLayout layoutsItem) {
         if (this.layouts == null) {
             this.layouts = new ArrayList<>();
         }
@@ -198,7 +162,7 @@ public class WebRtcTheme {
      * @return layouts
      */
     @JsonProperty("layouts")
-    public List<LayoutsEnum> getLayouts() {
+    public List<WebRtcLayout> getLayouts() {
         return layouts;
     }
 
@@ -211,7 +175,7 @@ public class WebRtcTheme {
      * @param layouts
      */
     @JsonProperty("layouts")
-    public void setLayouts(List<LayoutsEnum> layouts) {
+    public void setLayouts(List<WebRtcLayout> layouts) {
         this.layouts = layouts;
     }
 

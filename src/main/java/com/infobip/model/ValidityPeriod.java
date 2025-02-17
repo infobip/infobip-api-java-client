@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Message validity period. Once expired, the message won&#39;t be sent. Validity period longer than 48h is not supported. If exceeded, it will be automatically set to 48h. Minimal value is 10 seconds.
+ * Message validity period. Once expired, the message won&#39;t be sent. Validity period longer than 48h is not supported. If exceeded, it will be automatically set to 48h.
  */
 public class ValidityPeriod {
 
@@ -106,9 +106,9 @@ public class ValidityPeriod {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ValidityPeriod messagesApiValidityPeriod = (ValidityPeriod) o;
-        return Objects.equals(this.amount, messagesApiValidityPeriod.amount)
-                && Objects.equals(this.timeUnit, messagesApiValidityPeriod.timeUnit);
+        ValidityPeriod validityPeriod = (ValidityPeriod) o;
+        return Objects.equals(this.amount, validityPeriod.amount)
+                && Objects.equals(this.timeUnit, validityPeriod.timeUnit);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class ValidityPeriod {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class MessagesApiValidityPeriod {")
+                .append("class ValidityPeriod {")
                 .append(newLine)
                 .append("    amount: ")
                 .append(toIndentedString(amount))

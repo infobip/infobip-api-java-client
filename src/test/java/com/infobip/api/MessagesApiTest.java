@@ -90,7 +90,7 @@ class MessagesApiTest extends ApiTest {
                         .content(new MessagesApiMessageContent()
                                 .body(new MessagesApiMessageTextBody().text(givenText)))));
 
-        Consumer<MessagesApiResponse> assertions = (response) -> {
+        Consumer<MessageResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getBulkId()).isEqualTo(givenBulkId);
             then(response.getMessages()).isNotNull();
@@ -274,7 +274,7 @@ class MessagesApiTest extends ApiTest {
 
         MessagesApi api = new MessagesApi(getApiClient());
 
-        Consumer<MessagesApiResponse> assertions = (response) -> {
+        Consumer<MessageResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getBulkId()).isEqualTo(givenBulkId);
             then(response.getMessages()).isNotNull();
@@ -375,7 +375,7 @@ class MessagesApiTest extends ApiTest {
                         .sender(givenSender)
                         .destinations(List.of(new MessagesApiToDestination().to(givenTo)))));
 
-        Consumer<MessagesApiResponse> assertions = (response) -> {
+        Consumer<MessageResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getBulkId()).isEqualTo(givenBulkId);
             then(response.getMessages()).isNotNull();

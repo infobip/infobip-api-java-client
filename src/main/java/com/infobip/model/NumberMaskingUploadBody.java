@@ -10,8 +10,7 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -21,7 +20,7 @@ public class NumberMaskingUploadBody {
 
     private String url;
 
-    private List<byte[]> content = null;
+    private byte[] content;
 
     /**
      * Sets url.
@@ -72,25 +71,8 @@ public class NumberMaskingUploadBody {
      * @param content
      * @return This {@link NumberMaskingUploadBody instance}.
      */
-    public NumberMaskingUploadBody content(List<byte[]> content) {
+    public NumberMaskingUploadBody content(byte[] content) {
         this.content = content;
-        return this;
-    }
-
-    /**
-     * Adds and item into content.
-     * <p>
-     * Field description:
-     * Encoded (Base64) value of mp3 file can be included instead of the file location URL.
-     *
-     * @param contentItem The item to be added to the list.
-     * @return This {@link NumberMaskingUploadBody instance}.
-     */
-    public NumberMaskingUploadBody addContentItem(byte[] contentItem) {
-        if (this.content == null) {
-            this.content = new ArrayList<>();
-        }
-        this.content.add(contentItem);
         return this;
     }
 
@@ -103,7 +85,7 @@ public class NumberMaskingUploadBody {
      * @return content
      */
     @JsonProperty("content")
-    public List<byte[]> getContent() {
+    public byte[] getContent() {
         return content;
     }
 
@@ -116,7 +98,7 @@ public class NumberMaskingUploadBody {
      * @param content
      */
     @JsonProperty("content")
-    public void setContent(List<byte[]> content) {
+    public void setContent(byte[] content) {
         this.content = content;
     }
 
@@ -130,12 +112,12 @@ public class NumberMaskingUploadBody {
         }
         NumberMaskingUploadBody numberMaskingUploadBody = (NumberMaskingUploadBody) o;
         return Objects.equals(this.url, numberMaskingUploadBody.url)
-                && Objects.equals(this.content, numberMaskingUploadBody.content);
+                && Arrays.equals(this.content, numberMaskingUploadBody.content);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, content);
+        return Objects.hash(url, Arrays.hashCode(content));
     }
 
     @Override

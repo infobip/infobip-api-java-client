@@ -106,9 +106,9 @@ public class TurkeyIysOptions {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        TurkeyIysOptions smsTurkeyIysOptions = (TurkeyIysOptions) o;
-        return Objects.equals(this.brandCode, smsTurkeyIysOptions.brandCode)
-                && Objects.equals(this.recipientType, smsTurkeyIysOptions.recipientType);
+        TurkeyIysOptions turkeyIysOptions = (TurkeyIysOptions) o;
+        return Objects.equals(this.brandCode, turkeyIysOptions.brandCode)
+                && Objects.equals(this.recipientType, turkeyIysOptions.recipientType);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class TurkeyIysOptions {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class SmsTurkeyIysOptions {")
+                .append("class TurkeyIysOptions {")
                 .append(newLine)
                 .append("    brandCode: ")
                 .append(toIndentedString(brandCode))

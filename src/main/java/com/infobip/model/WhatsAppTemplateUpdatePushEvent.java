@@ -28,6 +28,10 @@ public class WhatsAppTemplateUpdatePushEvent {
 
     private WhatsAppTemplatePushEventChange change;
 
+    private Long entityId;
+
+    private Long applicationId;
+
     /**
      * Sets messageTemplateId.
      * <p>
@@ -240,6 +244,86 @@ public class WhatsAppTemplateUpdatePushEvent {
         this.change = change;
     }
 
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Entity ID.
+     *
+     * @param entityId
+     * @return This {@link WhatsAppTemplateUpdatePushEvent instance}.
+     */
+    public WhatsAppTemplateUpdatePushEvent entityId(Long entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * Entity ID.
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public Long getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Entity ID.
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(Long entityId) {
+        this.entityId = entityId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Application ID.
+     *
+     * @param applicationId
+     * @return This {@link WhatsAppTemplateUpdatePushEvent instance}.
+     */
+    public WhatsAppTemplateUpdatePushEvent applicationId(Long applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * Application ID.
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public Long getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Application ID.
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(Long applicationId) {
+        this.applicationId = applicationId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -253,12 +337,21 @@ public class WhatsAppTemplateUpdatePushEvent {
                 && Objects.equals(this.messageTemplateName, whatsAppTemplateUpdatePushEvent.messageTemplateName)
                 && Objects.equals(this.messageTemplateLanguage, whatsAppTemplateUpdatePushEvent.messageTemplateLanguage)
                 && Objects.equals(this.timestamp, whatsAppTemplateUpdatePushEvent.timestamp)
-                && Objects.equals(this.change, whatsAppTemplateUpdatePushEvent.change);
+                && Objects.equals(this.change, whatsAppTemplateUpdatePushEvent.change)
+                && Objects.equals(this.entityId, whatsAppTemplateUpdatePushEvent.entityId)
+                && Objects.equals(this.applicationId, whatsAppTemplateUpdatePushEvent.applicationId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageTemplateId, messageTemplateName, messageTemplateLanguage, timestamp, change);
+        return Objects.hash(
+                messageTemplateId,
+                messageTemplateName,
+                messageTemplateLanguage,
+                timestamp,
+                change,
+                entityId,
+                applicationId);
     }
 
     @Override
@@ -281,6 +374,12 @@ public class WhatsAppTemplateUpdatePushEvent {
                 .append(newLine)
                 .append("    change: ")
                 .append(toIndentedString(change))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
                 .append(newLine)
                 .append("}")
                 .toString();

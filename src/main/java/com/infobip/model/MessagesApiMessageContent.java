@@ -27,6 +27,8 @@ public class MessagesApiMessageContent {
 
     private MessagesApiMessageConfirmationBody confirmationBody;
 
+    private MessagesApiMessageFooter footer;
+
     /**
      * Sets header.
      *
@@ -99,7 +101,7 @@ public class MessagesApiMessageContent {
      * Sets buttons.
      * <p>
      * Field description:
-     * List of buttons for the message.
+     * List of buttons of the message.
      *
      * @param buttons
      * @return This {@link MessagesApiMessageContent instance}.
@@ -113,7 +115,7 @@ public class MessagesApiMessageContent {
      * Adds and item into buttons.
      * <p>
      * Field description:
-     * List of buttons for the message.
+     * List of buttons of the message.
      *
      * @param buttonsItem The item to be added to the list.
      * @return This {@link MessagesApiMessageContent instance}.
@@ -130,7 +132,7 @@ public class MessagesApiMessageContent {
      * Returns buttons.
      * <p>
      * Field description:
-     * List of buttons for the message.
+     * List of buttons of the message.
      *
      * @return buttons
      */
@@ -143,7 +145,7 @@ public class MessagesApiMessageContent {
      * Sets buttons.
      * <p>
      * Field description:
-     * List of buttons for the message.
+     * List of buttons of the message.
      *
      * @param buttons
      */
@@ -183,6 +185,37 @@ public class MessagesApiMessageContent {
         this.confirmationBody = confirmationBody;
     }
 
+    /**
+     * Sets footer.
+     *
+     * @param footer
+     * @return This {@link MessagesApiMessageContent instance}.
+     */
+    public MessagesApiMessageContent footer(MessagesApiMessageFooter footer) {
+        this.footer = footer;
+        return this;
+    }
+
+    /**
+     * Returns footer.
+     *
+     * @return footer
+     */
+    @JsonProperty("footer")
+    public MessagesApiMessageFooter getFooter() {
+        return footer;
+    }
+
+    /**
+     * Sets footer.
+     *
+     * @param footer
+     */
+    @JsonProperty("footer")
+    public void setFooter(MessagesApiMessageFooter footer) {
+        this.footer = footer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -195,12 +228,13 @@ public class MessagesApiMessageContent {
         return Objects.equals(this.header, messagesApiMessageContent.header)
                 && Objects.equals(this.body, messagesApiMessageContent.body)
                 && Objects.equals(this.buttons, messagesApiMessageContent.buttons)
-                && Objects.equals(this.confirmationBody, messagesApiMessageContent.confirmationBody);
+                && Objects.equals(this.confirmationBody, messagesApiMessageContent.confirmationBody)
+                && Objects.equals(this.footer, messagesApiMessageContent.footer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(header, body, buttons, confirmationBody);
+        return Objects.hash(header, body, buttons, confirmationBody, footer);
     }
 
     @Override
@@ -220,6 +254,9 @@ public class MessagesApiMessageContent {
                 .append(newLine)
                 .append("    confirmationBody: ")
                 .append(toIndentedString(confirmationBody))
+                .append(newLine)
+                .append("    footer: ")
+                .append(toIndentedString(footer))
                 .append(newLine)
                 .append("}")
                 .toString();

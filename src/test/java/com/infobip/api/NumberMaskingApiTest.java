@@ -3,9 +3,12 @@ package com.infobip.api;
 import static org.assertj.core.api.BDDAssertions.then;
 
 import com.infobip.model.*;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
@@ -24,10 +27,10 @@ class NumberMaskingApiTest extends ApiTest {
         String givenBackupCallbackUrl = "string";
         String givenBackupStatusUrl = "string";
         String givenDescription = "string";
-        String givenInsertDateTime = "2024-12-04T09:39:15Z";
-        OffsetDateTime givenInsertDateTimeOffset = OffsetDateTime.parse(givenInsertDateTime);
-        String givenUpdateDateTime = "2024-12-04T09:39:15Z";
-        OffsetDateTime givenUpdateDateTimeOffset = OffsetDateTime.parse(givenUpdateDateTime);
+        String givenInsertDateTime = "2025-01-07T15:06:33.68";
+        OffsetDateTime givenInsertDateTimeOffset = OffsetDateTime.of(2025, 1, 7, 15, 6, 33, 680000000, ZoneOffset.UTC);
+        String givenUpdateDateTime = "2025-01-07T15:06:33.68";
+        OffsetDateTime givenUpdateDateTimeOffset = OffsetDateTime.of(2025, 1, 7, 15, 6, 33, 680000000, ZoneOffset.UTC);
 
         String givenResponse = String.format(
                 "[{\n" + "  \"key\": \"%s\",\n"
@@ -72,6 +75,67 @@ class NumberMaskingApiTest extends ApiTest {
         var call = api.getNumberMaskingConfigurations();
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void testGetNumberMaskingConfigurationWhenUtcDateIsReturnedRegardlessOfDefaultTimezone() {
+        TimeZone initialDefaultTimezone = TimeZone.getDefault();
+        String testDefaultTimezone = "Europe/Zagreb";
+
+        String givenResponse = "{\n" + "  \"key\": \"givenKey\",\n"
+                + "  \"name\": \"givenName\",\n"
+                + "  \"callbackUrl\": \"https://example.com/callback\",\n"
+                + "  \"statusUrl\": \"https://example.com/status\",\n"
+                + "  \"backupCallbackUrl\": \"https://example.com/backup/callback\",\n"
+                + "  \"backupStatusUrl\": \"https://example.com/backup/status\",\n"
+                + "  \"description\": \"givenDescription\",\n"
+                + "  \"insertDateTime\": \"2025-01-07T15:06:33.68\",\n"
+                + "  \"updateDateTime\": \"2025-02-07T15:06:33.68\"\n"
+                + "}";
+
+        setUpGetRequest(NUMBER_MASKING_CONFIGURATION.replace("{key}", "givenKey"), Map.of(), givenResponse, 200);
+
+        NumberMaskingApi api = new NumberMaskingApi(getApiClient());
+
+        LocalDateTime givenInsertDateTime = LocalDateTime.of(2025, 1, 7, 15, 6, 33, 680000000);
+        LocalDateTime givenUpdateDateTime = LocalDateTime.of(2025, 2, 7, 15, 6, 33, 680000000);
+
+        OffsetDateTime expectedInsertDateTime = OffsetDateTime.of(2025, 1, 7, 15, 6, 33, 680000000, ZoneOffset.UTC);
+        OffsetDateTime expectedUpdateDateTime = OffsetDateTime.of(2025, 2, 7, 15, 6, 33, 680000000, ZoneOffset.UTC);
+
+        NumberMaskingSetupResponse expectedResponse = new NumberMaskingSetupResponse()
+                .key("givenKey")
+                .name("givenName")
+                .callbackUrl("https://example.com/callback")
+                .statusUrl("https://example.com/status")
+                .backupCallbackUrl("https://example.com/backup/callback")
+                .backupStatusUrl("https://example.com/backup/status")
+                .description("givenDescription")
+                .insertDateTime(givenInsertDateTime)
+                .updateDateTime(givenUpdateDateTime);
+
+        try {
+            TimeZone.setDefault(TimeZone.getTimeZone(testDefaultTimezone));
+            Consumer<NumberMaskingSetupResponse> assertions = (response) -> {
+                then(response).isNotNull();
+                then(response.getKey()).isEqualTo("givenKey");
+                then(response.getName()).isEqualTo("givenName");
+                then(response.getCallbackUrl()).isEqualTo("https://example.com/callback");
+                then(response.getStatusUrl()).isEqualTo("https://example.com/status");
+                then(response.getBackupCallbackUrl()).isEqualTo("https://example.com/backup/callback");
+                then(response.getBackupStatusUrl()).isEqualTo("https://example.com/backup/status");
+                then(response.getDescription()).isEqualTo("givenDescription");
+                then(response.getInsertDateTime()).isEqualTo(expectedInsertDateTime);
+                then(response.getUpdateDateTime()).isEqualTo(expectedUpdateDateTime);
+                then(response).isEqualTo(expectedResponse);
+            };
+
+            var call = api.getNumberMaskingConfiguration("givenKey");
+            testSuccessfulCall(call::execute, assertions);
+            testSuccessfulAsyncCall(call::executeAsync, assertions);
+        } finally {
+            TimeZone.setDefault(initialDefaultTimezone);
+        }
     }
 
     @Test

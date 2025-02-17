@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class CallsGetVoicesResponse {
 
-    private List<CallsVoice> voices = null;
+    private List<CallsSynthesisVoice> voices = null;
 
     /**
      * Sets voices.
@@ -30,7 +30,7 @@ public class CallsGetVoicesResponse {
      * @param voices
      * @return This {@link CallsGetVoicesResponse instance}.
      */
-    public CallsGetVoicesResponse voices(List<CallsVoice> voices) {
+    public CallsGetVoicesResponse voices(List<CallsSynthesisVoice> voices) {
         this.voices = voices;
         return this;
     }
@@ -44,7 +44,7 @@ public class CallsGetVoicesResponse {
      * @param voicesItem The item to be added to the list.
      * @return This {@link CallsGetVoicesResponse instance}.
      */
-    public CallsGetVoicesResponse addVoicesItem(CallsVoice voicesItem) {
+    public CallsGetVoicesResponse addVoicesItem(CallsSynthesisVoice voicesItem) {
         if (this.voices == null) {
             this.voices = new ArrayList<>();
         }
@@ -61,7 +61,7 @@ public class CallsGetVoicesResponse {
      * @return voices
      */
     @JsonProperty("voices")
-    public List<CallsVoice> getVoices() {
+    public List<CallsSynthesisVoice> getVoices() {
         return voices;
     }
 
@@ -74,7 +74,7 @@ public class CallsGetVoicesResponse {
      * @param voices
      */
     @JsonProperty("voices")
-    public void setVoices(List<CallsVoice> voices) {
+    public void setVoices(List<CallsSynthesisVoice> voices) {
         this.voices = voices;
     }
 

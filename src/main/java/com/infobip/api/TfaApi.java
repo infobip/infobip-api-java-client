@@ -103,7 +103,7 @@ public class TfaApi {
      *
      * @param tfaApplicationRequest  (required)
      * @return CreateTfaApplicationRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public CreateTfaApplicationRequest createTfaApplication(TfaApplicationRequest tfaApplicationRequest) {
         return new CreateTfaApplicationRequest(tfaApplicationRequest);
@@ -175,7 +175,7 @@ public class TfaApi {
      * @param appId ID of application for which requested message was created. (required)
      * @param tfaCreateEmailMessageRequest  (required)
      * @return CreateTfaEmailMessageTemplateRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public CreateTfaEmailMessageTemplateRequest createTfaEmailMessageTemplate(
             String appId, TfaCreateEmailMessageRequest tfaCreateEmailMessageRequest) {
@@ -243,7 +243,7 @@ public class TfaApi {
      * @param appId ID of application for which requested message was created. (required)
      * @param tfaCreateMessageRequest  (required)
      * @return CreateTfaMessageTemplateRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public CreateTfaMessageTemplateRequest createTfaMessageTemplate(
             String appId, TfaCreateMessageRequest tfaCreateMessageRequest) {
@@ -303,7 +303,7 @@ public class TfaApi {
      *
      * @param appId ID of application for which configuration view was requested. (required)
      * @return GetTfaApplicationRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public GetTfaApplicationRequest getTfaApplication(String appId) {
         return new GetTfaApplicationRequest(appId);
@@ -352,12 +352,12 @@ public class TfaApi {
     }
 
     /**
-     * Get 2FA applications.
+     * Get all 2FA applications.
      * <p>
      * An application is a container for 2FA message templates. Use this method to list your applications.
      *
      * @return GetTfaApplicationsRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public GetTfaApplicationsRequest getTfaApplications() {
         return new GetTfaApplicationsRequest();
@@ -422,7 +422,7 @@ public class TfaApi {
      * @param appId ID of application for which requested message was created. (required)
      * @param msgId Requested message ID. (required)
      * @return GetTfaMessageTemplateRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public GetTfaMessageTemplateRequest getTfaMessageTemplate(String appId, String msgId) {
         return new GetTfaMessageTemplateRequest(appId, msgId);
@@ -475,13 +475,13 @@ public class TfaApi {
     }
 
     /**
-     * Get 2FA message templates.
+     * Get all 2FA message templates.
      * <p>
      * List all message templates in a 2FA application.
      *
      * @param appId ID of application for which requested message was created. (required)
      * @return GetTfaMessageTemplatesRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public GetTfaMessageTemplatesRequest getTfaMessageTemplates(String appId) {
         return new GetTfaMessageTemplatesRequest(appId);
@@ -582,7 +582,7 @@ public class TfaApi {
      * @param msisdn Filter by msisdn (phone number) for which verification status is checked. (required)
      * @param appId ID of 2-FA application for which phone number verification status is requested. (required)
      * @return GetTfaVerificationStatusRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public GetTfaVerificationStatusRequest getTfaVerificationStatus(String msisdn, String appId) {
         return new GetTfaVerificationStatusRequest(msisdn, appId);
@@ -653,7 +653,7 @@ public class TfaApi {
      * @param pinId ID of the pin code that has to be verified. (required)
      * @param tfaResendPinRequest  (required)
      * @return Resend2faPinCodeOverEmailRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public Resend2faPinCodeOverEmailRequest resend2faPinCodeOverEmail(
             String pinId, TfaResendPinRequest tfaResendPinRequest) {
@@ -724,7 +724,7 @@ public class TfaApi {
      * @param pinId ID of the pin code that has to be verified. (required)
      * @param tfaResendPinRequest  (required)
      * @return ResendTfaPinCodeOverSmsRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public ResendTfaPinCodeOverSmsRequest resendTfaPinCodeOverSms(
             String pinId, TfaResendPinRequest tfaResendPinRequest) {
@@ -796,7 +796,7 @@ public class TfaApi {
      * @param pinId ID of the pin code that has to be verified. (required)
      * @param tfaResendPinRequest  (required)
      * @return ResendTfaPinCodeOverVoiceRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public ResendTfaPinCodeOverVoiceRequest resendTfaPinCodeOverVoice(
             String pinId, TfaResendPinRequest tfaResendPinRequest) {
@@ -863,7 +863,7 @@ public class TfaApi {
      *
      * @param tfaStartEmailAuthenticationRequest  (required)
      * @return Send2faPinCodeOverEmailRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public Send2faPinCodeOverEmailRequest send2faPinCodeOverEmail(
             TfaStartEmailAuthenticationRequest tfaStartEmailAuthenticationRequest) {
@@ -900,7 +900,7 @@ public class TfaApi {
         /**
          * Sets ncNeeded.
          *
-         * @param ncNeeded Indicates if Number Lookup is needed before sending the 2FA message. If the parameter value is true, Number Lookup will be requested before sending the SMS. If the value is false, the SMS will be sent without requesting Number Lookup. Field&#39;s default value is &#x60;true&#x60;. (optional)
+         * @param ncNeeded Indicates if [Number Lookup](https://www.infobip.com/docs/api/connectivity/number-lookup) is needed before sending the 2FA message. If the parameter value is true, Number Lookup will be requested before sending the SMS. If the value is false, the SMS will be sent without requesting Number Lookup. Field&#39;s default value is &#x60;true&#x60;. (optional)
          * @return SendTfaPinCodeOverSmsRequest
          */
         public SendTfaPinCodeOverSmsRequest ncNeeded(Boolean ncNeeded) {
@@ -944,7 +944,7 @@ public class TfaApi {
      *
      * @param tfaStartAuthenticationRequest  (required)
      * @return SendTfaPinCodeOverSmsRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public SendTfaPinCodeOverSmsRequest sendTfaPinCodeOverSms(
             TfaStartAuthenticationRequest tfaStartAuthenticationRequest) {
@@ -1011,7 +1011,7 @@ public class TfaApi {
      *
      * @param tfaStartAuthenticationRequest  (required)
      * @return SendTfaPinCodeOverVoiceRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public SendTfaPinCodeOverVoiceRequest sendTfaPinCodeOverVoice(
             TfaStartAuthenticationRequest tfaStartAuthenticationRequest) {
@@ -1080,7 +1080,7 @@ public class TfaApi {
      * @param appId ID of application that should be updated. (required)
      * @param tfaApplicationRequest  (required)
      * @return UpdateTfaApplicationRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public UpdateTfaApplicationRequest updateTfaApplication(String appId, TfaApplicationRequest tfaApplicationRequest) {
         return new UpdateTfaApplicationRequest(appId, tfaApplicationRequest);
@@ -1158,7 +1158,7 @@ public class TfaApi {
      * @param msgId Requested message ID. (required)
      * @param tfaUpdateEmailMessageRequest  (required)
      * @return UpdateTfaEmailMessageTemplateRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public UpdateTfaEmailMessageTemplateRequest updateTfaEmailMessageTemplate(
             String appId, String msgId, TfaUpdateEmailMessageRequest tfaUpdateEmailMessageRequest) {
@@ -1234,7 +1234,7 @@ public class TfaApi {
      * @param msgId Requested message ID. (required)
      * @param tfaUpdateMessageRequest  (required)
      * @return UpdateTfaMessageTemplateRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public UpdateTfaMessageTemplateRequest updateTfaMessageTemplate(
             String appId, String msgId, TfaUpdateMessageRequest tfaUpdateMessageRequest) {
@@ -1295,14 +1295,14 @@ public class TfaApi {
     }
 
     /**
-     * Verify phone number.
+     * Verify a PIN.
      * <p>
-     * Verify a phone number to confirm successful 2FA authentication.
+     * Verify OTP to confirm successful phone number verification. pinId is received in the response after [sending the OTP message](#channels/sms/2fa/pin-sending-and-verification/send-2fa-pin-code-over-voice).
      *
      * @param pinId ID of the pin code that has to be verified. (required)
      * @param tfaVerifyPinRequest  (required)
      * @return VerifyTfaPhoneNumberRequest
-     * @see <a href="https://www.infobip.com/docs/tutorials/two-factor-authentication-over-api">Read me first: Introduction and use cases</a>
+     * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public VerifyTfaPhoneNumberRequest verifyTfaPhoneNumber(String pinId, TfaVerifyPinRequest tfaVerifyPinRequest) {
         return new VerifyTfaPhoneNumberRequest(pinId, tfaVerifyPinRequest);

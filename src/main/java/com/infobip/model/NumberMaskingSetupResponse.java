@@ -10,7 +10,9 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Objects;
 
 /**
@@ -320,13 +322,13 @@ public class NumberMaskingSetupResponse {
      * Sets insertDateTime.
      * <p>
      * Field description:
-     * Date and time when masking configuration is created.
+     * Date and time (UTC timezone) when masking configuration is created.
      *
      * @param insertDateTime
      * @return This {@link NumberMaskingSetupResponse instance}.
      */
-    public NumberMaskingSetupResponse insertDateTime(OffsetDateTime insertDateTime) {
-        this.insertDateTime = insertDateTime;
+    public NumberMaskingSetupResponse insertDateTime(LocalDateTime insertDateTime) {
+        this.insertDateTime = insertDateTime.atOffset(ZoneOffset.UTC);
         return this;
     }
 
@@ -334,7 +336,7 @@ public class NumberMaskingSetupResponse {
      * Returns insertDateTime.
      * <p>
      * Field description:
-     * Date and time when masking configuration is created.
+     * Date and time (UTC timezone) when masking configuration is created.
      *
      * @return insertDateTime
      */
@@ -347,26 +349,26 @@ public class NumberMaskingSetupResponse {
      * Sets insertDateTime.
      * <p>
      * Field description:
-     * Date and time when masking configuration is created.
+     * Date and time (UTC timezone) when masking configuration is created.
      *
      * @param insertDateTime
      */
     @JsonProperty("insertDateTime")
-    public void setInsertDateTime(OffsetDateTime insertDateTime) {
-        this.insertDateTime = insertDateTime;
+    public void setInsertDateTime(LocalDateTime insertDateTime) {
+        this.insertDateTime = insertDateTime.atOffset(ZoneOffset.UTC);
     }
 
     /**
      * Sets updateDateTime.
      * <p>
      * Field description:
-     * Date and time when masking configuration was last modified.
+     * Date and time (UTC timezone) when masking configuration was last modified.
      *
      * @param updateDateTime
      * @return This {@link NumberMaskingSetupResponse instance}.
      */
-    public NumberMaskingSetupResponse updateDateTime(OffsetDateTime updateDateTime) {
-        this.updateDateTime = updateDateTime;
+    public NumberMaskingSetupResponse updateDateTime(LocalDateTime updateDateTime) {
+        this.updateDateTime = updateDateTime.atOffset(ZoneOffset.UTC);
         return this;
     }
 
@@ -374,7 +376,7 @@ public class NumberMaskingSetupResponse {
      * Returns updateDateTime.
      * <p>
      * Field description:
-     * Date and time when masking configuration was last modified.
+     * Date and time (UTC timezone) when masking configuration was last modified.
      *
      * @return updateDateTime
      */
@@ -387,13 +389,13 @@ public class NumberMaskingSetupResponse {
      * Sets updateDateTime.
      * <p>
      * Field description:
-     * Date and time when masking configuration was last modified.
+     * Date and time (UTC timezone) when masking configuration was last modified.
      *
      * @param updateDateTime
      */
     @JsonProperty("updateDateTime")
-    public void setUpdateDateTime(OffsetDateTime updateDateTime) {
-        this.updateDateTime = updateDateTime;
+    public void setUpdateDateTime(LocalDateTime updateDateTime) {
+        this.updateDateTime = updateDateTime.atOffset(ZoneOffset.UTC);
     }
 
     @Override

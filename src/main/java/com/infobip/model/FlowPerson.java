@@ -10,7 +10,11 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * Person attributes. In case a person with either the specified &lt;code&gt;externalId&lt;/code&gt; or &lt;code&gt;contactInformation&lt;/code&gt; already exists in the People, the persons will be automatically merged. See &lt;a href&#x3D;\&quot;https://www.infobip.com/docs/api/customer-engagement/moments/add-flow-participants\&quot; target&#x3D;\&quot;_blank\&quot;&gt;endpoint description&lt;/a&gt; for more info.

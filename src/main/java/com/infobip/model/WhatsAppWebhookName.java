@@ -13,11 +13,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Contains information about contact&#39;s name.
+ * Full contact name.
  */
 public class WhatsAppWebhookName {
 
     private String firstName;
+
+    private String formattedName;
 
     private String lastName;
 
@@ -27,13 +29,11 @@ public class WhatsAppWebhookName {
 
     private String namePrefix;
 
-    private String formattedName;
-
     /**
      * Sets firstName.
      * <p>
      * Field description:
-     * Contact&#39;s first name.
+     * First name of a contact. Mandatory value.
      *
      * @param firstName
      * @return This {@link WhatsAppWebhookName instance}.
@@ -47,7 +47,7 @@ public class WhatsAppWebhookName {
      * Returns firstName.
      * <p>
      * Field description:
-     * Contact&#39;s first name.
+     * First name of a contact. Mandatory value.
      *
      * @return firstName
      */
@@ -60,7 +60,7 @@ public class WhatsAppWebhookName {
      * Sets firstName.
      * <p>
      * Field description:
-     * Contact&#39;s first name.
+     * First name of a contact. Mandatory value.
      *
      * @param firstName
      */
@@ -70,170 +70,10 @@ public class WhatsAppWebhookName {
     }
 
     /**
-     * Sets lastName.
-     * <p>
-     * Field description:
-     * Contact&#39;s last name.
-     *
-     * @param lastName
-     * @return This {@link WhatsAppWebhookName instance}.
-     */
-    public WhatsAppWebhookName lastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
-    /**
-     * Returns lastName.
-     * <p>
-     * Field description:
-     * Contact&#39;s last name.
-     *
-     * @return lastName
-     */
-    @JsonProperty("lastName")
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     * Sets lastName.
-     * <p>
-     * Field description:
-     * Contact&#39;s last name.
-     *
-     * @param lastName
-     */
-    @JsonProperty("lastName")
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    /**
-     * Sets middleName.
-     * <p>
-     * Field description:
-     * Contact&#39;s middle name.
-     *
-     * @param middleName
-     * @return This {@link WhatsAppWebhookName instance}.
-     */
-    public WhatsAppWebhookName middleName(String middleName) {
-        this.middleName = middleName;
-        return this;
-    }
-
-    /**
-     * Returns middleName.
-     * <p>
-     * Field description:
-     * Contact&#39;s middle name.
-     *
-     * @return middleName
-     */
-    @JsonProperty("middleName")
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    /**
-     * Sets middleName.
-     * <p>
-     * Field description:
-     * Contact&#39;s middle name.
-     *
-     * @param middleName
-     */
-    @JsonProperty("middleName")
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    /**
-     * Sets nameSuffix.
-     * <p>
-     * Field description:
-     * Contact&#39;s name suffix.
-     *
-     * @param nameSuffix
-     * @return This {@link WhatsAppWebhookName instance}.
-     */
-    public WhatsAppWebhookName nameSuffix(String nameSuffix) {
-        this.nameSuffix = nameSuffix;
-        return this;
-    }
-
-    /**
-     * Returns nameSuffix.
-     * <p>
-     * Field description:
-     * Contact&#39;s name suffix.
-     *
-     * @return nameSuffix
-     */
-    @JsonProperty("nameSuffix")
-    public String getNameSuffix() {
-        return nameSuffix;
-    }
-
-    /**
-     * Sets nameSuffix.
-     * <p>
-     * Field description:
-     * Contact&#39;s name suffix.
-     *
-     * @param nameSuffix
-     */
-    @JsonProperty("nameSuffix")
-    public void setNameSuffix(String nameSuffix) {
-        this.nameSuffix = nameSuffix;
-    }
-
-    /**
-     * Sets namePrefix.
-     * <p>
-     * Field description:
-     * Contact&#39;s name prefix.
-     *
-     * @param namePrefix
-     * @return This {@link WhatsAppWebhookName instance}.
-     */
-    public WhatsAppWebhookName namePrefix(String namePrefix) {
-        this.namePrefix = namePrefix;
-        return this;
-    }
-
-    /**
-     * Returns namePrefix.
-     * <p>
-     * Field description:
-     * Contact&#39;s name prefix.
-     *
-     * @return namePrefix
-     */
-    @JsonProperty("namePrefix")
-    public String getNamePrefix() {
-        return namePrefix;
-    }
-
-    /**
-     * Sets namePrefix.
-     * <p>
-     * Field description:
-     * Contact&#39;s name prefix.
-     *
-     * @param namePrefix
-     */
-    @JsonProperty("namePrefix")
-    public void setNamePrefix(String namePrefix) {
-        this.namePrefix = namePrefix;
-    }
-
-    /**
      * Sets formattedName.
      * <p>
      * Field description:
-     * Contact&#39;s full name as it normally appears.
+     * Full name as it normally appears. Mandatory value.
      *
      * @param formattedName
      * @return This {@link WhatsAppWebhookName instance}.
@@ -247,7 +87,7 @@ public class WhatsAppWebhookName {
      * Returns formattedName.
      * <p>
      * Field description:
-     * Contact&#39;s full name as it normally appears.
+     * Full name as it normally appears. Mandatory value.
      *
      * @return formattedName
      */
@@ -260,13 +100,173 @@ public class WhatsAppWebhookName {
      * Sets formattedName.
      * <p>
      * Field description:
-     * Contact&#39;s full name as it normally appears.
+     * Full name as it normally appears. Mandatory value.
      *
      * @param formattedName
      */
     @JsonProperty("formattedName")
     public void setFormattedName(String formattedName) {
         this.formattedName = formattedName;
+    }
+
+    /**
+     * Sets lastName.
+     * <p>
+     * Field description:
+     * Last name of a contact.
+     *
+     * @param lastName
+     * @return This {@link WhatsAppWebhookName instance}.
+     */
+    public WhatsAppWebhookName lastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    /**
+     * Returns lastName.
+     * <p>
+     * Field description:
+     * Last name of a contact.
+     *
+     * @return lastName
+     */
+    @JsonProperty("lastName")
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * Sets lastName.
+     * <p>
+     * Field description:
+     * Last name of a contact.
+     *
+     * @param lastName
+     */
+    @JsonProperty("lastName")
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * Sets middleName.
+     * <p>
+     * Field description:
+     * Middle name of a contact.
+     *
+     * @param middleName
+     * @return This {@link WhatsAppWebhookName instance}.
+     */
+    public WhatsAppWebhookName middleName(String middleName) {
+        this.middleName = middleName;
+        return this;
+    }
+
+    /**
+     * Returns middleName.
+     * <p>
+     * Field description:
+     * Middle name of a contact.
+     *
+     * @return middleName
+     */
+    @JsonProperty("middleName")
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    /**
+     * Sets middleName.
+     * <p>
+     * Field description:
+     * Middle name of a contact.
+     *
+     * @param middleName
+     */
+    @JsonProperty("middleName")
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    /**
+     * Sets nameSuffix.
+     * <p>
+     * Field description:
+     * Name suffix of a contact.
+     *
+     * @param nameSuffix
+     * @return This {@link WhatsAppWebhookName instance}.
+     */
+    public WhatsAppWebhookName nameSuffix(String nameSuffix) {
+        this.nameSuffix = nameSuffix;
+        return this;
+    }
+
+    /**
+     * Returns nameSuffix.
+     * <p>
+     * Field description:
+     * Name suffix of a contact.
+     *
+     * @return nameSuffix
+     */
+    @JsonProperty("nameSuffix")
+    public String getNameSuffix() {
+        return nameSuffix;
+    }
+
+    /**
+     * Sets nameSuffix.
+     * <p>
+     * Field description:
+     * Name suffix of a contact.
+     *
+     * @param nameSuffix
+     */
+    @JsonProperty("nameSuffix")
+    public void setNameSuffix(String nameSuffix) {
+        this.nameSuffix = nameSuffix;
+    }
+
+    /**
+     * Sets namePrefix.
+     * <p>
+     * Field description:
+     * Name prefix of a contact.
+     *
+     * @param namePrefix
+     * @return This {@link WhatsAppWebhookName instance}.
+     */
+    public WhatsAppWebhookName namePrefix(String namePrefix) {
+        this.namePrefix = namePrefix;
+        return this;
+    }
+
+    /**
+     * Returns namePrefix.
+     * <p>
+     * Field description:
+     * Name prefix of a contact.
+     *
+     * @return namePrefix
+     */
+    @JsonProperty("namePrefix")
+    public String getNamePrefix() {
+        return namePrefix;
+    }
+
+    /**
+     * Sets namePrefix.
+     * <p>
+     * Field description:
+     * Name prefix of a contact.
+     *
+     * @param namePrefix
+     */
+    @JsonProperty("namePrefix")
+    public void setNamePrefix(String namePrefix) {
+        this.namePrefix = namePrefix;
     }
 
     @Override
@@ -279,16 +279,16 @@ public class WhatsAppWebhookName {
         }
         WhatsAppWebhookName whatsAppWebhookName = (WhatsAppWebhookName) o;
         return Objects.equals(this.firstName, whatsAppWebhookName.firstName)
+                && Objects.equals(this.formattedName, whatsAppWebhookName.formattedName)
                 && Objects.equals(this.lastName, whatsAppWebhookName.lastName)
                 && Objects.equals(this.middleName, whatsAppWebhookName.middleName)
                 && Objects.equals(this.nameSuffix, whatsAppWebhookName.nameSuffix)
-                && Objects.equals(this.namePrefix, whatsAppWebhookName.namePrefix)
-                && Objects.equals(this.formattedName, whatsAppWebhookName.formattedName);
+                && Objects.equals(this.namePrefix, whatsAppWebhookName.namePrefix);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, middleName, nameSuffix, namePrefix, formattedName);
+        return Objects.hash(firstName, formattedName, lastName, middleName, nameSuffix, namePrefix);
     }
 
     @Override
@@ -299,6 +299,9 @@ public class WhatsAppWebhookName {
                 .append(newLine)
                 .append("    firstName: ")
                 .append(toIndentedString(firstName))
+                .append(newLine)
+                .append("    formattedName: ")
+                .append(toIndentedString(formattedName))
                 .append(newLine)
                 .append("    lastName: ")
                 .append(toIndentedString(lastName))
@@ -311,9 +314,6 @@ public class WhatsAppWebhookName {
                 .append(newLine)
                 .append("    namePrefix: ")
                 .append(toIndentedString(namePrefix))
-                .append(newLine)
-                .append("    formattedName: ")
-                .append(toIndentedString(formattedName))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -23,6 +23,9 @@ public class MmsReportResponse {
 
     /**
      * Sets results.
+     * <p>
+     * Field description:
+     * Collection of reports, one per every message.
      *
      * @param results
      * @return This {@link MmsReportResponse instance}.
@@ -34,6 +37,9 @@ public class MmsReportResponse {
 
     /**
      * Adds and item into results.
+     * <p>
+     * Field description:
+     * Collection of reports, one per every message.
      *
      * @param resultsItem The item to be added to the list.
      * @return This {@link MmsReportResponse instance}.
@@ -48,6 +54,9 @@ public class MmsReportResponse {
 
     /**
      * Returns results.
+     * <p>
+     * Field description:
+     * Collection of reports, one per every message.
      *
      * @return results
      */
@@ -58,6 +67,9 @@ public class MmsReportResponse {
 
     /**
      * Sets results.
+     * <p>
+     * Field description:
+     * Collection of reports, one per every message.
      *
      * @param results
      */

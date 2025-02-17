@@ -23,6 +23,8 @@ public class WhatsAppUrlButtonApiData extends WhatsAppButtonApiData {
 
     private String example;
 
+    private String destinationUrl;
+
     /**
      * Constructs a new {@link WhatsAppUrlButtonApiData} instance.
      */
@@ -162,6 +164,46 @@ public class WhatsAppUrlButtonApiData extends WhatsAppButtonApiData {
         this.example = example;
     }
 
+    /**
+     * Sets destinationUrl.
+     * <p>
+     * Field description:
+     * Url of button&#39;s destination. Available only if custom domain is present.
+     *
+     * @param destinationUrl
+     * @return This {@link WhatsAppUrlButtonApiData instance}.
+     */
+    public WhatsAppUrlButtonApiData destinationUrl(String destinationUrl) {
+        this.destinationUrl = destinationUrl;
+        return this;
+    }
+
+    /**
+     * Returns destinationUrl.
+     * <p>
+     * Field description:
+     * Url of button&#39;s destination. Available only if custom domain is present.
+     *
+     * @return destinationUrl
+     */
+    @JsonProperty("destinationUrl")
+    public String getDestinationUrl() {
+        return destinationUrl;
+    }
+
+    /**
+     * Sets destinationUrl.
+     * <p>
+     * Field description:
+     * Url of button&#39;s destination. Available only if custom domain is present.
+     *
+     * @param destinationUrl
+     */
+    @JsonProperty("destinationUrl")
+    public void setDestinationUrl(String destinationUrl) {
+        this.destinationUrl = destinationUrl;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -174,12 +216,13 @@ public class WhatsAppUrlButtonApiData extends WhatsAppButtonApiData {
         return Objects.equals(this.text, whatsAppUrlButtonApiData.text)
                 && Objects.equals(this.url, whatsAppUrlButtonApiData.url)
                 && Objects.equals(this.example, whatsAppUrlButtonApiData.example)
+                && Objects.equals(this.destinationUrl, whatsAppUrlButtonApiData.destinationUrl)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, url, example, super.hashCode());
+        return Objects.hash(text, url, example, destinationUrl, super.hashCode());
     }
 
     @Override
@@ -199,6 +242,9 @@ public class WhatsAppUrlButtonApiData extends WhatsAppButtonApiData {
                 .append(newLine)
                 .append("    example: ")
                 .append(toIndentedString(example))
+                .append(newLine)
+                .append("    destinationUrl: ")
+                .append(toIndentedString(destinationUrl))
                 .append(newLine)
                 .append("}")
                 .toString();

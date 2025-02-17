@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Structure of the created template. Can consist of body (mandatory), header, footer, buttons, carousel and limited time offer.
+ * Structure of the created template. Can consist of body (mandatory), header, footer, buttons, carousel, limited time offer and shortening options.
  */
-public class WhatsAppDefaultTemplateStructureApiData {
+public class WhatsAppDefaultTemplateStructureApiData implements WhatsAppTemplateStructureApiData {
 
     private WhatsAppHeaderApiData header;
 
@@ -32,6 +32,8 @@ public class WhatsAppDefaultTemplateStructureApiData {
     private WhatsAppCarouselApiData carousel;
 
     private WhatsAppLimitedTimeOfferApiData limitedTimeOffer;
+
+    private WhatsAppShorteningOptionsApiData shorteningOptions;
 
     /**
      * Template structure type.
@@ -289,6 +291,38 @@ public class WhatsAppDefaultTemplateStructureApiData {
     }
 
     /**
+     * Sets shorteningOptions.
+     *
+     * @param shorteningOptions
+     * @return This {@link WhatsAppDefaultTemplateStructureApiData instance}.
+     */
+    public WhatsAppDefaultTemplateStructureApiData shorteningOptions(
+            WhatsAppShorteningOptionsApiData shorteningOptions) {
+        this.shorteningOptions = shorteningOptions;
+        return this;
+    }
+
+    /**
+     * Returns shorteningOptions.
+     *
+     * @return shorteningOptions
+     */
+    @JsonProperty("shorteningOptions")
+    public WhatsAppShorteningOptionsApiData getShorteningOptions() {
+        return shorteningOptions;
+    }
+
+    /**
+     * Sets shorteningOptions.
+     *
+     * @param shorteningOptions
+     */
+    @JsonProperty("shorteningOptions")
+    public void setShorteningOptions(WhatsAppShorteningOptionsApiData shorteningOptions) {
+        this.shorteningOptions = shorteningOptions;
+    }
+
+    /**
      * Sets type.
      * <p>
      * Field description:
@@ -344,12 +378,13 @@ public class WhatsAppDefaultTemplateStructureApiData {
                 && Objects.equals(this.buttons, whatsAppDefaultTemplateStructureApiData.buttons)
                 && Objects.equals(this.carousel, whatsAppDefaultTemplateStructureApiData.carousel)
                 && Objects.equals(this.limitedTimeOffer, whatsAppDefaultTemplateStructureApiData.limitedTimeOffer)
+                && Objects.equals(this.shorteningOptions, whatsAppDefaultTemplateStructureApiData.shorteningOptions)
                 && Objects.equals(this.type, whatsAppDefaultTemplateStructureApiData.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(header, body, footer, buttons, carousel, limitedTimeOffer, type);
+        return Objects.hash(header, body, footer, buttons, carousel, limitedTimeOffer, shorteningOptions, type);
     }
 
     @Override
@@ -375,6 +410,9 @@ public class WhatsAppDefaultTemplateStructureApiData {
                 .append(newLine)
                 .append("    limitedTimeOffer: ")
                 .append(toIndentedString(limitedTimeOffer))
+                .append(newLine)
+                .append("    shorteningOptions: ")
+                .append(toIndentedString(shorteningOptions))
                 .append(newLine)
                 .append("    type: ")
                 .append(toIndentedString(type))

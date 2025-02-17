@@ -37,21 +37,19 @@ class WebRtcApiTest extends ApiTest {
 
         String expectedRequest = String.format(
                 "{\n" + "  \"identity\" : \"%s\",\n"
-                        + "  \"applicationId\" : \"%s\",\n"
                         + "  \"displayName\" : \"%s\",\n"
                         + "  \"capabilities\" : {\n"
                         + "    \"recording\" : \"%s\"\n"
                         + "  },\n"
                         + "  \"timeToLive\" : %d\n"
                         + "}\n",
-                givenIdentity, givenApplicationId, givenDisplayName, givenRecording, givenTimeToLive);
+                givenIdentity, givenDisplayName, givenRecording, givenTimeToLive);
 
         setUpSuccessPostRequest(TOKEN, expectedRequest, givenResponse);
 
         WebRtcApi webrtcTokenApi = new WebRtcApi(getApiClient());
         WebRtcTokenRequestModel request = new WebRtcTokenRequestModel()
                 .identity(givenIdentity)
-                .applicationId(givenApplicationId)
                 .displayName(givenDisplayName)
                 .capabilities(new WebRtcCapabilities().recording(WebRtcRecording.valueOf(givenRecording)))
                 .timeToLive(givenTimeToLive);
@@ -73,16 +71,16 @@ class WebRtcApiTest extends ApiTest {
         var givenApnsCertificateFileName = "IOS_APNS_certificate.p";
         var givenApnsCertificateFileContent = "APNS certificate content";
         var givenApnsCertificatePassword = "pass";
-        var givenFcmServerKey = "AAAAtm7JlCY:APA91bEe02qey";
+        var givenPrivateKeyJson = "{'test': 'test'}";
         var givenAndroidConfigured = true;
 
         var expectedRequest = String.format(
                 "{\n" + "  \"applicationId\": \"%s\",\n"
                         + "  \"android\": {\n"
-                        + "    \"fcmServerKey\": \"%s\"\n"
+                        + "    \"privateKeyJson\": \"%s\"\n"
                         + "  }\n"
                         + "}",
-                givenApplicationId, givenFcmServerKey);
+                givenApplicationId, givenPrivateKeyJson);
 
         var givenPushConfigurationId = "894c822b-d7ba-439c-a761-141f591cace7";
 
@@ -99,7 +97,7 @@ class WebRtcApiTest extends ApiTest {
 
         var request = new WebRtcPushConfigurationRequest()
                 .applicationId(givenApplicationId)
-                .android(new WebRtcAndroidPushNotificationConfig().fcmServerKey(givenFcmServerKey));
+                .android(new WebRtcAndroidPushNotificationConfig().privateKeyJson(givenPrivateKeyJson));
 
         var expectedResponse = new WebRtcPushConfigurationResponse()
                 .id(givenPushConfigurationId)
@@ -120,7 +118,7 @@ class WebRtcApiTest extends ApiTest {
         var givenApnsCertificateFileName = "IOS_APNS_certificate.p";
         var givenApnsCertificateFileContent = "APNS certificate content";
         var givenApnsCertificatePassword = "pass";
-        var givenFcmServerKey = "AAAAtm7JlCY:APA91bEe02qey";
+        var givenPrivateKeyJson = "{'test': 'test'}";
 
         var expectedRequest = String.format(
                 "{\n" + "  \"applicationId\": \"%s\",\n"
@@ -130,14 +128,14 @@ class WebRtcApiTest extends ApiTest {
                         + "    \"apnsCertificatePassword\": \"%s\"\n"
                         + "  },\n"
                         + "  \"android\": {\n"
-                        + "    \"fcmServerKey\": \"%s\"\n"
+                        + "    \"privateKeyJson\": \"%s\"\n"
                         + "  }\n"
                         + "}",
                 givenApplicationId,
                 givenApnsCertificateFileName,
                 givenApnsCertificateFileContent,
                 givenApnsCertificatePassword,
-                givenFcmServerKey);
+                givenPrivateKeyJson);
 
         var givenPushConfigurationId = "894c822b-d7ba-439c-a761-141f591cace7";
         var givenAndroidConfigured = true;
@@ -162,7 +160,7 @@ class WebRtcApiTest extends ApiTest {
                         .apnsCertificateFileName(givenApnsCertificateFileName)
                         .apnsCertificateFileContent(givenApnsCertificateFileContent)
                         .apnsCertificatePassword(givenApnsCertificatePassword))
-                .android(new WebRtcAndroidPushNotificationConfig().fcmServerKey(givenFcmServerKey));
+                .android(new WebRtcAndroidPushNotificationConfig().privateKeyJson(givenPrivateKeyJson));
 
         var expectedResponse = new WebRtcPushConfigurationResponse()
                 .id(givenPushConfigurationId)

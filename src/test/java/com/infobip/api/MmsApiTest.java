@@ -17,46 +17,30 @@ import org.junit.jupiter.api.Test;
 
 class MmsApiTest extends ApiTest {
 
-    private static final String ADVANCED = "/mms/1/advanced";
-    private static final String REPORTS = "/mms/1/reports";
+    private static final String MESSAGES = "/mms/2/messages";
+    private static final String REPORTS = "/mms/2/reports";
     private static final String CONTENT = "/mms/1/content";
     private static final String INBOX_REPORTS = "/mms/1/inbox/reports";
-    private static final String LOGS = "/mms/1/logs";
+    private static final String LOGS = "/mms/2/logs";
 
     @Test
-    void shouldSendMmsMessage() {
-        String givenBulkId = "2034072219640523072";
-        String givenTo = "41793026727";
-        String givenFrom = "InfoMMS";
+    void shouldSendMmsMessages() {
+        String givenSender = "441134960000";
+        String givenTitle = "Some title";
+        String givenText = "Some text";
+        String givenBulkId = "a28dd97c-2222-4fcf-99f1-0b557ed381da";
+        String givenMessageId = "a28dd97c-1ffb-4fcf-99f1-0b557ed381da";
         Integer givenGroupId = 1;
         String givenGroupName = "PENDING";
-        Integer givenId = 26;
-        String givenName = "MESSAGE_ACCEPTED";
-        String givenDescription = "Message sent to next instance";
-        String givenMessageId = "2250be2d4219-3af1-78856-aabe-1362af1edfd2";
-        String givenText = "This is a sample message";
-        String givenContentId = "320px-Depth_of_field_Cat.jpg";
-        String givenTitle = "This is sample subject";
-        String givenErrorMessage = "string";
-        String givenCallbackData = "string";
-        DeliveryDay givenDay = DeliveryDay.MONDAY;
-        Integer givenFromHour = 0;
-        Integer givenFromMinute = 0;
-        Integer givenToHour = 0;
-        Integer givenToMinute = 0;
-        Boolean givenIntermediateReport = true;
-        String givenNotifyUrl = "string";
-        String givenSendAt = "2023-08-01T16:10:15.000+0500";
-        OffsetDateTime givenSendAtDate = OffsetDateTime.of(2023, 8, 1, 16, 10, 15, 0, ZoneOffset.ofHours(5));
-        Long givenValidityPeriod = 0L;
-        String givenApplicationId = "applicationId";
-        String givenEntityId = "entityId";
+        Integer givenStatusId = 26;
+        String givenStatusName = "PENDING_ACCEPTED";
+        String givenStatusDescription = "Message sent to next instance";
 
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
                         + "  \"messages\": [\n"
                         + "    {\n"
-                        + "      \"to\": \"%s\",\n"
+                        + "      \"messageId\": \"%s\",\n"
                         + "      \"status\": {\n"
                         + "        \"groupId\": %d,\n"
                         + "        \"groupName\": \"%s\",\n"
@@ -64,172 +48,105 @@ class MmsApiTest extends ApiTest {
                         + "        \"name\": \"%s\",\n"
                         + "        \"description\": \"%s\"\n"
                         + "      },\n"
-                        + "      \"messageId\": \"%s\"\n"
+                        + "      \"destination\": \"441134960001\"\n"
                         + "    }\n"
-                        + "  ],\n"
-                        + "  \"errorMessage\": \"%s\"\n"
+                        + "  ]\n"
                         + "}\n",
                 givenBulkId,
-                givenTo,
+                givenMessageId,
                 givenGroupId,
                 givenGroupName,
-                givenId,
-                givenName,
-                givenDescription,
-                givenMessageId,
-                givenErrorMessage);
+                givenStatusId,
+                givenStatusName,
+                givenStatusDescription);
 
         String expectedRequest = String.format(
-                "{\n" + "   \"bulkId\": \"%s\",\n"
-                        + "   \"messages\": [\n"
-                        + "     {\n"
-                        + "       \"callbackData\": \"%s\",\n"
-                        + "       \"deliveryTimeWindow\": {\n"
-                        + "         \"days\": [\n"
-                        + "           \"%s\"\n"
-                        + "         ],\n"
-                        + "         \"from\": {\n"
-                        + "           \"hour\": %d,\n"
-                        + "           \"minute\": %d\n"
-                        + "         },\n"
-                        + "         \"to\": {\n"
-                        + "           \"hour\": %d,\n"
-                        + "           \"minute\": %d\n"
-                        + "         }\n"
-                        + "       },\n"
-                        + "       \"destinations\": [\n"
-                        + "         {\n"
-                        + "           \"messageId\": \"%s\",\n"
-                        + "           \"to\": \"%s\",\n"
-                        + "           \"group\": []\n"
-                        + "         }\n"
-                        + "       ],\n"
-                        + "       \"from\": \"%s\",\n"
-                        + "       \"intermediateReport\": %b,\n"
-                        + "       \"notifyUrl\": \"%s\",\n"
-                        + "       \"sendAt\": \"%s\",\n"
-                        + "       \"messageSegments\": [\n"
-                        + "         {\n"
-                        + "           \"contentId\": \"%s\",\n"
-                        + "           \"text\": \"%s\"\n"
-                        + "         }\n"
-                        + "       ],\n"
-                        + "       \"validityPeriod\": %d,\n"
-                        + "       \"title\": \"%s\",\n"
-                        + "       \"applicationId\": \"%s\",\n"
-                        + "       \"entityId\": \"%s\"\n"
-                        + "     }\n"
-                        + "   ]\n"
+                "{\n" + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"group\": [\n"
+                        + "            {\"to\": \"441134960001\"},\n"
+                        + "            {\"to\": \"441134960002\"}\n"
+                        + "          ]\n"
+                        + "        },\n"
+                        + "        {\n"
+                        + "          \"to\": \"441134960003\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"content\": {\n"
+                        + "        \"title\": \"%s\",\n"
+                        + "        \"messageSegments\": [\n"
+                        + "          {\"text\": \"%s\", \"type\": \"TEXT\"}\n"
+                        + "        ]\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
                         + "}\n",
-                givenBulkId,
-                givenCallbackData,
-                givenDay,
-                givenFromHour,
-                givenFromMinute,
-                givenToHour,
-                givenToMinute,
-                givenMessageId,
-                givenTo,
-                givenFrom,
-                givenIntermediateReport,
-                givenNotifyUrl,
-                givenSendAt,
-                givenContentId,
-                givenText,
-                givenValidityPeriod,
-                givenTitle,
-                givenApplicationId,
-                givenEntityId);
+                givenSender, givenTitle, givenText);
 
-        setUpSuccessPostRequest(ADVANCED, expectedRequest, givenResponse);
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
 
         MmsApi api = new MmsApi(getApiClient());
 
-        MmsAdvancedRequest request = new MmsAdvancedRequest()
-                .bulkId(givenBulkId)
-                .messages(List.of(new MmsAdvancedMessage()
-                        .callbackData(givenCallbackData)
-                        .deliveryTimeWindow(new DeliveryTimeWindow()
-                                .days(List.of(givenDay))
-                                .from(new DeliveryTime().hour(givenFromHour).minute(givenFromMinute))
-                                .to(new DeliveryTime().hour(givenToHour).minute(givenToMinute)))
-                        .addDestinationsItem(
-                                new MmsDestination().messageId(givenMessageId).to(givenTo))
-                        .from(givenFrom)
-                        .intermediateReport(givenIntermediateReport)
-                        .notifyUrl(givenNotifyUrl)
-                        .sendAt(givenSendAtDate)
-                        .messageSegments(List.of(new MmsAdvancedMessageSegment()
-                                .contentId(givenContentId)
-                                .text(givenText)))
-                        .validityPeriod(givenValidityPeriod)
-                        .title(givenTitle)
-                        .applicationId(givenApplicationId)
-                        .entityId(givenEntityId)));
+        MmsRequest request = new MmsRequest()
+                .messages(List.of(new MmsMessage()
+                        .sender(givenSender)
+                        .destinations(List.of(
+                                new MmsDestinationSingle().to("441134960003"),
+                                new MmsDestinationGroup()
+                                        .group(List.of(
+                                                new MmsDestinationSingle().to("441134960001"),
+                                                new MmsDestinationSingle().to("441134960002")))))
+                        .content(new MmsOutboundContent()
+                                .title(givenTitle)
+                                .messageSegments(List.of(new MmsOutboundTextSegment().text(givenText))))));
 
-        Consumer<MmsSendResult> assertions = (response) -> {
+        Consumer<MessageResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getBulkId()).isEqualTo(givenBulkId);
             then(response.getMessages().size()).isEqualTo(1);
             var message = response.getMessages().get(0);
             then(message).isNotNull();
-            then(message.getTo()).isEqualTo(givenTo);
+            then(message.getMessageId()).isEqualTo(givenMessageId);
             then(message.getStatus()).isNotNull();
             var status = message.getStatus();
             then(status.getGroupId()).isEqualTo(givenGroupId);
             then(status.getGroupName()).isEqualTo(givenGroupName);
-            then(status.getId()).isEqualTo(givenId);
-            then(status.getName()).isEqualTo(givenName);
-            then(status.getDescription()).isEqualTo(givenDescription);
-            then(message.getMessageId()).isEqualTo(givenMessageId);
-            then(response.getErrorMessage()).isEqualTo(givenErrorMessage);
+            then(status.getId()).isEqualTo(givenStatusId);
+            then(status.getName()).isEqualTo(givenStatusName);
+            then(status.getDescription()).isEqualTo(givenStatusDescription);
+            then(message.getDestination()).isEqualTo("441134960001");
         };
 
-        var call = api.sendMmsMessage(request);
+        var call = api.sendMmsMessages(request);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
 
     @Test
-    void shouldGetOutboundMmsMessageDeliveryReports() {
-        String givenBulkId = "string";
-        String givenMessageId = "string";
-        String givenTo = "string";
-        String givenFrom = "string";
-        String givenSentAt = "2023-01-01T17:42:05.390+0100";
-        String givenDoneAt = "2023-01-01T17:42:10.390+0100";
-        OffsetDateTime expectedSentAt = OffsetDateTime.of(2023, 1, 1, 17, 42, 5, 390_000_000, ZoneOffset.ofHours(1));
-        OffsetDateTime expectedDoneAt = OffsetDateTime.of(2023, 1, 1, 17, 42, 10, 390_000_000, ZoneOffset.ofHours(1));
-        Integer givenMmsCount = 0;
-        String givenMccMnc = "string";
-        String givenCallbackData = "string";
-        Double givenPricePerMessage = 0D;
-        String givenCurrency = "string";
-        Integer givenGroupId = 1;
-        String givenGroupName = "PENDING";
-        Integer givenId = 26;
-        String givenName = "MESSAGE_ACCEPTED";
-        String givenDescription = "Message sent to next instance";
-        Integer givenErrorGroupId = 0;
-        String givenErrorGroupName = "string";
-        Integer givenErrorId = 0;
-        String givenErrorName = "string";
-        String givenErrorDescription = "string";
-        String givenEntityId = "string";
-        String givenApplicationId = "string";
+    void shouldGetMmsDeliveryReports() {
+        String givenBulkId = "3746923784";
+        String givenMessageId = "43u2ih-6453jbh-897kfs90u2nj";
+        String givenSender = "441134960000";
+        String givenSentAt = "2025-01-20T13:06:33.968+0000";
+        String givenDoneAt = "2025-01-20T13:06:33.968+0000";
+        OffsetDateTime expectedSentAt = OffsetDateTime.of(2025, 1, 20, 13, 6, 33, 968_000_000, ZoneOffset.ofHours(0));
+        OffsetDateTime expectedDoneAt = OffsetDateTime.of(2025, 1, 20, 13, 6, 33, 968_000_000, ZoneOffset.ofHours(0));
+        Integer givenMessageCount = 3;
+        Double givenPricePerMessage = 1.0;
+        String givenCurrency = "EUR";
+        Integer givenGroupId = 3;
+        String givenGroupName = "DELIVERED";
+        Integer givenId = 5;
+        String givenName = "DELIVERED_TO_HANDSET";
+        String givenDescription = "Message delivered to handset";
 
         String givenResponse = String.format(
                 "{\n" + "  \"results\": [\n"
                         + "    {\n"
                         + "      \"bulkId\": \"%s\",\n"
-                        + "      \"messageId\": \"%s\",\n"
-                        + "      \"to\": \"%s\",\n"
-                        + "      \"from\": \"%s\",\n"
-                        + "      \"sentAt\": \"%s\",\n"
-                        + "      \"doneAt\": \"%s\",\n"
-                        + "      \"mmsCount\": %d,\n"
-                        + "      \"mccMnc\": \"%s\",\n"
-                        + "      \"callbackData\": \"%s\",\n"
                         + "      \"price\": {\n"
                         + "        \"pricePerMessage\": %f,\n"
                         + "        \"currency\": \"%s\"\n"
@@ -241,27 +158,15 @@ class MmsApiTest extends ApiTest {
                         + "        \"name\": \"%s\",\n"
                         + "        \"description\": \"%s\"\n"
                         + "      },\n"
-                        + "      \"error\": {\n"
-                        + "        \"groupId\": %d,\n"
-                        + "        \"groupName\": \"%s\",\n"
-                        + "        \"id\": %d,\n"
-                        + "        \"name\": \"%s\",\n"
-                        + "        \"description\": \"%s\"\n"
-                        + "      },\n"
-                        + "      \"entityId\": \"%s\",\n"
-                        + "      \"applicationId\": \"%s\"\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"sentAt\": \"%s\",\n"
+                        + "      \"doneAt\": \"%s\",\n"
+                        + "      \"messageCount\": %d\n"
                         + "    }\n"
                         + "  ]\n"
                         + "}\n",
                 givenBulkId,
-                givenMessageId,
-                givenTo,
-                givenFrom,
-                givenSentAt,
-                givenDoneAt,
-                givenMmsCount,
-                givenMccMnc,
-                givenCallbackData,
                 givenPricePerMessage,
                 givenCurrency,
                 givenGroupId,
@@ -269,13 +174,11 @@ class MmsApiTest extends ApiTest {
                 givenId,
                 givenName,
                 givenDescription,
-                givenErrorGroupId,
-                givenErrorGroupName,
-                givenErrorId,
-                givenErrorName,
-                givenErrorDescription,
-                givenEntityId,
-                givenApplicationId);
+                givenMessageId,
+                givenSender,
+                givenSentAt,
+                givenDoneAt,
+                givenMessageCount);
 
         setUpSuccessGetRequest(REPORTS, Map.of(), givenResponse);
 
@@ -287,13 +190,10 @@ class MmsApiTest extends ApiTest {
             var result = response.getResults().get(0);
             then(result.getBulkId()).isEqualTo(givenBulkId);
             then(result.getMessageId()).isEqualTo(givenMessageId);
-            then(result.getTo()).isEqualTo(givenTo);
-            then(result.getFrom()).isEqualTo(givenFrom);
+            then(result.getSender()).isEqualTo(givenSender);
             then(result.getSentAt()).isEqualTo(expectedSentAt);
             then(result.getDoneAt()).isEqualTo(expectedDoneAt);
-            then(result.getMmsCount()).isEqualTo(givenMmsCount);
-            then(result.getMccMnc()).isEqualTo(givenMccMnc);
-            then(result.getCallbackData()).isEqualTo(givenCallbackData);
+            then(result.getMessageCount()).isEqualTo(givenMessageCount);
             then(result.getPrice()).isNotNull();
             var price = result.getPrice();
             then(price.getPricePerMessage()).isEqualTo(givenPricePerMessage);
@@ -305,15 +205,6 @@ class MmsApiTest extends ApiTest {
             then(status.getId()).isEqualTo(givenId);
             then(status.getName()).isEqualTo(givenName);
             then(status.getDescription()).isEqualTo(givenDescription);
-            then(result.getError()).isNotNull();
-            var errorStatus = result.getError();
-            then(errorStatus.getGroupId()).isEqualTo(givenErrorGroupId);
-            then(errorStatus.getGroupName()).isEqualTo(givenErrorGroupName);
-            then(errorStatus.getId()).isEqualTo(givenErrorId);
-            then(errorStatus.getName()).isEqualTo(givenErrorName);
-            then(errorStatus.getDescription()).isEqualTo(givenErrorDescription);
-            then(result.getEntityId()).isEqualTo(givenEntityId);
-            then(result.getApplicationId()).isEqualTo(givenApplicationId);
         };
 
         var call = api.getOutboundMmsMessageDeliveryReports();
@@ -428,62 +319,41 @@ class MmsApiTest extends ApiTest {
     }
 
     @Test
-    void shouldGetOutboundMmsMessageLogs() {
+    void shouldGetMmsDeliveryLogs() {
         String givenBulkId = "3746923784";
         String givenMessageId = "43u2ih-6453jbh-897kfs90u2nj";
-        String givenTo = "To name";
-        String givenFrom = "Company name";
-        String givenTitle = "Message title";
-        String givenContentId = "contentId";
-        String givenText = "some text";
-        String givenContentId2 = "contentId";
-        String givenContentType2 = "image/png";
-        String givenContentUrl2 = "host.com/image.png";
-        String givenContentId3 = "contentId";
-        String givenText3 = "some other text";
-        String givenSentAt = "2023-01-01T17:42:05.390+0100";
-        String givenDoneAt = "2023-01-01T17:42:10.390+0100";
-        OffsetDateTime expectedSentAt = OffsetDateTime.of(2023, 1, 1, 17, 42, 5, 390_000_000, ZoneOffset.ofHours(1));
-        OffsetDateTime expectedDoneAt = OffsetDateTime.of(2023, 1, 1, 17, 42, 10, 390_000_000, ZoneOffset.ofHours(1));
-        Integer givenMmsCount = 3;
-        String givenMccMnc = "22801";
+        String givenSender = "441134960000";
+        String givenDestination = "441134960001";
+        String givenSentAt = "2025-01-20T13:06:34.784+0000";
+        String givenDoneAt = "2025-01-20T13:06:34.785+0000";
+        OffsetDateTime expectedSentAt = OffsetDateTime.of(2025, 1, 20, 13, 6, 34, 784_000_000, ZoneOffset.ofHours(0));
+        OffsetDateTime expectedDoneAt = OffsetDateTime.of(2025, 1, 20, 13, 6, 34, 785_000_000, ZoneOffset.ofHours(0));
+        Integer givenMessageCount = 3;
         Double givenPricePerMessage = 1.0;
         String givenCurrency = "EUR";
-        Integer givenGroupId = 1;
-        String givenGroupName = "PENDING";
-        Integer givenId = 26;
-        String givenName = "MESSAGE_ACCEPTED";
-        String givenDescription = "Message sent to next instance";
-        String givenEntityId = "string";
-        String givenApplicationId = "string";
+        Integer givenGroupId = 3;
+        String givenGroupName = "DELIVERED";
+        Integer givenId = 5;
+        String givenName = "DELIVERED_TO_HANDSET";
+        String givenDescription = "Message delivered to handset";
+        String givenTitle = "Message title";
+        String givenMccMnc = "22801";
+        String givenContentTitle = "Some title";
+        String givenText = "Some text";
+        String givenType = "TEXT";
 
         String givenResponse = String.format(
                 "{\n" + "  \"results\": [\n"
                         + "    {\n"
+                        + "      \"title\": \"%s\",\n"
+                        + "      \"mccMnc\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"destination\": \"%s\",\n"
                         + "      \"bulkId\": \"%s\",\n"
                         + "      \"messageId\": \"%s\",\n"
-                        + "      \"to\": \"%s\",\n"
-                        + "      \"from\": \"%s\",\n"
-                        + "      \"title\": \"%s\",\n"
-                        + "      \"messageSegments\": [\n"
-                        + "        {\n"
-                        + "          \"contentId\": \"%s\",\n"
-                        + "          \"text\": \"%s\"\n"
-                        + "        },\n"
-                        + "        {\n"
-                        + "          \"contentId\": \"%s\",\n"
-                        + "          \"contentType\": \"%s\",\n"
-                        + "          \"contentUrl\": \"%s\"\n"
-                        + "        },\n"
-                        + "        {\n"
-                        + "          \"contentId\": \"%s\",\n"
-                        + "          \"text\": \"%s\"\n"
-                        + "        }\n"
-                        + "      ],\n"
                         + "      \"sentAt\": \"%s\",\n"
                         + "      \"doneAt\": \"%s\",\n"
-                        + "      \"mmsCount\": %d,\n"
-                        + "      \"mccMnc\": \"%s\",\n"
+                        + "      \"messageCount\": %d,\n"
                         + "      \"price\": {\n"
                         + "        \"pricePerMessage\": %f,\n"
                         + "        \"currency\": \"%s\"\n"
@@ -495,27 +365,27 @@ class MmsApiTest extends ApiTest {
                         + "        \"name\": \"%s\",\n"
                         + "        \"description\": \"%s\"\n"
                         + "      },\n"
-                        + "      \"entityId\": \"%s\",\n"
-                        + "      \"applicationId\": \"%s\"\n"
+                        + "      \"content\": {\n"
+                        + "        \"title\": \"%s\",\n"
+                        + "        \"messageSegments\": [\n"
+                        + "          {\n"
+                        + "            \"text\": \"%s\",\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "      }\n"
                         + "    }\n"
                         + "  ]\n"
                         + "}\n",
+                givenTitle,
+                givenMccMnc,
+                givenSender,
+                givenDestination,
                 givenBulkId,
                 givenMessageId,
-                givenTo,
-                givenFrom,
-                givenTitle,
-                givenContentId,
-                givenText,
-                givenContentId2,
-                givenContentType2,
-                givenContentUrl2,
-                givenContentId3,
-                givenText3,
                 givenSentAt,
                 givenDoneAt,
-                givenMmsCount,
-                givenMccMnc,
+                givenMessageCount,
                 givenPricePerMessage,
                 givenCurrency,
                 givenGroupId,
@@ -523,58 +393,49 @@ class MmsApiTest extends ApiTest {
                 givenId,
                 givenName,
                 givenDescription,
-                givenEntityId,
-                givenApplicationId);
+                givenContentTitle,
+                givenText,
+                givenType);
 
-        setUpSuccessGetRequest(
-                LOGS,
-                Map.of(
-                        "bulkId", "BULK-ID-123-xyz",
-                        "messageId", "MESSAGE-ID-123-xyz"),
-                givenResponse);
+        setUpSuccessGetRequest(LOGS, Map.of(), givenResponse);
 
         MmsApi api = new MmsApi(getApiClient());
 
-        Consumer<MmsLogsResponse> assertions = response -> {
+        var expectedSegment = new MmsOutboundTextSegment().text(givenText);
+
+        Consumer<MmsLogsResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getResults().size()).isEqualTo(1);
             var result = response.getResults().get(0);
             then(result.getBulkId()).isEqualTo(givenBulkId);
             then(result.getMessageId()).isEqualTo(givenMessageId);
-            then(result.getTo()).isEqualTo(givenTo);
-            then(result.getFrom()).isEqualTo(givenFrom);
-            then(result.getTitle()).isEqualTo(givenTitle);
-            then(result.getMessageSegments().size()).isEqualTo(3);
-            var segment1 = result.getMessageSegments().get(0);
-            then(segment1).isNotNull();
-            then(segment1.getContentId()).isEqualTo(givenContentId);
-            then(segment1.getText()).isEqualTo(givenText);
-            var segment2 = result.getMessageSegments().get(1);
-            then(segment2.getContentId()).isEqualTo(givenContentId2);
-            then(segment2.getContentType()).isEqualTo(givenContentType2);
-            then(segment2.getContentUrl()).isEqualTo(givenContentUrl2);
-            var segment3 = result.getMessageSegments().get(2);
-            then(segment3.getContentId()).isEqualTo(givenContentId3);
-            then(segment3.getText()).isEqualTo(givenText3);
+            then(result.getSender()).isEqualTo(givenSender);
+            then(result.getDestination()).isEqualTo(givenDestination);
             then(result.getSentAt()).isEqualTo(expectedSentAt);
             then(result.getDoneAt()).isEqualTo(expectedDoneAt);
-            then(result.getMmsCount()).isEqualTo(givenMmsCount);
-            then(result.getMccMnc()).isEqualTo(givenMccMnc);
+            then(result.getMessageCount()).isEqualTo(givenMessageCount);
             then(result.getPrice()).isNotNull();
             var price = result.getPrice();
             then(price.getPricePerMessage()).isEqualTo(givenPricePerMessage);
             then(price.getCurrency()).isEqualTo(givenCurrency);
+            then(result.getStatus()).isNotNull();
             var status = result.getStatus();
             then(status.getGroupId()).isEqualTo(givenGroupId);
             then(status.getGroupName()).isEqualTo(givenGroupName);
             then(status.getId()).isEqualTo(givenId);
             then(status.getName()).isEqualTo(givenName);
             then(status.getDescription()).isEqualTo(givenDescription);
-            then(result.getEntityId()).isEqualTo(givenEntityId);
-            then(result.getApplicationId()).isEqualTo(givenApplicationId);
+            then(result.getTitle()).isEqualTo(givenTitle);
+            then(result.getMccMnc()).isEqualTo(givenMccMnc);
+            then(result.getContent()).isNotNull();
+            var content = result.getContent();
+            then(content.getTitle()).isEqualTo(givenContentTitle);
+            then(content.getMessageSegments().size()).isEqualTo(1);
+            var segment = content.getMessageSegments().get(0);
+            then(segment).isEqualTo(expectedSegment);
         };
 
-        var call = api.getOutboundMmsMessageLogs().bulkId("BULK-ID-123-xyz").messageId("MESSAGE-ID-123-xyz");
+        var call = api.getOutboundMmsMessageLogs();
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -591,7 +452,7 @@ class MmsApiTest extends ApiTest {
                 + "      \"to\": \"41793026727\",\n"
                 + "      \"sentAt\": \"2019-11-09T16:00:00.000+0000\",\n"
                 + "      \"doneAt\": \"2019-11-09T16:00:00.000+0000\",\n"
-                + "      \"smsCount\": 1,\n"
+                + "      \"messageCount\": 1,\n"
                 + "      \"mccMnc\": 90134,\n"
                 + "      \"callbackData\": \"callbackData\",\n"
                 + "      \"price\": {\n"
@@ -607,14 +468,16 @@ class MmsApiTest extends ApiTest {
                 + "      },\n"
                 + "      \"error\": {\n"
                 + "        \"groupId\": 0,\n"
-                + "        \"groupName\": \"Ok\",\n"
+                + "        \"groupName\": \"OK\",\n"
                 + "        \"id\": 0,\n"
                 + "        \"name\": \"NO_ERROR\",\n"
                 + "        \"description\": \"No Error\",\n"
                 + "        \"permanent\": false\n"
                 + "      },\n"
-                + "      \"entityId\": \"entityId\",\n"
-                + "      \"applicationId\": \"applicationId\"\n"
+                + "      \"platform\": {\n"
+                + "         \"entityId\": \"entityId\",\n"
+                + "         \"applicationId\": \"applicationId\"\n"
+                + "      }\n"
                 + "    },\n"
                 + "    {\n"
                 + "      \"bulkId\": \"BULK-ID-123-xyz\",\n"
@@ -622,7 +485,7 @@ class MmsApiTest extends ApiTest {
                 + "      \"to\": \"41793026834\",\n"
                 + "      \"sentAt\": \"2019-11-09T17:00:00.000+0000\",\n"
                 + "      \"doneAt\": \"2019-11-09T17:00:00.000+0000\",\n"
-                + "      \"smsCount\": 1,\n"
+                + "      \"messageCount\": 1,\n"
                 + "      \"mccMnc\": 90134,\n"
                 + "      \"callbackData\": \"callbackData\",\n"
                 + "      \"price\": {\n"
@@ -638,34 +501,35 @@ class MmsApiTest extends ApiTest {
                 + "      },\n"
                 + "      \"error\": {\n"
                 + "        \"groupId\": 0,\n"
-                + "        \"groupName\": \"Ok\",\n"
+                + "        \"groupName\": \"OK\",\n"
                 + "        \"id\": 0,\n"
                 + "        \"name\": \"NO_ERROR\",\n"
                 + "        \"description\": \"No Error\",\n"
                 + "        \"permanent\": false\n"
                 + "      },\n"
-                + "      \"entityId\": \"entityId\",\n"
-                + "      \"applicationId\": \"applicationId\"\n"
+                + "      \"platform\": {\n"
+                + "         \"entityId\": \"entityId\",\n"
+                + "         \"applicationId\": \"applicationId\"\n"
+                + "      }\n"
                 + "    }\n"
                 + "  ]\n"
                 + "}\n";
 
-        MmsWebhookOutboundReportResponse reportResponse =
-                json.deserialize(givenRequest, MmsWebhookOutboundReportResponse.class);
+        MmsReportResponse reportResponse = json.deserialize(givenRequest, MmsReportResponse.class);
         then(reportResponse.getResults()).isNotNull();
         then(reportResponse.getResults().size()).isEqualTo(2);
 
-        then(reportResponse.getResults().get(0).getClass()).isEqualTo(MmsWebhookOutboundReport.class);
-        var message1 = (MmsWebhookOutboundReport) reportResponse.getResults().get(0);
+        then(reportResponse.getResults().get(0).getClass()).isEqualTo(MmsReport.class);
+        var message1 = (MmsReport) reportResponse.getResults().get(0);
         then(message1.getPrice().getClass()).isEqualTo(MessagePrice.class);
         then(message1.getStatus().getClass()).isEqualTo(MessageStatus.class);
-        then(message1.getError().getClass()).isEqualTo(MessageError.class);
+        then(message1.getError().getClass()).isEqualTo(MmsMessageError.class);
 
-        then(reportResponse.getResults().get(1).getClass()).isEqualTo(MmsWebhookOutboundReport.class);
-        var message2 = (MmsWebhookOutboundReport) reportResponse.getResults().get(1);
+        then(reportResponse.getResults().get(1).getClass()).isEqualTo(MmsReport.class);
+        var message2 = (MmsReport) reportResponse.getResults().get(1);
         then(message2.getPrice().getClass()).isEqualTo(MessagePrice.class);
         then(message2.getStatus().getClass()).isEqualTo(MessageStatus.class);
-        then(message2.getError().getClass()).isEqualTo(MessageError.class);
+        then(message2.getError().getClass()).isEqualTo(MmsMessageError.class);
     }
 
     @Test
@@ -709,18 +573,17 @@ class MmsApiTest extends ApiTest {
                 + "   \"pendingMessageCount\": 0\n"
                 + " }\n";
 
-        MmsWebhookInboundReportResponse reportResponse =
-                json.deserialize(givenRequest, MmsWebhookInboundReportResponse.class);
+        MmsInboundWebhookRequest reportResponse = json.deserialize(givenRequest, MmsInboundWebhookRequest.class);
         then(reportResponse.getResults()).isNotNull();
 
-        then(reportResponse.getResults().get(0).getClass()).isEqualTo(MmsWebhookInboundReport.class);
-        var result = (MmsWebhookInboundReport) reportResponse.getResults().get(0);
+        then(reportResponse.getResults().get(0).getClass()).isEqualTo(MmsInboundWebhookResult.class);
+        var result = reportResponse.getResults().get(0);
         then(result.getPrice().getClass()).isEqualTo(MessagePrice.class);
         then(result.getMessage()).isNotNull();
         then(result.getMessage().size()).isEqualTo(2);
-        then(result.getMessage().get(0).getClass()).isEqualTo(MmsWebhookInboundMessageSegment.class);
-        then(result.getMessage().get(1).getClass()).isEqualTo(MmsWebhookInboundMessageSegment.class);
-        then(result.getGroup().get(0).getClass()).isEqualTo(MmsWebhookInboundDestination.class);
-        then(result.getGroup().get(1).getClass()).isEqualTo(MmsWebhookInboundDestination.class);
+        then(result.getMessage().get(0).getClass()).isEqualTo(MmsInboundLinkSegment.class);
+        then(result.getMessage().get(1).getClass()).isEqualTo(MmsInboundTextSegment.class);
+        then(result.getGroup().get(0).getClass()).isEqualTo(MmsInboundDestination.class);
+        then(result.getGroup().get(1).getClass()).isEqualTo(MmsInboundDestination.class);
     }
 }

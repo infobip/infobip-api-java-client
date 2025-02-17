@@ -761,7 +761,7 @@ class SmsApiTest extends ApiTest {
         String givenName = "DELIVERED_TO_HANDSET";
         String givenDescription = "Message delivered to handset";
         Integer givenErrorGroupId = 0;
-        SmsMessageErrorGroup givenErrorGroupName = SmsMessageErrorGroup.OK;
+        MessageErrorGroup givenErrorGroupName = MessageErrorGroup.OK;
         Integer givenErrorId = 0;
         String givenErrorName = "NO_ERROR";
         String givenErrorDescription = "No Error";
@@ -1227,7 +1227,7 @@ class SmsApiTest extends ApiTest {
     private void thenNoError(SmsMessageError error) {
         then(error).isNotNull();
         then(error.getGroupId()).isEqualTo(NO_ERROR_GROUP_ID);
-        then(error.getGroupName()).isEqualTo(SmsMessageErrorGroup.OK);
+        then(error.getGroupName()).isEqualTo(MessageErrorGroup.OK);
         then(error.getId()).isEqualTo(NO_ERROR_ID);
         then(error.getName()).isEqualTo(NO_ERROR_NAME);
         then(error.getDescription()).isEqualTo(NO_ERROR_DESCRIPTION);
@@ -1353,7 +1353,7 @@ class SmsApiTest extends ApiTest {
         String givenStatusDescriptionMessage1 = "Message delivered to handset";
 
         Integer givenErrorGroupIdMessage1 = 0;
-        SmsMessageErrorGroup givenErrorGroupNameMessage1 = SmsMessageErrorGroup.OK;
+        MessageErrorGroup givenErrorGroupNameMessage1 = MessageErrorGroup.OK;
         Integer givenErrorIdMessage1 = 0;
         String givenErrorNameMessage1 = "NO_ERROR";
         String givenErrorDescriptionMessage1 = "No Error";
@@ -1375,7 +1375,7 @@ class SmsApiTest extends ApiTest {
         String givenStatusDescriptionMessage2 = "Message delivered to handset";
 
         Integer givenErrorGroupIdMessage2 = 0;
-        SmsMessageErrorGroup givenErrorGroupNameMessage2 = SmsMessageErrorGroup.OK;
+        MessageErrorGroup givenErrorGroupNameMessage2 = MessageErrorGroup.OK;
         Integer givenErrorIdMessage2 = 0;
         String givenErrorNameMessage2 = "NO_ERROR";
         String givenErrorDescriptionMessage2 = "No Error";

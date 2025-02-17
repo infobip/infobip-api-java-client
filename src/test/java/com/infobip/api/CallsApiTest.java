@@ -1752,7 +1752,7 @@ class CallsApiTest extends ApiTest {
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
         String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
 
-        CallsLanguage expectedLanguage = CallsLanguage.EN_GB;
+        CallTranscriptionLanguage expectedLanguage = CallTranscriptionLanguage.EN_GB;
         Integer expectedTimeout = 30;
         Integer expectedMaxSilence = 3;
         String expectedKeyPhrase1 = "phrase";
@@ -3241,7 +3241,7 @@ class CallsApiTest extends ApiTest {
 
         CallsApi api = new CallsApi(getApiClient());
 
-        CallsPlayRequest request = new CallsPlayRequest()
+        CallsConferencePlayRequest request = new CallsConferencePlayRequest()
                 .loopCount(givenLoopCount)
                 .content(new CallsFilePlayContent().fileId(givenFileId));
 
@@ -3652,7 +3652,7 @@ class CallsApiTest extends ApiTest {
     void shouldGetMediaStreamConfigs() {
         String givenId = "string";
         String givenUrl = "string";
-        CallsUrlSecurityConfigType givenType = CallsUrlSecurityConfigType.BASIC;
+        SecurityConfigType givenType = SecurityConfigType.BASIC;
         Integer givenPage = 0;
         Integer givenPageSize = 1;
         Integer givenPageTotalPages = 0;
@@ -3728,7 +3728,7 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldCreateMediaStreamConfig() {
         String givenUrl = "givenUrl";
-        CallsUrlSecurityConfigType givenType = CallsUrlSecurityConfigType.BASIC;
+        SecurityConfigType givenType = SecurityConfigType.BASIC;
         String givenUsername = "username";
         String givenPassword = "password";
         String givenName = "name";
@@ -3783,7 +3783,7 @@ class CallsApiTest extends ApiTest {
         String givenId = "63467c6e2885a5389ba11d80";
         String givenUrl = "wss://example-websocket.com:3001";
 
-        CallsUrlSecurityConfigType givenType = CallsUrlSecurityConfigType.BASIC;
+        SecurityConfigType givenType = SecurityConfigType.BASIC;
         String givenUsername = "username";
         String givenPassword = "password";
 
@@ -6369,21 +6369,20 @@ class CallsApiTest extends ApiTest {
                 SIP_TRUNK.replace("{sipTrunkId}", givenSipTrunkId), Map.of(), expectedRequest, givenResponse, 202);
 
         CallsApi api = new CallsApi(getApiClient());
-
         CallsStaticSipTrunkUpdateRequest callsSipTrunkUpdateRequest =
                 (CallsStaticSipTrunkUpdateRequest) new CallsStaticSipTrunkUpdateRequest()
                         .sourceHosts(List.of(expectedSourceHosts))
                         .destinationHosts(List.of(expectedDestinationHosts))
+                        .codecs(List.of(expectedCodecs))
                         .strategy(expectedStrategy)
                         .sipOptions(new CallsSipOptions().enabled(expectedEnabled))
-                        .name(expectedName)
-                        .codecs(List.of(expectedCodecs))
                         .dtmf(expectedDtmf)
                         .fax(expectedFax)
                         .numberFormat(expectedNumberFormat)
+                        .anonymization(expectedAnonymization)
+                        .name(expectedName)
                         .internationalCallsAllowed(expectedInternationalCallsAllowed)
-                        .channelLimit(expectedChannelLimit)
-                        .anonymization(expectedAnonymization);
+                        .channelLimit(expectedChannelLimit);
 
         Consumer<CallsSipTrunkResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -7213,7 +7212,7 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldStartTranscription() {
         String callId = "12345";
-        CallsLanguage givenLanguage = CallsLanguage.AR;
+        CallTranscriptionLanguage givenLanguage = CallTranscriptionLanguage.AR_AE;
         boolean givenSendInterimResults = false;
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
@@ -7262,6 +7261,101 @@ class CallsApiTest extends ApiTest {
         };
 
         var call = api.callStopTranscription(callId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldCreateCallsConfiguration() {
+        String givenRequest =
+                "{\n" + "  \"id\": \"63467c6e2885a5389ba11d80\",\n" + "  \"name\": \"Calls configuration\"\n" + "}";
+
+        String givenResponse =
+                "{\n" + "  \"id\": \"63467c6e2885a5389ba11d80\",\n" + "  \"name\": \"Calls configuration\"\n" + "}";
+
+        setUpSuccessPostRequest("/calls/1/configurations", givenRequest, givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        CallsConfigurationCreateRequest request = new CallsConfigurationCreateRequest()
+                .id("63467c6e2885a5389ba11d80")
+                .name("Calls configuration");
+
+        Consumer<CallsConfigurationResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo("63467c6e2885a5389ba11d80");
+            then(response.getName()).isEqualTo("Calls configuration");
+        };
+
+        var call = api.createCallsConfiguration(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetCallsConfiguration() {
+        String givenResponse =
+                "{\n" + "  \"id\": \"63467c6e2885a5389ba11d80\",\n" + "  \"name\": \"Calls configuration\"\n" + "}";
+
+        setUpSuccessGetRequest("/calls/1/configurations/63467c6e2885a5389ba11d80", Map.of(), givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsConfigurationResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo("63467c6e2885a5389ba11d80");
+            then(response.getName()).isEqualTo("Calls configuration");
+        };
+
+        var call = api.getCallsConfiguration("63467c6e2885a5389ba11d80");
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldUpdateCallsConfiguration() {
+        String givenRequest = "{\n" + "  \"name\": \"Updated calls configuration\"\n" + "}";
+
+        String givenResponse = "{\n" + "  \"id\": \"63467c6e2885a5389ba11d80\",\n"
+                + "  \"name\": \"Updated calls configuration\"\n"
+                + "}";
+
+        setUpSuccessPutRequest(
+                "/calls/1/configurations/63467c6e2885a5389ba11d80", Map.of(), givenRequest, givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        CallsConfigurationUpdateRequest request =
+                new CallsConfigurationUpdateRequest().name("Updated calls configuration");
+
+        Consumer<CallsConfigurationResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo("63467c6e2885a5389ba11d80");
+            then(response.getName()).isEqualTo("Updated calls configuration");
+        };
+
+        var call = api.updateCallsConfiguration("63467c6e2885a5389ba11d80", request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDeleteCallsConfiguration() {
+        String givenResponse =
+                "{\n" + "  \"id\": \"63467c6e2885a5389ba11d80\",\n" + "  \"name\": \"Calls configuration\"\n" + "}";
+
+        setUpNoRequestBodyDeleteRequest(
+                "/calls/1/configurations/63467c6e2885a5389ba11d80", Map.of(), givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsConfigurationResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo("63467c6e2885a5389ba11d80");
+            then(response.getName()).isEqualTo("Calls configuration");
+        };
+
+        var call = api.deleteCallsConfiguration("63467c6e2885a5389ba11d80");
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }

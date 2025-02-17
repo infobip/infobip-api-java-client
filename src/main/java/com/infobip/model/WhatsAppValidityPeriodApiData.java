@@ -19,7 +19,7 @@ public class WhatsAppValidityPeriodApiData {
 
     private Integer amount;
 
-    private WhatsAppValidityPeriodTimeUnit timeUnit;
+    private ValidityPeriodTimeUnit timeUnit;
 
     /**
      * Sets amount.
@@ -73,7 +73,7 @@ public class WhatsAppValidityPeriodApiData {
      * @param timeUnit
      * @return This {@link WhatsAppValidityPeriodApiData instance}.
      */
-    public WhatsAppValidityPeriodApiData timeUnit(WhatsAppValidityPeriodTimeUnit timeUnit) {
+    public WhatsAppValidityPeriodApiData timeUnit(ValidityPeriodTimeUnit timeUnit) {
         this.timeUnit = timeUnit;
         return this;
     }
@@ -84,7 +84,7 @@ public class WhatsAppValidityPeriodApiData {
      * @return timeUnit
      */
     @JsonProperty("timeUnit")
-    public WhatsAppValidityPeriodTimeUnit getTimeUnit() {
+    public ValidityPeriodTimeUnit getTimeUnit() {
         return timeUnit;
     }
 
@@ -94,7 +94,7 @@ public class WhatsAppValidityPeriodApiData {
      * @param timeUnit
      */
     @JsonProperty("timeUnit")
-    public void setTimeUnit(WhatsAppValidityPeriodTimeUnit timeUnit) {
+    public void setTimeUnit(ValidityPeriodTimeUnit timeUnit) {
         this.timeUnit = timeUnit;
     }
 

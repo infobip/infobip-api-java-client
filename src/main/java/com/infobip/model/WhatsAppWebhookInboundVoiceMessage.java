@@ -17,65 +17,15 @@ import java.util.Objects;
  */
 public class WhatsAppWebhookInboundVoiceMessage extends WhatsAppWebhookInboundMessage {
 
-    private String url;
-
     private String caption;
 
-    private WhatsAppContext context;
-
-    private WhatsAppWebhookReferral referral;
+    private String url;
 
     /**
      * Constructs a new {@link WhatsAppWebhookInboundVoiceMessage} instance.
      */
     public WhatsAppWebhookInboundVoiceMessage() {
         super("VOICE");
-    }
-
-    /**
-     * Sets url.
-     * <p>
-     * Field description:
-     * URL for media download.
-     * <p>
-     * The field is required.
-     *
-     * @param url
-     * @return This {@link WhatsAppWebhookInboundVoiceMessage instance}.
-     */
-    public WhatsAppWebhookInboundVoiceMessage url(String url) {
-        this.url = url;
-        return this;
-    }
-
-    /**
-     * Returns url.
-     * <p>
-     * Field description:
-     * URL for media download.
-     * <p>
-     * The field is required.
-     *
-     * @return url
-     */
-    @JsonProperty("url")
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * Sets url.
-     * <p>
-     * Field description:
-     * URL for media download.
-     * <p>
-     * The field is required.
-     *
-     * @param url
-     */
-    @JsonProperty("url")
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     /**
@@ -119,65 +69,43 @@ public class WhatsAppWebhookInboundVoiceMessage extends WhatsAppWebhookInboundMe
     }
 
     /**
-     * Sets context.
+     * Sets url.
+     * <p>
+     * Field description:
+     * Url for media download.
      *
-     * @param context
+     * @param url
      * @return This {@link WhatsAppWebhookInboundVoiceMessage instance}.
      */
-    public WhatsAppWebhookInboundVoiceMessage context(WhatsAppContext context) {
-        this.context = context;
+    public WhatsAppWebhookInboundVoiceMessage url(String url) {
+        this.url = url;
         return this;
     }
 
     /**
-     * Returns context.
+     * Returns url.
+     * <p>
+     * Field description:
+     * Url for media download.
      *
-     * @return context
+     * @return url
      */
-    @JsonProperty("context")
-    public WhatsAppContext getContext() {
-        return context;
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
     }
 
     /**
-     * Sets context.
+     * Sets url.
+     * <p>
+     * Field description:
+     * Url for media download.
      *
-     * @param context
+     * @param url
      */
-    @JsonProperty("context")
-    public void setContext(WhatsAppContext context) {
-        this.context = context;
-    }
-
-    /**
-     * Sets referral.
-     *
-     * @param referral
-     * @return This {@link WhatsAppWebhookInboundVoiceMessage instance}.
-     */
-    public WhatsAppWebhookInboundVoiceMessage referral(WhatsAppWebhookReferral referral) {
-        this.referral = referral;
-        return this;
-    }
-
-    /**
-     * Returns referral.
-     *
-     * @return referral
-     */
-    @JsonProperty("referral")
-    public WhatsAppWebhookReferral getReferral() {
-        return referral;
-    }
-
-    /**
-     * Sets referral.
-     *
-     * @param referral
-     */
-    @JsonProperty("referral")
-    public void setReferral(WhatsAppWebhookReferral referral) {
-        this.referral = referral;
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
@@ -189,16 +117,14 @@ public class WhatsAppWebhookInboundVoiceMessage extends WhatsAppWebhookInboundMe
             return false;
         }
         WhatsAppWebhookInboundVoiceMessage whatsAppWebhookInboundVoiceMessage = (WhatsAppWebhookInboundVoiceMessage) o;
-        return Objects.equals(this.url, whatsAppWebhookInboundVoiceMessage.url)
-                && Objects.equals(this.caption, whatsAppWebhookInboundVoiceMessage.caption)
-                && Objects.equals(this.context, whatsAppWebhookInboundVoiceMessage.context)
-                && Objects.equals(this.referral, whatsAppWebhookInboundVoiceMessage.referral)
+        return Objects.equals(this.caption, whatsAppWebhookInboundVoiceMessage.caption)
+                && Objects.equals(this.url, whatsAppWebhookInboundVoiceMessage.url)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, caption, context, referral, super.hashCode());
+        return Objects.hash(caption, url, super.hashCode());
     }
 
     @Override
@@ -210,17 +136,11 @@ public class WhatsAppWebhookInboundVoiceMessage extends WhatsAppWebhookInboundMe
                 .append("    ")
                 .append(toIndentedString(super.toString()))
                 .append(newLine)
-                .append("    url: ")
-                .append(toIndentedString(url))
-                .append(newLine)
                 .append("    caption: ")
                 .append(toIndentedString(caption))
                 .append(newLine)
-                .append("    context: ")
-                .append(toIndentedString(context))
-                .append(newLine)
-                .append("    referral: ")
-                .append(toIndentedString(referral))
+                .append("    url: ")
+                .append(toIndentedString(url))
                 .append(newLine)
                 .append("}")
                 .toString();

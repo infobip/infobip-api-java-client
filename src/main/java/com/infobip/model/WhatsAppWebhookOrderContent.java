@@ -21,9 +21,9 @@ public class WhatsAppWebhookOrderContent extends WhatsAppWebhookInboundMessage {
 
     private String catalogId;
 
-    private List<WhatsAppWebhookProductItem> productItems = new ArrayList<>();
-
     private String text;
+
+    private List<WhatsAppWebhookProductItem> productItems = new ArrayList<>();
 
     /**
      * Constructs a new {@link WhatsAppWebhookOrderContent} instance.
@@ -76,6 +76,46 @@ public class WhatsAppWebhookOrderContent extends WhatsAppWebhookInboundMessage {
     @JsonProperty("catalogId")
     public void setCatalogId(String catalogId) {
         this.catalogId = catalogId;
+    }
+
+    /**
+     * Sets text.
+     * <p>
+     * Field description:
+     * Text sent with order.
+     *
+     * @param text
+     * @return This {@link WhatsAppWebhookOrderContent instance}.
+     */
+    public WhatsAppWebhookOrderContent text(String text) {
+        this.text = text;
+        return this;
+    }
+
+    /**
+     * Returns text.
+     * <p>
+     * Field description:
+     * Text sent with order.
+     *
+     * @return text
+     */
+    @JsonProperty("text")
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * Sets text.
+     * <p>
+     * Field description:
+     * Text sent with order.
+     *
+     * @param text
+     */
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
     }
 
     /**
@@ -143,46 +183,6 @@ public class WhatsAppWebhookOrderContent extends WhatsAppWebhookInboundMessage {
         this.productItems = productItems;
     }
 
-    /**
-     * Sets text.
-     * <p>
-     * Field description:
-     * Text sent with order.
-     *
-     * @param text
-     * @return This {@link WhatsAppWebhookOrderContent instance}.
-     */
-    public WhatsAppWebhookOrderContent text(String text) {
-        this.text = text;
-        return this;
-    }
-
-    /**
-     * Returns text.
-     * <p>
-     * Field description:
-     * Text sent with order.
-     *
-     * @return text
-     */
-    @JsonProperty("text")
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * Sets text.
-     * <p>
-     * Field description:
-     * Text sent with order.
-     *
-     * @param text
-     */
-    @JsonProperty("text")
-    public void setText(String text) {
-        this.text = text;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -193,14 +193,14 @@ public class WhatsAppWebhookOrderContent extends WhatsAppWebhookInboundMessage {
         }
         WhatsAppWebhookOrderContent whatsAppWebhookOrderContent = (WhatsAppWebhookOrderContent) o;
         return Objects.equals(this.catalogId, whatsAppWebhookOrderContent.catalogId)
-                && Objects.equals(this.productItems, whatsAppWebhookOrderContent.productItems)
                 && Objects.equals(this.text, whatsAppWebhookOrderContent.text)
+                && Objects.equals(this.productItems, whatsAppWebhookOrderContent.productItems)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(catalogId, productItems, text, super.hashCode());
+        return Objects.hash(catalogId, text, productItems, super.hashCode());
     }
 
     @Override
@@ -215,11 +215,11 @@ public class WhatsAppWebhookOrderContent extends WhatsAppWebhookInboundMessage {
                 .append("    catalogId: ")
                 .append(toIndentedString(catalogId))
                 .append(newLine)
-                .append("    productItems: ")
-                .append(toIndentedString(productItems))
-                .append(newLine)
                 .append("    text: ")
                 .append(toIndentedString(text))
+                .append(newLine)
+                .append("    productItems: ")
+                .append(toIndentedString(productItems))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -21,7 +21,7 @@ public class MessagesApiRequest {
 
     private List<MessagesApiRequestMessagesInner> messages = new ArrayList<>();
 
-    private MessagesApiRequestOptions options;
+    private MessagesApiDefaultMessageRequestOptions options;
 
     /**
      * Sets messages.
@@ -94,7 +94,7 @@ public class MessagesApiRequest {
      * @param options
      * @return This {@link MessagesApiRequest instance}.
      */
-    public MessagesApiRequest options(MessagesApiRequestOptions options) {
+    public MessagesApiRequest options(MessagesApiDefaultMessageRequestOptions options) {
         this.options = options;
         return this;
     }
@@ -105,7 +105,7 @@ public class MessagesApiRequest {
      * @return options
      */
     @JsonProperty("options")
-    public MessagesApiRequestOptions getOptions() {
+    public MessagesApiDefaultMessageRequestOptions getOptions() {
         return options;
     }
 
@@ -115,7 +115,7 @@ public class MessagesApiRequest {
      * @param options
      */
     @JsonProperty("options")
-    public void setOptions(MessagesApiRequestOptions options) {
+    public void setOptions(MessagesApiDefaultMessageRequestOptions options) {
         this.options = options;
     }
 

@@ -19,19 +19,97 @@ import java.util.Objects;
  */
 public class WhatsAppWebhookInboundMessageResult {
 
-    private List<WhatsAppWebhookInboundMessageData> results = new ArrayList<>();
-
     private Integer messageCount;
 
     private Integer pendingMessageCount;
+
+    private List<WhatsAppWebhookInboundMessageData> results = null;
+
+    /**
+     * Sets messageCount.
+     * <p>
+     * Field description:
+     * Number of returned messages in this request.
+     *
+     * @param messageCount
+     * @return This {@link WhatsAppWebhookInboundMessageResult instance}.
+     */
+    public WhatsAppWebhookInboundMessageResult messageCount(Integer messageCount) {
+        this.messageCount = messageCount;
+        return this;
+    }
+
+    /**
+     * Returns messageCount.
+     * <p>
+     * Field description:
+     * Number of returned messages in this request.
+     *
+     * @return messageCount
+     */
+    @JsonProperty("messageCount")
+    public Integer getMessageCount() {
+        return messageCount;
+    }
+
+    /**
+     * Sets messageCount.
+     * <p>
+     * Field description:
+     * Number of returned messages in this request.
+     *
+     * @param messageCount
+     */
+    @JsonProperty("messageCount")
+    public void setMessageCount(Integer messageCount) {
+        this.messageCount = messageCount;
+    }
+
+    /**
+     * Sets pendingMessageCount.
+     * <p>
+     * Field description:
+     * Number of remaining new messages on Infobip servers ready to be returned in the next request.
+     *
+     * @param pendingMessageCount
+     * @return This {@link WhatsAppWebhookInboundMessageResult instance}.
+     */
+    public WhatsAppWebhookInboundMessageResult pendingMessageCount(Integer pendingMessageCount) {
+        this.pendingMessageCount = pendingMessageCount;
+        return this;
+    }
+
+    /**
+     * Returns pendingMessageCount.
+     * <p>
+     * Field description:
+     * Number of remaining new messages on Infobip servers ready to be returned in the next request.
+     *
+     * @return pendingMessageCount
+     */
+    @JsonProperty("pendingMessageCount")
+    public Integer getPendingMessageCount() {
+        return pendingMessageCount;
+    }
+
+    /**
+     * Sets pendingMessageCount.
+     * <p>
+     * Field description:
+     * Number of remaining new messages on Infobip servers ready to be returned in the next request.
+     *
+     * @param pendingMessageCount
+     */
+    @JsonProperty("pendingMessageCount")
+    public void setPendingMessageCount(Integer pendingMessageCount) {
+        this.pendingMessageCount = pendingMessageCount;
+    }
 
     /**
      * Sets results.
      * <p>
      * Field description:
      * Collection of reports, one per every received message.
-     * <p>
-     * The field is required.
      *
      * @param results
      * @return This {@link WhatsAppWebhookInboundMessageResult instance}.
@@ -46,8 +124,6 @@ public class WhatsAppWebhookInboundMessageResult {
      * <p>
      * Field description:
      * Collection of reports, one per every received message.
-     * <p>
-     * The field is required.
      *
      * @param resultsItem The item to be added to the list.
      * @return This {@link WhatsAppWebhookInboundMessageResult instance}.
@@ -65,8 +141,6 @@ public class WhatsAppWebhookInboundMessageResult {
      * <p>
      * Field description:
      * Collection of reports, one per every received message.
-     * <p>
-     * The field is required.
      *
      * @return results
      */
@@ -80,106 +154,12 @@ public class WhatsAppWebhookInboundMessageResult {
      * <p>
      * Field description:
      * Collection of reports, one per every received message.
-     * <p>
-     * The field is required.
      *
      * @param results
      */
     @JsonProperty("results")
     public void setResults(List<WhatsAppWebhookInboundMessageData> results) {
         this.results = results;
-    }
-
-    /**
-     * Sets messageCount.
-     * <p>
-     * Field description:
-     * The number of messages returned in the results array.
-     * <p>
-     * The field is required.
-     *
-     * @param messageCount
-     * @return This {@link WhatsAppWebhookInboundMessageResult instance}.
-     */
-    public WhatsAppWebhookInboundMessageResult messageCount(Integer messageCount) {
-        this.messageCount = messageCount;
-        return this;
-    }
-
-    /**
-     * Returns messageCount.
-     * <p>
-     * Field description:
-     * The number of messages returned in the results array.
-     * <p>
-     * The field is required.
-     *
-     * @return messageCount
-     */
-    @JsonProperty("messageCount")
-    public Integer getMessageCount() {
-        return messageCount;
-    }
-
-    /**
-     * Sets messageCount.
-     * <p>
-     * Field description:
-     * The number of messages returned in the results array.
-     * <p>
-     * The field is required.
-     *
-     * @param messageCount
-     */
-    @JsonProperty("messageCount")
-    public void setMessageCount(Integer messageCount) {
-        this.messageCount = messageCount;
-    }
-
-    /**
-     * Sets pendingMessageCount.
-     * <p>
-     * Field description:
-     * The number of messages that have not been pulled in.
-     * <p>
-     * The field is required.
-     *
-     * @param pendingMessageCount
-     * @return This {@link WhatsAppWebhookInboundMessageResult instance}.
-     */
-    public WhatsAppWebhookInboundMessageResult pendingMessageCount(Integer pendingMessageCount) {
-        this.pendingMessageCount = pendingMessageCount;
-        return this;
-    }
-
-    /**
-     * Returns pendingMessageCount.
-     * <p>
-     * Field description:
-     * The number of messages that have not been pulled in.
-     * <p>
-     * The field is required.
-     *
-     * @return pendingMessageCount
-     */
-    @JsonProperty("pendingMessageCount")
-    public Integer getPendingMessageCount() {
-        return pendingMessageCount;
-    }
-
-    /**
-     * Sets pendingMessageCount.
-     * <p>
-     * Field description:
-     * The number of messages that have not been pulled in.
-     * <p>
-     * The field is required.
-     *
-     * @param pendingMessageCount
-     */
-    @JsonProperty("pendingMessageCount")
-    public void setPendingMessageCount(Integer pendingMessageCount) {
-        this.pendingMessageCount = pendingMessageCount;
     }
 
     @Override
@@ -192,14 +172,14 @@ public class WhatsAppWebhookInboundMessageResult {
         }
         WhatsAppWebhookInboundMessageResult whatsAppWebhookInboundMessageResult =
                 (WhatsAppWebhookInboundMessageResult) o;
-        return Objects.equals(this.results, whatsAppWebhookInboundMessageResult.results)
-                && Objects.equals(this.messageCount, whatsAppWebhookInboundMessageResult.messageCount)
-                && Objects.equals(this.pendingMessageCount, whatsAppWebhookInboundMessageResult.pendingMessageCount);
+        return Objects.equals(this.messageCount, whatsAppWebhookInboundMessageResult.messageCount)
+                && Objects.equals(this.pendingMessageCount, whatsAppWebhookInboundMessageResult.pendingMessageCount)
+                && Objects.equals(this.results, whatsAppWebhookInboundMessageResult.results);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(results, messageCount, pendingMessageCount);
+        return Objects.hash(messageCount, pendingMessageCount, results);
     }
 
     @Override
@@ -208,14 +188,14 @@ public class WhatsAppWebhookInboundMessageResult {
         return new StringBuilder()
                 .append("class WhatsAppWebhookInboundMessageResult {")
                 .append(newLine)
-                .append("    results: ")
-                .append(toIndentedString(results))
-                .append(newLine)
                 .append("    messageCount: ")
                 .append(toIndentedString(messageCount))
                 .append(newLine)
                 .append("    pendingMessageCount: ")
                 .append(toIndentedString(pendingMessageCount))
+                .append(newLine)
+                .append("    results: ")
+                .append(toIndentedString(results))
                 .append(newLine)
                 .append("}")
                 .toString();
