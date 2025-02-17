@@ -581,8 +581,8 @@ class MmsApiTest extends ApiTest {
         then(result.getPrice().getClass()).isEqualTo(MessagePrice.class);
         then(result.getMessage()).isNotNull();
         then(result.getMessage().size()).isEqualTo(2);
-        then(result.getMessage().get(0).getClass()).isEqualTo(MmsInboundMessageSegment.class);
-        then(result.getMessage().get(1).getClass()).isEqualTo(MmsInboundMessageSegment.class);
+        then(result.getMessage().get(0).getClass()).isEqualTo(MmsInboundLinkSegment.class);
+        then(result.getMessage().get(1).getClass()).isEqualTo(MmsInboundTextSegment.class);
         then(result.getGroup().get(0).getClass()).isEqualTo(MmsInboundDestination.class);
         then(result.getGroup().get(1).getClass()).isEqualTo(MmsInboundDestination.class);
     }

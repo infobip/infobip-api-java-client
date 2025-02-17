@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class EmailApiTest extends ApiTest {
@@ -951,12 +950,12 @@ class EmailApiTest extends ApiTest {
     }
 
     @Test
-    @Disabled // TODO
     void shouldGetEmailSuppressions() {
         String givenDomainName = "example.com";
         String givenEmailAddress = "jane.smith@somecompany.com";
         EmailSuppressionType givenType = EmailSuppressionType.BOUNCE;
-        String givenCreatedDate = "2024-08-14T14:02:17.366";
+        String givenCreatedDate = "2024-08-14T14:02:17.366Z";
+        OffsetDateTime givenCreatedDateTime = OffsetDateTime.parse(givenCreatedDate);
         String givenReason = "550 5.1.1 <jane.smith@somecompany.com>: user does not exist";
         int givenPage = 0;
         int givenSize = 100;
@@ -979,7 +978,7 @@ class EmailApiTest extends ApiTest {
                 givenDomainName, givenEmailAddress, givenType, givenCreatedDate, givenReason, givenPage, givenSize);
 
         setUpGetRequest(
-                EMAIL_SUPPRESSION,
+                "/email/1/suppressions",
                 Map.of("domainName", givenDomainName, "type", givenType.toString()),
                 givenResponse,
                 200);
@@ -992,8 +991,8 @@ class EmailApiTest extends ApiTest {
             var result = response.getResults().get(0);
             then(result.getDomainName()).isEqualTo(givenDomainName);
             then(result.getEmailAddress()).isEqualTo(givenEmailAddress);
-            then(result.getType()).isEqualTo(givenType);
-            then(result.getCreatedDate()).isEqualTo(givenCreatedDate);
+            then(result.getType()).isEqualTo(givenType.toString());
+            then(result.getCreatedDate()).isEqualTo(givenCreatedDateTime);
             then(result.getReason()).isEqualTo(givenReason);
             var paging = response.getPaging();
             then(paging.getPage()).isEqualTo(givenPage);

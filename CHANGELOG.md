@@ -5,7 +5,7 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
-## [ [6.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/5.2.0) ] - 2025-02-13
+## [ [6.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.0.0) ] - 2025-02-17
 
 🎉 **NEW Major Version of `infobip-api-java-client`.**
 
@@ -36,6 +36,7 @@ If you find out that something was not addressed properly, please submit an issu
         * Introduced `/mms/2/logs (V2)` replacing `/mms/1/logs (V1)` endpoint.
 * **Added** new Calls error code type: `MACHINE_DETECTED`.
 * **Added** support for `CallsProviderSipTrunkUpdateRequest`.
+* Created `RawJsonDeserializer` to handle raw JSON deserialization.
 
 
 ### Changed
@@ -43,7 +44,7 @@ If you find out that something was not addressed properly, please submit an issu
 - General
   - **Unified** `MessageResponse`, `MessageResponseDetails`, `MessageGroupError`, `SendingSpeedLimit` and `SpeedLimitTimeUnit`.
   - **Updated** `MessagesApiMessageGeneralStatus` – Adjustments due to API updates.
-  - Adjusted the `DeprecationChecker` class to log info instead of warnings when an endpoint is deprecated and no sunset date is defined.
+  - **Updated** `DeprecationChecker` logging level from `WARNING` to `INFO` when the endpoint is only deprecated without a defined sunset date.
 
 - Mms API
   - Introduced the new `MmsMessage` class to replace `MmsAdvancedMessage`, reflecting the latest state of the API for MMS messaging.
@@ -51,7 +52,7 @@ If you find out that something was not addressed properly, please submit an issu
   - Updated sending message function: use `sendMmsMessages` instead of `sendMmsMessage`.
 
 - Voice API
-  -  Adjusted IVR models in script processing:
+  -  Adjusted IVR models in script processing. Scenario scripting is now implemented as a raw string to increase usability of the feature. Scripts should be passed as strings to the IVR request model in all upcoming SDK versions.
       - **Updated** `CallsUpdateScenarioRequest.script` field type from `List<CallsScriptInner>` → `String`.
       - **Updated** `CallsSearchResponse.script` and `else` fields type from `List<Object>` → `String`.
       - **Updated** `CallsUpdateScenarioResponse.script` field type from `Object` → `String`.

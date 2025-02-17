@@ -780,23 +780,22 @@ class VoiceApiTest extends ApiTest {
         String givenName = "scenario";
         String givenDescription = "";
         String givenCreateTime = "2023-12-06T13:37:15Z";
-        String givenDial = "dial";
-        Integer givenActionId = 1;
         OffsetDateTime givenCreateTimeDateTime =
                 OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
 
         String givenUpdateTime = null;
 
-        String script = String.format("[{'dial': '%s', 'actionId': %d}]", givenDial, givenActionId);
+        String script = "[{\"dial\":\"dial\",\"actionId\":1}]";
+
         String givenResponse = String.format(
                 "[{\n" + "  \"id\": \"%s\",\n"
                         + "  \"name\": \"%s\",\n"
                         + "  \"description\": \"%s\",\n"
                         + "  \"createTime\": \"%s\",\n"
                         + "  \"updateTime\": %s,\n"
-                        + "  \"script\": \"%s\"\n"
+                        + "  \"script\": [{\"dial\": \"dial\", \"actionId\": 1}]\n"
                         + "}]",
-                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime, script);
+                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime);
 
         setUpGetRequest("/voice/ivr/1/scenarios", Map.of(), givenResponse, 200);
 
@@ -821,20 +820,17 @@ class VoiceApiTest extends ApiTest {
     @Test
     void shouldCreateCallApiVoiceIvrScenario() {
         String script =
-                "[ { 'request': 'https://example.com/api/12345', 'options': { 'method': 'POST', 'headers': { 'content-type': 'application/json' }, 'body': { 'payload': '${to} finished the IVR.' } } } ]";
-
-        String givenRequest = String.format(
-                "{\n" + "  \"name\": \"Call API\",\n"
-                        + "  \"description\": \"Perform a POST request to provided URL with headers and payload.\",\n"
-                        + "  \"script\": \"%s\"\n"
-                        + "}",
-                script);
+                "[{\"request\":\"https://example.com/api/12345\",\"options\":{\"method\":\"POST\",\"headers\":{\"content-type\":\"application/json\"},\"body\":{\"payload\":\"${to} finished the IVR.\"}}}]";
+        String givenRequest = String.format("{\n" + "  \"name\": \"Call API\",\n"
+                + "  \"description\": \"Perform a POST request to provided URL with headers and payload.\",\n"
+                + "  \"script\": [ { \"request\": \"https://example.com/api/12345\", \"options\": { \"method\": \"POST\", \"headers\": { \"content-type\": \"application/json\" }, \"body\": { \"payload\": \"${to} finished the IVR.\" } } } ]\n"
+                + "}");
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"E83E787CF2613450157ADA3476171E3F\",\n"
                         + "  \"name\": \"Call API\",\n"
                         + "  \"description\": \"Perform a POST request to provided URL with headers and payload.\",\n"
-                        + "  \"script\": \"%s\",\n"
+                        + "  \"script\": [ { \"request\": \"https://example.com/api/12345\", \"options\": { \"method\": \"POST\", \"headers\": { \"content-type\": \"application/json\" }, \"body\": { \"payload\": \"${to} finished the IVR.\" } } } ],\n"
                         + "  \"createTime\": \"2024-11-09T17:00:00.000+01:00\"\n"
                         + "}",
                 script);
@@ -874,9 +870,7 @@ class VoiceApiTest extends ApiTest {
                 OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
 
         String givenUpdateTime = null;
-        String givenDial = "dial";
-        Integer givenActionId = 1;
-        String script = String.format("[{'dial': '%s', 'actionId': %d}]", givenDial, givenActionId);
+        String script = "[{\"dial\":\"dial\",\"actionId\":1}]";
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -884,9 +878,9 @@ class VoiceApiTest extends ApiTest {
                         + "  \"description\": \"%s\",\n"
                         + "  \"createTime\": \"%s\",\n"
                         + "  \"updateTime\": %s,\n"
-                        + "  \"script\": \"%s\"\n"
+                        + "  \"script\": [{\"dial\": \"dial\", \"actionId\": 1}]\n"
                         + "}",
-                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime, script);
+                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime);
 
         setUpGetRequest(VOICE_SCENARIO.replace("{id}", givenId), Map.of(), givenResponse, 200);
 
@@ -916,13 +910,12 @@ class VoiceApiTest extends ApiTest {
         OffsetDateTime givenCreateTimeDateTime =
                 OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
         String givenUpdateTime = null;
-        Integer givenActionId = 1;
-        String givenDial = "dial";
-        String script = String.format("[{'dial': '%s', 'actionId': %d}]", givenDial, givenActionId);
+        String script = "[{\"dial\":\"dial\",\"actionId\":1}]";
 
         String givenRequest = String.format(
-                "{\n" + "  \"name\": \"%s\",\n" + "  \"description\": \"%s\",\n" + "  \"script\": \"%s\"\n" + "}",
-                givenName, givenDescription, script);
+                "{\n" + "  \"name\": \"%s\",\n" + "  \"description\": \"%s\",\n"
+                        + "  \"script\": [{\"dial\": \"dial\", \"actionId\": 1}]\n" + "}",
+                givenName, givenDescription);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -930,9 +923,9 @@ class VoiceApiTest extends ApiTest {
                         + "  \"description\": \"%s\",\n"
                         + "  \"createTime\": \"%s\",\n"
                         + "  \"updateTime\": %s,\n"
-                        + "  \"script\": \"%s\"\n"
+                        + "  \"script\": [{\"dial\": \"dial\", \"actionId\": 1}]\n"
                         + "}",
-                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime, script);
+                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime);
 
         setUpPostRequest(VOICE_SCENARIOS, givenRequest, givenResponse, 200);
 
@@ -968,11 +961,13 @@ class VoiceApiTest extends ApiTest {
                 OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
         String givenUpdateTime = null;
         String script =
-                "[ { 'request': 'https://example.com/api/12345', 'options': { 'method': 'POST', 'headers': { 'content-type': 'application/json' }, 'body': { 'payload': '${to} finished the IVR.' } } } ]";
+                "[{\"request\":\"https://example.com/api/12345\",\"options\":{\"method\":\"POST\",\"headers\":{\"content-type\":\"application/json\"},\"body\":{\"payload\":\"${to} finished the IVR.\"}}}]";
 
         String givenRequest = String.format(
-                "{\n" + "  \"name\": \"%s\",\n" + "  \"description\": \"%s\",\n" + "  \"script\": \"%s\"\n" + "}",
-                givenName, givenDescription, script);
+                "{\n" + "  \"name\": \"%s\",\n" + "  \"description\": \"%s\",\n"
+                        + "  \"script\": [{\"request\":\"https://example.com/api/12345\",\"options\":{\"method\":\"POST\",\"headers\":{\"content-type\":\"application/json\"},\"body\":{\"payload\":\"${to} finished the IVR.\"}}}]\n"
+                        + "}",
+                givenName, givenDescription);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
@@ -980,9 +975,9 @@ class VoiceApiTest extends ApiTest {
                         + "  \"description\": \"%s\",\n"
                         + "  \"createTime\": \"%s\",\n"
                         + "  \"updateTime\": %s,\n"
-                        + "  \"script\": \"%s\"\n"
+                        + "  \"script\": [{\"request\":\"https://example.com/api/12345\",\"options\":{\"method\":\"POST\",\"headers\":{\"content-type\":\"application/json\"},\"body\":{\"payload\":\"${to} finished the IVR.\"}}}]\n"
                         + "}",
-                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime, script);
+                givenId, givenName, givenDescription, givenCreateTime, givenUpdateTime);
 
         setUpPutRequest(VOICE_SCENARIO.replace("{id}", givenId), Map.of(), givenRequest, givenResponse, 200);
 

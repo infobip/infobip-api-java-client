@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * Represents MmsInboundTextSegment model.
  */
-public class MmsInboundTextSegment {
+public class MmsInboundTextSegment implements MmsInboundMessageSegment {
 
     private String contentType;
 

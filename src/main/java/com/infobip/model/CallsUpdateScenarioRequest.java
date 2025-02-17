@@ -10,6 +10,9 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.infobip.RawJsonDeserializer;
 import java.util.Objects;
 
 /**
@@ -21,6 +24,8 @@ public class CallsUpdateScenarioRequest {
 
     private String description;
 
+    @JsonRawValue
+    @JsonDeserialize(using = RawJsonDeserializer.class)
     private String script;
 
     /**

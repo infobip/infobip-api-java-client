@@ -10,6 +10,9 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.infobip.RawJsonDeserializer;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
@@ -26,6 +29,8 @@ public class CallsSearchResponse {
 
     private String name;
 
+    @JsonRawValue
+    @JsonDeserialize(using = RawJsonDeserializer.class)
     private String script;
 
     private OffsetDateTime updateTime;
