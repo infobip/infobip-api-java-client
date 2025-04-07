@@ -10,72 +10,59 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents CallsRegionList model.
+ * Supported by MMS
  */
-public class CallsRegionList {
+public class MessagesApiMessageMixedTextItem implements MessagesApiMessageMixedItem {
 
-    private List<CallsPublicRegion> regions = null;
+    private String text;
 
     /**
-     * Sets regions.
+     * Sets text.
      * <p>
      * Field description:
-     * List of regions.
+     * Text to be sent.
+     * <p>
+     * The field is required.
      *
-     * @param regions
-     * @return This {@link CallsRegionList instance}.
+     * @param text
+     * @return This {@link MessagesApiMessageMixedTextItem instance}.
      */
-    public CallsRegionList regions(List<CallsPublicRegion> regions) {
-        this.regions = regions;
+    public MessagesApiMessageMixedTextItem text(String text) {
+        this.text = text;
         return this;
     }
 
     /**
-     * Adds and item into regions.
+     * Returns text.
      * <p>
      * Field description:
-     * List of regions.
+     * Text to be sent.
+     * <p>
+     * The field is required.
      *
-     * @param regionsItem The item to be added to the list.
-     * @return This {@link CallsRegionList instance}.
+     * @return text
      */
-    public CallsRegionList addRegionsItem(CallsPublicRegion regionsItem) {
-        if (this.regions == null) {
-            this.regions = new ArrayList<>();
-        }
-        this.regions.add(regionsItem);
-        return this;
+    @JsonProperty("text")
+    public String getText() {
+        return text;
     }
 
     /**
-     * Returns regions.
+     * Sets text.
      * <p>
      * Field description:
-     * List of regions.
-     *
-     * @return regions
-     */
-    @JsonProperty("regions")
-    public List<CallsPublicRegion> getRegions() {
-        return regions;
-    }
-
-    /**
-     * Sets regions.
+     * Text to be sent.
      * <p>
-     * Field description:
-     * List of regions.
+     * The field is required.
      *
-     * @param regions
+     * @param text
      */
-    @JsonProperty("regions")
-    public void setRegions(List<CallsPublicRegion> regions) {
-        this.regions = regions;
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
     }
 
     @Override
@@ -86,23 +73,23 @@ public class CallsRegionList {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallsRegionList callsRegionList = (CallsRegionList) o;
-        return Objects.equals(this.regions, callsRegionList.regions);
+        MessagesApiMessageMixedTextItem messagesApiMessageMixedTextItem = (MessagesApiMessageMixedTextItem) o;
+        return Objects.equals(this.text, messagesApiMessageMixedTextItem.text);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(regions);
+        return Objects.hash(text);
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallsRegionList {")
+                .append("class MessagesApiMessageMixedTextItem {")
                 .append(newLine)
-                .append("    regions: ")
-                .append(toIndentedString(regions))
+                .append("    text: ")
+                .append(toIndentedString(text))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -710,7 +710,7 @@ class VoiceApiTest extends ApiTest {
                 OffsetDateTime.of(LocalDateTime.of(2023, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
 
         String givenResponse = String.format(
-                "[{ \"files\": [\n" + "  {\n"
+                "{ \"files\": [\n" + "  {\n"
                         + "    \"messageId\": \"%s\",\n"
                         + "    \"from\": \"%s\",\n"
                         + "    \"to\": \"%s\",\n"
@@ -728,7 +728,7 @@ class VoiceApiTest extends ApiTest {
                         + "    \"url\": \"%s\",\n"
                         + "    \"recordedAt\": \"%s\"\n"
                         + "  }\n"
-                        + "]}]",
+                        + "]}",
                 givenMessageId1,
                 givenFrom1,
                 givenTo1,
@@ -748,10 +748,10 @@ class VoiceApiTest extends ApiTest {
 
         VoiceApi api = new VoiceApi(getApiClient());
 
-        Consumer<List<CallsRecordedAudioFilesResponse>> assertions = (response) -> {
+        Consumer<CallsRecordedAudioFilesResponse> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.get(0).getFiles().size()).isEqualTo(2);
-            var file1 = response.get(0).getFiles().get(0);
+            then(response.getFiles().size()).isEqualTo(2);
+            var file1 = response.getFiles().get(0);
             then(file1.getMessageId()).isEqualTo(givenMessageId1);
             then(file1.getFrom()).isEqualTo(givenFrom1);
             then(file1.getTo()).isEqualTo(givenTo1);
@@ -759,7 +759,7 @@ class VoiceApiTest extends ApiTest {
             then(file1.getGroupId()).isEqualTo(givenGroupId1);
             then(file1.getUrl()).isEqualTo(givenUrl1);
             then(file1.getRecordedAt()).isEqualTo(givenRecordedAt1DateTime);
-            var file2 = response.get(0).getFiles().get(1);
+            var file2 = response.getFiles().get(1);
             then(file2.getMessageId()).isEqualTo(givenMessageId2);
             then(file2.getFrom()).isEqualTo(givenFrom2);
             then(file2.getTo()).isEqualTo(givenTo2);

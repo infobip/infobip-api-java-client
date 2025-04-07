@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents EmailWebhookTrackReport model.
+ * Represents EmailWebhookTrackingPayload model.
  */
-public class EmailWebhookTrackReport {
+public class EmailWebhookTrackingPayload {
 
     private String notificationType;
 
@@ -27,7 +27,7 @@ public class EmailWebhookTrackReport {
 
     private Double sendDateTime;
 
-    private String messageId;
+    private Double messageId;
 
     private String bulkId;
 
@@ -37,6 +37,12 @@ public class EmailWebhookTrackReport {
 
     private EmailWebhookGeoLocation geoLocation;
 
+    private String campaignReferenceId;
+
+    private String entityId;
+
+    private String applicationId;
+
     /**
      * Sets notificationType.
      * <p>
@@ -44,9 +50,9 @@ public class EmailWebhookTrackReport {
      * Tells the type of user event that took place. Possible events: &#x60;OPENED&#x60;, &#x60;CLICKED&#x60;, &#x60;COMPLAINED&#x60;, &#x60;UNSUBSCRIBED&#x60;.
      *
      * @param notificationType
-     * @return This {@link EmailWebhookTrackReport instance}.
+     * @return This {@link EmailWebhookTrackingPayload instance}.
      */
-    public EmailWebhookTrackReport notificationType(String notificationType) {
+    public EmailWebhookTrackingPayload notificationType(String notificationType) {
         this.notificationType = notificationType;
         return this;
     }
@@ -84,9 +90,9 @@ public class EmailWebhookTrackReport {
      * The sending domain used to send the email to the recipient.
      *
      * @param domain
-     * @return This {@link EmailWebhookTrackReport instance}.
+     * @return This {@link EmailWebhookTrackingPayload instance}.
      */
-    public EmailWebhookTrackReport domain(String domain) {
+    public EmailWebhookTrackingPayload domain(String domain) {
         this.domain = domain;
         return this;
     }
@@ -124,9 +130,9 @@ public class EmailWebhookTrackReport {
      * Recipient of the email.
      *
      * @param recipient
-     * @return This {@link EmailWebhookTrackReport instance}.
+     * @return This {@link EmailWebhookTrackingPayload instance}.
      */
-    public EmailWebhookTrackReport recipient(String recipient) {
+    public EmailWebhookTrackingPayload recipient(String recipient) {
         this.recipient = recipient;
         return this;
     }
@@ -164,9 +170,9 @@ public class EmailWebhookTrackReport {
      * The link the recipient has clicked. This attribute will only be present if the event is of the type &#x60;CLICKED&#x60;.
      *
      * @param url
-     * @return This {@link EmailWebhookTrackReport instance}.
+     * @return This {@link EmailWebhookTrackingPayload instance}.
      */
-    public EmailWebhookTrackReport url(String url) {
+    public EmailWebhookTrackingPayload url(String url) {
         this.url = url;
         return this;
     }
@@ -204,9 +210,9 @@ public class EmailWebhookTrackReport {
      * The time at which the email was sent. Time is in milliseconds.
      *
      * @param sendDateTime
-     * @return This {@link EmailWebhookTrackReport instance}.
+     * @return This {@link EmailWebhookTrackingPayload instance}.
      */
-    public EmailWebhookTrackReport sendDateTime(Double sendDateTime) {
+    public EmailWebhookTrackingPayload sendDateTime(Double sendDateTime) {
         this.sendDateTime = sendDateTime;
         return this;
     }
@@ -244,9 +250,9 @@ public class EmailWebhookTrackReport {
      * The ID that uniquely identifies the message sent to the recipient.
      *
      * @param messageId
-     * @return This {@link EmailWebhookTrackReport instance}.
+     * @return This {@link EmailWebhookTrackingPayload instance}.
      */
-    public EmailWebhookTrackReport messageId(String messageId) {
+    public EmailWebhookTrackingPayload messageId(Double messageId) {
         this.messageId = messageId;
         return this;
     }
@@ -260,7 +266,7 @@ public class EmailWebhookTrackReport {
      * @return messageId
      */
     @JsonProperty("messageId")
-    public String getMessageId() {
+    public Double getMessageId() {
         return messageId;
     }
 
@@ -273,7 +279,7 @@ public class EmailWebhookTrackReport {
      * @param messageId
      */
     @JsonProperty("messageId")
-    public void setMessageId(String messageId) {
+    public void setMessageId(Double messageId) {
         this.messageId = messageId;
     }
 
@@ -284,9 +290,9 @@ public class EmailWebhookTrackReport {
      * The ID that uniquely identifies a list of email messages. This is either defined by user in the request or auto generated.
      *
      * @param bulkId
-     * @return This {@link EmailWebhookTrackReport instance}.
+     * @return This {@link EmailWebhookTrackingPayload instance}.
      */
-    public EmailWebhookTrackReport bulkId(String bulkId) {
+    public EmailWebhookTrackingPayload bulkId(String bulkId) {
         this.bulkId = bulkId;
         return this;
     }
@@ -324,9 +330,9 @@ public class EmailWebhookTrackReport {
      * The callback data sent through the callbackData field in your fully featured Email message.
      *
      * @param callbackData
-     * @return This {@link EmailWebhookTrackReport instance}.
+     * @return This {@link EmailWebhookTrackingPayload instance}.
      */
-    public EmailWebhookTrackReport callbackData(String callbackData) {
+    public EmailWebhookTrackingPayload callbackData(String callbackData) {
         this.callbackData = callbackData;
         return this;
     }
@@ -361,9 +367,9 @@ public class EmailWebhookTrackReport {
      * Sets recipientInfo.
      *
      * @param recipientInfo
-     * @return This {@link EmailWebhookTrackReport instance}.
+     * @return This {@link EmailWebhookTrackingPayload instance}.
      */
-    public EmailWebhookTrackReport recipientInfo(EmailWebhookRecipientInfo recipientInfo) {
+    public EmailWebhookTrackingPayload recipientInfo(EmailWebhookRecipientInfo recipientInfo) {
         this.recipientInfo = recipientInfo;
         return this;
     }
@@ -392,9 +398,9 @@ public class EmailWebhookTrackReport {
      * Sets geoLocation.
      *
      * @param geoLocation
-     * @return This {@link EmailWebhookTrackReport instance}.
+     * @return This {@link EmailWebhookTrackingPayload instance}.
      */
-    public EmailWebhookTrackReport geoLocation(EmailWebhookGeoLocation geoLocation) {
+    public EmailWebhookTrackingPayload geoLocation(EmailWebhookGeoLocation geoLocation) {
         this.geoLocation = geoLocation;
         return this;
     }
@@ -419,6 +425,126 @@ public class EmailWebhookTrackReport {
         this.geoLocation = geoLocation;
     }
 
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     * @return This {@link EmailWebhookTrackingPayload instance}.
+     */
+    public EmailWebhookTrackingPayload campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     * @return This {@link EmailWebhookTrackingPayload instance}.
+     */
+    public EmailWebhookTrackingPayload entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     * @return This {@link EmailWebhookTrackingPayload instance}.
+     */
+    public EmailWebhookTrackingPayload applicationId(String applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -427,17 +553,20 @@ public class EmailWebhookTrackReport {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        EmailWebhookTrackReport emailWebhookTrackReport = (EmailWebhookTrackReport) o;
-        return Objects.equals(this.notificationType, emailWebhookTrackReport.notificationType)
-                && Objects.equals(this.domain, emailWebhookTrackReport.domain)
-                && Objects.equals(this.recipient, emailWebhookTrackReport.recipient)
-                && Objects.equals(this.url, emailWebhookTrackReport.url)
-                && Objects.equals(this.sendDateTime, emailWebhookTrackReport.sendDateTime)
-                && Objects.equals(this.messageId, emailWebhookTrackReport.messageId)
-                && Objects.equals(this.bulkId, emailWebhookTrackReport.bulkId)
-                && Objects.equals(this.callbackData, emailWebhookTrackReport.callbackData)
-                && Objects.equals(this.recipientInfo, emailWebhookTrackReport.recipientInfo)
-                && Objects.equals(this.geoLocation, emailWebhookTrackReport.geoLocation);
+        EmailWebhookTrackingPayload emailWebhookTrackingPayload = (EmailWebhookTrackingPayload) o;
+        return Objects.equals(this.notificationType, emailWebhookTrackingPayload.notificationType)
+                && Objects.equals(this.domain, emailWebhookTrackingPayload.domain)
+                && Objects.equals(this.recipient, emailWebhookTrackingPayload.recipient)
+                && Objects.equals(this.url, emailWebhookTrackingPayload.url)
+                && Objects.equals(this.sendDateTime, emailWebhookTrackingPayload.sendDateTime)
+                && Objects.equals(this.messageId, emailWebhookTrackingPayload.messageId)
+                && Objects.equals(this.bulkId, emailWebhookTrackingPayload.bulkId)
+                && Objects.equals(this.callbackData, emailWebhookTrackingPayload.callbackData)
+                && Objects.equals(this.recipientInfo, emailWebhookTrackingPayload.recipientInfo)
+                && Objects.equals(this.geoLocation, emailWebhookTrackingPayload.geoLocation)
+                && Objects.equals(this.campaignReferenceId, emailWebhookTrackingPayload.campaignReferenceId)
+                && Objects.equals(this.entityId, emailWebhookTrackingPayload.entityId)
+                && Objects.equals(this.applicationId, emailWebhookTrackingPayload.applicationId);
     }
 
     @Override
@@ -452,14 +581,17 @@ public class EmailWebhookTrackReport {
                 bulkId,
                 callbackData,
                 recipientInfo,
-                geoLocation);
+                geoLocation,
+                campaignReferenceId,
+                entityId,
+                applicationId);
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class EmailWebhookTrackReport {")
+                .append("class EmailWebhookTrackingPayload {")
                 .append(newLine)
                 .append("    notificationType: ")
                 .append(toIndentedString(notificationType))
@@ -490,6 +622,15 @@ public class EmailWebhookTrackReport {
                 .append(newLine)
                 .append("    geoLocation: ")
                 .append(toIndentedString(geoLocation))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
                 .append(newLine)
                 .append("}")
                 .toString();

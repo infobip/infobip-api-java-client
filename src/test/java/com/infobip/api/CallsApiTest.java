@@ -3650,22 +3650,35 @@ class CallsApiTest extends ApiTest {
 
     @Test
     void shouldGetMediaStreamConfigs() {
-        String givenId = "string";
-        String givenUrl = "string";
-        SecurityConfigType givenType = SecurityConfigType.BASIC;
-        Integer givenPage = 0;
-        Integer givenPageSize = 1;
-        Integer givenPageTotalPages = 0;
-        Long givenPageTotalResults = 0L;
+        String givenId1 = "63467c6e2885a5389ba11d80";
+        CallsResponseMediaStreamConfigType givenMediaStreamType = CallsResponseMediaStreamConfigType.MEDIA_STREAMING;
+        String givenName1 = "Media-stream config";
+        String givenUrl1 = "ws://example-web-socket.com:3001";
+
+        String givenId2 = "63467c6e2885a5389ba11d81";
+        CallsResponseMediaStreamConfigType givenMediaStreamType2 =
+                CallsResponseMediaStreamConfigType.WEBSOCKET_ENDPOINT;
+        String givenName2 = "Media-stream config";
+        String givenUrl2 = "ws://example-web-socket.com:3001";
+
+        int givenPage = 0;
+        int givenSize = 2;
+        int givenTotalPages = 1;
+        int givenTotalResults = 2;
 
         String givenResponse = String.format(
                 "{\n" + "  \"results\": [\n"
                         + "    {\n"
                         + "      \"id\": \"%s\",\n"
-                        + "      \"url\": \"%s\",\n"
-                        + "      \"securityConfig\": {\n"
-                        + "        \"type\": \"%s\"\n"
-                        + "      }\n"
+                        + "      \"type\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"url\": \"%s\"\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"id\": \"%s\",\n"
+                        + "      \"type\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"url\": \"%s\"\n"
                         + "    }\n"
                         + "  ],\n"
                         + "  \"paging\": {\n"
@@ -3674,8 +3687,19 @@ class CallsApiTest extends ApiTest {
                         + "    \"totalPages\": %d,\n"
                         + "    \"totalResults\": %d\n"
                         + "  }\n"
-                        + "}\n",
-                givenId, givenUrl, givenType, givenPage, givenPageSize, givenPageTotalPages, givenPageTotalResults);
+                        + "}",
+                givenId1,
+                givenMediaStreamType,
+                givenName1,
+                givenUrl1,
+                givenId2,
+                givenMediaStreamType2,
+                givenName2,
+                givenUrl2,
+                givenPage,
+                givenSize,
+                givenTotalPages,
+                givenTotalResults);
 
         setUpSuccessGetRequest(MEDIA_STREAM_CONFIGS, Map.of(), givenResponse);
 
@@ -3683,18 +3707,25 @@ class CallsApiTest extends ApiTest {
 
         Consumer<CallsMediaStreamConfigPage> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getResults()).isNotNull();
-            var results = response.getResults();
-            then(results.size()).isEqualTo(1);
-            var result = results.get(0);
-            then(result.getId()).isEqualTo(givenId);
-            then(result.getUrl()).isEqualTo(givenUrl);
-            then(response.getPaging()).isNotNull();
+            then(response.getResults()).hasSize(2);
+
+            var result1 = response.getResults().get(0);
+            then(result1.getId()).isEqualTo(givenId1);
+            then(result1.getType()).isEqualTo(givenMediaStreamType);
+            then(result1.getName()).isEqualTo(givenName1);
+            then(result1.getUrl()).isEqualTo(givenUrl1);
+
+            var result2 = response.getResults().get(1);
+            then(result2.getId()).isEqualTo(givenId2);
+            then(result2.getType()).isEqualTo(givenMediaStreamType2);
+            then(result2.getName()).isEqualTo(givenName2);
+            then(result2.getUrl()).isEqualTo(givenUrl2);
+
             var paging = response.getPaging();
             then(paging.getPage()).isEqualTo(givenPage);
-            then(paging.getSize()).isEqualTo(givenPageSize);
-            then(paging.getTotalPages()).isEqualTo(givenPageTotalPages);
-            then(paging.getTotalResults()).isEqualTo(givenPageTotalResults);
+            then(paging.getSize()).isEqualTo(givenSize);
+            then(paging.getTotalPages()).isEqualTo(givenTotalPages);
+            then(paging.getTotalResults()).isEqualTo(givenTotalResults);
         };
 
         var call = api.getMediaStreamConfigs();
@@ -3705,10 +3736,17 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldGetMediaStreamConfig() {
         String givenId = "63467c6e2885a5389ba11d80";
-        String givenUrl = "wss://example-websocket.com:3001";
+        CallsResponseMediaStreamConfigType givenMediaStreamType = CallsResponseMediaStreamConfigType.MEDIA_STREAMING;
+        String givenName = "Media-stream config";
+        String givenUrl = "ws://example-web-socket.com:3001";
 
-        String givenResponse =
-                String.format("{\n" + "  \"id\": \"%s\",\n" + "  \"url\": \"%s\"\n" + "}\n", givenId, givenUrl);
+        String givenResponse = String.format(
+                "{\n" + "  \"id\": \"%s\",\n"
+                        + "  \"type\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"url\": \"%s\"\n"
+                        + "}",
+                givenId, givenMediaStreamType, givenName, givenUrl);
 
         setUpSuccessGetRequest(MEDIA_STREAM_CONFIG.replace("{mediaStreamConfigId}", givenId), Map.of(), givenResponse);
 
@@ -3717,6 +3755,8 @@ class CallsApiTest extends ApiTest {
         Consumer<CallsMediaStreamConfigResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getId()).isEqualTo(givenId);
+            then(response.getType()).isEqualTo(givenMediaStreamType);
+            then(response.getName()).isEqualTo(givenName);
             then(response.getUrl()).isEqualTo(givenUrl);
         };
 
@@ -3727,50 +3767,50 @@ class CallsApiTest extends ApiTest {
 
     @Test
     void shouldCreateMediaStreamConfig() {
-        String givenUrl = "givenUrl";
+        String givenUrl = "ws://example-web-socket.com:3001";
         SecurityConfigType givenType = SecurityConfigType.BASIC;
-        String givenUsername = "username";
-        String givenPassword = "password";
-        String givenName = "name";
+        String givenUsername = "my-username";
+        String givenPassword = "my-password";
+        String givenName = "Media-stream config";
+        CallsResponseMediaStreamConfigType givenMediaStreamType = CallsResponseMediaStreamConfigType.MEDIA_STREAMING;
 
         String expectedRequest = String.format(
-                "{\n" + "  \"name\" : \"%s\",\n"
+                "{\n" + "  \"type\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
                         + "  \"url\": \"%s\",\n"
                         + "  \"securityConfig\": {\n"
-                        + "    \"type\": \"%s\",\n"
                         + "    \"username\": \"%s\",\n"
-                        + "    \"password\": \"%s\"\n"
+                        + "    \"password\": \"%s\",\n"
+                        + "    \"type\": \"%s\"\n"
                         + "  }\n"
-                        + "}\n",
-                givenName, givenUrl, givenType, givenUsername, givenPassword);
+                        + "}",
+                givenMediaStreamType, givenName, givenUrl, givenUsername, givenPassword, givenType);
 
         String givenId = "63467c6e2885a5389ba11d80";
-
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
-                        + "  \"url\": \"%s\",\n"
-                        + "  \"securityConfig\": {\n"
-                        + "    \"type\": \"%s\",\n"
-                        + "    \"username\": \"%s\",\n"
-                        + "    \"password\": \"%s\"\n"
-                        + "  }\n"
-                        + "}\n",
-                givenId, givenUrl, givenType, givenUsername, givenPassword);
+                        + "  \"type\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"url\": \"%s\"\n"
+                        + "}",
+                givenId, givenMediaStreamType, givenName, givenUrl);
 
         setUpPostRequest(MEDIA_STREAM_CONFIGS, expectedRequest, givenResponse, 201);
 
         CallsApi api = new CallsApi(getApiClient());
 
-        CallsMediaStreamConfigRequest request = new CallsMediaStreamConfigRequest()
-                .name(givenName)
-                .url(givenUrl)
+        CallsMediaStreamConfigRequest request = new CallsMediaStreamingConfigRequest()
                 .securityConfig(
-                        new BasicSecurityConfig().username(givenUsername).password(givenPassword));
+                        new BasicSecurityConfig().username(givenUsername).password(givenPassword))
+                .name(givenName)
+                .url(givenUrl);
 
-        Consumer<CallsMediaStreamConfigResponse> assertions = response -> {
-            CallsMediaStreamConfigResponse expectedConfig =
-                    new CallsMediaStreamConfigResponse().id(givenId).url(givenUrl);
-            then(response).isEqualTo(expectedConfig);
+        Consumer<CallsMediaStreamConfigResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo(givenId);
+            then(response.getType()).isEqualTo(givenMediaStreamType);
+            then(response.getName()).isEqualTo(givenName);
+            then(response.getUrl()).isEqualTo(givenUrl);
         };
 
         var call = api.createMediaStreamConfig(request);
@@ -3781,32 +3821,32 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldUpdateMediaStreamConfig() {
         String givenId = "63467c6e2885a5389ba11d80";
-        String givenUrl = "wss://example-websocket.com:3001";
-
+        String givenUrl = "ws://example-web-socket.com:3001";
+        String givenName = "Media-stream config";
         SecurityConfigType givenType = SecurityConfigType.BASIC;
-        String givenUsername = "username";
-        String givenPassword = "password";
+        String givenUsername = "my-username";
+        String givenPassword = "my-password";
+        CallsResponseMediaStreamConfigType givenMediaStreamType = CallsResponseMediaStreamConfigType.MEDIA_STREAMING;
 
         String expectedRequest = String.format(
-                "{\n" + "  \"url\": \"%s\",\n"
+                "{\n" + "  \"type\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"url\": \"%s\",\n"
                         + "  \"securityConfig\": {\n"
-                        + "    \"type\": \"%s\",\n"
                         + "    \"username\": \"%s\",\n"
-                        + "    \"password\": \"%s\"\n"
+                        + "    \"password\": \"%s\",\n"
+                        + "    \"type\": \"%s\"\n"
                         + "  }\n"
-                        + "}\n",
-                givenUrl, givenType, givenUsername, givenPassword);
+                        + "}",
+                givenMediaStreamType, givenName, givenUrl, givenUsername, givenPassword, givenType);
 
         String givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
-                        + "  \"url\": \"%s\",\n"
-                        + "  \"securityConfig\": {\n"
-                        + "    \"type\": \"%s\",\n"
-                        + "    \"username\": \"%s\",\n"
-                        + "    \"password\": \"%s\"\n"
-                        + "  }\n"
-                        + "}\n",
-                givenId, givenUrl, givenType, givenUsername, givenPassword);
+                        + "  \"type\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"url\": \"%s\"\n"
+                        + "}",
+                givenId, givenMediaStreamType, givenName, givenUrl);
 
         setUpPutRequest(
                 MEDIA_STREAM_CONFIG.replace("{mediaStreamConfigId}", givenId),
@@ -3817,15 +3857,18 @@ class CallsApiTest extends ApiTest {
 
         CallsApi api = new CallsApi(getApiClient());
 
-        CallsMediaStreamConfigRequest request = new CallsMediaStreamConfigRequest()
-                .url(givenUrl)
+        CallsMediaStreamConfigRequest request = new CallsMediaStreamingConfigRequest()
                 .securityConfig(
-                        new BasicSecurityConfig().username(givenUsername).password(givenPassword));
+                        new BasicSecurityConfig().username(givenUsername).password(givenPassword))
+                .name(givenName)
+                .url(givenUrl);
 
         Consumer<CallsMediaStreamConfigResponse> assertions = response -> {
-            CallsMediaStreamConfigResponse expectedConfig =
-                    new CallsMediaStreamConfigResponse().id(givenId).url(givenUrl);
-            then(response).isEqualTo(expectedConfig);
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo(givenId);
+            then(response.getType()).isEqualTo(givenMediaStreamType);
+            then(response.getName()).isEqualTo(givenName);
+            then(response.getUrl()).isEqualTo(givenUrl);
         };
 
         var call = api.updateMediaStreamConfig(givenId, request);
@@ -3836,9 +3879,17 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldDeleteMediaStreamConfig() {
         String givenId = "63467c6e2885a5389ba11d80";
-        String givenUrl = "wss://example-websocket.com:3001";
-        String givenResponse =
-                String.format("{\n" + "  \"id\": \"%s\",\n" + "  \"url\": \"%s\"\n" + "}\n", givenId, givenUrl);
+        String givenUrl = "ws://example-web-socket.com:3001";
+        String givenName = "Media-stream config";
+        CallsResponseMediaStreamConfigType givenType = CallsResponseMediaStreamConfigType.MEDIA_STREAMING;
+
+        String givenResponse = String.format(
+                "{\n" + "  \"id\": \"%s\",\n"
+                        + "  \"type\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"url\": \"%s\"\n"
+                        + "}",
+                givenId, givenType, givenName, givenUrl);
 
         setUpNoRequestBodyDeleteRequest(
                 MEDIA_STREAM_CONFIG.replace("{mediaStreamConfigId}", givenId), Map.of(), givenResponse, 200);
@@ -3847,8 +3898,10 @@ class CallsApiTest extends ApiTest {
 
         Consumer<CallsMediaStreamConfigResponse> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getUrl()).isEqualTo(givenUrl);
             then(response.getId()).isEqualTo(givenId);
+            then(response.getType()).isEqualTo(givenType);
+            then(response.getName()).isEqualTo(givenName);
+            then(response.getUrl()).isEqualTo(givenUrl);
         };
 
         var call = api.deleteMediaStreamConfig(givenId);
@@ -7074,38 +7127,35 @@ class CallsApiTest extends ApiTest {
         String givenCode3 = "GLP";
 
         String givenResponse = String.format(
-                "{\n" + " \"countries\":\n"
-                        + "  [\n"
-                        + "   {\n"
-                        + "     \"name\": \"%s\",\n"
-                        + "     \"code\": \"%s\"\n"
-                        + "   },\n"
-                        + "   {\n"
-                        + "     \"name\": \"%s\",\n"
-                        + "     \"code\": \"%s\"\n"
-                        + "   },\n"
-                        + "   {\n"
-                        + "     \"name\": \"%s\",\n"
-                        + "     \"code\": \"%s\"\n"
-                        + "   }\n"
-                        + "  ]\n"
-                        + "}",
+                "[\n" + "  {\n"
+                        + "    \"name\": \"%s\",\n"
+                        + "    \"code\": \"%s\"\n"
+                        + "  },\n"
+                        + "  {\n"
+                        + "    \"name\": \"%s\",\n"
+                        + "    \"code\": \"%s\"\n"
+                        + "  },\n"
+                        + "  {\n"
+                        + "    \"name\": \"%s\",\n"
+                        + "    \"code\": \"%s\"\n"
+                        + "  }\n"
+                        + "]",
                 givenName1, givenCode1, givenName2, givenCode2, givenName3, givenCode3);
 
         setUpGetRequest(SIP_TRUNK_COUNTRIES, Map.of(), givenResponse, 200);
 
         CallsApi api = new CallsApi(getApiClient());
 
-        Consumer<CallsCountryList> assertions = (response) -> {
+        Consumer<List<CallsPublicCountry>> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getCountries().size()).isEqualTo(3);
-            var country1 = response.getCountries().get(0);
+            then(response.size()).isEqualTo(3);
+            var country1 = response.get(0);
             then(country1.getName()).isEqualTo(givenName1);
             then(country1.getCode()).isEqualTo(givenCode1);
-            var country2 = response.getCountries().get(1);
+            var country2 = response.get(1);
             then(country2.getName()).isEqualTo(givenName2);
             then(country2.getCode()).isEqualTo(givenCode2);
-            var country3 = response.getCountries().get(2);
+            var country3 = response.get(2);
             then(country3.getName()).isEqualTo(givenName3);
             then(country3.getCode()).isEqualTo(givenCode3);
         };
@@ -7128,24 +7178,22 @@ class CallsApiTest extends ApiTest {
         String givenCountryCode3 = "HRV";
 
         String givenResponse = String.format(
-                "{ \"regions\":\n" + "  [\n"
-                        + "    {\n"
-                        + "      \"name\": \"%s\",\n"
-                        + "      \"code\": \"%s\",\n"
-                        + "      \"countryCode\": \"%s\"\n"
-                        + "    },\n"
-                        + "    {\n"
-                        + "      \"name\": \"%s\",\n"
-                        + "      \"code\": \"%s\",\n"
-                        + "      \"countryCode\": \"%s\"\n"
-                        + "    },\n"
-                        + "    {\n"
-                        + "      \"name\": \"%s\",\n"
-                        + "      \"code\": \"%s\",\n"
-                        + "      \"countryCode\": \"%s\"\n"
-                        + "    }\n"
-                        + "  ]\n"
-                        + "}",
+                "[\n" + "  {\n"
+                        + "    \"name\": \"%s\",\n"
+                        + "    \"code\": \"%s\",\n"
+                        + "    \"countryCode\": \"%s\"\n"
+                        + "  },\n"
+                        + "  {\n"
+                        + "    \"name\": \"%s\",\n"
+                        + "    \"code\": \"%s\",\n"
+                        + "    \"countryCode\": \"%s\"\n"
+                        + "  },\n"
+                        + "  {\n"
+                        + "    \"name\": \"%s\",\n"
+                        + "    \"code\": \"%s\",\n"
+                        + "    \"countryCode\": \"%s\"\n"
+                        + "  }\n"
+                        + "]",
                 givenName1,
                 givenCode1,
                 givenCountryCode1,
@@ -7162,18 +7210,18 @@ class CallsApiTest extends ApiTest {
 
         CallsApi api = new CallsApi(getApiClient());
 
-        Consumer<CallsRegionList> assertions = (response) -> {
+        Consumer<List<CallsPublicRegion>> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getRegions().size()).isEqualTo(3);
-            var region1 = response.getRegions().get(0);
+            then(response.size()).isEqualTo(3);
+            var region1 = response.get(0);
             then(region1.getName()).isEqualTo(givenName1);
             then(region1.getCode()).isEqualTo(givenCode1);
             then(region1.getCountryCode()).isEqualTo(givenCountryCode1);
-            var region2 = response.getRegions().get(1);
+            var region2 = response.get(1);
             then(region2.getName()).isEqualTo(givenName2);
             then(region2.getCode()).isEqualTo(givenCode2);
             then(region2.getCountryCode()).isEqualTo(givenCountryCode2);
-            var region3 = response.getRegions().get(2);
+            var region3 = response.get(2);
             then(region3.getName()).isEqualTo(givenName3);
             then(region3.getCode()).isEqualTo(givenCode3);
             then(region3.getCountryCode()).isEqualTo(givenCountryCode3);

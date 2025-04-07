@@ -33,6 +33,8 @@ public class WhatsAppInteractiveOrderDetailsOrder {
 
     private WhatsAppInteractiveOrderDetailsOrderExpiration orderExpiration;
 
+    private WhatsAppOrderDetailsType orderDetailsType;
+
     /**
      * Sets catalogId.
      * <p>
@@ -306,6 +308,37 @@ public class WhatsAppInteractiveOrderDetailsOrder {
         this.orderExpiration = orderExpiration;
     }
 
+    /**
+     * Sets orderDetailsType.
+     *
+     * @param orderDetailsType
+     * @return This {@link WhatsAppInteractiveOrderDetailsOrder instance}.
+     */
+    public WhatsAppInteractiveOrderDetailsOrder orderDetailsType(WhatsAppOrderDetailsType orderDetailsType) {
+        this.orderDetailsType = orderDetailsType;
+        return this;
+    }
+
+    /**
+     * Returns orderDetailsType.
+     *
+     * @return orderDetailsType
+     */
+    @JsonProperty("orderDetailsType")
+    public WhatsAppOrderDetailsType getOrderDetailsType() {
+        return orderDetailsType;
+    }
+
+    /**
+     * Sets orderDetailsType.
+     *
+     * @param orderDetailsType
+     */
+    @JsonProperty("orderDetailsType")
+    public void setOrderDetailsType(WhatsAppOrderDetailsType orderDetailsType) {
+        this.orderDetailsType = orderDetailsType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -322,12 +355,13 @@ public class WhatsAppInteractiveOrderDetailsOrder {
                 && Objects.equals(this.tax, whatsAppInteractiveOrderDetailsOrder.tax)
                 && Objects.equals(this.shipping, whatsAppInteractiveOrderDetailsOrder.shipping)
                 && Objects.equals(this.discount, whatsAppInteractiveOrderDetailsOrder.discount)
-                && Objects.equals(this.orderExpiration, whatsAppInteractiveOrderDetailsOrder.orderExpiration);
+                && Objects.equals(this.orderExpiration, whatsAppInteractiveOrderDetailsOrder.orderExpiration)
+                && Objects.equals(this.orderDetailsType, whatsAppInteractiveOrderDetailsOrder.orderDetailsType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(catalogId, items, subtotal, tax, shipping, discount, orderExpiration);
+        return Objects.hash(catalogId, items, subtotal, tax, shipping, discount, orderExpiration, orderDetailsType);
     }
 
     @Override
@@ -356,6 +390,9 @@ public class WhatsAppInteractiveOrderDetailsOrder {
                 .append(newLine)
                 .append("    orderExpiration: ")
                 .append(toIndentedString(orderExpiration))
+                .append(newLine)
+                .append("    orderDetailsType: ")
+                .append(toIndentedString(orderDetailsType))
                 .append(newLine)
                 .append("}")
                 .toString();

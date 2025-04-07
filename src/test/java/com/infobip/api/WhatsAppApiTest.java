@@ -2248,16 +2248,13 @@ class WhatsAppApiTest extends ApiTest {
         String givenPaymentId = "fd3e847h2";
         WhatsAppWebhookPaymentNotification.PaymentStatusEnum givenPaymentStatus =
                 WhatsAppWebhookPaymentNotification.PaymentStatusEnum.CAPTURED;
-        WhatsAppWebhookPaymentNotification.CurrencyEnum givenCurrency =
-                WhatsAppWebhookPaymentNotification.CurrencyEnum.INR;
+        WhatsAppPaymentCurrency givenCurrency = WhatsAppPaymentCurrency.INR;
         Integer givenTotalAmountValue = 21000;
         Integer givenTotalAmountOffset = 100;
         String givenCallbackData1 = "customData1";
         String givenId = "27194245144";
-        WhatsAppWebhookPaymentTransactionNotification.TypeEnum givenTransactionType =
-                WhatsAppWebhookPaymentTransactionNotification.TypeEnum.UPI;
-        WhatsAppWebhookPaymentTransactionNotification.StatusEnum givenStatus =
-                WhatsAppWebhookPaymentTransactionNotification.StatusEnum.SUCCESS;
+        WhatsAppPaymentTransactionType givenTransactionType = WhatsAppPaymentTransactionType.UPI;
+        WhatsAppPaymentTransactionStatus givenStatus = WhatsAppPaymentTransactionStatus.SUCCESS;
         String givenCreatedTimestamp = "2023-01-01T01:00:00.000+0000";
         String givenUpdatedTimestamp = "2023-01-01T01:00:00.000+0000";
         String givenCreatedAtTimestamp = "2023-01-01T01:00:00.000+0000";

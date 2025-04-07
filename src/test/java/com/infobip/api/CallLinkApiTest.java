@@ -1,6 +1,5 @@
 package com.infobip.api;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.BDDAssertions.then;
 
 import com.infobip.model.*;

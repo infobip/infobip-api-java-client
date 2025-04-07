@@ -10,6 +10,7 @@
 package com.infobip.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.annotations.Beta;
 import com.infobip.ApiCallback;
 import com.infobip.ApiClient;
 import com.infobip.ApiException;
@@ -140,6 +141,7 @@ public class WhatsAppApi {
      * @return AddWhatsappSenderRequest
      * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
      */
+    @Beta
     public AddWhatsappSenderRequest addWhatsappSender(
             Long businessAccountId, WhatsAppPhoneNumberRequest whatsAppPhoneNumberRequest) {
         return new AddWhatsappSenderRequest(businessAccountId, whatsAppPhoneNumberRequest);
@@ -1342,6 +1344,7 @@ public class WhatsAppApi {
      * @return RetryWhatsappSenderVerificationRequest
      * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
      */
+    @Beta
     public RetryWhatsappSenderVerificationRequest retryWhatsappSenderVerification(
             String sender, WhatsAppOtpRequest whatsAppOtpRequest) {
         return new RetryWhatsappSenderVerificationRequest(sender, whatsAppOtpRequest);
@@ -2391,6 +2394,7 @@ public class WhatsAppApi {
      * @return SendWhatsappInteractiveOrderDetailsMessageRequest
      * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
      */
+    @Beta
     public SendWhatsappInteractiveOrderDetailsMessageRequest sendWhatsappInteractiveOrderDetailsMessage(
             WhatsAppInteractiveOrderDetailsMessage whatsAppInteractiveOrderDetailsMessage) {
         return new SendWhatsappInteractiveOrderDetailsMessageRequest(whatsAppInteractiveOrderDetailsMessage);
@@ -2460,6 +2464,7 @@ public class WhatsAppApi {
      * @return SendWhatsappInteractiveOrderStatusMessageRequest
      * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
      */
+    @Beta
     public SendWhatsappInteractiveOrderStatusMessageRequest sendWhatsappInteractiveOrderStatusMessage(
             WhatsAppInteractiveOrderStatusMessage whatsAppInteractiveOrderStatusMessage) {
         return new SendWhatsappInteractiveOrderStatusMessageRequest(whatsAppInteractiveOrderStatusMessage);
@@ -2662,6 +2667,7 @@ public class WhatsAppApi {
      * @return VerifyWhatsappSenderRequest
      * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
      */
+    @Beta
     public VerifyWhatsappSenderRequest verifyWhatsappSender(
             String sender, WhatsAppVerifyCodeRequest whatsAppVerifyCodeRequest) {
         return new VerifyWhatsappSenderRequest(sender, whatsAppVerifyCodeRequest);

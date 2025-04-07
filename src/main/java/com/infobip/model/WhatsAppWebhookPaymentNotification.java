@@ -69,42 +69,7 @@ public class WhatsAppWebhookPaymentNotification {
 
     private PaymentStatusEnum paymentStatus;
 
-    /**
-     * Currency of the payment.
-     */
-    public enum CurrencyEnum {
-        INR("INR"),
-        BRL("BRL"),
-        UNKNOWN("UNKNOWN");
-
-        private String value;
-
-        CurrencyEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static CurrencyEnum fromValue(String value) {
-            for (CurrencyEnum enumElement : CurrencyEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private CurrencyEnum currency;
+    private WhatsAppPaymentCurrency currency;
 
     private Integer totalAmountValue;
 
@@ -316,41 +281,32 @@ public class WhatsAppWebhookPaymentNotification {
 
     /**
      * Sets currency.
-     * <p>
-     * Field description:
-     * Currency of the payment.
      *
      * @param currency
      * @return This {@link WhatsAppWebhookPaymentNotification instance}.
      */
-    public WhatsAppWebhookPaymentNotification currency(CurrencyEnum currency) {
+    public WhatsAppWebhookPaymentNotification currency(WhatsAppPaymentCurrency currency) {
         this.currency = currency;
         return this;
     }
 
     /**
      * Returns currency.
-     * <p>
-     * Field description:
-     * Currency of the payment.
      *
      * @return currency
      */
     @JsonProperty("currency")
-    public CurrencyEnum getCurrency() {
+    public WhatsAppPaymentCurrency getCurrency() {
         return currency;
     }
 
     /**
      * Sets currency.
-     * <p>
-     * Field description:
-     * Currency of the payment.
      *
      * @param currency
      */
     @JsonProperty("currency")
-    public void setCurrency(CurrencyEnum currency) {
+    public void setCurrency(WhatsAppPaymentCurrency currency) {
         this.currency = currency;
     }
 

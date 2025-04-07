@@ -26,7 +26,9 @@ public enum MessagesApiMessageBodyType {
     CAROUSEL("CAROUSEL"),
     LOCATION("LOCATION"),
     CONTACT("CONTACT"),
-    STICKER("STICKER");
+    STICKER("STICKER"),
+    PRODUCT("PRODUCT"),
+    MIXED("MIXED");
 
     private final String value;
 

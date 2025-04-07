@@ -5,6 +5,44 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [6.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.1.0) ] - 2025-04-07
+
+⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
+All changes, including breaking changes, are addressed and explained in the list bellow.
+If you find out that something was not addressed properly, please submit an issue.
+
+### Added
+* Most recent feature set for:
+  * [Infobip Messages API](https://www.infobip.com/docs/api/platform/messages-api).
+  * [Infobip Voice API](https://www.infobip.com/docs/api/channels/voice).
+  * [Infobip SMS API](https://www.infobip.com/docs/api/channels/sms).
+  * [Infobip 2FA API](https://www.infobip.com/docs/api/platform/2fa).
+  * [Infobip Email API](https://www.infobip.com/docs/api/channels/email).
+  * [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp).
+  * [Infobip Viber API](https://www.infobip.com/docs/api/channels/viber).
+  * [Infobip WebRTC API](https://www.infobip.com/docs/api/channels/webrtc-calls).
+  * [Infobip Moments](https://www.infobip.com/docs/api/customer-engagement/moments).
+  * [Infobip MMS API](https://www.infobip.com/docs/api/channels/mms).
+* **Added** new Viber Outbound Content type: `LIST`.
+* **Added** new MessagesApi message body types: `PRODUCT` and `MIXED`.
+* **Added** new WhatsAppInteractive payment status and payment details type: `UPI_INTENT`.
+* **Added** support for `WEBSOCKET` option in call routing endpoint.
+
+
+### Changed
+* [WhatsAppWebhookPaymentTransactionNotification](src/main/java/com/infobip/model/WhatsAppWebhookPaymentTransactionNotification.java) model, previously nested enum 'type' and 'status' are now extracted to a separate class.
+* [WhatsAppWebhookPaymentNotification](src/main/java/com/infobip/model/WhatsAppWebhookPaymentNotification.java) model, previously nested enum 'currency' is now extracted to a separate class.
+* **Updated** `WhatsAppTemplateCardContent.buttons` field type from `List<WhatsAppTemplateButtonContent>` → `List<WhatsAppCardAllowedTemplateButtonContent>`.
+* **Updated** `WhatsAppTemplatePublicApiRequest.structure` field type from `WhatAppTemplateStructureApiData` → `Object`.
+* **Updated** `CallsUpdateScenarioResponse.lastUsageDate` field type from `String` → `LocalDate`.
+* **Updated** `CallsSearchResponse.lastUsageDate` field type from `String` → `LocalDate`.
+* **Removed** `EmailWebhookTrackReport` and `EmailWebhookTrackResponse`  in favor of a unified class: `EmailWebhookTrackingPayload`.
+* **Updated** `FormsRequest.formType` field type from `FormType` → `String`.
+* Fixed Javadoc.
+
+### Removed
+* **Removed** deviceDetails and networkId fields `MessagesApiDeliveryResult`.
+
 ## [ [6.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.0.0) ] - 2025-02-17
 
 🎉 **NEW Major Version of `infobip-api-java-client`.**

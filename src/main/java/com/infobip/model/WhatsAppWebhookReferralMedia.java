@@ -10,12 +10,23 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.Objects;
 
 /**
  * Media information of included referral.
  */
-public class WhatsAppWebhookReferralMedia {
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "type",
+        visible = true)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = WhatsAppWebhookReferralMediaImage.class, name = "IMAGE"),
+    @JsonSubTypes.Type(value = WhatsAppWebhookReferralMediaVideo.class, name = "VIDEO"),
+})
+public abstract class WhatsAppWebhookReferralMedia {
 
     protected final WhatsAppWebhookMediaType type;
 

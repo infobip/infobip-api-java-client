@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.infobip.RawJsonDeserializer;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
@@ -35,7 +36,7 @@ public class CallsUpdateScenarioResponse {
 
     private OffsetDateTime updateTime;
 
-    private String lastUsageDate;
+    private LocalDate lastUsageDate;
 
     /**
      * Sets createTime.
@@ -277,7 +278,7 @@ public class CallsUpdateScenarioResponse {
      * @param lastUsageDate
      * @return This {@link CallsUpdateScenarioResponse instance}.
      */
-    public CallsUpdateScenarioResponse lastUsageDate(String lastUsageDate) {
+    public CallsUpdateScenarioResponse lastUsageDate(LocalDate lastUsageDate) {
         this.lastUsageDate = lastUsageDate;
         return this;
     }
@@ -291,7 +292,7 @@ public class CallsUpdateScenarioResponse {
      * @return lastUsageDate
      */
     @JsonProperty("lastUsageDate")
-    public String getLastUsageDate() {
+    public LocalDate getLastUsageDate() {
         return lastUsageDate;
     }
 
@@ -304,7 +305,7 @@ public class CallsUpdateScenarioResponse {
      * @param lastUsageDate
      */
     @JsonProperty("lastUsageDate")
-    public void setLastUsageDate(String lastUsageDate) {
+    public void setLastUsageDate(LocalDate lastUsageDate) {
         this.lastUsageDate = lastUsageDate;
     }
 

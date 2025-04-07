@@ -21,6 +21,8 @@ public class MessagesApiMessageDeliveryReporting {
 
     private Boolean intermediateReport;
 
+    private Boolean receiveTriggeredFailoverReports;
+
     /**
      * Sets url.
      * <p>
@@ -65,7 +67,7 @@ public class MessagesApiMessageDeliveryReporting {
      * Sets intermediateReport.
      * <p>
      * Field description:
-     * The real-time intermediate delivery report containing GSM error codes, messages status, pricing, network and country codes, etc., which will be sent on your callback server. Defaults to &#x60;false&#x60;.
+     * The real-time intermediate delivery report containing GSM error codes, messages status, pricing, network and country codes, etc., which will be sent on your callback server. The default setting is &#x60;false&#x60;.
      *
      * @param intermediateReport
      * @return This {@link MessagesApiMessageDeliveryReporting instance}.
@@ -79,7 +81,7 @@ public class MessagesApiMessageDeliveryReporting {
      * Returns intermediateReport.
      * <p>
      * Field description:
-     * The real-time intermediate delivery report containing GSM error codes, messages status, pricing, network and country codes, etc., which will be sent on your callback server. Defaults to &#x60;false&#x60;.
+     * The real-time intermediate delivery report containing GSM error codes, messages status, pricing, network and country codes, etc., which will be sent on your callback server. The default setting is &#x60;false&#x60;.
      *
      * @return intermediateReport
      */
@@ -92,13 +94,54 @@ public class MessagesApiMessageDeliveryReporting {
      * Sets intermediateReport.
      * <p>
      * Field description:
-     * The real-time intermediate delivery report containing GSM error codes, messages status, pricing, network and country codes, etc., which will be sent on your callback server. Defaults to &#x60;false&#x60;.
+     * The real-time intermediate delivery report containing GSM error codes, messages status, pricing, network and country codes, etc., which will be sent on your callback server. The default setting is &#x60;false&#x60;.
      *
      * @param intermediateReport
      */
     @JsonProperty("intermediateReport")
     public void setIntermediateReport(Boolean intermediateReport) {
         this.intermediateReport = intermediateReport;
+    }
+
+    /**
+     * Sets receiveTriggeredFailoverReports.
+     * <p>
+     * Field description:
+     * Allows you to receive delivery reports for all triggered failover steps, not just the final one (either the first successful or the last failed step). The default setting is &#x60;false&#x60;.
+     *
+     * @param receiveTriggeredFailoverReports
+     * @return This {@link MessagesApiMessageDeliveryReporting instance}.
+     */
+    public MessagesApiMessageDeliveryReporting receiveTriggeredFailoverReports(
+            Boolean receiveTriggeredFailoverReports) {
+        this.receiveTriggeredFailoverReports = receiveTriggeredFailoverReports;
+        return this;
+    }
+
+    /**
+     * Returns receiveTriggeredFailoverReports.
+     * <p>
+     * Field description:
+     * Allows you to receive delivery reports for all triggered failover steps, not just the final one (either the first successful or the last failed step). The default setting is &#x60;false&#x60;.
+     *
+     * @return receiveTriggeredFailoverReports
+     */
+    @JsonProperty("receiveTriggeredFailoverReports")
+    public Boolean getReceiveTriggeredFailoverReports() {
+        return receiveTriggeredFailoverReports;
+    }
+
+    /**
+     * Sets receiveTriggeredFailoverReports.
+     * <p>
+     * Field description:
+     * Allows you to receive delivery reports for all triggered failover steps, not just the final one (either the first successful or the last failed step). The default setting is &#x60;false&#x60;.
+     *
+     * @param receiveTriggeredFailoverReports
+     */
+    @JsonProperty("receiveTriggeredFailoverReports")
+    public void setReceiveTriggeredFailoverReports(Boolean receiveTriggeredFailoverReports) {
+        this.receiveTriggeredFailoverReports = receiveTriggeredFailoverReports;
     }
 
     @Override
@@ -112,12 +155,15 @@ public class MessagesApiMessageDeliveryReporting {
         MessagesApiMessageDeliveryReporting messagesApiMessageDeliveryReporting =
                 (MessagesApiMessageDeliveryReporting) o;
         return Objects.equals(this.url, messagesApiMessageDeliveryReporting.url)
-                && Objects.equals(this.intermediateReport, messagesApiMessageDeliveryReporting.intermediateReport);
+                && Objects.equals(this.intermediateReport, messagesApiMessageDeliveryReporting.intermediateReport)
+                && Objects.equals(
+                        this.receiveTriggeredFailoverReports,
+                        messagesApiMessageDeliveryReporting.receiveTriggeredFailoverReports);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, intermediateReport);
+        return Objects.hash(url, intermediateReport, receiveTriggeredFailoverReports);
     }
 
     @Override
@@ -131,6 +177,9 @@ public class MessagesApiMessageDeliveryReporting {
                 .append(newLine)
                 .append("    intermediateReport: ")
                 .append(toIndentedString(intermediateReport))
+                .append(newLine)
+                .append("    receiveTriggeredFailoverReports: ")
+                .append(toIndentedString(receiveTriggeredFailoverReports))
                 .append(newLine)
                 .append("}")
                 .toString();

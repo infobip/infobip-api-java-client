@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Array of substitute destinations distinguished by a &#x60;channel&#x60; they belong to. Only one substitute destination per &#x60;channel&#x60; is permitted.
+ * An array of substitute destinations, each associated with a specific &#x60;channel&#x60;. Only one substitute destination is allowed per &#x60;channel&#x60;. A substitute destination must be provided for the main &#x60;channel&#x60; defined in the &#x60;message&#x60;.
  */
 public class MessagesApiChannelDestination {
 

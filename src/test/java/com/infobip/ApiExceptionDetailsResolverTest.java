@@ -9,7 +9,6 @@
 
 package com.infobip;
 
-import static org.assertj.core.api.BDDAssertions.*;
 import static org.assertj.core.api.BDDAssertions.then;
 
 import java.util.List;

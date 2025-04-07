@@ -17,6 +17,8 @@ import java.util.Objects;
  */
 public class WhatsAppTemplateUrlButtonContent extends WhatsAppTemplateButtonContent {
 
+    private String type;
+
     private String parameter;
 
     /**
@@ -27,10 +29,47 @@ public class WhatsAppTemplateUrlButtonContent extends WhatsAppTemplateButtonCont
     }
 
     /**
+     * Sets type.
+     * <p>
+     * The field is required.
+     *
+     * @param type
+     * @return This {@link WhatsAppTemplateUrlButtonContent instance}.
+     */
+    public WhatsAppTemplateUrlButtonContent type(String type) {
+        this.type = type;
+        return this;
+    }
+
+    /**
+     * Returns type.
+     * <p>
+     * The field is required.
+     *
+     * @return type
+     */
+    @JsonProperty("type")
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Sets type.
+     * <p>
+     * The field is required.
+     *
+     * @param type
+     */
+    @JsonProperty("type")
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
      * Sets parameter.
      * <p>
      * Field description:
-     * URL extension of a &#x60;dynamic URL&#x60; defined in the registered template.
+     * URL extension of a &#x60;dynamic URL&#x60; defined in the registered template. Learn more about [URL buttons](https://www.infobip.com/docs/whatsapp/api#dynamic-and-static-template-button-urls-message-templates).
      * <p>
      * The field is required.
      *
@@ -46,7 +85,7 @@ public class WhatsAppTemplateUrlButtonContent extends WhatsAppTemplateButtonCont
      * Returns parameter.
      * <p>
      * Field description:
-     * URL extension of a &#x60;dynamic URL&#x60; defined in the registered template.
+     * URL extension of a &#x60;dynamic URL&#x60; defined in the registered template. Learn more about [URL buttons](https://www.infobip.com/docs/whatsapp/api#dynamic-and-static-template-button-urls-message-templates).
      * <p>
      * The field is required.
      *
@@ -61,7 +100,7 @@ public class WhatsAppTemplateUrlButtonContent extends WhatsAppTemplateButtonCont
      * Sets parameter.
      * <p>
      * Field description:
-     * URL extension of a &#x60;dynamic URL&#x60; defined in the registered template.
+     * URL extension of a &#x60;dynamic URL&#x60; defined in the registered template. Learn more about [URL buttons](https://www.infobip.com/docs/whatsapp/api#dynamic-and-static-template-button-urls-message-templates).
      * <p>
      * The field is required.
      *
@@ -81,12 +120,14 @@ public class WhatsAppTemplateUrlButtonContent extends WhatsAppTemplateButtonCont
             return false;
         }
         WhatsAppTemplateUrlButtonContent whatsAppTemplateUrlButtonContent = (WhatsAppTemplateUrlButtonContent) o;
-        return Objects.equals(this.parameter, whatsAppTemplateUrlButtonContent.parameter) && super.equals(o);
+        return Objects.equals(this.type, whatsAppTemplateUrlButtonContent.type)
+                && Objects.equals(this.parameter, whatsAppTemplateUrlButtonContent.parameter)
+                && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(parameter, super.hashCode());
+        return Objects.hash(type, parameter, super.hashCode());
     }
 
     @Override
@@ -97,6 +138,9 @@ public class WhatsAppTemplateUrlButtonContent extends WhatsAppTemplateButtonCont
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
+                .append(newLine)
+                .append("    type: ")
+                .append(toIndentedString(type))
                 .append(newLine)
                 .append("    parameter: ")
                 .append(toIndentedString(parameter))

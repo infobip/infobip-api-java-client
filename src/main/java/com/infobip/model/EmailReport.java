@@ -34,6 +34,10 @@ public class EmailReport {
 
     private Integer messageCount;
 
+    private Integer attemptCount;
+
+    private Long timeToFirstAttempt;
+
     private MessagePrice price;
 
     private MessageStatus status;
@@ -361,6 +365,86 @@ public class EmailReport {
     }
 
     /**
+     * Sets attemptCount.
+     * <p>
+     * Field description:
+     * Number of times delivery was attempted for the email.
+     *
+     * @param attemptCount
+     * @return This {@link EmailReport instance}.
+     */
+    public EmailReport attemptCount(Integer attemptCount) {
+        this.attemptCount = attemptCount;
+        return this;
+    }
+
+    /**
+     * Returns attemptCount.
+     * <p>
+     * Field description:
+     * Number of times delivery was attempted for the email.
+     *
+     * @return attemptCount
+     */
+    @JsonProperty("attemptCount")
+    public Integer getAttemptCount() {
+        return attemptCount;
+    }
+
+    /**
+     * Sets attemptCount.
+     * <p>
+     * Field description:
+     * Number of times delivery was attempted for the email.
+     *
+     * @param attemptCount
+     */
+    @JsonProperty("attemptCount")
+    public void setAttemptCount(Integer attemptCount) {
+        this.attemptCount = attemptCount;
+    }
+
+    /**
+     * Sets timeToFirstAttempt.
+     * <p>
+     * Field description:
+     * This is the time in milliseconds between accepting the request and making the first delivery attempt to the destination.
+     *
+     * @param timeToFirstAttempt
+     * @return This {@link EmailReport instance}.
+     */
+    public EmailReport timeToFirstAttempt(Long timeToFirstAttempt) {
+        this.timeToFirstAttempt = timeToFirstAttempt;
+        return this;
+    }
+
+    /**
+     * Returns timeToFirstAttempt.
+     * <p>
+     * Field description:
+     * This is the time in milliseconds between accepting the request and making the first delivery attempt to the destination.
+     *
+     * @return timeToFirstAttempt
+     */
+    @JsonProperty("timeToFirstAttempt")
+    public Long getTimeToFirstAttempt() {
+        return timeToFirstAttempt;
+    }
+
+    /**
+     * Sets timeToFirstAttempt.
+     * <p>
+     * Field description:
+     * This is the time in milliseconds between accepting the request and making the first delivery attempt to the destination.
+     *
+     * @param timeToFirstAttempt
+     */
+    @JsonProperty("timeToFirstAttempt")
+    public void setTimeToFirstAttempt(Long timeToFirstAttempt) {
+        this.timeToFirstAttempt = timeToFirstAttempt;
+    }
+
+    /**
      * Sets price.
      *
      * @param price
@@ -470,6 +554,8 @@ public class EmailReport {
                 && Objects.equals(this.sentAt, emailReport.sentAt)
                 && Objects.equals(this.doneAt, emailReport.doneAt)
                 && Objects.equals(this.messageCount, emailReport.messageCount)
+                && Objects.equals(this.attemptCount, emailReport.attemptCount)
+                && Objects.equals(this.timeToFirstAttempt, emailReport.timeToFirstAttempt)
                 && Objects.equals(this.price, emailReport.price)
                 && Objects.equals(this.status, emailReport.status)
                 && Objects.equals(this.error, emailReport.error);
@@ -478,7 +564,19 @@ public class EmailReport {
     @Override
     public int hashCode() {
         return Objects.hash(
-                applicationId, entityId, bulkId, messageId, to, sentAt, doneAt, messageCount, price, status, error);
+                applicationId,
+                entityId,
+                bulkId,
+                messageId,
+                to,
+                sentAt,
+                doneAt,
+                messageCount,
+                attemptCount,
+                timeToFirstAttempt,
+                price,
+                status,
+                error);
     }
 
     @Override
@@ -510,6 +608,12 @@ public class EmailReport {
                 .append(newLine)
                 .append("    messageCount: ")
                 .append(toIndentedString(messageCount))
+                .append(newLine)
+                .append("    attemptCount: ")
+                .append(toIndentedString(attemptCount))
+                .append(newLine)
+                .append("    timeToFirstAttempt: ")
+                .append(toIndentedString(timeToFirstAttempt))
                 .append(newLine)
                 .append("    price: ")
                 .append(toIndentedString(price))

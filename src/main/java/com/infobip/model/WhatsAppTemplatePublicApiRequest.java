@@ -81,7 +81,7 @@ public abstract class WhatsAppTemplatePublicApiRequest {
 
     private Boolean allowCategoryChange;
 
-    private WhatsAppTemplateStructureApiData structure;
+    private Object structure;
 
     private Platform platform;
 
@@ -231,7 +231,7 @@ public abstract class WhatsAppTemplatePublicApiRequest {
      * @param structure
      * @return This {@link WhatsAppTemplatePublicApiRequest instance}.
      */
-    public WhatsAppTemplatePublicApiRequest structure(WhatsAppTemplateStructureApiData structure) {
+    public WhatsAppTemplatePublicApiRequest structure(Object structure) {
         this.structure = structure;
         return this;
     }
@@ -244,7 +244,7 @@ public abstract class WhatsAppTemplatePublicApiRequest {
      * @return structure
      */
     @JsonProperty("structure")
-    public WhatsAppTemplateStructureApiData getStructure() {
+    public Object getStructure() {
         return structure;
     }
 
@@ -256,7 +256,7 @@ public abstract class WhatsAppTemplatePublicApiRequest {
      * @param structure
      */
     @JsonProperty("structure")
-    public void setStructure(WhatsAppTemplateStructureApiData structure) {
+    public void setStructure(Object structure) {
         this.structure = structure;
     }
 

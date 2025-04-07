@@ -19,6 +19,7 @@ public enum CallsSipTrunkLocation {
     SAO_PAULO("SAO_PAULO"),
     BOGOTA("BOGOTA"),
     FRANKFURT("FRANKFURT"),
+    SWEDEN("SWEDEN"),
     JOHANNESBURG("JOHANNESBURG"),
     NEW_YORK("NEW_YORK"),
     PORTLAND("PORTLAND"),

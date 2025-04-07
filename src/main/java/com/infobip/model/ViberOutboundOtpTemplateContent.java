@@ -35,6 +35,9 @@ public class ViberOutboundOtpTemplateContent extends ViberOutboundContent {
     /**
      * Sets id.
      * <p>
+     * Field description:
+     * Predefined code of a template to be sent.
+     * <p>
      * The field is required.
      *
      * @param id
@@ -48,6 +51,9 @@ public class ViberOutboundOtpTemplateContent extends ViberOutboundContent {
     /**
      * Returns id.
      * <p>
+     * Field description:
+     * Predefined code of a template to be sent.
+     * <p>
      * The field is required.
      *
      * @return id
@@ -59,6 +65,9 @@ public class ViberOutboundOtpTemplateContent extends ViberOutboundContent {
 
     /**
      * Sets id.
+     * <p>
+     * Field description:
+     * Predefined code of a template to be sent.
      * <p>
      * The field is required.
      *
@@ -72,6 +81,9 @@ public class ViberOutboundOtpTemplateContent extends ViberOutboundContent {
     /**
      * Sets parameters.
      * <p>
+     * Field description:
+     * A range of variables which are specific per template.
+     * <p>
      * The field is required.
      *
      * @param parameters
@@ -84,6 +96,9 @@ public class ViberOutboundOtpTemplateContent extends ViberOutboundContent {
 
     /**
      * Puts and entry into parameters.
+     * <p>
+     * Field description:
+     * A range of variables which are specific per template.
      * <p>
      * The field is required.
      *
@@ -102,6 +117,9 @@ public class ViberOutboundOtpTemplateContent extends ViberOutboundContent {
     /**
      * Returns parameters.
      * <p>
+     * Field description:
+     * A range of variables which are specific per template.
+     * <p>
      * The field is required.
      *
      * @return parameters
@@ -113,6 +131,9 @@ public class ViberOutboundOtpTemplateContent extends ViberOutboundContent {
 
     /**
      * Sets parameters.
+     * <p>
+     * Field description:
+     * A range of variables which are specific per template.
      * <p>
      * The field is required.
      *

@@ -19,7 +19,6 @@ import com.infobip.model.FormsResponse;
 import com.infobip.model.FormsResponseContent;
 import com.infobip.model.FormsStatus;
 import com.infobip.model.FormsStatusResponse;
-import com.infobip.model.FormsType;
 import java.util.Map;
 import java.util.Objects;
 
@@ -97,7 +96,7 @@ public class FormsApi {
     }
 
     private RequestDefinition getFormsDefinition(
-            Integer offset, Integer limit, FormsType formType, FormsStatus formStatus) {
+            Integer offset, Integer limit, String formType, FormsStatus formStatus) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/forms/1/forms")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -123,7 +122,7 @@ public class FormsApi {
     public class GetFormsRequest {
         private Integer offset;
         private Integer limit;
-        private FormsType formType;
+        private String formType;
         private FormsStatus formStatus;
 
         private GetFormsRequest() {}
@@ -156,7 +155,7 @@ public class FormsApi {
          * @param formType The type of returned forms. (optional)
          * @return GetFormsRequest
          */
-        public GetFormsRequest formType(FormsType formType) {
+        public GetFormsRequest formType(String formType) {
             this.formType = formType;
             return this;
         }

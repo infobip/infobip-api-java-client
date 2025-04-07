@@ -27,7 +27,7 @@ The current version of this library includes this subset of Infobip products:
 * [SMS](https://www.infobip.com/docs/api/channels/sms)
 * [MMS](https://www.infobip.com/docs/api/channels/mms)
 * [Voice](https://www.infobip.com/docs/api/channels/voice)
-* [WebRTC](https://www.infobip.com/docs/api/channels/webrtc)
+* [WebRTC](https://www.infobip.com/docs/api/channels/webrtc-calls/webrtc)
 * [Email](https://www.infobip.com/docs/api/channels/email)
 * [WhatsApp](https://www.infobip.com/docs/api/channels/whatsapp)
 * [Viber](https://www.infobip.com/docs/api/channels/viber)
@@ -47,9 +47,9 @@ The library requires Java 11 and is compatible up to and including Java 19.
 Simply add the following in your project's POM file under `dependencies` tag:
 ```xml
 <dependency>
-    <groupId>com.infobip</groupId>
-    <artifactId>infobip-api-java-client</artifactId>
-    <version>6.0.0</version>
+      <groupId>com.infobip</groupId>
+      <artifactId>infobip-api-java-client</artifactId>
+      <version>6.1.0</version>
 </dependency>
 ```
 
@@ -91,7 +91,7 @@ See below, a simple example of sending a single SMS message to a single recipien
         .sender("InfoSMS")
         .addDestinationsItem(new SmsDestination().to("41793026727"))
         .content(new SmsTextContent().text("Hello World from infobip-api-java-client!"));
-    
+
     SmsRequest smsMessageRequest = new SmsRequest()
         .messages(List.of(message));
 ```
@@ -146,22 +146,24 @@ Example of webhook implementation with Spring Web framework:
     @PostMapping("/delivery-reports")
     public void receiveDeliveryReports(HttpServletRequest request) throws IOException {
         SmsDeliveryResult reports = new JSON().deserialize(request.getInputStream(), SmsDeliveryResult.class);
+
         for (SmsDeliveryReport report : reports.getResults()) {
             System.out.println(report.getMessageId() + " - " + report.getStatus().getName());
         }
     }
 ```
-If you prefer to use your own serializer, make note of the supported [date format](https://www.infobip.com/docs/essentials/integration-best-practices#date-formats).
+If you prefer to use your own serializer, make note of the supported [date format](https://www.infobip.com/docs/essentials/api-essentials/integration-best-practices#date-formats).
 You can always take a look at our [implementation](https://github.com/infobip/infobip-api-java-client/blob/master/src/main/java/com/infobip/JSON.java).
 
 #### Fetching delivery reports
 If you are for any reason unable to receive real-time delivery reports on your endpoint, you can use `messageId` or `bulkId` to fetch them.
-Each request will return a batch of delivery reports - only once. See [documentation](https://www.infobip.com/docs/api/channels/sms/sms-messaging/logs-and-status-reports/get-outbound-sms-message-delivery-reports) for more details.
+Each request will return a batch of delivery reports - only once. See [documentation](https://www.infobip.com/docs/api/channels/sms/logs-and-status-reports/get-outbound-sms-message-delivery-reports-v3) for more details.
 
 ```java
     SmsDeliveryResult deliveryResult = smsApi.getOutboundSmsMessageDeliveryReports()
                                              .bulkId("bulkId")
                                              .execute();
+
     for (SmsDeliveryReport report : deliveryResult.getResults()) {
         System.out.println(report.getMessageId() + " - " + report.getStatus().getName());
     }
@@ -173,9 +175,11 @@ Infobip API supports Unicode characters and automatically detects encoding. Unic
 ```java
     SmsPreviewRequest smsPreviewRequest = new SmsPreviewRequest()
             .text("Let's see how many characters will remain unused in this message.");
+
     SmsPreviewResponse previewResponse = smsApi
             .previewSmsMessage(smsPreviewRequest)
             .execute();
+
     System.out.println(previewResponse);
 ```
 

@@ -30,6 +30,8 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = MessagesApiMessageImageBody.class, name = "IMAGE"),
     @JsonSubTypes.Type(value = MessagesApiMessageListBody.class, name = "LIST"),
     @JsonSubTypes.Type(value = MessagesApiMessageLocationBody.class, name = "LOCATION"),
+    @JsonSubTypes.Type(value = MessagesApiMessageMixedBody.class, name = "MIXED"),
+    @JsonSubTypes.Type(value = MessagesApiMessageProductBody.class, name = "PRODUCT"),
     @JsonSubTypes.Type(value = MessagesApiMessageRichLinkBody.class, name = "RICH_LINK"),
     @JsonSubTypes.Type(value = MessagesApiMessageStickerBody.class, name = "STICKER"),
     @JsonSubTypes.Type(value = MessagesApiMessageTextBody.class, name = "TEXT"),

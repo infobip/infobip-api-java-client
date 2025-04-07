@@ -27,6 +27,8 @@ public class ViberOutboundVideoContent extends ViberOutboundContent {
 
     private String buttonTitle;
 
+    private ViberButton button;
+
     /**
      * Constructs a new {@link ViberOutboundVideoContent} instance.
      */
@@ -252,6 +254,37 @@ public class ViberOutboundVideoContent extends ViberOutboundContent {
         this.buttonTitle = buttonTitle;
     }
 
+    /**
+     * Sets button.
+     *
+     * @param button
+     * @return This {@link ViberOutboundVideoContent instance}.
+     */
+    public ViberOutboundVideoContent button(ViberButton button) {
+        this.button = button;
+        return this;
+    }
+
+    /**
+     * Returns button.
+     *
+     * @return button
+     */
+    @JsonProperty("button")
+    public ViberButton getButton() {
+        return button;
+    }
+
+    /**
+     * Sets button.
+     *
+     * @param button
+     */
+    @JsonProperty("button")
+    public void setButton(ViberButton button) {
+        this.button = button;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -266,12 +299,13 @@ public class ViberOutboundVideoContent extends ViberOutboundContent {
                 && Objects.equals(this.mediaDuration, viberOutboundVideoContent.mediaDuration)
                 && Objects.equals(this.thumbnailUrl, viberOutboundVideoContent.thumbnailUrl)
                 && Objects.equals(this.buttonTitle, viberOutboundVideoContent.buttonTitle)
+                && Objects.equals(this.button, viberOutboundVideoContent.button)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, mediaUrl, mediaDuration, thumbnailUrl, buttonTitle, super.hashCode());
+        return Objects.hash(text, mediaUrl, mediaDuration, thumbnailUrl, buttonTitle, button, super.hashCode());
     }
 
     @Override
@@ -297,6 +331,9 @@ public class ViberOutboundVideoContent extends ViberOutboundContent {
                 .append(newLine)
                 .append("    buttonTitle: ")
                 .append(toIndentedString(buttonTitle))
+                .append(newLine)
+                .append("    button: ")
+                .append(toIndentedString(button))
                 .append(newLine)
                 .append("}")
                 .toString();

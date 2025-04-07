@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION)
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = WhatsAppAuthenticationTemplateStructureApiData.class),
-    @JsonSubTypes.Type(value = WhatsAppDefaultTemplateStructureApiData.class)
+    @JsonSubTypes.Type(value = MessagesApiMessageMixedMediaItem.class),
+    @JsonSubTypes.Type(value = MessagesApiMessageMixedTextItem.class)
 })
-public interface WhatsAppTemplateStructureApiData {}
+public interface MessagesApiMessageMixedItem {}

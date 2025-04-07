@@ -426,9 +426,7 @@ class MessagesApiTest extends ApiTest {
         boolean expectedPermanent = true;
         String expectedApplicationId = "string";
         String expectedEntityId = "string";
-        String expectedDeviceDetails = "string";
         Integer expectedMccMnc = 0;
-        Integer expectedNetworkId = 0;
 
         String expectedRequest = String.format(
                 "{\n" + "  \"results\": [\n"
@@ -461,9 +459,7 @@ class MessagesApiTest extends ApiTest {
                         + "        \"applicationId\": \"%s\",\n"
                         + "        \"entityId\": \"%s\"\n"
                         + "      },\n"
-                        + "      \"deviceDetails\": \"%s\",\n"
-                        + "      \"mccMnc\": %d,\n"
-                        + "      \"networkId\": %d\n"
+                        + "      \"mccMnc\": %d\n"
                         + "    }\n"
                         + "  ]\n"
                         + "}",
@@ -489,9 +485,7 @@ class MessagesApiTest extends ApiTest {
                 expectedPermanent,
                 expectedApplicationId,
                 expectedEntityId,
-                expectedDeviceDetails,
-                expectedMccMnc,
-                expectedNetworkId);
+                expectedMccMnc);
 
         MessagesApiDeliveryReport messagesApiDlrRequest =
                 json.deserialize(expectedRequest, MessagesApiDeliveryReport.class);
@@ -524,9 +518,7 @@ class MessagesApiTest extends ApiTest {
         var messagePlatform = messagesApiDlrEvent.getPlatform();
         then(messagePlatform.getApplicationId()).isEqualTo(expectedApplicationId);
         then(messagePlatform.getEntityId()).isEqualTo(expectedEntityId);
-        then(messagesApiDlrEvent.getDeviceDetails()).isEqualTo(expectedDeviceDetails);
         then(messagesApiDlrEvent.getMccMnc()).isEqualTo(expectedMccMnc);
-        then(messagesApiDlrEvent.getNetworkId()).isEqualTo(expectedNetworkId);
     }
 
     @Test

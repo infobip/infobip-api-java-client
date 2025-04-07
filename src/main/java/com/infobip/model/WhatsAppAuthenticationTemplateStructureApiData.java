@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * Structure of the created authentication template. Must consist of body, footer and button.
  */
-public class WhatsAppAuthenticationTemplateStructureApiData implements WhatsAppTemplateStructureApiData {
+public class WhatsAppAuthenticationTemplateStructureApiData {
 
     private WhatsAppAuthenticationBodyApiData body;
 

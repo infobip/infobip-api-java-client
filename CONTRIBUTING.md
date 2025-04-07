@@ -38,10 +38,10 @@ please follow these guidelines to help us understand your proposal and evaluate 
 * **Open a New Enhancement Issue** - if your suggestion is new, please open a new issue and prefix it with "ENHANCEMENT" or "SUGGESTION".
   Please try to title your issue as clearly as possible to summarize your enhancement idea.
 * **Provide a Detailed Description** - in your issue description, try to include as much of the following information:
-    * **Problem:** What problem does this enhancement solve? Why is this feature needed?
-    * **Proposed Solution:** Describe the enhancement or feature you’re suggesting. How should it work? Provide as much detail as possible.
-    * **Alternatives Considered:** Have you thought of other ways to solve the problem? If so, briefly explain why your proposed solution is better.
-    * **Additional Context:** Share any examples, mockups, screenshots, or links to similar implementations (if applicable).
+  * **Problem:** What problem does this enhancement solve? Why is this feature needed?
+  * **Proposed Solution:** Describe the enhancement or feature you’re suggesting. How should it work? Provide as much detail as possible.
+  * **Alternatives Considered:** Have you thought of other ways to solve the problem? If so, briefly explain why your proposed solution is better.
+  * **Additional Context:** Share any examples, mockups, screenshots, or links to similar implementations (if applicable).
 * **Stay Focused and Specific** - try to keep your enhancement idea focused on a single problem or feature. If you have multiple ideas, consider creating separate issues for each to make the discussion easier to follow.
 * **Be Open to Feedback** - we encourage healthy discussion about proposed enhancements. Be open to feedback, as maintainers and other contributors may have questions or alternative suggestions.
 * **Contribute the Enhancement** - if you want implement your suggestion or if you're interested in working on the other people's enhancements yourself, please check the [Pull request](#%EF%B8%8F-pull-request) section on how to do that.

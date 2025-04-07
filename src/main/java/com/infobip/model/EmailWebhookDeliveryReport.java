@@ -38,9 +38,19 @@ public class EmailWebhookDeliveryReport {
 
     private String sendingIp;
 
+    private Integer attemptCount;
+
+    private Long timeToFirstAttempt;
+
     private String callbackData;
 
     private String to;
+
+    private String campaignReferenceId;
+
+    private String entityId;
+
+    private String applicationId;
 
     /**
      * Sets bulkId.
@@ -416,6 +426,86 @@ public class EmailWebhookDeliveryReport {
     }
 
     /**
+     * Sets attemptCount.
+     * <p>
+     * Field description:
+     * Number of times delivery was attempted for the email.
+     *
+     * @param attemptCount
+     * @return This {@link EmailWebhookDeliveryReport instance}.
+     */
+    public EmailWebhookDeliveryReport attemptCount(Integer attemptCount) {
+        this.attemptCount = attemptCount;
+        return this;
+    }
+
+    /**
+     * Returns attemptCount.
+     * <p>
+     * Field description:
+     * Number of times delivery was attempted for the email.
+     *
+     * @return attemptCount
+     */
+    @JsonProperty("attemptCount")
+    public Integer getAttemptCount() {
+        return attemptCount;
+    }
+
+    /**
+     * Sets attemptCount.
+     * <p>
+     * Field description:
+     * Number of times delivery was attempted for the email.
+     *
+     * @param attemptCount
+     */
+    @JsonProperty("attemptCount")
+    public void setAttemptCount(Integer attemptCount) {
+        this.attemptCount = attemptCount;
+    }
+
+    /**
+     * Sets timeToFirstAttempt.
+     * <p>
+     * Field description:
+     * This is the time in milliseconds between accepting the request and making the first delivery attempt to the destination.
+     *
+     * @param timeToFirstAttempt
+     * @return This {@link EmailWebhookDeliveryReport instance}.
+     */
+    public EmailWebhookDeliveryReport timeToFirstAttempt(Long timeToFirstAttempt) {
+        this.timeToFirstAttempt = timeToFirstAttempt;
+        return this;
+    }
+
+    /**
+     * Returns timeToFirstAttempt.
+     * <p>
+     * Field description:
+     * This is the time in milliseconds between accepting the request and making the first delivery attempt to the destination.
+     *
+     * @return timeToFirstAttempt
+     */
+    @JsonProperty("timeToFirstAttempt")
+    public Long getTimeToFirstAttempt() {
+        return timeToFirstAttempt;
+    }
+
+    /**
+     * Sets timeToFirstAttempt.
+     * <p>
+     * Field description:
+     * This is the time in milliseconds between accepting the request and making the first delivery attempt to the destination.
+     *
+     * @param timeToFirstAttempt
+     */
+    @JsonProperty("timeToFirstAttempt")
+    public void setTimeToFirstAttempt(Long timeToFirstAttempt) {
+        this.timeToFirstAttempt = timeToFirstAttempt;
+    }
+
+    /**
      * Sets callbackData.
      * <p>
      * Field description:
@@ -495,6 +585,126 @@ public class EmailWebhookDeliveryReport {
         this.to = to;
     }
 
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     * @return This {@link EmailWebhookDeliveryReport instance}.
+     */
+    public EmailWebhookDeliveryReport campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     * @return This {@link EmailWebhookDeliveryReport instance}.
+     */
+    public EmailWebhookDeliveryReport entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     * @return This {@link EmailWebhookDeliveryReport instance}.
+     */
+    public EmailWebhookDeliveryReport applicationId(String applicationId) {
+        this.applicationId = applicationId;
+        return this;
+    }
+
+    /**
+     * Returns applicationId.
+     * <p>
+     * Field description:
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return applicationId
+     */
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    /**
+     * Sets applicationId.
+     * <p>
+     * Field description:
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param applicationId
+     */
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -514,8 +724,13 @@ public class EmailWebhookDeliveryReport {
                 && Objects.equals(this.sentAt, emailWebhookDeliveryReport.sentAt)
                 && Objects.equals(this.browserLink, emailWebhookDeliveryReport.browserLink)
                 && Objects.equals(this.sendingIp, emailWebhookDeliveryReport.sendingIp)
+                && Objects.equals(this.attemptCount, emailWebhookDeliveryReport.attemptCount)
+                && Objects.equals(this.timeToFirstAttempt, emailWebhookDeliveryReport.timeToFirstAttempt)
                 && Objects.equals(this.callbackData, emailWebhookDeliveryReport.callbackData)
-                && Objects.equals(this.to, emailWebhookDeliveryReport.to);
+                && Objects.equals(this.to, emailWebhookDeliveryReport.to)
+                && Objects.equals(this.campaignReferenceId, emailWebhookDeliveryReport.campaignReferenceId)
+                && Objects.equals(this.entityId, emailWebhookDeliveryReport.entityId)
+                && Objects.equals(this.applicationId, emailWebhookDeliveryReport.applicationId);
     }
 
     @Override
@@ -531,8 +746,13 @@ public class EmailWebhookDeliveryReport {
                 sentAt,
                 browserLink,
                 sendingIp,
+                attemptCount,
+                timeToFirstAttempt,
                 callbackData,
-                to);
+                to,
+                campaignReferenceId,
+                entityId,
+                applicationId);
     }
 
     @Override
@@ -571,11 +791,26 @@ public class EmailWebhookDeliveryReport {
                 .append("    sendingIp: ")
                 .append(toIndentedString(sendingIp))
                 .append(newLine)
+                .append("    attemptCount: ")
+                .append(toIndentedString(attemptCount))
+                .append(newLine)
+                .append("    timeToFirstAttempt: ")
+                .append(toIndentedString(timeToFirstAttempt))
+                .append(newLine)
                 .append("    callbackData: ")
                 .append(toIndentedString(callbackData))
                 .append(newLine)
                 .append("    to: ")
                 .append(toIndentedString(to))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
                 .append(newLine)
                 .append("}")
                 .toString();
