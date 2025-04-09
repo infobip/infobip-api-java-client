@@ -9,59 +9,23 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * Represents WhatsAppWebhookEmail model.
+ * Array of emails information.
  */
 public class WhatsAppWebhookEmail {
 
     private String email;
 
-    /**
-     * Type of an email
-     */
-    public enum TypeEnum {
-        HOME("HOME"),
-        WORK("WORK");
-
-        private String value;
-
-        TypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TypeEnum fromValue(String value) {
-            for (TypeEnum enumElement : TypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private TypeEnum type;
+    private String type;
 
     /**
      * Sets email.
      * <p>
      * Field description:
-     * Email of a contact.
+     * Contact&#39;s email.
      *
      * @param email
      * @return This {@link WhatsAppWebhookEmail instance}.
@@ -75,7 +39,7 @@ public class WhatsAppWebhookEmail {
      * Returns email.
      * <p>
      * Field description:
-     * Email of a contact.
+     * Contact&#39;s email.
      *
      * @return email
      */
@@ -88,7 +52,7 @@ public class WhatsAppWebhookEmail {
      * Sets email.
      * <p>
      * Field description:
-     * Email of a contact.
+     * Contact&#39;s email.
      *
      * @param email
      */
@@ -101,12 +65,12 @@ public class WhatsAppWebhookEmail {
      * Sets type.
      * <p>
      * Field description:
-     * Type of an email
+     * Type of the email. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
      *
      * @param type
      * @return This {@link WhatsAppWebhookEmail instance}.
      */
-    public WhatsAppWebhookEmail type(TypeEnum type) {
+    public WhatsAppWebhookEmail type(String type) {
         this.type = type;
         return this;
     }
@@ -115,12 +79,12 @@ public class WhatsAppWebhookEmail {
      * Returns type.
      * <p>
      * Field description:
-     * Type of an email
+     * Type of the email. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
      *
      * @return type
      */
     @JsonProperty("type")
-    public TypeEnum getType() {
+    public String getType() {
         return type;
     }
 
@@ -128,12 +92,12 @@ public class WhatsAppWebhookEmail {
      * Sets type.
      * <p>
      * Field description:
-     * Type of an email
+     * Type of the email. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
      *
      * @param type
      */
     @JsonProperty("type")
-    public void setType(TypeEnum type) {
+    public void setType(String type) {
         this.type = type;
     }
 

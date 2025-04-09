@@ -9,11 +9,9 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
@@ -35,48 +33,13 @@ public abstract class WhatsAppTemplatePublicApiRequest {
 
     private WhatsAppLanguage language;
 
-    /**
-     * Category of the template. Mind that each category has different fields available for the endpoint. If you&#39;re sending traffic in India, for &#x60;AUTHENTICATION&#x60;, use fields available for &#x60;UTILITY&#x60; with &#x60;AUTHENTICATION&#x60; as category.
-     */
-    public enum CategoryEnum {
-        MARKETING("MARKETING"),
-        AUTHENTICATION("AUTHENTICATION"),
-        UTILITY("UTILITY");
-
-        private String value;
-
-        CategoryEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static CategoryEnum fromValue(String value) {
-            for (CategoryEnum enumElement : CategoryEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    protected final CategoryEnum category;
+    protected final WhatsAppCategory category;
 
     /**
      * Constructs a new {@link WhatsAppTemplatePublicApiRequest} instance.
      */
     public WhatsAppTemplatePublicApiRequest(String category) {
-        this.category = CategoryEnum.fromValue(category);
+        this.category = WhatsAppCategory.fromValue(category);
     }
 
     private Boolean allowCategoryChange;
@@ -171,15 +134,12 @@ public abstract class WhatsAppTemplatePublicApiRequest {
     /**
      * Returns category.
      * <p>
-     * Field description:
-     * Category of the template. Mind that each category has different fields available for the endpoint. If you&#39;re sending traffic in India, for &#x60;AUTHENTICATION&#x60;, use fields available for &#x60;UTILITY&#x60; with &#x60;AUTHENTICATION&#x60; as category.
-     * <p>
      * The field is required.
      *
      * @return category
      */
     @JsonProperty("category")
-    public CategoryEnum getCategory() {
+    public WhatsAppCategory getCategory() {
         return category;
     }
 

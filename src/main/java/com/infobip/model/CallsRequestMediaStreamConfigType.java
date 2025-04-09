@@ -13,16 +13,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Currency of the payment.
+ * Media stream configuration type.
  */
-public enum WhatsAppWebhookPaymentCurrency {
-    INR("INR"),
-    BRL("BRL"),
-    UNKNOWN("UNKNOWN");
+public enum CallsRequestMediaStreamConfigType {
+    MEDIA_STREAMING("MEDIA_STREAMING"),
+    WEBSOCKET_ENDPOINT("WEBSOCKET_ENDPOINT");
 
     private final String value;
 
-    WhatsAppWebhookPaymentCurrency(String value) {
+    CallsRequestMediaStreamConfigType(String value) {
         this.value = value;
     }
 
@@ -37,8 +36,8 @@ public enum WhatsAppWebhookPaymentCurrency {
     }
 
     @JsonCreator
-    public static WhatsAppWebhookPaymentCurrency fromValue(String value) {
-        for (WhatsAppWebhookPaymentCurrency enumElement : WhatsAppWebhookPaymentCurrency.values()) {
+    public static CallsRequestMediaStreamConfigType fromValue(String value) {
+        for (CallsRequestMediaStreamConfigType enumElement : CallsRequestMediaStreamConfigType.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

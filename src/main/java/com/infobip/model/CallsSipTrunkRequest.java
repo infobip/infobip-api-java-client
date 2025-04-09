@@ -40,7 +40,7 @@ public abstract class CallsSipTrunkRequest {
 
     private String name;
 
-    private CallsSipTrunkLocation location;
+    private String location;
 
     private Boolean tls;
 
@@ -108,32 +108,41 @@ public abstract class CallsSipTrunkRequest {
 
     /**
      * Sets location.
+     * <p>
+     * Field description:
+     * SIP trunk location.
      *
      * @param location
      * @return This {@link CallsSipTrunkRequest instance}.
      */
-    public CallsSipTrunkRequest location(CallsSipTrunkLocation location) {
+    public CallsSipTrunkRequest location(String location) {
         this.location = location;
         return this;
     }
 
     /**
      * Returns location.
+     * <p>
+     * Field description:
+     * SIP trunk location.
      *
      * @return location
      */
     @JsonProperty("location")
-    public CallsSipTrunkLocation getLocation() {
+    public String getLocation() {
         return location;
     }
 
     /**
      * Sets location.
+     * <p>
+     * Field description:
+     * SIP trunk location.
      *
      * @param location
      */
     @JsonProperty("location")
-    public void setLocation(CallsSipTrunkLocation location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 

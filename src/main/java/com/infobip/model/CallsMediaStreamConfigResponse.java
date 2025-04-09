@@ -10,14 +10,34 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.Objects;
 
 /**
  * Represents CallsMediaStreamConfigResponse model.
  */
-public class CallsMediaStreamConfigResponse {
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "type",
+        visible = true)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = CallsMediaStreamingConfigResponse.class, name = "MEDIA_STREAMING"),
+    @JsonSubTypes.Type(value = CallsWebsocketEndpointConfigResponse.class, name = "WEBSOCKET_ENDPOINT"),
+})
+public abstract class CallsMediaStreamConfigResponse {
 
     private String id;
+
+    protected final CallsResponseMediaStreamConfigType type;
+
+    /**
+     * Constructs a new {@link CallsMediaStreamConfigResponse} instance.
+     */
+    public CallsMediaStreamConfigResponse(String type) {
+        this.type = CallsResponseMediaStreamConfigType.fromValue(type);
+    }
 
     private String name;
 
@@ -61,6 +81,16 @@ public class CallsMediaStreamConfigResponse {
     @JsonProperty("id")
     public void setId(String id) {
         this.id = id;
+    }
+
+    /**
+     * Returns type.
+     *
+     * @return type
+     */
+    @JsonProperty("type")
+    public CallsResponseMediaStreamConfigType getType() {
+        return type;
     }
 
     /**
@@ -153,13 +183,14 @@ public class CallsMediaStreamConfigResponse {
         }
         CallsMediaStreamConfigResponse callsMediaStreamConfigResponse = (CallsMediaStreamConfigResponse) o;
         return Objects.equals(this.id, callsMediaStreamConfigResponse.id)
+                && Objects.equals(this.type, callsMediaStreamConfigResponse.type)
                 && Objects.equals(this.name, callsMediaStreamConfigResponse.name)
                 && Objects.equals(this.url, callsMediaStreamConfigResponse.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, url);
+        return Objects.hash(id, type, name, url);
     }
 
     @Override
@@ -170,6 +201,9 @@ public class CallsMediaStreamConfigResponse {
                 .append(newLine)
                 .append("    id: ")
                 .append(toIndentedString(id))
+                .append(newLine)
+                .append("    type: ")
+                .append(toIndentedString(type))
                 .append(newLine)
                 .append("    name: ")
                 .append(toIndentedString(name))

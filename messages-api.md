@@ -8,8 +8,8 @@ The first step is to create an `ApiClient` instance with some configuration.
 
 ````java
     ApiClient apiClient = ApiClient.forApiKey(ApiKey.from(API_KEY))
-        .withBaseUrl(BaseUrl.from(BASE_URL))
-        .build();
+                                   .withBaseUrl(BaseUrl.from(BASE_URL))
+                                   .build();
 ````
 
 With that ready, you can now create an instance of `MessagesApi` which allows you to send messages using Messages API.
@@ -61,7 +61,7 @@ The easiest way to start with Messages API is to send a text message. First you 
 Send the message invoking the appropriate send method and store the results in a new variable.
 
 ````java
-    MessagesApiResponse messageInfo = null;
+    MessageResponse messageInfo = null;
     try {
         messageInfo = messagesApi
             .sendMessagesApiMessage(messagesApiRequest)

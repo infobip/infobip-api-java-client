@@ -35,7 +35,7 @@ The easiest way to start with WhatsApp messages is to send a template message. T
 a specific sender. For other types of messages, the recipient must initiate the conversation.
 
 The Infobip test sender has a lot of predefined templates that you can fetch by using the [GET WhatsApp templates][get-templates-url] endpoint or the
-equivalent `WhatsAppApi` method `getWhatsappTemplates`.
+equivalent `WhatsAppApi` method `getWhatsAppTemplates`.
 
 The example below shows how to use a template named `welcome_multiple_languages` with only one placeholder.
 
@@ -179,8 +179,8 @@ You can find more details about the structure of the message you can expect on y
     }
 ```
 
-[get-templates-url]: https://www.infobip.com/docs/api#channels/whatsapp/get-whatsapp-templates
+[get-templates-url]: https://www.infobip.com/docs/api/channels/whatsapp/whatsapp-service-management/get-whatsapp-templates
 
-[receive-webhook-url]: https://www.infobip.com/docs/api#channels/whatsapp/receive-whatsapp-inbound-messages
+[receive-webhook-url]:  https://www.infobip.com/docs/api/channels/whatsapp/whatsapp-inbound-messages/receive-whatsapp-inbound-messages
 
-[whatsapp-docs-page]: https://www.infobip.com/docs/api#channels/whatsapp
+[whatsapp-docs-page]: https://www.infobip.com/docs/api/channels/whatsapp

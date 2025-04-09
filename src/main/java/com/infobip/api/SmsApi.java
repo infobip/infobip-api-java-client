@@ -484,7 +484,7 @@ public class SmsApi {
         /**
          * Sets sentSince.
          *
-         * @param sentSince The logs will only include messages sent after this date. Use it together with sentUntil to return a time range or if you want to fetch more than 1000 logs allowed per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
+         * @param sentSince The logs will only include messages sent after this date. Use it alongside sentUntil to specify a time range for the logs, but only up to the maximum limit of 1000 logs per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
          * @return GetOutboundSmsMessageLogsRequest
          */
         public GetOutboundSmsMessageLogsRequest sentSince(OffsetDateTime sentSince) {
@@ -495,7 +495,7 @@ public class SmsApi {
         /**
          * Sets sentUntil.
          *
-         * @param sentUntil The logs will only include messages sent before this date. Use it together with sentSince to return a time range or if you want to fetch more than 1000 logs allowed per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
+         * @param sentUntil The logs will only include messages sent before this date. Use it alongside sentSince to specify a time range for the logs, but only up to the maximum limit of 1000 logs per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
          * @return GetOutboundSmsMessageLogsRequest
          */
         public GetOutboundSmsMessageLogsRequest sentUntil(OffsetDateTime sentUntil) {
@@ -506,7 +506,7 @@ public class SmsApi {
         /**
          * Sets limit.
          *
-         * @param limit Maximum number of messages to include in logs. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access logs for the last 48h. If you want to fetch more than 1000 logs allowed per call, use sentBefore and sentUntil to retrieve them in pages. (optional, default to 50)
+         * @param limit Maximum number of messages to include in logs. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access logs for the last 48h. (optional, default to 50)
          * @return GetOutboundSmsMessageLogsRequest
          */
         public GetOutboundSmsMessageLogsRequest limit(Integer limit) {
@@ -601,7 +601,7 @@ public class SmsApi {
     /**
      * Get outbound SMS message logs.
      * <p>
-     * Use this method for displaying logs, for example, in the user interface. Available are the logs for the last 48 hours and you can only retrieve maximum of 1000 logs per call. See [message delivery reports](#channels/sms/get-outbound-sms-message-delivery-reports-v3) if your use case is to verify message delivery.
+     * Use this method to obtain the logs associated with outbound messages. The available logs are limited to those generated in the last 48 hours, and you can retrieve a maximum of only 1000 logs per call. See [message delivery reports](#channels/sms/get-outbound-sms-message-delivery-reports-v3) if your use case is to verify message delivery.
      *
      * @return GetOutboundSmsMessageLogsRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about the SMS channel and its use cases</a>

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents a destination which can be specified by a &#x60;channel&#x60;. It is required for a message failover.
+ * Represents a destination which can be specified by a &#x60;channel&#x60;. **It is required for a message failover**.
  */
 public class MessagesApiChannelsDestination implements MessagesApiMessageDestination {
 
@@ -27,7 +27,7 @@ public class MessagesApiChannelsDestination implements MessagesApiMessageDestina
      * Sets messageId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the message sent. If failover is defined, then it will be applied to each message in failover flow.
+     * The ID that uniquely identifies the message sent. If failover is defined, then it will override values provided in &#x60;byChannel&#x60; array and be applied to each message in failover flow.
      *
      * @param messageId
      * @return This {@link MessagesApiChannelsDestination instance}.
@@ -41,7 +41,7 @@ public class MessagesApiChannelsDestination implements MessagesApiMessageDestina
      * Returns messageId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the message sent. If failover is defined, then it will be applied to each message in failover flow.
+     * The ID that uniquely identifies the message sent. If failover is defined, then it will override values provided in &#x60;byChannel&#x60; array and be applied to each message in failover flow.
      *
      * @return messageId
      */
@@ -54,7 +54,7 @@ public class MessagesApiChannelsDestination implements MessagesApiMessageDestina
      * Sets messageId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the message sent. If failover is defined, then it will be applied to each message in failover flow.
+     * The ID that uniquely identifies the message sent. If failover is defined, then it will override values provided in &#x60;byChannel&#x60; array and be applied to each message in failover flow.
      *
      * @param messageId
      */
@@ -67,7 +67,7 @@ public class MessagesApiChannelsDestination implements MessagesApiMessageDestina
      * Sets byChannel.
      * <p>
      * Field description:
-     * Array of substitute destinations distinguished by a &#x60;channel&#x60; they belong to. Only one substitute destination per &#x60;channel&#x60; is permitted.
+     * An array of substitute destinations, each associated with a specific &#x60;channel&#x60;. Only one substitute destination is allowed per &#x60;channel&#x60;. A substitute destination must be provided for the main &#x60;channel&#x60; defined in the &#x60;message&#x60;.
      * <p>
      * The field is required.
      *
@@ -83,7 +83,7 @@ public class MessagesApiChannelsDestination implements MessagesApiMessageDestina
      * Adds and item into byChannel.
      * <p>
      * Field description:
-     * Array of substitute destinations distinguished by a &#x60;channel&#x60; they belong to. Only one substitute destination per &#x60;channel&#x60; is permitted.
+     * An array of substitute destinations, each associated with a specific &#x60;channel&#x60;. Only one substitute destination is allowed per &#x60;channel&#x60;. A substitute destination must be provided for the main &#x60;channel&#x60; defined in the &#x60;message&#x60;.
      * <p>
      * The field is required.
      *
@@ -102,7 +102,7 @@ public class MessagesApiChannelsDestination implements MessagesApiMessageDestina
      * Returns byChannel.
      * <p>
      * Field description:
-     * Array of substitute destinations distinguished by a &#x60;channel&#x60; they belong to. Only one substitute destination per &#x60;channel&#x60; is permitted.
+     * An array of substitute destinations, each associated with a specific &#x60;channel&#x60;. Only one substitute destination is allowed per &#x60;channel&#x60;. A substitute destination must be provided for the main &#x60;channel&#x60; defined in the &#x60;message&#x60;.
      * <p>
      * The field is required.
      *
@@ -117,7 +117,7 @@ public class MessagesApiChannelsDestination implements MessagesApiMessageDestina
      * Sets byChannel.
      * <p>
      * Field description:
-     * Array of substitute destinations distinguished by a &#x60;channel&#x60; they belong to. Only one substitute destination per &#x60;channel&#x60; is permitted.
+     * An array of substitute destinations, each associated with a specific &#x60;channel&#x60;. Only one substitute destination is allowed per &#x60;channel&#x60;. A substitute destination must be provided for the main &#x60;channel&#x60; defined in the &#x60;message&#x60;.
      * <p>
      * The field is required.
      *

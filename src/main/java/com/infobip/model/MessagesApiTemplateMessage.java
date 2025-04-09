@@ -317,7 +317,7 @@ public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInn
      * Sets failover.
      * <p>
      * Field description:
-     * Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. Make sure to provide correct sender and destinations specified as &#x60;Channels Destination&#x60; for each channel.
+     * Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. It has to contain unique entries per channel and it cannot contain entry with the same channel as original message. **Make sure to provide correct sender and destinations specified as &#x60;Channels Destination&#x60; for each channel**.
      *
      * @param failover
      * @return This {@link MessagesApiTemplateMessage instance}.
@@ -331,7 +331,7 @@ public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInn
      * Adds and item into failover.
      * <p>
      * Field description:
-     * Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. Make sure to provide correct sender and destinations specified as &#x60;Channels Destination&#x60; for each channel.
+     * Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. It has to contain unique entries per channel and it cannot contain entry with the same channel as original message. **Make sure to provide correct sender and destinations specified as &#x60;Channels Destination&#x60; for each channel**.
      *
      * @param failoverItem The item to be added to the list.
      * @return This {@link MessagesApiTemplateMessage instance}.
@@ -348,7 +348,7 @@ public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInn
      * Returns failover.
      * <p>
      * Field description:
-     * Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. Make sure to provide correct sender and destinations specified as &#x60;Channels Destination&#x60; for each channel.
+     * Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. It has to contain unique entries per channel and it cannot contain entry with the same channel as original message. **Make sure to provide correct sender and destinations specified as &#x60;Channels Destination&#x60; for each channel**.
      *
      * @return failover
      */
@@ -361,7 +361,7 @@ public class MessagesApiTemplateMessage implements MessagesApiRequestMessagesInn
      * Sets failover.
      * <p>
      * Field description:
-     * Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. Make sure to provide correct sender and destinations specified as &#x60;Channels Destination&#x60; for each channel.
+     * Provides options for configuring a message failover. When message fails it will be sent over channels in order specified in an array. It has to contain unique entries per channel and it cannot contain entry with the same channel as original message. **Make sure to provide correct sender and destinations specified as &#x60;Channels Destination&#x60; for each channel**.
      *
      * @param failover
      */

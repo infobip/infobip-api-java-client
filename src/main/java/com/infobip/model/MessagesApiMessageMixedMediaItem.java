@@ -13,64 +13,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents WhatsAppWebhookMedia model.
+ * Supported by APPLE_MB, MMS
  */
-public class WhatsAppWebhookMedia {
-
-    private String caption;
+public class MessagesApiMessageMixedMediaItem implements MessagesApiMessageMixedItem {
 
     private String url;
-
-    /**
-     * Sets caption.
-     * <p>
-     * Field description:
-     * Media Caption.
-     *
-     * @param caption
-     * @return This {@link WhatsAppWebhookMedia instance}.
-     */
-    public WhatsAppWebhookMedia caption(String caption) {
-        this.caption = caption;
-        return this;
-    }
-
-    /**
-     * Returns caption.
-     * <p>
-     * Field description:
-     * Media Caption.
-     *
-     * @return caption
-     */
-    @JsonProperty("caption")
-    public String getCaption() {
-        return caption;
-    }
-
-    /**
-     * Sets caption.
-     * <p>
-     * Field description:
-     * Media Caption.
-     *
-     * @param caption
-     */
-    @JsonProperty("caption")
-    public void setCaption(String caption) {
-        this.caption = caption;
-    }
 
     /**
      * Sets url.
      * <p>
      * Field description:
-     * Url for media download.
+     * URL of the media&#39;s item.
+     * <p>
+     * The field is required.
      *
      * @param url
-     * @return This {@link WhatsAppWebhookMedia instance}.
+     * @return This {@link MessagesApiMessageMixedMediaItem instance}.
      */
-    public WhatsAppWebhookMedia url(String url) {
+    public MessagesApiMessageMixedMediaItem url(String url) {
         this.url = url;
         return this;
     }
@@ -79,7 +39,9 @@ public class WhatsAppWebhookMedia {
      * Returns url.
      * <p>
      * Field description:
-     * Url for media download.
+     * URL of the media&#39;s item.
+     * <p>
+     * The field is required.
      *
      * @return url
      */
@@ -92,7 +54,9 @@ public class WhatsAppWebhookMedia {
      * Sets url.
      * <p>
      * Field description:
-     * Url for media download.
+     * URL of the media&#39;s item.
+     * <p>
+     * The field is required.
      *
      * @param url
      */
@@ -109,24 +73,20 @@ public class WhatsAppWebhookMedia {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        WhatsAppWebhookMedia whatsAppWebhookMedia = (WhatsAppWebhookMedia) o;
-        return Objects.equals(this.caption, whatsAppWebhookMedia.caption)
-                && Objects.equals(this.url, whatsAppWebhookMedia.url);
+        MessagesApiMessageMixedMediaItem messagesApiMessageMixedMediaItem = (MessagesApiMessageMixedMediaItem) o;
+        return Objects.equals(this.url, messagesApiMessageMixedMediaItem.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(caption, url);
+        return Objects.hash(url);
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class WhatsAppWebhookMedia {")
-                .append(newLine)
-                .append("    caption: ")
-                .append(toIndentedString(caption))
+                .append("class MessagesApiMessageMixedMediaItem {")
                 .append(newLine)
                 .append("    url: ")
                 .append(toIndentedString(url))

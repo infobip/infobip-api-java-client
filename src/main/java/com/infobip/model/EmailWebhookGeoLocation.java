@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Geolocation data such as Country and  City. This data will be available only for opens, clicks and unsubscribes.
+ * Geolocation data such as Country and City. This data will be available only for opens, clicks and unsubscribes.
  */
 public class EmailWebhookGeoLocation {
 

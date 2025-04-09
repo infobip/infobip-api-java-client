@@ -30,6 +30,7 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = MessagesApiWebhookEventButtonReplyContent.class, name = "BUTTON_REPLY"),
     @JsonSubTypes.Type(value = MessagesApiWebhookEventDocumentContent.class, name = "DOCUMENT"),
     @JsonSubTypes.Type(value = MessagesApiWebhookEventFileContent.class, name = "FILE"),
+    @JsonSubTypes.Type(value = MessagesApiWebhookEventFlowResponseContent.class, name = "FLOW_RESPONSE"),
     @JsonSubTypes.Type(value = MessagesApiWebhookEventImageContent.class, name = "IMAGE"),
     @JsonSubTypes.Type(value = MessagesApiWebhookEventListReplyContent.class, name = "LIST_REPLY"),
     @JsonSubTypes.Type(value = MessagesApiWebhookEventLocationContent.class, name = "LOCATION"),

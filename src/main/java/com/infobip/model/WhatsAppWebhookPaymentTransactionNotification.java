@@ -9,9 +9,7 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
@@ -22,81 +20,9 @@ public class WhatsAppWebhookPaymentTransactionNotification {
 
     private String id;
 
-    /**
-     * Type of the transaction.
-     */
-    public enum TypeEnum {
-        UPI("UPI"),
-        BR("BR"),
-        UNKNOWN("UNKNOWN");
+    private WhatsAppPaymentTransactionType type;
 
-        private String value;
-
-        TypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TypeEnum fromValue(String value) {
-            for (TypeEnum enumElement : TypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private TypeEnum type;
-
-    /**
-     * Status of the transaction.
-     */
-    public enum StatusEnum {
-        PENDING("PENDING"),
-        FAILED("FAILED"),
-        SUCCESS("SUCCESS"),
-        CANCELED("CANCELED"),
-        UNKNOWN("UNKNOWN");
-
-        private String value;
-
-        StatusEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static StatusEnum fromValue(String value) {
-            for (StatusEnum enumElement : StatusEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private StatusEnum status;
+    private WhatsAppPaymentTransactionStatus status;
 
     private OffsetDateTime createdTimestamp;
 
@@ -144,81 +70,63 @@ public class WhatsAppWebhookPaymentTransactionNotification {
 
     /**
      * Sets type.
-     * <p>
-     * Field description:
-     * Type of the transaction.
      *
      * @param type
      * @return This {@link WhatsAppWebhookPaymentTransactionNotification instance}.
      */
-    public WhatsAppWebhookPaymentTransactionNotification type(TypeEnum type) {
+    public WhatsAppWebhookPaymentTransactionNotification type(WhatsAppPaymentTransactionType type) {
         this.type = type;
         return this;
     }
 
     /**
      * Returns type.
-     * <p>
-     * Field description:
-     * Type of the transaction.
      *
      * @return type
      */
     @JsonProperty("type")
-    public TypeEnum getType() {
+    public WhatsAppPaymentTransactionType getType() {
         return type;
     }
 
     /**
      * Sets type.
-     * <p>
-     * Field description:
-     * Type of the transaction.
      *
      * @param type
      */
     @JsonProperty("type")
-    public void setType(TypeEnum type) {
+    public void setType(WhatsAppPaymentTransactionType type) {
         this.type = type;
     }
 
     /**
      * Sets status.
-     * <p>
-     * Field description:
-     * Status of the transaction.
      *
      * @param status
      * @return This {@link WhatsAppWebhookPaymentTransactionNotification instance}.
      */
-    public WhatsAppWebhookPaymentTransactionNotification status(StatusEnum status) {
+    public WhatsAppWebhookPaymentTransactionNotification status(WhatsAppPaymentTransactionStatus status) {
         this.status = status;
         return this;
     }
 
     /**
      * Returns status.
-     * <p>
-     * Field description:
-     * Status of the transaction.
      *
      * @return status
      */
     @JsonProperty("status")
-    public StatusEnum getStatus() {
+    public WhatsAppPaymentTransactionStatus getStatus() {
         return status;
     }
 
     /**
      * Sets status.
-     * <p>
-     * Field description:
-     * Status of the transaction.
      *
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(StatusEnum status) {
+    public void setStatus(WhatsAppPaymentTransactionStatus status) {
         this.status = status;
     }
 

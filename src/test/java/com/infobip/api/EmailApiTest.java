@@ -927,7 +927,7 @@ class EmailApiTest extends ApiTest {
                 + "   \"domain\": \"example.com\",\n"
                 + "   \"recipient\": \"john.doe@example.com\",\n"
                 + "   \"sendDateTime\": 1599542877689,\n"
-                + "   \"messageId\": \"14b734recsf69n8zkao5\",\n"
+                + "   \"messageId\": 1599542877689,\n"
                 + "   \"bulkId\": \"ikzzmbhu6223bxkhmyrj\",\n"
                 + "   \"recipientInfo\": {\n"
                 + "     \"deviceType\": \"Phone\",\n"
@@ -942,7 +942,7 @@ class EmailApiTest extends ApiTest {
                 + "   }\n"
                 + "}\n";
 
-        EmailWebhookTrackResponse reportResponse = json.deserialize(givenRequest, EmailWebhookTrackResponse.class);
+        EmailWebhookTrackingPayload reportResponse = json.deserialize(givenRequest, EmailWebhookTrackingPayload.class);
 
         then(reportResponse).isNotNull();
         then(reportResponse.getRecipientInfo().getClass()).isEqualTo(EmailWebhookRecipientInfo.class);

@@ -33,6 +33,7 @@ import com.infobip.model.CallsUpdateScenarioResponse;
 import com.infobip.model.CallsUpdateStatusRequest;
 import com.infobip.model.CallsVoiceResponse;
 import java.io.File;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -106,7 +107,7 @@ public class VoiceApi {
     /**
      * Create Voice IVR Scenarios.
      * <p>
-     * This method allows you to create a Voice IVR Scenario.
+     * This method allows you to create a Voice IVR Scenario. The IVR scenario will be removed if not used for more than 1 year.
      *
      * @param callsUpdateScenarioRequest  (required)
      * @return CreateAVoiceIvrScenarioRequest
@@ -1000,15 +1001,15 @@ public class VoiceApi {
         /**
          * Executes the searchVoiceIvrRecordedFiles request.
          *
-         * @return List&lt;CallsRecordedAudioFilesResponse&gt; The deserialized response.
+         * @return CallsRecordedAudioFilesResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public List<CallsRecordedAudioFilesResponse> execute() throws ApiException {
+        public CallsRecordedAudioFilesResponse execute() throws ApiException {
             RequestDefinition searchVoiceIvrRecordedFilesDefinition =
                     searchVoiceIvrRecordedFilesDefinition(page, pageSize, messageId, number);
             return apiClient.execute(
                     searchVoiceIvrRecordedFilesDefinition,
-                    new TypeReference<List<CallsRecordedAudioFilesResponse>>() {}.getType());
+                    new TypeReference<CallsRecordedAudioFilesResponse>() {}.getType());
         }
 
         /**
@@ -1017,12 +1018,12 @@ public class VoiceApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<List<CallsRecordedAudioFilesResponse>> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<CallsRecordedAudioFilesResponse> callback) {
             RequestDefinition searchVoiceIvrRecordedFilesDefinition =
                     searchVoiceIvrRecordedFilesDefinition(page, pageSize, messageId, number);
             return apiClient.executeAsync(
                     searchVoiceIvrRecordedFilesDefinition,
-                    new TypeReference<List<CallsRecordedAudioFilesResponse>>() {}.getType(),
+                    new TypeReference<CallsRecordedAudioFilesResponse>() {}.getType(),
                     callback);
         }
     }
@@ -1043,8 +1044,8 @@ public class VoiceApi {
             Integer pageSize,
             String name,
             String label,
-            String lastUsageDateSince,
-            String lastUsageDateUntil) {
+            LocalDate lastUsageDateSince,
+            LocalDate lastUsageDateUntil) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/voice/ivr/1/scenarios")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -1078,8 +1079,8 @@ public class VoiceApi {
         private Integer pageSize;
         private String name;
         private String label;
-        private String lastUsageDateSince;
-        private String lastUsageDateUntil;
+        private LocalDate lastUsageDateSince;
+        private LocalDate lastUsageDateUntil;
 
         private SearchVoiceIvrScenariosRequest() {}
 
@@ -1133,7 +1134,7 @@ public class VoiceApi {
          * @param lastUsageDateSince Lower limit of last usage date in &#x60;yyyy-MM-dd&#x60; format. Note: For scenarios where &#x60;lastUsageDate&#x60; is &#x60;null&#x60;, filtering matches &#x60;createTime&#x60;. (optional)
          * @return SearchVoiceIvrScenariosRequest
          */
-        public SearchVoiceIvrScenariosRequest lastUsageDateSince(String lastUsageDateSince) {
+        public SearchVoiceIvrScenariosRequest lastUsageDateSince(LocalDate lastUsageDateSince) {
             this.lastUsageDateSince = lastUsageDateSince;
             return this;
         }
@@ -1144,7 +1145,7 @@ public class VoiceApi {
          * @param lastUsageDateUntil Upper limit of last usage date &#x60;yyyy-MM-dd&#x60; format. Note: For scenarios where &#x60;lastUsageDate&#x60; is &#x60;null&#x60;, filtering matches &#x60;createTime&#x60;. (optional)
          * @return SearchVoiceIvrScenariosRequest
          */
-        public SearchVoiceIvrScenariosRequest lastUsageDateUntil(String lastUsageDateUntil) {
+        public SearchVoiceIvrScenariosRequest lastUsageDateUntil(LocalDate lastUsageDateUntil) {
             this.lastUsageDateUntil = lastUsageDateUntil;
             return this;
         }

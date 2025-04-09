@@ -1933,6 +1933,7 @@ public class EmailApi {
             Boolean track,
             Boolean trackClicks,
             Boolean trackOpens,
+            String trackingPixelPosition,
             String trackingUrl,
             String bulkId,
             String messageId,
@@ -2007,6 +2008,9 @@ public class EmailApi {
         if (trackOpens != null) {
             builder.addFormParameter(new Parameter("trackOpens", trackOpens));
         }
+        if (trackingPixelPosition != null) {
+            builder.addFormParameter(new Parameter("trackingPixelPosition", trackingPixelPosition));
+        }
         if (trackingUrl != null) {
             builder.addFormParameter(new Parameter("trackingUrl", trackingUrl));
         }
@@ -2077,6 +2081,7 @@ public class EmailApi {
         private Boolean track;
         private Boolean trackClicks;
         private Boolean trackOpens;
+        private String trackingPixelPosition;
         private String trackingUrl;
         private String bulkId;
         private String messageId;
@@ -2177,7 +2182,7 @@ public class EmailApi {
         /**
          * Sets templateId.
          *
-         * @param templateId Template ID used for generating email content. The template is created over Infobip web interface. If &#x60;templateId&#x60; is present, then &#x60;html&#x60; and &#x60;text&#x60; values are ignored.  Note: &#x60;templateId&#x60; only supports the value of &#x60;Broadcast&#x60;. &#x60;Content&#x60; and &#x60;Flow&#x60; are not supported. (optional)
+         * @param templateId Template ID used for generating email content. The template is created over Infobip web interface or via the [Infobip Templates API](https://www.infobip.com/docs/api/channels/email/templates). If &#x60;templateId&#x60; is present, then &#x60;html&#x60; and &#x60;text&#x60; values are ignored.  Note: &#x60;templateId&#x60; only supports the value of &#x60;Broadcast&#x60;. &#x60;Content&#x60; and &#x60;Flow&#x60; are not supported. (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest templateId(Long templateId) {
@@ -2281,6 +2286,17 @@ public class EmailApi {
          */
         public SendEmailRequest trackOpens(Boolean trackOpens) {
             this.trackOpens = trackOpens;
+            return this;
+        }
+
+        /**
+         * Sets trackingPixelPosition.
+         *
+         * @param trackingPixelPosition This parameter specifies the position of the open tracking pixel within the email content. Allowed values are &#x60;TOP&#x60; and &#x60;BOTTOM&#x60;. If no value is provided, the default is &#x60;TOP&#x60;. (optional)
+         * @return SendEmailRequest
+         */
+        public SendEmailRequest trackingPixelPosition(String trackingPixelPosition) {
+            this.trackingPixelPosition = trackingPixelPosition;
             return this;
         }
 
@@ -2475,6 +2491,7 @@ public class EmailApi {
                     track,
                     trackClicks,
                     trackOpens,
+                    trackingPixelPosition,
                     trackingUrl,
                     bulkId,
                     messageId,
@@ -2519,6 +2536,7 @@ public class EmailApi {
                     track,
                     trackClicks,
                     trackOpens,
+                    trackingPixelPosition,
                     trackingUrl,
                     bulkId,
                     messageId,

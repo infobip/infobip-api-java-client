@@ -13,23 +13,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * SIP trunk location.
+ * A quick payment option bypassing the review step. Applicable for PG PayU and PG Razorpay.
  */
-public enum CallsSipTrunkLocation {
-    SAO_PAULO("SAO_PAULO"),
-    BOGOTA("BOGOTA"),
-    FRANKFURT("FRANKFURT"),
-    JOHANNESBURG("JOHANNESBURG"),
-    NEW_YORK("NEW_YORK"),
-    PORTLAND("PORTLAND"),
-    MOSCOW("MOSCOW"),
-    SINGAPORE("SINGAPORE"),
-    ISTANBUL("ISTANBUL"),
-    KUALA_LUMPUR("KUALA_LUMPUR");
+public enum WhatsAppOrderDetailsType {
+    QUICK_PAY("QUICK_PAY");
 
     private final String value;
 
-    CallsSipTrunkLocation(String value) {
+    WhatsAppOrderDetailsType(String value) {
         this.value = value;
     }
 
@@ -44,8 +35,8 @@ public enum CallsSipTrunkLocation {
     }
 
     @JsonCreator
-    public static CallsSipTrunkLocation fromValue(String value) {
-        for (CallsSipTrunkLocation enumElement : CallsSipTrunkLocation.values()) {
+    public static WhatsAppOrderDetailsType fromValue(String value) {
+        for (WhatsAppOrderDetailsType enumElement : WhatsAppOrderDetailsType.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

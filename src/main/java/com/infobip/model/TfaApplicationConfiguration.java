@@ -153,7 +153,7 @@ public class TfaApplicationConfiguration {
      * Sets sendPinPerApplicationLimit.
      * <p>
      * Field description:
-     * Overall number of requests over a specififed time period for generating a PIN and sending an SMS using a single application. Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;. &#x60;attempts&#x60; and &#x60;timeunit&#x60; are mandatory and &#x60;timeLength&#x60; is optional with a default value of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;, &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days respectively. Must not exceed one year, although much lower value is recommended.
+     * Overall number of requests over a specified time period for generating a PIN and sending a message using a single application. Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;. &#x60;attempts&#x60; and &#x60;timeunit&#x60; are mandatory and &#x60;timeLength&#x60; is optional with a default value of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;, &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days respectively. Must not exceed one year, although much lower value is recommended.
      *
      * @param sendPinPerApplicationLimit
      * @return This {@link TfaApplicationConfiguration instance}.
@@ -167,7 +167,7 @@ public class TfaApplicationConfiguration {
      * Returns sendPinPerApplicationLimit.
      * <p>
      * Field description:
-     * Overall number of requests over a specififed time period for generating a PIN and sending an SMS using a single application. Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;. &#x60;attempts&#x60; and &#x60;timeunit&#x60; are mandatory and &#x60;timeLength&#x60; is optional with a default value of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;, &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days respectively. Must not exceed one year, although much lower value is recommended.
+     * Overall number of requests over a specified time period for generating a PIN and sending a message using a single application. Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;. &#x60;attempts&#x60; and &#x60;timeunit&#x60; are mandatory and &#x60;timeLength&#x60; is optional with a default value of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;, &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days respectively. Must not exceed one year, although much lower value is recommended.
      *
      * @return sendPinPerApplicationLimit
      */
@@ -180,7 +180,7 @@ public class TfaApplicationConfiguration {
      * Sets sendPinPerApplicationLimit.
      * <p>
      * Field description:
-     * Overall number of requests over a specififed time period for generating a PIN and sending an SMS using a single application. Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;. &#x60;attempts&#x60; and &#x60;timeunit&#x60; are mandatory and &#x60;timeLength&#x60; is optional with a default value of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;, &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days respectively. Must not exceed one year, although much lower value is recommended.
+     * Overall number of requests over a specified time period for generating a PIN and sending a message using a single application. Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;. &#x60;attempts&#x60; and &#x60;timeunit&#x60; are mandatory and &#x60;timeLength&#x60; is optional with a default value of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;, &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days respectively. Must not exceed one year, although much lower value is recommended.
      *
      * @param sendPinPerApplicationLimit
      */
@@ -193,7 +193,7 @@ public class TfaApplicationConfiguration {
      * Sets sendPinPerPhoneNumberLimit.
      * <p>
      * Field description:
-     * Number of requests over a specififed time period for generating a PIN and sending an SMS to one phone number (MSISDN). Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;. &#x60;attempts&#x60; and &#x60;timeunit&#x60; are mandatory and &#x60;timeLength&#x60; is optional with a default value of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;, &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days respectively. Must not exceed one year, although much lower value is recommended.
+     * Number of requests over a specified time period for generating a PIN and sending a message to one destination. Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;. &#x60;attempts&#x60; and &#x60;timeunit&#x60; are mandatory and &#x60;timeLength&#x60; is optional with a default value of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;, &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days respectively. Must not exceed one year, although much lower value is recommended.
      *
      * @param sendPinPerPhoneNumberLimit
      * @return This {@link TfaApplicationConfiguration instance}.
@@ -207,7 +207,7 @@ public class TfaApplicationConfiguration {
      * Returns sendPinPerPhoneNumberLimit.
      * <p>
      * Field description:
-     * Number of requests over a specififed time period for generating a PIN and sending an SMS to one phone number (MSISDN). Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;. &#x60;attempts&#x60; and &#x60;timeunit&#x60; are mandatory and &#x60;timeLength&#x60; is optional with a default value of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;, &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days respectively. Must not exceed one year, although much lower value is recommended.
+     * Number of requests over a specified time period for generating a PIN and sending a message to one destination. Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;. &#x60;attempts&#x60; and &#x60;timeunit&#x60; are mandatory and &#x60;timeLength&#x60; is optional with a default value of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;, &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days respectively. Must not exceed one year, although much lower value is recommended.
      *
      * @return sendPinPerPhoneNumberLimit
      */
@@ -220,7 +220,7 @@ public class TfaApplicationConfiguration {
      * Sets sendPinPerPhoneNumberLimit.
      * <p>
      * Field description:
-     * Number of requests over a specififed time period for generating a PIN and sending an SMS to one phone number (MSISDN). Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;. &#x60;attempts&#x60; and &#x60;timeunit&#x60; are mandatory and &#x60;timeLength&#x60; is optional with a default value of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;, &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days respectively. Must not exceed one year, although much lower value is recommended.
+     * Number of requests over a specified time period for generating a PIN and sending a message to one destination. Required format: &#x60;{attempts}/{timeLength}{timeUnit}&#x60;. &#x60;attempts&#x60; and &#x60;timeunit&#x60; are mandatory and &#x60;timeLength&#x60; is optional with a default value of 1. &#x60;timeUnit&#x60; is one of: &#x60;ms&#x60;, &#x60;s&#x60;, &#x60;m&#x60;, &#x60;h&#x60; or &#x60;d&#x60; representing milliseconds, seconds, minutes, hours, and days respectively. Must not exceed one year, although much lower value is recommended.
      *
      * @param sendPinPerPhoneNumberLimit
      */

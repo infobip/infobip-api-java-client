@@ -9,59 +9,23 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * Represents WhatsAppWebhookUrl model.
+ * Array of urls information.
  */
 public class WhatsAppWebhookUrl {
 
     private String url;
 
-    /**
-     * Type of a URL.
-     */
-    public enum TypeEnum {
-        HOME("HOME"),
-        WORK("WORK");
-
-        private String value;
-
-        TypeEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TypeEnum fromValue(String value) {
-            for (TypeEnum enumElement : TypeEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private TypeEnum type;
+    private String type;
 
     /**
      * Sets url.
      * <p>
      * Field description:
-     * Contact URL.
+     * Contact&#39;s url.
      *
      * @param url
      * @return This {@link WhatsAppWebhookUrl instance}.
@@ -75,7 +39,7 @@ public class WhatsAppWebhookUrl {
      * Returns url.
      * <p>
      * Field description:
-     * Contact URL.
+     * Contact&#39;s url.
      *
      * @return url
      */
@@ -88,7 +52,7 @@ public class WhatsAppWebhookUrl {
      * Sets url.
      * <p>
      * Field description:
-     * Contact URL.
+     * Contact&#39;s url.
      *
      * @param url
      */
@@ -101,12 +65,12 @@ public class WhatsAppWebhookUrl {
      * Sets type.
      * <p>
      * Field description:
-     * Type of a URL.
+     * Type of the url. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
      *
      * @param type
      * @return This {@link WhatsAppWebhookUrl instance}.
      */
-    public WhatsAppWebhookUrl type(TypeEnum type) {
+    public WhatsAppWebhookUrl type(String type) {
         this.type = type;
         return this;
     }
@@ -115,12 +79,12 @@ public class WhatsAppWebhookUrl {
      * Returns type.
      * <p>
      * Field description:
-     * Type of a URL.
+     * Type of the url. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
      *
      * @return type
      */
     @JsonProperty("type")
-    public TypeEnum getType() {
+    public String getType() {
         return type;
     }
 
@@ -128,12 +92,12 @@ public class WhatsAppWebhookUrl {
      * Sets type.
      * <p>
      * Field description:
-     * Type of a URL.
+     * Type of the url. Can be &#x60;HOME&#x60; or &#x60;WORK&#x60;.
      *
      * @param type
      */
     @JsonProperty("type")
-    public void setType(TypeEnum type) {
+    public void setType(String type) {
         this.type = type;
     }
 

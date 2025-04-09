@@ -17,51 +17,13 @@ import java.util.Objects;
  */
 public class WhatsAppContext {
 
-    private String id;
-
     private String from;
 
+    private String id;
+
+    private String groupId;
+
     private WhatsAppWebhookReferredProduct referredProduct;
-
-    /**
-     * Sets id.
-     * <p>
-     * Field description:
-     * MessageId of the message to which the end user responded.
-     *
-     * @param id
-     * @return This {@link WhatsAppContext instance}.
-     */
-    public WhatsAppContext id(String id) {
-        this.id = id;
-        return this;
-    }
-
-    /**
-     * Returns id.
-     * <p>
-     * Field description:
-     * MessageId of the message to which the end user responded.
-     *
-     * @return id
-     */
-    @JsonProperty("id")
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Sets id.
-     * <p>
-     * Field description:
-     * MessageId of the message to which the end user responded.
-     *
-     * @param id
-     */
-    @JsonProperty("id")
-    public void setId(String id) {
-        this.id = id;
-    }
 
     /**
      * Sets from.
@@ -104,6 +66,86 @@ public class WhatsAppContext {
     }
 
     /**
+     * Sets id.
+     * <p>
+     * Field description:
+     * MessageId of the message to which the end user responded.
+     *
+     * @param id
+     * @return This {@link WhatsAppContext instance}.
+     */
+    public WhatsAppContext id(String id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
+     * Returns id.
+     * <p>
+     * Field description:
+     * MessageId of the message to which the end user responded.
+     *
+     * @return id
+     */
+    @JsonProperty("id")
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Sets id.
+     * <p>
+     * Field description:
+     * MessageId of the message to which the end user responded.
+     *
+     * @param id
+     */
+    @JsonProperty("id")
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * Sets groupId.
+     * <p>
+     * Field description:
+     * GroupId of the message to which the end user responded.
+     *
+     * @param groupId
+     * @return This {@link WhatsAppContext instance}.
+     */
+    public WhatsAppContext groupId(String groupId) {
+        this.groupId = groupId;
+        return this;
+    }
+
+    /**
+     * Returns groupId.
+     * <p>
+     * Field description:
+     * GroupId of the message to which the end user responded.
+     *
+     * @return groupId
+     */
+    @JsonProperty("groupId")
+    public String getGroupId() {
+        return groupId;
+    }
+
+    /**
+     * Sets groupId.
+     * <p>
+     * Field description:
+     * GroupId of the message to which the end user responded.
+     *
+     * @param groupId
+     */
+    @JsonProperty("groupId")
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    /**
      * Sets referredProduct.
      *
      * @param referredProduct
@@ -143,14 +185,15 @@ public class WhatsAppContext {
             return false;
         }
         WhatsAppContext whatsAppContext = (WhatsAppContext) o;
-        return Objects.equals(this.id, whatsAppContext.id)
-                && Objects.equals(this.from, whatsAppContext.from)
+        return Objects.equals(this.from, whatsAppContext.from)
+                && Objects.equals(this.id, whatsAppContext.id)
+                && Objects.equals(this.groupId, whatsAppContext.groupId)
                 && Objects.equals(this.referredProduct, whatsAppContext.referredProduct);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, from, referredProduct);
+        return Objects.hash(from, id, groupId, referredProduct);
     }
 
     @Override
@@ -159,11 +202,14 @@ public class WhatsAppContext {
         return new StringBuilder()
                 .append("class WhatsAppContext {")
                 .append(newLine)
+                .append("    from: ")
+                .append(toIndentedString(from))
+                .append(newLine)
                 .append("    id: ")
                 .append(toIndentedString(id))
                 .append(newLine)
-                .append("    from: ")
-                .append(toIndentedString(from))
+                .append("    groupId: ")
+                .append(toIndentedString(groupId))
                 .append(newLine)
                 .append("    referredProduct: ")
                 .append(toIndentedString(referredProduct))

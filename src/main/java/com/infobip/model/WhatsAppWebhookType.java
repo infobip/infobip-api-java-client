@@ -13,24 +13,26 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Type of the message content. Select the type from the dropbox to view their parameters.
+ * Represents WhatsAppWebhookType enumeration.
  */
 public enum WhatsAppWebhookType {
+    UNSUPPORTED("UNSUPPORTED"),
     TEXT("TEXT"),
+    LOCATION("LOCATION"),
     IMAGE("IMAGE"),
     DOCUMENT("DOCUMENT"),
-    STICKER("STICKER"),
-    LOCATION("LOCATION"),
-    CONTACT("CONTACT"),
+    AUDIO("AUDIO"),
     VIDEO("VIDEO"),
     VOICE("VOICE"),
-    AUDIO("AUDIO"),
+    CONTACT("CONTACT"),
+    INFECTED_CONTENT("INFECTED_CONTENT"),
     BUTTON("BUTTON"),
+    STICKER("STICKER"),
     INTERACTIVE_BUTTON_REPLY("INTERACTIVE_BUTTON_REPLY"),
     INTERACTIVE_LIST_REPLY("INTERACTIVE_LIST_REPLY"),
+    INTERACTIVE_FLOW_REPLY("INTERACTIVE_FLOW_REPLY"),
     INTERACTIVE_PAYMENT_CONFIRMATION("INTERACTIVE_PAYMENT_CONFIRMATION"),
-    ORDER("ORDER"),
-    UNSUPPORTED("UNSUPPORTED");
+    ORDER("ORDER");
 
     private final String value;
 

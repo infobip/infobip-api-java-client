@@ -10,43 +10,59 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.Objects;
 
 /**
- * Payment of the order.
+ * Supported by MMS
  */
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.EXISTING_PROPERTY,
-        property = "type",
-        visible = true)
-@JsonSubTypes({
-    @JsonSubTypes.Type(value = WhatsAppInteractiveOrderBrazilLinkPaymentDetails.class, name = "BRAZIL_LINK"),
-    @JsonSubTypes.Type(value = WhatsAppInteractiveOrderBrazilPixDcPaymentDetails.class, name = "BRAZIL_PIX_DC"),
-})
-public abstract class WhatsAppTemplateAllowedOrderPaymentDetails {
+public class MessagesApiMessageMixedTextItem implements MessagesApiMessageMixedItem {
 
-    protected final String type;
+    private String text;
 
     /**
-     * Constructs a new {@link WhatsAppTemplateAllowedOrderPaymentDetails} instance.
-     */
-    public WhatsAppTemplateAllowedOrderPaymentDetails(String type) {
-        this.type = type;
-    }
-
-    /**
-     * Returns type.
+     * Sets text.
+     * <p>
+     * Field description:
+     * Text to be sent.
      * <p>
      * The field is required.
      *
-     * @return type
+     * @param text
+     * @return This {@link MessagesApiMessageMixedTextItem instance}.
      */
-    @JsonProperty("type")
-    public String getType() {
-        return type;
+    public MessagesApiMessageMixedTextItem text(String text) {
+        this.text = text;
+        return this;
+    }
+
+    /**
+     * Returns text.
+     * <p>
+     * Field description:
+     * Text to be sent.
+     * <p>
+     * The field is required.
+     *
+     * @return text
+     */
+    @JsonProperty("text")
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * Sets text.
+     * <p>
+     * Field description:
+     * Text to be sent.
+     * <p>
+     * The field is required.
+     *
+     * @param text
+     */
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
     }
 
     @Override
@@ -57,24 +73,23 @@ public abstract class WhatsAppTemplateAllowedOrderPaymentDetails {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        WhatsAppTemplateAllowedOrderPaymentDetails whatsAppTemplateAllowedOrderPaymentDetails =
-                (WhatsAppTemplateAllowedOrderPaymentDetails) o;
-        return Objects.equals(this.type, whatsAppTemplateAllowedOrderPaymentDetails.type);
+        MessagesApiMessageMixedTextItem messagesApiMessageMixedTextItem = (MessagesApiMessageMixedTextItem) o;
+        return Objects.equals(this.text, messagesApiMessageMixedTextItem.text);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type);
+        return Objects.hash(text);
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class WhatsAppTemplateAllowedOrderPaymentDetails {")
+                .append("class MessagesApiMessageMixedTextItem {")
                 .append(newLine)
-                .append("    type: ")
-                .append(toIndentedString(type))
+                .append("    text: ")
+                .append(toIndentedString(text))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -74,8 +74,6 @@ public class MessagesApiMessageCarouselCardBody {
      * <p>
      * Field description:
      * Text to be sent.
-     * <p>
-     * The field is required.
      *
      * @param text
      * @return This {@link MessagesApiMessageCarouselCardBody instance}.
@@ -90,8 +88,6 @@ public class MessagesApiMessageCarouselCardBody {
      * <p>
      * Field description:
      * Text to be sent.
-     * <p>
-     * The field is required.
      *
      * @return text
      */
@@ -105,8 +101,6 @@ public class MessagesApiMessageCarouselCardBody {
      * <p>
      * Field description:
      * Text to be sent.
-     * <p>
-     * The field is required.
      *
      * @param text
      */

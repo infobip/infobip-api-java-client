@@ -50,7 +50,6 @@ import com.infobip.model.CallsConfigurationResponse;
 import com.infobip.model.CallsConfigurationUpdateRequest;
 import com.infobip.model.CallsConnectRequest;
 import com.infobip.model.CallsConnectWithNewCallRequest;
-import com.infobip.model.CallsCountryList;
 import com.infobip.model.CallsCreateSipTrunkResponse;
 import com.infobip.model.CallsDialogBroadcastWebrtcTextRequest;
 import com.infobip.model.CallsDialogLogPage;
@@ -77,12 +76,13 @@ import com.infobip.model.CallsMediaStreamConfigResponse;
 import com.infobip.model.CallsOnDemandComposition;
 import com.infobip.model.CallsPlayRequest;
 import com.infobip.model.CallsPreAnswerRequest;
+import com.infobip.model.CallsPublicCountry;
+import com.infobip.model.CallsPublicRegion;
 import com.infobip.model.CallsPublicSipTrunkServiceAddress;
 import com.infobip.model.CallsPublicSipTrunkServiceAddressRequest;
 import com.infobip.model.CallsRecordingFile;
 import com.infobip.model.CallsRecordingLocation;
 import com.infobip.model.CallsRecordingStartRequest;
-import com.infobip.model.CallsRegionList;
 import com.infobip.model.CallsRescheduleRequest;
 import com.infobip.model.CallsSayRequest;
 import com.infobip.model.CallsSipTrunkPage;
@@ -100,6 +100,7 @@ import com.infobip.model.CallsStopPlayRequest;
 import com.infobip.model.CallsUpdateRequest;
 import java.io.File;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -5837,12 +5838,13 @@ public class CallsApi {
         /**
          * Executes the getCountries request.
          *
-         * @return CallsCountryList The deserialized response.
+         * @return List&lt;CallsPublicCountry&gt; The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public CallsCountryList execute() throws ApiException {
+        public List<CallsPublicCountry> execute() throws ApiException {
             RequestDefinition getCountriesDefinition = getCountriesDefinition();
-            return apiClient.execute(getCountriesDefinition, new TypeReference<CallsCountryList>() {}.getType());
+            return apiClient.execute(
+                    getCountriesDefinition, new TypeReference<List<CallsPublicCountry>>() {}.getType());
         }
 
         /**
@@ -5851,10 +5853,10 @@ public class CallsApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<CallsCountryList> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<List<CallsPublicCountry>> callback) {
             RequestDefinition getCountriesDefinition = getCountriesDefinition();
             return apiClient.executeAsync(
-                    getCountriesDefinition, new TypeReference<CallsCountryList>() {}.getType(), callback);
+                    getCountriesDefinition, new TypeReference<List<CallsPublicCountry>>() {}.getType(), callback);
         }
     }
 
@@ -6908,12 +6910,12 @@ public class CallsApi {
         /**
          * Executes the getRegions request.
          *
-         * @return CallsRegionList The deserialized response.
+         * @return List&lt;CallsPublicRegion&gt; The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public CallsRegionList execute() throws ApiException {
+        public List<CallsPublicRegion> execute() throws ApiException {
             RequestDefinition getRegionsDefinition = getRegionsDefinition(countryCode);
-            return apiClient.execute(getRegionsDefinition, new TypeReference<CallsRegionList>() {}.getType());
+            return apiClient.execute(getRegionsDefinition, new TypeReference<List<CallsPublicRegion>>() {}.getType());
         }
 
         /**
@@ -6922,10 +6924,10 @@ public class CallsApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<CallsRegionList> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<List<CallsPublicRegion>> callback) {
             RequestDefinition getRegionsDefinition = getRegionsDefinition(countryCode);
             return apiClient.executeAsync(
-                    getRegionsDefinition, new TypeReference<CallsRegionList>() {}.getType(), callback);
+                    getRegionsDefinition, new TypeReference<List<CallsPublicRegion>>() {}.getType(), callback);
         }
     }
 

@@ -10,18 +10,46 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.Objects;
 
 /**
  * Represents CallsMediaStreamConfigRequest model.
  */
-public class CallsMediaStreamConfigRequest {
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "type",
+        visible = true)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = CallsMediaStreamingConfigRequest.class, name = "MEDIA_STREAMING"),
+    @JsonSubTypes.Type(value = CallsWebsocketEndpointConfigRequest.class, name = "WEBSOCKET_ENDPOINT"),
+})
+public abstract class CallsMediaStreamConfigRequest {
+
+    protected final CallsRequestMediaStreamConfigType type;
+
+    /**
+     * Constructs a new {@link CallsMediaStreamConfigRequest} instance.
+     */
+    public CallsMediaStreamConfigRequest(String type) {
+        this.type = CallsRequestMediaStreamConfigType.fromValue(type);
+    }
 
     private String name;
 
     private String url;
 
-    private SecurityConfig securityConfig;
+    /**
+     * Returns type.
+     *
+     * @return type
+     */
+    @JsonProperty("type")
+    public CallsRequestMediaStreamConfigType getType() {
+        return type;
+    }
 
     /**
      * Sets name.
@@ -115,37 +143,6 @@ public class CallsMediaStreamConfigRequest {
         this.url = url;
     }
 
-    /**
-     * Sets securityConfig.
-     *
-     * @param securityConfig
-     * @return This {@link CallsMediaStreamConfigRequest instance}.
-     */
-    public CallsMediaStreamConfigRequest securityConfig(SecurityConfig securityConfig) {
-        this.securityConfig = securityConfig;
-        return this;
-    }
-
-    /**
-     * Returns securityConfig.
-     *
-     * @return securityConfig
-     */
-    @JsonProperty("securityConfig")
-    public SecurityConfig getSecurityConfig() {
-        return securityConfig;
-    }
-
-    /**
-     * Sets securityConfig.
-     *
-     * @param securityConfig
-     */
-    @JsonProperty("securityConfig")
-    public void setSecurityConfig(SecurityConfig securityConfig) {
-        this.securityConfig = securityConfig;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -155,14 +152,14 @@ public class CallsMediaStreamConfigRequest {
             return false;
         }
         CallsMediaStreamConfigRequest callsMediaStreamConfigRequest = (CallsMediaStreamConfigRequest) o;
-        return Objects.equals(this.name, callsMediaStreamConfigRequest.name)
-                && Objects.equals(this.url, callsMediaStreamConfigRequest.url)
-                && Objects.equals(this.securityConfig, callsMediaStreamConfigRequest.securityConfig);
+        return Objects.equals(this.type, callsMediaStreamConfigRequest.type)
+                && Objects.equals(this.name, callsMediaStreamConfigRequest.name)
+                && Objects.equals(this.url, callsMediaStreamConfigRequest.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, url, securityConfig);
+        return Objects.hash(type, name, url);
     }
 
     @Override
@@ -171,14 +168,14 @@ public class CallsMediaStreamConfigRequest {
         return new StringBuilder()
                 .append("class CallsMediaStreamConfigRequest {")
                 .append(newLine)
+                .append("    type: ")
+                .append(toIndentedString(type))
+                .append(newLine)
                 .append("    name: ")
                 .append(toIndentedString(name))
                 .append(newLine)
                 .append("    url: ")
                 .append(toIndentedString(url))
-                .append(newLine)
-                .append("    securityConfig: ")
-                .append(toIndentedString(securityConfig))
                 .append(newLine)
                 .append("}")
                 .toString();

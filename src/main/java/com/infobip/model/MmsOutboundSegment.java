@@ -41,6 +41,8 @@ public abstract class MmsOutboundSegment {
 
     /**
      * Returns type.
+     * <p>
+     * The field is required.
      *
      * @return type
      */
