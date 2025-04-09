@@ -19,7 +19,7 @@ public class WhatsAppTemplateEditPublicApiRequest {
 
     private WhatsAppCategory category;
 
-    private Object structure;
+    private WhatsAppTemplateStructureApiData structure;
 
     private ValidityPeriod validityPeriod;
 
@@ -58,41 +58,32 @@ public class WhatsAppTemplateEditPublicApiRequest {
 
     /**
      * Sets structure.
-     * <p>
-     * Field description:
-     * Template structure. Format depends on the template category.
      *
      * @param structure
      * @return This {@link WhatsAppTemplateEditPublicApiRequest instance}.
      */
-    public WhatsAppTemplateEditPublicApiRequest structure(Object structure) {
+    public WhatsAppTemplateEditPublicApiRequest structure(WhatsAppTemplateStructureApiData structure) {
         this.structure = structure;
         return this;
     }
 
     /**
      * Returns structure.
-     * <p>
-     * Field description:
-     * Template structure. Format depends on the template category.
      *
      * @return structure
      */
     @JsonProperty("structure")
-    public Object getStructure() {
+    public WhatsAppTemplateStructureApiData getStructure() {
         return structure;
     }
 
     /**
      * Sets structure.
-     * <p>
-     * Field description:
-     * Template structure. Format depends on the template category.
      *
      * @param structure
      */
     @JsonProperty("structure")
-    public void setStructure(Object structure) {
+    public void setStructure(WhatsAppTemplateStructureApiData structure) {
         this.structure = structure;
     }
 
