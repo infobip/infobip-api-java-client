@@ -17,8 +17,6 @@ import java.util.Objects;
  */
 public class WhatsAppTemplateUrlButtonContent extends WhatsAppTemplateButtonContent {
 
-    private String type;
-
     private String parameter;
 
     /**
@@ -26,43 +24,6 @@ public class WhatsAppTemplateUrlButtonContent extends WhatsAppTemplateButtonCont
      */
     public WhatsAppTemplateUrlButtonContent() {
         super("URL");
-    }
-
-    /**
-     * Sets type.
-     * <p>
-     * The field is required.
-     *
-     * @param type
-     * @return This {@link WhatsAppTemplateUrlButtonContent instance}.
-     */
-    public WhatsAppTemplateUrlButtonContent type(String type) {
-        this.type = type;
-        return this;
-    }
-
-    /**
-     * Returns type.
-     * <p>
-     * The field is required.
-     *
-     * @return type
-     */
-    @JsonProperty("type")
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * Sets type.
-     * <p>
-     * The field is required.
-     *
-     * @param type
-     */
-    @JsonProperty("type")
-    public void setType(String type) {
-        this.type = type;
     }
 
     /**
@@ -120,14 +81,12 @@ public class WhatsAppTemplateUrlButtonContent extends WhatsAppTemplateButtonCont
             return false;
         }
         WhatsAppTemplateUrlButtonContent whatsAppTemplateUrlButtonContent = (WhatsAppTemplateUrlButtonContent) o;
-        return Objects.equals(this.type, whatsAppTemplateUrlButtonContent.type)
-                && Objects.equals(this.parameter, whatsAppTemplateUrlButtonContent.parameter)
-                && super.equals(o);
+        return Objects.equals(this.parameter, whatsAppTemplateUrlButtonContent.parameter) && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, parameter, super.hashCode());
+        return Objects.hash(parameter, super.hashCode());
     }
 
     @Override
@@ -138,9 +97,6 @@ public class WhatsAppTemplateUrlButtonContent extends WhatsAppTemplateButtonCont
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
-                .append(newLine)
-                .append("    type: ")
-                .append(toIndentedString(type))
                 .append(newLine)
                 .append("    parameter: ")
                 .append(toIndentedString(parameter))

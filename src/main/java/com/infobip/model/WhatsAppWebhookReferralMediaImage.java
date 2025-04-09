@@ -31,6 +31,8 @@ public class WhatsAppWebhookReferralMediaImage extends WhatsAppWebhookReferralMe
      * <p>
      * Field description:
      * URL that leads to the image that end user saw and clicked.
+     * <p>
+     * The field is required.
      *
      * @param url
      * @return This {@link WhatsAppWebhookReferralMediaImage instance}.
@@ -45,6 +47,8 @@ public class WhatsAppWebhookReferralMediaImage extends WhatsAppWebhookReferralMe
      * <p>
      * Field description:
      * URL that leads to the image that end user saw and clicked.
+     * <p>
+     * The field is required.
      *
      * @return url
      */
@@ -58,6 +62,8 @@ public class WhatsAppWebhookReferralMediaImage extends WhatsAppWebhookReferralMe
      * <p>
      * Field description:
      * URL that leads to the image that end user saw and clicked.
+     * <p>
+     * The field is required.
      *
      * @param url
      */

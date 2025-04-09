@@ -21,9 +21,6 @@ public class WhatsAppWebhookContactName {
 
     /**
      * Sets name.
-     * <p>
-     * Field description:
-     * Contact name
      *
      * @param name
      * @return This {@link WhatsAppWebhookContactName instance}.
@@ -35,9 +32,6 @@ public class WhatsAppWebhookContactName {
 
     /**
      * Returns name.
-     * <p>
-     * Field description:
-     * Contact name
      *
      * @return name
      */
@@ -48,9 +42,6 @@ public class WhatsAppWebhookContactName {
 
     /**
      * Sets name.
-     * <p>
-     * Field description:
-     * Contact name
      *
      * @param name
      */

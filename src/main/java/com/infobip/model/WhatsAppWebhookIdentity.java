@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * Information about the identity of the end user.
+ * Represents WhatsAppWebhookIdentity model.
  */
 public class WhatsAppWebhookIdentity {
 
@@ -27,8 +27,7 @@ public class WhatsAppWebhookIdentity {
     /**
      * Sets acknowledged.
      * <p>
-     * Field description:
-     * Indicates whether identity is acknowledged.
+     * The field is required.
      *
      * @param acknowledged
      * @return This {@link WhatsAppWebhookIdentity instance}.
@@ -41,8 +40,7 @@ public class WhatsAppWebhookIdentity {
     /**
      * Returns acknowledged.
      * <p>
-     * Field description:
-     * Indicates whether identity is acknowledged.
+     * The field is required.
      *
      * @return acknowledged
      */
@@ -54,8 +52,7 @@ public class WhatsAppWebhookIdentity {
     /**
      * Sets acknowledged.
      * <p>
-     * Field description:
-     * Indicates whether identity is acknowledged.
+     * The field is required.
      *
      * @param acknowledged
      */
@@ -67,8 +64,7 @@ public class WhatsAppWebhookIdentity {
     /**
      * Sets hash.
      * <p>
-     * Field description:
-     * Identifier for the latest user_identity_changed system notification
+     * The field is required.
      *
      * @param hash
      * @return This {@link WhatsAppWebhookIdentity instance}.
@@ -81,8 +77,7 @@ public class WhatsAppWebhookIdentity {
     /**
      * Returns hash.
      * <p>
-     * Field description:
-     * Identifier for the latest user_identity_changed system notification
+     * The field is required.
      *
      * @return hash
      */
@@ -94,8 +89,7 @@ public class WhatsAppWebhookIdentity {
     /**
      * Sets hash.
      * <p>
-     * Field description:
-     * Identifier for the latest user_identity_changed system notification
+     * The field is required.
      *
      * @param hash
      */
@@ -107,8 +101,7 @@ public class WhatsAppWebhookIdentity {
     /**
      * Sets createdAt.
      * <p>
-     * Field description:
-     * Indicates when the identity was changed. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * The field is required.
      *
      * @param createdAt
      * @return This {@link WhatsAppWebhookIdentity instance}.
@@ -121,8 +114,7 @@ public class WhatsAppWebhookIdentity {
     /**
      * Returns createdAt.
      * <p>
-     * Field description:
-     * Indicates when the identity was changed. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * The field is required.
      *
      * @return createdAt
      */
@@ -134,8 +126,7 @@ public class WhatsAppWebhookIdentity {
     /**
      * Sets createdAt.
      * <p>
-     * Field description:
-     * Indicates when the identity was changed. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * The field is required.
      *
      * @param createdAt
      */

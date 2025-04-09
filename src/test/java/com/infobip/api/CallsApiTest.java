@@ -5825,7 +5825,7 @@ class CallsApiTest extends ApiTest {
     void shouldGetSipTrunks() {
         String givenId = "string";
         String givenName = "string";
-        CallsSipTrunkLocation givenLocation = CallsSipTrunkLocation.SAO_PAULO;
+        String givenLocation = "SAO_PAULO";
         Boolean givenTls = true;
         CallsAudioCodec givenCodecs = CallsAudioCodec.PCMU;
         CallsDtmfType givenDtmf = CallsDtmfType.RFC2833;
@@ -5961,7 +5961,7 @@ class CallsApiTest extends ApiTest {
     void shouldCreateSipTrunk() {
         String givenId = "string";
         String givenName = "string";
-        CallsSipTrunkLocation givenLocation = CallsSipTrunkLocation.SAO_PAULO;
+        String givenLocation = "SAO_PAULO";
         Boolean givenTls = true;
         CallsAudioCodec givenCodecs = CallsAudioCodec.PCMU;
         CallsDtmfType givenDtmf = CallsDtmfType.RFC2833;
@@ -6041,7 +6041,7 @@ class CallsApiTest extends ApiTest {
 
         String expectedType = "STATIC";
         String expectedName = "string";
-        CallsSipTrunkLocation expectedLocation = CallsSipTrunkLocation.SAO_PAULO;
+        String expectedLocation = "SAO_PAULO";
         Boolean expectedTls = false;
         CallsAudioCodec expectedCodecs = CallsAudioCodec.PCMU;
         CallsDtmfType expectedDtmf = CallsDtmfType.RFC2833;
@@ -6165,7 +6165,7 @@ class CallsApiTest extends ApiTest {
     void shouldGetSipTrunk() {
         String givenId = "string";
         String givenName = "string";
-        CallsSipTrunkLocation givenLocation = CallsSipTrunkLocation.SAO_PAULO;
+        String givenLocation = "SAO_PAULO";
         Boolean givenTls = true;
         CallsAudioCodec givenCodecs = CallsAudioCodec.PCMU;
         CallsDtmfType givenDtmf = CallsDtmfType.RFC2833;
@@ -6287,7 +6287,7 @@ class CallsApiTest extends ApiTest {
     void shouldUpdateSipTrunk() {
         String givenId = "string";
         String givenName = "string";
-        CallsSipTrunkLocation givenLocation = CallsSipTrunkLocation.SAO_PAULO;
+        String givenLocation = "SAO_PAULO";
         Boolean givenTls = true;
         CallsAudioCodec givenCodecs = CallsAudioCodec.PCMU;
         CallsDtmfType givenDtmf = CallsDtmfType.RFC2833;
@@ -6475,7 +6475,7 @@ class CallsApiTest extends ApiTest {
     void shouldDeleteSipTrunk() {
         String givenId = "string";
         String givenName = "string";
-        CallsSipTrunkLocation givenLocation = CallsSipTrunkLocation.SAO_PAULO;
+        String givenLocation = "SAO_PAULO";
         Boolean givenTls = true;
         CallsAudioCodec givenCodecs = CallsAudioCodec.PCMU;
         CallsDtmfType givenDtmf = CallsDtmfType.RFC2833;

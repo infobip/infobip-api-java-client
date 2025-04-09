@@ -9,9 +9,7 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -29,45 +27,7 @@ public class WhatsAppWebhookPaymentNotification {
 
     private String paymentId;
 
-    /**
-     * Status of the payment.
-     */
-    public enum PaymentStatusEnum {
-        NEW("NEW"),
-        PENDING("PENDING"),
-        CAPTURED("CAPTURED"),
-        CANCELED("CANCELED"),
-        FAILED("FAILED"),
-        UNKNOWN("UNKNOWN");
-
-        private String value;
-
-        PaymentStatusEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static PaymentStatusEnum fromValue(String value) {
-            for (PaymentStatusEnum enumElement : PaymentStatusEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private PaymentStatusEnum paymentStatus;
+    private WhatsAppPaymentStatus paymentStatus;
 
     private WhatsAppPaymentCurrency currency;
 
@@ -241,41 +201,32 @@ public class WhatsAppWebhookPaymentNotification {
 
     /**
      * Sets paymentStatus.
-     * <p>
-     * Field description:
-     * Status of the payment.
      *
      * @param paymentStatus
      * @return This {@link WhatsAppWebhookPaymentNotification instance}.
      */
-    public WhatsAppWebhookPaymentNotification paymentStatus(PaymentStatusEnum paymentStatus) {
+    public WhatsAppWebhookPaymentNotification paymentStatus(WhatsAppPaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
         return this;
     }
 
     /**
      * Returns paymentStatus.
-     * <p>
-     * Field description:
-     * Status of the payment.
      *
      * @return paymentStatus
      */
     @JsonProperty("paymentStatus")
-    public PaymentStatusEnum getPaymentStatus() {
+    public WhatsAppPaymentStatus getPaymentStatus() {
         return paymentStatus;
     }
 
     /**
      * Sets paymentStatus.
-     * <p>
-     * Field description:
-     * Status of the payment.
      *
      * @param paymentStatus
      */
     @JsonProperty("paymentStatus")
-    public void setPaymentStatus(PaymentStatusEnum paymentStatus) {
+    public void setPaymentStatus(WhatsAppPaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
 

@@ -13,76 +13,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents WhatsAppWebhookInboundTextMessage model.
+ * Represents WhatsAppWebhookInboundInfectedMessage model.
  */
-public class WhatsAppWebhookInboundTextMessage extends WhatsAppWebhookInboundMessage {
-
-    private String text;
+public class WhatsAppWebhookInboundInfectedMessage extends WhatsAppWebhookInboundMessage {
 
     private WhatsAppContext context;
+
+    private String malware;
 
     private WhatsAppWebhookReferral referral;
 
     /**
-     * Constructs a new {@link WhatsAppWebhookInboundTextMessage} instance.
+     * Constructs a new {@link WhatsAppWebhookInboundInfectedMessage} instance.
      */
-    public WhatsAppWebhookInboundTextMessage() {
-        super("TEXT");
-    }
-
-    /**
-     * Sets text.
-     * <p>
-     * Field description:
-     * Content of the end user&#39;s message.
-     * <p>
-     * The field is required.
-     *
-     * @param text
-     * @return This {@link WhatsAppWebhookInboundTextMessage instance}.
-     */
-    public WhatsAppWebhookInboundTextMessage text(String text) {
-        this.text = text;
-        return this;
-    }
-
-    /**
-     * Returns text.
-     * <p>
-     * Field description:
-     * Content of the end user&#39;s message.
-     * <p>
-     * The field is required.
-     *
-     * @return text
-     */
-    @JsonProperty("text")
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * Sets text.
-     * <p>
-     * Field description:
-     * Content of the end user&#39;s message.
-     * <p>
-     * The field is required.
-     *
-     * @param text
-     */
-    @JsonProperty("text")
-    public void setText(String text) {
-        this.text = text;
+    public WhatsAppWebhookInboundInfectedMessage() {
+        super("INFECTED_CONTENT");
     }
 
     /**
      * Sets context.
      *
      * @param context
-     * @return This {@link WhatsAppWebhookInboundTextMessage instance}.
+     * @return This {@link WhatsAppWebhookInboundInfectedMessage instance}.
      */
-    public WhatsAppWebhookInboundTextMessage context(WhatsAppContext context) {
+    public WhatsAppWebhookInboundInfectedMessage context(WhatsAppContext context) {
         this.context = context;
         return this;
     }
@@ -108,12 +62,52 @@ public class WhatsAppWebhookInboundTextMessage extends WhatsAppWebhookInboundMes
     }
 
     /**
+     * Sets malware.
+     * <p>
+     * Field description:
+     * Information about the malware.
+     *
+     * @param malware
+     * @return This {@link WhatsAppWebhookInboundInfectedMessage instance}.
+     */
+    public WhatsAppWebhookInboundInfectedMessage malware(String malware) {
+        this.malware = malware;
+        return this;
+    }
+
+    /**
+     * Returns malware.
+     * <p>
+     * Field description:
+     * Information about the malware.
+     *
+     * @return malware
+     */
+    @JsonProperty("malware")
+    public String getMalware() {
+        return malware;
+    }
+
+    /**
+     * Sets malware.
+     * <p>
+     * Field description:
+     * Information about the malware.
+     *
+     * @param malware
+     */
+    @JsonProperty("malware")
+    public void setMalware(String malware) {
+        this.malware = malware;
+    }
+
+    /**
      * Sets referral.
      *
      * @param referral
-     * @return This {@link WhatsAppWebhookInboundTextMessage instance}.
+     * @return This {@link WhatsAppWebhookInboundInfectedMessage instance}.
      */
-    public WhatsAppWebhookInboundTextMessage referral(WhatsAppWebhookReferral referral) {
+    public WhatsAppWebhookInboundInfectedMessage referral(WhatsAppWebhookReferral referral) {
         this.referral = referral;
         return this;
     }
@@ -146,32 +140,33 @@ public class WhatsAppWebhookInboundTextMessage extends WhatsAppWebhookInboundMes
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        WhatsAppWebhookInboundTextMessage whatsAppWebhookInboundTextMessage = (WhatsAppWebhookInboundTextMessage) o;
-        return Objects.equals(this.text, whatsAppWebhookInboundTextMessage.text)
-                && Objects.equals(this.context, whatsAppWebhookInboundTextMessage.context)
-                && Objects.equals(this.referral, whatsAppWebhookInboundTextMessage.referral)
+        WhatsAppWebhookInboundInfectedMessage whatsAppWebhookInboundInfectedMessage =
+                (WhatsAppWebhookInboundInfectedMessage) o;
+        return Objects.equals(this.context, whatsAppWebhookInboundInfectedMessage.context)
+                && Objects.equals(this.malware, whatsAppWebhookInboundInfectedMessage.malware)
+                && Objects.equals(this.referral, whatsAppWebhookInboundInfectedMessage.referral)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, context, referral, super.hashCode());
+        return Objects.hash(context, malware, referral, super.hashCode());
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class WhatsAppWebhookInboundTextMessage {")
+                .append("class WhatsAppWebhookInboundInfectedMessage {")
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
                 .append(newLine)
-                .append("    text: ")
-                .append(toIndentedString(text))
-                .append(newLine)
                 .append("    context: ")
                 .append(toIndentedString(context))
+                .append(newLine)
+                .append("    malware: ")
+                .append(toIndentedString(malware))
                 .append(newLine)
                 .append("    referral: ")
                 .append(toIndentedString(referral))

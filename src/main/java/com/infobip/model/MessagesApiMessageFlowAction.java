@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.Objects;
 
 /**
- * Payment of the order.
+ * Action of the flow.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -23,18 +23,18 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = WhatsAppInteractiveOrderBrazilLinkPaymentDetails.class, name = "BRAZIL_LINK"),
-    @JsonSubTypes.Type(value = WhatsAppInteractiveOrderBrazilPixDcPaymentDetails.class, name = "BRAZIL_PIX_DC"),
+    @JsonSubTypes.Type(value = MessagesApiMessageFlowDataExchangeAction.class, name = "DATA_EXCHANGE"),
+    @JsonSubTypes.Type(value = MessagesApiMessageFlowNavigateAction.class, name = "NAVIGATE"),
 })
-public abstract class WhatsAppTemplateAllowedOrderPaymentDetails {
+public abstract class MessagesApiMessageFlowAction {
 
-    protected final String type;
+    protected final MessagesApiMessageFlowActionType type;
 
     /**
-     * Constructs a new {@link WhatsAppTemplateAllowedOrderPaymentDetails} instance.
+     * Constructs a new {@link MessagesApiMessageFlowAction} instance.
      */
-    public WhatsAppTemplateAllowedOrderPaymentDetails(String type) {
-        this.type = type;
+    public MessagesApiMessageFlowAction(String type) {
+        this.type = MessagesApiMessageFlowActionType.fromValue(type);
     }
 
     /**
@@ -45,7 +45,7 @@ public abstract class WhatsAppTemplateAllowedOrderPaymentDetails {
      * @return type
      */
     @JsonProperty("type")
-    public String getType() {
+    public MessagesApiMessageFlowActionType getType() {
         return type;
     }
 
@@ -57,9 +57,8 @@ public abstract class WhatsAppTemplateAllowedOrderPaymentDetails {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        WhatsAppTemplateAllowedOrderPaymentDetails whatsAppTemplateAllowedOrderPaymentDetails =
-                (WhatsAppTemplateAllowedOrderPaymentDetails) o;
-        return Objects.equals(this.type, whatsAppTemplateAllowedOrderPaymentDetails.type);
+        MessagesApiMessageFlowAction messagesApiMessageFlowAction = (MessagesApiMessageFlowAction) o;
+        return Objects.equals(this.type, messagesApiMessageFlowAction.type);
     }
 
     @Override
@@ -71,7 +70,7 @@ public abstract class WhatsAppTemplateAllowedOrderPaymentDetails {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class WhatsAppTemplateAllowedOrderPaymentDetails {")
+                .append("class MessagesApiMessageFlowAction {")
                 .append(newLine)
                 .append("    type: ")
                 .append(toIndentedString(type))

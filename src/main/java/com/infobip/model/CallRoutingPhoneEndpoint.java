@@ -17,6 +17,8 @@ import java.util.Objects;
  */
 public class CallRoutingPhoneEndpoint extends CallRoutingEndpoint {
 
+    private String from;
+
     private String phoneNumber;
 
     /**
@@ -27,10 +29,50 @@ public class CallRoutingPhoneEndpoint extends CallRoutingEndpoint {
     }
 
     /**
+     * Sets from.
+     * <p>
+     * Field description:
+     * Phone number in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Defaults to &#x60;from&#x60; value used in inbound call.
+     *
+     * @param from
+     * @return This {@link CallRoutingPhoneEndpoint instance}.
+     */
+    public CallRoutingPhoneEndpoint from(String from) {
+        this.from = from;
+        return this;
+    }
+
+    /**
+     * Returns from.
+     * <p>
+     * Field description:
+     * Phone number in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Defaults to &#x60;from&#x60; value used in inbound call.
+     *
+     * @return from
+     */
+    @JsonProperty("from")
+    public String getFrom() {
+        return from;
+    }
+
+    /**
+     * Sets from.
+     * <p>
+     * Field description:
+     * Phone number in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Defaults to &#x60;from&#x60; value used in inbound call.
+     *
+     * @param from
+     */
+    @JsonProperty("from")
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    /**
      * Sets phoneNumber.
      * <p>
      * Field description:
-     * Phone number in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Defaults to &#x60;to&#x60; value used in inbound call.
+     * Phone number in the [E.164] format. Defaults to &#x60;to&#x60; value used in inbound call.
      *
      * @param phoneNumber
      * @return This {@link CallRoutingPhoneEndpoint instance}.
@@ -44,7 +86,7 @@ public class CallRoutingPhoneEndpoint extends CallRoutingEndpoint {
      * Returns phoneNumber.
      * <p>
      * Field description:
-     * Phone number in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Defaults to &#x60;to&#x60; value used in inbound call.
+     * Phone number in the [E.164] format. Defaults to &#x60;to&#x60; value used in inbound call.
      *
      * @return phoneNumber
      */
@@ -57,7 +99,7 @@ public class CallRoutingPhoneEndpoint extends CallRoutingEndpoint {
      * Sets phoneNumber.
      * <p>
      * Field description:
-     * Phone number in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Defaults to &#x60;to&#x60; value used in inbound call.
+     * Phone number in the [E.164] format. Defaults to &#x60;to&#x60; value used in inbound call.
      *
      * @param phoneNumber
      */
@@ -75,12 +117,14 @@ public class CallRoutingPhoneEndpoint extends CallRoutingEndpoint {
             return false;
         }
         CallRoutingPhoneEndpoint callRoutingPhoneEndpoint = (CallRoutingPhoneEndpoint) o;
-        return Objects.equals(this.phoneNumber, callRoutingPhoneEndpoint.phoneNumber) && super.equals(o);
+        return Objects.equals(this.from, callRoutingPhoneEndpoint.from)
+                && Objects.equals(this.phoneNumber, callRoutingPhoneEndpoint.phoneNumber)
+                && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(phoneNumber, super.hashCode());
+        return Objects.hash(from, phoneNumber, super.hashCode());
     }
 
     @Override
@@ -91,6 +135,9 @@ public class CallRoutingPhoneEndpoint extends CallRoutingEndpoint {
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
+                .append(newLine)
+                .append("    from: ")
+                .append(toIndentedString(from))
                 .append(newLine)
                 .append("    phoneNumber: ")
                 .append(toIndentedString(phoneNumber))

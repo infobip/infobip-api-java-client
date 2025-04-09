@@ -13,30 +13,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Represents WhatsAppWebhookType enumeration.
+ * Mode of the flow.
  */
-public enum WhatsAppWebhookType {
-    UNSUPPORTED("UNSUPPORTED"),
-    TEXT("TEXT"),
-    LOCATION("LOCATION"),
-    IMAGE("IMAGE"),
-    DOCUMENT("DOCUMENT"),
-    AUDIO("AUDIO"),
-    VIDEO("VIDEO"),
-    VOICE("VOICE"),
-    CONTACT("CONTACT"),
-    INFECTED_CONTENT("INFECTED_CONTENT"),
-    BUTTON("BUTTON"),
-    STICKER("STICKER"),
-    INTERACTIVE_BUTTON_REPLY("INTERACTIVE_BUTTON_REPLY"),
-    INTERACTIVE_LIST_REPLY("INTERACTIVE_LIST_REPLY"),
-    INTERACTIVE_FLOW_REPLY("INTERACTIVE_FLOW_REPLY"),
-    INTERACTIVE_PAYMENT_CONFIRMATION("INTERACTIVE_PAYMENT_CONFIRMATION"),
-    ORDER("ORDER");
+public enum MessagesApiMessageFlowMode {
+    DRAFT("DRAFT"),
+    PUBLISHED("PUBLISHED");
 
     private final String value;
 
-    WhatsAppWebhookType(String value) {
+    MessagesApiMessageFlowMode(String value) {
         this.value = value;
     }
 
@@ -51,8 +36,8 @@ public enum WhatsAppWebhookType {
     }
 
     @JsonCreator
-    public static WhatsAppWebhookType fromValue(String value) {
-        for (WhatsAppWebhookType enumElement : WhatsAppWebhookType.values()) {
+    public static MessagesApiMessageFlowMode fromValue(String value) {
+        for (MessagesApiMessageFlowMode enumElement : MessagesApiMessageFlowMode.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

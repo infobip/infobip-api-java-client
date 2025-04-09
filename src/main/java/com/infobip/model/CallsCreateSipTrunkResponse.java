@@ -42,7 +42,7 @@ public abstract class CallsCreateSipTrunkResponse {
 
     private String name;
 
-    private CallsSipTrunkLocation location;
+    private String location;
 
     private Boolean internationalCallsAllowed;
 
@@ -144,32 +144,41 @@ public abstract class CallsCreateSipTrunkResponse {
 
     /**
      * Sets location.
+     * <p>
+     * Field description:
+     * SIP trunk location.
      *
      * @param location
      * @return This {@link CallsCreateSipTrunkResponse instance}.
      */
-    public CallsCreateSipTrunkResponse location(CallsSipTrunkLocation location) {
+    public CallsCreateSipTrunkResponse location(String location) {
         this.location = location;
         return this;
     }
 
     /**
      * Returns location.
+     * <p>
+     * Field description:
+     * SIP trunk location.
      *
      * @return location
      */
     @JsonProperty("location")
-    public CallsSipTrunkLocation getLocation() {
+    public String getLocation() {
         return location;
     }
 
     /**
      * Sets location.
+     * <p>
+     * Field description:
+     * SIP trunk location.
      *
      * @param location
      */
     @JsonProperty("location")
-    public void setLocation(CallsSipTrunkLocation location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents EmailWebhookTrackingPayload model.
+ * Represents EmailWebhookTrackResponse model.
  */
 public class EmailWebhookTrackingPayload {
 
@@ -553,20 +553,20 @@ public class EmailWebhookTrackingPayload {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        EmailWebhookTrackingPayload emailWebhookTrackingPayload = (EmailWebhookTrackingPayload) o;
-        return Objects.equals(this.notificationType, emailWebhookTrackingPayload.notificationType)
-                && Objects.equals(this.domain, emailWebhookTrackingPayload.domain)
-                && Objects.equals(this.recipient, emailWebhookTrackingPayload.recipient)
-                && Objects.equals(this.url, emailWebhookTrackingPayload.url)
-                && Objects.equals(this.sendDateTime, emailWebhookTrackingPayload.sendDateTime)
-                && Objects.equals(this.messageId, emailWebhookTrackingPayload.messageId)
-                && Objects.equals(this.bulkId, emailWebhookTrackingPayload.bulkId)
-                && Objects.equals(this.callbackData, emailWebhookTrackingPayload.callbackData)
-                && Objects.equals(this.recipientInfo, emailWebhookTrackingPayload.recipientInfo)
-                && Objects.equals(this.geoLocation, emailWebhookTrackingPayload.geoLocation)
-                && Objects.equals(this.campaignReferenceId, emailWebhookTrackingPayload.campaignReferenceId)
-                && Objects.equals(this.entityId, emailWebhookTrackingPayload.entityId)
-                && Objects.equals(this.applicationId, emailWebhookTrackingPayload.applicationId);
+        EmailWebhookTrackingPayload emailWebhookTrackReport = (EmailWebhookTrackingPayload) o;
+        return Objects.equals(this.notificationType, emailWebhookTrackReport.notificationType)
+                && Objects.equals(this.domain, emailWebhookTrackReport.domain)
+                && Objects.equals(this.recipient, emailWebhookTrackReport.recipient)
+                && Objects.equals(this.url, emailWebhookTrackReport.url)
+                && Objects.equals(this.sendDateTime, emailWebhookTrackReport.sendDateTime)
+                && Objects.equals(this.messageId, emailWebhookTrackReport.messageId)
+                && Objects.equals(this.bulkId, emailWebhookTrackReport.bulkId)
+                && Objects.equals(this.callbackData, emailWebhookTrackReport.callbackData)
+                && Objects.equals(this.recipientInfo, emailWebhookTrackReport.recipientInfo)
+                && Objects.equals(this.geoLocation, emailWebhookTrackReport.geoLocation)
+                && Objects.equals(this.campaignReferenceId, emailWebhookTrackReport.campaignReferenceId)
+                && Objects.equals(this.entityId, emailWebhookTrackReport.entityId)
+                && Objects.equals(this.applicationId, emailWebhookTrackReport.applicationId);
     }
 
     @Override
@@ -591,7 +591,7 @@ public class EmailWebhookTrackingPayload {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class EmailWebhookTrackingPayload {")
+                .append("class EmailWebhookTrackResponse {")
                 .append(newLine)
                 .append("    notificationType: ")
                 .append(toIndentedString(notificationType))

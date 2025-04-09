@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.Objects;
 
 /**
- * Represents WhatsAppWebhookInboundMessage model.
+ * Message content.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -28,7 +28,9 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundContactMessage.class, name = "CONTACT"),
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundDocumentMessage.class, name = "DOCUMENT"),
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundImageMessage.class, name = "IMAGE"),
+    @JsonSubTypes.Type(value = WhatsAppWebhookInboundInfectedMessage.class, name = "INFECTED_CONTENT"),
     @JsonSubTypes.Type(value = WhatsAppWebhookButtonReplyContent.class, name = "INTERACTIVE_BUTTON_REPLY"),
+    @JsonSubTypes.Type(value = WhatsAppWebhookFlowReplyContent.class, name = "INTERACTIVE_FLOW_REPLY"),
     @JsonSubTypes.Type(value = WhatsAppWebhookListReplyContent.class, name = "INTERACTIVE_LIST_REPLY"),
     @JsonSubTypes.Type(
             value = WhatsAppWebhookPaymentConfirmationContent.class,
@@ -37,6 +39,7 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = WhatsAppWebhookOrderContent.class, name = "ORDER"),
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundStickerMessage.class, name = "STICKER"),
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundTextMessage.class, name = "TEXT"),
+    @JsonSubTypes.Type(value = WhatsAppWebhookInboundUnsupportedMessage.class, name = "UNSUPPORTED"),
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundVideoMessage.class, name = "VIDEO"),
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundVoiceMessage.class, name = "VOICE"),
 })
@@ -51,113 +54,16 @@ public abstract class WhatsAppWebhookInboundMessage {
         this.type = WhatsAppWebhookType.fromValue(type);
     }
 
-    private WhatsAppContext context;
-
-    private WhatsAppWebhookIdentity identity;
-
-    private WhatsAppWebhookReferral referral;
-
     /**
      * Returns type.
+     * <p>
+     * The field is required.
      *
      * @return type
      */
     @JsonProperty("type")
     public WhatsAppWebhookType getType() {
         return type;
-    }
-
-    /**
-     * Sets context.
-     *
-     * @param context
-     * @return This {@link WhatsAppWebhookInboundMessage instance}.
-     */
-    public WhatsAppWebhookInboundMessage context(WhatsAppContext context) {
-        this.context = context;
-        return this;
-    }
-
-    /**
-     * Returns context.
-     *
-     * @return context
-     */
-    @JsonProperty("context")
-    public WhatsAppContext getContext() {
-        return context;
-    }
-
-    /**
-     * Sets context.
-     *
-     * @param context
-     */
-    @JsonProperty("context")
-    public void setContext(WhatsAppContext context) {
-        this.context = context;
-    }
-
-    /**
-     * Sets identity.
-     *
-     * @param identity
-     * @return This {@link WhatsAppWebhookInboundMessage instance}.
-     */
-    public WhatsAppWebhookInboundMessage identity(WhatsAppWebhookIdentity identity) {
-        this.identity = identity;
-        return this;
-    }
-
-    /**
-     * Returns identity.
-     *
-     * @return identity
-     */
-    @JsonProperty("identity")
-    public WhatsAppWebhookIdentity getIdentity() {
-        return identity;
-    }
-
-    /**
-     * Sets identity.
-     *
-     * @param identity
-     */
-    @JsonProperty("identity")
-    public void setIdentity(WhatsAppWebhookIdentity identity) {
-        this.identity = identity;
-    }
-
-    /**
-     * Sets referral.
-     *
-     * @param referral
-     * @return This {@link WhatsAppWebhookInboundMessage instance}.
-     */
-    public WhatsAppWebhookInboundMessage referral(WhatsAppWebhookReferral referral) {
-        this.referral = referral;
-        return this;
-    }
-
-    /**
-     * Returns referral.
-     *
-     * @return referral
-     */
-    @JsonProperty("referral")
-    public WhatsAppWebhookReferral getReferral() {
-        return referral;
-    }
-
-    /**
-     * Sets referral.
-     *
-     * @param referral
-     */
-    @JsonProperty("referral")
-    public void setReferral(WhatsAppWebhookReferral referral) {
-        this.referral = referral;
     }
 
     @Override
@@ -169,15 +75,12 @@ public abstract class WhatsAppWebhookInboundMessage {
             return false;
         }
         WhatsAppWebhookInboundMessage whatsAppWebhookInboundMessage = (WhatsAppWebhookInboundMessage) o;
-        return Objects.equals(this.type, whatsAppWebhookInboundMessage.type)
-                && Objects.equals(this.context, whatsAppWebhookInboundMessage.context)
-                && Objects.equals(this.identity, whatsAppWebhookInboundMessage.identity)
-                && Objects.equals(this.referral, whatsAppWebhookInboundMessage.referral);
+        return Objects.equals(this.type, whatsAppWebhookInboundMessage.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, context, identity, referral);
+        return Objects.hash(type);
     }
 
     @Override
@@ -188,15 +91,6 @@ public abstract class WhatsAppWebhookInboundMessage {
                 .append(newLine)
                 .append("    type: ")
                 .append(toIndentedString(type))
-                .append(newLine)
-                .append("    context: ")
-                .append(toIndentedString(context))
-                .append(newLine)
-                .append("    identity: ")
-                .append(toIndentedString(identity))
-                .append(newLine)
-                .append("    referral: ")
-                .append(toIndentedString(referral))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -21,6 +21,8 @@ public class ViberOutboundImageContent extends ViberOutboundContent {
 
     private String mediaUrl;
 
+    private Boolean showImageInFullScreen;
+
     private ViberButton button;
 
     /**
@@ -117,6 +119,46 @@ public class ViberOutboundImageContent extends ViberOutboundContent {
     }
 
     /**
+     * Sets showImageInFullScreen.
+     * <p>
+     * Field description:
+     * Indicates whether the image is expandable. if set to &#x60;true&#x60;, the image opens in fullscreen, if set to &#x60;false&#x60;, tapping the image follows the button&#39;s URL.
+     *
+     * @param showImageInFullScreen
+     * @return This {@link ViberOutboundImageContent instance}.
+     */
+    public ViberOutboundImageContent showImageInFullScreen(Boolean showImageInFullScreen) {
+        this.showImageInFullScreen = showImageInFullScreen;
+        return this;
+    }
+
+    /**
+     * Returns showImageInFullScreen.
+     * <p>
+     * Field description:
+     * Indicates whether the image is expandable. if set to &#x60;true&#x60;, the image opens in fullscreen, if set to &#x60;false&#x60;, tapping the image follows the button&#39;s URL.
+     *
+     * @return showImageInFullScreen
+     */
+    @JsonProperty("showImageInFullScreen")
+    public Boolean getShowImageInFullScreen() {
+        return showImageInFullScreen;
+    }
+
+    /**
+     * Sets showImageInFullScreen.
+     * <p>
+     * Field description:
+     * Indicates whether the image is expandable. if set to &#x60;true&#x60;, the image opens in fullscreen, if set to &#x60;false&#x60;, tapping the image follows the button&#39;s URL.
+     *
+     * @param showImageInFullScreen
+     */
+    @JsonProperty("showImageInFullScreen")
+    public void setShowImageInFullScreen(Boolean showImageInFullScreen) {
+        this.showImageInFullScreen = showImageInFullScreen;
+    }
+
+    /**
      * Sets button.
      *
      * @param button
@@ -158,13 +200,14 @@ public class ViberOutboundImageContent extends ViberOutboundContent {
         ViberOutboundImageContent viberOutboundImageContent = (ViberOutboundImageContent) o;
         return Objects.equals(this.text, viberOutboundImageContent.text)
                 && Objects.equals(this.mediaUrl, viberOutboundImageContent.mediaUrl)
+                && Objects.equals(this.showImageInFullScreen, viberOutboundImageContent.showImageInFullScreen)
                 && Objects.equals(this.button, viberOutboundImageContent.button)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, mediaUrl, button, super.hashCode());
+        return Objects.hash(text, mediaUrl, showImageInFullScreen, button, super.hashCode());
     }
 
     @Override
@@ -181,6 +224,9 @@ public class ViberOutboundImageContent extends ViberOutboundContent {
                 .append(newLine)
                 .append("    mediaUrl: ")
                 .append(toIndentedString(mediaUrl))
+                .append(newLine)
+                .append("    showImageInFullScreen: ")
+                .append(toIndentedString(showImageInFullScreen))
                 .append(newLine)
                 .append("    button: ")
                 .append(toIndentedString(button))

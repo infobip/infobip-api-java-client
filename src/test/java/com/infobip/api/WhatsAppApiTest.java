@@ -1676,8 +1676,7 @@ class WhatsAppApiTest extends ApiTest {
                 givenButtonType,
                 givenQuality);
 
-        WhatsAppTemplateEditPublicApiRequest.CategoryEnum expectedCategory =
-                WhatsAppTemplateEditPublicApiRequest.CategoryEnum.MARKETING;
+        WhatsAppCategory expectedCategory = WhatsAppCategory.MARKETING;
         String expectedText = "body {{1}} content";
         String expectedExample = "example";
         WhatsAppDefaultTemplateStructureApiData.TypeEnum expectedType =
@@ -2246,8 +2245,7 @@ class WhatsAppApiTest extends ApiTest {
         String givenType = "payment";
         String givenReferenceId = "72123248136";
         String givenPaymentId = "fd3e847h2";
-        WhatsAppWebhookPaymentNotification.PaymentStatusEnum givenPaymentStatus =
-                WhatsAppWebhookPaymentNotification.PaymentStatusEnum.CAPTURED;
+        WhatsAppPaymentStatus givenPaymentStatus = WhatsAppPaymentStatus.CAPTURED;
         WhatsAppPaymentCurrency givenCurrency = WhatsAppPaymentCurrency.INR;
         Integer givenTotalAmountValue = 21000;
         Integer givenTotalAmountOffset = 100;

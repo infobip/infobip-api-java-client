@@ -13,24 +13,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * SIP trunk location.
+ * Represents MessagesApiMessageFlowActionType enumeration.
  */
-public enum CallsSipTrunkLocation {
-    SAO_PAULO("SAO_PAULO"),
-    BOGOTA("BOGOTA"),
-    FRANKFURT("FRANKFURT"),
-    SWEDEN("SWEDEN"),
-    JOHANNESBURG("JOHANNESBURG"),
-    NEW_YORK("NEW_YORK"),
-    PORTLAND("PORTLAND"),
-    MOSCOW("MOSCOW"),
-    SINGAPORE("SINGAPORE"),
-    ISTANBUL("ISTANBUL"),
-    KUALA_LUMPUR("KUALA_LUMPUR");
+public enum MessagesApiMessageFlowActionType {
+    NAVIGATE("NAVIGATE"),
+    DATA_EXCHANGE("DATA_EXCHANGE");
 
     private final String value;
 
-    CallsSipTrunkLocation(String value) {
+    MessagesApiMessageFlowActionType(String value) {
         this.value = value;
     }
 
@@ -45,8 +36,8 @@ public enum CallsSipTrunkLocation {
     }
 
     @JsonCreator
-    public static CallsSipTrunkLocation fromValue(String value) {
-        for (CallsSipTrunkLocation enumElement : CallsSipTrunkLocation.values()) {
+    public static MessagesApiMessageFlowActionType fromValue(String value) {
+        for (MessagesApiMessageFlowActionType enumElement : MessagesApiMessageFlowActionType.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

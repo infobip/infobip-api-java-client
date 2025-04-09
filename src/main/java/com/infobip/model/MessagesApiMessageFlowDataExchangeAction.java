@@ -9,33 +9,18 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Card buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered.
+ * Represents MessagesApiMessageFlowDataExchangeAction model.
  */
-public class WhatsAppCardAllowedTemplateButtonContent {
-
-    protected final String type;
+public class MessagesApiMessageFlowDataExchangeAction extends MessagesApiMessageFlowAction {
 
     /**
-     * Constructs a new {@link WhatsAppCardAllowedTemplateButtonContent} instance.
+     * Constructs a new {@link MessagesApiMessageFlowDataExchangeAction} instance.
      */
-    public WhatsAppCardAllowedTemplateButtonContent(String type) {
-        this.type = type;
-    }
-
-    /**
-     * Returns type.
-     * <p>
-     * The field is required.
-     *
-     * @return type
-     */
-    @JsonProperty("type")
-    public String getType() {
-        return type;
+    public MessagesApiMessageFlowDataExchangeAction() {
+        super("DATA_EXCHANGE");
     }
 
     @Override
@@ -46,24 +31,22 @@ public class WhatsAppCardAllowedTemplateButtonContent {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        WhatsAppCardAllowedTemplateButtonContent whatsAppCardAllowedTemplateButtonContent =
-                (WhatsAppCardAllowedTemplateButtonContent) o;
-        return Objects.equals(this.type, whatsAppCardAllowedTemplateButtonContent.type);
+        return super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type);
+        return Objects.hash(super.hashCode());
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class WhatsAppCardAllowedTemplateButtonContent {")
+                .append("class MessagesApiMessageFlowDataExchangeAction {")
                 .append(newLine)
-                .append("    type: ")
-                .append(toIndentedString(type))
+                .append("    ")
+                .append(toIndentedString(super.toString()))
                 .append(newLine)
                 .append("}")
                 .toString();

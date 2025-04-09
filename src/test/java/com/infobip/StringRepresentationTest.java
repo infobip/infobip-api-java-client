@@ -57,7 +57,8 @@ class StringRepresentationTest {
                                 .addCardsItem(new WhatsAppTemplateCardContent()
                                         .header(new WhatsAppTemplateImageHeaderContent().mediaUrl("mediaurllink"))
                                         .body(new WhatsAppTemplateBodyContent().placeholders(List.of("placeholders")))
-                                        .buttons(List.of(new WhatsAppCardAllowedTemplateButtonContent("URL"))))));
+                                        .buttons(List.of(
+                                                new WhatsAppTemplateUrlButtonContent().parameter("parameter"))))));
 
         // when
         String representation = content.toString();
@@ -79,7 +80,6 @@ class StringRepresentationTest {
                         + "            class WhatsAppTemplateButtonContent {\n"
                         + "                type: QUICK_REPLY\n"
                         + "            }\n"
-                        + "            type: null\n"
                         + "            parameter: yes\n"
                         + "        }]\n"
                         + "        carousel: class WhatsAppTemplateCarouselContent {\n"
@@ -93,8 +93,11 @@ class StringRepresentationTest {
                         + "                body: class WhatsAppTemplateBodyContent {\n"
                         + "                    placeholders: [placeholders]\n"
                         + "                }\n"
-                        + "                buttons: [class WhatsAppCardAllowedTemplateButtonContent {\n"
-                        + "                    type: URL\n"
+                        + "                buttons: [class WhatsAppTemplateUrlButtonContent {\n"
+                        + "                    class WhatsAppTemplateButtonContent {\n"
+                        + "                        type: URL\n"
+                        + "                    }\n"
+                        + "                    parameter: parameter\n"
                         + "                }]\n"
                         + "            }]\n"
                         + "        }\n"

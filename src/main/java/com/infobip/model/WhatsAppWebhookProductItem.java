@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents WhatsAppWebhookProductItem model.
+ * An array of selected products.
  */
 public class WhatsAppWebhookProductItem {
 

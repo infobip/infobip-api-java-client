@@ -10,38 +10,40 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
- * Represents WhatsAppWebhookQuickReplyContent model.
+ * Represents WhatsAppWebhookFlowReplyContent model.
  */
-public class WhatsAppWebhookQuickReplyContent extends WhatsAppWebhookInboundMessage {
+public class WhatsAppWebhookFlowReplyContent extends WhatsAppWebhookInboundMessage {
 
     private String text;
 
-    private String payload;
+    private Map<String, Object> response = null;
 
     private WhatsAppContext context;
 
     /**
-     * Constructs a new {@link WhatsAppWebhookQuickReplyContent} instance.
+     * Constructs a new {@link WhatsAppWebhookFlowReplyContent} instance.
      */
-    public WhatsAppWebhookQuickReplyContent() {
-        super("BUTTON");
+    public WhatsAppWebhookFlowReplyContent() {
+        super("INTERACTIVE_FLOW_REPLY");
     }
 
     /**
      * Sets text.
      * <p>
      * Field description:
-     * Text of the selected button.
+     * Text of the reply.
      * <p>
      * The field is required.
      *
      * @param text
-     * @return This {@link WhatsAppWebhookQuickReplyContent instance}.
+     * @return This {@link WhatsAppWebhookFlowReplyContent instance}.
      */
-    public WhatsAppWebhookQuickReplyContent text(String text) {
+    public WhatsAppWebhookFlowReplyContent text(String text) {
         this.text = text;
         return this;
     }
@@ -50,7 +52,7 @@ public class WhatsAppWebhookQuickReplyContent extends WhatsAppWebhookInboundMess
      * Returns text.
      * <p>
      * Field description:
-     * Text of the selected button.
+     * Text of the reply.
      * <p>
      * The field is required.
      *
@@ -65,7 +67,7 @@ public class WhatsAppWebhookQuickReplyContent extends WhatsAppWebhookInboundMess
      * Sets text.
      * <p>
      * Field description:
-     * Text of the selected button.
+     * Text of the reply.
      * <p>
      * The field is required.
      *
@@ -77,58 +79,70 @@ public class WhatsAppWebhookQuickReplyContent extends WhatsAppWebhookInboundMess
     }
 
     /**
-     * Sets payload.
+     * Sets response.
      * <p>
      * Field description:
-     * Payload of the selected button.
-     * <p>
-     * The field is required.
+     * Response payload of the reply.
      *
-     * @param payload
-     * @return This {@link WhatsAppWebhookQuickReplyContent instance}.
+     * @param response
+     * @return This {@link WhatsAppWebhookFlowReplyContent instance}.
      */
-    public WhatsAppWebhookQuickReplyContent payload(String payload) {
-        this.payload = payload;
+    public WhatsAppWebhookFlowReplyContent response(Map<String, Object> response) {
+        this.response = response;
         return this;
     }
 
     /**
-     * Returns payload.
+     * Puts and entry into response.
      * <p>
      * Field description:
-     * Payload of the selected button.
-     * <p>
-     * The field is required.
+     * Response payload of the reply.
      *
-     * @return payload
+     * @param key The given key.
+     * @param responseItem The item to be associated with the given key.
+     * @return This {@link WhatsAppWebhookFlowReplyContent instance}.
      */
-    @JsonProperty("payload")
-    public String getPayload() {
-        return payload;
+    public WhatsAppWebhookFlowReplyContent putResponseItem(String key, Object responseItem) {
+        if (this.response == null) {
+            this.response = new HashMap<>();
+        }
+        this.response.put(key, responseItem);
+        return this;
     }
 
     /**
-     * Sets payload.
+     * Returns response.
      * <p>
      * Field description:
-     * Payload of the selected button.
-     * <p>
-     * The field is required.
+     * Response payload of the reply.
      *
-     * @param payload
+     * @return response
      */
-    @JsonProperty("payload")
-    public void setPayload(String payload) {
-        this.payload = payload;
+    @JsonProperty("response")
+    public Map<String, Object> getResponse() {
+        return response;
+    }
+
+    /**
+     * Sets response.
+     * <p>
+     * Field description:
+     * Response payload of the reply.
+     *
+     * @param response
+     */
+    @JsonProperty("response")
+    public void setResponse(Map<String, Object> response) {
+        this.response = response;
     }
 
     /**
      * Sets context.
      *
      * @param context
-     * @return This {@link WhatsAppWebhookQuickReplyContent instance}.
+     * @return This {@link WhatsAppWebhookFlowReplyContent instance}.
      */
-    public WhatsAppWebhookQuickReplyContent context(WhatsAppContext context) {
+    public WhatsAppWebhookFlowReplyContent context(WhatsAppContext context) {
         this.context = context;
         return this;
     }
@@ -161,23 +175,23 @@ public class WhatsAppWebhookQuickReplyContent extends WhatsAppWebhookInboundMess
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        WhatsAppWebhookQuickReplyContent whatsAppWebhookQuickReplyContent = (WhatsAppWebhookQuickReplyContent) o;
-        return Objects.equals(this.text, whatsAppWebhookQuickReplyContent.text)
-                && Objects.equals(this.payload, whatsAppWebhookQuickReplyContent.payload)
-                && Objects.equals(this.context, whatsAppWebhookQuickReplyContent.context)
+        WhatsAppWebhookFlowReplyContent whatsAppWebhookFlowReplyContent = (WhatsAppWebhookFlowReplyContent) o;
+        return Objects.equals(this.text, whatsAppWebhookFlowReplyContent.text)
+                && Objects.equals(this.response, whatsAppWebhookFlowReplyContent.response)
+                && Objects.equals(this.context, whatsAppWebhookFlowReplyContent.context)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, payload, context, super.hashCode());
+        return Objects.hash(text, response, context, super.hashCode());
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class WhatsAppWebhookQuickReplyContent {")
+                .append("class WhatsAppWebhookFlowReplyContent {")
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
@@ -185,8 +199,8 @@ public class WhatsAppWebhookQuickReplyContent extends WhatsAppWebhookInboundMess
                 .append("    text: ")
                 .append(toIndentedString(text))
                 .append(newLine)
-                .append("    payload: ")
-                .append(toIndentedString(payload))
+                .append("    response: ")
+                .append(toIndentedString(response))
                 .append(newLine)
                 .append("    context: ")
                 .append(toIndentedString(context))

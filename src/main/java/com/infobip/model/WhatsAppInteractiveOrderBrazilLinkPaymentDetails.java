@@ -15,9 +15,7 @@ import java.util.Objects;
 /**
  * Represents WhatsAppInteractiveOrderBrazilLinkPaymentDetails model.
  */
-public class WhatsAppInteractiveOrderBrazilLinkPaymentDetails extends WhatsAppTemplateAllowedOrderPaymentDetails {
-
-    private String type;
+public class WhatsAppInteractiveOrderBrazilLinkPaymentDetails extends WhatsAppInteractiveAllowedOrderPaymentDetails {
 
     private String id;
 
@@ -28,43 +26,6 @@ public class WhatsAppInteractiveOrderBrazilLinkPaymentDetails extends WhatsAppTe
      */
     public WhatsAppInteractiveOrderBrazilLinkPaymentDetails() {
         super("BRAZIL_LINK");
-    }
-
-    /**
-     * Sets type.
-     * <p>
-     * The field is required.
-     *
-     * @param type
-     * @return This {@link WhatsAppInteractiveOrderBrazilLinkPaymentDetails instance}.
-     */
-    public WhatsAppInteractiveOrderBrazilLinkPaymentDetails type(String type) {
-        this.type = type;
-        return this;
-    }
-
-    /**
-     * Returns type.
-     * <p>
-     * The field is required.
-     *
-     * @return type
-     */
-    @JsonProperty("type")
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * Sets type.
-     * <p>
-     * The field is required.
-     *
-     * @param type
-     */
-    @JsonProperty("type")
-    public void setType(String type) {
-        this.type = type;
     }
 
     /**
@@ -169,15 +130,14 @@ public class WhatsAppInteractiveOrderBrazilLinkPaymentDetails extends WhatsAppTe
         }
         WhatsAppInteractiveOrderBrazilLinkPaymentDetails whatsAppInteractiveOrderBrazilLinkPaymentDetails =
                 (WhatsAppInteractiveOrderBrazilLinkPaymentDetails) o;
-        return Objects.equals(this.type, whatsAppInteractiveOrderBrazilLinkPaymentDetails.type)
-                && Objects.equals(this.id, whatsAppInteractiveOrderBrazilLinkPaymentDetails.id)
+        return Objects.equals(this.id, whatsAppInteractiveOrderBrazilLinkPaymentDetails.id)
                 && Objects.equals(this.paymentLink, whatsAppInteractiveOrderBrazilLinkPaymentDetails.paymentLink)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, id, paymentLink, super.hashCode());
+        return Objects.hash(id, paymentLink, super.hashCode());
     }
 
     @Override
@@ -188,9 +148,6 @@ public class WhatsAppInteractiveOrderBrazilLinkPaymentDetails extends WhatsAppTe
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
-                .append(newLine)
-                .append("    type: ")
-                .append(toIndentedString(type))
                 .append(newLine)
                 .append("    id: ")
                 .append(toIndentedString(id))

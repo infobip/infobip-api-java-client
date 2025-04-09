@@ -28,7 +28,8 @@ public enum MessagesApiMessageBodyType {
     CONTACT("CONTACT"),
     STICKER("STICKER"),
     PRODUCT("PRODUCT"),
-    MIXED("MIXED");
+    MIXED("MIXED"),
+    FLOW("FLOW");
 
     private final String value;
 

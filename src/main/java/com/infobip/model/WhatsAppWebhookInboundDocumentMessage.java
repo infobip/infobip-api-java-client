@@ -17,15 +17,65 @@ import java.util.Objects;
  */
 public class WhatsAppWebhookInboundDocumentMessage extends WhatsAppWebhookInboundMessage {
 
+    private String url;
+
     private String caption;
 
-    private String url;
+    private WhatsAppContext context;
+
+    private WhatsAppWebhookReferral referral;
 
     /**
      * Constructs a new {@link WhatsAppWebhookInboundDocumentMessage} instance.
      */
     public WhatsAppWebhookInboundDocumentMessage() {
         super("DOCUMENT");
+    }
+
+    /**
+     * Sets url.
+     * <p>
+     * Field description:
+     * URL for media download.
+     * <p>
+     * The field is required.
+     *
+     * @param url
+     * @return This {@link WhatsAppWebhookInboundDocumentMessage instance}.
+     */
+    public WhatsAppWebhookInboundDocumentMessage url(String url) {
+        this.url = url;
+        return this;
+    }
+
+    /**
+     * Returns url.
+     * <p>
+     * Field description:
+     * URL for media download.
+     * <p>
+     * The field is required.
+     *
+     * @return url
+     */
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * Sets url.
+     * <p>
+     * Field description:
+     * URL for media download.
+     * <p>
+     * The field is required.
+     *
+     * @param url
+     */
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**
@@ -69,43 +119,65 @@ public class WhatsAppWebhookInboundDocumentMessage extends WhatsAppWebhookInboun
     }
 
     /**
-     * Sets url.
-     * <p>
-     * Field description:
-     * Url for media download.
+     * Sets context.
      *
-     * @param url
+     * @param context
      * @return This {@link WhatsAppWebhookInboundDocumentMessage instance}.
      */
-    public WhatsAppWebhookInboundDocumentMessage url(String url) {
-        this.url = url;
+    public WhatsAppWebhookInboundDocumentMessage context(WhatsAppContext context) {
+        this.context = context;
         return this;
     }
 
     /**
-     * Returns url.
-     * <p>
-     * Field description:
-     * Url for media download.
+     * Returns context.
      *
-     * @return url
+     * @return context
      */
-    @JsonProperty("url")
-    public String getUrl() {
-        return url;
+    @JsonProperty("context")
+    public WhatsAppContext getContext() {
+        return context;
     }
 
     /**
-     * Sets url.
-     * <p>
-     * Field description:
-     * Url for media download.
+     * Sets context.
      *
-     * @param url
+     * @param context
      */
-    @JsonProperty("url")
-    public void setUrl(String url) {
-        this.url = url;
+    @JsonProperty("context")
+    public void setContext(WhatsAppContext context) {
+        this.context = context;
+    }
+
+    /**
+     * Sets referral.
+     *
+     * @param referral
+     * @return This {@link WhatsAppWebhookInboundDocumentMessage instance}.
+     */
+    public WhatsAppWebhookInboundDocumentMessage referral(WhatsAppWebhookReferral referral) {
+        this.referral = referral;
+        return this;
+    }
+
+    /**
+     * Returns referral.
+     *
+     * @return referral
+     */
+    @JsonProperty("referral")
+    public WhatsAppWebhookReferral getReferral() {
+        return referral;
+    }
+
+    /**
+     * Sets referral.
+     *
+     * @param referral
+     */
+    @JsonProperty("referral")
+    public void setReferral(WhatsAppWebhookReferral referral) {
+        this.referral = referral;
     }
 
     @Override
@@ -118,14 +190,16 @@ public class WhatsAppWebhookInboundDocumentMessage extends WhatsAppWebhookInboun
         }
         WhatsAppWebhookInboundDocumentMessage whatsAppWebhookInboundDocumentMessage =
                 (WhatsAppWebhookInboundDocumentMessage) o;
-        return Objects.equals(this.caption, whatsAppWebhookInboundDocumentMessage.caption)
-                && Objects.equals(this.url, whatsAppWebhookInboundDocumentMessage.url)
+        return Objects.equals(this.url, whatsAppWebhookInboundDocumentMessage.url)
+                && Objects.equals(this.caption, whatsAppWebhookInboundDocumentMessage.caption)
+                && Objects.equals(this.context, whatsAppWebhookInboundDocumentMessage.context)
+                && Objects.equals(this.referral, whatsAppWebhookInboundDocumentMessage.referral)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(caption, url, super.hashCode());
+        return Objects.hash(url, caption, context, referral, super.hashCode());
     }
 
     @Override
@@ -137,11 +211,17 @@ public class WhatsAppWebhookInboundDocumentMessage extends WhatsAppWebhookInboun
                 .append("    ")
                 .append(toIndentedString(super.toString()))
                 .append(newLine)
+                .append("    url: ")
+                .append(toIndentedString(url))
+                .append(newLine)
                 .append("    caption: ")
                 .append(toIndentedString(caption))
                 .append(newLine)
-                .append("    url: ")
-                .append(toIndentedString(url))
+                .append("    context: ")
+                .append(toIndentedString(context))
+                .append(newLine)
+                .append("    referral: ")
+                .append(toIndentedString(referral))
                 .append(newLine)
                 .append("}")
                 .toString();

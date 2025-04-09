@@ -15,9 +15,7 @@ import java.util.Objects;
 /**
  * Represents WhatsAppInteractiveOrderBrazilPixDcPaymentDetails model.
  */
-public class WhatsAppInteractiveOrderBrazilPixDcPaymentDetails extends WhatsAppTemplateAllowedOrderPaymentDetails {
-
-    private String type;
+public class WhatsAppInteractiveOrderBrazilPixDcPaymentDetails extends WhatsAppInteractiveAllowedOrderPaymentDetails {
 
     private String id;
 
@@ -34,43 +32,6 @@ public class WhatsAppInteractiveOrderBrazilPixDcPaymentDetails extends WhatsAppT
      */
     public WhatsAppInteractiveOrderBrazilPixDcPaymentDetails() {
         super("BRAZIL_PIX_DC");
-    }
-
-    /**
-     * Sets type.
-     * <p>
-     * The field is required.
-     *
-     * @param type
-     * @return This {@link WhatsAppInteractiveOrderBrazilPixDcPaymentDetails instance}.
-     */
-    public WhatsAppInteractiveOrderBrazilPixDcPaymentDetails type(String type) {
-        this.type = type;
-        return this;
-    }
-
-    /**
-     * Returns type.
-     * <p>
-     * The field is required.
-     *
-     * @return type
-     */
-    @JsonProperty("type")
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * Sets type.
-     * <p>
-     * The field is required.
-     *
-     * @param type
-     */
-    @JsonProperty("type")
-    public void setType(String type) {
-        this.type = type;
     }
 
     /**
@@ -304,8 +265,7 @@ public class WhatsAppInteractiveOrderBrazilPixDcPaymentDetails extends WhatsAppT
         }
         WhatsAppInteractiveOrderBrazilPixDcPaymentDetails whatsAppInteractiveOrderBrazilPixDcPaymentDetails =
                 (WhatsAppInteractiveOrderBrazilPixDcPaymentDetails) o;
-        return Objects.equals(this.type, whatsAppInteractiveOrderBrazilPixDcPaymentDetails.type)
-                && Objects.equals(this.id, whatsAppInteractiveOrderBrazilPixDcPaymentDetails.id)
+        return Objects.equals(this.id, whatsAppInteractiveOrderBrazilPixDcPaymentDetails.id)
                 && Objects.equals(this.code, whatsAppInteractiveOrderBrazilPixDcPaymentDetails.code)
                 && Objects.equals(this.merchantName, whatsAppInteractiveOrderBrazilPixDcPaymentDetails.merchantName)
                 && Objects.equals(this.keyType, whatsAppInteractiveOrderBrazilPixDcPaymentDetails.keyType)
@@ -315,7 +275,7 @@ public class WhatsAppInteractiveOrderBrazilPixDcPaymentDetails extends WhatsAppT
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, id, code, merchantName, keyType, key, super.hashCode());
+        return Objects.hash(id, code, merchantName, keyType, key, super.hashCode());
     }
 
     @Override
@@ -326,9 +286,6 @@ public class WhatsAppInteractiveOrderBrazilPixDcPaymentDetails extends WhatsAppT
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
-                .append(newLine)
-                .append("    type: ")
-                .append(toIndentedString(type))
                 .append(newLine)
                 .append("    id: ")
                 .append(toIndentedString(id))

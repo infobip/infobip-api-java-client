@@ -43,7 +43,11 @@ public class MessagesApiDeliveryResult {
 
     private Platform platform;
 
+    private String deviceDetails;
+
     private Integer mccMnc;
+
+    private Integer networkId;
 
     private String campaignReferenceId;
 
@@ -598,6 +602,46 @@ public class MessagesApiDeliveryResult {
     }
 
     /**
+     * Sets deviceDetails.
+     * <p>
+     * Field description:
+     * Device name if available.
+     *
+     * @param deviceDetails
+     * @return This {@link MessagesApiDeliveryResult instance}.
+     */
+    public MessagesApiDeliveryResult deviceDetails(String deviceDetails) {
+        this.deviceDetails = deviceDetails;
+        return this;
+    }
+
+    /**
+     * Returns deviceDetails.
+     * <p>
+     * Field description:
+     * Device name if available.
+     *
+     * @return deviceDetails
+     */
+    @JsonProperty("deviceDetails")
+    public String getDeviceDetails() {
+        return deviceDetails;
+    }
+
+    /**
+     * Sets deviceDetails.
+     * <p>
+     * Field description:
+     * Device name if available.
+     *
+     * @param deviceDetails
+     */
+    @JsonProperty("deviceDetails")
+    public void setDeviceDetails(String deviceDetails) {
+        this.deviceDetails = deviceDetails;
+    }
+
+    /**
      * Sets mccMnc.
      * <p>
      * Field description:
@@ -635,6 +679,46 @@ public class MessagesApiDeliveryResult {
     @JsonProperty("mccMnc")
     public void setMccMnc(Integer mccMnc) {
         this.mccMnc = mccMnc;
+    }
+
+    /**
+     * Sets networkId.
+     * <p>
+     * Field description:
+     * Network id dependent on Country.
+     *
+     * @param networkId
+     * @return This {@link MessagesApiDeliveryResult instance}.
+     */
+    public MessagesApiDeliveryResult networkId(Integer networkId) {
+        this.networkId = networkId;
+        return this;
+    }
+
+    /**
+     * Returns networkId.
+     * <p>
+     * Field description:
+     * Network id dependent on Country.
+     *
+     * @return networkId
+     */
+    @JsonProperty("networkId")
+    public Integer getNetworkId() {
+        return networkId;
+    }
+
+    /**
+     * Sets networkId.
+     * <p>
+     * Field description:
+     * Network id dependent on Country.
+     *
+     * @param networkId
+     */
+    @JsonProperty("networkId")
+    public void setNetworkId(Integer networkId) {
+        this.networkId = networkId;
     }
 
     /**
@@ -699,7 +783,9 @@ public class MessagesApiDeliveryResult {
                 && Objects.equals(this.status, messagesApiDeliveryResult.status)
                 && Objects.equals(this.error, messagesApiDeliveryResult.error)
                 && Objects.equals(this.platform, messagesApiDeliveryResult.platform)
+                && Objects.equals(this.deviceDetails, messagesApiDeliveryResult.deviceDetails)
                 && Objects.equals(this.mccMnc, messagesApiDeliveryResult.mccMnc)
+                && Objects.equals(this.networkId, messagesApiDeliveryResult.networkId)
                 && Objects.equals(this.campaignReferenceId, messagesApiDeliveryResult.campaignReferenceId);
     }
 
@@ -719,7 +805,9 @@ public class MessagesApiDeliveryResult {
                 status,
                 error,
                 platform,
+                deviceDetails,
                 mccMnc,
+                networkId,
                 campaignReferenceId);
     }
 
@@ -768,8 +856,14 @@ public class MessagesApiDeliveryResult {
                 .append("    platform: ")
                 .append(toIndentedString(platform))
                 .append(newLine)
+                .append("    deviceDetails: ")
+                .append(toIndentedString(deviceDetails))
+                .append(newLine)
                 .append("    mccMnc: ")
                 .append(toIndentedString(mccMnc))
+                .append(newLine)
+                .append("    networkId: ")
+                .append(toIndentedString(networkId))
                 .append(newLine)
                 .append("    campaignReferenceId: ")
                 .append(toIndentedString(campaignReferenceId))

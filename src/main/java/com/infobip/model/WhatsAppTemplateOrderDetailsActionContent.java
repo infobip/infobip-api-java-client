@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class WhatsAppTemplateOrderDetailsActionContent {
 
-    private WhatsAppTemplateAllowedOrderPaymentDetails payment;
+    private WhatsAppInteractiveAllowedOrderPaymentDetails payment;
 
     private String paymentConfiguration;
 
@@ -37,7 +37,7 @@ public class WhatsAppTemplateOrderDetailsActionContent {
      * @param payment
      * @return This {@link WhatsAppTemplateOrderDetailsActionContent instance}.
      */
-    public WhatsAppTemplateOrderDetailsActionContent payment(WhatsAppTemplateAllowedOrderPaymentDetails payment) {
+    public WhatsAppTemplateOrderDetailsActionContent payment(WhatsAppInteractiveAllowedOrderPaymentDetails payment) {
         this.payment = payment;
         return this;
     }
@@ -50,7 +50,7 @@ public class WhatsAppTemplateOrderDetailsActionContent {
      * @return payment
      */
     @JsonProperty("payment")
-    public WhatsAppTemplateAllowedOrderPaymentDetails getPayment() {
+    public WhatsAppInteractiveAllowedOrderPaymentDetails getPayment() {
         return payment;
     }
 
@@ -62,7 +62,7 @@ public class WhatsAppTemplateOrderDetailsActionContent {
      * @param payment
      */
     @JsonProperty("payment")
-    public void setPayment(WhatsAppTemplateAllowedOrderPaymentDetails payment) {
+    public void setPayment(WhatsAppInteractiveAllowedOrderPaymentDetails payment) {
         this.payment = payment;
     }
 

@@ -5,7 +5,7 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
-## [ [6.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.1.0) ] - 2025-04-07
+## [ [6.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.1.0) ] - 2025-04-09
 
 ⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
 All changes, including breaking changes, are addressed and explained in the list bellow.
@@ -38,6 +38,13 @@ If you find out that something was not addressed properly, please submit an issu
 * **Updated** `CallsSearchResponse.lastUsageDate` field type from `String` → `LocalDate`.
 * **Removed** `EmailWebhookTrackReport` and `EmailWebhookTrackResponse`  in favor of a unified class: `EmailWebhookTrackingPayload`.
 * **Updated** `FormsRequest.formType` field type from `FormType` → `String`.
+* **Removed** `CallSipTrunkLocation` enum class, now processed as a `String`.
+* **Updated** `WhatsAppTemplateEditPublicApiRequest` `category` field: `CategoryEnum` inner enum replaced by the existing `WhatsAppCategory` class enum value.
+* **Updated** `WhatsAppTemplatePublicApiRequest` `category` field: `CategoryEnum` inner enum replaced by the existing `WhatsAppCategory` class enum value.
+* **Replaced** `WhatsAppWebhookAddress` `type` enum with `String` to support more options.
+* **Fixed** `WhatsAppWebhookContact` `birthday` field type: changed from `OffsetDateTime` to `LocalDate`.
+* **Removed** `WhatsAppWebhookPaymentNotification` `CurrencyEnum` inner enum class, replaced by the existing `WhatsAppPaymentStatus` class.
+* **Removed** `WhatsAppTemplateAllowedOrderPaymentDetails` class, replaced by the unified `WhatsAppInteractiveAllowedOrderPaymentDetails` class.
 * Fixed Javadoc.
 
 ### Removed
@@ -54,24 +61,24 @@ If you find out that something was not addressed properly, please submit an issu
 
 ### Added
 * Most recent feature set for:
-    * [Infobip Messages API](https://www.infobip.com/docs/api/platform/messages-api).
-        * Footer support for Messages API Message. For additional details check Messages API documentation.
-        * Add calendar event button support for Messages API Message. For additional details check Messages API documentation.
-        * Card options for Carousel and Rich Link body types in Messages API Message. For additional details check Messages API documentation.
-    * [Infobip Voice API](https://www.infobip.com/docs/api/channels/voice).
-        * Support for Calls Configuration.
-    * [Infobip SMS API](https://www.infobip.com/docs/api/channels/sms).
-    * [Infobip 2FA API](https://www.infobip.com/docs/api/platform/2fa).
-    * [Infobip Email API](https://www.infobip.com/docs/api/channels/email).
-        * Support for Email IP Management instead of set of deprecated Email IP endpoints. Check [Email API documentation](https://www.infobip.com/docs/api/channels/email) for additional details.
-    * [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp).
-    * [Infobip Viber API](https://www.infobip.com/docs/api/channels/viber).
-    * [Infobip WebRTC API](https://www.infobip.com/docs/api/channels/webrtc-calls).
-    * [Infobip Moments](https://www.infobip.com/docs/api/customer-engagement/moments).
-    * [Infobip MMS API](https://www.infobip.com/docs/api/channels/mms).
-        * Introduced `/mms/2/messages (V2)`  replacing the `/mms/1/advanced (V1)` endpoint.
-        * Introduced `/mms/2/reports (V2)` replacing `/mms/1/reports (V1)` endpoint.
-        * Introduced `/mms/2/logs (V2)` replacing `/mms/1/logs (V1)` endpoint.
+  * [Infobip Messages API](https://www.infobip.com/docs/api/platform/messages-api).
+    * Footer support for Messages API Message. For additional details check Messages API documentation.
+    * Add calendar event button support for Messages API Message. For additional details check Messages API documentation.
+    * Card options for Carousel and Rich Link body types in Messages API Message. For additional details check Messages API documentation.
+  * [Infobip Voice API](https://www.infobip.com/docs/api/channels/voice).
+    * Support for Calls Configuration.
+  * [Infobip SMS API](https://www.infobip.com/docs/api/channels/sms).
+  * [Infobip 2FA API](https://www.infobip.com/docs/api/platform/2fa).
+  * [Infobip Email API](https://www.infobip.com/docs/api/channels/email).
+    * Support for Email IP Management instead of set of deprecated Email IP endpoints. Check [Email API documentation](https://www.infobip.com/docs/api/channels/email) for additional details.
+  * [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp).
+  * [Infobip Viber API](https://www.infobip.com/docs/api/channels/viber).
+  * [Infobip WebRTC API](https://www.infobip.com/docs/api/channels/webrtc-calls).
+  * [Infobip Moments](https://www.infobip.com/docs/api/customer-engagement/moments).
+  * [Infobip MMS API](https://www.infobip.com/docs/api/channels/mms).
+    * Introduced `/mms/2/messages (V2)`  replacing the `/mms/1/advanced (V1)` endpoint.
+    * Introduced `/mms/2/reports (V2)` replacing `/mms/1/reports (V1)` endpoint.
+    * Introduced `/mms/2/logs (V2)` replacing `/mms/1/logs (V1)` endpoint.
 * **Added** new Calls error code type: `MACHINE_DETECTED`.
 * **Added** support for `CallsProviderSipTrunkUpdateRequest`.
 * **Created** `RawJsonDeserializer` to handle raw JSON deserialization.
@@ -91,9 +98,9 @@ If you find out that something was not addressed properly, please submit an issu
 
 - Voice API
   -  Adjusted IVR models in script processing. Scenario scripting is now implemented as a raw string to increase usability of the feature. Scripts should be passed as strings to the IVR request model in all upcoming SDK versions.
-      - **Updated** `CallsUpdateScenarioRequest.script` field type from `List<CallsScriptInner>` → `String`.
-      - **Updated** `CallsSearchResponse.script` and `else` fields type from `List<Object>` → `String`.
-      - **Updated** `CallsUpdateScenarioResponse.script` field type from `Object` → `String`.
+    - **Updated** `CallsUpdateScenarioRequest.script` field type from `List<CallsScriptInner>` → `String`.
+    - **Updated** `CallsSearchResponse.script` and `else` fields type from `List<Object>` → `String`.
+    - **Updated** `CallsUpdateScenarioResponse.script` field type from `Object` → `String`.
   - **Updated** `CallsGetVoicesResponses.voices` field type from `List<CallsVoice>` → `List<CallsSynthesisVoice>`.
   - **Updated** `CallsSearchResponse.lastUsageDate` field type from `OffsetDateTime` → `String`.
   - **Updated** `CallsSpeechCaptureRequest.language` field type from `CallsLanguage` → `CallTranscriptionLanguage`.
@@ -161,31 +168,31 @@ If you find out that something was not addressed properly, please submit an issu
   - **Removed** `fcmServerKey` field from `WebRtcAndroidPushNotificationConfig`.
 
 ### Removed:
-  - Deprecated functions for sending Viber `Image`, `File`, and `Text` messages have been removed. Use `ViberApi.sendViberMessages` to send messages.
-  - All the Calls IVR script related class and from now on all the scripts are processed as `String`:
-    - `CallsCallApi`
-    - `CallsCapture`
-    - `CallsCollect`
-    - `CallsDial`
-    - `CallsDialToMany`
-    - `CallsDialToWebRTC`
-    - `CallsDialToConversations`
-    - `CallsForEach`
-    - `CallsGoTo`
-    - `CallsHangup`
-    - `CallsIfThenElse`
-    - `CallsMachineDetection`
-    - `CallsPause`
-    - `CallsPlay`
-    - `CallsPlayFromRecording`
-    - `CallsRecord`
-    - `CallsRepeatUntil`
-    - `CallsRepeatWhile`
-    - `CallsSay`
-    - `CallsSendSms`
-    - `CallsSetVariable`
-    - `CallsSwitchCase`
-    - `CallsWhileDo`
+- Deprecated functions for sending Viber `Image`, `File`, and `Text` messages have been removed. Use `ViberApi.sendViberMessages` to send messages.
+- All the Calls IVR script related class and from now on all the scripts are processed as `String`:
+  - `CallsCallApi`
+  - `CallsCapture`
+  - `CallsCollect`
+  - `CallsDial`
+  - `CallsDialToMany`
+  - `CallsDialToWebRTC`
+  - `CallsDialToConversations`
+  - `CallsForEach`
+  - `CallsGoTo`
+  - `CallsHangup`
+  - `CallsIfThenElse`
+  - `CallsMachineDetection`
+  - `CallsPause`
+  - `CallsPlay`
+  - `CallsPlayFromRecording`
+  - `CallsRecord`
+  - `CallsRepeatUntil`
+  - `CallsRepeatWhile`
+  - `CallsSay`
+  - `CallsSendSms`
+  - `CallsSetVariable`
+  - `CallsSwitchCase`
+  - `CallsWhileDo`
 
 These changes align the SDK with the current API specification, ensuring consistency and reliability in future updates.
 

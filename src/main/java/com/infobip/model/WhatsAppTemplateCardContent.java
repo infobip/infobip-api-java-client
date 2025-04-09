@@ -23,7 +23,7 @@ public class WhatsAppTemplateCardContent {
 
     private WhatsAppTemplateBodyContent body;
 
-    private List<WhatsAppCardAllowedTemplateButtonContent> buttons = null;
+    private List<WhatsAppTemplateButtonContent> buttons = null;
 
     /**
      * Sets header.
@@ -102,7 +102,7 @@ public class WhatsAppTemplateCardContent {
      * @param buttons
      * @return This {@link WhatsAppTemplateCardContent instance}.
      */
-    public WhatsAppTemplateCardContent buttons(List<WhatsAppCardAllowedTemplateButtonContent> buttons) {
+    public WhatsAppTemplateCardContent buttons(List<WhatsAppTemplateButtonContent> buttons) {
         this.buttons = buttons;
         return this;
     }
@@ -116,7 +116,7 @@ public class WhatsAppTemplateCardContent {
      * @param buttonsItem The item to be added to the list.
      * @return This {@link WhatsAppTemplateCardContent instance}.
      */
-    public WhatsAppTemplateCardContent addButtonsItem(WhatsAppCardAllowedTemplateButtonContent buttonsItem) {
+    public WhatsAppTemplateCardContent addButtonsItem(WhatsAppTemplateButtonContent buttonsItem) {
         if (this.buttons == null) {
             this.buttons = new ArrayList<>();
         }
@@ -133,7 +133,7 @@ public class WhatsAppTemplateCardContent {
      * @return buttons
      */
     @JsonProperty("buttons")
-    public List<WhatsAppCardAllowedTemplateButtonContent> getButtons() {
+    public List<WhatsAppTemplateButtonContent> getButtons() {
         return buttons;
     }
 
@@ -146,7 +146,7 @@ public class WhatsAppTemplateCardContent {
      * @param buttons
      */
     @JsonProperty("buttons")
-    public void setButtons(List<WhatsAppCardAllowedTemplateButtonContent> buttons) {
+    public void setButtons(List<WhatsAppTemplateButtonContent> buttons) {
         this.buttons = buttons;
     }
 

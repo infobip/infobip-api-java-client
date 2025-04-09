@@ -23,6 +23,8 @@ public class WhatsAppWebhookListReplyContent extends WhatsAppWebhookInboundMessa
 
     private String description;
 
+    private WhatsAppContext context;
+
     /**
      * Constructs a new {@link WhatsAppWebhookListReplyContent} instance.
      */
@@ -34,7 +36,7 @@ public class WhatsAppWebhookListReplyContent extends WhatsAppWebhookInboundMessa
      * Sets id.
      * <p>
      * Field description:
-     * ID of the selected row.
+     * Identifier of the selected row.
      * <p>
      * The field is required.
      *
@@ -50,7 +52,7 @@ public class WhatsAppWebhookListReplyContent extends WhatsAppWebhookInboundMessa
      * Returns id.
      * <p>
      * Field description:
-     * ID of the selected row.
+     * Identifier of the selected row.
      * <p>
      * The field is required.
      *
@@ -65,7 +67,7 @@ public class WhatsAppWebhookListReplyContent extends WhatsAppWebhookInboundMessa
      * Sets id.
      * <p>
      * Field description:
-     * ID of the selected row.
+     * Identifier of the selected row.
      * <p>
      * The field is required.
      *
@@ -162,6 +164,37 @@ public class WhatsAppWebhookListReplyContent extends WhatsAppWebhookInboundMessa
         this.description = description;
     }
 
+    /**
+     * Sets context.
+     *
+     * @param context
+     * @return This {@link WhatsAppWebhookListReplyContent instance}.
+     */
+    public WhatsAppWebhookListReplyContent context(WhatsAppContext context) {
+        this.context = context;
+        return this;
+    }
+
+    /**
+     * Returns context.
+     *
+     * @return context
+     */
+    @JsonProperty("context")
+    public WhatsAppContext getContext() {
+        return context;
+    }
+
+    /**
+     * Sets context.
+     *
+     * @param context
+     */
+    @JsonProperty("context")
+    public void setContext(WhatsAppContext context) {
+        this.context = context;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -174,12 +207,13 @@ public class WhatsAppWebhookListReplyContent extends WhatsAppWebhookInboundMessa
         return Objects.equals(this.id, whatsAppWebhookListReplyContent.id)
                 && Objects.equals(this.title, whatsAppWebhookListReplyContent.title)
                 && Objects.equals(this.description, whatsAppWebhookListReplyContent.description)
+                && Objects.equals(this.context, whatsAppWebhookListReplyContent.context)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, super.hashCode());
+        return Objects.hash(id, title, description, context, super.hashCode());
     }
 
     @Override
@@ -199,6 +233,9 @@ public class WhatsAppWebhookListReplyContent extends WhatsAppWebhookInboundMessa
                 .append(newLine)
                 .append("    description: ")
                 .append(toIndentedString(description))
+                .append(newLine)
+                .append("    context: ")
+                .append(toIndentedString(context))
                 .append(newLine)
                 .append("}")
                 .toString();

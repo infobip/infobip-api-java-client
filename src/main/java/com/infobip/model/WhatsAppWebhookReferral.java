@@ -27,12 +27,14 @@ public class WhatsAppWebhookReferral {
 
     private String body;
 
-    private String ctwaClickId;
-
     private WhatsAppWebhookReferralMedia referralMedia;
+
+    private String ctwaClickId;
 
     /**
      * Sets sourceType.
+     * <p>
+     * The field is required.
      *
      * @param sourceType
      * @return This {@link WhatsAppWebhookReferral instance}.
@@ -44,6 +46,8 @@ public class WhatsAppWebhookReferral {
 
     /**
      * Returns sourceType.
+     * <p>
+     * The field is required.
      *
      * @return sourceType
      */
@@ -54,6 +58,8 @@ public class WhatsAppWebhookReferral {
 
     /**
      * Sets sourceType.
+     * <p>
+     * The field is required.
      *
      * @param sourceType
      */
@@ -107,6 +113,8 @@ public class WhatsAppWebhookReferral {
      * <p>
      * Field description:
      * The URL that leads to a Facebook ad or a post.
+     * <p>
+     * The field is required.
      *
      * @param sourceUrl
      * @return This {@link WhatsAppWebhookReferral instance}.
@@ -121,6 +129,8 @@ public class WhatsAppWebhookReferral {
      * <p>
      * Field description:
      * The URL that leads to a Facebook ad or a post.
+     * <p>
+     * The field is required.
      *
      * @return sourceUrl
      */
@@ -134,6 +144,8 @@ public class WhatsAppWebhookReferral {
      * <p>
      * Field description:
      * The URL that leads to a Facebook ad or a post.
+     * <p>
+     * The field is required.
      *
      * @param sourceUrl
      */
@@ -223,6 +235,37 @@ public class WhatsAppWebhookReferral {
     }
 
     /**
+     * Sets referralMedia.
+     *
+     * @param referralMedia
+     * @return This {@link WhatsAppWebhookReferral instance}.
+     */
+    public WhatsAppWebhookReferral referralMedia(WhatsAppWebhookReferralMedia referralMedia) {
+        this.referralMedia = referralMedia;
+        return this;
+    }
+
+    /**
+     * Returns referralMedia.
+     *
+     * @return referralMedia
+     */
+    @JsonProperty("referralMedia")
+    public WhatsAppWebhookReferralMedia getReferralMedia() {
+        return referralMedia;
+    }
+
+    /**
+     * Sets referralMedia.
+     *
+     * @param referralMedia
+     */
+    @JsonProperty("referralMedia")
+    public void setReferralMedia(WhatsAppWebhookReferralMedia referralMedia) {
+        this.referralMedia = referralMedia;
+    }
+
+    /**
      * Sets ctwaClickId.
      * <p>
      * Field description:
@@ -262,37 +305,6 @@ public class WhatsAppWebhookReferral {
         this.ctwaClickId = ctwaClickId;
     }
 
-    /**
-     * Sets referralMedia.
-     *
-     * @param referralMedia
-     * @return This {@link WhatsAppWebhookReferral instance}.
-     */
-    public WhatsAppWebhookReferral referralMedia(WhatsAppWebhookReferralMedia referralMedia) {
-        this.referralMedia = referralMedia;
-        return this;
-    }
-
-    /**
-     * Returns referralMedia.
-     *
-     * @return referralMedia
-     */
-    @JsonProperty("referralMedia")
-    public WhatsAppWebhookReferralMedia getReferralMedia() {
-        return referralMedia;
-    }
-
-    /**
-     * Sets referralMedia.
-     *
-     * @param referralMedia
-     */
-    @JsonProperty("referralMedia")
-    public void setReferralMedia(WhatsAppWebhookReferralMedia referralMedia) {
-        this.referralMedia = referralMedia;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -307,13 +319,13 @@ public class WhatsAppWebhookReferral {
                 && Objects.equals(this.sourceUrl, whatsAppWebhookReferral.sourceUrl)
                 && Objects.equals(this.headline, whatsAppWebhookReferral.headline)
                 && Objects.equals(this.body, whatsAppWebhookReferral.body)
-                && Objects.equals(this.ctwaClickId, whatsAppWebhookReferral.ctwaClickId)
-                && Objects.equals(this.referralMedia, whatsAppWebhookReferral.referralMedia);
+                && Objects.equals(this.referralMedia, whatsAppWebhookReferral.referralMedia)
+                && Objects.equals(this.ctwaClickId, whatsAppWebhookReferral.ctwaClickId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sourceType, sourceId, sourceUrl, headline, body, ctwaClickId, referralMedia);
+        return Objects.hash(sourceType, sourceId, sourceUrl, headline, body, referralMedia, ctwaClickId);
     }
 
     @Override
@@ -337,11 +349,11 @@ public class WhatsAppWebhookReferral {
                 .append("    body: ")
                 .append(toIndentedString(body))
                 .append(newLine)
-                .append("    ctwaClickId: ")
-                .append(toIndentedString(ctwaClickId))
-                .append(newLine)
                 .append("    referralMedia: ")
                 .append(toIndentedString(referralMedia))
+                .append(newLine)
+                .append("    ctwaClickId: ")
+                .append(toIndentedString(ctwaClickId))
                 .append(newLine)
                 .append("}")
                 .toString();

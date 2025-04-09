@@ -19,7 +19,7 @@ import java.util.Objects;
 /**
  * Structure of the created template. Can consist of body (mandatory), header, footer, buttons, carousel, limited time offer and shortening options.
  */
-public class WhatsAppDefaultTemplateStructureApiData {
+public class WhatsAppDefaultTemplateStructureApiData implements WhatsAppTemplateStructureApiData {
 
     private WhatsAppHeaderApiData header;
 

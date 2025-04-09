@@ -13,63 +13,54 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents WhatsAppTemplateQuickReplyButtonContent model.
+ * Represents MessagesApiMessageFlowNavigateAction model.
  */
-public class WhatsAppTemplateQuickReplyButtonContent extends WhatsAppTemplateButtonContent {
+public class MessagesApiMessageFlowNavigateAction extends MessagesApiMessageFlowAction {
 
-    private String parameter;
+    private MessagesApiMessageFlowActionPayload payload;
 
     /**
-     * Constructs a new {@link WhatsAppTemplateQuickReplyButtonContent} instance.
+     * Constructs a new {@link MessagesApiMessageFlowNavigateAction} instance.
      */
-    public WhatsAppTemplateQuickReplyButtonContent() {
-        super("QUICK_REPLY");
+    public MessagesApiMessageFlowNavigateAction() {
+        super("NAVIGATE");
     }
 
     /**
-     * Sets parameter.
-     * <p>
-     * Field description:
-     * Payload of a &#x60;quick reply&#x60; button.
+     * Sets payload.
      * <p>
      * The field is required.
      *
-     * @param parameter
-     * @return This {@link WhatsAppTemplateQuickReplyButtonContent instance}.
+     * @param payload
+     * @return This {@link MessagesApiMessageFlowNavigateAction instance}.
      */
-    public WhatsAppTemplateQuickReplyButtonContent parameter(String parameter) {
-        this.parameter = parameter;
+    public MessagesApiMessageFlowNavigateAction payload(MessagesApiMessageFlowActionPayload payload) {
+        this.payload = payload;
         return this;
     }
 
     /**
-     * Returns parameter.
-     * <p>
-     * Field description:
-     * Payload of a &#x60;quick reply&#x60; button.
+     * Returns payload.
      * <p>
      * The field is required.
      *
-     * @return parameter
+     * @return payload
      */
-    @JsonProperty("parameter")
-    public String getParameter() {
-        return parameter;
+    @JsonProperty("payload")
+    public MessagesApiMessageFlowActionPayload getPayload() {
+        return payload;
     }
 
     /**
-     * Sets parameter.
-     * <p>
-     * Field description:
-     * Payload of a &#x60;quick reply&#x60; button.
+     * Sets payload.
      * <p>
      * The field is required.
      *
-     * @param parameter
+     * @param payload
      */
-    @JsonProperty("parameter")
-    public void setParameter(String parameter) {
-        this.parameter = parameter;
+    @JsonProperty("payload")
+    public void setPayload(MessagesApiMessageFlowActionPayload payload) {
+        this.payload = payload;
     }
 
     @Override
@@ -80,27 +71,27 @@ public class WhatsAppTemplateQuickReplyButtonContent extends WhatsAppTemplateBut
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        WhatsAppTemplateQuickReplyButtonContent whatsAppTemplateQuickReplyButtonContent =
-                (WhatsAppTemplateQuickReplyButtonContent) o;
-        return Objects.equals(this.parameter, whatsAppTemplateQuickReplyButtonContent.parameter) && super.equals(o);
+        MessagesApiMessageFlowNavigateAction messagesApiMessageFlowNavigateAction =
+                (MessagesApiMessageFlowNavigateAction) o;
+        return Objects.equals(this.payload, messagesApiMessageFlowNavigateAction.payload) && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(parameter, super.hashCode());
+        return Objects.hash(payload, super.hashCode());
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class WhatsAppTemplateQuickReplyButtonContent {")
+                .append("class MessagesApiMessageFlowNavigateAction {")
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
                 .append(newLine)
-                .append("    parameter: ")
-                .append(toIndentedString(parameter))
+                .append("    payload: ")
+                .append(toIndentedString(payload))
                 .append(newLine)
                 .append("}")
                 .toString();

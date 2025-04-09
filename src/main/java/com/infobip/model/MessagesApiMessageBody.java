@@ -27,6 +27,7 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = MessagesApiMessageCarouselBody.class, name = "CAROUSEL"),
     @JsonSubTypes.Type(value = MessagesApiMessageContactBody.class, name = "CONTACT"),
     @JsonSubTypes.Type(value = MessagesApiMessageDocumentBody.class, name = "DOCUMENT"),
+    @JsonSubTypes.Type(value = MessagesApiMessageFlowBody.class, name = "FLOW"),
     @JsonSubTypes.Type(value = MessagesApiMessageImageBody.class, name = "IMAGE"),
     @JsonSubTypes.Type(value = MessagesApiMessageListBody.class, name = "LIST"),
     @JsonSubTypes.Type(value = MessagesApiMessageLocationBody.class, name = "LOCATION"),

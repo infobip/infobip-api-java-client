@@ -9,51 +9,15 @@
 
 package com.infobip.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
  * Represents WhatsAppTemplateEditPublicApiRequest model.
  */
 public class WhatsAppTemplateEditPublicApiRequest {
-    /**
-     * Category of the template. Approved template category cannot be edited.
-     */
-    public enum CategoryEnum {
-        MARKETING("MARKETING"),
-        AUTHENTICATION("AUTHENTICATION"),
-        UTILITY("UTILITY");
 
-        private String value;
-
-        CategoryEnum(String value) {
-            this.value = value;
-        }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static CategoryEnum fromValue(String value) {
-            for (CategoryEnum enumElement : CategoryEnum.values()) {
-                if (enumElement.value.equals(value)) {
-                    return enumElement;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
-        }
-    }
-
-    private CategoryEnum category;
+    private WhatsAppCategory category;
 
     private Object structure;
 
@@ -63,41 +27,32 @@ public class WhatsAppTemplateEditPublicApiRequest {
 
     /**
      * Sets category.
-     * <p>
-     * Field description:
-     * Category of the template. Approved template category cannot be edited.
      *
      * @param category
      * @return This {@link WhatsAppTemplateEditPublicApiRequest instance}.
      */
-    public WhatsAppTemplateEditPublicApiRequest category(CategoryEnum category) {
+    public WhatsAppTemplateEditPublicApiRequest category(WhatsAppCategory category) {
         this.category = category;
         return this;
     }
 
     /**
      * Returns category.
-     * <p>
-     * Field description:
-     * Category of the template. Approved template category cannot be edited.
      *
      * @return category
      */
     @JsonProperty("category")
-    public CategoryEnum getCategory() {
+    public WhatsAppCategory getCategory() {
         return category;
     }
 
     /**
      * Sets category.
-     * <p>
-     * Field description:
-     * Category of the template. Approved template category cannot be edited.
      *
      * @param category
      */
     @JsonProperty("category")
-    public void setCategory(CategoryEnum category) {
+    public void setCategory(WhatsAppCategory category) {
         this.category = category;
     }
 

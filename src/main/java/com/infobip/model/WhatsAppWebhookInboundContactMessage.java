@@ -19,7 +19,11 @@ import java.util.Objects;
  */
 public class WhatsAppWebhookInboundContactMessage extends WhatsAppWebhookInboundMessage {
 
-    private List<WhatsAppWebhookContact> contacts = null;
+    private List<WhatsAppWebhookContact> contacts = new ArrayList<>();
+
+    private WhatsAppContext context;
+
+    private WhatsAppWebhookReferral referral;
 
     /**
      * Constructs a new {@link WhatsAppWebhookInboundContactMessage} instance.
@@ -30,6 +34,11 @@ public class WhatsAppWebhookInboundContactMessage extends WhatsAppWebhookInbound
 
     /**
      * Sets contacts.
+     * <p>
+     * Field description:
+     * An array of contacts sent in a WhatsApp message.
+     * <p>
+     * The field is required.
      *
      * @param contacts
      * @return This {@link WhatsAppWebhookInboundContactMessage instance}.
@@ -41,6 +50,11 @@ public class WhatsAppWebhookInboundContactMessage extends WhatsAppWebhookInbound
 
     /**
      * Adds and item into contacts.
+     * <p>
+     * Field description:
+     * An array of contacts sent in a WhatsApp message.
+     * <p>
+     * The field is required.
      *
      * @param contactsItem The item to be added to the list.
      * @return This {@link WhatsAppWebhookInboundContactMessage instance}.
@@ -55,6 +69,11 @@ public class WhatsAppWebhookInboundContactMessage extends WhatsAppWebhookInbound
 
     /**
      * Returns contacts.
+     * <p>
+     * Field description:
+     * An array of contacts sent in a WhatsApp message.
+     * <p>
+     * The field is required.
      *
      * @return contacts
      */
@@ -65,12 +84,79 @@ public class WhatsAppWebhookInboundContactMessage extends WhatsAppWebhookInbound
 
     /**
      * Sets contacts.
+     * <p>
+     * Field description:
+     * An array of contacts sent in a WhatsApp message.
+     * <p>
+     * The field is required.
      *
      * @param contacts
      */
     @JsonProperty("contacts")
     public void setContacts(List<WhatsAppWebhookContact> contacts) {
         this.contacts = contacts;
+    }
+
+    /**
+     * Sets context.
+     *
+     * @param context
+     * @return This {@link WhatsAppWebhookInboundContactMessage instance}.
+     */
+    public WhatsAppWebhookInboundContactMessage context(WhatsAppContext context) {
+        this.context = context;
+        return this;
+    }
+
+    /**
+     * Returns context.
+     *
+     * @return context
+     */
+    @JsonProperty("context")
+    public WhatsAppContext getContext() {
+        return context;
+    }
+
+    /**
+     * Sets context.
+     *
+     * @param context
+     */
+    @JsonProperty("context")
+    public void setContext(WhatsAppContext context) {
+        this.context = context;
+    }
+
+    /**
+     * Sets referral.
+     *
+     * @param referral
+     * @return This {@link WhatsAppWebhookInboundContactMessage instance}.
+     */
+    public WhatsAppWebhookInboundContactMessage referral(WhatsAppWebhookReferral referral) {
+        this.referral = referral;
+        return this;
+    }
+
+    /**
+     * Returns referral.
+     *
+     * @return referral
+     */
+    @JsonProperty("referral")
+    public WhatsAppWebhookReferral getReferral() {
+        return referral;
+    }
+
+    /**
+     * Sets referral.
+     *
+     * @param referral
+     */
+    @JsonProperty("referral")
+    public void setReferral(WhatsAppWebhookReferral referral) {
+        this.referral = referral;
     }
 
     @Override
@@ -83,12 +169,15 @@ public class WhatsAppWebhookInboundContactMessage extends WhatsAppWebhookInbound
         }
         WhatsAppWebhookInboundContactMessage whatsAppWebhookInboundContactMessage =
                 (WhatsAppWebhookInboundContactMessage) o;
-        return Objects.equals(this.contacts, whatsAppWebhookInboundContactMessage.contacts) && super.equals(o);
+        return Objects.equals(this.contacts, whatsAppWebhookInboundContactMessage.contacts)
+                && Objects.equals(this.context, whatsAppWebhookInboundContactMessage.context)
+                && Objects.equals(this.referral, whatsAppWebhookInboundContactMessage.referral)
+                && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(contacts, super.hashCode());
+        return Objects.hash(contacts, context, referral, super.hashCode());
     }
 
     @Override
@@ -102,6 +191,12 @@ public class WhatsAppWebhookInboundContactMessage extends WhatsAppWebhookInbound
                 .append(newLine)
                 .append("    contacts: ")
                 .append(toIndentedString(contacts))
+                .append(newLine)
+                .append("    context: ")
+                .append(toIndentedString(context))
+                .append(newLine)
+                .append("    referral: ")
+                .append(toIndentedString(referral))
                 .append(newLine)
                 .append("}")
                 .toString();
