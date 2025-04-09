@@ -27,6 +27,8 @@ If you find out that something was not addressed properly, please submit an issu
 * **Added** new MessagesApi message body types: `PRODUCT` and `MIXED`.
 * **Added** new WhatsAppInteractive payment status and payment details type: `UPI_INTENT`.
 * **Added** support for `WEBSOCKET` option in call routing endpoint.
+* **Added** WhatsAppWebhookType support:
+* **Added** support for `INFECTED_CONTENT` and `INTERACTIVE_FLOW_REPLY` types in the `WhatsAppWebhookType` enum.
 
 
 ### Changed
