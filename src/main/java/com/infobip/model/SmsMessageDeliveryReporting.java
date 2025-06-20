@@ -27,7 +27,7 @@ public class SmsMessageDeliveryReporting {
      * Sets url.
      * <p>
      * Field description:
-     * The URL on your call back server where a delivery report will be sent. If your URL becomes unavailable then the [retry cycle](https://www.infobip.com/docs/sms/api#notify-url) uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
+     * The URL on your call back server where a delivery report will be sent. If your URL becomes unavailable then the [retry cycle](https://www.infobip.com/docs/sms/sms-over-api#push-retry-cycle-notify-url) uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
      *
      * @param url
      * @return This {@link SmsMessageDeliveryReporting instance}.
@@ -41,7 +41,7 @@ public class SmsMessageDeliveryReporting {
      * Returns url.
      * <p>
      * Field description:
-     * The URL on your call back server where a delivery report will be sent. If your URL becomes unavailable then the [retry cycle](https://www.infobip.com/docs/sms/api#notify-url) uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
+     * The URL on your call back server where a delivery report will be sent. If your URL becomes unavailable then the [retry cycle](https://www.infobip.com/docs/sms/sms-over-api#push-retry-cycle-notify-url) uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
      *
      * @return url
      */
@@ -54,7 +54,7 @@ public class SmsMessageDeliveryReporting {
      * Sets url.
      * <p>
      * Field description:
-     * The URL on your call back server where a delivery report will be sent. If your URL becomes unavailable then the [retry cycle](https://www.infobip.com/docs/sms/api#notify-url) uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
+     * The URL on your call back server where a delivery report will be sent. If your URL becomes unavailable then the [retry cycle](https://www.infobip.com/docs/sms/sms-over-api#push-retry-cycle-notify-url) uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
      *
      * @param url
      */

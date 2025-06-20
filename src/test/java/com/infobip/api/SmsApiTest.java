@@ -977,6 +977,10 @@ class SmsApiTest extends ApiTest {
         var givenTextContent = "hello";
         var givenContent = new SmsTextContent().text(givenTextContent);
 
+        var givenNextCursor = "next-cursor-id";
+        var givenCursorLimit = 10;
+        var givenUseCursor = true;
+
         String givenResponse = String.format(
                 "{" + "  \"results\": ["
                         + "    {"
@@ -1040,7 +1044,11 @@ class SmsApiTest extends ApiTest {
                         + "        \"permanent\": %b"
                         + "      }"
                         + "    }"
-                        + "  ]"
+                        + "  ],"
+                        + "  \"cursor\": {"
+                        + "    \"limit\": %d,"
+                        + "    \"nextCursor\": \"%s\""
+                        + "  }"
                         + "}",
                 givenBulkId,
                 givenApplicationId,
@@ -1082,13 +1090,17 @@ class SmsApiTest extends ApiTest {
                 NO_ERROR_ID,
                 NO_ERROR_NAME,
                 NO_ERROR_DESCRIPTION,
-                NO_ERROR_IS_PERMANENT);
+                NO_ERROR_IS_PERMANENT,
+                givenCursorLimit,
+                givenNextCursor);
 
         setUpSuccessGetRequest(
                 LOGS,
                 Map.of(
                         "bulkId", givenBulkId,
-                        "sentSince", givenSentSinceString),
+                        "sentSince", givenSentSinceString,
+                        "useCursor", Boolean.toString(givenUseCursor),
+                        "cursor", givenNextCursor),
                 givenResponse);
 
         SmsApi sendSmsApi = new SmsApi(getApiClient());
@@ -1141,12 +1153,19 @@ class SmsApiTest extends ApiTest {
             thenPriceIsEqualTo(anotherLog.getPrice(), givenPricePerMessageMessage2, givenCurrencyMessage2);
             thenStatusIsDelivered(anotherLog.getStatus());
             thenNoError(anotherLog.getError());
+
+            SmsCursorPageInfo cursorPageInfo = smsLogsResponse.getCursor();
+            then(cursorPageInfo).isNotNull();
+            then(cursorPageInfo.getNextCursor()).isEqualTo(givenNextCursor);
+            then(cursorPageInfo.getLimit()).isEqualTo(givenCursorLimit);
         };
 
         var call = sendSmsApi
                 .getOutboundSmsMessageLogs()
                 .bulkId(List.of(givenBulkId))
-                .sentSince(givenSentSinceDateTime);
+                .sentSince(givenSentSinceDateTime)
+                .useCursor(givenUseCursor)
+                .cursor(givenNextCursor);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }

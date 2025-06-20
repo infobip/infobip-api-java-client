@@ -21,6 +21,8 @@ public class SmsLogsResponse {
 
     private List<SmsLog> results = null;
 
+    private SmsCursorPageInfo cursor;
+
     /**
      * Sets results.
      * <p>
@@ -78,6 +80,37 @@ public class SmsLogsResponse {
         this.results = results;
     }
 
+    /**
+     * Sets cursor.
+     *
+     * @param cursor
+     * @return This {@link SmsLogsResponse instance}.
+     */
+    public SmsLogsResponse cursor(SmsCursorPageInfo cursor) {
+        this.cursor = cursor;
+        return this;
+    }
+
+    /**
+     * Returns cursor.
+     *
+     * @return cursor
+     */
+    @JsonProperty("cursor")
+    public SmsCursorPageInfo getCursor() {
+        return cursor;
+    }
+
+    /**
+     * Sets cursor.
+     *
+     * @param cursor
+     */
+    @JsonProperty("cursor")
+    public void setCursor(SmsCursorPageInfo cursor) {
+        this.cursor = cursor;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -87,12 +120,13 @@ public class SmsLogsResponse {
             return false;
         }
         SmsLogsResponse smsLogsResponse = (SmsLogsResponse) o;
-        return Objects.equals(this.results, smsLogsResponse.results);
+        return Objects.equals(this.results, smsLogsResponse.results)
+                && Objects.equals(this.cursor, smsLogsResponse.cursor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(results);
+        return Objects.hash(results, cursor);
     }
 
     @Override
@@ -103,6 +137,9 @@ public class SmsLogsResponse {
                 .append(newLine)
                 .append("    results: ")
                 .append(toIndentedString(results))
+                .append(newLine)
+                .append("    cursor: ")
+                .append(toIndentedString(cursor))
                 .append(newLine)
                 .append("}")
                 .toString();

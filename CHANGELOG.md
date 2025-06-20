@@ -5,6 +5,16 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [6.1.1](https://github.com/infobip/infobip-api-java-client/releases/tag/6.1.1) ] - 2025-06-20
+
+### Added
+* Most recent feature set for [Infobip SMS API](https://www.infobip.com/docs/api/channels/sms).
+  * Cursor-based pagination support in `getOutboundSmsMessageLogs` function with `useCursor` and `cursor` parameters.
+
+### Changed
+* `SmsLogsResponse` now includes cursor field to support cursor-based pagination.
+* Updated Javadoc documentation for `SmsMessageDeliveryReporting`.
+
 ## [ [6.1.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.1.0) ] - 2025-04-09
 
 ⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.

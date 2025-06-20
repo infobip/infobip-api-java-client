@@ -331,7 +331,9 @@ public class SmsApi {
             Integer limit,
             String entityId,
             String applicationId,
-            List<String> campaignReferenceId) {
+            List<String> campaignReferenceId,
+            Boolean useCursor,
+            String cursor) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/sms/3/logs")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -381,6 +383,12 @@ public class SmsApi {
                 builder.addQueryParameter(new Parameter("campaignReferenceId", parameterItem));
             }
         }
+        if (useCursor != null) {
+            builder.addQueryParameter(new Parameter("useCursor", useCursor));
+        }
+        if (cursor != null) {
+            builder.addQueryParameter(new Parameter("cursor", cursor));
+        }
         return builder.build();
     }
 
@@ -401,6 +409,8 @@ public class SmsApi {
         private String entityId;
         private String applicationId;
         private List<String> campaignReferenceId;
+        private Boolean useCursor;
+        private String cursor;
 
         private GetOutboundSmsMessageLogsRequest() {}
 
@@ -548,6 +558,28 @@ public class SmsApi {
         }
 
         /**
+         * Sets useCursor.
+         *
+         * @param useCursor Flag used to enable cursor-based pagination. When set to true, the system will use the cursor to fetch the next set of logs. (optional)
+         * @return GetOutboundSmsMessageLogsRequest
+         */
+        public GetOutboundSmsMessageLogsRequest useCursor(Boolean useCursor) {
+            this.useCursor = useCursor;
+            return this;
+        }
+
+        /**
+         * Sets cursor.
+         *
+         * @param cursor Value which represents the current position in the data set. For the first request, this field shouldn&#39;t be defined. In subsequent requests, use the &#x60;nextCursor&#x60; value returned from the previous response to continue fetching data. (optional)
+         * @return GetOutboundSmsMessageLogsRequest
+         */
+        public GetOutboundSmsMessageLogsRequest cursor(String cursor) {
+            this.cursor = cursor;
+            return this;
+        }
+
+        /**
          * Executes the getOutboundSmsMessageLogs request.
          *
          * @return SmsLogsResponse The deserialized response.
@@ -567,7 +599,9 @@ public class SmsApi {
                     limit,
                     entityId,
                     applicationId,
-                    campaignReferenceId);
+                    campaignReferenceId,
+                    useCursor,
+                    cursor);
             return apiClient.execute(
                     getOutboundSmsMessageLogsDefinition, new TypeReference<SmsLogsResponse>() {}.getType());
         }
@@ -592,7 +626,9 @@ public class SmsApi {
                     limit,
                     entityId,
                     applicationId,
-                    campaignReferenceId);
+                    campaignReferenceId,
+                    useCursor,
+                    cursor);
             return apiClient.executeAsync(
                     getOutboundSmsMessageLogsDefinition, new TypeReference<SmsLogsResponse>() {}.getType(), callback);
         }
@@ -659,7 +695,7 @@ public class SmsApi {
     /**
      * Get scheduled SMS messages.
      * <p>
-     * See all scheduled messages and their scheduled date and time. To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message).
+     * See all [scheduled messages](https://www.infobip.com/docs/sms/sms-over-api#schedule-sms) and their scheduled date and time. To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message).
      *
      * @param bulkId  (required)
      * @return GetScheduledSmsMessagesRequest
@@ -720,7 +756,7 @@ public class SmsApi {
     /**
      * Get scheduled SMS messages status.
      * <p>
-     * See the status of scheduled messages. To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message).
+     * See the status of [scheduled messages](https://www.infobip.com/docs/sms/sms-over-api#schedule-sms). To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message).
      *
      * @param bulkId  (required)
      * @return GetScheduledSmsMessagesStatusRequest
@@ -842,7 +878,7 @@ public class SmsApi {
     /**
      * Reschedule SMS messages.
      * <p>
-     * Change the date and time of already scheduled messages. To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message).
+     * Change the date and time of already [scheduled messages](https://www.infobip.com/docs/sms/sms-over-api#schedule-sms). To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message).
      *
      * @param bulkId  (required)
      * @param smsBulkRequest  (required)
@@ -970,7 +1006,7 @@ public class SmsApi {
     /**
      * Update scheduled SMS messages status.
      * <p>
-     * Change the status or completely cancel sending of scheduled messages. To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message).
+     * Change the status or completely cancel sending of [scheduled messages](https://www.infobip.com/docs/sms/sms-over-api#schedule-sms). To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message).
      *
      * @param bulkId  (required)
      * @param smsUpdateStatusRequest  (required)
