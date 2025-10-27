@@ -30,7 +30,7 @@ public class WhatsAppTemplateUrlButtonContent extends WhatsAppTemplateButtonCont
      * Sets parameter.
      * <p>
      * Field description:
-     * URL extension of a &#x60;dynamic URL&#x60; defined in the registered template. Learn more about [URL buttons](https://www.infobip.com/docs/whatsapp/api#dynamic-and-static-template-button-urls-message-templates).
+     * URL extension of a &#x60;dynamic URL&#x60; defined in the registered template. Learn more about [URL buttons](https://www.infobip.com/docs/whatsapp/whatsapp-over-api#dynamic-template-button-urls-with-shortening-and-tracking).
      * <p>
      * The field is required.
      *
@@ -46,7 +46,7 @@ public class WhatsAppTemplateUrlButtonContent extends WhatsAppTemplateButtonCont
      * Returns parameter.
      * <p>
      * Field description:
-     * URL extension of a &#x60;dynamic URL&#x60; defined in the registered template. Learn more about [URL buttons](https://www.infobip.com/docs/whatsapp/api#dynamic-and-static-template-button-urls-message-templates).
+     * URL extension of a &#x60;dynamic URL&#x60; defined in the registered template. Learn more about [URL buttons](https://www.infobip.com/docs/whatsapp/whatsapp-over-api#dynamic-template-button-urls-with-shortening-and-tracking).
      * <p>
      * The field is required.
      *
@@ -61,7 +61,7 @@ public class WhatsAppTemplateUrlButtonContent extends WhatsAppTemplateButtonCont
      * Sets parameter.
      * <p>
      * Field description:
-     * URL extension of a &#x60;dynamic URL&#x60; defined in the registered template. Learn more about [URL buttons](https://www.infobip.com/docs/whatsapp/api#dynamic-and-static-template-button-urls-message-templates).
+     * URL extension of a &#x60;dynamic URL&#x60; defined in the registered template. Learn more about [URL buttons](https://www.infobip.com/docs/whatsapp/whatsapp-over-api#dynamic-template-button-urls-with-shortening-and-tracking).
      * <p>
      * The field is required.
      *

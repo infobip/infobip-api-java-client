@@ -264,7 +264,7 @@ public class ViberInboundMessageViberInboundContent {
      * Sets receivedAt.
      * <p>
      * Field description:
-     * Date and time when Infobip received the message.
+     * Date and time when Infobip received the message. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      * <p>
      * The field is required.
      *
@@ -280,7 +280,7 @@ public class ViberInboundMessageViberInboundContent {
      * Returns receivedAt.
      * <p>
      * Field description:
-     * Date and time when Infobip received the message.
+     * Date and time when Infobip received the message. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      * <p>
      * The field is required.
      *
@@ -295,7 +295,7 @@ public class ViberInboundMessageViberInboundContent {
      * Sets receivedAt.
      * <p>
      * Field description:
-     * Date and time when Infobip received the message.
+     * Date and time when Infobip received the message. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      * <p>
      * The field is required.
      *

@@ -23,11 +23,13 @@ public class ViberMessageDeliveryReporting {
 
     private Boolean notify;
 
+    private Boolean receiveTriggeredFailoverReports;
+
     /**
      * Sets url.
      * <p>
      * Field description:
-     * The URL on your call back server where a delivery report will be sent. If your URL becomes unavailable then the [retry cycle](https://www.infobip.com/docs/sms/api#notify-url) uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
+     * The URL on your call back server where a delivery report will be sent. If your URL becomes unavailable then the [retry cycle](https://www.infobip.com/docs/sms/sms-over-api#push-retry-cycle-notify-url) uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
      *
      * @param url
      * @return This {@link ViberMessageDeliveryReporting instance}.
@@ -41,7 +43,7 @@ public class ViberMessageDeliveryReporting {
      * Returns url.
      * <p>
      * Field description:
-     * The URL on your call back server where a delivery report will be sent. If your URL becomes unavailable then the [retry cycle](https://www.infobip.com/docs/sms/api#notify-url) uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
+     * The URL on your call back server where a delivery report will be sent. If your URL becomes unavailable then the [retry cycle](https://www.infobip.com/docs/sms/sms-over-api#push-retry-cycle-notify-url) uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
      *
      * @return url
      */
@@ -54,7 +56,7 @@ public class ViberMessageDeliveryReporting {
      * Sets url.
      * <p>
      * Field description:
-     * The URL on your call back server where a delivery report will be sent. If your URL becomes unavailable then the [retry cycle](https://www.infobip.com/docs/sms/api#notify-url) uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
+     * The URL on your call back server where a delivery report will be sent. If your URL becomes unavailable then the [retry cycle](https://www.infobip.com/docs/sms/sms-over-api#push-retry-cycle-notify-url) uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
      *
      * @param url
      */
@@ -143,6 +145,46 @@ public class ViberMessageDeliveryReporting {
         this.notify = notify;
     }
 
+    /**
+     * Sets receiveTriggeredFailoverReports.
+     * <p>
+     * Field description:
+     * Allows you to receive delivery reports for all triggered failover steps, not just the final one (either the first successful or the last failed step). The default setting is &#x60;false&#x60;.
+     *
+     * @param receiveTriggeredFailoverReports
+     * @return This {@link ViberMessageDeliveryReporting instance}.
+     */
+    public ViberMessageDeliveryReporting receiveTriggeredFailoverReports(Boolean receiveTriggeredFailoverReports) {
+        this.receiveTriggeredFailoverReports = receiveTriggeredFailoverReports;
+        return this;
+    }
+
+    /**
+     * Returns receiveTriggeredFailoverReports.
+     * <p>
+     * Field description:
+     * Allows you to receive delivery reports for all triggered failover steps, not just the final one (either the first successful or the last failed step). The default setting is &#x60;false&#x60;.
+     *
+     * @return receiveTriggeredFailoverReports
+     */
+    @JsonProperty("receiveTriggeredFailoverReports")
+    public Boolean getReceiveTriggeredFailoverReports() {
+        return receiveTriggeredFailoverReports;
+    }
+
+    /**
+     * Sets receiveTriggeredFailoverReports.
+     * <p>
+     * Field description:
+     * Allows you to receive delivery reports for all triggered failover steps, not just the final one (either the first successful or the last failed step). The default setting is &#x60;false&#x60;.
+     *
+     * @param receiveTriggeredFailoverReports
+     */
+    @JsonProperty("receiveTriggeredFailoverReports")
+    public void setReceiveTriggeredFailoverReports(Boolean receiveTriggeredFailoverReports) {
+        this.receiveTriggeredFailoverReports = receiveTriggeredFailoverReports;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -154,12 +196,15 @@ public class ViberMessageDeliveryReporting {
         ViberMessageDeliveryReporting viberMessageDeliveryReporting = (ViberMessageDeliveryReporting) o;
         return Objects.equals(this.url, viberMessageDeliveryReporting.url)
                 && Objects.equals(this.intermediateReport, viberMessageDeliveryReporting.intermediateReport)
-                && Objects.equals(this.notify, viberMessageDeliveryReporting.notify);
+                && Objects.equals(this.notify, viberMessageDeliveryReporting.notify)
+                && Objects.equals(
+                        this.receiveTriggeredFailoverReports,
+                        viberMessageDeliveryReporting.receiveTriggeredFailoverReports);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, intermediateReport, notify);
+        return Objects.hash(url, intermediateReport, notify, receiveTriggeredFailoverReports);
     }
 
     @Override
@@ -176,6 +221,9 @@ public class ViberMessageDeliveryReporting {
                 .append(newLine)
                 .append("    notify: ")
                 .append(toIndentedString(notify))
+                .append(newLine)
+                .append("    receiveTriggeredFailoverReports: ")
+                .append(toIndentedString(receiveTriggeredFailoverReports))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -29,6 +29,8 @@ public class WhatsAppTemplateDataContent {
 
     private WhatsAppTemplateLimitedTimeOfferContent limitedTimeOffer;
 
+    private WhatsAppTemplateOrderStatusContent orderStatus;
+
     /**
      * Sets body.
      * <p>
@@ -101,7 +103,7 @@ public class WhatsAppTemplateDataContent {
      * Sets buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60;, &#x60;copy code&#x60; or &#x60;flow&#x60;  buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button. When &#x60;flow&#x60;, &#x60;catalog&#x60;, &#x60;multi product&#x60; or &#x60;order details&#x60; button is used it needs to be the only button.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60;, &#x60;copy code&#x60; or &#x60;flow&#x60;  buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons, one &#x60;copy code&#x60; button and one &#x60;flow&#x60; button. When &#x60;catalog&#x60;, &#x60;multi product&#x60; or &#x60;order details&#x60; button is used it needs to be the only button.
      *
      * @param buttons
      * @return This {@link WhatsAppTemplateDataContent instance}.
@@ -115,7 +117,7 @@ public class WhatsAppTemplateDataContent {
      * Adds and item into buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60;, &#x60;copy code&#x60; or &#x60;flow&#x60;  buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button. When &#x60;flow&#x60;, &#x60;catalog&#x60;, &#x60;multi product&#x60; or &#x60;order details&#x60; button is used it needs to be the only button.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60;, &#x60;copy code&#x60; or &#x60;flow&#x60;  buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons, one &#x60;copy code&#x60; button and one &#x60;flow&#x60; button. When &#x60;catalog&#x60;, &#x60;multi product&#x60; or &#x60;order details&#x60; button is used it needs to be the only button.
      *
      * @param buttonsItem The item to be added to the list.
      * @return This {@link WhatsAppTemplateDataContent instance}.
@@ -132,7 +134,7 @@ public class WhatsAppTemplateDataContent {
      * Returns buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60;, &#x60;copy code&#x60; or &#x60;flow&#x60;  buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button. When &#x60;flow&#x60;, &#x60;catalog&#x60;, &#x60;multi product&#x60; or &#x60;order details&#x60; button is used it needs to be the only button.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60;, &#x60;copy code&#x60; or &#x60;flow&#x60;  buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons, one &#x60;copy code&#x60; button and one &#x60;flow&#x60; button. When &#x60;catalog&#x60;, &#x60;multi product&#x60; or &#x60;order details&#x60; button is used it needs to be the only button.
      *
      * @return buttons
      */
@@ -145,7 +147,7 @@ public class WhatsAppTemplateDataContent {
      * Sets buttons.
      * <p>
      * Field description:
-     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60;, &#x60;copy code&#x60; or &#x60;flow&#x60;  buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons and one &#x60;copy code&#x60; button. When &#x60;flow&#x60;, &#x60;catalog&#x60;, &#x60;multi product&#x60; or &#x60;order details&#x60; button is used it needs to be the only button.
+     * Template buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60;, &#x60;dynamic URL&#x60;, &#x60;copy code&#x60; or &#x60;flow&#x60;  buttons have been registered. It can have up to ten buttons including a maximum of two &#x60;dynamic URL&#x60; buttons, one &#x60;copy code&#x60; button and one &#x60;flow&#x60; button. When &#x60;catalog&#x60;, &#x60;multi product&#x60; or &#x60;order details&#x60; button is used it needs to be the only button.
      *
      * @param buttons
      */
@@ -216,6 +218,37 @@ public class WhatsAppTemplateDataContent {
         this.limitedTimeOffer = limitedTimeOffer;
     }
 
+    /**
+     * Sets orderStatus.
+     *
+     * @param orderStatus
+     * @return This {@link WhatsAppTemplateDataContent instance}.
+     */
+    public WhatsAppTemplateDataContent orderStatus(WhatsAppTemplateOrderStatusContent orderStatus) {
+        this.orderStatus = orderStatus;
+        return this;
+    }
+
+    /**
+     * Returns orderStatus.
+     *
+     * @return orderStatus
+     */
+    @JsonProperty("orderStatus")
+    public WhatsAppTemplateOrderStatusContent getOrderStatus() {
+        return orderStatus;
+    }
+
+    /**
+     * Sets orderStatus.
+     *
+     * @param orderStatus
+     */
+    @JsonProperty("orderStatus")
+    public void setOrderStatus(WhatsAppTemplateOrderStatusContent orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -229,12 +262,13 @@ public class WhatsAppTemplateDataContent {
                 && Objects.equals(this.header, whatsAppTemplateDataContent.header)
                 && Objects.equals(this.buttons, whatsAppTemplateDataContent.buttons)
                 && Objects.equals(this.carousel, whatsAppTemplateDataContent.carousel)
-                && Objects.equals(this.limitedTimeOffer, whatsAppTemplateDataContent.limitedTimeOffer);
+                && Objects.equals(this.limitedTimeOffer, whatsAppTemplateDataContent.limitedTimeOffer)
+                && Objects.equals(this.orderStatus, whatsAppTemplateDataContent.orderStatus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(body, header, buttons, carousel, limitedTimeOffer);
+        return Objects.hash(body, header, buttons, carousel, limitedTimeOffer, orderStatus);
     }
 
     @Override
@@ -257,6 +291,9 @@ public class WhatsAppTemplateDataContent {
                 .append(newLine)
                 .append("    limitedTimeOffer: ")
                 .append(toIndentedString(limitedTimeOffer))
+                .append(newLine)
+                .append("    orderStatus: ")
+                .append(toIndentedString(orderStatus))
                 .append(newLine)
                 .append("}")
                 .toString();

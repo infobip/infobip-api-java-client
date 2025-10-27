@@ -23,6 +23,8 @@ public class TfaEmailMessage {
 
     private String from;
 
+    private String landingPageId;
+
     private String messageId;
 
     private Integer pinLength;
@@ -150,6 +152,46 @@ public class TfaEmailMessage {
     }
 
     /**
+     * Sets landingPageId.
+     * <p>
+     * Field description:
+     * Opt out landing page ID that should reference a previously created landing page template.
+     *
+     * @param landingPageId
+     * @return This {@link TfaEmailMessage instance}.
+     */
+    public TfaEmailMessage landingPageId(String landingPageId) {
+        this.landingPageId = landingPageId;
+        return this;
+    }
+
+    /**
+     * Returns landingPageId.
+     * <p>
+     * Field description:
+     * Opt out landing page ID that should reference a previously created landing page template.
+     *
+     * @return landingPageId
+     */
+    @JsonProperty("landingPageId")
+    public String getLandingPageId() {
+        return landingPageId;
+    }
+
+    /**
+     * Sets landingPageId.
+     * <p>
+     * Field description:
+     * Opt out landing page ID that should reference a previously created landing page template.
+     *
+     * @param landingPageId
+     */
+    @JsonProperty("landingPageId")
+    public void setLandingPageId(String landingPageId) {
+        this.landingPageId = landingPageId;
+    }
+
+    /**
      * Sets messageId.
      * <p>
      * Field description:
@@ -272,6 +314,7 @@ public class TfaEmailMessage {
         return Objects.equals(this.applicationId, tfaEmailMessage.applicationId)
                 && Objects.equals(this.emailTemplateId, tfaEmailMessage.emailTemplateId)
                 && Objects.equals(this.from, tfaEmailMessage.from)
+                && Objects.equals(this.landingPageId, tfaEmailMessage.landingPageId)
                 && Objects.equals(this.messageId, tfaEmailMessage.messageId)
                 && Objects.equals(this.pinLength, tfaEmailMessage.pinLength)
                 && Objects.equals(this.pinType, tfaEmailMessage.pinType);
@@ -279,7 +322,7 @@ public class TfaEmailMessage {
 
     @Override
     public int hashCode() {
-        return Objects.hash(applicationId, emailTemplateId, from, messageId, pinLength, pinType);
+        return Objects.hash(applicationId, emailTemplateId, from, landingPageId, messageId, pinLength, pinType);
     }
 
     @Override
@@ -296,6 +339,9 @@ public class TfaEmailMessage {
                 .append(newLine)
                 .append("    from: ")
                 .append(toIndentedString(from))
+                .append(newLine)
+                .append("    landingPageId: ")
+                .append(toIndentedString(landingPageId))
                 .append(newLine)
                 .append("    messageId: ")
                 .append(toIndentedString(messageId))

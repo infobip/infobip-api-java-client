@@ -24,9 +24,11 @@ import java.util.Objects;
         visible = true)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = MessagesApiMessageAddCalendarEventButton.class, name = "ADD_CALENDAR_EVENT"),
+    @JsonSubTypes.Type(value = MessagesApiMessageDialPhoneButton.class, name = "DIAL_PHONE"),
     @JsonSubTypes.Type(value = MessagesApiMessageOpenUrlButton.class, name = "OPEN_URL"),
     @JsonSubTypes.Type(value = MessagesApiMessageReplyButton.class, name = "REPLY"),
     @JsonSubTypes.Type(value = MessagesApiMessageRequestLocationButton.class, name = "REQUEST_LOCATION"),
+    @JsonSubTypes.Type(value = MessagesApiMessageShowLocationButton.class, name = "SHOW_LOCATION"),
 })
 public abstract class MessagesApiMessageButton {
 

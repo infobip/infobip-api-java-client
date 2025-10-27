@@ -26,7 +26,9 @@ public class EmailBulkRescheduleResponse {
      * Sets bulkId.
      * <p>
      * Field description:
-     * The ID uniquely identifies the sent email request.
+     * The ID that uniquely identifies the message within the bulk.
+     * <p>
+     * The field is required.
      *
      * @param bulkId
      * @return This {@link EmailBulkRescheduleResponse instance}.
@@ -40,7 +42,9 @@ public class EmailBulkRescheduleResponse {
      * Returns bulkId.
      * <p>
      * Field description:
-     * The ID uniquely identifies the sent email request.
+     * The ID that uniquely identifies the message within the bulk.
+     * <p>
+     * The field is required.
      *
      * @return bulkId
      */
@@ -53,7 +57,9 @@ public class EmailBulkRescheduleResponse {
      * Sets bulkId.
      * <p>
      * Field description:
-     * The ID uniquely identifies the sent email request.
+     * The ID that uniquely identifies the message within the bulk.
+     * <p>
+     * The field is required.
      *
      * @param bulkId
      */
@@ -67,6 +73,8 @@ public class EmailBulkRescheduleResponse {
      * <p>
      * Field description:
      * Date and time when the email is to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * <p>
+     * The field is required.
      *
      * @param sendAt
      * @return This {@link EmailBulkRescheduleResponse instance}.
@@ -81,6 +89,8 @@ public class EmailBulkRescheduleResponse {
      * <p>
      * Field description:
      * Date and time when the email is to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * <p>
+     * The field is required.
      *
      * @return sendAt
      */
@@ -94,6 +104,8 @@ public class EmailBulkRescheduleResponse {
      * <p>
      * Field description:
      * Date and time when the email is to be sent. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * <p>
+     * The field is required.
      *
      * @param sendAt
      */

@@ -78,9 +78,7 @@ public class MessagesApiMessageReplyButton extends MessagesApiMessageButton {
      * Sets postbackData.
      * <p>
      * Field description:
-     * Custom data that will be sent to you when user reply to a message.
-     * <p>
-     * The field is required.
+     * Custom data that will be sent to you when the user replies to the message.
      *
      * @param postbackData
      * @return This {@link MessagesApiMessageReplyButton instance}.
@@ -94,9 +92,7 @@ public class MessagesApiMessageReplyButton extends MessagesApiMessageButton {
      * Returns postbackData.
      * <p>
      * Field description:
-     * Custom data that will be sent to you when user reply to a message.
-     * <p>
-     * The field is required.
+     * Custom data that will be sent to you when the user replies to the message.
      *
      * @return postbackData
      */
@@ -109,9 +105,7 @@ public class MessagesApiMessageReplyButton extends MessagesApiMessageButton {
      * Sets postbackData.
      * <p>
      * Field description:
-     * Custom data that will be sent to you when user reply to a message.
-     * <p>
-     * The field is required.
+     * Custom data that will be sent to you when the user replies to the message.
      *
      * @param postbackData
      */

@@ -454,7 +454,7 @@ public class MessagesApiDeliveryResult {
      * Sets messageCount.
      * <p>
      * Field description:
-     * Number of returned messages in this request.
+     * The number of parts the message content was split into.
      * <p>
      * The field is required.
      *
@@ -470,7 +470,7 @@ public class MessagesApiDeliveryResult {
      * Returns messageCount.
      * <p>
      * Field description:
-     * Number of returned messages in this request.
+     * The number of parts the message content was split into.
      * <p>
      * The field is required.
      *
@@ -485,7 +485,7 @@ public class MessagesApiDeliveryResult {
      * Sets messageCount.
      * <p>
      * Field description:
-     * Number of returned messages in this request.
+     * The number of parts the message content was split into.
      * <p>
      * The field is required.
      *

@@ -55,6 +55,8 @@ public class NumberMaskingStatusRequest {
 
     private NumberMaskingRecordingStatus recordingStatus;
 
+    private CallsMachineDetectionResult machineDetectionResult;
+
     private String clientReferenceId;
 
     /**
@@ -809,6 +811,37 @@ public class NumberMaskingStatusRequest {
     }
 
     /**
+     * Sets machineDetectionResult.
+     *
+     * @param machineDetectionResult
+     * @return This {@link NumberMaskingStatusRequest instance}.
+     */
+    public NumberMaskingStatusRequest machineDetectionResult(CallsMachineDetectionResult machineDetectionResult) {
+        this.machineDetectionResult = machineDetectionResult;
+        return this;
+    }
+
+    /**
+     * Returns machineDetectionResult.
+     *
+     * @return machineDetectionResult
+     */
+    @JsonProperty("machineDetectionResult")
+    public CallsMachineDetectionResult getMachineDetectionResult() {
+        return machineDetectionResult;
+    }
+
+    /**
+     * Sets machineDetectionResult.
+     *
+     * @param machineDetectionResult
+     */
+    @JsonProperty("machineDetectionResult")
+    public void setMachineDetectionResult(CallsMachineDetectionResult machineDetectionResult) {
+        this.machineDetectionResult = machineDetectionResult;
+    }
+
+    /**
      * Sets clientReferenceId.
      * <p>
      * Field description:
@@ -876,6 +909,7 @@ public class NumberMaskingStatusRequest {
                 && Objects.equals(this.recordingFileId, numberMaskingStatusRequest.recordingFileId)
                 && Objects.equals(this.recordCalleeAnnouncement, numberMaskingStatusRequest.recordCalleeAnnouncement)
                 && Objects.equals(this.recordingStatus, numberMaskingStatusRequest.recordingStatus)
+                && Objects.equals(this.machineDetectionResult, numberMaskingStatusRequest.machineDetectionResult)
                 && Objects.equals(this.clientReferenceId, numberMaskingStatusRequest.clientReferenceId);
     }
 
@@ -901,6 +935,7 @@ public class NumberMaskingStatusRequest {
                 recordingFileId,
                 recordCalleeAnnouncement,
                 recordingStatus,
+                machineDetectionResult,
                 clientReferenceId);
     }
 
@@ -966,6 +1001,9 @@ public class NumberMaskingStatusRequest {
                 .append(newLine)
                 .append("    recordingStatus: ")
                 .append(toIndentedString(recordingStatus))
+                .append(newLine)
+                .append("    machineDetectionResult: ")
+                .append(toIndentedString(machineDetectionResult))
                 .append(newLine)
                 .append("    clientReferenceId: ")
                 .append(toIndentedString(clientReferenceId))

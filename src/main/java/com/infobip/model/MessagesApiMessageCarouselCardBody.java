@@ -113,9 +113,7 @@ public class MessagesApiMessageCarouselCardBody {
      * Sets url.
      * <p>
      * Field description:
-     * URL of the rich link. It can be image or video. When you provide it with &#x60;isVideo&#x3D;true&#x60; then it will be mapped as a video, otherwise - as an image.
-     * <p>
-     * The field is required.
+     * URL of the card&#39;s media. It can be image or video. When you provide it with &#x60;isVideo&#x3D;true&#x60; then it will be mapped as a video, otherwise - as an image.
      *
      * @param url
      * @return This {@link MessagesApiMessageCarouselCardBody instance}.
@@ -129,9 +127,7 @@ public class MessagesApiMessageCarouselCardBody {
      * Returns url.
      * <p>
      * Field description:
-     * URL of the rich link. It can be image or video. When you provide it with &#x60;isVideo&#x3D;true&#x60; then it will be mapped as a video, otherwise - as an image.
-     * <p>
-     * The field is required.
+     * URL of the card&#39;s media. It can be image or video. When you provide it with &#x60;isVideo&#x3D;true&#x60; then it will be mapped as a video, otherwise - as an image.
      *
      * @return url
      */
@@ -144,9 +140,7 @@ public class MessagesApiMessageCarouselCardBody {
      * Sets url.
      * <p>
      * Field description:
-     * URL of the rich link. It can be image or video. When you provide it with &#x60;isVideo&#x3D;true&#x60; then it will be mapped as a video, otherwise - as an image.
-     * <p>
-     * The field is required.
+     * URL of the card&#39;s media. It can be image or video. When you provide it with &#x60;isVideo&#x3D;true&#x60; then it will be mapped as a video, otherwise - as an image.
      *
      * @param url
      */

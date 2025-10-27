@@ -35,6 +35,8 @@ public class WhatsAppInteractiveFlowMessage {
 
     private String applicationId;
 
+    private WhatsAppMessageContext context;
+
     /**
      * Sets from.
      * <p>
@@ -395,6 +397,37 @@ public class WhatsAppInteractiveFlowMessage {
         this.applicationId = applicationId;
     }
 
+    /**
+     * Sets context.
+     *
+     * @param context
+     * @return This {@link WhatsAppInteractiveFlowMessage instance}.
+     */
+    public WhatsAppInteractiveFlowMessage context(WhatsAppMessageContext context) {
+        this.context = context;
+        return this;
+    }
+
+    /**
+     * Returns context.
+     *
+     * @return context
+     */
+    @JsonProperty("context")
+    public WhatsAppMessageContext getContext() {
+        return context;
+    }
+
+    /**
+     * Sets context.
+     *
+     * @param context
+     */
+    @JsonProperty("context")
+    public void setContext(WhatsAppMessageContext context) {
+        this.context = context;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -412,12 +445,14 @@ public class WhatsAppInteractiveFlowMessage {
                 && Objects.equals(this.notifyUrl, whatsAppInteractiveFlowMessage.notifyUrl)
                 && Objects.equals(this.urlOptions, whatsAppInteractiveFlowMessage.urlOptions)
                 && Objects.equals(this.entityId, whatsAppInteractiveFlowMessage.entityId)
-                && Objects.equals(this.applicationId, whatsAppInteractiveFlowMessage.applicationId);
+                && Objects.equals(this.applicationId, whatsAppInteractiveFlowMessage.applicationId)
+                && Objects.equals(this.context, whatsAppInteractiveFlowMessage.context);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, to, messageId, content, callbackData, notifyUrl, urlOptions, entityId, applicationId);
+        return Objects.hash(
+                from, to, messageId, content, callbackData, notifyUrl, urlOptions, entityId, applicationId, context);
     }
 
     @Override
@@ -452,6 +487,9 @@ public class WhatsAppInteractiveFlowMessage {
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    context: ")
+                .append(toIndentedString(context))
                 .append(newLine)
                 .append("}")
                 .toString();

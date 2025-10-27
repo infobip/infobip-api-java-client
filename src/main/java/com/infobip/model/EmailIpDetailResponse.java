@@ -23,6 +23,8 @@ public class EmailIpDetailResponse {
 
     private String ip;
 
+    private Set<String> ipAddresses = new LinkedHashSet<>();
+
     private Set<EmailIpPoolResponse> pools = new LinkedHashSet<>();
 
     /**
@@ -118,6 +120,59 @@ public class EmailIpDetailResponse {
     }
 
     /**
+     * Sets ipAddresses.
+     * <p>
+     * The field is required.
+     *
+     * @param ipAddresses
+     * @return This {@link EmailIpDetailResponse instance}.
+     */
+    public EmailIpDetailResponse ipAddresses(Set<String> ipAddresses) {
+        this.ipAddresses = ipAddresses;
+        return this;
+    }
+
+    /**
+     * Adds and item into ipAddresses.
+     * <p>
+     * The field is required.
+     *
+     * @param ipAddressesItem The item to be added to the list.
+     * @return This {@link EmailIpDetailResponse instance}.
+     */
+    public EmailIpDetailResponse addIpAddressesItem(String ipAddressesItem) {
+        if (this.ipAddresses == null) {
+            this.ipAddresses = new LinkedHashSet<>();
+        }
+        this.ipAddresses.add(ipAddressesItem);
+        return this;
+    }
+
+    /**
+     * Returns ipAddresses.
+     * <p>
+     * The field is required.
+     *
+     * @return ipAddresses
+     */
+    @JsonProperty("ipAddresses")
+    public Set<String> getIpAddresses() {
+        return ipAddresses;
+    }
+
+    /**
+     * Sets ipAddresses.
+     * <p>
+     * The field is required.
+     *
+     * @param ipAddresses
+     */
+    @JsonProperty("ipAddresses")
+    public void setIpAddresses(Set<String> ipAddresses) {
+        this.ipAddresses = ipAddresses;
+    }
+
+    /**
      * Sets pools.
      * <p>
      * The field is required.
@@ -181,12 +236,13 @@ public class EmailIpDetailResponse {
         EmailIpDetailResponse emailIpDetailResponse = (EmailIpDetailResponse) o;
         return Objects.equals(this.id, emailIpDetailResponse.id)
                 && Objects.equals(this.ip, emailIpDetailResponse.ip)
+                && Objects.equals(this.ipAddresses, emailIpDetailResponse.ipAddresses)
                 && Objects.equals(this.pools, emailIpDetailResponse.pools);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ip, pools);
+        return Objects.hash(id, ip, ipAddresses, pools);
     }
 
     @Override
@@ -200,6 +256,9 @@ public class EmailIpDetailResponse {
                 .append(newLine)
                 .append("    ip: ")
                 .append(toIndentedString(ip))
+                .append(newLine)
+                .append("    ipAddresses: ")
+                .append(toIndentedString(ipAddresses))
                 .append(newLine)
                 .append("    pools: ")
                 .append(toIndentedString(pools))

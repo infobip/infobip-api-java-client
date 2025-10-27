@@ -56,7 +56,7 @@ public class SmsLanguageConfiguration {
      * Sets transliteration.
      * <p>
      * Field description:
-     * Conversion of a message text from one script to another. Possible values: &#x60;TURKISH&#x60;, &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;, &#x60;SERBIAN_CYRILLIC&#x60;, &#x60;BULGARIAN_CYRILLIC&#x60;, &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60; and &#x60;NON_UNICODE&#x60;.
+     * Conversion of a message text from one script to another. Possible values: &#x60;TURKISH&#x60;, &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;, &#x60;SERBIAN_CYRILLIC&#x60;, &#x60;BULGARIAN_CYRILLIC&#x60;, &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60;, &#x60;NON_UNICODE&#x60; and &#x60;ALL&#x60;.
      *
      * @param transliteration
      * @return This {@link SmsLanguageConfiguration instance}.
@@ -70,7 +70,7 @@ public class SmsLanguageConfiguration {
      * Returns transliteration.
      * <p>
      * Field description:
-     * Conversion of a message text from one script to another. Possible values: &#x60;TURKISH&#x60;, &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;, &#x60;SERBIAN_CYRILLIC&#x60;, &#x60;BULGARIAN_CYRILLIC&#x60;, &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60; and &#x60;NON_UNICODE&#x60;.
+     * Conversion of a message text from one script to another. Possible values: &#x60;TURKISH&#x60;, &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;, &#x60;SERBIAN_CYRILLIC&#x60;, &#x60;BULGARIAN_CYRILLIC&#x60;, &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60;, &#x60;NON_UNICODE&#x60; and &#x60;ALL&#x60;.
      *
      * @return transliteration
      */
@@ -83,7 +83,7 @@ public class SmsLanguageConfiguration {
      * Sets transliteration.
      * <p>
      * Field description:
-     * Conversion of a message text from one script to another. Possible values: &#x60;TURKISH&#x60;, &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;, &#x60;SERBIAN_CYRILLIC&#x60;, &#x60;BULGARIAN_CYRILLIC&#x60;, &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60; and &#x60;NON_UNICODE&#x60;.
+     * Conversion of a message text from one script to another. Possible values: &#x60;TURKISH&#x60;, &#x60;GREEK&#x60;, &#x60;CYRILLIC&#x60;, &#x60;SERBIAN_CYRILLIC&#x60;, &#x60;BULGARIAN_CYRILLIC&#x60;, &#x60;CENTRAL_EUROPEAN&#x60;, &#x60;BALTIC&#x60;, &#x60;NON_UNICODE&#x60; and &#x60;ALL&#x60;.
      *
      * @param transliteration
      */

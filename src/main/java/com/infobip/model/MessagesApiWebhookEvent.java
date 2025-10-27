@@ -36,9 +36,13 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
 
     private String callbackData;
 
+    private Integer messageCount;
+
     private Platform platform;
 
     private String campaignReferenceId;
+
+    private MessagesApiWebhookEventMetadata metadata;
 
     /**
      * Constructs a new {@link MessagesApiWebhookEvent} instance.
@@ -414,6 +418,52 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
     }
 
     /**
+     * Sets messageCount.
+     * <p>
+     * Field description:
+     * The number of parts the message content was split into.
+     * <p>
+     * The field is required.
+     *
+     * @param messageCount
+     * @return This {@link MessagesApiWebhookEvent instance}.
+     */
+    public MessagesApiWebhookEvent messageCount(Integer messageCount) {
+        this.messageCount = messageCount;
+        return this;
+    }
+
+    /**
+     * Returns messageCount.
+     * <p>
+     * Field description:
+     * The number of parts the message content was split into.
+     * <p>
+     * The field is required.
+     *
+     * @return messageCount
+     */
+    @JsonProperty("messageCount")
+    public Integer getMessageCount() {
+        return messageCount;
+    }
+
+    /**
+     * Sets messageCount.
+     * <p>
+     * Field description:
+     * The number of parts the message content was split into.
+     * <p>
+     * The field is required.
+     *
+     * @param messageCount
+     */
+    @JsonProperty("messageCount")
+    public void setMessageCount(Integer messageCount) {
+        this.messageCount = messageCount;
+    }
+
+    /**
      * Sets platform.
      *
      * @param platform
@@ -484,6 +534,37 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
         this.campaignReferenceId = campaignReferenceId;
     }
 
+    /**
+     * Sets metadata.
+     *
+     * @param metadata
+     * @return This {@link MessagesApiWebhookEvent instance}.
+     */
+    public MessagesApiWebhookEvent metadata(MessagesApiWebhookEventMetadata metadata) {
+        this.metadata = metadata;
+        return this;
+    }
+
+    /**
+     * Returns metadata.
+     *
+     * @return metadata
+     */
+    @JsonProperty("metadata")
+    public MessagesApiWebhookEventMetadata getMetadata() {
+        return metadata;
+    }
+
+    /**
+     * Sets metadata.
+     *
+     * @param metadata
+     */
+    @JsonProperty("metadata")
+    public void setMetadata(MessagesApiWebhookEventMetadata metadata) {
+        this.metadata = metadata;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -501,8 +582,10 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
                 && Objects.equals(this.messageId, messagesApiWebhookEvent.messageId)
                 && Objects.equals(this.pairedMessageId, messagesApiWebhookEvent.pairedMessageId)
                 && Objects.equals(this.callbackData, messagesApiWebhookEvent.callbackData)
+                && Objects.equals(this.messageCount, messagesApiWebhookEvent.messageCount)
                 && Objects.equals(this.platform, messagesApiWebhookEvent.platform)
                 && Objects.equals(this.campaignReferenceId, messagesApiWebhookEvent.campaignReferenceId)
+                && Objects.equals(this.metadata, messagesApiWebhookEvent.metadata)
                 && super.equals(o);
     }
 
@@ -517,8 +600,10 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
                 messageId,
                 pairedMessageId,
                 callbackData,
+                messageCount,
                 platform,
                 campaignReferenceId,
+                metadata,
                 super.hashCode());
     }
 
@@ -555,11 +640,17 @@ public class MessagesApiWebhookEvent extends MessagesApiInboundEvent {
                 .append("    callbackData: ")
                 .append(toIndentedString(callbackData))
                 .append(newLine)
+                .append("    messageCount: ")
+                .append(toIndentedString(messageCount))
+                .append(newLine)
                 .append("    platform: ")
                 .append(toIndentedString(platform))
                 .append(newLine)
                 .append("    campaignReferenceId: ")
                 .append(toIndentedString(campaignReferenceId))
+                .append(newLine)
+                .append("    metadata: ")
+                .append(toIndentedString(metadata))
                 .append(newLine)
                 .append("}")
                 .toString();

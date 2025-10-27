@@ -21,6 +21,10 @@ public class MessagesApiMessageOpenUrlButton extends MessagesApiMessageButton {
 
     private String url;
 
+    private String postbackData;
+
+    private MessagesApiOpenUrlButtonOpenIn openIn;
+
     /**
      * Constructs a new {@link MessagesApiMessageOpenUrlButton} instance.
      */
@@ -120,6 +124,77 @@ public class MessagesApiMessageOpenUrlButton extends MessagesApiMessageButton {
         this.url = url;
     }
 
+    /**
+     * Sets postbackData.
+     * <p>
+     * Field description:
+     * Custom data that will be sent to you when the user replies to the message.
+     *
+     * @param postbackData
+     * @return This {@link MessagesApiMessageOpenUrlButton instance}.
+     */
+    public MessagesApiMessageOpenUrlButton postbackData(String postbackData) {
+        this.postbackData = postbackData;
+        return this;
+    }
+
+    /**
+     * Returns postbackData.
+     * <p>
+     * Field description:
+     * Custom data that will be sent to you when the user replies to the message.
+     *
+     * @return postbackData
+     */
+    @JsonProperty("postbackData")
+    public String getPostbackData() {
+        return postbackData;
+    }
+
+    /**
+     * Sets postbackData.
+     * <p>
+     * Field description:
+     * Custom data that will be sent to you when the user replies to the message.
+     *
+     * @param postbackData
+     */
+    @JsonProperty("postbackData")
+    public void setPostbackData(String postbackData) {
+        this.postbackData = postbackData;
+    }
+
+    /**
+     * Sets openIn.
+     *
+     * @param openIn
+     * @return This {@link MessagesApiMessageOpenUrlButton instance}.
+     */
+    public MessagesApiMessageOpenUrlButton openIn(MessagesApiOpenUrlButtonOpenIn openIn) {
+        this.openIn = openIn;
+        return this;
+    }
+
+    /**
+     * Returns openIn.
+     *
+     * @return openIn
+     */
+    @JsonProperty("openIn")
+    public MessagesApiOpenUrlButtonOpenIn getOpenIn() {
+        return openIn;
+    }
+
+    /**
+     * Sets openIn.
+     *
+     * @param openIn
+     */
+    @JsonProperty("openIn")
+    public void setOpenIn(MessagesApiOpenUrlButtonOpenIn openIn) {
+        this.openIn = openIn;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -131,12 +206,14 @@ public class MessagesApiMessageOpenUrlButton extends MessagesApiMessageButton {
         MessagesApiMessageOpenUrlButton messagesApiMessageOpenUrlButton = (MessagesApiMessageOpenUrlButton) o;
         return Objects.equals(this.text, messagesApiMessageOpenUrlButton.text)
                 && Objects.equals(this.url, messagesApiMessageOpenUrlButton.url)
+                && Objects.equals(this.postbackData, messagesApiMessageOpenUrlButton.postbackData)
+                && Objects.equals(this.openIn, messagesApiMessageOpenUrlButton.openIn)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, url, super.hashCode());
+        return Objects.hash(text, url, postbackData, openIn, super.hashCode());
     }
 
     @Override
@@ -153,6 +230,12 @@ public class MessagesApiMessageOpenUrlButton extends MessagesApiMessageButton {
                 .append(newLine)
                 .append("    url: ")
                 .append(toIndentedString(url))
+                .append(newLine)
+                .append("    postbackData: ")
+                .append(toIndentedString(postbackData))
+                .append(newLine)
+                .append("    openIn: ")
+                .append(toIndentedString(openIn))
                 .append(newLine)
                 .append("}")
                 .toString();

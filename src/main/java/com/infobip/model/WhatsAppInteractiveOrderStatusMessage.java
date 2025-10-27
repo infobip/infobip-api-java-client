@@ -35,6 +35,8 @@ public class WhatsAppInteractiveOrderStatusMessage {
 
     private String applicationId;
 
+    private WhatsAppMessageContext context;
+
     /**
      * Sets from.
      * <p>
@@ -395,6 +397,37 @@ public class WhatsAppInteractiveOrderStatusMessage {
         this.applicationId = applicationId;
     }
 
+    /**
+     * Sets context.
+     *
+     * @param context
+     * @return This {@link WhatsAppInteractiveOrderStatusMessage instance}.
+     */
+    public WhatsAppInteractiveOrderStatusMessage context(WhatsAppMessageContext context) {
+        this.context = context;
+        return this;
+    }
+
+    /**
+     * Returns context.
+     *
+     * @return context
+     */
+    @JsonProperty("context")
+    public WhatsAppMessageContext getContext() {
+        return context;
+    }
+
+    /**
+     * Sets context.
+     *
+     * @param context
+     */
+    @JsonProperty("context")
+    public void setContext(WhatsAppMessageContext context) {
+        this.context = context;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -413,12 +446,14 @@ public class WhatsAppInteractiveOrderStatusMessage {
                 && Objects.equals(this.notifyUrl, whatsAppInteractiveOrderStatusMessage.notifyUrl)
                 && Objects.equals(this.urlOptions, whatsAppInteractiveOrderStatusMessage.urlOptions)
                 && Objects.equals(this.entityId, whatsAppInteractiveOrderStatusMessage.entityId)
-                && Objects.equals(this.applicationId, whatsAppInteractiveOrderStatusMessage.applicationId);
+                && Objects.equals(this.applicationId, whatsAppInteractiveOrderStatusMessage.applicationId)
+                && Objects.equals(this.context, whatsAppInteractiveOrderStatusMessage.context);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, to, messageId, content, callbackData, notifyUrl, urlOptions, entityId, applicationId);
+        return Objects.hash(
+                from, to, messageId, content, callbackData, notifyUrl, urlOptions, entityId, applicationId, context);
     }
 
     @Override
@@ -453,6 +488,9 @@ public class WhatsAppInteractiveOrderStatusMessage {
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    context: ")
+                .append(toIndentedString(context))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -23,6 +23,8 @@ public class TfaMessage {
 
     private String from;
 
+    private String landingPageId;
+
     private TfaLanguage language;
 
     private String messageId;
@@ -163,6 +165,46 @@ public class TfaMessage {
     @JsonProperty("from")
     public void setFrom(String from) {
         this.from = from;
+    }
+
+    /**
+     * Sets landingPageId.
+     * <p>
+     * Field description:
+     * Opt out landing page ID that should reference a previously created landing page template. This field is present only for [Email message templates](#channels/sms/create-2fa-email-message-template).
+     *
+     * @param landingPageId
+     * @return This {@link TfaMessage instance}.
+     */
+    public TfaMessage landingPageId(String landingPageId) {
+        this.landingPageId = landingPageId;
+        return this;
+    }
+
+    /**
+     * Returns landingPageId.
+     * <p>
+     * Field description:
+     * Opt out landing page ID that should reference a previously created landing page template. This field is present only for [Email message templates](#channels/sms/create-2fa-email-message-template).
+     *
+     * @return landingPageId
+     */
+    @JsonProperty("landingPageId")
+    public String getLandingPageId() {
+        return landingPageId;
+    }
+
+    /**
+     * Sets landingPageId.
+     * <p>
+     * Field description:
+     * Opt out landing page ID that should reference a previously created landing page template. This field is present only for [Email message templates](#channels/sms/create-2fa-email-message-template).
+     *
+     * @param landingPageId
+     */
+    @JsonProperty("landingPageId")
+    public void setLandingPageId(String landingPageId) {
+        this.landingPageId = landingPageId;
     }
 
     /**
@@ -590,6 +632,7 @@ public class TfaMessage {
         return Objects.equals(this.applicationId, tfaMessage.applicationId)
                 && Objects.equals(this.emailTemplateId, tfaMessage.emailTemplateId)
                 && Objects.equals(this.from, tfaMessage.from)
+                && Objects.equals(this.landingPageId, tfaMessage.landingPageId)
                 && Objects.equals(this.language, tfaMessage.language)
                 && Objects.equals(this.messageId, tfaMessage.messageId)
                 && Objects.equals(this.messageText, tfaMessage.messageText)
@@ -609,6 +652,7 @@ public class TfaMessage {
                 applicationId,
                 emailTemplateId,
                 from,
+                landingPageId,
                 language,
                 messageId,
                 messageText,
@@ -636,6 +680,9 @@ public class TfaMessage {
                 .append(newLine)
                 .append("    from: ")
                 .append(toIndentedString(from))
+                .append(newLine)
+                .append("    landingPageId: ")
+                .append(toIndentedString(landingPageId))
                 .append(newLine)
                 .append("    language: ")
                 .append(toIndentedString(language))

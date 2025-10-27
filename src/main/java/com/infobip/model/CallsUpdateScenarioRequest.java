@@ -24,6 +24,10 @@ public class CallsUpdateScenarioRequest {
 
     private String description;
 
+    private String notifyUrl;
+
+    private String notifyContentType;
+
     @JsonRawValue
     @JsonDeserialize(using = RawJsonDeserializer.class)
     private String script;
@@ -115,6 +119,86 @@ public class CallsUpdateScenarioRequest {
     }
 
     /**
+     * Sets notifyUrl.
+     * <p>
+     * Field description:
+     * The URL on your callback server on which the Delivery report will be sent.
+     *
+     * @param notifyUrl
+     * @return This {@link CallsUpdateScenarioRequest instance}.
+     */
+    public CallsUpdateScenarioRequest notifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
+        return this;
+    }
+
+    /**
+     * Returns notifyUrl.
+     * <p>
+     * Field description:
+     * The URL on your callback server on which the Delivery report will be sent.
+     *
+     * @return notifyUrl
+     */
+    @JsonProperty("notifyUrl")
+    public String getNotifyUrl() {
+        return notifyUrl;
+    }
+
+    /**
+     * Sets notifyUrl.
+     * <p>
+     * Field description:
+     * The URL on your callback server on which the Delivery report will be sent.
+     *
+     * @param notifyUrl
+     */
+    @JsonProperty("notifyUrl")
+    public void setNotifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
+    }
+
+    /**
+     * Sets notifyContentType.
+     * <p>
+     * Field description:
+     * Preferred Delivery report content type. Can be &#x60;application/json&#x60; or &#x60;application/xml&#x60;.
+     *
+     * @param notifyContentType
+     * @return This {@link CallsUpdateScenarioRequest instance}.
+     */
+    public CallsUpdateScenarioRequest notifyContentType(String notifyContentType) {
+        this.notifyContentType = notifyContentType;
+        return this;
+    }
+
+    /**
+     * Returns notifyContentType.
+     * <p>
+     * Field description:
+     * Preferred Delivery report content type. Can be &#x60;application/json&#x60; or &#x60;application/xml&#x60;.
+     *
+     * @return notifyContentType
+     */
+    @JsonProperty("notifyContentType")
+    public String getNotifyContentType() {
+        return notifyContentType;
+    }
+
+    /**
+     * Sets notifyContentType.
+     * <p>
+     * Field description:
+     * Preferred Delivery report content type. Can be &#x60;application/json&#x60; or &#x60;application/xml&#x60;.
+     *
+     * @param notifyContentType
+     */
+    @JsonProperty("notifyContentType")
+    public void setNotifyContentType(String notifyContentType) {
+        this.notifyContentType = notifyContentType;
+    }
+
+    /**
      * Sets script.
      * <p>
      * The field is required.
@@ -162,12 +246,14 @@ public class CallsUpdateScenarioRequest {
         CallsUpdateScenarioRequest callsUpdateScenarioRequest = (CallsUpdateScenarioRequest) o;
         return Objects.equals(this.name, callsUpdateScenarioRequest.name)
                 && Objects.equals(this.description, callsUpdateScenarioRequest.description)
+                && Objects.equals(this.notifyUrl, callsUpdateScenarioRequest.notifyUrl)
+                && Objects.equals(this.notifyContentType, callsUpdateScenarioRequest.notifyContentType)
                 && Objects.equals(this.script, callsUpdateScenarioRequest.script);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, script);
+        return Objects.hash(name, description, notifyUrl, notifyContentType, script);
     }
 
     @Override
@@ -181,6 +267,12 @@ public class CallsUpdateScenarioRequest {
                 .append(newLine)
                 .append("    description: ")
                 .append(toIndentedString(description))
+                .append(newLine)
+                .append("    notifyUrl: ")
+                .append(toIndentedString(notifyUrl))
+                .append(newLine)
+                .append("    notifyContentType: ")
+                .append(toIndentedString(notifyContentType))
                 .append(newLine)
                 .append("    script: ")
                 .append(toIndentedString(script))

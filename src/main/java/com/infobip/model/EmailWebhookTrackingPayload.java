@@ -19,9 +19,13 @@ public class EmailWebhookTrackingPayload {
 
     private String notificationType;
 
+    private String eventId;
+
     private String domain;
 
     private String recipient;
+
+    private String sender;
 
     private String url;
 
@@ -47,7 +51,7 @@ public class EmailWebhookTrackingPayload {
      * Sets notificationType.
      * <p>
      * Field description:
-     * Tells the type of user event that took place. Possible events: &#x60;OPENED&#x60;, &#x60;CLICKED&#x60;, &#x60;COMPLAINED&#x60;, &#x60;UNSUBSCRIBED&#x60;.
+     * Tells the type of user event that took place. Possible events: &#x60;OPENED&#x60;, &#x60;CLICKED&#x60;, &#x60;COMPLAINED&#x60;, &#x60;LATE_BOUNCE&#x60;, &#x60;UNSUBSCRIBED&#x60;.
      *
      * @param notificationType
      * @return This {@link EmailWebhookTrackingPayload instance}.
@@ -61,7 +65,7 @@ public class EmailWebhookTrackingPayload {
      * Returns notificationType.
      * <p>
      * Field description:
-     * Tells the type of user event that took place. Possible events: &#x60;OPENED&#x60;, &#x60;CLICKED&#x60;, &#x60;COMPLAINED&#x60;, &#x60;UNSUBSCRIBED&#x60;.
+     * Tells the type of user event that took place. Possible events: &#x60;OPENED&#x60;, &#x60;CLICKED&#x60;, &#x60;COMPLAINED&#x60;, &#x60;LATE_BOUNCE&#x60;, &#x60;UNSUBSCRIBED&#x60;.
      *
      * @return notificationType
      */
@@ -74,13 +78,53 @@ public class EmailWebhookTrackingPayload {
      * Sets notificationType.
      * <p>
      * Field description:
-     * Tells the type of user event that took place. Possible events: &#x60;OPENED&#x60;, &#x60;CLICKED&#x60;, &#x60;COMPLAINED&#x60;, &#x60;UNSUBSCRIBED&#x60;.
+     * Tells the type of user event that took place. Possible events: &#x60;OPENED&#x60;, &#x60;CLICKED&#x60;, &#x60;COMPLAINED&#x60;, &#x60;LATE_BOUNCE&#x60;, &#x60;UNSUBSCRIBED&#x60;.
      *
      * @param notificationType
      */
     @JsonProperty("notificationType")
     public void setNotificationType(String notificationType) {
         this.notificationType = notificationType;
+    }
+
+    /**
+     * Sets eventId.
+     * <p>
+     * Field description:
+     * Unique ID of the event. This ID can be used for deduplication purposes.
+     *
+     * @param eventId
+     * @return This {@link EmailWebhookTrackingPayload instance}.
+     */
+    public EmailWebhookTrackingPayload eventId(String eventId) {
+        this.eventId = eventId;
+        return this;
+    }
+
+    /**
+     * Returns eventId.
+     * <p>
+     * Field description:
+     * Unique ID of the event. This ID can be used for deduplication purposes.
+     *
+     * @return eventId
+     */
+    @JsonProperty("eventId")
+    public String getEventId() {
+        return eventId;
+    }
+
+    /**
+     * Sets eventId.
+     * <p>
+     * Field description:
+     * Unique ID of the event. This ID can be used for deduplication purposes.
+     *
+     * @param eventId
+     */
+    @JsonProperty("eventId")
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
     }
 
     /**
@@ -161,6 +205,46 @@ public class EmailWebhookTrackingPayload {
     @JsonProperty("recipient")
     public void setRecipient(String recipient) {
         this.recipient = recipient;
+    }
+
+    /**
+     * Sets sender.
+     * <p>
+     * Field description:
+     * Sender of the email. This attribute will only be present if the event is of the type &#x60;COMPLAINED&#x60; or &#x60;LATE_BOUNCE&#x60;.
+     *
+     * @param sender
+     * @return This {@link EmailWebhookTrackingPayload instance}.
+     */
+    public EmailWebhookTrackingPayload sender(String sender) {
+        this.sender = sender;
+        return this;
+    }
+
+    /**
+     * Returns sender.
+     * <p>
+     * Field description:
+     * Sender of the email. This attribute will only be present if the event is of the type &#x60;COMPLAINED&#x60; or &#x60;LATE_BOUNCE&#x60;.
+     *
+     * @return sender
+     */
+    @JsonProperty("sender")
+    public String getSender() {
+        return sender;
+    }
+
+    /**
+     * Sets sender.
+     * <p>
+     * Field description:
+     * Sender of the email. This attribute will only be present if the event is of the type &#x60;COMPLAINED&#x60; or &#x60;LATE_BOUNCE&#x60;.
+     *
+     * @param sender
+     */
+    @JsonProperty("sender")
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     /**
@@ -555,8 +639,10 @@ public class EmailWebhookTrackingPayload {
         }
         EmailWebhookTrackingPayload emailWebhookTrackingPayload = (EmailWebhookTrackingPayload) o;
         return Objects.equals(this.notificationType, emailWebhookTrackingPayload.notificationType)
+                && Objects.equals(this.eventId, emailWebhookTrackingPayload.eventId)
                 && Objects.equals(this.domain, emailWebhookTrackingPayload.domain)
                 && Objects.equals(this.recipient, emailWebhookTrackingPayload.recipient)
+                && Objects.equals(this.sender, emailWebhookTrackingPayload.sender)
                 && Objects.equals(this.url, emailWebhookTrackingPayload.url)
                 && Objects.equals(this.sendDateTime, emailWebhookTrackingPayload.sendDateTime)
                 && Objects.equals(this.messageId, emailWebhookTrackingPayload.messageId)
@@ -573,8 +659,10 @@ public class EmailWebhookTrackingPayload {
     public int hashCode() {
         return Objects.hash(
                 notificationType,
+                eventId,
                 domain,
                 recipient,
+                sender,
                 url,
                 sendDateTime,
                 messageId,
@@ -596,11 +684,17 @@ public class EmailWebhookTrackingPayload {
                 .append("    notificationType: ")
                 .append(toIndentedString(notificationType))
                 .append(newLine)
+                .append("    eventId: ")
+                .append(toIndentedString(eventId))
+                .append(newLine)
                 .append("    domain: ")
                 .append(toIndentedString(domain))
                 .append(newLine)
                 .append("    recipient: ")
                 .append(toIndentedString(recipient))
+                .append(newLine)
+                .append("    sender: ")
+                .append(toIndentedString(sender))
                 .append(newLine)
                 .append("    url: ")
                 .append(toIndentedString(url))

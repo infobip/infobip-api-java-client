@@ -16,10 +16,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Messaging channel used for sending an event.
  */
 public enum MessagesApiInboundSeenChannel {
-    WHATSAPP("WHATSAPP"),
+    RCS("RCS"),
     VIBER_BM("VIBER_BM"),
     VIBER_BOT("VIBER_BOT"),
-    RCS("RCS");
+    WHATSAPP("WHATSAPP");
 
     private final String value;
 

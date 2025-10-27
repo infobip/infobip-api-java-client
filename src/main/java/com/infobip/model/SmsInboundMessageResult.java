@@ -19,11 +19,68 @@ import java.util.Objects;
  */
 public class SmsInboundMessageResult {
 
+    private List<SmsInboundMessage> results = null;
+
     private Integer messageCount;
 
     private Integer pendingMessageCount;
 
-    private List<SmsInboundMessage> results = null;
+    /**
+     * Sets results.
+     * <p>
+     * Field description:
+     * An array of result objects.
+     *
+     * @param results
+     * @return This {@link SmsInboundMessageResult instance}.
+     */
+    public SmsInboundMessageResult results(List<SmsInboundMessage> results) {
+        this.results = results;
+        return this;
+    }
+
+    /**
+     * Adds and item into results.
+     * <p>
+     * Field description:
+     * An array of result objects.
+     *
+     * @param resultsItem The item to be added to the list.
+     * @return This {@link SmsInboundMessageResult instance}.
+     */
+    public SmsInboundMessageResult addResultsItem(SmsInboundMessage resultsItem) {
+        if (this.results == null) {
+            this.results = new ArrayList<>();
+        }
+        this.results.add(resultsItem);
+        return this;
+    }
+
+    /**
+     * Returns results.
+     * <p>
+     * Field description:
+     * An array of result objects.
+     *
+     * @return results
+     */
+    @JsonProperty("results")
+    public List<SmsInboundMessage> getResults() {
+        return results;
+    }
+
+    /**
+     * Sets results.
+     * <p>
+     * Field description:
+     * An array of result objects.
+     *
+     * @param results
+     */
+    @JsonProperty("results")
+    public void setResults(List<SmsInboundMessage> results) {
+        this.results = results;
+    }
 
     /**
      * Sets messageCount.
@@ -105,63 +162,6 @@ public class SmsInboundMessageResult {
         this.pendingMessageCount = pendingMessageCount;
     }
 
-    /**
-     * Sets results.
-     * <p>
-     * Field description:
-     * An array of result objects.
-     *
-     * @param results
-     * @return This {@link SmsInboundMessageResult instance}.
-     */
-    public SmsInboundMessageResult results(List<SmsInboundMessage> results) {
-        this.results = results;
-        return this;
-    }
-
-    /**
-     * Adds and item into results.
-     * <p>
-     * Field description:
-     * An array of result objects.
-     *
-     * @param resultsItem The item to be added to the list.
-     * @return This {@link SmsInboundMessageResult instance}.
-     */
-    public SmsInboundMessageResult addResultsItem(SmsInboundMessage resultsItem) {
-        if (this.results == null) {
-            this.results = new ArrayList<>();
-        }
-        this.results.add(resultsItem);
-        return this;
-    }
-
-    /**
-     * Returns results.
-     * <p>
-     * Field description:
-     * An array of result objects.
-     *
-     * @return results
-     */
-    @JsonProperty("results")
-    public List<SmsInboundMessage> getResults() {
-        return results;
-    }
-
-    /**
-     * Sets results.
-     * <p>
-     * Field description:
-     * An array of result objects.
-     *
-     * @param results
-     */
-    @JsonProperty("results")
-    public void setResults(List<SmsInboundMessage> results) {
-        this.results = results;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -171,14 +171,14 @@ public class SmsInboundMessageResult {
             return false;
         }
         SmsInboundMessageResult smsInboundMessageResult = (SmsInboundMessageResult) o;
-        return Objects.equals(this.messageCount, smsInboundMessageResult.messageCount)
-                && Objects.equals(this.pendingMessageCount, smsInboundMessageResult.pendingMessageCount)
-                && Objects.equals(this.results, smsInboundMessageResult.results);
+        return Objects.equals(this.results, smsInboundMessageResult.results)
+                && Objects.equals(this.messageCount, smsInboundMessageResult.messageCount)
+                && Objects.equals(this.pendingMessageCount, smsInboundMessageResult.pendingMessageCount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageCount, pendingMessageCount, results);
+        return Objects.hash(results, messageCount, pendingMessageCount);
     }
 
     @Override
@@ -187,14 +187,14 @@ public class SmsInboundMessageResult {
         return new StringBuilder()
                 .append("class SmsInboundMessageResult {")
                 .append(newLine)
+                .append("    results: ")
+                .append(toIndentedString(results))
+                .append(newLine)
                 .append("    messageCount: ")
                 .append(toIndentedString(messageCount))
                 .append(newLine)
                 .append("    pendingMessageCount: ")
                 .append(toIndentedString(pendingMessageCount))
-                .append(newLine)
-                .append("    results: ")
-                .append(toIndentedString(results))
                 .append(newLine)
                 .append("}")
                 .toString();

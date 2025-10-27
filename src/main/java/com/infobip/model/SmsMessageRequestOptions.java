@@ -91,7 +91,7 @@ public class SmsMessageRequestOptions {
      * Sets includeSmsCountInResponse.
      * <p>
      * Field description:
-     * Set to true to return smsCount in the response. Default is false. smsCount is the total count of SMS submitted in the request. SMS messages have a character limit and messages longer than that limit will be split into multiple SMS and reflected in the total count of SMS submitted.
+     * Set to true to return &#x60;messageCount&#x60; in the response. The &#x60;messageCount&#x60; is the total count of SMS submitted in the request. SMS messages have a character limit and messages longer than the limit will be split into multiple SMS. Not compatible with &#x60;binary&#x60; message content type.
      *
      * @param includeSmsCountInResponse
      * @return This {@link SmsMessageRequestOptions instance}.
@@ -105,7 +105,7 @@ public class SmsMessageRequestOptions {
      * Returns includeSmsCountInResponse.
      * <p>
      * Field description:
-     * Set to true to return smsCount in the response. Default is false. smsCount is the total count of SMS submitted in the request. SMS messages have a character limit and messages longer than that limit will be split into multiple SMS and reflected in the total count of SMS submitted.
+     * Set to true to return &#x60;messageCount&#x60; in the response. The &#x60;messageCount&#x60; is the total count of SMS submitted in the request. SMS messages have a character limit and messages longer than the limit will be split into multiple SMS. Not compatible with &#x60;binary&#x60; message content type.
      *
      * @return includeSmsCountInResponse
      */
@@ -118,7 +118,7 @@ public class SmsMessageRequestOptions {
      * Sets includeSmsCountInResponse.
      * <p>
      * Field description:
-     * Set to true to return smsCount in the response. Default is false. smsCount is the total count of SMS submitted in the request. SMS messages have a character limit and messages longer than that limit will be split into multiple SMS and reflected in the total count of SMS submitted.
+     * Set to true to return &#x60;messageCount&#x60; in the response. The &#x60;messageCount&#x60; is the total count of SMS submitted in the request. SMS messages have a character limit and messages longer than the limit will be split into multiple SMS. Not compatible with &#x60;binary&#x60; message content type.
      *
      * @param includeSmsCountInResponse
      */

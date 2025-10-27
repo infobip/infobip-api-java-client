@@ -20,7 +20,8 @@ public enum CallsDialogState {
     PRE_ESTABLISHED("PRE_ESTABLISHED"),
     ESTABLISHED("ESTABLISHED"),
     FINISHED("FINISHED"),
-    FAILED("FAILED");
+    FAILED("FAILED"),
+    TRANSFERRING("TRANSFERRING");
 
     private final String value;
 

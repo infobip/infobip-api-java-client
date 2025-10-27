@@ -23,7 +23,9 @@ public class CallsWebsocketEndpointConfigRequest extends CallsMediaStreamConfigR
      */
     public enum SampleRateEnum {
         _8000("8000"),
-        _16000("16000");
+        _16000("16000"),
+        _24000("24000"),
+        _32000("32000");
 
         private String value;
 

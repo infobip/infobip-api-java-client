@@ -1142,7 +1142,7 @@ public class VoiceApi {
         /**
          * Sets lastUsageDateUntil.
          *
-         * @param lastUsageDateUntil Upper limit of last usage date &#x60;yyyy-MM-dd&#x60; format. Note: For scenarios where &#x60;lastUsageDate&#x60; is &#x60;null&#x60;, filtering matches &#x60;createTime&#x60;. (optional)
+         * @param lastUsageDateUntil Upper limit of last usage date in &#x60;yyyy-MM-dd&#x60; format. Note: For scenarios where &#x60;lastUsageDate&#x60; is &#x60;null&#x60;, filtering matches &#x60;createTime&#x60;. (optional)
          * @return SearchVoiceIvrScenariosRequest
          */
         public SearchVoiceIvrScenariosRequest lastUsageDateUntil(LocalDate lastUsageDateUntil) {
@@ -1490,7 +1490,7 @@ public class VoiceApi {
     /**
      * Update Voice IVR Scenarios.
      * <p>
-     * This method allows you to update a Voice IVR Scenario.
+     * This method allows you to update a Voice IVR Scenario. Changes may take up to 10 minutes to apply.
      *
      * @param id Scenario identifier. (required)
      * @param callsUpdateScenarioRequest  (required)

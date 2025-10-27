@@ -21,6 +21,8 @@ public class CallsUpdateRequest {
 
     private Boolean deaf;
 
+    private Boolean blind;
+
     /**
      * Sets muted.
      * <p>
@@ -101,6 +103,46 @@ public class CallsUpdateRequest {
         this.deaf = deaf;
     }
 
+    /**
+     * Sets blind.
+     * <p>
+     * Field description:
+     * Indicates whether to blind or unblind the end user. This action prevents the user from seeing any remote video in the call. Only applicable for WebRTC endpoints.
+     *
+     * @param blind
+     * @return This {@link CallsUpdateRequest instance}.
+     */
+    public CallsUpdateRequest blind(Boolean blind) {
+        this.blind = blind;
+        return this;
+    }
+
+    /**
+     * Returns blind.
+     * <p>
+     * Field description:
+     * Indicates whether to blind or unblind the end user. This action prevents the user from seeing any remote video in the call. Only applicable for WebRTC endpoints.
+     *
+     * @return blind
+     */
+    @JsonProperty("blind")
+    public Boolean getBlind() {
+        return blind;
+    }
+
+    /**
+     * Sets blind.
+     * <p>
+     * Field description:
+     * Indicates whether to blind or unblind the end user. This action prevents the user from seeing any remote video in the call. Only applicable for WebRTC endpoints.
+     *
+     * @param blind
+     */
+    @JsonProperty("blind")
+    public void setBlind(Boolean blind) {
+        this.blind = blind;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -111,12 +153,13 @@ public class CallsUpdateRequest {
         }
         CallsUpdateRequest callsUpdateRequest = (CallsUpdateRequest) o;
         return Objects.equals(this.muted, callsUpdateRequest.muted)
-                && Objects.equals(this.deaf, callsUpdateRequest.deaf);
+                && Objects.equals(this.deaf, callsUpdateRequest.deaf)
+                && Objects.equals(this.blind, callsUpdateRequest.blind);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(muted, deaf);
+        return Objects.hash(muted, deaf, blind);
     }
 
     @Override
@@ -130,6 +173,9 @@ public class CallsUpdateRequest {
                 .append(newLine)
                 .append("    deaf: ")
                 .append(toIndentedString(deaf))
+                .append(newLine)
+                .append("    blind: ")
+                .append(toIndentedString(blind))
                 .append(newLine)
                 .append("}")
                 .toString();

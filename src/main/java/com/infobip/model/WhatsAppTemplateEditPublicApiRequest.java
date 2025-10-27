@@ -25,6 +25,8 @@ public class WhatsAppTemplateEditPublicApiRequest {
 
     private Platform platform;
 
+    private WhatsAppEditSubCategory subCategory;
+
     /**
      * Sets category.
      *
@@ -149,6 +151,37 @@ public class WhatsAppTemplateEditPublicApiRequest {
         this.platform = platform;
     }
 
+    /**
+     * Sets subCategory.
+     *
+     * @param subCategory
+     * @return This {@link WhatsAppTemplateEditPublicApiRequest instance}.
+     */
+    public WhatsAppTemplateEditPublicApiRequest subCategory(WhatsAppEditSubCategory subCategory) {
+        this.subCategory = subCategory;
+        return this;
+    }
+
+    /**
+     * Returns subCategory.
+     *
+     * @return subCategory
+     */
+    @JsonProperty("subCategory")
+    public WhatsAppEditSubCategory getSubCategory() {
+        return subCategory;
+    }
+
+    /**
+     * Sets subCategory.
+     *
+     * @param subCategory
+     */
+    @JsonProperty("subCategory")
+    public void setSubCategory(WhatsAppEditSubCategory subCategory) {
+        this.subCategory = subCategory;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -162,12 +195,13 @@ public class WhatsAppTemplateEditPublicApiRequest {
         return Objects.equals(this.category, whatsAppTemplateEditPublicApiRequest.category)
                 && Objects.equals(this.structure, whatsAppTemplateEditPublicApiRequest.structure)
                 && Objects.equals(this.validityPeriod, whatsAppTemplateEditPublicApiRequest.validityPeriod)
-                && Objects.equals(this.platform, whatsAppTemplateEditPublicApiRequest.platform);
+                && Objects.equals(this.platform, whatsAppTemplateEditPublicApiRequest.platform)
+                && Objects.equals(this.subCategory, whatsAppTemplateEditPublicApiRequest.subCategory);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(category, structure, validityPeriod, platform);
+        return Objects.hash(category, structure, validityPeriod, platform, subCategory);
     }
 
     @Override
@@ -187,6 +221,9 @@ public class WhatsAppTemplateEditPublicApiRequest {
                 .append(newLine)
                 .append("    platform: ")
                 .append(toIndentedString(platform))
+                .append(newLine)
+                .append("    subCategory: ")
+                .append(toIndentedString(subCategory))
                 .append(newLine)
                 .append("}")
                 .toString();

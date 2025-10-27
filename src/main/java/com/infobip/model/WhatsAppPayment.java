@@ -33,7 +33,7 @@ public class WhatsAppPayment {
 
     private List<WhatsAppPaymentTransaction> transactions = new ArrayList<>();
 
-    private List<String> callbackData = null;
+    private Object callbackData;
 
     /**
      * Sets referenceId.
@@ -362,30 +362,13 @@ public class WhatsAppPayment {
      * Sets callbackData.
      * <p>
      * Field description:
-     * List of custom parameters corresponding to the transaction. Available only for UPI Payments.
+     * Custom parameters corresponding to the transaction. Available only for PayU UPI Payments and Razorpay.
      *
      * @param callbackData
      * @return This {@link WhatsAppPayment instance}.
      */
-    public WhatsAppPayment callbackData(List<String> callbackData) {
+    public WhatsAppPayment callbackData(Object callbackData) {
         this.callbackData = callbackData;
-        return this;
-    }
-
-    /**
-     * Adds and item into callbackData.
-     * <p>
-     * Field description:
-     * List of custom parameters corresponding to the transaction. Available only for UPI Payments.
-     *
-     * @param callbackDataItem The item to be added to the list.
-     * @return This {@link WhatsAppPayment instance}.
-     */
-    public WhatsAppPayment addCallbackDataItem(String callbackDataItem) {
-        if (this.callbackData == null) {
-            this.callbackData = new ArrayList<>();
-        }
-        this.callbackData.add(callbackDataItem);
         return this;
     }
 
@@ -393,12 +376,12 @@ public class WhatsAppPayment {
      * Returns callbackData.
      * <p>
      * Field description:
-     * List of custom parameters corresponding to the transaction. Available only for UPI Payments.
+     * Custom parameters corresponding to the transaction. Available only for PayU UPI Payments and Razorpay.
      *
      * @return callbackData
      */
     @JsonProperty("callbackData")
-    public List<String> getCallbackData() {
+    public Object getCallbackData() {
         return callbackData;
     }
 
@@ -406,12 +389,12 @@ public class WhatsAppPayment {
      * Sets callbackData.
      * <p>
      * Field description:
-     * List of custom parameters corresponding to the transaction. Available only for UPI Payments.
+     * Custom parameters corresponding to the transaction. Available only for PayU UPI Payments and Razorpay.
      *
      * @param callbackData
      */
     @JsonProperty("callbackData")
-    public void setCallbackData(List<String> callbackData) {
+    public void setCallbackData(Object callbackData) {
         this.callbackData = callbackData;
     }
 

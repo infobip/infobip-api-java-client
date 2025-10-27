@@ -21,6 +21,8 @@ public class CallRoutingPhoneEndpoint extends CallRoutingEndpoint {
 
     private String phoneNumber;
 
+    private CallRoutingRingbackGeneration ringbackGeneration;
+
     /**
      * Constructs a new {@link CallRoutingPhoneEndpoint} instance.
      */
@@ -108,6 +110,37 @@ public class CallRoutingPhoneEndpoint extends CallRoutingEndpoint {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * Sets ringbackGeneration.
+     *
+     * @param ringbackGeneration
+     * @return This {@link CallRoutingPhoneEndpoint instance}.
+     */
+    public CallRoutingPhoneEndpoint ringbackGeneration(CallRoutingRingbackGeneration ringbackGeneration) {
+        this.ringbackGeneration = ringbackGeneration;
+        return this;
+    }
+
+    /**
+     * Returns ringbackGeneration.
+     *
+     * @return ringbackGeneration
+     */
+    @JsonProperty("ringbackGeneration")
+    public CallRoutingRingbackGeneration getRingbackGeneration() {
+        return ringbackGeneration;
+    }
+
+    /**
+     * Sets ringbackGeneration.
+     *
+     * @param ringbackGeneration
+     */
+    @JsonProperty("ringbackGeneration")
+    public void setRingbackGeneration(CallRoutingRingbackGeneration ringbackGeneration) {
+        this.ringbackGeneration = ringbackGeneration;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -119,12 +152,13 @@ public class CallRoutingPhoneEndpoint extends CallRoutingEndpoint {
         CallRoutingPhoneEndpoint callRoutingPhoneEndpoint = (CallRoutingPhoneEndpoint) o;
         return Objects.equals(this.from, callRoutingPhoneEndpoint.from)
                 && Objects.equals(this.phoneNumber, callRoutingPhoneEndpoint.phoneNumber)
+                && Objects.equals(this.ringbackGeneration, callRoutingPhoneEndpoint.ringbackGeneration)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, phoneNumber, super.hashCode());
+        return Objects.hash(from, phoneNumber, ringbackGeneration, super.hashCode());
     }
 
     @Override
@@ -141,6 +175,9 @@ public class CallRoutingPhoneEndpoint extends CallRoutingEndpoint {
                 .append(newLine)
                 .append("    phoneNumber: ")
                 .append(toIndentedString(phoneNumber))
+                .append(newLine)
+                .append("    ringbackGeneration: ")
+                .append(toIndentedString(ringbackGeneration))
                 .append(newLine)
                 .append("}")
                 .toString();

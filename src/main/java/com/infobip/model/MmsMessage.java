@@ -79,7 +79,7 @@ public class MmsMessage {
      * Sets destinations.
      * <p>
      * Field description:
-     * An array of destination objects for where messages are being sent. A valid destination is required.
+     * An array of destination objects for where messages are being sent. Each object in array can be one of available options. A valid destination is required.
      * <p>
      * The field is required.
      *
@@ -95,7 +95,7 @@ public class MmsMessage {
      * Adds and item into destinations.
      * <p>
      * Field description:
-     * An array of destination objects for where messages are being sent. A valid destination is required.
+     * An array of destination objects for where messages are being sent. Each object in array can be one of available options. A valid destination is required.
      * <p>
      * The field is required.
      *
@@ -114,7 +114,7 @@ public class MmsMessage {
      * Returns destinations.
      * <p>
      * Field description:
-     * An array of destination objects for where messages are being sent. A valid destination is required.
+     * An array of destination objects for where messages are being sent. Each object in array can be one of available options. A valid destination is required.
      * <p>
      * The field is required.
      *
@@ -129,7 +129,7 @@ public class MmsMessage {
      * Sets destinations.
      * <p>
      * Field description:
-     * An array of destination objects for where messages are being sent. A valid destination is required.
+     * An array of destination objects for where messages are being sent. Each object in array can be one of available options. A valid destination is required.
      * <p>
      * The field is required.
      *

@@ -28,6 +28,7 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = CallRoutingViberEndpoint.class, name = "VIBER"),
     @JsonSubTypes.Type(value = CallRoutingWebRtcEndpoint.class, name = "WEBRTC"),
     @JsonSubTypes.Type(value = CallRoutingWebSocketEndpoint.class, name = "WEBSOCKET"),
+    @JsonSubTypes.Type(value = CallRoutingWhatsAppEndpoint.class, name = "WHATSAPP"),
 })
 public abstract class CallRoutingEndpoint {
 

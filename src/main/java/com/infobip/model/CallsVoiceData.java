@@ -33,6 +33,8 @@ public class CallsVoiceData {
 
     private String dtmfCodes;
 
+    private String answeredBy;
+
     private CallsIvrData ivr;
 
     /**
@@ -356,6 +358,46 @@ public class CallsVoiceData {
     }
 
     /**
+     * Sets answeredBy.
+     * <p>
+     * Field description:
+     * If machine detection is used, contains the result of the machine detection (&#x60;HUMAN&#x60; or &#x60;MACHINE&#x60;).
+     *
+     * @param answeredBy
+     * @return This {@link CallsVoiceData instance}.
+     */
+    public CallsVoiceData answeredBy(String answeredBy) {
+        this.answeredBy = answeredBy;
+        return this;
+    }
+
+    /**
+     * Returns answeredBy.
+     * <p>
+     * Field description:
+     * If machine detection is used, contains the result of the machine detection (&#x60;HUMAN&#x60; or &#x60;MACHINE&#x60;).
+     *
+     * @return answeredBy
+     */
+    @JsonProperty("answeredBy")
+    public String getAnsweredBy() {
+        return answeredBy;
+    }
+
+    /**
+     * Sets answeredBy.
+     * <p>
+     * Field description:
+     * If machine detection is used, contains the result of the machine detection (&#x60;HUMAN&#x60; or &#x60;MACHINE&#x60;).
+     *
+     * @param answeredBy
+     */
+    @JsonProperty("answeredBy")
+    public void setAnsweredBy(String answeredBy) {
+        this.answeredBy = answeredBy;
+    }
+
+    /**
      * Sets ivr.
      *
      * @param ivr
@@ -403,13 +445,23 @@ public class CallsVoiceData {
                 && Objects.equals(this.chargedDuration, callsVoiceData.chargedDuration)
                 && Objects.equals(this.fileDuration, callsVoiceData.fileDuration)
                 && Objects.equals(this.dtmfCodes, callsVoiceData.dtmfCodes)
+                && Objects.equals(this.answeredBy, callsVoiceData.answeredBy)
                 && Objects.equals(this.ivr, callsVoiceData.ivr);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                feature, startTime, answerTime, endTime, duration, chargedDuration, fileDuration, dtmfCodes, ivr);
+                feature,
+                startTime,
+                answerTime,
+                endTime,
+                duration,
+                chargedDuration,
+                fileDuration,
+                dtmfCodes,
+                answeredBy,
+                ivr);
     }
 
     @Override
@@ -441,6 +493,9 @@ public class CallsVoiceData {
                 .append(newLine)
                 .append("    dtmfCodes: ")
                 .append(toIndentedString(dtmfCodes))
+                .append(newLine)
+                .append("    answeredBy: ")
+                .append(toIndentedString(answeredBy))
                 .append(newLine)
                 .append("    ivr: ")
                 .append(toIndentedString(ivr))

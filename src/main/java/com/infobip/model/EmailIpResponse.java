@@ -10,7 +10,9 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Dedicated IPs assigned to the IP pool.
@@ -20,6 +22,8 @@ public class EmailIpResponse {
     private String id;
 
     private String ip;
+
+    private Set<String> ipAddresses = new LinkedHashSet<>();
 
     /**
      * Sets id.
@@ -113,6 +117,59 @@ public class EmailIpResponse {
         this.ip = ip;
     }
 
+    /**
+     * Sets ipAddresses.
+     * <p>
+     * The field is required.
+     *
+     * @param ipAddresses
+     * @return This {@link EmailIpResponse instance}.
+     */
+    public EmailIpResponse ipAddresses(Set<String> ipAddresses) {
+        this.ipAddresses = ipAddresses;
+        return this;
+    }
+
+    /**
+     * Adds and item into ipAddresses.
+     * <p>
+     * The field is required.
+     *
+     * @param ipAddressesItem The item to be added to the list.
+     * @return This {@link EmailIpResponse instance}.
+     */
+    public EmailIpResponse addIpAddressesItem(String ipAddressesItem) {
+        if (this.ipAddresses == null) {
+            this.ipAddresses = new LinkedHashSet<>();
+        }
+        this.ipAddresses.add(ipAddressesItem);
+        return this;
+    }
+
+    /**
+     * Returns ipAddresses.
+     * <p>
+     * The field is required.
+     *
+     * @return ipAddresses
+     */
+    @JsonProperty("ipAddresses")
+    public Set<String> getIpAddresses() {
+        return ipAddresses;
+    }
+
+    /**
+     * Sets ipAddresses.
+     * <p>
+     * The field is required.
+     *
+     * @param ipAddresses
+     */
+    @JsonProperty("ipAddresses")
+    public void setIpAddresses(Set<String> ipAddresses) {
+        this.ipAddresses = ipAddresses;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -122,12 +179,14 @@ public class EmailIpResponse {
             return false;
         }
         EmailIpResponse emailIpResponse = (EmailIpResponse) o;
-        return Objects.equals(this.id, emailIpResponse.id) && Objects.equals(this.ip, emailIpResponse.ip);
+        return Objects.equals(this.id, emailIpResponse.id)
+                && Objects.equals(this.ip, emailIpResponse.ip)
+                && Objects.equals(this.ipAddresses, emailIpResponse.ipAddresses);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ip);
+        return Objects.hash(id, ip, ipAddresses);
     }
 
     @Override
@@ -141,6 +200,9 @@ public class EmailIpResponse {
                 .append(newLine)
                 .append("    ip: ")
                 .append(toIndentedString(ip))
+                .append(newLine)
+                .append("    ipAddresses: ")
+                .append(toIndentedString(ipAddresses))
                 .append(newLine)
                 .append("}")
                 .toString();

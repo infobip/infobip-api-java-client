@@ -114,6 +114,802 @@ class MessagesApiTest extends ApiTest {
     }
 
     @Test
+    void shouldSendTextMessagesWithReplyButton() {
+        String givenBulkId = "1688025180464000013";
+        String givenMessageId = "1688025180464000014";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "MESSAGE_ACCEPTED";
+        String givenDescription = "Message sent to next instance";
+        String givenDestination = "48600700800";
+        MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
+        String givenSender = "447491163443";
+        String givenTo = "111111111";
+        String givenText = "May the Force be with you.";
+        String givenType = "TEXT";
+        String givenButtonText = "Yes, I agree!";
+        String givenButtonType = "REPLY";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenBulkId,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenDestination);
+
+        String expectedRequest = String.format(
+                "{\n" + "   \"messages\": [\n"
+                        + "     {\n"
+                        + "       \"channel\": \"%s\",\n"
+                        + "       \"sender\": \"%s\",\n"
+                        + "       \"destinations\": [\n"
+                        + "         {\n"
+                        + "           \"to\": \"%s\"\n"
+                        + "         }\n"
+                        + "       ],\n"
+                        + "       \"content\": {\n"
+                        + "         \"body\": {\n"
+                        + "           \"text\": \"%s\",\n"
+                        + "           \"type\": \"%s\"\n"
+                        + "         },\n"
+                        + "        \"buttons\": [\n"
+                        + "          {\n"
+                        + "            \"text\": \"%s\",\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "       }\n"
+                        + "     }\n"
+                        + "   ]\n"
+                        + "}",
+                givenChannel, givenSender, givenTo, givenText, givenType, givenButtonText, givenButtonType);
+
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        MessagesApiRequest request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiMessage()
+                        .channel(MessagesApiOutboundMessageChannel.SMS)
+                        .sender(givenSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(givenTo)))
+                        .content(new MessagesApiMessageContent()
+                                .body(new MessagesApiMessageTextBody().text(givenText))
+                                .buttons(List.of(new MessagesApiMessageReplyButton().text(givenButtonText))))));
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            var messages = response.getMessages();
+            then(messages.size()).isEqualTo(1);
+            var message = messages.get(0);
+            then(message).isNotNull();
+            then(message.getMessageId()).isEqualTo(givenMessageId);
+            then(message.getStatus()).isNotNull();
+            var status = message.getStatus();
+            then(status.getGroupId()).isEqualTo(givenGroupId);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
+            then(status.getId()).isEqualTo(givenId);
+            then(status.getName()).isEqualTo(givenName);
+            then(status.getDescription()).isEqualTo(givenDescription);
+        };
+
+        var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendTextMessagesWithOperUrlButton() {
+        String givenBulkId = "1688025180464000013";
+        String givenMessageId = "1688025180464000014";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "MESSAGE_ACCEPTED";
+        String givenDescription = "Message sent to next instance";
+        String givenDestination = "48600700800";
+        MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
+        String givenSender = "447491163443";
+        String givenTo = "111111111";
+        String givenText = "May the Force be with you.";
+        String givenType = "TEXT";
+        String givenButtonText = "Yes, I agree!";
+        String givenButtonType = "OPEN_URL";
+        String givenOpenUrl = "http://example.com/agree";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenBulkId,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenDestination);
+
+        String expectedRequest = String.format(
+                "{\n" + "   \"messages\": [\n"
+                        + "     {\n"
+                        + "       \"channel\": \"%s\",\n"
+                        + "       \"sender\": \"%s\",\n"
+                        + "       \"destinations\": [\n"
+                        + "         {\n"
+                        + "           \"to\": \"%s\"\n"
+                        + "         }\n"
+                        + "       ],\n"
+                        + "       \"content\": {\n"
+                        + "         \"body\": {\n"
+                        + "           \"text\": \"%s\",\n"
+                        + "           \"type\": \"%s\"\n"
+                        + "         },\n"
+                        + "        \"buttons\": [\n"
+                        + "          {\n"
+                        + "            \"text\": \"%s\",\n"
+                        + "            \"url\": \"%s\",\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "       }\n"
+                        + "     }\n"
+                        + "   ]\n"
+                        + "}",
+                givenChannel,
+                givenSender,
+                givenTo,
+                givenText,
+                givenType,
+                givenButtonText,
+                givenOpenUrl,
+                givenButtonType);
+
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        MessagesApiRequest request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiMessage()
+                        .channel(MessagesApiOutboundMessageChannel.SMS)
+                        .sender(givenSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(givenTo)))
+                        .content(new MessagesApiMessageContent()
+                                .body(new MessagesApiMessageTextBody().text(givenText))
+                                .buttons(List.of(new MessagesApiMessageOpenUrlButton()
+                                        .text(givenButtonText)
+                                        .url(givenOpenUrl))))));
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            var messages = response.getMessages();
+            then(messages.size()).isEqualTo(1);
+            var message = messages.get(0);
+            then(message).isNotNull();
+            then(message.getMessageId()).isEqualTo(givenMessageId);
+            then(message.getStatus()).isNotNull();
+            var status = message.getStatus();
+            then(status.getGroupId()).isEqualTo(givenGroupId);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
+            then(status.getId()).isEqualTo(givenId);
+            then(status.getName()).isEqualTo(givenName);
+            then(status.getDescription()).isEqualTo(givenDescription);
+        };
+
+        var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendTextMessagesWithDialPhoneButton() {
+        String givenBulkId = "1688025180464000013";
+        String givenMessageId = "1688025180464000014";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "MESSAGE_ACCEPTED";
+        String givenDescription = "Message sent to next instance";
+        String givenDestination = "48600700800";
+        MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
+        String givenSender = "447491163443";
+        String givenTo = "111111111";
+        String givenText = "May the Force be with you.";
+        String givenType = "TEXT";
+        String givenButtonText = "Yes, I agree!";
+        String givenButtonType = "DIAL_PHONE";
+        String givenPhoneNumber = "+1234567890";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenBulkId,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenDestination);
+
+        String expectedRequest = String.format(
+                "{\n" + "   \"messages\": [\n"
+                        + "     {\n"
+                        + "       \"channel\": \"%s\",\n"
+                        + "       \"sender\": \"%s\",\n"
+                        + "       \"destinations\": [\n"
+                        + "         {\n"
+                        + "           \"to\": \"%s\"\n"
+                        + "         }\n"
+                        + "       ],\n"
+                        + "       \"content\": {\n"
+                        + "         \"body\": {\n"
+                        + "           \"text\": \"%s\",\n"
+                        + "           \"type\": \"%s\"\n"
+                        + "         },\n"
+                        + "        \"buttons\": [\n"
+                        + "          {\n"
+                        + "            \"text\": \"%s\",\n"
+                        + "            \"phoneNumber\": \"%s\",\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "       }\n"
+                        + "     }\n"
+                        + "   ]\n"
+                        + "}",
+                givenChannel,
+                givenSender,
+                givenTo,
+                givenText,
+                givenType,
+                givenButtonText,
+                givenPhoneNumber,
+                givenButtonType);
+
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        MessagesApiRequest request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiMessage()
+                        .channel(MessagesApiOutboundMessageChannel.SMS)
+                        .sender(givenSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(givenTo)))
+                        .content(new MessagesApiMessageContent()
+                                .body(new MessagesApiMessageTextBody().text(givenText))
+                                .buttons(List.of(new MessagesApiMessageDialPhoneButton()
+                                        .text(givenButtonText)
+                                        .phoneNumber(givenPhoneNumber))))));
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            var messages = response.getMessages();
+            then(messages.size()).isEqualTo(1);
+            var message = messages.get(0);
+            then(message).isNotNull();
+            then(message.getMessageId()).isEqualTo(givenMessageId);
+            then(message.getStatus()).isNotNull();
+            var status = message.getStatus();
+            then(status.getGroupId()).isEqualTo(givenGroupId);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
+            then(status.getId()).isEqualTo(givenId);
+            then(status.getName()).isEqualTo(givenName);
+            then(status.getDescription()).isEqualTo(givenDescription);
+        };
+
+        var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendTextMessagesWithShowLocationButton() {
+        String givenBulkId = "1688025180464000013";
+        String givenMessageId = "1688025180464000014";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "MESSAGE_ACCEPTED";
+        String givenDescription = "Message sent to next instance";
+        String givenDestination = "48600700800";
+        MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
+        String givenSender = "447491163443";
+        String givenTo = "111111111";
+        String givenText = "May the Force be with you.";
+        String givenType = "TEXT";
+        String givenButtonText = "Yes, I agree!";
+        String givenButtonType = "SHOW_LOCATION";
+        Double givenLatitude = 37.7749;
+        Double givenLongitude = -122.4194;
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenBulkId,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenDestination);
+
+        String expectedRequest = String.format(
+                "{\n" + "   \"messages\": [\n"
+                        + "     {\n"
+                        + "       \"channel\": \"%s\",\n"
+                        + "       \"sender\": \"%s\",\n"
+                        + "       \"destinations\": [\n"
+                        + "         {\n"
+                        + "           \"to\": \"%s\"\n"
+                        + "         }\n"
+                        + "       ],\n"
+                        + "       \"content\": {\n"
+                        + "         \"body\": {\n"
+                        + "           \"text\": \"%s\",\n"
+                        + "           \"type\": \"%s\"\n"
+                        + "         },\n"
+                        + "        \"buttons\": [\n"
+                        + "          {\n"
+                        + "            \"text\": \"%s\",\n"
+                        + "            \"latitude\": %f,\n"
+                        + "            \"longitude\": %f,\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "       }\n"
+                        + "     }\n"
+                        + "   ]\n"
+                        + "}",
+                givenChannel,
+                givenSender,
+                givenTo,
+                givenText,
+                givenType,
+                givenButtonText,
+                givenLatitude,
+                givenLongitude,
+                givenButtonType);
+
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        MessagesApiRequest request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiMessage()
+                        .channel(MessagesApiOutboundMessageChannel.SMS)
+                        .sender(givenSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(givenTo)))
+                        .content(new MessagesApiMessageContent()
+                                .body(new MessagesApiMessageTextBody().text(givenText))
+                                .buttons(List.of(new MessagesApiMessageShowLocationButton()
+                                        .text(givenButtonText)
+                                        .longitude(givenLongitude)
+                                        .latitude(givenLatitude))))));
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            var messages = response.getMessages();
+            then(messages.size()).isEqualTo(1);
+            var message = messages.get(0);
+            then(message).isNotNull();
+            then(message.getMessageId()).isEqualTo(givenMessageId);
+            then(message.getStatus()).isNotNull();
+            var status = message.getStatus();
+            then(status.getGroupId()).isEqualTo(givenGroupId);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
+            then(status.getId()).isEqualTo(givenId);
+            then(status.getName()).isEqualTo(givenName);
+            then(status.getDescription()).isEqualTo(givenDescription);
+        };
+
+        var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendTextMessagesWithRequestLocationButton() {
+        String givenBulkId = "1688025180464000013";
+        String givenMessageId = "1688025180464000014";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "MESSAGE_ACCEPTED";
+        String givenDescription = "Message sent to next instance";
+        String givenDestination = "48600700800";
+        MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
+        String givenSender = "447491163443";
+        String givenTo = "111111111";
+        String givenText = "May the Force be with you.";
+        String givenType = "TEXT";
+        String givenButtonText = "Yes, I agree!";
+        String givenButtonType = "REQUEST_LOCATION";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenBulkId,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenDestination);
+
+        String expectedRequest = String.format(
+                "{\n" + "   \"messages\": [\n"
+                        + "     {\n"
+                        + "       \"channel\": \"%s\",\n"
+                        + "       \"sender\": \"%s\",\n"
+                        + "       \"destinations\": [\n"
+                        + "         {\n"
+                        + "           \"to\": \"%s\"\n"
+                        + "         }\n"
+                        + "       ],\n"
+                        + "       \"content\": {\n"
+                        + "         \"body\": {\n"
+                        + "           \"text\": \"%s\",\n"
+                        + "           \"type\": \"%s\"\n"
+                        + "         },\n"
+                        + "        \"buttons\": [\n"
+                        + "          {\n"
+                        + "            \"text\": \"%s\",\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "       }\n"
+                        + "     }\n"
+                        + "   ]\n"
+                        + "}",
+                givenChannel, givenSender, givenTo, givenText, givenType, givenButtonText, givenButtonType);
+
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        MessagesApiRequest request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiMessage()
+                        .channel(MessagesApiOutboundMessageChannel.SMS)
+                        .sender(givenSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(givenTo)))
+                        .content(new MessagesApiMessageContent()
+                                .body(new MessagesApiMessageTextBody().text(givenText))
+                                .buttons(List.of(
+                                        new MessagesApiMessageRequestLocationButton().text(givenButtonText))))));
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            var messages = response.getMessages();
+            then(messages.size()).isEqualTo(1);
+            var message = messages.get(0);
+            then(message).isNotNull();
+            then(message.getMessageId()).isEqualTo(givenMessageId);
+            then(message.getStatus()).isNotNull();
+            var status = message.getStatus();
+            then(status.getGroupId()).isEqualTo(givenGroupId);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
+            then(status.getId()).isEqualTo(givenId);
+            then(status.getName()).isEqualTo(givenName);
+            then(status.getDescription()).isEqualTo(givenDescription);
+        };
+
+        var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendTextMessagesWithAddCalendarEventButton() {
+        String givenBulkId = "1688025180464000013";
+        String givenMessageId = "1688025180464000014";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "MESSAGE_ACCEPTED";
+        String givenDescription = "Message sent to next instance";
+        String givenDestination = "48600700800";
+        MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
+        String givenSender = "447491163443";
+        String givenTo = "111111111";
+        String givenText = "May the Force be with you.";
+        String givenType = "TEXT";
+        String givenButtonText = "Yes, I agree!";
+        String givenButtonType = "ADD_CALENDAR_EVENT";
+        OffsetDateTime givenStartTime = OffsetDateTime.of(2024, 7, 1, 10, 0, 0, 0, ZoneOffset.UTC);
+        OffsetDateTime givenEndTime = OffsetDateTime.of(2024, 7, 1, 11, 0, 0, 0, ZoneOffset.UTC);
+        String givenStartTimeAsString = "2024-07-01T10:00:00.000+0000";
+        String givenEndTimeAsString = "2024-07-01T11:00:00.000+0000";
+        String givenEventTitle = "Meeting";
+        String givenEventDescription = "Discuss project updates";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenBulkId,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenDestination);
+
+        String expectedRequest = String.format(
+                "{\n" + "   \"messages\": [\n"
+                        + "     {\n"
+                        + "       \"channel\": \"%s\",\n"
+                        + "       \"sender\": \"%s\",\n"
+                        + "       \"destinations\": [\n"
+                        + "         {\n"
+                        + "           \"to\": \"%s\"\n"
+                        + "         }\n"
+                        + "       ],\n"
+                        + "       \"content\": {\n"
+                        + "         \"body\": {\n"
+                        + "           \"text\": \"%s\",\n"
+                        + "           \"type\": \"%s\"\n"
+                        + "         },\n"
+                        + "        \"buttons\": [\n"
+                        + "          {\n"
+                        + "            \"text\": \"%s\",\n"
+                        + "            \"startTime\": \"%s\",\n"
+                        + "            \"endTime\": \"%s\",\n"
+                        + "            \"title\": \"%s\",\n"
+                        + "            \"description\": \"%s\",\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "       }\n"
+                        + "     }\n"
+                        + "   ]\n"
+                        + "}",
+                givenChannel,
+                givenSender,
+                givenTo,
+                givenText,
+                givenType,
+                givenButtonText,
+                givenStartTimeAsString,
+                givenEndTimeAsString,
+                givenEventTitle,
+                givenEventDescription,
+                givenButtonType);
+
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        MessagesApiRequest request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiMessage()
+                        .channel(MessagesApiOutboundMessageChannel.SMS)
+                        .sender(givenSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(givenTo)))
+                        .content(new MessagesApiMessageContent()
+                                .body(new MessagesApiMessageTextBody().text(givenText))
+                                .buttons(List.of(new MessagesApiMessageAddCalendarEventButton()
+                                        .description(givenEventDescription)
+                                        .title(givenEventTitle)
+                                        .startTime(givenStartTime)
+                                        .endTime(givenEndTime)
+                                        .text(givenButtonText))))));
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            var messages = response.getMessages();
+            then(messages.size()).isEqualTo(1);
+            var message = messages.get(0);
+            then(message).isNotNull();
+            then(message.getMessageId()).isEqualTo(givenMessageId);
+            then(message.getStatus()).isNotNull();
+            var status = message.getStatus();
+            then(status.getGroupId()).isEqualTo(givenGroupId);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
+            then(status.getId()).isEqualTo(givenId);
+            then(status.getName()).isEqualTo(givenName);
+            then(status.getDescription()).isEqualTo(givenDescription);
+        };
+
+        var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendImageMessages() {
+        String givenBulkId = "1688025180464000013";
+        String givenMessageId = "1688025180464000014";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "MESSAGE_ACCEPTED";
+        String givenDescription = "Message sent to next instance";
+        String givenDestination = "48600700800";
+        MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
+        String givenSender = "447491163443";
+        String givenTo = "111111111";
+        String givenType = "IMAGE";
+        String givenImageUrl = "https://example.com/image.jpg";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}\n",
+                givenBulkId,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenDestination);
+
+        String expectedRequest = String.format(
+                "{\n" + "   \"messages\": [\n"
+                        + "     {\n"
+                        + "       \"channel\": \"%s\",\n"
+                        + "       \"sender\": \"%s\",\n"
+                        + "       \"destinations\": [\n"
+                        + "         {\n"
+                        + "           \"to\": \"%s\"\n"
+                        + "         }\n"
+                        + "       ],\n"
+                        + "       \"content\": {\n"
+                        + "         \"body\": {\n"
+                        + "           \"url\": \"%s\",\n"
+                        + "           \"type\": \"%s\"\n"
+                        + "         }\n"
+                        + "       }\n"
+                        + "     }\n"
+                        + "   ]\n"
+                        + "}",
+                givenChannel, givenSender, givenTo, givenImageUrl, givenType);
+
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        MessagesApiRequest request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiMessage()
+                        .channel(MessagesApiOutboundMessageChannel.SMS)
+                        .sender(givenSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(givenTo)))
+                        .content(new MessagesApiMessageContent()
+                                .body(new MessagesApiMessageImageBody().url(givenImageUrl)))));
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            var messages = response.getMessages();
+            then(messages.size()).isEqualTo(1);
+            var message = messages.get(0);
+            then(message).isNotNull();
+            then(message.getMessageId()).isEqualTo(givenMessageId);
+            then(message.getStatus()).isNotNull();
+            var status = message.getStatus();
+            then(status.getGroupId()).isEqualTo(givenGroupId);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
+            then(status.getId()).isEqualTo(givenId);
+            then(status.getName()).isEqualTo(givenName);
+            then(status.getDescription()).isEqualTo(givenDescription);
+        };
+
+        var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
     void shouldSendValidateMessagesApiMessage() {
         MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
         String givenSender = "447491163443";
@@ -303,6 +1099,743 @@ class MessagesApiTest extends ApiTest {
                         .content(new MessagesApiTemplateMessageContent()
                                 .body(new MessagesApiTemplateTextBody())
                                 .buttons(List.of(new MessagesApiTemplateOpenUrlButton().suffix(expectedSuffix))))));
+
+        var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendTemplateMessageWithQuickReplyButtonType() {
+        String givenBulkId = "1688025180464000013";
+        String givenMessageId = "1688025180464000014";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "MESSAGE_ACCEPTED";
+        String givenDescription = "Message sent to next instance";
+        String givenDestination = "48600700800";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenDestination);
+
+        MessagesApiOutboundTemplateChannel expectedChannel = MessagesApiOutboundTemplateChannel.WHATSAPP;
+        String expectedSender = "447860099299";
+        String expectedDestination = "111111111";
+        String expectedTemplateName = "registration_success";
+        String expectedLanguage = "en_GB";
+        String expectedType = "TEXT";
+        String expectPostbackData = "postback_data_123";
+        String expectedButtonType = "QUICK_REPLY";
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"channel\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"template\": {\n"
+                        + "        \"templateName\": \"%s\",\n"
+                        + "        \"language\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"content\": {\n"
+                        + "        \"body\": {\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"buttons\": [\n"
+                        + "          {\n"
+                        + "            \"postbackData\": \"%s\",\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                expectedChannel,
+                expectedSender,
+                expectedDestination,
+                expectedTemplateName,
+                expectedLanguage,
+                expectedType,
+                expectPostbackData,
+                expectedButtonType);
+
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            var messages = response.getMessages();
+            then(messages.size()).isEqualTo(1);
+            var message = messages.get(0);
+            then(message).isNotNull();
+            then(message.getMessageId()).isEqualTo(givenMessageId);
+            then(message.getStatus()).isNotNull();
+            var status = message.getStatus();
+            then(status.getGroupId()).isEqualTo(givenGroupId);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
+            then(status.getId()).isEqualTo(givenId);
+            then(status.getName()).isEqualTo(givenName);
+            then(status.getDescription()).isEqualTo(givenDescription);
+        };
+
+        MessagesApiRequest request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiTemplateMessage()
+                        .channel(MessagesApiOutboundTemplateChannel.WHATSAPP)
+                        .sender(expectedSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(expectedDestination)))
+                        .template(new MessagesApiTemplate()
+                                .templateName(expectedTemplateName)
+                                .language(expectedLanguage))
+                        .content(new MessagesApiTemplateMessageContent()
+                                .body(new MessagesApiTemplateTextBody())
+                                .buttons(List.of(
+                                        new MessagesApiTemplateQuickReplyButton().postbackData(expectPostbackData))))));
+
+        var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendTemplateMessageWithPhoneNumberButtonType() {
+        String givenBulkId = "1688025180464000013";
+        String givenMessageId = "1688025180464000014";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "MESSAGE_ACCEPTED";
+        String givenDescription = "Message sent to next instance";
+        String givenDestination = "48600700800";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenDestination);
+
+        MessagesApiOutboundTemplateChannel expectedChannel = MessagesApiOutboundTemplateChannel.WHATSAPP;
+        String expectedSender = "447860099299";
+        String expectedDestination = "111111111";
+        String expectedTemplateName = "registration_success";
+        String expectedLanguage = "en_GB";
+        String expectedType = "TEXT";
+        String expectedButtonType = "PHONE_NUMBER";
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"channel\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"template\": {\n"
+                        + "        \"templateName\": \"%s\",\n"
+                        + "        \"language\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"content\": {\n"
+                        + "        \"body\": {\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"buttons\": [\n"
+                        + "          {\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                expectedChannel,
+                expectedSender,
+                expectedDestination,
+                expectedTemplateName,
+                expectedLanguage,
+                expectedType,
+                expectedButtonType);
+
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            var messages = response.getMessages();
+            then(messages.size()).isEqualTo(1);
+            var message = messages.get(0);
+            then(message).isNotNull();
+            then(message.getMessageId()).isEqualTo(givenMessageId);
+            then(message.getStatus()).isNotNull();
+            var status = message.getStatus();
+            then(status.getGroupId()).isEqualTo(givenGroupId);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
+            then(status.getId()).isEqualTo(givenId);
+            then(status.getName()).isEqualTo(givenName);
+            then(status.getDescription()).isEqualTo(givenDescription);
+        };
+
+        MessagesApiRequest request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiTemplateMessage()
+                        .channel(MessagesApiOutboundTemplateChannel.WHATSAPP)
+                        .sender(expectedSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(expectedDestination)))
+                        .template(new MessagesApiTemplate()
+                                .templateName(expectedTemplateName)
+                                .language(expectedLanguage))
+                        .content(new MessagesApiTemplateMessageContent()
+                                .body(new MessagesApiTemplateTextBody())
+                                .buttons(List.of(new MessagesApiTemplatePhoneNumberButton())))));
+
+        var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendTemplateMessageWithCopyCodeButtonType() {
+        String givenBulkId = "1688025180464000013";
+        String givenMessageId = "1688025180464000014";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "MESSAGE_ACCEPTED";
+        String givenDescription = "Message sent to next instance";
+        String givenDestination = "48600700800";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenDestination);
+
+        MessagesApiOutboundTemplateChannel expectedChannel = MessagesApiOutboundTemplateChannel.WHATSAPP;
+        String expectedSender = "447860099299";
+        String expectedDestination = "111111111";
+        String expectedTemplateName = "registration_success";
+        String expectedLanguage = "en_GB";
+        String expectedType = "TEXT";
+        String expectedCode = "code";
+        String expectedButtonType = "COPY_CODE";
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"channel\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"template\": {\n"
+                        + "        \"templateName\": \"%s\",\n"
+                        + "        \"language\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"content\": {\n"
+                        + "        \"body\": {\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"buttons\": [\n"
+                        + "          {\n"
+                        + "            \"code\": \"%s\",\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                expectedChannel,
+                expectedSender,
+                expectedDestination,
+                expectedTemplateName,
+                expectedLanguage,
+                expectedType,
+                expectedCode,
+                expectedButtonType);
+
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            var messages = response.getMessages();
+            then(messages.size()).isEqualTo(1);
+            var message = messages.get(0);
+            then(message).isNotNull();
+            then(message.getMessageId()).isEqualTo(givenMessageId);
+            then(message.getStatus()).isNotNull();
+            var status = message.getStatus();
+            then(status.getGroupId()).isEqualTo(givenGroupId);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
+            then(status.getId()).isEqualTo(givenId);
+            then(status.getName()).isEqualTo(givenName);
+            then(status.getDescription()).isEqualTo(givenDescription);
+        };
+
+        MessagesApiRequest request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiTemplateMessage()
+                        .channel(MessagesApiOutboundTemplateChannel.WHATSAPP)
+                        .sender(expectedSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(expectedDestination)))
+                        .template(new MessagesApiTemplate()
+                                .templateName(expectedTemplateName)
+                                .language(expectedLanguage))
+                        .content(new MessagesApiTemplateMessageContent()
+                                .body(new MessagesApiTemplateTextBody())
+                                .buttons(List.of(new MessagesApiTemplateCopyCodeButton().code(expectedCode))))));
+
+        var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendTemplateMessageWithFlowButtonType() {
+        String givenBulkId = "1688025180464000013";
+        String givenMessageId = "1688025180464000014";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "MESSAGE_ACCEPTED";
+        String givenDescription = "Message sent to next instance";
+        String givenDestination = "48600700800";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenDestination);
+
+        MessagesApiOutboundTemplateChannel expectedChannel = MessagesApiOutboundTemplateChannel.WHATSAPP;
+        String expectedSender = "447860099299";
+        String expectedDestination = "111111111";
+        String expectedTemplateName = "registration_success";
+        String expectedLanguage = "en_GB";
+        String expectedType = "TEXT";
+        String expectedToken = "flow_token";
+        String expectedButtonType = "FLOW";
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"channel\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"template\": {\n"
+                        + "        \"templateName\": \"%s\",\n"
+                        + "        \"language\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"content\": {\n"
+                        + "        \"body\": {\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"buttons\": [\n"
+                        + "          {\n"
+                        + "            \"token\": \"%s\",\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                expectedChannel,
+                expectedSender,
+                expectedDestination,
+                expectedTemplateName,
+                expectedLanguage,
+                expectedType,
+                expectedToken,
+                expectedButtonType);
+
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            var messages = response.getMessages();
+            then(messages.size()).isEqualTo(1);
+            var message = messages.get(0);
+            then(message).isNotNull();
+            then(message.getMessageId()).isEqualTo(givenMessageId);
+            then(message.getStatus()).isNotNull();
+            var status = message.getStatus();
+            then(status.getGroupId()).isEqualTo(givenGroupId);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
+            then(status.getId()).isEqualTo(givenId);
+            then(status.getName()).isEqualTo(givenName);
+            then(status.getDescription()).isEqualTo(givenDescription);
+        };
+
+        MessagesApiRequest request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiTemplateMessage()
+                        .channel(MessagesApiOutboundTemplateChannel.WHATSAPP)
+                        .sender(expectedSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(expectedDestination)))
+                        .template(new MessagesApiTemplate()
+                                .templateName(expectedTemplateName)
+                                .language(expectedLanguage))
+                        .content(new MessagesApiTemplateMessageContent()
+                                .body(new MessagesApiTemplateTextBody())
+                                .buttons(List.of(new MessagesApiTemplateFlowButton().token(expectedToken))))));
+
+        var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendTemplateMessageWithCatalogButtonType() {
+        String givenBulkId = "1688025180464000013";
+        String givenMessageId = "1688025180464000014";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "MESSAGE_ACCEPTED";
+        String givenDescription = "Message sent to next instance";
+        String givenDestination = "48600700800";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenDestination);
+
+        MessagesApiOutboundTemplateChannel expectedChannel = MessagesApiOutboundTemplateChannel.WHATSAPP;
+        String expectedSender = "447860099299";
+        String expectedDestination = "111111111";
+        String expectedTemplateName = "registration_success";
+        String expectedLanguage = "en_GB";
+        String expectedType = "TEXT";
+        String expectedProductId = "product_id";
+        String expectedButtonType = "CATALOG";
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"channel\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"template\": {\n"
+                        + "        \"templateName\": \"%s\",\n"
+                        + "        \"language\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"content\": {\n"
+                        + "        \"body\": {\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"buttons\": [\n"
+                        + "          {\n"
+                        + "            \"productId\": \"%s\",\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                expectedChannel,
+                expectedSender,
+                expectedDestination,
+                expectedTemplateName,
+                expectedLanguage,
+                expectedType,
+                expectedProductId,
+                expectedButtonType);
+
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            var messages = response.getMessages();
+            then(messages.size()).isEqualTo(1);
+            var message = messages.get(0);
+            then(message).isNotNull();
+            then(message.getMessageId()).isEqualTo(givenMessageId);
+            then(message.getStatus()).isNotNull();
+            var status = message.getStatus();
+            then(status.getGroupId()).isEqualTo(givenGroupId);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
+            then(status.getId()).isEqualTo(givenId);
+            then(status.getName()).isEqualTo(givenName);
+            then(status.getDescription()).isEqualTo(givenDescription);
+        };
+
+        MessagesApiRequest request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiTemplateMessage()
+                        .channel(MessagesApiOutboundTemplateChannel.WHATSAPP)
+                        .sender(expectedSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(expectedDestination)))
+                        .template(new MessagesApiTemplate()
+                                .templateName(expectedTemplateName)
+                                .language(expectedLanguage))
+                        .content(new MessagesApiTemplateMessageContent()
+                                .body(new MessagesApiTemplateTextBody())
+                                .buttons(List.of(
+                                        new MessagesApiTemplateCatalogButton().productId(expectedProductId))))));
+
+        var call = api.sendMessagesApiMessage(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendTemplateMessageWithMultiProductButtonType() {
+        String givenBulkId = "1688025180464000013";
+        String givenMessageId = "1688025180464000014";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "MESSAGE_ACCEPTED";
+        String givenDescription = "Message sent to next instance";
+        String givenDestination = "48600700800";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId,
+                givenMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription,
+                givenDestination);
+
+        MessagesApiOutboundTemplateChannel expectedChannel = MessagesApiOutboundTemplateChannel.WHATSAPP;
+        String expectedSender = "447860099299";
+        String expectedDestination = "111111111";
+        String expectedTemplateName = "registration_success";
+        String expectedLanguage = "en_GB";
+        String expectedType = "TEXT";
+        String expectedProductId = "product_id";
+        String expectedProductId2 = "product_id_2";
+        String expectedButtonType = "MULTI_PRODUCT";
+        String expectedTitleForButton = "title";
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"channel\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"template\": {\n"
+                        + "        \"templateName\": \"%s\",\n"
+                        + "        \"language\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"content\": {\n"
+                        + "        \"body\": {\n"
+                        + "          \"type\": \"%s\"\n"
+                        + "        },\n"
+                        + "        \"buttons\": [\n"
+                        + "          {\n"
+                        + "            \"sections\": [\n"
+                        + "             {\n"
+                        + "              \"title\": \"%s\",\n"
+                        + "              \"productIds\": [\"%s\", \"%s\"]\n"
+                        + "             }\n"
+                        + "             ],\n"
+                        + "            \"type\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                expectedChannel,
+                expectedSender,
+                expectedDestination,
+                expectedTemplateName,
+                expectedLanguage,
+                expectedType,
+                expectedTitleForButton,
+                expectedProductId,
+                expectedProductId2,
+                expectedButtonType);
+
+        setUpSuccessPostRequest(MESSAGES, expectedRequest, givenResponse);
+
+        MessagesApi api = new MessagesApi(getApiClient());
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            var messages = response.getMessages();
+            then(messages.size()).isEqualTo(1);
+            var message = messages.get(0);
+            then(message).isNotNull();
+            then(message.getMessageId()).isEqualTo(givenMessageId);
+            then(message.getStatus()).isNotNull();
+            var status = message.getStatus();
+            then(status.getGroupId()).isEqualTo(givenGroupId);
+            then(status.getGroupName()).isEqualTo(givenGroupName);
+            then(status.getId()).isEqualTo(givenId);
+            then(status.getName()).isEqualTo(givenName);
+            then(status.getDescription()).isEqualTo(givenDescription);
+        };
+
+        MessagesApiRequest request = new MessagesApiRequest()
+                .messages(List.of(new MessagesApiTemplateMessage()
+                        .channel(MessagesApiOutboundTemplateChannel.WHATSAPP)
+                        .sender(expectedSender)
+                        .destinations(List.of(new MessagesApiToDestination().to(expectedDestination)))
+                        .template(new MessagesApiTemplate()
+                                .templateName(expectedTemplateName)
+                                .language(expectedLanguage))
+                        .content(new MessagesApiTemplateMessageContent()
+                                .body(new MessagesApiTemplateTextBody())
+                                .buttons(List.of(new MessagesApiTemplateMultiProductButton()
+                                        .sections(List.of(new MessagesApiTemplateMultiProductButtonSection()
+                                                .title(expectedTitleForButton)
+                                                .productIds(List.of(expectedProductId, expectedProductId2)))))))));
 
         var call = api.sendMessagesApiMessage(request);
         testSuccessfulCall(call::execute, assertions);

@@ -21,6 +21,8 @@ public class TfaUpdateEmailMessageRequest {
 
     private String from;
 
+    private String landingPageId;
+
     private Integer pinLength;
 
     private TfaPinType pinType;
@@ -106,6 +108,46 @@ public class TfaUpdateEmailMessageRequest {
     }
 
     /**
+     * Sets landingPageId.
+     * <p>
+     * Field description:
+     * Opt out landing page ID that should reference a previously created landing page template.
+     *
+     * @param landingPageId
+     * @return This {@link TfaUpdateEmailMessageRequest instance}.
+     */
+    public TfaUpdateEmailMessageRequest landingPageId(String landingPageId) {
+        this.landingPageId = landingPageId;
+        return this;
+    }
+
+    /**
+     * Returns landingPageId.
+     * <p>
+     * Field description:
+     * Opt out landing page ID that should reference a previously created landing page template.
+     *
+     * @return landingPageId
+     */
+    @JsonProperty("landingPageId")
+    public String getLandingPageId() {
+        return landingPageId;
+    }
+
+    /**
+     * Sets landingPageId.
+     * <p>
+     * Field description:
+     * Opt out landing page ID that should reference a previously created landing page template.
+     *
+     * @param landingPageId
+     */
+    @JsonProperty("landingPageId")
+    public void setLandingPageId(String landingPageId) {
+        this.landingPageId = landingPageId;
+    }
+
+    /**
      * Sets pinLength.
      * <p>
      * Field description:
@@ -187,13 +229,14 @@ public class TfaUpdateEmailMessageRequest {
         TfaUpdateEmailMessageRequest tfaUpdateEmailMessageRequest = (TfaUpdateEmailMessageRequest) o;
         return Objects.equals(this.emailTemplateId, tfaUpdateEmailMessageRequest.emailTemplateId)
                 && Objects.equals(this.from, tfaUpdateEmailMessageRequest.from)
+                && Objects.equals(this.landingPageId, tfaUpdateEmailMessageRequest.landingPageId)
                 && Objects.equals(this.pinLength, tfaUpdateEmailMessageRequest.pinLength)
                 && Objects.equals(this.pinType, tfaUpdateEmailMessageRequest.pinType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(emailTemplateId, from, pinLength, pinType);
+        return Objects.hash(emailTemplateId, from, landingPageId, pinLength, pinType);
     }
 
     @Override
@@ -207,6 +250,9 @@ public class TfaUpdateEmailMessageRequest {
                 .append(newLine)
                 .append("    from: ")
                 .append(toIndentedString(from))
+                .append(newLine)
+                .append("    landingPageId: ")
+                .append(toIndentedString(landingPageId))
                 .append(newLine)
                 .append("    pinLength: ")
                 .append(toIndentedString(pinLength))

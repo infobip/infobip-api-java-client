@@ -21,6 +21,7 @@ public enum ViberOutboundContentType {
     VIDEO("VIDEO"),
     FILE("FILE"),
     LIST("LIST"),
+    CAROUSEL("CAROUSEL"),
     OTP_TEMPLATE("OTP_TEMPLATE");
 
     private final String value;

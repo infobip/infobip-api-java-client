@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Template validity period in which WhatsApp will try to deliver template message to end user. Validity period can be customized between 1 and 10 minutes. -1 can be used to use Meta&#39;s default message validity period. This is 24 hours for the Cloud senders and 30 days for the On-Premises.
+ * Template validity period in which WhatsApp will try to deliver template message to end user. Validity period can be customized between 30 seconds and 15 minutes. -1 can be used to use Meta&#39;s default message validity period. This is 24 hours for the Cloud senders and 30 days for the On-Premises.
  */
 public class WhatsAppValidityPeriodApiData {
 

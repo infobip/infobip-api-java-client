@@ -21,6 +21,8 @@ public class CallsMachineDetectionRequest {
 
     private Integer messageDetectionTimeout;
 
+    private Double detectionTime;
+
     /**
      * Sets enabled.
      * <p>
@@ -107,6 +109,46 @@ public class CallsMachineDetectionRequest {
         this.messageDetectionTimeout = messageDetectionTimeout;
     }
 
+    /**
+     * Sets detectionTime.
+     * <p>
+     * Field description:
+     * Indicates time in seconds during which answering machine detection will analyse the call before making a decision. Shorter detection time may come at the expense of accuracy. Must be lower than &#x60;messageDetectionTimeout&#x60; if &#x60;messageDetectionTimeout&#x60; is specified.
+     *
+     * @param detectionTime
+     * @return This {@link CallsMachineDetectionRequest instance}.
+     */
+    public CallsMachineDetectionRequest detectionTime(Double detectionTime) {
+        this.detectionTime = detectionTime;
+        return this;
+    }
+
+    /**
+     * Returns detectionTime.
+     * <p>
+     * Field description:
+     * Indicates time in seconds during which answering machine detection will analyse the call before making a decision. Shorter detection time may come at the expense of accuracy. Must be lower than &#x60;messageDetectionTimeout&#x60; if &#x60;messageDetectionTimeout&#x60; is specified.
+     *
+     * @return detectionTime
+     */
+    @JsonProperty("detectionTime")
+    public Double getDetectionTime() {
+        return detectionTime;
+    }
+
+    /**
+     * Sets detectionTime.
+     * <p>
+     * Field description:
+     * Indicates time in seconds during which answering machine detection will analyse the call before making a decision. Shorter detection time may come at the expense of accuracy. Must be lower than &#x60;messageDetectionTimeout&#x60; if &#x60;messageDetectionTimeout&#x60; is specified.
+     *
+     * @param detectionTime
+     */
+    @JsonProperty("detectionTime")
+    public void setDetectionTime(Double detectionTime) {
+        this.detectionTime = detectionTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -117,12 +159,13 @@ public class CallsMachineDetectionRequest {
         }
         CallsMachineDetectionRequest callsMachineDetectionRequest = (CallsMachineDetectionRequest) o;
         return Objects.equals(this.enabled, callsMachineDetectionRequest.enabled)
-                && Objects.equals(this.messageDetectionTimeout, callsMachineDetectionRequest.messageDetectionTimeout);
+                && Objects.equals(this.messageDetectionTimeout, callsMachineDetectionRequest.messageDetectionTimeout)
+                && Objects.equals(this.detectionTime, callsMachineDetectionRequest.detectionTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(enabled, messageDetectionTimeout);
+        return Objects.hash(enabled, messageDetectionTimeout, detectionTime);
     }
 
     @Override
@@ -136,6 +179,9 @@ public class CallsMachineDetectionRequest {
                 .append(newLine)
                 .append("    messageDetectionTimeout: ")
                 .append(toIndentedString(messageDetectionTimeout))
+                .append(newLine)
+                .append("    detectionTime: ")
+                .append(toIndentedString(detectionTime))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -30,7 +30,7 @@ public class WhatsAppInteractiveButtonsTextHeaderContent extends WhatsAppInterac
      * Sets text.
      * <p>
      * Field description:
-     * Content of the header used when creating [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types#interactive-buttons-free-form-messages).
+     * Text sent in the header of message containing one or more [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#interactive-buttons-interactive-messages).
      * <p>
      * The field is required.
      *
@@ -46,7 +46,7 @@ public class WhatsAppInteractiveButtonsTextHeaderContent extends WhatsAppInterac
      * Returns text.
      * <p>
      * Field description:
-     * Content of the header used when creating [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types#interactive-buttons-free-form-messages).
+     * Text sent in the header of message containing one or more [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#interactive-buttons-interactive-messages).
      * <p>
      * The field is required.
      *
@@ -61,7 +61,7 @@ public class WhatsAppInteractiveButtonsTextHeaderContent extends WhatsAppInterac
      * Sets text.
      * <p>
      * Field description:
-     * Content of the header used when creating [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types#interactive-buttons-free-form-messages).
+     * Text sent in the header of message containing one or more [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#interactive-buttons-interactive-messages).
      * <p>
      * The field is required.
      *

@@ -72,7 +72,7 @@ public class MessagesApiMessageRequestLocationButton extends MessagesApiMessageB
      * Sets postbackData.
      * <p>
      * Field description:
-     * Custom data that will be sent to you when user reply to a message.
+     * Custom data that will be sent to you when the user replies to the message.
      *
      * @param postbackData
      * @return This {@link MessagesApiMessageRequestLocationButton instance}.
@@ -86,7 +86,7 @@ public class MessagesApiMessageRequestLocationButton extends MessagesApiMessageB
      * Returns postbackData.
      * <p>
      * Field description:
-     * Custom data that will be sent to you when user reply to a message.
+     * Custom data that will be sent to you when the user replies to the message.
      *
      * @return postbackData
      */
@@ -99,7 +99,7 @@ public class MessagesApiMessageRequestLocationButton extends MessagesApiMessageB
      * Sets postbackData.
      * <p>
      * Field description:
-     * Custom data that will be sent to you when user reply to a message.
+     * Custom data that will be sent to you when the user replies to the message.
      *
      * @param postbackData
      */

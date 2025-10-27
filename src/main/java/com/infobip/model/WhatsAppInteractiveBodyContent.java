@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Body of a message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types#free-form-messages).
+ * Body of a message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats).
  */
 public class WhatsAppInteractiveBodyContent {
 

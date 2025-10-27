@@ -1772,12 +1772,11 @@ class SmsApiTest extends ApiTest {
                 + "  \"messageCount\": 1,\n"
                 + "  \"pendingMessageCount\": 0\n"
                 + "}\n";
-        SmsWebhookInboundReportResponse reportResponse =
-                json.deserialize(givenRequest, SmsWebhookInboundReportResponse.class);
+        SmsInboundMessageResult reportResponse = json.deserialize(givenRequest, SmsInboundMessageResult.class);
         then(reportResponse.getResults()).isNotNull();
         then(reportResponse.getResults().size()).isEqualTo(1);
-        then(reportResponse.getResults().get(0).getClass()).isEqualTo(SmsWebhookInboundReport.class);
-        var message = (SmsWebhookInboundReport) reportResponse.getResults().get(0);
+        then(reportResponse.getResults().get(0).getClass()).isEqualTo(SmsInboundMessage.class);
+        var message = (SmsInboundMessage) reportResponse.getResults().get(0);
         then(message.getPrice().getClass()).isEqualTo(MessagePrice.class);
     }
 

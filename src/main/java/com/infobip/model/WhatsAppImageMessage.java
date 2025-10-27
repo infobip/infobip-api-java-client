@@ -35,6 +35,8 @@ public class WhatsAppImageMessage {
 
     private String applicationId;
 
+    private WhatsAppMessageContext context;
+
     /**
      * Sets from.
      * <p>
@@ -395,6 +397,37 @@ public class WhatsAppImageMessage {
         this.applicationId = applicationId;
     }
 
+    /**
+     * Sets context.
+     *
+     * @param context
+     * @return This {@link WhatsAppImageMessage instance}.
+     */
+    public WhatsAppImageMessage context(WhatsAppMessageContext context) {
+        this.context = context;
+        return this;
+    }
+
+    /**
+     * Returns context.
+     *
+     * @return context
+     */
+    @JsonProperty("context")
+    public WhatsAppMessageContext getContext() {
+        return context;
+    }
+
+    /**
+     * Sets context.
+     *
+     * @param context
+     */
+    @JsonProperty("context")
+    public void setContext(WhatsAppMessageContext context) {
+        this.context = context;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -412,12 +445,14 @@ public class WhatsAppImageMessage {
                 && Objects.equals(this.notifyUrl, whatsAppImageMessage.notifyUrl)
                 && Objects.equals(this.urlOptions, whatsAppImageMessage.urlOptions)
                 && Objects.equals(this.entityId, whatsAppImageMessage.entityId)
-                && Objects.equals(this.applicationId, whatsAppImageMessage.applicationId);
+                && Objects.equals(this.applicationId, whatsAppImageMessage.applicationId)
+                && Objects.equals(this.context, whatsAppImageMessage.context);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, to, messageId, content, callbackData, notifyUrl, urlOptions, entityId, applicationId);
+        return Objects.hash(
+                from, to, messageId, content, callbackData, notifyUrl, urlOptions, entityId, applicationId, context);
     }
 
     @Override
@@ -452,6 +487,9 @@ public class WhatsAppImageMessage {
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    context: ")
+                .append(toIndentedString(context))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -23,6 +23,8 @@ public class CallsAddNewCallRequest {
 
     private RingbackGeneration ringbackGeneration;
 
+    private CallsRole role;
+
     /**
      * Sets callRequest.
      * <p>
@@ -131,6 +133,37 @@ public class CallsAddNewCallRequest {
         this.ringbackGeneration = ringbackGeneration;
     }
 
+    /**
+     * Sets role.
+     *
+     * @param role
+     * @return This {@link CallsAddNewCallRequest instance}.
+     */
+    public CallsAddNewCallRequest role(CallsRole role) {
+        this.role = role;
+        return this;
+    }
+
+    /**
+     * Returns role.
+     *
+     * @return role
+     */
+    @JsonProperty("role")
+    public CallsRole getRole() {
+        return role;
+    }
+
+    /**
+     * Sets role.
+     *
+     * @param role
+     */
+    @JsonProperty("role")
+    public void setRole(CallsRole role) {
+        this.role = role;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -142,12 +175,13 @@ public class CallsAddNewCallRequest {
         CallsAddNewCallRequest callsAddNewCallRequest = (CallsAddNewCallRequest) o;
         return Objects.equals(this.callRequest, callsAddNewCallRequest.callRequest)
                 && Objects.equals(this.connectOnEarlyMedia, callsAddNewCallRequest.connectOnEarlyMedia)
-                && Objects.equals(this.ringbackGeneration, callsAddNewCallRequest.ringbackGeneration);
+                && Objects.equals(this.ringbackGeneration, callsAddNewCallRequest.ringbackGeneration)
+                && Objects.equals(this.role, callsAddNewCallRequest.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(callRequest, connectOnEarlyMedia, ringbackGeneration);
+        return Objects.hash(callRequest, connectOnEarlyMedia, ringbackGeneration, role);
     }
 
     @Override
@@ -164,6 +198,9 @@ public class CallsAddNewCallRequest {
                 .append(newLine)
                 .append("    ringbackGeneration: ")
                 .append(toIndentedString(ringbackGeneration))
+                .append(newLine)
+                .append("    role: ")
+                .append(toIndentedString(role))
                 .append(newLine)
                 .append("}")
                 .toString();

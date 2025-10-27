@@ -63,8 +63,6 @@ public class EmailAddDomainRequest {
 
     private String entityId;
 
-    private String returnPathAddress;
-
     /**
      * Sets domainName.
      * <p>
@@ -277,46 +275,6 @@ public class EmailAddDomainRequest {
         this.entityId = entityId;
     }
 
-    /**
-     * Sets returnPathAddress.
-     * <p>
-     * Field description:
-     * Set a custom return path to customize the mailbox that tells receiving email servers where to route delayed bounces.
-     *
-     * @param returnPathAddress
-     * @return This {@link EmailAddDomainRequest instance}.
-     */
-    public EmailAddDomainRequest returnPathAddress(String returnPathAddress) {
-        this.returnPathAddress = returnPathAddress;
-        return this;
-    }
-
-    /**
-     * Returns returnPathAddress.
-     * <p>
-     * Field description:
-     * Set a custom return path to customize the mailbox that tells receiving email servers where to route delayed bounces.
-     *
-     * @return returnPathAddress
-     */
-    @JsonProperty("returnPathAddress")
-    public String getReturnPathAddress() {
-        return returnPathAddress;
-    }
-
-    /**
-     * Sets returnPathAddress.
-     * <p>
-     * Field description:
-     * Set a custom return path to customize the mailbox that tells receiving email servers where to route delayed bounces.
-     *
-     * @param returnPathAddress
-     */
-    @JsonProperty("returnPathAddress")
-    public void setReturnPathAddress(String returnPathAddress) {
-        this.returnPathAddress = returnPathAddress;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -330,14 +288,12 @@ public class EmailAddDomainRequest {
                 && Objects.equals(this.dkimKeyLength, emailAddDomainRequest.dkimKeyLength)
                 && Objects.equals(this.targetedDailyTraffic, emailAddDomainRequest.targetedDailyTraffic)
                 && Objects.equals(this.applicationId, emailAddDomainRequest.applicationId)
-                && Objects.equals(this.entityId, emailAddDomainRequest.entityId)
-                && Objects.equals(this.returnPathAddress, emailAddDomainRequest.returnPathAddress);
+                && Objects.equals(this.entityId, emailAddDomainRequest.entityId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                domainName, dkimKeyLength, targetedDailyTraffic, applicationId, entityId, returnPathAddress);
+        return Objects.hash(domainName, dkimKeyLength, targetedDailyTraffic, applicationId, entityId);
     }
 
     @Override
@@ -360,9 +316,6 @@ public class EmailAddDomainRequest {
                 .append(newLine)
                 .append("    entityId: ")
                 .append(toIndentedString(entityId))
-                .append(newLine)
-                .append("    returnPathAddress: ")
-                .append(toIndentedString(returnPathAddress))
                 .append(newLine)
                 .append("}")
                 .toString();

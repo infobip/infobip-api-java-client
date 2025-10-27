@@ -23,6 +23,7 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = CallRoutingApplicationDestination.class, name = "APPLICATION"),
     @JsonSubTypes.Type(value = CallRoutingEndpointDestination.class, name = "ENDPOINT"),
     @JsonSubTypes.Type(value = CallRoutingUrlDestination.class, name = "URL"),
 })

@@ -10,7 +10,9 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,7 +27,13 @@ public class CallsSpeechCaptureRequest {
 
     private Integer maxSilence;
 
-    private Set<String> keyPhrases = new LinkedHashSet<>();
+    private Set<String> keyPhrases = null;
+
+    private Boolean terminateOnKeyPhrase;
+
+    private List<String> customDictionary = null;
+
+    private Boolean advancedFormatting;
 
     /**
      * Sets language.
@@ -155,8 +163,6 @@ public class CallsSpeechCaptureRequest {
      * <p>
      * Field description:
      * Array of key-phrases used for matching capturing speech.
-     * <p>
-     * The field is required.
      *
      * @param keyPhrases
      * @return This {@link CallsSpeechCaptureRequest instance}.
@@ -171,8 +177,6 @@ public class CallsSpeechCaptureRequest {
      * <p>
      * Field description:
      * Array of key-phrases used for matching capturing speech.
-     * <p>
-     * The field is required.
      *
      * @param keyPhrasesItem The item to be added to the list.
      * @return This {@link CallsSpeechCaptureRequest instance}.
@@ -190,8 +194,6 @@ public class CallsSpeechCaptureRequest {
      * <p>
      * Field description:
      * Array of key-phrases used for matching capturing speech.
-     * <p>
-     * The field is required.
      *
      * @return keyPhrases
      */
@@ -205,14 +207,149 @@ public class CallsSpeechCaptureRequest {
      * <p>
      * Field description:
      * Array of key-phrases used for matching capturing speech.
-     * <p>
-     * The field is required.
      *
      * @param keyPhrases
      */
     @JsonProperty("keyPhrases")
     public void setKeyPhrases(Set<String> keyPhrases) {
         this.keyPhrases = keyPhrases;
+    }
+
+    /**
+     * Sets terminateOnKeyPhrase.
+     * <p>
+     * Field description:
+     * Indicates whether speech capture should terminate immediately upon detecting a key phrase. Defaults to &#x60;true&#x60;. When &#x60;false&#x60;, capture proceeds until completion and retains only the first matched key phrase, if any.
+     *
+     * @param terminateOnKeyPhrase
+     * @return This {@link CallsSpeechCaptureRequest instance}.
+     */
+    public CallsSpeechCaptureRequest terminateOnKeyPhrase(Boolean terminateOnKeyPhrase) {
+        this.terminateOnKeyPhrase = terminateOnKeyPhrase;
+        return this;
+    }
+
+    /**
+     * Returns terminateOnKeyPhrase.
+     * <p>
+     * Field description:
+     * Indicates whether speech capture should terminate immediately upon detecting a key phrase. Defaults to &#x60;true&#x60;. When &#x60;false&#x60;, capture proceeds until completion and retains only the first matched key phrase, if any.
+     *
+     * @return terminateOnKeyPhrase
+     */
+    @JsonProperty("terminateOnKeyPhrase")
+    public Boolean getTerminateOnKeyPhrase() {
+        return terminateOnKeyPhrase;
+    }
+
+    /**
+     * Sets terminateOnKeyPhrase.
+     * <p>
+     * Field description:
+     * Indicates whether speech capture should terminate immediately upon detecting a key phrase. Defaults to &#x60;true&#x60;. When &#x60;false&#x60;, capture proceeds until completion and retains only the first matched key phrase, if any.
+     *
+     * @param terminateOnKeyPhrase
+     */
+    @JsonProperty("terminateOnKeyPhrase")
+    public void setTerminateOnKeyPhrase(Boolean terminateOnKeyPhrase) {
+        this.terminateOnKeyPhrase = terminateOnKeyPhrase;
+    }
+
+    /**
+     * Sets customDictionary.
+     * <p>
+     * Field description:
+     * Array of custom words (typically, industry-specific terms) used for improved speech capture.
+     *
+     * @param customDictionary
+     * @return This {@link CallsSpeechCaptureRequest instance}.
+     */
+    public CallsSpeechCaptureRequest customDictionary(List<String> customDictionary) {
+        this.customDictionary = customDictionary;
+        return this;
+    }
+
+    /**
+     * Adds and item into customDictionary.
+     * <p>
+     * Field description:
+     * Array of custom words (typically, industry-specific terms) used for improved speech capture.
+     *
+     * @param customDictionaryItem The item to be added to the list.
+     * @return This {@link CallsSpeechCaptureRequest instance}.
+     */
+    public CallsSpeechCaptureRequest addCustomDictionaryItem(String customDictionaryItem) {
+        if (this.customDictionary == null) {
+            this.customDictionary = new ArrayList<>();
+        }
+        this.customDictionary.add(customDictionaryItem);
+        return this;
+    }
+
+    /**
+     * Returns customDictionary.
+     * <p>
+     * Field description:
+     * Array of custom words (typically, industry-specific terms) used for improved speech capture.
+     *
+     * @return customDictionary
+     */
+    @JsonProperty("customDictionary")
+    public List<String> getCustomDictionary() {
+        return customDictionary;
+    }
+
+    /**
+     * Sets customDictionary.
+     * <p>
+     * Field description:
+     * Array of custom words (typically, industry-specific terms) used for improved speech capture.
+     *
+     * @param customDictionary
+     */
+    @JsonProperty("customDictionary")
+    public void setCustomDictionary(List<String> customDictionary) {
+        this.customDictionary = customDictionary;
+    }
+
+    /**
+     * Sets advancedFormatting.
+     * <p>
+     * Field description:
+     * Toggles enhanced text formatting features like punctuation, proper casing, numeral normalization, and disfluency filtering. Defaults to &#x60;false&#x60;.
+     *
+     * @param advancedFormatting
+     * @return This {@link CallsSpeechCaptureRequest instance}.
+     */
+    public CallsSpeechCaptureRequest advancedFormatting(Boolean advancedFormatting) {
+        this.advancedFormatting = advancedFormatting;
+        return this;
+    }
+
+    /**
+     * Returns advancedFormatting.
+     * <p>
+     * Field description:
+     * Toggles enhanced text formatting features like punctuation, proper casing, numeral normalization, and disfluency filtering. Defaults to &#x60;false&#x60;.
+     *
+     * @return advancedFormatting
+     */
+    @JsonProperty("advancedFormatting")
+    public Boolean getAdvancedFormatting() {
+        return advancedFormatting;
+    }
+
+    /**
+     * Sets advancedFormatting.
+     * <p>
+     * Field description:
+     * Toggles enhanced text formatting features like punctuation, proper casing, numeral normalization, and disfluency filtering. Defaults to &#x60;false&#x60;.
+     *
+     * @param advancedFormatting
+     */
+    @JsonProperty("advancedFormatting")
+    public void setAdvancedFormatting(Boolean advancedFormatting) {
+        this.advancedFormatting = advancedFormatting;
     }
 
     @Override
@@ -227,12 +364,16 @@ public class CallsSpeechCaptureRequest {
         return Objects.equals(this.language, callsSpeechCaptureRequest.language)
                 && Objects.equals(this.timeout, callsSpeechCaptureRequest.timeout)
                 && Objects.equals(this.maxSilence, callsSpeechCaptureRequest.maxSilence)
-                && Objects.equals(this.keyPhrases, callsSpeechCaptureRequest.keyPhrases);
+                && Objects.equals(this.keyPhrases, callsSpeechCaptureRequest.keyPhrases)
+                && Objects.equals(this.terminateOnKeyPhrase, callsSpeechCaptureRequest.terminateOnKeyPhrase)
+                && Objects.equals(this.customDictionary, callsSpeechCaptureRequest.customDictionary)
+                && Objects.equals(this.advancedFormatting, callsSpeechCaptureRequest.advancedFormatting);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(language, timeout, maxSilence, keyPhrases);
+        return Objects.hash(
+                language, timeout, maxSilence, keyPhrases, terminateOnKeyPhrase, customDictionary, advancedFormatting);
     }
 
     @Override
@@ -252,6 +393,15 @@ public class CallsSpeechCaptureRequest {
                 .append(newLine)
                 .append("    keyPhrases: ")
                 .append(toIndentedString(keyPhrases))
+                .append(newLine)
+                .append("    terminateOnKeyPhrase: ")
+                .append(toIndentedString(terminateOnKeyPhrase))
+                .append(newLine)
+                .append("    customDictionary: ")
+                .append(toIndentedString(customDictionary))
+                .append(newLine)
+                .append("    advancedFormatting: ")
+                .append(toIndentedString(advancedFormatting))
                 .append(newLine)
                 .append("}")
                 .toString();

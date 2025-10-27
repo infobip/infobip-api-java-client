@@ -25,7 +25,7 @@ public class WhatsAppInteractiveProductActionContent {
      * Sets catalogId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the [catalog](https://www.infobip.com/docs/whatsapp/manage-connection#manage-catalog) registered with Facebook and connected to the WhatsApp Business Account the sender belongs to.
+     * The ID that uniquely identifies the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration/integration-essentials#enable-meta-catalog-for-product-based-messaging) registered with Facebook and connected to the WhatsApp Business Account the sender belongs to.
      * <p>
      * The field is required.
      *
@@ -41,7 +41,7 @@ public class WhatsAppInteractiveProductActionContent {
      * Returns catalogId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the [catalog](https://www.infobip.com/docs/whatsapp/manage-connection#manage-catalog) registered with Facebook and connected to the WhatsApp Business Account the sender belongs to.
+     * The ID that uniquely identifies the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration/integration-essentials#enable-meta-catalog-for-product-based-messaging) registered with Facebook and connected to the WhatsApp Business Account the sender belongs to.
      * <p>
      * The field is required.
      *
@@ -56,7 +56,7 @@ public class WhatsAppInteractiveProductActionContent {
      * Sets catalogId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the [catalog](https://www.infobip.com/docs/whatsapp/manage-connection#manage-catalog) registered with Facebook and connected to the WhatsApp Business Account the sender belongs to.
+     * The ID that uniquely identifies the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration/integration-essentials#enable-meta-catalog-for-product-based-messaging) registered with Facebook and connected to the WhatsApp Business Account the sender belongs to.
      * <p>
      * The field is required.
      *

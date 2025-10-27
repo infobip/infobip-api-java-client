@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents EmailValidationResponse model.
+ * Validation response
  */
 public class EmailValidationResponse {
 
@@ -31,17 +31,19 @@ public class EmailValidationResponse {
 
     private Boolean roleBased;
 
-    private String reason;
+    private EmailValidationReason reason;
+
+    private EmailValidationApiRisk risk;
 
     private String detailedReasons;
-
-    private String risk;
 
     /**
      * Sets to.
      * <p>
      * Field description:
-     * Email address of the recipient.
+     * The validated email address.
+     * <p>
+     * The field is required.
      *
      * @param to
      * @return This {@link EmailValidationResponse instance}.
@@ -55,7 +57,9 @@ public class EmailValidationResponse {
      * Returns to.
      * <p>
      * Field description:
-     * Email address of the recipient.
+     * The validated email address.
+     * <p>
+     * The field is required.
      *
      * @return to
      */
@@ -68,7 +72,9 @@ public class EmailValidationResponse {
      * Sets to.
      * <p>
      * Field description:
-     * Email address of the recipient.
+     * The validated email address.
+     * <p>
+     * The field is required.
      *
      * @param to
      */
@@ -81,7 +87,9 @@ public class EmailValidationResponse {
      * Sets validMailbox.
      * <p>
      * Field description:
-     * Represents status of recipient email address.
+     * Indicates whether email address is valid.
+     * <p>
+     * The field is required.
      *
      * @param validMailbox
      * @return This {@link EmailValidationResponse instance}.
@@ -95,7 +103,9 @@ public class EmailValidationResponse {
      * Returns validMailbox.
      * <p>
      * Field description:
-     * Represents status of recipient email address.
+     * Indicates whether email address is valid.
+     * <p>
+     * The field is required.
      *
      * @return validMailbox
      */
@@ -108,7 +118,9 @@ public class EmailValidationResponse {
      * Sets validMailbox.
      * <p>
      * Field description:
-     * Represents status of recipient email address.
+     * Indicates whether email address is valid.
+     * <p>
+     * The field is required.
      *
      * @param validMailbox
      */
@@ -121,7 +133,9 @@ public class EmailValidationResponse {
      * Sets validSyntax.
      * <p>
      * Field description:
-     * Represents syntax of recipient email address.
+     * Indicates whether email address syntax is valid.
+     * <p>
+     * The field is required.
      *
      * @param validSyntax
      * @return This {@link EmailValidationResponse instance}.
@@ -135,7 +149,9 @@ public class EmailValidationResponse {
      * Returns validSyntax.
      * <p>
      * Field description:
-     * Represents syntax of recipient email address.
+     * Indicates whether email address syntax is valid.
+     * <p>
+     * The field is required.
      *
      * @return validSyntax
      */
@@ -148,7 +164,9 @@ public class EmailValidationResponse {
      * Sets validSyntax.
      * <p>
      * Field description:
-     * Represents syntax of recipient email address.
+     * Indicates whether email address syntax is valid.
+     * <p>
+     * The field is required.
      *
      * @param validSyntax
      */
@@ -161,7 +179,9 @@ public class EmailValidationResponse {
      * Sets catchAll.
      * <p>
      * Field description:
-     * Denotes catch all status of recipient email address.
+     * Indicates catch all status of email address.
+     * <p>
+     * The field is required.
      *
      * @param catchAll
      * @return This {@link EmailValidationResponse instance}.
@@ -175,7 +195,9 @@ public class EmailValidationResponse {
      * Returns catchAll.
      * <p>
      * Field description:
-     * Denotes catch all status of recipient email address.
+     * Indicates catch all status of email address.
+     * <p>
+     * The field is required.
      *
      * @return catchAll
      */
@@ -188,7 +210,9 @@ public class EmailValidationResponse {
      * Sets catchAll.
      * <p>
      * Field description:
-     * Denotes catch all status of recipient email address.
+     * Indicates catch all status of email address.
+     * <p>
+     * The field is required.
      *
      * @param catchAll
      */
@@ -201,7 +225,7 @@ public class EmailValidationResponse {
      * Sets didYouMean.
      * <p>
      * Field description:
-     * Suggests alternate addresses that maybe valid.
+     * Suggests similar alternate address that may be valid.
      *
      * @param didYouMean
      * @return This {@link EmailValidationResponse instance}.
@@ -215,7 +239,7 @@ public class EmailValidationResponse {
      * Returns didYouMean.
      * <p>
      * Field description:
-     * Suggests alternate addresses that maybe valid.
+     * Suggests similar alternate address that may be valid.
      *
      * @return didYouMean
      */
@@ -228,7 +252,7 @@ public class EmailValidationResponse {
      * Sets didYouMean.
      * <p>
      * Field description:
-     * Suggests alternate addresses that maybe valid.
+     * Suggests similar alternate address that may be valid.
      *
      * @param didYouMean
      */
@@ -239,6 +263,11 @@ public class EmailValidationResponse {
 
     /**
      * Sets disposable.
+     * <p>
+     * Field description:
+     * Indicates whether email address is disposable. A disposable email address is a temporary address that is often used for short-term purposes and can be discarded after use.
+     * <p>
+     * The field is required.
      *
      * @param disposable
      * @return This {@link EmailValidationResponse instance}.
@@ -250,6 +279,11 @@ public class EmailValidationResponse {
 
     /**
      * Returns disposable.
+     * <p>
+     * Field description:
+     * Indicates whether email address is disposable. A disposable email address is a temporary address that is often used for short-term purposes and can be discarded after use.
+     * <p>
+     * The field is required.
      *
      * @return disposable
      */
@@ -260,6 +294,11 @@ public class EmailValidationResponse {
 
     /**
      * Sets disposable.
+     * <p>
+     * Field description:
+     * Indicates whether email address is disposable. A disposable email address is a temporary address that is often used for short-term purposes and can be discarded after use.
+     * <p>
+     * The field is required.
      *
      * @param disposable
      */
@@ -270,6 +309,11 @@ public class EmailValidationResponse {
 
     /**
      * Sets roleBased.
+     * <p>
+     * Field description:
+     * Indicates whether email address is role-based. A role-based email address is one that is associated with a specific function or group within an organization, such as marketing@example.org, rather than an individual person.
+     * <p>
+     * The field is required.
      *
      * @param roleBased
      * @return This {@link EmailValidationResponse instance}.
@@ -281,6 +325,11 @@ public class EmailValidationResponse {
 
     /**
      * Returns roleBased.
+     * <p>
+     * Field description:
+     * Indicates whether email address is role-based. A role-based email address is one that is associated with a specific function or group within an organization, such as marketing@example.org, rather than an individual person.
+     * <p>
+     * The field is required.
      *
      * @return roleBased
      */
@@ -291,6 +340,11 @@ public class EmailValidationResponse {
 
     /**
      * Sets roleBased.
+     * <p>
+     * Field description:
+     * Indicates whether email address is role-based. A role-based email address is one that is associated with a specific function or group within an organization, such as marketing@example.org, rather than an individual person.
+     * <p>
+     * The field is required.
      *
      * @param roleBased
      */
@@ -301,49 +355,77 @@ public class EmailValidationResponse {
 
     /**
      * Sets reason.
-     * <p>
-     * Field description:
-     * Reason is provided when validMailbox status is unknown. 1. INBOX_FULL - The user quota exceeded / The user inbox is full / The user doesn&#39;t accept any more requests.  2. UNEXPECTED_FAILURE - The mail Server returned a temporary error. 3. THROTTLED - The mail server is not allowing us momentarily because of too many requests. 4. TIMED_OUT - The Mail Server took a longer time to respond / there was a delay in the network. 5. TEMP_REJECTION - Mail server temporarily rejected. 6. UNABLE_TO_CONNECT - Unable to connect to the Mail Server.
      *
      * @param reason
      * @return This {@link EmailValidationResponse instance}.
      */
-    public EmailValidationResponse reason(String reason) {
+    public EmailValidationResponse reason(EmailValidationReason reason) {
         this.reason = reason;
         return this;
     }
 
     /**
      * Returns reason.
-     * <p>
-     * Field description:
-     * Reason is provided when validMailbox status is unknown. 1. INBOX_FULL - The user quota exceeded / The user inbox is full / The user doesn&#39;t accept any more requests.  2. UNEXPECTED_FAILURE - The mail Server returned a temporary error. 3. THROTTLED - The mail server is not allowing us momentarily because of too many requests. 4. TIMED_OUT - The Mail Server took a longer time to respond / there was a delay in the network. 5. TEMP_REJECTION - Mail server temporarily rejected. 6. UNABLE_TO_CONNECT - Unable to connect to the Mail Server.
      *
      * @return reason
      */
     @JsonProperty("reason")
-    public String getReason() {
+    public EmailValidationReason getReason() {
         return reason;
     }
 
     /**
      * Sets reason.
-     * <p>
-     * Field description:
-     * Reason is provided when validMailbox status is unknown. 1. INBOX_FULL - The user quota exceeded / The user inbox is full / The user doesn&#39;t accept any more requests.  2. UNEXPECTED_FAILURE - The mail Server returned a temporary error. 3. THROTTLED - The mail server is not allowing us momentarily because of too many requests. 4. TIMED_OUT - The Mail Server took a longer time to respond / there was a delay in the network. 5. TEMP_REJECTION - Mail server temporarily rejected. 6. UNABLE_TO_CONNECT - Unable to connect to the Mail Server.
      *
      * @param reason
      */
     @JsonProperty("reason")
-    public void setReason(String reason) {
+    public void setReason(EmailValidationReason reason) {
         this.reason = reason;
+    }
+
+    /**
+     * Sets risk.
+     * <p>
+     * The field is required.
+     *
+     * @param risk
+     * @return This {@link EmailValidationResponse instance}.
+     */
+    public EmailValidationResponse risk(EmailValidationApiRisk risk) {
+        this.risk = risk;
+        return this;
+    }
+
+    /**
+     * Returns risk.
+     * <p>
+     * The field is required.
+     *
+     * @return risk
+     */
+    @JsonProperty("risk")
+    public EmailValidationApiRisk getRisk() {
+        return risk;
+    }
+
+    /**
+     * Sets risk.
+     * <p>
+     * The field is required.
+     *
+     * @param risk
+     */
+    @JsonProperty("risk")
+    public void setRisk(EmailValidationApiRisk risk) {
+        this.risk = risk;
     }
 
     /**
      * Sets detailedReasons.
      * <p>
      * Field description:
-     * Is provided when validMailbox is &#39;unknown&#39; or &#39;false&#39; and lists reasons clarifying why validMailbox has that status.
+     * This field is provided when the validMailbox status is &#39;unknown&#39; or &#39;false&#39;, offering specific explanations for why the email address has been assigned that status.
      *
      * @param detailedReasons
      * @return This {@link EmailValidationResponse instance}.
@@ -357,7 +439,7 @@ public class EmailValidationResponse {
      * Returns detailedReasons.
      * <p>
      * Field description:
-     * Is provided when validMailbox is &#39;unknown&#39; or &#39;false&#39; and lists reasons clarifying why validMailbox has that status.
+     * This field is provided when the validMailbox status is &#39;unknown&#39; or &#39;false&#39;, offering specific explanations for why the email address has been assigned that status.
      *
      * @return detailedReasons
      */
@@ -370,53 +452,13 @@ public class EmailValidationResponse {
      * Sets detailedReasons.
      * <p>
      * Field description:
-     * Is provided when validMailbox is &#39;unknown&#39; or &#39;false&#39; and lists reasons clarifying why validMailbox has that status.
+     * This field is provided when the validMailbox status is &#39;unknown&#39; or &#39;false&#39;, offering specific explanations for why the email address has been assigned that status.
      *
      * @param detailedReasons
      */
     @JsonProperty("detailedReasons")
     public void setDetailedReasons(String detailedReasons) {
         this.detailedReasons = detailedReasons;
-    }
-
-    /**
-     * Sets risk.
-     * <p>
-     * Field description:
-     * Returns one of the following values: &#39;High&#39;, &#39;Medium&#39;, &#39;Low&#39; or &#39;Unknown&#39;. High risk addresses have very high chances of bouncing (and potentially damaging the sender&#39;s reputation), whereas low risk addresses have very low chances of bouncing and damaging the sender&#39;s reputation.
-     *
-     * @param risk
-     * @return This {@link EmailValidationResponse instance}.
-     */
-    public EmailValidationResponse risk(String risk) {
-        this.risk = risk;
-        return this;
-    }
-
-    /**
-     * Returns risk.
-     * <p>
-     * Field description:
-     * Returns one of the following values: &#39;High&#39;, &#39;Medium&#39;, &#39;Low&#39; or &#39;Unknown&#39;. High risk addresses have very high chances of bouncing (and potentially damaging the sender&#39;s reputation), whereas low risk addresses have very low chances of bouncing and damaging the sender&#39;s reputation.
-     *
-     * @return risk
-     */
-    @JsonProperty("risk")
-    public String getRisk() {
-        return risk;
-    }
-
-    /**
-     * Sets risk.
-     * <p>
-     * Field description:
-     * Returns one of the following values: &#39;High&#39;, &#39;Medium&#39;, &#39;Low&#39; or &#39;Unknown&#39;. High risk addresses have very high chances of bouncing (and potentially damaging the sender&#39;s reputation), whereas low risk addresses have very low chances of bouncing and damaging the sender&#39;s reputation.
-     *
-     * @param risk
-     */
-    @JsonProperty("risk")
-    public void setRisk(String risk) {
-        this.risk = risk;
     }
 
     @Override
@@ -436,8 +478,8 @@ public class EmailValidationResponse {
                 && Objects.equals(this.disposable, emailValidationResponse.disposable)
                 && Objects.equals(this.roleBased, emailValidationResponse.roleBased)
                 && Objects.equals(this.reason, emailValidationResponse.reason)
-                && Objects.equals(this.detailedReasons, emailValidationResponse.detailedReasons)
-                && Objects.equals(this.risk, emailValidationResponse.risk);
+                && Objects.equals(this.risk, emailValidationResponse.risk)
+                && Objects.equals(this.detailedReasons, emailValidationResponse.detailedReasons);
     }
 
     @Override
@@ -451,8 +493,8 @@ public class EmailValidationResponse {
                 disposable,
                 roleBased,
                 reason,
-                detailedReasons,
-                risk);
+                risk,
+                detailedReasons);
     }
 
     @Override
@@ -485,11 +527,11 @@ public class EmailValidationResponse {
                 .append("    reason: ")
                 .append(toIndentedString(reason))
                 .append(newLine)
-                .append("    detailedReasons: ")
-                .append(toIndentedString(detailedReasons))
-                .append(newLine)
                 .append("    risk: ")
                 .append(toIndentedString(risk))
+                .append(newLine)
+                .append("    detailedReasons: ")
+                .append(toIndentedString(detailedReasons))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -311,7 +311,9 @@ public class MmsApi {
             Integer limit,
             String entityId,
             String applicationId,
-            List<String> campaignReferenceId) {
+            List<String> campaignReferenceId,
+            Boolean useCursor,
+            String cursor) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/mms/2/logs")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -361,6 +363,12 @@ public class MmsApi {
                 builder.addQueryParameter(new Parameter("campaignReferenceId", parameterItem));
             }
         }
+        if (useCursor != null) {
+            builder.addQueryParameter(new Parameter("useCursor", useCursor));
+        }
+        if (cursor != null) {
+            builder.addQueryParameter(new Parameter("cursor", cursor));
+        }
         return builder.build();
     }
 
@@ -381,6 +389,8 @@ public class MmsApi {
         private String entityId;
         private String applicationId;
         private List<String> campaignReferenceId;
+        private Boolean useCursor;
+        private String cursor;
 
         private GetOutboundMmsMessageLogsRequest() {}
 
@@ -528,6 +538,28 @@ public class MmsApi {
         }
 
         /**
+         * Sets useCursor.
+         *
+         * @param useCursor Flag used to enable cursor-based pagination. When set to true, the system will use the cursor to fetch the next set of logs. (optional)
+         * @return GetOutboundMmsMessageLogsRequest
+         */
+        public GetOutboundMmsMessageLogsRequest useCursor(Boolean useCursor) {
+            this.useCursor = useCursor;
+            return this;
+        }
+
+        /**
+         * Sets cursor.
+         *
+         * @param cursor Value which represents the current position in the data set. For the first request, this field shouldn&#39;t be defined. In subsequent requests, use the &#x60;nextCursor&#x60; value returned from the previous response to continue fetching data. (optional)
+         * @return GetOutboundMmsMessageLogsRequest
+         */
+        public GetOutboundMmsMessageLogsRequest cursor(String cursor) {
+            this.cursor = cursor;
+            return this;
+        }
+
+        /**
          * Executes the getOutboundMmsMessageLogs request.
          *
          * @return MmsLogsResponse The deserialized response.
@@ -547,7 +579,9 @@ public class MmsApi {
                     limit,
                     entityId,
                     applicationId,
-                    campaignReferenceId);
+                    campaignReferenceId,
+                    useCursor,
+                    cursor);
             return apiClient.execute(
                     getOutboundMmsMessageLogsDefinition, new TypeReference<MmsLogsResponse>() {}.getType());
         }
@@ -572,7 +606,9 @@ public class MmsApi {
                     limit,
                     entityId,
                     applicationId,
-                    campaignReferenceId);
+                    campaignReferenceId,
+                    useCursor,
+                    cursor);
             return apiClient.executeAsync(
                     getOutboundMmsMessageLogsDefinition, new TypeReference<MmsLogsResponse>() {}.getType(), callback);
         }

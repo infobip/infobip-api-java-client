@@ -28,7 +28,6 @@ class WebRtcApiTest extends ApiTest {
         String givenIdentity = "Alice";
         String givenApplicationId = "2277594c-76ea-4b8e-a299-e2b6db41b9dc";
         String givenDisplayName = "Alice in Wonderland";
-        String givenRecording = "ALWAYS";
         Long givenTimeToLive = 43200L;
 
         String givenResponse = String.format(
@@ -38,12 +37,9 @@ class WebRtcApiTest extends ApiTest {
         String expectedRequest = String.format(
                 "{\n" + "  \"identity\" : \"%s\",\n"
                         + "  \"displayName\" : \"%s\",\n"
-                        + "  \"capabilities\" : {\n"
-                        + "    \"recording\" : \"%s\"\n"
-                        + "  },\n"
                         + "  \"timeToLive\" : %d\n"
                         + "}\n",
-                givenIdentity, givenDisplayName, givenRecording, givenTimeToLive);
+                givenIdentity, givenDisplayName, givenTimeToLive);
 
         setUpSuccessPostRequest(TOKEN, expectedRequest, givenResponse);
 
@@ -51,7 +47,6 @@ class WebRtcApiTest extends ApiTest {
         WebRtcTokenRequestModel request = new WebRtcTokenRequestModel()
                 .identity(givenIdentity)
                 .displayName(givenDisplayName)
-                .capabilities(new WebRtcCapabilities().recording(WebRtcRecording.valueOf(givenRecording)))
                 .timeToLive(givenTimeToLive);
 
         Consumer<WebRtcTokenResponseModel> assertions = applicationResponse -> {

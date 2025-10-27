@@ -30,6 +30,10 @@ public class CallsSearchResponse {
 
     private String name;
 
+    private String notifyUrl;
+
+    private String notifyContentType;
+
     @JsonRawValue
     @JsonDeserialize(using = RawJsonDeserializer.class)
     private String script;
@@ -199,6 +203,86 @@ public class CallsSearchResponse {
     }
 
     /**
+     * Sets notifyUrl.
+     * <p>
+     * Field description:
+     * The URL on the client&#39;s callback server on which the Delivery report will be sent.
+     *
+     * @param notifyUrl
+     * @return This {@link CallsSearchResponse instance}.
+     */
+    public CallsSearchResponse notifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
+        return this;
+    }
+
+    /**
+     * Returns notifyUrl.
+     * <p>
+     * Field description:
+     * The URL on the client&#39;s callback server on which the Delivery report will be sent.
+     *
+     * @return notifyUrl
+     */
+    @JsonProperty("notifyUrl")
+    public String getNotifyUrl() {
+        return notifyUrl;
+    }
+
+    /**
+     * Sets notifyUrl.
+     * <p>
+     * Field description:
+     * The URL on the client&#39;s callback server on which the Delivery report will be sent.
+     *
+     * @param notifyUrl
+     */
+    @JsonProperty("notifyUrl")
+    public void setNotifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
+    }
+
+    /**
+     * Sets notifyContentType.
+     * <p>
+     * Field description:
+     * Preferred Delivery report content type. Can be &#x60;application/json&#x60; or &#x60;application/xml&#x60;.
+     *
+     * @param notifyContentType
+     * @return This {@link CallsSearchResponse instance}.
+     */
+    public CallsSearchResponse notifyContentType(String notifyContentType) {
+        this.notifyContentType = notifyContentType;
+        return this;
+    }
+
+    /**
+     * Returns notifyContentType.
+     * <p>
+     * Field description:
+     * Preferred Delivery report content type. Can be &#x60;application/json&#x60; or &#x60;application/xml&#x60;.
+     *
+     * @return notifyContentType
+     */
+    @JsonProperty("notifyContentType")
+    public String getNotifyContentType() {
+        return notifyContentType;
+    }
+
+    /**
+     * Sets notifyContentType.
+     * <p>
+     * Field description:
+     * Preferred Delivery report content type. Can be &#x60;application/json&#x60; or &#x60;application/xml&#x60;.
+     *
+     * @param notifyContentType
+     */
+    @JsonProperty("notifyContentType")
+    public void setNotifyContentType(String notifyContentType) {
+        this.notifyContentType = notifyContentType;
+    }
+
+    /**
      * Sets script.
      *
      * @param script
@@ -322,6 +406,8 @@ public class CallsSearchResponse {
                 && Objects.equals(this.description, callsSearchResponse.description)
                 && Objects.equals(this.id, callsSearchResponse.id)
                 && Objects.equals(this.name, callsSearchResponse.name)
+                && Objects.equals(this.notifyUrl, callsSearchResponse.notifyUrl)
+                && Objects.equals(this.notifyContentType, callsSearchResponse.notifyContentType)
                 && Objects.equals(this.script, callsSearchResponse.script)
                 && Objects.equals(this.updateTime, callsSearchResponse.updateTime)
                 && Objects.equals(this.lastUsageDate, callsSearchResponse.lastUsageDate);
@@ -329,7 +415,8 @@ public class CallsSearchResponse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(createTime, description, id, name, script, updateTime, lastUsageDate);
+        return Objects.hash(
+                createTime, description, id, name, notifyUrl, notifyContentType, script, updateTime, lastUsageDate);
     }
 
     @Override
@@ -349,6 +436,12 @@ public class CallsSearchResponse {
                 .append(newLine)
                 .append("    name: ")
                 .append(toIndentedString(name))
+                .append(newLine)
+                .append("    notifyUrl: ")
+                .append(toIndentedString(notifyUrl))
+                .append(newLine)
+                .append("    notifyContentType: ")
+                .append(toIndentedString(notifyContentType))
                 .append(newLine)
                 .append("    script: ")
                 .append(toIndentedString(script))

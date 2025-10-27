@@ -21,6 +21,8 @@ public class CallsVideoMediaProperties {
 
     private Boolean screenShare;
 
+    private Boolean blind;
+
     /**
      * Sets camera.
      * <p>
@@ -101,6 +103,46 @@ public class CallsVideoMediaProperties {
         this.screenShare = screenShare;
     }
 
+    /**
+     * Sets blind.
+     * <p>
+     * Field description:
+     * Indicates whether the end user can receive remote videos.
+     *
+     * @param blind
+     * @return This {@link CallsVideoMediaProperties instance}.
+     */
+    public CallsVideoMediaProperties blind(Boolean blind) {
+        this.blind = blind;
+        return this;
+    }
+
+    /**
+     * Returns blind.
+     * <p>
+     * Field description:
+     * Indicates whether the end user can receive remote videos.
+     *
+     * @return blind
+     */
+    @JsonProperty("blind")
+    public Boolean getBlind() {
+        return blind;
+    }
+
+    /**
+     * Sets blind.
+     * <p>
+     * Field description:
+     * Indicates whether the end user can receive remote videos.
+     *
+     * @param blind
+     */
+    @JsonProperty("blind")
+    public void setBlind(Boolean blind) {
+        this.blind = blind;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -111,12 +153,13 @@ public class CallsVideoMediaProperties {
         }
         CallsVideoMediaProperties callsVideoMediaProperties = (CallsVideoMediaProperties) o;
         return Objects.equals(this.camera, callsVideoMediaProperties.camera)
-                && Objects.equals(this.screenShare, callsVideoMediaProperties.screenShare);
+                && Objects.equals(this.screenShare, callsVideoMediaProperties.screenShare)
+                && Objects.equals(this.blind, callsVideoMediaProperties.blind);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(camera, screenShare);
+        return Objects.hash(camera, screenShare, blind);
     }
 
     @Override
@@ -130,6 +173,9 @@ public class CallsVideoMediaProperties {
                 .append(newLine)
                 .append("    screenShare: ")
                 .append(toIndentedString(screenShare))
+                .append(newLine)
+                .append("    blind: ")
+                .append(toIndentedString(blind))
                 .append(newLine)
                 .append("}")
                 .toString();

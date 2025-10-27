@@ -35,6 +35,8 @@ public class WhatsAppInteractiveUrlButtonMessage {
 
     private String applicationId;
 
+    private WhatsAppMessageContext context;
+
     /**
      * Sets from.
      * <p>
@@ -395,6 +397,37 @@ public class WhatsAppInteractiveUrlButtonMessage {
         this.applicationId = applicationId;
     }
 
+    /**
+     * Sets context.
+     *
+     * @param context
+     * @return This {@link WhatsAppInteractiveUrlButtonMessage instance}.
+     */
+    public WhatsAppInteractiveUrlButtonMessage context(WhatsAppMessageContext context) {
+        this.context = context;
+        return this;
+    }
+
+    /**
+     * Returns context.
+     *
+     * @return context
+     */
+    @JsonProperty("context")
+    public WhatsAppMessageContext getContext() {
+        return context;
+    }
+
+    /**
+     * Sets context.
+     *
+     * @param context
+     */
+    @JsonProperty("context")
+    public void setContext(WhatsAppMessageContext context) {
+        this.context = context;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -413,12 +446,14 @@ public class WhatsAppInteractiveUrlButtonMessage {
                 && Objects.equals(this.notifyUrl, whatsAppInteractiveUrlButtonMessage.notifyUrl)
                 && Objects.equals(this.urlOptions, whatsAppInteractiveUrlButtonMessage.urlOptions)
                 && Objects.equals(this.entityId, whatsAppInteractiveUrlButtonMessage.entityId)
-                && Objects.equals(this.applicationId, whatsAppInteractiveUrlButtonMessage.applicationId);
+                && Objects.equals(this.applicationId, whatsAppInteractiveUrlButtonMessage.applicationId)
+                && Objects.equals(this.context, whatsAppInteractiveUrlButtonMessage.context);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, to, messageId, content, callbackData, notifyUrl, urlOptions, entityId, applicationId);
+        return Objects.hash(
+                from, to, messageId, content, callbackData, notifyUrl, urlOptions, entityId, applicationId, context);
     }
 
     @Override
@@ -453,6 +488,9 @@ public class WhatsAppInteractiveUrlButtonMessage {
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    context: ")
+                .append(toIndentedString(context))
                 .append(newLine)
                 .append("}")
                 .toString();

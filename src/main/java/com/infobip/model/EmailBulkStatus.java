@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Represents EmailBulkStatus enumeration.
+ * Status of scheduled email messages.
  */
 public enum EmailBulkStatus {
     PENDING("PENDING"),

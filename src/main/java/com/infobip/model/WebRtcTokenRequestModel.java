@@ -21,8 +21,6 @@ public class WebRtcTokenRequestModel {
 
     private String displayName;
 
-    private WebRtcCapabilities capabilities;
-
     private Long timeToLive;
 
     /**
@@ -112,37 +110,6 @@ public class WebRtcTokenRequestModel {
     }
 
     /**
-     * Sets capabilities.
-     *
-     * @param capabilities
-     * @return This {@link WebRtcTokenRequestModel instance}.
-     */
-    public WebRtcTokenRequestModel capabilities(WebRtcCapabilities capabilities) {
-        this.capabilities = capabilities;
-        return this;
-    }
-
-    /**
-     * Returns capabilities.
-     *
-     * @return capabilities
-     */
-    @JsonProperty("capabilities")
-    public WebRtcCapabilities getCapabilities() {
-        return capabilities;
-    }
-
-    /**
-     * Sets capabilities.
-     *
-     * @param capabilities
-     */
-    @JsonProperty("capabilities")
-    public void setCapabilities(WebRtcCapabilities capabilities) {
-        this.capabilities = capabilities;
-    }
-
-    /**
      * Sets timeToLive.
      * <p>
      * Field description:
@@ -193,13 +160,12 @@ public class WebRtcTokenRequestModel {
         WebRtcTokenRequestModel webRtcTokenRequestModel = (WebRtcTokenRequestModel) o;
         return Objects.equals(this.identity, webRtcTokenRequestModel.identity)
                 && Objects.equals(this.displayName, webRtcTokenRequestModel.displayName)
-                && Objects.equals(this.capabilities, webRtcTokenRequestModel.capabilities)
                 && Objects.equals(this.timeToLive, webRtcTokenRequestModel.timeToLive);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(identity, displayName, capabilities, timeToLive);
+        return Objects.hash(identity, displayName, timeToLive);
     }
 
     @Override
@@ -213,9 +179,6 @@ public class WebRtcTokenRequestModel {
                 .append(newLine)
                 .append("    displayName: ")
                 .append(toIndentedString(displayName))
-                .append(newLine)
-                .append("    capabilities: ")
-                .append(toIndentedString(capabilities))
                 .append(newLine)
                 .append("    timeToLive: ")
                 .append(toIndentedString(timeToLive))

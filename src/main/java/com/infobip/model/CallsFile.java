@@ -26,8 +26,6 @@ public class CallsFile {
 
     private Long size;
 
-    private CallsCreationMethod creationMethod;
-
     private OffsetDateTime creationTime;
 
     private OffsetDateTime expirationTime;
@@ -198,37 +196,6 @@ public class CallsFile {
     }
 
     /**
-     * Sets creationMethod.
-     *
-     * @param creationMethod
-     * @return This {@link CallsFile instance}.
-     */
-    public CallsFile creationMethod(CallsCreationMethod creationMethod) {
-        this.creationMethod = creationMethod;
-        return this;
-    }
-
-    /**
-     * Returns creationMethod.
-     *
-     * @return creationMethod
-     */
-    @JsonProperty("creationMethod")
-    public CallsCreationMethod getCreationMethod() {
-        return creationMethod;
-    }
-
-    /**
-     * Sets creationMethod.
-     *
-     * @param creationMethod
-     */
-    @JsonProperty("creationMethod")
-    public void setCreationMethod(CallsCreationMethod creationMethod) {
-        this.creationMethod = creationMethod;
-    }
-
-    /**
      * Sets creationTime.
      * <p>
      * Field description:
@@ -361,7 +328,6 @@ public class CallsFile {
                 && Objects.equals(this.name, callsFile.name)
                 && Objects.equals(this.fileFormat, callsFile.fileFormat)
                 && Objects.equals(this.size, callsFile.size)
-                && Objects.equals(this.creationMethod, callsFile.creationMethod)
                 && Objects.equals(this.creationTime, callsFile.creationTime)
                 && Objects.equals(this.expirationTime, callsFile.expirationTime)
                 && Objects.equals(this.duration, callsFile.duration);
@@ -369,7 +335,7 @@ public class CallsFile {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, fileFormat, size, creationMethod, creationTime, expirationTime, duration);
+        return Objects.hash(id, name, fileFormat, size, creationTime, expirationTime, duration);
     }
 
     @Override
@@ -389,9 +355,6 @@ public class CallsFile {
                 .append(newLine)
                 .append("    size: ")
                 .append(toIndentedString(size))
-                .append(newLine)
-                .append("    creationMethod: ")
-                .append(toIndentedString(creationMethod))
                 .append(newLine)
                 .append("    creationTime: ")
                 .append(toIndentedString(creationTime))

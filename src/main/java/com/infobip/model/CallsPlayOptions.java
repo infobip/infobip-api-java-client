@@ -13,41 +13,50 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Optional. The object containing permission for certain actions during the session.
+ * Represents CallsPlayOptions model.
  */
-public class WebRtcCapabilities {
+public class CallsPlayOptions {
 
-    private WebRtcRecording recording;
+    private Integer loopCount;
 
     /**
-     * Sets recording.
+     * Sets loopCount.
+     * <p>
+     * Field description:
+     * Number of times the file will be played.
      *
-     * @param recording
-     * @return This {@link WebRtcCapabilities instance}.
+     * @param loopCount
+     * @return This {@link CallsPlayOptions instance}.
      */
-    public WebRtcCapabilities recording(WebRtcRecording recording) {
-        this.recording = recording;
+    public CallsPlayOptions loopCount(Integer loopCount) {
+        this.loopCount = loopCount;
         return this;
     }
 
     /**
-     * Returns recording.
+     * Returns loopCount.
+     * <p>
+     * Field description:
+     * Number of times the file will be played.
      *
-     * @return recording
+     * @return loopCount
      */
-    @JsonProperty("recording")
-    public WebRtcRecording getRecording() {
-        return recording;
+    @JsonProperty("loopCount")
+    public Integer getLoopCount() {
+        return loopCount;
     }
 
     /**
-     * Sets recording.
+     * Sets loopCount.
+     * <p>
+     * Field description:
+     * Number of times the file will be played.
      *
-     * @param recording
+     * @param loopCount
      */
-    @JsonProperty("recording")
-    public void setRecording(WebRtcRecording recording) {
-        this.recording = recording;
+    @JsonProperty("loopCount")
+    public void setLoopCount(Integer loopCount) {
+        this.loopCount = loopCount;
     }
 
     @Override
@@ -58,23 +67,23 @@ public class WebRtcCapabilities {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        WebRtcCapabilities webRtcCapabilities = (WebRtcCapabilities) o;
-        return Objects.equals(this.recording, webRtcCapabilities.recording);
+        CallsPlayOptions callsPlayOptions = (CallsPlayOptions) o;
+        return Objects.equals(this.loopCount, callsPlayOptions.loopCount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(recording);
+        return Objects.hash(loopCount);
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class WebRtcCapabilities {")
+                .append("class CallsPlayOptions {")
                 .append(newLine)
-                .append("    recording: ")
-                .append(toIndentedString(recording))
+                .append("    loopCount: ")
+                .append(toIndentedString(loopCount))
                 .append(newLine)
                 .append("}")
                 .toString();

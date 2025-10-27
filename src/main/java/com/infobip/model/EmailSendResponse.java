@@ -21,7 +21,7 @@ public class EmailSendResponse {
 
     private String bulkId;
 
-    private List<EmailResponseDetails> messages = null;
+    private List<EmailResponseDetails> messages = new ArrayList<>();
 
     /**
      * Sets bulkId.
@@ -68,6 +68,8 @@ public class EmailSendResponse {
      * <p>
      * Field description:
      * List of message response details.
+     * <p>
+     * The field is required.
      *
      * @param messages
      * @return This {@link EmailSendResponse instance}.
@@ -82,6 +84,8 @@ public class EmailSendResponse {
      * <p>
      * Field description:
      * List of message response details.
+     * <p>
+     * The field is required.
      *
      * @param messagesItem The item to be added to the list.
      * @return This {@link EmailSendResponse instance}.
@@ -99,6 +103,8 @@ public class EmailSendResponse {
      * <p>
      * Field description:
      * List of message response details.
+     * <p>
+     * The field is required.
      *
      * @return messages
      */
@@ -112,6 +118,8 @@ public class EmailSendResponse {
      * <p>
      * Field description:
      * List of message response details.
+     * <p>
+     * The field is required.
      *
      * @param messages
      */

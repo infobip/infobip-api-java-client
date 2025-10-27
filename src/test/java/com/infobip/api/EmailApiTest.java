@@ -49,7 +49,6 @@ class EmailApiTest extends ApiTest {
         Boolean givenBlocked = false;
         String givenCreatedAt = "2022-05-05T17:32:28.777+01:00";
         Long givenTargetedDailyTraffic = 15L;
-        String givenReturnPathAddress = "pathAddress";
 
         String givenResponse = String.format(
                 "{\n" + "  \"domainId\": %d,\n"
@@ -69,8 +68,7 @@ class EmailApiTest extends ApiTest {
                         + "    }\n"
                         + "  ],\n"
                         + "  \"blocked\": %b,\n"
-                        + "  \"createdAt\": \"%s\",\n"
-                        + "  \"returnPathAddress\": \"%s\"\n"
+                        + "  \"createdAt\": \"%s\"\n"
                         + "}\n",
                 givenDomainId,
                 givenDomainName,
@@ -83,16 +81,14 @@ class EmailApiTest extends ApiTest {
                 givenDnsRecords,
                 givenVerified,
                 givenBlocked,
-                givenCreatedAt,
-                givenReturnPathAddress);
+                givenCreatedAt);
 
         String expectedRequest = String.format(
                 "{\n" + "  \"domainName\": \"%s\",\n"
                         + "  \"dkimKeyLength\": %s,\n"
-                        + "  \"targetedDailyTraffic\": %d,\n"
-                        + "  \"returnPathAddress\": \"%s\"\n"
+                        + "  \"targetedDailyTraffic\": %d\n"
                         + "}\n",
-                givenDomainName, givenDkimKeyLength, givenTargetedDailyTraffic, givenReturnPathAddress);
+                givenDomainName, givenDkimKeyLength, givenTargetedDailyTraffic);
 
         setUpSuccessPostRequest(DOMAINS, Map.of(), expectedRequest, givenResponse);
 
@@ -101,8 +97,7 @@ class EmailApiTest extends ApiTest {
         EmailAddDomainRequest request = new EmailAddDomainRequest()
                 .domainName(givenDomainName)
                 .dkimKeyLength(givenDkimKeyLength)
-                .targetedDailyTraffic(givenTargetedDailyTraffic)
-                .returnPathAddress(givenReturnPathAddress);
+                .targetedDailyTraffic(givenTargetedDailyTraffic);
 
         Consumer<EmailDomainResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -122,7 +117,6 @@ class EmailApiTest extends ApiTest {
             then(record.getVerified()).isEqualTo(givenVerified);
             then(response.getBlocked()).isEqualTo(givenBlocked);
             then(response.getCreatedAt()).isEqualTo(givenCreatedAt);
-            then(response.getReturnPathAddress()).isEqualTo(givenReturnPathAddress);
         };
 
         var call = api.addDomain(request);
@@ -781,96 +775,6 @@ class EmailApiTest extends ApiTest {
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
 
-    @Test
-    void shouldUpdateReturnPath() {
-        Long givenDomainId = 1L;
-        String givenDomainName = "example.com";
-        Boolean givenActive = false;
-        Boolean givenTracking = true;
-        Boolean givenOpens = true;
-        Boolean givenUnsubscribe = true;
-        String givenRecordType = "string";
-        String givenName = "string";
-        String givenExpectedValue = "string";
-        Boolean givenVerified = true;
-        Boolean givenBlocked = false;
-        String givenCreatedAt = "2021-01-02T01:00:00.123Z";
-        String givenReturnPathAddress = "returnpath@example.com";
-
-        String givenResponse = String.format(
-                "{\n" + "  \"domainId\": %d,\n"
-                        + "  \"domainName\": \"%s\",\n"
-                        + "  \"active\": %b,\n"
-                        + "  \"tracking\": {\n"
-                        + "    \"clicks\": %b,\n"
-                        + "    \"opens\": %b,\n"
-                        + "    \"unsubscribe\": %b\n"
-                        + "  },\n"
-                        + "  \"dnsRecords\": [\n"
-                        + "    {\n"
-                        + "      \"recordType\": \"%s\",\n"
-                        + "      \"name\": \"%s\",\n"
-                        + "      \"expectedValue\": \"%s\",\n"
-                        + "      \"verified\": %b\n"
-                        + "    }\n"
-                        + "  ],\n"
-                        + "  \"blocked\": %b,\n"
-                        + "  \"createdAt\": \"%s\",\n"
-                        + "  \"returnPathAddress\": \"%s\"\n"
-                        + "}\n",
-                givenDomainId,
-                givenDomainName,
-                givenActive,
-                givenTracking,
-                givenOpens,
-                givenUnsubscribe,
-                givenRecordType,
-                givenName,
-                givenExpectedValue,
-                givenVerified,
-                givenBlocked,
-                givenCreatedAt,
-                givenReturnPathAddress);
-
-        String expectedReturnPathAddress = "returnpath@example.com";
-        String expectedRequest =
-                String.format("{\n" + "  \"returnPathAddress\": \"%s\"\n" + "}\n", expectedReturnPathAddress);
-
-        setUpPutRequest(
-                RETURN_PATH.replace("{domainName}", givenDomainName), Map.of(), expectedRequest, givenResponse, 200);
-
-        EmailApi sendEmailApi = new EmailApi(getApiClient());
-        var givenReturnPathAddressRequest =
-                new EmailReturnPathAddressRequest().returnPathAddress(givenReturnPathAddress);
-
-        Consumer<EmailDomainResponse> assertions = emailDomainResponse -> {
-            then(emailDomainResponse).isNotNull();
-            then(emailDomainResponse.getDomainId()).isEqualTo(givenDomainId);
-            then(emailDomainResponse.getDomainName()).isEqualTo(givenDomainName);
-            then(emailDomainResponse.getActive()).isFalse();
-            var emailTrackingResponse = emailDomainResponse.getTracking();
-            then(emailTrackingResponse).isNotNull();
-            then(emailTrackingResponse.getClicks()).isTrue();
-            then(emailTrackingResponse.getOpens()).isTrue();
-            then(emailTrackingResponse.getUnsubscribe()).isTrue();
-            var emailDnsRecords = emailDomainResponse.getDnsRecords();
-            then(emailDnsRecords.size()).isEqualTo(1);
-            var emailDnsRecord = emailDnsRecords.get(0);
-            then(emailDnsRecord).isNotNull();
-            then(emailDnsRecord.getRecordType()).isEqualTo(givenRecordType);
-            then(emailDnsRecord.getName()).isEqualTo(givenName);
-            then(emailDnsRecord.getExpectedValue()).isEqualTo(givenExpectedValue);
-            then(emailDnsRecord.getVerified()).isTrue();
-            then(emailDomainResponse.getBlocked()).isFalse();
-            then(emailDomainResponse.getCreatedAt()).isEqualTo(givenCreatedAt);
-            then(emailDomainResponse.getReturnPathAddress()).isEqualTo(givenReturnPathAddress);
-        };
-
-        var call = sendEmailApi.updateReturnPath(givenDomainName, givenReturnPathAddressRequest);
-        testSuccessfulCall(call::execute, assertions);
-        testSuccessfulAsyncCall(call::executeAsync, assertions);
-    }
-
     // WEBHOOKS
     private final JSON json = new JSON();
 
@@ -1246,10 +1150,10 @@ class EmailApiTest extends ApiTest {
 
         EmailApi api = new EmailApi(getApiClient());
 
-        Consumer<List<EmailIpResponse>> assertions = (response) -> {
+        Consumer<List<EmailIpDetailResponse>> assertions = (response) -> {
             then(response).isNotNull();
             then(response).hasSize(1);
-            EmailIpResponse ipResponse = response.get(0);
+            EmailIpDetailResponse ipResponse = response.get(0);
             then(ipResponse.getId()).isEqualTo("DB3F9D439088BF73F5560443C8054AC4");
             then(ipResponse.getIp()).isEqualTo("198.51.100.0");
         };

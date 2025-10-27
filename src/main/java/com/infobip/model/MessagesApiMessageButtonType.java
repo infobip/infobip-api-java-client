@@ -18,6 +18,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum MessagesApiMessageButtonType {
     REPLY("REPLY"),
     OPEN_URL("OPEN_URL"),
+    DIAL_PHONE("DIAL_PHONE"),
+    SHOW_LOCATION("SHOW_LOCATION"),
     REQUEST_LOCATION("REQUEST_LOCATION"),
     ADD_CALENDAR_EVENT("ADD_CALENDAR_EVENT");
 

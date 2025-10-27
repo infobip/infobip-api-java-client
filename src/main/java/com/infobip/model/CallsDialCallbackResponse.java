@@ -25,6 +25,8 @@ public class CallsDialCallbackResponse extends CallbackResponse {
 
     private CallsRecording recording;
 
+    private CallsMachineDetection machineDetection;
+
     private String clientReferenceId;
 
     /**
@@ -189,6 +191,37 @@ public class CallsDialCallbackResponse extends CallbackResponse {
     }
 
     /**
+     * Sets machineDetection.
+     *
+     * @param machineDetection
+     * @return This {@link CallsDialCallbackResponse instance}.
+     */
+    public CallsDialCallbackResponse machineDetection(CallsMachineDetection machineDetection) {
+        this.machineDetection = machineDetection;
+        return this;
+    }
+
+    /**
+     * Returns machineDetection.
+     *
+     * @return machineDetection
+     */
+    @JsonProperty("machineDetection")
+    public CallsMachineDetection getMachineDetection() {
+        return machineDetection;
+    }
+
+    /**
+     * Sets machineDetection.
+     *
+     * @param machineDetection
+     */
+    @JsonProperty("machineDetection")
+    public void setMachineDetection(CallsMachineDetection machineDetection) {
+        this.machineDetection = machineDetection;
+    }
+
+    /**
      * Sets clientReferenceId.
      * <p>
      * Field description:
@@ -241,13 +274,15 @@ public class CallsDialCallbackResponse extends CallbackResponse {
                 && Objects.equals(this.callerId, callsDialCallbackResponse.callerId)
                 && Objects.equals(this.announcements, callsDialCallbackResponse.announcements)
                 && Objects.equals(this.recording, callsDialCallbackResponse.recording)
+                && Objects.equals(this.machineDetection, callsDialCallbackResponse.machineDetection)
                 && Objects.equals(this.clientReferenceId, callsDialCallbackResponse.clientReferenceId)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(phoneNumber, callerId, announcements, recording, clientReferenceId, super.hashCode());
+        return Objects.hash(
+                phoneNumber, callerId, announcements, recording, machineDetection, clientReferenceId, super.hashCode());
     }
 
     @Override
@@ -270,6 +305,9 @@ public class CallsDialCallbackResponse extends CallbackResponse {
                 .append(newLine)
                 .append("    recording: ")
                 .append(toIndentedString(recording))
+                .append(newLine)
+                .append("    machineDetection: ")
+                .append(toIndentedString(machineDetection))
                 .append(newLine)
                 .append("    clientReferenceId: ")
                 .append(toIndentedString(clientReferenceId))

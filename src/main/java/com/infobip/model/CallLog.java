@@ -68,6 +68,8 @@ public class CallLog {
 
     private CallsHangupSource hangupSource;
 
+    private String externalId;
+
     /**
      * Sets callId.
      * <p>
@@ -983,6 +985,46 @@ public class CallLog {
         this.hangupSource = hangupSource;
     }
 
+    /**
+     * Sets externalId.
+     * <p>
+     * Field description:
+     * Client defined call ID.
+     *
+     * @param externalId
+     * @return This {@link CallLog instance}.
+     */
+    public CallLog externalId(String externalId) {
+        this.externalId = externalId;
+        return this;
+    }
+
+    /**
+     * Returns externalId.
+     * <p>
+     * Field description:
+     * Client defined call ID.
+     *
+     * @return externalId
+     */
+    @JsonProperty("externalId")
+    public String getExternalId() {
+        return externalId;
+    }
+
+    /**
+     * Sets externalId.
+     * <p>
+     * Field description:
+     * Client defined call ID.
+     *
+     * @param externalId
+     */
+    @JsonProperty("externalId")
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -1014,7 +1056,8 @@ public class CallLog {
                 && Objects.equals(this.customData, callLog.customData)
                 && Objects.equals(this.dialogId, callLog.dialogId)
                 && Objects.equals(this.sender, callLog.sender)
-                && Objects.equals(this.hangupSource, callLog.hangupSource);
+                && Objects.equals(this.hangupSource, callLog.hangupSource)
+                && Objects.equals(this.externalId, callLog.externalId);
     }
 
     @Override
@@ -1042,7 +1085,8 @@ public class CallLog {
                 customData,
                 dialogId,
                 sender,
-                hangupSource);
+                hangupSource,
+                externalId);
     }
 
     @Override
@@ -1119,6 +1163,9 @@ public class CallLog {
                 .append(newLine)
                 .append("    hangupSource: ")
                 .append(toIndentedString(hangupSource))
+                .append(newLine)
+                .append("    externalId: ")
+                .append(toIndentedString(externalId))
                 .append(newLine)
                 .append("}")
                 .toString();

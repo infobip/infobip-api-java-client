@@ -1240,7 +1240,8 @@ class TfaApiTest extends ApiTest {
         setUpPostRequest(PIN_EMAIL_RESEND.replace("{pinId}", sentPinId), expectedRequest, givenResponse, 200);
 
         TfaApi tfaApi = new TfaApi(getApiClient());
-        var tfaStartEmailAuthenticationRequest = new TfaResendPinRequest().placeholders(Map.of("firstName", "John"));
+        var tfaStartEmailAuthenticationRequest =
+                new TfaResendPinRequestViaEmail().placeholders(Map.of("firstName", "John"));
 
         Consumer<TfaStartEmailAuthenticationResponse> assertions = tfaStartEmailAuthenticationResponse -> {
             then(tfaStartEmailAuthenticationResponse).isNotNull();

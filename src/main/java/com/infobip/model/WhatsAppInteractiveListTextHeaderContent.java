@@ -30,7 +30,7 @@ public class WhatsAppInteractiveListTextHeaderContent extends WhatsAppInteractiv
      * Sets text.
      * <p>
      * Field description:
-     * Content of the header used when creating an [interactive list](https://www.infobip.com/docs/whatsapp/message-types#interactive-lists-free-form-messages).
+     * Content of the header used when creating an [interactive list](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#interactive-lists-interactive-messages).
      * <p>
      * The field is required.
      *
@@ -46,7 +46,7 @@ public class WhatsAppInteractiveListTextHeaderContent extends WhatsAppInteractiv
      * Returns text.
      * <p>
      * Field description:
-     * Content of the header used when creating an [interactive list](https://www.infobip.com/docs/whatsapp/message-types#interactive-lists-free-form-messages).
+     * Content of the header used when creating an [interactive list](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#interactive-lists-interactive-messages).
      * <p>
      * The field is required.
      *
@@ -61,7 +61,7 @@ public class WhatsAppInteractiveListTextHeaderContent extends WhatsAppInteractiv
      * Sets text.
      * <p>
      * Field description:
-     * Content of the header used when creating an [interactive list](https://www.infobip.com/docs/whatsapp/message-types#interactive-lists-free-form-messages).
+     * Content of the header used when creating an [interactive list](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#interactive-lists-interactive-messages).
      * <p>
      * The field is required.
      *
