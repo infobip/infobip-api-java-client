@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -20,6 +22,8 @@ public class WhatsAppInteractiveOrderUPIPGRazorpayPaymentDetails extends WhatsAp
     private String id;
 
     private WhatsAppBeneficiary beneficiary;
+
+    private Map<String, String> callbackData = null;
 
     /**
      * Constructs a new {@link WhatsAppInteractiveOrderUPIPGRazorpayPaymentDetails} instance.
@@ -105,6 +109,65 @@ public class WhatsAppInteractiveOrderUPIPGRazorpayPaymentDetails extends WhatsAp
         this.beneficiary = beneficiary;
     }
 
+    /**
+     * Sets callbackData.
+     * <p>
+     * Field description:
+     * Object with key value pairs containing custom parameters corresponding to the transaction.
+     *
+     * @param callbackData
+     * @return This {@link WhatsAppInteractiveOrderUPIPGRazorpayPaymentDetails instance}.
+     */
+    public WhatsAppInteractiveOrderUPIPGRazorpayPaymentDetails callbackData(Map<String, String> callbackData) {
+        this.callbackData = callbackData;
+        return this;
+    }
+
+    /**
+     * Puts and entry into callbackData.
+     * <p>
+     * Field description:
+     * Object with key value pairs containing custom parameters corresponding to the transaction.
+     *
+     * @param key The given key.
+     * @param callbackDataItem The item to be associated with the given key.
+     * @return This {@link WhatsAppInteractiveOrderUPIPGRazorpayPaymentDetails instance}.
+     */
+    public WhatsAppInteractiveOrderUPIPGRazorpayPaymentDetails putCallbackDataItem(
+            String key, String callbackDataItem) {
+        if (this.callbackData == null) {
+            this.callbackData = new HashMap<>();
+        }
+        this.callbackData.put(key, callbackDataItem);
+        return this;
+    }
+
+    /**
+     * Returns callbackData.
+     * <p>
+     * Field description:
+     * Object with key value pairs containing custom parameters corresponding to the transaction.
+     *
+     * @return callbackData
+     */
+    @JsonProperty("callbackData")
+    public Map<String, String> getCallbackData() {
+        return callbackData;
+    }
+
+    /**
+     * Sets callbackData.
+     * <p>
+     * Field description:
+     * Object with key value pairs containing custom parameters corresponding to the transaction.
+     *
+     * @param callbackData
+     */
+    @JsonProperty("callbackData")
+    public void setCallbackData(Map<String, String> callbackData) {
+        this.callbackData = callbackData;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -117,12 +180,13 @@ public class WhatsAppInteractiveOrderUPIPGRazorpayPaymentDetails extends WhatsAp
                 (WhatsAppInteractiveOrderUPIPGRazorpayPaymentDetails) o;
         return Objects.equals(this.id, whatsAppInteractiveOrderUPIPGRazorpayPaymentDetails.id)
                 && Objects.equals(this.beneficiary, whatsAppInteractiveOrderUPIPGRazorpayPaymentDetails.beneficiary)
+                && Objects.equals(this.callbackData, whatsAppInteractiveOrderUPIPGRazorpayPaymentDetails.callbackData)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, beneficiary, super.hashCode());
+        return Objects.hash(id, beneficiary, callbackData, super.hashCode());
     }
 
     @Override
@@ -139,6 +203,9 @@ public class WhatsAppInteractiveOrderUPIPGRazorpayPaymentDetails extends WhatsAp
                 .append(newLine)
                 .append("    beneficiary: ")
                 .append(toIndentedString(beneficiary))
+                .append(newLine)
+                .append("    callbackData: ")
+                .append(toIndentedString(callbackData))
                 .append(newLine)
                 .append("}")
                 .toString();

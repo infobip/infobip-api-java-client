@@ -25,6 +25,8 @@ public class CallRecordingRequest {
 
     private String filePrefix;
 
+    private CallsRecordingChannels channels;
+
     /**
      * Sets recordingType.
      * <p>
@@ -139,6 +141,37 @@ public class CallRecordingRequest {
         this.filePrefix = filePrefix;
     }
 
+    /**
+     * Sets channels.
+     *
+     * @param channels
+     * @return This {@link CallRecordingRequest instance}.
+     */
+    public CallRecordingRequest channels(CallsRecordingChannels channels) {
+        this.channels = channels;
+        return this;
+    }
+
+    /**
+     * Returns channels.
+     *
+     * @return channels
+     */
+    @JsonProperty("channels")
+    public CallsRecordingChannels getChannels() {
+        return channels;
+    }
+
+    /**
+     * Sets channels.
+     *
+     * @param channels
+     */
+    @JsonProperty("channels")
+    public void setChannels(CallsRecordingChannels channels) {
+        this.channels = channels;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -150,12 +183,13 @@ public class CallRecordingRequest {
         CallRecordingRequest callRecordingRequest = (CallRecordingRequest) o;
         return Objects.equals(this.recordingType, callRecordingRequest.recordingType)
                 && Objects.equals(this.customData, callRecordingRequest.customData)
-                && Objects.equals(this.filePrefix, callRecordingRequest.filePrefix);
+                && Objects.equals(this.filePrefix, callRecordingRequest.filePrefix)
+                && Objects.equals(this.channels, callRecordingRequest.channels);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(recordingType, customData, filePrefix);
+        return Objects.hash(recordingType, customData, filePrefix, channels);
     }
 
     @Override
@@ -172,6 +206,9 @@ public class CallRecordingRequest {
                 .append(newLine)
                 .append("    filePrefix: ")
                 .append(toIndentedString(filePrefix))
+                .append(newLine)
+                .append("    channels: ")
+                .append(toIndentedString(channels))
                 .append(newLine)
                 .append("}")
                 .toString();

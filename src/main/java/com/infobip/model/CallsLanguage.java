@@ -52,6 +52,7 @@ public enum CallsLanguage {
     IT("it"),
     JA("ja"),
     KN("kn"),
+    KK_KZ("kk-kz"),
     KO("ko"),
     MS("ms"),
     ML("ml"),
@@ -64,6 +65,7 @@ public enum CallsLanguage {
     SK("sk"),
     SL("sl"),
     ES("es"),
+    ES_AR("es-ar"),
     ES_GL("es-gl"),
     ES_MX("es-mx"),
     SV("sv"),
@@ -72,11 +74,14 @@ public enum CallsLanguage {
     TH("th"),
     TR("tr"),
     UK("uk"),
+    UZ_UZ("uz-uz"),
     VI("vi"),
     WLS("wls"),
     AR_MA("ar-ma"),
     UR_PK("ur-pk"),
-    MR_IN("mr-in");
+    MR_IN("mr-in"),
+    SW_KE("sw-ke"),
+    SW_TZ("sw-tz");
 
     private final String value;
 

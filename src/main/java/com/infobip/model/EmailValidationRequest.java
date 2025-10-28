@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents EmailValidationRequest model.
+ * Validation request
  */
 public class EmailValidationRequest {
 
@@ -23,7 +23,7 @@ public class EmailValidationRequest {
      * Sets to.
      * <p>
      * Field description:
-     * Email address of the recipient.
+     * The email address to be validated.
      * <p>
      * The field is required.
      *
@@ -39,7 +39,7 @@ public class EmailValidationRequest {
      * Returns to.
      * <p>
      * Field description:
-     * Email address of the recipient.
+     * The email address to be validated.
      * <p>
      * The field is required.
      *
@@ -54,7 +54,7 @@ public class EmailValidationRequest {
      * Sets to.
      * <p>
      * Field description:
-     * Email address of the recipient.
+     * The email address to be validated.
      * <p>
      * The field is required.
      *

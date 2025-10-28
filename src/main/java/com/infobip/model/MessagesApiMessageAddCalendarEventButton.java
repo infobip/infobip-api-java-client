@@ -87,9 +87,7 @@ public class MessagesApiMessageAddCalendarEventButton extends MessagesApiMessage
      * Sets postbackData.
      * <p>
      * Field description:
-     * Custom data that will be sent to you when user reply to a message.
-     * <p>
-     * The field is required.
+     * Custom data that will be sent to you when the user replies to the message.
      *
      * @param postbackData
      * @return This {@link MessagesApiMessageAddCalendarEventButton instance}.
@@ -103,9 +101,7 @@ public class MessagesApiMessageAddCalendarEventButton extends MessagesApiMessage
      * Returns postbackData.
      * <p>
      * Field description:
-     * Custom data that will be sent to you when user reply to a message.
-     * <p>
-     * The field is required.
+     * Custom data that will be sent to you when the user replies to the message.
      *
      * @return postbackData
      */
@@ -118,9 +114,7 @@ public class MessagesApiMessageAddCalendarEventButton extends MessagesApiMessage
      * Sets postbackData.
      * <p>
      * Field description:
-     * Custom data that will be sent to you when user reply to a message.
-     * <p>
-     * The field is required.
+     * Custom data that will be sent to you when the user replies to the message.
      *
      * @param postbackData
      */

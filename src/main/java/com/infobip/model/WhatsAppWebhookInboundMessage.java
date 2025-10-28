@@ -30,6 +30,9 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundImageMessage.class, name = "IMAGE"),
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundInfectedMessage.class, name = "INFECTED_CONTENT"),
     @JsonSubTypes.Type(value = WhatsAppWebhookButtonReplyContent.class, name = "INTERACTIVE_BUTTON_REPLY"),
+    @JsonSubTypes.Type(
+            value = WhatsAppWebhookCallPermissionReplyContent.class,
+            name = "INTERACTIVE_CALL_PERMISSION_REPLY"),
     @JsonSubTypes.Type(value = WhatsAppWebhookFlowReplyContent.class, name = "INTERACTIVE_FLOW_REPLY"),
     @JsonSubTypes.Type(value = WhatsAppWebhookListReplyContent.class, name = "INTERACTIVE_LIST_REPLY"),
     @JsonSubTypes.Type(
@@ -37,6 +40,7 @@ import java.util.Objects;
             name = "INTERACTIVE_PAYMENT_CONFIRMATION"),
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundLocationMessage.class, name = "LOCATION"),
     @JsonSubTypes.Type(value = WhatsAppWebhookOrderContent.class, name = "ORDER"),
+    @JsonSubTypes.Type(value = WhatsAppWebhookInboundReactionMessage.class, name = "REACTION"),
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundStickerMessage.class, name = "STICKER"),
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundTextMessage.class, name = "TEXT"),
     @JsonSubTypes.Type(value = WhatsAppWebhookInboundUnsupportedMessage.class, name = "UNSUPPORTED"),

@@ -16,15 +16,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Messaging channel using which the message was sent.
  */
 public enum MessagesApiInboundMoEventChannel {
-    SMS("SMS"),
-    MMS("MMS"),
-    WHATSAPP("WHATSAPP"),
-    VIBER_BM("VIBER_BM"),
-    VIBER_BOT("VIBER_BOT"),
-    RCS("RCS"),
     APPLE_MB("APPLE_MB"),
     INSTAGRAM_DM("INSTAGRAM_DM"),
-    MESSENGER("MESSENGER");
+    MESSENGER("MESSENGER"),
+    MMS("MMS"),
+    RCS("RCS"),
+    SMS("SMS"),
+    VIBER_BM("VIBER_BM"),
+    VIBER_BOT("VIBER_BOT"),
+    WHATSAPP("WHATSAPP");
 
     private final String value;
 

@@ -126,7 +126,7 @@ public class ViberOutboundVideoContent extends ViberOutboundContent {
      * Sets mediaDuration.
      * <p>
      * Field description:
-     * How long is the video.
+     * How long is the video. It has to be in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
      * <p>
      * The field is required.
      *
@@ -142,7 +142,7 @@ public class ViberOutboundVideoContent extends ViberOutboundContent {
      * Returns mediaDuration.
      * <p>
      * Field description:
-     * How long is the video.
+     * How long is the video. It has to be in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
      * <p>
      * The field is required.
      *
@@ -157,7 +157,7 @@ public class ViberOutboundVideoContent extends ViberOutboundContent {
      * Sets mediaDuration.
      * <p>
      * Field description:
-     * How long is the video.
+     * How long is the video. It has to be in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
      * <p>
      * The field is required.
      *

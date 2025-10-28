@@ -71,7 +71,7 @@ public class WhatsAppTextContent {
      * Sets previewUrl.
      * <p>
      * Field description:
-     * Allows for URL preview from within the message. If set to &#x60;true&#x60;, the message content must contain a URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Defaults to &#x60;false&#x60;.
+     * Allows for URL preview from within the message. If set to &#x60;true&#x60;, the message content must contain a URL starting with &#x60;https://&#x60; or &#x60;http://&#x60; and the flag removeProtocol must be set to &#x60;false&#x60;.
      *
      * @param previewUrl
      * @return This {@link WhatsAppTextContent instance}.
@@ -85,7 +85,7 @@ public class WhatsAppTextContent {
      * Returns previewUrl.
      * <p>
      * Field description:
-     * Allows for URL preview from within the message. If set to &#x60;true&#x60;, the message content must contain a URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Defaults to &#x60;false&#x60;.
+     * Allows for URL preview from within the message. If set to &#x60;true&#x60;, the message content must contain a URL starting with &#x60;https://&#x60; or &#x60;http://&#x60; and the flag removeProtocol must be set to &#x60;false&#x60;.
      *
      * @return previewUrl
      */
@@ -98,7 +98,7 @@ public class WhatsAppTextContent {
      * Sets previewUrl.
      * <p>
      * Field description:
-     * Allows for URL preview from within the message. If set to &#x60;true&#x60;, the message content must contain a URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Defaults to &#x60;false&#x60;.
+     * Allows for URL preview from within the message. If set to &#x60;true&#x60;, the message content must contain a URL starting with &#x60;https://&#x60; or &#x60;http://&#x60; and the flag removeProtocol must be set to &#x60;false&#x60;.
      *
      * @param previewUrl
      */

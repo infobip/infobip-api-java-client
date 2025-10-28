@@ -30,6 +30,10 @@ public class WebRtcParticipant {
 
     private Integer duration;
 
+    private WebRtcState state;
+
+    private WebRtcCallDirection direction;
+
     /**
      * Sets callId.
      * <p>
@@ -105,7 +109,7 @@ public class WebRtcParticipant {
      * Sets joinTime.
      * <p>
      * Field description:
-     * Date and time the participant joined the call.
+     * Date and time the participant joined the call. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS+ZZZZ&#x60;.
      *
      * @param joinTime
      * @return This {@link WebRtcParticipant instance}.
@@ -119,7 +123,7 @@ public class WebRtcParticipant {
      * Returns joinTime.
      * <p>
      * Field description:
-     * Date and time the participant joined the call.
+     * Date and time the participant joined the call. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS+ZZZZ&#x60;.
      *
      * @return joinTime
      */
@@ -132,7 +136,7 @@ public class WebRtcParticipant {
      * Sets joinTime.
      * <p>
      * Field description:
-     * Date and time the participant joined the call.
+     * Date and time the participant joined the call. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS+ZZZZ&#x60;.
      *
      * @param joinTime
      */
@@ -145,7 +149,7 @@ public class WebRtcParticipant {
      * Sets leaveTime.
      * <p>
      * Field description:
-     * Date and time the participant left the call.
+     * Date and time the participant left the call. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS+ZZZZ&#x60;.
      *
      * @param leaveTime
      * @return This {@link WebRtcParticipant instance}.
@@ -159,7 +163,7 @@ public class WebRtcParticipant {
      * Returns leaveTime.
      * <p>
      * Field description:
-     * Date and time the participant left the call.
+     * Date and time the participant left the call. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS+ZZZZ&#x60;.
      *
      * @return leaveTime
      */
@@ -172,7 +176,7 @@ public class WebRtcParticipant {
      * Sets leaveTime.
      * <p>
      * Field description:
-     * Date and time the participant left the call.
+     * Date and time the participant left the call. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS+ZZZZ&#x60;.
      *
      * @param leaveTime
      */
@@ -261,6 +265,68 @@ public class WebRtcParticipant {
         this.duration = duration;
     }
 
+    /**
+     * Sets state.
+     *
+     * @param state
+     * @return This {@link WebRtcParticipant instance}.
+     */
+    public WebRtcParticipant state(WebRtcState state) {
+        this.state = state;
+        return this;
+    }
+
+    /**
+     * Returns state.
+     *
+     * @return state
+     */
+    @JsonProperty("state")
+    public WebRtcState getState() {
+        return state;
+    }
+
+    /**
+     * Sets state.
+     *
+     * @param state
+     */
+    @JsonProperty("state")
+    public void setState(WebRtcState state) {
+        this.state = state;
+    }
+
+    /**
+     * Sets direction.
+     *
+     * @param direction
+     * @return This {@link WebRtcParticipant instance}.
+     */
+    public WebRtcParticipant direction(WebRtcCallDirection direction) {
+        this.direction = direction;
+        return this;
+    }
+
+    /**
+     * Returns direction.
+     *
+     * @return direction
+     */
+    @JsonProperty("direction")
+    public WebRtcCallDirection getDirection() {
+        return direction;
+    }
+
+    /**
+     * Sets direction.
+     *
+     * @param direction
+     */
+    @JsonProperty("direction")
+    public void setDirection(WebRtcCallDirection direction) {
+        this.direction = direction;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -275,12 +341,14 @@ public class WebRtcParticipant {
                 && Objects.equals(this.joinTime, webRtcParticipant.joinTime)
                 && Objects.equals(this.leaveTime, webRtcParticipant.leaveTime)
                 && Objects.equals(this.ringDuration, webRtcParticipant.ringDuration)
-                && Objects.equals(this.duration, webRtcParticipant.duration);
+                && Objects.equals(this.duration, webRtcParticipant.duration)
+                && Objects.equals(this.state, webRtcParticipant.state)
+                && Objects.equals(this.direction, webRtcParticipant.direction);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(callId, endpoint, joinTime, leaveTime, ringDuration, duration);
+        return Objects.hash(callId, endpoint, joinTime, leaveTime, ringDuration, duration, state, direction);
     }
 
     @Override
@@ -306,6 +374,12 @@ public class WebRtcParticipant {
                 .append(newLine)
                 .append("    duration: ")
                 .append(toIndentedString(duration))
+                .append(newLine)
+                .append("    state: ")
+                .append(toIndentedString(state))
+                .append(newLine)
+                .append("    direction: ")
+                .append(toIndentedString(direction))
                 .append(newLine)
                 .append("}")
                 .toString();

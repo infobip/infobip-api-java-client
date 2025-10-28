@@ -13,12 +13,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Detected entity that answered the call. &#x60;UNKNOWN&#x60; if unable to detect.
+ * Detected class during analysis of the call. Always returns either HUMAN or MACHINE. Use confidenceRating for a finer grained analysis result
  */
 public enum CallsDetectionResult {
     HUMAN("HUMAN"),
-    MACHINE("MACHINE"),
-    UNKNOWN("UNKNOWN");
+    MACHINE("MACHINE");
 
     private final String value;
 

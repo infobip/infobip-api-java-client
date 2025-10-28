@@ -30,7 +30,7 @@ public class WhatsAppInteractiveButtonsImageHeaderContent extends WhatsAppIntera
      * Sets mediaUrl.
      * <p>
      * Field description:
-     * URL of an image sent in the header of a message containing one or more [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types#interactive-buttons-free-form-messages). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported image types are &#x60;JPG&#x60;, &#x60;JPEG&#x60;, &#x60;PNG&#x60;. Maximum image size is 5MB.
+     * URL of an image sent in the header of a message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported image types are &#x60;JPG&#x60;, &#x60;JPEG&#x60;, &#x60;PNG&#x60;. Maximum image size is 5MB.
      * <p>
      * The field is required.
      *
@@ -46,7 +46,7 @@ public class WhatsAppInteractiveButtonsImageHeaderContent extends WhatsAppIntera
      * Returns mediaUrl.
      * <p>
      * Field description:
-     * URL of an image sent in the header of a message containing one or more [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types#interactive-buttons-free-form-messages). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported image types are &#x60;JPG&#x60;, &#x60;JPEG&#x60;, &#x60;PNG&#x60;. Maximum image size is 5MB.
+     * URL of an image sent in the header of a message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported image types are &#x60;JPG&#x60;, &#x60;JPEG&#x60;, &#x60;PNG&#x60;. Maximum image size is 5MB.
      * <p>
      * The field is required.
      *
@@ -61,7 +61,7 @@ public class WhatsAppInteractiveButtonsImageHeaderContent extends WhatsAppIntera
      * Sets mediaUrl.
      * <p>
      * Field description:
-     * URL of an image sent in the header of a message containing one or more [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types#interactive-buttons-free-form-messages). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported image types are &#x60;JPG&#x60;, &#x60;JPEG&#x60;, &#x60;PNG&#x60;. Maximum image size is 5MB.
+     * URL of an image sent in the header of a message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported image types are &#x60;JPG&#x60;, &#x60;JPEG&#x60;, &#x60;PNG&#x60;. Maximum image size is 5MB.
      * <p>
      * The field is required.
      *

@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -20,6 +22,10 @@ public class CallsTranscription {
     private CallTranscriptionLanguage language;
 
     private Boolean sendInterimResults;
+
+    private List<String> customDictionary = null;
+
+    private Boolean advancedFormatting;
 
     /**
      * Sets language.
@@ -98,6 +104,103 @@ public class CallsTranscription {
         this.sendInterimResults = sendInterimResults;
     }
 
+    /**
+     * Sets customDictionary.
+     * <p>
+     * Field description:
+     * Array of custom words used for more accurate transcription.
+     *
+     * @param customDictionary
+     * @return This {@link CallsTranscription instance}.
+     */
+    public CallsTranscription customDictionary(List<String> customDictionary) {
+        this.customDictionary = customDictionary;
+        return this;
+    }
+
+    /**
+     * Adds and item into customDictionary.
+     * <p>
+     * Field description:
+     * Array of custom words used for more accurate transcription.
+     *
+     * @param customDictionaryItem The item to be added to the list.
+     * @return This {@link CallsTranscription instance}.
+     */
+    public CallsTranscription addCustomDictionaryItem(String customDictionaryItem) {
+        if (this.customDictionary == null) {
+            this.customDictionary = new ArrayList<>();
+        }
+        this.customDictionary.add(customDictionaryItem);
+        return this;
+    }
+
+    /**
+     * Returns customDictionary.
+     * <p>
+     * Field description:
+     * Array of custom words used for more accurate transcription.
+     *
+     * @return customDictionary
+     */
+    @JsonProperty("customDictionary")
+    public List<String> getCustomDictionary() {
+        return customDictionary;
+    }
+
+    /**
+     * Sets customDictionary.
+     * <p>
+     * Field description:
+     * Array of custom words used for more accurate transcription.
+     *
+     * @param customDictionary
+     */
+    @JsonProperty("customDictionary")
+    public void setCustomDictionary(List<String> customDictionary) {
+        this.customDictionary = customDictionary;
+    }
+
+    /**
+     * Sets advancedFormatting.
+     * <p>
+     * Field description:
+     * Toggles enhanced text formatting features like punctuation, proper casing, numeral normalization, and disfluency filtering. Defaults to &#x60;false&#x60;.
+     *
+     * @param advancedFormatting
+     * @return This {@link CallsTranscription instance}.
+     */
+    public CallsTranscription advancedFormatting(Boolean advancedFormatting) {
+        this.advancedFormatting = advancedFormatting;
+        return this;
+    }
+
+    /**
+     * Returns advancedFormatting.
+     * <p>
+     * Field description:
+     * Toggles enhanced text formatting features like punctuation, proper casing, numeral normalization, and disfluency filtering. Defaults to &#x60;false&#x60;.
+     *
+     * @return advancedFormatting
+     */
+    @JsonProperty("advancedFormatting")
+    public Boolean getAdvancedFormatting() {
+        return advancedFormatting;
+    }
+
+    /**
+     * Sets advancedFormatting.
+     * <p>
+     * Field description:
+     * Toggles enhanced text formatting features like punctuation, proper casing, numeral normalization, and disfluency filtering. Defaults to &#x60;false&#x60;.
+     *
+     * @param advancedFormatting
+     */
+    @JsonProperty("advancedFormatting")
+    public void setAdvancedFormatting(Boolean advancedFormatting) {
+        this.advancedFormatting = advancedFormatting;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -108,12 +211,14 @@ public class CallsTranscription {
         }
         CallsTranscription callsTranscription = (CallsTranscription) o;
         return Objects.equals(this.language, callsTranscription.language)
-                && Objects.equals(this.sendInterimResults, callsTranscription.sendInterimResults);
+                && Objects.equals(this.sendInterimResults, callsTranscription.sendInterimResults)
+                && Objects.equals(this.customDictionary, callsTranscription.customDictionary)
+                && Objects.equals(this.advancedFormatting, callsTranscription.advancedFormatting);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(language, sendInterimResults);
+        return Objects.hash(language, sendInterimResults, customDictionary, advancedFormatting);
     }
 
     @Override
@@ -127,6 +232,12 @@ public class CallsTranscription {
                 .append(newLine)
                 .append("    sendInterimResults: ")
                 .append(toIndentedString(sendInterimResults))
+                .append(newLine)
+                .append("    customDictionary: ")
+                .append(toIndentedString(customDictionary))
+                .append(newLine)
+                .append("    advancedFormatting: ")
+                .append(toIndentedString(advancedFormatting))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -21,6 +21,8 @@ public class TfaCreateEmailMessageRequest {
 
     private String from;
 
+    private String landingPageId;
+
     private Integer pinLength;
 
     private TfaPinType pinType;
@@ -112,6 +114,46 @@ public class TfaCreateEmailMessageRequest {
     }
 
     /**
+     * Sets landingPageId.
+     * <p>
+     * Field description:
+     * The ID of an opt out landing page to be used and displayed once an end user clicks the unsubscribe link. If not present, default opt out landing page will be displayed. Create a landing page in your Infobip account and use its ID, e.g., &#x60;1_23456&#x60;.
+     *
+     * @param landingPageId
+     * @return This {@link TfaCreateEmailMessageRequest instance}.
+     */
+    public TfaCreateEmailMessageRequest landingPageId(String landingPageId) {
+        this.landingPageId = landingPageId;
+        return this;
+    }
+
+    /**
+     * Returns landingPageId.
+     * <p>
+     * Field description:
+     * The ID of an opt out landing page to be used and displayed once an end user clicks the unsubscribe link. If not present, default opt out landing page will be displayed. Create a landing page in your Infobip account and use its ID, e.g., &#x60;1_23456&#x60;.
+     *
+     * @return landingPageId
+     */
+    @JsonProperty("landingPageId")
+    public String getLandingPageId() {
+        return landingPageId;
+    }
+
+    /**
+     * Sets landingPageId.
+     * <p>
+     * Field description:
+     * The ID of an opt out landing page to be used and displayed once an end user clicks the unsubscribe link. If not present, default opt out landing page will be displayed. Create a landing page in your Infobip account and use its ID, e.g., &#x60;1_23456&#x60;.
+     *
+     * @param landingPageId
+     */
+    @JsonProperty("landingPageId")
+    public void setLandingPageId(String landingPageId) {
+        this.landingPageId = landingPageId;
+    }
+
+    /**
      * Sets pinLength.
      * <p>
      * Field description:
@@ -193,13 +235,14 @@ public class TfaCreateEmailMessageRequest {
         TfaCreateEmailMessageRequest tfaCreateEmailMessageRequest = (TfaCreateEmailMessageRequest) o;
         return Objects.equals(this.emailTemplateId, tfaCreateEmailMessageRequest.emailTemplateId)
                 && Objects.equals(this.from, tfaCreateEmailMessageRequest.from)
+                && Objects.equals(this.landingPageId, tfaCreateEmailMessageRequest.landingPageId)
                 && Objects.equals(this.pinLength, tfaCreateEmailMessageRequest.pinLength)
                 && Objects.equals(this.pinType, tfaCreateEmailMessageRequest.pinType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(emailTemplateId, from, pinLength, pinType);
+        return Objects.hash(emailTemplateId, from, landingPageId, pinLength, pinType);
     }
 
     @Override
@@ -213,6 +256,9 @@ public class TfaCreateEmailMessageRequest {
                 .append(newLine)
                 .append("    from: ")
                 .append(toIndentedString(from))
+                .append(newLine)
+                .append("    landingPageId: ")
+                .append(toIndentedString(landingPageId))
                 .append(newLine)
                 .append("    pinLength: ")
                 .append(toIndentedString(pinLength))

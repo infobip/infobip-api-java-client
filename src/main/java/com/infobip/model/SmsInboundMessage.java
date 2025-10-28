@@ -14,35 +14,35 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * Represents SmsInboundMessage model.
+ * An array of result objects.
  */
 public class SmsInboundMessage {
 
     private String applicationId;
 
-    private String callbackData;
-
-    private String campaignReferenceId;
-
-    private String cleanText;
-
-    private String entityId;
+    private String messageId;
 
     private String from;
 
+    private String to;
+
+    private String text;
+
+    private String cleanText;
+
     private String keyword;
-
-    private String messageId;
-
-    private MessagePrice price;
 
     private OffsetDateTime receivedAt;
 
     private Integer smsCount;
 
-    private String text;
+    private MessagePrice price;
 
-    private String to;
+    private String callbackData;
+
+    private String entityId;
+
+    private String campaignReferenceId;
 
     /**
      * Sets applicationId.
@@ -82,246 +82,6 @@ public class SmsInboundMessage {
     @JsonProperty("applicationId")
     public void setApplicationId(String applicationId) {
         this.applicationId = applicationId;
-    }
-
-    /**
-     * Sets callbackData.
-     * <p>
-     * Field description:
-     * Custom callback data sent over the notifyUrl.
-     *
-     * @param callbackData
-     * @return This {@link SmsInboundMessage instance}.
-     */
-    public SmsInboundMessage callbackData(String callbackData) {
-        this.callbackData = callbackData;
-        return this;
-    }
-
-    /**
-     * Returns callbackData.
-     * <p>
-     * Field description:
-     * Custom callback data sent over the notifyUrl.
-     *
-     * @return callbackData
-     */
-    @JsonProperty("callbackData")
-    public String getCallbackData() {
-        return callbackData;
-    }
-
-    /**
-     * Sets callbackData.
-     * <p>
-     * Field description:
-     * Custom callback data sent over the notifyUrl.
-     *
-     * @param callbackData
-     */
-    @JsonProperty("callbackData")
-    public void setCallbackData(String callbackData) {
-        this.callbackData = callbackData;
-    }
-
-    /**
-     * Sets campaignReferenceId.
-     * <p>
-     * Field description:
-     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
-     *
-     * @param campaignReferenceId
-     * @return This {@link SmsInboundMessage instance}.
-     */
-    public SmsInboundMessage campaignReferenceId(String campaignReferenceId) {
-        this.campaignReferenceId = campaignReferenceId;
-        return this;
-    }
-
-    /**
-     * Returns campaignReferenceId.
-     * <p>
-     * Field description:
-     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
-     *
-     * @return campaignReferenceId
-     */
-    @JsonProperty("campaignReferenceId")
-    public String getCampaignReferenceId() {
-        return campaignReferenceId;
-    }
-
-    /**
-     * Sets campaignReferenceId.
-     * <p>
-     * Field description:
-     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
-     *
-     * @param campaignReferenceId
-     */
-    @JsonProperty("campaignReferenceId")
-    public void setCampaignReferenceId(String campaignReferenceId) {
-        this.campaignReferenceId = campaignReferenceId;
-    }
-
-    /**
-     * Sets cleanText.
-     * <p>
-     * Field description:
-     * Content of the message without a keyword (if a keyword was sent).
-     *
-     * @param cleanText
-     * @return This {@link SmsInboundMessage instance}.
-     */
-    public SmsInboundMessage cleanText(String cleanText) {
-        this.cleanText = cleanText;
-        return this;
-    }
-
-    /**
-     * Returns cleanText.
-     * <p>
-     * Field description:
-     * Content of the message without a keyword (if a keyword was sent).
-     *
-     * @return cleanText
-     */
-    @JsonProperty("cleanText")
-    public String getCleanText() {
-        return cleanText;
-    }
-
-    /**
-     * Sets cleanText.
-     * <p>
-     * Field description:
-     * Content of the message without a keyword (if a keyword was sent).
-     *
-     * @param cleanText
-     */
-    @JsonProperty("cleanText")
-    public void setCleanText(String cleanText) {
-        this.cleanText = cleanText;
-    }
-
-    /**
-     * Sets entityId.
-     * <p>
-     * Field description:
-     * Entity id linked to the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
-     *
-     * @param entityId
-     * @return This {@link SmsInboundMessage instance}.
-     */
-    public SmsInboundMessage entityId(String entityId) {
-        this.entityId = entityId;
-        return this;
-    }
-
-    /**
-     * Returns entityId.
-     * <p>
-     * Field description:
-     * Entity id linked to the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
-     *
-     * @return entityId
-     */
-    @JsonProperty("entityId")
-    public String getEntityId() {
-        return entityId;
-    }
-
-    /**
-     * Sets entityId.
-     * <p>
-     * Field description:
-     * Entity id linked to the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
-     *
-     * @param entityId
-     */
-    @JsonProperty("entityId")
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
-    /**
-     * Sets from.
-     * <p>
-     * Field description:
-     * Sender ID that can be alphanumeric or numeric.
-     *
-     * @param from
-     * @return This {@link SmsInboundMessage instance}.
-     */
-    public SmsInboundMessage from(String from) {
-        this.from = from;
-        return this;
-    }
-
-    /**
-     * Returns from.
-     * <p>
-     * Field description:
-     * Sender ID that can be alphanumeric or numeric.
-     *
-     * @return from
-     */
-    @JsonProperty("from")
-    public String getFrom() {
-        return from;
-    }
-
-    /**
-     * Sets from.
-     * <p>
-     * Field description:
-     * Sender ID that can be alphanumeric or numeric.
-     *
-     * @param from
-     */
-    @JsonProperty("from")
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    /**
-     * Sets keyword.
-     * <p>
-     * Field description:
-     * Keyword extracted from the message content.
-     *
-     * @param keyword
-     * @return This {@link SmsInboundMessage instance}.
-     */
-    public SmsInboundMessage keyword(String keyword) {
-        this.keyword = keyword;
-        return this;
-    }
-
-    /**
-     * Returns keyword.
-     * <p>
-     * Field description:
-     * Keyword extracted from the message content.
-     *
-     * @return keyword
-     */
-    @JsonProperty("keyword")
-    public String getKeyword() {
-        return keyword;
-    }
-
-    /**
-     * Sets keyword.
-     * <p>
-     * Field description:
-     * Keyword extracted from the message content.
-     *
-     * @param keyword
-     */
-    @JsonProperty("keyword")
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
     }
 
     /**
@@ -365,34 +125,203 @@ public class SmsInboundMessage {
     }
 
     /**
-     * Sets price.
+     * Sets from.
+     * <p>
+     * Field description:
+     * Sender ID that can be alphanumeric or numeric.
      *
-     * @param price
+     * @param from
      * @return This {@link SmsInboundMessage instance}.
      */
-    public SmsInboundMessage price(MessagePrice price) {
-        this.price = price;
+    public SmsInboundMessage from(String from) {
+        this.from = from;
         return this;
     }
 
     /**
-     * Returns price.
+     * Returns from.
+     * <p>
+     * Field description:
+     * Sender ID that can be alphanumeric or numeric.
      *
-     * @return price
+     * @return from
      */
-    @JsonProperty("price")
-    public MessagePrice getPrice() {
-        return price;
+    @JsonProperty("from")
+    public String getFrom() {
+        return from;
     }
 
     /**
-     * Sets price.
+     * Sets from.
+     * <p>
+     * Field description:
+     * Sender ID that can be alphanumeric or numeric.
      *
-     * @param price
+     * @param from
      */
-    @JsonProperty("price")
-    public void setPrice(MessagePrice price) {
-        this.price = price;
+    @JsonProperty("from")
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    /**
+     * Sets to.
+     * <p>
+     * Field description:
+     * The destination address of the message.
+     *
+     * @param to
+     * @return This {@link SmsInboundMessage instance}.
+     */
+    public SmsInboundMessage to(String to) {
+        this.to = to;
+        return this;
+    }
+
+    /**
+     * Returns to.
+     * <p>
+     * Field description:
+     * The destination address of the message.
+     *
+     * @return to
+     */
+    @JsonProperty("to")
+    public String getTo() {
+        return to;
+    }
+
+    /**
+     * Sets to.
+     * <p>
+     * Field description:
+     * The destination address of the message.
+     *
+     * @param to
+     */
+    @JsonProperty("to")
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    /**
+     * Sets text.
+     * <p>
+     * Field description:
+     * Full content of the message.
+     *
+     * @param text
+     * @return This {@link SmsInboundMessage instance}.
+     */
+    public SmsInboundMessage text(String text) {
+        this.text = text;
+        return this;
+    }
+
+    /**
+     * Returns text.
+     * <p>
+     * Field description:
+     * Full content of the message.
+     *
+     * @return text
+     */
+    @JsonProperty("text")
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * Sets text.
+     * <p>
+     * Field description:
+     * Full content of the message.
+     *
+     * @param text
+     */
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    /**
+     * Sets cleanText.
+     * <p>
+     * Field description:
+     * Content of the message without a keyword (if a keyword was sent).
+     *
+     * @param cleanText
+     * @return This {@link SmsInboundMessage instance}.
+     */
+    public SmsInboundMessage cleanText(String cleanText) {
+        this.cleanText = cleanText;
+        return this;
+    }
+
+    /**
+     * Returns cleanText.
+     * <p>
+     * Field description:
+     * Content of the message without a keyword (if a keyword was sent).
+     *
+     * @return cleanText
+     */
+    @JsonProperty("cleanText")
+    public String getCleanText() {
+        return cleanText;
+    }
+
+    /**
+     * Sets cleanText.
+     * <p>
+     * Field description:
+     * Content of the message without a keyword (if a keyword was sent).
+     *
+     * @param cleanText
+     */
+    @JsonProperty("cleanText")
+    public void setCleanText(String cleanText) {
+        this.cleanText = cleanText;
+    }
+
+    /**
+     * Sets keyword.
+     * <p>
+     * Field description:
+     * Keyword extracted from the message content.
+     *
+     * @param keyword
+     * @return This {@link SmsInboundMessage instance}.
+     */
+    public SmsInboundMessage keyword(String keyword) {
+        this.keyword = keyword;
+        return this;
+    }
+
+    /**
+     * Returns keyword.
+     * <p>
+     * Field description:
+     * Keyword extracted from the message content.
+     *
+     * @return keyword
+     */
+    @JsonProperty("keyword")
+    public String getKeyword() {
+        return keyword;
+    }
+
+    /**
+     * Sets keyword.
+     * <p>
+     * Field description:
+     * Keyword extracted from the message content.
+     *
+     * @param keyword
+     */
+    @JsonProperty("keyword")
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     /**
@@ -439,7 +368,7 @@ public class SmsInboundMessage {
      * Sets smsCount.
      * <p>
      * Field description:
-     * The number of characters within a message
+     * The number of parts the message content was split into.
      *
      * @param smsCount
      * @return This {@link SmsInboundMessage instance}.
@@ -453,7 +382,7 @@ public class SmsInboundMessage {
      * Returns smsCount.
      * <p>
      * Field description:
-     * The number of characters within a message
+     * The number of parts the message content was split into.
      *
      * @return smsCount
      */
@@ -466,7 +395,7 @@ public class SmsInboundMessage {
      * Sets smsCount.
      * <p>
      * Field description:
-     * The number of characters within a message
+     * The number of parts the message content was split into.
      *
      * @param smsCount
      */
@@ -476,83 +405,154 @@ public class SmsInboundMessage {
     }
 
     /**
-     * Sets text.
-     * <p>
-     * Field description:
-     * Full content of the message.
+     * Sets price.
      *
-     * @param text
+     * @param price
      * @return This {@link SmsInboundMessage instance}.
      */
-    public SmsInboundMessage text(String text) {
-        this.text = text;
+    public SmsInboundMessage price(MessagePrice price) {
+        this.price = price;
         return this;
     }
 
     /**
-     * Returns text.
-     * <p>
-     * Field description:
-     * Full content of the message.
+     * Returns price.
      *
-     * @return text
+     * @return price
      */
-    @JsonProperty("text")
-    public String getText() {
-        return text;
+    @JsonProperty("price")
+    public MessagePrice getPrice() {
+        return price;
     }
 
     /**
-     * Sets text.
-     * <p>
-     * Field description:
-     * Full content of the message.
+     * Sets price.
      *
-     * @param text
+     * @param price
      */
-    @JsonProperty("text")
-    public void setText(String text) {
-        this.text = text;
+    @JsonProperty("price")
+    public void setPrice(MessagePrice price) {
+        this.price = price;
     }
 
     /**
-     * Sets to.
+     * Sets callbackData.
      * <p>
      * Field description:
-     * The destination address of the message.
+     * Custom callback data sent over the notifyUrl.
      *
-     * @param to
+     * @param callbackData
      * @return This {@link SmsInboundMessage instance}.
      */
-    public SmsInboundMessage to(String to) {
-        this.to = to;
+    public SmsInboundMessage callbackData(String callbackData) {
+        this.callbackData = callbackData;
         return this;
     }
 
     /**
-     * Returns to.
+     * Returns callbackData.
      * <p>
      * Field description:
-     * The destination address of the message.
+     * Custom callback data sent over the notifyUrl.
      *
-     * @return to
+     * @return callbackData
      */
-    @JsonProperty("to")
-    public String getTo() {
-        return to;
+    @JsonProperty("callbackData")
+    public String getCallbackData() {
+        return callbackData;
     }
 
     /**
-     * Sets to.
+     * Sets callbackData.
      * <p>
      * Field description:
-     * The destination address of the message.
+     * Custom callback data sent over the notifyUrl.
      *
-     * @param to
+     * @param callbackData
      */
-    @JsonProperty("to")
-    public void setTo(String to) {
-        this.to = to;
+    @JsonProperty("callbackData")
+    public void setCallbackData(String callbackData) {
+        this.callbackData = callbackData;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Entity id linked to the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     * @return This {@link SmsInboundMessage instance}.
+     */
+    public SmsInboundMessage entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     * <p>
+     * Field description:
+     * Entity id linked to the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     * <p>
+     * Field description:
+     * Entity id linked to the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @param campaignReferenceId
+     * @return This {@link SmsInboundMessage instance}.
+     */
+    public SmsInboundMessage campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
     }
 
     @Override
@@ -565,36 +565,36 @@ public class SmsInboundMessage {
         }
         SmsInboundMessage smsInboundMessage = (SmsInboundMessage) o;
         return Objects.equals(this.applicationId, smsInboundMessage.applicationId)
-                && Objects.equals(this.callbackData, smsInboundMessage.callbackData)
-                && Objects.equals(this.campaignReferenceId, smsInboundMessage.campaignReferenceId)
-                && Objects.equals(this.cleanText, smsInboundMessage.cleanText)
-                && Objects.equals(this.entityId, smsInboundMessage.entityId)
-                && Objects.equals(this.from, smsInboundMessage.from)
-                && Objects.equals(this.keyword, smsInboundMessage.keyword)
                 && Objects.equals(this.messageId, smsInboundMessage.messageId)
-                && Objects.equals(this.price, smsInboundMessage.price)
+                && Objects.equals(this.from, smsInboundMessage.from)
+                && Objects.equals(this.to, smsInboundMessage.to)
+                && Objects.equals(this.text, smsInboundMessage.text)
+                && Objects.equals(this.cleanText, smsInboundMessage.cleanText)
+                && Objects.equals(this.keyword, smsInboundMessage.keyword)
                 && Objects.equals(this.receivedAt, smsInboundMessage.receivedAt)
                 && Objects.equals(this.smsCount, smsInboundMessage.smsCount)
-                && Objects.equals(this.text, smsInboundMessage.text)
-                && Objects.equals(this.to, smsInboundMessage.to);
+                && Objects.equals(this.price, smsInboundMessage.price)
+                && Objects.equals(this.callbackData, smsInboundMessage.callbackData)
+                && Objects.equals(this.entityId, smsInboundMessage.entityId)
+                && Objects.equals(this.campaignReferenceId, smsInboundMessage.campaignReferenceId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
                 applicationId,
-                callbackData,
-                campaignReferenceId,
-                cleanText,
-                entityId,
-                from,
-                keyword,
                 messageId,
-                price,
+                from,
+                to,
+                text,
+                cleanText,
+                keyword,
                 receivedAt,
                 smsCount,
-                text,
-                to);
+                price,
+                callbackData,
+                entityId,
+                campaignReferenceId);
     }
 
     @Override
@@ -606,29 +606,23 @@ public class SmsInboundMessage {
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
                 .append(newLine)
-                .append("    callbackData: ")
-                .append(toIndentedString(callbackData))
-                .append(newLine)
-                .append("    campaignReferenceId: ")
-                .append(toIndentedString(campaignReferenceId))
-                .append(newLine)
-                .append("    cleanText: ")
-                .append(toIndentedString(cleanText))
-                .append(newLine)
-                .append("    entityId: ")
-                .append(toIndentedString(entityId))
+                .append("    messageId: ")
+                .append(toIndentedString(messageId))
                 .append(newLine)
                 .append("    from: ")
                 .append(toIndentedString(from))
                 .append(newLine)
+                .append("    to: ")
+                .append(toIndentedString(to))
+                .append(newLine)
+                .append("    text: ")
+                .append(toIndentedString(text))
+                .append(newLine)
+                .append("    cleanText: ")
+                .append(toIndentedString(cleanText))
+                .append(newLine)
                 .append("    keyword: ")
                 .append(toIndentedString(keyword))
-                .append(newLine)
-                .append("    messageId: ")
-                .append(toIndentedString(messageId))
-                .append(newLine)
-                .append("    price: ")
-                .append(toIndentedString(price))
                 .append(newLine)
                 .append("    receivedAt: ")
                 .append(toIndentedString(receivedAt))
@@ -636,11 +630,17 @@ public class SmsInboundMessage {
                 .append("    smsCount: ")
                 .append(toIndentedString(smsCount))
                 .append(newLine)
-                .append("    text: ")
-                .append(toIndentedString(text))
+                .append("    price: ")
+                .append(toIndentedString(price))
                 .append(newLine)
-                .append("    to: ")
-                .append(toIndentedString(to))
+                .append("    callbackData: ")
+                .append(toIndentedString(callbackData))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
                 .append(newLine)
                 .append("}")
                 .toString();

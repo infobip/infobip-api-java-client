@@ -42,8 +42,6 @@ public abstract class WhatsAppTemplatePublicApiRequest {
         this.category = WhatsAppCategory.fromValue(category);
     }
 
-    private Boolean allowCategoryChange;
-
     private WhatsAppTemplateStructureApiData structure;
 
     private Platform platform;
@@ -144,46 +142,6 @@ public abstract class WhatsAppTemplatePublicApiRequest {
     }
 
     /**
-     * Sets allowCategoryChange.
-     * <p>
-     * Field description:
-     * If set to true, Meta will be able to assign category based on their template guidelines. If omitted, template will not be auto-assigned a category and may get rejected if determined to be miscategorized.
-     *
-     * @param allowCategoryChange
-     * @return This {@link WhatsAppTemplatePublicApiRequest instance}.
-     */
-    public WhatsAppTemplatePublicApiRequest allowCategoryChange(Boolean allowCategoryChange) {
-        this.allowCategoryChange = allowCategoryChange;
-        return this;
-    }
-
-    /**
-     * Returns allowCategoryChange.
-     * <p>
-     * Field description:
-     * If set to true, Meta will be able to assign category based on their template guidelines. If omitted, template will not be auto-assigned a category and may get rejected if determined to be miscategorized.
-     *
-     * @return allowCategoryChange
-     */
-    @JsonProperty("allowCategoryChange")
-    public Boolean getAllowCategoryChange() {
-        return allowCategoryChange;
-    }
-
-    /**
-     * Sets allowCategoryChange.
-     * <p>
-     * Field description:
-     * If set to true, Meta will be able to assign category based on their template guidelines. If omitted, template will not be auto-assigned a category and may get rejected if determined to be miscategorized.
-     *
-     * @param allowCategoryChange
-     */
-    @JsonProperty("allowCategoryChange")
-    public void setAllowCategoryChange(Boolean allowCategoryChange) {
-        this.allowCategoryChange = allowCategoryChange;
-    }
-
-    /**
      * Sets structure.
      * <p>
      * The field is required.
@@ -263,14 +221,13 @@ public abstract class WhatsAppTemplatePublicApiRequest {
         return Objects.equals(this.name, whatsAppTemplatePublicApiRequest.name)
                 && Objects.equals(this.language, whatsAppTemplatePublicApiRequest.language)
                 && Objects.equals(this.category, whatsAppTemplatePublicApiRequest.category)
-                && Objects.equals(this.allowCategoryChange, whatsAppTemplatePublicApiRequest.allowCategoryChange)
                 && Objects.equals(this.structure, whatsAppTemplatePublicApiRequest.structure)
                 && Objects.equals(this.platform, whatsAppTemplatePublicApiRequest.platform);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, language, category, allowCategoryChange, structure, platform);
+        return Objects.hash(name, language, category, structure, platform);
     }
 
     @Override
@@ -287,9 +244,6 @@ public abstract class WhatsAppTemplatePublicApiRequest {
                 .append(newLine)
                 .append("    category: ")
                 .append(toIndentedString(category))
-                .append(newLine)
-                .append("    allowCategoryChange: ")
-                .append(toIndentedString(allowCategoryChange))
                 .append(newLine)
                 .append("    structure: ")
                 .append(toIndentedString(structure))

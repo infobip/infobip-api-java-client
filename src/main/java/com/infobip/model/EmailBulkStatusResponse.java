@@ -21,10 +21,15 @@ public class EmailBulkStatusResponse {
 
     private String externalBulkId;
 
-    private List<EmailBulkStatusInfo> bulks = null;
+    private List<EmailBulkStatusInfo> bulks = new ArrayList<>();
 
     /**
      * Sets externalBulkId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the sent bulk.
+     * <p>
+     * The field is required.
      *
      * @param externalBulkId
      * @return This {@link EmailBulkStatusResponse instance}.
@@ -36,6 +41,11 @@ public class EmailBulkStatusResponse {
 
     /**
      * Returns externalBulkId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the sent bulk.
+     * <p>
+     * The field is required.
      *
      * @return externalBulkId
      */
@@ -46,6 +56,11 @@ public class EmailBulkStatusResponse {
 
     /**
      * Sets externalBulkId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the sent bulk.
+     * <p>
+     * The field is required.
      *
      * @param externalBulkId
      */
@@ -56,6 +71,8 @@ public class EmailBulkStatusResponse {
 
     /**
      * Sets bulks.
+     * <p>
+     * The field is required.
      *
      * @param bulks
      * @return This {@link EmailBulkStatusResponse instance}.
@@ -67,6 +84,8 @@ public class EmailBulkStatusResponse {
 
     /**
      * Adds and item into bulks.
+     * <p>
+     * The field is required.
      *
      * @param bulksItem The item to be added to the list.
      * @return This {@link EmailBulkStatusResponse instance}.
@@ -81,6 +100,8 @@ public class EmailBulkStatusResponse {
 
     /**
      * Returns bulks.
+     * <p>
+     * The field is required.
      *
      * @return bulks
      */
@@ -91,6 +112,8 @@ public class EmailBulkStatusResponse {
 
     /**
      * Sets bulks.
+     * <p>
+     * The field is required.
      *
      * @param bulks
      */

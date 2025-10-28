@@ -36,7 +36,7 @@ public class MessagesApiMessageLocationBody extends MessagesApiMessageBody {
      * Sets latitude.
      * <p>
      * Field description:
-     * Latitude of a location.
+     * Latitude of the location.
      * <p>
      * The field is required.
      *
@@ -52,7 +52,7 @@ public class MessagesApiMessageLocationBody extends MessagesApiMessageBody {
      * Returns latitude.
      * <p>
      * Field description:
-     * Latitude of a location.
+     * Latitude of the location.
      * <p>
      * The field is required.
      *
@@ -67,7 +67,7 @@ public class MessagesApiMessageLocationBody extends MessagesApiMessageBody {
      * Sets latitude.
      * <p>
      * Field description:
-     * Latitude of a location.
+     * Latitude of the location.
      * <p>
      * The field is required.
      *
@@ -82,7 +82,7 @@ public class MessagesApiMessageLocationBody extends MessagesApiMessageBody {
      * Sets longitude.
      * <p>
      * Field description:
-     * Longitude of a location.
+     * Longitude of the location.
      * <p>
      * The field is required.
      *
@@ -98,7 +98,7 @@ public class MessagesApiMessageLocationBody extends MessagesApiMessageBody {
      * Returns longitude.
      * <p>
      * Field description:
-     * Longitude of a location.
+     * Longitude of the location.
      * <p>
      * The field is required.
      *
@@ -113,7 +113,7 @@ public class MessagesApiMessageLocationBody extends MessagesApiMessageBody {
      * Sets longitude.
      * <p>
      * Field description:
-     * Longitude of a location.
+     * Longitude of the location.
      * <p>
      * The field is required.
      *

@@ -589,7 +589,6 @@ class ViberApiTest extends ApiTest {
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
 
-    // TODO: Fix this test
     @Test
     void shouldGetOutboundViberMessageLogs() {
         String givenSender = "string";
@@ -617,6 +616,10 @@ class ViberApiTest extends ApiTest {
         String givenApplicationId = "string";
         String givenContentType = "TEXT";
         String givenContentText = "Some text";
+
+        var givenNextCursor = "next-cursor-id";
+        var givenCursorLimit = 10;
+        var givenUseCursor = true;
 
         String givenResponse = String.format(
                 "{\n" + "  \"results\": [\n"
@@ -657,8 +660,12 @@ class ViberApiTest extends ApiTest {
                         + "        \"text\": \"%s\"\n"
                         + "      }\n"
                         + "    }\n"
-                        + "  ]\n"
-                        + "}",
+                        + "  ],\n"
+                        + "  \"cursor\": {"
+                        + "    \"limit\": %d,"
+                        + "    \"nextCursor\": \"%s\""
+                        + "  }"
+                        + "}\n",
                 givenSender,
                 givenDestination,
                 givenBulkId,
@@ -683,7 +690,9 @@ class ViberApiTest extends ApiTest {
                 givenEntityId,
                 givenApplicationId,
                 givenContentType,
-                givenContentText);
+                givenContentText,
+                givenCursorLimit,
+                givenNextCursor);
 
         ViberApi api = new ViberApi(getApiClient());
 
@@ -726,17 +735,19 @@ class ViberApiTest extends ApiTest {
 
         setUpSuccessGetRequest(
                 GET_VIBER_LOGS,
-                Map.of(
-                        "bulkId", "BULK-ID-123-xyz",
-                        "messageId", "MESSAGE-ID-123-xyz",
-                        "sender", "sender",
-                        "destination", "destination",
-                        "generalStatus", "DELIVERED",
-                        "sentSince", givenSentSinceString,
-                        "sentUntil", givenSentUntilString,
-                        "limit", "50",
-                        "entityId", "entityId",
-                        "applicationId", "applicationId"),
+                Map.ofEntries(
+                        Map.entry("bulkId", "BULK-ID-123-xyz"),
+                        Map.entry("messageId", "MESSAGE-ID-123-xyz"),
+                        Map.entry("sender", "sender"),
+                        Map.entry("destination", "destination"),
+                        Map.entry("generalStatus", "DELIVERED"),
+                        Map.entry("sentSince", givenSentSinceString),
+                        Map.entry("sentUntil", givenSentUntilString),
+                        Map.entry("limit", "50"),
+                        Map.entry("entityId", "entityId"),
+                        Map.entry("applicationId", "applicationId"),
+                        Map.entry("useCursor", Boolean.toString(givenUseCursor)),
+                        Map.entry("cursor", givenNextCursor)),
                 givenResponse);
 
         var call = api.getOutboundViberMessageLogs()
@@ -749,7 +760,9 @@ class ViberApiTest extends ApiTest {
                 .sentUntil(givenSentUntil)
                 .limit(50)
                 .entityId("entityId")
-                .applicationId("applicationId");
+                .applicationId("applicationId")
+                .cursor(givenNextCursor)
+                .useCursor(givenUseCursor);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }

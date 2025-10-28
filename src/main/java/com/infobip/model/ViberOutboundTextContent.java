@@ -32,7 +32,7 @@ public class ViberOutboundTextContent extends ViberOutboundContent {
      * Sets text.
      * <p>
      * Field description:
-     * Content of the message being sent.
+     * Content of the message being sent. If sending a template, see the [guidance and compliance rules](https://www.infobip.com/docs/viber/business-messages/api#message-template-business-messages-api).
      * <p>
      * The field is required.
      *
@@ -48,7 +48,7 @@ public class ViberOutboundTextContent extends ViberOutboundContent {
      * Returns text.
      * <p>
      * Field description:
-     * Content of the message being sent.
+     * Content of the message being sent. If sending a template, see the [guidance and compliance rules](https://www.infobip.com/docs/viber/business-messages/api#message-template-business-messages-api).
      * <p>
      * The field is required.
      *
@@ -63,7 +63,7 @@ public class ViberOutboundTextContent extends ViberOutboundContent {
      * Sets text.
      * <p>
      * Field description:
-     * Content of the message being sent.
+     * Content of the message being sent. If sending a template, see the [guidance and compliance rules](https://www.infobip.com/docs/viber/business-messages/api#message-template-business-messages-api).
      * <p>
      * The field is required.
      *

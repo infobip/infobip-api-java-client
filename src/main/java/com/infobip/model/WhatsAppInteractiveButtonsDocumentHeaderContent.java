@@ -32,7 +32,7 @@ public class WhatsAppInteractiveButtonsDocumentHeaderContent extends WhatsAppInt
      * Sets mediaUrl.
      * <p>
      * Field description:
-     * URL of a document sent in the header of a message containing one or more [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types#interactive-buttons-free-form-messages). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported document type is &#x60;PDF&#x60;. Maximum document size is 100MB.
+     * URL of a document sent in the header of a message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported document types are &#x60;PDF&#x60;, &#x60;TXT&#x60;, &#x60;XLS&#x60;, &#x60;XLSX&#x60;, &#x60;DOC&#x60;, &#x60;DOCX&#x60;, &#x60;PPT&#x60;, &#x60;PPTX&#x60;. Maximum document size is 100MB.
      * <p>
      * The field is required.
      *
@@ -48,7 +48,7 @@ public class WhatsAppInteractiveButtonsDocumentHeaderContent extends WhatsAppInt
      * Returns mediaUrl.
      * <p>
      * Field description:
-     * URL of a document sent in the header of a message containing one or more [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types#interactive-buttons-free-form-messages). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported document type is &#x60;PDF&#x60;. Maximum document size is 100MB.
+     * URL of a document sent in the header of a message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported document types are &#x60;PDF&#x60;, &#x60;TXT&#x60;, &#x60;XLS&#x60;, &#x60;XLSX&#x60;, &#x60;DOC&#x60;, &#x60;DOCX&#x60;, &#x60;PPT&#x60;, &#x60;PPTX&#x60;. Maximum document size is 100MB.
      * <p>
      * The field is required.
      *
@@ -63,7 +63,7 @@ public class WhatsAppInteractiveButtonsDocumentHeaderContent extends WhatsAppInt
      * Sets mediaUrl.
      * <p>
      * Field description:
-     * URL of a document sent in the header of a message containing one or more [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types#interactive-buttons-free-form-messages). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported document type is &#x60;PDF&#x60;. Maximum document size is 100MB.
+     * URL of a document sent in the header of a message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported document types are &#x60;PDF&#x60;, &#x60;TXT&#x60;, &#x60;XLS&#x60;, &#x60;XLSX&#x60;, &#x60;DOC&#x60;, &#x60;DOCX&#x60;, &#x60;PPT&#x60;, &#x60;PPTX&#x60;. Maximum document size is 100MB.
      * <p>
      * The field is required.
      *

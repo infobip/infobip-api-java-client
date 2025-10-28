@@ -29,7 +29,11 @@ public enum MessagesApiMessageBodyType {
     STICKER("STICKER"),
     PRODUCT("PRODUCT"),
     MIXED("MIXED"),
-    FLOW("FLOW");
+    FLOW("FLOW"),
+    TIME_PICKER("TIME_PICKER"),
+    ORDER_REQUEST("ORDER_REQUEST"),
+    ORDER_STATUS("ORDER_STATUS"),
+    FORM("FORM");
 
     private final String value;
 

@@ -9,6 +9,7 @@
 
 package com.infobip.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
@@ -16,11 +17,44 @@ import java.util.Objects;
  */
 public class WhatsAppDefaultUtilityTemplateApiResponse extends WhatsAppTemplateApiResponse {
 
+    private WhatsAppEditSubCategory subCategory;
+
     /**
      * Constructs a new {@link WhatsAppDefaultUtilityTemplateApiResponse} instance.
      */
     public WhatsAppDefaultUtilityTemplateApiResponse() {
         super("UTILITY");
+    }
+
+    /**
+     * Sets subCategory.
+     *
+     * @param subCategory
+     * @return This {@link WhatsAppDefaultUtilityTemplateApiResponse instance}.
+     */
+    public WhatsAppDefaultUtilityTemplateApiResponse subCategory(WhatsAppEditSubCategory subCategory) {
+        this.subCategory = subCategory;
+        return this;
+    }
+
+    /**
+     * Returns subCategory.
+     *
+     * @return subCategory
+     */
+    @JsonProperty("subCategory")
+    public WhatsAppEditSubCategory getSubCategory() {
+        return subCategory;
+    }
+
+    /**
+     * Sets subCategory.
+     *
+     * @param subCategory
+     */
+    @JsonProperty("subCategory")
+    public void setSubCategory(WhatsAppEditSubCategory subCategory) {
+        this.subCategory = subCategory;
     }
 
     @Override
@@ -31,12 +65,15 @@ public class WhatsAppDefaultUtilityTemplateApiResponse extends WhatsAppTemplateA
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        return super.equals(o);
+        WhatsAppDefaultUtilityTemplateApiResponse whatsAppDefaultUtilityTemplateApiResponse =
+                (WhatsAppDefaultUtilityTemplateApiResponse) o;
+        return Objects.equals(this.subCategory, whatsAppDefaultUtilityTemplateApiResponse.subCategory)
+                && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode());
+        return Objects.hash(subCategory, super.hashCode());
     }
 
     @Override
@@ -47,6 +84,9 @@ public class WhatsAppDefaultUtilityTemplateApiResponse extends WhatsAppTemplateA
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
+                .append(newLine)
+                .append("    subCategory: ")
+                .append(toIndentedString(subCategory))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum MessagesApiOutboundTemplateChannel {
     APPLE_MB("APPLE_MB"),
     RCS("RCS"),
+    VIBER_BM("VIBER_BM"),
     WHATSAPP("WHATSAPP");
 
     private final String value;

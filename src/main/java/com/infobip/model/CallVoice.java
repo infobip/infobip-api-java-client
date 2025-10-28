@@ -92,6 +92,8 @@ public enum CallVoice {
     MIZUKI("Mizuki"),
     SHASHANK_BETA_("Shashank (beta)"),
     NAMRATHA_BETA_("Namratha (beta)"),
+    AIGUL_NEURAL_("Aigul (neural)"),
+    DAULET_NEURAL_("Daulet (neural)"),
     SEOYEON("Seoyeon"),
     SUMI_BETA_("Sumi (beta)"),
     JINA_BETA_("Jina (beta)"),
@@ -136,6 +138,8 @@ public enum CallVoice {
     NATCHAYA_BETA_("Natchaya (beta)"),
     FILIZ("Filiz"),
     ULYANA("Ulyana"),
+    MADINA_NEURAL_("Madina (neural)"),
+    SARDOR_NEURAL_("Sardor (neural)"),
     LIEN_BETA_("Lien (beta)"),
     QUAN_BETA_("Quan (beta)"),
     MAI_BETA_("Mai (beta)"),
@@ -411,6 +415,8 @@ public enum CallVoice {
     PELAYO_NEURAL_("Pelayo (neural)"),
     RENATA_NEURAL_("Renata (neural)"),
     YAGO_NEURAL_("Yago (neural)"),
+    ELENA_NEURAL_("Elena (neural)"),
+    TOMAS_NEURAL_("Tomas (neural)"),
     HILLEVI_NEURAL_("Hillevi (neural)"),
     MATTIAS_NEURAL_("Mattias (neural)"),
     SOFIE_NEURAL_("Sofie (neural)"),
@@ -434,7 +440,11 @@ public enum CallVoice {
     UZMA_NEURAL_("Uzma (neural)"),
     ASAD_NEURAL_("Asad (neural)"),
     AAROHI_NEURAL_("Aarohi (neural)"),
-    MANOHAR_NEURAL_("Manohar (neural)");
+    MANOHAR_NEURAL_("Manohar (neural)"),
+    ZURI_NEURAL_("Zuri (neural)"),
+    RAFIKI_NEURAL_("Rafiki (neural)"),
+    REHEMA_NEURAL_("Rehema (neural)"),
+    DAUDI_NEURAL_("Daudi (neural)");
 
     private final String value;
 

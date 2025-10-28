@@ -32,7 +32,7 @@ public class MessagesApiTemplateLocationHeader extends MessagesApiTemplateHeader
      * Sets latitude.
      * <p>
      * Field description:
-     * Latitude of a location.
+     * Latitude of the location.
      * <p>
      * The field is required.
      *
@@ -48,7 +48,7 @@ public class MessagesApiTemplateLocationHeader extends MessagesApiTemplateHeader
      * Returns latitude.
      * <p>
      * Field description:
-     * Latitude of a location.
+     * Latitude of the location.
      * <p>
      * The field is required.
      *
@@ -63,7 +63,7 @@ public class MessagesApiTemplateLocationHeader extends MessagesApiTemplateHeader
      * Sets latitude.
      * <p>
      * Field description:
-     * Latitude of a location.
+     * Latitude of the location.
      * <p>
      * The field is required.
      *
@@ -78,7 +78,7 @@ public class MessagesApiTemplateLocationHeader extends MessagesApiTemplateHeader
      * Sets longitude.
      * <p>
      * Field description:
-     * Latitude of a location.
+     * Longitude of the location.
      * <p>
      * The field is required.
      *
@@ -94,7 +94,7 @@ public class MessagesApiTemplateLocationHeader extends MessagesApiTemplateHeader
      * Returns longitude.
      * <p>
      * Field description:
-     * Latitude of a location.
+     * Longitude of the location.
      * <p>
      * The field is required.
      *
@@ -109,7 +109,7 @@ public class MessagesApiTemplateLocationHeader extends MessagesApiTemplateHeader
      * Sets longitude.
      * <p>
      * Field description:
-     * Latitude of a location.
+     * Longitude of the location.
      * <p>
      * The field is required.
      *

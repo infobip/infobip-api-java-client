@@ -19,6 +19,8 @@ import java.util.Objects;
  */
 public class CallRoutingSipEndpoint extends CallRoutingEndpoint {
 
+    private String from;
+
     private String username;
 
     private String sipTrunkId;
@@ -30,6 +32,46 @@ public class CallRoutingSipEndpoint extends CallRoutingEndpoint {
      */
     public CallRoutingSipEndpoint() {
         super("SIP");
+    }
+
+    /**
+     * Sets from.
+     * <p>
+     * Field description:
+     * Caller ID that will be used. Defaults to &#x60;from&#x60; value used in inbound call.
+     *
+     * @param from
+     * @return This {@link CallRoutingSipEndpoint instance}.
+     */
+    public CallRoutingSipEndpoint from(String from) {
+        this.from = from;
+        return this;
+    }
+
+    /**
+     * Returns from.
+     * <p>
+     * Field description:
+     * Caller ID that will be used. Defaults to &#x60;from&#x60; value used in inbound call.
+     *
+     * @return from
+     */
+    @JsonProperty("from")
+    public String getFrom() {
+        return from;
+    }
+
+    /**
+     * Sets from.
+     * <p>
+     * Field description:
+     * Caller ID that will be used. Defaults to &#x60;from&#x60; value used in inbound call.
+     *
+     * @param from
+     */
+    @JsonProperty("from")
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     /**
@@ -185,7 +227,8 @@ public class CallRoutingSipEndpoint extends CallRoutingEndpoint {
             return false;
         }
         CallRoutingSipEndpoint callRoutingSipEndpoint = (CallRoutingSipEndpoint) o;
-        return Objects.equals(this.username, callRoutingSipEndpoint.username)
+        return Objects.equals(this.from, callRoutingSipEndpoint.from)
+                && Objects.equals(this.username, callRoutingSipEndpoint.username)
                 && Objects.equals(this.sipTrunkId, callRoutingSipEndpoint.sipTrunkId)
                 && Objects.equals(this.customHeaders, callRoutingSipEndpoint.customHeaders)
                 && super.equals(o);
@@ -193,7 +236,7 @@ public class CallRoutingSipEndpoint extends CallRoutingEndpoint {
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, sipTrunkId, customHeaders, super.hashCode());
+        return Objects.hash(from, username, sipTrunkId, customHeaders, super.hashCode());
     }
 
     @Override
@@ -204,6 +247,9 @@ public class CallRoutingSipEndpoint extends CallRoutingEndpoint {
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
+                .append(newLine)
+                .append("    from: ")
+                .append(toIndentedString(from))
                 .append(newLine)
                 .append("    username: ")
                 .append(toIndentedString(username))

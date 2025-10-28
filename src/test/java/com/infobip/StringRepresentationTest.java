@@ -102,6 +102,7 @@ class StringRepresentationTest {
                         + "            }]\n"
                         + "        }\n"
                         + "        limitedTimeOffer: null\n"
+                        + "        orderStatus: null\n"
                         + "    }\n"
                         + "    language: en\n"
                         + "}");

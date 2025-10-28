@@ -28,14 +28,18 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = MessagesApiMessageContactBody.class, name = "CONTACT"),
     @JsonSubTypes.Type(value = MessagesApiMessageDocumentBody.class, name = "DOCUMENT"),
     @JsonSubTypes.Type(value = MessagesApiMessageFlowBody.class, name = "FLOW"),
+    @JsonSubTypes.Type(value = MessagesApiMessageFormBody.class, name = "FORM"),
     @JsonSubTypes.Type(value = MessagesApiMessageImageBody.class, name = "IMAGE"),
     @JsonSubTypes.Type(value = MessagesApiMessageListBody.class, name = "LIST"),
     @JsonSubTypes.Type(value = MessagesApiMessageLocationBody.class, name = "LOCATION"),
     @JsonSubTypes.Type(value = MessagesApiMessageMixedBody.class, name = "MIXED"),
+    @JsonSubTypes.Type(value = MessagesApiMessageOrderRequestBody.class, name = "ORDER_REQUEST"),
+    @JsonSubTypes.Type(value = MessagesApiMessageOrderStatusBody.class, name = "ORDER_STATUS"),
     @JsonSubTypes.Type(value = MessagesApiMessageProductBody.class, name = "PRODUCT"),
     @JsonSubTypes.Type(value = MessagesApiMessageRichLinkBody.class, name = "RICH_LINK"),
     @JsonSubTypes.Type(value = MessagesApiMessageStickerBody.class, name = "STICKER"),
     @JsonSubTypes.Type(value = MessagesApiMessageTextBody.class, name = "TEXT"),
+    @JsonSubTypes.Type(value = MessagesApiMessageTimePickerBody.class, name = "TIME_PICKER"),
     @JsonSubTypes.Type(value = MessagesApiMessageVideoBody.class, name = "VIDEO"),
 })
 public abstract class MessagesApiMessageBody {

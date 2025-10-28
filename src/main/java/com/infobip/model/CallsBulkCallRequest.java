@@ -25,7 +25,7 @@ public class CallsBulkCallRequest {
      * Sets externalId.
      * <p>
      * Field description:
-     * Client defined call ID.
+     * Custom ID assigned by the client.
      *
      * @param externalId
      * @return This {@link CallsBulkCallRequest instance}.
@@ -39,7 +39,7 @@ public class CallsBulkCallRequest {
      * Returns externalId.
      * <p>
      * Field description:
-     * Client defined call ID.
+     * Custom ID assigned by the client.
      *
      * @return externalId
      */
@@ -52,7 +52,7 @@ public class CallsBulkCallRequest {
      * Sets externalId.
      * <p>
      * Field description:
-     * Client defined call ID.
+     * Custom ID assigned by the client.
      *
      * @param externalId
      */

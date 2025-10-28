@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.Objects;
 
 /**
- * Header of a message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types#free-form-messages).
+ * Header of a message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats).
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -23,7 +23,10 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = WhatsAppInteractiveUrlButtonDocumentHeaderContent.class, name = "DOCUMENT"),
+    @JsonSubTypes.Type(value = WhatsAppInteractiveUrlButtonImageHeaderContent.class, name = "IMAGE"),
     @JsonSubTypes.Type(value = WhatsAppInteractiveUrlButtonTextHeaderContent.class, name = "TEXT"),
+    @JsonSubTypes.Type(value = WhatsAppInteractiveUrlButtonVideoHeaderContent.class, name = "VIDEO"),
 })
 public abstract class WhatsAppInteractiveUrlButtonHeaderContent {
 

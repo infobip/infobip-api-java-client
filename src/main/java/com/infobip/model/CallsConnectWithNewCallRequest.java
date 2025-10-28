@@ -27,6 +27,8 @@ public class CallsConnectWithNewCallRequest {
 
     /**
      * Sets callRequest.
+     * <p>
+     * The field is required.
      *
      * @param callRequest
      * @return This {@link CallsConnectWithNewCallRequest instance}.
@@ -38,6 +40,8 @@ public class CallsConnectWithNewCallRequest {
 
     /**
      * Returns callRequest.
+     * <p>
+     * The field is required.
      *
      * @return callRequest
      */
@@ -48,6 +52,8 @@ public class CallsConnectWithNewCallRequest {
 
     /**
      * Sets callRequest.
+     * <p>
+     * The field is required.
      *
      * @param callRequest
      */

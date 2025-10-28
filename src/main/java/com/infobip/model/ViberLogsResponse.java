@@ -21,6 +21,8 @@ public class ViberLogsResponse {
 
     private List<ViberLog> results = null;
 
+    private ViberCursorPageInfo cursor;
+
     /**
      * Sets results.
      * <p>
@@ -78,6 +80,37 @@ public class ViberLogsResponse {
         this.results = results;
     }
 
+    /**
+     * Sets cursor.
+     *
+     * @param cursor
+     * @return This {@link ViberLogsResponse instance}.
+     */
+    public ViberLogsResponse cursor(ViberCursorPageInfo cursor) {
+        this.cursor = cursor;
+        return this;
+    }
+
+    /**
+     * Returns cursor.
+     *
+     * @return cursor
+     */
+    @JsonProperty("cursor")
+    public ViberCursorPageInfo getCursor() {
+        return cursor;
+    }
+
+    /**
+     * Sets cursor.
+     *
+     * @param cursor
+     */
+    @JsonProperty("cursor")
+    public void setCursor(ViberCursorPageInfo cursor) {
+        this.cursor = cursor;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -87,12 +120,13 @@ public class ViberLogsResponse {
             return false;
         }
         ViberLogsResponse viberLogsResponse = (ViberLogsResponse) o;
-        return Objects.equals(this.results, viberLogsResponse.results);
+        return Objects.equals(this.results, viberLogsResponse.results)
+                && Objects.equals(this.cursor, viberLogsResponse.cursor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(results);
+        return Objects.hash(results, cursor);
     }
 
     @Override
@@ -103,6 +137,9 @@ public class ViberLogsResponse {
                 .append(newLine)
                 .append("    results: ")
                 .append(toIndentedString(results))
+                .append(newLine)
+                .append("    cursor: ")
+                .append(toIndentedString(cursor))
                 .append(newLine)
                 .append("}")
                 .toString();

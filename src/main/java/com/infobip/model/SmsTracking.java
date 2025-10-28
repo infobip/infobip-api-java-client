@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Allows you to set up tracking parameters to track conversion metrics. For more details on SMS Conversion, see: [Track Conversion](https://www.infobip.com/docs/sms/api#track-conversion).
+ * Allows you to set up tracking parameters to track conversion metrics. For more details, see: [SMS with conversion tracking](https://www.infobip.com/docs/sms/sms-over-api#send-sms-with-conversion-tracking).
  */
 public class SmsTracking {
 

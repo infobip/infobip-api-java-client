@@ -34,7 +34,7 @@ public class EmailDomainResponse {
 
     private OffsetDateTime createdAt;
 
-    private String returnPathAddress;
+    private EmailBlocklistConfigurationLevel blocklistConfigurationLevel;
 
     /**
      * Sets domainId.
@@ -325,43 +325,35 @@ public class EmailDomainResponse {
     }
 
     /**
-     * Sets returnPathAddress.
-     * <p>
-     * Field description:
-     * Mailbox for return path.
+     * Sets blocklistConfigurationLevel.
      *
-     * @param returnPathAddress
+     * @param blocklistConfigurationLevel
      * @return This {@link EmailDomainResponse instance}.
      */
-    public EmailDomainResponse returnPathAddress(String returnPathAddress) {
-        this.returnPathAddress = returnPathAddress;
+    public EmailDomainResponse blocklistConfigurationLevel(
+            EmailBlocklistConfigurationLevel blocklistConfigurationLevel) {
+        this.blocklistConfigurationLevel = blocklistConfigurationLevel;
         return this;
     }
 
     /**
-     * Returns returnPathAddress.
-     * <p>
-     * Field description:
-     * Mailbox for return path.
+     * Returns blocklistConfigurationLevel.
      *
-     * @return returnPathAddress
+     * @return blocklistConfigurationLevel
      */
-    @JsonProperty("returnPathAddress")
-    public String getReturnPathAddress() {
-        return returnPathAddress;
+    @JsonProperty("blocklistConfigurationLevel")
+    public EmailBlocklistConfigurationLevel getBlocklistConfigurationLevel() {
+        return blocklistConfigurationLevel;
     }
 
     /**
-     * Sets returnPathAddress.
-     * <p>
-     * Field description:
-     * Mailbox for return path.
+     * Sets blocklistConfigurationLevel.
      *
-     * @param returnPathAddress
+     * @param blocklistConfigurationLevel
      */
-    @JsonProperty("returnPathAddress")
-    public void setReturnPathAddress(String returnPathAddress) {
-        this.returnPathAddress = returnPathAddress;
+    @JsonProperty("blocklistConfigurationLevel")
+    public void setBlocklistConfigurationLevel(EmailBlocklistConfigurationLevel blocklistConfigurationLevel) {
+        this.blocklistConfigurationLevel = blocklistConfigurationLevel;
     }
 
     @Override
@@ -380,12 +372,13 @@ public class EmailDomainResponse {
                 && Objects.equals(this.dnsRecords, emailDomainResponse.dnsRecords)
                 && Objects.equals(this.blocked, emailDomainResponse.blocked)
                 && Objects.equals(this.createdAt, emailDomainResponse.createdAt)
-                && Objects.equals(this.returnPathAddress, emailDomainResponse.returnPathAddress);
+                && Objects.equals(this.blocklistConfigurationLevel, emailDomainResponse.blocklistConfigurationLevel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(domainId, domainName, active, tracking, dnsRecords, blocked, createdAt, returnPathAddress);
+        return Objects.hash(
+                domainId, domainName, active, tracking, dnsRecords, blocked, createdAt, blocklistConfigurationLevel);
     }
 
     @Override
@@ -415,8 +408,8 @@ public class EmailDomainResponse {
                 .append("    createdAt: ")
                 .append(toIndentedString(createdAt))
                 .append(newLine)
-                .append("    returnPathAddress: ")
-                .append(toIndentedString(returnPathAddress))
+                .append("    blocklistConfigurationLevel: ")
+                .append(toIndentedString(blocklistConfigurationLevel))
                 .append(newLine)
                 .append("}")
                 .toString();

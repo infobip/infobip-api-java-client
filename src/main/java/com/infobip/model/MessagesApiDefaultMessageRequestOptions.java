@@ -21,6 +21,8 @@ public class MessagesApiDefaultMessageRequestOptions {
 
     private UrlOptions tracking;
 
+    private MessagesApiMessageOrderingOptions messageOrdering;
+
     /**
      * Sets schedule.
      *
@@ -83,6 +85,37 @@ public class MessagesApiDefaultMessageRequestOptions {
         this.tracking = tracking;
     }
 
+    /**
+     * Sets messageOrdering.
+     *
+     * @param messageOrdering
+     * @return This {@link MessagesApiDefaultMessageRequestOptions instance}.
+     */
+    public MessagesApiDefaultMessageRequestOptions messageOrdering(MessagesApiMessageOrderingOptions messageOrdering) {
+        this.messageOrdering = messageOrdering;
+        return this;
+    }
+
+    /**
+     * Returns messageOrdering.
+     *
+     * @return messageOrdering
+     */
+    @JsonProperty("messageOrdering")
+    public MessagesApiMessageOrderingOptions getMessageOrdering() {
+        return messageOrdering;
+    }
+
+    /**
+     * Sets messageOrdering.
+     *
+     * @param messageOrdering
+     */
+    @JsonProperty("messageOrdering")
+    public void setMessageOrdering(MessagesApiMessageOrderingOptions messageOrdering) {
+        this.messageOrdering = messageOrdering;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -94,12 +127,13 @@ public class MessagesApiDefaultMessageRequestOptions {
         MessagesApiDefaultMessageRequestOptions messagesApiDefaultMessageRequestOptions =
                 (MessagesApiDefaultMessageRequestOptions) o;
         return Objects.equals(this.schedule, messagesApiDefaultMessageRequestOptions.schedule)
-                && Objects.equals(this.tracking, messagesApiDefaultMessageRequestOptions.tracking);
+                && Objects.equals(this.tracking, messagesApiDefaultMessageRequestOptions.tracking)
+                && Objects.equals(this.messageOrdering, messagesApiDefaultMessageRequestOptions.messageOrdering);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(schedule, tracking);
+        return Objects.hash(schedule, tracking, messageOrdering);
     }
 
     @Override
@@ -113,6 +147,9 @@ public class MessagesApiDefaultMessageRequestOptions {
                 .append(newLine)
                 .append("    tracking: ")
                 .append(toIndentedString(tracking))
+                .append(newLine)
+                .append("    messageOrdering: ")
+                .append(toIndentedString(messageOrdering))
                 .append(newLine)
                 .append("}")
                 .toString();

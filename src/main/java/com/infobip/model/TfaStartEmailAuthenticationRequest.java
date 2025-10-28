@@ -23,6 +23,8 @@ public class TfaStartEmailAuthenticationRequest {
 
     private String from;
 
+    private Map<String, String> landingPagePlaceholders = null;
+
     private String messageId;
 
     private Map<String, String> placeholders = null;
@@ -113,6 +115,65 @@ public class TfaStartEmailAuthenticationRequest {
     @JsonProperty("from")
     public void setFrom(String from) {
         this.from = from;
+    }
+
+    /**
+     * Sets landingPagePlaceholders.
+     * <p>
+     * Field description:
+     * Key value pairs that will be replaced when using personalized opt out landing page. Placeholder keys should NOT contain curly brackets and should NOT contain a &#x60;pin&#x60; placeholder. Valid example: &#x60;\&quot;landingPagePlaceholders\&quot;:{\&quot;name\&quot;:\&quot;John\&quot;, \&quot;surname\&quot;: \&quot;Smith\&quot;}&#x60;
+     *
+     * @param landingPagePlaceholders
+     * @return This {@link TfaStartEmailAuthenticationRequest instance}.
+     */
+    public TfaStartEmailAuthenticationRequest landingPagePlaceholders(Map<String, String> landingPagePlaceholders) {
+        this.landingPagePlaceholders = landingPagePlaceholders;
+        return this;
+    }
+
+    /**
+     * Puts and entry into landingPagePlaceholders.
+     * <p>
+     * Field description:
+     * Key value pairs that will be replaced when using personalized opt out landing page. Placeholder keys should NOT contain curly brackets and should NOT contain a &#x60;pin&#x60; placeholder. Valid example: &#x60;\&quot;landingPagePlaceholders\&quot;:{\&quot;name\&quot;:\&quot;John\&quot;, \&quot;surname\&quot;: \&quot;Smith\&quot;}&#x60;
+     *
+     * @param key The given key.
+     * @param landingPagePlaceholdersItem The item to be associated with the given key.
+     * @return This {@link TfaStartEmailAuthenticationRequest instance}.
+     */
+    public TfaStartEmailAuthenticationRequest putLandingPagePlaceholdersItem(
+            String key, String landingPagePlaceholdersItem) {
+        if (this.landingPagePlaceholders == null) {
+            this.landingPagePlaceholders = new HashMap<>();
+        }
+        this.landingPagePlaceholders.put(key, landingPagePlaceholdersItem);
+        return this;
+    }
+
+    /**
+     * Returns landingPagePlaceholders.
+     * <p>
+     * Field description:
+     * Key value pairs that will be replaced when using personalized opt out landing page. Placeholder keys should NOT contain curly brackets and should NOT contain a &#x60;pin&#x60; placeholder. Valid example: &#x60;\&quot;landingPagePlaceholders\&quot;:{\&quot;name\&quot;:\&quot;John\&quot;, \&quot;surname\&quot;: \&quot;Smith\&quot;}&#x60;
+     *
+     * @return landingPagePlaceholders
+     */
+    @JsonProperty("landingPagePlaceholders")
+    public Map<String, String> getLandingPagePlaceholders() {
+        return landingPagePlaceholders;
+    }
+
+    /**
+     * Sets landingPagePlaceholders.
+     * <p>
+     * Field description:
+     * Key value pairs that will be replaced when using personalized opt out landing page. Placeholder keys should NOT contain curly brackets and should NOT contain a &#x60;pin&#x60; placeholder. Valid example: &#x60;\&quot;landingPagePlaceholders\&quot;:{\&quot;name\&quot;:\&quot;John\&quot;, \&quot;surname\&quot;: \&quot;Smith\&quot;}&#x60;
+     *
+     * @param landingPagePlaceholders
+     */
+    @JsonProperty("landingPagePlaceholders")
+    public void setLandingPagePlaceholders(Map<String, String> landingPagePlaceholders) {
+        this.landingPagePlaceholders = landingPagePlaceholders;
     }
 
     /**
@@ -276,6 +337,8 @@ public class TfaStartEmailAuthenticationRequest {
         TfaStartEmailAuthenticationRequest tfaStartEmailAuthenticationRequest = (TfaStartEmailAuthenticationRequest) o;
         return Objects.equals(this.applicationId, tfaStartEmailAuthenticationRequest.applicationId)
                 && Objects.equals(this.from, tfaStartEmailAuthenticationRequest.from)
+                && Objects.equals(
+                        this.landingPagePlaceholders, tfaStartEmailAuthenticationRequest.landingPagePlaceholders)
                 && Objects.equals(this.messageId, tfaStartEmailAuthenticationRequest.messageId)
                 && Objects.equals(this.placeholders, tfaStartEmailAuthenticationRequest.placeholders)
                 && Objects.equals(this.to, tfaStartEmailAuthenticationRequest.to);
@@ -283,7 +346,7 @@ public class TfaStartEmailAuthenticationRequest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(applicationId, from, messageId, placeholders, to);
+        return Objects.hash(applicationId, from, landingPagePlaceholders, messageId, placeholders, to);
     }
 
     @Override
@@ -297,6 +360,9 @@ public class TfaStartEmailAuthenticationRequest {
                 .append(newLine)
                 .append("    from: ")
                 .append(toIndentedString(from))
+                .append(newLine)
+                .append("    landingPagePlaceholders: ")
+                .append(toIndentedString(landingPagePlaceholders))
                 .append(newLine)
                 .append("    messageId: ")
                 .append(toIndentedString(messageId))

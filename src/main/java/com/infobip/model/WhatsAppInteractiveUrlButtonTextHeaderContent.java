@@ -30,7 +30,7 @@ public class WhatsAppInteractiveUrlButtonTextHeaderContent extends WhatsAppInter
      * Sets text.
      * <p>
      * Field description:
-     * Content of the header used when creating interactive url button.
+     * Text sent in the header of message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats).
      * <p>
      * The field is required.
      *
@@ -46,7 +46,7 @@ public class WhatsAppInteractiveUrlButtonTextHeaderContent extends WhatsAppInter
      * Returns text.
      * <p>
      * Field description:
-     * Content of the header used when creating interactive url button.
+     * Text sent in the header of message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats).
      * <p>
      * The field is required.
      *
@@ -61,7 +61,7 @@ public class WhatsAppInteractiveUrlButtonTextHeaderContent extends WhatsAppInter
      * Sets text.
      * <p>
      * Field description:
-     * Content of the header used when creating interactive url button.
+     * Text sent in the header of message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats).
      * <p>
      * The field is required.
      *

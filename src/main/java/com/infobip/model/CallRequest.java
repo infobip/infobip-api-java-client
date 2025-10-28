@@ -41,6 +41,8 @@ public class CallRequest {
 
     private String parentCallId;
 
+    private String externalId;
+
     /**
      * Sets endpoint.
      * <p>
@@ -475,6 +477,46 @@ public class CallRequest {
         this.parentCallId = parentCallId;
     }
 
+    /**
+     * Sets externalId.
+     * <p>
+     * Field description:
+     * Custom ID assigned by the client.
+     *
+     * @param externalId
+     * @return This {@link CallRequest instance}.
+     */
+    public CallRequest externalId(String externalId) {
+        this.externalId = externalId;
+        return this;
+    }
+
+    /**
+     * Returns externalId.
+     * <p>
+     * Field description:
+     * Custom ID assigned by the client.
+     *
+     * @return externalId
+     */
+    @JsonProperty("externalId")
+    public String getExternalId() {
+        return externalId;
+    }
+
+    /**
+     * Sets externalId.
+     * <p>
+     * Field description:
+     * Custom ID assigned by the client.
+     *
+     * @param externalId
+     */
+    @JsonProperty("externalId")
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -494,7 +536,8 @@ public class CallRequest {
                 && Objects.equals(this.customData, callRequest.customData)
                 && Objects.equals(this.callsConfigurationId, callRequest.callsConfigurationId)
                 && Objects.equals(this.platform, callRequest.platform)
-                && Objects.equals(this.parentCallId, callRequest.parentCallId);
+                && Objects.equals(this.parentCallId, callRequest.parentCallId)
+                && Objects.equals(this.externalId, callRequest.externalId);
     }
 
     @Override
@@ -510,7 +553,8 @@ public class CallRequest {
                 customData,
                 callsConfigurationId,
                 platform,
-                parentCallId);
+                parentCallId,
+                externalId);
     }
 
     @Override
@@ -551,6 +595,9 @@ public class CallRequest {
                 .append(newLine)
                 .append("    parentCallId: ")
                 .append(toIndentedString(parentCallId))
+                .append(newLine)
+                .append("    externalId: ")
+                .append(toIndentedString(externalId))
                 .append(newLine)
                 .append("}")
                 .toString();

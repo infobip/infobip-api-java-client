@@ -97,6 +97,7 @@ import com.infobip.model.CallsSpeechCaptureRequest;
 import com.infobip.model.CallsStartMediaStreamRequest;
 import com.infobip.model.CallsStartTranscriptionRequest;
 import com.infobip.model.CallsStopPlayRequest;
+import com.infobip.model.CallsUpdateCallRequest;
 import com.infobip.model.CallsUpdateRequest;
 import java.io.File;
 import java.time.OffsetDateTime;
@@ -4411,7 +4412,6 @@ public class CallsApi {
             CallDirection direction,
             CallState status,
             OffsetDateTime startTimeAfter,
-            OffsetDateTime endTimeBefore,
             String conferenceId,
             String dialogId,
             String bulkId,
@@ -4445,9 +4445,6 @@ public class CallsApi {
         if (startTimeAfter != null) {
             builder.addQueryParameter(new Parameter("startTimeAfter", startTimeAfter));
         }
-        if (endTimeBefore != null) {
-            builder.addQueryParameter(new Parameter("endTimeBefore", endTimeBefore));
-        }
         if (conferenceId != null) {
             builder.addQueryParameter(new Parameter("conferenceId", conferenceId));
         }
@@ -4478,7 +4475,6 @@ public class CallsApi {
         private CallDirection direction;
         private CallState status;
         private OffsetDateTime startTimeAfter;
-        private OffsetDateTime endTimeBefore;
         private String conferenceId;
         private String dialogId;
         private String bulkId;
@@ -4576,17 +4572,6 @@ public class CallsApi {
         }
 
         /**
-         * Sets endTimeBefore.
-         *
-         * @param endTimeBefore Date and time for when the call has been finished. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS+ZZZZ&#x60;. (optional)
-         * @return GetCallsHistoryRequest
-         */
-        public GetCallsHistoryRequest endTimeBefore(OffsetDateTime endTimeBefore) {
-            this.endTimeBefore = endTimeBefore;
-            return this;
-        }
-
-        /**
          * Sets conferenceId.
          *
          * @param conferenceId Conference ID. (optional)
@@ -4657,7 +4642,6 @@ public class CallsApi {
                     direction,
                     status,
                     startTimeAfter,
-                    endTimeBefore,
                     conferenceId,
                     dialogId,
                     bulkId,
@@ -4682,7 +4666,6 @@ public class CallsApi {
                     direction,
                     status,
                     startTimeAfter,
-                    endTimeBefore,
                     conferenceId,
                     dialogId,
                     bulkId,
@@ -8242,10 +8225,10 @@ public class CallsApi {
     }
 
     private RequestDefinition updateConferenceCallDefinition(
-            String conferenceId, String callId, CallsUpdateRequest callsUpdateRequest) {
+            String conferenceId, String callId, CallsUpdateCallRequest callsUpdateCallRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "PATCH", "/calls/1/conferences/{conferenceId}/call/{callId}")
-                .body(callsUpdateRequest)
+                .body(callsUpdateCallRequest)
                 .requiresAuthentication(true)
                 .accept("application/json")
                 .contentType("application/json");
@@ -8265,14 +8248,15 @@ public class CallsApi {
     public class UpdateConferenceCallRequest {
         private final String conferenceId;
         private final String callId;
-        private final CallsUpdateRequest callsUpdateRequest;
+        private final CallsUpdateCallRequest callsUpdateCallRequest;
 
-        private UpdateConferenceCallRequest(String conferenceId, String callId, CallsUpdateRequest callsUpdateRequest) {
+        private UpdateConferenceCallRequest(
+                String conferenceId, String callId, CallsUpdateCallRequest callsUpdateCallRequest) {
             this.conferenceId =
                     Objects.requireNonNull(conferenceId, "The required parameter 'conferenceId' is missing.");
             this.callId = Objects.requireNonNull(callId, "The required parameter 'callId' is missing.");
-            this.callsUpdateRequest = Objects.requireNonNull(
-                    callsUpdateRequest, "The required parameter 'callsUpdateRequest' is missing.");
+            this.callsUpdateCallRequest = Objects.requireNonNull(
+                    callsUpdateCallRequest, "The required parameter 'callsUpdateCallRequest' is missing.");
         }
 
         /**
@@ -8283,7 +8267,7 @@ public class CallsApi {
          */
         public CallsActionResponse execute() throws ApiException {
             RequestDefinition updateConferenceCallDefinition =
-                    updateConferenceCallDefinition(conferenceId, callId, callsUpdateRequest);
+                    updateConferenceCallDefinition(conferenceId, callId, callsUpdateCallRequest);
             return apiClient.execute(
                     updateConferenceCallDefinition, new TypeReference<CallsActionResponse>() {}.getType());
         }
@@ -8296,7 +8280,7 @@ public class CallsApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
             RequestDefinition updateConferenceCallDefinition =
-                    updateConferenceCallDefinition(conferenceId, callId, callsUpdateRequest);
+                    updateConferenceCallDefinition(conferenceId, callId, callsUpdateCallRequest);
             return apiClient.executeAsync(
                     updateConferenceCallDefinition, new TypeReference<CallsActionResponse>() {}.getType(), callback);
         }
@@ -8309,12 +8293,12 @@ public class CallsApi {
      *
      * @param conferenceId Conference ID. (required)
      * @param callId Call ID. (required)
-     * @param callsUpdateRequest  (required)
+     * @param callsUpdateCallRequest  (required)
      * @return UpdateConferenceCallRequest
      */
     public UpdateConferenceCallRequest updateConferenceCall(
-            String conferenceId, String callId, CallsUpdateRequest callsUpdateRequest) {
-        return new UpdateConferenceCallRequest(conferenceId, callId, callsUpdateRequest);
+            String conferenceId, String callId, CallsUpdateCallRequest callsUpdateCallRequest) {
+        return new UpdateConferenceCallRequest(conferenceId, callId, callsUpdateCallRequest);
     }
 
     private RequestDefinition updateMediaStreamConfigDefinition(

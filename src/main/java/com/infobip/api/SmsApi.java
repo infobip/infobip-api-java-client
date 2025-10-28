@@ -155,7 +155,7 @@ public class SmsApi {
     /**
      * Get inbound SMS messages.
      * <p>
-     * If for some reason you are unable to receive incoming SMS to the endpoint of your choice in real time, you can use this API call to fetch messages. Each request will return a batch of received messages - only once. The API request will only return new messages that arrived since the last API request.
+     * If you are unable to receive incoming SMS to the endpoint of your choice in real-time, you can use this API call to fetch messages. Each request will return a batch of received messages, only once. The API request will only return new messages that arrived since the last API request. To use this method, you’d need to:&lt;ol&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;https://www.infobip.com/docs/api/platform/numbers/phone-numbers/purchase-number\&quot;&gt;Buy a number&lt;/a&gt; capable of receiving SMS traffic.&lt;/li&gt;&lt;li&gt;Specify a forwarding endpoint for the number and optionally configure other &lt;a href&#x3D;\&quot;https://www.infobip.com/docs/api/platform/numbers/my-numbers/resource-management/manage-inbound-configuration\&quot;&gt;inbound settings&lt;/a&gt;.&lt;/li&gt;&lt;/ol&gt;
      *
      * @return GetInboundSmsMessagesRequest
      */
@@ -695,9 +695,9 @@ public class SmsApi {
     /**
      * Get scheduled SMS messages.
      * <p>
-     * See all [scheduled messages](https://www.infobip.com/docs/sms/sms-over-api#schedule-sms) and their scheduled date and time. To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message).
+     * See all [scheduled messages](https://www.infobip.com/docs/sms/sms-over-api#schedule-sms) and their scheduled date and time. To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](#channels/sms/sms-messaging/outbound-sms/send-sms-messages).
      *
-     * @param bulkId  (required)
+     * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. (required)
      * @return GetScheduledSmsMessagesRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
      */
@@ -756,9 +756,9 @@ public class SmsApi {
     /**
      * Get scheduled SMS messages status.
      * <p>
-     * See the status of [scheduled messages](https://www.infobip.com/docs/sms/sms-over-api#schedule-sms). To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message).
+     * See the status of [scheduled messages](https://www.infobip.com/docs/sms/sms-over-api#schedule-sms). To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](#channels/sms/sms-messaging/outbound-sms/send-sms-messages).
      *
-     * @param bulkId  (required)
+     * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. (required)
      * @return GetScheduledSmsMessagesStatusRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
      */
@@ -878,9 +878,9 @@ public class SmsApi {
     /**
      * Reschedule SMS messages.
      * <p>
-     * Change the date and time of already [scheduled messages](https://www.infobip.com/docs/sms/sms-over-api#schedule-sms). To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message).
+     * Change the date and time of already [scheduled messages](https://www.infobip.com/docs/sms/sms-over-api#schedule-sms). To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](#channels/sms/sms-messaging/outbound-sms/send-sms-messages).
      *
-     * @param bulkId  (required)
+     * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. (required)
      * @param smsBulkRequest  (required)
      * @return RescheduleSmsMessagesRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>
@@ -1006,9 +1006,9 @@ public class SmsApi {
     /**
      * Update scheduled SMS messages status.
      * <p>
-     * Change the status or completely cancel sending of [scheduled messages](https://www.infobip.com/docs/sms/sms-over-api#schedule-sms). To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](https://www.infobip.com/docs/api/channels/sms/sms-messaging/outbound-sms/send-sms-message).
+     * Change the status or completely cancel sending of [scheduled messages](https://www.infobip.com/docs/sms/sms-over-api#schedule-sms). To schedule a message, use the &#x60;sendAt&#x60; field when [sending a message](#channels/sms/sms-messaging/outbound-sms/send-sms-messages).
      *
-     * @param bulkId  (required)
+     * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. (required)
      * @param smsUpdateStatusRequest  (required)
      * @return UpdateScheduledSmsMessagesStatusRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about SMS channel and use cases</a>

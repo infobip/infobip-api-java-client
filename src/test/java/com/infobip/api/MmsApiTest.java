@@ -342,6 +342,10 @@ class MmsApiTest extends ApiTest {
         String givenText = "Some text";
         String givenType = "TEXT";
 
+        var givenNextCursor = "next-cursor-id";
+        var givenCursorLimit = 10;
+        var givenUseCursor = true;
+
         String givenResponse = String.format(
                 "{\n" + "  \"results\": [\n"
                         + "    {\n"
@@ -375,7 +379,11 @@ class MmsApiTest extends ApiTest {
                         + "        ]\n"
                         + "      }\n"
                         + "    }\n"
-                        + "  ]\n"
+                        + "  ],\n"
+                        + "  \"cursor\": {"
+                        + "    \"limit\": %d,"
+                        + "    \"nextCursor\": \"%s\""
+                        + "  }"
                         + "}\n",
                 givenTitle,
                 givenMccMnc,
@@ -395,9 +403,12 @@ class MmsApiTest extends ApiTest {
                 givenDescription,
                 givenContentTitle,
                 givenText,
-                givenType);
+                givenType,
+                givenCursorLimit,
+                givenNextCursor);
 
-        setUpSuccessGetRequest(LOGS, Map.of(), givenResponse);
+        setUpSuccessGetRequest(
+                LOGS, Map.of("useCursor", Boolean.toString(givenUseCursor), "cursor", givenNextCursor), givenResponse);
 
         MmsApi api = new MmsApi(getApiClient());
 
@@ -435,7 +446,10 @@ class MmsApiTest extends ApiTest {
             then(segment).isEqualTo(expectedSegment);
         };
 
-        var call = api.getOutboundMmsMessageLogs();
+        var call = api.getOutboundMmsMessageLogs()
+                .useCursor(givenUseCursor)
+                .cursor(givenNextCursor)
+                .limit(givenCursorLimit);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }

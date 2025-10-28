@@ -87,7 +87,7 @@ public class MessagesApi {
     /**
      * Send a Messages API event.
      * <p>
-     * Send one or more events to multiple recipients.&lt;br/&gt;An event is an interaction with end-user&#39;s device which does not impact messaging content of conversation.&lt;br/&gt;Examples of events are: TYPING_STARTED, TYPING_STOPPED.
+     * Send one or more events to multiple recipients.  An event is an interaction with end-user&#39;s device which does not impact messaging content of conversation.  Examples of events are: TYPING_STARTED, TYPING_STOPPED.
      *
      * @param messagesApiEventRequest  (required)
      * @return SendMessagesApiEventsRequest

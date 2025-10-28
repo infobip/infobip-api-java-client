@@ -28,6 +28,8 @@ public class EmailResponseDetails {
      * <p>
      * Field description:
      * The destination address of the message.
+     * <p>
+     * The field is required.
      *
      * @param to
      * @return This {@link EmailResponseDetails instance}.
@@ -42,6 +44,8 @@ public class EmailResponseDetails {
      * <p>
      * Field description:
      * The destination address of the message.
+     * <p>
+     * The field is required.
      *
      * @return to
      */
@@ -55,6 +59,8 @@ public class EmailResponseDetails {
      * <p>
      * Field description:
      * The destination address of the message.
+     * <p>
+     * The field is required.
      *
      * @param to
      */
@@ -68,6 +74,8 @@ public class EmailResponseDetails {
      * <p>
      * Field description:
      * The ID that uniquely identifies a message response.
+     * <p>
+     * The field is required.
      *
      * @param messageId
      * @return This {@link EmailResponseDetails instance}.
@@ -82,6 +90,8 @@ public class EmailResponseDetails {
      * <p>
      * Field description:
      * The ID that uniquely identifies a message response.
+     * <p>
+     * The field is required.
      *
      * @return messageId
      */
@@ -95,6 +105,8 @@ public class EmailResponseDetails {
      * <p>
      * Field description:
      * The ID that uniquely identifies a message response.
+     * <p>
+     * The field is required.
      *
      * @param messageId
      */
@@ -105,6 +117,8 @@ public class EmailResponseDetails {
 
     /**
      * Sets status.
+     * <p>
+     * The field is required.
      *
      * @param status
      * @return This {@link EmailResponseDetails instance}.
@@ -116,6 +130,8 @@ public class EmailResponseDetails {
 
     /**
      * Returns status.
+     * <p>
+     * The field is required.
      *
      * @return status
      */
@@ -126,6 +142,8 @@ public class EmailResponseDetails {
 
     /**
      * Sets status.
+     * <p>
+     * The field is required.
      *
      * @param status
      */

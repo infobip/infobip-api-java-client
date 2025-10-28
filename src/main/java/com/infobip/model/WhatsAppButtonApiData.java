@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Objects;
 
 /**
- * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, a phone number button and &#x60;copy code&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
+ * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, one phone number button, one &#x60;copy code&#x60; button and one &#x60;flow&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -29,9 +29,11 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = WhatsAppCopyCodeDefaultButtonApiData.class, name = "COPY_CODE"),
     @JsonSubTypes.Type(value = WhatsAppFlowButtonApiData.class, name = "FLOW"),
     @JsonSubTypes.Type(value = WhatsAppMultiProductButtonApiData.class, name = "MULTI_PRODUCT"),
+    @JsonSubTypes.Type(value = WhatsAppOrderDetailsButtonApiData.class, name = "ORDER_DETAILS"),
     @JsonSubTypes.Type(value = WhatsAppPhoneNumberButtonApiData.class, name = "PHONE_NUMBER"),
     @JsonSubTypes.Type(value = WhatsAppQuickReplyButtonApiData.class, name = "QUICK_REPLY"),
     @JsonSubTypes.Type(value = WhatsAppUrlButtonApiData.class, name = "URL"),
+    @JsonSubTypes.Type(value = WhatsAppVoiceCallButtonApiData.class, name = "VOICE_CALL"),
 })
 public abstract class WhatsAppButtonApiData {
     /**
@@ -44,7 +46,9 @@ public abstract class WhatsAppButtonApiData {
         COPY_CODE("COPY_CODE"),
         FLOW("FLOW"),
         CATALOG("CATALOG"),
-        MULTI_PRODUCT("MULTI_PRODUCT");
+        MULTI_PRODUCT("MULTI_PRODUCT"),
+        ORDER_DETAILS("ORDER_DETAILS"),
+        VOICE_CALL("VOICE_CALL");
 
         private String value;
 

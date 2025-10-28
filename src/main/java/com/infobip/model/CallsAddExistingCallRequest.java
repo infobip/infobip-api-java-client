@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -20,6 +22,10 @@ public class CallsAddExistingCallRequest {
     private Boolean connectOnEarlyMedia;
 
     private RingbackGeneration ringbackGeneration;
+
+    private CallsRole role;
+
+    private Map<String, String> customData = null;
 
     /**
      * Sets connectOnEarlyMedia.
@@ -92,6 +98,95 @@ public class CallsAddExistingCallRequest {
         this.ringbackGeneration = ringbackGeneration;
     }
 
+    /**
+     * Sets role.
+     *
+     * @param role
+     * @return This {@link CallsAddExistingCallRequest instance}.
+     */
+    public CallsAddExistingCallRequest role(CallsRole role) {
+        this.role = role;
+        return this;
+    }
+
+    /**
+     * Returns role.
+     *
+     * @return role
+     */
+    @JsonProperty("role")
+    public CallsRole getRole() {
+        return role;
+    }
+
+    /**
+     * Sets role.
+     *
+     * @param role
+     */
+    @JsonProperty("role")
+    public void setRole(CallsRole role) {
+        this.role = role;
+    }
+
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @param customData
+     * @return This {@link CallsAddExistingCallRequest instance}.
+     */
+    public CallsAddExistingCallRequest customData(Map<String, String> customData) {
+        this.customData = customData;
+        return this;
+    }
+
+    /**
+     * Puts and entry into customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @param key The given key.
+     * @param customDataItem The item to be associated with the given key.
+     * @return This {@link CallsAddExistingCallRequest instance}.
+     */
+    public CallsAddExistingCallRequest putCustomDataItem(String key, String customDataItem) {
+        if (this.customData == null) {
+            this.customData = new HashMap<>();
+        }
+        this.customData.put(key, customDataItem);
+        return this;
+    }
+
+    /**
+     * Returns customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @return customData
+     */
+    @JsonProperty("customData")
+    public Map<String, String> getCustomData() {
+        return customData;
+    }
+
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Optional parameter to update a call&#39;s custom data.
+     *
+     * @param customData
+     */
+    @JsonProperty("customData")
+    public void setCustomData(Map<String, String> customData) {
+        this.customData = customData;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -102,12 +197,14 @@ public class CallsAddExistingCallRequest {
         }
         CallsAddExistingCallRequest callsAddExistingCallRequest = (CallsAddExistingCallRequest) o;
         return Objects.equals(this.connectOnEarlyMedia, callsAddExistingCallRequest.connectOnEarlyMedia)
-                && Objects.equals(this.ringbackGeneration, callsAddExistingCallRequest.ringbackGeneration);
+                && Objects.equals(this.ringbackGeneration, callsAddExistingCallRequest.ringbackGeneration)
+                && Objects.equals(this.role, callsAddExistingCallRequest.role)
+                && Objects.equals(this.customData, callsAddExistingCallRequest.customData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(connectOnEarlyMedia, ringbackGeneration);
+        return Objects.hash(connectOnEarlyMedia, ringbackGeneration, role, customData);
     }
 
     @Override
@@ -121,6 +218,12 @@ public class CallsAddExistingCallRequest {
                 .append(newLine)
                 .append("    ringbackGeneration: ")
                 .append(toIndentedString(ringbackGeneration))
+                .append(newLine)
+                .append("    role: ")
+                .append(toIndentedString(role))
+                .append(newLine)
+                .append("    customData: ")
+                .append(toIndentedString(customData))
                 .append(newLine)
                 .append("}")
                 .toString();

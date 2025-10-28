@@ -211,7 +211,7 @@ public class WhatsAppApi {
      * @param userNumber End user&#39;s number. Must be in international format. (required)
      * @param whatsAppIdentityConfirmation  (required)
      * @return ConfirmWhatsAppIdentityRequest
-     * @see <a href="https://www.infobip.com/docs/whatsapp/additional-functionality#identity-change">Learn more.</a>
+     * @see <a href="https://www.infobip.com/docs/whatsapp/manage-integration/additional-functionalities#detect-identity-changes">Learn more.</a>
      */
     public ConfirmWhatsAppIdentityRequest confirmWhatsAppIdentity(
             String sender, String userNumber, WhatsAppIdentityConfirmation whatsAppIdentityConfirmation) {
@@ -279,7 +279,7 @@ public class WhatsAppApi {
     /**
      * Create WhatsApp Template.
      * <p>
-     * Create a WhatsApp template. Created template will be submitted for WhatsApp&#39;s review and approval. Once approved, template can be sent to end-users. Refer to [template guidelines](https://www.infobip.com/docs/whatsapp/message-types#guidelines-amp-best-practices) for additional info.
+     * Create a WhatsApp template. Once created, Infobip submits a template for WhatsApp&#39;s review and approval. When approved, a template can be sent to end users. Refer to [template guidelines](https://www.infobip.com/docs/whatsapp/remaining-compliant#message-templates) for additional info.
      *
      * @param sender Registered WhatsApp sender number. Must be in international format. (required)
      * @param whatsAppTemplatePublicApiRequest  (required)
@@ -553,7 +553,7 @@ public class WhatsAppApi {
     /**
      * Edit WhatsApp Template.
      * <p>
-     * Edit a WhatsApp template. Edited template will be submitted for WhatsApp&#39;s review and approval. Once approved, template can be sent to end-users. Refer to [template guidelines](https://www.infobip.com/docs/whatsapp/message-types#guidelines-amp-best-practices) for additional info. * Only templates with an approved, rejected or paused status can be edited. * Please use structure documented in [Create WhatsApp Template](#channels/whatsapp/whatsapp-service-management/create-whatsapp-template) endpoint. * Category of an approved template cannot be edited. * Approved template can be edited up to 10 times in a 30 day window, or 1 time in a 24 hour window. Rejected or paused templates can be edited an unlimited number of times.
+     * Edit a WhatsApp template. Once edited, Infobip submits a template for WhatsApp&#39;s review and approval. When approved, a template can be sent to end users. Refer to [template guidelines](https://www.infobip.com/docs/whatsapp/remaining-compliant#message-templates) for additional info. * Only templates with an approved, rejected, or paused status can be edited. * Use the structure provided in the [Create WhatsApp Template](#channels/whatsapp/whatsapp-service-management/create-whatsapp-template) endpoint. * Category of an approved template cannot be edited. * Approved templates can be edited up to 10 times in a 30-day window, or 1 time in a 24-hour window. Rejected or paused templates can be edited an unlimited number of times.
      *
      * @param sender Registered WhatsApp sender number. Must be in international format. (required)
      * @param id Template ID. Must be a number. (required)
@@ -626,7 +626,7 @@ public class WhatsAppApi {
      * @param sender Registered WhatsApp sender number. Must be in international format. (required)
      * @param userNumber End user&#39;s number. Must be in international format. (required)
      * @return GetWhatsAppIdentityRequest
-     * @see <a href="https://www.infobip.com/docs/whatsapp/additional-functionality#identity-change">Learn more.</a>
+     * @see <a href="https://www.infobip.com/docs/whatsapp/manage-integration/additional-functionalities#detect-identity-changes">Learn more.</a>
      */
     public GetWhatsAppIdentityRequest getWhatsAppIdentity(String sender, String userNumber) {
         return new GetWhatsAppIdentityRequest(sender, userNumber);

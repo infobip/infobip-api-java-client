@@ -3418,7 +3418,6 @@ class CallsApiTest extends ApiTest {
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
-        CallsCreationMethod givenCreationMethod = CallsCreationMethod.RECORDED;
         String givenCreationTime = "2022-05-01T14:25:45.143Z";
         String givenExpirationTime = "2022-06-01T14:25:45.143Z";
         Long givenDuration = 3L;
@@ -3434,7 +3433,6 @@ class CallsApiTest extends ApiTest {
                         + "      \"name\": \"%s\",\n"
                         + "      \"fileFormat\": \"%s\",\n"
                         + "      \"size\": %d,\n"
-                        + "      \"creationMethod\": \"%s\",\n"
                         + "      \"creationTime\": \"%s\",\n"
                         + "      \"expirationTime\": \"%s\",\n"
                         + "      \"duration\": %d\n"
@@ -3451,7 +3449,6 @@ class CallsApiTest extends ApiTest {
                 givenName,
                 givenFileFormat,
                 givenSize,
-                givenCreationMethod,
                 givenCreationTime,
                 givenExpirationTime,
                 givenDuration,
@@ -3474,7 +3471,6 @@ class CallsApiTest extends ApiTest {
             then(result.getName()).isEqualTo(givenName);
             then(result.getFileFormat()).isEqualTo(givenFileFormat);
             then(result.getSize()).isEqualTo(givenSize);
-            then(result.getCreationMethod()).isEqualTo(givenCreationMethod);
             then(result.getCreationTime()).isEqualTo(givenCreationTime);
             then(result.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(result.getDuration()).isEqualTo(givenDuration);
@@ -3497,7 +3493,6 @@ class CallsApiTest extends ApiTest {
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
-        CallsCreationMethod givenCreationMethod = CallsCreationMethod.RECORDED;
         String givenCreationTime = "2022-05-01T14:25:45.143Z";
         String givenExpirationTime = "2022-06-01T14:25:45.143Z";
         Long givenDuration = 3L;
@@ -3511,19 +3506,11 @@ class CallsApiTest extends ApiTest {
                         + "  \"name\": \"%s\",\n"
                         + "  \"fileFormat\": \"%s\",\n"
                         + "  \"size\": %d,\n"
-                        + "  \"creationMethod\": \"%s\",\n"
                         + "  \"creationTime\": \"%s\",\n"
                         + "  \"expirationTime\": \"%s\",\n"
                         + "  \"duration\": %d\n"
                         + "}\n",
-                givenId,
-                givenName,
-                givenFileFormat,
-                givenSize,
-                givenCreationMethod,
-                givenCreationTime,
-                givenExpirationTime,
-                givenDuration);
+                givenId, givenName, givenFileFormat, givenSize, givenCreationTime, givenExpirationTime, givenDuration);
 
         setUpMultipartRequest(CALLS_FILES, List.of(new Multipart("file", givenAttachmentText)), givenResponse, 200);
 
@@ -3535,7 +3522,6 @@ class CallsApiTest extends ApiTest {
             then(response.getName()).isEqualTo(givenName);
             then(response.getFileFormat()).isEqualTo(givenFileFormat);
             then(response.getSize()).isEqualTo(givenSize);
-            then(response.getCreationMethod()).isEqualTo(givenCreationMethod);
             then(response.getCreationTime()).isEqualTo(givenCreationTime);
             then(response.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(response.getDuration()).isEqualTo(givenDuration);
@@ -3552,7 +3538,6 @@ class CallsApiTest extends ApiTest {
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
-        CallsCreationMethod givenCreationMethod = CallsCreationMethod.RECORDED;
         String givenCreationTime = "2022-05-01T14:25:45.143Z";
         String givenExpirationTime = "2022-06-01T14:25:45.143Z";
         Long givenDuration = 3L;
@@ -3562,19 +3547,11 @@ class CallsApiTest extends ApiTest {
                         + "  \"name\": \"%s\",\n"
                         + "  \"fileFormat\": \"%s\",\n"
                         + "  \"size\": %d,\n"
-                        + "  \"creationMethod\": \"%s\",\n"
                         + "  \"creationTime\": \"%s\",\n"
                         + "  \"expirationTime\": \"%s\",\n"
                         + "  \"duration\": %d\n"
                         + "}\n",
-                givenId,
-                givenName,
-                givenFileFormat,
-                givenSize,
-                givenCreationMethod,
-                givenCreationTime,
-                givenExpirationTime,
-                givenDuration);
+                givenId, givenName, givenFileFormat, givenSize, givenCreationTime, givenExpirationTime, givenDuration);
 
         setUpSuccessGetRequest(CALLS_FILE.replace("{fileId}", givenId), Map.of(), givenResponse);
 
@@ -3586,7 +3563,6 @@ class CallsApiTest extends ApiTest {
             then(response.getName()).isEqualTo(givenName);
             then(response.getFileFormat()).isEqualTo(givenFileFormat);
             then(response.getSize()).isEqualTo(givenSize);
-            then(response.getCreationMethod()).isEqualTo(givenCreationMethod);
             then(response.getCreationTime()).isEqualTo(givenCreationTime);
             then(response.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(response.getDuration()).isEqualTo(givenDuration);
@@ -3603,7 +3579,6 @@ class CallsApiTest extends ApiTest {
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
-        CallsCreationMethod givenMethod = CallsCreationMethod.RECORDED;
         String givenCreationTime = "2022-05-01T14:25:45.143Z";
         String givenExpirationTime = "2022-06-01T14:25:45.143Z";
         Long givenDuration = 3L;
@@ -3613,19 +3588,11 @@ class CallsApiTest extends ApiTest {
                         + "  \"name\": \"%s\",\n"
                         + "  \"fileFormat\": \"%s\",\n"
                         + "  \"size\": %d,\n"
-                        + "  \"creationMethod\": \"%s\",\n"
                         + "  \"creationTime\": \"%s\",\n"
                         + "  \"expirationTime\": \"%s\",\n"
                         + "  \"duration\": %d\n"
                         + "}\n",
-                givenId,
-                givenName,
-                givenFileFormat,
-                givenSize,
-                givenMethod,
-                givenCreationTime,
-                givenExpirationTime,
-                givenDuration);
+                givenId, givenName, givenFileFormat, givenSize, givenCreationTime, givenExpirationTime, givenDuration);
 
         setUpNoRequestBodyDeleteRequest(CALLS_FILE.replace("{fileId}", givenId), Map.of(), givenResponse, 200);
 
@@ -3637,7 +3604,6 @@ class CallsApiTest extends ApiTest {
             then(response.getName()).isEqualTo(givenName);
             then(response.getFileFormat()).isEqualTo(givenFileFormat);
             then(response.getSize()).isEqualTo(givenSize);
-            then(response.getCreationMethod()).isEqualTo(givenMethod);
             then(response.getCreationTime()).isEqualTo(givenCreationTime);
             then(response.getExpirationTime()).isEqualTo(givenExpirationTime);
             then(response.getDuration()).isEqualTo(givenDuration);
@@ -4240,7 +4206,6 @@ class CallsApiTest extends ApiTest {
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
         Long givenSize = 292190L;
-        CallsCreationMethod givenCreationMethod = CallsCreationMethod.RECORDED;
         String givenCreationTime = "2022-05-01T14:25:45.143Z";
         String givenExpirationTime = "2022-06-01T14:25:45.143Z";
         Long givenDuration = 3L;

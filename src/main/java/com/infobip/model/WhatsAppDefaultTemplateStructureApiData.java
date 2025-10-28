@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Structure of the created template. Can consist of body (mandatory), header, footer, buttons, carousel, limited time offer and shortening options.
+ * Structure of the created template. Can consist of body (mandatory), header, footer, buttons, carousel, limited time offer, call permission request and shortening options.
  */
 public class WhatsAppDefaultTemplateStructureApiData implements WhatsAppTemplateStructureApiData {
 
@@ -32,6 +32,8 @@ public class WhatsAppDefaultTemplateStructureApiData implements WhatsAppTemplate
     private WhatsAppCarouselApiData carousel;
 
     private WhatsAppLimitedTimeOfferApiData limitedTimeOffer;
+
+    private Object callPermissionRequest;
 
     private WhatsAppShorteningOptionsApiData shorteningOptions;
 
@@ -175,7 +177,7 @@ public class WhatsAppDefaultTemplateStructureApiData implements WhatsAppTemplate
      * Sets buttons.
      * <p>
      * Field description:
-     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, a phone number button and &#x60;copy code&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
+     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, one phone number button, one &#x60;copy code&#x60; button and one &#x60;flow&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
      *
      * @param buttons
      * @return This {@link WhatsAppDefaultTemplateStructureApiData instance}.
@@ -189,7 +191,7 @@ public class WhatsAppDefaultTemplateStructureApiData implements WhatsAppTemplate
      * Adds and item into buttons.
      * <p>
      * Field description:
-     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, a phone number button and &#x60;copy code&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
+     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, one phone number button, one &#x60;copy code&#x60; button and one &#x60;flow&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
      *
      * @param buttonsItem The item to be added to the list.
      * @return This {@link WhatsAppDefaultTemplateStructureApiData instance}.
@@ -206,7 +208,7 @@ public class WhatsAppDefaultTemplateStructureApiData implements WhatsAppTemplate
      * Returns buttons.
      * <p>
      * Field description:
-     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, a phone number button and &#x60;copy code&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
+     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, one phone number button, one &#x60;copy code&#x60; button and one &#x60;flow&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
      *
      * @return buttons
      */
@@ -219,7 +221,7 @@ public class WhatsAppDefaultTemplateStructureApiData implements WhatsAppTemplate
      * Sets buttons.
      * <p>
      * Field description:
-     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, a phone number button and &#x60;copy code&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
+     * Template buttons. Can contain 1 to 10 buttons which include up to 2 URL buttons, one phone number button, one &#x60;copy code&#x60; button and one &#x60;flow&#x60; button. &#x60;quick reply&#x60; and non &#x60;quick reply&#x60; buttons have to be grouped together.
      *
      * @param buttons
      */
@@ -288,6 +290,46 @@ public class WhatsAppDefaultTemplateStructureApiData implements WhatsAppTemplate
     @JsonProperty("limitedTimeOffer")
     public void setLimitedTimeOffer(WhatsAppLimitedTimeOfferApiData limitedTimeOffer) {
         this.limitedTimeOffer = limitedTimeOffer;
+    }
+
+    /**
+     * Sets callPermissionRequest.
+     * <p>
+     * Field description:
+     * Call permission request. Presence of this object enables a call permission request feature, no fields are required. When header is media type call permission request will not be displayed on end-user&#39;s device.
+     *
+     * @param callPermissionRequest
+     * @return This {@link WhatsAppDefaultTemplateStructureApiData instance}.
+     */
+    public WhatsAppDefaultTemplateStructureApiData callPermissionRequest(Object callPermissionRequest) {
+        this.callPermissionRequest = callPermissionRequest;
+        return this;
+    }
+
+    /**
+     * Returns callPermissionRequest.
+     * <p>
+     * Field description:
+     * Call permission request. Presence of this object enables a call permission request feature, no fields are required. When header is media type call permission request will not be displayed on end-user&#39;s device.
+     *
+     * @return callPermissionRequest
+     */
+    @JsonProperty("callPermissionRequest")
+    public Object getCallPermissionRequest() {
+        return callPermissionRequest;
+    }
+
+    /**
+     * Sets callPermissionRequest.
+     * <p>
+     * Field description:
+     * Call permission request. Presence of this object enables a call permission request feature, no fields are required. When header is media type call permission request will not be displayed on end-user&#39;s device.
+     *
+     * @param callPermissionRequest
+     */
+    @JsonProperty("callPermissionRequest")
+    public void setCallPermissionRequest(Object callPermissionRequest) {
+        this.callPermissionRequest = callPermissionRequest;
     }
 
     /**
@@ -378,13 +420,24 @@ public class WhatsAppDefaultTemplateStructureApiData implements WhatsAppTemplate
                 && Objects.equals(this.buttons, whatsAppDefaultTemplateStructureApiData.buttons)
                 && Objects.equals(this.carousel, whatsAppDefaultTemplateStructureApiData.carousel)
                 && Objects.equals(this.limitedTimeOffer, whatsAppDefaultTemplateStructureApiData.limitedTimeOffer)
+                && Objects.equals(
+                        this.callPermissionRequest, whatsAppDefaultTemplateStructureApiData.callPermissionRequest)
                 && Objects.equals(this.shorteningOptions, whatsAppDefaultTemplateStructureApiData.shorteningOptions)
                 && Objects.equals(this.type, whatsAppDefaultTemplateStructureApiData.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(header, body, footer, buttons, carousel, limitedTimeOffer, shorteningOptions, type);
+        return Objects.hash(
+                header,
+                body,
+                footer,
+                buttons,
+                carousel,
+                limitedTimeOffer,
+                callPermissionRequest,
+                shorteningOptions,
+                type);
     }
 
     @Override
@@ -410,6 +463,9 @@ public class WhatsAppDefaultTemplateStructureApiData implements WhatsAppTemplate
                 .append(newLine)
                 .append("    limitedTimeOffer: ")
                 .append(toIndentedString(limitedTimeOffer))
+                .append(newLine)
+                .append("    callPermissionRequest: ")
+                .append(toIndentedString(callPermissionRequest))
                 .append(newLine)
                 .append("    shorteningOptions: ")
                 .append(toIndentedString(shorteningOptions))

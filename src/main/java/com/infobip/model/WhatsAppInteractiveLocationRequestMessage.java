@@ -35,6 +35,8 @@ public class WhatsAppInteractiveLocationRequestMessage {
 
     private String applicationId;
 
+    private WhatsAppMessageContext context;
+
     /**
      * Sets from.
      * <p>
@@ -395,6 +397,37 @@ public class WhatsAppInteractiveLocationRequestMessage {
         this.applicationId = applicationId;
     }
 
+    /**
+     * Sets context.
+     *
+     * @param context
+     * @return This {@link WhatsAppInteractiveLocationRequestMessage instance}.
+     */
+    public WhatsAppInteractiveLocationRequestMessage context(WhatsAppMessageContext context) {
+        this.context = context;
+        return this;
+    }
+
+    /**
+     * Returns context.
+     *
+     * @return context
+     */
+    @JsonProperty("context")
+    public WhatsAppMessageContext getContext() {
+        return context;
+    }
+
+    /**
+     * Sets context.
+     *
+     * @param context
+     */
+    @JsonProperty("context")
+    public void setContext(WhatsAppMessageContext context) {
+        this.context = context;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -413,12 +446,14 @@ public class WhatsAppInteractiveLocationRequestMessage {
                 && Objects.equals(this.notifyUrl, whatsAppInteractiveLocationRequestMessage.notifyUrl)
                 && Objects.equals(this.urlOptions, whatsAppInteractiveLocationRequestMessage.urlOptions)
                 && Objects.equals(this.entityId, whatsAppInteractiveLocationRequestMessage.entityId)
-                && Objects.equals(this.applicationId, whatsAppInteractiveLocationRequestMessage.applicationId);
+                && Objects.equals(this.applicationId, whatsAppInteractiveLocationRequestMessage.applicationId)
+                && Objects.equals(this.context, whatsAppInteractiveLocationRequestMessage.context);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, to, messageId, content, callbackData, notifyUrl, urlOptions, entityId, applicationId);
+        return Objects.hash(
+                from, to, messageId, content, callbackData, notifyUrl, urlOptions, entityId, applicationId, context);
     }
 
     @Override
@@ -453,6 +488,9 @@ public class WhatsAppInteractiveLocationRequestMessage {
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    context: ")
+                .append(toIndentedString(context))
                 .append(newLine)
                 .append("}")
                 .toString();

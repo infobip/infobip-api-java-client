@@ -13,16 +13,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * File creation method.
+ * Represents CallRoutingApplicationType enumeration.
  */
-public enum CallsCreationMethod {
-    UPLOADED("UPLOADED"),
-    SYNTHESIZED("SYNTHESIZED"),
-    RECORDED("RECORDED");
+public enum CallRoutingApplicationType {
+    CALL_ROUTING("CALL_ROUTING");
 
     private final String value;
 
-    CallsCreationMethod(String value) {
+    CallRoutingApplicationType(String value) {
         this.value = value;
     }
 
@@ -37,8 +35,8 @@ public enum CallsCreationMethod {
     }
 
     @JsonCreator
-    public static CallsCreationMethod fromValue(String value) {
-        for (CallsCreationMethod enumElement : CallsCreationMethod.values()) {
+    public static CallRoutingApplicationType fromValue(String value) {
+        for (CallRoutingApplicationType enumElement : CallRoutingApplicationType.values()) {
             if (enumElement.value.equals(value)) {
                 return enumElement;
             }

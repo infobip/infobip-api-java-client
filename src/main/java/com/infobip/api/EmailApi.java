@@ -35,10 +35,8 @@ import com.infobip.model.EmailIpPoolAssignIpApiRequest;
 import com.infobip.model.EmailIpPoolCreateApiRequest;
 import com.infobip.model.EmailIpPoolDetailResponse;
 import com.infobip.model.EmailIpPoolResponse;
-import com.infobip.model.EmailIpResponse;
 import com.infobip.model.EmailLogsResponse;
 import com.infobip.model.EmailReportsResult;
-import com.infobip.model.EmailReturnPathAddressRequest;
 import com.infobip.model.EmailSendResponse;
 import com.infobip.model.EmailSuppressionInfoPageResponse;
 import com.infobip.model.EmailSuppressionType;
@@ -632,12 +630,13 @@ public class EmailApi {
         /**
          * Executes the getAllIps request.
          *
-         * @return List&lt;EmailIpResponse&gt; The deserialized response.
+         * @return List&lt;EmailIpDetailResponse&gt; The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public List<EmailIpResponse> execute() throws ApiException {
+        public List<EmailIpDetailResponse> execute() throws ApiException {
             RequestDefinition getAllIpsDefinition = getAllIpsDefinition();
-            return apiClient.execute(getAllIpsDefinition, new TypeReference<List<EmailIpResponse>>() {}.getType());
+            return apiClient.execute(
+                    getAllIpsDefinition, new TypeReference<List<EmailIpDetailResponse>>() {}.getType());
         }
 
         /**
@@ -646,10 +645,10 @@ public class EmailApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<List<EmailIpResponse>> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<List<EmailIpDetailResponse>> callback) {
             RequestDefinition getAllIpsDefinition = getAllIpsDefinition();
             return apiClient.executeAsync(
-                    getAllIpsDefinition, new TypeReference<List<EmailIpResponse>>() {}.getType(), callback);
+                    getAllIpsDefinition, new TypeReference<List<EmailIpDetailResponse>>() {}.getType(), callback);
         }
     }
 
@@ -1404,12 +1403,13 @@ public class EmailApi {
         /**
          * Executes the getIpPools request.
          *
-         * @return List&lt;EmailIpPoolResponse&gt; The deserialized response.
+         * @return List&lt;EmailIpPoolDetailResponse&gt; The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public List<EmailIpPoolResponse> execute() throws ApiException {
+        public List<EmailIpPoolDetailResponse> execute() throws ApiException {
             RequestDefinition getIpPoolsDefinition = getIpPoolsDefinition(name);
-            return apiClient.execute(getIpPoolsDefinition, new TypeReference<List<EmailIpPoolResponse>>() {}.getType());
+            return apiClient.execute(
+                    getIpPoolsDefinition, new TypeReference<List<EmailIpPoolDetailResponse>>() {}.getType());
         }
 
         /**
@@ -1418,10 +1418,10 @@ public class EmailApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<List<EmailIpPoolResponse>> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<List<EmailIpPoolDetailResponse>> callback) {
             RequestDefinition getIpPoolsDefinition = getIpPoolsDefinition(name);
             return apiClient.executeAsync(
-                    getIpPoolsDefinition, new TypeReference<List<EmailIpPoolResponse>>() {}.getType(), callback);
+                    getIpPoolsDefinition, new TypeReference<List<EmailIpPoolDetailResponse>>() {}.getType(), callback);
         }
     }
 
@@ -1489,7 +1489,7 @@ public class EmailApi {
      * <p>
      * See the status of scheduled email messages.
      *
-     * @param bulkId The ID uniquely identifies the sent email request. (required)
+     * @param bulkId The ID that uniquely identifies the sent bulk. (required)
      * @return GetScheduledEmailStatusesRequest
      */
     public GetScheduledEmailStatusesRequest getScheduledEmailStatuses(String bulkId) {
@@ -1549,7 +1549,7 @@ public class EmailApi {
      * <p>
      * See the scheduled time of your Email messages.
      *
-     * @param bulkId The ID uniquely identifies the sent email request. (required)
+     * @param bulkId The ID that uniquely identifies the sent bulk. (required)
      * @return GetScheduledEmailsRequest
      */
     public GetScheduledEmailsRequest getScheduledEmails(String bulkId) {
@@ -1905,7 +1905,7 @@ public class EmailApi {
      * <p>
      * Change the date and time for sending scheduled messages.
      *
-     * @param bulkId  (required)
+     * @param bulkId The ID that uniquely identifies the sent bulk. (required)
      * @param emailBulkRescheduleRequest  (required)
      * @return RescheduleEmailsRequest
      */
@@ -1948,7 +1948,8 @@ public class EmailApi {
             String clientPriority,
             String applicationId,
             String entityId,
-            String headers) {
+            String headers,
+            String ipPoolId) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/email/3/send")
                 .requiresAuthentication(true)
                 .accept("application/json")
@@ -2056,6 +2057,9 @@ public class EmailApi {
         if (headers != null) {
             builder.addFormParameter(new Parameter("headers", headers));
         }
+        if (ipPoolId != null) {
+            builder.addFormParameter(new Parameter("ipPoolId", ipPoolId));
+        }
         return builder.build();
     }
 
@@ -2097,6 +2101,7 @@ public class EmailApi {
         private String applicationId;
         private String entityId;
         private String headers;
+        private String ipPoolId;
 
         private SendEmailRequest(List<String> to) {
             this.to = Objects.requireNonNull(to, "The required parameter 'to' is missing.");
@@ -2314,7 +2319,7 @@ public class EmailApi {
         /**
          * Sets bulkId.
          *
-         * @param bulkId The ID uniquely identifies the sent email request. This filter will enable you to query delivery reports for all the messages using just one request. You will receive a &#x60;bulkId&#x60; in the response after sending an email request. If you don&#39;t set your own &#x60;bulkId&#x60;, unique ID will be generated by our system and returned in the API response. (Optional Field) (optional)
+         * @param bulkId The ID that uniquely identifies the sent bulk. This filter will enable you to query delivery reports for all the messages using just one request. You will receive a &#x60;bulkId&#x60; in the response after sending an email request. If you don&#39;t set your own &#x60;bulkId&#x60;, unique ID will be generated by our system and returned in the API response. (Optional Field) (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest bulkId(String bulkId) {
@@ -2424,7 +2429,7 @@ public class EmailApi {
         /**
          * Sets clientPriority.
          *
-         * @param clientPriority Adds a priority rating to this email message. Allowed values are &#x60;HIGH&#x60;, &#x60;STANDARD&#x60; and &#x60;LOW&#x60;. Messages with a higher priority value sent by your account are prioritized over messages with a lower priority value sent by your account. If no priority value is provided, messages will be treated with &#x60;STANDARD&#x60; priority by default. (optional)
+         * @param clientPriority Adds a priority rating to this email message. Allowed values are &#x60;HIGH&#x60;, &#x60;STANDARD&#x60; and &#x60;LOW&#x60;. Messages with a higher priority value sent by your account are prioritized over messages with a lower priority value sent by your account. If no priority value is provided, messages will be treated with &#x60;STANDARD&#x60; priority by default.  (optional, default to STANDARD)
          * @return SendEmailRequest
          */
         public SendEmailRequest clientPriority(String clientPriority) {
@@ -2457,11 +2462,22 @@ public class EmailApi {
         /**
          * Sets headers.
          *
-         * @param headers Additional email headers for customization that can be provided in a form of JSON. Example: &#x60;headers&#x3D;{\\\&quot;X-CustomHeader\\\&quot;: \\\&quot;Header value\\\&quot;}&#x60;.  There are a few exceptions of headers which are not adjustable through this option: &#x60;To&#x60;, &#x60;Cc&#x60;, &#x60;Bcc&#x60;, &#x60;From&#x60;, &#x60;Subject&#x60;,&#x60;Content-Type&#x60;, &#x60;DKIM-Signature&#x60;, &#x60;Content-Transfer-Encoding&#x60;, &#x60;Return-Path&#x60;, &#x60;MIME-Version&#x60; (optional)
+         * @param headers Additional email headers for customization that can be provided in a form of JSON. For example, you can override List-Unsubscribe header and provide your own custom one: &#x60;headers&#x3D;{\\\&quot;List-Unsubscribe\\\&quot;: \\\&quot;your unsubscribe link\\\&quot;, \\\&quot;X-CustomHeader\\\&quot;: \\\&quot;Header value\\\&quot;}&#x60;.  There are a few exceptions of headers which are not adjustable through this option: &#x60;To&#x60;, &#x60;Cc&#x60;, &#x60;Bcc&#x60;, &#x60;From&#x60;, &#x60;Subject&#x60;,&#x60;Content-Type&#x60;, &#x60;DKIM-Signature&#x60;, &#x60;Content-Transfer-Encoding&#x60;, &#x60;Return-Path&#x60;, &#x60;MIME-Version&#x60; (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest headers(String headers) {
             this.headers = headers;
+            return this;
+        }
+
+        /**
+         * Sets ipPoolId.
+         *
+         * @param ipPoolId The ID of the IP Pool which will be used for sending. (optional)
+         * @return SendEmailRequest
+         */
+        public SendEmailRequest ipPoolId(String ipPoolId) {
+            this.ipPoolId = ipPoolId;
             return this;
         }
 
@@ -2506,7 +2522,8 @@ public class EmailApi {
                     clientPriority,
                     applicationId,
                     entityId,
-                    headers);
+                    headers,
+                    ipPoolId);
             return apiClient.execute(sendEmailDefinition, new TypeReference<EmailSendResponse>() {}.getType());
         }
 
@@ -2551,7 +2568,8 @@ public class EmailApi {
                     clientPriority,
                     applicationId,
                     entityId,
-                    headers);
+                    headers,
+                    ipPoolId);
             return apiClient.executeAsync(
                     sendEmailDefinition, new TypeReference<EmailSendResponse>() {}.getType(), callback);
         }
@@ -2706,76 +2724,6 @@ public class EmailApi {
         return new UpdateIpPoolRequest(poolId, emailIpPoolCreateApiRequest);
     }
 
-    private RequestDefinition updateReturnPathDefinition(
-            String domainName, EmailReturnPathAddressRequest emailReturnPathAddressRequest) {
-        RequestDefinition.Builder builder = RequestDefinition.builder(
-                        "PUT", "/email/1/domains/{domainName}/return-path")
-                .body(emailReturnPathAddressRequest)
-                .requiresAuthentication(true)
-                .accept("application/json")
-                .contentType("application/json");
-
-        if (domainName != null) {
-            builder.addPathParameter(new Parameter("domainName", domainName));
-        }
-        return builder.build();
-    }
-
-    /**
-     * updateReturnPath request builder class.
-     */
-    public class UpdateReturnPathRequest {
-        private final String domainName;
-        private final EmailReturnPathAddressRequest emailReturnPathAddressRequest;
-
-        private UpdateReturnPathRequest(
-                String domainName, EmailReturnPathAddressRequest emailReturnPathAddressRequest) {
-            this.domainName = Objects.requireNonNull(domainName, "The required parameter 'domainName' is missing.");
-            this.emailReturnPathAddressRequest = Objects.requireNonNull(
-                    emailReturnPathAddressRequest,
-                    "The required parameter 'emailReturnPathAddressRequest' is missing.");
-        }
-
-        /**
-         * Executes the updateReturnPath request.
-         *
-         * @return EmailDomainResponse The deserialized response.
-         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
-         */
-        public EmailDomainResponse execute() throws ApiException {
-            RequestDefinition updateReturnPathDefinition =
-                    updateReturnPathDefinition(domainName, emailReturnPathAddressRequest);
-            return apiClient.execute(updateReturnPathDefinition, new TypeReference<EmailDomainResponse>() {}.getType());
-        }
-
-        /**
-         * Executes the updateReturnPath request asynchronously.
-         *
-         * @param callback The {@link ApiCallback} to be invoked.
-         * @return The {@link okhttp3.Call} associated with the API request.
-         */
-        public okhttp3.Call executeAsync(ApiCallback<EmailDomainResponse> callback) {
-            RequestDefinition updateReturnPathDefinition =
-                    updateReturnPathDefinition(domainName, emailReturnPathAddressRequest);
-            return apiClient.executeAsync(
-                    updateReturnPathDefinition, new TypeReference<EmailDomainResponse>() {}.getType(), callback);
-        }
-    }
-
-    /**
-     * Update return path.
-     * <p>
-     * API to update return path for the provided domain. The mailbox used for return path should be based on the same domain.
-     *
-     * @param domainName Domain for which the return path address needs to be updated. (required)
-     * @param emailReturnPathAddressRequest  (required)
-     * @return UpdateReturnPathRequest
-     */
-    public UpdateReturnPathRequest updateReturnPath(
-            String domainName, EmailReturnPathAddressRequest emailReturnPathAddressRequest) {
-        return new UpdateReturnPathRequest(domainName, emailReturnPathAddressRequest);
-    }
-
     private RequestDefinition updateScheduledEmailStatusesDefinition(
             String bulkId, EmailBulkUpdateStatusRequest emailBulkUpdateStatusRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder("PUT", "/email/1/bulks/status")
@@ -2839,7 +2787,7 @@ public class EmailApi {
      * <p>
      * Change status or completely cancel sending of scheduled messages.
      *
-     * @param bulkId The ID uniquely identifies the sent email request. (required)
+     * @param bulkId The ID that uniquely identifies the sent bulk. (required)
      * @param emailBulkUpdateStatusRequest  (required)
      * @return UpdateScheduledEmailStatusesRequest
      */
@@ -2967,9 +2915,9 @@ public class EmailApi {
     }
 
     /**
-     * Validate email addresses.
+     * Validate email address.
      * <p>
-     * Run validation to identify poor quality emails to clean up your recipient list.
+     * This method lets you request validation of a single email address in real-time, helping you to identify and remove poor-quality emails from your list.
      *
      * @param emailValidationRequest  (required)
      * @return ValidateEmailAddressesRequest

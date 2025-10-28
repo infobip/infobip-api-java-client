@@ -56,6 +56,8 @@ public class Call {
 
     private String dialogId;
 
+    private String externalId;
+
     /**
      * Sets id.
      * <p>
@@ -746,6 +748,46 @@ public class Call {
         this.dialogId = dialogId;
     }
 
+    /**
+     * Sets externalId.
+     * <p>
+     * Field description:
+     * Client defined call ID.
+     *
+     * @param externalId
+     * @return This {@link Call instance}.
+     */
+    public Call externalId(String externalId) {
+        this.externalId = externalId;
+        return this;
+    }
+
+    /**
+     * Returns externalId.
+     * <p>
+     * Field description:
+     * Client defined call ID.
+     *
+     * @return externalId
+     */
+    @JsonProperty("externalId")
+    public String getExternalId() {
+        return externalId;
+    }
+
+    /**
+     * Sets externalId.
+     * <p>
+     * Field description:
+     * Client defined call ID.
+     *
+     * @param externalId
+     */
+    @JsonProperty("externalId")
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -772,7 +814,8 @@ public class Call {
                 && Objects.equals(this.platform, call.platform)
                 && Objects.equals(this.conferenceId, call.conferenceId)
                 && Objects.equals(this.customData, call.customData)
-                && Objects.equals(this.dialogId, call.dialogId);
+                && Objects.equals(this.dialogId, call.dialogId)
+                && Objects.equals(this.externalId, call.externalId);
     }
 
     @Override
@@ -795,7 +838,8 @@ public class Call {
                 platform,
                 conferenceId,
                 customData,
-                dialogId);
+                dialogId,
+                externalId);
     }
 
     @Override
@@ -857,6 +901,9 @@ public class Call {
                 .append(newLine)
                 .append("    dialogId: ")
                 .append(toIndentedString(dialogId))
+                .append(newLine)
+                .append("    externalId: ")
+                .append(toIndentedString(externalId))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -206,7 +206,9 @@ public class ViberApi {
             Integer limit,
             String entityId,
             String applicationId,
-            List<String> campaignReferenceId) {
+            List<String> campaignReferenceId,
+            Boolean useCursor,
+            String cursor) {
         RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/viber/2/logs")
                 .requiresAuthentication(true)
                 .accept("application/json");
@@ -250,6 +252,12 @@ public class ViberApi {
                 builder.addQueryParameter(new Parameter("campaignReferenceId", parameterItem));
             }
         }
+        if (useCursor != null) {
+            builder.addQueryParameter(new Parameter("useCursor", useCursor));
+        }
+        if (cursor != null) {
+            builder.addQueryParameter(new Parameter("cursor", cursor));
+        }
         return builder.build();
     }
 
@@ -268,6 +276,8 @@ public class ViberApi {
         private String entityId;
         private String applicationId;
         private List<String> campaignReferenceId;
+        private Boolean useCursor;
+        private String cursor;
 
         private GetOutboundViberMessageLogsRequest() {}
 
@@ -329,7 +339,7 @@ public class ViberApi {
         /**
          * Sets sentSince.
          *
-         * @param sentSince The logs will only include messages sent after this date. Use it together with sentUntil to return a time range or if you want to fetch more than 1000 logs allowed per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
+         * @param sentSince The logs will only include messages sent after this date. Use it alongside sentUntil to specify a time range for the logs, but only up to the maximum limit of 1000 logs per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
          * @return GetOutboundViberMessageLogsRequest
          */
         public GetOutboundViberMessageLogsRequest sentSince(OffsetDateTime sentSince) {
@@ -340,7 +350,7 @@ public class ViberApi {
         /**
          * Sets sentUntil.
          *
-         * @param sentUntil The logs will only include messages sent before this date. Use it together with sentSince to return a time range or if you want to fetch more than 1000 logs allowed per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
+         * @param sentUntil The logs will only include messages sent before this date. Use it alongside sentSince to specify a time range for the logs, but only up to the maximum limit of 1000 logs per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
          * @return GetOutboundViberMessageLogsRequest
          */
         public GetOutboundViberMessageLogsRequest sentUntil(OffsetDateTime sentUntil) {
@@ -351,7 +361,7 @@ public class ViberApi {
         /**
          * Sets limit.
          *
-         * @param limit Maximum number of messages to include in logs. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access logs for the last 48h. If you want to fetch more than 1000 logs allowed per call, use sentBefore and sentUntil to retrieve them in pages. (optional, default to 50)
+         * @param limit Maximum number of messages to include in logs. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access logs for the last 48h. (optional, default to 50)
          * @return GetOutboundViberMessageLogsRequest
          */
         public GetOutboundViberMessageLogsRequest limit(Integer limit) {
@@ -393,6 +403,28 @@ public class ViberApi {
         }
 
         /**
+         * Sets useCursor.
+         *
+         * @param useCursor Flag used to enable cursor-based pagination. When set to true, the system will use the cursor to fetch the next set of logs. (optional)
+         * @return GetOutboundViberMessageLogsRequest
+         */
+        public GetOutboundViberMessageLogsRequest useCursor(Boolean useCursor) {
+            this.useCursor = useCursor;
+            return this;
+        }
+
+        /**
+         * Sets cursor.
+         *
+         * @param cursor Value which represents the current position in the data set. For the first request, this field shouldn&#39;t be defined. In subsequent requests, use the &#x60;nextCursor&#x60; value returned from the previous response to continue fetching data. (optional)
+         * @return GetOutboundViberMessageLogsRequest
+         */
+        public GetOutboundViberMessageLogsRequest cursor(String cursor) {
+            this.cursor = cursor;
+            return this;
+        }
+
+        /**
          * Executes the getOutboundViberMessageLogs request.
          *
          * @return ViberLogsResponse The deserialized response.
@@ -410,7 +442,9 @@ public class ViberApi {
                     limit,
                     entityId,
                     applicationId,
-                    campaignReferenceId);
+                    campaignReferenceId,
+                    useCursor,
+                    cursor);
             return apiClient.execute(
                     getOutboundViberMessageLogsDefinition, new TypeReference<ViberLogsResponse>() {}.getType());
         }
@@ -433,7 +467,9 @@ public class ViberApi {
                     limit,
                     entityId,
                     applicationId,
-                    campaignReferenceId);
+                    campaignReferenceId,
+                    useCursor,
+                    cursor);
             return apiClient.executeAsync(
                     getOutboundViberMessageLogsDefinition,
                     new TypeReference<ViberLogsResponse>() {}.getType(),

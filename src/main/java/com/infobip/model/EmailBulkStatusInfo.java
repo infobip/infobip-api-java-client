@@ -23,6 +23,11 @@ public class EmailBulkStatusInfo {
 
     /**
      * Sets bulkId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the message within the bulk.
+     * <p>
+     * The field is required.
      *
      * @param bulkId
      * @return This {@link EmailBulkStatusInfo instance}.
@@ -34,6 +39,11 @@ public class EmailBulkStatusInfo {
 
     /**
      * Returns bulkId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the message within the bulk.
+     * <p>
+     * The field is required.
      *
      * @return bulkId
      */
@@ -44,6 +54,11 @@ public class EmailBulkStatusInfo {
 
     /**
      * Sets bulkId.
+     * <p>
+     * Field description:
+     * The ID that uniquely identifies the message within the bulk.
+     * <p>
+     * The field is required.
      *
      * @param bulkId
      */
@@ -54,6 +69,8 @@ public class EmailBulkStatusInfo {
 
     /**
      * Sets status.
+     * <p>
+     * The field is required.
      *
      * @param status
      * @return This {@link EmailBulkStatusInfo instance}.
@@ -65,6 +82,8 @@ public class EmailBulkStatusInfo {
 
     /**
      * Returns status.
+     * <p>
+     * The field is required.
      *
      * @return status
      */
@@ -75,6 +94,8 @@ public class EmailBulkStatusInfo {
 
     /**
      * Sets status.
+     * <p>
+     * The field is required.
      *
      * @param status
      */

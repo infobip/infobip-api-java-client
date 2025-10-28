@@ -30,7 +30,7 @@ public class WhatsAppInteractiveButtonsVideoHeaderContent extends WhatsAppIntera
      * Sets mediaUrl.
      * <p>
      * Field description:
-     * URL of a video sent in the header of a message containing one or more [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types#interactive-buttons-free-form-messages). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported video types are &#x60;MP4&#x60;, &#x60;3GPP&#x60;. Maximum video size is 16MB.
+     * URL of a video sent in the header of a message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported video types are &#x60;MP4&#x60;, &#x60;3GPP&#x60;. Maximum video size is 16MB.
      * <p>
      * The field is required.
      *
@@ -46,7 +46,7 @@ public class WhatsAppInteractiveButtonsVideoHeaderContent extends WhatsAppIntera
      * Returns mediaUrl.
      * <p>
      * Field description:
-     * URL of a video sent in the header of a message containing one or more [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types#interactive-buttons-free-form-messages). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported video types are &#x60;MP4&#x60;, &#x60;3GPP&#x60;. Maximum video size is 16MB.
+     * URL of a video sent in the header of a message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported video types are &#x60;MP4&#x60;, &#x60;3GPP&#x60;. Maximum video size is 16MB.
      * <p>
      * The field is required.
      *
@@ -61,7 +61,7 @@ public class WhatsAppInteractiveButtonsVideoHeaderContent extends WhatsAppIntera
      * Sets mediaUrl.
      * <p>
      * Field description:
-     * URL of a video sent in the header of a message containing one or more [interactive buttons](https://www.infobip.com/docs/whatsapp/message-types#interactive-buttons-free-form-messages). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported video types are &#x60;MP4&#x60;, &#x60;3GPP&#x60;. Maximum video size is 16MB.
+     * URL of a video sent in the header of a message containing one or more [interactive elements](https://www.infobip.com/docs/whatsapp/message-types-and-templates/free-form-messages#available-interactive-formats). Must be a valid URL starting with &#x60;https://&#x60; or &#x60;http://&#x60;. Supported video types are &#x60;MP4&#x60;, &#x60;3GPP&#x60;. Maximum video size is 16MB.
      * <p>
      * The field is required.
      *

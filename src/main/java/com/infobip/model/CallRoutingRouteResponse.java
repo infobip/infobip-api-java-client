@@ -27,6 +27,10 @@ public class CallRoutingRouteResponse {
 
     private List<CallRoutingDestination> destinations = new ArrayList<>();
 
+    private CallRoutingRouteStatus status;
+
+    private Integer order;
+
     /**
      * Sets id.
      * <p>
@@ -241,6 +245,83 @@ public class CallRoutingRouteResponse {
         this.destinations = destinations;
     }
 
+    /**
+     * Sets status.
+     * <p>
+     * The field is required.
+     *
+     * @param status
+     * @return This {@link CallRoutingRouteResponse instance}.
+     */
+    public CallRoutingRouteResponse status(CallRoutingRouteStatus status) {
+        this.status = status;
+        return this;
+    }
+
+    /**
+     * Returns status.
+     * <p>
+     * The field is required.
+     *
+     * @return status
+     */
+    @JsonProperty("status")
+    public CallRoutingRouteStatus getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets status.
+     * <p>
+     * The field is required.
+     *
+     * @param status
+     */
+    @JsonProperty("status")
+    public void setStatus(CallRoutingRouteStatus status) {
+        this.status = status;
+    }
+
+    /**
+     * Sets order.
+     * <p>
+     * Field description:
+     * Indicates priority index of the route. Routes with lower priority index are executed first.
+     *
+     * @param order
+     * @return This {@link CallRoutingRouteResponse instance}.
+     */
+    public CallRoutingRouteResponse order(Integer order) {
+        this.order = order;
+        return this;
+    }
+
+    /**
+     * Returns order.
+     * <p>
+     * Field description:
+     * Indicates priority index of the route. Routes with lower priority index are executed first.
+     *
+     * @return order
+     */
+    @JsonProperty("order")
+    public Integer getOrder() {
+        return order;
+    }
+
+    /**
+     * Sets order.
+     * <p>
+     * Field description:
+     * Indicates priority index of the route. Routes with lower priority index are executed first.
+     *
+     * @param order
+     */
+    @JsonProperty("order")
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -253,12 +334,14 @@ public class CallRoutingRouteResponse {
         return Objects.equals(this.id, callRoutingRouteResponse.id)
                 && Objects.equals(this.name, callRoutingRouteResponse.name)
                 && Objects.equals(this.criteria, callRoutingRouteResponse.criteria)
-                && Objects.equals(this.destinations, callRoutingRouteResponse.destinations);
+                && Objects.equals(this.destinations, callRoutingRouteResponse.destinations)
+                && Objects.equals(this.status, callRoutingRouteResponse.status)
+                && Objects.equals(this.order, callRoutingRouteResponse.order);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, criteria, destinations);
+        return Objects.hash(id, name, criteria, destinations, status, order);
     }
 
     @Override
@@ -278,6 +361,12 @@ public class CallRoutingRouteResponse {
                 .append(newLine)
                 .append("    destinations: ")
                 .append(toIndentedString(destinations))
+                .append(newLine)
+                .append("    status: ")
+                .append(toIndentedString(status))
+                .append(newLine)
+                .append("    order: ")
+                .append(toIndentedString(order))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -37,6 +37,8 @@ public class WhatsAppMessage {
 
     private String applicationId;
 
+    private WhatsAppMessageContext context;
+
     /**
      * Sets from.
      * <p>
@@ -428,6 +430,37 @@ public class WhatsAppMessage {
         this.applicationId = applicationId;
     }
 
+    /**
+     * Sets context.
+     *
+     * @param context
+     * @return This {@link WhatsAppMessage instance}.
+     */
+    public WhatsAppMessage context(WhatsAppMessageContext context) {
+        this.context = context;
+        return this;
+    }
+
+    /**
+     * Returns context.
+     *
+     * @return context
+     */
+    @JsonProperty("context")
+    public WhatsAppMessageContext getContext() {
+        return context;
+    }
+
+    /**
+     * Sets context.
+     *
+     * @param context
+     */
+    @JsonProperty("context")
+    public void setContext(WhatsAppMessageContext context) {
+        this.context = context;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -446,7 +479,8 @@ public class WhatsAppMessage {
                 && Objects.equals(this.urlOptions, whatsAppMessage.urlOptions)
                 && Objects.equals(this.smsFailover, whatsAppMessage.smsFailover)
                 && Objects.equals(this.entityId, whatsAppMessage.entityId)
-                && Objects.equals(this.applicationId, whatsAppMessage.applicationId);
+                && Objects.equals(this.applicationId, whatsAppMessage.applicationId)
+                && Objects.equals(this.context, whatsAppMessage.context);
     }
 
     @Override
@@ -461,7 +495,8 @@ public class WhatsAppMessage {
                 urlOptions,
                 smsFailover,
                 entityId,
-                applicationId);
+                applicationId,
+                context);
     }
 
     @Override
@@ -499,6 +534,9 @@ public class WhatsAppMessage {
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    context: ")
+                .append(toIndentedString(context))
                 .append(newLine)
                 .append("}")
                 .toString();

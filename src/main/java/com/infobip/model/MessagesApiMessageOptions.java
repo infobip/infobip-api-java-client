@@ -27,6 +27,10 @@ public class MessagesApiMessageOptions {
 
     private String campaignReferenceId;
 
+    private MessagesApiTransliterationCode transliteration;
+
+    private String correlationData;
+
     /**
      * Sets platform.
      *
@@ -200,6 +204,77 @@ public class MessagesApiMessageOptions {
         this.campaignReferenceId = campaignReferenceId;
     }
 
+    /**
+     * Sets transliteration.
+     *
+     * @param transliteration
+     * @return This {@link MessagesApiMessageOptions instance}.
+     */
+    public MessagesApiMessageOptions transliteration(MessagesApiTransliterationCode transliteration) {
+        this.transliteration = transliteration;
+        return this;
+    }
+
+    /**
+     * Returns transliteration.
+     *
+     * @return transliteration
+     */
+    @JsonProperty("transliteration")
+    public MessagesApiTransliterationCode getTransliteration() {
+        return transliteration;
+    }
+
+    /**
+     * Sets transliteration.
+     *
+     * @param transliteration
+     */
+    @JsonProperty("transliteration")
+    public void setTransliteration(MessagesApiTransliterationCode transliteration) {
+        this.transliteration = transliteration;
+    }
+
+    /**
+     * Sets correlationData.
+     * <p>
+     * Field description:
+     * Correlation data included in the outbound message. If provided, it will be returned in the inbound message. Auto-generated if not set explicitly.
+     *
+     * @param correlationData
+     * @return This {@link MessagesApiMessageOptions instance}.
+     */
+    public MessagesApiMessageOptions correlationData(String correlationData) {
+        this.correlationData = correlationData;
+        return this;
+    }
+
+    /**
+     * Returns correlationData.
+     * <p>
+     * Field description:
+     * Correlation data included in the outbound message. If provided, it will be returned in the inbound message. Auto-generated if not set explicitly.
+     *
+     * @return correlationData
+     */
+    @JsonProperty("correlationData")
+    public String getCorrelationData() {
+        return correlationData;
+    }
+
+    /**
+     * Sets correlationData.
+     * <p>
+     * Field description:
+     * Correlation data included in the outbound message. If provided, it will be returned in the inbound message. Auto-generated if not set explicitly.
+     *
+     * @param correlationData
+     */
+    @JsonProperty("correlationData")
+    public void setCorrelationData(String correlationData) {
+        this.correlationData = correlationData;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -213,12 +288,21 @@ public class MessagesApiMessageOptions {
                 && Objects.equals(this.validityPeriod, messagesApiMessageOptions.validityPeriod)
                 && Objects.equals(this.adaptationMode, messagesApiMessageOptions.adaptationMode)
                 && Objects.equals(this.regional, messagesApiMessageOptions.regional)
-                && Objects.equals(this.campaignReferenceId, messagesApiMessageOptions.campaignReferenceId);
+                && Objects.equals(this.campaignReferenceId, messagesApiMessageOptions.campaignReferenceId)
+                && Objects.equals(this.transliteration, messagesApiMessageOptions.transliteration)
+                && Objects.equals(this.correlationData, messagesApiMessageOptions.correlationData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(platform, validityPeriod, adaptationMode, regional, campaignReferenceId);
+        return Objects.hash(
+                platform,
+                validityPeriod,
+                adaptationMode,
+                regional,
+                campaignReferenceId,
+                transliteration,
+                correlationData);
     }
 
     @Override
@@ -241,6 +325,12 @@ public class MessagesApiMessageOptions {
                 .append(newLine)
                 .append("    campaignReferenceId: ")
                 .append(toIndentedString(campaignReferenceId))
+                .append(newLine)
+                .append("    transliteration: ")
+                .append(toIndentedString(transliteration))
+                .append(newLine)
+                .append("    correlationData: ")
+                .append(toIndentedString(correlationData))
                 .append(newLine)
                 .append("}")
                 .toString();

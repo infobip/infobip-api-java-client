@@ -30,6 +30,8 @@ public class CallsParticipant {
 
     private CallsMediaProperties media;
 
+    private CallsRole role;
+
     /**
      * Sets callId.
      * <p>
@@ -249,6 +251,37 @@ public class CallsParticipant {
         this.media = media;
     }
 
+    /**
+     * Sets role.
+     *
+     * @param role
+     * @return This {@link CallsParticipant instance}.
+     */
+    public CallsParticipant role(CallsRole role) {
+        this.role = role;
+        return this;
+    }
+
+    /**
+     * Returns role.
+     *
+     * @return role
+     */
+    @JsonProperty("role")
+    public CallsRole getRole() {
+        return role;
+    }
+
+    /**
+     * Sets role.
+     *
+     * @param role
+     */
+    @JsonProperty("role")
+    public void setRole(CallsRole role) {
+        this.role = role;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -263,12 +296,13 @@ public class CallsParticipant {
                 && Objects.equals(this.state, callsParticipant.state)
                 && Objects.equals(this.joinTime, callsParticipant.joinTime)
                 && Objects.equals(this.leaveTime, callsParticipant.leaveTime)
-                && Objects.equals(this.media, callsParticipant.media);
+                && Objects.equals(this.media, callsParticipant.media)
+                && Objects.equals(this.role, callsParticipant.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(callId, endpoint, state, joinTime, leaveTime, media);
+        return Objects.hash(callId, endpoint, state, joinTime, leaveTime, media, role);
     }
 
     @Override
@@ -294,6 +328,9 @@ public class CallsParticipant {
                 .append(newLine)
                 .append("    media: ")
                 .append(toIndentedString(media))
+                .append(newLine)
+                .append("    role: ")
+                .append(toIndentedString(role))
                 .append(newLine)
                 .append("}")
                 .toString();

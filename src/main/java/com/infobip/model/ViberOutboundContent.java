@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.Objects;
 
 /**
- * Message content.&lt;br/&gt;The &#x60;LIST&#x60; content type is in early access phase. Please contact Infobip Support to enable it for your sender.
+ * Message content.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -23,6 +23,7 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = ViberOutboundCarouselContent.class, name = "CAROUSEL"),
     @JsonSubTypes.Type(value = ViberOutboundFileContent.class, name = "FILE"),
     @JsonSubTypes.Type(value = ViberOutboundImageContent.class, name = "IMAGE"),
     @JsonSubTypes.Type(value = ViberOutboundListContent.class, name = "LIST"),

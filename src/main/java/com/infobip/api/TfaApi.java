@@ -22,6 +22,7 @@ import com.infobip.model.TfaCreateMessageRequest;
 import com.infobip.model.TfaEmailMessage;
 import com.infobip.model.TfaMessage;
 import com.infobip.model.TfaResendPinRequest;
+import com.infobip.model.TfaResendPinRequestViaEmail;
 import com.infobip.model.TfaStartAuthenticationRequest;
 import com.infobip.model.TfaStartAuthenticationResponse;
 import com.infobip.model.TfaStartEmailAuthenticationRequest;
@@ -577,9 +578,9 @@ public class TfaApi {
     /**
      * Get 2FA verification status.
      * <p>
-     * Check if a phone number is already verified for a specific 2FA application.
+     * Check if a phone number (or email) is already verified for a specific 2FA application.
      *
-     * @param msisdn Filter by msisdn (phone number) for which verification status is checked. (required)
+     * @param msisdn Filter by msisdn (phone number or email) for which verification status is checked. (required)
      * @param appId ID of 2-FA application for which phone number verification status is requested. (required)
      * @return GetTfaVerificationStatusRequest
      * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
@@ -589,9 +590,9 @@ public class TfaApi {
     }
 
     private RequestDefinition resend2faPinCodeOverEmailDefinition(
-            String pinId, TfaResendPinRequest tfaResendPinRequest) {
+            String pinId, TfaResendPinRequestViaEmail tfaResendPinRequestViaEmail) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/2fa/2/pin/{pinId}/resend/email")
-                .body(tfaResendPinRequest)
+                .body(tfaResendPinRequestViaEmail)
                 .requiresAuthentication(true)
                 .accept("application/json")
                 .contentType("application/json");
@@ -607,12 +608,13 @@ public class TfaApi {
      */
     public class Resend2faPinCodeOverEmailRequest {
         private final String pinId;
-        private final TfaResendPinRequest tfaResendPinRequest;
+        private final TfaResendPinRequestViaEmail tfaResendPinRequestViaEmail;
 
-        private Resend2faPinCodeOverEmailRequest(String pinId, TfaResendPinRequest tfaResendPinRequest) {
+        private Resend2faPinCodeOverEmailRequest(
+                String pinId, TfaResendPinRequestViaEmail tfaResendPinRequestViaEmail) {
             this.pinId = Objects.requireNonNull(pinId, "The required parameter 'pinId' is missing.");
-            this.tfaResendPinRequest = Objects.requireNonNull(
-                    tfaResendPinRequest, "The required parameter 'tfaResendPinRequest' is missing.");
+            this.tfaResendPinRequestViaEmail = Objects.requireNonNull(
+                    tfaResendPinRequestViaEmail, "The required parameter 'tfaResendPinRequestViaEmail' is missing.");
         }
 
         /**
@@ -623,7 +625,7 @@ public class TfaApi {
          */
         public TfaStartEmailAuthenticationResponse execute() throws ApiException {
             RequestDefinition resend2faPinCodeOverEmailDefinition =
-                    resend2faPinCodeOverEmailDefinition(pinId, tfaResendPinRequest);
+                    resend2faPinCodeOverEmailDefinition(pinId, tfaResendPinRequestViaEmail);
             return apiClient.execute(
                     resend2faPinCodeOverEmailDefinition,
                     new TypeReference<TfaStartEmailAuthenticationResponse>() {}.getType());
@@ -637,7 +639,7 @@ public class TfaApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<TfaStartEmailAuthenticationResponse> callback) {
             RequestDefinition resend2faPinCodeOverEmailDefinition =
-                    resend2faPinCodeOverEmailDefinition(pinId, tfaResendPinRequest);
+                    resend2faPinCodeOverEmailDefinition(pinId, tfaResendPinRequestViaEmail);
             return apiClient.executeAsync(
                     resend2faPinCodeOverEmailDefinition,
                     new TypeReference<TfaStartEmailAuthenticationResponse>() {}.getType(),
@@ -651,13 +653,13 @@ public class TfaApi {
      * If needed, you can resend the same (previously sent) PIN code over Email.
      *
      * @param pinId ID of the pin code that has to be verified. (required)
-     * @param tfaResendPinRequest  (required)
+     * @param tfaResendPinRequestViaEmail  (required)
      * @return Resend2faPinCodeOverEmailRequest
      * @see <a href="https://www.infobip.com/docs/2fa-service/general-2fa-otp-setup">Learn more about the workflow and setup</a>
      */
     public Resend2faPinCodeOverEmailRequest resend2faPinCodeOverEmail(
-            String pinId, TfaResendPinRequest tfaResendPinRequest) {
-        return new Resend2faPinCodeOverEmailRequest(pinId, tfaResendPinRequest);
+            String pinId, TfaResendPinRequestViaEmail tfaResendPinRequestViaEmail) {
+        return new Resend2faPinCodeOverEmailRequest(pinId, tfaResendPinRequestViaEmail);
     }
 
     private RequestDefinition resendTfaPinCodeOverSmsDefinition(String pinId, TfaResendPinRequest tfaResendPinRequest) {
