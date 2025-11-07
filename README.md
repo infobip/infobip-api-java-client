@@ -39,7 +39,7 @@ For `infobip-api-java-client` versioning we use [Semantic Versioning][semver] sc
 
 Published under [MIT License][license].
 
-The library requires Java 11 and is compatible up to and including Java 19.
+The library requires Java 11 and is compatible with the latest Java versions.
 
 ## Installation
 
