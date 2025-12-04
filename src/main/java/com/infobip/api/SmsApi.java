@@ -1037,8 +1037,8 @@ public class SmsApi {
         private final SmsOutboundRequest smsOutboundRequest;
 
         private SendSmsOutboundRequest(SmsOutboundRequest smsOutboundRequest) {
-            this.smsOutboundRequest =
-                    Objects.requireNonNull(smsOutboundRequest, "The required parameter 'smsOutboundRequest' is missing.");
+            this.smsOutboundRequest = Objects.requireNonNull(
+                    smsOutboundRequest, "The required parameter 'smsOutboundRequest' is missing.");
         }
 
         /**

@@ -2009,9 +2009,7 @@ class SmsApiTest extends ApiTest {
 
         SmsOutboundMessage message = new SmsOutboundMessage()
                 .from(givenFrom)
-                .destinations(List.of(
-                        new SmsDestination().to(givenTo1),
-                        new SmsDestination().to(givenTo2)))
+                .destinations(List.of(new SmsDestination().to(givenTo1), new SmsDestination().to(givenTo2)))
                 .text(givenText)
                 .flash(true)
                 .transliteration(true)
@@ -2019,12 +2017,11 @@ class SmsApiTest extends ApiTest {
                 .notifyUrl("https://example.com/sms-callback")
                 .callbackData("custom-data-123");
 
-        SmsMessageRequestOptions options = new SmsMessageRequestOptions()
-                .schedule(new SmsRequestSchedulingSettings().bulkId(givenBulkId));
+        SmsMessageRequestOptions options =
+                new SmsMessageRequestOptions().schedule(new SmsRequestSchedulingSettings().bulkId(givenBulkId));
 
-        SmsOutboundRequest request = new SmsOutboundRequest()
-                .messages(List.of(message))
-                .options(options);
+        SmsOutboundRequest request =
+                new SmsOutboundRequest().messages(List.of(message)).options(options);
 
         Consumer<SmsOutboundResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -2048,18 +2045,17 @@ class SmsApiTest extends ApiTest {
     @Test
     void shouldHandleSmsOutboundValidationError() {
         // Given
-        String givenResponse = String.format(
-                "{\n"
-                        + "  \"errorCode\": \"E400\",\n"
-                        + "  \"description\": \"Invalid request.\",\n"
-                        + "  \"action\": \"Check request parameters.\",\n"
-                        + "  \"violations\": [\n"
-                        + "    {\n"
-                        + "      \"field\": \"messages[0].text\",\n"
-                        + "      \"description\": \"Text is required\"\n"
-                        + "    }\n"
-                        + "  ]\n"
-                        + "}");
+        String givenResponse = String.format("{\n"
+                + "  \"errorCode\": \"E400\",\n"
+                + "  \"description\": \"Invalid request.\",\n"
+                + "  \"action\": \"Check request parameters.\",\n"
+                + "  \"violations\": [\n"
+                + "    {\n"
+                + "      \"field\": \"messages[0].text\",\n"
+                + "      \"description\": \"Text is required\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}");
 
         String expectedRequest = "{\n"
                 + "  \"messages\": [\n"
@@ -2078,9 +2074,8 @@ class SmsApiTest extends ApiTest {
 
         SmsApi api = new SmsApi(getApiClient());
 
-        SmsOutboundMessage message = new SmsOutboundMessage()
-                .from("InfoSMS")
-                .destinations(List.of(new SmsDestination().to("41793026727")));
+        SmsOutboundMessage message =
+                new SmsOutboundMessage().from("InfoSMS").destinations(List.of(new SmsDestination().to("41793026727")));
         // Note: text is missing
 
         SmsOutboundRequest request = new SmsOutboundRequest().messages(List.of(message));
@@ -2093,8 +2088,8 @@ class SmsApiTest extends ApiTest {
 
         testFailedCall(() -> api.sendSmsOutbound(request).execute(), assertions);
         testFailedAsyncCall(
-                (ApiCallback<SmsOutboundResponse> callback) -> 
-                    api.sendSmsOutbound(request).executeAsync(callback),
+                (ApiCallback<SmsOutboundResponse> callback) ->
+                        api.sendSmsOutbound(request).executeAsync(callback),
                 assertions);
     }
 
@@ -2148,7 +2143,7 @@ class SmsApiTest extends ApiTest {
         SmsApi api = new SmsApi(getApiClient());
 
         // Parse the date in the format Jackson expects
-        java.time.format.DateTimeFormatter formatter = 
+        java.time.format.DateTimeFormatter formatter =
                 java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         SmsOutboundMessage message = new SmsOutboundMessage()
                 .from(givenFrom)
@@ -2234,9 +2229,7 @@ class SmsApiTest extends ApiTest {
 
         SmsOutboundMessage message = new SmsOutboundMessage()
                 .from(givenFrom)
-                .destinations(List.of(
-                        new SmsDestination().to(validTo),
-                        new SmsDestination().to(invalidTo)))
+                .destinations(List.of(new SmsDestination().to(validTo), new SmsDestination().to(invalidTo)))
                 .text("Test message");
 
         SmsOutboundRequest request = new SmsOutboundRequest().messages(List.of(message));
@@ -2315,9 +2308,7 @@ class SmsApiTest extends ApiTest {
                 .from("InfoSMS")
                 .destinations(List.of(new SmsDestination().to(givenTo)))
                 .text("Message with validity period")
-                .validityPeriod(new ValidityPeriod()
-                        .amount(48)
-                        .timeUnit(ValidityPeriodTimeUnit.HOURS));
+                .validityPeriod(new ValidityPeriod().amount(48).timeUnit(ValidityPeriodTimeUnit.HOURS));
 
         SmsOutboundRequest request = new SmsOutboundRequest().messages(List.of(message));
 
