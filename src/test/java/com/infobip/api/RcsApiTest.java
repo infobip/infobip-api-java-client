@@ -58,10 +58,8 @@ class RcsApiTest extends ApiTest {
 
         RcsContent content = new RcsContent().text(givenText);
 
-        RcsOutboundRequest request = new RcsOutboundRequest()
-                .from(givenFrom)
-                .to(List.of(givenTo))
-                .content(content);
+        RcsOutboundRequest request =
+                new RcsOutboundRequest().from(givenFrom).to(List.of(givenTo)).content(content);
 
         // Then
         Consumer<RcsOutboundResponse> assertions = (response) -> {
@@ -148,17 +146,12 @@ class RcsApiTest extends ApiTest {
                                 .type("openUrl")
                                 .text("Shop Now")
                                 .url("https://example.com/shop"),
-                        new RcsSuggestedAction()
-                                .type("reply")
-                                .text("More Info")
-                                .postbackData("INFO_REQUEST")));
+                        new RcsSuggestedAction().type("reply").text("More Info").postbackData("INFO_REQUEST")));
 
         RcsContent content = new RcsContent().card(card);
 
-        RcsOutboundRequest request = new RcsOutboundRequest()
-                .from(givenFrom)
-                .to(List.of(givenTo))
-                .content(content);
+        RcsOutboundRequest request =
+                new RcsOutboundRequest().from(givenFrom).to(List.of(givenTo)).content(content);
 
         // Then
         Consumer<RcsOutboundResponse> assertions = (response) -> {
@@ -261,10 +254,7 @@ class RcsApiTest extends ApiTest {
         RcsContent content = new RcsContent()
                 .carousel(carousel)
                 .suggestedActions(List.of(
-                        new RcsSuggestedAction()
-                                .type("reply")
-                                .text("View More")
-                                .postbackData("VIEW_MORE")));
+                        new RcsSuggestedAction().type("reply").text("View More").postbackData("VIEW_MORE")));
 
         RcsOutboundRequest request = new RcsOutboundRequest()
                 .from(givenFrom)
@@ -353,14 +343,10 @@ class RcsApiTest extends ApiTest {
                                 .latitude(47.3769)
                                 .longitude(8.5417)
                                 .label("Infobip Office Zurich"),
-                        new RcsSuggestedAction()
-                                .type("shareLocation")
-                                .text("Share Your Location")));
+                        new RcsSuggestedAction().type("shareLocation").text("Share Your Location")));
 
-        RcsOutboundRequest request = new RcsOutboundRequest()
-                .from(givenFrom)
-                .to(List.of(givenTo))
-                .content(content);
+        RcsOutboundRequest request =
+                new RcsOutboundRequest().from(givenFrom).to(List.of(givenTo)).content(content);
 
         // Then
         Consumer<RcsOutboundResponse> assertions = (response) -> {
@@ -422,8 +408,8 @@ class RcsApiTest extends ApiTest {
 
         testFailedCall(() -> api.sendRcsOutboundMessage(request).execute(), assertions);
         testFailedAsyncCall(
-                (ApiCallback<RcsOutboundResponse> callback) -> 
-                    api.sendRcsOutboundMessage(request).executeAsync(callback),
+                (ApiCallback<RcsOutboundResponse> callback) ->
+                        api.sendRcsOutboundMessage(request).executeAsync(callback),
                 assertions);
     }
 
@@ -466,13 +452,10 @@ class RcsApiTest extends ApiTest {
 
         RcsApi api = new RcsApi(getApiClient());
 
-        RcsContent content = new RcsContent()
-                .mediaUrl("https://example.com/video.mp4");
+        RcsContent content = new RcsContent().mediaUrl("https://example.com/video.mp4");
 
-        RcsOutboundRequest request = new RcsOutboundRequest()
-                .from(givenFrom)
-                .to(List.of(givenTo))
-                .content(content);
+        RcsOutboundRequest request =
+                new RcsOutboundRequest().from(givenFrom).to(List.of(givenTo)).content(content);
 
         // Then
         Consumer<RcsOutboundResponse> assertions = (response) -> {
@@ -545,12 +528,12 @@ class RcsApiTest extends ApiTest {
         Consumer<RcsOutboundResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getMessages()).hasSize(2);
-            
+
             // First recipient succeeds
             RcsMessageInfo msg1 = response.getMessages().get(0);
             then(msg1.getTo()).isEqualTo(validTo);
             then(msg1.getStatus().getGroupName()).isEqualTo("PENDING");
-            
+
             // Second recipient fails
             RcsMessageInfo msg2 = response.getMessages().get(1);
             then(msg2.getTo()).isEqualTo(invalidTo);
@@ -590,13 +573,10 @@ class RcsApiTest extends ApiTest {
 
         RcsApi api = new RcsApi(getApiClient());
 
-        RcsContent content = new RcsContent()
-                .carousel(new ArrayList<>());
+        RcsContent content = new RcsContent().carousel(new ArrayList<>());
 
-        RcsOutboundRequest request = new RcsOutboundRequest()
-                .from(givenFrom)
-                .to(List.of(givenTo))
-                .content(content);
+        RcsOutboundRequest request =
+                new RcsOutboundRequest().from(givenFrom).to(List.of(givenTo)).content(content);
 
         // Then
         Consumer<ApiException> assertions = (exception) -> {

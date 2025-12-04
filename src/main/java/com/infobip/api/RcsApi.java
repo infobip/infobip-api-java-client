@@ -13,7 +13,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.infobip.ApiCallback;
 import com.infobip.ApiClient;
 import com.infobip.ApiException;
-import com.infobip.Parameter;
 import com.infobip.RequestDefinition;
 import com.infobip.model.RcsOutboundRequest;
 import com.infobip.model.RcsOutboundResponse;
@@ -77,9 +76,7 @@ public class RcsApi {
         public okhttp3.Call executeAsync(ApiCallback<RcsOutboundResponse> callback) {
             RequestDefinition sendRcsOutboundMessageDefinition = sendRcsOutboundMessageDefinition(rcsOutboundRequest);
             return apiClient.executeAsync(
-                    sendRcsOutboundMessageDefinition,
-                    new TypeReference<RcsOutboundResponse>() {}.getType(),
-                    callback);
+                    sendRcsOutboundMessageDefinition, new TypeReference<RcsOutboundResponse>() {}.getType(), callback);
         }
     }
 
