@@ -151,19 +151,14 @@ class CapabilityCheckApiTest extends ApiTest {
                 + "  ]\n"
                 + "}";
 
-        String expectedRequest = "{\n"
-                + "  \"numbers\": [\n"
-                + "    \"" + givenPhoneNumber + "\"\n"
-                + "  ]\n"
-                + "}";
+        String expectedRequest = "{\n" + "  \"numbers\": [\n" + "    \"" + givenPhoneNumber + "\"\n" + "  ]\n" + "}";
 
         // When
         setUpSuccessPostRequest(CAPABILITY_CHECK, expectedRequest, givenResponse);
 
         CapabilityCheckApi api = new CapabilityCheckApi(getApiClient());
 
-        CapabilityCheckRequest request = new CapabilityCheckRequest()
-                .addNumbersItem(givenPhoneNumber);
+        CapabilityCheckRequest request = new CapabilityCheckRequest().addNumbersItem(givenPhoneNumber);
 
         // Then
         Consumer<CapabilityCheckResponse> assertions = (response) -> {
@@ -173,10 +168,10 @@ class CapabilityCheckApiTest extends ApiTest {
             CapabilityCheckResult result = response.getResults().get(0);
             then(result.getPhoneNumber()).isEqualTo(givenPhoneNumber);
             then(result.getCapabilities()).hasSize(2);
-            
+
             then(result.getCapabilities().get(0).getChannel()).isEqualTo("SMS");
             then(result.getCapabilities().get(0).getSupported()).isTrue();
-            
+
             then(result.getCapabilities().get(1).getChannel()).isEqualTo("VOICE");
             then(result.getCapabilities().get(1).getSupported()).isTrue();
         };
@@ -200,19 +195,14 @@ class CapabilityCheckApiTest extends ApiTest {
                 + "  ]\n"
                 + "}";
 
-        String expectedRequest = "{\n"
-                + "  \"numbers\": [\n"
-                + "    \"" + givenPhoneNumber + "\"\n"
-                + "  ]\n"
-                + "}";
+        String expectedRequest = "{\n" + "  \"numbers\": [\n" + "    \"" + givenPhoneNumber + "\"\n" + "  ]\n" + "}";
 
         // When
         setUpSuccessPostRequest(CAPABILITY_CHECK, expectedRequest, givenResponse);
 
         CapabilityCheckApi api = new CapabilityCheckApi(getApiClient());
 
-        CapabilityCheckRequest request = new CapabilityCheckRequest()
-                .addNumbersItem(givenPhoneNumber);
+        CapabilityCheckRequest request = new CapabilityCheckRequest().addNumbersItem(givenPhoneNumber);
 
         // Then
         Consumer<CapabilityCheckResponse> assertions = (response) -> {
@@ -242,19 +232,14 @@ class CapabilityCheckApiTest extends ApiTest {
                 + "  ]\n"
                 + "}";
 
-        String expectedRequest = "{\n"
-                + "  \"numbers\": [\n"
-                + "    \"" + invalidNumber + "\"\n"
-                + "  ]\n"
-                + "}";
+        String expectedRequest = "{\n" + "  \"numbers\": [\n" + "    \"" + invalidNumber + "\"\n" + "  ]\n" + "}";
 
         // When
         setUpPostRequest(CAPABILITY_CHECK, expectedRequest, givenResponse, 400);
 
         CapabilityCheckApi api = new CapabilityCheckApi(getApiClient());
 
-        CapabilityCheckRequest request = new CapabilityCheckRequest()
-                .addNumbersItem(invalidNumber);
+        CapabilityCheckRequest request = new CapabilityCheckRequest().addNumbersItem(invalidNumber);
 
         // Then
         Consumer<ApiException> assertions = (exception) -> {
@@ -265,8 +250,8 @@ class CapabilityCheckApiTest extends ApiTest {
 
         testFailedCall(() -> api.checkCapabilities(request).execute(), assertions);
         testFailedAsyncCall(
-                (ApiCallback<CapabilityCheckResponse> callback) -> 
-                    api.checkCapabilities(request).executeAsync(callback),
+                (ApiCallback<CapabilityCheckResponse> callback) ->
+                        api.checkCapabilities(request).executeAsync(callback),
                 assertions);
     }
 
@@ -326,14 +311,14 @@ class CapabilityCheckApiTest extends ApiTest {
         Consumer<CapabilityCheckResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getResults()).hasSize(2);
-            
+
             // Valid number has full details
             CapabilityCheckResult validResult = response.getResults().get(0);
             then(validResult.getPhoneNumber()).isEqualTo(validNumber);
             then(validResult.getMccMnc()).isNotNull();
             then(validResult.getCountryCode()).isNotNull();
             then(validResult.getCapabilities().get(0).getSupported()).isTrue();
-            
+
             // Invalid number has limited details
             CapabilityCheckResult invalidResult = response.getResults().get(1);
             then(invalidResult.getPhoneNumber()).isEqualTo(invalidNumber);
@@ -357,19 +342,14 @@ class CapabilityCheckApiTest extends ApiTest {
                 + "  \"action\": \"Retry after some time.\"\n"
                 + "}";
 
-        String expectedRequest = "{\n"
-                + "  \"numbers\": [\n"
-                + "    \"41793026727\"\n"
-                + "  ]\n"
-                + "}";
+        String expectedRequest = "{\n" + "  \"numbers\": [\n" + "    \"41793026727\"\n" + "  ]\n" + "}";
 
         // When
         setUpPostRequest(CAPABILITY_CHECK, expectedRequest, givenResponse, 429);
 
         CapabilityCheckApi api = new CapabilityCheckApi(getApiClient());
 
-        CapabilityCheckRequest request = new CapabilityCheckRequest()
-                .addNumbersItem("41793026727");
+        CapabilityCheckRequest request = new CapabilityCheckRequest().addNumbersItem("41793026727");
 
         // Then
         Consumer<ApiException> assertions = (exception) -> {

@@ -13,7 +13,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.infobip.ApiCallback;
 import com.infobip.ApiClient;
 import com.infobip.ApiException;
-import com.infobip.Parameter;
 import com.infobip.RequestDefinition;
 import com.infobip.model.CapabilityCheckRequest;
 import com.infobip.model.CapabilityCheckResponse;
@@ -77,9 +76,7 @@ public class CapabilityCheckApi {
         public okhttp3.Call executeAsync(ApiCallback<CapabilityCheckResponse> callback) {
             RequestDefinition checkCapabilitiesDefinition = checkCapabilitiesDefinition(capabilityCheckRequest);
             return apiClient.executeAsync(
-                    checkCapabilitiesDefinition,
-                    new TypeReference<CapabilityCheckResponse>() {}.getType(),
-                    callback);
+                    checkCapabilitiesDefinition, new TypeReference<CapabilityCheckResponse>() {}.getType(), callback);
         }
     }
 
