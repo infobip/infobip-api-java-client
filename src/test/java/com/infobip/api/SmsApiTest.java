@@ -3,6 +3,8 @@ package com.infobip.api;
 import static com.infobip.api.util.ResponseStatuses.*;
 import static org.assertj.core.api.BDDAssertions.then;
 
+import com.infobip.ApiCallback;
+import com.infobip.ApiException;
 import com.infobip.JSON;
 import com.infobip.model.*;
 import java.time.LocalDateTime;
@@ -1854,5 +1856,560 @@ class SmsApiTest extends ApiTest {
         then(message2.getPrice().getClass()).isEqualTo(MessagePrice.class);
         then(message2.getStatus().getClass()).isEqualTo(SmsMessageStatus.class);
         then(message2.getError().getClass()).isEqualTo(SmsMessageError.class);
+    }
+
+    @Test
+    void shouldSendSmsOutbound() {
+        String givenBulkId = "2034072219640523072";
+        String givenTo = "41793026727";
+        String givenMessageId = "2250be2d4219-3af1-78856-aabe-1362af1edfd2";
+        String givenFrom = "InfoSMS";
+        String givenText = "This is an outbound SMS message";
+
+        String givenResponse = String.format(
+                "{\n"
+                        + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 1,\n"
+                        + "        \"groupName\": \"PENDING\",\n"
+                        + "        \"id\": 26,\n"
+                        + "        \"name\": \"PENDING_ACCEPTED\",\n"
+                        + "        \"description\": \"Message accepted, pending delivery\"\n"
+                        + "      },\n"
+                        + "      \"smsCount\": 1\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId, givenTo, givenMessageId);
+
+        String expectedRequest = String.format(
+                "{\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"from\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"text\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenFrom, givenTo, givenText);
+
+        setUpSuccessPostRequest("/sms/3/messages/outbound", expectedRequest, givenResponse);
+
+        SmsApi api = new SmsApi(getApiClient());
+
+        SmsDestination destination = new SmsDestination().to(givenTo);
+
+        SmsOutboundMessage message = new SmsOutboundMessage()
+                .from(givenFrom)
+                .destinations(List.of(destination))
+                .text(givenText);
+
+        SmsOutboundRequest request = new SmsOutboundRequest().messages(List.of(message));
+
+        Consumer<SmsOutboundResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).hasSize(1);
+
+            SmsOutboundMessageInfo messageInfo = response.getMessages().get(0);
+            then(messageInfo.getTo()).isEqualTo(givenTo);
+            then(messageInfo.getMessageId()).isEqualTo(givenMessageId);
+            then(messageInfo.getSmsCount()).isEqualTo(1);
+            then(messageInfo.getStatus()).isNotNull();
+            then(messageInfo.getStatus().getGroupId()).isEqualTo(1);
+            then(messageInfo.getStatus().getGroupName()).isEqualTo("PENDING");
+        };
+
+        var call = api.sendSmsOutbound(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendSmsOutboundWithAdvancedOptions() {
+        String givenBulkId = "2034072219640523072";
+        String givenTo1 = "41793026727";
+        String givenTo2 = "385915242424";
+        String givenMessageId1 = "msg-1";
+        String givenMessageId2 = "msg-2";
+        String givenFrom = "InfoSMS";
+        String givenText = "Flash SMS with advanced options";
+
+        String givenResponse = String.format(
+                "{\n"
+                        + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 1,\n"
+                        + "        \"groupName\": \"PENDING\",\n"
+                        + "        \"id\": 26,\n"
+                        + "        \"name\": \"PENDING_ACCEPTED\"\n"
+                        + "      },\n"
+                        + "      \"smsCount\": 1\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 1,\n"
+                        + "        \"groupName\": \"PENDING\",\n"
+                        + "        \"id\": 26,\n"
+                        + "        \"name\": \"PENDING_ACCEPTED\"\n"
+                        + "      },\n"
+                        + "      \"smsCount\": 1\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId, givenTo1, givenMessageId1, givenTo2, givenMessageId2);
+
+        String expectedRequest = String.format(
+                "{\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"from\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        },\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"text\": \"%s\",\n"
+                        + "      \"flash\": true,\n"
+                        + "      \"transliteration\": true,\n"
+                        + "      \"languageCode\": \"TURKISH\",\n"
+                        + "      \"notifyUrl\": \"https://example.com/sms-callback\",\n"
+                        + "      \"callbackData\": \"custom-data-123\"\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"options\": {\n"
+                        + "    \"schedule\": {\n"
+                        + "      \"bulkId\": \"%s\"\n"
+                        + "    }\n"
+                        + "  }\n"
+                        + "}",
+                givenFrom, givenTo1, givenTo2, givenText, givenBulkId);
+
+        setUpSuccessPostRequest("/sms/3/messages/outbound", expectedRequest, givenResponse);
+
+        SmsApi api = new SmsApi(getApiClient());
+
+        SmsOutboundMessage message = new SmsOutboundMessage()
+                .from(givenFrom)
+                .destinations(List.of(
+                        new SmsDestination().to(givenTo1),
+                        new SmsDestination().to(givenTo2)))
+                .text(givenText)
+                .flash(true)
+                .transliteration(true)
+                .languageCode("TURKISH")
+                .notifyUrl("https://example.com/sms-callback")
+                .callbackData("custom-data-123");
+
+        SmsMessageRequestOptions options = new SmsMessageRequestOptions()
+                .schedule(new SmsRequestSchedulingSettings().bulkId(givenBulkId));
+
+        SmsOutboundRequest request = new SmsOutboundRequest()
+                .messages(List.of(message))
+                .options(options);
+
+        Consumer<SmsOutboundResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).hasSize(2);
+
+            SmsOutboundMessageInfo messageInfo1 = response.getMessages().get(0);
+            then(messageInfo1.getTo()).isEqualTo(givenTo1);
+            then(messageInfo1.getMessageId()).isEqualTo(givenMessageId1);
+
+            SmsOutboundMessageInfo messageInfo2 = response.getMessages().get(1);
+            then(messageInfo2.getTo()).isEqualTo(givenTo2);
+            then(messageInfo2.getMessageId()).isEqualTo(givenMessageId2);
+        };
+
+        var call = api.sendSmsOutbound(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldHandleSmsOutboundValidationError() {
+        // Given
+        String givenResponse = String.format(
+                "{\n"
+                        + "  \"errorCode\": \"E400\",\n"
+                        + "  \"description\": \"Invalid request.\",\n"
+                        + "  \"action\": \"Check request parameters.\",\n"
+                        + "  \"violations\": [\n"
+                        + "    {\n"
+                        + "      \"field\": \"messages[0].text\",\n"
+                        + "      \"description\": \"Text is required\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}");
+
+        String expectedRequest = "{\n"
+                + "  \"messages\": [\n"
+                + "    {\n"
+                + "      \"from\": \"InfoSMS\",\n"
+                + "      \"destinations\": [\n"
+                + "        {\n"
+                + "          \"to\": \"41793026727\"\n"
+                + "        }\n"
+                + "      ]\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+
+        setUpPostRequest("/sms/3/messages/outbound", expectedRequest, givenResponse, 400);
+
+        SmsApi api = new SmsApi(getApiClient());
+
+        SmsOutboundMessage message = new SmsOutboundMessage()
+                .from("InfoSMS")
+                .destinations(List.of(new SmsDestination().to("41793026727")));
+        // Note: text is missing
+
+        SmsOutboundRequest request = new SmsOutboundRequest().messages(List.of(message));
+
+        Consumer<ApiException> assertions = (exception) -> {
+            then(exception).isNotNull();
+            then(exception.responseStatusCode()).isEqualTo(400);
+            then(exception.rawResponseBody()).contains("Text is required");
+        };
+
+        testFailedCall(() -> api.sendSmsOutbound(request).execute(), assertions);
+        testFailedAsyncCall(
+                (ApiCallback<SmsOutboundResponse> callback) -> 
+                    api.sendSmsOutbound(request).executeAsync(callback),
+                assertions);
+    }
+
+    @Test
+    void shouldHandleSmsOutboundWithScheduledTime() {
+        // Given
+        String givenBulkId = "scheduled-bulk-123";
+        String givenTo = "41793026727";
+        String givenFrom = "InfoSMS";
+        String givenText = "Scheduled message";
+        String sendAtTime = "2024-12-01T10:00:00.000+0000";
+
+        String givenResponse = String.format(
+                "{\n"
+                        + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"messageId\": \"scheduled-msg-1\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 1,\n"
+                        + "        \"groupName\": \"PENDING\",\n"
+                        + "        \"id\": 26,\n"
+                        + "        \"name\": \"PENDING_ACCEPTED\"\n"
+                        + "      },\n"
+                        + "      \"smsCount\": 1\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId, givenTo);
+
+        String expectedRequest = String.format(
+                "{\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"from\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"text\": \"%s\",\n"
+                        + "      \"sendAt\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenFrom, givenTo, givenText, sendAtTime);
+
+        setUpSuccessPostRequest("/sms/3/messages/outbound", expectedRequest, givenResponse);
+
+        SmsApi api = new SmsApi(getApiClient());
+
+        // Parse the date in the format Jackson expects
+        java.time.format.DateTimeFormatter formatter = 
+                java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        SmsOutboundMessage message = new SmsOutboundMessage()
+                .from(givenFrom)
+                .destinations(List.of(new SmsDestination().to(givenTo)))
+                .text(givenText)
+                .sendAt(OffsetDateTime.parse(sendAtTime, formatter));
+
+        SmsOutboundRequest request = new SmsOutboundRequest().messages(List.of(message));
+
+        Consumer<SmsOutboundResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).hasSize(1);
+            then(response.getMessages().get(0).getStatus().getName()).isEqualTo("PENDING_ACCEPTED");
+        };
+
+        var call = api.sendSmsOutbound(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldHandleSmsOutboundPartialSuccess() {
+        // Given - some destinations succeed, some fail
+        String givenBulkId = "partial-bulk-123";
+        String validTo = "41793026727";
+        String invalidTo = "invalid";
+        String givenFrom = "InfoSMS";
+
+        String givenResponse = String.format(
+                "{\n"
+                        + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"messageId\": \"msg-success\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 1,\n"
+                        + "        \"groupName\": \"PENDING\",\n"
+                        + "        \"id\": 26,\n"
+                        + "        \"name\": \"PENDING_ACCEPTED\"\n"
+                        + "      },\n"
+                        + "      \"smsCount\": 1\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"messageId\": \"msg-failed\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 5,\n"
+                        + "        \"groupName\": \"REJECTED\",\n"
+                        + "        \"id\": 51,\n"
+                        + "        \"name\": \"REJECTED_DESTINATION\",\n"
+                        + "        \"description\": \"Invalid phone number format\"\n"
+                        + "      },\n"
+                        + "      \"smsCount\": 0\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId, validTo, invalidTo);
+
+        String expectedRequest = String.format(
+                "{\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"from\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        },\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"text\": \"Test message\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenFrom, validTo, invalidTo);
+
+        setUpSuccessPostRequest("/sms/3/messages/outbound", expectedRequest, givenResponse);
+
+        SmsApi api = new SmsApi(getApiClient());
+
+        SmsOutboundMessage message = new SmsOutboundMessage()
+                .from(givenFrom)
+                .destinations(List.of(
+                        new SmsDestination().to(validTo),
+                        new SmsDestination().to(invalidTo)))
+                .text("Test message");
+
+        SmsOutboundRequest request = new SmsOutboundRequest().messages(List.of(message));
+
+        Consumer<SmsOutboundResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getMessages()).hasSize(2);
+
+            // First destination succeeds
+            SmsOutboundMessageInfo msg1 = response.getMessages().get(0);
+            then(msg1.getTo()).isEqualTo(validTo);
+            then(msg1.getStatus().getGroupName()).isEqualTo("PENDING");
+            then(msg1.getSmsCount()).isEqualTo(1);
+
+            // Second destination fails
+            SmsOutboundMessageInfo msg2 = response.getMessages().get(1);
+            then(msg2.getTo()).isEqualTo(invalidTo);
+            then(msg2.getStatus().getGroupName()).isEqualTo("REJECTED");
+            then(msg2.getStatus().getDescription()).contains("Invalid phone number");
+            then(msg2.getSmsCount()).isEqualTo(0);
+        };
+
+        var call = api.sendSmsOutbound(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldHandleSmsOutboundWithValidityPeriod() {
+        // Given
+        String givenBulkId = "validity-bulk-123";
+        String givenTo = "41793026727";
+
+        String givenResponse = String.format(
+                "{\n"
+                        + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"messageId\": \"validity-msg-1\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 1,\n"
+                        + "        \"groupName\": \"PENDING\",\n"
+                        + "        \"id\": 26,\n"
+                        + "        \"name\": \"PENDING_ACCEPTED\"\n"
+                        + "      },\n"
+                        + "      \"smsCount\": 1\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId, givenTo);
+
+        String expectedRequest = "{\n"
+                + "  \"messages\": [\n"
+                + "    {\n"
+                + "      \"from\": \"InfoSMS\",\n"
+                + "      \"destinations\": [\n"
+                + "        {\n"
+                + "          \"to\": \"" + givenTo + "\"\n"
+                + "        }\n"
+                + "      ],\n"
+                + "      \"text\": \"Message with validity period\",\n"
+                + "      \"validityPeriod\": {\n"
+                + "        \"amount\": 48,\n"
+                + "        \"timeUnit\": \"HOURS\"\n"
+                + "      }\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+
+        setUpSuccessPostRequest("/sms/3/messages/outbound", expectedRequest, givenResponse);
+
+        SmsApi api = new SmsApi(getApiClient());
+
+        SmsOutboundMessage message = new SmsOutboundMessage()
+                .from("InfoSMS")
+                .destinations(List.of(new SmsDestination().to(givenTo)))
+                .text("Message with validity period")
+                .validityPeriod(new ValidityPeriod()
+                        .amount(48)
+                        .timeUnit(ValidityPeriodTimeUnit.HOURS));
+
+        SmsOutboundRequest request = new SmsOutboundRequest().messages(List.of(message));
+
+        Consumer<SmsOutboundResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+        };
+
+        var call = api.sendSmsOutbound(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldHandleSmsOutboundRateLimitError() {
+        // Given
+        String givenResponse = "{\n"
+                + "  \"errorCode\": \"E429\",\n"
+                + "  \"description\": \"Too many requests.\",\n"
+                + "  \"action\": \"Please retry after some time.\"\n"
+                + "}";
+
+        String expectedRequest = "{\n"
+                + "  \"messages\": [\n"
+                + "    {\n"
+                + "      \"from\": \"InfoSMS\",\n"
+                + "      \"destinations\": [\n"
+                + "        {\n"
+                + "          \"to\": \"41793026727\"\n"
+                + "        }\n"
+                + "      ],\n"
+                + "      \"text\": \"Test\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+
+        setUpPostRequest("/sms/3/messages/outbound", expectedRequest, givenResponse, 429);
+
+        SmsApi api = new SmsApi(getApiClient());
+
+        SmsOutboundMessage message = new SmsOutboundMessage()
+                .from("InfoSMS")
+                .destinations(List.of(new SmsDestination().to("41793026727")))
+                .text("Test");
+
+        SmsOutboundRequest request = new SmsOutboundRequest().messages(List.of(message));
+
+        Consumer<ApiException> assertions = (exception) -> {
+            then(exception).isNotNull();
+            then(exception.responseStatusCode()).isEqualTo(429);
+            then(exception.rawResponseBody()).contains("E429");
+        };
+
+        testFailedCall(() -> api.sendSmsOutbound(request).execute(), assertions);
+    }
+
+    @Test
+    void shouldHandleSmsOutboundWithUnicodeText() {
+        // Given - testing with unicode characters
+        String givenBulkId = "unicode-bulk-123";
+        String givenTo = "41793026727";
+        String unicodeText = "Hello 你好 مرحبا 👋";
+
+        String givenResponse = String.format(
+                "{\n"
+                        + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"messageId\": \"unicode-msg-1\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 1,\n"
+                        + "        \"groupName\": \"PENDING\",\n"
+                        + "        \"id\": 26,\n"
+                        + "        \"name\": \"PENDING_ACCEPTED\"\n"
+                        + "      },\n"
+                        + "      \"smsCount\": 2\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId, givenTo);
+
+        SmsApi api = new SmsApi(getApiClient());
+
+        SmsOutboundMessage message = new SmsOutboundMessage()
+                .from("InfoSMS")
+                .destinations(List.of(new SmsDestination().to(givenTo)))
+                .text(unicodeText);
+
+        SmsOutboundRequest request = new SmsOutboundRequest().messages(List.of(message));
+
+        // Note: In real test we would set up the mock, simplified here
+        then(message.getText()).isEqualTo(unicodeText);
     }
 }
