@@ -22,6 +22,8 @@ import com.infobip.model.SmsBulkStatusResponse;
 import com.infobip.model.SmsDeliveryResult;
 import com.infobip.model.SmsInboundMessageResult;
 import com.infobip.model.SmsLogsResponse;
+import com.infobip.model.SmsOutboundRequest;
+import com.infobip.model.SmsOutboundResponse;
 import com.infobip.model.SmsPreviewRequest;
 import com.infobip.model.SmsPreviewResponse;
 import com.infobip.model.SmsRequest;
@@ -1016,5 +1018,63 @@ public class SmsApi {
     public UpdateScheduledSmsMessagesStatusRequest updateScheduledSmsMessagesStatus(
             String bulkId, SmsUpdateStatusRequest smsUpdateStatusRequest) {
         return new UpdateScheduledSmsMessagesStatusRequest(bulkId, smsUpdateStatusRequest);
+    }
+
+    private RequestDefinition sendSmsOutboundDefinition(SmsOutboundRequest smsOutboundRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/sms/3/messages/outbound")
+                .body(smsOutboundRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * sendSmsOutbound request builder class.
+     */
+    public class SendSmsOutboundRequest {
+        private final SmsOutboundRequest smsOutboundRequest;
+
+        private SendSmsOutboundRequest(SmsOutboundRequest smsOutboundRequest) {
+            this.smsOutboundRequest =
+                    Objects.requireNonNull(smsOutboundRequest, "The required parameter 'smsOutboundRequest' is missing.");
+        }
+
+        /**
+         * Executes the sendSmsOutbound request.
+         *
+         * @return SmsOutboundResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public SmsOutboundResponse execute() throws ApiException {
+            RequestDefinition sendSmsOutboundDefinition = sendSmsOutboundDefinition(smsOutboundRequest);
+            return apiClient.execute(sendSmsOutboundDefinition, new TypeReference<SmsOutboundResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the sendSmsOutbound request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<SmsOutboundResponse> callback) {
+            RequestDefinition sendSmsOutboundDefinition = sendSmsOutboundDefinition(smsOutboundRequest);
+            return apiClient.executeAsync(
+                    sendSmsOutboundDefinition, new TypeReference<SmsOutboundResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Send SMS outbound message.
+     * <p>
+     * Send SMS messages to one or multiple recipients with advanced features like scheduling, delivery reports, and failover options.
+     *
+     * @param smsOutboundRequest  (required)
+     * @return SendSmsOutboundRequest
+     * @see <a href="https://www.infobip.com/docs/sms">Learn more about the SMS channel and its use cases</a>
+     */
+    public SendSmsOutboundRequest sendSmsOutbound(SmsOutboundRequest smsOutboundRequest) {
+        return new SendSmsOutboundRequest(smsOutboundRequest);
     }
 }
