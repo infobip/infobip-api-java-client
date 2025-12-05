@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infobip.model.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
@@ -177,17 +178,17 @@ class BrandsApiTest extends ApiTest {
     @Test
     void shouldGetBrandRegistrarStatuses() {
         String brandId = "brand-123";
-        String givenResponse = "{\n" + "      \"registrar\": \"SOME_REGISTRAR\",\n"
+        String givenResponse = "[{\n" + "      \"registrar\": \"SOME_REGISTRAR\",\n"
                 + "      \"state\": \"APPROVED\",\n"
                 + "      \"brandIdentityStatus\": \"test\"\n"
-                + "}";
+                + "}]";
 
         setUpSuccessGetRequest("/number-registration/1/brands/brand-123/registrar-statuses", Map.of(), givenResponse);
 
-        Consumer<GetBrandRegistrarStatusesResponse> assertions = (response) -> {
-            then(response.getRegistrar()).isEqualTo("SOME_REGISTRAR");
-            then(response.getState()).isEqualTo("APPROVED");
-            then(response.getBrandIdentityStatus()).isEqualTo("test");
+        Consumer<List<GetBrandRegistrarStatusesResponse>> assertions = (response) -> {
+            then(response.get(0).getRegistrar()).isEqualTo("SOME_REGISTRAR");
+            then(response.get(0).getState()).isEqualTo("APPROVED");
+            then(response.get(0).getBrandIdentityStatus()).isEqualTo("test");
         };
 
         BrandApi api = new BrandApi(getApiClient());

@@ -3,6 +3,7 @@ package com.infobip.api;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.infobip.*;
 import com.infobip.model.*;
+import java.util.List;
 import java.util.Objects;
 import okhttp3.Call;
 
@@ -262,11 +263,11 @@ public class BrandApi {
          * Executes the getBrandRegistrarStatuses request
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public GetBrandRegistrarStatusesResponse execute() throws ApiException {
+        public List<GetBrandRegistrarStatusesResponse> execute() throws ApiException {
             RequestDefinition getBrandRegistrarStatusesDefinition = getBrandRegistrarStatusesDefinition(brandId);
             return apiClient.execute(
                     getBrandRegistrarStatusesDefinition,
-                    new TypeReference<GetBrandRegistrarStatusesResponse>() {}.getType());
+                    new TypeReference<List<GetBrandRegistrarStatusesResponse>>() {}.getType());
         }
 
         /**
