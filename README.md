@@ -33,6 +33,7 @@ The current version of this library includes this subset of Infobip products:
 * [Viber](https://www.infobip.com/docs/api/channels/viber)
 * [Messages API](https://www.infobip.com/docs/api/platform/messages-api)
 * [Moments API](https://www.infobip.com/docs/api/customer-engagement/moments)
+* [[Brands API](https://www.infobip.com/docs/api/platform/numbers/number-registration/brands)]
 
 ## General Info
 For `infobip-api-java-client` versioning we use [Semantic Versioning][semver] scheme.
