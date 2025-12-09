@@ -200,27 +200,32 @@ Example of webhook implementation with Spring Web framework:
     }
 ```
 #### Two-Factor Authentication (2FA)
-For 2FA quick start guide, view [these examples](two-factor-authentication.md).
+For the 2FA quick start guide, view [these examples](two-factor-authentication.md).
 
 #### Email
-For Email quick start guide, view [these examples](email.md).
+For the Email quick start guide, view [these examples](email.md).
 
 #### WhatsApp
-For WhatsApp quick start guide, view [these examples](whatsapp.md).
+For the WhatsApp quick start guide, view [these examples](whatsapp.md).
 
 #### Messages API
-For Messages API quick start guide, view [these examples](messages-api.md).
+For the Messages API quick start guide, view [these examples](messages-api.md).
 
 #### Moments
-For Moments quick start guide, view [these examples](moments.md).
+For the Moments quick start guide, view [these examples](moments.md).
+
+## Versioning
+
+This project follows a pragmatic Semantic Versioning approach.  
+For full details on how versions are managed, please see our [Versioning guide][versioning].
 
 ## Ask for help
 
-Feel free to open issues on the repository for any encountered problem or feature request. For pull requests, go to the `CONTRIBUTING` [file][contributing] related to it. This code is auto generated, and we are unable to merge any pull requests form here.
+Feel free to open an issue on the repository if you see any problem or want to request a feature. For pull requests, go to the `CONTRIBUTING` [file][contributing] related to it. This code is auto generated, and we are unable to merge any pull requests form here.
 
 This code is auto generated, and we are unable to merge any pull request from here, but we will review and implement changes directly within our pipeline, as described in the `CONTRIBUTING` [file][contributing].
 
-For anything that requires our imminent attention, contact us @ [support@infobip.com](mailto:support@infobip.com).
+For anything that requires our immediate attention, contact us @ [support@infobip.com](mailto:support@infobip.com).
 
 [apidocs]: https://www.infobip.com/docs/api
 [freetrial]: https://www.infobip.com/docs/essentials/getting-started/free-trial
@@ -228,3 +233,4 @@ For anything that requires our imminent attention, contact us @ [support@infobip
 [semver]: https://semver.org
 [license]: LICENSE
 [contributing]: CONTRIBUTING.md
+[versioning]: VERSIONING.md
