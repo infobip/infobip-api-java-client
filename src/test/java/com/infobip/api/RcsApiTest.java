@@ -691,7 +691,13 @@ class RcsApiTest extends ApiTest {
                         + "    }\n"
                         + "  ]\n"
                         + "}",
-                givenBulkId, givenMessageId1, givenPhoneNumber1, givenStatus, givenMessageId2, givenPhoneNumber2, givenStatus);
+                givenBulkId,
+                givenMessageId1,
+                givenPhoneNumber1,
+                givenStatus,
+                givenMessageId2,
+                givenPhoneNumber2,
+                givenStatus);
 
         setUpSuccessPostRequest(CAPABILITY_CHECK_NOTIFY, expectedRequest, givenResponse);
 

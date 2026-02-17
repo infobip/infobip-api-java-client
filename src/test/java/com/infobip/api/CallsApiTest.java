@@ -53,8 +53,7 @@ class CallsApiTest extends ApiTest {
     private static final String CONFERENCE_STOP_PLAYING_FILE = "/calls/1/conferences/{conferenceId}/stop-play";
     private static final String CONFERENCE_START_RECORDING = "/calls/1/conferences/{conferenceId}/start-recording";
     private static final String CONFERENCE_STOP_RECORDING = "/calls/1/conferences/{conferenceId}/stop-recording";
-    private static final String CONFERENCE_BROADCAST_WEBRTC_TEXT =
-            "/calls/1/conferences/{conferenceId}/send-message";
+    private static final String CONFERENCE_BROADCAST_WEBRTC_TEXT = "/calls/1/conferences/{conferenceId}/send-message";
     private static final String CALLS_FILES = "/calls/1/files";
     private static final String CALLS_FILE = "/calls/1/files/{fileId}";
     private static final String MEDIA_STREAM_CONFIGS = "/calls/1/media-stream-configs";

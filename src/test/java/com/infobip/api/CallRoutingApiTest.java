@@ -2,9 +2,7 @@ package com.infobip.api;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
-import com.infobip.JSON;
 import com.infobip.model.*;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -770,10 +768,13 @@ class CallRoutingApiTest extends ApiTest {
                         + "  ],\n"
                         + "  \"order\": %d\n"
                         + "}",
-                givenRouteId, givenName, givenDestinationsValuePhoneNumber, givenDestinationsConnectTimeout, givenOrder);
+                givenRouteId,
+                givenName,
+                givenDestinationsValuePhoneNumber,
+                givenDestinationsConnectTimeout,
+                givenOrder);
 
-        setUpPatchRequest(
-                ROUTE.replace("{routeId}", givenRouteId), Map.of(), expectedRequest, givenResponse, 200);
+        setUpPatchRequest(ROUTE.replace("{routeId}", givenRouteId), Map.of(), expectedRequest, givenResponse, 200);
 
         var callRoutingApi = new CallRoutingApi(getApiClient());
 
