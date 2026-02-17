@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Messaging channel used for sending a message.
+ * Messaging channel used for sending a template message.
  */
 public enum MessagesApiOutboundTemplateChannel {
     APPLE_MB("APPLE_MB"),

@@ -19,6 +19,8 @@ public class TfaStartAuthenticationResponse {
 
     private String callStatus;
 
+    private String externalMessageId;
+
     private String ncStatus;
 
     private String pinId;
@@ -65,6 +67,46 @@ public class TfaStartAuthenticationResponse {
     @JsonProperty("callStatus")
     public void setCallStatus(String callStatus) {
         this.callStatus = callStatus;
+    }
+
+    /**
+     * Sets externalMessageId.
+     * <p>
+     * Field description:
+     * Message ID used for delivery tracking.
+     *
+     * @param externalMessageId
+     * @return This {@link TfaStartAuthenticationResponse instance}.
+     */
+    public TfaStartAuthenticationResponse externalMessageId(String externalMessageId) {
+        this.externalMessageId = externalMessageId;
+        return this;
+    }
+
+    /**
+     * Returns externalMessageId.
+     * <p>
+     * Field description:
+     * Message ID used for delivery tracking.
+     *
+     * @return externalMessageId
+     */
+    @JsonProperty("externalMessageId")
+    public String getExternalMessageId() {
+        return externalMessageId;
+    }
+
+    /**
+     * Sets externalMessageId.
+     * <p>
+     * Field description:
+     * Message ID used for delivery tracking.
+     *
+     * @param externalMessageId
+     */
+    @JsonProperty("externalMessageId")
+    public void setExternalMessageId(String externalMessageId) {
+        this.externalMessageId = externalMessageId;
     }
 
     /**
@@ -237,6 +279,7 @@ public class TfaStartAuthenticationResponse {
         }
         TfaStartAuthenticationResponse tfaStartAuthenticationResponse = (TfaStartAuthenticationResponse) o;
         return Objects.equals(this.callStatus, tfaStartAuthenticationResponse.callStatus)
+                && Objects.equals(this.externalMessageId, tfaStartAuthenticationResponse.externalMessageId)
                 && Objects.equals(this.ncStatus, tfaStartAuthenticationResponse.ncStatus)
                 && Objects.equals(this.pinId, tfaStartAuthenticationResponse.pinId)
                 && Objects.equals(this.smsStatus, tfaStartAuthenticationResponse.smsStatus)
@@ -245,7 +288,7 @@ public class TfaStartAuthenticationResponse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(callStatus, ncStatus, pinId, smsStatus, to);
+        return Objects.hash(callStatus, externalMessageId, ncStatus, pinId, smsStatus, to);
     }
 
     @Override
@@ -256,6 +299,9 @@ public class TfaStartAuthenticationResponse {
                 .append(newLine)
                 .append("    callStatus: ")
                 .append(toIndentedString(callStatus))
+                .append(newLine)
+                .append("    externalMessageId: ")
+                .append(toIndentedString(externalMessageId))
                 .append(newLine)
                 .append("    ncStatus: ")
                 .append(toIndentedString(ncStatus))

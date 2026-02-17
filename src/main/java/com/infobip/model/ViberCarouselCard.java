@@ -23,7 +23,7 @@ public class ViberCarouselCard {
 
     private String mediaUrl;
 
-    private List<ViberCarouselButton> buttons = new ArrayList<>();
+    private List<ViberCarouselButton> buttons = null;
 
     /**
      * Sets text.
@@ -75,7 +75,7 @@ public class ViberCarouselCard {
      * Sets mediaUrl.
      * <p>
      * Field description:
-     * URL of the image being sent. Must be a valid URL starting with https:// or http://. Supported image types are .jpg, .jpeg, .png. Recommended resolution: 215 px x 185 px.
+     * URL of the image being sent. Must be a valid URL starting with https:// or http://. Supported image types are .jpg, .jpeg, .png. Recommended resolution: 696 px x 600 px.
      * <p>
      * The field is required.
      *
@@ -91,7 +91,7 @@ public class ViberCarouselCard {
      * Returns mediaUrl.
      * <p>
      * Field description:
-     * URL of the image being sent. Must be a valid URL starting with https:// or http://. Supported image types are .jpg, .jpeg, .png. Recommended resolution: 215 px x 185 px.
+     * URL of the image being sent. Must be a valid URL starting with https:// or http://. Supported image types are .jpg, .jpeg, .png. Recommended resolution: 696 px x 600 px.
      * <p>
      * The field is required.
      *
@@ -106,7 +106,7 @@ public class ViberCarouselCard {
      * Sets mediaUrl.
      * <p>
      * Field description:
-     * URL of the image being sent. Must be a valid URL starting with https:// or http://. Supported image types are .jpg, .jpeg, .png. Recommended resolution: 215 px x 185 px.
+     * URL of the image being sent. Must be a valid URL starting with https:// or http://. Supported image types are .jpg, .jpeg, .png. Recommended resolution: 696 px x 600 px.
      * <p>
      * The field is required.
      *
@@ -122,8 +122,6 @@ public class ViberCarouselCard {
      * <p>
      * Field description:
      * List of buttons that will be sent in card.
-     * <p>
-     * The field is required.
      *
      * @param buttons
      * @return This {@link ViberCarouselCard instance}.
@@ -138,8 +136,6 @@ public class ViberCarouselCard {
      * <p>
      * Field description:
      * List of buttons that will be sent in card.
-     * <p>
-     * The field is required.
      *
      * @param buttonsItem The item to be added to the list.
      * @return This {@link ViberCarouselCard instance}.
@@ -157,8 +153,6 @@ public class ViberCarouselCard {
      * <p>
      * Field description:
      * List of buttons that will be sent in card.
-     * <p>
-     * The field is required.
      *
      * @return buttons
      */
@@ -172,8 +166,6 @@ public class ViberCarouselCard {
      * <p>
      * Field description:
      * List of buttons that will be sent in card.
-     * <p>
-     * The field is required.
      *
      * @param buttons
      */

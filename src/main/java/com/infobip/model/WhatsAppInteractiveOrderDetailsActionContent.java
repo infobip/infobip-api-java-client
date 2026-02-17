@@ -70,7 +70,7 @@ public class WhatsAppInteractiveOrderDetailsActionContent {
      * Sets paymentConfiguration.
      * <p>
      * Field description:
-     * Name of the WhatsApp payment configuration to be used for this order. Can be omitted for Brazil PIX and must be omitted for Brazil link, Brazil Boleto, Brazil Payments and UPI Intent payment.
+     * Name of the WhatsApp payment configuration to be used for this order. Can be omitted for Brazil PIX, UPI Link and must be omitted for Brazil link, Brazil Boleto, Brazil Payments and UPI Intent payment.
      *
      * @param paymentConfiguration
      * @return This {@link WhatsAppInteractiveOrderDetailsActionContent instance}.
@@ -84,7 +84,7 @@ public class WhatsAppInteractiveOrderDetailsActionContent {
      * Returns paymentConfiguration.
      * <p>
      * Field description:
-     * Name of the WhatsApp payment configuration to be used for this order. Can be omitted for Brazil PIX and must be omitted for Brazil link, Brazil Boleto, Brazil Payments and UPI Intent payment.
+     * Name of the WhatsApp payment configuration to be used for this order. Can be omitted for Brazil PIX, UPI Link and must be omitted for Brazil link, Brazil Boleto, Brazil Payments and UPI Intent payment.
      *
      * @return paymentConfiguration
      */
@@ -97,7 +97,7 @@ public class WhatsAppInteractiveOrderDetailsActionContent {
      * Sets paymentConfiguration.
      * <p>
      * Field description:
-     * Name of the WhatsApp payment configuration to be used for this order. Can be omitted for Brazil PIX and must be omitted for Brazil link, Brazil Boleto, Brazil Payments and UPI Intent payment.
+     * Name of the WhatsApp payment configuration to be used for this order. Can be omitted for Brazil PIX, UPI Link and must be omitted for Brazil link, Brazil Boleto, Brazil Payments and UPI Intent payment.
      *
      * @param paymentConfiguration
      */

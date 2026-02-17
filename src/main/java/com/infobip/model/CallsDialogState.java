@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Dialog state.
+ * Represents CallsDialogState enumeration.
  */
 public enum CallsDialogState {
     CREATED("CREATED"),

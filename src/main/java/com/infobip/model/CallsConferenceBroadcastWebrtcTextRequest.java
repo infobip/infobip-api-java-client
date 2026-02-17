@@ -17,46 +17,52 @@ import java.util.Objects;
  */
 public class CallsConferenceBroadcastWebrtcTextRequest {
 
-    private String text;
+    private String message;
 
     /**
-     * Sets text.
+     * Sets message.
      * <p>
      * Field description:
-     * Text to broadcast.
+     * Message to send.
+     * <p>
+     * The field is required.
      *
-     * @param text
+     * @param message
      * @return This {@link CallsConferenceBroadcastWebrtcTextRequest instance}.
      */
-    public CallsConferenceBroadcastWebrtcTextRequest text(String text) {
-        this.text = text;
+    public CallsConferenceBroadcastWebrtcTextRequest message(String message) {
+        this.message = message;
         return this;
     }
 
     /**
-     * Returns text.
+     * Returns message.
      * <p>
      * Field description:
-     * Text to broadcast.
+     * Message to send.
+     * <p>
+     * The field is required.
      *
-     * @return text
+     * @return message
      */
-    @JsonProperty("text")
-    public String getText() {
-        return text;
+    @JsonProperty("message")
+    public String getMessage() {
+        return message;
     }
 
     /**
-     * Sets text.
+     * Sets message.
      * <p>
      * Field description:
-     * Text to broadcast.
+     * Message to send.
+     * <p>
+     * The field is required.
      *
-     * @param text
+     * @param message
      */
-    @JsonProperty("text")
-    public void setText(String text) {
-        this.text = text;
+    @JsonProperty("message")
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override
@@ -69,12 +75,12 @@ public class CallsConferenceBroadcastWebrtcTextRequest {
         }
         CallsConferenceBroadcastWebrtcTextRequest callsConferenceBroadcastWebrtcTextRequest =
                 (CallsConferenceBroadcastWebrtcTextRequest) o;
-        return Objects.equals(this.text, callsConferenceBroadcastWebrtcTextRequest.text);
+        return Objects.equals(this.message, callsConferenceBroadcastWebrtcTextRequest.message);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text);
+        return Objects.hash(message);
     }
 
     @Override
@@ -83,8 +89,8 @@ public class CallsConferenceBroadcastWebrtcTextRequest {
         return new StringBuilder()
                 .append("class CallsConferenceBroadcastWebrtcTextRequest {")
                 .append(newLine)
-                .append("    text: ")
-                .append(toIndentedString(text))
+                .append("    message: ")
+                .append(toIndentedString(message))
                 .append(newLine)
                 .append("}")
                 .toString();

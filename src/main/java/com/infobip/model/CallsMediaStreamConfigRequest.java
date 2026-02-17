@@ -43,6 +43,8 @@ public abstract class CallsMediaStreamConfigRequest {
 
     /**
      * Returns type.
+     * <p>
+     * The field is required.
      *
      * @return type
      */

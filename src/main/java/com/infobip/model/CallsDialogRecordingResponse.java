@@ -26,9 +26,9 @@ public class CallsDialogRecordingResponse {
 
     private Platform platform;
 
-    private List<CallsRecordingFile> composedFiles = null;
+    private List<CallsPublicRecordingFile> composedFiles = null;
 
-    private List<CallRecording> callRecordings = null;
+    private List<CallsPublicRecording> callRecordings = null;
 
     private OffsetDateTime startTime;
 
@@ -154,7 +154,7 @@ public class CallsDialogRecordingResponse {
      * @param composedFiles
      * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecordingResponse composedFiles(List<CallsRecordingFile> composedFiles) {
+    public CallsDialogRecordingResponse composedFiles(List<CallsPublicRecordingFile> composedFiles) {
         this.composedFiles = composedFiles;
         return this;
     }
@@ -168,7 +168,7 @@ public class CallsDialogRecordingResponse {
      * @param composedFilesItem The item to be added to the list.
      * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecordingResponse addComposedFilesItem(CallsRecordingFile composedFilesItem) {
+    public CallsDialogRecordingResponse addComposedFilesItem(CallsPublicRecordingFile composedFilesItem) {
         if (this.composedFiles == null) {
             this.composedFiles = new ArrayList<>();
         }
@@ -185,7 +185,7 @@ public class CallsDialogRecordingResponse {
      * @return composedFiles
      */
     @JsonProperty("composedFiles")
-    public List<CallsRecordingFile> getComposedFiles() {
+    public List<CallsPublicRecordingFile> getComposedFiles() {
         return composedFiles;
     }
 
@@ -198,7 +198,7 @@ public class CallsDialogRecordingResponse {
      * @param composedFiles
      */
     @JsonProperty("composedFiles")
-    public void setComposedFiles(List<CallsRecordingFile> composedFiles) {
+    public void setComposedFiles(List<CallsPublicRecordingFile> composedFiles) {
         this.composedFiles = composedFiles;
     }
 
@@ -211,7 +211,7 @@ public class CallsDialogRecordingResponse {
      * @param callRecordings
      * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecordingResponse callRecordings(List<CallRecording> callRecordings) {
+    public CallsDialogRecordingResponse callRecordings(List<CallsPublicRecording> callRecordings) {
         this.callRecordings = callRecordings;
         return this;
     }
@@ -225,7 +225,7 @@ public class CallsDialogRecordingResponse {
      * @param callRecordingsItem The item to be added to the list.
      * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecordingResponse addCallRecordingsItem(CallRecording callRecordingsItem) {
+    public CallsDialogRecordingResponse addCallRecordingsItem(CallsPublicRecording callRecordingsItem) {
         if (this.callRecordings == null) {
             this.callRecordings = new ArrayList<>();
         }
@@ -242,7 +242,7 @@ public class CallsDialogRecordingResponse {
      * @return callRecordings
      */
     @JsonProperty("callRecordings")
-    public List<CallRecording> getCallRecordings() {
+    public List<CallsPublicRecording> getCallRecordings() {
         return callRecordings;
     }
 
@@ -255,7 +255,7 @@ public class CallsDialogRecordingResponse {
      * @param callRecordings
      */
     @JsonProperty("callRecordings")
-    public void setCallRecordings(List<CallRecording> callRecordings) {
+    public void setCallRecordings(List<CallsPublicRecording> callRecordings) {
         this.callRecordings = callRecordings;
     }
 

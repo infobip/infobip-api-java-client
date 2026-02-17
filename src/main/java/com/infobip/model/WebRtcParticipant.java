@@ -14,13 +14,15 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * Participant of the call.
+ * Represents WebRtcParticipant model.
  */
 public class WebRtcParticipant {
 
     private String callId;
 
     private WebRtcEndpoint endpoint;
+
+    private OffsetDateTime startTime;
 
     private OffsetDateTime joinTime;
 
@@ -30,9 +32,11 @@ public class WebRtcParticipant {
 
     private Integer duration;
 
+    private WebRtcCallDirection direction;
+
     private WebRtcState state;
 
-    private WebRtcCallDirection direction;
+    private WebRtcParticipantType type;
 
     /**
      * Sets callId.
@@ -103,6 +107,46 @@ public class WebRtcParticipant {
     @JsonProperty("endpoint")
     public void setEndpoint(WebRtcEndpoint endpoint) {
         this.endpoint = endpoint;
+    }
+
+    /**
+     * Sets startTime.
+     * <p>
+     * Field description:
+     * Date and time the call started. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS+ZZZZ&#x60;.
+     *
+     * @param startTime
+     * @return This {@link WebRtcParticipant instance}.
+     */
+    public WebRtcParticipant startTime(OffsetDateTime startTime) {
+        this.startTime = startTime;
+        return this;
+    }
+
+    /**
+     * Returns startTime.
+     * <p>
+     * Field description:
+     * Date and time the call started. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS+ZZZZ&#x60;.
+     *
+     * @return startTime
+     */
+    @JsonProperty("startTime")
+    public OffsetDateTime getStartTime() {
+        return startTime;
+    }
+
+    /**
+     * Sets startTime.
+     * <p>
+     * Field description:
+     * Date and time the call started. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS+ZZZZ&#x60;.
+     *
+     * @param startTime
+     */
+    @JsonProperty("startTime")
+    public void setStartTime(OffsetDateTime startTime) {
+        this.startTime = startTime;
     }
 
     /**
@@ -266,37 +310,6 @@ public class WebRtcParticipant {
     }
 
     /**
-     * Sets state.
-     *
-     * @param state
-     * @return This {@link WebRtcParticipant instance}.
-     */
-    public WebRtcParticipant state(WebRtcState state) {
-        this.state = state;
-        return this;
-    }
-
-    /**
-     * Returns state.
-     *
-     * @return state
-     */
-    @JsonProperty("state")
-    public WebRtcState getState() {
-        return state;
-    }
-
-    /**
-     * Sets state.
-     *
-     * @param state
-     */
-    @JsonProperty("state")
-    public void setState(WebRtcState state) {
-        this.state = state;
-    }
-
-    /**
      * Sets direction.
      *
      * @param direction
@@ -327,6 +340,74 @@ public class WebRtcParticipant {
         this.direction = direction;
     }
 
+    /**
+     * Sets state.
+     * <p>
+     * The field is required.
+     *
+     * @param state
+     * @return This {@link WebRtcParticipant instance}.
+     */
+    public WebRtcParticipant state(WebRtcState state) {
+        this.state = state;
+        return this;
+    }
+
+    /**
+     * Returns state.
+     * <p>
+     * The field is required.
+     *
+     * @return state
+     */
+    @JsonProperty("state")
+    public WebRtcState getState() {
+        return state;
+    }
+
+    /**
+     * Sets state.
+     * <p>
+     * The field is required.
+     *
+     * @param state
+     */
+    @JsonProperty("state")
+    public void setState(WebRtcState state) {
+        this.state = state;
+    }
+
+    /**
+     * Sets type.
+     *
+     * @param type
+     * @return This {@link WebRtcParticipant instance}.
+     */
+    public WebRtcParticipant type(WebRtcParticipantType type) {
+        this.type = type;
+        return this;
+    }
+
+    /**
+     * Returns type.
+     *
+     * @return type
+     */
+    @JsonProperty("type")
+    public WebRtcParticipantType getType() {
+        return type;
+    }
+
+    /**
+     * Sets type.
+     *
+     * @param type
+     */
+    @JsonProperty("type")
+    public void setType(WebRtcParticipantType type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -338,17 +419,20 @@ public class WebRtcParticipant {
         WebRtcParticipant webRtcParticipant = (WebRtcParticipant) o;
         return Objects.equals(this.callId, webRtcParticipant.callId)
                 && Objects.equals(this.endpoint, webRtcParticipant.endpoint)
+                && Objects.equals(this.startTime, webRtcParticipant.startTime)
                 && Objects.equals(this.joinTime, webRtcParticipant.joinTime)
                 && Objects.equals(this.leaveTime, webRtcParticipant.leaveTime)
                 && Objects.equals(this.ringDuration, webRtcParticipant.ringDuration)
                 && Objects.equals(this.duration, webRtcParticipant.duration)
+                && Objects.equals(this.direction, webRtcParticipant.direction)
                 && Objects.equals(this.state, webRtcParticipant.state)
-                && Objects.equals(this.direction, webRtcParticipant.direction);
+                && Objects.equals(this.type, webRtcParticipant.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(callId, endpoint, joinTime, leaveTime, ringDuration, duration, state, direction);
+        return Objects.hash(
+                callId, endpoint, startTime, joinTime, leaveTime, ringDuration, duration, direction, state, type);
     }
 
     @Override
@@ -363,6 +447,9 @@ public class WebRtcParticipant {
                 .append("    endpoint: ")
                 .append(toIndentedString(endpoint))
                 .append(newLine)
+                .append("    startTime: ")
+                .append(toIndentedString(startTime))
+                .append(newLine)
                 .append("    joinTime: ")
                 .append(toIndentedString(joinTime))
                 .append(newLine)
@@ -375,11 +462,14 @@ public class WebRtcParticipant {
                 .append("    duration: ")
                 .append(toIndentedString(duration))
                 .append(newLine)
+                .append("    direction: ")
+                .append(toIndentedString(direction))
+                .append(newLine)
                 .append("    state: ")
                 .append(toIndentedString(state))
                 .append(newLine)
-                .append("    direction: ")
-                .append(toIndentedString(direction))
+                .append("    type: ")
+                .append(toIndentedString(type))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -22,6 +22,7 @@ class VoiceApiTest extends ApiTest {
     private static final String VOICE_REPORTS = "/voice/1/reports";
     private static final String VOICE_LOGS = "/tts/3/logs";
     private static final String IVR_FILES = "/voice/ivr/1/files";
+    private static final String IVR_UPLOADS = "/voice/ivr/1/uploads";
     private static final String VOICE_SCENARIOS = "/voice/ivr/1/scenarios";
     private static final String VOICE_SCENARIO = "/voice/ivr/1/scenarios/{id}";
     private static final String LAUNCH_IVR_SCENARIO = "/voice/ivr/1/messages";
@@ -1040,7 +1041,6 @@ class VoiceApiTest extends ApiTest {
         int givenRetryMinPeriod = 1;
         int givenRetryMaxPeriod = 5;
         int givenRetryMaxCount = 5;
-        boolean givenRecord = false;
         int givenDeliveryFromHour = 6;
         int givenDeliveryFromMinute = 0;
         int givenDeliveryToHour = 15;
@@ -1068,7 +1068,6 @@ class VoiceApiTest extends ApiTest {
                         + "        \"maxPeriod\": %d,\n"
                         + "        \"maxCount\": %d\n"
                         + "      },\n"
-                        + "      \"record\": %b,\n"
                         + "      \"deliveryTimeWindow\": {\n"
                         + "        \"from\": { \"hour\": %d, \"minute\": %d },\n"
                         + "        \"to\": { \"hour\": %d, \"minute\": %d },\n"
@@ -1090,7 +1089,6 @@ class VoiceApiTest extends ApiTest {
                 givenRetryMinPeriod,
                 givenRetryMaxPeriod,
                 givenRetryMaxCount,
-                givenRecord,
                 givenDeliveryFromHour,
                 givenDeliveryFromMinute,
                 givenDeliveryToHour,
@@ -1145,7 +1143,6 @@ class VoiceApiTest extends ApiTest {
                                 .minPeriod(givenRetryMinPeriod)
                                 .maxPeriod(givenRetryMaxPeriod)
                                 .maxCount(givenRetryMaxCount))
-                        .record(givenRecord)
                         .deliveryTimeWindow(new DeliveryTimeWindow()
                                 .from(new DeliveryTime()
                                         .hour(givenDeliveryFromHour)
@@ -1174,6 +1171,63 @@ class VoiceApiTest extends ApiTest {
         };
 
         var call = api.sendVoiceMessagesWithAnIvrScenario(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetIvrUploadedFiles() {
+        var givenId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
+        var givenName = "Example file";
+        var givenFileFormat = "WAV";
+        var givenSize = 292190L;
+        var givenDuration = 3L;
+        var givenPagingPage = 0;
+        var givenPagingSize = 20;
+        var givenPagingTotalPages = 1;
+        var givenPagingTotalResults = 1L;
+
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"fileFormat\": \"%s\",\n"
+                        + "      \"size\": %d,\n"
+                        + "      \"duration\": %d\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"paging\": {\n"
+                        + "    \"page\": %d,\n"
+                        + "    \"size\": %d,\n"
+                        + "    \"totalPages\": %d,\n"
+                        + "    \"totalResults\": %d\n"
+                        + "  }\n"
+                        + "}",
+                givenId,
+                givenName,
+                givenFileFormat,
+                givenSize,
+                givenDuration,
+                givenPagingPage,
+                givenPagingSize,
+                givenPagingTotalPages,
+                givenPagingTotalResults);
+
+        setUpSuccessGetRequest(IVR_UPLOADS, Map.of(), givenResponse);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        Consumer<CallRoutingRouteResponsePage> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getPaging()).isNotNull();
+            then(response.getPaging().getPage()).isEqualTo(givenPagingPage);
+            then(response.getPaging().getSize()).isEqualTo(givenPagingSize);
+            then(response.getPaging().getTotalPages()).isEqualTo(givenPagingTotalPages);
+            then(response.getPaging().getTotalResults()).isEqualTo(givenPagingTotalResults);
+        };
+
+        var call = api.ivrUploadGetFiles();
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }

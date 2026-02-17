@@ -39,7 +39,7 @@ public class WhatsAppInteractiveOrderDetailsOrder {
      * Sets catalogId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration/integration-essentials#enable-meta-catalog-for-product-based-messaging) registered with Facebook and connected to the WhatsApp Business Account the sender belongs to.
+     * The ID that uniquely identifies the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration#enable-meta-catalog-for-product-based-messaging) registered with Facebook and connected to the WhatsApp Business Account the sender belongs to.
      *
      * @param catalogId
      * @return This {@link WhatsAppInteractiveOrderDetailsOrder instance}.
@@ -53,7 +53,7 @@ public class WhatsAppInteractiveOrderDetailsOrder {
      * Returns catalogId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration/integration-essentials#enable-meta-catalog-for-product-based-messaging) registered with Facebook and connected to the WhatsApp Business Account the sender belongs to.
+     * The ID that uniquely identifies the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration#enable-meta-catalog-for-product-based-messaging) registered with Facebook and connected to the WhatsApp Business Account the sender belongs to.
      *
      * @return catalogId
      */
@@ -66,7 +66,7 @@ public class WhatsAppInteractiveOrderDetailsOrder {
      * Sets catalogId.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration/integration-essentials#enable-meta-catalog-for-product-based-messaging) registered with Facebook and connected to the WhatsApp Business Account the sender belongs to.
+     * The ID that uniquely identifies the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration#enable-meta-catalog-for-product-based-messaging) registered with Facebook and connected to the WhatsApp Business Account the sender belongs to.
      *
      * @param catalogId
      */

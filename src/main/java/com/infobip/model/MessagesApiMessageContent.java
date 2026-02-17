@@ -27,6 +27,8 @@ public class MessagesApiMessageContent {
 
     private MessagesApiMessageConfirmationBody confirmationBody;
 
+    private MessagesApiMessageSenderDisplayInfo senderDisplayInfo;
+
     private MessagesApiMessageFooter footer;
 
     /**
@@ -186,6 +188,37 @@ public class MessagesApiMessageContent {
     }
 
     /**
+     * Sets senderDisplayInfo.
+     *
+     * @param senderDisplayInfo
+     * @return This {@link MessagesApiMessageContent instance}.
+     */
+    public MessagesApiMessageContent senderDisplayInfo(MessagesApiMessageSenderDisplayInfo senderDisplayInfo) {
+        this.senderDisplayInfo = senderDisplayInfo;
+        return this;
+    }
+
+    /**
+     * Returns senderDisplayInfo.
+     *
+     * @return senderDisplayInfo
+     */
+    @JsonProperty("senderDisplayInfo")
+    public MessagesApiMessageSenderDisplayInfo getSenderDisplayInfo() {
+        return senderDisplayInfo;
+    }
+
+    /**
+     * Sets senderDisplayInfo.
+     *
+     * @param senderDisplayInfo
+     */
+    @JsonProperty("senderDisplayInfo")
+    public void setSenderDisplayInfo(MessagesApiMessageSenderDisplayInfo senderDisplayInfo) {
+        this.senderDisplayInfo = senderDisplayInfo;
+    }
+
+    /**
      * Sets footer.
      *
      * @param footer
@@ -229,12 +262,13 @@ public class MessagesApiMessageContent {
                 && Objects.equals(this.body, messagesApiMessageContent.body)
                 && Objects.equals(this.buttons, messagesApiMessageContent.buttons)
                 && Objects.equals(this.confirmationBody, messagesApiMessageContent.confirmationBody)
+                && Objects.equals(this.senderDisplayInfo, messagesApiMessageContent.senderDisplayInfo)
                 && Objects.equals(this.footer, messagesApiMessageContent.footer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(header, body, buttons, confirmationBody, footer);
+        return Objects.hash(header, body, buttons, confirmationBody, senderDisplayInfo, footer);
     }
 
     @Override
@@ -254,6 +288,9 @@ public class MessagesApiMessageContent {
                 .append(newLine)
                 .append("    confirmationBody: ")
                 .append(toIndentedString(confirmationBody))
+                .append(newLine)
+                .append("    senderDisplayInfo: ")
+                .append(toIndentedString(senderDisplayInfo))
                 .append(newLine)
                 .append("    footer: ")
                 .append(toIndentedString(footer))

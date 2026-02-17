@@ -32,7 +32,7 @@ public class WhatsAppInteractiveOrderBrazilPaymentsDetails extends WhatsAppInter
      * Sets payments.
      * <p>
      * Field description:
-     * List of payments. Each payment must have same ID.
+     * List of payments. Each payment must have same ID. Maximum 2 payments allowed.
      * <p>
      * The field is required.
      *
@@ -49,7 +49,7 @@ public class WhatsAppInteractiveOrderBrazilPaymentsDetails extends WhatsAppInter
      * Adds and item into payments.
      * <p>
      * Field description:
-     * List of payments. Each payment must have same ID.
+     * List of payments. Each payment must have same ID. Maximum 2 payments allowed.
      * <p>
      * The field is required.
      *
@@ -69,7 +69,7 @@ public class WhatsAppInteractiveOrderBrazilPaymentsDetails extends WhatsAppInter
      * Returns payments.
      * <p>
      * Field description:
-     * List of payments. Each payment must have same ID.
+     * List of payments. Each payment must have same ID. Maximum 2 payments allowed.
      * <p>
      * The field is required.
      *
@@ -84,7 +84,7 @@ public class WhatsAppInteractiveOrderBrazilPaymentsDetails extends WhatsAppInter
      * Sets payments.
      * <p>
      * Field description:
-     * List of payments. Each payment must have same ID.
+     * List of payments. Each payment must have same ID. Maximum 2 payments allowed.
      * <p>
      * The field is required.
      *

@@ -16,19 +16,11 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Participant state.
  */
 public enum WebRtcState {
-    CALLING("CALLING"),
-    RINGING("RINGING"),
-    PRE_ESTABLISHED("PRE_ESTABLISHED"),
-    ESTABLISHED("ESTABLISHED"),
     FINISHED("FINISHED"),
     FAILED("FAILED"),
     CANCELLED("CANCELLED"),
     NO_ANSWER("NO_ANSWER"),
-    BUSY("BUSY"),
-    DISCONNECTED("DISCONNECTED"),
-    JOINING("JOINING"),
-    JOINED("JOINED"),
-    LEFT("LEFT");
+    BUSY("BUSY");
 
     private final String value;
 

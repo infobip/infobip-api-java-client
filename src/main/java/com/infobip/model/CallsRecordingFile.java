@@ -30,6 +30,8 @@ public class CallsRecordingFile {
 
     private OffsetDateTime creationTime;
 
+    private OffsetDateTime expirationTime;
+
     private Long duration;
 
     private OffsetDateTime startTime;
@@ -40,7 +42,7 @@ public class CallsRecordingFile {
 
     private CallsSftpUploadStatus sftpUploadStatus;
 
-    private Map<String, String> customData = null;
+    private Map<String, String> multichannelMappingData = null;
 
     /**
      * Sets id.
@@ -246,6 +248,46 @@ public class CallsRecordingFile {
     }
 
     /**
+     * Sets expirationTime.
+     * <p>
+     * Field description:
+     * File expiration time.
+     *
+     * @param expirationTime
+     * @return This {@link CallsRecordingFile instance}.
+     */
+    public CallsRecordingFile expirationTime(OffsetDateTime expirationTime) {
+        this.expirationTime = expirationTime;
+        return this;
+    }
+
+    /**
+     * Returns expirationTime.
+     * <p>
+     * Field description:
+     * File expiration time.
+     *
+     * @return expirationTime
+     */
+    @JsonProperty("expirationTime")
+    public OffsetDateTime getExpirationTime() {
+        return expirationTime;
+    }
+
+    /**
+     * Sets expirationTime.
+     * <p>
+     * Field description:
+     * File expiration time.
+     *
+     * @param expirationTime
+     */
+    @JsonProperty("expirationTime")
+    public void setExpirationTime(OffsetDateTime expirationTime) {
+        this.expirationTime = expirationTime;
+    }
+
+    /**
      * Sets duration.
      * <p>
      * Field description:
@@ -428,61 +470,61 @@ public class CallsRecordingFile {
     }
 
     /**
-     * Sets customData.
+     * Sets multichannelMappingData.
      * <p>
      * Field description:
-     * Custom data.
+     * A map that associates audio channels with their respective call IDs for managing multichannel composed recordings.
      *
-     * @param customData
+     * @param multichannelMappingData
      * @return This {@link CallsRecordingFile instance}.
      */
-    public CallsRecordingFile customData(Map<String, String> customData) {
-        this.customData = customData;
+    public CallsRecordingFile multichannelMappingData(Map<String, String> multichannelMappingData) {
+        this.multichannelMappingData = multichannelMappingData;
         return this;
     }
 
     /**
-     * Puts and entry into customData.
+     * Puts and entry into multichannelMappingData.
      * <p>
      * Field description:
-     * Custom data.
+     * A map that associates audio channels with their respective call IDs for managing multichannel composed recordings.
      *
      * @param key The given key.
-     * @param customDataItem The item to be associated with the given key.
+     * @param multichannelMappingDataItem The item to be associated with the given key.
      * @return This {@link CallsRecordingFile instance}.
      */
-    public CallsRecordingFile putCustomDataItem(String key, String customDataItem) {
-        if (this.customData == null) {
-            this.customData = new HashMap<>();
+    public CallsRecordingFile putMultichannelMappingDataItem(String key, String multichannelMappingDataItem) {
+        if (this.multichannelMappingData == null) {
+            this.multichannelMappingData = new HashMap<>();
         }
-        this.customData.put(key, customDataItem);
+        this.multichannelMappingData.put(key, multichannelMappingDataItem);
         return this;
     }
 
     /**
-     * Returns customData.
+     * Returns multichannelMappingData.
      * <p>
      * Field description:
-     * Custom data.
+     * A map that associates audio channels with their respective call IDs for managing multichannel composed recordings.
      *
-     * @return customData
+     * @return multichannelMappingData
      */
-    @JsonProperty("customData")
-    public Map<String, String> getCustomData() {
-        return customData;
+    @JsonProperty("multichannelMappingData")
+    public Map<String, String> getMultichannelMappingData() {
+        return multichannelMappingData;
     }
 
     /**
-     * Sets customData.
+     * Sets multichannelMappingData.
      * <p>
      * Field description:
-     * Custom data.
+     * A map that associates audio channels with their respective call IDs for managing multichannel composed recordings.
      *
-     * @param customData
+     * @param multichannelMappingData
      */
-    @JsonProperty("customData")
-    public void setCustomData(Map<String, String> customData) {
-        this.customData = customData;
+    @JsonProperty("multichannelMappingData")
+    public void setMultichannelMappingData(Map<String, String> multichannelMappingData) {
+        this.multichannelMappingData = multichannelMappingData;
     }
 
     @Override
@@ -499,12 +541,13 @@ public class CallsRecordingFile {
                 && Objects.equals(this.fileFormat, callsRecordingFile.fileFormat)
                 && Objects.equals(this.size, callsRecordingFile.size)
                 && Objects.equals(this.creationTime, callsRecordingFile.creationTime)
+                && Objects.equals(this.expirationTime, callsRecordingFile.expirationTime)
                 && Objects.equals(this.duration, callsRecordingFile.duration)
                 && Objects.equals(this.startTime, callsRecordingFile.startTime)
                 && Objects.equals(this.endTime, callsRecordingFile.endTime)
                 && Objects.equals(this.location, callsRecordingFile.location)
                 && Objects.equals(this.sftpUploadStatus, callsRecordingFile.sftpUploadStatus)
-                && Objects.equals(this.customData, callsRecordingFile.customData);
+                && Objects.equals(this.multichannelMappingData, callsRecordingFile.multichannelMappingData);
     }
 
     @Override
@@ -515,12 +558,13 @@ public class CallsRecordingFile {
                 fileFormat,
                 size,
                 creationTime,
+                expirationTime,
                 duration,
                 startTime,
                 endTime,
                 location,
                 sftpUploadStatus,
-                customData);
+                multichannelMappingData);
     }
 
     @Override
@@ -544,6 +588,9 @@ public class CallsRecordingFile {
                 .append("    creationTime: ")
                 .append(toIndentedString(creationTime))
                 .append(newLine)
+                .append("    expirationTime: ")
+                .append(toIndentedString(expirationTime))
+                .append(newLine)
                 .append("    duration: ")
                 .append(toIndentedString(duration))
                 .append(newLine)
@@ -559,8 +606,8 @@ public class CallsRecordingFile {
                 .append("    sftpUploadStatus: ")
                 .append(toIndentedString(sftpUploadStatus))
                 .append(newLine)
-                .append("    customData: ")
-                .append(toIndentedString(customData))
+                .append("    multichannelMappingData: ")
+                .append(toIndentedString(multichannelMappingData))
                 .append(newLine)
                 .append("}")
                 .toString();

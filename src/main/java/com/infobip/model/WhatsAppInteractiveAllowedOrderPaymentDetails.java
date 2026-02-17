@@ -31,6 +31,7 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = WhatsAppInteractiveOrderUPIPGPayUPaymentDetails.class, name = "PG_PAYU"),
     @JsonSubTypes.Type(value = WhatsAppInteractiveOrderUPIPGRazorpayPaymentDetails.class, name = "PG_RAZORPAY"),
     @JsonSubTypes.Type(value = WhatsAppInteractiveOrderUPIIntentPaymentDetails.class, name = "UPI_INTENT"),
+    @JsonSubTypes.Type(value = WhatsAppInteractiveOrderUPILinkPaymentDetails.class, name = "UPI_LINK"),
     @JsonSubTypes.Type(value = WhatsAppInteractiveOrderUPIPayUPaymentDetails.class, name = "UPI_PAYU"),
 })
 public abstract class WhatsAppInteractiveAllowedOrderPaymentDetails {

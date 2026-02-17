@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class WebRtcRoomCallDetails extends WebRtcCallDetails {
 
-    private List<WebRtcParticipant> participants = new ArrayList<>();
+    private List<WebRtcConferenceParticipant> participants = new ArrayList<>();
 
     /**
      * Constructs a new {@link WebRtcRoomCallDetails} instance.
@@ -39,7 +39,7 @@ public class WebRtcRoomCallDetails extends WebRtcCallDetails {
      * @param participants
      * @return This {@link WebRtcRoomCallDetails instance}.
      */
-    public WebRtcRoomCallDetails participants(List<WebRtcParticipant> participants) {
+    public WebRtcRoomCallDetails participants(List<WebRtcConferenceParticipant> participants) {
         this.participants = participants;
         return this;
     }
@@ -55,7 +55,7 @@ public class WebRtcRoomCallDetails extends WebRtcCallDetails {
      * @param participantsItem The item to be added to the list.
      * @return This {@link WebRtcRoomCallDetails instance}.
      */
-    public WebRtcRoomCallDetails addParticipantsItem(WebRtcParticipant participantsItem) {
+    public WebRtcRoomCallDetails addParticipantsItem(WebRtcConferenceParticipant participantsItem) {
         if (this.participants == null) {
             this.participants = new ArrayList<>();
         }
@@ -74,7 +74,7 @@ public class WebRtcRoomCallDetails extends WebRtcCallDetails {
      * @return participants
      */
     @JsonProperty("participants")
-    public List<WebRtcParticipant> getParticipants() {
+    public List<WebRtcConferenceParticipant> getParticipants() {
         return participants;
     }
 
@@ -89,7 +89,7 @@ public class WebRtcRoomCallDetails extends WebRtcCallDetails {
      * @param participants
      */
     @JsonProperty("participants")
-    public void setParticipants(List<WebRtcParticipant> participants) {
+    public void setParticipants(List<WebRtcConferenceParticipant> participants) {
         this.participants = participants;
     }
 

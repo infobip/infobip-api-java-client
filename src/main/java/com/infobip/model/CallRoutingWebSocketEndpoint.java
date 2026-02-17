@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -20,6 +22,8 @@ public class CallRoutingWebSocketEndpoint extends CallRoutingEndpoint {
     private String websocketEndpointConfigId;
 
     private String identifier;
+
+    private Map<String, String> customData = null;
 
     /**
      * Constructs a new {@link CallRoutingWebSocketEndpoint} instance.
@@ -114,6 +118,64 @@ public class CallRoutingWebSocketEndpoint extends CallRoutingEndpoint {
         this.identifier = identifier;
     }
 
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Custom data associated with the websocket endpoint. Supports using variables &#x60;${from}&#x60; and &#x60;${to}&#x60;.
+     *
+     * @param customData
+     * @return This {@link CallRoutingWebSocketEndpoint instance}.
+     */
+    public CallRoutingWebSocketEndpoint customData(Map<String, String> customData) {
+        this.customData = customData;
+        return this;
+    }
+
+    /**
+     * Puts and entry into customData.
+     * <p>
+     * Field description:
+     * Custom data associated with the websocket endpoint. Supports using variables &#x60;${from}&#x60; and &#x60;${to}&#x60;.
+     *
+     * @param key The given key.
+     * @param customDataItem The item to be associated with the given key.
+     * @return This {@link CallRoutingWebSocketEndpoint instance}.
+     */
+    public CallRoutingWebSocketEndpoint putCustomDataItem(String key, String customDataItem) {
+        if (this.customData == null) {
+            this.customData = new HashMap<>();
+        }
+        this.customData.put(key, customDataItem);
+        return this;
+    }
+
+    /**
+     * Returns customData.
+     * <p>
+     * Field description:
+     * Custom data associated with the websocket endpoint. Supports using variables &#x60;${from}&#x60; and &#x60;${to}&#x60;.
+     *
+     * @return customData
+     */
+    @JsonProperty("customData")
+    public Map<String, String> getCustomData() {
+        return customData;
+    }
+
+    /**
+     * Sets customData.
+     * <p>
+     * Field description:
+     * Custom data associated with the websocket endpoint. Supports using variables &#x60;${from}&#x60; and &#x60;${to}&#x60;.
+     *
+     * @param customData
+     */
+    @JsonProperty("customData")
+    public void setCustomData(Map<String, String> customData) {
+        this.customData = customData;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -125,12 +187,13 @@ public class CallRoutingWebSocketEndpoint extends CallRoutingEndpoint {
         CallRoutingWebSocketEndpoint callRoutingWebSocketEndpoint = (CallRoutingWebSocketEndpoint) o;
         return Objects.equals(this.websocketEndpointConfigId, callRoutingWebSocketEndpoint.websocketEndpointConfigId)
                 && Objects.equals(this.identifier, callRoutingWebSocketEndpoint.identifier)
+                && Objects.equals(this.customData, callRoutingWebSocketEndpoint.customData)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(websocketEndpointConfigId, identifier, super.hashCode());
+        return Objects.hash(websocketEndpointConfigId, identifier, customData, super.hashCode());
     }
 
     @Override
@@ -147,6 +210,9 @@ public class CallRoutingWebSocketEndpoint extends CallRoutingEndpoint {
                 .append(newLine)
                 .append("    identifier: ")
                 .append(toIndentedString(identifier))
+                .append(newLine)
+                .append("    customData: ")
+                .append(toIndentedString(customData))
                 .append(newLine)
                 .append("}")
                 .toString();

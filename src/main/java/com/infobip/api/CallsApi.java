@@ -24,7 +24,6 @@ import com.infobip.model.CallEndpointType;
 import com.infobip.model.CallLog;
 import com.infobip.model.CallLogPage;
 import com.infobip.model.CallPage;
-import com.infobip.model.CallRecording;
 import com.infobip.model.CallRecordingPage;
 import com.infobip.model.CallRequest;
 import com.infobip.model.CallState;
@@ -40,7 +39,6 @@ import com.infobip.model.CallsConferenceLog;
 import com.infobip.model.CallsConferenceLogPage;
 import com.infobip.model.CallsConferencePage;
 import com.infobip.model.CallsConferencePlayRequest;
-import com.infobip.model.CallsConferenceRecording;
 import com.infobip.model.CallsConferenceRecordingPage;
 import com.infobip.model.CallsConferenceRecordingRequest;
 import com.infobip.model.CallsConferenceRequest;
@@ -76,11 +74,14 @@ import com.infobip.model.CallsMediaStreamConfigResponse;
 import com.infobip.model.CallsOnDemandComposition;
 import com.infobip.model.CallsPlayRequest;
 import com.infobip.model.CallsPreAnswerRequest;
+import com.infobip.model.CallsPublicConferenceRecording;
 import com.infobip.model.CallsPublicCountry;
+import com.infobip.model.CallsPublicRecording;
+import com.infobip.model.CallsPublicRecordingFile;
 import com.infobip.model.CallsPublicRegion;
+import com.infobip.model.CallsPublicSayRequest;
 import com.infobip.model.CallsPublicSipTrunkServiceAddress;
 import com.infobip.model.CallsPublicSipTrunkServiceAddressRequest;
-import com.infobip.model.CallsRecordingFile;
 import com.infobip.model.CallsRecordingLocation;
 import com.infobip.model.CallsRecordingStartRequest;
 import com.infobip.model.CallsRescheduleRequest;
@@ -734,9 +735,9 @@ public class CallsApi {
         return new CallPlayFileRequest(callId, callsPlayRequest);
     }
 
-    private RequestDefinition callSayTextDefinition(String callId, CallsSayRequest callsSayRequest) {
+    private RequestDefinition callSayTextDefinition(String callId, CallsPublicSayRequest callsPublicSayRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/calls/1/calls/{callId}/say")
-                .body(callsSayRequest)
+                .body(callsPublicSayRequest)
                 .requiresAuthentication(true)
                 .accept("application/json")
                 .contentType("application/json");
@@ -752,12 +753,12 @@ public class CallsApi {
      */
     public class CallSayTextRequest {
         private final String callId;
-        private final CallsSayRequest callsSayRequest;
+        private final CallsPublicSayRequest callsPublicSayRequest;
 
-        private CallSayTextRequest(String callId, CallsSayRequest callsSayRequest) {
+        private CallSayTextRequest(String callId, CallsPublicSayRequest callsPublicSayRequest) {
             this.callId = Objects.requireNonNull(callId, "The required parameter 'callId' is missing.");
-            this.callsSayRequest =
-                    Objects.requireNonNull(callsSayRequest, "The required parameter 'callsSayRequest' is missing.");
+            this.callsPublicSayRequest = Objects.requireNonNull(
+                    callsPublicSayRequest, "The required parameter 'callsPublicSayRequest' is missing.");
         }
 
         /**
@@ -767,7 +768,7 @@ public class CallsApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public CallsActionResponse execute() throws ApiException {
-            RequestDefinition callSayTextDefinition = callSayTextDefinition(callId, callsSayRequest);
+            RequestDefinition callSayTextDefinition = callSayTextDefinition(callId, callsPublicSayRequest);
             return apiClient.execute(callSayTextDefinition, new TypeReference<CallsActionResponse>() {}.getType());
         }
 
@@ -778,7 +779,7 @@ public class CallsApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
-            RequestDefinition callSayTextDefinition = callSayTextDefinition(callId, callsSayRequest);
+            RequestDefinition callSayTextDefinition = callSayTextDefinition(callId, callsPublicSayRequest);
             return apiClient.executeAsync(
                     callSayTextDefinition, new TypeReference<CallsActionResponse>() {}.getType(), callback);
         }
@@ -790,11 +791,11 @@ public class CallsApi {
      * Say text on a call.
      *
      * @param callId Call ID. (required)
-     * @param callsSayRequest  (required)
+     * @param callsPublicSayRequest  (required)
      * @return CallSayTextRequest
      */
-    public CallSayTextRequest callSayText(String callId, CallsSayRequest callsSayRequest) {
-        return new CallSayTextRequest(callId, callsSayRequest);
+    public CallSayTextRequest callSayText(String callId, CallsPublicSayRequest callsPublicSayRequest) {
+        return new CallSayTextRequest(callId, callsPublicSayRequest);
     }
 
     private RequestDefinition callSendDtmfDefinition(String callId, CallsDtmfSendRequest callsDtmfSendRequest) {
@@ -1414,7 +1415,7 @@ public class CallsApi {
     private RequestDefinition conferenceBroadcastWebrtcTextDefinition(
             String conferenceId, CallsConferenceBroadcastWebrtcTextRequest callsConferenceBroadcastWebrtcTextRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
-                        "POST", "/calls/1/conferences/{conferenceId}/broadcast-webrtc-text")
+                        "POST", "/calls/1/conferences/{conferenceId}/send-message")
                 .body(callsConferenceBroadcastWebrtcTextRequest)
                 .requiresAuthentication(true)
                 .accept("application/json")
@@ -1473,9 +1474,9 @@ public class CallsApi {
     }
 
     /**
-     * Broadcast text.
+     * Send message.
      * <p>
-     * Broadcasts a text message to conference WebRTC participants with open data channel.
+     * Send a message to all WebRTC participants in a conference.
      *
      * @param conferenceId Conference ID. (required)
      * @param callsConferenceBroadcastWebrtcTextRequest  (required)
@@ -2551,12 +2552,13 @@ public class CallsApi {
         /**
          * Executes the deleteCallRecordings request.
          *
-         * @return CallRecording The deserialized response.
+         * @return CallsPublicRecording The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public CallRecording execute() throws ApiException {
+        public CallsPublicRecording execute() throws ApiException {
             RequestDefinition deleteCallRecordingsDefinition = deleteCallRecordingsDefinition(callId, location);
-            return apiClient.execute(deleteCallRecordingsDefinition, new TypeReference<CallRecording>() {}.getType());
+            return apiClient.execute(
+                    deleteCallRecordingsDefinition, new TypeReference<CallsPublicRecording>() {}.getType());
         }
 
         /**
@@ -2565,10 +2567,10 @@ public class CallsApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<CallRecording> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<CallsPublicRecording> callback) {
             RequestDefinition deleteCallRecordingsDefinition = deleteCallRecordingsDefinition(callId, location);
             return apiClient.executeAsync(
-                    deleteCallRecordingsDefinition, new TypeReference<CallRecording>() {}.getType(), callback);
+                    deleteCallRecordingsDefinition, new TypeReference<CallsPublicRecording>() {}.getType(), callback);
         }
     }
 
@@ -2747,14 +2749,15 @@ public class CallsApi {
         /**
          * Executes the deleteConferenceRecordings request.
          *
-         * @return CallsConferenceRecording The deserialized response.
+         * @return CallsPublicConferenceRecording The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public CallsConferenceRecording execute() throws ApiException {
+        public CallsPublicConferenceRecording execute() throws ApiException {
             RequestDefinition deleteConferenceRecordingsDefinition =
                     deleteConferenceRecordingsDefinition(conferenceId, location);
             return apiClient.execute(
-                    deleteConferenceRecordingsDefinition, new TypeReference<CallsConferenceRecording>() {}.getType());
+                    deleteConferenceRecordingsDefinition,
+                    new TypeReference<CallsPublicConferenceRecording>() {}.getType());
         }
 
         /**
@@ -2763,12 +2766,12 @@ public class CallsApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<CallsConferenceRecording> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<CallsPublicConferenceRecording> callback) {
             RequestDefinition deleteConferenceRecordingsDefinition =
                     deleteConferenceRecordingsDefinition(conferenceId, location);
             return apiClient.executeAsync(
                     deleteConferenceRecordingsDefinition,
-                    new TypeReference<CallsConferenceRecording>() {}.getType(),
+                    new TypeReference<CallsPublicConferenceRecording>() {}.getType(),
                     callback);
         }
     }
@@ -2965,13 +2968,13 @@ public class CallsApi {
         /**
          * Executes the deleteRecordingFile request.
          *
-         * @return CallsRecordingFile The deserialized response.
+         * @return CallsPublicRecordingFile The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public CallsRecordingFile execute() throws ApiException {
+        public CallsPublicRecordingFile execute() throws ApiException {
             RequestDefinition deleteRecordingFileDefinition = deleteRecordingFileDefinition(fileId, location);
             return apiClient.execute(
-                    deleteRecordingFileDefinition, new TypeReference<CallsRecordingFile>() {}.getType());
+                    deleteRecordingFileDefinition, new TypeReference<CallsPublicRecordingFile>() {}.getType());
         }
 
         /**
@@ -2980,10 +2983,12 @@ public class CallsApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<CallsRecordingFile> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<CallsPublicRecordingFile> callback) {
             RequestDefinition deleteRecordingFileDefinition = deleteRecordingFileDefinition(fileId, location);
             return apiClient.executeAsync(
-                    deleteRecordingFileDefinition, new TypeReference<CallsRecordingFile>() {}.getType(), callback);
+                    deleteRecordingFileDefinition,
+                    new TypeReference<CallsPublicRecordingFile>() {}.getType(),
+                    callback);
         }
     }
 
@@ -3124,7 +3129,7 @@ public class CallsApi {
     private RequestDefinition dialogBroadcastWebrtcTextDefinition(
             String dialogId, CallsDialogBroadcastWebrtcTextRequest callsDialogBroadcastWebrtcTextRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
-                        "POST", "/calls/1/dialogs/{dialogId}/broadcast-webrtc-text")
+                        "POST", "/calls/1/dialogs/{dialogId}/send-message")
                 .body(callsDialogBroadcastWebrtcTextRequest)
                 .requiresAuthentication(true)
                 .accept("application/json")
@@ -3181,9 +3186,9 @@ public class CallsApi {
     }
 
     /**
-     * Broadcast text.
+     * Send message.
      * <p>
-     * Broadcasts a text message to dialog WebRTC call legs with open data channel.
+     * Send a message to all WebRTC call legs in a dialog.
      *
      * @param dialogId Dialog ID. (required)
      * @param callsDialogBroadcastWebrtcTextRequest  (required)
@@ -3805,12 +3810,13 @@ public class CallsApi {
         /**
          * Executes the getCallRecordings request.
          *
-         * @return CallRecording The deserialized response.
+         * @return CallsPublicRecording The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public CallRecording execute() throws ApiException {
+        public CallsPublicRecording execute() throws ApiException {
             RequestDefinition getCallRecordingsDefinition = getCallRecordingsDefinition(callId, location);
-            return apiClient.execute(getCallRecordingsDefinition, new TypeReference<CallRecording>() {}.getType());
+            return apiClient.execute(
+                    getCallRecordingsDefinition, new TypeReference<CallsPublicRecording>() {}.getType());
         }
 
         /**
@@ -3819,10 +3825,10 @@ public class CallsApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<CallRecording> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<CallsPublicRecording> callback) {
             RequestDefinition getCallRecordingsDefinition = getCallRecordingsDefinition(callId, location);
             return apiClient.executeAsync(
-                    getCallRecordingsDefinition, new TypeReference<CallRecording>() {}.getType(), callback);
+                    getCallRecordingsDefinition, new TypeReference<CallsPublicRecording>() {}.getType(), callback);
         }
     }
 
@@ -5112,14 +5118,15 @@ public class CallsApi {
         /**
          * Executes the getConferenceRecordings request.
          *
-         * @return CallsConferenceRecording The deserialized response.
+         * @return CallsPublicConferenceRecording The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public CallsConferenceRecording execute() throws ApiException {
+        public CallsPublicConferenceRecording execute() throws ApiException {
             RequestDefinition getConferenceRecordingsDefinition =
                     getConferenceRecordingsDefinition(conferenceId, location);
             return apiClient.execute(
-                    getConferenceRecordingsDefinition, new TypeReference<CallsConferenceRecording>() {}.getType());
+                    getConferenceRecordingsDefinition,
+                    new TypeReference<CallsPublicConferenceRecording>() {}.getType());
         }
 
         /**
@@ -5128,12 +5135,12 @@ public class CallsApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<CallsConferenceRecording> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<CallsPublicConferenceRecording> callback) {
             RequestDefinition getConferenceRecordingsDefinition =
                     getConferenceRecordingsDefinition(conferenceId, location);
             return apiClient.executeAsync(
                     getConferenceRecordingsDefinition,
-                    new TypeReference<CallsConferenceRecording>() {}.getType(),
+                    new TypeReference<CallsPublicConferenceRecording>() {}.getType(),
                     callback);
         }
     }

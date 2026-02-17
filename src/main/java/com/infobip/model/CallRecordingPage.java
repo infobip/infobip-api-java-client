@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class CallRecordingPage {
 
-    private List<CallRecording> results = null;
+    private List<CallsPublicRecording> results = null;
 
     private PageInfo paging;
 
@@ -32,7 +32,7 @@ public class CallRecordingPage {
      * @param results
      * @return This {@link CallRecordingPage instance}.
      */
-    public CallRecordingPage results(List<CallRecording> results) {
+    public CallRecordingPage results(List<CallsPublicRecording> results) {
         this.results = results;
         return this;
     }
@@ -46,7 +46,7 @@ public class CallRecordingPage {
      * @param resultsItem The item to be added to the list.
      * @return This {@link CallRecordingPage instance}.
      */
-    public CallRecordingPage addResultsItem(CallRecording resultsItem) {
+    public CallRecordingPage addResultsItem(CallsPublicRecording resultsItem) {
         if (this.results == null) {
             this.results = new ArrayList<>();
         }
@@ -63,7 +63,7 @@ public class CallRecordingPage {
      * @return results
      */
     @JsonProperty("results")
-    public List<CallRecording> getResults() {
+    public List<CallsPublicRecording> getResults() {
         return results;
     }
 
@@ -76,7 +76,7 @@ public class CallRecordingPage {
      * @param results
      */
     @JsonProperty("results")
-    public void setResults(List<CallRecording> results) {
+    public void setResults(List<CallsPublicRecording> results) {
         this.results = results;
     }
 

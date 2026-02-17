@@ -29,6 +29,8 @@ public class TfaStartAuthenticationRequest {
 
     private String to;
 
+    private Boolean trackDelivery;
+
     /**
      * Sets applicationId.
      * <p>
@@ -265,6 +267,46 @@ public class TfaStartAuthenticationRequest {
         this.to = to;
     }
 
+    /**
+     * Sets trackDelivery.
+     * <p>
+     * Field description:
+     * Enables sending of delivery reports via [Subscriptions](https://www.infobip.com/docs/cpaas-x/subscriptions-management). The [retry cycle](https://www.infobip.com/docs/sms/sms-over-api#push-retry-cycle-notify-url) for when your URL becomes unavailable uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
+     *
+     * @param trackDelivery
+     * @return This {@link TfaStartAuthenticationRequest instance}.
+     */
+    public TfaStartAuthenticationRequest trackDelivery(Boolean trackDelivery) {
+        this.trackDelivery = trackDelivery;
+        return this;
+    }
+
+    /**
+     * Returns trackDelivery.
+     * <p>
+     * Field description:
+     * Enables sending of delivery reports via [Subscriptions](https://www.infobip.com/docs/cpaas-x/subscriptions-management). The [retry cycle](https://www.infobip.com/docs/sms/sms-over-api#push-retry-cycle-notify-url) for when your URL becomes unavailable uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
+     *
+     * @return trackDelivery
+     */
+    @JsonProperty("trackDelivery")
+    public Boolean getTrackDelivery() {
+        return trackDelivery;
+    }
+
+    /**
+     * Sets trackDelivery.
+     * <p>
+     * Field description:
+     * Enables sending of delivery reports via [Subscriptions](https://www.infobip.com/docs/cpaas-x/subscriptions-management). The [retry cycle](https://www.infobip.com/docs/sms/sms-over-api#push-retry-cycle-notify-url) for when your URL becomes unavailable uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
+     *
+     * @param trackDelivery
+     */
+    @JsonProperty("trackDelivery")
+    public void setTrackDelivery(Boolean trackDelivery) {
+        this.trackDelivery = trackDelivery;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -278,12 +320,13 @@ public class TfaStartAuthenticationRequest {
                 && Objects.equals(this.from, tfaStartAuthenticationRequest.from)
                 && Objects.equals(this.messageId, tfaStartAuthenticationRequest.messageId)
                 && Objects.equals(this.placeholders, tfaStartAuthenticationRequest.placeholders)
-                && Objects.equals(this.to, tfaStartAuthenticationRequest.to);
+                && Objects.equals(this.to, tfaStartAuthenticationRequest.to)
+                && Objects.equals(this.trackDelivery, tfaStartAuthenticationRequest.trackDelivery);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(applicationId, from, messageId, placeholders, to);
+        return Objects.hash(applicationId, from, messageId, placeholders, to, trackDelivery);
     }
 
     @Override
@@ -306,6 +349,9 @@ public class TfaStartAuthenticationRequest {
                 .append(newLine)
                 .append("    to: ")
                 .append(toIndentedString(to))
+                .append(newLine)
+                .append("    trackDelivery: ")
+                .append(toIndentedString(trackDelivery))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -31,6 +31,9 @@ public class CallsUrlPlayContent extends CallsPlayContent {
     /**
      * Sets fileUrl.
      * <p>
+     * Field description:
+     * URL of the audio file. Only &#x60;wav&#x60; and &#x60;mp3&#x60; files are supported.
+     * <p>
      * The field is required.
      *
      * @param fileUrl
@@ -44,6 +47,9 @@ public class CallsUrlPlayContent extends CallsPlayContent {
     /**
      * Returns fileUrl.
      * <p>
+     * Field description:
+     * URL of the audio file. Only &#x60;wav&#x60; and &#x60;mp3&#x60; files are supported.
+     * <p>
      * The field is required.
      *
      * @return fileUrl
@@ -55,6 +61,9 @@ public class CallsUrlPlayContent extends CallsPlayContent {
 
     /**
      * Sets fileUrl.
+     * <p>
+     * Field description:
+     * URL of the audio file. Only &#x60;wav&#x60; and &#x60;mp3&#x60; files are supported.
      * <p>
      * The field is required.
      *

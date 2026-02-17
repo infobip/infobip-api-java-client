@@ -16,7 +16,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Represents CallRoutingApplicationType enumeration.
  */
 public enum CallRoutingApplicationType {
-    CALL_ROUTING("CALL_ROUTING");
+    CALL_ROUTING("CALL_ROUTING"),
+    INFOBIP_APPLICATION("INFOBIP_APPLICATION"),
+    CALLS_APPLICATION("CALLS_APPLICATION");
 
     private final String value;
 

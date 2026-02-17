@@ -36,8 +36,10 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = MessagesApiWebhookEventListReplyContent.class, name = "LIST_REPLY"),
     @JsonSubTypes.Type(value = MessagesApiWebhookEventLocationContent.class, name = "LOCATION"),
     @JsonSubTypes.Type(value = MessagesApiWebhookEventPaymentResponseContent.class, name = "PAYMENT_RESPONSE"),
+    @JsonSubTypes.Type(value = MessagesApiWebhookEventReactionContent.class, name = "REACTION"),
     @JsonSubTypes.Type(value = MessagesApiWebhookEventSubjectContent.class, name = "SUBJECT"),
     @JsonSubTypes.Type(value = MessagesApiWebhookEventTextContent.class, name = "TEXT"),
+    @JsonSubTypes.Type(value = MessagesApiWebhookEventUrlContent.class, name = "URL"),
     @JsonSubTypes.Type(value = MessagesApiWebhookEventVideoContent.class, name = "VIDEO"),
 })
 public abstract class MessagesApiWebhookEventContent {

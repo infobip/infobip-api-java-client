@@ -19,9 +19,9 @@ import java.util.Objects;
  */
 public class CallsDialogRecordingLog {
 
-    private List<CallsRecordingFile> composedFiles = null;
+    private List<CallsPublicRecordingFile> composedFiles = null;
 
-    private List<CallRecording> callRecordings = null;
+    private List<CallsPublicRecording> callRecordings = null;
 
     /**
      * Sets composedFiles.
@@ -32,7 +32,7 @@ public class CallsDialogRecordingLog {
      * @param composedFiles
      * @return This {@link CallsDialogRecordingLog instance}.
      */
-    public CallsDialogRecordingLog composedFiles(List<CallsRecordingFile> composedFiles) {
+    public CallsDialogRecordingLog composedFiles(List<CallsPublicRecordingFile> composedFiles) {
         this.composedFiles = composedFiles;
         return this;
     }
@@ -46,7 +46,7 @@ public class CallsDialogRecordingLog {
      * @param composedFilesItem The item to be added to the list.
      * @return This {@link CallsDialogRecordingLog instance}.
      */
-    public CallsDialogRecordingLog addComposedFilesItem(CallsRecordingFile composedFilesItem) {
+    public CallsDialogRecordingLog addComposedFilesItem(CallsPublicRecordingFile composedFilesItem) {
         if (this.composedFiles == null) {
             this.composedFiles = new ArrayList<>();
         }
@@ -63,7 +63,7 @@ public class CallsDialogRecordingLog {
      * @return composedFiles
      */
     @JsonProperty("composedFiles")
-    public List<CallsRecordingFile> getComposedFiles() {
+    public List<CallsPublicRecordingFile> getComposedFiles() {
         return composedFiles;
     }
 
@@ -76,7 +76,7 @@ public class CallsDialogRecordingLog {
      * @param composedFiles
      */
     @JsonProperty("composedFiles")
-    public void setComposedFiles(List<CallsRecordingFile> composedFiles) {
+    public void setComposedFiles(List<CallsPublicRecordingFile> composedFiles) {
         this.composedFiles = composedFiles;
     }
 
@@ -89,7 +89,7 @@ public class CallsDialogRecordingLog {
      * @param callRecordings
      * @return This {@link CallsDialogRecordingLog instance}.
      */
-    public CallsDialogRecordingLog callRecordings(List<CallRecording> callRecordings) {
+    public CallsDialogRecordingLog callRecordings(List<CallsPublicRecording> callRecordings) {
         this.callRecordings = callRecordings;
         return this;
     }
@@ -103,7 +103,7 @@ public class CallsDialogRecordingLog {
      * @param callRecordingsItem The item to be added to the list.
      * @return This {@link CallsDialogRecordingLog instance}.
      */
-    public CallsDialogRecordingLog addCallRecordingsItem(CallRecording callRecordingsItem) {
+    public CallsDialogRecordingLog addCallRecordingsItem(CallsPublicRecording callRecordingsItem) {
         if (this.callRecordings == null) {
             this.callRecordings = new ArrayList<>();
         }
@@ -120,7 +120,7 @@ public class CallsDialogRecordingLog {
      * @return callRecordings
      */
     @JsonProperty("callRecordings")
-    public List<CallRecording> getCallRecordings() {
+    public List<CallsPublicRecording> getCallRecordings() {
         return callRecordings;
     }
 
@@ -133,7 +133,7 @@ public class CallsDialogRecordingLog {
      * @param callRecordings
      */
     @JsonProperty("callRecordings")
-    public void setCallRecordings(List<CallRecording> callRecordings) {
+    public void setCallRecordings(List<CallsPublicRecording> callRecordings) {
         this.callRecordings = callRecordings;
     }
 

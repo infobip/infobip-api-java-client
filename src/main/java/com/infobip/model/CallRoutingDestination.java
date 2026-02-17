@@ -31,8 +31,6 @@ public abstract class CallRoutingDestination {
 
     private Integer priority;
 
-    private Integer weight;
-
     protected final CallRoutingDestinationType type;
 
     /**
@@ -41,6 +39,8 @@ public abstract class CallRoutingDestination {
     public CallRoutingDestination(String type) {
         this.type = CallRoutingDestinationType.fromValue(type);
     }
+
+    private Integer weight;
 
     /**
      * Sets priority.
@@ -83,6 +83,18 @@ public abstract class CallRoutingDestination {
     }
 
     /**
+     * Returns type.
+     * <p>
+     * The field is required.
+     *
+     * @return type
+     */
+    @JsonProperty("type")
+    public CallRoutingDestinationType getType() {
+        return type;
+    }
+
+    /**
      * Sets weight.
      * <p>
      * Field description:
@@ -122,18 +134,6 @@ public abstract class CallRoutingDestination {
         this.weight = weight;
     }
 
-    /**
-     * Returns type.
-     * <p>
-     * The field is required.
-     *
-     * @return type
-     */
-    @JsonProperty("type")
-    public CallRoutingDestinationType getType() {
-        return type;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -144,13 +144,13 @@ public abstract class CallRoutingDestination {
         }
         CallRoutingDestination callRoutingDestination = (CallRoutingDestination) o;
         return Objects.equals(this.priority, callRoutingDestination.priority)
-                && Objects.equals(this.weight, callRoutingDestination.weight)
-                && Objects.equals(this.type, callRoutingDestination.type);
+                && Objects.equals(this.type, callRoutingDestination.type)
+                && Objects.equals(this.weight, callRoutingDestination.weight);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(priority, weight, type);
+        return Objects.hash(priority, type, weight);
     }
 
     @Override
@@ -162,11 +162,11 @@ public abstract class CallRoutingDestination {
                 .append("    priority: ")
                 .append(toIndentedString(priority))
                 .append(newLine)
-                .append("    weight: ")
-                .append(toIndentedString(weight))
-                .append(newLine)
                 .append("    type: ")
                 .append(toIndentedString(type))
+                .append(newLine)
+                .append("    weight: ")
+                .append(toIndentedString(weight))
                 .append(newLine)
                 .append("}")
                 .toString();

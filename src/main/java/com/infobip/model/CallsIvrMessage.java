@@ -50,8 +50,6 @@ public class CallsIvrMessage {
 
     private Integer pause;
 
-    private Boolean record;
-
     private DeliveryTimeWindow deliveryTimeWindow;
 
     private Integer callTimeout;
@@ -648,46 +646,6 @@ public class CallsIvrMessage {
     }
 
     /**
-     * Sets record.
-     * <p>
-     * Field description:
-     * [Early access: Contact your account manager to enable the usage] Record the call and expose it to client as URL inside the delivery report. Can be &#x60;true&#x60; or &#x60;false&#x60;.
-     *
-     * @param record
-     * @return This {@link CallsIvrMessage instance}.
-     */
-    public CallsIvrMessage record(Boolean record) {
-        this.record = record;
-        return this;
-    }
-
-    /**
-     * Returns record.
-     * <p>
-     * Field description:
-     * [Early access: Contact your account manager to enable the usage] Record the call and expose it to client as URL inside the delivery report. Can be &#x60;true&#x60; or &#x60;false&#x60;.
-     *
-     * @return record
-     */
-    @JsonProperty("record")
-    public Boolean getRecord() {
-        return record;
-    }
-
-    /**
-     * Sets record.
-     * <p>
-     * Field description:
-     * [Early access: Contact your account manager to enable the usage] Record the call and expose it to client as URL inside the delivery report. Can be &#x60;true&#x60; or &#x60;false&#x60;.
-     *
-     * @param record
-     */
-    @JsonProperty("record")
-    public void setRecord(Boolean record) {
-        this.record = record;
-    }
-
-    /**
      * Sets deliveryTimeWindow.
      *
      * @param deliveryTimeWindow
@@ -781,7 +739,6 @@ public class CallsIvrMessage {
                 && Objects.equals(this.sendingSpeed, callsIvrMessage.sendingSpeed)
                 && Objects.equals(this.parameters, callsIvrMessage.parameters)
                 && Objects.equals(this.pause, callsIvrMessage.pause)
-                && Objects.equals(this.record, callsIvrMessage.record)
                 && Objects.equals(this.deliveryTimeWindow, callsIvrMessage.deliveryTimeWindow)
                 && Objects.equals(this.callTimeout, callsIvrMessage.callTimeout);
     }
@@ -803,7 +760,6 @@ public class CallsIvrMessage {
                 sendingSpeed,
                 parameters,
                 pause,
-                record,
                 deliveryTimeWindow,
                 callTimeout);
     }
@@ -855,9 +811,6 @@ public class CallsIvrMessage {
                 .append(newLine)
                 .append("    pause: ")
                 .append(toIndentedString(pause))
-                .append(newLine)
-                .append("    record: ")
-                .append(toIndentedString(record))
                 .append(newLine)
                 .append("    deliveryTimeWindow: ")
                 .append(toIndentedString(deliveryTimeWindow))

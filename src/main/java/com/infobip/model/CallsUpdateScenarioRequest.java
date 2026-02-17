@@ -28,6 +28,8 @@ public class CallsUpdateScenarioRequest {
 
     private String notifyContentType;
 
+    private Boolean record;
+
     @JsonRawValue
     @JsonDeserialize(using = RawJsonDeserializer.class)
     private String script;
@@ -199,6 +201,46 @@ public class CallsUpdateScenarioRequest {
     }
 
     /**
+     * Sets record.
+     * <p>
+     * Field description:
+     * Indicates if all calls using the scenario should be recorded.
+     *
+     * @param record
+     * @return This {@link CallsUpdateScenarioRequest instance}.
+     */
+    public CallsUpdateScenarioRequest record(Boolean record) {
+        this.record = record;
+        return this;
+    }
+
+    /**
+     * Returns record.
+     * <p>
+     * Field description:
+     * Indicates if all calls using the scenario should be recorded.
+     *
+     * @return record
+     */
+    @JsonProperty("record")
+    public Boolean getRecord() {
+        return record;
+    }
+
+    /**
+     * Sets record.
+     * <p>
+     * Field description:
+     * Indicates if all calls using the scenario should be recorded.
+     *
+     * @param record
+     */
+    @JsonProperty("record")
+    public void setRecord(Boolean record) {
+        this.record = record;
+    }
+
+    /**
      * Sets script.
      * <p>
      * The field is required.
@@ -248,12 +290,13 @@ public class CallsUpdateScenarioRequest {
                 && Objects.equals(this.description, callsUpdateScenarioRequest.description)
                 && Objects.equals(this.notifyUrl, callsUpdateScenarioRequest.notifyUrl)
                 && Objects.equals(this.notifyContentType, callsUpdateScenarioRequest.notifyContentType)
+                && Objects.equals(this.record, callsUpdateScenarioRequest.record)
                 && Objects.equals(this.script, callsUpdateScenarioRequest.script);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, notifyUrl, notifyContentType, script);
+        return Objects.hash(name, description, notifyUrl, notifyContentType, record, script);
     }
 
     @Override
@@ -273,6 +316,9 @@ public class CallsUpdateScenarioRequest {
                 .append(newLine)
                 .append("    notifyContentType: ")
                 .append(toIndentedString(notifyContentType))
+                .append(newLine)
+                .append("    record: ")
+                .append(toIndentedString(record))
                 .append(newLine)
                 .append("    script: ")
                 .append(toIndentedString(script))

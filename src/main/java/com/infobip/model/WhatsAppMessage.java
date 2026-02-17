@@ -43,7 +43,7 @@ public class WhatsAppMessage {
      * Sets from.
      * <p>
      * Field description:
-     * Registered WhatsApp sender number. Must be in international format and comply with [WhatsApp&#39;s requirements](https://www.infobip.com/docs/whatsapp/get-started#phone-number-what-you-need-to-know).
+     * Registered WhatsApp sender number. Must be in international format and comply with [WhatsApp&#39;s requirements](https://www.infobip.com/docs/whatsapp/get-started/sender-registration#phone-number-what-you-need-to-know).
      * <p>
      * The field is required.
      *
@@ -59,7 +59,7 @@ public class WhatsAppMessage {
      * Returns from.
      * <p>
      * Field description:
-     * Registered WhatsApp sender number. Must be in international format and comply with [WhatsApp&#39;s requirements](https://www.infobip.com/docs/whatsapp/get-started#phone-number-what-you-need-to-know).
+     * Registered WhatsApp sender number. Must be in international format and comply with [WhatsApp&#39;s requirements](https://www.infobip.com/docs/whatsapp/get-started/sender-registration#phone-number-what-you-need-to-know).
      * <p>
      * The field is required.
      *
@@ -74,7 +74,7 @@ public class WhatsAppMessage {
      * Sets from.
      * <p>
      * Field description:
-     * Registered WhatsApp sender number. Must be in international format and comply with [WhatsApp&#39;s requirements](https://www.infobip.com/docs/whatsapp/get-started#phone-number-what-you-need-to-know).
+     * Registered WhatsApp sender number. Must be in international format and comply with [WhatsApp&#39;s requirements](https://www.infobip.com/docs/whatsapp/get-started/sender-registration#phone-number-what-you-need-to-know).
      * <p>
      * The field is required.
      *

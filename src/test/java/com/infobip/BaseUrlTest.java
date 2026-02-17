@@ -168,4 +168,77 @@ public final class BaseUrlTest {
         // then
         then(defaultApiUrl).isEqualTo(expectedDefaultApiUrl);
     }
+
+    @Test
+    void shouldThrowIllegalArgumentExceptionForHttpScheme() {
+        // given
+        String givenUrl = "http://api.infobip.com";
+
+        // when, then
+        thenIllegalArgumentException()
+                .isThrownBy(() -> BaseUrl.from(givenUrl))
+                .withMessage("HTTP scheme is not supported. Please provide a URL with HTTPS scheme.");
+    }
+
+    @Test
+    void shouldAllowHttpSchemeForLocalhost() {
+        // given
+        String givenUrl = "http://localhost:8080";
+
+        // when
+        BaseUrl baseUrl = BaseUrl.from(givenUrl);
+
+        // then
+        URL baseUrlWrapper = baseUrl.getUrl();
+        then(baseUrlWrapper.getProtocol()).isEqualTo("http");
+        then(baseUrlWrapper.getHost()).isEqualTo("localhost");
+        then(baseUrlWrapper.getPort()).isEqualTo(8080);
+    }
+
+    @Test
+    void shouldAllowHttpSchemeFor127001() {
+        // given
+        String givenUrl = "http://127.0.0.1:9090";
+
+        // when
+        BaseUrl baseUrl = BaseUrl.from(givenUrl);
+
+        // then
+        URL baseUrlWrapper = baseUrl.getUrl();
+        then(baseUrlWrapper.getProtocol()).isEqualTo("http");
+        then(baseUrlWrapper.getHost()).isEqualTo("127.0.0.1");
+        then(baseUrlWrapper.getPort()).isEqualTo(9090);
+    }
+
+    @Test
+    void shouldAutomaticallyAddHttpsSchemeWhenNoSchemeProvided() {
+        // given
+        String givenUrl = "api.infobip.com";
+
+        // when
+        BaseUrl baseUrl = BaseUrl.from(givenUrl);
+
+        // then
+        URL baseUrlWrapper = baseUrl.getUrl();
+        then(baseUrlWrapper.getProtocol()).isEqualTo("https");
+        then(baseUrlWrapper.getHost()).isEqualTo("api.infobip.com");
+        then(baseUrlWrapper.getPath()).isEqualTo("");
+        then(baseUrlWrapper.toString()).isEqualTo("https://api.infobip.com");
+    }
+
+    @Test
+    void shouldAcceptHttpsSchemeWithoutModification() {
+        // given
+        String givenUrl = "https://api.infobip.com";
+
+        // when
+        BaseUrl baseUrl = BaseUrl.from(givenUrl);
+
+        // then
+        URL baseUrlWrapper = baseUrl.getUrl();
+        then(baseUrlWrapper.getProtocol()).isEqualTo("https");
+        then(baseUrlWrapper.getHost()).isEqualTo("api.infobip.com");
+        then(baseUrlWrapper.getPath()).isEqualTo("");
+        then(baseUrlWrapper.toString()).isEqualTo(givenUrl);
+    }
 }

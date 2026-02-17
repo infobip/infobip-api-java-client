@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class WebRtcApplicationDestination extends WebRtcDestination {
 
-    private String applicationId;
+    private String callsConfigurationId;
 
     /**
      * Constructs a new {@link WebRtcApplicationDestination} instance.
@@ -27,49 +27,49 @@ public class WebRtcApplicationDestination extends WebRtcDestination {
     }
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Call Configuration ID.
      * <p>
      * The field is required.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      * @return This {@link WebRtcApplicationDestination instance}.
      */
-    public WebRtcApplicationDestination applicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public WebRtcApplicationDestination callsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
         return this;
     }
 
     /**
-     * Returns applicationId.
+     * Returns callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Call Configuration ID.
      * <p>
      * The field is required.
      *
-     * @return applicationId
+     * @return callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
+    @JsonProperty("callsConfigurationId")
+    public String getCallsConfigurationId() {
+        return callsConfigurationId;
     }
 
     /**
-     * Sets applicationId.
+     * Sets callsConfigurationId.
      * <p>
      * Field description:
-     * Application ID.
+     * Call Configuration ID.
      * <p>
      * The field is required.
      *
-     * @param applicationId
+     * @param callsConfigurationId
      */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("callsConfigurationId")
+    public void setCallsConfigurationId(String callsConfigurationId) {
+        this.callsConfigurationId = callsConfigurationId;
     }
 
     @Override
@@ -81,12 +81,13 @@ public class WebRtcApplicationDestination extends WebRtcDestination {
             return false;
         }
         WebRtcApplicationDestination webRtcApplicationDestination = (WebRtcApplicationDestination) o;
-        return Objects.equals(this.applicationId, webRtcApplicationDestination.applicationId) && super.equals(o);
+        return Objects.equals(this.callsConfigurationId, webRtcApplicationDestination.callsConfigurationId)
+                && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(applicationId, super.hashCode());
+        return Objects.hash(callsConfigurationId, super.hashCode());
     }
 
     @Override
@@ -98,8 +99,8 @@ public class WebRtcApplicationDestination extends WebRtcDestination {
                 .append("    ")
                 .append(toIndentedString(super.toString()))
                 .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    callsConfigurationId: ")
+                .append(toIndentedString(callsConfigurationId))
                 .append(newLine)
                 .append("}")
                 .toString();

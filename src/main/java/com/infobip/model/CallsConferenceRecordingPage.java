@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class CallsConferenceRecordingPage {
 
-    private List<CallsConferenceRecording> results = null;
+    private List<CallsPublicConferenceRecording> results = null;
 
     private PageInfo paging;
 
@@ -32,7 +32,7 @@ public class CallsConferenceRecordingPage {
      * @param results
      * @return This {@link CallsConferenceRecordingPage instance}.
      */
-    public CallsConferenceRecordingPage results(List<CallsConferenceRecording> results) {
+    public CallsConferenceRecordingPage results(List<CallsPublicConferenceRecording> results) {
         this.results = results;
         return this;
     }
@@ -46,7 +46,7 @@ public class CallsConferenceRecordingPage {
      * @param resultsItem The item to be added to the list.
      * @return This {@link CallsConferenceRecordingPage instance}.
      */
-    public CallsConferenceRecordingPage addResultsItem(CallsConferenceRecording resultsItem) {
+    public CallsConferenceRecordingPage addResultsItem(CallsPublicConferenceRecording resultsItem) {
         if (this.results == null) {
             this.results = new ArrayList<>();
         }
@@ -63,7 +63,7 @@ public class CallsConferenceRecordingPage {
      * @return results
      */
     @JsonProperty("results")
-    public List<CallsConferenceRecording> getResults() {
+    public List<CallsPublicConferenceRecording> getResults() {
         return results;
     }
 
@@ -76,7 +76,7 @@ public class CallsConferenceRecordingPage {
      * @param results
      */
     @JsonProperty("results")
-    public void setResults(List<CallsConferenceRecording> results) {
+    public void setResults(List<CallsPublicConferenceRecording> results) {
         this.results = results;
     }
 

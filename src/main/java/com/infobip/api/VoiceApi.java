@@ -15,6 +15,8 @@ import com.infobip.ApiClient;
 import com.infobip.ApiException;
 import com.infobip.Parameter;
 import com.infobip.RequestDefinition;
+import com.infobip.model.CallRoutingFile;
+import com.infobip.model.CallRoutingRouteResponsePage;
 import com.infobip.model.CallsAdvancedBody;
 import com.infobip.model.CallsBulkRequest;
 import com.infobip.model.CallsBulkResponse;
@@ -789,6 +791,147 @@ public class VoiceApi {
         return new GetVoicesRequest(language);
     }
 
+    private RequestDefinition ivrUploadAudioFileDefinition(File _file) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/voice/ivr/1/uploads")
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("multipart/form-data");
+
+        if (_file != null) {
+            builder.addFormParameter(new Parameter("file", _file));
+        }
+        return builder.build();
+    }
+
+    /**
+     * ivrUploadAudioFile request builder class.
+     */
+    public class IvrUploadAudioFileRequest {
+        private final File _file;
+
+        private IvrUploadAudioFileRequest(File _file) {
+            this._file = Objects.requireNonNull(_file, "The required parameter '_file' is missing.");
+        }
+
+        /**
+         * Executes the ivrUploadAudioFile request.
+         *
+         * @return CallRoutingFile The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallRoutingFile execute() throws ApiException {
+            RequestDefinition ivrUploadAudioFileDefinition = ivrUploadAudioFileDefinition(_file);
+            return apiClient.execute(ivrUploadAudioFileDefinition, new TypeReference<CallRoutingFile>() {}.getType());
+        }
+
+        /**
+         * Executes the ivrUploadAudioFile request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallRoutingFile> callback) {
+            RequestDefinition ivrUploadAudioFileDefinition = ivrUploadAudioFileDefinition(_file);
+            return apiClient.executeAsync(
+                    ivrUploadAudioFileDefinition, new TypeReference<CallRoutingFile>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Upload file.
+     * <p>
+     * Upload an audio file to be played in IVR calls. The file will be removed if it is not used for 90 days. Supported formats: &#x60;.wav&#x60; and &#x60;.mp3&#x60;.
+     *
+     * @param _file  (required)
+     * @return IvrUploadAudioFileRequest
+     */
+    public IvrUploadAudioFileRequest ivrUploadAudioFile(File _file) {
+        return new IvrUploadAudioFileRequest(_file);
+    }
+
+    private RequestDefinition ivrUploadGetFilesDefinition(Integer page, Integer size) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/voice/ivr/1/uploads")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (page != null) {
+            builder.addQueryParameter(new Parameter("page", page));
+        }
+        if (size != null) {
+            builder.addQueryParameter(new Parameter("size", size));
+        }
+        return builder.build();
+    }
+
+    /**
+     * ivrUploadGetFiles request builder class.
+     */
+    public class IvrUploadGetFilesRequest {
+        private Integer page;
+        private Integer size;
+
+        private IvrUploadGetFilesRequest() {}
+
+        /**
+         * Sets page.
+         *
+         * @param page Results page to retrieve (0..N). (optional, default to 0)
+         * @return IvrUploadGetFilesRequest
+         */
+        public IvrUploadGetFilesRequest page(Integer page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Sets size.
+         *
+         * @param size Number of records per page. (optional, default to 20)
+         * @return IvrUploadGetFilesRequest
+         */
+        public IvrUploadGetFilesRequest size(Integer size) {
+            this.size = size;
+            return this;
+        }
+
+        /**
+         * Executes the ivrUploadGetFiles request.
+         *
+         * @return CallRoutingRouteResponsePage The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallRoutingRouteResponsePage execute() throws ApiException {
+            RequestDefinition ivrUploadGetFilesDefinition = ivrUploadGetFilesDefinition(page, size);
+            return apiClient.execute(
+                    ivrUploadGetFilesDefinition, new TypeReference<CallRoutingRouteResponsePage>() {}.getType());
+        }
+
+        /**
+         * Executes the ivrUploadGetFiles request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallRoutingRouteResponsePage> callback) {
+            RequestDefinition ivrUploadGetFilesDefinition = ivrUploadGetFilesDefinition(page, size);
+            return apiClient.executeAsync(
+                    ivrUploadGetFilesDefinition,
+                    new TypeReference<CallRoutingRouteResponsePage>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get files.
+     * <p>
+     * Get files with pagination. Maximum number of pages is 100.
+     *
+     * @return IvrUploadGetFilesRequest
+     */
+    public IvrUploadGetFilesRequest ivrUploadGetFiles() {
+        return new IvrUploadGetFilesRequest();
+    }
+
     private RequestDefinition manageSentBulksStatusDefinition(
             String bulkId, CallsUpdateStatusRequest callsUpdateStatusRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder("PUT", "/tts/3/bulks/status")
@@ -912,7 +1055,7 @@ public class VoiceApi {
     /**
      * Reschedule sent bulk.
      * <p>
-     * This method allows you to reschedule scheduled TTS bulk. Messages scheduled with the sendAt or Sending speed parameter can be paused, resumed or canceled by changing the message status, or rescheduled using the bulkId parameter as an identifier.
+     * This method allows you to reschedule scheduled TTS bulk. Messages scheduled with the sendAt or Sending speed parameter can be paused, resumed or canceled by changing the message status, or rescheduled using the bulkId parameter as an identifier. Rescheduling is only possible if the bulk status is PAUSED.
      *
      * @param bulkId Unique ID of the bulk. (required)
      * @param callsBulkRequest  (required)

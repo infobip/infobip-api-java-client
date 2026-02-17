@@ -25,7 +25,7 @@ public class WebRtcCallLinkResponse {
      * Sets id.
      * <p>
      * Field description:
-     * Identifier of the created call. Call link ID. To open a call link, an ID will be concatenated to the URL: https://call-link.com/.
+     * Identifier of the created call link. To open a call link, an ID will be concatenated to the URL: https://call-link.com/.
      *
      * @param id
      * @return This {@link WebRtcCallLinkResponse instance}.
@@ -39,7 +39,7 @@ public class WebRtcCallLinkResponse {
      * Returns id.
      * <p>
      * Field description:
-     * Identifier of the created call. Call link ID. To open a call link, an ID will be concatenated to the URL: https://call-link.com/.
+     * Identifier of the created call link. To open a call link, an ID will be concatenated to the URL: https://call-link.com/.
      *
      * @return id
      */
@@ -52,7 +52,7 @@ public class WebRtcCallLinkResponse {
      * Sets id.
      * <p>
      * Field description:
-     * Identifier of the created call. Call link ID. To open a call link, an ID will be concatenated to the URL: https://call-link.com/.
+     * Identifier of the created call link. To open a call link, an ID will be concatenated to the URL: https://call-link.com/.
      *
      * @param id
      */

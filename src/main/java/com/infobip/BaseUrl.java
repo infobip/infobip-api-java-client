@@ -26,7 +26,27 @@ public final class BaseUrl {
 
     private BaseUrl(String url) {
         Objects.requireNonNull(url);
-        String urlWithoutTrailingSlashes = url.trim().replaceFirst("/+$", "");
+        String trimmedUrl = url.trim();
+
+        // Check if URL starts with http:// scheme (case-insensitive)
+        if (trimmedUrl.toLowerCase().startsWith("http://")) {
+            // Allow HTTP for localhost and 127.0.0.1 (for testing purposes)
+            String lowerUrl = trimmedUrl.toLowerCase();
+            boolean isLocalhost = lowerUrl.startsWith("http://localhost") || lowerUrl.startsWith("http://127.0.0.1");
+
+            if (!isLocalhost) {
+                throw new IllegalArgumentException(
+                        "HTTP scheme is not supported. Please provide a URL with HTTPS scheme.");
+            }
+        }
+
+        // If no scheme is provided, add https://
+        if (!trimmedUrl.toLowerCase().startsWith("https://")
+                && !trimmedUrl.toLowerCase().startsWith("http://")) {
+            trimmedUrl = "https://" + trimmedUrl;
+        }
+
+        String urlWithoutTrailingSlashes = trimmedUrl.replaceFirst("/+$", "");
         try {
             this.url = new URL(urlWithoutTrailingSlashes);
         } catch (MalformedURLException e) {

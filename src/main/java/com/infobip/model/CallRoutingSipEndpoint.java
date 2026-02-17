@@ -164,7 +164,7 @@ public class CallRoutingSipEndpoint extends CallRoutingEndpoint {
      * Sets customHeaders.
      * <p>
      * Field description:
-     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated.
+     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated. Supports using variables &#x60;${from}&#x60; and &#x60;${to}&#x60;.
      *
      * @param customHeaders
      * @return This {@link CallRoutingSipEndpoint instance}.
@@ -178,7 +178,7 @@ public class CallRoutingSipEndpoint extends CallRoutingEndpoint {
      * Puts and entry into customHeaders.
      * <p>
      * Field description:
-     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated.
+     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated. Supports using variables &#x60;${from}&#x60; and &#x60;${to}&#x60;.
      *
      * @param key The given key.
      * @param customHeadersItem The item to be associated with the given key.
@@ -196,7 +196,7 @@ public class CallRoutingSipEndpoint extends CallRoutingEndpoint {
      * Returns customHeaders.
      * <p>
      * Field description:
-     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated.
+     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated. Supports using variables &#x60;${from}&#x60; and &#x60;${to}&#x60;.
      *
      * @return customHeaders
      */
@@ -209,7 +209,7 @@ public class CallRoutingSipEndpoint extends CallRoutingEndpoint {
      * Sets customHeaders.
      * <p>
      * Field description:
-     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated.
+     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated. Supports using variables &#x60;${from}&#x60; and &#x60;${to}&#x60;.
      *
      * @param customHeaders
      */

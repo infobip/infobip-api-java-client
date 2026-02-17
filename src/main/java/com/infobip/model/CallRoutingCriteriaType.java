@@ -18,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum CallRoutingCriteriaType {
     PHONE("PHONE"),
     SIP("SIP"),
-    WEBRTC("WEBRTC");
+    WEBRTC("WEBRTC"),
+    APPLICATION("APPLICATION");
 
     private final String value;
 

@@ -31,9 +31,13 @@ public class CallsVoiceData {
 
     private Double fileDuration;
 
+    private CallDirection direction;
+
     private String dtmfCodes;
 
     private String answeredBy;
+
+    private String callRecordingFileId;
 
     private CallsIvrData ivr;
 
@@ -318,6 +322,37 @@ public class CallsVoiceData {
     }
 
     /**
+     * Sets direction.
+     *
+     * @param direction
+     * @return This {@link CallsVoiceData instance}.
+     */
+    public CallsVoiceData direction(CallDirection direction) {
+        this.direction = direction;
+        return this;
+    }
+
+    /**
+     * Returns direction.
+     *
+     * @return direction
+     */
+    @JsonProperty("direction")
+    public CallDirection getDirection() {
+        return direction;
+    }
+
+    /**
+     * Sets direction.
+     *
+     * @param direction
+     */
+    @JsonProperty("direction")
+    public void setDirection(CallDirection direction) {
+        this.direction = direction;
+    }
+
+    /**
      * Sets dtmfCodes.
      * <p>
      * Field description:
@@ -398,6 +433,46 @@ public class CallsVoiceData {
     }
 
     /**
+     * Sets callRecordingFileId.
+     * <p>
+     * Field description:
+     * Call recording file identification, if the call was recorded. Currently, populated only if the call was IVR.
+     *
+     * @param callRecordingFileId
+     * @return This {@link CallsVoiceData instance}.
+     */
+    public CallsVoiceData callRecordingFileId(String callRecordingFileId) {
+        this.callRecordingFileId = callRecordingFileId;
+        return this;
+    }
+
+    /**
+     * Returns callRecordingFileId.
+     * <p>
+     * Field description:
+     * Call recording file identification, if the call was recorded. Currently, populated only if the call was IVR.
+     *
+     * @return callRecordingFileId
+     */
+    @JsonProperty("callRecordingFileId")
+    public String getCallRecordingFileId() {
+        return callRecordingFileId;
+    }
+
+    /**
+     * Sets callRecordingFileId.
+     * <p>
+     * Field description:
+     * Call recording file identification, if the call was recorded. Currently, populated only if the call was IVR.
+     *
+     * @param callRecordingFileId
+     */
+    @JsonProperty("callRecordingFileId")
+    public void setCallRecordingFileId(String callRecordingFileId) {
+        this.callRecordingFileId = callRecordingFileId;
+    }
+
+    /**
      * Sets ivr.
      *
      * @param ivr
@@ -444,8 +519,10 @@ public class CallsVoiceData {
                 && Objects.equals(this.duration, callsVoiceData.duration)
                 && Objects.equals(this.chargedDuration, callsVoiceData.chargedDuration)
                 && Objects.equals(this.fileDuration, callsVoiceData.fileDuration)
+                && Objects.equals(this.direction, callsVoiceData.direction)
                 && Objects.equals(this.dtmfCodes, callsVoiceData.dtmfCodes)
                 && Objects.equals(this.answeredBy, callsVoiceData.answeredBy)
+                && Objects.equals(this.callRecordingFileId, callsVoiceData.callRecordingFileId)
                 && Objects.equals(this.ivr, callsVoiceData.ivr);
     }
 
@@ -459,8 +536,10 @@ public class CallsVoiceData {
                 duration,
                 chargedDuration,
                 fileDuration,
+                direction,
                 dtmfCodes,
                 answeredBy,
+                callRecordingFileId,
                 ivr);
     }
 
@@ -491,11 +570,17 @@ public class CallsVoiceData {
                 .append("    fileDuration: ")
                 .append(toIndentedString(fileDuration))
                 .append(newLine)
+                .append("    direction: ")
+                .append(toIndentedString(direction))
+                .append(newLine)
                 .append("    dtmfCodes: ")
                 .append(toIndentedString(dtmfCodes))
                 .append(newLine)
                 .append("    answeredBy: ")
                 .append(toIndentedString(answeredBy))
+                .append(newLine)
+                .append("    callRecordingFileId: ")
+                .append(toIndentedString(callRecordingFileId))
                 .append(newLine)
                 .append("    ivr: ")
                 .append(toIndentedString(ivr))

@@ -34,6 +34,8 @@ public class CallsUpdateScenarioResponse {
 
     private String notifyContentType;
 
+    private Boolean record;
+
     @JsonRawValue
     @JsonDeserialize(using = RawJsonDeserializer.class)
     private String script;
@@ -283,6 +285,46 @@ public class CallsUpdateScenarioResponse {
     }
 
     /**
+     * Sets record.
+     * <p>
+     * Field description:
+     * Indicates if all calls using the scenario should be recorded.
+     *
+     * @param record
+     * @return This {@link CallsUpdateScenarioResponse instance}.
+     */
+    public CallsUpdateScenarioResponse record(Boolean record) {
+        this.record = record;
+        return this;
+    }
+
+    /**
+     * Returns record.
+     * <p>
+     * Field description:
+     * Indicates if all calls using the scenario should be recorded.
+     *
+     * @return record
+     */
+    @JsonProperty("record")
+    public Boolean getRecord() {
+        return record;
+    }
+
+    /**
+     * Sets record.
+     * <p>
+     * Field description:
+     * Indicates if all calls using the scenario should be recorded.
+     *
+     * @param record
+     */
+    @JsonProperty("record")
+    public void setRecord(Boolean record) {
+        this.record = record;
+    }
+
+    /**
      * Sets script.
      *
      * @param script
@@ -408,6 +450,7 @@ public class CallsUpdateScenarioResponse {
                 && Objects.equals(this.name, callsUpdateScenarioResponse.name)
                 && Objects.equals(this.notifyUrl, callsUpdateScenarioResponse.notifyUrl)
                 && Objects.equals(this.notifyContentType, callsUpdateScenarioResponse.notifyContentType)
+                && Objects.equals(this.record, callsUpdateScenarioResponse.record)
                 && Objects.equals(this.script, callsUpdateScenarioResponse.script)
                 && Objects.equals(this.updateTime, callsUpdateScenarioResponse.updateTime)
                 && Objects.equals(this.lastUsageDate, callsUpdateScenarioResponse.lastUsageDate);
@@ -416,7 +459,16 @@ public class CallsUpdateScenarioResponse {
     @Override
     public int hashCode() {
         return Objects.hash(
-                createTime, description, id, name, notifyUrl, notifyContentType, script, updateTime, lastUsageDate);
+                createTime,
+                description,
+                id,
+                name,
+                notifyUrl,
+                notifyContentType,
+                record,
+                script,
+                updateTime,
+                lastUsageDate);
     }
 
     @Override
@@ -442,6 +494,9 @@ public class CallsUpdateScenarioResponse {
                 .append(newLine)
                 .append("    notifyContentType: ")
                 .append(toIndentedString(notifyContentType))
+                .append(newLine)
+                .append("    record: ")
+                .append(toIndentedString(record))
                 .append(newLine)
                 .append("    script: ")
                 .append(toIndentedString(script))

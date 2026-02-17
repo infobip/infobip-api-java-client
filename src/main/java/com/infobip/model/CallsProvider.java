@@ -26,6 +26,7 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = CallsCiscoWebexProvider.class, name = "CISCO_WEBEX"),
     @JsonSubTypes.Type(value = CallsFreshworksProvider.class, name = "FRESHWORKS"),
     @JsonSubTypes.Type(value = CallsGenesysCloudProvider.class, name = "GENESYS_CLOUD"),
+    @JsonSubTypes.Type(value = CallsOpenAiProvider.class, name = "OPENAI_REALTIME"),
 })
 public abstract class CallsProvider {
 
