@@ -81,9 +81,6 @@ If you find out that something was not addressed properly, please submit an issu
 * **General**:
     * Updated tests
 
-### Removed
-- Unused `CallsIvrMessage.record` field is removed
-
 ## [ [6.2.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.2.0) ] - 2025-10-27
 
 ⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
