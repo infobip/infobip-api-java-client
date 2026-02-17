@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Represents WhatsAppWebhookType enumeration.
  */
 public enum WhatsAppWebhookType {
-    UNSUPPORTED("UNSUPPORTED"),
     TEXT("TEXT"),
     LOCATION("LOCATION"),
     IMAGE("IMAGE"),
@@ -34,7 +33,8 @@ public enum WhatsAppWebhookType {
     INTERACTIVE_PAYMENT_CONFIRMATION("INTERACTIVE_PAYMENT_CONFIRMATION"),
     INTERACTIVE_CALL_PERMISSION_REPLY("INTERACTIVE_CALL_PERMISSION_REPLY"),
     ORDER("ORDER"),
-    REACTION("REACTION");
+    REACTION("REACTION"),
+    UNSUPPORTED("UNSUPPORTED");
 
     private final String value;
 

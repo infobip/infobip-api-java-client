@@ -21,6 +21,8 @@ public class TfaResendPinRequest {
 
     private Map<String, String> placeholders = null;
 
+    private Boolean trackDelivery;
+
     /**
      * Sets placeholders.
      * <p>
@@ -79,6 +81,46 @@ public class TfaResendPinRequest {
         this.placeholders = placeholders;
     }
 
+    /**
+     * Sets trackDelivery.
+     * <p>
+     * Field description:
+     * Enables sending of delivery reports via [Subscriptions](https://www.infobip.com/docs/cpaas-x/subscriptions-management). The [retry cycle](https://www.infobip.com/docs/sms/sms-over-api#push-retry-cycle-notify-url) for when your URL becomes unavailable uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
+     *
+     * @param trackDelivery
+     * @return This {@link TfaResendPinRequest instance}.
+     */
+    public TfaResendPinRequest trackDelivery(Boolean trackDelivery) {
+        this.trackDelivery = trackDelivery;
+        return this;
+    }
+
+    /**
+     * Returns trackDelivery.
+     * <p>
+     * Field description:
+     * Enables sending of delivery reports via [Subscriptions](https://www.infobip.com/docs/cpaas-x/subscriptions-management). The [retry cycle](https://www.infobip.com/docs/sms/sms-over-api#push-retry-cycle-notify-url) for when your URL becomes unavailable uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
+     *
+     * @return trackDelivery
+     */
+    @JsonProperty("trackDelivery")
+    public Boolean getTrackDelivery() {
+        return trackDelivery;
+    }
+
+    /**
+     * Sets trackDelivery.
+     * <p>
+     * Field description:
+     * Enables sending of delivery reports via [Subscriptions](https://www.infobip.com/docs/cpaas-x/subscriptions-management). The [retry cycle](https://www.infobip.com/docs/sms/sms-over-api#push-retry-cycle-notify-url) for when your URL becomes unavailable uses the following formula: &#x60;1min + (1min * retryNumber * retryNumber)&#x60;.
+     *
+     * @param trackDelivery
+     */
+    @JsonProperty("trackDelivery")
+    public void setTrackDelivery(Boolean trackDelivery) {
+        this.trackDelivery = trackDelivery;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -88,12 +130,13 @@ public class TfaResendPinRequest {
             return false;
         }
         TfaResendPinRequest tfaResendPinRequest = (TfaResendPinRequest) o;
-        return Objects.equals(this.placeholders, tfaResendPinRequest.placeholders);
+        return Objects.equals(this.placeholders, tfaResendPinRequest.placeholders)
+                && Objects.equals(this.trackDelivery, tfaResendPinRequest.trackDelivery);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(placeholders);
+        return Objects.hash(placeholders, trackDelivery);
     }
 
     @Override
@@ -104,6 +147,9 @@ public class TfaResendPinRequest {
                 .append(newLine)
                 .append("    placeholders: ")
                 .append(toIndentedString(placeholders))
+                .append(newLine)
+                .append("    trackDelivery: ")
+                .append(toIndentedString(trackDelivery))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Indicates if content is of promotional character.
+ * Indicates character of the content.
  */
 public enum ViberLabel {
     PROMOTIONAL("PROMOTIONAL"),

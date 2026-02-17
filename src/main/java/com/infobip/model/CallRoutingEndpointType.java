@@ -20,6 +20,7 @@ public enum CallRoutingEndpointType {
     SIP("SIP"),
     WEBRTC("WEBRTC"),
     VIBER("VIBER"),
+    WHATSAPP("WHATSAPP"),
     WEBSOCKET("WEBSOCKET");
 
     private final String value;

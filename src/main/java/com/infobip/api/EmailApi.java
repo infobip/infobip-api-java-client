@@ -2264,7 +2264,7 @@ public class EmailApi {
         /**
          * Sets track.
          *
-         * @param track Enable or disable open and click tracking. Passing true will only enable tracking and the statistics would be visible in the web interface alone. This can be explicitly overridden by &#x60;trackClicks&#x60; and &#x60;trackOpens&#x60;. (optional, default to true)
+         * @param track Enable or disable open and click tracking. Passing true will only enable tracking and the statistics would be visible in the web interface alone. This can be explicitly overridden by &#x60;trackClicks&#x60; and &#x60;trackOpens&#x60;. (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest track(Boolean track) {
@@ -2275,7 +2275,7 @@ public class EmailApi {
         /**
          * Sets trackClicks.
          *
-         * @param trackClicks This parameter enables or disables track click feature.  Note: Option to disable click tracking per URL is available. For detailed usage, please refer to the [documentation](https://www.infobip.com/docs/email/tracking-service#disable-click-tracking-on-urls). (optional)
+         * @param trackClicks This parameter enables or disables track click feature.  Note: Option to disable click tracking per URL is available. For detailed usage, please refer to the [documentation](https://www.infobip.com/docs/email/email-tracking-and-analytics/email-tracking-types#disable-click-tracking-on-urls-url-clicks). (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest trackClicks(Boolean trackClicks) {
@@ -2308,7 +2308,7 @@ public class EmailApi {
         /**
          * Sets trackingUrl.
          *
-         * @param trackingUrl The URL on your callback server on which the open and click notifications will be sent. See [Tracking Notifications](https://www.infobip.com/docs/email/send-email-over-api#tracking-notifications) for details. (optional)
+         * @param trackingUrl The URL on your callback server on which the open and click notifications will be sent. See [Tracking Notifications](https://www.infobip.com/docs/email/email-over-api/tracking-notifications) for details. (optional)
          * @return SendEmailRequest
          */
         public SendEmailRequest trackingUrl(String trackingUrl) {

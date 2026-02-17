@@ -35,6 +35,9 @@ public class CallsTextPlayContent extends CallsPlayContent {
     /**
      * Sets text.
      * <p>
+     * Field description:
+     * Text to read. Use the Speech Synthesis Markup Language (SSML) in a request to fine-tune your output.
+     * <p>
      * The field is required.
      *
      * @param text
@@ -48,6 +51,9 @@ public class CallsTextPlayContent extends CallsPlayContent {
     /**
      * Returns text.
      * <p>
+     * Field description:
+     * Text to read. Use the Speech Synthesis Markup Language (SSML) in a request to fine-tune your output.
+     * <p>
      * The field is required.
      *
      * @return text
@@ -59,6 +65,9 @@ public class CallsTextPlayContent extends CallsPlayContent {
 
     /**
      * Sets text.
+     * <p>
+     * Field description:
+     * Text to read. Use the Speech Synthesis Markup Language (SSML) in a request to fine-tune your output.
      * <p>
      * The field is required.
      *
@@ -108,6 +117,9 @@ public class CallsTextPlayContent extends CallsPlayContent {
 
     /**
      * Sets speechRate.
+     * <p>
+     * Field description:
+     * Speech rate. Must be within &#x60;[0.5 - 2.0]&#x60; range, default value is &#x60;1&#x60;.
      *
      * @param speechRate
      * @return This {@link CallsTextPlayContent instance}.
@@ -119,6 +131,9 @@ public class CallsTextPlayContent extends CallsPlayContent {
 
     /**
      * Returns speechRate.
+     * <p>
+     * Field description:
+     * Speech rate. Must be within &#x60;[0.5 - 2.0]&#x60; range, default value is &#x60;1&#x60;.
      *
      * @return speechRate
      */
@@ -129,6 +144,9 @@ public class CallsTextPlayContent extends CallsPlayContent {
 
     /**
      * Sets speechRate.
+     * <p>
+     * Field description:
+     * Speech rate. Must be within &#x60;[0.5 - 2.0]&#x60; range, default value is &#x60;1&#x60;.
      *
      * @param speechRate
      */

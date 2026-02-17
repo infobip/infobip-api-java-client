@@ -41,7 +41,7 @@ public class WebRtcCallLink {
      * Sets id.
      * <p>
      * Field description:
-     * Identifier of the created call. To open a call link, it should be concatenated to the URL: https://call-link.com/.
+     * Identifier of the created call link. To open a call link, it should be concatenated to the URL: https://call-link.com/.
      *
      * @param id
      * @return This {@link WebRtcCallLink instance}.
@@ -55,7 +55,7 @@ public class WebRtcCallLink {
      * Returns id.
      * <p>
      * Field description:
-     * Identifier of the created call. To open a call link, it should be concatenated to the URL: https://call-link.com/.
+     * Identifier of the created call link. To open a call link, it should be concatenated to the URL: https://call-link.com/.
      *
      * @return id
      */
@@ -68,7 +68,7 @@ public class WebRtcCallLink {
      * Sets id.
      * <p>
      * Field description:
-     * Identifier of the created call. To open a call link, it should be concatenated to the URL: https://call-link.com/.
+     * Identifier of the created call link. To open a call link, it should be concatenated to the URL: https://call-link.com/.
      *
      * @param id
      */

@@ -31,6 +31,12 @@ public class MessagesApiMessageOptions {
 
     private String correlationData;
 
+    private MessagesApiTrafficType trafficType;
+
+    private Boolean sessionRate;
+
+    private Boolean primaryDevice;
+
     /**
      * Sets platform.
      *
@@ -275,6 +281,117 @@ public class MessagesApiMessageOptions {
         this.correlationData = correlationData;
     }
 
+    /**
+     * Sets trafficType.
+     *
+     * @param trafficType
+     * @return This {@link MessagesApiMessageOptions instance}.
+     */
+    public MessagesApiMessageOptions trafficType(MessagesApiTrafficType trafficType) {
+        this.trafficType = trafficType;
+        return this;
+    }
+
+    /**
+     * Returns trafficType.
+     *
+     * @return trafficType
+     */
+    @JsonProperty("trafficType")
+    public MessagesApiTrafficType getTrafficType() {
+        return trafficType;
+    }
+
+    /**
+     * Sets trafficType.
+     *
+     * @param trafficType
+     */
+    @JsonProperty("trafficType")
+    public void setTrafficType(MessagesApiTrafficType trafficType) {
+        this.trafficType = trafficType;
+    }
+
+    /**
+     * Sets sessionRate.
+     * <p>
+     * Field description:
+     * Defines if the message should be charged using session rate. Supported by Viber for content with text/image/document only (without buttons, extra text etc.) body type. For text/image only body types &#x60;sessionRate&#x60; won&#39;t be applied if parameter &#x60;primaryDevice&#x60; is set to true.
+     *
+     * @param sessionRate
+     * @return This {@link MessagesApiMessageOptions instance}.
+     */
+    public MessagesApiMessageOptions sessionRate(Boolean sessionRate) {
+        this.sessionRate = sessionRate;
+        return this;
+    }
+
+    /**
+     * Returns sessionRate.
+     * <p>
+     * Field description:
+     * Defines if the message should be charged using session rate. Supported by Viber for content with text/image/document only (without buttons, extra text etc.) body type. For text/image only body types &#x60;sessionRate&#x60; won&#39;t be applied if parameter &#x60;primaryDevice&#x60; is set to true.
+     *
+     * @return sessionRate
+     */
+    @JsonProperty("sessionRate")
+    public Boolean getSessionRate() {
+        return sessionRate;
+    }
+
+    /**
+     * Sets sessionRate.
+     * <p>
+     * Field description:
+     * Defines if the message should be charged using session rate. Supported by Viber for content with text/image/document only (without buttons, extra text etc.) body type. For text/image only body types &#x60;sessionRate&#x60; won&#39;t be applied if parameter &#x60;primaryDevice&#x60; is set to true.
+     *
+     * @param sessionRate
+     */
+    @JsonProperty("sessionRate")
+    public void setSessionRate(Boolean sessionRate) {
+        this.sessionRate = sessionRate;
+    }
+
+    /**
+     * Sets primaryDevice.
+     * <p>
+     * Field description:
+     * Defines if the message should be sent only to the end user&#39;s primary device (phone or tablet). Supported by Viber for message with content with text/image/document only (without buttons, extra text etc.) body type or template message.
+     *
+     * @param primaryDevice
+     * @return This {@link MessagesApiMessageOptions instance}.
+     */
+    public MessagesApiMessageOptions primaryDevice(Boolean primaryDevice) {
+        this.primaryDevice = primaryDevice;
+        return this;
+    }
+
+    /**
+     * Returns primaryDevice.
+     * <p>
+     * Field description:
+     * Defines if the message should be sent only to the end user&#39;s primary device (phone or tablet). Supported by Viber for message with content with text/image/document only (without buttons, extra text etc.) body type or template message.
+     *
+     * @return primaryDevice
+     */
+    @JsonProperty("primaryDevice")
+    public Boolean getPrimaryDevice() {
+        return primaryDevice;
+    }
+
+    /**
+     * Sets primaryDevice.
+     * <p>
+     * Field description:
+     * Defines if the message should be sent only to the end user&#39;s primary device (phone or tablet). Supported by Viber for message with content with text/image/document only (without buttons, extra text etc.) body type or template message.
+     *
+     * @param primaryDevice
+     */
+    @JsonProperty("primaryDevice")
+    public void setPrimaryDevice(Boolean primaryDevice) {
+        this.primaryDevice = primaryDevice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -290,7 +407,10 @@ public class MessagesApiMessageOptions {
                 && Objects.equals(this.regional, messagesApiMessageOptions.regional)
                 && Objects.equals(this.campaignReferenceId, messagesApiMessageOptions.campaignReferenceId)
                 && Objects.equals(this.transliteration, messagesApiMessageOptions.transliteration)
-                && Objects.equals(this.correlationData, messagesApiMessageOptions.correlationData);
+                && Objects.equals(this.correlationData, messagesApiMessageOptions.correlationData)
+                && Objects.equals(this.trafficType, messagesApiMessageOptions.trafficType)
+                && Objects.equals(this.sessionRate, messagesApiMessageOptions.sessionRate)
+                && Objects.equals(this.primaryDevice, messagesApiMessageOptions.primaryDevice);
     }
 
     @Override
@@ -302,7 +422,10 @@ public class MessagesApiMessageOptions {
                 regional,
                 campaignReferenceId,
                 transliteration,
-                correlationData);
+                correlationData,
+                trafficType,
+                sessionRate,
+                primaryDevice);
     }
 
     @Override
@@ -331,6 +454,15 @@ public class MessagesApiMessageOptions {
                 .append(newLine)
                 .append("    correlationData: ")
                 .append(toIndentedString(correlationData))
+                .append(newLine)
+                .append("    trafficType: ")
+                .append(toIndentedString(trafficType))
+                .append(newLine)
+                .append("    sessionRate: ")
+                .append(toIndentedString(sessionRate))
+                .append(newLine)
+                .append("    primaryDevice: ")
+                .append(toIndentedString(primaryDevice))
                 .append(newLine)
                 .append("}")
                 .toString();

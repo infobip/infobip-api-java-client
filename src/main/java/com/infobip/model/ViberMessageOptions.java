@@ -203,7 +203,7 @@ public class ViberMessageOptions {
      * Sets trackingData.
      * <p>
      * Field description:
-     * Custom client&#39;s data that will be passed back with user&#39;s reply.
+     * Custom client&#39;s data that will be passed back with user&#39;s reply. It is not supported for &#x60;OTP_TEMPLATE&#x60; or when &#x60;toPrimaryDeviceOnly&#x60; option is enabled for text only and image only content types.
      *
      * @param trackingData
      * @return This {@link ViberMessageOptions instance}.
@@ -217,7 +217,7 @@ public class ViberMessageOptions {
      * Returns trackingData.
      * <p>
      * Field description:
-     * Custom client&#39;s data that will be passed back with user&#39;s reply.
+     * Custom client&#39;s data that will be passed back with user&#39;s reply. It is not supported for &#x60;OTP_TEMPLATE&#x60; or when &#x60;toPrimaryDeviceOnly&#x60; option is enabled for text only and image only content types.
      *
      * @return trackingData
      */
@@ -230,7 +230,7 @@ public class ViberMessageOptions {
      * Sets trackingData.
      * <p>
      * Field description:
-     * Custom client&#39;s data that will be passed back with user&#39;s reply.
+     * Custom client&#39;s data that will be passed back with user&#39;s reply. It is not supported for &#x60;OTP_TEMPLATE&#x60; or when &#x60;toPrimaryDeviceOnly&#x60; option is enabled for text only and image only content types.
      *
      * @param trackingData
      */
@@ -274,7 +274,7 @@ public class ViberMessageOptions {
      * Sets applySessionRate.
      * <p>
      * Field description:
-     * Defines if the message should be charged using Viber&#39;s session rate if applicable. The session rate is supported for text only, image only and file content types if parameter &#x60;toPrimaryDeviceOnly&#x60; is set to &#x60;false&#x60;.
+     * Defines if the message should be charged using Viber&#39;s session rate if applicable. The session rate is supported for text only, image only and &#x60;FILE&#x60; content types. For text only and image only content types &#x60;sessionRate&#x60; won&#39;t be applied if parameter &#x60;toPrimaryDeviceOnly&#x60; is set to &#x60;true&#x60;.
      *
      * @param applySessionRate
      * @return This {@link ViberMessageOptions instance}.
@@ -288,7 +288,7 @@ public class ViberMessageOptions {
      * Returns applySessionRate.
      * <p>
      * Field description:
-     * Defines if the message should be charged using Viber&#39;s session rate if applicable. The session rate is supported for text only, image only and file content types if parameter &#x60;toPrimaryDeviceOnly&#x60; is set to &#x60;false&#x60;.
+     * Defines if the message should be charged using Viber&#39;s session rate if applicable. The session rate is supported for text only, image only and &#x60;FILE&#x60; content types. For text only and image only content types &#x60;sessionRate&#x60; won&#39;t be applied if parameter &#x60;toPrimaryDeviceOnly&#x60; is set to &#x60;true&#x60;.
      *
      * @return applySessionRate
      */
@@ -301,7 +301,7 @@ public class ViberMessageOptions {
      * Sets applySessionRate.
      * <p>
      * Field description:
-     * Defines if the message should be charged using Viber&#39;s session rate if applicable. The session rate is supported for text only, image only and file content types if parameter &#x60;toPrimaryDeviceOnly&#x60; is set to &#x60;false&#x60;.
+     * Defines if the message should be charged using Viber&#39;s session rate if applicable. The session rate is supported for text only, image only and &#x60;FILE&#x60; content types. For text only and image only content types &#x60;sessionRate&#x60; won&#39;t be applied if parameter &#x60;toPrimaryDeviceOnly&#x60; is set to &#x60;true&#x60;.
      *
      * @param applySessionRate
      */
@@ -314,7 +314,7 @@ public class ViberMessageOptions {
      * Sets toPrimaryDeviceOnly.
      * <p>
      * Field description:
-     * Defines if the message should be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Primary device concept is supported for text only content type.
+     * Defines if the message should be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Primary device concept is supported for text only, image only, &#x60;FILE&#x60; and &#x60;OTP_TEMPLATE&#x60; content type.
      *
      * @param toPrimaryDeviceOnly
      * @return This {@link ViberMessageOptions instance}.
@@ -328,7 +328,7 @@ public class ViberMessageOptions {
      * Returns toPrimaryDeviceOnly.
      * <p>
      * Field description:
-     * Defines if the message should be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Primary device concept is supported for text only content type.
+     * Defines if the message should be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Primary device concept is supported for text only, image only, &#x60;FILE&#x60; and &#x60;OTP_TEMPLATE&#x60; content type.
      *
      * @return toPrimaryDeviceOnly
      */
@@ -341,7 +341,7 @@ public class ViberMessageOptions {
      * Sets toPrimaryDeviceOnly.
      * <p>
      * Field description:
-     * Defines if the message should be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Primary device concept is supported for text only content type.
+     * Defines if the message should be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Primary device concept is supported for text only, image only, &#x60;FILE&#x60; and &#x60;OTP_TEMPLATE&#x60; content type.
      *
      * @param toPrimaryDeviceOnly
      */

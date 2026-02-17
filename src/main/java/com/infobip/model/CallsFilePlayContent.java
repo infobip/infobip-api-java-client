@@ -29,6 +29,9 @@ public class CallsFilePlayContent extends CallsPlayContent {
     /**
      * Sets fileId.
      * <p>
+     * Field description:
+     * ID of the previously uploaded audio file.
+     * <p>
      * The field is required.
      *
      * @param fileId
@@ -42,6 +45,9 @@ public class CallsFilePlayContent extends CallsPlayContent {
     /**
      * Returns fileId.
      * <p>
+     * Field description:
+     * ID of the previously uploaded audio file.
+     * <p>
      * The field is required.
      *
      * @return fileId
@@ -53,6 +59,9 @@ public class CallsFilePlayContent extends CallsPlayContent {
 
     /**
      * Sets fileId.
+     * <p>
+     * Field description:
+     * ID of the previously uploaded audio file.
      * <p>
      * The field is required.
      *

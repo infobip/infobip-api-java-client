@@ -67,7 +67,7 @@ public class WhatsAppInteractiveMultiProductSectionContent {
      * Sets productRetailerIds.
      * <p>
      * Field description:
-     * An array of product-unique identifiers as defined in the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration/integration-essentials#enable-meta-catalog-for-product-based-messaging). If product retailer ID doesn&#39;t exist in your catalog, the product won&#39;t be displayed.
+     * An array of product-unique identifiers as defined in the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration#enable-meta-catalog-for-product-based-messaging). If product retailer ID doesn&#39;t exist in your catalog, the product won&#39;t be displayed.
      * <p>
      * The field is required.
      *
@@ -83,7 +83,7 @@ public class WhatsAppInteractiveMultiProductSectionContent {
      * Adds and item into productRetailerIds.
      * <p>
      * Field description:
-     * An array of product-unique identifiers as defined in the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration/integration-essentials#enable-meta-catalog-for-product-based-messaging). If product retailer ID doesn&#39;t exist in your catalog, the product won&#39;t be displayed.
+     * An array of product-unique identifiers as defined in the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration#enable-meta-catalog-for-product-based-messaging). If product retailer ID doesn&#39;t exist in your catalog, the product won&#39;t be displayed.
      * <p>
      * The field is required.
      *
@@ -102,7 +102,7 @@ public class WhatsAppInteractiveMultiProductSectionContent {
      * Returns productRetailerIds.
      * <p>
      * Field description:
-     * An array of product-unique identifiers as defined in the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration/integration-essentials#enable-meta-catalog-for-product-based-messaging). If product retailer ID doesn&#39;t exist in your catalog, the product won&#39;t be displayed.
+     * An array of product-unique identifiers as defined in the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration#enable-meta-catalog-for-product-based-messaging). If product retailer ID doesn&#39;t exist in your catalog, the product won&#39;t be displayed.
      * <p>
      * The field is required.
      *
@@ -117,7 +117,7 @@ public class WhatsAppInteractiveMultiProductSectionContent {
      * Sets productRetailerIds.
      * <p>
      * Field description:
-     * An array of product-unique identifiers as defined in the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration/integration-essentials#enable-meta-catalog-for-product-based-messaging). If product retailer ID doesn&#39;t exist in your catalog, the product won&#39;t be displayed.
+     * An array of product-unique identifiers as defined in the [catalog](https://www.infobip.com/docs/whatsapp/manage-integration#enable-meta-catalog-for-product-based-messaging). If product retailer ID doesn&#39;t exist in your catalog, the product won&#39;t be displayed.
      * <p>
      * The field is required.
      *

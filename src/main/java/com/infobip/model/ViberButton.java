@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Button to be displayed alongside the image.
+ * Button with action.
  */
 public class ViberButton {
 

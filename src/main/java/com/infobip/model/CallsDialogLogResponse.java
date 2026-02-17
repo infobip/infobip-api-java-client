@@ -42,6 +42,8 @@ public class CallsDialogLogResponse {
 
     private CallsErrorCodeInfo errorCode;
 
+    private CallsDialogHangupSource hangupSource;
+
     /**
      * Sets dialogId.
      * <p>
@@ -486,6 +488,37 @@ public class CallsDialogLogResponse {
         this.errorCode = errorCode;
     }
 
+    /**
+     * Sets hangupSource.
+     *
+     * @param hangupSource
+     * @return This {@link CallsDialogLogResponse instance}.
+     */
+    public CallsDialogLogResponse hangupSource(CallsDialogHangupSource hangupSource) {
+        this.hangupSource = hangupSource;
+        return this;
+    }
+
+    /**
+     * Returns hangupSource.
+     *
+     * @return hangupSource
+     */
+    @JsonProperty("hangupSource")
+    public CallsDialogHangupSource getHangupSource() {
+        return hangupSource;
+    }
+
+    /**
+     * Sets hangupSource.
+     *
+     * @param hangupSource
+     */
+    @JsonProperty("hangupSource")
+    public void setHangupSource(CallsDialogHangupSource hangupSource) {
+        this.hangupSource = hangupSource;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -506,7 +539,8 @@ public class CallsDialogLogResponse {
                 && Objects.equals(this.childCallId, callsDialogLogResponse.childCallId)
                 && Objects.equals(this.duration, callsDialogLogResponse.duration)
                 && Objects.equals(this.recording, callsDialogLogResponse.recording)
-                && Objects.equals(this.errorCode, callsDialogLogResponse.errorCode);
+                && Objects.equals(this.errorCode, callsDialogLogResponse.errorCode)
+                && Objects.equals(this.hangupSource, callsDialogLogResponse.hangupSource);
     }
 
     @Override
@@ -523,7 +557,8 @@ public class CallsDialogLogResponse {
                 childCallId,
                 duration,
                 recording,
-                errorCode);
+                errorCode,
+                hangupSource);
     }
 
     @Override
@@ -567,6 +602,9 @@ public class CallsDialogLogResponse {
                 .append(newLine)
                 .append("    errorCode: ")
                 .append(toIndentedString(errorCode))
+                .append(newLine)
+                .append("    hangupSource: ")
+                .append(toIndentedString(hangupSource))
                 .append(newLine)
                 .append("}")
                 .toString();

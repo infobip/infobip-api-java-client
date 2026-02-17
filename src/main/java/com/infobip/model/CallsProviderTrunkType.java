@@ -18,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum CallsProviderTrunkType {
     FRESHWORKS("FRESHWORKS"),
     GENESYS_CLOUD("GENESYS_CLOUD"),
-    CISCO_WEBEX("CISCO_WEBEX");
+    CISCO_WEBEX("CISCO_WEBEX"),
+    OPENAI_REALTIME("OPENAI_REALTIME");
 
     private final String value;
 

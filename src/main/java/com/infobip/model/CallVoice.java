@@ -49,6 +49,8 @@ public enum CallVoice {
     JOEY("Joey"),
     JUSTIN("Justin"),
     MATTHEW("Matthew"),
+    JENNIFER("Jennifer"),
+    DAVID("David"),
     RUSSELL("Russell"),
     NICOLE("Nicole"),
     BRIAN("Brian"),

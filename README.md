@@ -33,6 +33,7 @@ The current version of this library includes this subset of Infobip products:
 * [Viber](https://www.infobip.com/docs/api/channels/viber)
 * [Messages API](https://www.infobip.com/docs/api/platform/messages-api)
 * [Moments API](https://www.infobip.com/docs/api/customer-engagement/moments)
+* [RCS](https://www.infobip.com/docs/api/channels/rcs)
 
 ## General Info
 For `infobip-api-java-client` versioning we use [Semantic Versioning][semver] scheme.
@@ -49,7 +50,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
       <groupId>com.infobip</groupId>
       <artifactId>infobip-api-java-client</artifactId>
-      <version>6.2.0</version>
+      <version>6.3.0</version>
 </dependency>
 ```
 

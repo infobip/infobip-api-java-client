@@ -3,6 +3,7 @@ package com.infobip.api;
 import static org.assertj.core.api.Assertions.entry;
 import static org.assertj.core.api.BDDAssertions.then;
 
+import com.infobip.JSON;
 import com.infobip.model.*;
 import java.io.File;
 import java.io.IOException;
@@ -52,8 +53,7 @@ class CallsApiTest extends ApiTest {
     private static final String CONFERENCE_STOP_PLAYING_FILE = "/calls/1/conferences/{conferenceId}/stop-play";
     private static final String CONFERENCE_START_RECORDING = "/calls/1/conferences/{conferenceId}/start-recording";
     private static final String CONFERENCE_STOP_RECORDING = "/calls/1/conferences/{conferenceId}/stop-recording";
-    private static final String CONFERENCE_BROADCAST_WEBRTC_TEXT =
-            "/calls/1/conferences/{conferenceId}/broadcast-webrtc-text";
+    private static final String CONFERENCE_BROADCAST_WEBRTC_TEXT = "/calls/1/conferences/{conferenceId}/send-message";
     private static final String CALLS_FILES = "/calls/1/files";
     private static final String CALLS_FILE = "/calls/1/files/{fileId}";
     private static final String MEDIA_STREAM_CONFIGS = "/calls/1/media-stream-configs";
@@ -73,7 +73,7 @@ class CallsApiTest extends ApiTest {
     private static final String DIALOGS = "/calls/1/dialogs";
     private static final String DIALOGS_EXISTING_CALLS =
             "/calls/1/dialogs/parent-call/{parentCallId}/child-call/{childCallId}";
-    private static final String DIALOGS_BROADCAST_TEXT = "/calls/1/dialogs/{dialogId}/broadcast-webrtc-text";
+    private static final String DIALOGS_BROADCAST_TEXT = "/calls/1/dialogs/{dialogId}/send-message";
     private static final String SIP_TRUNKS = "/calls/1/sip-trunks";
     private static final String SIP_TRUNK = "/calls/1/sip-trunks/{sipTrunkId}";
     private static final String SIP_TRUNK_STATUS = "/calls/1/sip-trunks/{sipTrunkId}/status";
@@ -1665,7 +1665,7 @@ class CallsApiTest extends ApiTest {
 
         CallsApi api = new CallsApi(getApiClient());
 
-        CallsSayRequest request = new CallsSayRequest()
+        CallsPublicSayRequest request = new CallsPublicSayRequest()
                 .text(givenText)
                 .language(givenLanguage)
                 .speechRate(givenSpeechRate)
@@ -3388,7 +3388,7 @@ class CallsApiTest extends ApiTest {
         String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}\n", givenStatus);
 
         String expectedText = "This meeting will end in 5 minutes.";
-        String expectedRequest = String.format("{\n" + "  \"text\": \"%s\"\n" + "}", expectedText);
+        String expectedRequest = String.format("{\n" + "  \"message\": \"%s\"\n" + "}", expectedText);
 
         String givenConferenceId = "123";
         setUpPostRequest(
@@ -3400,7 +3400,7 @@ class CallsApiTest extends ApiTest {
         CallsApi api = new CallsApi(getApiClient());
 
         var callsConferenceBroadcastWebrtcTextRequest =
-                new CallsConferenceBroadcastWebrtcTextRequest().text(expectedText);
+                new CallsConferenceBroadcastWebrtcTextRequest().message(expectedText);
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -4067,7 +4067,7 @@ class CallsApiTest extends ApiTest {
 
         CallsApi api = new CallsApi(getApiClient());
 
-        Consumer<CallRecording> assertions = (response) -> {
+        Consumer<CallsPublicRecording> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getCallId()).isEqualTo(givenId);
             then(response.getEndpoint()).isNotNull();
@@ -4162,7 +4162,7 @@ class CallsApiTest extends ApiTest {
 
         setUpNoRequestBodyDeleteRequest(CALL_RECORDINGS.replace("{callId}", givenId), Map.of(), givenResponse, 200);
 
-        Consumer<CallRecording> assertions = (response) -> {
+        Consumer<CallsPublicRecording> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getCallId()).isEqualTo(givenId);
             then(response.getEndpoint()).isNotNull();
@@ -4199,9 +4199,9 @@ class CallsApiTest extends ApiTest {
         String givenConferenceId = "string";
         String givenConferenceName = "string";
         String givenApplicationId = "string";
-        String givenFileId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
         String givenEntityId = "entityId";
         Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
+        String givenFileId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
 
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
@@ -4392,8 +4392,6 @@ class CallsApiTest extends ApiTest {
         String givenConferenceId = "string";
         String givenConferenceName = "string";
         String givenApplicationId = "string";
-        String givenEntityId = "entityId";
-        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
         String givenFileId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
         String givenName = "Example file";
         CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
@@ -4411,6 +4409,8 @@ class CallsApiTest extends ApiTest {
         CallDirection givenDirection = CallDirection.INBOUND;
         CallsRecordingStatus givenStatus = CallsRecordingStatus.SUCCESSFUL;
         String givenReason = "string";
+        String givenEntityId = "entityId";
+        Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
 
         String givenResponse = String.format(
                 "{\n" + "  \"conferenceId\": \"%s\",\n"
@@ -4494,7 +4494,7 @@ class CallsApiTest extends ApiTest {
 
         CallsApi api = new CallsApi(getApiClient());
 
-        Consumer<CallsConferenceRecording> assertions = (response) -> {
+        Consumer<CallsPublicConferenceRecording> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getConferenceId()).isEqualTo(givenConferenceId);
             then(response.getConferenceName()).isEqualTo(givenConferenceName);
@@ -4660,7 +4660,7 @@ class CallsApiTest extends ApiTest {
 
         CallsApi api = new CallsApi(getApiClient());
 
-        Consumer<CallsConferenceRecording> assertions = (response) -> {
+        Consumer<CallsPublicConferenceRecording> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getConferenceId()).isEqualTo(givenConferenceId);
             then(response.getConferenceName()).isEqualTo(givenConferenceName);
@@ -4768,7 +4768,7 @@ class CallsApiTest extends ApiTest {
 
         CallsApi api = new CallsApi(getApiClient());
 
-        Consumer<CallsRecordingFile> assertions = (response) -> {
+        Consumer<CallsPublicRecordingFile> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getId()).isEqualTo(givenFileId);
             then(response.getName()).isEqualTo(givenName);
@@ -5766,7 +5766,7 @@ class CallsApiTest extends ApiTest {
         String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}\n", givenStatus);
 
         String expectedText = "This dialog will end in 5 minutes.";
-        String expectedRequest = String.format("{\n" + "  \"text\": \"%s\"\n" + "}", expectedText);
+        String expectedRequest = String.format("{\n" + "  \"message\": \"%s\"\n" + "}", expectedText);
 
         String givenDialogId = "123";
         setUpPostRequest(
@@ -5774,7 +5774,7 @@ class CallsApiTest extends ApiTest {
 
         CallsApi api = new CallsApi(getApiClient());
 
-        var callsDialogBroadcastWebrtcTextRequest = new CallsDialogBroadcastWebrtcTextRequest().text(expectedText);
+        var callsDialogBroadcastWebrtcTextRequest = new CallsDialogBroadcastWebrtcTextRequest().message(expectedText);
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -7371,5 +7371,34 @@ class CallsApiTest extends ApiTest {
         var call = api.deleteCallsConfiguration("63467c6e2885a5389ba11d80");
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldParseCallEstablishedEvent() {
+        String givenCallId = "123e4567-e89b-12d3-a456-426614174000";
+        String givenTimestamp = "2024-06-14T09:12:00.000+0000";
+        String givenCallsConfigurationId = "63467c6e2885a5389ba11d80";
+
+        String givenRequest = String.format(
+                "{\n" + "  \"type\": \"CALL_ESTABLISHED\",\n"
+                        + "  \"callId\": \"%s\",\n"
+                        + "  \"timestamp\": \"%s\",\n"
+                        + "  \"callsConfigurationId\": \"%s\",\n"
+                        + "  \"properties\": {\n"
+                        + "    \"sender\": \"441134960000\"\n"
+                        + "  }\n"
+                        + "}",
+                givenCallId, givenTimestamp, givenCallsConfigurationId);
+
+        CallsEvent event = new JSON().deserialize(givenRequest, CallsEvent.class);
+
+        then(event).isNotNull();
+        then(event).isInstanceOf(CallEstablishedEvent.class);
+        then(event.getType()).isEqualTo(CallsEventType.CALL_ESTABLISHED);
+        then(event.getCallId()).isEqualTo(givenCallId);
+        then(event.getCallsConfigurationId()).isEqualTo(givenCallsConfigurationId);
+        var established = (CallEstablishedEvent) event;
+        then(established.getProperties()).isNotNull();
+        then(established.getProperties().getSender()).isEqualTo("441134960000");
     }
 }

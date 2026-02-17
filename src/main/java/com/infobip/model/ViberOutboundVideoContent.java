@@ -218,7 +218,7 @@ public class ViberOutboundVideoContent extends ViberOutboundContent {
      * Sets buttonTitle.
      * <p>
      * Field description:
-     * The text that will appear on the button.
+     * Button title.
      *
      * @param buttonTitle
      * @return This {@link ViberOutboundVideoContent instance}.
@@ -232,7 +232,7 @@ public class ViberOutboundVideoContent extends ViberOutboundContent {
      * Returns buttonTitle.
      * <p>
      * Field description:
-     * The text that will appear on the button.
+     * Button title.
      *
      * @return buttonTitle
      */
@@ -245,7 +245,7 @@ public class ViberOutboundVideoContent extends ViberOutboundContent {
      * Sets buttonTitle.
      * <p>
      * Field description:
-     * The text that will appear on the button.
+     * Button title.
      *
      * @param buttonTitle
      */

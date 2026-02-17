@@ -120,7 +120,7 @@ public class MessagesApiMessage implements MessagesApiRequestMessagesInner {
      * Sets destinations.
      * <p>
      * Field description:
-     * Array of destination objects for where messages are being sent. A valid destination is required.
+     * Array of destination objects for where messages are being sent. A valid destination is required. **&#x60;Channels Destination&#x60; is required when sending messages with defined failover.**
      * <p>
      * The field is required.
      *
@@ -136,7 +136,7 @@ public class MessagesApiMessage implements MessagesApiRequestMessagesInner {
      * Adds and item into destinations.
      * <p>
      * Field description:
-     * Array of destination objects for where messages are being sent. A valid destination is required.
+     * Array of destination objects for where messages are being sent. A valid destination is required. **&#x60;Channels Destination&#x60; is required when sending messages with defined failover.**
      * <p>
      * The field is required.
      *
@@ -155,7 +155,7 @@ public class MessagesApiMessage implements MessagesApiRequestMessagesInner {
      * Returns destinations.
      * <p>
      * Field description:
-     * Array of destination objects for where messages are being sent. A valid destination is required.
+     * Array of destination objects for where messages are being sent. A valid destination is required. **&#x60;Channels Destination&#x60; is required when sending messages with defined failover.**
      * <p>
      * The field is required.
      *
@@ -170,7 +170,7 @@ public class MessagesApiMessage implements MessagesApiRequestMessagesInner {
      * Sets destinations.
      * <p>
      * Field description:
-     * Array of destination objects for where messages are being sent. A valid destination is required.
+     * Array of destination objects for where messages are being sent. A valid destination is required. **&#x60;Channels Destination&#x60; is required when sending messages with defined failover.**
      * <p>
      * The field is required.
      *

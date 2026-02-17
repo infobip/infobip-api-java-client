@@ -10,8 +10,6 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -20,8 +18,6 @@ import java.util.Objects;
 public class CallRoutingCallsApplication extends CallRoutingApplication {
 
     private String applicationId;
-
-    private Map<String, String> customData = null;
 
     private Integer timeout;
 
@@ -79,64 +75,6 @@ public class CallRoutingCallsApplication extends CallRoutingApplication {
     }
 
     /**
-     * Sets customData.
-     * <p>
-     * Field description:
-     * Client defined data passed to the calls application.
-     *
-     * @param customData
-     * @return This {@link CallRoutingCallsApplication instance}.
-     */
-    public CallRoutingCallsApplication customData(Map<String, String> customData) {
-        this.customData = customData;
-        return this;
-    }
-
-    /**
-     * Puts and entry into customData.
-     * <p>
-     * Field description:
-     * Client defined data passed to the calls application.
-     *
-     * @param key The given key.
-     * @param customDataItem The item to be associated with the given key.
-     * @return This {@link CallRoutingCallsApplication instance}.
-     */
-    public CallRoutingCallsApplication putCustomDataItem(String key, String customDataItem) {
-        if (this.customData == null) {
-            this.customData = new HashMap<>();
-        }
-        this.customData.put(key, customDataItem);
-        return this;
-    }
-
-    /**
-     * Returns customData.
-     * <p>
-     * Field description:
-     * Client defined data passed to the calls application.
-     *
-     * @return customData
-     */
-    @JsonProperty("customData")
-    public Map<String, String> getCustomData() {
-        return customData;
-    }
-
-    /**
-     * Sets customData.
-     * <p>
-     * Field description:
-     * Client defined data passed to the calls application.
-     *
-     * @param customData
-     */
-    @JsonProperty("customData")
-    public void setCustomData(Map<String, String> customData) {
-        this.customData = customData;
-    }
-
-    /**
      * Sets timeout.
      * <p>
      * Field description:
@@ -186,14 +124,13 @@ public class CallRoutingCallsApplication extends CallRoutingApplication {
         }
         CallRoutingCallsApplication callRoutingCallsApplication = (CallRoutingCallsApplication) o;
         return Objects.equals(this.applicationId, callRoutingCallsApplication.applicationId)
-                && Objects.equals(this.customData, callRoutingCallsApplication.customData)
                 && Objects.equals(this.timeout, callRoutingCallsApplication.timeout)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(applicationId, customData, timeout, super.hashCode());
+        return Objects.hash(applicationId, timeout, super.hashCode());
     }
 
     @Override
@@ -207,9 +144,6 @@ public class CallRoutingCallsApplication extends CallRoutingApplication {
                 .append(newLine)
                 .append("    applicationId: ")
                 .append(toIndentedString(applicationId))
-                .append(newLine)
-                .append("    customData: ")
-                .append(toIndentedString(customData))
                 .append(newLine)
                 .append("    timeout: ")
                 .append(toIndentedString(timeout))

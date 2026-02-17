@@ -21,6 +21,10 @@ public class WebRtcParticipantsDetails extends WebRtcCallDetails {
 
     private WebRtcParticipant callee;
 
+    private String dialogId;
+
+    private WebRtcHangupSource hangupSource;
+
     /**
      * Constructs a new {@link WebRtcParticipantsDetails} instance.
      */
@@ -102,6 +106,77 @@ public class WebRtcParticipantsDetails extends WebRtcCallDetails {
         this.callee = callee;
     }
 
+    /**
+     * Sets dialogId.
+     * <p>
+     * Field description:
+     * Dialog identifier.
+     *
+     * @param dialogId
+     * @return This {@link WebRtcParticipantsDetails instance}.
+     */
+    public WebRtcParticipantsDetails dialogId(String dialogId) {
+        this.dialogId = dialogId;
+        return this;
+    }
+
+    /**
+     * Returns dialogId.
+     * <p>
+     * Field description:
+     * Dialog identifier.
+     *
+     * @return dialogId
+     */
+    @JsonProperty("dialogId")
+    public String getDialogId() {
+        return dialogId;
+    }
+
+    /**
+     * Sets dialogId.
+     * <p>
+     * Field description:
+     * Dialog identifier.
+     *
+     * @param dialogId
+     */
+    @JsonProperty("dialogId")
+    public void setDialogId(String dialogId) {
+        this.dialogId = dialogId;
+    }
+
+    /**
+     * Sets hangupSource.
+     *
+     * @param hangupSource
+     * @return This {@link WebRtcParticipantsDetails instance}.
+     */
+    public WebRtcParticipantsDetails hangupSource(WebRtcHangupSource hangupSource) {
+        this.hangupSource = hangupSource;
+        return this;
+    }
+
+    /**
+     * Returns hangupSource.
+     *
+     * @return hangupSource
+     */
+    @JsonProperty("hangupSource")
+    public WebRtcHangupSource getHangupSource() {
+        return hangupSource;
+    }
+
+    /**
+     * Sets hangupSource.
+     *
+     * @param hangupSource
+     */
+    @JsonProperty("hangupSource")
+    public void setHangupSource(WebRtcHangupSource hangupSource) {
+        this.hangupSource = hangupSource;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -113,12 +188,14 @@ public class WebRtcParticipantsDetails extends WebRtcCallDetails {
         WebRtcParticipantsDetails webRtcParticipantsDetails = (WebRtcParticipantsDetails) o;
         return Objects.equals(this.caller, webRtcParticipantsDetails.caller)
                 && Objects.equals(this.callee, webRtcParticipantsDetails.callee)
+                && Objects.equals(this.dialogId, webRtcParticipantsDetails.dialogId)
+                && Objects.equals(this.hangupSource, webRtcParticipantsDetails.hangupSource)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(caller, callee, super.hashCode());
+        return Objects.hash(caller, callee, dialogId, hangupSource, super.hashCode());
     }
 
     @Override
@@ -135,6 +212,12 @@ public class WebRtcParticipantsDetails extends WebRtcCallDetails {
                 .append(newLine)
                 .append("    callee: ")
                 .append(toIndentedString(callee))
+                .append(newLine)
+                .append("    dialogId: ")
+                .append(toIndentedString(dialogId))
+                .append(newLine)
+                .append("    hangupSource: ")
+                .append(toIndentedString(hangupSource))
                 .append(newLine)
                 .append("}")
                 .toString();

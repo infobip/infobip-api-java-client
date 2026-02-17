@@ -5,6 +5,82 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [6.3.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.3.0) ] - 2026-02-17
+
+⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
+All changes, including breaking changes, are addressed and explained in the list bellow.
+If you find out that something was not addressed properly, please submit an issue.
+
+### Added
+* Support for [Infobip RCS API](https://www.infobip.com/docs/api/channels/rcs).
+* Most recent feature set for:
+  * [Infobip Messages API](https://www.infobip.com/docs/api/platform/messages-api).
+  * [Infobip Voice API](https://www.infobip.com/docs/api/channels/voice).
+  * [Infobip SMS API](https://www.infobip.com/docs/api/channels/sms).
+  * [Infobip 2FA API](https://www.infobip.com/docs/api/platform/2fa).
+  * [Infobip Email API](https://www.infobip.com/docs/api/channels/email).
+  * [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp).
+  * [Infobip Viber API](https://www.infobip.com/docs/api/channels/viber).
+  * [Infobip WebRTC API](https://www.infobip.com/docs/api/channels/webrtc-calls).
+  * [Infobip Moments](https://www.infobip.com/docs/api/customer-engagement/moments).
+  * [Infobip MMS API](https://www.infobip.com/docs/api/channels/mms).
+* **HTTPS enforcement:** The SDK now automatically ensures HTTPS is used for API host URLs. If `http://` is explicitly provided, a `IllegalArgumentException` is raised. URLs without a protocol are automatically prefixed with `https://`.
+
+### Changed
+
+* **Call Routing**:
+    * Extended `CallRoutingWebSocketEndpoint` with `customData` field
+    * Extended `CallRoutingApi` with new endpoints: `deleteByCorrelationId`, `recordingFileDownload`, `searchCallRoutingRecording`, `updateRouteOrder`, `updateRouteStatus`, `simulateRoute`
+    * Extended `getCallRoutes` method with `nameContains` query parameter support
+    * Extended `CallRoutingCriteriaType` with `APPLICATION` type support
+    * Extended `CallRoutingCriteria` with `CallRoutingApplicationCriteria` subtype support
+    * Removed duplicate `customData` field from `CallRoutingInfobipApplication` and `CallRoutingCallsApplication` models (field is already inherited from parent class `CallRoutingApplication`)
+    * JavaDoc fixes
+* **Voice**:
+    * Extended `VoiceApi` with new IVR upload endpoints: `ivrUploadAudioFile` and `ivrUploadGetFiles`
+    * Extended `CallsSearchResponse`, `CallsUpdateScenarioRequest`, `CallsUpdateScenarioResponse` models with `record` field support
+    * Extended `CallsProviderTrunkType` with `OPENAI_REALTIME` type support
+    * Extended `CallsProvider` with `CallsOpenAiProvider` subtype support
+    * Extended `CallsRecordingFile` model with `expirationTime` field support
+    * Renamed `customData` field to `multichannelMappingData` in `CallsRecordingFile` model
+    * Extended `CallsVoiceData` with `direction` and `callRecordingFileId` field support
+    * Extended `CallVoice` with new voices (`JENNIFER`, `DAVID`)
+    * Replaced `platform` field (type: `Platform`) with `applicationId` field (type: `String`) in `CallRecording` and `CallsConferenceRecording` models
+    * Changed `results` field type from `List<CallRecording>` to `List<CallsPublicRecording>` in `CallRecordingPage` model
+    * Changed `results` field type from `List<CallsConferenceRecording>` to `List<CallsPublicConferenceRecording>` in `CallsConferenceRecordingPage` model
+    * Changed `composedFiles` field type from `List<CallsRecordingFile>` to `List<CallsPublicRecordingFile>` and `callRecordings` field type from `List<CallRecording>` to `List<CallsPublicRecording>` in `CallsConferenceRecordingLog`, `CallsDialogRecordingLog`, and `CallsDialogRecordingResponse` models
+    * Removed `stopOn` and `customData` fields from `CallsSayRequest` model
+    * Removed `record` field from `CallsIvrMessage` model
+    * Removed `TRANSFERRING` state from `CallsDialogState` enum
+    * Removed `JOHANNESBURG_1` enum value from `CallsRecordingLocation` to reflect the current state of the API
+    * JavaDoc fixes
+* **Viber**:
+    * Fixed `ViberCarouselCard` buttons now are null instead of being initialized as a new ArrayList to reflect field change from required to optional
+    * JavaDoc fixes
+* **MessagesApi**:
+    * Extended `MessagesApiMessageContent` with `senderDisplayInfo` field support
+    * Extended `MessagesApiMessageOptions` with `trafficType`, `sessionRate` and `primaryDevice` field support
+    * Extended `MessagesApiWebhookEventContentType` with `URL` and `REACTION` event type support
+    * JavaDoc fixes
+* **Tfa**:
+    * Extended `TfaStartAuthenticationRequest` and `TfaResendPinRequest` with `trackDelivery` field support
+    * Extended `TfaStartAuthenticationResponse` with `externalMessageId` field support
+    * JavaDoc fixes
+* **WebRtc**:
+    * Extended `WebRtcParticipant` with `startTime` and `type` field support
+    * Extended `WebRtcParticipantsDetails` and `WebRtcPhoneCallDetails` with `dialogId` and `hangupSource` field support
+    * Renamed `text` field to `message` in `CallsDialogBroadcastWebrtcTextRequest` model due to previous endpoint `/calls/1/dialogs/{dialogId}/broadcast-webrtc-text` being sunset and migrated to `/calls/1/dialogs/{dialogId}/send-message`
+    * Renamed `text` field to `message` in `CallsConferenceBroadcastWebrtcTextRequest` model due to previous endpoint `/calls/1/conferences/{conferenceId}/broadcast-webrtc-text` being sunset and migrated to `/calls/1/conferences/{conferenceId}/send-message`
+    * Removed `CALLING`, `RINGING`, `PRE_ESTABLISHED`, `ESTABLISHED`, `DISCONNECTED`, `JOINING`, `JOINED`, `LEFT` enum values from `WebRtcState`
+    * JavaDoc fixes
+* **WhatsApp**:
+    * Extended `WhatsAppInteractiveOrderPaymentStatus` with `UPI_LINK` status support
+    * Extended `WhatsAppInteractiveAllowedOrderPaymentDetails` with `UPI_LINK` type support
+    * Removed `LIMIT_1K` value from `WhatsAppSenderLimit` enum
+    * JavaDoc fixes
+* **General**:
+    * Updated tests
+
 ## [ [6.2.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.2.0) ] - 2025-10-27
 
 ⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
@@ -27,101 +103,100 @@ If you find out that something was not addressed properly, please submit an issu
 ### Changed
 
 * **Email:**
-  * For `getIpPool` method response type changed from `EmailIpPoolResponse` to `EmailIpPoolDetailResponse`
-  * Removed `returnPathAddress` field from `EmailAddDomainRequest`, `EmailDomainResponse` model
-  * `/email/1/domains/{domainName}/return-path` - This endpoint has been is no longer supported in the SDK.
-  * Fixed `bulks` field in `EmailBulkScheduleResponse` and `EmailBulkStatusResponse`, now initialized as an empty list due to field change from optional to required
-  * Extended `EmailDomainResponse` model with `blocklistConfigrationLevel` field
-  * Extended `EmailIpDetailResponse`, `EmailIpResponse` model with `ipAddresses` field
-  * Fixed `messages` field in `EmailSendResponse`, now initialized as an empty list due to field change from optional to required
-  * Fixed `reason` field type in `EmailValidationResponse` from `String` to `EmailValidationReason`
-  * Fixed `risk` field type in `EmailValidationResponse` from `String` to `EmailValidationApiRisk`
-  * Extended `EmailWebhookTrackingPayload` model with `eventId` and `sender` field support
-  * JavaDoc fixes
+    * For `getIpPool` method response type changed from `EmailIpPoolResponse` to `EmailIpPoolDetailResponse`
+    * Removed `returnPathAddress` field from `EmailAddDomainRequest`, `EmailDomainResponse` model
+    * `/email/1/domains/{domainName}/return-path` - This endpoint has been is no longer supported in the SDK.
+    * Fixed `bulks` field in `EmailBulkScheduleResponse` and `EmailBulkStatusResponse`, now initialized as an empty list due to field change from optional to required
+    * Extended `EmailDomainResponse` model with `blocklistConfigrationLevel` field
+    * Extended `EmailIpDetailResponse`, `EmailIpResponse` model with `ipAddresses` field
+    * Fixed `messages` field in `EmailSendResponse`, now initialized as an empty list due to field change from optional to required
+    * Fixed `reason` field type in `EmailValidationResponse` from `String` to `EmailValidationReason`
+    * Fixed `risk` field type in `EmailValidationResponse` from `String` to `EmailValidationApiRisk`
+    * Extended `EmailWebhookTrackingPayload` model with `eventId` and `sender` field support
+    * JavaDoc fixes
 * **MessagesApi**:
-  * Extended `MessagesApiDefaultMessageRequestOptions` with `messageOrdering` field support
-  * Extended `MessagesApiMessageBody` with `FORM`, `ORDER_REQUEST`, `ORDER_STATUS` and `TIME_PICKER` body type support
-  * Extended `MessagesApiMessageButton` with `DIAL_PHONE` and `SHOW_LOCATION` button type support
-  * Extended `MessagesApiMessageOpenUrlButton` model with `postbackData` and `openIn` field support
-  * Extended `MessagesApiMessageOptions` model with `transliteration` and `correlationData` field support
-  * Extended `MessagesApiOutboundTemplateChannel` model with `VIBER_BM` type support
-  * Extended `MessagesApiWebhookEventContent` model with `FORM_RESPONSE` and `PAYMENT_RESPONSE` event type support
-  * Extended `MessagesApiWebhookEvent` with `messageCount` and `metadata` field support
-  * JavaDoc fixes
+    * Extended `MessagesApiDefaultMessageRequestOptions` with `messageOrdering` field support
+    * Extended `MessagesApiMessageBody` with `FORM`, `ORDER_REQUEST`, `ORDER_STATUS` and `TIME_PICKER` body type support
+    * Extended `MessagesApiMessageButton` with `DIAL_PHONE` and `SHOW_LOCATION` button type support
+    * Extended `MessagesApiMessageOpenUrlButton` model with `postbackData` and `openIn` field support
+    * Extended `MessagesApiMessageOptions` model with `transliteration` and `correlationData` field support
+    * Extended `MessagesApiOutboundTemplateChannel` model with `VIBER_BM` type support
+    * Extended `MessagesApiWebhookEventContent` model with `FORM_RESPONSE` and `PAYMENT_RESPONSE` event type support
+    * Extended `MessagesApiWebhookEvent` with `messageCount` and `metadata` field support
+    * JavaDoc fixes
 * **Mms**:
-  * Cursor-based pagination support in `getOutboundMmsMessageLogs` function with `useCursor` and `cursor` parameters. 
-    * Extended `MmsLogsResponse` model with `cursor` field
-  * JavaDoc fixes
+    * Cursor-based pagination support in `getOutboundMmsMessageLogs` function with `useCursor` and `cursor` parameters.
+        * Extended `MmsLogsResponse` model with `cursor` field
+    * JavaDoc fixes
 * **Moments**:
-  * Fixed `FlowExceptionResponse` model with adding missing fields: `type`, `title`, `status`, `detail`, `instance`
-  * JavaDoc fixes
+    * Fixed `FlowExceptionResponse` model with adding missing fields: `type`, `title`, `status`, `detail`, `instance`
+    * JavaDoc fixes
 * **Sms**:
-  * Unified `SmsWebhookInboundReport` with the existing `SmsInboundMessage` model
-  * Unified `SmsWebhookInboundReportResponse` with the existing `SmsInboundMessageResult` model
-  * JavaDoc fixes
+    * Unified `SmsWebhookInboundReport` with the existing `SmsInboundMessage` model
+    * Unified `SmsWebhookInboundReportResponse` with the existing `SmsInboundMessageResult` model
+    * JavaDoc fixes
 * **Tfa**:
-  * Extended `TfaCreateEmailMessageRequest`, `TfaMessage`, `TfaUpdateEmailMessageRequest` and `TfaEmailMessage` with `landingPageId` field support
-  * Extended `TfaStartEmailAuthenticationRequest` with `landingPagePlaceholders` field support
-  * JavaDoc fixes
+    * Extended `TfaCreateEmailMessageRequest`, `TfaMessage`, `TfaUpdateEmailMessageRequest` and `TfaEmailMessage` with `landingPageId` field support
+    * Extended `TfaStartEmailAuthenticationRequest` with `landingPagePlaceholders` field support
+    * JavaDoc fixes
 * **Viber**:
-  * Cursor-based pagination support in `getOutboundViberMessageLogs` function with `useCursor` and `cursor` parameters. 
+    * Cursor-based pagination support in `getOutboundViberMessageLogs` function with `useCursor` and `cursor` parameters.
     * Extended `ViberLogsResponse` model with `cursor` field
-  * Extended `ViberMessageDeliveryReporting` with `receiveTriggeredFailoverReports` field support
-  * Extended `ViberOutboundFileContent` and `ViberOutboundFileContentType` with a `CAROUSEL` support
-  * JavaDoc fixes
+    * Extended `ViberMessageDeliveryReporting` with `receiveTriggeredFailoverReports` field support
+    * Extended `ViberOutboundFileContent` and `ViberOutboundFileContentType` with a `CAROUSEL` support
+    * JavaDoc fixes
 * **Voice**:
-  * Class replaced in `updateConferenceCall` method from `CallsUpdateRequest` to `CallsUpdateCallRequest` to better reflect its specific usage
-  * Extended `Call`, `CalLog`, `CallRequest` models with new field: `externalId`
-  * Extended `CallEndpoint`, `CallRoutingEndpoint` models with `WHATSAPP` type support
-  * Extended `CallRoutingDestination` model with `APPLICATION` type support
-  * Extended `CallRecordingRequest` model with new field: `channels`
-  * Extended `CallRoutingPhoneEndpoint` model with new field: `ringbackGeneration`
-  * Extended `CallRoutingRouteResponse` model with new fields: `status` and `order`
-  * Extended `CallRoutingSipEndpoint` model with new field: `from`
-  * Extended `CallsAddExistingCallRequest` model with new fields: `role` and `customData`
-  * Extended `CallsAddNewCallRequest` with `role` support
-  * Extended `CallsMachineDetection` model with `machineDetection` support
-  * Extended `CallsDialogState` with `TRANSFERRING` state support
-  * Removed `UNKOWN` enum value from `CallsDetectionResult` enum
-  * Removed `creationMethod` field from `CallsFile` model
-  * Extended `CallsLanguage` with multiple new language options
-  * Extended `CallsMachineDetectionProperties` with `confidenceRating` field support
-  * Extended `CallsMachineDetectionRequest` with `detectionTime` field support
-  * Extended `CallsParticipant` with `role` field support
-  * Extended `CallsSearchResponse`, `CallsUpdateScenarioRequest`, `CallsUpdateScenarioResponse` model with new fields: `notifyUrl` and `notifyContentType`
-  * Fixed `CallsSpeechCaptureRequest` keyPhrases now are null instead of being initialized as a new LinkedHashSet to reflect field change from required to optional
-  * Extended `CallsTranscription` model with new fields: `customDictionary` and `advancedFormatting`
-  * Extended `CallsUpdateRequest`, `CallsVideoMediaProperties` model with new `blind` field support
-  * Extended `CallsVoiceData` with new field support: `answeredBy`
-  * Extended `CallsWebsocketEndpointConfigRequest.SampleRateEnum` with new rate values: `24000` and `32000`
-  * Extended `CallVoice` with new voices
-  * JavaDoc fixes
+    * Class replaced in `updateConferenceCall` method from `CallsUpdateRequest` to `CallsUpdateCallRequest` to better reflect its specific usage
+    * Extended `Call`, `CalLog`, `CallRequest` models with new field: `externalId`
+    * Extended `CallEndpoint`, `CallRoutingEndpoint` models with `WHATSAPP` type support
+    * Extended `CallRoutingDestination` model with `APPLICATION` type support
+    * Extended `CallRecordingRequest` model with new field: `channels`
+    * Extended `CallRoutingPhoneEndpoint` model with new field: `ringbackGeneration`
+    * Extended `CallRoutingRouteResponse` model with new fields: `status` and `order`
+    * Extended `CallRoutingSipEndpoint` model with new field: `from`
+    * Extended `CallsAddExistingCallRequest` model with new fields: `role` and `customData`
+    * Extended `CallsAddNewCallRequest` with `role` support
+    * Extended `CallsMachineDetection` model with `machineDetection` support
+    * Extended `CallsDialogState` with `TRANSFERRING` state support
+    * Removed `UNKOWN` enum value from `CallsDetectionResult` enum
+    * Removed `creationMethod` field from `CallsFile` model
+    * Extended `CallsLanguage` with multiple new language options
+    * Extended `CallsMachineDetectionProperties` with `confidenceRating` field support
+    * Extended `CallsMachineDetectionRequest` with `detectionTime` field support
+    * Extended `CallsParticipant` with `role` field support
+    * Extended `CallsSearchResponse`, `CallsUpdateScenarioRequest`, `CallsUpdateScenarioResponse` model with new fields: `notifyUrl` and `notifyContentType`
+    * Fixed `CallsSpeechCaptureRequest` keyPhrases now are null instead of being initialized as a new LinkedHashSet to reflect field change from required to optional
+    * Extended `CallsTranscription` model with new fields: `customDictionary` and `advancedFormatting`
+    * Extended `CallsUpdateRequest`, `CallsVideoMediaProperties` model with new `blind` field support
+    * Extended `CallsVoiceData` with new field support: `answeredBy`
+    * Extended `CallsWebsocketEndpointConfigRequest.SampleRateEnum` with new rate values: `24000` and `32000`
+    * Extended `CallVoice` with new voices
+    * JavaDoc fixes
 * **Number Masking**:
-  * Extended `NumberMaskingStatusRequest` with `machineDetectionResult` field support
-  * JavaDoc fixes
+    * Extended `NumberMaskingStatusRequest` with `machineDetectionResult` field support
+    * JavaDoc fixes
 * **WebRtc**:
-  * Removed `capabilites` field from `WebRtcTokenRequestModel` to reflect the current behaviour of the endpoint
-  * Extended `WebRtcParticipant` with `state` and `direction` field support
-  * JavaDoc fixes
+    * Removed `capabilites` field from `WebRtcTokenRequestModel` to reflect the current behaviour of the endpoint
+    * Extended `WebRtcParticipant` with `state` and `direction` field support
+    * JavaDoc fixes
 * **WhatsApp**:
-  * Extended `WhatsAppWebhookType` with new types: `INTERACTIVE_CALL_PERMISSION_REPLY` and `REACTION`
-  * Extended `WhatsAppVideoMessage`, `WhatsAppAudioMessage`, `WhatsAppContactsMessage`, `WhatsAppDocumentMessage`, `WhatsAppImageMessage`, `WhatsAppInteractiveButtonsMessage`, `WhatsAppInteractiveFlowMessage`, `WhatsAppInteractiveListMessage`, `WhatsAppInteractiveLocationRequestMessage`, `WhatsAppInteractiveMultiProductMessage`, `WhatsAppInteractiveOrderDetailsMessage`, `WhatsAppTextMessage`, `WhatsAppInteractiveOrderStatusMessage`, `WhatsAppStickerMessage`, `WhatsAppMessage`, `WhatsAppLocationMessage`, `WhatsAppInteractiveProductMessage`, `WhatsAppInteractiveUrlButtonMessage` models with `context` field support
-  * Removed `allowCategoryChange` field from `WhatsAppTemplatePublicApiRequest` model to reflect the current behaviour of the endpoint
-  * Extended `WhatsAppTemplateEditPublicApiRequest`, `WhatsAppDefaultUtilityTemplateApiResponse` models with `subCategory` field support
-  * Extended `WhatsAppTemplateDataContent` model with `orderStatus` field support
-  * Extended `WhatsAppSenderLimit` model with additional value (`LIMIT_2K`)
-  * Fixed `callbackData` field type in `WhatsAppPayment` model from `List<String>` to `Object` reflecting the current behaviour of the endpoint
-  * Extended `WhatsAppLanguage` with multiple new language options
-  * Extended `WhatsAppInteractiveUrlButtonHeaderContent` with `DOCUMENT, `IMAGE` and `VIDEO` type support
-  * Extended `WhatsAppInteractiveOrderUPIPGRazorpayPaymentDetails` with callbackData field support
-  * Extended `WhatsAppInteractiveOrderPaymentStatus` with `BRAZIL_BOLETO` status support
-  * Extended `WhatsAppInteractiveAllowedOrderPaymentDetails` with `BRAZIL_BOLETO` and `BRAZIL_PAYMENTS` type support
-  * Extended `WhatsAppDefaultTemplateStructureApiData` with `callPermissionRequest` field support
-  * Extended `WhatsAppButtonApiData` with `ORDER_DETAILS` and `VOICE_CALL` type support
-  * JavaDoc fixes
-
+    * Extended `WhatsAppWebhookType` with new types: `INTERACTIVE_CALL_PERMISSION_REPLY` and `REACTION`
+    * Extended `WhatsAppVideoMessage`, `WhatsAppAudioMessage`, `WhatsAppContactsMessage`, `WhatsAppDocumentMessage`, `WhatsAppImageMessage`, `WhatsAppInteractiveButtonsMessage`, `WhatsAppInteractiveFlowMessage`, `WhatsAppInteractiveListMessage`, `WhatsAppInteractiveLocationRequestMessage`, `WhatsAppInteractiveMultiProductMessage`, `WhatsAppInteractiveOrderDetailsMessage`, `WhatsAppTextMessage`, `WhatsAppInteractiveOrderStatusMessage`, `WhatsAppStickerMessage`, `WhatsAppMessage`, `WhatsAppLocationMessage`, `WhatsAppInteractiveProductMessage`, `WhatsAppInteractiveUrlButtonMessage` models with `context` field support
+    * Removed `allowCategoryChange` field from `WhatsAppTemplatePublicApiRequest` model to reflect the current behaviour of the endpoint
+    * Extended `WhatsAppTemplateEditPublicApiRequest`, `WhatsAppDefaultUtilityTemplateApiResponse` models with `subCategory` field support
+    * Extended `WhatsAppTemplateDataContent` model with `orderStatus` field support
+    * Extended `WhatsAppSenderLimit` model with additional value (`LIMIT_2K`)
+    * Fixed `callbackData` field type in `WhatsAppPayment` model from `List<String>` to `Object` reflecting the current behaviour of the endpoint
+    * Extended `WhatsAppLanguage` with multiple new language options
+    * Extended `WhatsAppInteractiveUrlButtonHeaderContent` with `DOCUMENT, `IMAGE` and `VIDEO` type support
+    * Extended `WhatsAppInteractiveOrderUPIPGRazorpayPaymentDetails` with callbackData field support
+    * Extended `WhatsAppInteractiveOrderPaymentStatus` with `BRAZIL_BOLETO` status support
+    * Extended `WhatsAppInteractiveAllowedOrderPaymentDetails` with `BRAZIL_BOLETO` and `BRAZIL_PAYMENTS` type support
+    * Extended `WhatsAppDefaultTemplateStructureApiData` with `callPermissionRequest` field support
+    * Extended `WhatsAppButtonApiData` with `ORDER_DETAILS` and `VOICE_CALL` type support
+    * JavaDoc fixes
 * **General**:
-  * Updated tests
+    * Updated tests
 
 ### Removed
 - Unused `EmailReturnPathAddressRequest`, `CallsCreationMethod`, `WebRtcCapabilities`, `WebhookMessageCount` and `WebRtcRecording` classes are removed
@@ -231,9 +306,9 @@ If you find out that something was not addressed properly, please submit an issu
 
 - Voice API
   -  Adjusted IVR models in script processing. Scenario scripting is now implemented as a raw string to increase usability of the feature. Scripts should be passed as strings to the IVR request model in all upcoming SDK versions.
-    - **Updated** `CallsUpdateScenarioRequest.script` field type from `List<CallsScriptInner>` → `String`.
-    - **Updated** `CallsSearchResponse.script` and `else` fields type from `List<Object>` → `String`.
-    - **Updated** `CallsUpdateScenarioResponse.script` field type from `Object` → `String`.
+      - **Updated** `CallsUpdateScenarioRequest.script` field type from `List<CallsScriptInner>` → `String`.
+      - **Updated** `CallsSearchResponse.script` and `else` fields type from `List<Object>` → `String`.
+      - **Updated** `CallsUpdateScenarioResponse.script` field type from `Object` → `String`.
   - **Updated** `CallsGetVoicesResponses.voices` field type from `List<CallsVoice>` → `List<CallsSynthesisVoice>`.
   - **Updated** `CallsSearchResponse.lastUsageDate` field type from `OffsetDateTime` → `String`.
   - **Updated** `CallsSpeechCaptureRequest.language` field type from `CallsLanguage` → `CallTranscriptionLanguage`.
@@ -301,31 +376,31 @@ If you find out that something was not addressed properly, please submit an issu
   - **Removed** `fcmServerKey` field from `WebRtcAndroidPushNotificationConfig`.
 
 ### Removed:
-- Deprecated functions for sending Viber `Image`, `File`, and `Text` messages have been removed. Use `ViberApi.sendViberMessages` to send messages.
-- All the Calls IVR script related class and from now on all the scripts are processed as `String`:
-  - `CallsCallApi`
-  - `CallsCapture`
-  - `CallsCollect`
-  - `CallsDial`
-  - `CallsDialToMany`
-  - `CallsDialToWebRTC`
-  - `CallsDialToConversations`
-  - `CallsForEach`
-  - `CallsGoTo`
-  - `CallsHangup`
-  - `CallsIfThenElse`
-  - `CallsMachineDetection`
-  - `CallsPause`
-  - `CallsPlay`
-  - `CallsPlayFromRecording`
-  - `CallsRecord`
-  - `CallsRepeatUntil`
-  - `CallsRepeatWhile`
-  - `CallsSay`
-  - `CallsSendSms`
-  - `CallsSetVariable`
-  - `CallsSwitchCase`
-  - `CallsWhileDo`
+  - Deprecated functions for sending Viber `Image`, `File`, and `Text` messages have been removed. Use `ViberApi.sendViberMessages` to send messages.
+  - All the Calls IVR script related class and from now on all the scripts are processed as `String`:
+    - `CallsCallApi`
+    - `CallsCapture`
+    - `CallsCollect`
+    - `CallsDial`
+    - `CallsDialToMany`
+    - `CallsDialToWebRTC`
+    - `CallsDialToConversations`
+    - `CallsForEach`
+    - `CallsGoTo`
+    - `CallsHangup`
+    - `CallsIfThenElse`
+    - `CallsMachineDetection`
+    - `CallsPause`
+    - `CallsPlay`
+    - `CallsPlayFromRecording`
+    - `CallsRecord`
+    - `CallsRepeatUntil`
+    - `CallsRepeatWhile`
+    - `CallsSay`
+    - `CallsSendSms`
+    - `CallsSetVariable`
+    - `CallsSwitchCase`
+    - `CallsWhileDo`
 
 These changes align the SDK with the current API specification, ensuring consistency and reliability in future updates.
 

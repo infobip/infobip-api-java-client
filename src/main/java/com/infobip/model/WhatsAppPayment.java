@@ -86,8 +86,6 @@ public class WhatsAppPayment {
      * <p>
      * Field description:
      * Unique identifier of the payment.
-     * <p>
-     * The field is required.
      *
      * @param paymentId
      * @return This {@link WhatsAppPayment instance}.
@@ -102,8 +100,6 @@ public class WhatsAppPayment {
      * <p>
      * Field description:
      * Unique identifier of the payment.
-     * <p>
-     * The field is required.
      *
      * @return paymentId
      */
@@ -117,8 +113,6 @@ public class WhatsAppPayment {
      * <p>
      * Field description:
      * Unique identifier of the payment.
-     * <p>
-     * The field is required.
      *
      * @param paymentId
      */

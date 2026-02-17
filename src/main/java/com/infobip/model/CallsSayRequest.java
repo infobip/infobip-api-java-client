@@ -10,12 +10,10 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 /**
- * Call say request.
+ * Represents CallsSayRequest model.
  */
 public class CallsSayRequest {
 
@@ -29,15 +27,11 @@ public class CallsSayRequest {
 
     private CallsVoicePreferences preferences;
 
-    private CallsTermination stopOn;
-
-    private Map<String, String> customData = null;
-
     /**
      * Sets text.
      * <p>
      * Field description:
-     * Text to read. Use the Speech Synthesis Markup Language (SSML) in a request to fine-tune your output.
+     * Text to read.
      * <p>
      * The field is required.
      *
@@ -53,7 +47,7 @@ public class CallsSayRequest {
      * Returns text.
      * <p>
      * Field description:
-     * Text to read. Use the Speech Synthesis Markup Language (SSML) in a request to fine-tune your output.
+     * Text to read.
      * <p>
      * The field is required.
      *
@@ -68,7 +62,7 @@ public class CallsSayRequest {
      * Sets text.
      * <p>
      * Field description:
-     * Text to read. Use the Speech Synthesis Markup Language (SSML) in a request to fine-tune your output.
+     * Text to read.
      * <p>
      * The field is required.
      *
@@ -227,95 +221,6 @@ public class CallsSayRequest {
         this.preferences = preferences;
     }
 
-    /**
-     * Sets stopOn.
-     *
-     * @param stopOn
-     * @return This {@link CallsSayRequest instance}.
-     */
-    public CallsSayRequest stopOn(CallsTermination stopOn) {
-        this.stopOn = stopOn;
-        return this;
-    }
-
-    /**
-     * Returns stopOn.
-     *
-     * @return stopOn
-     */
-    @JsonProperty("stopOn")
-    public CallsTermination getStopOn() {
-        return stopOn;
-    }
-
-    /**
-     * Sets stopOn.
-     *
-     * @param stopOn
-     */
-    @JsonProperty("stopOn")
-    public void setStopOn(CallsTermination stopOn) {
-        this.stopOn = stopOn;
-    }
-
-    /**
-     * Sets customData.
-     * <p>
-     * Field description:
-     * Optional parameter to update a call&#39;s custom data.
-     *
-     * @param customData
-     * @return This {@link CallsSayRequest instance}.
-     */
-    public CallsSayRequest customData(Map<String, String> customData) {
-        this.customData = customData;
-        return this;
-    }
-
-    /**
-     * Puts and entry into customData.
-     * <p>
-     * Field description:
-     * Optional parameter to update a call&#39;s custom data.
-     *
-     * @param key The given key.
-     * @param customDataItem The item to be associated with the given key.
-     * @return This {@link CallsSayRequest instance}.
-     */
-    public CallsSayRequest putCustomDataItem(String key, String customDataItem) {
-        if (this.customData == null) {
-            this.customData = new HashMap<>();
-        }
-        this.customData.put(key, customDataItem);
-        return this;
-    }
-
-    /**
-     * Returns customData.
-     * <p>
-     * Field description:
-     * Optional parameter to update a call&#39;s custom data.
-     *
-     * @return customData
-     */
-    @JsonProperty("customData")
-    public Map<String, String> getCustomData() {
-        return customData;
-    }
-
-    /**
-     * Sets customData.
-     * <p>
-     * Field description:
-     * Optional parameter to update a call&#39;s custom data.
-     *
-     * @param customData
-     */
-    @JsonProperty("customData")
-    public void setCustomData(Map<String, String> customData) {
-        this.customData = customData;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -329,14 +234,12 @@ public class CallsSayRequest {
                 && Objects.equals(this.language, callsSayRequest.language)
                 && Objects.equals(this.speechRate, callsSayRequest.speechRate)
                 && Objects.equals(this.loopCount, callsSayRequest.loopCount)
-                && Objects.equals(this.preferences, callsSayRequest.preferences)
-                && Objects.equals(this.stopOn, callsSayRequest.stopOn)
-                && Objects.equals(this.customData, callsSayRequest.customData);
+                && Objects.equals(this.preferences, callsSayRequest.preferences);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, language, speechRate, loopCount, preferences, stopOn, customData);
+        return Objects.hash(text, language, speechRate, loopCount, preferences);
     }
 
     @Override
@@ -359,12 +262,6 @@ public class CallsSayRequest {
                 .append(newLine)
                 .append("    preferences: ")
                 .append(toIndentedString(preferences))
-                .append(newLine)
-                .append("    stopOn: ")
-                .append(toIndentedString(stopOn))
-                .append(newLine)
-                .append("    customData: ")
-                .append(toIndentedString(customData))
                 .append(newLine)
                 .append("}")
                 .toString();
