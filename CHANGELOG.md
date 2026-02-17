@@ -7,6 +7,10 @@ and this library adheres to [Semantic Versioning](http://semver.org/) as mention
 
 ## [ [6.3.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.3.0) ] - 2026-02-17
 
+⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
+All changes, including breaking changes, are addressed and explained in the list bellow.
+If you find out that something was not addressed properly, please submit an issue.
+
 ### Added
 * Support for [Infobip RCS API](https://www.infobip.com/docs/api/channels/rcs).
 * Most recent feature set for:
