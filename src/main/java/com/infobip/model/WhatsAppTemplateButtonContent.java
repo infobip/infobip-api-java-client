@@ -30,6 +30,7 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = WhatsAppTemplateOrderDetailsButtonContent.class, name = "ORDER_DETAILS"),
     @JsonSubTypes.Type(value = WhatsAppTemplateQuickReplyButtonContent.class, name = "QUICK_REPLY"),
     @JsonSubTypes.Type(value = WhatsAppTemplateUrlButtonContent.class, name = "URL"),
+    @JsonSubTypes.Type(value = WhatsAppTemplateVoiceCallButtonContent.class, name = "VOICE_CALL"),
 })
 public abstract class WhatsAppTemplateButtonContent {
 

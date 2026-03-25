@@ -18,7 +18,7 @@ import java.util.Objects;
  */
 public class MessagesApiInboundTypingStoppedEvent extends MessagesApiInboundEvent {
 
-    private MessagesApiInboundTypingIndicatorChannel channel;
+    private MessagesApiInboundTypingStoppedChannel channel;
 
     private String sender;
 
@@ -49,7 +49,7 @@ public class MessagesApiInboundTypingStoppedEvent extends MessagesApiInboundEven
      * @param channel
      * @return This {@link MessagesApiInboundTypingStoppedEvent instance}.
      */
-    public MessagesApiInboundTypingStoppedEvent channel(MessagesApiInboundTypingIndicatorChannel channel) {
+    public MessagesApiInboundTypingStoppedEvent channel(MessagesApiInboundTypingStoppedChannel channel) {
         this.channel = channel;
         return this;
     }
@@ -62,7 +62,7 @@ public class MessagesApiInboundTypingStoppedEvent extends MessagesApiInboundEven
      * @return channel
      */
     @JsonProperty("channel")
-    public MessagesApiInboundTypingIndicatorChannel getChannel() {
+    public MessagesApiInboundTypingStoppedChannel getChannel() {
         return channel;
     }
 
@@ -74,7 +74,7 @@ public class MessagesApiInboundTypingStoppedEvent extends MessagesApiInboundEven
      * @param channel
      */
     @JsonProperty("channel")
-    public void setChannel(MessagesApiInboundTypingIndicatorChannel channel) {
+    public void setChannel(MessagesApiInboundTypingStoppedChannel channel) {
         this.channel = channel;
     }
 

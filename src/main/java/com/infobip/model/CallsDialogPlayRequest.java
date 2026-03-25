@@ -63,6 +63,8 @@ public class CallsDialogPlayRequest {
 
     /**
      * Sets content.
+     * <p>
+     * The field is required.
      *
      * @param content
      * @return This {@link CallsDialogPlayRequest instance}.
@@ -74,6 +76,8 @@ public class CallsDialogPlayRequest {
 
     /**
      * Returns content.
+     * <p>
+     * The field is required.
      *
      * @return content
      */
@@ -84,6 +88,8 @@ public class CallsDialogPlayRequest {
 
     /**
      * Sets content.
+     * <p>
+     * The field is required.
      *
      * @param content
      */

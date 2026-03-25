@@ -7204,17 +7204,25 @@ class CallsApiTest extends ApiTest {
         String givenPassword = "fkZ1921tM87";
 
         String givenResponse = String.format(
-                "{\n" + "  \"username\": \"%s\",\n" + "  \"password\": \"%s\"\n" + "}", givenUsername, givenPassword);
+                "{\n"
+                        + "  \"type\": \"REGISTERED\",\n"
+                        + "  \"username\": \"%s\",\n"
+                        + "  \"password\": \"%s\"\n"
+                        + "}",
+                givenUsername, givenPassword);
 
         setUpEmptyPostRequest(
                 SIP_TRUNK_RESET_PASSWORD.replace("{sipTrunkId}", sipTrunkId), Map.of(), givenResponse, 200);
 
         CallsApi api = new CallsApi(getApiClient());
 
-        Consumer<CallsSipTrunkRegistrationCredentials> assertions = (response) -> {
+        Consumer<CallsSipTrunkResetPasswordResponse> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getUsername()).isEqualTo(givenUsername);
-            then(response.getPassword()).isEqualTo(givenPassword);
+            then(response.getClass()).isEqualTo(CallsSipTrunkRegisteredResetPasswordResponse.class);
+            CallsSipTrunkRegisteredResetPasswordResponse registeredResponse =
+                    (CallsSipTrunkRegisteredResetPasswordResponse) response;
+            then(registeredResponse.getUsername()).isEqualTo(givenUsername);
+            then(registeredResponse.getPassword()).isEqualTo(givenPassword);
         };
 
         var call = api.resetSipTrunkPassword(sipTrunkId);

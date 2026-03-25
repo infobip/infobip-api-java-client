@@ -1,0 +1,256 @@
+/*
+ * This class is auto generated from the Infobip OpenAPI specification
+ * through the OpenAPI Specification Client API libraries (Re)Generator (OSCAR),
+ * powered by the OpenAPI Generator (https://openapi-generator.tech).
+ *
+ * Do not edit manually. To learn how to raise an issue, see the CONTRIBUTING guide
+ * or contact us @ support@infobip.com.
+ */
+
+package com.infobip.model;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.time.OffsetDateTime;
+import java.util.Objects;
+
+/**
+ * Incoming events
+ */
+public class NumbersBrandAuthUpdateWebhookMessage {
+    /**
+     * The name of the event.
+     */
+    public enum EventEnum {
+        BRAND_AUTH_UPDATE("BRAND_AUTH_UPDATE");
+
+        private String value;
+
+        EventEnum(String value) {
+            this.value = value;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        @JsonCreator
+        public static EventEnum fromValue(String value) {
+            for (EventEnum enumElement : EventEnum.values()) {
+                if (enumElement.value.equals(value)) {
+                    return enumElement;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected enum value '" + value + "'.");
+        }
+    }
+
+    private EventEnum event;
+
+    private OffsetDateTime receivedAt;
+
+    private NumbersBrandAuthUpdateWebhookContent content;
+
+    private NumbersBrandWebhookPlatform platform;
+
+    /**
+     * Sets event.
+     * <p>
+     * Field description:
+     * The name of the event.
+     *
+     * @param event
+     * @return This {@link NumbersBrandAuthUpdateWebhookMessage instance}.
+     */
+    public NumbersBrandAuthUpdateWebhookMessage event(EventEnum event) {
+        this.event = event;
+        return this;
+    }
+
+    /**
+     * Returns event.
+     * <p>
+     * Field description:
+     * The name of the event.
+     *
+     * @return event
+     */
+    @JsonProperty("event")
+    public EventEnum getEvent() {
+        return event;
+    }
+
+    /**
+     * Sets event.
+     * <p>
+     * Field description:
+     * The name of the event.
+     *
+     * @param event
+     */
+    @JsonProperty("event")
+    public void setEvent(EventEnum event) {
+        this.event = event;
+    }
+
+    /**
+     * Sets receivedAt.
+     * <p>
+     * Field description:
+     * Date and time when Infobip received the event.
+     *
+     * @param receivedAt
+     * @return This {@link NumbersBrandAuthUpdateWebhookMessage instance}.
+     */
+    public NumbersBrandAuthUpdateWebhookMessage receivedAt(OffsetDateTime receivedAt) {
+        this.receivedAt = receivedAt;
+        return this;
+    }
+
+    /**
+     * Returns receivedAt.
+     * <p>
+     * Field description:
+     * Date and time when Infobip received the event.
+     *
+     * @return receivedAt
+     */
+    @JsonProperty("receivedAt")
+    public OffsetDateTime getReceivedAt() {
+        return receivedAt;
+    }
+
+    /**
+     * Sets receivedAt.
+     * <p>
+     * Field description:
+     * Date and time when Infobip received the event.
+     *
+     * @param receivedAt
+     */
+    @JsonProperty("receivedAt")
+    public void setReceivedAt(OffsetDateTime receivedAt) {
+        this.receivedAt = receivedAt;
+    }
+
+    /**
+     * Sets content.
+     *
+     * @param content
+     * @return This {@link NumbersBrandAuthUpdateWebhookMessage instance}.
+     */
+    public NumbersBrandAuthUpdateWebhookMessage content(NumbersBrandAuthUpdateWebhookContent content) {
+        this.content = content;
+        return this;
+    }
+
+    /**
+     * Returns content.
+     *
+     * @return content
+     */
+    @JsonProperty("content")
+    public NumbersBrandAuthUpdateWebhookContent getContent() {
+        return content;
+    }
+
+    /**
+     * Sets content.
+     *
+     * @param content
+     */
+    @JsonProperty("content")
+    public void setContent(NumbersBrandAuthUpdateWebhookContent content) {
+        this.content = content;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     * @return This {@link NumbersBrandAuthUpdateWebhookMessage instance}.
+     */
+    public NumbersBrandAuthUpdateWebhookMessage platform(NumbersBrandWebhookPlatform platform) {
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * Returns platform.
+     *
+     * @return platform
+     */
+    @JsonProperty("platform")
+    public NumbersBrandWebhookPlatform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     */
+    @JsonProperty("platform")
+    public void setPlatform(NumbersBrandWebhookPlatform platform) {
+        this.platform = platform;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        NumbersBrandAuthUpdateWebhookMessage numbersBrandAuthUpdateWebhookMessage =
+                (NumbersBrandAuthUpdateWebhookMessage) o;
+        return Objects.equals(this.event, numbersBrandAuthUpdateWebhookMessage.event)
+                && Objects.equals(this.receivedAt, numbersBrandAuthUpdateWebhookMessage.receivedAt)
+                && Objects.equals(this.content, numbersBrandAuthUpdateWebhookMessage.content)
+                && Objects.equals(this.platform, numbersBrandAuthUpdateWebhookMessage.platform);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(event, receivedAt, content, platform);
+    }
+
+    @Override
+    public String toString() {
+        String newLine = System.lineSeparator();
+        return new StringBuilder()
+                .append("class NumbersBrandAuthUpdateWebhookMessage {")
+                .append(newLine)
+                .append("    event: ")
+                .append(toIndentedString(event))
+                .append(newLine)
+                .append("    receivedAt: ")
+                .append(toIndentedString(receivedAt))
+                .append(newLine)
+                .append("    content: ")
+                .append(toIndentedString(content))
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
+                .append(newLine)
+                .append("}")
+                .toString();
+    }
+
+    private String toIndentedString(Object o) {
+        if (o == null) {
+            return "null";
+        }
+        String lineSeparator = System.lineSeparator();
+        String lineSeparatorFollowedByIndentation = lineSeparator + "    ";
+        return o.toString().replace(lineSeparator, lineSeparatorFollowedByIndentation);
+    }
+}

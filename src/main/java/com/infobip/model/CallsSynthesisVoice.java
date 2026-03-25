@@ -25,6 +25,10 @@ public class CallsSynthesisVoice {
 
     private Boolean ssmlSupported;
 
+    private Boolean _default;
+
+    private Boolean neural;
+
     private Boolean isDefault;
 
     private Boolean isNeural;
@@ -190,6 +194,68 @@ public class CallsSynthesisVoice {
     }
 
     /**
+     * Sets _default.
+     *
+     * @param _default
+     * @return This {@link CallsSynthesisVoice instance}.
+     */
+    public CallsSynthesisVoice _default(Boolean _default) {
+        this._default = _default;
+        return this;
+    }
+
+    /**
+     * Returns _default.
+     *
+     * @return _default
+     */
+    @JsonProperty("default")
+    public Boolean getDefault() {
+        return _default;
+    }
+
+    /**
+     * Sets _default.
+     *
+     * @param _default
+     */
+    @JsonProperty("default")
+    public void setDefault(Boolean _default) {
+        this._default = _default;
+    }
+
+    /**
+     * Sets neural.
+     *
+     * @param neural
+     * @return This {@link CallsSynthesisVoice instance}.
+     */
+    public CallsSynthesisVoice neural(Boolean neural) {
+        this.neural = neural;
+        return this;
+    }
+
+    /**
+     * Returns neural.
+     *
+     * @return neural
+     */
+    @JsonProperty("neural")
+    public Boolean getNeural() {
+        return neural;
+    }
+
+    /**
+     * Sets neural.
+     *
+     * @param neural
+     */
+    @JsonProperty("neural")
+    public void setNeural(Boolean neural) {
+        this.neural = neural;
+    }
+
+    /**
      * Sets isDefault.
      * <p>
      * Field description:
@@ -282,13 +348,15 @@ public class CallsSynthesisVoice {
                 && Objects.equals(this.gender, callsSynthesisVoice.gender)
                 && Objects.equals(this.supplier, callsSynthesisVoice.supplier)
                 && Objects.equals(this.ssmlSupported, callsSynthesisVoice.ssmlSupported)
+                && Objects.equals(this._default, callsSynthesisVoice._default)
+                && Objects.equals(this.neural, callsSynthesisVoice.neural)
                 && Objects.equals(this.isDefault, callsSynthesisVoice.isDefault)
                 && Objects.equals(this.isNeural, callsSynthesisVoice.isNeural);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, gender, supplier, ssmlSupported, isDefault, isNeural);
+        return Objects.hash(name, gender, supplier, ssmlSupported, _default, neural, isDefault, isNeural);
     }
 
     @Override
@@ -308,6 +376,12 @@ public class CallsSynthesisVoice {
                 .append(newLine)
                 .append("    ssmlSupported: ")
                 .append(toIndentedString(ssmlSupported))
+                .append(newLine)
+                .append("    _default: ")
+                .append(toIndentedString(_default))
+                .append(newLine)
+                .append("    neural: ")
+                .append(toIndentedString(neural))
                 .append(newLine)
                 .append("    isDefault: ")
                 .append(toIndentedString(isDefault))

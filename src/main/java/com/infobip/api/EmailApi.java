@@ -1949,7 +1949,9 @@ public class EmailApi {
             String applicationId,
             String entityId,
             String headers,
-            String ipPoolId) {
+            String ipPoolId,
+            Boolean skipPassiveStorage,
+            Boolean skipActiveStorage) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/email/3/send")
                 .requiresAuthentication(true)
                 .accept("application/json")
@@ -2060,6 +2062,12 @@ public class EmailApi {
         if (ipPoolId != null) {
             builder.addFormParameter(new Parameter("ipPoolId", ipPoolId));
         }
+        if (skipPassiveStorage != null) {
+            builder.addFormParameter(new Parameter("skipPassiveStorage", skipPassiveStorage));
+        }
+        if (skipActiveStorage != null) {
+            builder.addFormParameter(new Parameter("skipActiveStorage", skipActiveStorage));
+        }
         return builder.build();
     }
 
@@ -2102,6 +2110,8 @@ public class EmailApi {
         private String entityId;
         private String headers;
         private String ipPoolId;
+        private Boolean skipPassiveStorage;
+        private Boolean skipActiveStorage;
 
         private SendEmailRequest(List<String> to) {
             this.to = Objects.requireNonNull(to, "The required parameter 'to' is missing.");
@@ -2482,6 +2492,28 @@ public class EmailApi {
         }
 
         /**
+         * Sets skipPassiveStorage.
+         *
+         * @param skipPassiveStorage Set to true to skip [passive email storage](https://www.infobip.com/docs/email/email-storage-and-retrieval/passive-email-storage) (long-term storage used for compliance, legal, or audit purposes). If &#x60;false&#x60; or not set, the account-level setting is used.  (optional)
+         * @return SendEmailRequest
+         */
+        public SendEmailRequest skipPassiveStorage(Boolean skipPassiveStorage) {
+            this.skipPassiveStorage = skipPassiveStorage;
+            return this;
+        }
+
+        /**
+         * Sets skipActiveStorage.
+         *
+         * @param skipActiveStorage Set to true to skip [active email storage](https://www.infobip.com/docs/email/email-storage-and-retrieval/active-email-storage) (short-term storage used for troubleshooting or support). If &#x60;false&#x60; or not set, the account-level setting is used.  (optional)
+         * @return SendEmailRequest
+         */
+        public SendEmailRequest skipActiveStorage(Boolean skipActiveStorage) {
+            this.skipActiveStorage = skipActiveStorage;
+            return this;
+        }
+
+        /**
          * Executes the sendEmail request.
          *
          * @return EmailSendResponse The deserialized response.
@@ -2523,7 +2555,9 @@ public class EmailApi {
                     applicationId,
                     entityId,
                     headers,
-                    ipPoolId);
+                    ipPoolId,
+                    skipPassiveStorage,
+                    skipActiveStorage);
             return apiClient.execute(sendEmailDefinition, new TypeReference<EmailSendResponse>() {}.getType());
         }
 
@@ -2569,7 +2603,9 @@ public class EmailApi {
                     applicationId,
                     entityId,
                     headers,
-                    ipPoolId);
+                    ipPoolId,
+                    skipPassiveStorage,
+                    skipActiveStorage);
             return apiClient.executeAsync(
                     sendEmailDefinition, new TypeReference<EmailSendResponse>() {}.getType(), callback);
         }

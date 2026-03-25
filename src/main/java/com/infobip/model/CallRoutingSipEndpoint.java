@@ -27,6 +27,8 @@ public class CallRoutingSipEndpoint extends CallRoutingEndpoint {
 
     private Map<String, String> customHeaders = null;
 
+    private CallRoutingRingbackGeneration ringbackGeneration;
+
     /**
      * Constructs a new {@link CallRoutingSipEndpoint} instance.
      */
@@ -218,6 +220,37 @@ public class CallRoutingSipEndpoint extends CallRoutingEndpoint {
         this.customHeaders = customHeaders;
     }
 
+    /**
+     * Sets ringbackGeneration.
+     *
+     * @param ringbackGeneration
+     * @return This {@link CallRoutingSipEndpoint instance}.
+     */
+    public CallRoutingSipEndpoint ringbackGeneration(CallRoutingRingbackGeneration ringbackGeneration) {
+        this.ringbackGeneration = ringbackGeneration;
+        return this;
+    }
+
+    /**
+     * Returns ringbackGeneration.
+     *
+     * @return ringbackGeneration
+     */
+    @JsonProperty("ringbackGeneration")
+    public CallRoutingRingbackGeneration getRingbackGeneration() {
+        return ringbackGeneration;
+    }
+
+    /**
+     * Sets ringbackGeneration.
+     *
+     * @param ringbackGeneration
+     */
+    @JsonProperty("ringbackGeneration")
+    public void setRingbackGeneration(CallRoutingRingbackGeneration ringbackGeneration) {
+        this.ringbackGeneration = ringbackGeneration;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -231,12 +264,13 @@ public class CallRoutingSipEndpoint extends CallRoutingEndpoint {
                 && Objects.equals(this.username, callRoutingSipEndpoint.username)
                 && Objects.equals(this.sipTrunkId, callRoutingSipEndpoint.sipTrunkId)
                 && Objects.equals(this.customHeaders, callRoutingSipEndpoint.customHeaders)
+                && Objects.equals(this.ringbackGeneration, callRoutingSipEndpoint.ringbackGeneration)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, username, sipTrunkId, customHeaders, super.hashCode());
+        return Objects.hash(from, username, sipTrunkId, customHeaders, ringbackGeneration, super.hashCode());
     }
 
     @Override
@@ -259,6 +293,9 @@ public class CallRoutingSipEndpoint extends CallRoutingEndpoint {
                 .append(newLine)
                 .append("    customHeaders: ")
                 .append(toIndentedString(customHeaders))
+                .append(newLine)
+                .append("    ringbackGeneration: ")
+                .append(toIndentedString(ringbackGeneration))
                 .append(newLine)
                 .append("}")
                 .toString();

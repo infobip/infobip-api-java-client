@@ -26,6 +26,7 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = CallsFilePlayContent.class, name = "FILE"),
     @JsonSubTypes.Type(value = CallsRecordingPlayContent.class, name = "RECORDING"),
     @JsonSubTypes.Type(value = CallsTextPlayContent.class, name = "TEXT"),
+    @JsonSubTypes.Type(value = CallsTtyPlayContent.class, name = "TTY"),
     @JsonSubTypes.Type(value = CallsUrlPlayContent.class, name = "URL"),
 })
 public abstract class CallsPlayContent {

@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum MessagesApiOutboundEventType {
     STARTED("TYPING_STARTED"),
-    STOPPED("TYPING_STOPPED");
+    STOPPED("TYPING_STOPPED"),
+    SEEN("SEEN");
 
     private final String value;
 

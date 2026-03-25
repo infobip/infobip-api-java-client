@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class RcsInboundMessages {
 
-    private List<RcsInboundMessageRcsInboundMessageContent> results = new ArrayList<>();
+    private List<RcsInboundMessage> results = new ArrayList<>();
 
     private Integer messageCount;
 
@@ -36,7 +36,7 @@ public class RcsInboundMessages {
      * @param results
      * @return This {@link RcsInboundMessages instance}.
      */
-    public RcsInboundMessages results(List<RcsInboundMessageRcsInboundMessageContent> results) {
+    public RcsInboundMessages results(List<RcsInboundMessage> results) {
         this.results = results;
         return this;
     }
@@ -52,7 +52,7 @@ public class RcsInboundMessages {
      * @param resultsItem The item to be added to the list.
      * @return This {@link RcsInboundMessages instance}.
      */
-    public RcsInboundMessages addResultsItem(RcsInboundMessageRcsInboundMessageContent resultsItem) {
+    public RcsInboundMessages addResultsItem(RcsInboundMessage resultsItem) {
         if (this.results == null) {
             this.results = new ArrayList<>();
         }
@@ -71,7 +71,7 @@ public class RcsInboundMessages {
      * @return results
      */
     @JsonProperty("results")
-    public List<RcsInboundMessageRcsInboundMessageContent> getResults() {
+    public List<RcsInboundMessage> getResults() {
         return results;
     }
 
@@ -86,7 +86,7 @@ public class RcsInboundMessages {
      * @param results
      */
     @JsonProperty("results")
-    public void setResults(List<RcsInboundMessageRcsInboundMessageContent> results) {
+    public void setResults(List<RcsInboundMessage> results) {
         this.results = results;
     }
 

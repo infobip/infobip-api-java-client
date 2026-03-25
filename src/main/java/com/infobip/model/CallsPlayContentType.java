@@ -19,7 +19,8 @@ public enum CallsPlayContentType {
     FILE("FILE"),
     URL("URL"),
     RECORDING("RECORDING"),
-    TEXT("TEXT");
+    TEXT("TEXT"),
+    TTY("TTY");
 
     private final String value;
 

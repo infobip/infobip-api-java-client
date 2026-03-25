@@ -10380,4 +10380,20 @@ class WhatsAppApiTest extends ApiTest {
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
+
+    @Test
+    void shouldShareWabaWhatsapp() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        Long givenBusinessAccountId = 222L;
+
+        String givenRequest = String.format("{\n" + "  \"businessAccountId\": %d\n" + "}", givenBusinessAccountId);
+
+        setUpNoResponseBodyPostRequest(
+                "/whatsapp/1/embedded-signup/registrations/share-waba", Map.of(), givenRequest, 202);
+
+        WhatsAppShareWabaRequest request = new WhatsAppShareWabaRequest().businessAccountId(givenBusinessAccountId);
+
+        var call = whatsAppApi.shareWabaWhatsapp(request);
+        testSuccessfulCallWithNoBody(call::executeAsync, 202);
+    }
 }

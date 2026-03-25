@@ -59,27 +59,31 @@ public class RcsWebhookDeliveryReport {
 
     private ChannelEnum channel;
 
-    private MessagePrice price;
+    private RcsMessagePrice price;
 
     private MessageStatus status;
 
     private MessageError error;
 
+    private RcsConversationInfo conversation;
+
     private String messageId;
-
-    private String to;
-
-    private String sender;
-
-    private OffsetDateTime sentAt;
 
     private OffsetDateTime doneAt;
 
+    private RcsMessageInteractionType interactionType;
+
     private Integer messageCount;
+
+    private OffsetDateTime sentAt;
 
     private String mccMnc;
 
     private String callbackData;
+
+    private String to;
+
+    private String sender;
 
     private Platform platform;
 
@@ -171,7 +175,7 @@ public class RcsWebhookDeliveryReport {
      * @param price
      * @return This {@link RcsWebhookDeliveryReport instance}.
      */
-    public RcsWebhookDeliveryReport price(MessagePrice price) {
+    public RcsWebhookDeliveryReport price(RcsMessagePrice price) {
         this.price = price;
         return this;
     }
@@ -182,7 +186,7 @@ public class RcsWebhookDeliveryReport {
      * @return price
      */
     @JsonProperty("price")
-    public MessagePrice getPrice() {
+    public RcsMessagePrice getPrice() {
         return price;
     }
 
@@ -192,7 +196,7 @@ public class RcsWebhookDeliveryReport {
      * @param price
      */
     @JsonProperty("price")
-    public void setPrice(MessagePrice price) {
+    public void setPrice(RcsMessagePrice price) {
         this.price = price;
     }
 
@@ -259,6 +263,37 @@ public class RcsWebhookDeliveryReport {
     }
 
     /**
+     * Sets conversation.
+     *
+     * @param conversation
+     * @return This {@link RcsWebhookDeliveryReport instance}.
+     */
+    public RcsWebhookDeliveryReport conversation(RcsConversationInfo conversation) {
+        this.conversation = conversation;
+        return this;
+    }
+
+    /**
+     * Returns conversation.
+     *
+     * @return conversation
+     */
+    @JsonProperty("conversation")
+    public RcsConversationInfo getConversation() {
+        return conversation;
+    }
+
+    /**
+     * Sets conversation.
+     *
+     * @param conversation
+     */
+    @JsonProperty("conversation")
+    public void setConversation(RcsConversationInfo conversation) {
+        this.conversation = conversation;
+    }
+
+    /**
      * Sets messageId.
      * <p>
      * Field description:
@@ -296,126 +331,6 @@ public class RcsWebhookDeliveryReport {
     @JsonProperty("messageId")
     public void setMessageId(String messageId) {
         this.messageId = messageId;
-    }
-
-    /**
-     * Sets to.
-     * <p>
-     * Field description:
-     * Message destination address.
-     *
-     * @param to
-     * @return This {@link RcsWebhookDeliveryReport instance}.
-     */
-    public RcsWebhookDeliveryReport to(String to) {
-        this.to = to;
-        return this;
-    }
-
-    /**
-     * Returns to.
-     * <p>
-     * Field description:
-     * Message destination address.
-     *
-     * @return to
-     */
-    @JsonProperty("to")
-    public String getTo() {
-        return to;
-    }
-
-    /**
-     * Sets to.
-     * <p>
-     * Field description:
-     * Message destination address.
-     *
-     * @param to
-     */
-    @JsonProperty("to")
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    /**
-     * Sets sender.
-     * <p>
-     * Field description:
-     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
-     *
-     * @param sender
-     * @return This {@link RcsWebhookDeliveryReport instance}.
-     */
-    public RcsWebhookDeliveryReport sender(String sender) {
-        this.sender = sender;
-        return this;
-    }
-
-    /**
-     * Returns sender.
-     * <p>
-     * Field description:
-     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
-     *
-     * @return sender
-     */
-    @JsonProperty("sender")
-    public String getSender() {
-        return sender;
-    }
-
-    /**
-     * Sets sender.
-     * <p>
-     * Field description:
-     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
-     *
-     * @param sender
-     */
-    @JsonProperty("sender")
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
-    /**
-     * Sets sentAt.
-     * <p>
-     * Field description:
-     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
-     *
-     * @param sentAt
-     * @return This {@link RcsWebhookDeliveryReport instance}.
-     */
-    public RcsWebhookDeliveryReport sentAt(OffsetDateTime sentAt) {
-        this.sentAt = sentAt;
-        return this;
-    }
-
-    /**
-     * Returns sentAt.
-     * <p>
-     * Field description:
-     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
-     *
-     * @return sentAt
-     */
-    @JsonProperty("sentAt")
-    public OffsetDateTime getSentAt() {
-        return sentAt;
-    }
-
-    /**
-     * Sets sentAt.
-     * <p>
-     * Field description:
-     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
-     *
-     * @param sentAt
-     */
-    @JsonProperty("sentAt")
-    public void setSentAt(OffsetDateTime sentAt) {
-        this.sentAt = sentAt;
     }
 
     /**
@@ -459,6 +374,37 @@ public class RcsWebhookDeliveryReport {
     }
 
     /**
+     * Sets interactionType.
+     *
+     * @param interactionType
+     * @return This {@link RcsWebhookDeliveryReport instance}.
+     */
+    public RcsWebhookDeliveryReport interactionType(RcsMessageInteractionType interactionType) {
+        this.interactionType = interactionType;
+        return this;
+    }
+
+    /**
+     * Returns interactionType.
+     *
+     * @return interactionType
+     */
+    @JsonProperty("interactionType")
+    public RcsMessageInteractionType getInteractionType() {
+        return interactionType;
+    }
+
+    /**
+     * Sets interactionType.
+     *
+     * @param interactionType
+     */
+    @JsonProperty("interactionType")
+    public void setInteractionType(RcsMessageInteractionType interactionType) {
+        this.interactionType = interactionType;
+    }
+
+    /**
      * Sets messageCount.
      * <p>
      * Field description:
@@ -496,6 +442,46 @@ public class RcsWebhookDeliveryReport {
     @JsonProperty("messageCount")
     public void setMessageCount(Integer messageCount) {
         this.messageCount = messageCount;
+    }
+
+    /**
+     * Sets sentAt.
+     * <p>
+     * Field description:
+     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
+     *
+     * @param sentAt
+     * @return This {@link RcsWebhookDeliveryReport instance}.
+     */
+    public RcsWebhookDeliveryReport sentAt(OffsetDateTime sentAt) {
+        this.sentAt = sentAt;
+        return this;
+    }
+
+    /**
+     * Returns sentAt.
+     * <p>
+     * Field description:
+     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
+     *
+     * @return sentAt
+     */
+    @JsonProperty("sentAt")
+    public OffsetDateTime getSentAt() {
+        return sentAt;
+    }
+
+    /**
+     * Sets sentAt.
+     * <p>
+     * Field description:
+     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
+     *
+     * @param sentAt
+     */
+    @JsonProperty("sentAt")
+    public void setSentAt(OffsetDateTime sentAt) {
+        this.sentAt = sentAt;
     }
 
     /**
@@ -576,6 +562,86 @@ public class RcsWebhookDeliveryReport {
     @JsonProperty("callbackData")
     public void setCallbackData(String callbackData) {
         this.callbackData = callbackData;
+    }
+
+    /**
+     * Sets to.
+     * <p>
+     * Field description:
+     * Message destination address.
+     *
+     * @param to
+     * @return This {@link RcsWebhookDeliveryReport instance}.
+     */
+    public RcsWebhookDeliveryReport to(String to) {
+        this.to = to;
+        return this;
+    }
+
+    /**
+     * Returns to.
+     * <p>
+     * Field description:
+     * Message destination address.
+     *
+     * @return to
+     */
+    @JsonProperty("to")
+    public String getTo() {
+        return to;
+    }
+
+    /**
+     * Sets to.
+     * <p>
+     * Field description:
+     * Message destination address.
+     *
+     * @param to
+     */
+    @JsonProperty("to")
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    /**
+     * Sets sender.
+     * <p>
+     * Field description:
+     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
+     *
+     * @param sender
+     * @return This {@link RcsWebhookDeliveryReport instance}.
+     */
+    public RcsWebhookDeliveryReport sender(String sender) {
+        this.sender = sender;
+        return this;
+    }
+
+    /**
+     * Returns sender.
+     * <p>
+     * Field description:
+     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
+     *
+     * @return sender
+     */
+    @JsonProperty("sender")
+    public String getSender() {
+        return sender;
+    }
+
+    /**
+     * Sets sender.
+     * <p>
+     * Field description:
+     * The sender ID which can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;).
+     *
+     * @param sender
+     */
+    @JsonProperty("sender")
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     /**
@@ -663,14 +729,16 @@ public class RcsWebhookDeliveryReport {
                 && Objects.equals(this.price, rcsWebhookDeliveryReport.price)
                 && Objects.equals(this.status, rcsWebhookDeliveryReport.status)
                 && Objects.equals(this.error, rcsWebhookDeliveryReport.error)
+                && Objects.equals(this.conversation, rcsWebhookDeliveryReport.conversation)
                 && Objects.equals(this.messageId, rcsWebhookDeliveryReport.messageId)
-                && Objects.equals(this.to, rcsWebhookDeliveryReport.to)
-                && Objects.equals(this.sender, rcsWebhookDeliveryReport.sender)
-                && Objects.equals(this.sentAt, rcsWebhookDeliveryReport.sentAt)
                 && Objects.equals(this.doneAt, rcsWebhookDeliveryReport.doneAt)
+                && Objects.equals(this.interactionType, rcsWebhookDeliveryReport.interactionType)
                 && Objects.equals(this.messageCount, rcsWebhookDeliveryReport.messageCount)
+                && Objects.equals(this.sentAt, rcsWebhookDeliveryReport.sentAt)
                 && Objects.equals(this.mccMnc, rcsWebhookDeliveryReport.mccMnc)
                 && Objects.equals(this.callbackData, rcsWebhookDeliveryReport.callbackData)
+                && Objects.equals(this.to, rcsWebhookDeliveryReport.to)
+                && Objects.equals(this.sender, rcsWebhookDeliveryReport.sender)
                 && Objects.equals(this.platform, rcsWebhookDeliveryReport.platform)
                 && Objects.equals(this.campaignReferenceId, rcsWebhookDeliveryReport.campaignReferenceId);
     }
@@ -683,14 +751,16 @@ public class RcsWebhookDeliveryReport {
                 price,
                 status,
                 error,
+                conversation,
                 messageId,
-                to,
-                sender,
-                sentAt,
                 doneAt,
+                interactionType,
                 messageCount,
+                sentAt,
                 mccMnc,
                 callbackData,
+                to,
+                sender,
                 platform,
                 campaignReferenceId);
     }
@@ -716,29 +786,35 @@ public class RcsWebhookDeliveryReport {
                 .append("    error: ")
                 .append(toIndentedString(error))
                 .append(newLine)
+                .append("    conversation: ")
+                .append(toIndentedString(conversation))
+                .append(newLine)
                 .append("    messageId: ")
                 .append(toIndentedString(messageId))
-                .append(newLine)
-                .append("    to: ")
-                .append(toIndentedString(to))
-                .append(newLine)
-                .append("    sender: ")
-                .append(toIndentedString(sender))
-                .append(newLine)
-                .append("    sentAt: ")
-                .append(toIndentedString(sentAt))
                 .append(newLine)
                 .append("    doneAt: ")
                 .append(toIndentedString(doneAt))
                 .append(newLine)
+                .append("    interactionType: ")
+                .append(toIndentedString(interactionType))
+                .append(newLine)
                 .append("    messageCount: ")
                 .append(toIndentedString(messageCount))
+                .append(newLine)
+                .append("    sentAt: ")
+                .append(toIndentedString(sentAt))
                 .append(newLine)
                 .append("    mccMnc: ")
                 .append(toIndentedString(mccMnc))
                 .append(newLine)
                 .append("    callbackData: ")
                 .append(toIndentedString(callbackData))
+                .append(newLine)
+                .append("    to: ")
+                .append(toIndentedString(to))
+                .append(newLine)
+                .append("    sender: ")
+                .append(toIndentedString(sender))
                 .append(newLine)
                 .append("    platform: ")
                 .append(toIndentedString(platform))

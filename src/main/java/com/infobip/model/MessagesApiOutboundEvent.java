@@ -23,6 +23,7 @@ import java.util.Objects;
         property = "event",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = MessagesApiOutboundSeenEvent.class, name = "SEEN"),
     @JsonSubTypes.Type(value = MessagesApiOutboundTypingStartedEvent.class, name = "TYPING_STARTED"),
     @JsonSubTypes.Type(value = MessagesApiOutboundTypingStoppedEvent.class, name = "TYPING_STOPPED"),
 })

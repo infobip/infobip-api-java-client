@@ -657,7 +657,7 @@ public class CallsClickToCallMessage {
      * Sets text.
      * <p>
      * Field description:
-     * Text of the message that will be played before call transfer.
+     * Text of the message that will be played before call transfer. SSML (Speech Synthesis Markup Language) is supported and can be used to fully customize pronunciation of the provided text.
      *
      * @param text
      * @return This {@link CallsClickToCallMessage instance}.
@@ -671,7 +671,7 @@ public class CallsClickToCallMessage {
      * Returns text.
      * <p>
      * Field description:
-     * Text of the message that will be played before call transfer.
+     * Text of the message that will be played before call transfer. SSML (Speech Synthesis Markup Language) is supported and can be used to fully customize pronunciation of the provided text.
      *
      * @return text
      */
@@ -684,7 +684,7 @@ public class CallsClickToCallMessage {
      * Sets text.
      * <p>
      * Field description:
-     * Text of the message that will be played before call transfer.
+     * Text of the message that will be played before call transfer. SSML (Speech Synthesis Markup Language) is supported and can be used to fully customize pronunciation of the provided text.
      *
      * @param text
      */

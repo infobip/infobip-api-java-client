@@ -97,6 +97,8 @@ public abstract class WhatsAppTemplateApiResponse {
 
     private OffsetDateTime lastUpdatedAt;
 
+    private String libraryTemplateName;
+
     /**
      * Sets id.
      * <p>
@@ -477,6 +479,46 @@ public abstract class WhatsAppTemplateApiResponse {
         this.lastUpdatedAt = lastUpdatedAt;
     }
 
+    /**
+     * Sets libraryTemplateName.
+     * <p>
+     * Field description:
+     * Name of the library template from which this template was created. If not present, the template was not created using the template library.
+     *
+     * @param libraryTemplateName
+     * @return This {@link WhatsAppTemplateApiResponse instance}.
+     */
+    public WhatsAppTemplateApiResponse libraryTemplateName(String libraryTemplateName) {
+        this.libraryTemplateName = libraryTemplateName;
+        return this;
+    }
+
+    /**
+     * Returns libraryTemplateName.
+     * <p>
+     * Field description:
+     * Name of the library template from which this template was created. If not present, the template was not created using the template library.
+     *
+     * @return libraryTemplateName
+     */
+    @JsonProperty("libraryTemplateName")
+    public String getLibraryTemplateName() {
+        return libraryTemplateName;
+    }
+
+    /**
+     * Sets libraryTemplateName.
+     * <p>
+     * Field description:
+     * Name of the library template from which this template was created. If not present, the template was not created using the template library.
+     *
+     * @param libraryTemplateName
+     */
+    @JsonProperty("libraryTemplateName")
+    public void setLibraryTemplateName(String libraryTemplateName) {
+        this.libraryTemplateName = libraryTemplateName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -496,7 +538,8 @@ public abstract class WhatsAppTemplateApiResponse {
                 && Objects.equals(this.quality, whatsAppTemplateApiResponse.quality)
                 && Objects.equals(this.platform, whatsAppTemplateApiResponse.platform)
                 && Objects.equals(this.createdAt, whatsAppTemplateApiResponse.createdAt)
-                && Objects.equals(this.lastUpdatedAt, whatsAppTemplateApiResponse.lastUpdatedAt);
+                && Objects.equals(this.lastUpdatedAt, whatsAppTemplateApiResponse.lastUpdatedAt)
+                && Objects.equals(this.libraryTemplateName, whatsAppTemplateApiResponse.libraryTemplateName);
     }
 
     @Override
@@ -512,7 +555,8 @@ public abstract class WhatsAppTemplateApiResponse {
                 quality,
                 platform,
                 createdAt,
-                lastUpdatedAt);
+                lastUpdatedAt,
+                libraryTemplateName);
     }
 
     @Override
@@ -553,6 +597,9 @@ public abstract class WhatsAppTemplateApiResponse {
                 .append(newLine)
                 .append("    lastUpdatedAt: ")
                 .append(toIndentedString(lastUpdatedAt))
+                .append(newLine)
+                .append("    libraryTemplateName: ")
+                .append(toIndentedString(libraryTemplateName))
                 .append(newLine)
                 .append("}")
                 .toString();

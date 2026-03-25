@@ -25,6 +25,8 @@ public class WebRtcPhoneDestination extends WebRtcDestination {
 
     private WebRtcHangupRestriction hangupRestriction;
 
+    private WebRtcMachineDetection machineDetection;
+
     /**
      * Constructs a new {@link WebRtcPhoneDestination} instance.
      */
@@ -189,6 +191,37 @@ public class WebRtcPhoneDestination extends WebRtcDestination {
         this.hangupRestriction = hangupRestriction;
     }
 
+    /**
+     * Sets machineDetection.
+     *
+     * @param machineDetection
+     * @return This {@link WebRtcPhoneDestination instance}.
+     */
+    public WebRtcPhoneDestination machineDetection(WebRtcMachineDetection machineDetection) {
+        this.machineDetection = machineDetection;
+        return this;
+    }
+
+    /**
+     * Returns machineDetection.
+     *
+     * @return machineDetection
+     */
+    @JsonProperty("machineDetection")
+    public WebRtcMachineDetection getMachineDetection() {
+        return machineDetection;
+    }
+
+    /**
+     * Sets machineDetection.
+     *
+     * @param machineDetection
+     */
+    @JsonProperty("machineDetection")
+    public void setMachineDetection(WebRtcMachineDetection machineDetection) {
+        this.machineDetection = machineDetection;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -202,12 +235,13 @@ public class WebRtcPhoneDestination extends WebRtcDestination {
                 && Objects.equals(this.from, webRtcPhoneDestination.from)
                 && Objects.equals(this.displayName, webRtcPhoneDestination.displayName)
                 && Objects.equals(this.hangupRestriction, webRtcPhoneDestination.hangupRestriction)
+                && Objects.equals(this.machineDetection, webRtcPhoneDestination.machineDetection)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(phoneNumber, from, displayName, hangupRestriction, super.hashCode());
+        return Objects.hash(phoneNumber, from, displayName, hangupRestriction, machineDetection, super.hashCode());
     }
 
     @Override
@@ -230,6 +264,9 @@ public class WebRtcPhoneDestination extends WebRtcDestination {
                 .append(newLine)
                 .append("    hangupRestriction: ")
                 .append(toIndentedString(hangupRestriction))
+                .append(newLine)
+                .append("    machineDetection: ")
+                .append(toIndentedString(machineDetection))
                 .append(newLine)
                 .append("}")
                 .toString();
