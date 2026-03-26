@@ -5,6 +5,83 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [6.4.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.4.0) ] - 2026-03-26
+
+⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
+All changes, including breaking changes, are addressed and explained in the list bellow.
+If you find out that something was not addressed properly, please submit an issue.
+
+### Added
+* Support for [Infobip Numbers API](https://www.infobip.com/docs/api/platform/numbers).
+* Support for [Infobip Resources API](https://www.infobip.com/docs/api/platform/resources).
+* Most recent feature set for:
+    * [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp).
+    * [Infobip RCS API](https://www.infobip.com/docs/api/channels/rcs).
+    * [Infobip Voice API](https://www.infobip.com/docs/api/channels/voice).
+    * [Infobip Messages API](https://www.infobip.com/docs/api/platform/messages-api).
+    * [Infobip WebRTC API](https://www.infobip.com/docs/api/channels/webrtc-calls).
+
+### Changed
+
+* **WhatsApp**:
+    * Added Media Carousel message support with `WhatsAppInteractiveMediaCarouselMessage`, `WhatsAppMediaCarouselCard`, `WhatsAppImageMediaCarouselCardHeader`, `WhatsAppVideoMediaCarouselCardHeader` models
+    * Added Voice button message support with `WhatsAppInteractiveVoiceButtonMessage` and `WhatsAppInteractiveVoiceButtonContent` models
+    * Added calling permission support with `WhatsAppCallingPermissionAction`, `WhatsAppCallingPermissionActionLimit`, `WhatsAppCallingPermissionResponse` and `WhatsAppInteractiveCallPermissionRequestMessage` models
+    * Added outbound event support (typing indicator) with `WhatsAppEvent`, `WhatsAppEventRequest`, `WhatsAppEventOptions`, `WhatsAppOutboundEventTypingIndicatorContent` models
+    * Added Meta conversion tracking support with `WhatsAppMetaConversionModel`, `WhatsAppMetaConversionType`, `WhatsAppWABAConversionEventRequest`, `WhatsAppConversionDetails` models
+    * Added marketing update notification support with `WhatsAppWebhookMarketingUpdateNotification` and `WhatsAppWebhookMarketingUpdateNotificationResponse` models
+    * Added message scheduling support with `WhatsAppRequestSchedulingSettings` model
+    * Added `WhatsAppTemplateVoiceCallButtonContent` model for voice call template button support
+    * Added `WhatsAppMessageStatus`, `WhatsAppMessageGeneralStatus`, `WhatsAppSenderPublicKeyResponse`, `WhatsAppShareWabaRequest`, `WhatsAppToDestination` models
+    * Extended `WhatsAppTemplateButtonContent` with voice call button type support
+    * Extended `WhatsAppPayment` with additional fields
+    * Extended `WhatsAppTemplateApiResponse` and `WhatsAppVoiceCallButtonApiData` with new fields
+    * JavaDoc fixes
+* **RCS**:
+    * Renamed `RcsInboundMessageContent` to `RcsInboundMessage`
+    * Renamed `RcsMessageEventContent` to `RcsInboundEvent`
+    * Removed `RcsPlatformInfo` class
+    * Added conversation started event support with `RcsConversationStartedEvent`, `RcsConversationStartedEvents`, `RcsConversationStartedInfo`, `RcsConversationStartedEventContent`, `RcsConversationInfo` models
+    * Added `RcsConversationType`, `RcsConversationStartedEventType`, `RcsTrafficType`, `RcsMessagePrice`, `RcsMessageInteractionType`, `RcsEventInteractionType` models
+    * Updated `RcsWebhookDeliveryReport` model
+    * JavaDoc fixes
+* **Voice**:
+    * Renamed `CallsDialogRecording` to `CallsDialogRecordingResponse`
+    * Renamed `CallsSipTrunkRegisteredResetPasswordResponse` to `CallsSipTrunkResetPasswordResponse`
+    * Removed `CallsPublicDialogRecording` class
+    * Added CNAM support with `CallsCnam`, `CallsCnamDelivery`, `CallsCnamDeliveryStatus`, `CallsCnamStorage`, `CallsCnamStorageStatus`, `CallsPublicCnamStatus` models
+    * Added emergency address support with `CallsEmergencyAddress`, `CallsEmergencyAddressStatus`, `CallsValidateAddressResponse` models
+    * Added TTY play content support with `CallsPlayTty`, `CallsPlayTtyOptions`, `CallsTtyPlayContent` models
+    * Added `CallsAddress`, `CallsDirection` models
+    * Extended `CallsLanguage` and `CallsSynthesisVoice` with new language and voice options
+    * Extended `CallsDialogPlayRequest` with new fields
+    * Extended `CallsUrlPlayContent` with new fields
+    * Updated `CallsDialogRecordingPage` to reference `CallsDialogRecordingResponse`
+    * JavaDoc fixes
+* **MessagesApi**:
+    * Added outbound seen event support with `MessagesApiOutboundSeenEvent` and `MessagesApiOutboundSeenEventChannel` models
+    * Added outbound typing event channel support with `MessagesApiOutboundTypingStartedEventChannel` and `MessagesApiOutboundTypingStoppedEventChannel` models
+    * Added `MessagesApiInboundTypingStartedChannel` model
+    * Extended `MessagesApiOutboundEventType` with new event type values
+    * Updated `MessagesApiInboundDlrChannel`, `MessagesApiInboundTypingStartedEvent`, `MessagesApiInboundTypingStoppedEvent`, `MessagesApiOutboundTypingStartedEvent`, `MessagesApiOutboundTypingStoppedEvent` models
+    * Extended `MessagesApiOutboundEvent` with new fields
+    * JavaDoc fixes
+* **WebRtc**:
+    * Added machine detection support with `WebRtcMachineDetection` and `WebRtcMachineDetectionResult` models
+    * Extended `WebRtcPhoneCallDetails` and `WebRtcPhoneDestination` with new fields
+    * Updated `WebRtcHangupSource` enum
+    * JavaDoc fixes
+* **Viber**:
+    * Extended `ViberOtpTemplateLanguage` with new language options
+    * Extended `ViberOutboundOtpTemplateContent` with new fields
+    * JavaDoc fixes
+* **General**:
+    * Updated tests
+
+### Removed
+- Removed `RcsPlatformInfo` class — its `applicationId` and `entityId` fields are now carried by the existing `Platform` class, which is used consistently across the SDK for platform context
+- Removed `CallsPublicDialogRecording` class — unified with `CallsDialogRecordingResponse`, which represents the same dialog recording data and is now the single type returned from dialog recording endpoints
+
 ## [ [6.3.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.3.0) ] - 2026-02-17
 
 ⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
