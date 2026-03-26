@@ -22,7 +22,9 @@ import java.util.UUID;
  * Represents ResourcesAlphaResourceOrderApiDoc model.
  */
 public class ResourcesAlphaResourceOrderApiDoc
-        implements GetResourceRequest200Response, ResourcesPageResourceOrderApiDocResultsInner {
+        implements ResourcesGetResourceRequestResponse,
+                ResourcesPageResourceOrderApiDocResultsInner,
+                ResourcesUpdateResourceRequestResponse {
 
     private UUID id;
 

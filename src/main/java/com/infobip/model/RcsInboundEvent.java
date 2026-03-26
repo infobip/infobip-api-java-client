@@ -44,7 +44,7 @@ public class RcsInboundEvent {
 
     private RcsConversationInfo conversation;
 
-    private RcsPlatformInfo platform;
+    private Platform platform;
 
     /**
      * Sets campaignReferenceId.
@@ -592,7 +592,7 @@ public class RcsInboundEvent {
      * @param platform
      * @return This {@link RcsInboundEvent instance}.
      */
-    public RcsInboundEvent platform(RcsPlatformInfo platform) {
+    public RcsInboundEvent platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -605,7 +605,7 @@ public class RcsInboundEvent {
      * @return platform
      */
     @JsonProperty("platform")
-    public RcsPlatformInfo getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
@@ -617,7 +617,7 @@ public class RcsInboundEvent {
      * @param platform
      */
     @JsonProperty("platform")
-    public void setPlatform(RcsPlatformInfo platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

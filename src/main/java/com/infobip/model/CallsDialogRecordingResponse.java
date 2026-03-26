@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents CallsPublicDialogRecording model.
+ * Represents CallsDialogRecordingResponse model.
  */
-public class CallsPublicDialogRecording {
+public class CallsDialogRecordingResponse {
 
     private String dialogId;
 
@@ -41,9 +41,9 @@ public class CallsPublicDialogRecording {
      * Unique dialog ID.
      *
      * @param dialogId
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsPublicDialogRecording dialogId(String dialogId) {
+    public CallsDialogRecordingResponse dialogId(String dialogId) {
         this.dialogId = dialogId;
         return this;
     }
@@ -81,9 +81,9 @@ public class CallsPublicDialogRecording {
      * Calls Configuration ID.
      *
      * @param callsConfigurationId
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsPublicDialogRecording callsConfigurationId(String callsConfigurationId) {
+    public CallsDialogRecordingResponse callsConfigurationId(String callsConfigurationId) {
         this.callsConfigurationId = callsConfigurationId;
         return this;
     }
@@ -118,9 +118,9 @@ public class CallsPublicDialogRecording {
      * Sets platform.
      *
      * @param platform
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsPublicDialogRecording platform(Platform platform) {
+    public CallsDialogRecordingResponse platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -152,9 +152,9 @@ public class CallsPublicDialogRecording {
      * File(s) with a recording of both dialog participants.
      *
      * @param composedFiles
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsPublicDialogRecording composedFiles(List<CallsPublicRecordingFile> composedFiles) {
+    public CallsDialogRecordingResponse composedFiles(List<CallsPublicRecordingFile> composedFiles) {
         this.composedFiles = composedFiles;
         return this;
     }
@@ -166,9 +166,9 @@ public class CallsPublicDialogRecording {
      * File(s) with a recording of both dialog participants.
      *
      * @param composedFilesItem The item to be added to the list.
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsPublicDialogRecording addComposedFilesItem(CallsPublicRecordingFile composedFilesItem) {
+    public CallsDialogRecordingResponse addComposedFilesItem(CallsPublicRecordingFile composedFilesItem) {
         if (this.composedFiles == null) {
             this.composedFiles = new ArrayList<>();
         }
@@ -209,9 +209,9 @@ public class CallsPublicDialogRecording {
      * File(s) with a recording of one dialog participant.
      *
      * @param callRecordings
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsPublicDialogRecording callRecordings(List<CallsPublicRecording> callRecordings) {
+    public CallsDialogRecordingResponse callRecordings(List<CallsPublicRecording> callRecordings) {
         this.callRecordings = callRecordings;
         return this;
     }
@@ -223,9 +223,9 @@ public class CallsPublicDialogRecording {
      * File(s) with a recording of one dialog participant.
      *
      * @param callRecordingsItem The item to be added to the list.
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsPublicDialogRecording addCallRecordingsItem(CallsPublicRecording callRecordingsItem) {
+    public CallsDialogRecordingResponse addCallRecordingsItem(CallsPublicRecording callRecordingsItem) {
         if (this.callRecordings == null) {
             this.callRecordings = new ArrayList<>();
         }
@@ -266,9 +266,9 @@ public class CallsPublicDialogRecording {
      * Date and time when the (first) recording started.
      *
      * @param startTime
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsPublicDialogRecording startTime(OffsetDateTime startTime) {
+    public CallsDialogRecordingResponse startTime(OffsetDateTime startTime) {
         this.startTime = startTime;
         return this;
     }
@@ -306,9 +306,9 @@ public class CallsPublicDialogRecording {
      * Date and time when the (last) recording ended.
      *
      * @param endTime
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsPublicDialogRecording endTime(OffsetDateTime endTime) {
+    public CallsDialogRecordingResponse endTime(OffsetDateTime endTime) {
         this.endTime = endTime;
         return this;
     }
@@ -347,14 +347,14 @@ public class CallsPublicDialogRecording {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallsPublicDialogRecording callsPublicDialogRecording = (CallsPublicDialogRecording) o;
-        return Objects.equals(this.dialogId, callsPublicDialogRecording.dialogId)
-                && Objects.equals(this.callsConfigurationId, callsPublicDialogRecording.callsConfigurationId)
-                && Objects.equals(this.platform, callsPublicDialogRecording.platform)
-                && Objects.equals(this.composedFiles, callsPublicDialogRecording.composedFiles)
-                && Objects.equals(this.callRecordings, callsPublicDialogRecording.callRecordings)
-                && Objects.equals(this.startTime, callsPublicDialogRecording.startTime)
-                && Objects.equals(this.endTime, callsPublicDialogRecording.endTime);
+        CallsDialogRecordingResponse callsDialogRecordingResponse = (CallsDialogRecordingResponse) o;
+        return Objects.equals(this.dialogId, callsDialogRecordingResponse.dialogId)
+                && Objects.equals(this.callsConfigurationId, callsDialogRecordingResponse.callsConfigurationId)
+                && Objects.equals(this.platform, callsDialogRecordingResponse.platform)
+                && Objects.equals(this.composedFiles, callsDialogRecordingResponse.composedFiles)
+                && Objects.equals(this.callRecordings, callsDialogRecordingResponse.callRecordings)
+                && Objects.equals(this.startTime, callsDialogRecordingResponse.startTime)
+                && Objects.equals(this.endTime, callsDialogRecordingResponse.endTime);
     }
 
     @Override
@@ -367,7 +367,7 @@ public class CallsPublicDialogRecording {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallsPublicDialogRecording {")
+                .append("class CallsDialogRecordingResponse {")
                 .append(newLine)
                 .append("    dialogId: ")
                 .append(toIndentedString(dialogId))

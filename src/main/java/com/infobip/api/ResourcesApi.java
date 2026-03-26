@@ -16,9 +16,9 @@ import com.infobip.ApiClient;
 import com.infobip.ApiException;
 import com.infobip.Parameter;
 import com.infobip.RequestDefinition;
-import com.infobip.model.GetResourceRequest200Response;
 import com.infobip.model.ResourcesConfigurationType;
 import com.infobip.model.ResourcesDocumentIdentifier;
+import com.infobip.model.ResourcesGetResourceRequestResponse;
 import com.infobip.model.ResourcesIbResourceCoverageInfo;
 import com.infobip.model.ResourcesIbResourceCoverageKey;
 import com.infobip.model.ResourcesIbResourcesFilter;
@@ -32,6 +32,7 @@ import com.infobip.model.ResourcesResourceOrderIdentifier;
 import com.infobip.model.ResourcesResourceOrderStatus;
 import com.infobip.model.ResourcesSubmitResourceRequestBody;
 import com.infobip.model.ResourcesUpdateResourceOrderRequest;
+import com.infobip.model.ResourcesUpdateResourceRequestResponse;
 import java.io.File;
 import java.util.List;
 import java.util.Objects;
@@ -481,13 +482,14 @@ public class ResourcesApi {
         /**
          * Executes the getResourceRequest request.
          *
-         * @return GetResourceRequest200Response The deserialized response.
+         * @return ResourcesGetResourceRequestResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public GetResourceRequest200Response execute() throws ApiException {
+        public ResourcesGetResourceRequestResponse execute() throws ApiException {
             RequestDefinition getResourceRequestDefinition = getResourceRequestDefinition(id);
             return apiClient.execute(
-                    getResourceRequestDefinition, new TypeReference<GetResourceRequest200Response>() {}.getType());
+                    getResourceRequestDefinition,
+                    new TypeReference<ResourcesGetResourceRequestResponse>() {}.getType());
         }
 
         /**
@@ -496,11 +498,11 @@ public class ResourcesApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<GetResourceRequest200Response> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<ResourcesGetResourceRequestResponse> callback) {
             RequestDefinition getResourceRequestDefinition = getResourceRequestDefinition(id);
             return apiClient.executeAsync(
                     getResourceRequestDefinition,
-                    new TypeReference<GetResourceRequest200Response>() {}.getType(),
+                    new TypeReference<ResourcesGetResourceRequestResponse>() {}.getType(),
                     callback);
         }
     }
@@ -1066,14 +1068,15 @@ public class ResourcesApi {
         /**
          * Executes the updateResourceRequest request.
          *
-         * @return GetResourceRequest200Response The deserialized response.
+         * @return ResourcesUpdateResourceRequestResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public GetResourceRequest200Response execute() throws ApiException {
+        public ResourcesUpdateResourceRequestResponse execute() throws ApiException {
             RequestDefinition updateResourceRequestDefinition =
                     updateResourceRequestDefinition(id, resourcesUpdateResourceOrderRequest);
             return apiClient.execute(
-                    updateResourceRequestDefinition, new TypeReference<GetResourceRequest200Response>() {}.getType());
+                    updateResourceRequestDefinition,
+                    new TypeReference<ResourcesUpdateResourceRequestResponse>() {}.getType());
         }
 
         /**
@@ -1082,12 +1085,12 @@ public class ResourcesApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<GetResourceRequest200Response> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<ResourcesUpdateResourceRequestResponse> callback) {
             RequestDefinition updateResourceRequestDefinition =
                     updateResourceRequestDefinition(id, resourcesUpdateResourceOrderRequest);
             return apiClient.executeAsync(
                     updateResourceRequestDefinition,
-                    new TypeReference<GetResourceRequest200Response>() {}.getType(),
+                    new TypeReference<ResourcesUpdateResourceRequestResponse>() {}.getType(),
                     callback);
         }
     }

@@ -1230,7 +1230,7 @@ class ResourcesApiTest extends ApiTest {
 
         ResourcesApi api = new ResourcesApi(getApiClient());
 
-        Consumer<GetResourceRequest200Response> assertions = (response) -> {
+        Consumer<ResourcesGetResourceRequestResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response).isInstanceOf(ResourcesAlphaResourceOrderApiDoc.class);
 
@@ -1347,7 +1347,7 @@ class ResourcesApiTest extends ApiTest {
                         .key(givenRequirementKey)
                         .value(givenRequirementValue)));
 
-        Consumer<GetResourceRequest200Response> assertions = (response) -> {
+        Consumer<ResourcesUpdateResourceRequestResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response).isInstanceOf(ResourcesNumberResourceOrderApiDoc.class);
 

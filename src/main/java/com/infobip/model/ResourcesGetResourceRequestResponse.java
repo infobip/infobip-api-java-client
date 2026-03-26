@@ -18,4 +18,4 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = ResourcesNumberResourceOrderApiDoc.class),
     @JsonSubTypes.Type(value = ResourcesRcsSenderResourceOrderApiDoc.class)
 })
-public interface GetResourceRequest200Response {}
+public interface ResourcesGetResourceRequestResponse {}

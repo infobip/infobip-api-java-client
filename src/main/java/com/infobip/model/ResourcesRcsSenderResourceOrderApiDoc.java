@@ -22,7 +22,9 @@ import java.util.UUID;
  * Represents ResourcesRcsSenderResourceOrderApiDoc model.
  */
 public class ResourcesRcsSenderResourceOrderApiDoc
-        implements GetResourceRequest200Response, ResourcesPageResourceOrderApiDocResultsInner {
+        implements ResourcesGetResourceRequestResponse,
+                ResourcesPageResourceOrderApiDocResultsInner,
+                ResourcesUpdateResourceRequestResponse {
 
     private UUID id;
 
