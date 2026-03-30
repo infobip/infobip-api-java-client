@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents CallsDialogRecording model.
+ * Represents CallsDialogRecordingResponse model.
  */
-public class CallsDialogRecording {
+public class CallsDialogRecordingResponse {
 
     private String dialogId;
 
@@ -40,9 +40,9 @@ public class CallsDialogRecording {
      * Sets dialogId.
      *
      * @param dialogId
-     * @return This {@link CallsDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecording dialogId(String dialogId) {
+    public CallsDialogRecordingResponse dialogId(String dialogId) {
         this.dialogId = dialogId;
         return this;
     }
@@ -71,9 +71,9 @@ public class CallsDialogRecording {
      * Sets callsConfigurationId.
      *
      * @param callsConfigurationId
-     * @return This {@link CallsDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecording callsConfigurationId(String callsConfigurationId) {
+    public CallsDialogRecordingResponse callsConfigurationId(String callsConfigurationId) {
         this.callsConfigurationId = callsConfigurationId;
         return this;
     }
@@ -102,9 +102,9 @@ public class CallsDialogRecording {
      * Sets applicationId.
      *
      * @param applicationId
-     * @return This {@link CallsDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecording applicationId(String applicationId) {
+    public CallsDialogRecordingResponse applicationId(String applicationId) {
         this.applicationId = applicationId;
         return this;
     }
@@ -133,9 +133,9 @@ public class CallsDialogRecording {
      * Sets entityId.
      *
      * @param entityId
-     * @return This {@link CallsDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecording entityId(String entityId) {
+    public CallsDialogRecordingResponse entityId(String entityId) {
         this.entityId = entityId;
         return this;
     }
@@ -164,9 +164,9 @@ public class CallsDialogRecording {
      * Sets composedFiles.
      *
      * @param composedFiles
-     * @return This {@link CallsDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecording composedFiles(List<CallsRecordingFile> composedFiles) {
+    public CallsDialogRecordingResponse composedFiles(List<CallsRecordingFile> composedFiles) {
         this.composedFiles = composedFiles;
         return this;
     }
@@ -175,9 +175,9 @@ public class CallsDialogRecording {
      * Adds and item into composedFiles.
      *
      * @param composedFilesItem The item to be added to the list.
-     * @return This {@link CallsDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecording addComposedFilesItem(CallsRecordingFile composedFilesItem) {
+    public CallsDialogRecordingResponse addComposedFilesItem(CallsRecordingFile composedFilesItem) {
         if (this.composedFiles == null) {
             this.composedFiles = new ArrayList<>();
         }
@@ -209,9 +209,9 @@ public class CallsDialogRecording {
      * Sets callRecordings.
      *
      * @param callRecordings
-     * @return This {@link CallsDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecording callRecordings(List<CallRecording> callRecordings) {
+    public CallsDialogRecordingResponse callRecordings(List<CallRecording> callRecordings) {
         this.callRecordings = callRecordings;
         return this;
     }
@@ -220,9 +220,9 @@ public class CallsDialogRecording {
      * Adds and item into callRecordings.
      *
      * @param callRecordingsItem The item to be added to the list.
-     * @return This {@link CallsDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecording addCallRecordingsItem(CallRecording callRecordingsItem) {
+    public CallsDialogRecordingResponse addCallRecordingsItem(CallRecording callRecordingsItem) {
         if (this.callRecordings == null) {
             this.callRecordings = new ArrayList<>();
         }
@@ -254,9 +254,9 @@ public class CallsDialogRecording {
      * Sets startTime.
      *
      * @param startTime
-     * @return This {@link CallsDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecording startTime(OffsetDateTime startTime) {
+    public CallsDialogRecordingResponse startTime(OffsetDateTime startTime) {
         this.startTime = startTime;
         return this;
     }
@@ -285,9 +285,9 @@ public class CallsDialogRecording {
      * Sets endTime.
      *
      * @param endTime
-     * @return This {@link CallsDialogRecording instance}.
+     * @return This {@link CallsDialogRecordingResponse instance}.
      */
-    public CallsDialogRecording endTime(OffsetDateTime endTime) {
+    public CallsDialogRecordingResponse endTime(OffsetDateTime endTime) {
         this.endTime = endTime;
         return this;
     }
@@ -320,15 +320,15 @@ public class CallsDialogRecording {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallsDialogRecording callsDialogRecording = (CallsDialogRecording) o;
-        return Objects.equals(this.dialogId, callsDialogRecording.dialogId)
-                && Objects.equals(this.callsConfigurationId, callsDialogRecording.callsConfigurationId)
-                && Objects.equals(this.applicationId, callsDialogRecording.applicationId)
-                && Objects.equals(this.entityId, callsDialogRecording.entityId)
-                && Objects.equals(this.composedFiles, callsDialogRecording.composedFiles)
-                && Objects.equals(this.callRecordings, callsDialogRecording.callRecordings)
-                && Objects.equals(this.startTime, callsDialogRecording.startTime)
-                && Objects.equals(this.endTime, callsDialogRecording.endTime);
+        CallsDialogRecordingResponse callsDialogRecordingResponse = (CallsDialogRecordingResponse) o;
+        return Objects.equals(this.dialogId, callsDialogRecordingResponse.dialogId)
+                && Objects.equals(this.callsConfigurationId, callsDialogRecordingResponse.callsConfigurationId)
+                && Objects.equals(this.applicationId, callsDialogRecordingResponse.applicationId)
+                && Objects.equals(this.entityId, callsDialogRecordingResponse.entityId)
+                && Objects.equals(this.composedFiles, callsDialogRecordingResponse.composedFiles)
+                && Objects.equals(this.callRecordings, callsDialogRecordingResponse.callRecordings)
+                && Objects.equals(this.startTime, callsDialogRecordingResponse.startTime)
+                && Objects.equals(this.endTime, callsDialogRecordingResponse.endTime);
     }
 
     @Override
@@ -348,7 +348,7 @@ public class CallsDialogRecording {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallsDialogRecording {")
+                .append("class CallsDialogRecordingResponse {")
                 .append(newLine)
                 .append("    dialogId: ")
                 .append(toIndentedString(dialogId))
