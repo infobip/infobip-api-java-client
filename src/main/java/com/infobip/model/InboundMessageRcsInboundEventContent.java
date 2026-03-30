@@ -14,9 +14,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * Collection of mobile originated messages.
+ * Collection of mobile originated events.
  */
-public class RcsInboundMessage {
+public class InboundMessageRcsInboundEventContent {
 
     private String campaignReferenceId;
 
@@ -28,9 +28,7 @@ public class RcsInboundMessage {
 
     private OffsetDateTime receivedAt;
 
-    private RcsMessageInteractionType interactionType;
-
-    private Integer rcsCount;
+    private RcsEventInteractionType interactionType;
 
     private String keyword;
 
@@ -55,9 +53,9 @@ public class RcsInboundMessage {
      * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
      *
      * @param campaignReferenceId
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage campaignReferenceId(String campaignReferenceId) {
+    public InboundMessageRcsInboundEventContent campaignReferenceId(String campaignReferenceId) {
         this.campaignReferenceId = campaignReferenceId;
         return this;
     }
@@ -97,9 +95,9 @@ public class RcsInboundMessage {
      * The field is required.
      *
      * @param sender
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage sender(String sender) {
+    public InboundMessageRcsInboundEventContent sender(String sender) {
         this.sender = sender;
         return this;
     }
@@ -143,9 +141,9 @@ public class RcsInboundMessage {
      * The field is required.
      *
      * @param to
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage to(String to) {
+    public InboundMessageRcsInboundEventContent to(String to) {
         this.to = to;
         return this;
     }
@@ -189,9 +187,9 @@ public class RcsInboundMessage {
      * The field is required.
      *
      * @param integrationType
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage integrationType(String integrationType) {
+    public InboundMessageRcsInboundEventContent integrationType(String integrationType) {
         this.integrationType = integrationType;
         return this;
     }
@@ -235,9 +233,9 @@ public class RcsInboundMessage {
      * The field is required.
      *
      * @param receivedAt
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage receivedAt(OffsetDateTime receivedAt) {
+    public InboundMessageRcsInboundEventContent receivedAt(OffsetDateTime receivedAt) {
         this.receivedAt = receivedAt;
         return this;
     }
@@ -278,9 +276,9 @@ public class RcsInboundMessage {
      * The field is required.
      *
      * @param interactionType
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage interactionType(RcsMessageInteractionType interactionType) {
+    public InboundMessageRcsInboundEventContent interactionType(RcsEventInteractionType interactionType) {
         this.interactionType = interactionType;
         return this;
     }
@@ -293,7 +291,7 @@ public class RcsInboundMessage {
      * @return interactionType
      */
     @JsonProperty("interactionType")
-    public RcsMessageInteractionType getInteractionType() {
+    public RcsEventInteractionType getInteractionType() {
         return interactionType;
     }
 
@@ -305,54 +303,8 @@ public class RcsInboundMessage {
      * @param interactionType
      */
     @JsonProperty("interactionType")
-    public void setInteractionType(RcsMessageInteractionType interactionType) {
+    public void setInteractionType(RcsEventInteractionType interactionType) {
         this.interactionType = interactionType;
-    }
-
-    /**
-     * Sets rcsCount.
-     * <p>
-     * Field description:
-     * A field that informs the client how many segment counts does a MO message contain. Can be received as &gt; 1 for use case of Rich message in USA.
-     * <p>
-     * The field is required.
-     *
-     * @param rcsCount
-     * @return This {@link RcsInboundMessage instance}.
-     */
-    public RcsInboundMessage rcsCount(Integer rcsCount) {
-        this.rcsCount = rcsCount;
-        return this;
-    }
-
-    /**
-     * Returns rcsCount.
-     * <p>
-     * Field description:
-     * A field that informs the client how many segment counts does a MO message contain. Can be received as &gt; 1 for use case of Rich message in USA.
-     * <p>
-     * The field is required.
-     *
-     * @return rcsCount
-     */
-    @JsonProperty("rcsCount")
-    public Integer getRcsCount() {
-        return rcsCount;
-    }
-
-    /**
-     * Sets rcsCount.
-     * <p>
-     * Field description:
-     * A field that informs the client how many segment counts does a MO message contain. Can be received as &gt; 1 for use case of Rich message in USA.
-     * <p>
-     * The field is required.
-     *
-     * @param rcsCount
-     */
-    @JsonProperty("rcsCount")
-    public void setRcsCount(Integer rcsCount) {
-        this.rcsCount = rcsCount;
     }
 
     /**
@@ -362,9 +314,9 @@ public class RcsInboundMessage {
      * Keyword extracted from the message text.
      *
      * @param keyword
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage keyword(String keyword) {
+    public InboundMessageRcsInboundEventContent keyword(String keyword) {
         this.keyword = keyword;
         return this;
     }
@@ -404,9 +356,9 @@ public class RcsInboundMessage {
      * The field is required.
      *
      * @param messageId
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage messageId(String messageId) {
+    public InboundMessageRcsInboundEventContent messageId(String messageId) {
         this.messageId = messageId;
         return this;
     }
@@ -448,9 +400,9 @@ public class RcsInboundMessage {
      * Message ID of paired outgoing message if matched by Infobip platform.
      *
      * @param pairedMessageId
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage pairedMessageId(String pairedMessageId) {
+    public InboundMessageRcsInboundEventContent pairedMessageId(String pairedMessageId) {
         this.pairedMessageId = pairedMessageId;
         return this;
     }
@@ -488,9 +440,9 @@ public class RcsInboundMessage {
      * Callback data sent through ‛callbackData‛ field when sending message.
      *
      * @param callbackData
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage callbackData(String callbackData) {
+    public InboundMessageRcsInboundEventContent callbackData(String callbackData) {
         this.callbackData = callbackData;
         return this;
     }
@@ -527,9 +479,9 @@ public class RcsInboundMessage {
      * The field is required.
      *
      * @param message
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage message(RcsInboundMessageContent message) {
+    public InboundMessageRcsInboundEventContent message(RcsInboundMessageContent message) {
         this.message = message;
         return this;
     }
@@ -564,9 +516,9 @@ public class RcsInboundMessage {
      * The field is required.
      *
      * @param price
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage price(RcsMessagePrice price) {
+    public InboundMessageRcsInboundEventContent price(RcsMessagePrice price) {
         this.price = price;
         return this;
     }
@@ -601,9 +553,9 @@ public class RcsInboundMessage {
      * The field is required.
      *
      * @param conversation
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage conversation(RcsConversationInfo conversation) {
+    public InboundMessageRcsInboundEventContent conversation(RcsConversationInfo conversation) {
         this.conversation = conversation;
         return this;
     }
@@ -638,9 +590,9 @@ public class RcsInboundMessage {
      * The field is required.
      *
      * @param platform
-     * @return This {@link RcsInboundMessage instance}.
+     * @return This {@link InboundMessageRcsInboundEventContent instance}.
      */
-    public RcsInboundMessage platform(Platform platform) {
+    public InboundMessageRcsInboundEventContent platform(Platform platform) {
         this.platform = platform;
         return this;
     }
@@ -677,22 +629,22 @@ public class RcsInboundMessage {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        RcsInboundMessage rcsInboundMessage = (RcsInboundMessage) o;
-        return Objects.equals(this.campaignReferenceId, rcsInboundMessage.campaignReferenceId)
-                && Objects.equals(this.sender, rcsInboundMessage.sender)
-                && Objects.equals(this.to, rcsInboundMessage.to)
-                && Objects.equals(this.integrationType, rcsInboundMessage.integrationType)
-                && Objects.equals(this.receivedAt, rcsInboundMessage.receivedAt)
-                && Objects.equals(this.interactionType, rcsInboundMessage.interactionType)
-                && Objects.equals(this.rcsCount, rcsInboundMessage.rcsCount)
-                && Objects.equals(this.keyword, rcsInboundMessage.keyword)
-                && Objects.equals(this.messageId, rcsInboundMessage.messageId)
-                && Objects.equals(this.pairedMessageId, rcsInboundMessage.pairedMessageId)
-                && Objects.equals(this.callbackData, rcsInboundMessage.callbackData)
-                && Objects.equals(this.message, rcsInboundMessage.message)
-                && Objects.equals(this.price, rcsInboundMessage.price)
-                && Objects.equals(this.conversation, rcsInboundMessage.conversation)
-                && Objects.equals(this.platform, rcsInboundMessage.platform);
+        InboundMessageRcsInboundEventContent inboundMessageRcsInboundEventContent =
+                (InboundMessageRcsInboundEventContent) o;
+        return Objects.equals(this.campaignReferenceId, inboundMessageRcsInboundEventContent.campaignReferenceId)
+                && Objects.equals(this.sender, inboundMessageRcsInboundEventContent.sender)
+                && Objects.equals(this.to, inboundMessageRcsInboundEventContent.to)
+                && Objects.equals(this.integrationType, inboundMessageRcsInboundEventContent.integrationType)
+                && Objects.equals(this.receivedAt, inboundMessageRcsInboundEventContent.receivedAt)
+                && Objects.equals(this.interactionType, inboundMessageRcsInboundEventContent.interactionType)
+                && Objects.equals(this.keyword, inboundMessageRcsInboundEventContent.keyword)
+                && Objects.equals(this.messageId, inboundMessageRcsInboundEventContent.messageId)
+                && Objects.equals(this.pairedMessageId, inboundMessageRcsInboundEventContent.pairedMessageId)
+                && Objects.equals(this.callbackData, inboundMessageRcsInboundEventContent.callbackData)
+                && Objects.equals(this.message, inboundMessageRcsInboundEventContent.message)
+                && Objects.equals(this.price, inboundMessageRcsInboundEventContent.price)
+                && Objects.equals(this.conversation, inboundMessageRcsInboundEventContent.conversation)
+                && Objects.equals(this.platform, inboundMessageRcsInboundEventContent.platform);
     }
 
     @Override
@@ -704,7 +656,6 @@ public class RcsInboundMessage {
                 integrationType,
                 receivedAt,
                 interactionType,
-                rcsCount,
                 keyword,
                 messageId,
                 pairedMessageId,
@@ -719,7 +670,7 @@ public class RcsInboundMessage {
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class RcsInboundMessage {")
+                .append("class InboundMessageRcsInboundEventContent {")
                 .append(newLine)
                 .append("    campaignReferenceId: ")
                 .append(toIndentedString(campaignReferenceId))
@@ -738,9 +689,6 @@ public class RcsInboundMessage {
                 .append(newLine)
                 .append("    interactionType: ")
                 .append(toIndentedString(interactionType))
-                .append(newLine)
-                .append("    rcsCount: ")
-                .append(toIndentedString(rcsCount))
                 .append(newLine)
                 .append("    keyword: ")
                 .append(toIndentedString(keyword))

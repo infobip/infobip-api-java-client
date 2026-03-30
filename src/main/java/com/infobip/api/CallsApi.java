@@ -56,7 +56,6 @@ import com.infobip.model.CallsDialogPage;
 import com.infobip.model.CallsDialogPlayRequest;
 import com.infobip.model.CallsDialogRecordingPage;
 import com.infobip.model.CallsDialogRecordingRequest;
-import com.infobip.model.CallsDialogRecordingResponse;
 import com.infobip.model.CallsDialogRequest;
 import com.infobip.model.CallsDialogResponse;
 import com.infobip.model.CallsDialogSayRequest;
@@ -76,6 +75,7 @@ import com.infobip.model.CallsPlayRequest;
 import com.infobip.model.CallsPreAnswerRequest;
 import com.infobip.model.CallsPublicConferenceRecording;
 import com.infobip.model.CallsPublicCountry;
+import com.infobip.model.CallsPublicDialogRecording;
 import com.infobip.model.CallsPublicRecording;
 import com.infobip.model.CallsPublicRecordingFile;
 import com.infobip.model.CallsPublicRegion;
@@ -2828,13 +2828,13 @@ public class CallsApi {
         /**
          * Executes the deleteDialogRecordings request.
          *
-         * @return CallsDialogRecordingResponse The deserialized response.
+         * @return CallsPublicDialogRecording The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public CallsDialogRecordingResponse execute() throws ApiException {
+        public CallsPublicDialogRecording execute() throws ApiException {
             RequestDefinition deleteDialogRecordingsDefinition = deleteDialogRecordingsDefinition(dialogId, location);
             return apiClient.execute(
-                    deleteDialogRecordingsDefinition, new TypeReference<CallsDialogRecordingResponse>() {}.getType());
+                    deleteDialogRecordingsDefinition, new TypeReference<CallsPublicDialogRecording>() {}.getType());
         }
 
         /**
@@ -2843,11 +2843,11 @@ public class CallsApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<CallsDialogRecordingResponse> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<CallsPublicDialogRecording> callback) {
             RequestDefinition deleteDialogRecordingsDefinition = deleteDialogRecordingsDefinition(dialogId, location);
             return apiClient.executeAsync(
                     deleteDialogRecordingsDefinition,
-                    new TypeReference<CallsDialogRecordingResponse>() {}.getType(),
+                    new TypeReference<CallsPublicDialogRecording>() {}.getType(),
                     callback);
         }
     }
@@ -6015,13 +6015,13 @@ public class CallsApi {
         /**
          * Executes the getDialogRecordings request.
          *
-         * @return CallsDialogRecordingResponse The deserialized response.
+         * @return CallsPublicDialogRecording The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public CallsDialogRecordingResponse execute() throws ApiException {
+        public CallsPublicDialogRecording execute() throws ApiException {
             RequestDefinition getDialogRecordingsDefinition = getDialogRecordingsDefinition(dialogId, location);
             return apiClient.execute(
-                    getDialogRecordingsDefinition, new TypeReference<CallsDialogRecordingResponse>() {}.getType());
+                    getDialogRecordingsDefinition, new TypeReference<CallsPublicDialogRecording>() {}.getType());
         }
 
         /**
@@ -6030,11 +6030,11 @@ public class CallsApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<CallsDialogRecordingResponse> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<CallsPublicDialogRecording> callback) {
             RequestDefinition getDialogRecordingsDefinition = getDialogRecordingsDefinition(dialogId, location);
             return apiClient.executeAsync(
                     getDialogRecordingsDefinition,
-                    new TypeReference<CallsDialogRecordingResponse>() {}.getType(),
+                    new TypeReference<CallsPublicDialogRecording>() {}.getType(),
                     callback);
         }
     }

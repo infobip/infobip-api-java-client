@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class CallsDialogRecordingPage {
 
-    private List<CallsDialogRecordingResponse> results = null;
+    private List<CallsPublicDialogRecording> results = null;
 
     private PageInfo paging;
 
@@ -32,7 +32,7 @@ public class CallsDialogRecordingPage {
      * @param results
      * @return This {@link CallsDialogRecordingPage instance}.
      */
-    public CallsDialogRecordingPage results(List<CallsDialogRecordingResponse> results) {
+    public CallsDialogRecordingPage results(List<CallsPublicDialogRecording> results) {
         this.results = results;
         return this;
     }
@@ -46,7 +46,7 @@ public class CallsDialogRecordingPage {
      * @param resultsItem The item to be added to the list.
      * @return This {@link CallsDialogRecordingPage instance}.
      */
-    public CallsDialogRecordingPage addResultsItem(CallsDialogRecordingResponse resultsItem) {
+    public CallsDialogRecordingPage addResultsItem(CallsPublicDialogRecording resultsItem) {
         if (this.results == null) {
             this.results = new ArrayList<>();
         }
@@ -63,7 +63,7 @@ public class CallsDialogRecordingPage {
      * @return results
      */
     @JsonProperty("results")
-    public List<CallsDialogRecordingResponse> getResults() {
+    public List<CallsPublicDialogRecording> getResults() {
         return results;
     }
 
@@ -76,7 +76,7 @@ public class CallsDialogRecordingPage {
      * @param results
      */
     @JsonProperty("results")
-    public void setResults(List<CallsDialogRecordingResponse> results) {
+    public void setResults(List<CallsPublicDialogRecording> results) {
         this.results = results;
     }
 

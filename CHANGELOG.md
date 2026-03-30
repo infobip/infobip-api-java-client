@@ -38,17 +38,13 @@ If you find out that something was not addressed properly, please submit an issu
     * Extended `WhatsAppTemplateApiResponse` and `WhatsAppVoiceCallButtonApiData` with new fields
     * JavaDoc fixes
 * **RCS**:
-    * Renamed `RcsInboundMessageContent` to `RcsInboundMessage`
-    * Renamed `RcsMessageEventContent` to `RcsInboundEvent`
-    * Removed `RcsPlatformInfo` class
+    * Removed `RcsPlatformInfo` class (see [Removed](#removed) section)
     * Added conversation started event support with `RcsConversationStartedEvent`, `RcsConversationStartedEvents`, `RcsConversationStartedInfo`, `RcsConversationStartedEventContent`, `RcsConversationInfo` models
     * Added `RcsConversationType`, `RcsConversationStartedEventType`, `RcsTrafficType`, `RcsMessagePrice`, `RcsMessageInteractionType`, `RcsEventInteractionType` models
     * Updated `RcsWebhookDeliveryReport` model
     * JavaDoc fixes
 * **Voice**:
-    * Renamed `CallsDialogRecording` to `CallsDialogRecordingResponse`
-    * Renamed `CallsSipTrunkRegisteredResetPasswordResponse` to `CallsSipTrunkResetPasswordResponse`
-    * Removed `CallsPublicDialogRecording` class
+    * Renamed `CallsSipTrunkRegisteredResetPasswordResponse` to `CallsSipTrunkResetPasswordResponse` to better reflect the return type of the reset password endpoint
     * Added CNAM support with `CallsCnam`, `CallsCnamDelivery`, `CallsCnamDeliveryStatus`, `CallsCnamStorage`, `CallsCnamStorageStatus`, `CallsPublicCnamStatus` models
     * Added emergency address support with `CallsEmergencyAddress`, `CallsEmergencyAddressStatus`, `CallsValidateAddressResponse` models
     * Added TTY play content support with `CallsPlayTty`, `CallsPlayTtyOptions`, `CallsTtyPlayContent` models
@@ -56,7 +52,6 @@ If you find out that something was not addressed properly, please submit an issu
     * Extended `CallsLanguage` and `CallsSynthesisVoice` with new language and voice options
     * Extended `CallsDialogPlayRequest` with new fields
     * Extended `CallsUrlPlayContent` with new fields
-    * Updated `CallsDialogRecordingPage` to reference `CallsDialogRecordingResponse`
     * JavaDoc fixes
 * **MessagesApi**:
     * Added outbound seen event support with `MessagesApiOutboundSeenEvent` and `MessagesApiOutboundSeenEventChannel` models
@@ -80,7 +75,6 @@ If you find out that something was not addressed properly, please submit an issu
 
 ### Removed
 - Removed `RcsPlatformInfo` class — its `applicationId` and `entityId` fields are now carried by the existing `Platform` class, which is used consistently across the SDK for platform context
-- Removed `CallsPublicDialogRecording` class — unified with `CallsDialogRecordingResponse`, which represents the same dialog recording data and is now the single type returned from dialog recording endpoints
 
 ## [ [6.3.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.3.0) ] - 2026-02-17
 
