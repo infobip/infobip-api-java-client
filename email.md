@@ -25,9 +25,7 @@ Fields `from`, `to`, and `subject` are required. The message must also contain a
 Keep in mind the following restrictions while using a trial account:
 
 - you can only send messages to verified email addresses,
-- you can only use your email address with the Infobip test domain in the following form:
-    -  `test.worlds-connected.co` (for managed clients) or
-    - `selfserve.worlds-connected.co` (for self-service clients).
+- you can only use your email address with the Infobip test domain in the following form: `YourUserName@selfserve.worlds-connected.co`
 
 ---
 
