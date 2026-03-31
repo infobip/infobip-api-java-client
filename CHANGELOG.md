@@ -45,6 +45,7 @@ If you find out that something was not addressed properly, please submit an issu
     * JavaDoc fixes
 * **Voice**:
     * Renamed `CallsSipTrunkRegisteredResetPasswordResponse` to `CallsSipTrunkResetPasswordResponse` to better reflect the return type of the reset password endpoint
+    * Removed `CallsPublicDialogRecording` class (see [Removed](#removed) section)
     * Added CNAM support with `CallsCnam`, `CallsCnamDelivery`, `CallsCnamDeliveryStatus`, `CallsCnamStorage`, `CallsCnamStorageStatus`, `CallsPublicCnamStatus` models
     * Added emergency address support with `CallsEmergencyAddress`, `CallsEmergencyAddressStatus`, `CallsValidateAddressResponse` models
     * Added TTY play content support with `CallsPlayTty`, `CallsPlayTtyOptions`, `CallsTtyPlayContent` models
@@ -75,6 +76,7 @@ If you find out that something was not addressed properly, please submit an issu
 
 ### Removed
 - Removed `RcsPlatformInfo` class — its `applicationId` and `entityId` fields are now carried by the existing `Platform` class, which is used consistently across the SDK for platform context
+- Removed `CallsPublicDialogRecording` class — unified with `CallsDialogRecordingResponse`, which represents the same dialog recording data and is now the single type returned from dialog recording endpoints
 
 ## [ [6.3.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.3.0) ] - 2026-02-17
 
