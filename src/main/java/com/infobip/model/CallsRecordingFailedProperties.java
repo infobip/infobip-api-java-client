@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -18,6 +20,8 @@ import java.util.Objects;
 public class CallsRecordingFailedProperties {
 
     private String reason;
+
+    private Map<String, String> recordingCustomData = null;
 
     /**
      * Sets reason.
@@ -59,6 +63,64 @@ public class CallsRecordingFailedProperties {
         this.reason = reason;
     }
 
+    /**
+     * Sets recordingCustomData.
+     * <p>
+     * Field description:
+     * Recording custom data.
+     *
+     * @param recordingCustomData
+     * @return This {@link CallsRecordingFailedProperties instance}.
+     */
+    public CallsRecordingFailedProperties recordingCustomData(Map<String, String> recordingCustomData) {
+        this.recordingCustomData = recordingCustomData;
+        return this;
+    }
+
+    /**
+     * Puts and entry into recordingCustomData.
+     * <p>
+     * Field description:
+     * Recording custom data.
+     *
+     * @param key The given key.
+     * @param recordingCustomDataItem The item to be associated with the given key.
+     * @return This {@link CallsRecordingFailedProperties instance}.
+     */
+    public CallsRecordingFailedProperties putRecordingCustomDataItem(String key, String recordingCustomDataItem) {
+        if (this.recordingCustomData == null) {
+            this.recordingCustomData = new HashMap<>();
+        }
+        this.recordingCustomData.put(key, recordingCustomDataItem);
+        return this;
+    }
+
+    /**
+     * Returns recordingCustomData.
+     * <p>
+     * Field description:
+     * Recording custom data.
+     *
+     * @return recordingCustomData
+     */
+    @JsonProperty("recordingCustomData")
+    public Map<String, String> getRecordingCustomData() {
+        return recordingCustomData;
+    }
+
+    /**
+     * Sets recordingCustomData.
+     * <p>
+     * Field description:
+     * Recording custom data.
+     *
+     * @param recordingCustomData
+     */
+    @JsonProperty("recordingCustomData")
+    public void setRecordingCustomData(Map<String, String> recordingCustomData) {
+        this.recordingCustomData = recordingCustomData;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -68,12 +130,13 @@ public class CallsRecordingFailedProperties {
             return false;
         }
         CallsRecordingFailedProperties callsRecordingFailedProperties = (CallsRecordingFailedProperties) o;
-        return Objects.equals(this.reason, callsRecordingFailedProperties.reason);
+        return Objects.equals(this.reason, callsRecordingFailedProperties.reason)
+                && Objects.equals(this.recordingCustomData, callsRecordingFailedProperties.recordingCustomData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(reason);
+        return Objects.hash(reason, recordingCustomData);
     }
 
     @Override
@@ -84,6 +147,9 @@ public class CallsRecordingFailedProperties {
                 .append(newLine)
                 .append("    reason: ")
                 .append(toIndentedString(reason))
+                .append(newLine)
+                .append("    recordingCustomData: ")
+                .append(toIndentedString(recordingCustomData))
                 .append(newLine)
                 .append("}")
                 .toString();

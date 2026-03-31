@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Language to be used for the template. If not set, the device language will be used.
+ * Template language. Must match the &#39;lang&#39; parameter from template creation. If not specified (OTP templates only), defaults to device language.
  */
 public enum ViberOtpTemplateLanguage {
     ENGLISH("ENGLISH"),

@@ -18,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum CallsSipTrunkType {
     STATIC("STATIC"),
     REGISTERED("REGISTERED"),
-    PROVIDER("PROVIDER");
+    PROVIDER("PROVIDER"),
+    AUTHENTICATED("AUTHENTICATED");
 
     private final String value;
 

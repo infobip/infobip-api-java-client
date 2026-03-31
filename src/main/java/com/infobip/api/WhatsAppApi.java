@@ -10,6 +10,7 @@
 package com.infobip.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.annotations.Beta;
 import com.infobip.ApiCallback;
 import com.infobip.ApiClient;
 import com.infobip.ApiException;
@@ -20,26 +21,34 @@ import com.infobip.model.WhatsAppBulkMessage;
 import com.infobip.model.WhatsAppBulkMessageInfo;
 import com.infobip.model.WhatsAppBusinessInfoRequest;
 import com.infobip.model.WhatsAppBusinessInfoResponse;
+import com.infobip.model.WhatsAppCallingPermissionResponse;
 import com.infobip.model.WhatsAppContactsMessage;
 import com.infobip.model.WhatsAppDocumentMessage;
+import com.infobip.model.WhatsAppEventRequest;
 import com.infobip.model.WhatsAppIdentityConfirmation;
 import com.infobip.model.WhatsAppIdentityInfo;
 import com.infobip.model.WhatsAppImageMessage;
 import com.infobip.model.WhatsAppInteractiveButtonsMessage;
+import com.infobip.model.WhatsAppInteractiveCallPermissionRequestMessage;
 import com.infobip.model.WhatsAppInteractiveFlowMessage;
 import com.infobip.model.WhatsAppInteractiveListMessage;
 import com.infobip.model.WhatsAppInteractiveLocationRequestMessage;
+import com.infobip.model.WhatsAppInteractiveMediaCarouselMessage;
 import com.infobip.model.WhatsAppInteractiveMultiProductMessage;
 import com.infobip.model.WhatsAppInteractiveOrderDetailsMessage;
 import com.infobip.model.WhatsAppInteractiveOrderStatusMessage;
 import com.infobip.model.WhatsAppInteractiveProductMessage;
 import com.infobip.model.WhatsAppInteractiveUrlButtonMessage;
+import com.infobip.model.WhatsAppInteractiveVoiceButtonMessage;
 import com.infobip.model.WhatsAppLocationMessage;
 import com.infobip.model.WhatsAppOtpRequest;
 import com.infobip.model.WhatsAppPayment;
 import com.infobip.model.WhatsAppPhoneNumberRequest;
+import com.infobip.model.WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails;
+import com.infobip.model.WhatsAppSenderPublicKeyResponse;
 import com.infobip.model.WhatsAppSenderQualityResponse;
 import com.infobip.model.WhatsAppSenderRegistrationResponse;
+import com.infobip.model.WhatsAppShareWabaRequest;
 import com.infobip.model.WhatsAppSingleMessageInfo;
 import com.infobip.model.WhatsAppStickerMessage;
 import com.infobip.model.WhatsAppTemplateApiResponse;
@@ -50,6 +59,7 @@ import com.infobip.model.WhatsAppTextMessage;
 import com.infobip.model.WhatsAppUrlDeletionRequest;
 import com.infobip.model.WhatsAppVerifyCodeRequest;
 import com.infobip.model.WhatsAppVideoMessage;
+import com.infobip.model.WhatsAppWABAConversionEventRequest;
 import java.io.File;
 import java.util.List;
 import java.util.Objects;
@@ -417,6 +427,68 @@ public class WhatsAppApi {
      */
     public DeleteWhatsAppTemplateRequest deleteWhatsAppTemplate(String sender, String templateName) {
         return new DeleteWhatsAppTemplateRequest(sender, templateName);
+    }
+
+    private RequestDefinition deleteWhatsappIdentityDefinition(String sender, String userNumber) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "DELETE", "/whatsapp/1/{sender}/contacts/{userNumber}/identity")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        if (userNumber != null) {
+            builder.addPathParameter(new Parameter("userNumber", userNumber));
+        }
+        return builder.build();
+    }
+
+    /**
+     * deleteWhatsappIdentity request builder class.
+     */
+    public class DeleteWhatsappIdentityRequest {
+        private final String sender;
+        private final String userNumber;
+
+        private DeleteWhatsappIdentityRequest(String sender, String userNumber) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this.userNumber = Objects.requireNonNull(userNumber, "The required parameter 'userNumber' is missing.");
+        }
+
+        /**
+         * Executes the deleteWhatsappIdentity request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition deleteWhatsappIdentityDefinition = deleteWhatsappIdentityDefinition(sender, userNumber);
+            apiClient.execute(deleteWhatsappIdentityDefinition);
+        }
+
+        /**
+         * Executes the deleteWhatsappIdentity request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition deleteWhatsappIdentityDefinition = deleteWhatsappIdentityDefinition(sender, userNumber);
+            return apiClient.executeAsync(deleteWhatsappIdentityDefinition, callback);
+        }
+    }
+
+    /**
+     * Delete identity.
+     * <p>
+     * Delete stored identity data. After this operation, identity from next message exchange will be treated as confirmed.
+     *
+     * @param sender Registered WhatsApp sender number. Must be in international format. (required)
+     * @param userNumber End user&#39;s number. Must be in international format. (required)
+     * @return DeleteWhatsappIdentityRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp/manage-integration/additional-functionalities#detect-identity-changes">Learn more.</a>
+     */
+    public DeleteWhatsappIdentityRequest deleteWhatsappIdentity(String sender, String userNumber) {
+        return new DeleteWhatsappIdentityRequest(sender, userNumber);
     }
 
     private RequestDefinition downloadWhatsAppInboundMediaDefinition(String sender, String mediaId) {
@@ -825,6 +897,77 @@ public class WhatsAppApi {
         return new GetWhatsappBrazilPaymentStatusRequest(sender, paymentId);
     }
 
+    private RequestDefinition getWhatsappCallingPermissionDefinition(String sender, String userNumber) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "GET", "/whatsapp/1/senders/{sender}/calls/{userNumber}/permissions")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        if (userNumber != null) {
+            builder.addPathParameter(new Parameter("userNumber", userNumber));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getWhatsappCallingPermission request builder class.
+     */
+    public class GetWhatsappCallingPermissionRequest {
+        private final String sender;
+        private final String userNumber;
+
+        private GetWhatsappCallingPermissionRequest(String sender, String userNumber) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this.userNumber = Objects.requireNonNull(userNumber, "The required parameter 'userNumber' is missing.");
+        }
+
+        /**
+         * Executes the getWhatsappCallingPermission request.
+         *
+         * @return WhatsAppCallingPermissionResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppCallingPermissionResponse execute() throws ApiException {
+            RequestDefinition getWhatsappCallingPermissionDefinition =
+                    getWhatsappCallingPermissionDefinition(sender, userNumber);
+            return apiClient.execute(
+                    getWhatsappCallingPermissionDefinition,
+                    new TypeReference<WhatsAppCallingPermissionResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getWhatsappCallingPermission request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppCallingPermissionResponse> callback) {
+            RequestDefinition getWhatsappCallingPermissionDefinition =
+                    getWhatsappCallingPermissionDefinition(sender, userNumber);
+            return apiClient.executeAsync(
+                    getWhatsappCallingPermissionDefinition,
+                    new TypeReference<WhatsAppCallingPermissionResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get calling permission.
+     * <p>
+     * Get calling permission info of WhatsApp sender for specified end user number, including status, allowed actions, and limitations.
+     *
+     * @param sender Registered WhatsApp sender number. Must be in international format. (required)
+     * @param userNumber End user phone number. Must be in international format. (required)
+     * @return GetWhatsappCallingPermissionRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public GetWhatsappCallingPermissionRequest getWhatsappCallingPermission(String sender, String userNumber) {
+        return new GetWhatsappCallingPermissionRequest(sender, userNumber);
+    }
+
     private RequestDefinition getWhatsappSenderBusinessInfoDefinition(String sender) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "GET", "/whatsapp/1/senders/{sender}/business-info")
@@ -945,6 +1088,68 @@ public class WhatsAppApi {
      */
     public GetWhatsappSenderBusinessLogoRequest getWhatsappSenderBusinessLogo(String sender) {
         return new GetWhatsappSenderBusinessLogoRequest(sender);
+    }
+
+    private RequestDefinition getWhatsappSenderPublicKeyDefinition(String sender) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/whatsapp/1/senders/{sender}/public-key")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getWhatsappSenderPublicKey request builder class.
+     */
+    public class GetWhatsappSenderPublicKeyRequest {
+        private final String sender;
+
+        private GetWhatsappSenderPublicKeyRequest(String sender) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+        }
+
+        /**
+         * Executes the getWhatsappSenderPublicKey request.
+         *
+         * @return WhatsAppSenderPublicKeyResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppSenderPublicKeyResponse execute() throws ApiException {
+            RequestDefinition getWhatsappSenderPublicKeyDefinition = getWhatsappSenderPublicKeyDefinition(sender);
+            return apiClient.execute(
+                    getWhatsappSenderPublicKeyDefinition,
+                    new TypeReference<WhatsAppSenderPublicKeyResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getWhatsappSenderPublicKey request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppSenderPublicKeyResponse> callback) {
+            RequestDefinition getWhatsappSenderPublicKeyDefinition = getWhatsappSenderPublicKeyDefinition(sender);
+            return apiClient.executeAsync(
+                    getWhatsappSenderPublicKeyDefinition,
+                    new TypeReference<WhatsAppSenderPublicKeyResponse>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Get WhatsApp sender public key.
+     * <p>
+     * Retrieves the public key for WhatsApp encryption. The public key enables             end-to-end encrypted data exchange with WhatsApp, such as in WhatsApp Flows.
+     *
+     * @param sender Registered WhatsApp sender number. Must be in international format. (required)
+     * @return GetWhatsappSenderPublicKeyRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public GetWhatsappSenderPublicKeyRequest getWhatsappSenderPublicKey(String sender) {
+        return new GetWhatsappSenderPublicKeyRequest(sender);
     }
 
     private RequestDefinition getWhatsappSendersQualityDefinition(List<String> senders) {
@@ -2190,6 +2395,142 @@ public class WhatsAppApi {
         return new SendWhatsAppVideoMessageRequest(whatsAppVideoMessage);
     }
 
+    private RequestDefinition sendWhatsappEventsDefinition(WhatsAppEventRequest whatsAppEventRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/whatsapp/1/events")
+                .body(whatsAppEventRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * sendWhatsappEvents request builder class.
+     */
+    public class SendWhatsappEventsRequest {
+        private final WhatsAppEventRequest whatsAppEventRequest;
+
+        private SendWhatsappEventsRequest(WhatsAppEventRequest whatsAppEventRequest) {
+            this.whatsAppEventRequest = Objects.requireNonNull(
+                    whatsAppEventRequest, "The required parameter 'whatsAppEventRequest' is missing.");
+        }
+
+        /**
+         * Executes the sendWhatsappEvents request.
+         *
+         * @return WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails execute() throws ApiException {
+            RequestDefinition sendWhatsappEventsDefinition = sendWhatsappEventsDefinition(whatsAppEventRequest);
+            return apiClient.execute(
+                    sendWhatsappEventsDefinition,
+                    new TypeReference<WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails>() {}.getType());
+        }
+
+        /**
+         * Executes the sendWhatsappEvents request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(
+                ApiCallback<WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails> callback) {
+            RequestDefinition sendWhatsappEventsDefinition = sendWhatsappEventsDefinition(whatsAppEventRequest);
+            return apiClient.executeAsync(
+                    sendWhatsappEventsDefinition,
+                    new TypeReference<WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Send WhatsApp events.
+     * <p>
+     * Send WhatsApp events to multiple recipients.
+     *
+     * @param whatsAppEventRequest  (required)
+     * @return SendWhatsappEventsRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public SendWhatsappEventsRequest sendWhatsappEvents(WhatsAppEventRequest whatsAppEventRequest) {
+        return new SendWhatsappEventsRequest(whatsAppEventRequest);
+    }
+
+    private RequestDefinition sendWhatsappInteractiveCallPermissionRequestMessageDefinition(
+            WhatsAppInteractiveCallPermissionRequestMessage whatsAppInteractiveCallPermissionRequestMessage) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/whatsapp/1/message/interactive/call-permission-request")
+                .body(whatsAppInteractiveCallPermissionRequestMessage)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * sendWhatsappInteractiveCallPermissionRequestMessage request builder class.
+     */
+    public class SendWhatsappInteractiveCallPermissionRequestMessageRequest {
+        private final WhatsAppInteractiveCallPermissionRequestMessage whatsAppInteractiveCallPermissionRequestMessage;
+
+        private SendWhatsappInteractiveCallPermissionRequestMessageRequest(
+                WhatsAppInteractiveCallPermissionRequestMessage whatsAppInteractiveCallPermissionRequestMessage) {
+            this.whatsAppInteractiveCallPermissionRequestMessage = Objects.requireNonNull(
+                    whatsAppInteractiveCallPermissionRequestMessage,
+                    "The required parameter 'whatsAppInteractiveCallPermissionRequestMessage' is missing.");
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveCallPermissionRequestMessage request.
+         *
+         * @return WhatsAppSingleMessageInfo The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppSingleMessageInfo execute() throws ApiException {
+            RequestDefinition sendWhatsappInteractiveCallPermissionRequestMessageDefinition =
+                    sendWhatsappInteractiveCallPermissionRequestMessageDefinition(
+                            whatsAppInteractiveCallPermissionRequestMessage);
+            return apiClient.execute(
+                    sendWhatsappInteractiveCallPermissionRequestMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType());
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveCallPermissionRequestMessage request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppSingleMessageInfo> callback) {
+            RequestDefinition sendWhatsappInteractiveCallPermissionRequestMessageDefinition =
+                    sendWhatsappInteractiveCallPermissionRequestMessageDefinition(
+                            whatsAppInteractiveCallPermissionRequestMessage);
+            return apiClient.executeAsync(
+                    sendWhatsappInteractiveCallPermissionRequestMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Send WhatsApp interactive call permission request message.
+     * <p>
+     * Send an interactive call permission request message to a single recipient. Interactive call permission request messages can only be successfully delivered if the recipient has contacted the business within the last 24 hours, otherwise [template message](#channels/whatsapp/send-whatsapp-template-message) should be used. &lt;br/&gt; The API response will not contain the final delivery status, use [Delivery Reports](#channels/whatsapp/receive-whatsapp-delivery-reports) instead.
+     *
+     * @param whatsAppInteractiveCallPermissionRequestMessage  (required)
+     * @return SendWhatsappInteractiveCallPermissionRequestMessageRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public SendWhatsappInteractiveCallPermissionRequestMessageRequest
+            sendWhatsappInteractiveCallPermissionRequestMessage(
+                    WhatsAppInteractiveCallPermissionRequestMessage whatsAppInteractiveCallPermissionRequestMessage) {
+        return new SendWhatsappInteractiveCallPermissionRequestMessageRequest(
+                whatsAppInteractiveCallPermissionRequestMessage);
+    }
+
     private RequestDefinition sendWhatsappInteractiveFlowMessageDefinition(
             WhatsAppInteractiveFlowMessage whatsAppInteractiveFlowMessage) {
         RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/whatsapp/1/message/interactive/flow")
@@ -2325,6 +2666,75 @@ public class WhatsAppApi {
     public SendWhatsappInteractiveLocationRequestMessageRequest sendWhatsappInteractiveLocationRequestMessage(
             WhatsAppInteractiveLocationRequestMessage whatsAppInteractiveLocationRequestMessage) {
         return new SendWhatsappInteractiveLocationRequestMessageRequest(whatsAppInteractiveLocationRequestMessage);
+    }
+
+    private RequestDefinition sendWhatsappInteractiveMediaCarouselMessageDefinition(
+            WhatsAppInteractiveMediaCarouselMessage whatsAppInteractiveMediaCarouselMessage) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/whatsapp/1/message/interactive/media-carousel")
+                .body(whatsAppInteractiveMediaCarouselMessage)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * sendWhatsappInteractiveMediaCarouselMessage request builder class.
+     */
+    public class SendWhatsappInteractiveMediaCarouselMessageRequest {
+        private final WhatsAppInteractiveMediaCarouselMessage whatsAppInteractiveMediaCarouselMessage;
+
+        private SendWhatsappInteractiveMediaCarouselMessageRequest(
+                WhatsAppInteractiveMediaCarouselMessage whatsAppInteractiveMediaCarouselMessage) {
+            this.whatsAppInteractiveMediaCarouselMessage = Objects.requireNonNull(
+                    whatsAppInteractiveMediaCarouselMessage,
+                    "The required parameter 'whatsAppInteractiveMediaCarouselMessage' is missing.");
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveMediaCarouselMessage request.
+         *
+         * @return WhatsAppSingleMessageInfo The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppSingleMessageInfo execute() throws ApiException {
+            RequestDefinition sendWhatsappInteractiveMediaCarouselMessageDefinition =
+                    sendWhatsappInteractiveMediaCarouselMessageDefinition(whatsAppInteractiveMediaCarouselMessage);
+            return apiClient.execute(
+                    sendWhatsappInteractiveMediaCarouselMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType());
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveMediaCarouselMessage request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppSingleMessageInfo> callback) {
+            RequestDefinition sendWhatsappInteractiveMediaCarouselMessageDefinition =
+                    sendWhatsappInteractiveMediaCarouselMessageDefinition(whatsAppInteractiveMediaCarouselMessage);
+            return apiClient.executeAsync(
+                    sendWhatsappInteractiveMediaCarouselMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Send WhatsApp interactive media carousel message.
+     * <p>
+     * Send an interactive media carousel message to a single recipient. Interactive media carousel messages can only be successfully delivered if the recipient has contacted the business within the last 24 hours, otherwise [template message](#channels/whatsapp/send-whatsapp-template-message) should be used. &lt;br/&gt; The API response will not contain the final delivery status, use [Delivery Reports](#channels/whatsapp/receive-whatsapp-delivery-reports) instead.
+     *
+     * @param whatsAppInteractiveMediaCarouselMessage  (required)
+     * @return SendWhatsappInteractiveMediaCarouselMessageRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public SendWhatsappInteractiveMediaCarouselMessageRequest sendWhatsappInteractiveMediaCarouselMessage(
+            WhatsAppInteractiveMediaCarouselMessage whatsAppInteractiveMediaCarouselMessage) {
+        return new SendWhatsappInteractiveMediaCarouselMessageRequest(whatsAppInteractiveMediaCarouselMessage);
     }
 
     private RequestDefinition sendWhatsappInteractiveOrderDetailsMessageDefinition(
@@ -2534,6 +2944,192 @@ public class WhatsAppApi {
         return new SendWhatsappInteractiveUrlButtonMessageRequest(whatsAppInteractiveUrlButtonMessage);
     }
 
+    private RequestDefinition sendWhatsappInteractiveVoiceButtonMessageDefinition(
+            WhatsAppInteractiveVoiceButtonMessage whatsAppInteractiveVoiceButtonMessage) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/whatsapp/1/message/interactive/voice-button")
+                .body(whatsAppInteractiveVoiceButtonMessage)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * sendWhatsappInteractiveVoiceButtonMessage request builder class.
+     */
+    public class SendWhatsappInteractiveVoiceButtonMessageRequest {
+        private final WhatsAppInteractiveVoiceButtonMessage whatsAppInteractiveVoiceButtonMessage;
+
+        private SendWhatsappInteractiveVoiceButtonMessageRequest(
+                WhatsAppInteractiveVoiceButtonMessage whatsAppInteractiveVoiceButtonMessage) {
+            this.whatsAppInteractiveVoiceButtonMessage = Objects.requireNonNull(
+                    whatsAppInteractiveVoiceButtonMessage,
+                    "The required parameter 'whatsAppInteractiveVoiceButtonMessage' is missing.");
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveVoiceButtonMessage request.
+         *
+         * @return WhatsAppSingleMessageInfo The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public WhatsAppSingleMessageInfo execute() throws ApiException {
+            RequestDefinition sendWhatsappInteractiveVoiceButtonMessageDefinition =
+                    sendWhatsappInteractiveVoiceButtonMessageDefinition(whatsAppInteractiveVoiceButtonMessage);
+            return apiClient.execute(
+                    sendWhatsappInteractiveVoiceButtonMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType());
+        }
+
+        /**
+         * Executes the sendWhatsappInteractiveVoiceButtonMessage request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<WhatsAppSingleMessageInfo> callback) {
+            RequestDefinition sendWhatsappInteractiveVoiceButtonMessageDefinition =
+                    sendWhatsappInteractiveVoiceButtonMessageDefinition(whatsAppInteractiveVoiceButtonMessage);
+            return apiClient.executeAsync(
+                    sendWhatsappInteractiveVoiceButtonMessageDefinition,
+                    new TypeReference<WhatsAppSingleMessageInfo>() {}.getType(),
+                    callback);
+        }
+    }
+
+    /**
+     * Send WhatsApp interactive voice button message.
+     * <p>
+     * Send an interactive voice button message to a single recipient. Interactive voice button messages can only be successfully delivered if the recipient has contacted the business within the last 24 hours, otherwise [template message](#channels/whatsapp/send-whatsapp-template-message) should be used. &lt;br/&gt; The API response will not contain the final delivery status, use [Delivery Reports](#channels/whatsapp/receive-whatsapp-delivery-reports) instead.
+     *
+     * @param whatsAppInteractiveVoiceButtonMessage  (required)
+     * @return SendWhatsappInteractiveVoiceButtonMessageRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public SendWhatsappInteractiveVoiceButtonMessageRequest sendWhatsappInteractiveVoiceButtonMessage(
+            WhatsAppInteractiveVoiceButtonMessage whatsAppInteractiveVoiceButtonMessage) {
+        return new SendWhatsappInteractiveVoiceButtonMessageRequest(whatsAppInteractiveVoiceButtonMessage);
+    }
+
+    private RequestDefinition shareWabaWhatsappDefinition(WhatsAppShareWabaRequest whatsAppShareWabaRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/whatsapp/1/embedded-signup/registrations/share-waba")
+                .body(whatsAppShareWabaRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * shareWabaWhatsapp request builder class.
+     */
+    public class ShareWabaWhatsappRequest {
+        private final WhatsAppShareWabaRequest whatsAppShareWabaRequest;
+
+        private ShareWabaWhatsappRequest(WhatsAppShareWabaRequest whatsAppShareWabaRequest) {
+            this.whatsAppShareWabaRequest = Objects.requireNonNull(
+                    whatsAppShareWabaRequest, "The required parameter 'whatsAppShareWabaRequest' is missing.");
+        }
+
+        /**
+         * Executes the shareWabaWhatsapp request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition shareWabaWhatsappDefinition = shareWabaWhatsappDefinition(whatsAppShareWabaRequest);
+            apiClient.execute(shareWabaWhatsappDefinition);
+        }
+
+        /**
+         * Executes the shareWabaWhatsapp request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition shareWabaWhatsappDefinition = shareWabaWhatsappDefinition(whatsAppShareWabaRequest);
+            return apiClient.executeAsync(shareWabaWhatsappDefinition, callback);
+        }
+    }
+
+    /**
+     * .
+     * <p>
+     *
+     *
+     * @param whatsAppShareWabaRequest  (required)
+     * @return ShareWabaWhatsappRequest
+     */
+    public ShareWabaWhatsappRequest shareWabaWhatsapp(WhatsAppShareWabaRequest whatsAppShareWabaRequest) {
+        return new ShareWabaWhatsappRequest(whatsAppShareWabaRequest);
+    }
+
+    private RequestDefinition submitWabaWhatsappConversionsDefinition(
+            WhatsAppWABAConversionEventRequest whatsAppWABAConversionEventRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/whatsapp/1/conversions/waba")
+                .body(whatsAppWABAConversionEventRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * submitWabaWhatsappConversions request builder class.
+     */
+    public class SubmitWabaWhatsappConversionsRequest {
+        private final WhatsAppWABAConversionEventRequest whatsAppWABAConversionEventRequest;
+
+        private SubmitWabaWhatsappConversionsRequest(
+                WhatsAppWABAConversionEventRequest whatsAppWABAConversionEventRequest) {
+            this.whatsAppWABAConversionEventRequest = Objects.requireNonNull(
+                    whatsAppWABAConversionEventRequest,
+                    "The required parameter 'whatsAppWABAConversionEventRequest' is missing.");
+        }
+
+        /**
+         * Executes the submitWabaWhatsappConversions request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition submitWabaWhatsappConversionsDefinition =
+                    submitWabaWhatsappConversionsDefinition(whatsAppWABAConversionEventRequest);
+            apiClient.execute(submitWabaWhatsappConversionsDefinition);
+        }
+
+        /**
+         * Executes the submitWabaWhatsappConversions request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition submitWabaWhatsappConversionsDefinition =
+                    submitWabaWhatsappConversionsDefinition(whatsAppWABAConversionEventRequest);
+            return apiClient.executeAsync(submitWabaWhatsappConversionsDefinition, callback);
+        }
+    }
+
+    /**
+     * Submit WABA conversions.
+     * <p>
+     * Submit WhatsApp conversion events using your WhatsApp Business Account (WABA) phone number as the source. Each conversion event is linked to an ad click via ctwaClickId — a unique identifier contained within the inbound WhatsApp message originating from the ad. You can optionally include conversion details such as value and currency, and a conversion timestamp (up to 7 days in the past). Events are submitted in batches of up to 1,000 and are indivisible — either all are submitted or none.
+     *
+     * @param whatsAppWABAConversionEventRequest  (required)
+     * @return SubmitWabaWhatsappConversionsRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    @Beta
+    public SubmitWabaWhatsappConversionsRequest submitWabaWhatsappConversions(
+            WhatsAppWABAConversionEventRequest whatsAppWABAConversionEventRequest) {
+        return new SubmitWabaWhatsappConversionsRequest(whatsAppWABAConversionEventRequest);
+    }
+
     private RequestDefinition updateWhatsappSenderBusinessInfoDefinition(
             String sender, WhatsAppBusinessInfoRequest whatsAppBusinessInfoRequest) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
@@ -2599,6 +3195,70 @@ public class WhatsAppApi {
     public UpdateWhatsappSenderBusinessInfoRequest updateWhatsappSenderBusinessInfo(
             String sender, WhatsAppBusinessInfoRequest whatsAppBusinessInfoRequest) {
         return new UpdateWhatsappSenderBusinessInfoRequest(sender, whatsAppBusinessInfoRequest);
+    }
+
+    private RequestDefinition uploadWhatsappSenderPublicKeyDefinition(String sender, File _file) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/whatsapp/1/senders/{sender}/public-key")
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("multipart/form-data");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        if (_file != null) {
+            builder.addFormParameter(new Parameter("file", _file));
+        }
+        return builder.build();
+    }
+
+    /**
+     * uploadWhatsappSenderPublicKey request builder class.
+     */
+    public class UploadWhatsappSenderPublicKeyRequest {
+        private final String sender;
+        private final File _file;
+
+        private UploadWhatsappSenderPublicKeyRequest(String sender, File _file) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this._file = Objects.requireNonNull(_file, "The required parameter '_file' is missing.");
+        }
+
+        /**
+         * Executes the uploadWhatsappSenderPublicKey request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition uploadWhatsappSenderPublicKeyDefinition =
+                    uploadWhatsappSenderPublicKeyDefinition(sender, _file);
+            apiClient.execute(uploadWhatsappSenderPublicKeyDefinition);
+        }
+
+        /**
+         * Executes the uploadWhatsappSenderPublicKey request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition uploadWhatsappSenderPublicKeyDefinition =
+                    uploadWhatsappSenderPublicKeyDefinition(sender, _file);
+            return apiClient.executeAsync(uploadWhatsappSenderPublicKeyDefinition, callback);
+        }
+    }
+
+    /**
+     * Upload WhatsApp sender public key.
+     * <p>
+     * Uploads a public key for WhatsApp encryption. The public key enables             end-to-end encrypted data exchange with WhatsApp, such as in WhatsApp Flows.             Previous keys are replaced when new ones are uploaded using this endpoint.
+     *
+     * @param sender Registered WhatsApp sender number. Must be in international format. (required)
+     * @param _file Multipart form data containing the public key file.                          The file must be in PEM format with a 2048-bit RSA key                  and include the appropriate header and footer lines.                  Example file content: &#x60;----BEGIN PUBLIC KEY-----\\\\n MIIBIjAN... \\\\n ----END PUBLIC (required)
+     * @return UploadWhatsappSenderPublicKeyRequest
+     * @see <a href="https://www.infobip.com/docs/whatsapp">Learn more about WhatsApp channel and use cases</a>
+     */
+    public UploadWhatsappSenderPublicKeyRequest uploadWhatsappSenderPublicKey(String sender, File _file) {
+        return new UploadWhatsappSenderPublicKeyRequest(sender, _file);
     }
 
     private RequestDefinition verifyWhatsappSenderDefinition(

@@ -34,6 +34,8 @@ The current version of this library includes this subset of Infobip products:
 * [Messages API](https://www.infobip.com/docs/api/platform/messages-api)
 * [Moments API](https://www.infobip.com/docs/api/customer-engagement/moments)
 * [RCS](https://www.infobip.com/docs/api/channels/rcs)
+* [Numbers](https://www.infobip.com/docs/api/platform/numbers)
+* [Resources](https://www.infobip.com/docs/api/platform/resources)
 
 ## General Info
 For `infobip-api-java-client` versioning we use [Semantic Versioning][semver] scheme.
@@ -50,7 +52,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
       <groupId>com.infobip</groupId>
       <artifactId>infobip-api-java-client</artifactId>
-      <version>6.3.0</version>
+      <version>6.4.0</version>
 </dependency>
 ```
 
@@ -200,32 +202,27 @@ Example of webhook implementation with Spring Web framework:
     }
 ```
 #### Two-Factor Authentication (2FA)
-For the 2FA quick start guide, view [these examples](two-factor-authentication.md).
+For 2FA quick start guide, view [these examples](two-factor-authentication.md).
 
 #### Email
-For the Email quick start guide, view [these examples](email.md).
+For Email quick start guide, view [these examples](email.md).
 
 #### WhatsApp
-For the WhatsApp quick start guide, view [these examples](whatsapp.md).
+For WhatsApp quick start guide, view [these examples](whatsapp.md).
 
 #### Messages API
-For the Messages API quick start guide, view [these examples](messages-api.md).
+For Messages API quick start guide, view [these examples](messages-api.md).
 
 #### Moments
-For the Moments quick start guide, view [these examples](moments.md).
-
-## Versioning
-
-This project follows a pragmatic Semantic Versioning approach.  
-For full details on how versions are managed, please see our [Versioning guide][versioning].
+For Moments quick start guide, view [these examples](moments.md).
 
 ## Ask for help
 
-Feel free to open an issue on the repository if you see any problem or want to request a feature. For pull requests, go to the `CONTRIBUTING` [file][contributing] related to it. This code is auto generated, and we are unable to merge any pull requests form here.
+Feel free to open issues on the repository for any encountered problem or feature request. For pull requests, go to the `CONTRIBUTING` [file][contributing] related to it. This code is auto generated, and we are unable to merge any pull requests form here.
 
 This code is auto generated, and we are unable to merge any pull request from here, but we will review and implement changes directly within our pipeline, as described in the `CONTRIBUTING` [file][contributing].
 
-For anything that requires our immediate attention, contact us @ [support@infobip.com](mailto:support@infobip.com).
+For anything that requires our imminent attention, contact us @ [support@infobip.com](mailto:support@infobip.com).
 
 [apidocs]: https://www.infobip.com/docs/api
 [freetrial]: https://www.infobip.com/docs/essentials/getting-started/free-trial
@@ -233,4 +230,3 @@ For anything that requires our immediate attention, contact us @ [support@infobi
 [semver]: https://semver.org
 [license]: LICENSE
 [contributing]: CONTRIBUTING.md
-[versioning]: VERSIONING.md

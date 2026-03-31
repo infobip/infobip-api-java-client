@@ -19,6 +19,8 @@ public class WhatsAppVoiceCallButtonApiData extends WhatsAppButtonApiData {
 
     private String text;
 
+    private Integer callValidityPeriod;
+
     /**
      * Constructs a new {@link WhatsAppVoiceCallButtonApiData} instance.
      */
@@ -72,6 +74,46 @@ public class WhatsAppVoiceCallButtonApiData extends WhatsAppButtonApiData {
         this.text = text;
     }
 
+    /**
+     * Sets callValidityPeriod.
+     * <p>
+     * Field description:
+     * Time to live for the call button in minutes. Must be between 1440 (1 day) and 43200 (30 days).
+     *
+     * @param callValidityPeriod
+     * @return This {@link WhatsAppVoiceCallButtonApiData instance}.
+     */
+    public WhatsAppVoiceCallButtonApiData callValidityPeriod(Integer callValidityPeriod) {
+        this.callValidityPeriod = callValidityPeriod;
+        return this;
+    }
+
+    /**
+     * Returns callValidityPeriod.
+     * <p>
+     * Field description:
+     * Time to live for the call button in minutes. Must be between 1440 (1 day) and 43200 (30 days).
+     *
+     * @return callValidityPeriod
+     */
+    @JsonProperty("callValidityPeriod")
+    public Integer getCallValidityPeriod() {
+        return callValidityPeriod;
+    }
+
+    /**
+     * Sets callValidityPeriod.
+     * <p>
+     * Field description:
+     * Time to live for the call button in minutes. Must be between 1440 (1 day) and 43200 (30 days).
+     *
+     * @param callValidityPeriod
+     */
+    @JsonProperty("callValidityPeriod")
+    public void setCallValidityPeriod(Integer callValidityPeriod) {
+        this.callValidityPeriod = callValidityPeriod;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -81,12 +123,14 @@ public class WhatsAppVoiceCallButtonApiData extends WhatsAppButtonApiData {
             return false;
         }
         WhatsAppVoiceCallButtonApiData whatsAppVoiceCallButtonApiData = (WhatsAppVoiceCallButtonApiData) o;
-        return Objects.equals(this.text, whatsAppVoiceCallButtonApiData.text) && super.equals(o);
+        return Objects.equals(this.text, whatsAppVoiceCallButtonApiData.text)
+                && Objects.equals(this.callValidityPeriod, whatsAppVoiceCallButtonApiData.callValidityPeriod)
+                && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, super.hashCode());
+        return Objects.hash(text, callValidityPeriod, super.hashCode());
     }
 
     @Override
@@ -100,6 +144,9 @@ public class WhatsAppVoiceCallButtonApiData extends WhatsAppButtonApiData {
                 .append(newLine)
                 .append("    text: ")
                 .append(toIndentedString(text))
+                .append(newLine)
+                .append("    callValidityPeriod: ")
+                .append(toIndentedString(callValidityPeriod))
                 .append(newLine)
                 .append("}")
                 .toString();

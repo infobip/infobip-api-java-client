@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class MessagesApiOutboundTypingStartedEvent extends MessagesApiOutboundEvent {
 
-    private MessagesApiOutboundEventChannel channel;
+    private MessagesApiOutboundTypingStartedEventChannel channel;
 
     private String sender;
 
@@ -42,7 +42,7 @@ public class MessagesApiOutboundTypingStartedEvent extends MessagesApiOutboundEv
      * @param channel
      * @return This {@link MessagesApiOutboundTypingStartedEvent instance}.
      */
-    public MessagesApiOutboundTypingStartedEvent channel(MessagesApiOutboundEventChannel channel) {
+    public MessagesApiOutboundTypingStartedEvent channel(MessagesApiOutboundTypingStartedEventChannel channel) {
         this.channel = channel;
         return this;
     }
@@ -55,7 +55,7 @@ public class MessagesApiOutboundTypingStartedEvent extends MessagesApiOutboundEv
      * @return channel
      */
     @JsonProperty("channel")
-    public MessagesApiOutboundEventChannel getChannel() {
+    public MessagesApiOutboundTypingStartedEventChannel getChannel() {
         return channel;
     }
 
@@ -67,7 +67,7 @@ public class MessagesApiOutboundTypingStartedEvent extends MessagesApiOutboundEv
      * @param channel
      */
     @JsonProperty("channel")
-    public void setChannel(MessagesApiOutboundEventChannel channel) {
+    public void setChannel(MessagesApiOutboundTypingStartedEventChannel channel) {
         this.channel = channel;
     }
 

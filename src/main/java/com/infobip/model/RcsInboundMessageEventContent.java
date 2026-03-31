@@ -18,9 +18,7 @@ import java.util.Objects;
  */
 public class RcsInboundMessageEventContent {
 
-    private String entityId;
-
-    private String applicationId;
+    private String campaignReferenceId;
 
     private String sender;
 
@@ -29,6 +27,8 @@ public class RcsInboundMessageEventContent {
     private String integrationType;
 
     private OffsetDateTime receivedAt;
+
+    private RcsEventInteractionType interactionType;
 
     private String keyword;
 
@@ -40,86 +40,50 @@ public class RcsInboundMessageEventContent {
 
     private RcsInboundMessageContent message;
 
-    private MessagePrice price;
+    private RcsMessagePrice price;
+
+    private RcsConversationInfo conversation;
+
+    private Platform platform;
 
     /**
-     * Sets entityId.
+     * Sets campaignReferenceId.
      * <p>
      * Field description:
-     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
      *
-     * @param entityId
+     * @param campaignReferenceId
      * @return This {@link RcsInboundMessageEventContent instance}.
      */
-    public RcsInboundMessageEventContent entityId(String entityId) {
-        this.entityId = entityId;
+    public RcsInboundMessageEventContent campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
         return this;
     }
 
     /**
-     * Returns entityId.
+     * Returns campaignReferenceId.
      * <p>
      * Field description:
-     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
      *
-     * @return entityId
+     * @return campaignReferenceId
      */
-    @JsonProperty("entityId")
-    public String getEntityId() {
-        return entityId;
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
     }
 
     /**
-     * Sets entityId.
+     * Sets campaignReferenceId.
      * <p>
      * Field description:
-     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns per sending channel.
      *
-     * @param entityId
+     * @param campaignReferenceId
      */
-    @JsonProperty("entityId")
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
-    /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
-     *
-     * @param applicationId
-     * @return This {@link RcsInboundMessageEventContent instance}.
-     */
-    public RcsInboundMessageEventContent applicationId(String applicationId) {
-        this.applicationId = applicationId;
-        return this;
-    }
-
-    /**
-     * Returns applicationId.
-     * <p>
-     * Field description:
-     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
-     *
-     * @return applicationId
-     */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
-     *
-     * @param applicationId
-     */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
     }
 
     /**
@@ -304,6 +268,43 @@ public class RcsInboundMessageEventContent {
     @JsonProperty("receivedAt")
     public void setReceivedAt(OffsetDateTime receivedAt) {
         this.receivedAt = receivedAt;
+    }
+
+    /**
+     * Sets interactionType.
+     * <p>
+     * The field is required.
+     *
+     * @param interactionType
+     * @return This {@link RcsInboundMessageEventContent instance}.
+     */
+    public RcsInboundMessageEventContent interactionType(RcsEventInteractionType interactionType) {
+        this.interactionType = interactionType;
+        return this;
+    }
+
+    /**
+     * Returns interactionType.
+     * <p>
+     * The field is required.
+     *
+     * @return interactionType
+     */
+    @JsonProperty("interactionType")
+    public RcsEventInteractionType getInteractionType() {
+        return interactionType;
+    }
+
+    /**
+     * Sets interactionType.
+     * <p>
+     * The field is required.
+     *
+     * @param interactionType
+     */
+    @JsonProperty("interactionType")
+    public void setInteractionType(RcsEventInteractionType interactionType) {
+        this.interactionType = interactionType;
     }
 
     /**
@@ -517,7 +518,7 @@ public class RcsInboundMessageEventContent {
      * @param price
      * @return This {@link RcsInboundMessageEventContent instance}.
      */
-    public RcsInboundMessageEventContent price(MessagePrice price) {
+    public RcsInboundMessageEventContent price(RcsMessagePrice price) {
         this.price = price;
         return this;
     }
@@ -530,7 +531,7 @@ public class RcsInboundMessageEventContent {
      * @return price
      */
     @JsonProperty("price")
-    public MessagePrice getPrice() {
+    public RcsMessagePrice getPrice() {
         return price;
     }
 
@@ -542,8 +543,82 @@ public class RcsInboundMessageEventContent {
      * @param price
      */
     @JsonProperty("price")
-    public void setPrice(MessagePrice price) {
+    public void setPrice(RcsMessagePrice price) {
         this.price = price;
+    }
+
+    /**
+     * Sets conversation.
+     * <p>
+     * The field is required.
+     *
+     * @param conversation
+     * @return This {@link RcsInboundMessageEventContent instance}.
+     */
+    public RcsInboundMessageEventContent conversation(RcsConversationInfo conversation) {
+        this.conversation = conversation;
+        return this;
+    }
+
+    /**
+     * Returns conversation.
+     * <p>
+     * The field is required.
+     *
+     * @return conversation
+     */
+    @JsonProperty("conversation")
+    public RcsConversationInfo getConversation() {
+        return conversation;
+    }
+
+    /**
+     * Sets conversation.
+     * <p>
+     * The field is required.
+     *
+     * @param conversation
+     */
+    @JsonProperty("conversation")
+    public void setConversation(RcsConversationInfo conversation) {
+        this.conversation = conversation;
+    }
+
+    /**
+     * Sets platform.
+     * <p>
+     * The field is required.
+     *
+     * @param platform
+     * @return This {@link RcsInboundMessageEventContent instance}.
+     */
+    public RcsInboundMessageEventContent platform(Platform platform) {
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * Returns platform.
+     * <p>
+     * The field is required.
+     *
+     * @return platform
+     */
+    @JsonProperty("platform")
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * Sets platform.
+     * <p>
+     * The field is required.
+     *
+     * @param platform
+     */
+    @JsonProperty("platform")
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     @Override
@@ -555,35 +630,39 @@ public class RcsInboundMessageEventContent {
             return false;
         }
         RcsInboundMessageEventContent rcsInboundMessageEventContent = (RcsInboundMessageEventContent) o;
-        return Objects.equals(this.entityId, rcsInboundMessageEventContent.entityId)
-                && Objects.equals(this.applicationId, rcsInboundMessageEventContent.applicationId)
+        return Objects.equals(this.campaignReferenceId, rcsInboundMessageEventContent.campaignReferenceId)
                 && Objects.equals(this.sender, rcsInboundMessageEventContent.sender)
                 && Objects.equals(this.to, rcsInboundMessageEventContent.to)
                 && Objects.equals(this.integrationType, rcsInboundMessageEventContent.integrationType)
                 && Objects.equals(this.receivedAt, rcsInboundMessageEventContent.receivedAt)
+                && Objects.equals(this.interactionType, rcsInboundMessageEventContent.interactionType)
                 && Objects.equals(this.keyword, rcsInboundMessageEventContent.keyword)
                 && Objects.equals(this.messageId, rcsInboundMessageEventContent.messageId)
                 && Objects.equals(this.pairedMessageId, rcsInboundMessageEventContent.pairedMessageId)
                 && Objects.equals(this.callbackData, rcsInboundMessageEventContent.callbackData)
                 && Objects.equals(this.message, rcsInboundMessageEventContent.message)
-                && Objects.equals(this.price, rcsInboundMessageEventContent.price);
+                && Objects.equals(this.price, rcsInboundMessageEventContent.price)
+                && Objects.equals(this.conversation, rcsInboundMessageEventContent.conversation)
+                && Objects.equals(this.platform, rcsInboundMessageEventContent.platform);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                entityId,
-                applicationId,
+                campaignReferenceId,
                 sender,
                 to,
                 integrationType,
                 receivedAt,
+                interactionType,
                 keyword,
                 messageId,
                 pairedMessageId,
                 callbackData,
                 message,
-                price);
+                price,
+                conversation,
+                platform);
     }
 
     @Override
@@ -592,11 +671,8 @@ public class RcsInboundMessageEventContent {
         return new StringBuilder()
                 .append("class RcsInboundMessageEventContent {")
                 .append(newLine)
-                .append("    entityId: ")
-                .append(toIndentedString(entityId))
-                .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
                 .append(newLine)
                 .append("    sender: ")
                 .append(toIndentedString(sender))
@@ -609,6 +685,9 @@ public class RcsInboundMessageEventContent {
                 .append(newLine)
                 .append("    receivedAt: ")
                 .append(toIndentedString(receivedAt))
+                .append(newLine)
+                .append("    interactionType: ")
+                .append(toIndentedString(interactionType))
                 .append(newLine)
                 .append("    keyword: ")
                 .append(toIndentedString(keyword))
@@ -627,6 +706,12 @@ public class RcsInboundMessageEventContent {
                 .append(newLine)
                 .append("    price: ")
                 .append(toIndentedString(price))
+                .append(newLine)
+                .append("    conversation: ")
+                .append(toIndentedString(conversation))
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
                 .append(newLine)
                 .append("}")
                 .toString();

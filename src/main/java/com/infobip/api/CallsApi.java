@@ -87,8 +87,8 @@ import com.infobip.model.CallsRecordingStartRequest;
 import com.infobip.model.CallsRescheduleRequest;
 import com.infobip.model.CallsSayRequest;
 import com.infobip.model.CallsSipTrunkPage;
-import com.infobip.model.CallsSipTrunkRegistrationCredentials;
 import com.infobip.model.CallsSipTrunkRequest;
+import com.infobip.model.CallsSipTrunkResetPasswordResponse;
 import com.infobip.model.CallsSipTrunkResponse;
 import com.infobip.model.CallsSipTrunkServiceAddressPage;
 import com.infobip.model.CallsSipTrunkStatusRequest;
@@ -7746,14 +7746,14 @@ public class CallsApi {
         /**
          * Executes the resetSipTrunkPassword request.
          *
-         * @return CallsSipTrunkRegistrationCredentials The deserialized response.
+         * @return CallsSipTrunkResetPasswordResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public CallsSipTrunkRegistrationCredentials execute() throws ApiException {
+        public CallsSipTrunkResetPasswordResponse execute() throws ApiException {
             RequestDefinition resetSipTrunkPasswordDefinition = resetSipTrunkPasswordDefinition(sipTrunkId);
             return apiClient.execute(
                     resetSipTrunkPasswordDefinition,
-                    new TypeReference<CallsSipTrunkRegistrationCredentials>() {}.getType());
+                    new TypeReference<CallsSipTrunkResetPasswordResponse>() {}.getType());
         }
 
         /**
@@ -7762,21 +7762,21 @@ public class CallsApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<CallsSipTrunkRegistrationCredentials> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<CallsSipTrunkResetPasswordResponse> callback) {
             RequestDefinition resetSipTrunkPasswordDefinition = resetSipTrunkPasswordDefinition(sipTrunkId);
             return apiClient.executeAsync(
                     resetSipTrunkPasswordDefinition,
-                    new TypeReference<CallsSipTrunkRegistrationCredentials>() {}.getType(),
+                    new TypeReference<CallsSipTrunkResetPasswordResponse>() {}.getType(),
                     callback);
         }
     }
 
     /**
-     * Reset registered SIP trunk password.
+     * Reset SIP trunk credentials.
      * <p>
      * Reset password. Applicable only for &#x60;REGISTERED&#x60; SIP trunks.
      *
-     * @param sipTrunkId Sip Trunk ID. (required)
+     * @param sipTrunkId SIP trunk ID. (required)
      * @return ResetSipTrunkPasswordRequest
      */
     public ResetSipTrunkPasswordRequest resetSipTrunkPassword(String sipTrunkId) {

@@ -25,6 +25,8 @@ public class WebRtcPhoneCallDetails extends WebRtcCallDetails {
 
     private WebRtcHangupSource hangupSource;
 
+    private WebRtcMachineDetectionResult machineDetection;
+
     /**
      * Constructs a new {@link WebRtcPhoneCallDetails} instance.
      */
@@ -177,6 +179,37 @@ public class WebRtcPhoneCallDetails extends WebRtcCallDetails {
         this.hangupSource = hangupSource;
     }
 
+    /**
+     * Sets machineDetection.
+     *
+     * @param machineDetection
+     * @return This {@link WebRtcPhoneCallDetails instance}.
+     */
+    public WebRtcPhoneCallDetails machineDetection(WebRtcMachineDetectionResult machineDetection) {
+        this.machineDetection = machineDetection;
+        return this;
+    }
+
+    /**
+     * Returns machineDetection.
+     *
+     * @return machineDetection
+     */
+    @JsonProperty("machineDetection")
+    public WebRtcMachineDetectionResult getMachineDetection() {
+        return machineDetection;
+    }
+
+    /**
+     * Sets machineDetection.
+     *
+     * @param machineDetection
+     */
+    @JsonProperty("machineDetection")
+    public void setMachineDetection(WebRtcMachineDetectionResult machineDetection) {
+        this.machineDetection = machineDetection;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -190,12 +223,13 @@ public class WebRtcPhoneCallDetails extends WebRtcCallDetails {
                 && Objects.equals(this.callee, webRtcPhoneCallDetails.callee)
                 && Objects.equals(this.dialogId, webRtcPhoneCallDetails.dialogId)
                 && Objects.equals(this.hangupSource, webRtcPhoneCallDetails.hangupSource)
+                && Objects.equals(this.machineDetection, webRtcPhoneCallDetails.machineDetection)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(caller, callee, dialogId, hangupSource, super.hashCode());
+        return Objects.hash(caller, callee, dialogId, hangupSource, machineDetection, super.hashCode());
     }
 
     @Override
@@ -218,6 +252,9 @@ public class WebRtcPhoneCallDetails extends WebRtcCallDetails {
                 .append(newLine)
                 .append("    hangupSource: ")
                 .append(toIndentedString(hangupSource))
+                .append(newLine)
+                .append("    machineDetection: ")
+                .append(toIndentedString(machineDetection))
                 .append(newLine)
                 .append("}")
                 .toString();

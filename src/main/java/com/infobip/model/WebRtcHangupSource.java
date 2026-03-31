@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Hangup source identifies who terminated the call: the PLATFORM, the API, or one of the participants (CALLER or CALLEE).
+ * Hangup source indicates who terminated the call: PLATFORM, API, or one of the participants (CALLER or CALLEE).
  */
 public enum WebRtcHangupSource {
     CALLER("CALLER"),

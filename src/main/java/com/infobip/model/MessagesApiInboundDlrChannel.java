@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Messaging channel used for sending an event.
+ * Messaging channel used for sending an event. &#x60;KAKAO, ZALO, VOICE or TELEGRAM&#x60; can be received with Smart Messaging.
  */
 public enum MessagesApiInboundDlrChannel {
     APPLE_MB("APPLE_MB"),
@@ -25,7 +25,11 @@ public enum MessagesApiInboundDlrChannel {
     SMS("SMS"),
     VIBER_BM("VIBER_BM"),
     VIBER_BOT("VIBER_BOT"),
-    WHATSAPP("WHATSAPP");
+    WHATSAPP("WHATSAPP"),
+    KAKAO("KAKAO"),
+    ZALO("ZALO"),
+    VOICE("VOICE"),
+    TELEGRAM("TELEGRAM");
 
     private final String value;
 

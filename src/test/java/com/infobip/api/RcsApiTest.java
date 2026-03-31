@@ -805,32 +805,36 @@ class RcsApiTest extends ApiTest {
 
     @Test
     void shouldParseRcsUserActionEvent() {
-        String givenEntityId = "c0ed295b-c39d-4f6d-b347-fa1837f18c00";
-        String givenApplicationId = "21901";
-        String givenSender = "DemoSender";
-        String givenTo = "441134960001";
+        String givenCampaignReferenceId = "CAMP-2026-Q1";
+        String givenSender = "+385911234567";
+        String givenTo = "+385911111111";
         String givenIntegrationType = "RCS";
-        String givenReceivedAt = "2024-06-14T09:12:00.000+0000";
-        String givenKeyword = "someKeyword";
-        String givenMessageId = "c0ed295b-c39d-4f6d-b347-fa1837f18c00";
-        String givenPairedMessageId = "29ee2440-5461-4b04-bc81-3f6aa630ffa7";
-        String givenCallbackData = "someCallbackData";
+        String givenReceivedAt = "2026-03-03T14:22:30.000+0000";
+        String givenInteractionType = "EVENT";
+        String givenKeyword = "START";
+        String givenMessageId = "msg-abc123";
+        String givenPairedMessageId = "msg-xyz456";
+        String givenCallbackData = "custom-user-data";
         String givenSuggestionText = "suggestionText";
         String givenPostbackData = "suggestionPostbackData";
         double givenPricePerMessage = 0;
         String givenCurrency = "EUR";
+        boolean givenConversationCanInitiate = false;
+        String givenConversationId = "conv-xyz789";
+        String givenApplicationId = "ext-app-001";
+        String givenEntityId = "ext-entity-001";
         int givenMessageCount = 1;
         int givenPendingMessageCount = 0;
 
         String givenRequest = String.format(
                 "{\n" + "  \"results\": [\n"
                         + "    {\n"
-                        + "      \"entityId\": \"%s\",\n"
-                        + "      \"applicationId\": \"%s\",\n"
+                        + "      \"campaignReferenceId\": \"%s\",\n"
                         + "      \"sender\": \"%s\",\n"
                         + "      \"to\": \"%s\",\n"
                         + "      \"integrationType\": \"%s\",\n"
                         + "      \"receivedAt\": \"%s\",\n"
+                        + "      \"interactionType\": \"%s\",\n"
                         + "      \"keyword\": \"%s\",\n"
                         + "      \"messageId\": \"%s\",\n"
                         + "      \"pairedMessageId\": \"%s\",\n"
@@ -843,18 +847,26 @@ class RcsApiTest extends ApiTest {
                         + "      \"price\": {\n"
                         + "        \"pricePerMessage\": %.0f,\n"
                         + "        \"currency\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"conversation\": {\n"
+                        + "        \"canInitiate\": %b,\n"
+                        + "        \"id\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"platform\": {\n"
+                        + "        \"applicationId\": \"%s\",\n"
+                        + "        \"entityId\": \"%s\"\n"
                         + "      }\n"
                         + "    }\n"
                         + "  ],\n"
                         + "  \"messageCount\": %d,\n"
                         + "  \"pendingMessageCount\": %d\n"
                         + "}",
-                givenEntityId,
-                givenApplicationId,
+                givenCampaignReferenceId,
                 givenSender,
                 givenTo,
                 givenIntegrationType,
                 givenReceivedAt,
+                givenInteractionType,
                 givenKeyword,
                 givenMessageId,
                 givenPairedMessageId,
@@ -863,6 +875,10 @@ class RcsApiTest extends ApiTest {
                 givenPostbackData,
                 givenPricePerMessage,
                 givenCurrency,
+                givenConversationCanInitiate,
+                givenConversationId,
+                givenApplicationId,
+                givenEntityId,
                 givenMessageCount,
                 givenPendingMessageCount);
 
@@ -874,11 +890,11 @@ class RcsApiTest extends ApiTest {
         then(result.getResults()).isNotNull();
         then(result.getResults().size()).isEqualTo(1);
         var event = result.getResults().get(0);
-        then(event.getEntityId()).isEqualTo(givenEntityId);
-        then(event.getApplicationId()).isEqualTo(givenApplicationId);
+        then(event.getCampaignReferenceId()).isEqualTo(givenCampaignReferenceId);
         then(event.getSender()).isEqualTo(givenSender);
         then(event.getTo()).isEqualTo(givenTo);
         then(event.getIntegrationType()).isEqualTo(givenIntegrationType);
+        then(event.getInteractionType()).isEqualTo(RcsEventInteractionType.EVENT);
         then(event.getKeyword()).isEqualTo(givenKeyword);
         then(event.getMessageId()).isEqualTo(givenMessageId);
         then(event.getPairedMessageId()).isEqualTo(givenPairedMessageId);
@@ -886,11 +902,20 @@ class RcsApiTest extends ApiTest {
         var content = event.getMessage();
         then(content).isNotNull();
         then(content).isInstanceOf(RcsInboundSuggestionContent.class);
-        then(content.getType()).isEqualTo(RcsInboundMessageContentType.SUGGESTION);
+        then(((RcsInboundSuggestionContent) content).getText()).isEqualTo(givenSuggestionText);
+        then(((RcsInboundSuggestionContent) content).getPostbackData()).isEqualTo(givenPostbackData);
         var price = event.getPrice();
         then(price).isNotNull();
         then(price.getPricePerMessage()).isEqualTo(givenPricePerMessage);
         then(price.getCurrency()).isEqualTo(givenCurrency);
+        var conversation = event.getConversation();
+        then(conversation).isNotNull();
+        then(conversation.getCanInitiate()).isEqualTo(givenConversationCanInitiate);
+        then(conversation.getId()).isEqualTo(givenConversationId);
+        var platform = event.getPlatform();
+        then(platform).isNotNull();
+        then(platform.getApplicationId()).isEqualTo(givenApplicationId);
+        then(platform.getEntityId()).isEqualTo(givenEntityId);
     }
 
     @Test
@@ -1313,5 +1338,79 @@ class RcsApiTest extends ApiTest {
         var eventContent = event.getEvent();
         then(eventContent).isNotNull();
         then(eventContent.getType()).isEqualTo(RcsIsTypingEventType.TYPING_INDICATOR);
+    }
+
+    @Test
+    void shouldReceiveRcsConversationStartedEvent() {
+        String givenMessageId = "msg-abc123";
+        String givenTrafficType = "A2P_CONVERSATION";
+        String givenEventType = "CONVERSATION_STARTED";
+        String givenConversationType = "A2P";
+        String givenConversationId = "conv-xyz789";
+        String givenStartTime = "2026-06-14T09:12:00.000+0000";
+        String givenEndTime = "2026-06-15T09:12:00.000+0000";
+        String givenEntityId = "ext-entity-001";
+        String givenApplicationId = "ext-app-001";
+        int givenEventCount = 1;
+        int givenPendingEventCount = 0;
+
+        String givenRequest = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"trafficType\": \"%s\",\n"
+                        + "      \"event\": {\n"
+                        + "        \"type\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"conversation\": {\n"
+                        + "        \"type\": \"%s\",\n"
+                        + "        \"id\": \"%s\",\n"
+                        + "        \"startTime\": \"%s\",\n"
+                        + "        \"endTime\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"platform\": {\n"
+                        + "        \"entityId\": \"%s\",\n"
+                        + "        \"applicationId\": \"%s\"\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"eventCount\": %d,\n"
+                        + "  \"pendingEventCount\": %d\n"
+                        + "}",
+                givenMessageId,
+                givenTrafficType,
+                givenEventType,
+                givenConversationType,
+                givenConversationId,
+                givenStartTime,
+                givenEndTime,
+                givenEntityId,
+                givenApplicationId,
+                givenEventCount,
+                givenPendingEventCount);
+
+        RcsConversationStartedEvents result = new JSON().deserialize(givenRequest, RcsConversationStartedEvents.class);
+
+        then(result).isNotNull();
+        then(result.getEventCount()).isEqualTo(givenEventCount);
+        then(result.getPendingEventCount()).isEqualTo(givenPendingEventCount);
+        then(result.getResults()).isNotNull();
+        then(result.getResults().size()).isEqualTo(1);
+        var event = result.getResults().get(0);
+        then(event.getMessageId()).isEqualTo(givenMessageId);
+        then(event.getTrafficType()).isEqualTo(RcsTrafficType.A2P_CONVERSATION);
+        var eventContent = event.getEvent();
+        then(eventContent).isNotNull();
+        then(eventContent.getType()).isEqualTo(RcsConversationStartedEventType.STARTED);
+        var conversation = event.getConversation();
+        then(conversation).isNotNull();
+        then(conversation.getType()).isEqualTo(RcsConversationType.A2P);
+        then(conversation.getId()).isEqualTo(givenConversationId);
+        then(conversation.getStartTime()).isEqualTo(OffsetDateTime.of(2026, 6, 14, 9, 12, 0, 0, ZoneOffset.ofHours(0)));
+        then(conversation.getEndTime()).isEqualTo(OffsetDateTime.of(2026, 6, 15, 9, 12, 0, 0, ZoneOffset.ofHours(0)));
+        var platform = event.getPlatform();
+        then(platform).isNotNull();
+        then(platform.getEntityId()).isEqualTo(givenEntityId);
+        then(platform.getApplicationId()).isEqualTo(givenApplicationId);
     }
 }

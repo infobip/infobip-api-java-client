@@ -1852,7 +1852,8 @@ class MessagesApiTest extends ApiTest {
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
         String givenDestination = "48600700800";
-        MessagesApiOutboundEventChannel givenChannel = MessagesApiOutboundEventChannel.APPLE_MB;
+        MessagesApiOutboundTypingStartedEventChannel givenChannel =
+                MessagesApiOutboundTypingStartedEventChannel.APPLE_MB;
         String givenSender = "447491163443";
         String givenTo = "111111111";
         String givenEvent = "TYPING_STARTED";

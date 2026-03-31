@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class ViberOutboundOtpTemplateContent extends ViberOutboundContent {
 
-    private String id;
+    private String templateId;
 
     private Map<String, String> parameters = new HashMap<>();
 
@@ -33,49 +33,49 @@ public class ViberOutboundOtpTemplateContent extends ViberOutboundContent {
     }
 
     /**
-     * Sets id.
+     * Sets templateId.
      * <p>
      * Field description:
      * Predefined code of a template to be sent.
      * <p>
      * The field is required.
      *
-     * @param id
+     * @param templateId
      * @return This {@link ViberOutboundOtpTemplateContent instance}.
      */
-    public ViberOutboundOtpTemplateContent id(String id) {
-        this.id = id;
+    public ViberOutboundOtpTemplateContent templateId(String templateId) {
+        this.templateId = templateId;
         return this;
     }
 
     /**
-     * Returns id.
+     * Returns templateId.
      * <p>
      * Field description:
      * Predefined code of a template to be sent.
      * <p>
      * The field is required.
      *
-     * @return id
+     * @return templateId
      */
-    @JsonProperty("id")
-    public String getId() {
-        return id;
+    @JsonProperty("templateId")
+    public String getTemplateId() {
+        return templateId;
     }
 
     /**
-     * Sets id.
+     * Sets templateId.
      * <p>
      * Field description:
      * Predefined code of a template to be sent.
      * <p>
      * The field is required.
      *
-     * @param id
+     * @param templateId
      */
-    @JsonProperty("id")
-    public void setId(String id) {
-        this.id = id;
+    @JsonProperty("templateId")
+    public void setTemplateId(String templateId) {
+        this.templateId = templateId;
     }
 
     /**
@@ -184,7 +184,7 @@ public class ViberOutboundOtpTemplateContent extends ViberOutboundContent {
             return false;
         }
         ViberOutboundOtpTemplateContent viberOutboundOtpTemplateContent = (ViberOutboundOtpTemplateContent) o;
-        return Objects.equals(this.id, viberOutboundOtpTemplateContent.id)
+        return Objects.equals(this.templateId, viberOutboundOtpTemplateContent.templateId)
                 && Objects.equals(this.parameters, viberOutboundOtpTemplateContent.parameters)
                 && Objects.equals(this.language, viberOutboundOtpTemplateContent.language)
                 && super.equals(o);
@@ -192,7 +192,7 @@ public class ViberOutboundOtpTemplateContent extends ViberOutboundContent {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, parameters, language, super.hashCode());
+        return Objects.hash(templateId, parameters, language, super.hashCode());
     }
 
     @Override
@@ -204,8 +204,8 @@ public class ViberOutboundOtpTemplateContent extends ViberOutboundContent {
                 .append("    ")
                 .append(toIndentedString(super.toString()))
                 .append(newLine)
-                .append("    id: ")
-                .append(toIndentedString(id))
+                .append("    templateId: ")
+                .append(toIndentedString(templateId))
                 .append(newLine)
                 .append("    parameters: ")
                 .append(toIndentedString(parameters))
