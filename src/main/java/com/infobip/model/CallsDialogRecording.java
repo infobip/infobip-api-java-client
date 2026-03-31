@@ -16,19 +16,21 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents CallsPublicDialogRecording model.
+ * Represents CallsDialogRecording model.
  */
-public class CallsPublicDialogRecording {
+public class CallsDialogRecording {
 
     private String dialogId;
 
     private String callsConfigurationId;
 
-    private Platform platform;
+    private String applicationId;
 
-    private List<CallsPublicRecordingFile> composedFiles = null;
+    private String entityId;
 
-    private List<CallsPublicRecording> callRecordings = null;
+    private List<CallsRecordingFile> composedFiles = null;
+
+    private List<CallRecording> callRecordings = null;
 
     private OffsetDateTime startTime;
 
@@ -36,23 +38,17 @@ public class CallsPublicDialogRecording {
 
     /**
      * Sets dialogId.
-     * <p>
-     * Field description:
-     * Unique dialog ID.
      *
      * @param dialogId
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecording instance}.
      */
-    public CallsPublicDialogRecording dialogId(String dialogId) {
+    public CallsDialogRecording dialogId(String dialogId) {
         this.dialogId = dialogId;
         return this;
     }
 
     /**
      * Returns dialogId.
-     * <p>
-     * Field description:
-     * Unique dialog ID.
      *
      * @return dialogId
      */
@@ -63,9 +59,6 @@ public class CallsPublicDialogRecording {
 
     /**
      * Sets dialogId.
-     * <p>
-     * Field description:
-     * Unique dialog ID.
      *
      * @param dialogId
      */
@@ -76,23 +69,17 @@ public class CallsPublicDialogRecording {
 
     /**
      * Sets callsConfigurationId.
-     * <p>
-     * Field description:
-     * Calls Configuration ID.
      *
      * @param callsConfigurationId
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecording instance}.
      */
-    public CallsPublicDialogRecording callsConfigurationId(String callsConfigurationId) {
+    public CallsDialogRecording callsConfigurationId(String callsConfigurationId) {
         this.callsConfigurationId = callsConfigurationId;
         return this;
     }
 
     /**
      * Returns callsConfigurationId.
-     * <p>
-     * Field description:
-     * Calls Configuration ID.
      *
      * @return callsConfigurationId
      */
@@ -103,9 +90,6 @@ public class CallsPublicDialogRecording {
 
     /**
      * Sets callsConfigurationId.
-     * <p>
-     * Field description:
-     * Calls Configuration ID.
      *
      * @param callsConfigurationId
      */
@@ -115,60 +99,85 @@ public class CallsPublicDialogRecording {
     }
 
     /**
-     * Sets platform.
+     * Sets applicationId.
      *
-     * @param platform
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @param applicationId
+     * @return This {@link CallsDialogRecording instance}.
      */
-    public CallsPublicDialogRecording platform(Platform platform) {
-        this.platform = platform;
+    public CallsDialogRecording applicationId(String applicationId) {
+        this.applicationId = applicationId;
         return this;
     }
 
     /**
-     * Returns platform.
+     * Returns applicationId.
      *
-     * @return platform
+     * @return applicationId
      */
-    @JsonProperty("platform")
-    public Platform getPlatform() {
-        return platform;
+    @JsonProperty("applicationId")
+    public String getApplicationId() {
+        return applicationId;
     }
 
     /**
-     * Sets platform.
+     * Sets applicationId.
      *
-     * @param platform
+     * @param applicationId
      */
-    @JsonProperty("platform")
-    public void setPlatform(Platform platform) {
-        this.platform = platform;
+    @JsonProperty("applicationId")
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    /**
+     * Sets entityId.
+     *
+     * @param entityId
+     * @return This {@link CallsDialogRecording instance}.
+     */
+    public CallsDialogRecording entityId(String entityId) {
+        this.entityId = entityId;
+        return this;
+    }
+
+    /**
+     * Returns entityId.
+     *
+     * @return entityId
+     */
+    @JsonProperty("entityId")
+    public String getEntityId() {
+        return entityId;
+    }
+
+    /**
+     * Sets entityId.
+     *
+     * @param entityId
+     */
+    @JsonProperty("entityId")
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
     }
 
     /**
      * Sets composedFiles.
-     * <p>
-     * Field description:
-     * File(s) with a recording of both dialog participants.
      *
      * @param composedFiles
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecording instance}.
      */
-    public CallsPublicDialogRecording composedFiles(List<CallsPublicRecordingFile> composedFiles) {
+    public CallsDialogRecording composedFiles(List<CallsRecordingFile> composedFiles) {
         this.composedFiles = composedFiles;
         return this;
     }
 
     /**
      * Adds and item into composedFiles.
-     * <p>
-     * Field description:
-     * File(s) with a recording of both dialog participants.
      *
      * @param composedFilesItem The item to be added to the list.
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecording instance}.
      */
-    public CallsPublicDialogRecording addComposedFilesItem(CallsPublicRecordingFile composedFilesItem) {
+    public CallsDialogRecording addComposedFilesItem(CallsRecordingFile composedFilesItem) {
         if (this.composedFiles == null) {
             this.composedFiles = new ArrayList<>();
         }
@@ -178,54 +187,42 @@ public class CallsPublicDialogRecording {
 
     /**
      * Returns composedFiles.
-     * <p>
-     * Field description:
-     * File(s) with a recording of both dialog participants.
      *
      * @return composedFiles
      */
     @JsonProperty("composedFiles")
-    public List<CallsPublicRecordingFile> getComposedFiles() {
+    public List<CallsRecordingFile> getComposedFiles() {
         return composedFiles;
     }
 
     /**
      * Sets composedFiles.
-     * <p>
-     * Field description:
-     * File(s) with a recording of both dialog participants.
      *
      * @param composedFiles
      */
     @JsonProperty("composedFiles")
-    public void setComposedFiles(List<CallsPublicRecordingFile> composedFiles) {
+    public void setComposedFiles(List<CallsRecordingFile> composedFiles) {
         this.composedFiles = composedFiles;
     }
 
     /**
      * Sets callRecordings.
-     * <p>
-     * Field description:
-     * File(s) with a recording of one dialog participant.
      *
      * @param callRecordings
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecording instance}.
      */
-    public CallsPublicDialogRecording callRecordings(List<CallsPublicRecording> callRecordings) {
+    public CallsDialogRecording callRecordings(List<CallRecording> callRecordings) {
         this.callRecordings = callRecordings;
         return this;
     }
 
     /**
      * Adds and item into callRecordings.
-     * <p>
-     * Field description:
-     * File(s) with a recording of one dialog participant.
      *
      * @param callRecordingsItem The item to be added to the list.
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecording instance}.
      */
-    public CallsPublicDialogRecording addCallRecordingsItem(CallsPublicRecording callRecordingsItem) {
+    public CallsDialogRecording addCallRecordingsItem(CallRecording callRecordingsItem) {
         if (this.callRecordings == null) {
             this.callRecordings = new ArrayList<>();
         }
@@ -235,49 +232,37 @@ public class CallsPublicDialogRecording {
 
     /**
      * Returns callRecordings.
-     * <p>
-     * Field description:
-     * File(s) with a recording of one dialog participant.
      *
      * @return callRecordings
      */
     @JsonProperty("callRecordings")
-    public List<CallsPublicRecording> getCallRecordings() {
+    public List<CallRecording> getCallRecordings() {
         return callRecordings;
     }
 
     /**
      * Sets callRecordings.
-     * <p>
-     * Field description:
-     * File(s) with a recording of one dialog participant.
      *
      * @param callRecordings
      */
     @JsonProperty("callRecordings")
-    public void setCallRecordings(List<CallsPublicRecording> callRecordings) {
+    public void setCallRecordings(List<CallRecording> callRecordings) {
         this.callRecordings = callRecordings;
     }
 
     /**
      * Sets startTime.
-     * <p>
-     * Field description:
-     * Date and time when the (first) recording started.
      *
      * @param startTime
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecording instance}.
      */
-    public CallsPublicDialogRecording startTime(OffsetDateTime startTime) {
+    public CallsDialogRecording startTime(OffsetDateTime startTime) {
         this.startTime = startTime;
         return this;
     }
 
     /**
      * Returns startTime.
-     * <p>
-     * Field description:
-     * Date and time when the (first) recording started.
      *
      * @return startTime
      */
@@ -288,9 +273,6 @@ public class CallsPublicDialogRecording {
 
     /**
      * Sets startTime.
-     * <p>
-     * Field description:
-     * Date and time when the (first) recording started.
      *
      * @param startTime
      */
@@ -301,23 +283,17 @@ public class CallsPublicDialogRecording {
 
     /**
      * Sets endTime.
-     * <p>
-     * Field description:
-     * Date and time when the (last) recording ended.
      *
      * @param endTime
-     * @return This {@link CallsPublicDialogRecording instance}.
+     * @return This {@link CallsDialogRecording instance}.
      */
-    public CallsPublicDialogRecording endTime(OffsetDateTime endTime) {
+    public CallsDialogRecording endTime(OffsetDateTime endTime) {
         this.endTime = endTime;
         return this;
     }
 
     /**
      * Returns endTime.
-     * <p>
-     * Field description:
-     * Date and time when the (last) recording ended.
      *
      * @return endTime
      */
@@ -328,9 +304,6 @@ public class CallsPublicDialogRecording {
 
     /**
      * Sets endTime.
-     * <p>
-     * Field description:
-     * Date and time when the (last) recording ended.
      *
      * @param endTime
      */
@@ -347,27 +320,35 @@ public class CallsPublicDialogRecording {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CallsPublicDialogRecording callsPublicDialogRecording = (CallsPublicDialogRecording) o;
-        return Objects.equals(this.dialogId, callsPublicDialogRecording.dialogId)
-                && Objects.equals(this.callsConfigurationId, callsPublicDialogRecording.callsConfigurationId)
-                && Objects.equals(this.platform, callsPublicDialogRecording.platform)
-                && Objects.equals(this.composedFiles, callsPublicDialogRecording.composedFiles)
-                && Objects.equals(this.callRecordings, callsPublicDialogRecording.callRecordings)
-                && Objects.equals(this.startTime, callsPublicDialogRecording.startTime)
-                && Objects.equals(this.endTime, callsPublicDialogRecording.endTime);
+        CallsDialogRecording callsDialogRecording = (CallsDialogRecording) o;
+        return Objects.equals(this.dialogId, callsDialogRecording.dialogId)
+                && Objects.equals(this.callsConfigurationId, callsDialogRecording.callsConfigurationId)
+                && Objects.equals(this.applicationId, callsDialogRecording.applicationId)
+                && Objects.equals(this.entityId, callsDialogRecording.entityId)
+                && Objects.equals(this.composedFiles, callsDialogRecording.composedFiles)
+                && Objects.equals(this.callRecordings, callsDialogRecording.callRecordings)
+                && Objects.equals(this.startTime, callsDialogRecording.startTime)
+                && Objects.equals(this.endTime, callsDialogRecording.endTime);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                dialogId, callsConfigurationId, platform, composedFiles, callRecordings, startTime, endTime);
+                dialogId,
+                callsConfigurationId,
+                applicationId,
+                entityId,
+                composedFiles,
+                callRecordings,
+                startTime,
+                endTime);
     }
 
     @Override
     public String toString() {
         String newLine = System.lineSeparator();
         return new StringBuilder()
-                .append("class CallsPublicDialogRecording {")
+                .append("class CallsDialogRecording {")
                 .append(newLine)
                 .append("    dialogId: ")
                 .append(toIndentedString(dialogId))
@@ -375,8 +356,11 @@ public class CallsPublicDialogRecording {
                 .append("    callsConfigurationId: ")
                 .append(toIndentedString(callsConfigurationId))
                 .append(newLine)
-                .append("    platform: ")
-                .append(toIndentedString(platform))
+                .append("    applicationId: ")
+                .append(toIndentedString(applicationId))
+                .append(newLine)
+                .append("    entityId: ")
+                .append(toIndentedString(entityId))
                 .append(newLine)
                 .append("    composedFiles: ")
                 .append(toIndentedString(composedFiles))

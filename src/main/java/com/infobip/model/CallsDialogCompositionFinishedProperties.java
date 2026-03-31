@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class CallsDialogCompositionFinishedProperties {
 
-    private CallsDialogRecordingResponse recording;
+    private CallsDialogRecording recording;
 
     /**
      * Sets recording.
@@ -25,7 +25,7 @@ public class CallsDialogCompositionFinishedProperties {
      * @param recording
      * @return This {@link CallsDialogCompositionFinishedProperties instance}.
      */
-    public CallsDialogCompositionFinishedProperties recording(CallsDialogRecordingResponse recording) {
+    public CallsDialogCompositionFinishedProperties recording(CallsDialogRecording recording) {
         this.recording = recording;
         return this;
     }
@@ -36,7 +36,7 @@ public class CallsDialogCompositionFinishedProperties {
      * @return recording
      */
     @JsonProperty("recording")
-    public CallsDialogRecordingResponse getRecording() {
+    public CallsDialogRecording getRecording() {
         return recording;
     }
 
@@ -46,7 +46,7 @@ public class CallsDialogCompositionFinishedProperties {
      * @param recording
      */
     @JsonProperty("recording")
-    public void setRecording(CallsDialogRecordingResponse recording) {
+    public void setRecording(CallsDialogRecording recording) {
         this.recording = recording;
     }
 
