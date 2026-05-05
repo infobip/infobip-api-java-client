@@ -5,6 +5,11 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [6.4.1](https://github.com/infobip/infobip-api-java-client/releases/tag/6.4.1) ] - 2026-05-05
+
+### Fixed
+* Fixed `getCampaignNetworkStatuses` response type to return a list instead of a single object.
+
 ## [ [6.4.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.4.0) ] - 2026-03-31
 
 ⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
