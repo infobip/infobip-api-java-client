@@ -5,7 +5,18 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
-## [ [6.4.1](https://github.com/infobip/infobip-api-java-client/releases/tag/6.4.1) ] - 2026-05-05
+## [ [6.4.1](https://github.com/infobip/infobip-api-java-client/releases/tag/6.4.1) ] - 2026-05-07
+
+### Changed
+* **Numbers**:
+    * Extended `NumbersBrandRegistrationStatusPublic` with `PENDING_APPEAL` status support
+    * Extended `NumbersCampaignRegistrar` with `LIBERTY` registrar support
+    * Replaced `UPDATE_REQUESTED_BY_CARRIERS` with `REJECTED_EXTERNALLY` in `NumbersCampaignStage` enum
+    * Extended `NumbersCampaignType` with `RCS_SENDER_LAUNCH` type support
+    * Extended `NumbersExternalTenDlcCampaign` with `policy` field support
+    * Extended `NumbersNetwork` with `LIBERTY` network support
+    * Extended `NumbersTenDlcCampaign` with `policy` field support
+    * Extended `NumbersTenDlcUseCase` with `SWEEPSTAKE` use case support
 
 ### Fixed
 * Fixed `getCampaignNetworkStatuses` response type to return a list instead of a single object.
