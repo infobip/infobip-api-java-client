@@ -4641,18 +4641,28 @@ class NumbersApiTest extends ApiTest {
         NumbersNetworkState givenState1 = NumbersNetworkState.ACTIVE;
         String givenMessageClass1 = "A";
         Integer givenThroughput1 = 4500;
+        NumbersNetwork givenNetwork2 = NumbersNetwork.T_MOBILE;
+        NumbersNetworkState givenState2 = NumbersNetworkState.ACTIVE;
+        String givenMessageClass2 = "20";
+        Integer givenThroughput2 = 2000;
+        String givenBrandTier2 = "LOW";
 
-        String givenResponse = "{\n"
-                + "  \"network\": \"ATT\",\n"
-                + "  \"state\": \"ACTIVE\",\n"
-                + "  \"messageClass\": \""
-                + givenMessageClass1
-                + "\",\n"
-                + "  \"throughput\": "
-                + givenThroughput1
-                + ",\n"
-                + "  \"brandTier\": null\n"
-                + "}\n";
+        String givenResponse = "[\n"
+                + "  {\n"
+                + "    \"network\": \"ATT\",\n"
+                + "    \"state\": \"ACTIVE\",\n"
+                + "    \"messageClass\": \"A\",\n"
+                + "    \"throughput\": 4500,\n"
+                + "    \"brandTier\": null\n"
+                + "  },\n"
+                + "  {\n"
+                + "    \"network\": \"T_MOBILE\",\n"
+                + "    \"state\": \"ACTIVE\",\n"
+                + "    \"messageClass\": \"20\",\n"
+                + "    \"throughput\": 2000,\n"
+                + "    \"brandTier\": \"LOW\"\n"
+                + "  }\n"
+                + "]\n";
 
         setUpSuccessGetRequest(
                 CAMPAIGN_NETWORK_STATUSES.replace("{campaignId}", givenCampaignId.toString()), Map.of(), givenResponse);
@@ -4661,13 +4671,21 @@ class NumbersApiTest extends ApiTest {
 
         var call = api.getCampaignNetworkStatuses(givenCampaignId);
 
-        Consumer<NumbersNetworkStatus> assertions = response -> {
+        Consumer<List<NumbersNetworkStatus>> assertions = response -> {
             then(response).isNotNull();
-            then(response.getNetwork()).isEqualTo(givenNetwork1);
-            then(response.getState()).isEqualTo(givenState1);
-            then(response.getMessageClass()).isEqualTo(givenMessageClass1);
-            then(response.getThroughput()).isEqualTo(givenThroughput1);
-            then(response.getBrandTier()).isNull();
+            then(response).hasSize(2);
+            NumbersNetworkStatus status1 = response.get(0);
+            then(status1.getNetwork()).isEqualTo(givenNetwork1);
+            then(status1.getState()).isEqualTo(givenState1);
+            then(status1.getMessageClass()).isEqualTo(givenMessageClass1);
+            then(status1.getThroughput()).isEqualTo(givenThroughput1);
+            then(status1.getBrandTier()).isNull();
+            NumbersNetworkStatus status2 = response.get(1);
+            then(status2.getNetwork()).isEqualTo(givenNetwork2);
+            then(status2.getState()).isEqualTo(givenState2);
+            then(status2.getMessageClass()).isEqualTo(givenMessageClass2);
+            then(status2.getThroughput()).isEqualTo(givenThroughput2);
+            then(status2.getBrandTier()).isEqualTo(givenBrandTier2);
         };
 
         testSuccessfulCall(call::execute, assertions);

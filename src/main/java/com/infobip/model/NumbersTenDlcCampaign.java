@@ -64,6 +64,8 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
 
     private List<String> supportingDocuments = null;
 
+    private NumbersPolicyType policy;
+
     private Set<String> numberKeys = null;
 
     private Set<String> numbers = null;
@@ -1062,6 +1064,37 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
     }
 
     /**
+     * Sets policy.
+     *
+     * @param policy
+     * @return This {@link NumbersTenDlcCampaign instance}.
+     */
+    public NumbersTenDlcCampaign policy(NumbersPolicyType policy) {
+        this.policy = policy;
+        return this;
+    }
+
+    /**
+     * Returns policy.
+     *
+     * @return policy
+     */
+    @JsonProperty("policy")
+    public NumbersPolicyType getPolicy() {
+        return policy;
+    }
+
+    /**
+     * Sets policy.
+     *
+     * @param policy
+     */
+    @JsonProperty("policy")
+    public void setPolicy(NumbersPolicyType policy) {
+        this.policy = policy;
+    }
+
+    /**
      * Sets numberKeys.
      * <p>
      * Field description:
@@ -1293,6 +1326,7 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
                 && Objects.equals(this.customerCareEmail, numbersTenDlcCampaign.customerCareEmail)
                 && Objects.equals(this.mmsSampleFiles, numbersTenDlcCampaign.mmsSampleFiles)
                 && Objects.equals(this.supportingDocuments, numbersTenDlcCampaign.supportingDocuments)
+                && Objects.equals(this.policy, numbersTenDlcCampaign.policy)
                 && Objects.equals(this.numberKeys, numbersTenDlcCampaign.numberKeys)
                 && Objects.equals(this.numbers, numbersTenDlcCampaign.numbers)
                 && Objects.equals(this.numberPreviews, numbersTenDlcCampaign.numberPreviews)
@@ -1324,6 +1358,7 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
                 customerCareEmail,
                 mmsSampleFiles,
                 supportingDocuments,
+                policy,
                 numberKeys,
                 numbers,
                 numberPreviews,
@@ -1402,6 +1437,9 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
                 .append(newLine)
                 .append("    supportingDocuments: ")
                 .append(toIndentedString(supportingDocuments))
+                .append(newLine)
+                .append("    policy: ")
+                .append(toIndentedString(policy))
                 .append(newLine)
                 .append("    numberKeys: ")
                 .append(toIndentedString(numberKeys))

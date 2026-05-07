@@ -25,7 +25,8 @@ public enum NumbersCampaignRegistrar {
     INTEROP("INTEROP"),
     GOOGLE_VOICE("GOOGLE_VOICE"),
     US_CELLULAR_MMS("US_CELLULAR_MMS"),
-    ZIPWHIP("ZIPWHIP");
+    ZIPWHIP("ZIPWHIP"),
+    LIBERTY("LIBERTY");
 
     private final String value;
 

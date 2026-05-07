@@ -23,6 +23,8 @@ public class NumbersExternalTenDlcCampaign extends NumbersCampaign {
 
     private Set<String> numbers = null;
 
+    private NumbersPolicyType policy;
+
     private Set<String> numberKeys = null;
 
     private Set<NumbersNumberPreview> numberPreviews = null;
@@ -137,6 +139,37 @@ public class NumbersExternalTenDlcCampaign extends NumbersCampaign {
     @JsonProperty("numbers")
     public void setNumbers(Set<String> numbers) {
         this.numbers = numbers;
+    }
+
+    /**
+     * Sets policy.
+     *
+     * @param policy
+     * @return This {@link NumbersExternalTenDlcCampaign instance}.
+     */
+    public NumbersExternalTenDlcCampaign policy(NumbersPolicyType policy) {
+        this.policy = policy;
+        return this;
+    }
+
+    /**
+     * Returns policy.
+     *
+     * @return policy
+     */
+    @JsonProperty("policy")
+    public NumbersPolicyType getPolicy() {
+        return policy;
+    }
+
+    /**
+     * Sets policy.
+     *
+     * @param policy
+     */
+    @JsonProperty("policy")
+    public void setPolicy(NumbersPolicyType policy) {
+        this.policy = policy;
     }
 
     /**
@@ -295,6 +328,7 @@ public class NumbersExternalTenDlcCampaign extends NumbersCampaign {
         NumbersExternalTenDlcCampaign numbersExternalTenDlcCampaign = (NumbersExternalTenDlcCampaign) o;
         return Objects.equals(this.externalCampaignId, numbersExternalTenDlcCampaign.externalCampaignId)
                 && Objects.equals(this.numbers, numbersExternalTenDlcCampaign.numbers)
+                && Objects.equals(this.policy, numbersExternalTenDlcCampaign.policy)
                 && Objects.equals(this.numberKeys, numbersExternalTenDlcCampaign.numberKeys)
                 && Objects.equals(this.numberPreviews, numbersExternalTenDlcCampaign.numberPreviews)
                 && Objects.equals(this.numberPool, numbersExternalTenDlcCampaign.numberPool)
@@ -303,7 +337,8 @@ public class NumbersExternalTenDlcCampaign extends NumbersCampaign {
 
     @Override
     public int hashCode() {
-        return Objects.hash(externalCampaignId, numbers, numberKeys, numberPreviews, numberPool, super.hashCode());
+        return Objects.hash(
+                externalCampaignId, numbers, policy, numberKeys, numberPreviews, numberPool, super.hashCode());
     }
 
     @Override
@@ -320,6 +355,9 @@ public class NumbersExternalTenDlcCampaign extends NumbersCampaign {
                 .append(newLine)
                 .append("    numbers: ")
                 .append(toIndentedString(numbers))
+                .append(newLine)
+                .append("    policy: ")
+                .append(toIndentedString(policy))
                 .append(newLine)
                 .append("    numberKeys: ")
                 .append(toIndentedString(numberKeys))

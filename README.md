@@ -52,7 +52,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
       <groupId>com.infobip</groupId>
       <artifactId>infobip-api-java-client</artifactId>
-      <version>6.4.0</version>
+      <version>6.4.1</version>
 </dependency>
 ```
 

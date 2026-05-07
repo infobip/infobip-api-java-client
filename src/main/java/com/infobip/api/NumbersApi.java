@@ -1943,13 +1943,13 @@ public class NumbersApi {
         /**
          * Executes the getCampaignNetworkStatuses request.
          *
-         * @return NumbersNetworkStatus The deserialized response.
+         * @return List&lt;NumbersNetworkStatus&gt; The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public NumbersNetworkStatus execute() throws ApiException {
+        public List<NumbersNetworkStatus> execute() throws ApiException {
             RequestDefinition getCampaignNetworkStatusesDefinition = getCampaignNetworkStatusesDefinition(campaignId);
             return apiClient.execute(
-                    getCampaignNetworkStatusesDefinition, new TypeReference<NumbersNetworkStatus>() {}.getType());
+                    getCampaignNetworkStatusesDefinition, new TypeReference<List<NumbersNetworkStatus>>() {}.getType());
         }
 
         /**
@@ -1958,11 +1958,11 @@ public class NumbersApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<NumbersNetworkStatus> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<List<NumbersNetworkStatus>> callback) {
             RequestDefinition getCampaignNetworkStatusesDefinition = getCampaignNetworkStatusesDefinition(campaignId);
             return apiClient.executeAsync(
                     getCampaignNetworkStatusesDefinition,
-                    new TypeReference<NumbersNetworkStatus>() {}.getType(),
+                    new TypeReference<List<NumbersNetworkStatus>>() {}.getType(),
                     callback);
         }
     }
