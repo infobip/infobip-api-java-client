@@ -19,6 +19,7 @@ public enum NumbersBrandRegistrationStatusPublic {
     ACTIVE("ACTIVE"),
     PENDING("PENDING"),
     PENDING_2FA("PENDING_2FA"),
+    PENDING_APPEAL("PENDING_APPEAL"),
     REJECTED("REJECTED");
 
     private final String value;

@@ -22,7 +22,8 @@ public enum NumbersNetwork {
     US_CELLULAR("US_CELLULAR"),
     INTEROP("INTEROP"),
     CLEARSKY("CLEARSKY"),
-    GOOGLE_VOICE("GOOGLE_VOICE");
+    GOOGLE_VOICE("GOOGLE_VOICE"),
+    LIBERTY("LIBERTY");
 
     private final String value;
 

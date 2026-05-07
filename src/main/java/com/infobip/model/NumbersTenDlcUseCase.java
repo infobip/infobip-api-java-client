@@ -26,7 +26,8 @@ public enum NumbersTenDlcUseCase {
     TWO_FACTOR_AUTH("TWO_FACTOR_AUTH"),
     VOTING_POLLING("VOTING_POLLING"),
     POLITICAL("POLITICAL"),
-    M2M("M2M");
+    M2M("M2M"),
+    SWEEPSTAKE("SWEEPSTAKE");
 
     private final String value;
 
