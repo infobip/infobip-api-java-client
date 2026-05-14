@@ -35,9 +35,9 @@ public class NumberLookupResponseDetails {
 
     private String servingMSC;
 
-    private NumberLookupStatus status;
+    private MessageStatus status;
 
-    private NumberLookupError error;
+    private MessageError error;
 
     /**
      * Sets to.
@@ -378,7 +378,7 @@ public class NumberLookupResponseDetails {
      * @param status
      * @return This {@link NumberLookupResponseDetails instance}.
      */
-    public NumberLookupResponseDetails status(NumberLookupStatus status) {
+    public NumberLookupResponseDetails status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -389,7 +389,7 @@ public class NumberLookupResponseDetails {
      * @return status
      */
     @JsonProperty("status")
-    public NumberLookupStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -399,7 +399,7 @@ public class NumberLookupResponseDetails {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(NumberLookupStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 
@@ -409,7 +409,7 @@ public class NumberLookupResponseDetails {
      * @param error
      * @return This {@link NumberLookupResponseDetails instance}.
      */
-    public NumberLookupResponseDetails error(NumberLookupError error) {
+    public NumberLookupResponseDetails error(MessageError error) {
         this.error = error;
         return this;
     }
@@ -420,7 +420,7 @@ public class NumberLookupResponseDetails {
      * @return error
      */
     @JsonProperty("error")
-    public NumberLookupError getError() {
+    public MessageError getError() {
         return error;
     }
 
@@ -430,7 +430,7 @@ public class NumberLookupResponseDetails {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(NumberLookupError error) {
+    public void setError(MessageError error) {
         this.error = error;
     }
 

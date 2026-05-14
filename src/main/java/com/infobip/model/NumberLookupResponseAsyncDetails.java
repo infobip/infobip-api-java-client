@@ -19,7 +19,7 @@ public class NumberLookupResponseAsyncDetails {
 
     private String to;
 
-    private NumberLookupStatus status;
+    private MessageStatus status;
 
     private String messageId;
 
@@ -69,7 +69,7 @@ public class NumberLookupResponseAsyncDetails {
      * @param status
      * @return This {@link NumberLookupResponseAsyncDetails instance}.
      */
-    public NumberLookupResponseAsyncDetails status(NumberLookupStatus status) {
+    public NumberLookupResponseAsyncDetails status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -80,7 +80,7 @@ public class NumberLookupResponseAsyncDetails {
      * @return status
      */
     @JsonProperty("status")
-    public NumberLookupStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -90,7 +90,7 @@ public class NumberLookupResponseAsyncDetails {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(NumberLookupStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 

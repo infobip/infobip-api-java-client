@@ -288,7 +288,7 @@ class NumberLookupApiTest extends ApiTest {
             then(portedNetwork.getCountryPrefix()).isEqualTo(givenPortedCountryPrefix);
             then(portedNetwork.getNetworkId()).isEqualTo(givenPortedNetworkId);
 
-            NumberLookupStatus status = result.getStatus();
+            MessageStatus status = result.getStatus();
             then(status).isNotNull();
             then(status.getGroupId()).isEqualTo(givenStatusGroupId);
             then(status.getGroupName()).isEqualTo(givenStatusGroupName);
@@ -296,7 +296,7 @@ class NumberLookupApiTest extends ApiTest {
             then(status.getName()).isEqualTo(givenStatusName);
             then(status.getDescription()).isEqualTo(givenStatusDescription);
 
-            NumberLookupError error = result.getError();
+            MessageError error = result.getError();
             then(error).isNotNull();
             then(error.getGroupId()).isEqualTo(givenErrorGroupId);
             then(error.getGroupName()).isEqualTo(givenErrorGroupName);
@@ -429,7 +429,7 @@ class NumberLookupApiTest extends ApiTest {
             then(price.getCurrency()).isEqualTo(givenCurrency);
             then(price.getPricePerLookup()).isEqualTo(givenPricePerLookup);
 
-            NumberLookupStatus status = log.getStatus();
+            MessageStatus status = log.getStatus();
             then(status).isNotNull();
             then(status.getGroupId()).isEqualTo(givenStatusGroupId);
             then(status.getGroupName()).isEqualTo(givenStatusGroupName);
@@ -438,7 +438,7 @@ class NumberLookupApiTest extends ApiTest {
             then(status.getDescription()).isEqualTo(givenStatusDescription);
             then(status.getAction()).isEqualTo(givenStatusAction);
 
-            NumberLookupError error = log.getError();
+            MessageError error = log.getError();
             then(error).isNotNull();
             then(error.getGroupId()).isEqualTo(givenErrorGroupId);
             then(error.getGroupName()).isEqualTo(givenErrorGroupName);

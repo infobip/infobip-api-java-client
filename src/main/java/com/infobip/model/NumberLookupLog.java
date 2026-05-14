@@ -32,9 +32,9 @@ public class NumberLookupLog {
 
     private NumberLookupLogPrice price;
 
-    private NumberLookupStatus status;
+    private MessageStatus status;
 
-    private NumberLookupError error;
+    private MessageError error;
 
     /**
      * Sets bulkId.
@@ -313,7 +313,7 @@ public class NumberLookupLog {
      * @param status
      * @return This {@link NumberLookupLog instance}.
      */
-    public NumberLookupLog status(NumberLookupStatus status) {
+    public NumberLookupLog status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -324,7 +324,7 @@ public class NumberLookupLog {
      * @return status
      */
     @JsonProperty("status")
-    public NumberLookupStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -334,7 +334,7 @@ public class NumberLookupLog {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(NumberLookupStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 
@@ -344,7 +344,7 @@ public class NumberLookupLog {
      * @param error
      * @return This {@link NumberLookupLog instance}.
      */
-    public NumberLookupLog error(NumberLookupError error) {
+    public NumberLookupLog error(MessageError error) {
         this.error = error;
         return this;
     }
@@ -355,7 +355,7 @@ public class NumberLookupLog {
      * @return error
      */
     @JsonProperty("error")
-    public NumberLookupError getError() {
+    public MessageError getError() {
         return error;
     }
 
@@ -365,7 +365,7 @@ public class NumberLookupLog {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(NumberLookupError error) {
+    public void setError(MessageError error) {
         this.error = error;
     }
 
