@@ -36,6 +36,7 @@ The current version of this library includes this subset of Infobip products:
 * [RCS](https://www.infobip.com/docs/api/channels/rcs)
 * [Numbers](https://www.infobip.com/docs/api/platform/numbers)
 * [Resources](https://www.infobip.com/docs/api/platform/resources)
+* [Number Lookup](https://www.infobip.com/docs/api/connectivity/number-lookup)
 
 ## General Info
 For `infobip-api-java-client` versioning we use [Semantic Versioning][semver] scheme.
@@ -52,7 +53,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
       <groupId>com.infobip</groupId>
       <artifactId>infobip-api-java-client</artifactId>
-      <version>6.4.1</version>
+      <version>6.5.0</version>
 </dependency>
 ```
 
