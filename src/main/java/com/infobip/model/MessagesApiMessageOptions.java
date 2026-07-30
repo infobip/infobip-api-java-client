@@ -21,6 +21,8 @@ public class MessagesApiMessageOptions {
 
     private ValidityPeriod validityPeriod;
 
+    private DeliveryTimeWindow deliveryTimeWindow;
+
     private Boolean adaptationMode;
 
     private MessagesApiRegionalOptions regional;
@@ -97,6 +99,37 @@ public class MessagesApiMessageOptions {
     @JsonProperty("validityPeriod")
     public void setValidityPeriod(ValidityPeriod validityPeriod) {
         this.validityPeriod = validityPeriod;
+    }
+
+    /**
+     * Sets deliveryTimeWindow.
+     *
+     * @param deliveryTimeWindow
+     * @return This {@link MessagesApiMessageOptions instance}.
+     */
+    public MessagesApiMessageOptions deliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
+        this.deliveryTimeWindow = deliveryTimeWindow;
+        return this;
+    }
+
+    /**
+     * Returns deliveryTimeWindow.
+     *
+     * @return deliveryTimeWindow
+     */
+    @JsonProperty("deliveryTimeWindow")
+    public DeliveryTimeWindow getDeliveryTimeWindow() {
+        return deliveryTimeWindow;
+    }
+
+    /**
+     * Sets deliveryTimeWindow.
+     *
+     * @param deliveryTimeWindow
+     */
+    @JsonProperty("deliveryTimeWindow")
+    public void setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
+        this.deliveryTimeWindow = deliveryTimeWindow;
     }
 
     /**
@@ -403,6 +436,7 @@ public class MessagesApiMessageOptions {
         MessagesApiMessageOptions messagesApiMessageOptions = (MessagesApiMessageOptions) o;
         return Objects.equals(this.platform, messagesApiMessageOptions.platform)
                 && Objects.equals(this.validityPeriod, messagesApiMessageOptions.validityPeriod)
+                && Objects.equals(this.deliveryTimeWindow, messagesApiMessageOptions.deliveryTimeWindow)
                 && Objects.equals(this.adaptationMode, messagesApiMessageOptions.adaptationMode)
                 && Objects.equals(this.regional, messagesApiMessageOptions.regional)
                 && Objects.equals(this.campaignReferenceId, messagesApiMessageOptions.campaignReferenceId)
@@ -418,6 +452,7 @@ public class MessagesApiMessageOptions {
         return Objects.hash(
                 platform,
                 validityPeriod,
+                deliveryTimeWindow,
                 adaptationMode,
                 regional,
                 campaignReferenceId,
@@ -439,6 +474,9 @@ public class MessagesApiMessageOptions {
                 .append(newLine)
                 .append("    validityPeriod: ")
                 .append(toIndentedString(validityPeriod))
+                .append(newLine)
+                .append("    deliveryTimeWindow: ")
+                .append(toIndentedString(deliveryTimeWindow))
                 .append(newLine)
                 .append("    adaptationMode: ")
                 .append(toIndentedString(adaptationMode))

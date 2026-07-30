@@ -62,42 +62,41 @@ class WebRtcApiTest extends ApiTest {
 
     @Test
     void shouldCreateWebRtcPushConfiguration() {
-        var givenApplicationId = "test-application";
-        var givenApnsCertificateFileName = "IOS_APNS_certificate.p";
-        var givenApnsCertificateFileContent = "APNS certificate content";
-        var givenApnsCertificatePassword = "pass";
+        var givenName = "Android Push Config Production";
         var givenPrivateKeyJson = "{'test': 'test'}";
         var givenAndroidConfigured = true;
 
         var expectedRequest = String.format(
-                "{\n" + "  \"applicationId\": \"%s\",\n"
+                "{\n" + "  \"name\": \"%s\",\n"
                         + "  \"android\": {\n"
                         + "    \"privateKeyJson\": \"%s\"\n"
                         + "  }\n"
                         + "}",
-                givenApplicationId, givenPrivateKeyJson);
+                givenName, givenPrivateKeyJson);
 
         var givenPushConfigurationId = "894c822b-d7ba-439c-a761-141f591cace7";
 
         var givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
-                        + "  \"applicationId\": \"%s\",\n"
-                        + "  \"androidConfigured\": \"%s\"\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"androidConfigured\": %b,\n"
+                        + "  \"iosConfigured\": false\n"
                         + "}",
-                givenPushConfigurationId, givenApplicationId, givenAndroidConfigured);
+                givenPushConfigurationId, givenName, givenAndroidConfigured);
 
         setUpSuccessPostRequest(PUSH_CONFIGURATIONS, expectedRequest, givenResponse);
 
         var webrtcApi = new WebRtcApi(getApiClient());
 
         var request = new WebRtcPushConfigurationRequest()
-                .applicationId(givenApplicationId)
+                .name(givenName)
                 .android(new WebRtcAndroidPushNotificationConfig().privateKeyJson(givenPrivateKeyJson));
 
         var expectedResponse = new WebRtcPushConfigurationResponse()
                 .id(givenPushConfigurationId)
-                .applicationId(givenApplicationId)
-                .androidConfigured(true);
+                .name(givenName)
+                .androidConfigured(true)
+                .iosConfigured(false);
 
         Consumer<WebRtcPushConfigurationResponse> assertions =
                 response -> then(response).isEqualTo(expectedResponse);
@@ -109,14 +108,14 @@ class WebRtcApiTest extends ApiTest {
 
     @Test
     void shouldUpdateWebRtcPushConfiguration() {
-        var givenApplicationId = "test-application";
+        var givenName = "Test Push Config";
         var givenApnsCertificateFileName = "IOS_APNS_certificate.p";
         var givenApnsCertificateFileContent = "APNS certificate content";
         var givenApnsCertificatePassword = "pass";
         var givenPrivateKeyJson = "{'test': 'test'}";
 
         var expectedRequest = String.format(
-                "{\n" + "  \"applicationId\": \"%s\",\n"
+                "{\n" + "  \"name\": \"%s\",\n"
                         + "  \"ios\": {\n"
                         + "    \"apnsCertificateFileName\": \"%s\",\n"
                         + "    \"apnsCertificateFileContent\": \"%s\",\n"
@@ -126,7 +125,7 @@ class WebRtcApiTest extends ApiTest {
                         + "    \"privateKeyJson\": \"%s\"\n"
                         + "  }\n"
                         + "}",
-                givenApplicationId,
+                givenName,
                 givenApnsCertificateFileName,
                 givenApnsCertificateFileContent,
                 givenApnsCertificatePassword,
@@ -138,11 +137,11 @@ class WebRtcApiTest extends ApiTest {
 
         var givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
-                        + "  \"applicationId\": \"%s\",\n"
-                        + "  \"iosConfigured\": \"%s\",\n"
-                        + "  \"androidConfigured\": \"%s\"\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"iosConfigured\": %b,\n"
+                        + "  \"androidConfigured\": %b\n"
                         + "}",
-                givenPushConfigurationId, givenApplicationId, givenAndroidConfigured, givenIosConfigured);
+                givenPushConfigurationId, givenName, givenIosConfigured, givenAndroidConfigured);
 
         setUpSuccessPutRequest(
                 PUSH_CONFIGURATION.replace("{id}", givenPushConfigurationId), Map.of(), expectedRequest, givenResponse);
@@ -150,7 +149,7 @@ class WebRtcApiTest extends ApiTest {
         var webrtcApi = new WebRtcApi(getApiClient());
 
         var request = new WebRtcPushConfigurationRequest()
-                .applicationId(givenApplicationId)
+                .name(givenName)
                 .ios(new WebRtcIosPushNotificationConfig()
                         .apnsCertificateFileName(givenApnsCertificateFileName)
                         .apnsCertificateFileContent(givenApnsCertificateFileContent)
@@ -159,7 +158,7 @@ class WebRtcApiTest extends ApiTest {
 
         var expectedResponse = new WebRtcPushConfigurationResponse()
                 .id(givenPushConfigurationId)
-                .applicationId(givenApplicationId)
+                .name(givenName)
                 .androidConfigured(true)
                 .iosConfigured(true);
 
@@ -187,13 +186,8 @@ class WebRtcApiTest extends ApiTest {
 
     @Test
     void shouldGetWebRtcPushConfigurations() {
-        var givenApplicationId = "test-application";
-        var givenApnsCertificateFileName = "IOS_APNS_certificate.p";
-        var givenApnsCertificateFileContent = "APNS certificate content";
-        var givenApnsCertificatePassword = "pass";
-
-        var givenFirstFcmServerKey = "AAAAtm7JlCY:VmoD3sz1juETi";
-        var givenSecondFcmServerKey = "AAAAtm7JlCY:APA91bEe02qey";
+        var givenFirstName = "Android Push Config Production";
+        var givenSecondName = "Test Push Config";
 
         var givenFirstPushConfigurationId = "454d142b-a1ad-239a-d231-227fa335aadc3";
         var givenSecondPushConfigurationId = "894c822b-d7ba-439c-a761-141f591cace7";
@@ -204,7 +198,7 @@ class WebRtcApiTest extends ApiTest {
         var givenTotalResults = 2L;
 
         var givenFirstAndroidConfigured = true;
-        var givenFirstIosConfigured = true;
+        var givenFirstIosConfigured = false;
 
         var givenSecondAndroidConfigured = true;
         var givenSecondIosConfigured = true;
@@ -213,15 +207,15 @@ class WebRtcApiTest extends ApiTest {
                 "{\n" + "  \"results\": [\n"
                         + "    {\n"
                         + "      \"id\": \"%s\",\n"
-                        + "      \"applicationId\": \"%s\",\n"
-                        + "      \"androidConfigured\": \"%s\",\n"
-                        + "      \"iosConfigured\": \"%s\"\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"androidConfigured\": %b,\n"
+                        + "      \"iosConfigured\": %b\n"
                         + "    },\n"
                         + "    {\n"
                         + "      \"id\": \"%s\",\n"
-                        + "      \"applicationId\": \"%s\",\n"
-                        + "      \"androidConfigured\": \"%s\",\n"
-                        + "      \"iosConfigured\": \"%s\"\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"androidConfigured\": %b,\n"
+                        + "      \"iosConfigured\": %b\n"
                         + "    }\n"
                         + "  ],\n"
                         + "  \"pageInfo\": {\n"
@@ -232,11 +226,11 @@ class WebRtcApiTest extends ApiTest {
                         + "  }\n"
                         + "}",
                 givenFirstPushConfigurationId,
-                givenApplicationId,
+                givenFirstName,
                 givenFirstAndroidConfigured,
                 givenFirstIosConfigured,
                 givenSecondPushConfigurationId,
-                givenApplicationId,
+                givenSecondName,
                 givenSecondAndroidConfigured,
                 givenSecondIosConfigured,
                 givenPage,
@@ -250,13 +244,13 @@ class WebRtcApiTest extends ApiTest {
 
         var expectedFirstConfiguration = new WebRtcPushConfigurationResponse()
                 .id(givenFirstPushConfigurationId)
-                .applicationId(givenApplicationId)
+                .name(givenFirstName)
                 .androidConfigured(givenFirstAndroidConfigured)
                 .iosConfigured(givenFirstIosConfigured);
 
         var expectedSecondConfiguration = new WebRtcPushConfigurationResponse()
                 .id(givenSecondPushConfigurationId)
-                .applicationId(givenApplicationId)
+                .name(givenSecondName)
                 .androidConfigured(givenSecondAndroidConfigured)
                 .iosConfigured(givenSecondIosConfigured);
 
@@ -280,32 +274,18 @@ class WebRtcApiTest extends ApiTest {
 
     @Test
     void shouldGetWebRtcPushConfiguration() {
-        var givenApplicationId = "test-application";
-        var givenApnsCertificateFileName = "IOS_APNS_certificate.p";
-        var givenApnsCertificateFileContent = "APNS certificate content";
-        var givenApnsCertificatePassword = "pass";
-        var givenFcmServerKey = "AAAAtm7JlCY:APA91bEe02qey";
-
+        var givenName = "Test Push Config";
         var givenPushConfigurationId = "894c822b-d7ba-439c-a761-141f591cace7";
+        var givenAndroidConfigured = true;
+        var givenIosConfigured = true;
 
         var givenResponse = String.format(
                 "{\n" + "  \"id\": \"%s\",\n"
-                        + "  \"applicationId\": \"%s\",\n"
-                        + "  \"ios\": {\n"
-                        + "    \"apnsCertificateFileName\": \"%s\",\n"
-                        + "    \"apnsCertificateFileContent\": \"%s\",\n"
-                        + "    \"apnsCertificatePassword\": \"%s\"\n"
-                        + "  },\n"
-                        + "  \"android\": {\n"
-                        + "    \"fcmServerKey\": \"%s\"\n"
-                        + "  }\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"androidConfigured\": %b,\n"
+                        + "  \"iosConfigured\": %b\n"
                         + "}",
-                givenPushConfigurationId,
-                givenApplicationId,
-                givenApnsCertificateFileName,
-                givenApnsCertificateFileContent,
-                givenApnsCertificatePassword,
-                givenFcmServerKey);
+                givenPushConfigurationId, givenName, givenAndroidConfigured, givenIosConfigured);
 
         setUpSuccessGetRequest(PUSH_CONFIGURATION.replace("{id}", givenPushConfigurationId), Map.of(), givenResponse);
 
@@ -313,7 +293,9 @@ class WebRtcApiTest extends ApiTest {
 
         var expectedResponse = new WebRtcPushConfigurationResponse()
                 .id(givenPushConfigurationId)
-                .applicationId(givenApplicationId);
+                .name(givenName)
+                .androidConfigured(givenAndroidConfigured)
+                .iosConfigured(givenIosConfigured);
 
         Consumer<WebRtcPushConfigurationResponse> assertions =
                 response -> then(response).isEqualTo(expectedResponse);
@@ -462,6 +444,71 @@ class WebRtcApiTest extends ApiTest {
 
         var call = webrtcApi.deleteFile(givenId);
 
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDownloadWebRtcFile() {
+        String givenId = "5f4e8861-8ed7-4521-b8c8-f26346726716";
+        String givenResponse = "";
+
+        setUpGetRequestOctet(DOWNLOAD.replace("{id}", givenId), Map.of(), givenResponse, 200);
+
+        WebRtcApi webrtcApi = new WebRtcApi(getApiClient());
+
+        var call = webrtcApi.downloadFile(givenId);
+        testSuccessfulCallWithFileResult(call::execute);
+    }
+
+    @Test
+    void shouldPatchWebRtcPushConfiguration() {
+        var givenName = "Test Push Config";
+        var givenPrivateKeyJson = "{'test': 'test'}";
+
+        var expectedRequest = String.format(
+                "{\n" + "  \"name\": \"%s\",\n"
+                        + "  \"android\": {\n"
+                        + "    \"privateKeyJson\": \"%s\"\n"
+                        + "  }\n"
+                        + "}",
+                givenName, givenPrivateKeyJson);
+
+        var givenPushConfigurationId = "894c822b-d7ba-439c-a761-141f591cace7";
+        var givenAndroidConfigured = true;
+        var givenIosConfigured = false;
+
+        var givenResponse = String.format(
+                "{\n" + "  \"id\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"iosConfigured\": %b,\n"
+                        + "  \"androidConfigured\": %b\n"
+                        + "}",
+                givenPushConfigurationId, givenName, givenIosConfigured, givenAndroidConfigured);
+
+        setUpPatchRequest(
+                PUSH_CONFIGURATION.replace("{id}", givenPushConfigurationId),
+                Map.of(),
+                expectedRequest,
+                givenResponse,
+                200);
+
+        var webrtcApi = new WebRtcApi(getApiClient());
+
+        var request = new WebRtcPushConfigurationRequest()
+                .name(givenName)
+                .android(new WebRtcAndroidPushNotificationConfig().privateKeyJson(givenPrivateKeyJson));
+
+        var expectedResponse = new WebRtcPushConfigurationResponse()
+                .id(givenPushConfigurationId)
+                .name(givenName)
+                .androidConfigured(givenAndroidConfigured)
+                .iosConfigured(givenIosConfigured);
+
+        Consumer<WebRtcPushConfigurationResponse> assertions =
+                response -> then(response).isEqualTo(expectedResponse);
+
+        var call = webrtcApi.patchPushConfiguration(givenPushConfigurationId, request);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }

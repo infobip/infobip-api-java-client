@@ -24,6 +24,7 @@ import java.util.UUID;
 public class ResourcesNumberResourceOrderApiDoc
         implements ResourcesGetResourceRequestResponse,
                 ResourcesPageResourceOrderApiDocResultsInner,
+                ResourcesResourceOrderApiDoc,
                 ResourcesUpdateResourceRequestResponse {
 
     private UUID id;

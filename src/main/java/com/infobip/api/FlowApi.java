@@ -98,7 +98,7 @@ public class FlowApi {
     /**
      * Add participants to flow.
      * <p>
-     * Use this endpoint to add participants to a flow, accommodating anywhere from 1 to 1000 persons.                  When participants are added, their profiles in People are automatically created, updated or merged based on the identifiers provided.&lt;br&gt;                 If identifiers are unique, a new profile is created.&lt;br&gt;                 If identifiers match an existing profile, then that profile is updated.&lt;br&gt;                 If identifiers refer to multiple existing profiles or are not unique within the request, profiles are merged.&lt;br&gt;                 To prevent unwanted merges, ensure each participant&#39;s identifiers                  (&lt;code&gt;identifyBy&lt;/code&gt;, &lt;code&gt;externalId&lt;/code&gt; and &lt;code&gt;contactInformation&lt;/code&gt;) are unique.
+     * Use this endpoint to add participants to a flow, accommodating anywhere from 1 to 1000 persons.                 When participants are added, their profiles in People are automatically created, updated or merged based on the identifiers provided.&lt;br&gt;                 If identifiers are unique, a new profile is created.&lt;br&gt;                 If identifiers match an existing profile, then that profile is updated.&lt;br&gt;                 If identifiers refer to multiple existing profiles or are not unique within the request, profiles are merged.&lt;br&gt;                 To prevent unwanted merges, ensure each participant&#39;s identifiers                 (&lt;code&gt;identifyBy&lt;/code&gt;, &lt;code&gt;externalId&lt;/code&gt; and &lt;code&gt;contactInformation&lt;/code&gt;) are unique.
      *
      * @param campaignId Unique identifier of the flow that participant will be added to. (required)
      * @param flowAddFlowParticipantsRequest  (required)
@@ -109,7 +109,8 @@ public class FlowApi {
         return new AddFlowParticipantsRequest(campaignId, flowAddFlowParticipantsRequest);
     }
 
-    private RequestDefinition getFlowParticipantsAddedReportDefinition(Long campaignId, String operationId) {
+    private RequestDefinition getFlowParticipantsAddedReportDefinition(
+            Long campaignId, String operationId, String applicationId, String entityId) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "GET", "/moments/1/flows/{campaignId}/participants/report")
                 .requiresAuthentication(true)
@@ -121,6 +122,12 @@ public class FlowApi {
         if (operationId != null) {
             builder.addQueryParameter(new Parameter("operationId", operationId));
         }
+        if (applicationId != null) {
+            builder.addQueryParameter(new Parameter("applicationId", applicationId));
+        }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
+        }
         return builder.build();
     }
 
@@ -130,10 +137,34 @@ public class FlowApi {
     public class GetFlowParticipantsAddedReportRequest {
         private final Long campaignId;
         private final String operationId;
+        private String applicationId;
+        private String entityId;
 
         private GetFlowParticipantsAddedReportRequest(Long campaignId, String operationId) {
             this.campaignId = Objects.requireNonNull(campaignId, "The required parameter 'campaignId' is missing.");
             this.operationId = Objects.requireNonNull(operationId, "The required parameter 'operationId' is missing.");
+        }
+
+        /**
+         * Sets applicationId.
+         *
+         * @param applicationId  (optional)
+         * @return GetFlowParticipantsAddedReportRequest
+         */
+        public GetFlowParticipantsAddedReportRequest applicationId(String applicationId) {
+            this.applicationId = applicationId;
+            return this;
+        }
+
+        /**
+         * Sets entityId.
+         *
+         * @param entityId  (optional)
+         * @return GetFlowParticipantsAddedReportRequest
+         */
+        public GetFlowParticipantsAddedReportRequest entityId(String entityId) {
+            this.entityId = entityId;
+            return this;
         }
 
         /**
@@ -144,7 +175,7 @@ public class FlowApi {
          */
         public FlowParticipantsReportResponse execute() throws ApiException {
             RequestDefinition getFlowParticipantsAddedReportDefinition =
-                    getFlowParticipantsAddedReportDefinition(campaignId, operationId);
+                    getFlowParticipantsAddedReportDefinition(campaignId, operationId, applicationId, entityId);
             return apiClient.execute(
                     getFlowParticipantsAddedReportDefinition,
                     new TypeReference<FlowParticipantsReportResponse>() {}.getType());
@@ -158,7 +189,7 @@ public class FlowApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<FlowParticipantsReportResponse> callback) {
             RequestDefinition getFlowParticipantsAddedReportDefinition =
-                    getFlowParticipantsAddedReportDefinition(campaignId, operationId);
+                    getFlowParticipantsAddedReportDefinition(campaignId, operationId, applicationId, entityId);
             return apiClient.executeAsync(
                     getFlowParticipantsAddedReportDefinition,
                     new TypeReference<FlowParticipantsReportResponse>() {}.getType(),

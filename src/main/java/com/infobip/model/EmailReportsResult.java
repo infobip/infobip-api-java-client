@@ -19,10 +19,62 @@ import java.util.Objects;
  */
 public class EmailReportsResult {
 
-    private List<EmailReport> results = null;
+    private List<EmailReport> emailResults = null;
+
+    private List<EmailReport> results = new ArrayList<>();
+
+    /**
+     * Sets emailResults.
+     *
+     * @param emailResults
+     * @return This {@link EmailReportsResult instance}.
+     */
+    public EmailReportsResult emailResults(List<EmailReport> emailResults) {
+        this.emailResults = emailResults;
+        return this;
+    }
+
+    /**
+     * Adds and item into emailResults.
+     *
+     * @param emailResultsItem The item to be added to the list.
+     * @return This {@link EmailReportsResult instance}.
+     */
+    public EmailReportsResult addEmailResultsItem(EmailReport emailResultsItem) {
+        if (this.emailResults == null) {
+            this.emailResults = new ArrayList<>();
+        }
+        this.emailResults.add(emailResultsItem);
+        return this;
+    }
+
+    /**
+     * Returns emailResults.
+     *
+     * @return emailResults
+     */
+    @JsonProperty("emailResults")
+    public List<EmailReport> getEmailResults() {
+        return emailResults;
+    }
+
+    /**
+     * Sets emailResults.
+     *
+     * @param emailResults
+     */
+    @JsonProperty("emailResults")
+    public void setEmailResults(List<EmailReport> emailResults) {
+        this.emailResults = emailResults;
+    }
 
     /**
      * Sets results.
+     * <p>
+     * Field description:
+     * Collection of email delivery reports, one per every message.
+     * <p>
+     * The field is required.
      *
      * @param results
      * @return This {@link EmailReportsResult instance}.
@@ -34,6 +86,11 @@ public class EmailReportsResult {
 
     /**
      * Adds and item into results.
+     * <p>
+     * Field description:
+     * Collection of email delivery reports, one per every message.
+     * <p>
+     * The field is required.
      *
      * @param resultsItem The item to be added to the list.
      * @return This {@link EmailReportsResult instance}.
@@ -48,6 +105,11 @@ public class EmailReportsResult {
 
     /**
      * Returns results.
+     * <p>
+     * Field description:
+     * Collection of email delivery reports, one per every message.
+     * <p>
+     * The field is required.
      *
      * @return results
      */
@@ -58,6 +120,11 @@ public class EmailReportsResult {
 
     /**
      * Sets results.
+     * <p>
+     * Field description:
+     * Collection of email delivery reports, one per every message.
+     * <p>
+     * The field is required.
      *
      * @param results
      */
@@ -75,12 +142,13 @@ public class EmailReportsResult {
             return false;
         }
         EmailReportsResult emailReportsResult = (EmailReportsResult) o;
-        return Objects.equals(this.results, emailReportsResult.results);
+        return Objects.equals(this.emailResults, emailReportsResult.emailResults)
+                && Objects.equals(this.results, emailReportsResult.results);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(results);
+        return Objects.hash(emailResults, results);
     }
 
     @Override
@@ -88,6 +156,9 @@ public class EmailReportsResult {
         String newLine = System.lineSeparator();
         return new StringBuilder()
                 .append("class EmailReportsResult {")
+                .append(newLine)
+                .append("    emailResults: ")
+                .append(toIndentedString(emailResults))
                 .append(newLine)
                 .append("    results: ")
                 .append(toIndentedString(results))

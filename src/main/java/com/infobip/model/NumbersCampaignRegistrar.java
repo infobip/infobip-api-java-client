@@ -26,7 +26,12 @@ public enum NumbersCampaignRegistrar {
     GOOGLE_VOICE("GOOGLE_VOICE"),
     US_CELLULAR_MMS("US_CELLULAR_MMS"),
     ZIPWHIP("ZIPWHIP"),
-    LIBERTY("LIBERTY");
+    LIBERTY("LIBERTY"),
+    DISH("DISH"),
+    CHARTER_SPECTRUM("CHARTER_SPECTRUM"),
+    C_SPIRE("C_SPIRE"),
+    GOOGLE_FI("GOOGLE_FI"),
+    TRACFONE("TRACFONE");
 
     private final String value;
 

@@ -27,7 +27,7 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = ViberOutboundFileContent.class, name = "FILE"),
     @JsonSubTypes.Type(value = ViberOutboundImageContent.class, name = "IMAGE"),
     @JsonSubTypes.Type(value = ViberOutboundListContent.class, name = "LIST"),
-    @JsonSubTypes.Type(value = ViberOutboundOtpTemplateContent.class, name = "OTP_TEMPLATE"),
+    @JsonSubTypes.Type(value = ViberOutboundTransactionalTemplateContent.class, name = "TEMPLATE"),
     @JsonSubTypes.Type(value = ViberOutboundTextContent.class, name = "TEXT"),
     @JsonSubTypes.Type(value = ViberOutboundVideoContent.class, name = "VIDEO"),
 })

@@ -23,6 +23,8 @@ public class CallsSbcHosts {
 
     private List<String> backup = null;
 
+    private List<String> subnets = null;
+
     /**
      * Sets primary.
      *
@@ -113,6 +115,51 @@ public class CallsSbcHosts {
         this.backup = backup;
     }
 
+    /**
+     * Sets subnets.
+     *
+     * @param subnets
+     * @return This {@link CallsSbcHosts instance}.
+     */
+    public CallsSbcHosts subnets(List<String> subnets) {
+        this.subnets = subnets;
+        return this;
+    }
+
+    /**
+     * Adds and item into subnets.
+     *
+     * @param subnetsItem The item to be added to the list.
+     * @return This {@link CallsSbcHosts instance}.
+     */
+    public CallsSbcHosts addSubnetsItem(String subnetsItem) {
+        if (this.subnets == null) {
+            this.subnets = new ArrayList<>();
+        }
+        this.subnets.add(subnetsItem);
+        return this;
+    }
+
+    /**
+     * Returns subnets.
+     *
+     * @return subnets
+     */
+    @JsonProperty("subnets")
+    public List<String> getSubnets() {
+        return subnets;
+    }
+
+    /**
+     * Sets subnets.
+     *
+     * @param subnets
+     */
+    @JsonProperty("subnets")
+    public void setSubnets(List<String> subnets) {
+        this.subnets = subnets;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -122,12 +169,14 @@ public class CallsSbcHosts {
             return false;
         }
         CallsSbcHosts callsSbcHosts = (CallsSbcHosts) o;
-        return Objects.equals(this.primary, callsSbcHosts.primary) && Objects.equals(this.backup, callsSbcHosts.backup);
+        return Objects.equals(this.primary, callsSbcHosts.primary)
+                && Objects.equals(this.backup, callsSbcHosts.backup)
+                && Objects.equals(this.subnets, callsSbcHosts.subnets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(primary, backup);
+        return Objects.hash(primary, backup, subnets);
     }
 
     @Override
@@ -141,6 +190,9 @@ public class CallsSbcHosts {
                 .append(newLine)
                 .append("    backup: ")
                 .append(toIndentedString(backup))
+                .append(newLine)
+                .append("    subnets: ")
+                .append(toIndentedString(subnets))
                 .append(newLine)
                 .append("}")
                 .toString();

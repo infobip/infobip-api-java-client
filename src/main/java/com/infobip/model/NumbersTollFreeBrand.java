@@ -21,6 +21,10 @@ public class NumbersTollFreeBrand extends NumbersBrand {
 
     private String referenceId;
 
+    private String taxId;
+
+    private String taxIdIssuingCountry;
+
     private NumbersAddress address;
 
     private String countryCode;
@@ -35,9 +39,7 @@ public class NumbersTollFreeBrand extends NumbersBrand {
 
     private String businessDBA;
 
-    private String taxId;
-
-    private String taxIdIssuingCountry;
+    private String legalName;
 
     /**
      * Legal entity type of the business.
@@ -79,8 +81,6 @@ public class NumbersTollFreeBrand extends NumbersBrand {
     private LegalEntityTypeEnum legalEntityType;
 
     private NumbersBusinessRegistrationType businessRegistrationType;
-
-    private String legalName;
 
     /**
      * Constructs a new {@link NumbersTollFreeBrand} instance.
@@ -127,6 +127,92 @@ public class NumbersTollFreeBrand extends NumbersBrand {
     @JsonProperty("referenceId")
     public void setReferenceId(String referenceId) {
         this.referenceId = referenceId;
+    }
+
+    /**
+     * Sets taxId.
+     * <p>
+     * Field description:
+     * The tax identifier for the brand. Not required for sole proprietor brands.
+     * <p>
+     * The field is required.
+     *
+     * @param taxId
+     * @return This {@link NumbersTollFreeBrand instance}.
+     */
+    public NumbersTollFreeBrand taxId(String taxId) {
+        this.taxId = taxId;
+        return this;
+    }
+
+    /**
+     * Returns taxId.
+     * <p>
+     * Field description:
+     * The tax identifier for the brand. Not required for sole proprietor brands.
+     * <p>
+     * The field is required.
+     *
+     * @return taxId
+     */
+    @JsonProperty("taxId")
+    public String getTaxId() {
+        return taxId;
+    }
+
+    /**
+     * Sets taxId.
+     * <p>
+     * Field description:
+     * The tax identifier for the brand. Not required for sole proprietor brands.
+     * <p>
+     * The field is required.
+     *
+     * @param taxId
+     */
+    @JsonProperty("taxId")
+    public void setTaxId(String taxId) {
+        this.taxId = taxId;
+    }
+
+    /**
+     * Sets taxIdIssuingCountry.
+     * <p>
+     * Field description:
+     * The country where tax identifier is issued. If not specified, the value from countryCode will be used.
+     *
+     * @param taxIdIssuingCountry
+     * @return This {@link NumbersTollFreeBrand instance}.
+     */
+    public NumbersTollFreeBrand taxIdIssuingCountry(String taxIdIssuingCountry) {
+        this.taxIdIssuingCountry = taxIdIssuingCountry;
+        return this;
+    }
+
+    /**
+     * Returns taxIdIssuingCountry.
+     * <p>
+     * Field description:
+     * The country where tax identifier is issued. If not specified, the value from countryCode will be used.
+     *
+     * @return taxIdIssuingCountry
+     */
+    @JsonProperty("taxIdIssuingCountry")
+    public String getTaxIdIssuingCountry() {
+        return taxIdIssuingCountry;
+    }
+
+    /**
+     * Sets taxIdIssuingCountry.
+     * <p>
+     * Field description:
+     * The country where tax identifier is issued. If not specified, the value from countryCode will be used.
+     *
+     * @param taxIdIssuingCountry
+     */
+    @JsonProperty("taxIdIssuingCountry")
+    public void setTaxIdIssuingCountry(String taxIdIssuingCountry) {
+        this.taxIdIssuingCountry = taxIdIssuingCountry;
     }
 
     /**
@@ -437,89 +523,49 @@ public class NumbersTollFreeBrand extends NumbersBrand {
     }
 
     /**
-     * Sets taxId.
+     * Sets legalName.
      * <p>
      * Field description:
-     * The tax identifier for the brand.
+     * The legal name of the brand.
      * <p>
      * The field is required.
      *
-     * @param taxId
+     * @param legalName
      * @return This {@link NumbersTollFreeBrand instance}.
      */
-    public NumbersTollFreeBrand taxId(String taxId) {
-        this.taxId = taxId;
+    public NumbersTollFreeBrand legalName(String legalName) {
+        this.legalName = legalName;
         return this;
     }
 
     /**
-     * Returns taxId.
+     * Returns legalName.
      * <p>
      * Field description:
-     * The tax identifier for the brand.
+     * The legal name of the brand.
      * <p>
      * The field is required.
      *
-     * @return taxId
+     * @return legalName
      */
-    @JsonProperty("taxId")
-    public String getTaxId() {
-        return taxId;
+    @JsonProperty("legalName")
+    public String getLegalName() {
+        return legalName;
     }
 
     /**
-     * Sets taxId.
+     * Sets legalName.
      * <p>
      * Field description:
-     * The tax identifier for the brand.
+     * The legal name of the brand.
      * <p>
      * The field is required.
      *
-     * @param taxId
+     * @param legalName
      */
-    @JsonProperty("taxId")
-    public void setTaxId(String taxId) {
-        this.taxId = taxId;
-    }
-
-    /**
-     * Sets taxIdIssuingCountry.
-     * <p>
-     * Field description:
-     * The country where tax identifier is issued. If not specified, the value from countryCode will be used.
-     *
-     * @param taxIdIssuingCountry
-     * @return This {@link NumbersTollFreeBrand instance}.
-     */
-    public NumbersTollFreeBrand taxIdIssuingCountry(String taxIdIssuingCountry) {
-        this.taxIdIssuingCountry = taxIdIssuingCountry;
-        return this;
-    }
-
-    /**
-     * Returns taxIdIssuingCountry.
-     * <p>
-     * Field description:
-     * The country where tax identifier is issued. If not specified, the value from countryCode will be used.
-     *
-     * @return taxIdIssuingCountry
-     */
-    @JsonProperty("taxIdIssuingCountry")
-    public String getTaxIdIssuingCountry() {
-        return taxIdIssuingCountry;
-    }
-
-    /**
-     * Sets taxIdIssuingCountry.
-     * <p>
-     * Field description:
-     * The country where tax identifier is issued. If not specified, the value from countryCode will be used.
-     *
-     * @param taxIdIssuingCountry
-     */
-    @JsonProperty("taxIdIssuingCountry")
-    public void setTaxIdIssuingCountry(String taxIdIssuingCountry) {
-        this.taxIdIssuingCountry = taxIdIssuingCountry;
+    @JsonProperty("legalName")
+    public void setLegalName(String legalName) {
+        this.legalName = legalName;
     }
 
     /**
@@ -605,52 +651,6 @@ public class NumbersTollFreeBrand extends NumbersBrand {
         this.businessRegistrationType = businessRegistrationType;
     }
 
-    /**
-     * Sets legalName.
-     * <p>
-     * Field description:
-     * The legal name of the brand.
-     * <p>
-     * The field is required.
-     *
-     * @param legalName
-     * @return This {@link NumbersTollFreeBrand instance}.
-     */
-    public NumbersTollFreeBrand legalName(String legalName) {
-        this.legalName = legalName;
-        return this;
-    }
-
-    /**
-     * Returns legalName.
-     * <p>
-     * Field description:
-     * The legal name of the brand.
-     * <p>
-     * The field is required.
-     *
-     * @return legalName
-     */
-    @JsonProperty("legalName")
-    public String getLegalName() {
-        return legalName;
-    }
-
-    /**
-     * Sets legalName.
-     * <p>
-     * Field description:
-     * The legal name of the brand.
-     * <p>
-     * The field is required.
-     *
-     * @param legalName
-     */
-    @JsonProperty("legalName")
-    public void setLegalName(String legalName) {
-        this.legalName = legalName;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -661,6 +661,8 @@ public class NumbersTollFreeBrand extends NumbersBrand {
         }
         NumbersTollFreeBrand numbersTollFreeBrand = (NumbersTollFreeBrand) o;
         return Objects.equals(this.referenceId, numbersTollFreeBrand.referenceId)
+                && Objects.equals(this.taxId, numbersTollFreeBrand.taxId)
+                && Objects.equals(this.taxIdIssuingCountry, numbersTollFreeBrand.taxIdIssuingCountry)
                 && Objects.equals(this.address, numbersTollFreeBrand.address)
                 && Objects.equals(this.countryCode, numbersTollFreeBrand.countryCode)
                 && Objects.equals(this.supportPhone, numbersTollFreeBrand.supportPhone)
@@ -668,11 +670,9 @@ public class NumbersTollFreeBrand extends NumbersBrand {
                 && Objects.equals(this.businessContactFirstName, numbersTollFreeBrand.businessContactFirstName)
                 && Objects.equals(this.businessContactLastName, numbersTollFreeBrand.businessContactLastName)
                 && Objects.equals(this.businessDBA, numbersTollFreeBrand.businessDBA)
-                && Objects.equals(this.taxId, numbersTollFreeBrand.taxId)
-                && Objects.equals(this.taxIdIssuingCountry, numbersTollFreeBrand.taxIdIssuingCountry)
+                && Objects.equals(this.legalName, numbersTollFreeBrand.legalName)
                 && Objects.equals(this.legalEntityType, numbersTollFreeBrand.legalEntityType)
                 && Objects.equals(this.businessRegistrationType, numbersTollFreeBrand.businessRegistrationType)
-                && Objects.equals(this.legalName, numbersTollFreeBrand.legalName)
                 && super.equals(o);
     }
 
@@ -680,6 +680,8 @@ public class NumbersTollFreeBrand extends NumbersBrand {
     public int hashCode() {
         return Objects.hash(
                 referenceId,
+                taxId,
+                taxIdIssuingCountry,
                 address,
                 countryCode,
                 supportPhone,
@@ -687,11 +689,9 @@ public class NumbersTollFreeBrand extends NumbersBrand {
                 businessContactFirstName,
                 businessContactLastName,
                 businessDBA,
-                taxId,
-                taxIdIssuingCountry,
+                legalName,
                 legalEntityType,
                 businessRegistrationType,
-                legalName,
                 super.hashCode());
     }
 
@@ -706,6 +706,12 @@ public class NumbersTollFreeBrand extends NumbersBrand {
                 .append(newLine)
                 .append("    referenceId: ")
                 .append(toIndentedString(referenceId))
+                .append(newLine)
+                .append("    taxId: ")
+                .append(toIndentedString(taxId))
+                .append(newLine)
+                .append("    taxIdIssuingCountry: ")
+                .append(toIndentedString(taxIdIssuingCountry))
                 .append(newLine)
                 .append("    address: ")
                 .append(toIndentedString(address))
@@ -728,20 +734,14 @@ public class NumbersTollFreeBrand extends NumbersBrand {
                 .append("    businessDBA: ")
                 .append(toIndentedString(businessDBA))
                 .append(newLine)
-                .append("    taxId: ")
-                .append(toIndentedString(taxId))
-                .append(newLine)
-                .append("    taxIdIssuingCountry: ")
-                .append(toIndentedString(taxIdIssuingCountry))
+                .append("    legalName: ")
+                .append(toIndentedString(legalName))
                 .append(newLine)
                 .append("    legalEntityType: ")
                 .append(toIndentedString(legalEntityType))
                 .append(newLine)
                 .append("    businessRegistrationType: ")
                 .append(toIndentedString(businessRegistrationType))
-                .append(newLine)
-                .append("    legalName: ")
-                .append(toIndentedString(legalName))
                 .append(newLine)
                 .append("}")
                 .toString();

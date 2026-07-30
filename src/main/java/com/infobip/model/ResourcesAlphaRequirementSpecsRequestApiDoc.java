@@ -17,7 +17,8 @@ import java.util.Objects;
 /**
  * Represents ResourcesAlphaRequirementSpecsRequestApiDoc model.
  */
-public class ResourcesAlphaRequirementSpecsRequestApiDoc implements ResourcesRequirementsLookupBody {
+public class ResourcesAlphaRequirementSpecsRequestApiDoc
+        implements ResourcesRequirementSpecsRequestApiDoc, ResourcesRequirementsLookupBody {
     /**
      * Type of resource.
      */

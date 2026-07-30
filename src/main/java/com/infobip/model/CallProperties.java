@@ -10,6 +10,8 @@
 package com.infobip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -24,6 +26,8 @@ public class CallProperties {
     private String sender;
 
     private String resolvedCnam;
+
+    private List<CallsForwardingInfo> forwardedFrom = null;
 
     /**
      * Sets call.
@@ -129,6 +133,9 @@ public class CallProperties {
 
     /**
      * Sets resolvedCnam.
+     * <p>
+     * Field description:
+     * The caller&#39;s display name as received with the inbound call. When the called number has CNAM delivery enabled, this field contains the resolved Caller ID Name (CNAM) associated with the calling party&#39;s phone number.
      *
      * @param resolvedCnam
      * @return This {@link CallProperties instance}.
@@ -140,6 +147,9 @@ public class CallProperties {
 
     /**
      * Returns resolvedCnam.
+     * <p>
+     * Field description:
+     * The caller&#39;s display name as received with the inbound call. When the called number has CNAM delivery enabled, this field contains the resolved Caller ID Name (CNAM) associated with the calling party&#39;s phone number.
      *
      * @return resolvedCnam
      */
@@ -150,12 +160,72 @@ public class CallProperties {
 
     /**
      * Sets resolvedCnam.
+     * <p>
+     * Field description:
+     * The caller&#39;s display name as received with the inbound call. When the called number has CNAM delivery enabled, this field contains the resolved Caller ID Name (CNAM) associated with the calling party&#39;s phone number.
      *
      * @param resolvedCnam
      */
     @JsonProperty("resolvedCnam")
     public void setResolvedCnam(String resolvedCnam) {
         this.resolvedCnam = resolvedCnam;
+    }
+
+    /**
+     * Sets forwardedFrom.
+     * <p>
+     * Field description:
+     * Call diversion history. Contains information about the original destination and reason if the call was forwarded before reaching the final recipient.
+     *
+     * @param forwardedFrom
+     * @return This {@link CallProperties instance}.
+     */
+    public CallProperties forwardedFrom(List<CallsForwardingInfo> forwardedFrom) {
+        this.forwardedFrom = forwardedFrom;
+        return this;
+    }
+
+    /**
+     * Adds and item into forwardedFrom.
+     * <p>
+     * Field description:
+     * Call diversion history. Contains information about the original destination and reason if the call was forwarded before reaching the final recipient.
+     *
+     * @param forwardedFromItem The item to be added to the list.
+     * @return This {@link CallProperties instance}.
+     */
+    public CallProperties addForwardedFromItem(CallsForwardingInfo forwardedFromItem) {
+        if (this.forwardedFrom == null) {
+            this.forwardedFrom = new ArrayList<>();
+        }
+        this.forwardedFrom.add(forwardedFromItem);
+        return this;
+    }
+
+    /**
+     * Returns forwardedFrom.
+     * <p>
+     * Field description:
+     * Call diversion history. Contains information about the original destination and reason if the call was forwarded before reaching the final recipient.
+     *
+     * @return forwardedFrom
+     */
+    @JsonProperty("forwardedFrom")
+    public List<CallsForwardingInfo> getForwardedFrom() {
+        return forwardedFrom;
+    }
+
+    /**
+     * Sets forwardedFrom.
+     * <p>
+     * Field description:
+     * Call diversion history. Contains information about the original destination and reason if the call was forwarded before reaching the final recipient.
+     *
+     * @param forwardedFrom
+     */
+    @JsonProperty("forwardedFrom")
+    public void setForwardedFrom(List<CallsForwardingInfo> forwardedFrom) {
+        this.forwardedFrom = forwardedFrom;
     }
 
     @Override
@@ -170,12 +240,13 @@ public class CallProperties {
         return Objects.equals(this.call, callProperties.call)
                 && Objects.equals(this.apiBaseUrl, callProperties.apiBaseUrl)
                 && Objects.equals(this.sender, callProperties.sender)
-                && Objects.equals(this.resolvedCnam, callProperties.resolvedCnam);
+                && Objects.equals(this.resolvedCnam, callProperties.resolvedCnam)
+                && Objects.equals(this.forwardedFrom, callProperties.forwardedFrom);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(call, apiBaseUrl, sender, resolvedCnam);
+        return Objects.hash(call, apiBaseUrl, sender, resolvedCnam, forwardedFrom);
     }
 
     @Override
@@ -195,6 +266,9 @@ public class CallProperties {
                 .append(newLine)
                 .append("    resolvedCnam: ")
                 .append(toIndentedString(resolvedCnam))
+                .append(newLine)
+                .append("    forwardedFrom: ")
+                .append(toIndentedString(forwardedFrom))
                 .append(newLine)
                 .append("}")
                 .toString();

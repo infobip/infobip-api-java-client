@@ -109,7 +109,7 @@ public class NumberLookupNotifyRequest {
      * Sets to.
      * <p>
      * Field description:
-     * Array of phone numbers to look up. Numbers must be in international format (Example: &#x60;41793026727&#x60;).
+     * Array of phone numbers to look up. Numbers must be in international format (Example: &#x60;41793026727&#x60;). Numbers longer than 256 characters in the request will be clipped during processing. The clipped numbers will be included in the response, reports, and logs.
      * <p>
      * The field is required.
      *
@@ -125,7 +125,7 @@ public class NumberLookupNotifyRequest {
      * Adds and item into to.
      * <p>
      * Field description:
-     * Array of phone numbers to look up. Numbers must be in international format (Example: &#x60;41793026727&#x60;).
+     * Array of phone numbers to look up. Numbers must be in international format (Example: &#x60;41793026727&#x60;). Numbers longer than 256 characters in the request will be clipped during processing. The clipped numbers will be included in the response, reports, and logs.
      * <p>
      * The field is required.
      *
@@ -144,7 +144,7 @@ public class NumberLookupNotifyRequest {
      * Returns to.
      * <p>
      * Field description:
-     * Array of phone numbers to look up. Numbers must be in international format (Example: &#x60;41793026727&#x60;).
+     * Array of phone numbers to look up. Numbers must be in international format (Example: &#x60;41793026727&#x60;). Numbers longer than 256 characters in the request will be clipped during processing. The clipped numbers will be included in the response, reports, and logs.
      * <p>
      * The field is required.
      *
@@ -159,7 +159,7 @@ public class NumberLookupNotifyRequest {
      * Sets to.
      * <p>
      * Field description:
-     * Array of phone numbers to look up. Numbers must be in international format (Example: &#x60;41793026727&#x60;).
+     * Array of phone numbers to look up. Numbers must be in international format (Example: &#x60;41793026727&#x60;). Numbers longer than 256 characters in the request will be clipped during processing. The clipped numbers will be included in the response, reports, and logs.
      * <p>
      * The field is required.
      *

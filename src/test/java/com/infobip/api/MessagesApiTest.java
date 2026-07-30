@@ -1953,7 +1953,7 @@ class MessagesApiTest extends ApiTest {
         String expectedName = "string";
         String expectedDescription = "string";
         Integer expectedErrorGroupId = 0;
-        String expectedErrorGroupName = "string";
+        String expectedErrorGroupName = "OK";
         Integer expectedErrorId = 0;
         String expectedErrorName = "string";
         String expectedErrorDescription = "string";
@@ -2044,7 +2044,7 @@ class MessagesApiTest extends ApiTest {
         then(messageStatus.getDescription()).isEqualTo(expectedDescription);
         var messageError = messagesApiDlrEvent.getError();
         then(messageError.getGroupId()).isEqualTo(expectedErrorGroupId);
-        then(messageError.getGroupName()).isEqualTo(expectedErrorGroupName);
+        then(messageError.getGroupName()).isEqualTo("OK");
         then(messageError.getId()).isEqualTo(expectedErrorId);
         then(messageError.getName()).isEqualTo(expectedErrorName);
         then(messageError.getDescription()).isEqualTo(expectedErrorDescription);

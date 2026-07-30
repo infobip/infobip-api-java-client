@@ -28,7 +28,6 @@ public enum CallsRecordingLocation {
     KUALA_LUMPUR("KUALA_LUMPUR"),
     JAKARTA("JAKARTA"),
     MUMBAI("MUMBAI"),
-    HONG_KONG_1("HONG_KONG_1"),
     HONG_KONG("HONG_KONG"),
     RIYADH("RIYADH"),
     CHENNAI("CHENNAI");

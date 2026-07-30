@@ -250,7 +250,10 @@ class MmsApiTest extends ApiTest {
         String givenMessageId = "string";
         String givenTo = "string";
         String givenFrom = "string";
-        String givenMessage = "string";
+        String givenMessageOrigin = "string";
+        String givenMessageContentType = "text/plain";
+        String givenMessageContentId = "string";
+        String givenMessageValue = "string";
         String givenReceivedAt = "string";
         Integer givenMmsCount = 0;
         String givenCallbackData = "string";
@@ -265,7 +268,14 @@ class MmsApiTest extends ApiTest {
                         + "      \"messageId\": \"%s\",\n"
                         + "      \"to\": \"%s\",\n"
                         + "      \"from\": \"%s\",\n"
-                        + "      \"message\": \"%s\",\n"
+                        + "      \"message\": [\n"
+                        + "        {\n"
+                        + "          \"origin\": \"%s\",\n"
+                        + "          \"contentType\": \"%s\",\n"
+                        + "          \"contentId\": \"%s\",\n"
+                        + "          \"value\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
                         + "      \"receivedAt\": \"%s\",\n"
                         + "      \"mmsCount\": %s,\n"
                         + "      \"callbackData\": \"%s\",\n"
@@ -281,7 +291,10 @@ class MmsApiTest extends ApiTest {
                 givenMessageId,
                 givenTo,
                 givenFrom,
-                givenMessage,
+                givenMessageOrigin,
+                givenMessageContentType,
+                givenMessageContentId,
+                givenMessageValue,
                 givenReceivedAt,
                 givenMmsCount,
                 givenCallbackData,
@@ -301,7 +314,13 @@ class MmsApiTest extends ApiTest {
             then(result.getMessageId()).isEqualTo(givenMessageId);
             then(result.getTo()).isEqualTo(givenTo);
             then(result.getFrom()).isEqualTo(givenFrom);
-            then(result.getMessage()).isEqualTo(givenMessage);
+            then(result.getMessage()).isNotNull();
+            then(result.getMessage().size()).isEqualTo(1);
+            var messagePart = result.getMessage().get(0);
+            then(messagePart.getOrigin()).isEqualTo(givenMessageOrigin);
+            then(messagePart.getContentType()).isEqualTo(givenMessageContentType);
+            then(messagePart.getContentId()).isEqualTo(givenMessageContentId);
+            then(messagePart.getValue()).isEqualTo(givenMessageValue);
             then(result.getReceivedAt()).isEqualTo(givenReceivedAt);
             then(result.getMmsCount()).isEqualTo(givenMmsCount);
             then(result.getCallbackData()).isEqualTo(givenCallbackData);
@@ -534,16 +553,16 @@ class MmsApiTest extends ApiTest {
         then(reportResponse.getResults().size()).isEqualTo(2);
 
         then(reportResponse.getResults().get(0).getClass()).isEqualTo(MmsReport.class);
-        var message1 = (MmsReport) reportResponse.getResults().get(0);
+        var message1 = reportResponse.getResults().get(0);
         then(message1.getPrice().getClass()).isEqualTo(MessagePrice.class);
         then(message1.getStatus().getClass()).isEqualTo(MessageStatus.class);
-        then(message1.getError().getClass()).isEqualTo(MmsMessageError.class);
+        then(message1.getError().getClass()).isEqualTo(MessageError.class);
 
         then(reportResponse.getResults().get(1).getClass()).isEqualTo(MmsReport.class);
-        var message2 = (MmsReport) reportResponse.getResults().get(1);
+        var message2 = reportResponse.getResults().get(1);
         then(message2.getPrice().getClass()).isEqualTo(MessagePrice.class);
         then(message2.getStatus().getClass()).isEqualTo(MessageStatus.class);
-        then(message2.getError().getClass()).isEqualTo(MmsMessageError.class);
+        then(message2.getError().getClass()).isEqualTo(MessageError.class);
     }
 
     @Test

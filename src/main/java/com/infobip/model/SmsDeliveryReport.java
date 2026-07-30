@@ -22,9 +22,9 @@ public class SmsDeliveryReport {
 
     private MessagePrice price;
 
-    private SmsMessageStatus status;
+    private MessageStatus status;
 
-    private SmsMessageError error;
+    private MessageError error;
 
     private String messageId;
 
@@ -123,7 +123,7 @@ public class SmsDeliveryReport {
      * @param status
      * @return This {@link SmsDeliveryReport instance}.
      */
-    public SmsDeliveryReport status(SmsMessageStatus status) {
+    public SmsDeliveryReport status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -134,7 +134,7 @@ public class SmsDeliveryReport {
      * @return status
      */
     @JsonProperty("status")
-    public SmsMessageStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -144,7 +144,7 @@ public class SmsDeliveryReport {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(SmsMessageStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 
@@ -154,7 +154,7 @@ public class SmsDeliveryReport {
      * @param error
      * @return This {@link SmsDeliveryReport instance}.
      */
-    public SmsDeliveryReport error(SmsMessageError error) {
+    public SmsDeliveryReport error(MessageError error) {
         this.error = error;
         return this;
     }
@@ -165,7 +165,7 @@ public class SmsDeliveryReport {
      * @return error
      */
     @JsonProperty("error")
-    public SmsMessageError getError() {
+    public MessageError getError() {
         return error;
     }
 
@@ -175,7 +175,7 @@ public class SmsDeliveryReport {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(SmsMessageError error) {
+    public void setError(MessageError error) {
         this.error = error;
     }
 

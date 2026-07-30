@@ -213,7 +213,7 @@ public class MmsApi {
         /**
          * Sets limit.
          *
-         * @param limit Maximum number of delivery reports to be returned. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access reports for the last 48h (optional, default to 50)
+         * @param limit Maximum number of delivery reports to be returned. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access reports for the last 48h. (optional, default to 50)
          * @return GetOutboundMmsMessageDeliveryReportsRequest
          */
         public GetOutboundMmsMessageDeliveryReportsRequest limit(Integer limit) {

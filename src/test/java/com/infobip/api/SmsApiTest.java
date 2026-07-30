@@ -145,7 +145,7 @@ class SmsApiTest extends ApiTest {
         String givenBulkId = "BULK-ID-123-xyz";
         String givenFirstDestinationMessageId = "abc123";
         int givenGroupId = 1;
-        MessageGeneralStatus givenGroupName = MessageGeneralStatus.PENDING;
+        String givenGroupName = PENDING_STATUS_GROUP_NAME;
         int givenStatusId = 26;
         String givenStatusName = "PENDING_ACCEPTED";
         String givenStatusDescription = "Message sent to next instance";
@@ -756,12 +756,12 @@ class SmsApiTest extends ApiTest {
         Double givenPricePerMessage = 0.01;
         String givenCurrency = "EUR";
         Integer givenGroupId = 3;
-        MessageGeneralStatus givenGroupName = MessageGeneralStatus.DELIVERED;
+        String givenGroupName = DELIVERED_STATUS_GROUP_NAME;
         Integer givenId = 5;
         String givenName = "DELIVERED_TO_HANDSET";
         String givenDescription = "Message delivered to handset";
         Integer givenErrorGroupId = 0;
-        MessageErrorGroup givenErrorGroupName = MessageErrorGroup.OK;
+        String givenErrorGroupName = "OK";
         Integer givenErrorId = 0;
         String givenErrorName = "NO_ERROR";
         String givenErrorDescription = "No Error";
@@ -1154,7 +1154,7 @@ class SmsApiTest extends ApiTest {
             thenStatusIsDelivered(anotherLog.getStatus());
             thenNoError(anotherLog.getError());
 
-            SmsCursorPageInfo cursorPageInfo = smsLogsResponse.getCursor();
+            CursorPageInfo cursorPageInfo = smsLogsResponse.getCursor();
             then(cursorPageInfo).isNotNull();
             then(cursorPageInfo.getNextCursor()).isEqualTo(givenNextCursor);
             then(cursorPageInfo.getLimit()).isEqualTo(givenCursorLimit);
@@ -1217,20 +1217,20 @@ class SmsApiTest extends ApiTest {
         thenStatusIsPending(responseDetails.getStatus());
     }
 
-    private void thenStatusIsPending(SmsMessageStatus status) {
+    private void thenStatusIsPending(MessageStatus status) {
         then(status).isNotNull();
         then(status.getGroupId()).isEqualTo(PENDING_STATUS_GROUP_ID);
-        then(status.getGroupName()).isEqualTo(MessageGeneralStatus.PENDING);
+        then(status.getGroupName()).isEqualTo(PENDING_STATUS_GROUP_NAME);
         then(status.getId()).isEqualTo(PENDING_STATUS_ID);
         then(status.getName()).isEqualTo(PENDING_STATUS_NAME);
         then(status.getDescription()).isEqualTo(PENDING_STATUS_DESCRIPTION);
         then(status.getAction()).isNull();
     }
 
-    private void thenStatusIsDelivered(SmsMessageStatus status) {
+    private void thenStatusIsDelivered(MessageStatus status) {
         then(status).isNotNull();
         then(status.getGroupId()).isEqualTo(DELIVERED_STATUS_GROUP_ID);
-        then(status.getGroupName()).isEqualTo(MessageGeneralStatus.DELIVERED);
+        then(status.getGroupName()).isEqualTo(DELIVERED_STATUS_GROUP_NAME);
         then(status.getId()).isEqualTo(DELIVERED_STATUS_ID);
         then(status.getName()).isEqualTo(DELIVERED_STATUS_NAME);
         then(status.getDescription()).isEqualTo(DELIVERED_STATUS_DESCRIPTION);
@@ -1243,10 +1243,10 @@ class SmsApiTest extends ApiTest {
         then(price.getCurrency()).isEqualTo(expectedCurrency);
     }
 
-    private void thenNoError(SmsMessageError error) {
+    private void thenNoError(MessageError error) {
         then(error).isNotNull();
         then(error.getGroupId()).isEqualTo(NO_ERROR_GROUP_ID);
-        then(error.getGroupName()).isEqualTo(MessageErrorGroup.OK);
+        then(error.getGroupName()).isEqualTo("OK");
         then(error.getId()).isEqualTo(NO_ERROR_ID);
         then(error.getName()).isEqualTo(NO_ERROR_NAME);
         then(error.getDescription()).isEqualTo(NO_ERROR_DESCRIPTION);
@@ -1366,13 +1366,13 @@ class SmsApiTest extends ApiTest {
         String givenCurrencyMessage1 = "EUR";
 
         Integer givenStatusGroupIdMessage1 = 3;
-        MessageGeneralStatus givenStatusGroupNameMessage1 = MessageGeneralStatus.DELIVERED;
+        String givenStatusGroupNameMessage1 = DELIVERED_STATUS_GROUP_NAME;
         Integer givenStatusIdMessage1 = 5;
         String givenStatusNameMessage1 = "DELIVERED_TO_HANDSET";
         String givenStatusDescriptionMessage1 = "Message delivered to handset";
 
         Integer givenErrorGroupIdMessage1 = 0;
-        MessageErrorGroup givenErrorGroupNameMessage1 = MessageErrorGroup.OK;
+        String givenErrorGroupNameMessage1 = "OK";
         Integer givenErrorIdMessage1 = 0;
         String givenErrorNameMessage1 = "NO_ERROR";
         String givenErrorDescriptionMessage1 = "No Error";
@@ -1388,13 +1388,13 @@ class SmsApiTest extends ApiTest {
         String givenCurrencyMessage2 = "EUR";
 
         Integer givenStatusGroupIdMessage2 = 3;
-        MessageGeneralStatus givenStatusGroupNameMessage2 = MessageGeneralStatus.DELIVERED;
+        String givenStatusGroupNameMessage2 = DELIVERED_STATUS_GROUP_NAME;
         Integer givenStatusIdMessage2 = 5;
         String givenStatusNameMessage2 = "DELIVERED_TO_HANDSET";
         String givenStatusDescriptionMessage2 = "Message delivered to handset";
 
         Integer givenErrorGroupIdMessage2 = 0;
-        MessageErrorGroup givenErrorGroupNameMessage2 = MessageErrorGroup.OK;
+        String givenErrorGroupNameMessage2 = "OK";
         Integer givenErrorIdMessage2 = 0;
         String givenErrorNameMessage2 = "NO_ERROR";
         String givenErrorDescriptionMessage2 = "No Error";
@@ -1539,13 +1539,13 @@ class SmsApiTest extends ApiTest {
             then(price1.getPricePerMessage()).isEqualTo(givenPricePerMessageMessage1);
             then(price1.getCurrency()).isEqualTo(givenCurrencyMessage1);
             then(report1.getStatus()).isNotNull();
-            SmsMessageStatus status1 = report1.getStatus();
+            MessageStatus status1 = report1.getStatus();
             then(status1.getGroupId()).isEqualTo(givenStatusGroupIdMessage1);
             then(status1.getGroupName()).isEqualTo(givenStatusGroupNameMessage1);
             then(status1.getId()).isEqualTo(givenStatusIdMessage1);
             then(status1.getDescription()).isEqualTo(givenStatusDescriptionMessage1);
             then(report1.getError()).isNotNull();
-            SmsMessageError error1 = report1.getError();
+            MessageError error1 = report1.getError();
             then(error1.getGroupId()).isEqualTo(givenErrorGroupIdMessage1);
             then(error1.getGroupName()).isEqualTo(givenErrorGroupNameMessage1);
             then(error1.getName()).isEqualTo(givenErrorNameMessage1);
@@ -1564,13 +1564,13 @@ class SmsApiTest extends ApiTest {
             then(price2.getPricePerMessage()).isEqualTo(givenPricePerMessageMessage2);
             then(price2.getCurrency()).isEqualTo(givenCurrencyMessage2);
             then(report2.getStatus()).isNotNull();
-            SmsMessageStatus status2 = report2.getStatus();
+            MessageStatus status2 = report2.getStatus();
             then(status2.getGroupId()).isEqualTo(givenStatusGroupIdMessage2);
             then(status2.getGroupName()).isEqualTo(givenStatusGroupNameMessage2);
             then(status2.getId()).isEqualTo(givenStatusIdMessage2);
             then(status2.getDescription()).isEqualTo(givenStatusDescriptionMessage2);
             then(report2.getError()).isNotNull();
-            SmsMessageError error2 = report2.getError();
+            MessageError error2 = report2.getError();
             then(error2.getGroupId()).isEqualTo(givenErrorGroupIdMessage2);
             then(error2.getGroupName()).isEqualTo(givenErrorGroupNameMessage2);
             then(error2.getName()).isEqualTo(givenErrorNameMessage2);
@@ -1776,7 +1776,7 @@ class SmsApiTest extends ApiTest {
         then(reportResponse.getResults()).isNotNull();
         then(reportResponse.getResults().size()).isEqualTo(1);
         then(reportResponse.getResults().get(0).getClass()).isEqualTo(SmsInboundMessage.class);
-        var message = (SmsInboundMessage) reportResponse.getResults().get(0);
+        var message = reportResponse.getResults().get(0);
         then(message.getPrice().getClass()).isEqualTo(MessagePrice.class);
     }
 
@@ -1844,15 +1844,15 @@ class SmsApiTest extends ApiTest {
         then(reportResponse.getResults().size()).isEqualTo(2);
 
         then(reportResponse.getResults().get(0).getClass()).isEqualTo(SmsDeliveryReport.class);
-        var message1 = (SmsDeliveryReport) reportResponse.getResults().get(0);
+        var message1 = reportResponse.getResults().get(0);
         then(message1.getPrice().getClass()).isEqualTo(MessagePrice.class);
-        then(message1.getStatus().getClass()).isEqualTo(SmsMessageStatus.class);
-        then(message1.getError().getClass()).isEqualTo(SmsMessageError.class);
+        then(message1.getStatus().getClass()).isEqualTo(MessageStatus.class);
+        then(message1.getError().getClass()).isEqualTo(MessageError.class);
 
         then(reportResponse.getResults().get(1).getClass()).isEqualTo(SmsDeliveryReport.class);
-        var message2 = (SmsDeliveryReport) reportResponse.getResults().get(1);
+        var message2 = reportResponse.getResults().get(1);
         then(message2.getPrice().getClass()).isEqualTo(MessagePrice.class);
-        then(message2.getStatus().getClass()).isEqualTo(SmsMessageStatus.class);
-        then(message2.getError().getClass()).isEqualTo(SmsMessageError.class);
+        then(message2.getStatus().getClass()).isEqualTo(MessageStatus.class);
+        then(message2.getError().getClass()).isEqualTo(MessageError.class);
     }
 }

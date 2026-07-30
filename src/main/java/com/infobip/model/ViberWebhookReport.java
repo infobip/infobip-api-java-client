@@ -24,7 +24,7 @@ public class ViberWebhookReport {
 
     private MessageStatus status;
 
-    private ViberMessageError error;
+    private MessageError error;
 
     private String messageId;
 
@@ -154,7 +154,7 @@ public class ViberWebhookReport {
      * @param error
      * @return This {@link ViberWebhookReport instance}.
      */
-    public ViberWebhookReport error(ViberMessageError error) {
+    public ViberWebhookReport error(MessageError error) {
         this.error = error;
         return this;
     }
@@ -165,7 +165,7 @@ public class ViberWebhookReport {
      * @return error
      */
     @JsonProperty("error")
-    public ViberMessageError getError() {
+    public MessageError getError() {
         return error;
     }
 
@@ -175,7 +175,7 @@ public class ViberWebhookReport {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(ViberMessageError error) {
+    public void setError(MessageError error) {
         this.error = error;
     }
 

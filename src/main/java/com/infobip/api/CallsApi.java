@@ -49,6 +49,7 @@ import com.infobip.model.CallsConfigurationUpdateRequest;
 import com.infobip.model.CallsConnectRequest;
 import com.infobip.model.CallsConnectWithNewCallRequest;
 import com.infobip.model.CallsCreateSipTrunkResponse;
+import com.infobip.model.CallsDialogAcceptTransferRequest;
 import com.infobip.model.CallsDialogBroadcastWebrtcTextRequest;
 import com.infobip.model.CallsDialogLogPage;
 import com.infobip.model.CallsDialogLogResponse;
@@ -2378,7 +2379,7 @@ public class CallsApi {
     /**
      * Create a media-stream configuration.
      * <p>
-     * Create a media-stream configuration.
+     * Create a media-stream configuration. For more details, see [documentation](https://www.infobip.com/docs/voice-and-video/calls#media-streaming-understanding-calls-api).
      *
      * @param callsMediaStreamConfigRequest  (required)
      * @return CreateMediaStreamConfigRequest
@@ -3509,6 +3510,136 @@ public class CallsApi {
      */
     public DialogStopRecordingRequest dialogStopRecording(String dialogId) {
         return new DialogStopRecordingRequest(dialogId);
+    }
+
+    private RequestDefinition dialogTransferAcceptDefinition(
+            String dialogId, CallsDialogAcceptTransferRequest callsDialogAcceptTransferRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/calls/1/dialogs/{dialogId}/transfer/accept")
+                .body(callsDialogAcceptTransferRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (dialogId != null) {
+            builder.addPathParameter(new Parameter("dialogId", dialogId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * dialogTransferAccept request builder class.
+     */
+    public class DialogTransferAcceptRequest {
+        private final String dialogId;
+        private final CallsDialogAcceptTransferRequest callsDialogAcceptTransferRequest;
+
+        private DialogTransferAcceptRequest(
+                String dialogId, CallsDialogAcceptTransferRequest callsDialogAcceptTransferRequest) {
+            this.dialogId = Objects.requireNonNull(dialogId, "The required parameter 'dialogId' is missing.");
+            this.callsDialogAcceptTransferRequest = Objects.requireNonNull(
+                    callsDialogAcceptTransferRequest,
+                    "The required parameter 'callsDialogAcceptTransferRequest' is missing.");
+        }
+
+        /**
+         * Executes the dialogTransferAccept request.
+         *
+         * @return CallsDialogResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsDialogResponse execute() throws ApiException {
+            RequestDefinition dialogTransferAcceptDefinition =
+                    dialogTransferAcceptDefinition(dialogId, callsDialogAcceptTransferRequest);
+            return apiClient.execute(
+                    dialogTransferAcceptDefinition, new TypeReference<CallsDialogResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the dialogTransferAccept request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsDialogResponse> callback) {
+            RequestDefinition dialogTransferAcceptDefinition =
+                    dialogTransferAcceptDefinition(dialogId, callsDialogAcceptTransferRequest);
+            return apiClient.executeAsync(
+                    dialogTransferAcceptDefinition, new TypeReference<CallsDialogResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Dialog transfer accept.
+     * <p>
+     * Accepts a dialog transfer request.
+     *
+     * @param dialogId Dialog ID. (required)
+     * @param callsDialogAcceptTransferRequest  (required)
+     * @return DialogTransferAcceptRequest
+     */
+    public DialogTransferAcceptRequest dialogTransferAccept(
+            String dialogId, CallsDialogAcceptTransferRequest callsDialogAcceptTransferRequest) {
+        return new DialogTransferAcceptRequest(dialogId, callsDialogAcceptTransferRequest);
+    }
+
+    private RequestDefinition dialogTransferRejectDefinition(String dialogId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "POST", "/calls/1/dialogs/{dialogId}/transfer/reject")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (dialogId != null) {
+            builder.addPathParameter(new Parameter("dialogId", dialogId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * dialogTransferReject request builder class.
+     */
+    public class DialogTransferRejectRequest {
+        private final String dialogId;
+
+        private DialogTransferRejectRequest(String dialogId) {
+            this.dialogId = Objects.requireNonNull(dialogId, "The required parameter 'dialogId' is missing.");
+        }
+
+        /**
+         * Executes the dialogTransferReject request.
+         *
+         * @return CallsActionResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public CallsActionResponse execute() throws ApiException {
+            RequestDefinition dialogTransferRejectDefinition = dialogTransferRejectDefinition(dialogId);
+            return apiClient.execute(
+                    dialogTransferRejectDefinition, new TypeReference<CallsActionResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the dialogTransferReject request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<CallsActionResponse> callback) {
+            RequestDefinition dialogTransferRejectDefinition = dialogTransferRejectDefinition(dialogId);
+            return apiClient.executeAsync(
+                    dialogTransferRejectDefinition, new TypeReference<CallsActionResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Dialog transfer reject.
+     * <p>
+     * Rejects a dialog transfer request.
+     *
+     * @param dialogId Dialog ID. (required)
+     * @return DialogTransferRejectRequest
+     */
+    public DialogTransferRejectRequest dialogTransferReject(String dialogId) {
+        return new DialogTransferRejectRequest(dialogId);
     }
 
     private RequestDefinition downloadRecordingFileDefinition(
@@ -7774,7 +7905,7 @@ public class CallsApi {
     /**
      * Reset SIP trunk credentials.
      * <p>
-     * Reset password. Applicable only for &#x60;REGISTERED&#x60; SIP trunks.
+     * Reset credentials. For &#x60;REGISTERED&#x60; SIP trunks, resets the registration password. For &#x60;AUTHENTICATED&#x60; SIP trunks, resets the authentication secrets (header value and digest credentials).
      *
      * @param sipTrunkId SIP trunk ID. (required)
      * @return ResetSipTrunkPasswordRequest

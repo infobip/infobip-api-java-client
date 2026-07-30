@@ -35,6 +35,8 @@ public class CallRoutingSimulatorWebRTCEndpoint extends CallRoutingSimulatorCall
      * <p>
      * Field description:
      * The unique from identity used to present a user on the Infobip WebRTC platform.
+     * <p>
+     * The field is required.
      *
      * @param from
      * @return This {@link CallRoutingSimulatorWebRTCEndpoint instance}.
@@ -49,6 +51,8 @@ public class CallRoutingSimulatorWebRTCEndpoint extends CallRoutingSimulatorCall
      * <p>
      * Field description:
      * The unique from identity used to present a user on the Infobip WebRTC platform.
+     * <p>
+     * The field is required.
      *
      * @return from
      */
@@ -62,6 +66,8 @@ public class CallRoutingSimulatorWebRTCEndpoint extends CallRoutingSimulatorCall
      * <p>
      * Field description:
      * The unique from identity used to present a user on the Infobip WebRTC platform.
+     * <p>
+     * The field is required.
      *
      * @param from
      */

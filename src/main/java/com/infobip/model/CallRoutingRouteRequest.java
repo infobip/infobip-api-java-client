@@ -25,6 +25,8 @@ public class CallRoutingRouteRequest {
 
     private List<CallRoutingDestination> destinations = new ArrayList<>();
 
+    private Boolean transferOnly;
+
     /**
      * Sets name.
      * <p>
@@ -193,6 +195,46 @@ public class CallRoutingRouteRequest {
         this.destinations = destinations;
     }
 
+    /**
+     * Sets transferOnly.
+     * <p>
+     * Field description:
+     * Indicates whether this route should be used exclusively for call transfers initiated via the REFER SIP message. The &#x60;to&#x60; number value will be taken from the &#x60;Refer-To&#x60; header.
+     *
+     * @param transferOnly
+     * @return This {@link CallRoutingRouteRequest instance}.
+     */
+    public CallRoutingRouteRequest transferOnly(Boolean transferOnly) {
+        this.transferOnly = transferOnly;
+        return this;
+    }
+
+    /**
+     * Returns transferOnly.
+     * <p>
+     * Field description:
+     * Indicates whether this route should be used exclusively for call transfers initiated via the REFER SIP message. The &#x60;to&#x60; number value will be taken from the &#x60;Refer-To&#x60; header.
+     *
+     * @return transferOnly
+     */
+    @JsonProperty("transferOnly")
+    public Boolean getTransferOnly() {
+        return transferOnly;
+    }
+
+    /**
+     * Sets transferOnly.
+     * <p>
+     * Field description:
+     * Indicates whether this route should be used exclusively for call transfers initiated via the REFER SIP message. The &#x60;to&#x60; number value will be taken from the &#x60;Refer-To&#x60; header.
+     *
+     * @param transferOnly
+     */
+    @JsonProperty("transferOnly")
+    public void setTransferOnly(Boolean transferOnly) {
+        this.transferOnly = transferOnly;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -204,12 +246,13 @@ public class CallRoutingRouteRequest {
         CallRoutingRouteRequest callRoutingRouteRequest = (CallRoutingRouteRequest) o;
         return Objects.equals(this.name, callRoutingRouteRequest.name)
                 && Objects.equals(this.criteria, callRoutingRouteRequest.criteria)
-                && Objects.equals(this.destinations, callRoutingRouteRequest.destinations);
+                && Objects.equals(this.destinations, callRoutingRouteRequest.destinations)
+                && Objects.equals(this.transferOnly, callRoutingRouteRequest.transferOnly);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, criteria, destinations);
+        return Objects.hash(name, criteria, destinations, transferOnly);
     }
 
     @Override
@@ -226,6 +269,9 @@ public class CallRoutingRouteRequest {
                 .append(newLine)
                 .append("    destinations: ")
                 .append(toIndentedString(destinations))
+                .append(newLine)
+                .append("    transferOnly: ")
+                .append(toIndentedString(transferOnly))
                 .append(newLine)
                 .append("}")
                 .toString();

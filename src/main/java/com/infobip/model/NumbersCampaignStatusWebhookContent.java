@@ -23,6 +23,8 @@ public class NumbersCampaignStatusWebhookContent {
 
     private UUID campaignId;
 
+    private String tcrId;
+
     private NumbersWebhookCampaignStage campaignStatus;
 
     private String rejectionReasons;
@@ -69,6 +71,46 @@ public class NumbersCampaignStatusWebhookContent {
     @JsonProperty("campaignId")
     public void setCampaignId(UUID campaignId) {
         this.campaignId = campaignId;
+    }
+
+    /**
+     * Sets tcrId.
+     * <p>
+     * Field description:
+     * The ID of the campaign as defined by The Campaign Registry. This field is present only for 10DLC campaigns.
+     *
+     * @param tcrId
+     * @return This {@link NumbersCampaignStatusWebhookContent instance}.
+     */
+    public NumbersCampaignStatusWebhookContent tcrId(String tcrId) {
+        this.tcrId = tcrId;
+        return this;
+    }
+
+    /**
+     * Returns tcrId.
+     * <p>
+     * Field description:
+     * The ID of the campaign as defined by The Campaign Registry. This field is present only for 10DLC campaigns.
+     *
+     * @return tcrId
+     */
+    @JsonProperty("tcrId")
+    public String getTcrId() {
+        return tcrId;
+    }
+
+    /**
+     * Sets tcrId.
+     * <p>
+     * Field description:
+     * The ID of the campaign as defined by The Campaign Registry. This field is present only for 10DLC campaigns.
+     *
+     * @param tcrId
+     */
+    @JsonProperty("tcrId")
+    public void setTcrId(String tcrId) {
+        this.tcrId = tcrId;
     }
 
     /**
@@ -251,6 +293,7 @@ public class NumbersCampaignStatusWebhookContent {
         NumbersCampaignStatusWebhookContent numbersCampaignStatusWebhookContent =
                 (NumbersCampaignStatusWebhookContent) o;
         return Objects.equals(this.campaignId, numbersCampaignStatusWebhookContent.campaignId)
+                && Objects.equals(this.tcrId, numbersCampaignStatusWebhookContent.tcrId)
                 && Objects.equals(this.campaignStatus, numbersCampaignStatusWebhookContent.campaignStatus)
                 && Objects.equals(this.rejectionReasons, numbersCampaignStatusWebhookContent.rejectionReasons)
                 && Objects.equals(this.rejectionDetails, numbersCampaignStatusWebhookContent.rejectionDetails)
@@ -259,7 +302,7 @@ public class NumbersCampaignStatusWebhookContent {
 
     @Override
     public int hashCode() {
-        return Objects.hash(campaignId, campaignStatus, rejectionReasons, rejectionDetails, rejectionDate);
+        return Objects.hash(campaignId, tcrId, campaignStatus, rejectionReasons, rejectionDetails, rejectionDate);
     }
 
     @Override
@@ -270,6 +313,9 @@ public class NumbersCampaignStatusWebhookContent {
                 .append(newLine)
                 .append("    campaignId: ")
                 .append(toIndentedString(campaignId))
+                .append(newLine)
+                .append("    tcrId: ")
+                .append(toIndentedString(tcrId))
                 .append(newLine)
                 .append("    campaignStatus: ")
                 .append(toIndentedString(campaignStatus))

@@ -5,12 +5,10 @@ import static org.assertj.core.api.BDDAssertions.then;
 
 import com.infobip.JSON;
 import com.infobip.model.*;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,9 +17,10 @@ import org.junit.jupiter.api.Test;
 
 class EmailApiTest extends ApiTest {
 
-    private static final String EMAIL_SEND = "/email/3/send";
-    private static final String LOGS = "/email/1/logs";
-    private static final String REPORTS = "/email/1/reports";
+    private static final String EMAIL_SEND = "/email/4/messages";
+    private static final String EMAIL_MIME = "/email/4/mime";
+    private static final String LOGS = "/email/4/logs";
+    private static final String REPORTS = "/email/4/reports";
     private static final String BULKS = "/email/1/bulks";
     private static final String BULKS_STATUS = "/email/1/bulks/status";
     private static final String VALIDATION = "/email/2/validation";
@@ -29,9 +28,6 @@ class EmailApiTest extends ApiTest {
     private static final String DOMAIN = "/email/1/domains/{domainName}";
     private static final String DOMAIN_TRACKING = "/email/1/domains/{domainName}/tracking";
     private static final String DOMAIN_VERIFY = "/email/1/domains/{domainName}/verify";
-    private static final String IPS = "/email/1/ips";
-    private static final String DOMAIN_IPS = "/email/1/domain-ips";
-    private static final String RETURN_PATH = "/email/1/domains/{domainName}/return-path";
     private static final String EMAIL_SUPPRESSION = "/email/1/suppressions";
     private static final String EMAIL_SUPPRESSION_DOMAINS = "/email/1/suppressions/domains";
 
@@ -194,7 +190,7 @@ class EmailApiTest extends ApiTest {
             then(response.getPaging().getPage()).isEqualTo(givenPaging);
             then(response.getPaging().getSize()).isEqualTo(givenPaging);
             then(response.getPaging().getTotalPages()).isEqualTo(givenPaging);
-            then(response.getPaging().getTotalResults()).isEqualTo(givenPaging);
+            then(response.getPaging().getTotalResults()).isEqualTo(givenPaging.longValue());
 
             then(response.getResults()).isNotNull();
             var result = response.getResults().get(0);
@@ -554,53 +550,99 @@ class EmailApiTest extends ApiTest {
     }
 
     @Test
-    void shouldSendFullyFeaturedEmail() throws IOException {
-        String givenTo = "john.smith@somedomain.com";
-        String givenAnotherTo = "{\"to\": \"alice.grey@somecompany.com\",\"placeholders\": {\"name\": \"Alice\"}}";
-        String anotherToInResponse = "alice.grey@somecompany.com";
-        String givenBulkId = "snxemd8u52v7v84iiu69";
-        Integer givenGroupId = 1;
-        String givenGroupName = "PENDING";
-        Integer givenId = 1;
-        String givenName = "PENDING_ACCEPTED";
-        String givenDescription = "Message accepted, pending for delivery.";
-
-        String givenAttachmentText = "Test file text";
-        File tempFile = File.createTempFile("attachment", ".txt");
-        Files.writeString(tempFile.toPath(), givenAttachmentText);
-
-        String givenMessageId = "somExternalMessageId0";
-        String givenAnotherMessageId = "someExternalMessageId1";
-
-        String givenFrom = "Jane Smith <jane.smith@example.com>";
-        String givenReplyTo = "all.replies@example.com";
-        String givenSubject = "Mail subject text";
-        String givenText = "Mail body text";
-        String givenHtml = "<h1>Html body</h1><p>Rich HTML message body.</p>";
-        Boolean intermediateReport = true;
+    void shouldSendFullyFeaturedEmail() {
+        // Fixtures adapted from OpenAPI POST /email/4/messages examples:
+        // "Email with HTML and placeholders...", "Email with attachments",
+        // and "Success response with multiple destinations".
+        String givenSender = "jenny.smith@company.com";
+        String givenTo = "john.smith@company.com";
+        String givenAnotherTo = "mike.smith@company.com";
+        String givenToPlaceholders = "{\"customer_name\":\"John Smith\"}";
+        String givenAnotherToPlaceholders = "{\"customer_name\":\"Mike Smith\"}";
+        String givenSubject = "Test message";
+        String givenHtml = "<h1>Html body</h1>\n<p>Rich HTML message body.</p>\n"
+                + "<div>Example with default placeholders: {{default_ph}}</div>\n"
+                + "<div>Example with personalized placeholders: {{to_ph}}</div>";
+        String givenDefaultPlaceholders = "{\"default_ph\":\"Default placeholder\"}";
+        String givenAttachmentContentBase64 = "Q29udGVudA==";
+        String givenAttachmentContentType = "image/png";
+        String givenAttachmentFileName = "image.png";
+        Boolean givenIntermediateReport = true;
         String givenNotifyUrl = "https://www.example.com/email/advanced";
         String givenNotifyContentType = "application/json";
         String givenCallbackData = "DLR callback data";
 
-        var parts = List.of(
-                new Multipart("from", givenFrom),
-                new Multipart("to", givenTo),
-                new Multipart("to", givenAnotherTo),
-                new Multipart("replyTo", givenReplyTo),
-                new Multipart("subject", givenSubject),
-                new Multipart("text", givenText),
-                new Multipart("html", givenHtml),
-                new Multipart("attachment", givenAttachmentText),
-                new Multipart("intermediateReport", intermediateReport.toString()),
-                new Multipart("notifyUrl", givenNotifyUrl),
-                new Multipart("notifyContentType", givenNotifyContentType),
-                new Multipart("callbackData", givenCallbackData));
+        String givenBulkId = "a28dd97c-2222-4fcf-99f1-0b557ed381da";
+        String givenMessageId = "a28dd97c-1ffb-4fcf-99f1-0b557ed381da";
+        String givenAnotherMessageId = "2211d97c-53432-4fcf-99f1-0b557ed381da";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 7;
+        String givenName = "PENDING_ENROUTE";
+        String givenDescription = "Message sent to next instance";
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": [\n"
+                        + "            {\n"
+                        + "              \"destination\": \"%s\",\n"
+                        + "              \"placeholders\": %s\n"
+                        + "            },\n"
+                        + "            {\n"
+                        + "              \"destination\": \"%s\",\n"
+                        + "              \"placeholders\": %s\n"
+                        + "            }\n"
+                        + "          ]\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"content\": {\n"
+                        + "        \"subject\": \"%s\",\n"
+                        + "        \"html\": %s,\n"
+                        + "        \"defaultPlaceholders\": %s,\n"
+                        + "        \"attachments\": [\n"
+                        + "          {\n"
+                        + "            \"type\": \"binary\",\n"
+                        + "            \"content\": \"%s\",\n"
+                        + "            \"contentType\": \"%s\",\n"
+                        + "            \"fileName\": \"%s\"\n"
+                        + "          }\n"
+                        + "        ]\n"
+                        + "      },\n"
+                        + "      \"webhooks\": {\n"
+                        + "        \"delivery\": {\n"
+                        + "          \"url\": \"%s\",\n"
+                        + "          \"intermediateReport\": %b\n"
+                        + "        },\n"
+                        + "        \"contentType\": \"%s\",\n"
+                        + "        \"callbackData\": \"%s\"\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenSender,
+                givenTo,
+                jsonStringLiteral(givenToPlaceholders),
+                givenAnotherTo,
+                jsonStringLiteral(givenAnotherToPlaceholders),
+                givenSubject,
+                jsonStringLiteral(givenHtml),
+                jsonStringLiteral(givenDefaultPlaceholders),
+                givenAttachmentContentBase64,
+                givenAttachmentContentType,
+                givenAttachmentFileName,
+                givenNotifyUrl,
+                givenIntermediateReport,
+                givenNotifyContentType,
+                givenCallbackData);
 
         String expectedResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
                         + "  \"messages\": [\n"
                         + "    {\n"
-                        + "      \"to\": \"%s\",\n"
                         + "      \"messageId\": \"%s\",\n"
                         + "      \"status\": {\n"
                         + "        \"groupId\": %d,\n"
@@ -608,10 +650,10 @@ class EmailApiTest extends ApiTest {
                         + "        \"id\": %d,\n"
                         + "        \"name\": \"%s\",\n"
                         + "        \"description\": \"%s\"\n"
-                        + "      }\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
                         + "    },\n"
                         + "    {\n"
-                        + "      \"to\": \"%s\",\n"
                         + "      \"messageId\": \"%s\",\n"
                         + "      \"status\": {\n"
                         + "        \"groupId\": %d,\n"
@@ -619,67 +661,84 @@ class EmailApiTest extends ApiTest {
                         + "        \"id\": %d,\n"
                         + "        \"name\": \"%s\",\n"
                         + "        \"description\": \"%s\"\n"
-                        + "      }\n"
+                        + "      },\n"
+                        + "      \"destination\": \"%s\"\n"
                         + "    }\n"
                         + "  ]\n"
                         + "}",
                 givenBulkId,
-                givenTo,
                 givenMessageId,
                 givenGroupId,
                 givenGroupName,
                 givenId,
                 givenName,
                 givenDescription,
-                anotherToInResponse,
+                givenTo,
                 givenAnotherMessageId,
                 givenGroupId,
                 givenGroupName,
                 givenId,
                 givenName,
-                givenDescription);
+                givenDescription,
+                givenAnotherTo);
 
-        setUpMultipartRequest(EMAIL_SEND, parts, expectedResponse, 200);
+        setUpSuccessPostRequest(EMAIL_SEND, expectedRequest, expectedResponse);
 
-        Consumer<EmailSendResponse> assertions = (response) -> {
+        Consumer<EmailResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getBulkId()).isEqualTo(givenBulkId);
             then(response.getMessages()).isNotNull();
-            var messages = response.getMessages();
-            then(messages).isNotNull();
-            then(messages).hasSize(2);
+            then(response.getMessages()).hasSize(2);
             var expectedStatus = new MessageStatus()
                     .groupId(givenGroupId)
                     .groupName(givenGroupName)
                     .id(givenId)
                     .name(givenName)
                     .description(givenDescription);
-            var firstMessage = messages.get(0);
-            then(firstMessage.getTo()).isEqualTo(givenTo);
+            var firstMessage = response.getMessages().get(0);
+            then(firstMessage.getDestination()).isEqualTo(givenTo);
             then(firstMessage.getMessageId()).isEqualTo(givenMessageId);
             then(firstMessage.getStatus()).isEqualTo(expectedStatus);
-            var secondMessage = messages.get(1);
-            then(secondMessage.getTo()).isEqualTo(anotherToInResponse);
+            var secondMessage = response.getMessages().get(1);
+            then(secondMessage.getDestination()).isEqualTo(givenAnotherTo);
             then(secondMessage.getMessageId()).isEqualTo(givenAnotherMessageId);
             then(secondMessage.getStatus()).isEqualTo(expectedStatus);
         };
 
-        EmailApi sendEmailApi = new EmailApi(getApiClient());
+        EmailApi api = new EmailApi(getApiClient());
 
-        var call = sendEmailApi
-                .sendEmail(List.of(givenTo, givenAnotherTo))
-                .from(givenFrom)
-                .subject(givenSubject)
-                .replyTo(givenReplyTo)
-                .html(givenHtml)
-                .text(givenText)
-                .attachment(List.of(tempFile))
-                .intermediateReport(intermediateReport)
-                .notifyUrl(givenNotifyUrl)
-                .notifyContentType(givenNotifyContentType)
-                .callbackData(givenCallbackData);
+        EmailRequest emailRequest = new EmailRequest()
+                .addMessagesItem(new EmailMessage()
+                        .sender(givenSender)
+                        .addDestinationsItem(new EmailGroupDestination()
+                                .addToItem(new EmailToDestination()
+                                        .destination(givenTo)
+                                        .placeholders(givenToPlaceholders))
+                                .addToItem(new EmailToDestination()
+                                        .destination(givenAnotherTo)
+                                        .placeholders(givenAnotherToPlaceholders)))
+                        .content(new EmailMessageContent()
+                                .subject(givenSubject)
+                                .html(givenHtml)
+                                .defaultPlaceholders(givenDefaultPlaceholders)
+                                .addAttachmentsItem(new EmailMediaBinaryAttachment()
+                                        .content(Base64.getDecoder().decode(givenAttachmentContentBase64))
+                                        .contentType(givenAttachmentContentType)
+                                        .fileName(givenAttachmentFileName)))
+                        .webhooks(new EmailWebhooks()
+                                .delivery(new EmailMessageDeliveryReporting()
+                                        .url(givenNotifyUrl)
+                                        .intermediateReport(givenIntermediateReport))
+                                .contentType(givenNotifyContentType)
+                                .callbackData(givenCallbackData)));
+
+        var call = api.sendEmail(emailRequest);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    private static String jsonStringLiteral(String value) {
+        return "\"" + value.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n") + "\"";
     }
 
     @Test
@@ -691,6 +750,7 @@ class EmailApiTest extends ApiTest {
         String givenBulkId = "csdstgteet4fath2pclbq";
         String givenMessageId = "45653761-3a88-4060-869e-ae372adc7a51";
         String givenTo = "john.doe@example.com";
+        String givenSender = "jenny.smith@company.com";
 
         String expectedResponse = String.format(
                 "{\n" + "  \"results\": [\n"
@@ -698,6 +758,105 @@ class EmailApiTest extends ApiTest {
                         + "      \"bulkId\": \"%s\",\n"
                         + "      \"messageId\": \"%s\",\n"
                         + "      \"to\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"sentAt\": \"%s\",\n"
+                        + "      \"doneAt\": \"%s\",\n"
+                        + "      \"messageCount\": 1,\n"
+                        + "      \"price\": {\n"
+                        + "        \"pricePerMessage\": 0,\n"
+                        + "        \"currency\": \"UNKNOWN\"\n"
+                        + "      },\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 3,\n"
+                        + "        \"groupName\": \"DELIVERED\",\n"
+                        + "        \"id\": 5,\n"
+                        + "        \"name\": \"DELIVERED_TO_HANDSET\",\n"
+                        + "        \"description\": \"Message delivered to handset\"\n"
+                        + "      },\n"
+                        + "      \"error\": {\n"
+                        + "        \"groupId\": 0,\n"
+                        + "        \"groupName\": \"OK\",\n"
+                        + "        \"id\": 0,\n"
+                        + "        \"name\": \"NO_ERROR\",\n"
+                        + "        \"description\": \"No Error\",\n"
+                        + "        \"permanent\": false\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId, givenMessageId, givenTo, givenSender, givenSentAt, givenDoneAt);
+
+        Consumer<EmailReportsResult> assertions = emailReportsResult -> {
+            then(emailReportsResult).isNotNull();
+            List<EmailReport> results = emailReportsResult.getResults();
+            then(results).isNotNull();
+            then(results).hasSize(1);
+            EmailReport report = results.get(0);
+
+            then(report).isNotNull();
+            then(report.getBulkId()).isEqualTo(givenBulkId);
+            then(report.getMessageId()).isEqualTo(givenMessageId);
+            then(report.getTo()).isEqualTo(givenTo);
+            then(report.getSender()).isEqualTo(givenSender);
+
+            then(report.getSentAt()).isEqualTo(expectedSentAt);
+            then(report.getDoneAt()).isEqualTo(expectedDoneAt);
+
+            MessageStatus status = report.getStatus();
+            then(status.getGroupId()).isEqualTo(DELIVERED_STATUS_GROUP_ID);
+            then(status.getGroupName()).isEqualTo(DELIVERED_STATUS_GROUP_NAME);
+            then(status.getId()).isEqualTo(DELIVERED_STATUS_ID);
+            then(status.getName()).isEqualTo(DELIVERED_STATUS_NAME);
+            then(status.getDescription()).isEqualTo(DELIVERED_STATUS_DESCRIPTION);
+            MessageError error = report.getError();
+            then(error).isNotNull();
+            then(error.getGroupId()).isEqualTo(NO_ERROR_GROUP_ID);
+            then(error.getGroupName()).isEqualTo("OK");
+            then(error.getId()).isEqualTo(NO_ERROR_ID);
+            then(error.getName()).isEqualTo(NO_ERROR_NAME);
+            then(error.getDescription()).isEqualTo(NO_ERROR_DESCRIPTION);
+            then(error.getPermanent()).isEqualTo(NO_ERROR_IS_PERMANENT);
+        };
+
+        Map<String, String> params = Map.of(
+                "bulkId", givenBulkId,
+                "messageId", givenMessageId,
+                "limit", "1");
+
+        setUpGetRequest(REPORTS, params, expectedResponse, 200);
+
+        EmailApi sendEmailApi = new EmailApi(getApiClient());
+        var call = sendEmailApi
+                .getEmailDeliveryReports()
+                .bulkId(givenBulkId)
+                .messageId(givenMessageId)
+                .limit(1);
+
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetEmailLogs() {
+        String givenSentAt = "2021-08-25T16:10:00.000+0500";
+        String givenDoneAt = "2021-08-25T16:11:00.000+0500";
+        OffsetDateTime expectedSentAt = OffsetDateTime.of(LocalDateTime.of(2021, 8, 25, 16, 10), ZoneOffset.ofHours(5));
+        OffsetDateTime expectedDoneAt = OffsetDateTime.of(LocalDateTime.of(2021, 8, 25, 16, 11), ZoneOffset.ofHours(5));
+        String givenBulkId = "csdstgteet4fath2pclbq";
+        String givenMessageId = "45653761-3a88-4060-869e-ae372adc7a51";
+        String givenDestination = "john.doe@example.com";
+        String givenSender = "jenny.smith@company.com";
+        String givenApplicationId = "applicationId";
+        String givenEntityId = "entityId";
+        String givenNextCursor = "next-cursor";
+
+        String expectedResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"bulkId\": \"%s\",\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"destination\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
                         + "      \"sentAt\": \"%s\",\n"
                         + "      \"doneAt\": \"%s\",\n"
                         + "      \"messageCount\": 1,\n"
@@ -720,41 +879,55 @@ class EmailApiTest extends ApiTest {
                         + "        \"description\": \"No Error\",\n"
                         + "        \"permanent\": false\n"
                         + "      },\n"
-                        + "      \"channel\": \"EMAIL\"\n"
+                        + "      \"platform\": {\n"
+                        + "        \"applicationId\": \"%s\",\n"
+                        + "        \"entityId\": \"%s\"\n"
+                        + "      }\n"
                         + "    }\n"
-                        + "  ]\n"
+                        + "  ],\n"
+                        + "  \"cursor\": {\n"
+                        + "    \"nextCursor\": \"%s\",\n"
+                        + "    \"limit\": 1\n"
+                        + "  }\n"
                         + "}",
-                givenBulkId, givenMessageId, givenTo, givenSentAt, givenDoneAt);
+                givenBulkId,
+                givenMessageId,
+                givenDestination,
+                givenSender,
+                givenSentAt,
+                givenDoneAt,
+                givenApplicationId,
+                givenEntityId,
+                givenNextCursor);
 
-        Consumer<EmailReportsResult> assertions = emailReportsResult -> {
-            then(emailReportsResult).isNotNull();
-            List<EmailReport> results = emailReportsResult.getResults();
+        Consumer<EmailLogsResponse> assertions = emailLogsResponse -> {
+            then(emailLogsResponse).isNotNull();
+            List<EmailLog> results = emailLogsResponse.getResults();
             then(results).isNotNull();
             then(results).hasSize(1);
-            EmailReport report = results.get(0);
+            EmailLog log = results.get(0);
 
-            then(report).isNotNull();
-            then(report.getBulkId()).isEqualTo(givenBulkId);
-            then(report.getMessageId()).isEqualTo(givenMessageId);
-            then(report.getTo()).isEqualTo(givenTo);
+            then(log).isNotNull();
+            then(log.getBulkId()).isEqualTo(givenBulkId);
+            then(log.getMessageId()).isEqualTo(givenMessageId);
+            then(log.getDestination()).isEqualTo(givenDestination);
+            then(log.getSender()).isEqualTo(givenSender);
+            then(log.getSentAt()).isEqualTo(expectedSentAt);
+            then(log.getDoneAt()).isEqualTo(expectedDoneAt);
+            then(log.getPlatform()).isNotNull();
+            then(log.getPlatform().getApplicationId()).isEqualTo(givenApplicationId);
+            then(log.getPlatform().getEntityId()).isEqualTo(givenEntityId);
 
-            then(report.getSentAt()).isEqualTo(expectedSentAt);
-            then(report.getDoneAt()).isEqualTo(expectedDoneAt);
-
-            MessageStatus status = report.getStatus();
+            MessageStatus status = log.getStatus();
             then(status.getGroupId()).isEqualTo(DELIVERED_STATUS_GROUP_ID);
             then(status.getGroupName()).isEqualTo(DELIVERED_STATUS_GROUP_NAME);
             then(status.getId()).isEqualTo(DELIVERED_STATUS_ID);
             then(status.getName()).isEqualTo(DELIVERED_STATUS_NAME);
             then(status.getDescription()).isEqualTo(DELIVERED_STATUS_DESCRIPTION);
-            MessageError error = report.getError();
-            then(error).isNotNull();
-            then(error.getGroupId()).isEqualTo(NO_ERROR_GROUP_ID);
-            then(error.getGroupName()).isEqualTo(NO_ERROR_GROUP_NAME);
-            then(error.getId()).isEqualTo(NO_ERROR_ID);
-            then(error.getName()).isEqualTo(NO_ERROR_NAME);
-            then(error.getDescription()).isEqualTo(NO_ERROR_DESCRIPTION);
-            then(error.getPermanent()).isEqualTo(NO_ERROR_IS_PERMANENT);
+
+            then(emailLogsResponse.getCursor()).isNotNull();
+            then(emailLogsResponse.getCursor().getNextCursor()).isEqualTo(givenNextCursor);
+            then(emailLogsResponse.getCursor().getLimit()).isEqualTo(1);
         };
 
         Map<String, String> params = Map.of(
@@ -762,15 +935,99 @@ class EmailApiTest extends ApiTest {
                 "messageId", givenMessageId,
                 "limit", "1");
 
-        setUpGetRequest(REPORTS, params, expectedResponse, 200);
+        setUpGetRequest(LOGS, params, expectedResponse, 200);
 
-        EmailApi sendEmailApi = new EmailApi(getApiClient());
-        var call = sendEmailApi
-                .getEmailDeliveryReports()
-                .bulkId(givenBulkId)
-                .messageId(givenMessageId)
+        EmailApi api = new EmailApi(getApiClient());
+        var call = api.getEmailLogs()
+                .bulkId(List.of(givenBulkId))
+                .messageId(List.of(givenMessageId))
                 .limit(1);
 
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendMimeEmail() {
+        // Fixtures from OpenAPI POST /email/4/mime examples:
+        // single-recipient request and "Example for single message" response.
+        String givenMessageId = "requestMessageId";
+        String givenFrom = "jenny.smith@company.com";
+        String givenDestination = "john.smith@company";
+        String givenMimeMessage =
+                "RGF0ZTogV2VkLCAxOCBKdW4gMjAyNSAxMjo0ODoyMyArMDIwMCAoQ0VTVCkNCkZyb206IGplbm55LnNtaXRoQGNvbXBhbnkuY29tDQpUbzogam9obi5zbWl0aEBjb21wYW55LmNvbQ0KTWVzc2FnZS1JRDogPG1lc3NhZ2VAaWQ+DQpTdWJqZWN0OiBUaGlzIGlzIHN1YmplY3QNCk1JTUUtVmVyc2lvbjogMS4wDQpDb250ZW50LVR5cGU6IG11bHRpcGFydC9taXhlZDsgDQoJYm91bmRhcnk9Ii0tLS09X1BhcnRfMF8xNDkzMzcyMS4xNzUwMjQzNzAzMTY0Ig0KWC1JQi1idWxrLWlkOiBkZWZhdWx0QnVsa0lkDQoNCi0tLS0tLT1fUGFydF8wXzE0OTMzNzIxLjE3NTAyNDM3MDMxNjQNCkNvbnRlbnQtVHlwZTogdGV4dC9wbGFpbjsgY2hhcnNldD11cy1hc2NpaQ0KQ29udGVudC1UcmFuc2Zlci1FbmNvZGluZzogN2JpdA0KDQpIZWxsbyB3b3JsZA0KLS0tLS0tPV9QYXJ0XzBfMTQ5MzM3MjEuMTc1MDI0MzcwMzE2NA0KQ29udGVudC1UeXBlOiB0ZXh0L2h0bWw7IGNoYXJzZXQ9dXMtYXNjaWkNCkNvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IDdiaXQNCg0KPGRpdj5IZWxsbyB3b3JsZDwvZGl2Pg0KLS0tLS0tPV9QYXJ0XzBfMTQ5MzM3MjEuMTc1MDI0MzcwMzE2NC0tDQo=";
+
+        String givenBulkId = "snxemd8u52v7v84iiu69";
+        String givenResponseTo = "john.smith@somecompany.com";
+        String givenResponseMessageId = "jgzra46v9zi1ztvd62t5";
+        Integer givenGroupId = 1;
+        String givenGroupName = "PENDING";
+        Integer givenId = 26;
+        String givenName = "PENDING_ACCEPTED";
+        String givenDescription = "Message accepted, pending for delivery.";
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"messageId\": \"%s\",\n"
+                        + "  \"from\": \"%s\",\n"
+                        + "  \"destinations\": [\n"
+                        + "    \"%s\"\n"
+                        + "  ],\n"
+                        + "  \"mimeMessage\": \"%s\"\n"
+                        + "}",
+                givenMessageId, givenFrom, givenDestination, givenMimeMessage);
+
+        String expectedResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"messageId\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": %d,\n"
+                        + "        \"groupName\": \"%s\",\n"
+                        + "        \"id\": %d,\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"description\": \"%s\"\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId,
+                givenResponseTo,
+                givenResponseMessageId,
+                givenGroupId,
+                givenGroupName,
+                givenId,
+                givenName,
+                givenDescription);
+
+        setUpSuccessPostRequest(EMAIL_MIME, expectedRequest, expectedResponse);
+
+        Consumer<EmailSendResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(givenBulkId);
+            then(response.getMessages()).isNotNull();
+            then(response.getMessages()).hasSize(1);
+            var message = response.getMessages().get(0);
+            then(message.getTo()).isEqualTo(givenResponseTo);
+            then(message.getMessageId()).isEqualTo(givenResponseMessageId);
+            then(message.getStatus())
+                    .isEqualTo(new MessageStatus()
+                            .groupId(givenGroupId)
+                            .groupName(givenGroupName)
+                            .id(givenId)
+                            .name(givenName)
+                            .description(givenDescription));
+        };
+
+        EmailApi api = new EmailApi(getApiClient());
+        EmailSendMimeRequestSchema mimeRequest = new EmailSendMimeRequestSchema()
+                .messageId(givenMessageId)
+                .from(givenFrom)
+                .destinations(List.of(givenDestination))
+                .mimeMessage(givenMimeMessage);
+
+        var call = api.sendMimeEmail(mimeRequest);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -1238,5 +1495,208 @@ class EmailApiTest extends ApiTest {
         var call = api.getIpDomain(domainId);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldCreateIpPool() {
+        String poolId = "08A3A7608750CC6E6080325A6ADF45B6";
+        String poolName = "IP pool name";
+        String expectedRequest = String.format("{\n" + "  \"name\": \"%s\"\n" + "}", poolName);
+        String givenResponse =
+                String.format("{\n" + "  \"id\": \"%s\",\n" + "  \"name\": \"%s\"\n" + "}", poolId, poolName);
+
+        setUpPostRequest("/email/1/ip-management/pools", expectedRequest, givenResponse, 201);
+
+        EmailApi api = new EmailApi(getApiClient());
+        EmailIpPoolCreateApiRequest request = new EmailIpPoolCreateApiRequest().name(poolName);
+        Consumer<EmailIpPoolResponse> assertions = response -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo(poolId);
+            then(response.getName()).isEqualTo(poolName);
+        };
+
+        var call = api.createIpPool(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetIpPools() {
+        String poolId = "08A3A7608750CC6E6080325A6ADF45B6";
+        String ipId = "DB3F9D439088BF73F5560443C8054AC4";
+        String givenResponse = "[\n" + "  {\n"
+                + "    \"id\": \"08A3A7608750CC6E6080325A6ADF45B6\",\n"
+                + "    \"name\": \"IP pool name\",\n"
+                + "    \"ips\": [\n"
+                + "      {\n"
+                + "        \"id\": \"DB3F9D439088BF73F5560443C8054AC4\",\n"
+                + "        \"ip\": \"198.51.100.0\",\n"
+                + "        \"ipAddresses\": [\n"
+                + "          \"198.51.100.0\",\n"
+                + "          \"198.51.100.1\"\n"
+                + "        ]\n"
+                + "      }\n"
+                + "    ]\n"
+                + "  }\n"
+                + "]";
+
+        setUpSuccessGetRequest("/email/1/ip-management/pools", Map.of(), givenResponse);
+
+        EmailApi api = new EmailApi(getApiClient());
+        Consumer<List<EmailIpPoolDetailResponse>> assertions = response -> {
+            then(response).hasSize(1);
+            EmailIpPoolDetailResponse pool = response.get(0);
+            then(pool.getId()).isEqualTo(poolId);
+            then(pool.getName()).isEqualTo("IP pool name");
+            then(pool.getIps()).hasSize(1);
+            EmailIpResponse ip = pool.getIps().iterator().next();
+            then(ip.getId()).isEqualTo(ipId);
+            then(ip.getIp()).isEqualTo("198.51.100.0");
+            then(ip.getIpAddresses()).containsExactlyInAnyOrder("198.51.100.0", "198.51.100.1");
+        };
+
+        var call = api.getIpPools();
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetIpPool() {
+        String poolId = "08A3A7608750CC6E6080325A6ADF45B6";
+        String givenResponse = "{\n" + "  \"id\": \"08A3A7608750CC6E6080325A6ADF45B6\",\n"
+                + "  \"name\": \"IP pool name\",\n"
+                + "  \"ips\": [\n"
+                + "    {\n"
+                + "      \"id\": \"DB3F9D439088BF73F5560443C8054AC4\",\n"
+                + "      \"ip\": \"198.51.100.0\",\n"
+                + "      \"ipAddresses\": [\n"
+                + "        \"198.51.100.0\"\n"
+                + "      ]\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+
+        setUpSuccessGetRequest("/email/1/ip-management/pools/" + poolId, Map.of(), givenResponse);
+
+        EmailApi api = new EmailApi(getApiClient());
+        Consumer<EmailIpPoolDetailResponse> assertions = response -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo(poolId);
+            then(response.getName()).isEqualTo("IP pool name");
+            then(response.getIps()).hasSize(1);
+            then(response.getIps().iterator().next().getIp()).isEqualTo("198.51.100.0");
+        };
+
+        var call = api.getIpPool(poolId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldUpdateIpPool() {
+        String poolId = "08A3A7608750CC6E6080325A6ADF45B6";
+        String poolName = "Updated IP pool name";
+        String expectedRequest = String.format("{\n" + "  \"name\": \"%s\"\n" + "}", poolName);
+        String givenResponse =
+                String.format("{\n" + "  \"id\": \"%s\",\n" + "  \"name\": \"%s\"\n" + "}", poolId, poolName);
+
+        setUpSuccessPutRequest("/email/1/ip-management/pools/" + poolId, Map.of(), expectedRequest, givenResponse);
+
+        EmailApi api = new EmailApi(getApiClient());
+        EmailIpPoolCreateApiRequest request = new EmailIpPoolCreateApiRequest().name(poolName);
+        Consumer<EmailIpPoolResponse> assertions = response -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo(poolId);
+            then(response.getName()).isEqualTo(poolName);
+        };
+
+        var call = api.updateIpPool(poolId, request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDeleteIpPool() {
+        String poolId = "08A3A7608750CC6E6080325A6ADF45B6";
+
+        setUpNoResponseBodyDeleteRequest("/email/1/ip-management/pools/" + poolId, Map.of(), 204);
+
+        EmailApi api = new EmailApi(getApiClient());
+        var call = api.deleteIpPool(poolId);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldAssignIpToPool() {
+        String poolId = "08A3A7608750CC6E6080325A6ADF45B6";
+        String ipId = "DB3F9D439088BF73F5560443C8054AC4";
+        String expectedRequest = String.format("{\n" + "  \"ipId\": \"%s\"\n" + "}", ipId);
+
+        setUpNoResponseBodyPostRequest(
+                "/email/1/ip-management/pools/" + poolId + "/ips", Map.of(), expectedRequest, 204);
+
+        EmailApi api = new EmailApi(getApiClient());
+        EmailIpPoolAssignIpApiRequest request = new EmailIpPoolAssignIpApiRequest().ipId(ipId);
+        var call = api.assignIpToPool(poolId, request);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldRemoveIpFromPool() {
+        String poolId = "08A3A7608750CC6E6080325A6ADF45B6";
+        String ipId = "DB3F9D439088BF73F5560443C8054AC4";
+
+        setUpNoResponseBodyDeleteRequest("/email/1/ip-management/pools/" + poolId + "/ips/" + ipId, Map.of(), 204);
+
+        EmailApi api = new EmailApi(getApiClient());
+        var call = api.removeIpFromPool(poolId, ipId);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldAssignPoolToDomain() {
+        Long domainId = 1L;
+        String poolId = "08A3A7608750CC6E6080325A6ADF45B6";
+        Integer priority = 0;
+        String expectedRequest =
+                String.format("{\n" + "  \"poolId\": \"%s\",\n" + "  \"priority\": %d\n" + "}", poolId, priority);
+
+        setUpNoResponseBodyPostRequest(
+                "/email/1/ip-management/domains/" + domainId + "/pools", Map.of(), expectedRequest, 204);
+
+        EmailApi api = new EmailApi(getApiClient());
+        EmailDomainIpPoolAssignApiRequest request =
+                new EmailDomainIpPoolAssignApiRequest().poolId(poolId).priority(priority);
+        var call = api.assignPoolToDomain(domainId, request);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldRemoveIpPoolFromDomain() {
+        Long domainId = 1L;
+        String poolId = "08A3A7608750CC6E6080325A6ADF45B6";
+
+        setUpNoResponseBodyDeleteRequest(
+                "/email/1/ip-management/domains/" + domainId + "/pools/" + poolId, Map.of(), 204);
+
+        EmailApi api = new EmailApi(getApiClient());
+        var call = api.removeIpPoolFromDomain(domainId, poolId);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldUpdateDomainPoolPriority() {
+        Long domainId = 1L;
+        String poolId = "08A3A7608750CC6E6080325A6ADF45B6";
+        Integer priority = 0;
+        String expectedRequest = String.format("{\n" + "  \"priority\": %d\n" + "}", priority);
+
+        setUpNoResponseBodyPutRequest(
+                "/email/1/ip-management/domains/" + domainId + "/pools/" + poolId, Map.of(), expectedRequest, 204);
+
+        EmailApi api = new EmailApi(getApiClient());
+        EmailDomainIpPoolUpdateApiRequest request = new EmailDomainIpPoolUpdateApiRequest().priority(priority);
+        var call = api.updateDomainPoolPriority(domainId, poolId, request);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
     }
 }

@@ -25,7 +25,8 @@ public enum ResourcesResourceOrderStatus {
     COMPLETED("COMPLETED"),
     PENDING_REVIEW("PENDING_REVIEW"),
     IN_REVIEW("IN_REVIEW"),
-    IN_PROGRESS("IN_PROGRESS");
+    IN_PROGRESS("IN_PROGRESS"),
+    CANCEL_REQUESTED("CANCEL_REQUESTED");
 
     private final String value;
 

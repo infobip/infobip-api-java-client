@@ -36,6 +36,8 @@ public class WhatsAppWebhookDeliveryReport {
 
     private String to;
 
+    private WhatsAppWebhookDlrContact contact;
+
     /**
      * Sets bulkId.
      * <p>
@@ -369,6 +371,37 @@ public class WhatsAppWebhookDeliveryReport {
         this.to = to;
     }
 
+    /**
+     * Sets contact.
+     *
+     * @param contact
+     * @return This {@link WhatsAppWebhookDeliveryReport instance}.
+     */
+    public WhatsAppWebhookDeliveryReport contact(WhatsAppWebhookDlrContact contact) {
+        this.contact = contact;
+        return this;
+    }
+
+    /**
+     * Returns contact.
+     *
+     * @return contact
+     */
+    @JsonProperty("contact")
+    public WhatsAppWebhookDlrContact getContact() {
+        return contact;
+    }
+
+    /**
+     * Sets contact.
+     *
+     * @param contact
+     */
+    @JsonProperty("contact")
+    public void setContact(WhatsAppWebhookDlrContact contact) {
+        this.contact = contact;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -386,12 +419,13 @@ public class WhatsAppWebhookDeliveryReport {
                 && Objects.equals(this.doneAt, whatsAppWebhookDeliveryReport.doneAt)
                 && Objects.equals(this.messageCount, whatsAppWebhookDeliveryReport.messageCount)
                 && Objects.equals(this.sentAt, whatsAppWebhookDeliveryReport.sentAt)
-                && Objects.equals(this.to, whatsAppWebhookDeliveryReport.to);
+                && Objects.equals(this.to, whatsAppWebhookDeliveryReport.to)
+                && Objects.equals(this.contact, whatsAppWebhookDeliveryReport.contact);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bulkId, price, status, error, messageId, doneAt, messageCount, sentAt, to);
+        return Objects.hash(bulkId, price, status, error, messageId, doneAt, messageCount, sentAt, to, contact);
     }
 
     @Override
@@ -426,6 +460,9 @@ public class WhatsAppWebhookDeliveryReport {
                 .append(newLine)
                 .append("    to: ")
                 .append(toIndentedString(to))
+                .append(newLine)
+                .append("    contact: ")
+                .append(toIndentedString(contact))
                 .append(newLine)
                 .append("}")
                 .toString();

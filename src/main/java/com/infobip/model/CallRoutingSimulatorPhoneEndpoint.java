@@ -31,6 +31,8 @@ public class CallRoutingSimulatorPhoneEndpoint extends CallRoutingSimulatorCallE
      * <p>
      * Field description:
      * Phone number in the [E.164](https://en.wikipedia.org/wiki/E.164) format.
+     * <p>
+     * The field is required.
      *
      * @param from
      * @return This {@link CallRoutingSimulatorPhoneEndpoint instance}.
@@ -45,6 +47,8 @@ public class CallRoutingSimulatorPhoneEndpoint extends CallRoutingSimulatorCallE
      * <p>
      * Field description:
      * Phone number in the [E.164](https://en.wikipedia.org/wiki/E.164) format.
+     * <p>
+     * The field is required.
      *
      * @return from
      */
@@ -58,6 +62,8 @@ public class CallRoutingSimulatorPhoneEndpoint extends CallRoutingSimulatorCallE
      * <p>
      * Field description:
      * Phone number in the [E.164](https://en.wikipedia.org/wiki/E.164) format.
+     * <p>
+     * The field is required.
      *
      * @param from
      */

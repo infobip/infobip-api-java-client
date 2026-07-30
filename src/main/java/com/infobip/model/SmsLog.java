@@ -34,9 +34,9 @@ public class SmsLog {
 
     private MessagePrice price;
 
-    private SmsMessageStatus status;
+    private MessageStatus status;
 
-    private SmsMessageError error;
+    private MessageError error;
 
     private Platform platform;
 
@@ -363,7 +363,7 @@ public class SmsLog {
      * @param status
      * @return This {@link SmsLog instance}.
      */
-    public SmsLog status(SmsMessageStatus status) {
+    public SmsLog status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -374,7 +374,7 @@ public class SmsLog {
      * @return status
      */
     @JsonProperty("status")
-    public SmsMessageStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -384,7 +384,7 @@ public class SmsLog {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(SmsMessageStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 
@@ -394,7 +394,7 @@ public class SmsLog {
      * @param error
      * @return This {@link SmsLog instance}.
      */
-    public SmsLog error(SmsMessageError error) {
+    public SmsLog error(MessageError error) {
         this.error = error;
         return this;
     }
@@ -405,7 +405,7 @@ public class SmsLog {
      * @return error
      */
     @JsonProperty("error")
-    public SmsMessageError getError() {
+    public MessageError getError() {
         return error;
     }
 
@@ -415,7 +415,7 @@ public class SmsLog {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(SmsMessageError error) {
+    public void setError(MessageError error) {
         this.error = error;
     }
 

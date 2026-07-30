@@ -30,6 +30,7 @@ public enum CallsGenesysCloudRegion {
     AP_NORTHEAST_3("AP_NORTHEAST_3"),
     AP_NORTHEAST_2("AP_NORTHEAST_2"),
     AP_SOUTHEAST_2("AP_SOUTHEAST_2"),
+    AP_SOUTHEAST_1("AP_SOUTHEAST_1"),
     AP_NORTHEAST_1("AP_NORTHEAST_1");
 
     private final String value;

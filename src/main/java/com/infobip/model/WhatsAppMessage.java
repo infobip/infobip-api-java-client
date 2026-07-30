@@ -89,7 +89,7 @@ public class WhatsAppMessage {
      * Sets to.
      * <p>
      * Field description:
-     * Message recipient number. Must be in international format.
+     * Message recipient number in international format or WhatsApp business-scoped user ID.
      * <p>
      * The field is required.
      *
@@ -105,7 +105,7 @@ public class WhatsAppMessage {
      * Returns to.
      * <p>
      * Field description:
-     * Message recipient number. Must be in international format.
+     * Message recipient number in international format or WhatsApp business-scoped user ID.
      * <p>
      * The field is required.
      *
@@ -120,7 +120,7 @@ public class WhatsAppMessage {
      * Sets to.
      * <p>
      * Field description:
-     * Message recipient number. Must be in international format.
+     * Message recipient number in international format or WhatsApp business-scoped user ID.
      * <p>
      * The field is required.
      *

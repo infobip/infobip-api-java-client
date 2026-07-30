@@ -19,7 +19,8 @@ public enum CallRoutingCriteriaType {
     PHONE("PHONE"),
     SIP("SIP"),
     WEBRTC("WEBRTC"),
-    APPLICATION("APPLICATION");
+    APPLICATION("APPLICATION"),
+    WHATSAPP("WHATSAPP");
 
     private final String value;
 

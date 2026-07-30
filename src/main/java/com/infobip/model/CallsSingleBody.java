@@ -13,21 +13,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents CallsSingleBody model.
+ * Single voice message request object.
  */
 public class CallsSingleBody {
 
     private String audioFileUrl;
 
-    private String from;
+    private String text;
 
     private String language;
 
-    private String text;
+    private CallsVoice voice;
+
+    private String from;
 
     private String to;
-
-    private CallsVoice voice;
 
     /**
      * Sets audioFileUrl.
@@ -67,6 +67,117 @@ public class CallsSingleBody {
     @JsonProperty("audioFileUrl")
     public void setAudioFileUrl(String audioFileUrl) {
         this.audioFileUrl = audioFileUrl;
+    }
+
+    /**
+     * Sets text.
+     * <p>
+     * Field description:
+     * Message to be converted to speech and played to subscribers. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
+     *
+     * @param text
+     * @return This {@link CallsSingleBody instance}.
+     */
+    public CallsSingleBody text(String text) {
+        this.text = text;
+        return this;
+    }
+
+    /**
+     * Returns text.
+     * <p>
+     * Field description:
+     * Message to be converted to speech and played to subscribers. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
+     *
+     * @return text
+     */
+    @JsonProperty("text")
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * Sets text.
+     * <p>
+     * Field description:
+     * Message to be converted to speech and played to subscribers. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
+     *
+     * @param text
+     */
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    /**
+     * Sets language.
+     * <p>
+     * Field description:
+     * If the message is in text format, the language in which the message is written must be defined for correct pronunciation. More about Text-to-speech functionality and supported TTS languages can be found [here](https://www.infobip.com/docs/voice-and-video/outbound-calls#text-to-speech-voice-over-broadcast). If not set, default language is &#x60;English [en]&#x60;. If voice is not set, then default voice for that specific language is used. In the case of English language, the voice is &#x60;[Joanna]&#x60;.
+     *
+     * @param language
+     * @return This {@link CallsSingleBody instance}.
+     */
+    public CallsSingleBody language(String language) {
+        this.language = language;
+        return this;
+    }
+
+    /**
+     * Returns language.
+     * <p>
+     * Field description:
+     * If the message is in text format, the language in which the message is written must be defined for correct pronunciation. More about Text-to-speech functionality and supported TTS languages can be found [here](https://www.infobip.com/docs/voice-and-video/outbound-calls#text-to-speech-voice-over-broadcast). If not set, default language is &#x60;English [en]&#x60;. If voice is not set, then default voice for that specific language is used. In the case of English language, the voice is &#x60;[Joanna]&#x60;.
+     *
+     * @return language
+     */
+    @JsonProperty("language")
+    public String getLanguage() {
+        return language;
+    }
+
+    /**
+     * Sets language.
+     * <p>
+     * Field description:
+     * If the message is in text format, the language in which the message is written must be defined for correct pronunciation. More about Text-to-speech functionality and supported TTS languages can be found [here](https://www.infobip.com/docs/voice-and-video/outbound-calls#text-to-speech-voice-over-broadcast). If not set, default language is &#x60;English [en]&#x60;. If voice is not set, then default voice for that specific language is used. In the case of English language, the voice is &#x60;[Joanna]&#x60;.
+     *
+     * @param language
+     */
+    @JsonProperty("language")
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    /**
+     * Sets voice.
+     *
+     * @param voice
+     * @return This {@link CallsSingleBody instance}.
+     */
+    public CallsSingleBody voice(CallsVoice voice) {
+        this.voice = voice;
+        return this;
+    }
+
+    /**
+     * Returns voice.
+     *
+     * @return voice
+     */
+    @JsonProperty("voice")
+    public CallsVoice getVoice() {
+        return voice;
+    }
+
+    /**
+     * Sets voice.
+     *
+     * @param voice
+     */
+    @JsonProperty("voice")
+    public void setVoice(CallsVoice voice) {
+        this.voice = voice;
     }
 
     /**
@@ -116,86 +227,6 @@ public class CallsSingleBody {
     }
 
     /**
-     * Sets language.
-     * <p>
-     * Field description:
-     * If the message is in text format, the language in which the message is written must be defined for correct pronunciation. More about Text-to-speech functionality and supported TTS languages can be found [here](https://www.infobip.com/docs/voice-and-video/outbound-calls#text-to-speech-voice-over-broadcast). If not set, default language is &#x60;English [en]&#x60;. If voice is not set, then default voice for that specific language is used. In the case of English language, the voice is &#x60;[Joanna]&#x60;.
-     *
-     * @param language
-     * @return This {@link CallsSingleBody instance}.
-     */
-    public CallsSingleBody language(String language) {
-        this.language = language;
-        return this;
-    }
-
-    /**
-     * Returns language.
-     * <p>
-     * Field description:
-     * If the message is in text format, the language in which the message is written must be defined for correct pronunciation. More about Text-to-speech functionality and supported TTS languages can be found [here](https://www.infobip.com/docs/voice-and-video/outbound-calls#text-to-speech-voice-over-broadcast). If not set, default language is &#x60;English [en]&#x60;. If voice is not set, then default voice for that specific language is used. In the case of English language, the voice is &#x60;[Joanna]&#x60;.
-     *
-     * @return language
-     */
-    @JsonProperty("language")
-    public String getLanguage() {
-        return language;
-    }
-
-    /**
-     * Sets language.
-     * <p>
-     * Field description:
-     * If the message is in text format, the language in which the message is written must be defined for correct pronunciation. More about Text-to-speech functionality and supported TTS languages can be found [here](https://www.infobip.com/docs/voice-and-video/outbound-calls#text-to-speech-voice-over-broadcast). If not set, default language is &#x60;English [en]&#x60;. If voice is not set, then default voice for that specific language is used. In the case of English language, the voice is &#x60;[Joanna]&#x60;.
-     *
-     * @param language
-     */
-    @JsonProperty("language")
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    /**
-     * Sets text.
-     * <p>
-     * Field description:
-     * Message to be converted to speech and played to subscribers. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
-     *
-     * @param text
-     * @return This {@link CallsSingleBody instance}.
-     */
-    public CallsSingleBody text(String text) {
-        this.text = text;
-        return this;
-    }
-
-    /**
-     * Returns text.
-     * <p>
-     * Field description:
-     * Message to be converted to speech and played to subscribers. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
-     *
-     * @return text
-     */
-    @JsonProperty("text")
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * Sets text.
-     * <p>
-     * Field description:
-     * Message to be converted to speech and played to subscribers. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
-     *
-     * @param text
-     */
-    @JsonProperty("text")
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    /**
      * Sets to.
      * <p>
      * Field description:
@@ -241,37 +272,6 @@ public class CallsSingleBody {
         this.to = to;
     }
 
-    /**
-     * Sets voice.
-     *
-     * @param voice
-     * @return This {@link CallsSingleBody instance}.
-     */
-    public CallsSingleBody voice(CallsVoice voice) {
-        this.voice = voice;
-        return this;
-    }
-
-    /**
-     * Returns voice.
-     *
-     * @return voice
-     */
-    @JsonProperty("voice")
-    public CallsVoice getVoice() {
-        return voice;
-    }
-
-    /**
-     * Sets voice.
-     *
-     * @param voice
-     */
-    @JsonProperty("voice")
-    public void setVoice(CallsVoice voice) {
-        this.voice = voice;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -282,16 +282,16 @@ public class CallsSingleBody {
         }
         CallsSingleBody callsSingleBody = (CallsSingleBody) o;
         return Objects.equals(this.audioFileUrl, callsSingleBody.audioFileUrl)
-                && Objects.equals(this.from, callsSingleBody.from)
-                && Objects.equals(this.language, callsSingleBody.language)
                 && Objects.equals(this.text, callsSingleBody.text)
-                && Objects.equals(this.to, callsSingleBody.to)
-                && Objects.equals(this.voice, callsSingleBody.voice);
+                && Objects.equals(this.language, callsSingleBody.language)
+                && Objects.equals(this.voice, callsSingleBody.voice)
+                && Objects.equals(this.from, callsSingleBody.from)
+                && Objects.equals(this.to, callsSingleBody.to);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(audioFileUrl, from, language, text, to, voice);
+        return Objects.hash(audioFileUrl, text, language, voice, from, to);
     }
 
     @Override
@@ -303,20 +303,20 @@ public class CallsSingleBody {
                 .append("    audioFileUrl: ")
                 .append(toIndentedString(audioFileUrl))
                 .append(newLine)
-                .append("    from: ")
-                .append(toIndentedString(from))
+                .append("    text: ")
+                .append(toIndentedString(text))
                 .append(newLine)
                 .append("    language: ")
                 .append(toIndentedString(language))
                 .append(newLine)
-                .append("    text: ")
-                .append(toIndentedString(text))
+                .append("    voice: ")
+                .append(toIndentedString(voice))
+                .append(newLine)
+                .append("    from: ")
+                .append(toIndentedString(from))
                 .append(newLine)
                 .append("    to: ")
                 .append(toIndentedString(to))
-                .append(newLine)
-                .append("    voice: ")
-                .append(toIndentedString(voice))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -71,6 +71,22 @@ class CallsApiTest extends ApiTest {
     private static final String RESUME_BULK = "/calls/1/bulks/{bulkId}/resume";
     private static final String CANCEL_BULK = "/calls/1/bulks/{bulkId}/cancel";
     private static final String DIALOGS = "/calls/1/dialogs";
+    private static final String DIALOG = "/calls/1/dialogs/{dialogId}";
+    private static final String DIALOGS_HISTORY = "/calls/1/dialogs/history";
+    private static final String DIALOG_HISTORY = "/calls/1/dialogs/{dialogId}/history";
+    private static final String HANGUP_DIALOG = "/calls/1/dialogs/{dialogId}/hangup";
+    private static final String DIALOG_PLAY_FILE = "/calls/1/dialogs/{dialogId}/play";
+    private static final String DIALOG_SAY_TEXT = "/calls/1/dialogs/{dialogId}/say";
+    private static final String DIALOG_START_RECORDING = "/calls/1/dialogs/{dialogId}/start-recording";
+    private static final String DIALOG_STOP_PLAYING_FILE = "/calls/1/dialogs/{dialogId}/stop-play";
+    private static final String DIALOG_STOP_RECORDING = "/calls/1/dialogs/{dialogId}/stop-recording";
+    private static final String DIALOG_TRANSFER_ACCEPT = "/calls/1/dialogs/{dialogId}/transfer/accept";
+    private static final String DIALOG_TRANSFER_REJECT = "/calls/1/dialogs/{dialogId}/transfer/reject";
+    private static final String DIALOGS_RECORDINGS = "/calls/1/recordings/dialogs";
+    private static final String DIALOG_RECORDINGS = "/calls/1/recordings/dialogs/{dialogId}";
+    private static final String COMPOSE_DIALOG_RECORDING = "/calls/1/recordings/dialogs/{dialogId}/compose";
+    private static final String CALLS_CONFIGURATIONS = "/calls/1/configurations";
+    private static final String SEND_RINGING = "/calls/1/calls/{callId}/send-ringing";
     private static final String DIALOGS_EXISTING_CALLS =
             "/calls/1/dialogs/parent-call/{parentCallId}/child-call/{childCallId}";
     private static final String DIALOGS_BROADCAST_TEXT = "/calls/1/dialogs/{dialogId}/send-message";
@@ -6074,6 +6090,7 @@ class CallsApiTest extends ApiTest {
         CallsApi api = new CallsApi(getApiClient());
 
         CallsStaticSipTrunkRequest callsSipTrunkRequest = (CallsStaticSipTrunkRequest) new CallsStaticSipTrunkRequest()
+                .tls(expectedTls)
                 .sourceHosts(List.of(expectedSourceHosts))
                 .destinationHosts(List.of(expectedDestinationHosts))
                 .strategy(expectedStrategy)
@@ -6089,8 +6106,7 @@ class CallsApiTest extends ApiTest {
                         .packageType(expectedPackageType)
                         .addressId(expectedAddressId))
                 .name(expectedName)
-                .location(expectedLocation)
-                .tls(expectedTls);
+                .location(expectedLocation);
 
         Consumer<CallsCreateSipTrunkResponse> assertions = (staticResponse) -> {
             CallsCreateStaticSipTrunkResponse response = (CallsCreateStaticSipTrunkResponse) staticResponse;
@@ -7235,15 +7251,17 @@ class CallsApiTest extends ApiTest {
         String callId = "12345";
         CallTranscriptionLanguage givenLanguage = CallTranscriptionLanguage.AR_AE;
         boolean givenSendInterimResults = false;
+        CallsTranscriptionProvider givenProvider = CallsTranscriptionProvider.DEEPGRAM;
         CallsActionStatus givenStatus = CallsActionStatus.PENDING;
 
         String expectedRequest = String.format(
                 "{\n" + "  \"transcription\": {\n"
                         + "    \"language\": \"%s\",\n"
-                        + "    \"sendInterimResults\": %b\n"
+                        + "    \"sendInterimResults\": %b,\n"
+                        + "    \"provider\": \"%s\"\n"
                         + "  }\n"
                         + "}",
-                givenLanguage, givenSendInterimResults);
+                givenLanguage, givenSendInterimResults, givenProvider);
 
         String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
 
@@ -7252,8 +7270,10 @@ class CallsApiTest extends ApiTest {
         CallsApi api = new CallsApi(getApiClient());
 
         CallsStartTranscriptionRequest request = new CallsStartTranscriptionRequest()
-                .transcription(
-                        new CallsTranscription().language(givenLanguage).sendInterimResults(givenSendInterimResults));
+                .transcription(new CallsTranscription()
+                        .language(givenLanguage)
+                        .sendInterimResults(givenSendInterimResults)
+                        .provider(givenProvider));
 
         Consumer<CallsActionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -7408,5 +7428,716 @@ class CallsApiTest extends ApiTest {
         var established = (CallEstablishedEvent) event;
         then(established.getProperties()).isNotNull();
         then(established.getProperties().getSender()).isEqualTo("441134960000");
+    }
+
+    @Test
+    void shouldGetDialog() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        String givenApplicationId = "61c060db2675060027d8c7a6";
+        CallsDialogState givenState = CallsDialogState.ESTABLISHED;
+        OffsetDateTime givenStartTime =
+                OffsetDateTime.of(LocalDateTime.of(2022, 1, 1, 0, 0, 0, 100000000), ZoneOffset.UTC);
+        String givenParentCallId = "d8d84155-3831-43fb-91c9-bb897149a79d";
+        String givenChildCallId = "3ad8805e-d401-424e-9b03-e02a2016a5e2";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"id\": \"%s\",\n"
+                        + "  \"platform\": {\n"
+                        + "    \"applicationId\": \"%s\"\n"
+                        + "  },\n"
+                        + "  \"state\": \"%s\",\n"
+                        + "  \"startTime\": \"2022-01-01T00:00:00.100+0000\",\n"
+                        + "  \"parentCall\": {\n"
+                        + "    \"id\": \"%s\",\n"
+                        + "    \"endpoint\": {\n"
+                        + "      \"type\": \"PHONE\",\n"
+                        + "      \"phoneNumber\": \"44790123456\"\n"
+                        + "    },\n"
+                        + "    \"direction\": \"INBOUND\",\n"
+                        + "    \"state\": \"ESTABLISHED\",\n"
+                        + "    \"dialogId\": \"%s\"\n"
+                        + "  },\n"
+                        + "  \"childCall\": {\n"
+                        + "    \"id\": \"%s\",\n"
+                        + "    \"endpoint\": {\n"
+                        + "      \"type\": \"PHONE\",\n"
+                        + "      \"phoneNumber\": \"44790987654\"\n"
+                        + "    },\n"
+                        + "    \"direction\": \"OUTBOUND\",\n"
+                        + "    \"state\": \"ESTABLISHED\",\n"
+                        + "    \"dialogId\": \"%s\"\n"
+                        + "  }\n"
+                        + "}",
+                givenDialogId,
+                givenApplicationId,
+                givenState,
+                givenParentCallId,
+                givenDialogId,
+                givenChildCallId,
+                givenDialogId);
+
+        setUpSuccessGetRequest(DIALOG.replace("{dialogId}", givenDialogId), Map.of(), givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsDialogResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo(givenDialogId);
+            then(response.getState()).isEqualTo(givenState);
+            then(response.getStartTime()).isEqualTo(givenStartTime);
+            then(response.getPlatform()).isNotNull();
+            then(response.getPlatform().getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getParentCall()).isNotNull();
+            then(response.getParentCall().getId()).isEqualTo(givenParentCallId);
+            then(response.getChildCall()).isNotNull();
+            then(response.getChildCall().getId()).isEqualTo(givenChildCallId);
+        };
+
+        var call = api.getDialog(givenDialogId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetDialogs() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        String givenApplicationId = "61c060db2675060027d8c7a6";
+        CallsDialogState givenState = CallsDialogState.ESTABLISHED;
+
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"id\": \"%s\",\n"
+                        + "      \"platform\": {\n"
+                        + "        \"applicationId\": \"%s\"\n"
+                        + "      },\n"
+                        + "      \"state\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"paging\": {\n"
+                        + "    \"page\": 0,\n"
+                        + "    \"size\": 1,\n"
+                        + "    \"totalPages\": 1,\n"
+                        + "    \"totalResults\": 1\n"
+                        + "  }\n"
+                        + "}",
+                givenDialogId, givenApplicationId, givenState);
+
+        setUpSuccessGetRequest(DIALOGS, Map.of(), givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsDialogPage> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getResults()).hasSize(1);
+            then(response.getResults().get(0).getId()).isEqualTo(givenDialogId);
+            then(response.getResults().get(0).getState()).isEqualTo(givenState);
+            then(response.getPaging()).isNotNull();
+            then(response.getPaging().getPage()).isEqualTo(0);
+            then(response.getPaging().getSize()).isEqualTo(1);
+            then(response.getPaging().getTotalPages()).isEqualTo(1);
+            then(response.getPaging().getTotalResults()).isEqualTo(1L);
+        };
+
+        var call = api.getDialogs();
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetDialogHistory() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        String givenApplicationId = "61c060db2675060027d8c7a6";
+        CallsDialogState givenState = CallsDialogState.ESTABLISHED;
+        OffsetDateTime givenStartTime = OffsetDateTime.of(LocalDateTime.of(2022, 1, 1, 0, 0, 0), ZoneOffset.UTC);
+        OffsetDateTime givenEndTime = OffsetDateTime.of(LocalDateTime.of(2022, 1, 1, 0, 1, 0), ZoneOffset.UTC);
+        String givenParentCallId = "d8d84155-3831-43fb-91c9-10b5a8d628a0";
+        String givenChildCallId = "ae024ad1-52e7-45d5-a5d2-cd7c809e03f8";
+        Long givenDuration = 60L;
+
+        String givenResponse = String.format(
+                "{\n" + "  \"dialogId\": \"%s\",\n"
+                        + "  \"platform\": {\n"
+                        + "    \"applicationId\": \"%s\"\n"
+                        + "  },\n"
+                        + "  \"state\": \"%s\",\n"
+                        + "  \"startTime\": \"2022-01-01T00:00:00.000+0000\",\n"
+                        + "  \"endTime\": \"2022-01-01T00:01:00.000+0000\",\n"
+                        + "  \"parentCallId\": \"%s\",\n"
+                        + "  \"childCallId\": \"%s\",\n"
+                        + "  \"duration\": %d,\n"
+                        + "  \"errorCode\": {\n"
+                        + "    \"id\": 10000,\n"
+                        + "    \"name\": \"NORMAL_HANGUP\",\n"
+                        + "    \"description\": \"The call has ended with hangup initiated by caller, callee or API\"\n"
+                        + "  },\n"
+                        + "  \"hangupSource\": \"CHILD_ENDPOINT\"\n"
+                        + "}",
+                givenDialogId, givenApplicationId, givenState, givenParentCallId, givenChildCallId, givenDuration);
+
+        setUpSuccessGetRequest(DIALOG_HISTORY.replace("{dialogId}", givenDialogId), Map.of(), givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsDialogLogResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getDialogId()).isEqualTo(givenDialogId);
+            then(response.getState()).isEqualTo(givenState);
+            then(response.getStartTime()).isEqualTo(givenStartTime);
+            then(response.getEndTime()).isEqualTo(givenEndTime);
+            then(response.getParentCallId()).isEqualTo(givenParentCallId);
+            then(response.getChildCallId()).isEqualTo(givenChildCallId);
+            then(response.getDuration()).isEqualTo(givenDuration);
+            then(response.getHangupSource()).isEqualTo(CallsDialogHangupSource.CHILD_ENDPOINT);
+            then(response.getErrorCode()).isNotNull();
+            then(response.getErrorCode().getId()).isEqualTo(10000);
+            then(response.getErrorCode().getName()).isEqualTo("NORMAL_HANGUP");
+        };
+
+        var call = api.getDialogHistory(givenDialogId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetDialogsHistory() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        CallsDialogState givenState = CallsDialogState.ESTABLISHED;
+
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"dialogId\": \"%s\",\n"
+                        + "      \"state\": \"%s\",\n"
+                        + "      \"duration\": 60\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"paging\": {\n"
+                        + "    \"page\": 0,\n"
+                        + "    \"size\": 1,\n"
+                        + "    \"totalPages\": 1,\n"
+                        + "    \"totalResults\": 1\n"
+                        + "  }\n"
+                        + "}",
+                givenDialogId, givenState);
+
+        setUpSuccessGetRequest(DIALOGS_HISTORY, Map.of(), givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsDialogLogPage> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getResults()).hasSize(1);
+            then(response.getResults().get(0).getDialogId()).isEqualTo(givenDialogId);
+            then(response.getResults().get(0).getState()).isEqualTo(givenState);
+            then(response.getResults().get(0).getDuration()).isEqualTo(60L);
+            then(response.getPaging().getTotalResults()).isEqualTo(1L);
+        };
+
+        var call = api.getDialogsHistory();
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldHangupDialog() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        CallsDialogState givenState = CallsDialogState.FINISHED;
+
+        String givenResponse =
+                String.format("{\n" + "  \"id\": \"%s\",\n" + "  \"state\": \"%s\"\n" + "}", givenDialogId, givenState);
+
+        setUpEmptyPostRequest(HANGUP_DIALOG.replace("{dialogId}", givenDialogId), Map.of(), givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsDialogResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo(givenDialogId);
+            then(response.getState()).isEqualTo(givenState);
+        };
+
+        var call = api.hangupDialog(givenDialogId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDialogPlayFile() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        String givenFileId = "65f0b3d7c8b6a00001a2b3c4";
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+        String expectedRequest = String.format(
+                "{\n" + "  \"content\": {\n" + "    \"fileId\": \"%s\",\n" + "    \"type\": \"FILE\"\n" + "  }\n" + "}",
+                givenFileId);
+
+        setUpSuccessPostRequest(DIALOG_PLAY_FILE.replace("{dialogId}", givenDialogId), expectedRequest, givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        CallsDialogPlayRequest request =
+                new CallsDialogPlayRequest().content(new CallsFilePlayContent().fileId(givenFileId));
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.dialogPlayFile(givenDialogId, request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDialogSayText() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        String givenText = "Hello world";
+        CallsLanguage givenLanguage = CallsLanguage.EN;
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+        String expectedRequest = String.format(
+                "{\n" + "  \"text\": \"%s\",\n" + "  \"language\": \"%s\"\n" + "}", givenText, givenLanguage);
+
+        setUpSuccessPostRequest(DIALOG_SAY_TEXT.replace("{dialogId}", givenDialogId), expectedRequest, givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        CallsDialogSayRequest request =
+                new CallsDialogSayRequest().text(givenText).language(givenLanguage);
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.dialogSayText(givenDialogId, request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDialogStartRecording() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        CallsRecordingType givenRecordingType = CallsRecordingType.AUDIO_AND_VIDEO;
+        Boolean givenEnabled = true;
+        String givenFilePrefix = "customFilename";
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+        String expectedRequest = String.format(
+                "{\n" + "  \"recordingType\": \"%s\",\n"
+                        + "  \"dialogComposition\": {\n"
+                        + "    \"enabled\": %b\n"
+                        + "  },\n"
+                        + "  \"customData\": {\n"
+                        + "    \"key\": \"value\"\n"
+                        + "  },\n"
+                        + "  \"filePrefix\": \"%s\"\n"
+                        + "}",
+                givenRecordingType, givenEnabled, givenFilePrefix);
+
+        setUpSuccessPostRequest(
+                DIALOG_START_RECORDING.replace("{dialogId}", givenDialogId), expectedRequest, givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        CallsDialogRecordingRequest request = new CallsDialogRecordingRequest()
+                .recordingType(givenRecordingType)
+                .dialogComposition(new CallsDialogRecordingComposition().enabled(givenEnabled))
+                .customData(Map.of("key", "value"))
+                .filePrefix(givenFilePrefix);
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.dialogStartRecording(givenDialogId, request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDialogStopPlayingFile() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+
+        setUpEmptyPostRequest(
+                DIALOG_STOP_PLAYING_FILE.replace("{dialogId}", givenDialogId), Map.of(), givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.dialogStopPlayingFile(givenDialogId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDialogStopRecording() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+
+        setUpEmptyPostRequest(DIALOG_STOP_RECORDING.replace("{dialogId}", givenDialogId), Map.of(), givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.dialogStopRecording(givenDialogId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDialogTransferAccept() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        String givenPhoneNumber = "41792036727";
+        String givenFrom = "41793026834";
+        CallsDialogState givenState = CallsDialogState.ESTABLISHED;
+
+        String givenResponse =
+                String.format("{\n" + "  \"id\": \"%s\",\n" + "  \"state\": \"%s\"\n" + "}", givenDialogId, givenState);
+        String expectedRequest = String.format(
+                "{\n" + "  \"targetCallRequest\": {\n"
+                        + "    \"endpoint\": {\n"
+                        + "      \"type\": \"PHONE\",\n"
+                        + "      \"phoneNumber\": \"%s\"\n"
+                        + "    },\n"
+                        + "    \"from\": \"%s\"\n"
+                        + "  }\n"
+                        + "}",
+                givenPhoneNumber, givenFrom);
+
+        setUpSuccessPostRequest(
+                DIALOG_TRANSFER_ACCEPT.replace("{dialogId}", givenDialogId), expectedRequest, givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        CallsDialogAcceptTransferRequest request = new CallsDialogAcceptTransferRequest()
+                .targetCallRequest(new CallsDialogCallRequest()
+                        .endpoint(new CallsPhoneEndpoint().phoneNumber(givenPhoneNumber))
+                        .from(givenFrom));
+
+        Consumer<CallsDialogResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo(givenDialogId);
+            then(response.getState()).isEqualTo(givenState);
+        };
+
+        var call = api.dialogTransferAccept(givenDialogId, request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDialogTransferReject() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+
+        setUpEmptyPostRequest(
+                DIALOG_TRANSFER_REJECT.replace("{dialogId}", givenDialogId), Map.of(), givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.dialogTransferReject(givenDialogId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetDialogRecordings() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        String givenApplicationId = "61c060db2675060027d8c7a6";
+        String givenFileId = "65f0b3d7c8b6a00001a2b3d5";
+        String givenFileName = "example-recording.wav";
+        CallsFileFormat givenFileFormat = CallsFileFormat.WAV;
+        Long givenSize = 67564L;
+        Long givenDuration = 10L;
+        OffsetDateTime givenCreationTime =
+                OffsetDateTime.of(LocalDateTime.of(2022, 1, 1, 12, 0, 0, 150000000), ZoneOffset.UTC);
+
+        String givenResponse = String.format(
+                "{\n" + "  \"dialogId\": \"%s\",\n"
+                        + "  \"platform\": {\n"
+                        + "    \"applicationId\": \"%s\"\n"
+                        + "  },\n"
+                        + "  \"composedFiles\": [\n"
+                        + "    {\n"
+                        + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"fileFormat\": \"%s\",\n"
+                        + "      \"size\": %d,\n"
+                        + "      \"creationTime\": \"2022-01-01T12:00:00.150+0000\",\n"
+                        + "      \"duration\": %d,\n"
+                        + "      \"location\": \"HOSTED\"\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"callRecordings\": []\n"
+                        + "}",
+                givenDialogId,
+                givenApplicationId,
+                givenFileId,
+                givenFileName,
+                givenFileFormat,
+                givenSize,
+                givenDuration);
+
+        setUpSuccessGetRequest(DIALOG_RECORDINGS.replace("{dialogId}", givenDialogId), Map.of(), givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsDialogRecordingResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getDialogId()).isEqualTo(givenDialogId);
+            then(response.getPlatform().getApplicationId()).isEqualTo(givenApplicationId);
+            then(response.getComposedFiles()).hasSize(1);
+            then(response.getComposedFiles().get(0).getId()).isEqualTo(givenFileId);
+            then(response.getComposedFiles().get(0).getName()).isEqualTo(givenFileName);
+            then(response.getComposedFiles().get(0).getFileFormat()).isEqualTo(givenFileFormat);
+            then(response.getComposedFiles().get(0).getSize()).isEqualTo(givenSize);
+            then(response.getComposedFiles().get(0).getCreationTime()).isEqualTo(givenCreationTime);
+            then(response.getComposedFiles().get(0).getDuration()).isEqualTo(givenDuration);
+            then(response.getComposedFiles().get(0).getLocation()).isEqualTo(CallsRecordingFileLocation.HOSTED);
+        };
+
+        var call = api.getDialogRecordings(givenDialogId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetDialogsRecordings() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"dialogId\": \"%s\",\n"
+                        + "      \"composedFiles\": [],\n"
+                        + "      \"callRecordings\": []\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"paging\": {\n"
+                        + "    \"page\": 0,\n"
+                        + "    \"size\": 1,\n"
+                        + "    \"totalPages\": 1,\n"
+                        + "    \"totalResults\": 1\n"
+                        + "  }\n"
+                        + "}",
+                givenDialogId);
+
+        setUpSuccessGetRequest(DIALOGS_RECORDINGS, Map.of(), givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsDialogRecordingPage> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getResults()).hasSize(1);
+            then(response.getResults().get(0).getDialogId()).isEqualTo(givenDialogId);
+            then(response.getPaging().getTotalResults()).isEqualTo(1L);
+        };
+
+        var call = api.getDialogsRecordings();
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDeleteDialogRecordings() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        String givenFileId = "65f0b3d7c8b6a00001a2b3d5";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"dialogId\": \"%s\",\n"
+                        + "  \"composedFiles\": [\n"
+                        + "    {\n"
+                        + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"example-recording.wav\",\n"
+                        + "      \"fileFormat\": \"WAV\"\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"callRecordings\": []\n"
+                        + "}",
+                givenDialogId, givenFileId);
+
+        setUpNoRequestBodyDeleteRequest(
+                DIALOG_RECORDINGS.replace("{dialogId}", givenDialogId), Map.of(), givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsDialogRecordingResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getDialogId()).isEqualTo(givenDialogId);
+            then(response.getComposedFiles()).hasSize(1);
+            then(response.getComposedFiles().get(0).getId()).isEqualTo(givenFileId);
+        };
+
+        var call = api.deleteDialogRecordings(givenDialogId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldComposeDialogRecording() {
+        String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        Boolean givenDeleteCallRecordings = true;
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+        String expectedRequest =
+                String.format("{\n" + "  \"deleteCallRecordings\": %b\n" + "}", givenDeleteCallRecordings);
+
+        setUpSuccessPostRequest(
+                COMPOSE_DIALOG_RECORDING.replace("{dialogId}", givenDialogId), expectedRequest, givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        CallsOnDemandComposition request =
+                new CallsOnDemandComposition().deleteCallRecordings(givenDeleteCallRecordings);
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.composeDialogRecording(givenDialogId, request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetCallsConfigurations() {
+        String givenId = "63467c6e2885a5389ba11d80";
+        String givenName = "Calls configuration";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"results\": [\n"
+                        + "    {\n"
+                        + "      \"id\": \"%s\",\n"
+                        + "      \"name\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"paging\": {\n"
+                        + "    \"page\": 0,\n"
+                        + "    \"size\": 1,\n"
+                        + "    \"totalPages\": 1,\n"
+                        + "    \"totalResults\": 1\n"
+                        + "  }\n"
+                        + "}",
+                givenId, givenName);
+
+        setUpSuccessGetRequest(CALLS_CONFIGURATIONS, Map.of(), givenResponse);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsConfigurationPage> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getResults()).hasSize(1);
+            then(response.getResults().get(0).getId()).isEqualTo(givenId);
+            then(response.getResults().get(0).getName()).isEqualTo(givenName);
+            then(response.getPaging().getTotalResults()).isEqualTo(1L);
+        };
+
+        var call = api.getCallsConfigurations();
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendRinging() {
+        String givenCallId = "d8d84155-3831-43fb-91c9-10b5a8d628a0";
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+
+        setUpEmptyPostRequest(SEND_RINGING.replace("{callId}", givenCallId), Map.of(), givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.sendRinging(givenCallId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldUpdateConference() {
+        String givenConferenceId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+        String expectedRequest = "{\n" + "  \"muted\": true\n" + "}";
+
+        setUpPatchRequest(
+                CONFERENCE.replace("{conferenceId}", givenConferenceId), Map.of(), expectedRequest, givenResponse, 200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        CallsUpdateRequest request = new CallsUpdateRequest().muted(true);
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.updateConference(givenConferenceId, request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldUpdateConferenceCall() {
+        String givenConferenceId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
+        String givenCallId = "d8d84155-3831-43fb-91c9-10b5a8d628a0";
+        CallsActionStatus givenStatus = CallsActionStatus.PENDING;
+
+        String givenResponse = String.format("{\n" + "  \"status\": \"%s\"\n" + "}", givenStatus);
+        String expectedRequest = "{\n" + "  \"muted\": true\n" + "}";
+
+        setUpPatchRequest(
+                CONFERENCE_CALL.replace("{conferenceId}", givenConferenceId).replace("{callId}", givenCallId),
+                Map.of(),
+                expectedRequest,
+                givenResponse,
+                200);
+
+        CallsApi api = new CallsApi(getApiClient());
+
+        CallsUpdateCallRequest request = new CallsUpdateCallRequest().muted(true);
+
+        Consumer<CallsActionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(givenStatus);
+        };
+
+        var call = api.updateConferenceCall(givenConferenceId, givenCallId, request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
 }

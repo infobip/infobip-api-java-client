@@ -9,6 +9,7 @@
 
 package com.infobip.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
@@ -16,11 +17,44 @@ import java.util.Objects;
  */
 public class CallsMediaStreamingConfigResponse extends CallsMediaStreamConfigResponse {
 
+    private CallsAudioEncoding audioEncoding;
+
     /**
      * Constructs a new {@link CallsMediaStreamingConfigResponse} instance.
      */
     public CallsMediaStreamingConfigResponse() {
         super("MEDIA_STREAMING");
+    }
+
+    /**
+     * Sets audioEncoding.
+     *
+     * @param audioEncoding
+     * @return This {@link CallsMediaStreamingConfigResponse instance}.
+     */
+    public CallsMediaStreamingConfigResponse audioEncoding(CallsAudioEncoding audioEncoding) {
+        this.audioEncoding = audioEncoding;
+        return this;
+    }
+
+    /**
+     * Returns audioEncoding.
+     *
+     * @return audioEncoding
+     */
+    @JsonProperty("audioEncoding")
+    public CallsAudioEncoding getAudioEncoding() {
+        return audioEncoding;
+    }
+
+    /**
+     * Sets audioEncoding.
+     *
+     * @param audioEncoding
+     */
+    @JsonProperty("audioEncoding")
+    public void setAudioEncoding(CallsAudioEncoding audioEncoding) {
+        this.audioEncoding = audioEncoding;
     }
 
     @Override
@@ -31,12 +65,13 @@ public class CallsMediaStreamingConfigResponse extends CallsMediaStreamConfigRes
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        return super.equals(o);
+        CallsMediaStreamingConfigResponse callsMediaStreamingConfigResponse = (CallsMediaStreamingConfigResponse) o;
+        return Objects.equals(this.audioEncoding, callsMediaStreamingConfigResponse.audioEncoding) && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode());
+        return Objects.hash(audioEncoding, super.hashCode());
     }
 
     @Override
@@ -47,6 +82,9 @@ public class CallsMediaStreamingConfigResponse extends CallsMediaStreamConfigRes
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
+                .append(newLine)
+                .append("    audioEncoding: ")
+                .append(toIndentedString(audioEncoding))
                 .append(newLine)
                 .append("}")
                 .toString();

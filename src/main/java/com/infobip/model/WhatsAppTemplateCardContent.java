@@ -97,7 +97,7 @@ public class WhatsAppTemplateCardContent {
      * Sets buttons.
      * <p>
      * Field description:
-     * Card buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered.
+     * Card buttons. Define buttons only for &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons (in the required order). For static URL button, omit the buttons section.
      *
      * @param buttons
      * @return This {@link WhatsAppTemplateCardContent instance}.
@@ -111,7 +111,7 @@ public class WhatsAppTemplateCardContent {
      * Adds and item into buttons.
      * <p>
      * Field description:
-     * Card buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered.
+     * Card buttons. Define buttons only for &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons (in the required order). For static URL button, omit the buttons section.
      *
      * @param buttonsItem The item to be added to the list.
      * @return This {@link WhatsAppTemplateCardContent instance}.
@@ -128,7 +128,7 @@ public class WhatsAppTemplateCardContent {
      * Returns buttons.
      * <p>
      * Field description:
-     * Card buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered.
+     * Card buttons. Define buttons only for &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons (in the required order). For static URL button, omit the buttons section.
      *
      * @return buttons
      */
@@ -141,7 +141,7 @@ public class WhatsAppTemplateCardContent {
      * Sets buttons.
      * <p>
      * Field description:
-     * Card buttons. Should be defined in the correct order, only if &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons have been registered.
+     * Card buttons. Define buttons only for &#x60;quick reply&#x60; or &#x60;dynamic URL&#x60; buttons (in the required order). For static URL button, omit the buttons section.
      *
      * @param buttons
      */

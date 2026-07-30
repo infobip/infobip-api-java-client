@@ -21,11 +21,13 @@ public class EmailLogsResponse {
 
     private List<EmailLog> results = null;
 
+    private CursorPageInfo cursor;
+
     /**
      * Sets results.
      * <p>
      * Field description:
-     * Array of email logs, one object per each email request.
+     * An array of message log results, one object per each message log entry.
      *
      * @param results
      * @return This {@link EmailLogsResponse instance}.
@@ -39,7 +41,7 @@ public class EmailLogsResponse {
      * Adds and item into results.
      * <p>
      * Field description:
-     * Array of email logs, one object per each email request.
+     * An array of message log results, one object per each message log entry.
      *
      * @param resultsItem The item to be added to the list.
      * @return This {@link EmailLogsResponse instance}.
@@ -56,7 +58,7 @@ public class EmailLogsResponse {
      * Returns results.
      * <p>
      * Field description:
-     * Array of email logs, one object per each email request.
+     * An array of message log results, one object per each message log entry.
      *
      * @return results
      */
@@ -69,13 +71,44 @@ public class EmailLogsResponse {
      * Sets results.
      * <p>
      * Field description:
-     * Array of email logs, one object per each email request.
+     * An array of message log results, one object per each message log entry.
      *
      * @param results
      */
     @JsonProperty("results")
     public void setResults(List<EmailLog> results) {
         this.results = results;
+    }
+
+    /**
+     * Sets cursor.
+     *
+     * @param cursor
+     * @return This {@link EmailLogsResponse instance}.
+     */
+    public EmailLogsResponse cursor(CursorPageInfo cursor) {
+        this.cursor = cursor;
+        return this;
+    }
+
+    /**
+     * Returns cursor.
+     *
+     * @return cursor
+     */
+    @JsonProperty("cursor")
+    public CursorPageInfo getCursor() {
+        return cursor;
+    }
+
+    /**
+     * Sets cursor.
+     *
+     * @param cursor
+     */
+    @JsonProperty("cursor")
+    public void setCursor(CursorPageInfo cursor) {
+        this.cursor = cursor;
     }
 
     @Override
@@ -87,12 +120,13 @@ public class EmailLogsResponse {
             return false;
         }
         EmailLogsResponse emailLogsResponse = (EmailLogsResponse) o;
-        return Objects.equals(this.results, emailLogsResponse.results);
+        return Objects.equals(this.results, emailLogsResponse.results)
+                && Objects.equals(this.cursor, emailLogsResponse.cursor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(results);
+        return Objects.hash(results, cursor);
     }
 
     @Override
@@ -103,6 +137,9 @@ public class EmailLogsResponse {
                 .append(newLine)
                 .append("    results: ")
                 .append(toIndentedString(results))
+                .append(newLine)
+                .append("    cursor: ")
+                .append(toIndentedString(cursor))
                 .append(newLine)
                 .append("}")
                 .toString();

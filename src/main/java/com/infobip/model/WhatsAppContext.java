@@ -29,7 +29,7 @@ public class WhatsAppContext {
      * Sets from.
      * <p>
      * Field description:
-     * End user&#39;s phone number.
+     * Phone number or Business Scoped User ID (BSUID) of the end user.
      *
      * @param from
      * @return This {@link WhatsAppContext instance}.
@@ -43,7 +43,7 @@ public class WhatsAppContext {
      * Returns from.
      * <p>
      * Field description:
-     * End user&#39;s phone number.
+     * Phone number or Business Scoped User ID (BSUID) of the end user.
      *
      * @return from
      */
@@ -56,7 +56,7 @@ public class WhatsAppContext {
      * Sets from.
      * <p>
      * Field description:
-     * End user&#39;s phone number.
+     * Phone number or Business Scoped User ID (BSUID) of the end user.
      *
      * @param from
      */

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Policy type
+ * Policy type to indicate either standard, reduced or M2M policy
  */
 public enum NumbersPolicyType {
     STANDARD("STANDARD"),

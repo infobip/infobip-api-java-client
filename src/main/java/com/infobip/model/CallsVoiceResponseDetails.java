@@ -19,7 +19,7 @@ public class CallsVoiceResponseDetails {
 
     private String to;
 
-    private CallsSingleMessageStatus status;
+    private MessageStatus status;
 
     private String messageId;
 
@@ -69,7 +69,7 @@ public class CallsVoiceResponseDetails {
      * @param status
      * @return This {@link CallsVoiceResponseDetails instance}.
      */
-    public CallsVoiceResponseDetails status(CallsSingleMessageStatus status) {
+    public CallsVoiceResponseDetails status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -80,7 +80,7 @@ public class CallsVoiceResponseDetails {
      * @return status
      */
     @JsonProperty("status")
-    public CallsSingleMessageStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -90,7 +90,7 @@ public class CallsVoiceResponseDetails {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(CallsSingleMessageStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 

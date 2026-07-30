@@ -67,8 +67,6 @@ public class MessagesApiFailover implements MessagesApiBaseFailover {
      * <p>
      * Field description:
      * Sender for channel specified above.
-     * <p>
-     * The field is required.
      *
      * @param sender
      * @return This {@link MessagesApiFailover instance}.
@@ -83,8 +81,6 @@ public class MessagesApiFailover implements MessagesApiBaseFailover {
      * <p>
      * Field description:
      * Sender for channel specified above.
-     * <p>
-     * The field is required.
      *
      * @return sender
      */
@@ -98,8 +94,6 @@ public class MessagesApiFailover implements MessagesApiBaseFailover {
      * <p>
      * Field description:
      * Sender for channel specified above.
-     * <p>
-     * The field is required.
      *
      * @param sender
      */

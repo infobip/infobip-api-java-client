@@ -34,6 +34,9 @@ import java.util.Objects;
             value = WhatsAppWebhookCallPermissionReplyContent.class,
             name = "INTERACTIVE_CALL_PERMISSION_REPLY"),
     @JsonSubTypes.Type(value = WhatsAppWebhookFlowReplyContent.class, name = "INTERACTIVE_FLOW_REPLY"),
+    @JsonSubTypes.Type(
+            value = WhatsAppWebhookInThreadAuthenticationReplyContent.class,
+            name = "INTERACTIVE_IN_THREAD_AUTHENTICATION_REPLY"),
     @JsonSubTypes.Type(value = WhatsAppWebhookListReplyContent.class, name = "INTERACTIVE_LIST_REPLY"),
     @JsonSubTypes.Type(
             value = WhatsAppWebhookPaymentConfirmationContent.class,

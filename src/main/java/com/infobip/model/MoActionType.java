@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Defines voice action for inbound calls.
+ * Defines action type. It is not possible to create new action type.
  */
 public enum MoActionType {
     PULL("PULL"),

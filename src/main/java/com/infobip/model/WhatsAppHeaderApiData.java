@@ -26,6 +26,7 @@ import java.util.Objects;
         visible = true)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = WhatsAppDocumentHeaderApiData.class, name = "DOCUMENT"),
+    @JsonSubTypes.Type(value = WhatsAppGifHeaderApiData.class, name = "GIF"),
     @JsonSubTypes.Type(value = WhatsAppImageHeaderApiData.class, name = "IMAGE"),
     @JsonSubTypes.Type(value = WhatsAppLocationHeaderApiData.class, name = "LOCATION"),
     @JsonSubTypes.Type(value = WhatsAppTextHeaderApiData.class, name = "TEXT"),
@@ -39,6 +40,7 @@ public abstract class WhatsAppHeaderApiData {
         TEXT("TEXT"),
         IMAGE("IMAGE"),
         VIDEO("VIDEO"),
+        GIF("GIF"),
         DOCUMENT("DOCUMENT"),
         LOCATION("LOCATION");
 

@@ -21,7 +21,7 @@ public class RcsLogsResponse {
 
     private List<RcsLogsResult> results = null;
 
-    private RcsCursorPageInfo cursor;
+    private CursorPageInfo cursor;
 
     /**
      * Sets results.
@@ -86,7 +86,7 @@ public class RcsLogsResponse {
      * @param cursor
      * @return This {@link RcsLogsResponse instance}.
      */
-    public RcsLogsResponse cursor(RcsCursorPageInfo cursor) {
+    public RcsLogsResponse cursor(CursorPageInfo cursor) {
         this.cursor = cursor;
         return this;
     }
@@ -97,7 +97,7 @@ public class RcsLogsResponse {
      * @return cursor
      */
     @JsonProperty("cursor")
-    public RcsCursorPageInfo getCursor() {
+    public CursorPageInfo getCursor() {
         return cursor;
     }
 
@@ -107,7 +107,7 @@ public class RcsLogsResponse {
      * @param cursor
      */
     @JsonProperty("cursor")
-    public void setCursor(RcsCursorPageInfo cursor) {
+    public void setCursor(CursorPageInfo cursor) {
         this.cursor = cursor;
     }
 

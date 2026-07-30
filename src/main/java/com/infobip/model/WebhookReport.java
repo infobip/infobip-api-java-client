@@ -36,6 +36,8 @@ public class WebhookReport {
 
     private String to;
 
+    private WhatsAppWebhookDlrContact contact;
+
     /**
      * Sets bulkId.
      * <p>
@@ -369,6 +371,37 @@ public class WebhookReport {
         this.to = to;
     }
 
+    /**
+     * Sets contact.
+     *
+     * @param contact
+     * @return This {@link WebhookReport instance}.
+     */
+    public WebhookReport contact(WhatsAppWebhookDlrContact contact) {
+        this.contact = contact;
+        return this;
+    }
+
+    /**
+     * Returns contact.
+     *
+     * @return contact
+     */
+    @JsonProperty("contact")
+    public WhatsAppWebhookDlrContact getContact() {
+        return contact;
+    }
+
+    /**
+     * Sets contact.
+     *
+     * @param contact
+     */
+    @JsonProperty("contact")
+    public void setContact(WhatsAppWebhookDlrContact contact) {
+        this.contact = contact;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -386,12 +419,13 @@ public class WebhookReport {
                 && Objects.equals(this.doneAt, webhookReport.doneAt)
                 && Objects.equals(this.messageCount, webhookReport.messageCount)
                 && Objects.equals(this.sentAt, webhookReport.sentAt)
-                && Objects.equals(this.to, webhookReport.to);
+                && Objects.equals(this.to, webhookReport.to)
+                && Objects.equals(this.contact, webhookReport.contact);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bulkId, price, status, error, messageId, doneAt, messageCount, sentAt, to);
+        return Objects.hash(bulkId, price, status, error, messageId, doneAt, messageCount, sentAt, to, contact);
     }
 
     @Override
@@ -426,6 +460,9 @@ public class WebhookReport {
                 .append(newLine)
                 .append("    to: ")
                 .append(toIndentedString(to))
+                .append(newLine)
+                .append("    contact: ")
+                .append(toIndentedString(contact))
                 .append(newLine)
                 .append("}")
                 .toString();

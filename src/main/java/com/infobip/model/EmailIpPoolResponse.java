@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * IP pools which have assigned the provided dedicated IP.
+ * Represents EmailIpPoolResponse model.
  */
 public class EmailIpPoolResponse {
 

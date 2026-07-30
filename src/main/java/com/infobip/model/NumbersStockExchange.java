@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * The stock exchange where brand is listed.
+ * The stock exchange where brand is listed. Only for publicly traded companies.
  */
 public enum NumbersStockExchange {
     AMEX("AMEX"),

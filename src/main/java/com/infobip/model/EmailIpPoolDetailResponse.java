@@ -120,6 +120,9 @@ public class EmailIpPoolDetailResponse {
     /**
      * Sets ips.
      * <p>
+     * Field description:
+     * Dedicated IPs assigned to the provided IP pool.
+     * <p>
      * The field is required.
      *
      * @param ips
@@ -132,6 +135,9 @@ public class EmailIpPoolDetailResponse {
 
     /**
      * Adds and item into ips.
+     * <p>
+     * Field description:
+     * Dedicated IPs assigned to the provided IP pool.
      * <p>
      * The field is required.
      *
@@ -149,6 +155,9 @@ public class EmailIpPoolDetailResponse {
     /**
      * Returns ips.
      * <p>
+     * Field description:
+     * Dedicated IPs assigned to the provided IP pool.
+     * <p>
      * The field is required.
      *
      * @return ips
@@ -160,6 +169,9 @@ public class EmailIpPoolDetailResponse {
 
     /**
      * Sets ips.
+     * <p>
+     * Field description:
+     * Dedicated IPs assigned to the provided IP pool.
      * <p>
      * The field is required.
      *

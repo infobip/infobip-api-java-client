@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Type of tax identification number provided. Value depend on selected taxId issuing country. For US it can be only EIN.
+ * Type of tax identification number provided. Value depend on selected taxId issuing country. For US it can be only EIN. Not required for sole proprietor brands.
  */
 public enum NumbersBusinessRegistrationType {
     EIN("EIN"),

@@ -10,6 +10,7 @@
 package com.infobip.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.annotations.Beta;
 import com.infobip.ApiCallback;
 import com.infobip.ApiClient;
 import com.infobip.ApiException;
@@ -37,13 +38,16 @@ import com.infobip.model.EmailIpPoolDetailResponse;
 import com.infobip.model.EmailIpPoolResponse;
 import com.infobip.model.EmailLogsResponse;
 import com.infobip.model.EmailReportsResult;
+import com.infobip.model.EmailRequest;
+import com.infobip.model.EmailResponse;
+import com.infobip.model.EmailSendMimeRequestSchema;
 import com.infobip.model.EmailSendResponse;
 import com.infobip.model.EmailSuppressionInfoPageResponse;
 import com.infobip.model.EmailSuppressionType;
 import com.infobip.model.EmailTrackingEventRequest;
 import com.infobip.model.EmailValidationRequest;
 import com.infobip.model.EmailValidationResponse;
-import java.io.File;
+import com.infobip.model.MessageGeneralStatus;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -110,7 +114,7 @@ public class EmailApi {
     }
 
     /**
-     * Add new domain.
+     * Add domain.
      * <p>
      * This method allows you to add new domains with a limit to create a maximum of 1000 domains in a day.
      *
@@ -408,7 +412,7 @@ public class EmailApi {
     }
 
     /**
-     * Delete existing domain.
+     * Delete domain.
      * <p>
      * This method allows you to delete an existing domain.
      *
@@ -602,7 +606,7 @@ public class EmailApi {
     }
 
     /**
-     * Get all domains for the account.
+     * Get domains.
      * <p>
      * This API is to get all domain associated with the account. It also provides details of the retrieved domain like the DNS records, Tracking details, Active/Blocked status,etc.
      *
@@ -804,11 +808,11 @@ public class EmailApi {
     private RequestDefinition getEmailDeliveryReportsDefinition(
             String bulkId,
             String messageId,
-            String campaignReferenceId,
             Integer limit,
+            String entityId,
             String applicationId,
-            String entityId) {
-        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/reports")
+            String campaignReferenceId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/4/reports")
                 .requiresAuthentication(true)
                 .accept("application/json");
 
@@ -818,17 +822,17 @@ public class EmailApi {
         if (messageId != null) {
             builder.addQueryParameter(new Parameter("messageId", messageId));
         }
-        if (campaignReferenceId != null) {
-            builder.addQueryParameter(new Parameter("campaignReferenceId", campaignReferenceId));
-        }
         if (limit != null) {
             builder.addQueryParameter(new Parameter("limit", limit));
+        }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
         }
         if (applicationId != null) {
             builder.addQueryParameter(new Parameter("applicationId", applicationId));
         }
-        if (entityId != null) {
-            builder.addQueryParameter(new Parameter("entityId", entityId));
+        if (campaignReferenceId != null) {
+            builder.addQueryParameter(new Parameter("campaignReferenceId", campaignReferenceId));
         }
         return builder.build();
     }
@@ -839,17 +843,17 @@ public class EmailApi {
     public class GetEmailDeliveryReportsRequest {
         private String bulkId;
         private String messageId;
-        private String campaignReferenceId;
         private Integer limit;
-        private String applicationId;
         private String entityId;
+        private String applicationId;
+        private String campaignReferenceId;
 
         private GetEmailDeliveryReportsRequest() {}
 
         /**
          * Sets bulkId.
          *
-         * @param bulkId Bulk ID for which report is requested. (optional)
+         * @param bulkId The ID that uniquely identifies the request. (optional)
          * @return GetEmailDeliveryReportsRequest
          */
         public GetEmailDeliveryReportsRequest bulkId(String bulkId) {
@@ -860,7 +864,7 @@ public class EmailApi {
         /**
          * Sets messageId.
          *
-         * @param messageId The ID that uniquely identifies the sent email. (optional)
+         * @param messageId The ID that uniquely identifies the message sent. (optional)
          * @return GetEmailDeliveryReportsRequest
          */
         public GetEmailDeliveryReportsRequest messageId(String messageId) {
@@ -869,20 +873,9 @@ public class EmailApi {
         }
 
         /**
-         * Sets campaignReferenceId.
-         *
-         * @param campaignReferenceId The ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns. (optional)
-         * @return GetEmailDeliveryReportsRequest
-         */
-        public GetEmailDeliveryReportsRequest campaignReferenceId(String campaignReferenceId) {
-            this.campaignReferenceId = campaignReferenceId;
-            return this;
-        }
-
-        /**
          * Sets limit.
          *
-         * @param limit Maximum number of reports. (optional)
+         * @param limit Maximum number of delivery reports to be returned. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access reports for the last 48h. (optional, default to 50)
          * @return GetEmailDeliveryReportsRequest
          */
         public GetEmailDeliveryReportsRequest limit(Integer limit) {
@@ -891,9 +884,20 @@ public class EmailApi {
         }
 
         /**
+         * Sets entityId.
+         *
+         * @param entityId Entity id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
+         * @return GetEmailDeliveryReportsRequest
+         */
+        public GetEmailDeliveryReportsRequest entityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
+
+        /**
          * Sets applicationId.
          *
-         * @param applicationId [Application](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#application) identifier used for filtering. (optional)
+         * @param applicationId Application id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
          * @return GetEmailDeliveryReportsRequest
          */
         public GetEmailDeliveryReportsRequest applicationId(String applicationId) {
@@ -902,13 +906,13 @@ public class EmailApi {
         }
 
         /**
-         * Sets entityId.
+         * Sets campaignReferenceId.
          *
-         * @param entityId [Entity](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#entity) identifier used for filtering. (optional)
+         * @param campaignReferenceId ID of a campaign that was sent in the message. (optional)
          * @return GetEmailDeliveryReportsRequest
          */
-        public GetEmailDeliveryReportsRequest entityId(String entityId) {
-            this.entityId = entityId;
+        public GetEmailDeliveryReportsRequest campaignReferenceId(String campaignReferenceId) {
+            this.campaignReferenceId = campaignReferenceId;
             return this;
         }
 
@@ -920,7 +924,7 @@ public class EmailApi {
          */
         public EmailReportsResult execute() throws ApiException {
             RequestDefinition getEmailDeliveryReportsDefinition = getEmailDeliveryReportsDefinition(
-                    bulkId, messageId, campaignReferenceId, limit, applicationId, entityId);
+                    bulkId, messageId, limit, entityId, applicationId, campaignReferenceId);
             return apiClient.execute(
                     getEmailDeliveryReportsDefinition, new TypeReference<EmailReportsResult>() {}.getType());
         }
@@ -933,53 +937,57 @@ public class EmailApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<EmailReportsResult> callback) {
             RequestDefinition getEmailDeliveryReportsDefinition = getEmailDeliveryReportsDefinition(
-                    bulkId, messageId, campaignReferenceId, limit, applicationId, entityId);
+                    bulkId, messageId, limit, entityId, applicationId, campaignReferenceId);
             return apiClient.executeAsync(
                     getEmailDeliveryReportsDefinition, new TypeReference<EmailReportsResult>() {}.getType(), callback);
         }
     }
 
     /**
-     * Email delivery reports.
+     * Get email delivery reports.
      * <p>
      * Get one-time delivery reports for all sent emails.
      *
      * @return GetEmailDeliveryReportsRequest
+     * @see <a href="https://www.infobip.com/docs/email">Learn more about EMAIL channel and use cases</a>
      */
     public GetEmailDeliveryReportsRequest getEmailDeliveryReports() {
         return new GetEmailDeliveryReportsRequest();
     }
 
     private RequestDefinition getEmailLogsDefinition(
-            String messageId,
-            String from,
-            String to,
-            String bulkId,
-            String campaignReferenceId,
-            String generalStatus,
+            String sender,
+            String destination,
+            List<String> bulkId,
+            List<String> messageId,
+            MessageGeneralStatus generalStatus,
             OffsetDateTime sentSince,
             OffsetDateTime sentUntil,
             Integer limit,
+            String entityId,
             String applicationId,
-            String entityId) {
-        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/1/logs")
+            List<String> campaignReferenceId,
+            Boolean useCursor,
+            String cursor) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/email/4/logs")
                 .requiresAuthentication(true)
                 .accept("application/json");
 
-        if (messageId != null) {
-            builder.addQueryParameter(new Parameter("messageId", messageId));
+        if (sender != null) {
+            builder.addQueryParameter(new Parameter("sender", sender));
         }
-        if (from != null) {
-            builder.addQueryParameter(new Parameter("from", from));
-        }
-        if (to != null) {
-            builder.addQueryParameter(new Parameter("to", to));
+        if (destination != null) {
+            builder.addQueryParameter(new Parameter("destination", destination));
         }
         if (bulkId != null) {
-            builder.addQueryParameter(new Parameter("bulkId", bulkId));
+            for (var parameterItem : bulkId) {
+                builder.addQueryParameter(new Parameter("bulkId", parameterItem));
+            }
         }
-        if (campaignReferenceId != null) {
-            builder.addQueryParameter(new Parameter("campaignReferenceId", campaignReferenceId));
+        if (messageId != null) {
+            for (var parameterItem : messageId) {
+                builder.addQueryParameter(new Parameter("messageId", parameterItem));
+            }
         }
         if (generalStatus != null) {
             builder.addQueryParameter(new Parameter("generalStatus", generalStatus));
@@ -993,11 +1001,22 @@ public class EmailApi {
         if (limit != null) {
             builder.addQueryParameter(new Parameter("limit", limit));
         }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
+        }
         if (applicationId != null) {
             builder.addQueryParameter(new Parameter("applicationId", applicationId));
         }
-        if (entityId != null) {
-            builder.addQueryParameter(new Parameter("entityId", entityId));
+        if (campaignReferenceId != null) {
+            for (var parameterItem : campaignReferenceId) {
+                builder.addQueryParameter(new Parameter("campaignReferenceId", parameterItem));
+            }
+        }
+        if (useCursor != null) {
+            builder.addQueryParameter(new Parameter("useCursor", useCursor));
+        }
+        if (cursor != null) {
+            builder.addQueryParameter(new Parameter("cursor", cursor));
         }
         return builder.build();
     }
@@ -1006,82 +1025,73 @@ public class EmailApi {
      * getEmailLogs request builder class.
      */
     public class GetEmailLogsRequest {
-        private String messageId;
-        private String from;
-        private String to;
-        private String bulkId;
-        private String campaignReferenceId;
-        private String generalStatus;
+        private String sender;
+        private String destination;
+        private List<String> bulkId;
+        private List<String> messageId;
+        private MessageGeneralStatus generalStatus;
         private OffsetDateTime sentSince;
         private OffsetDateTime sentUntil;
         private Integer limit;
-        private String applicationId;
         private String entityId;
+        private String applicationId;
+        private List<String> campaignReferenceId;
+        private Boolean useCursor;
+        private String cursor;
 
         private GetEmailLogsRequest() {}
 
         /**
-         * Sets messageId.
+         * Sets sender.
          *
-         * @param messageId The ID that uniquely identifies the sent email. (optional)
+         * @param sender The sender ID which can be alphanumeric or numeric. (optional)
          * @return GetEmailLogsRequest
          */
-        public GetEmailLogsRequest messageId(String messageId) {
-            this.messageId = messageId;
+        public GetEmailLogsRequest sender(String sender) {
+            this.sender = sender;
             return this;
         }
 
         /**
-         * Sets from.
+         * Sets destination.
          *
-         * @param from From email address. (optional)
+         * @param destination Message destination address. (optional)
          * @return GetEmailLogsRequest
          */
-        public GetEmailLogsRequest from(String from) {
-            this.from = from;
-            return this;
-        }
-
-        /**
-         * Sets to.
-         *
-         * @param to The recipient email address. (optional)
-         * @return GetEmailLogsRequest
-         */
-        public GetEmailLogsRequest to(String to) {
-            this.to = to;
+        public GetEmailLogsRequest destination(String destination) {
+            this.destination = destination;
             return this;
         }
 
         /**
          * Sets bulkId.
          *
-         * @param bulkId Bulk ID that uniquely identifies the request. (optional)
+         * @param bulkId Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request. May contain multiple comma-separated values. Maximum length 2048 characters. (optional)
          * @return GetEmailLogsRequest
          */
-        public GetEmailLogsRequest bulkId(String bulkId) {
+        public GetEmailLogsRequest bulkId(List<String> bulkId) {
             this.bulkId = bulkId;
             return this;
         }
 
         /**
-         * Sets campaignReferenceId.
+         * Sets messageId.
          *
-         * @param campaignReferenceId The ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns. (optional)
+         * @param messageId Unique message ID for which a log is requested. May contain multiple comma-separated values. Maximum length 2048 characters. (optional)
          * @return GetEmailLogsRequest
          */
-        public GetEmailLogsRequest campaignReferenceId(String campaignReferenceId) {
-            this.campaignReferenceId = campaignReferenceId;
+        public GetEmailLogsRequest messageId(List<String> messageId) {
+            this.messageId = messageId;
             return this;
         }
 
         /**
          * Sets generalStatus.
          *
-         * @param generalStatus Indicates whether the initiated email has been successfully sent, not sent, delivered, not delivered, waiting for delivery or any other possible status. (optional)
+         * @param generalStatus  (optional)
          * @return GetEmailLogsRequest
          */
-        public GetEmailLogsRequest generalStatus(String generalStatus) {
+        public GetEmailLogsRequest generalStatus(MessageGeneralStatus generalStatus) {
             this.generalStatus = generalStatus;
             return this;
         }
@@ -1089,7 +1099,7 @@ public class EmailApi {
         /**
          * Sets sentSince.
          *
-         * @param sentSince Tells when the email was initiated. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
+         * @param sentSince The logs will only include messages sent after this date. Use it alongside sentUntil to specify a time range for the logs, but only up to the maximum limit of 1000 logs per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
          * @return GetEmailLogsRequest
          */
         public GetEmailLogsRequest sentSince(OffsetDateTime sentSince) {
@@ -1100,7 +1110,7 @@ public class EmailApi {
         /**
          * Sets sentUntil.
          *
-         * @param sentUntil Tells when the email request was processed by Infobip.Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;. (optional)
+         * @param sentUntil The logs will only include messages sent before this date. Use it alongside sentSince to specify a time range for the logs, but only up to the maximum limit of 1000 logs per call. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ. (optional)
          * @return GetEmailLogsRequest
          */
         public GetEmailLogsRequest sentUntil(OffsetDateTime sentUntil) {
@@ -1111,7 +1121,7 @@ public class EmailApi {
         /**
          * Sets limit.
          *
-         * @param limit Maximum number of logs. (optional)
+         * @param limit Maximum number of messages to include in logs. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access logs for the last 48h. (optional, default to 50)
          * @return GetEmailLogsRequest
          */
         public GetEmailLogsRequest limit(Integer limit) {
@@ -1120,9 +1130,20 @@ public class EmailApi {
         }
 
         /**
+         * Sets entityId.
+         *
+         * @param entityId Entity id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
+         * @return GetEmailLogsRequest
+         */
+        public GetEmailLogsRequest entityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
+
+        /**
          * Sets applicationId.
          *
-         * @param applicationId [Application](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#application) identifier used for filtering. (optional)
+         * @param applicationId Application id used to send the message. For more details, see our [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management). (optional)
          * @return GetEmailLogsRequest
          */
         public GetEmailLogsRequest applicationId(String applicationId) {
@@ -1131,13 +1152,35 @@ public class EmailApi {
         }
 
         /**
-         * Sets entityId.
+         * Sets campaignReferenceId.
          *
-         * @param entityId [Entity](https://www.infobip.com/docs/cpaas-x/application-and-entity-management#entity) identifier used for filtering. (optional)
+         * @param campaignReferenceId ID of a campaign that was sent in the message. May contain multiple comma-separated values. (optional)
          * @return GetEmailLogsRequest
          */
-        public GetEmailLogsRequest entityId(String entityId) {
-            this.entityId = entityId;
+        public GetEmailLogsRequest campaignReferenceId(List<String> campaignReferenceId) {
+            this.campaignReferenceId = campaignReferenceId;
+            return this;
+        }
+
+        /**
+         * Sets useCursor.
+         *
+         * @param useCursor Flag used to enable cursor-based pagination. When set to true, the system will use the cursor to fetch the next set of logs. (optional)
+         * @return GetEmailLogsRequest
+         */
+        public GetEmailLogsRequest useCursor(Boolean useCursor) {
+            this.useCursor = useCursor;
+            return this;
+        }
+
+        /**
+         * Sets cursor.
+         *
+         * @param cursor Value which represents the current position in the data set. For the first request, this field shouldn&#39;t be defined. In subsequent requests, use the &#x60;nextCursor&#x60; value returned from the previous response to continue fetching data. (optional)
+         * @return GetEmailLogsRequest
+         */
+        public GetEmailLogsRequest cursor(String cursor) {
+            this.cursor = cursor;
             return this;
         }
 
@@ -1149,17 +1192,19 @@ public class EmailApi {
          */
         public EmailLogsResponse execute() throws ApiException {
             RequestDefinition getEmailLogsDefinition = getEmailLogsDefinition(
-                    messageId,
-                    from,
-                    to,
+                    sender,
+                    destination,
                     bulkId,
-                    campaignReferenceId,
+                    messageId,
                     generalStatus,
                     sentSince,
                     sentUntil,
                     limit,
+                    entityId,
                     applicationId,
-                    entityId);
+                    campaignReferenceId,
+                    useCursor,
+                    cursor);
             return apiClient.execute(getEmailLogsDefinition, new TypeReference<EmailLogsResponse>() {}.getType());
         }
 
@@ -1171,26 +1216,28 @@ public class EmailApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<EmailLogsResponse> callback) {
             RequestDefinition getEmailLogsDefinition = getEmailLogsDefinition(
-                    messageId,
-                    from,
-                    to,
+                    sender,
+                    destination,
                     bulkId,
-                    campaignReferenceId,
+                    messageId,
                     generalStatus,
                     sentSince,
                     sentUntil,
                     limit,
+                    entityId,
                     applicationId,
-                    entityId);
+                    campaignReferenceId,
+                    useCursor,
+                    cursor);
             return apiClient.executeAsync(
                     getEmailLogsDefinition, new TypeReference<EmailLogsResponse>() {}.getType(), callback);
         }
     }
 
     /**
-     * Get email logs.
+     * Get email message logs.
      * <p>
-     * This method allows you to get logs for sent emails using their messageId. Email logs are available for the last 48 hours.
+     * Use this method for displaying logs for example in the user interface. Available are the logs for the last 48 hours.
      *
      * @return GetEmailLogsRequest
      */
@@ -1485,7 +1532,7 @@ public class EmailApi {
     }
 
     /**
-     * Get sent email bulks status.
+     * Get scheduled bulk statuses.
      * <p>
      * See the status of scheduled email messages.
      *
@@ -1545,7 +1592,7 @@ public class EmailApi {
     }
 
     /**
-     * Get sent email bulks.
+     * Get scheduled bulks.
      * <p>
      * See the scheduled time of your Email messages.
      *
@@ -1901,7 +1948,7 @@ public class EmailApi {
     }
 
     /**
-     * Reschedule Email messages.
+     * Reschedule messages.
      * <p>
      * Change the date and time for sending scheduled messages.
      *
@@ -1914,160 +1961,13 @@ public class EmailApi {
         return new RescheduleEmailsRequest(bulkId, emailBulkRescheduleRequest);
     }
 
-    private RequestDefinition sendEmailDefinition(
-            List<String> to,
-            String from,
-            List<String> cc,
-            List<String> bcc,
-            String subject,
-            String text,
-            String html,
-            String ampHtml,
-            Long templateId,
-            List<File> attachment,
-            List<File> inlineImage,
-            Boolean intermediateReport,
-            String notifyUrl,
-            String notifyContentType,
-            String callbackData,
-            Boolean track,
-            Boolean trackClicks,
-            Boolean trackOpens,
-            String trackingPixelPosition,
-            String trackingUrl,
-            String bulkId,
-            String messageId,
-            String campaignReferenceId,
-            String replyTo,
-            String defaultPlaceholders,
-            Boolean preserveRecipients,
-            OffsetDateTime sendAt,
-            String landingPagePlaceholders,
-            String landingPageId,
-            String templateLanguageVersion,
-            String clientPriority,
-            String applicationId,
-            String entityId,
-            String headers,
-            String ipPoolId,
-            Boolean skipPassiveStorage,
-            Boolean skipActiveStorage) {
-        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/email/3/send")
+    private RequestDefinition sendEmailDefinition(EmailRequest emailRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/email/4/messages")
+                .body(emailRequest)
                 .requiresAuthentication(true)
                 .accept("application/json")
-                .contentType("multipart/form-data");
+                .contentType("application/json");
 
-        if (from != null) {
-            builder.addFormParameter(new Parameter("from", from));
-        }
-        if (to != null) {
-            builder.addFormParameter(new Parameter("to", to));
-        }
-        if (cc != null) {
-            builder.addFormParameter(new Parameter("cc", cc));
-        }
-        if (bcc != null) {
-            builder.addFormParameter(new Parameter("bcc", bcc));
-        }
-        if (subject != null) {
-            builder.addFormParameter(new Parameter("subject", subject));
-        }
-        if (text != null) {
-            builder.addFormParameter(new Parameter("text", text));
-        }
-        if (html != null) {
-            builder.addFormParameter(new Parameter("html", html));
-        }
-        if (ampHtml != null) {
-            builder.addFormParameter(new Parameter("ampHtml", ampHtml));
-        }
-        if (templateId != null) {
-            builder.addFormParameter(new Parameter("templateId", templateId));
-        }
-        if (attachment != null) {
-            builder.addFormParameter(new Parameter("attachment", attachment));
-        }
-        if (inlineImage != null) {
-            builder.addFormParameter(new Parameter("inlineImage", inlineImage));
-        }
-        if (intermediateReport != null) {
-            builder.addFormParameter(new Parameter("intermediateReport", intermediateReport));
-        }
-        if (notifyUrl != null) {
-            builder.addFormParameter(new Parameter("notifyUrl", notifyUrl));
-        }
-        if (notifyContentType != null) {
-            builder.addFormParameter(new Parameter("notifyContentType", notifyContentType));
-        }
-        if (callbackData != null) {
-            builder.addFormParameter(new Parameter("callbackData", callbackData));
-        }
-        if (track != null) {
-            builder.addFormParameter(new Parameter("track", track));
-        }
-        if (trackClicks != null) {
-            builder.addFormParameter(new Parameter("trackClicks", trackClicks));
-        }
-        if (trackOpens != null) {
-            builder.addFormParameter(new Parameter("trackOpens", trackOpens));
-        }
-        if (trackingPixelPosition != null) {
-            builder.addFormParameter(new Parameter("trackingPixelPosition", trackingPixelPosition));
-        }
-        if (trackingUrl != null) {
-            builder.addFormParameter(new Parameter("trackingUrl", trackingUrl));
-        }
-        if (bulkId != null) {
-            builder.addFormParameter(new Parameter("bulkId", bulkId));
-        }
-        if (messageId != null) {
-            builder.addFormParameter(new Parameter("messageId", messageId));
-        }
-        if (campaignReferenceId != null) {
-            builder.addFormParameter(new Parameter("campaignReferenceId", campaignReferenceId));
-        }
-        if (replyTo != null) {
-            builder.addFormParameter(new Parameter("replyTo", replyTo));
-        }
-        if (defaultPlaceholders != null) {
-            builder.addFormParameter(new Parameter("defaultPlaceholders", defaultPlaceholders));
-        }
-        if (preserveRecipients != null) {
-            builder.addFormParameter(new Parameter("preserveRecipients", preserveRecipients));
-        }
-        if (sendAt != null) {
-            builder.addFormParameter(new Parameter("sendAt", sendAt));
-        }
-        if (landingPagePlaceholders != null) {
-            builder.addFormParameter(new Parameter("landingPagePlaceholders", landingPagePlaceholders));
-        }
-        if (landingPageId != null) {
-            builder.addFormParameter(new Parameter("landingPageId", landingPageId));
-        }
-        if (templateLanguageVersion != null) {
-            builder.addFormParameter(new Parameter("templateLanguageVersion", templateLanguageVersion));
-        }
-        if (clientPriority != null) {
-            builder.addFormParameter(new Parameter("clientPriority", clientPriority));
-        }
-        if (applicationId != null) {
-            builder.addFormParameter(new Parameter("applicationId", applicationId));
-        }
-        if (entityId != null) {
-            builder.addFormParameter(new Parameter("entityId", entityId));
-        }
-        if (headers != null) {
-            builder.addFormParameter(new Parameter("headers", headers));
-        }
-        if (ipPoolId != null) {
-            builder.addFormParameter(new Parameter("ipPoolId", ipPoolId));
-        }
-        if (skipPassiveStorage != null) {
-            builder.addFormParameter(new Parameter("skipPassiveStorage", skipPassiveStorage));
-        }
-        if (skipActiveStorage != null) {
-            builder.addFormParameter(new Parameter("skipActiveStorage", skipActiveStorage));
-        }
         return builder.build();
     }
 
@@ -2075,490 +1975,22 @@ public class EmailApi {
      * sendEmail request builder class.
      */
     public class SendEmailRequest {
-        private final List<String> to;
-        private String from;
-        private List<String> cc;
-        private List<String> bcc;
-        private String subject;
-        private String text;
-        private String html;
-        private String ampHtml;
-        private Long templateId;
-        private List<File> attachment;
-        private List<File> inlineImage;
-        private Boolean intermediateReport;
-        private String notifyUrl;
-        private String notifyContentType;
-        private String callbackData;
-        private Boolean track;
-        private Boolean trackClicks;
-        private Boolean trackOpens;
-        private String trackingPixelPosition;
-        private String trackingUrl;
-        private String bulkId;
-        private String messageId;
-        private String campaignReferenceId;
-        private String replyTo;
-        private String defaultPlaceholders;
-        private Boolean preserveRecipients;
-        private OffsetDateTime sendAt;
-        private String landingPagePlaceholders;
-        private String landingPageId;
-        private String templateLanguageVersion;
-        private String clientPriority;
-        private String applicationId;
-        private String entityId;
-        private String headers;
-        private String ipPoolId;
-        private Boolean skipPassiveStorage;
-        private Boolean skipActiveStorage;
+        private final EmailRequest emailRequest;
 
-        private SendEmailRequest(List<String> to) {
-            this.to = Objects.requireNonNull(to, "The required parameter 'to' is missing.");
-        }
-
-        /**
-         * Sets from.
-         *
-         * @param from Email address with optional sender name.  Note: This field is required if &#x60;templateId&#x60; is not present. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest from(String from) {
-            this.from = from;
-            return this;
-        }
-
-        /**
-         * Sets cc.
-         *
-         * @param cc CC recipient email address. As optional feature on this field, a specific placeholder can be defined whose value will apply only for this destination.  Note: Maximum number of recipients per request is 1000 overall including to, cc and bcc field. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest cc(List<String> cc) {
-            this.cc = cc;
-            return this;
-        }
-
-        /**
-         * Sets bcc.
-         *
-         * @param bcc BCC recipient email address. As optional feature on this field, a specific placeholder can be defined whose value will apply only for this destination.  Note: Maximum number of recipients per request is 1000 overall including to, cc and bcc field. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest bcc(List<String> bcc) {
-            this.bcc = bcc;
-            return this;
-        }
-
-        /**
-         * Sets subject.
-         *
-         * @param subject Message subject.  Note: This field is required if &#x60;templateId&#x60; is not present. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest subject(String subject) {
-            this.subject = subject;
-            return this;
-        }
-
-        /**
-         * Sets text.
-         *
-         * @param text Body of the message. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest text(String text) {
-            this.text = text;
-            return this;
-        }
-
-        /**
-         * Sets html.
-         *
-         * @param html HTML body of the message. If &#x60;html&#x60; and &#x60;text&#x60; fields are present, the &#x60;text&#x60; field will be ignored and &#x60;html&#x60; will be delivered as a message body. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest html(String html) {
-            this.html = html;
-            return this;
-        }
-
-        /**
-         * Sets ampHtml.
-         *
-         * @param ampHtml Amp HTML body of the message. If &#x60;ampHtml&#x60; is present, &#x60;html&#x60; is mandatory. Amp HTML is not supported by all the email clients. Please check this link for configuring gmail client https://developers.google.com/gmail/ampemail/. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest ampHtml(String ampHtml) {
-            this.ampHtml = ampHtml;
-            return this;
-        }
-
-        /**
-         * Sets templateId.
-         *
-         * @param templateId Template ID used for generating email content. The template is created over Infobip web interface or via the [Infobip Templates API](https://www.infobip.com/docs/api/channels/email/templates). If &#x60;templateId&#x60; is present, then &#x60;html&#x60; and &#x60;text&#x60; values are ignored.  Note: &#x60;templateId&#x60; only supports the value of &#x60;Broadcast&#x60;. &#x60;Content&#x60; and &#x60;Flow&#x60; are not supported. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest templateId(Long templateId) {
-            this.templateId = templateId;
-            return this;
-        }
-
-        /**
-         * Sets attachment.
-         *
-         * @param attachment File attachment. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest attachment(List<File> attachment) {
-            this.attachment = attachment;
-            return this;
-        }
-
-        /**
-         * Sets inlineImage.
-         *
-         * @param inlineImage Allows for inserting an image file inside the HTML code of the email by using &#x60;cid:FILENAME&#x60; instead of providing an external link to the image. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest inlineImage(List<File> inlineImage) {
-            this.inlineImage = inlineImage;
-            return this;
-        }
-
-        /**
-         * Sets intermediateReport.
-         *
-         * @param intermediateReport The real-time Intermediate delivery report that will be sent on your callback server. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest intermediateReport(Boolean intermediateReport) {
-            this.intermediateReport = intermediateReport;
-            return this;
-        }
-
-        /**
-         * Sets notifyUrl.
-         *
-         * @param notifyUrl The URL on your callback server on which the Delivery report will be sent. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest notifyUrl(String notifyUrl) {
-            this.notifyUrl = notifyUrl;
-            return this;
-        }
-
-        /**
-         * Sets notifyContentType.
-         *
-         * @param notifyContentType Preferred Delivery report content type. Can be &#x60;application/json&#x60; or &#x60;application/xml&#x60;. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest notifyContentType(String notifyContentType) {
-            this.notifyContentType = notifyContentType;
-            return this;
-        }
-
-        /**
-         * Sets callbackData.
-         *
-         * @param callbackData Additional client data that will be sent on the notifyUrl. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest callbackData(String callbackData) {
-            this.callbackData = callbackData;
-            return this;
-        }
-
-        /**
-         * Sets track.
-         *
-         * @param track Enable or disable open and click tracking. Passing true will only enable tracking and the statistics would be visible in the web interface alone. This can be explicitly overridden by &#x60;trackClicks&#x60; and &#x60;trackOpens&#x60;. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest track(Boolean track) {
-            this.track = track;
-            return this;
-        }
-
-        /**
-         * Sets trackClicks.
-         *
-         * @param trackClicks This parameter enables or disables track click feature.  Note: Option to disable click tracking per URL is available. For detailed usage, please refer to the [documentation](https://www.infobip.com/docs/email/email-tracking-and-analytics/email-tracking-types#disable-click-tracking-on-urls-url-clicks). (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest trackClicks(Boolean trackClicks) {
-            this.trackClicks = trackClicks;
-            return this;
-        }
-
-        /**
-         * Sets trackOpens.
-         *
-         * @param trackOpens This parameter enables or disables track open feature. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest trackOpens(Boolean trackOpens) {
-            this.trackOpens = trackOpens;
-            return this;
-        }
-
-        /**
-         * Sets trackingPixelPosition.
-         *
-         * @param trackingPixelPosition This parameter specifies the position of the open tracking pixel within the email content. Allowed values are &#x60;TOP&#x60; and &#x60;BOTTOM&#x60;. If no value is provided, the default is &#x60;TOP&#x60;. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest trackingPixelPosition(String trackingPixelPosition) {
-            this.trackingPixelPosition = trackingPixelPosition;
-            return this;
-        }
-
-        /**
-         * Sets trackingUrl.
-         *
-         * @param trackingUrl The URL on your callback server on which the open and click notifications will be sent. See [Tracking Notifications](https://www.infobip.com/docs/email/email-over-api/tracking-notifications) for details. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest trackingUrl(String trackingUrl) {
-            this.trackingUrl = trackingUrl;
-            return this;
-        }
-
-        /**
-         * Sets bulkId.
-         *
-         * @param bulkId The ID that uniquely identifies the sent bulk. This filter will enable you to query delivery reports for all the messages using just one request. You will receive a &#x60;bulkId&#x60; in the response after sending an email request. If you don&#39;t set your own &#x60;bulkId&#x60;, unique ID will be generated by our system and returned in the API response. (Optional Field) (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest bulkId(String bulkId) {
-            this.bulkId = bulkId;
-            return this;
-        }
-
-        /**
-         * Sets messageId.
-         *
-         * @param messageId The ID that uniquely identifies the message sent to a recipient. (Optional Field) (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest messageId(String messageId) {
-            this.messageId = messageId;
-            return this;
-        }
-
-        /**
-         * Sets campaignReferenceId.
-         *
-         * @param campaignReferenceId The ID that allows you to track, analyze, and show an aggregated overview and the performance of individual campaigns. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest campaignReferenceId(String campaignReferenceId) {
-            this.campaignReferenceId = campaignReferenceId;
-            return this;
-        }
-
-        /**
-         * Sets replyTo.
-         *
-         * @param replyTo Email address to which recipients of the email can reply. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest replyTo(String replyTo) {
-            this.replyTo = replyTo;
-            return this;
-        }
-
-        /**
-         * Sets defaultPlaceholders.
-         *
-         * @param defaultPlaceholders General placeholder, given in a form of json example: &#x60;defaultPlaceholders&#x3D;{\\\&quot;ph1\\\&quot;: \\\&quot;Success\\\&quot;}&#x60;, which will replace given key &#x60;{{ph1}}&#x60; with given value &#x60;Success&#x60; anywhere in the email (subject, text, html...). In case of more destinations in &#x60;To&#x60; field, this placeholder will resolve the same value for key &#x60;ph1&#x60;. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest defaultPlaceholders(String defaultPlaceholders) {
-            this.defaultPlaceholders = defaultPlaceholders;
-            return this;
-        }
-
-        /**
-         * Sets preserveRecipients.
-         *
-         * @param preserveRecipients If set to &#x60;true&#x60;, the &#x60;to&#x60; recipients will see the list of all other recipients to get the email and the response will return only one &#x60;messageId&#x60;. Otherwise, each recipient will see just their own email and the response will return a unique &#x60;messageId&#x60; for each email recipient. (optional, default to false)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest preserveRecipients(Boolean preserveRecipients) {
-            this.preserveRecipients = preserveRecipients;
-            return this;
-        }
-
-        /**
-         * Sets sendAt.
-         *
-         * @param sendAt To schedule message at a given time. Time provided should be in UTC in the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60; and cannot exceed 30 days in the future.  (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest sendAt(OffsetDateTime sendAt) {
-            this.sendAt = sendAt;
-            return this;
-        }
-
-        /**
-         * Sets landingPagePlaceholders.
-         *
-         * @param landingPagePlaceholders Personalize opt out landing page by inserting placeholders. Insert placeholder or tag while designing landing page. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest landingPagePlaceholders(String landingPagePlaceholders) {
-            this.landingPagePlaceholders = landingPagePlaceholders;
-            return this;
-        }
-
-        /**
-         * Sets landingPageId.
-         *
-         * @param landingPageId The ID of an opt out landing page to be used and displayed once an end user clicks the unsubscribe link. If not present, default opt out landing page will be displayed. Create a landing page in your Infobip account and use its ID, e.g., &#x60;1_23456&#x60;. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest landingPageId(String landingPageId) {
-            this.landingPageId = landingPageId;
-            return this;
-        }
-
-        /**
-         * Sets templateLanguageVersion.
-         *
-         * @param templateLanguageVersion Specifies template language version that will be used in the current message template. Use version 1 for previous version of template language. Use version 2 for features of the new template language. If not present version 1 will be used as default version.  (optional, default to 1)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest templateLanguageVersion(String templateLanguageVersion) {
-            this.templateLanguageVersion = templateLanguageVersion;
-            return this;
-        }
-
-        /**
-         * Sets clientPriority.
-         *
-         * @param clientPriority Adds a priority rating to this email message. Allowed values are &#x60;HIGH&#x60;, &#x60;STANDARD&#x60; and &#x60;LOW&#x60;. Messages with a higher priority value sent by your account are prioritized over messages with a lower priority value sent by your account. If no priority value is provided, messages will be treated with &#x60;STANDARD&#x60; priority by default.  (optional, default to STANDARD)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest clientPriority(String clientPriority) {
-            this.clientPriority = clientPriority;
-            return this;
-        }
-
-        /**
-         * Sets applicationId.
-         *
-         * @param applicationId Required for application use in a send request for outbound traffic. Returned in notification events. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest applicationId(String applicationId) {
-            this.applicationId = applicationId;
-            return this;
-        }
-
-        /**
-         * Sets entityId.
-         *
-         * @param entityId Required for entity use in a send request for outbound traffic. Returned in notification events. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest entityId(String entityId) {
-            this.entityId = entityId;
-            return this;
-        }
-
-        /**
-         * Sets headers.
-         *
-         * @param headers Additional email headers for customization that can be provided in a form of JSON. For example, you can override List-Unsubscribe header and provide your own custom one: &#x60;headers&#x3D;{\\\&quot;List-Unsubscribe\\\&quot;: \\\&quot;your unsubscribe link\\\&quot;, \\\&quot;X-CustomHeader\\\&quot;: \\\&quot;Header value\\\&quot;}&#x60;.  There are a few exceptions of headers which are not adjustable through this option: &#x60;To&#x60;, &#x60;Cc&#x60;, &#x60;Bcc&#x60;, &#x60;From&#x60;, &#x60;Subject&#x60;,&#x60;Content-Type&#x60;, &#x60;DKIM-Signature&#x60;, &#x60;Content-Transfer-Encoding&#x60;, &#x60;Return-Path&#x60;, &#x60;MIME-Version&#x60; (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest headers(String headers) {
-            this.headers = headers;
-            return this;
-        }
-
-        /**
-         * Sets ipPoolId.
-         *
-         * @param ipPoolId The ID of the IP Pool which will be used for sending. (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest ipPoolId(String ipPoolId) {
-            this.ipPoolId = ipPoolId;
-            return this;
-        }
-
-        /**
-         * Sets skipPassiveStorage.
-         *
-         * @param skipPassiveStorage Set to true to skip [passive email storage](https://www.infobip.com/docs/email/email-storage-and-retrieval/passive-email-storage) (long-term storage used for compliance, legal, or audit purposes). If &#x60;false&#x60; or not set, the account-level setting is used.  (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest skipPassiveStorage(Boolean skipPassiveStorage) {
-            this.skipPassiveStorage = skipPassiveStorage;
-            return this;
-        }
-
-        /**
-         * Sets skipActiveStorage.
-         *
-         * @param skipActiveStorage Set to true to skip [active email storage](https://www.infobip.com/docs/email/email-storage-and-retrieval/active-email-storage) (short-term storage used for troubleshooting or support). If &#x60;false&#x60; or not set, the account-level setting is used.  (optional)
-         * @return SendEmailRequest
-         */
-        public SendEmailRequest skipActiveStorage(Boolean skipActiveStorage) {
-            this.skipActiveStorage = skipActiveStorage;
-            return this;
+        private SendEmailRequest(EmailRequest emailRequest) {
+            this.emailRequest =
+                    Objects.requireNonNull(emailRequest, "The required parameter 'emailRequest' is missing.");
         }
 
         /**
          * Executes the sendEmail request.
          *
-         * @return EmailSendResponse The deserialized response.
+         * @return EmailResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public EmailSendResponse execute() throws ApiException {
-            RequestDefinition sendEmailDefinition = sendEmailDefinition(
-                    to,
-                    from,
-                    cc,
-                    bcc,
-                    subject,
-                    text,
-                    html,
-                    ampHtml,
-                    templateId,
-                    attachment,
-                    inlineImage,
-                    intermediateReport,
-                    notifyUrl,
-                    notifyContentType,
-                    callbackData,
-                    track,
-                    trackClicks,
-                    trackOpens,
-                    trackingPixelPosition,
-                    trackingUrl,
-                    bulkId,
-                    messageId,
-                    campaignReferenceId,
-                    replyTo,
-                    defaultPlaceholders,
-                    preserveRecipients,
-                    sendAt,
-                    landingPagePlaceholders,
-                    landingPageId,
-                    templateLanguageVersion,
-                    clientPriority,
-                    applicationId,
-                    entityId,
-                    headers,
-                    ipPoolId,
-                    skipPassiveStorage,
-                    skipActiveStorage);
-            return apiClient.execute(sendEmailDefinition, new TypeReference<EmailSendResponse>() {}.getType());
+        public EmailResponse execute() throws ApiException {
+            RequestDefinition sendEmailDefinition = sendEmailDefinition(emailRequest);
+            return apiClient.execute(sendEmailDefinition, new TypeReference<EmailResponse>() {}.getType());
         }
 
         /**
@@ -2567,60 +1999,82 @@ public class EmailApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(ApiCallback<EmailSendResponse> callback) {
-            RequestDefinition sendEmailDefinition = sendEmailDefinition(
-                    to,
-                    from,
-                    cc,
-                    bcc,
-                    subject,
-                    text,
-                    html,
-                    ampHtml,
-                    templateId,
-                    attachment,
-                    inlineImage,
-                    intermediateReport,
-                    notifyUrl,
-                    notifyContentType,
-                    callbackData,
-                    track,
-                    trackClicks,
-                    trackOpens,
-                    trackingPixelPosition,
-                    trackingUrl,
-                    bulkId,
-                    messageId,
-                    campaignReferenceId,
-                    replyTo,
-                    defaultPlaceholders,
-                    preserveRecipients,
-                    sendAt,
-                    landingPagePlaceholders,
-                    landingPageId,
-                    templateLanguageVersion,
-                    clientPriority,
-                    applicationId,
-                    entityId,
-                    headers,
-                    ipPoolId,
-                    skipPassiveStorage,
-                    skipActiveStorage);
+        public okhttp3.Call executeAsync(ApiCallback<EmailResponse> callback) {
+            RequestDefinition sendEmailDefinition = sendEmailDefinition(emailRequest);
             return apiClient.executeAsync(
-                    sendEmailDefinition, new TypeReference<EmailSendResponse>() {}.getType(), callback);
+                    sendEmailDefinition, new TypeReference<EmailResponse>() {}.getType(), callback);
         }
     }
 
     /**
-     * Send fully featured email.
+     * Send email messages.
      * <p>
-     * Send an email or multiple emails to a recipient or multiple recipients with CC/BCC enabled.
+     * 99% of all use cases can be achieved by using this API method. Everything from sending a simple single message to a single destination, up to batch sending of personalized messages to the thousands of recipients with a single API request. Scheduling and every advanced feature you can think of is supported.
      *
-     * @param to Email address of the recipient in a form of &#x60;To&#x3D;\\\&quot;john.smith@somecompany.com\\\&quot;&#x60;. As optional feature on this field, a specific placeholder can be defined whose value will apply only for this destination. Given &#x60;To&#x60; value should look like: &#x60;To&#x3D; {\\\&quot;to\\\&quot;: \\\&quot;john.smith@somecompany.com\\\&quot;,\\\&quot;placeholders\\\&quot;: {\\\&quot;name\\\&quot;: \\\&quot;John\\\&quot;}}&#x60; &#x60;To&#x3D; {\\\&quot;to\\\&quot;: \\\&quot;alice.grey@somecompany.com\\\&quot;,\\\&quot;placeholders\\\&quot;: {\\\&quot;name\\\&quot;: \\\&quot;Alice\\\&quot;}}&#x60;.  Note: Maximum number of recipients per request is 1000 overall including to, cc and bcc field. (required)
+     * @param emailRequest  (required)
      * @return SendEmailRequest
+     * @see <a href="https://www.infobip.com/docs/email">Learn more about Email channel and use cases</a>
      */
-    public SendEmailRequest sendEmail(List<String> to) {
-        return new SendEmailRequest(to);
+    @Beta
+    public SendEmailRequest sendEmail(EmailRequest emailRequest) {
+        return new SendEmailRequest(emailRequest);
+    }
+
+    private RequestDefinition sendMimeEmailDefinition(EmailSendMimeRequestSchema emailSendMimeRequestSchema) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/email/4/mime")
+                .body(emailSendMimeRequestSchema)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        return builder.build();
+    }
+
+    /**
+     * sendMimeEmail request builder class.
+     */
+    public class SendMimeEmailRequest {
+        private final EmailSendMimeRequestSchema emailSendMimeRequestSchema;
+
+        private SendMimeEmailRequest(EmailSendMimeRequestSchema emailSendMimeRequestSchema) {
+            this.emailSendMimeRequestSchema = Objects.requireNonNull(
+                    emailSendMimeRequestSchema, "The required parameter 'emailSendMimeRequestSchema' is missing.");
+        }
+
+        /**
+         * Executes the sendMimeEmail request.
+         *
+         * @return EmailSendResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public EmailSendResponse execute() throws ApiException {
+            RequestDefinition sendMimeEmailDefinition = sendMimeEmailDefinition(emailSendMimeRequestSchema);
+            return apiClient.execute(sendMimeEmailDefinition, new TypeReference<EmailSendResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the sendMimeEmail request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<EmailSendResponse> callback) {
+            RequestDefinition sendMimeEmailDefinition = sendMimeEmailDefinition(emailSendMimeRequestSchema);
+            return apiClient.executeAsync(
+                    sendMimeEmailDefinition, new TypeReference<EmailSendResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Send MIME email.
+     * <p>
+     * Send an email where you can specify the content as MIME message.
+     *
+     * @param emailSendMimeRequestSchema  (required)
+     * @return SendMimeEmailRequest
+     */
+    public SendMimeEmailRequest sendMimeEmail(EmailSendMimeRequestSchema emailSendMimeRequestSchema) {
+        return new SendMimeEmailRequest(emailSendMimeRequestSchema);
     }
 
     private RequestDefinition updateDomainPoolPriorityDefinition(
@@ -2819,7 +2273,7 @@ public class EmailApi {
     }
 
     /**
-     * Update scheduled Email messages status.
+     * Update scheduled message statuses.
      * <p>
      * Change status or completely cancel sending of scheduled messages.
      *
@@ -2887,7 +2341,7 @@ public class EmailApi {
     }
 
     /**
-     * Update tracking events.
+     * Update domain tracking events.
      * <p>
      * API to update tracking events for the provided domain. Tracking events can be updated only for CLICKS, OPENS and UNSUBSCRIBES.
      *
@@ -3005,7 +2459,7 @@ public class EmailApi {
     }
 
     /**
-     * Verify Domain.
+     * Verify domain.
      * <p>
      * API request to verify records(TXT, MX, DKIM) associated with the provided domain.
      *

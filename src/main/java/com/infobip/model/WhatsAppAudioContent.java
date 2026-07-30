@@ -19,6 +19,8 @@ public class WhatsAppAudioContent {
 
     private String mediaUrl;
 
+    private Boolean voice;
+
     /**
      * Sets mediaUrl.
      * <p>
@@ -65,6 +67,46 @@ public class WhatsAppAudioContent {
         this.mediaUrl = mediaUrl;
     }
 
+    /**
+     * Sets voice.
+     * <p>
+     * Field description:
+     * When set to true, the audio message is displayed as a voice note. Voice notes require OGG format with OPUS codec. Maximum size is 16MB.
+     *
+     * @param voice
+     * @return This {@link WhatsAppAudioContent instance}.
+     */
+    public WhatsAppAudioContent voice(Boolean voice) {
+        this.voice = voice;
+        return this;
+    }
+
+    /**
+     * Returns voice.
+     * <p>
+     * Field description:
+     * When set to true, the audio message is displayed as a voice note. Voice notes require OGG format with OPUS codec. Maximum size is 16MB.
+     *
+     * @return voice
+     */
+    @JsonProperty("voice")
+    public Boolean getVoice() {
+        return voice;
+    }
+
+    /**
+     * Sets voice.
+     * <p>
+     * Field description:
+     * When set to true, the audio message is displayed as a voice note. Voice notes require OGG format with OPUS codec. Maximum size is 16MB.
+     *
+     * @param voice
+     */
+    @JsonProperty("voice")
+    public void setVoice(Boolean voice) {
+        this.voice = voice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -74,12 +116,13 @@ public class WhatsAppAudioContent {
             return false;
         }
         WhatsAppAudioContent whatsAppAudioContent = (WhatsAppAudioContent) o;
-        return Objects.equals(this.mediaUrl, whatsAppAudioContent.mediaUrl);
+        return Objects.equals(this.mediaUrl, whatsAppAudioContent.mediaUrl)
+                && Objects.equals(this.voice, whatsAppAudioContent.voice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mediaUrl);
+        return Objects.hash(mediaUrl, voice);
     }
 
     @Override
@@ -90,6 +133,9 @@ public class WhatsAppAudioContent {
                 .append(newLine)
                 .append("    mediaUrl: ")
                 .append(toIndentedString(mediaUrl))
+                .append(newLine)
+                .append("    voice: ")
+                .append(toIndentedString(voice))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -21,7 +21,7 @@ public class SmsLogsResponse {
 
     private List<SmsLog> results = null;
 
-    private SmsCursorPageInfo cursor;
+    private CursorPageInfo cursor;
 
     /**
      * Sets results.
@@ -86,7 +86,7 @@ public class SmsLogsResponse {
      * @param cursor
      * @return This {@link SmsLogsResponse instance}.
      */
-    public SmsLogsResponse cursor(SmsCursorPageInfo cursor) {
+    public SmsLogsResponse cursor(CursorPageInfo cursor) {
         this.cursor = cursor;
         return this;
     }
@@ -97,7 +97,7 @@ public class SmsLogsResponse {
      * @return cursor
      */
     @JsonProperty("cursor")
-    public SmsCursorPageInfo getCursor() {
+    public CursorPageInfo getCursor() {
         return cursor;
     }
 
@@ -107,7 +107,7 @@ public class SmsLogsResponse {
      * @param cursor
      */
     @JsonProperty("cursor")
-    public void setCursor(SmsCursorPageInfo cursor) {
+    public void setCursor(CursorPageInfo cursor) {
         this.cursor = cursor;
     }
 

@@ -21,7 +21,7 @@ public class ViberLogsResponse {
 
     private List<ViberLog> results = null;
 
-    private ViberCursorPageInfo cursor;
+    private CursorPageInfo cursor;
 
     /**
      * Sets results.
@@ -86,7 +86,7 @@ public class ViberLogsResponse {
      * @param cursor
      * @return This {@link ViberLogsResponse instance}.
      */
-    public ViberLogsResponse cursor(ViberCursorPageInfo cursor) {
+    public ViberLogsResponse cursor(CursorPageInfo cursor) {
         this.cursor = cursor;
         return this;
     }
@@ -97,7 +97,7 @@ public class ViberLogsResponse {
      * @return cursor
      */
     @JsonProperty("cursor")
-    public ViberCursorPageInfo getCursor() {
+    public CursorPageInfo getCursor() {
         return cursor;
     }
 
@@ -107,7 +107,7 @@ public class ViberLogsResponse {
      * @param cursor
      */
     @JsonProperty("cursor")
-    public void setCursor(ViberCursorPageInfo cursor) {
+    public void setCursor(CursorPageInfo cursor) {
         this.cursor = cursor;
     }
 

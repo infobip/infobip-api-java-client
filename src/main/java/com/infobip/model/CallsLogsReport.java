@@ -38,7 +38,7 @@ public class CallsLogsReport {
 
     private CallsPrice price;
 
-    private CallsSingleMessageStatus status;
+    private MessageStatus status;
 
     private CallsVoiceError error;
 
@@ -439,7 +439,7 @@ public class CallsLogsReport {
      * @param status
      * @return This {@link CallsLogsReport instance}.
      */
-    public CallsLogsReport status(CallsSingleMessageStatus status) {
+    public CallsLogsReport status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -450,7 +450,7 @@ public class CallsLogsReport {
      * @return status
      */
     @JsonProperty("status")
-    public CallsSingleMessageStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -460,7 +460,7 @@ public class CallsLogsReport {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(CallsSingleMessageStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 

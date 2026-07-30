@@ -17,56 +17,56 @@ import java.util.Objects;
  */
 public class CallsRetry {
 
-    private Integer maxCount;
+    private Integer minPeriod;
 
     private Integer maxPeriod;
 
-    private Integer minPeriod;
+    private Integer maxCount;
 
     /**
-     * Sets maxCount.
+     * Sets minPeriod.
      * <p>
      * Field description:
-     * Specify the maximum number of retry attempts. Maximum value of the maxCount is &#x60;4&#x60;. If the value is higher than &#x60;4&#x60;, it will be set to &#x60;4&#x60;.
+     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to deliver the message again. Supported values are 1 min, 2 min, 5 min, 10 min, 20 min, 30 min, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, 24 hours. If entered a value that isn&#39;t from the previous list but that&#39;s smaller than 24 hours, it is used the next bigger value from the list. If entered value that is bigger than 24 hours than it is used 24 hours.
      * <p>
      * The field is required.
      *
-     * @param maxCount
+     * @param minPeriod
      * @return This {@link CallsRetry instance}.
      */
-    public CallsRetry maxCount(Integer maxCount) {
-        this.maxCount = maxCount;
+    public CallsRetry minPeriod(Integer minPeriod) {
+        this.minPeriod = minPeriod;
         return this;
     }
 
     /**
-     * Returns maxCount.
+     * Returns minPeriod.
      * <p>
      * Field description:
-     * Specify the maximum number of retry attempts. Maximum value of the maxCount is &#x60;4&#x60;. If the value is higher than &#x60;4&#x60;, it will be set to &#x60;4&#x60;.
+     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to deliver the message again. Supported values are 1 min, 2 min, 5 min, 10 min, 20 min, 30 min, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, 24 hours. If entered a value that isn&#39;t from the previous list but that&#39;s smaller than 24 hours, it is used the next bigger value from the list. If entered value that is bigger than 24 hours than it is used 24 hours.
      * <p>
      * The field is required.
      *
-     * @return maxCount
+     * @return minPeriod
      */
-    @JsonProperty("maxCount")
-    public Integer getMaxCount() {
-        return maxCount;
+    @JsonProperty("minPeriod")
+    public Integer getMinPeriod() {
+        return minPeriod;
     }
 
     /**
-     * Sets maxCount.
+     * Sets minPeriod.
      * <p>
      * Field description:
-     * Specify the maximum number of retry attempts. Maximum value of the maxCount is &#x60;4&#x60;. If the value is higher than &#x60;4&#x60;, it will be set to &#x60;4&#x60;.
+     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to deliver the message again. Supported values are 1 min, 2 min, 5 min, 10 min, 20 min, 30 min, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, 24 hours. If entered a value that isn&#39;t from the previous list but that&#39;s smaller than 24 hours, it is used the next bigger value from the list. If entered value that is bigger than 24 hours than it is used 24 hours.
      * <p>
      * The field is required.
      *
-     * @param maxCount
+     * @param minPeriod
      */
-    @JsonProperty("maxCount")
-    public void setMaxCount(Integer maxCount) {
-        this.maxCount = maxCount;
+    @JsonProperty("minPeriod")
+    public void setMinPeriod(Integer minPeriod) {
+        this.minPeriod = minPeriod;
     }
 
     /**
@@ -116,49 +116,49 @@ public class CallsRetry {
     }
 
     /**
-     * Sets minPeriod.
+     * Sets maxCount.
      * <p>
      * Field description:
-     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to deliver the message again. Supported values are 1 min, 2 min, 5 min, 10 min, 20 min, 30 min, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, 24 hours. If entered a value that isn&#39;t from the previous list but that&#39;s smaller than 24 hours, it is used the next bigger value from the list. If entered value that is bigger than 24 hours than it is used 24 hours.
+     * Specify the maximum number of retry attempts. Maximum value of the maxCount is &#x60;4&#x60;. If the value is higher than &#x60;4&#x60;, it will be set to &#x60;4&#x60;.
      * <p>
      * The field is required.
      *
-     * @param minPeriod
+     * @param maxCount
      * @return This {@link CallsRetry instance}.
      */
-    public CallsRetry minPeriod(Integer minPeriod) {
-        this.minPeriod = minPeriod;
+    public CallsRetry maxCount(Integer maxCount) {
+        this.maxCount = maxCount;
         return this;
     }
 
     /**
-     * Returns minPeriod.
+     * Returns maxCount.
      * <p>
      * Field description:
-     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to deliver the message again. Supported values are 1 min, 2 min, 5 min, 10 min, 20 min, 30 min, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, 24 hours. If entered a value that isn&#39;t from the previous list but that&#39;s smaller than 24 hours, it is used the next bigger value from the list. If entered value that is bigger than 24 hours than it is used 24 hours.
+     * Specify the maximum number of retry attempts. Maximum value of the maxCount is &#x60;4&#x60;. If the value is higher than &#x60;4&#x60;, it will be set to &#x60;4&#x60;.
      * <p>
      * The field is required.
      *
-     * @return minPeriod
+     * @return maxCount
      */
-    @JsonProperty("minPeriod")
-    public Integer getMinPeriod() {
-        return minPeriod;
+    @JsonProperty("maxCount")
+    public Integer getMaxCount() {
+        return maxCount;
     }
 
     /**
-     * Sets minPeriod.
+     * Sets maxCount.
      * <p>
      * Field description:
-     * Defines the minimal waiting time (in minutes) after the previous failed attempt to try to deliver the message again. Supported values are 1 min, 2 min, 5 min, 10 min, 20 min, 30 min, 1 hour, 2 hours, 4 hours, 8 hours, 16 hours, 24 hours. If entered a value that isn&#39;t from the previous list but that&#39;s smaller than 24 hours, it is used the next bigger value from the list. If entered value that is bigger than 24 hours than it is used 24 hours.
+     * Specify the maximum number of retry attempts. Maximum value of the maxCount is &#x60;4&#x60;. If the value is higher than &#x60;4&#x60;, it will be set to &#x60;4&#x60;.
      * <p>
      * The field is required.
      *
-     * @param minPeriod
+     * @param maxCount
      */
-    @JsonProperty("minPeriod")
-    public void setMinPeriod(Integer minPeriod) {
-        this.minPeriod = minPeriod;
+    @JsonProperty("maxCount")
+    public void setMaxCount(Integer maxCount) {
+        this.maxCount = maxCount;
     }
 
     @Override
@@ -170,14 +170,14 @@ public class CallsRetry {
             return false;
         }
         CallsRetry callsRetry = (CallsRetry) o;
-        return Objects.equals(this.maxCount, callsRetry.maxCount)
+        return Objects.equals(this.minPeriod, callsRetry.minPeriod)
                 && Objects.equals(this.maxPeriod, callsRetry.maxPeriod)
-                && Objects.equals(this.minPeriod, callsRetry.minPeriod);
+                && Objects.equals(this.maxCount, callsRetry.maxCount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(maxCount, maxPeriod, minPeriod);
+        return Objects.hash(minPeriod, maxPeriod, maxCount);
     }
 
     @Override
@@ -186,14 +186,14 @@ public class CallsRetry {
         return new StringBuilder()
                 .append("class CallsRetry {")
                 .append(newLine)
-                .append("    maxCount: ")
-                .append(toIndentedString(maxCount))
+                .append("    minPeriod: ")
+                .append(toIndentedString(minPeriod))
                 .append(newLine)
                 .append("    maxPeriod: ")
                 .append(toIndentedString(maxPeriod))
                 .append(newLine)
-                .append("    minPeriod: ")
-                .append(toIndentedString(minPeriod))
+                .append("    maxCount: ")
+                .append(toIndentedString(maxCount))
                 .append(newLine)
                 .append("}")
                 .toString();

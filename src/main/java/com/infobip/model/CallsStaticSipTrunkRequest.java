@@ -19,6 +19,8 @@ import java.util.Objects;
  */
 public class CallsStaticSipTrunkRequest extends CallsSipTrunkRequest {
 
+    private Boolean tls;
+
     private List<CallsAudioCodec> codecs = null;
 
     private CallsDtmfType dtmf;
@@ -42,6 +44,46 @@ public class CallsStaticSipTrunkRequest extends CallsSipTrunkRequest {
      */
     public CallsStaticSipTrunkRequest() {
         super("STATIC");
+    }
+
+    /**
+     * Sets tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @param tls
+     * @return This {@link CallsStaticSipTrunkRequest instance}.
+     */
+    public CallsStaticSipTrunkRequest tls(Boolean tls) {
+        this.tls = tls;
+        return this;
+    }
+
+    /**
+     * Returns tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @return tls
+     */
+    @JsonProperty("tls")
+    public Boolean getTls() {
+        return tls;
+    }
+
+    /**
+     * Sets tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @param tls
+     */
+    @JsonProperty("tls")
+    public void setTls(Boolean tls) {
+        this.tls = tls;
     }
 
     /**
@@ -410,7 +452,8 @@ public class CallsStaticSipTrunkRequest extends CallsSipTrunkRequest {
             return false;
         }
         CallsStaticSipTrunkRequest callsStaticSipTrunkRequest = (CallsStaticSipTrunkRequest) o;
-        return Objects.equals(this.codecs, callsStaticSipTrunkRequest.codecs)
+        return Objects.equals(this.tls, callsStaticSipTrunkRequest.tls)
+                && Objects.equals(this.codecs, callsStaticSipTrunkRequest.codecs)
                 && Objects.equals(this.dtmf, callsStaticSipTrunkRequest.dtmf)
                 && Objects.equals(this.fax, callsStaticSipTrunkRequest.fax)
                 && Objects.equals(this.numberFormat, callsStaticSipTrunkRequest.numberFormat)
@@ -425,6 +468,7 @@ public class CallsStaticSipTrunkRequest extends CallsSipTrunkRequest {
     @Override
     public int hashCode() {
         return Objects.hash(
+                tls,
                 codecs,
                 dtmf,
                 fax,
@@ -445,6 +489,9 @@ public class CallsStaticSipTrunkRequest extends CallsSipTrunkRequest {
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
+                .append(newLine)
+                .append("    tls: ")
+                .append(toIndentedString(tls))
                 .append(newLine)
                 .append("    codecs: ")
                 .append(toIndentedString(codecs))

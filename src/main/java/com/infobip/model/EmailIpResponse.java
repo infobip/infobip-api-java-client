@@ -120,6 +120,9 @@ public class EmailIpResponse {
     /**
      * Sets ipAddresses.
      * <p>
+     * Field description:
+     * List of IP addresses that are paired together.
+     * <p>
      * The field is required.
      *
      * @param ipAddresses
@@ -132,6 +135,9 @@ public class EmailIpResponse {
 
     /**
      * Adds and item into ipAddresses.
+     * <p>
+     * Field description:
+     * List of IP addresses that are paired together.
      * <p>
      * The field is required.
      *
@@ -149,6 +155,9 @@ public class EmailIpResponse {
     /**
      * Returns ipAddresses.
      * <p>
+     * Field description:
+     * List of IP addresses that are paired together.
+     * <p>
      * The field is required.
      *
      * @return ipAddresses
@@ -160,6 +169,9 @@ public class EmailIpResponse {
 
     /**
      * Sets ipAddresses.
+     * <p>
+     * Field description:
+     * List of IP addresses that are paired together.
      * <p>
      * The field is required.
      *

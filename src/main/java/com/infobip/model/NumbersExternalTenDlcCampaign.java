@@ -176,7 +176,7 @@ public class NumbersExternalTenDlcCampaign extends NumbersCampaign {
      * Sets numberKeys.
      * <p>
      * Field description:
-     * The numberKey(s) of the numbers to use with the campaign. Campaign must have at least one 10DLC number associated before it can be submitted for review. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
+     * The numberKey(s) of the numbers to use with the campaign. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
      *
      * @param numberKeys
      * @return This {@link NumbersExternalTenDlcCampaign instance}.
@@ -190,7 +190,7 @@ public class NumbersExternalTenDlcCampaign extends NumbersCampaign {
      * Adds and item into numberKeys.
      * <p>
      * Field description:
-     * The numberKey(s) of the numbers to use with the campaign. Campaign must have at least one 10DLC number associated before it can be submitted for review. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
+     * The numberKey(s) of the numbers to use with the campaign. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
      *
      * @param numberKeysItem The item to be added to the list.
      * @return This {@link NumbersExternalTenDlcCampaign instance}.
@@ -207,7 +207,7 @@ public class NumbersExternalTenDlcCampaign extends NumbersCampaign {
      * Returns numberKeys.
      * <p>
      * Field description:
-     * The numberKey(s) of the numbers to use with the campaign. Campaign must have at least one 10DLC number associated before it can be submitted for review. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
+     * The numberKey(s) of the numbers to use with the campaign. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
      *
      * @return numberKeys
      */
@@ -220,7 +220,7 @@ public class NumbersExternalTenDlcCampaign extends NumbersCampaign {
      * Sets numberKeys.
      * <p>
      * Field description:
-     * The numberKey(s) of the numbers to use with the campaign. Campaign must have at least one 10DLC number associated before it can be submitted for review. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
+     * The numberKey(s) of the numbers to use with the campaign. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
      *
      * @param numberKeys
      */

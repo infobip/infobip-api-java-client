@@ -66,6 +66,8 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
 
     private NumbersPolicyType policy;
 
+    private String externalCampaignId;
+
     private Set<String> numberKeys = null;
 
     private Set<String> numbers = null;
@@ -1095,10 +1097,50 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
     }
 
     /**
+     * Sets externalCampaignId.
+     * <p>
+     * Field description:
+     * The ID of the campaign as defined by The Campaign Registry.
+     *
+     * @param externalCampaignId
+     * @return This {@link NumbersTenDlcCampaign instance}.
+     */
+    public NumbersTenDlcCampaign externalCampaignId(String externalCampaignId) {
+        this.externalCampaignId = externalCampaignId;
+        return this;
+    }
+
+    /**
+     * Returns externalCampaignId.
+     * <p>
+     * Field description:
+     * The ID of the campaign as defined by The Campaign Registry.
+     *
+     * @return externalCampaignId
+     */
+    @JsonProperty("externalCampaignId")
+    public String getExternalCampaignId() {
+        return externalCampaignId;
+    }
+
+    /**
+     * Sets externalCampaignId.
+     * <p>
+     * Field description:
+     * The ID of the campaign as defined by The Campaign Registry.
+     *
+     * @param externalCampaignId
+     */
+    @JsonProperty("externalCampaignId")
+    public void setExternalCampaignId(String externalCampaignId) {
+        this.externalCampaignId = externalCampaignId;
+    }
+
+    /**
      * Sets numberKeys.
      * <p>
      * Field description:
-     * The numberKey(s) of the numbers to use with the campaign. Campaign must have at least one 10DLC number associated before it can be submitted for review. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
+     * The numberKey(s) of the numbers to use with the campaign. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
      *
      * @param numberKeys
      * @return This {@link NumbersTenDlcCampaign instance}.
@@ -1112,7 +1154,7 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
      * Adds and item into numberKeys.
      * <p>
      * Field description:
-     * The numberKey(s) of the numbers to use with the campaign. Campaign must have at least one 10DLC number associated before it can be submitted for review. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
+     * The numberKey(s) of the numbers to use with the campaign. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
      *
      * @param numberKeysItem The item to be added to the list.
      * @return This {@link NumbersTenDlcCampaign instance}.
@@ -1129,7 +1171,7 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
      * Returns numberKeys.
      * <p>
      * Field description:
-     * The numberKey(s) of the numbers to use with the campaign. Campaign must have at least one 10DLC number associated before it can be submitted for review. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
+     * The numberKey(s) of the numbers to use with the campaign. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
      *
      * @return numberKeys
      */
@@ -1142,7 +1184,7 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
      * Sets numberKeys.
      * <p>
      * Field description:
-     * The numberKey(s) of the numbers to use with the campaign. Campaign must have at least one 10DLC number associated before it can be submitted for review. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
+     * The numberKey(s) of the numbers to use with the campaign. Alternatively, you can use the &#39;numbers&#39; property to specify the numbers directly, but note that &#39;numberKeys&#39; property takes precedence if both are specified.
      *
      * @param numberKeys
      */
@@ -1155,7 +1197,7 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
      * Sets numbers.
      * <p>
      * Field description:
-     * US 10DLC numbers to use with the campaign. Campaign must have at least one 10DLC number associated before it can be submitted for review. You may only use numbers that are associated with your account inside the Infobip platform. Numbers must be provided in international format including the country prefix, e.g. 14232180111. This property can be used instead of &#39;numberKeys&#39; to specify the campaign numbers; it is not returned in the API response.
+     * US 10DLC numbers to use with the campaign. You may only use numbers that are associated with your account inside the Infobip platform. Numbers must be provided in international format including the country prefix, e.g. 14232180111. This property can be used instead of &#39;numberKeys&#39; to specify the campaign numbers; it is not returned in the API response.
      *
      * @param numbers
      * @return This {@link NumbersTenDlcCampaign instance}.
@@ -1169,7 +1211,7 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
      * Adds and item into numbers.
      * <p>
      * Field description:
-     * US 10DLC numbers to use with the campaign. Campaign must have at least one 10DLC number associated before it can be submitted for review. You may only use numbers that are associated with your account inside the Infobip platform. Numbers must be provided in international format including the country prefix, e.g. 14232180111. This property can be used instead of &#39;numberKeys&#39; to specify the campaign numbers; it is not returned in the API response.
+     * US 10DLC numbers to use with the campaign. You may only use numbers that are associated with your account inside the Infobip platform. Numbers must be provided in international format including the country prefix, e.g. 14232180111. This property can be used instead of &#39;numberKeys&#39; to specify the campaign numbers; it is not returned in the API response.
      *
      * @param numbersItem The item to be added to the list.
      * @return This {@link NumbersTenDlcCampaign instance}.
@@ -1186,7 +1228,7 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
      * Returns numbers.
      * <p>
      * Field description:
-     * US 10DLC numbers to use with the campaign. Campaign must have at least one 10DLC number associated before it can be submitted for review. You may only use numbers that are associated with your account inside the Infobip platform. Numbers must be provided in international format including the country prefix, e.g. 14232180111. This property can be used instead of &#39;numberKeys&#39; to specify the campaign numbers; it is not returned in the API response.
+     * US 10DLC numbers to use with the campaign. You may only use numbers that are associated with your account inside the Infobip platform. Numbers must be provided in international format including the country prefix, e.g. 14232180111. This property can be used instead of &#39;numberKeys&#39; to specify the campaign numbers; it is not returned in the API response.
      *
      * @return numbers
      */
@@ -1199,7 +1241,7 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
      * Sets numbers.
      * <p>
      * Field description:
-     * US 10DLC numbers to use with the campaign. Campaign must have at least one 10DLC number associated before it can be submitted for review. You may only use numbers that are associated with your account inside the Infobip platform. Numbers must be provided in international format including the country prefix, e.g. 14232180111. This property can be used instead of &#39;numberKeys&#39; to specify the campaign numbers; it is not returned in the API response.
+     * US 10DLC numbers to use with the campaign. You may only use numbers that are associated with your account inside the Infobip platform. Numbers must be provided in international format including the country prefix, e.g. 14232180111. This property can be used instead of &#39;numberKeys&#39; to specify the campaign numbers; it is not returned in the API response.
      *
      * @param numbers
      */
@@ -1327,6 +1369,7 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
                 && Objects.equals(this.mmsSampleFiles, numbersTenDlcCampaign.mmsSampleFiles)
                 && Objects.equals(this.supportingDocuments, numbersTenDlcCampaign.supportingDocuments)
                 && Objects.equals(this.policy, numbersTenDlcCampaign.policy)
+                && Objects.equals(this.externalCampaignId, numbersTenDlcCampaign.externalCampaignId)
                 && Objects.equals(this.numberKeys, numbersTenDlcCampaign.numberKeys)
                 && Objects.equals(this.numbers, numbersTenDlcCampaign.numbers)
                 && Objects.equals(this.numberPreviews, numbersTenDlcCampaign.numberPreviews)
@@ -1359,6 +1402,7 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
                 mmsSampleFiles,
                 supportingDocuments,
                 policy,
+                externalCampaignId,
                 numberKeys,
                 numbers,
                 numberPreviews,
@@ -1440,6 +1484,9 @@ public class NumbersTenDlcCampaign extends NumbersCampaign {
                 .append(newLine)
                 .append("    policy: ")
                 .append(toIndentedString(policy))
+                .append(newLine)
+                .append("    externalCampaignId: ")
+                .append(toIndentedString(externalCampaignId))
                 .append(newLine)
                 .append("    numberKeys: ")
                 .append(toIndentedString(numberKeys))

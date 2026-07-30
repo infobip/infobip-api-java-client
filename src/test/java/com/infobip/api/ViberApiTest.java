@@ -17,6 +17,8 @@ class ViberApiTest extends ApiTest {
     private static final String SEND_VIBER_MESSAGES = "/viber/2/messages";
     private static final String GET_VIBER_REPORTS = "/viber/2/reports";
     private static final String GET_VIBER_LOGS = "/viber/2/logs";
+    private static final String VIBER_TEMPLATES = "/viber/1/senders/{sender}/templates";
+    private static final String VIBER_TEMPLATE = "/viber/1/senders/{sender}/templates/{templateId}";
 
     @Test
     void shouldSendNewViberTextMessage() {
@@ -465,7 +467,7 @@ class ViberApiTest extends ApiTest {
         String givenDescription = "Message sent to next instance";
         String givenAction = "string";
         Integer givenErrorGroupId = 0;
-        MessageErrorGroup givenErrorGroupName = MessageErrorGroup.OK;
+        String givenErrorGroupName = "OK";
         Integer givenErrorId = 0;
         String givenErrorName = "string";
         String givenErrorDescription = "string";
@@ -607,7 +609,7 @@ class ViberApiTest extends ApiTest {
         String givenDescription = "Message sent to next instance";
         String givenAction = "string";
         Integer givenErrorGroupId = 0;
-        MessageErrorGroup givenErrorGroupName = MessageErrorGroup.OK;
+        String givenErrorGroupName = "OK";
         Integer givenErrorId = 0;
         String givenErrorName = "string";
         String givenErrorDescription = "string";
@@ -865,10 +867,10 @@ class ViberApiTest extends ApiTest {
                 .mccMnc(givenMccMnc)
                 .callbackData(givenCallbackData)
                 .price(new MessagePrice().pricePerMessage(givenPricePerMessage).currency(givenCurrency))
-                .error(new ViberMessageError()
+                .error(new MessageError()
                         .id(givenErrorId)
                         .groupId(givenErrorGroupId)
-                        .groupName(MessageErrorGroup.valueOf(givenErrorGroupName))
+                        .groupName(givenErrorGroupName)
                         .name(givenErrorName)
                         .description(givenErrorDescription)
                         .permanent(givenErrorPermanent))
@@ -1096,5 +1098,282 @@ class ViberApiTest extends ApiTest {
         var seenReports = new ViberSeenReports().addResultsItem(seenReport);
 
         then(receivedSeenReports).isEqualTo(seenReports);
+    }
+
+    @Test
+    void shouldCreateViberTemplate() {
+        // Request fixture from OpenAPI POST .../templates example "OTP template".
+        // Response fields from ViberTemplateResponse schema property examples.
+        String givenSender = "CompanyName";
+        String givenTemplateId = "00000000-0000-0000-0000-000000000000";
+        String givenVersion = "1";
+        Long givenCreatedAt = 1677628800000L;
+        Long givenLastModified = 1677628800000L;
+        String givenLanguage = "en";
+        String givenTemplateText = "Your verification code is {{pin}}. Valid for 10 minutes.";
+        String givenParamName = "pin";
+        String givenParamExample = "123456";
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"category\": \"OTP\",\n"
+                        + "  \"body\": [\n"
+                        + "    {\n"
+                        + "      \"language\": \"%s\",\n"
+                        + "      \"template\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"params\": [\n"
+                        + "    {\n"
+                        + "      \"type\": \"TEXT\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"example\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenLanguage, givenTemplateText, givenParamName, givenParamExample);
+
+        String givenResponse = String.format(
+                "{\n" + "  \"templateId\": \"%s\",\n"
+                        + "  \"version\": \"%s\",\n"
+                        + "  \"sender\": \"%s\",\n"
+                        + "  \"createdAt\": %d,\n"
+                        + "  \"category\": \"OTP\",\n"
+                        + "  \"status\": \"APPROVED\",\n"
+                        + "  \"lastModified\": %d,\n"
+                        + "  \"params\": [\n"
+                        + "    {\n"
+                        + "      \"type\": \"TEXT\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"example\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"body\": [\n"
+                        + "    {\n"
+                        + "      \"language\": \"%s\",\n"
+                        + "      \"template\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenTemplateId,
+                givenVersion,
+                givenSender,
+                givenCreatedAt,
+                givenLastModified,
+                givenParamName,
+                givenParamExample,
+                givenLanguage,
+                givenTemplateText);
+
+        setUpPostRequest(VIBER_TEMPLATES.replace("{sender}", givenSender), expectedRequest, givenResponse, 201);
+
+        Consumer<ViberTemplateResponse> assertions = response -> {
+            then(response).isNotNull();
+            then(response.getTemplateId()).isEqualTo(givenTemplateId);
+            then(response.getVersion()).isEqualTo(givenVersion);
+            then(response.getSender()).isEqualTo(givenSender);
+            then(response.getCreatedAt()).isEqualTo(givenCreatedAt);
+            then(response.getLastModified()).isEqualTo(givenLastModified);
+            then(response.getCategory()).isEqualTo(ViberTemplateCategory.OTP);
+            then(response.getStatus()).isEqualTo(ViberTemplateStatus.APPROVED);
+            then(response.getBody()).hasSize(1);
+            then(response.getBody().get(0).getLanguage()).isEqualTo(ViberTemplateLang.EN);
+            then(response.getBody().get(0).getTemplate()).isEqualTo(givenTemplateText);
+            then(response.getParams()).hasSize(1);
+            then(response.getParams().get(0).getType()).isEqualTo(ViberTemplateParamType.TEXT);
+            then(response.getParams().get(0).getName()).isEqualTo(givenParamName);
+            then(response.getParams().get(0).getExample()).isEqualTo(givenParamExample);
+        };
+
+        ViberApi api = new ViberApi(getApiClient());
+        ViberTemplateRequest request = new ViberTemplateRequest()
+                .category(ViberTemplateCategory.OTP)
+                .addBodyItem(
+                        new ViberTemplateBody().language(ViberTemplateLang.EN).template(givenTemplateText))
+                .addParamsItem(new ViberTemplateParam()
+                        .type(ViberTemplateParamType.TEXT)
+                        .name(givenParamName)
+                        .example(givenParamExample));
+
+        var call = api.createViberTemplate(givenSender, request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetViberTemplates() {
+        String givenSender = "CompanyName";
+        String givenTemplateId = "00000000-0000-0000-0000-000000000000";
+        String givenVersion = "1";
+        String givenLanguage = "en";
+        String givenTemplateText = "Your verification code is {{pin}}. Valid for 10 minutes.";
+        String givenParamName = "pin";
+        String givenParamExample = "123456";
+        Integer givenPage = 0;
+        Integer givenSize = 20;
+        String givenOrderBy = "createdAt,ASC";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"templates\": [\n"
+                        + "    {\n"
+                        + "      \"templateId\": \"%s\",\n"
+                        + "      \"version\": \"%s\",\n"
+                        + "      \"sender\": \"%s\",\n"
+                        + "      \"category\": \"OTP\",\n"
+                        + "      \"status\": \"APPROVED\",\n"
+                        + "      \"params\": [\n"
+                        + "        {\n"
+                        + "          \"type\": \"TEXT\",\n"
+                        + "          \"name\": \"%s\",\n"
+                        + "          \"example\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"body\": [\n"
+                        + "        {\n"
+                        + "          \"language\": \"%s\",\n"
+                        + "          \"template\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ]\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"paging\": {\n"
+                        + "    \"page\": %d,\n"
+                        + "    \"size\": %d,\n"
+                        + "    \"totalPages\": 1,\n"
+                        + "    \"totalResults\": 1\n"
+                        + "  }\n"
+                        + "}",
+                givenTemplateId,
+                givenVersion,
+                givenSender,
+                givenParamName,
+                givenParamExample,
+                givenLanguage,
+                givenTemplateText,
+                givenPage,
+                givenSize);
+
+        setUpSuccessGetRequest(
+                VIBER_TEMPLATES.replace("{sender}", givenSender),
+                Map.of(
+                        "page", givenPage.toString(),
+                        "size", givenSize.toString(),
+                        "orderBy", givenOrderBy),
+                givenResponse);
+
+        Consumer<ViberTemplatesResponse> assertions = response -> {
+            then(response).isNotNull();
+            then(response.getTemplates()).hasSize(1);
+            ViberTemplateResponseNoDates template = response.getTemplates().get(0);
+            then(template.getTemplateId()).isEqualTo(givenTemplateId);
+            then(template.getVersion()).isEqualTo(givenVersion);
+            then(template.getSender()).isEqualTo(givenSender);
+            then(template.getCategory()).isEqualTo(ViberTemplateCategory.OTP);
+            then(template.getStatus()).isEqualTo(ViberTemplateStatus.APPROVED);
+            then(template.getBody()).hasSize(1);
+            then(template.getBody().get(0).getLanguage()).isEqualTo(ViberTemplateLang.EN);
+            then(template.getBody().get(0).getTemplate()).isEqualTo(givenTemplateText);
+            then(response.getPaging()).isNotNull();
+            then(response.getPaging().getPage()).isEqualTo(givenPage);
+            then(response.getPaging().getSize()).isEqualTo(givenSize);
+            then(response.getPaging().getTotalPages()).isEqualTo(1);
+            then(response.getPaging().getTotalResults()).isEqualTo(1L);
+        };
+
+        ViberApi api = new ViberApi(getApiClient());
+        var call = api.getViberTemplates(givenSender)
+                .page(givenPage)
+                .size(givenSize)
+                .orderBy(givenOrderBy);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetViberTemplate() {
+        String givenSender = "CompanyName";
+        String givenTemplateId = "00000000-0000-0000-0000-000000000000";
+        String givenVersion = "1";
+        Long givenCreatedAt = 1677628800000L;
+        Long givenLastModified = 1677628800000L;
+        String givenLanguage = "en";
+        String givenTemplateText = "Your verification code is {{pin}}. Valid for 10 minutes.";
+        String givenParamName = "pin";
+        String givenParamExample = "123456";
+
+        String givenResponse = String.format(
+                "{\n" + "  \"templateId\": \"%s\",\n"
+                        + "  \"version\": \"%s\",\n"
+                        + "  \"sender\": \"%s\",\n"
+                        + "  \"createdAt\": %d,\n"
+                        + "  \"category\": \"OTP\",\n"
+                        + "  \"status\": \"APPROVED\",\n"
+                        + "  \"lastModified\": %d,\n"
+                        + "  \"params\": [\n"
+                        + "    {\n"
+                        + "      \"type\": \"TEXT\",\n"
+                        + "      \"name\": \"%s\",\n"
+                        + "      \"example\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ],\n"
+                        + "  \"body\": [\n"
+                        + "    {\n"
+                        + "      \"language\": \"%s\",\n"
+                        + "      \"template\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenTemplateId,
+                givenVersion,
+                givenSender,
+                givenCreatedAt,
+                givenLastModified,
+                givenParamName,
+                givenParamExample,
+                givenLanguage,
+                givenTemplateText);
+
+        setUpSuccessGetRequest(
+                VIBER_TEMPLATE.replace("{sender}", givenSender).replace("{templateId}", givenTemplateId),
+                Map.of(),
+                givenResponse);
+
+        Consumer<ViberTemplateResponse> assertions = response -> {
+            then(response).isNotNull();
+            then(response.getTemplateId()).isEqualTo(givenTemplateId);
+            then(response.getVersion()).isEqualTo(givenVersion);
+            then(response.getSender()).isEqualTo(givenSender);
+            then(response.getCreatedAt()).isEqualTo(givenCreatedAt);
+            then(response.getLastModified()).isEqualTo(givenLastModified);
+            then(response.getCategory()).isEqualTo(ViberTemplateCategory.OTP);
+            then(response.getStatus()).isEqualTo(ViberTemplateStatus.APPROVED);
+            then(response.getBody()).hasSize(1);
+            then(response.getBody().get(0).getLanguage()).isEqualTo(ViberTemplateLang.EN);
+            then(response.getBody().get(0).getTemplate()).isEqualTo(givenTemplateText);
+            then(response.getParams()).hasSize(1);
+            then(response.getParams().get(0).getType()).isEqualTo(ViberTemplateParamType.TEXT);
+            then(response.getParams().get(0).getName()).isEqualTo(givenParamName);
+            then(response.getParams().get(0).getExample()).isEqualTo(givenParamExample);
+        };
+
+        ViberApi api = new ViberApi(getApiClient());
+        var call = api.getViberTemplate(givenSender, givenTemplateId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDeleteViberTemplate() {
+        String givenSender = "CompanyName";
+        String givenTemplateId = "00000000-0000-0000-0000-000000000000";
+        int givenStatusCode = 204;
+
+        setUpNoResponseBodyDeleteRequest(
+                VIBER_TEMPLATE.replace("{sender}", givenSender).replace("{templateId}", givenTemplateId),
+                Map.of(),
+                givenStatusCode);
+
+        ViberApi api = new ViberApi(getApiClient());
+        var call = api.deleteViberTemplate(givenSender, givenTemplateId);
+        testSuccessfulCallWithNoBody(call::executeAsync, givenStatusCode);
     }
 }

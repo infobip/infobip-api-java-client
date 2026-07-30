@@ -19,7 +19,8 @@ import java.util.Objects;
 /**
  * Represents ResourcesRcsSenderResourceOrderRequestApiDoc model.
  */
-public class ResourcesRcsSenderResourceOrderRequestApiDoc implements ResourcesSubmitResourceRequestBody {
+public class ResourcesRcsSenderResourceOrderRequestApiDoc
+        implements ResourcesResourceOrderRequestApiDoc, ResourcesSubmitResourceRequestBody {
     /**
      * Type of resource.
      */

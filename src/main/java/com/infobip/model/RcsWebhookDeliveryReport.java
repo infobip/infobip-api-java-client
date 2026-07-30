@@ -59,7 +59,7 @@ public class RcsWebhookDeliveryReport {
 
     private ChannelEnum channel;
 
-    private RcsMessagePrice price;
+    private RcsDlrMessagePrice price;
 
     private MessageStatus status;
 
@@ -175,7 +175,7 @@ public class RcsWebhookDeliveryReport {
      * @param price
      * @return This {@link RcsWebhookDeliveryReport instance}.
      */
-    public RcsWebhookDeliveryReport price(RcsMessagePrice price) {
+    public RcsWebhookDeliveryReport price(RcsDlrMessagePrice price) {
         this.price = price;
         return this;
     }
@@ -186,7 +186,7 @@ public class RcsWebhookDeliveryReport {
      * @return price
      */
     @JsonProperty("price")
-    public RcsMessagePrice getPrice() {
+    public RcsDlrMessagePrice getPrice() {
         return price;
     }
 
@@ -196,7 +196,7 @@ public class RcsWebhookDeliveryReport {
      * @param price
      */
     @JsonProperty("price")
-    public void setPrice(RcsMessagePrice price) {
+    public void setPrice(RcsDlrMessagePrice price) {
         this.price = price;
     }
 

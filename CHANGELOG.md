@@ -5,6 +5,152 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [7.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.6.0) ] - 2026-07-28
+
+⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
+All changes, including breaking changes, are addressed and explained in the list bellow.
+If you find out that something was not addressed properly, please submit an issue.
+
+### Added
+* Most recent feature set for:
+    * [Infobip Email API](https://www.infobip.com/docs/api/channels/email).
+    * [Infobip Viber API](https://www.infobip.com/docs/api/channels/viber).
+    * [Infobip Voice API](https://www.infobip.com/docs/api/channels/voice).
+    * [Infobip WhatsApp API](https://www.infobip.com/docs/api/channels/whatsapp).
+    * [Infobip RCS API](https://www.infobip.com/docs/api/channels/rcs).
+    * [Infobip Numbers API](https://www.infobip.com/docs/api/platform/numbers).
+    * [Infobip Resources API](https://www.infobip.com/docs/api/platform/resources).
+    * [Infobip MMS API](https://www.infobip.com/docs/api/channels/mms).
+    * [Infobip Messages API](https://www.infobip.com/docs/api/platform/messages-api).
+* **Email**:
+    * JSON send API `POST /email/4/messages` via `sendEmail(EmailRequest)` returning `EmailResponse` (`@Beta`)
+    * MIME send API `POST /email/4/mime` via `sendMimeEmail(EmailSendMimeRequestSchema)`
+    * New send models: `EmailRequest`, `EmailMessage`, `EmailMessageContent`, `EmailMessageOptions`, `EmailMessageRequestOptions`, `EmailMessageDeliveryReporting`, `EmailToDestination`, `EmailGroupDestination`, `EmailWebhooks`, `EmailIps`, `EmailStorage`, `EmailUrlOptions`, `EmailRequestSchedulingSettings`, `EmailPlaceholderMasking`, `EmailClientPriority`, `EmailSmtpInfo`, and media attachment models (`EmailMediaAttachment`, `EmailMediaBinaryAttachment`, `EmailMediaBinaryImage`, `EmailMediaInlineImage`, `EmailMediaUploadedReference`)
+* **Viber**:
+    * Template management endpoints (`@Beta`): `createViberTemplate`, `getViberTemplates`, `getViberTemplate`, `deleteViberTemplate` on `/viber/1/senders/{sender}/templates`
+    * Template models: `ViberTemplateRequest`, `ViberTemplateResponse`, `ViberTemplatesResponse`, `ViberTemplateResponseNoDates`, `ViberTemplateBody`, `ViberTemplateParam`, `ViberTemplateParamType`, `ViberTemplateCategory`, `ViberTemplateStatus`, `ViberTemplateLang`
+    * `ViberOutboundTransactionalTemplateContent` for outbound transactional template messages
+* **Calls / Voice**:
+    * Dialog transfer endpoints: `dialogTransferAccept` and `dialogTransferReject`
+    * Authenticated SIP trunk support with `CallsAuthenticatedSipTrunkRequest`, `CallsAuthenticatedSipTrunkResponse`, `CallsAuthenticatedSipTrunkUpdateRequest`, `CallsCreateAuthenticatedSipTrunkResponse`, and related authentication models (`CallsSipTrunkAuthentication*`, inbound/outbound auth variants, `CallsSipTrunkAuthenticatedResetPasswordResponse`)
+    * `CallsDialogAcceptTransferRequest`, `CallsForwardingInfo`, `CallsMediaStreamMultiChannel`, `CallsAudioEncoding`, `CallsApplicationTransferPropagationOptions`, `CallsRecordingTransferOptions`
+* **Call Routing**:
+    * WhatsApp routing support with `CallRoutingWhatsAppCriteria` and `CallRoutingSimulatorWhatsAppEndpoint`
+* **WhatsApp**:
+    * GIF template header support with `WhatsAppGifHeaderApiData` and `WhatsAppTemplateGifHeaderContent`
+    * In-thread authentication reply support with `WhatsAppInThreadAuthenticationReply`, `WhatsAppInThreadAuthenticationStatus`, and `WhatsAppWebhookInThreadAuthenticationReplyContent`
+    * PIX flow type support with `WhatsAppPixFlowType`
+    * `WhatsAppRequestContactInfoButtonApiData`, `WhatsAppWebhookDlrContact`, `WhatsAppWebhookInboundContactProfile`
+* **Resources**:
+    * Polymorphic resource order interfaces: `ResourcesResourceOrderApiDoc`, `ResourcesResourceOrderRequestApiDoc`, `ResourcesRequirementSpecsRequestApiDoc`
+    * `ResourcesNumberOfferClientType`
+* **Numbers**:
+    * `NumbersForwardToMarkupLanguageDetails` for `FORWARD_TO_MARKUP_LANGUAGE` voice action subtype
+* **MMS**:
+    * `MmsInboundMessagePart` for structured inbound message parts
+* **RCS**:
+    * Context-specific price and traffic types: `RcsDlrMessagePrice`, `RcsDlrTrafficType`, `RcsMoMessagePrice`, `RcsMoTrafficType`, `RcsMoEventMessagePrice`, `RcsConvStartedTrafficType`
+* **Shared**:
+    * `CursorPageInfo` shared across channel log responses
+
+### Changed
+
+* **Email**:
+    * `sendEmail` redesigned from multipart fluent API (`POST /email/3/send`) to JSON `EmailRequest` (`POST /email/4/messages`); execute return type changed from `EmailSendResponse` to `EmailResponse`
+    * `sendMimeEmail` returns `EmailSendResponse` (messages typed as `EmailResponseDetails`), not `EmailResponse`
+    * `getEmailLogs` path changed from `/email/1/logs` to `/email/4/logs`
+    * `getEmailDeliveryReports` path changed from `/email/1/reports` to `/email/4/reports`
+    * `getEmailLogs` builder: renamed `from` → `sender`, `to` → `destination`; `bulkId` / `messageId` / `campaignReferenceId` changed from `String` to `List<String>`; `generalStatus` changed from `String` to `MessageGeneralStatus`; added cursor pagination (`useCursor`, `cursor`)
+    * `EmailLog`: renamed `from`/`to` to `sender`/`destination`; replaced `applicationId`/`entityId` with `platform`; added `campaignReferenceId`
+    * `EmailReport`: added `sender`, `callbackData`, and `campaignReferenceId`; replaced `applicationId`/`entityId` with `platform`
+    * `EmailWebhookDeliveryReport`: added `smtp` (`EmailSmtpInfo`); field set reshuffled
+    * `EmailLogsResponse` extended with `cursor` (`CursorPageInfo`)
+    * Replaced `EmailPaging` with `PageInfo` (`totalResults` type `Long`)
+    * `sendEmail` response message items use shared `MessageResponseDetails` (with `details` typed as `Object`)
+    * JavaDoc fixes
+* **Viber**:
+    * Renamed `ViberOutboundOtpTemplateContent` to `ViberOutboundTransactionalTemplateContent`
+    * Replaced `ViberOutboundContentType.OTP_TEMPLATE` with `TEMPLATE`
+    * Removed `ViberOtpTemplateLanguage`; outbound template language is a `String`, template management uses `ViberTemplateLang`
+    * Extended `ViberMessageOptions` with `activationCheck`
+    * JavaDoc fixes
+* **WhatsApp**:
+    * Identity endpoints (`confirmWhatsAppIdentity`, `deleteWhatsappIdentity`, `getWhatsAppIdentity`): renamed path/parameter `userNumber` → `userIdentifier` (MSISDN or BSUID)
+    * `sendWhatsappEvents` return type changed from `WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails` to shared `MessageResponse` (messages typed as `MessageResponseDetails`)
+    * Replaced channel-specific status models with shared `MessageStatus` on `WhatsAppSingleMessageInfo`
+    * Replaced `WhatsAppWebhookContactName` with `WhatsAppWebhookInboundContactProfile`; added `WhatsAppWebhookDlrContact` on delivery/seen reports
+    * Extended `WhatsAppStatus` with `ARCHIVED` and `UNKNOWN`
+    * Extended `WhatsAppWebhookType` with `INTERACTIVE_IN_THREAD_AUTHENTICATION_REPLY`
+    * Extended template headers with `GIF` support
+    * Extended `WhatsAppInteractiveOrderBrazilPixDcPaymentDetails` with `flowType`
+    * JavaDoc fixes
+* **Calls / Voice**:
+    * Extended `CallsSipTrunkRequest` with `AUTHENTICATED` subtype; `tls` moved from the base request onto specific trunk subtypes
+    * Extended `CallProperties` with `forwardedFrom`
+    * Extended `CallsMediaStreamAudioProperties` with `multiChannel`
+    * Extended media-stream webhook properties with `streamId`; extended `CallsMediaStreamingConfigResponse` with `audioEncoding`
+    * Extended `CallsTranscription` with `provider`
+    * Extended `CallsApplicationTransferRequest` with `propagationOptions`
+    * SIP trunk reset credentials now also apply to `AUTHENTICATED` trunks
+    * JavaDoc fixes
+* **Call Routing**:
+    * Extended criteria/endpoint types with `WHATSAPP` support
+    * Extended route request/response with `transferOnly`
+    * JavaDoc fixes
+* **RCS**:
+    * Split `RcsMessagePrice` / `RcsTrafficType` into context-specific types (DLR, MO, MO event, conversation started); DLR traffic enum drops `A2P_CONVERSATION`, adds `INTERACTIVE_SESSION`
+    * `RcsLogsResponse.cursor` now uses shared `CursorPageInfo`
+    * JavaDoc fixes
+* **MMS**:
+    * `MmsInboundReport.message` type changed from `String` to `List<MmsInboundMessagePart>`; added `subject` and `userAgent`
+    * Channel logs/reports use shared `MessageError` and `CursorPageInfo`
+    * JavaDoc fixes
+* **SMS**:
+    * Channel logs/reports/responses use shared `MessageStatus`, `MessageError`, and `CursorPageInfo`
+    * `SmsResponseDetails` kept as the SMS send-response item type; `details` remains `SmsMessageResponseDetails` (includes `messageCount`)
+    * JavaDoc fixes
+* **Numbers**:
+    * Extended `getBrands` / `getCampaigns` with optional `applicationId` and `entityId` filters
+    * Marked AI review endpoints as `@Beta`: `getAiReviewResults`, `submitCampaignInfoForAiReview`, `submitExistingCampaignForAiReview`
+    * Extended `NumbersTenDlcCampaign` with `externalCampaignId`
+    * Extended `NumbersCampaignRegistrar` and `NumbersNetwork` with `DISH`, `CHARTER_SPECTRUM`, `C_SPIRE`, `GOOGLE_FI`, and `TRACFONE`
+    * Extended voice action details with `FORWARD_TO_MARKUP_LANGUAGE` support via `NumbersForwardToMarkupLanguageDetails`
+    * JavaDoc fixes
+* **Resources**:
+    * Resource order/requirement models implement new polymorphic interfaces; number order/specs gain `clientType`
+    * Extended enums with `PREFILLED_DOCUMENT`, `USER_ACTION_REQUIRED`, `IN_PROGRESS`, and `CANCEL_REQUESTED`
+    * JavaDoc fixes
+* **MessagesApi**:
+    * Extended `MessagesApiMessageOptions` with `deliveryTimeWindow` field support
+    * JavaDoc fixes
+* **WebRtc**:
+    * Removed `applicationId` field from `WebRtcPushConfigurationRequest` and `WebRtcPushConfigurationResponse`
+    * JavaDoc fixes
+* **Number Lookup**:
+    * Updated JavaDoc for number clipping behaviour on requests longer than 256 characters
+* **Flow**:
+    * Extended `getFlowParticipantsAddedReport` with optional `applicationId` and `entityId` query parameters
+* **Shared consolidations**:
+    * `SmsCursorPageInfo`, `MmsCursorPageInfo`, `RcsCursorPageInfo`, `ViberCursorPageInfo` → `CursorPageInfo`
+    * `SmsMessageError`, `MmsMessageError`, `ViberMessageError` → `MessageError` (`groupName` changed from `MessageErrorGroup` to `String`)
+    * `SmsMessageStatus`, `WhatsAppMessageStatus`, `WhatsAppSingleMessageStatus`, `CallsSingleMessageStatus` → `MessageStatus`
+    * Expanded reuse of existing `MessageResponseDetails` for Email and WhatsApp send responses
+* **General**:
+    * Updated tests
+    * User-Agent bumped to `infobip-api-client-java/6.6.0`
+
+### Removed
+- Removed Numbers voice recording configuration APIs (`createRecordingConfiguration`, `updateRecordingConfiguration`, `retrieveRecordingConfiguration`, `removeRecordingConfiguration`) and related models (`NumbersNumberConfigurationModel`, `NumbersRecordingBody`, `NumbersDownloadResponseModel`, `NumbersReviewType`)
+- Removed per-channel cursor, error, and status duplicates in favor of shared `CursorPageInfo`, `MessageError`, and `MessageStatus`
+- Removed `EmailPaging` in favor of `PageInfo`
+- Removed `MessageErrorGroup` in favor of `String`-typed `MessageError.groupName`
+- Removed `ViberOutboundOtpTemplateContent` and `ViberOtpTemplateLanguage` (replaced by transactional template models)
+- Removed `WhatsAppMessageStatus`, `WhatsAppMessageGeneralStatus`, `WhatsAppSingleMessageStatus`, `WhatsAppWebhookContactName`, `WhatsAppMessageResponseMessageResponseDetails`, and `WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails`
+- Removed `CallsSingleMessageStatus` in favor of shared `MessageStatus`
+- Removed `RcsMessagePrice` and `RcsTrafficType` (replaced by context-specific types)
+- Removed TTY play content models `CallsPlayTty` and `CallsPlayTtyOptions`
+- Removed unused orphaned Calls IVR script models previously generated as `Calls*` (`CallsAnsweringMachineDetection*`, `CallsPlayFromUpload*`, `CallsPlayOptions`, `CallsAudioContent*`, `CallsCustomRingback`, `CallsWaitForEom`, and related types)
+
 ## [ [6.5.0](https://github.com/infobip/infobip-api-java-client/releases/tag/6.5.0) ] - 2026-05-15
 
 ### Added

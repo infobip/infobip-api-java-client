@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents CallsAdvancedBody model.
+ * Advanced voice message request object.
  */
 public class CallsAdvancedBody {
 

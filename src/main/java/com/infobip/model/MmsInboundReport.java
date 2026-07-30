@@ -25,7 +25,11 @@ public class MmsInboundReport {
 
     private String from;
 
-    private String message;
+    private String subject;
+
+    private String userAgent;
+
+    private List<MmsInboundMessagePart> message = null;
 
     private List<MmsInboundDestination> group = null;
 
@@ -162,16 +166,113 @@ public class MmsInboundReport {
     }
 
     /**
+     * Sets subject.
+     * <p>
+     * Field description:
+     * Subject of the received message.
+     *
+     * @param subject
+     * @return This {@link MmsInboundReport instance}.
+     */
+    public MmsInboundReport subject(String subject) {
+        this.subject = subject;
+        return this;
+    }
+
+    /**
+     * Returns subject.
+     * <p>
+     * Field description:
+     * Subject of the received message.
+     *
+     * @return subject
+     */
+    @JsonProperty("subject")
+    public String getSubject() {
+        return subject;
+    }
+
+    /**
+     * Sets subject.
+     * <p>
+     * Field description:
+     * Subject of the received message.
+     *
+     * @param subject
+     */
+    @JsonProperty("subject")
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    /**
+     * Sets userAgent.
+     * <p>
+     * Field description:
+     * Identifier of the device from which the message was sent.
+     *
+     * @param userAgent
+     * @return This {@link MmsInboundReport instance}.
+     */
+    public MmsInboundReport userAgent(String userAgent) {
+        this.userAgent = userAgent;
+        return this;
+    }
+
+    /**
+     * Returns userAgent.
+     * <p>
+     * Field description:
+     * Identifier of the device from which the message was sent.
+     *
+     * @return userAgent
+     */
+    @JsonProperty("userAgent")
+    public String getUserAgent() {
+        return userAgent;
+    }
+
+    /**
+     * Sets userAgent.
+     * <p>
+     * Field description:
+     * Identifier of the device from which the message was sent.
+     *
+     * @param userAgent
+     */
+    @JsonProperty("userAgent")
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
+
+    /**
      * Sets message.
      * <p>
      * Field description:
-     * Full text of the received message.
+     * Received message parts.
      *
      * @param message
      * @return This {@link MmsInboundReport instance}.
      */
-    public MmsInboundReport message(String message) {
+    public MmsInboundReport message(List<MmsInboundMessagePart> message) {
         this.message = message;
+        return this;
+    }
+
+    /**
+     * Adds and item into message.
+     * <p>
+     * Field description:
+     * Received message parts.
+     *
+     * @param messageItem The item to be added to the list.
+     * @return This {@link MmsInboundReport instance}.
+     */
+    public MmsInboundReport addMessageItem(MmsInboundMessagePart messageItem) {
+        if (this.message == null) {
+            this.message = new ArrayList<>();
+        }
+        this.message.add(messageItem);
         return this;
     }
 
@@ -179,12 +280,12 @@ public class MmsInboundReport {
      * Returns message.
      * <p>
      * Field description:
-     * Full text of the received message.
+     * Received message parts.
      *
      * @return message
      */
     @JsonProperty("message")
-    public String getMessage() {
+    public List<MmsInboundMessagePart> getMessage() {
         return message;
     }
 
@@ -192,12 +293,12 @@ public class MmsInboundReport {
      * Sets message.
      * <p>
      * Field description:
-     * Full text of the received message.
+     * Received message parts.
      *
      * @param message
      */
     @JsonProperty("message")
-    public void setMessage(String message) {
+    public void setMessage(List<MmsInboundMessagePart> message) {
         this.message = message;
     }
 
@@ -501,6 +602,8 @@ public class MmsInboundReport {
         return Objects.equals(this.messageId, mmsInboundReport.messageId)
                 && Objects.equals(this.to, mmsInboundReport.to)
                 && Objects.equals(this.from, mmsInboundReport.from)
+                && Objects.equals(this.subject, mmsInboundReport.subject)
+                && Objects.equals(this.userAgent, mmsInboundReport.userAgent)
                 && Objects.equals(this.message, mmsInboundReport.message)
                 && Objects.equals(this.group, mmsInboundReport.group)
                 && Objects.equals(this.receivedAt, mmsInboundReport.receivedAt)
@@ -517,6 +620,8 @@ public class MmsInboundReport {
                 messageId,
                 to,
                 from,
+                subject,
+                userAgent,
                 message,
                 group,
                 receivedAt,
@@ -541,6 +646,12 @@ public class MmsInboundReport {
                 .append(newLine)
                 .append("    from: ")
                 .append(toIndentedString(from))
+                .append(newLine)
+                .append("    subject: ")
+                .append(toIndentedString(subject))
+                .append(newLine)
+                .append("    userAgent: ")
+                .append(toIndentedString(userAgent))
                 .append(newLine)
                 .append("    message: ")
                 .append(toIndentedString(message))
