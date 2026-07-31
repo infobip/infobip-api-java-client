@@ -137,7 +137,6 @@ If you find out that something was not addressed properly, please submit an issu
     * Expanded reuse of existing `MessageResponseDetails` for Email and WhatsApp send responses
 * **General**:
     * Updated tests
-    * User-Agent bumped to `infobip-api-client-java/6.6.0`
 
 ### Removed
 - Removed Numbers voice recording configuration APIs (`createRecordingConfiguration`, `updateRecordingConfiguration`, `retrieveRecordingConfiguration`, `removeRecordingConfiguration`) and related models (`NumbersNumberConfigurationModel`, `NumbersRecordingBody`, `NumbersDownloadResponseModel`, `NumbersReviewType`)
