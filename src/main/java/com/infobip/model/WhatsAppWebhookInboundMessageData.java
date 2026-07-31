@@ -42,7 +42,7 @@ public class WhatsAppWebhookInboundMessageData {
 
     private MessagePrice price;
 
-    private WhatsAppWebhookContactName contact;
+    private WhatsAppWebhookInboundContactProfile contact;
 
     private WhatsAppWebhookIdentity identity;
 
@@ -90,7 +90,7 @@ public class WhatsAppWebhookInboundMessageData {
      * Sets applicationId.
      * <p>
      * Field description:
-     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @param applicationId
      * @return This {@link WhatsAppWebhookInboundMessageData instance}.
@@ -104,7 +104,7 @@ public class WhatsAppWebhookInboundMessageData {
      * Returns applicationId.
      * <p>
      * Field description:
-     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @return applicationId
      */
@@ -117,7 +117,7 @@ public class WhatsAppWebhookInboundMessageData {
      * Sets applicationId.
      * <p>
      * Field description:
-     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @param applicationId
      */
@@ -558,7 +558,7 @@ public class WhatsAppWebhookInboundMessageData {
      * @param contact
      * @return This {@link WhatsAppWebhookInboundMessageData instance}.
      */
-    public WhatsAppWebhookInboundMessageData contact(WhatsAppWebhookContactName contact) {
+    public WhatsAppWebhookInboundMessageData contact(WhatsAppWebhookInboundContactProfile contact) {
         this.contact = contact;
         return this;
     }
@@ -571,7 +571,7 @@ public class WhatsAppWebhookInboundMessageData {
      * @return contact
      */
     @JsonProperty("contact")
-    public WhatsAppWebhookContactName getContact() {
+    public WhatsAppWebhookInboundContactProfile getContact() {
         return contact;
     }
 
@@ -583,7 +583,7 @@ public class WhatsAppWebhookInboundMessageData {
      * @param contact
      */
     @JsonProperty("contact")
-    public void setContact(WhatsAppWebhookContactName contact) {
+    public void setContact(WhatsAppWebhookInboundContactProfile contact) {
         this.contact = contact;
     }
 

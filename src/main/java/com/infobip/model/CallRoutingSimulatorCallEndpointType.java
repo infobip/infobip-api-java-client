@@ -18,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum CallRoutingSimulatorCallEndpointType {
     SIP("SIP"),
     PHONE("PHONE"),
-    WEBRTC("WEBRTC");
+    WEBRTC("WEBRTC"),
+    WHATSAPP("WHATSAPP");
 
     private final String value;
 

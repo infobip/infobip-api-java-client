@@ -24,6 +24,7 @@ import java.util.Objects;
         visible = true)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = WhatsAppTemplateDocumentHeaderContent.class, name = "DOCUMENT"),
+    @JsonSubTypes.Type(value = WhatsAppTemplateGifHeaderContent.class, name = "GIF"),
     @JsonSubTypes.Type(value = WhatsAppTemplateImageHeaderContent.class, name = "IMAGE"),
     @JsonSubTypes.Type(value = WhatsAppTemplateLocationHeaderContent.class, name = "LOCATION"),
     @JsonSubTypes.Type(value = WhatsAppTemplateTextHeaderContent.class, name = "TEXT"),

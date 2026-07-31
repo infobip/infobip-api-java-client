@@ -10,6 +10,7 @@
 package com.infobip.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.annotations.Beta;
 import com.infobip.ApiCallback;
 import com.infobip.ApiClient;
 import com.infobip.ApiException;
@@ -28,10 +29,8 @@ import com.infobip.model.NumbersBrandStatus;
 import com.infobip.model.NumbersBrandVet;
 import com.infobip.model.NumbersCampaign;
 import com.infobip.model.NumbersDocumentMetadata;
-import com.infobip.model.NumbersDownloadResponseModel;
 import com.infobip.model.NumbersExternalAutomaticReviewResults;
 import com.infobip.model.NumbersNetworkStatus;
-import com.infobip.model.NumbersNumberConfigurationModel;
 import com.infobip.model.NumbersNumberPoolAvailability;
 import com.infobip.model.NumbersNumberPoolUsageApiPageResponse;
 import com.infobip.model.NumbersNumberPreviews;
@@ -365,7 +364,7 @@ public class NumbersApi {
     /**
      * Cancel number.
      * <p>
-     * This method will cancel your purchased number. The number you cancel will become available in the numbers pool for anyone to buy.
+     * This method will cancel your number. Any number purchased from Infobip Numbers inventory you cancel will become available in the numbers pool for anyone to buy.
      *
      * @param numberKey Unique ID of a number. (required)
      * @return CancelNumberRequest
@@ -620,73 +619,6 @@ public class NumbersApi {
     public CreateEmergencyServiceRequest createEmergencyService(
             String numberKey, CallsEmergencyAddress callsEmergencyAddress) {
         return new CreateEmergencyServiceRequest(numberKey, callsEmergencyAddress);
-    }
-
-    private RequestDefinition createRecordingConfigurationDefinition(
-            NumbersNumberConfigurationModel numbersNumberConfigurationModel) {
-        RequestDefinition.Builder builder = RequestDefinition.builder(
-                        "POST", "/voice/recording/1/configuration/numbers")
-                .body(numbersNumberConfigurationModel)
-                .requiresAuthentication(true)
-                .accept("application/json")
-                .contentType("application/json");
-
-        return builder.build();
-    }
-
-    /**
-     * createRecordingConfiguration request builder class.
-     */
-    public class CreateRecordingConfigurationRequest {
-        private final NumbersNumberConfigurationModel numbersNumberConfigurationModel;
-
-        private CreateRecordingConfigurationRequest(NumbersNumberConfigurationModel numbersNumberConfigurationModel) {
-            this.numbersNumberConfigurationModel = Objects.requireNonNull(
-                    numbersNumberConfigurationModel,
-                    "The required parameter 'numbersNumberConfigurationModel' is missing.");
-        }
-
-        /**
-         * Executes the createRecordingConfiguration request.
-         *
-         * @return NumbersNumberConfigurationModel The deserialized response.
-         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
-         */
-        public NumbersNumberConfigurationModel execute() throws ApiException {
-            RequestDefinition createRecordingConfigurationDefinition =
-                    createRecordingConfigurationDefinition(numbersNumberConfigurationModel);
-            return apiClient.execute(
-                    createRecordingConfigurationDefinition,
-                    new TypeReference<NumbersNumberConfigurationModel>() {}.getType());
-        }
-
-        /**
-         * Executes the createRecordingConfiguration request asynchronously.
-         *
-         * @param callback The {@link ApiCallback} to be invoked.
-         * @return The {@link okhttp3.Call} associated with the API request.
-         */
-        public okhttp3.Call executeAsync(ApiCallback<NumbersNumberConfigurationModel> callback) {
-            RequestDefinition createRecordingConfigurationDefinition =
-                    createRecordingConfigurationDefinition(numbersNumberConfigurationModel);
-            return apiClient.executeAsync(
-                    createRecordingConfigurationDefinition,
-                    new TypeReference<NumbersNumberConfigurationModel>() {}.getType(),
-                    callback);
-        }
-    }
-
-    /**
-     * Create voice recording configuration.
-     * <p>
-     * This method allows you to set up recording configuration for the Voice number that has a &#x60;Forward to phone&#x60; or &#x60;Forward to IP&#x60; action enabled. Once you purchase a Voice number and attach a voice action to it, you can make additional recording configuration. Enabling recording on a Voice number means that each call made on this number will be recorded.   By default, the recording is disabled on all numbers.    **NOTE** Changing an action on a number doesn&#39;t disable the recording feature.
-     *
-     * @param numbersNumberConfigurationModel  (required)
-     * @return CreateRecordingConfigurationRequest
-     */
-    public CreateRecordingConfigurationRequest createRecordingConfiguration(
-            NumbersNumberConfigurationModel numbersNumberConfigurationModel) {
-        return new CreateRecordingConfigurationRequest(numbersNumberConfigurationModel);
     }
 
     private RequestDefinition createTollFreeCampaignDefinition(
@@ -1333,6 +1265,7 @@ public class NumbersApi {
      * @param requestUuid The UUID of the AI review request. (required)
      * @return GetAiReviewResultsRequest
      */
+    @Beta
     public GetAiReviewResultsRequest getAiReviewResults(UUID requestUuid) {
         return new GetAiReviewResultsRequest(requestUuid);
     }
@@ -1693,6 +1626,8 @@ public class NumbersApi {
             List<String> type,
             String nameLike,
             List<String> referenceId,
+            String applicationId,
+            String entityId,
             Integer page,
             Integer size,
             List<String> sort) {
@@ -1718,6 +1653,12 @@ public class NumbersApi {
                 builder.addQueryParameter(new Parameter("referenceId", parameterItem));
             }
         }
+        if (applicationId != null) {
+            builder.addQueryParameter(new Parameter("applicationId", applicationId));
+        }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
+        }
         if (page != null) {
             builder.addQueryParameter(new Parameter("page", page));
         }
@@ -1740,6 +1681,8 @@ public class NumbersApi {
         private List<String> type;
         private String nameLike;
         private List<String> referenceId;
+        private String applicationId;
+        private String entityId;
         private Integer page;
         private Integer size;
         private List<String> sort;
@@ -1791,6 +1734,28 @@ public class NumbersApi {
         }
 
         /**
+         * Sets applicationId.
+         *
+         * @param applicationId Filters brands to those whose application ID contains the supplied value. (optional)
+         * @return GetBrandsRequest
+         */
+        public GetBrandsRequest applicationId(String applicationId) {
+            this.applicationId = applicationId;
+            return this;
+        }
+
+        /**
+         * Sets entityId.
+         *
+         * @param entityId Filters brands to those whose entity ID contains the supplied value. (optional)
+         * @return GetBrandsRequest
+         */
+        public GetBrandsRequest entityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
+
+        /**
          * Sets page.
          *
          * @param page Results page you want to retrieve (0..N). The default value is 0. (optional)
@@ -1831,7 +1796,7 @@ public class NumbersApi {
          */
         public NumbersPageResponseBrand execute() throws ApiException {
             RequestDefinition getBrandsDefinition =
-                    getBrandsDefinition(id, type, nameLike, referenceId, page, size, sort);
+                    getBrandsDefinition(id, type, nameLike, referenceId, applicationId, entityId, page, size, sort);
             return apiClient.execute(getBrandsDefinition, new TypeReference<NumbersPageResponseBrand>() {}.getType());
         }
 
@@ -1843,7 +1808,7 @@ public class NumbersApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<NumbersPageResponseBrand> callback) {
             RequestDefinition getBrandsDefinition =
-                    getBrandsDefinition(id, type, nameLike, referenceId, page, size, sort);
+                    getBrandsDefinition(id, type, nameLike, referenceId, applicationId, entityId, page, size, sort);
             return apiClient.executeAsync(
                     getBrandsDefinition, new TypeReference<NumbersPageResponseBrand>() {}.getType(), callback);
         }
@@ -2096,6 +2061,8 @@ public class NumbersApi {
             List<String> type,
             String nameLike,
             List<String> referenceId,
+            String applicationId,
+            String entityId,
             List<String> stage,
             List<String> number,
             Integer page,
@@ -2127,6 +2094,12 @@ public class NumbersApi {
             for (var parameterItem : referenceId) {
                 builder.addQueryParameter(new Parameter("referenceId", parameterItem));
             }
+        }
+        if (applicationId != null) {
+            builder.addQueryParameter(new Parameter("applicationId", applicationId));
+        }
+        if (entityId != null) {
+            builder.addQueryParameter(new Parameter("entityId", entityId));
         }
         if (stage != null) {
             for (var parameterItem : stage) {
@@ -2161,6 +2134,8 @@ public class NumbersApi {
         private List<String> type;
         private String nameLike;
         private List<String> referenceId;
+        private String applicationId;
+        private String entityId;
         private List<String> stage;
         private List<String> number;
         private Integer page;
@@ -2221,6 +2196,28 @@ public class NumbersApi {
          */
         public GetCampaignsRequest referenceId(List<String> referenceId) {
             this.referenceId = referenceId;
+            return this;
+        }
+
+        /**
+         * Sets applicationId.
+         *
+         * @param applicationId Filters campaigns to those whose application ID contains the supplied value. (optional)
+         * @return GetCampaignsRequest
+         */
+        public GetCampaignsRequest applicationId(String applicationId) {
+            this.applicationId = applicationId;
+            return this;
+        }
+
+        /**
+         * Sets entityId.
+         *
+         * @param entityId Filters campaigns to those whose entity ID contains the supplied value. (optional)
+         * @return GetCampaignsRequest
+         */
+        public GetCampaignsRequest entityId(String entityId) {
+            this.entityId = entityId;
             return this;
         }
 
@@ -2286,8 +2283,8 @@ public class NumbersApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public NumbersPageResponseCampaign execute() throws ApiException {
-            RequestDefinition getCampaignsDefinition =
-                    getCampaignsDefinition(id, brandId, type, nameLike, referenceId, stage, number, page, size, sort);
+            RequestDefinition getCampaignsDefinition = getCampaignsDefinition(
+                    id, brandId, type, nameLike, referenceId, applicationId, entityId, stage, number, page, size, sort);
             return apiClient.execute(
                     getCampaignsDefinition, new TypeReference<NumbersPageResponseCampaign>() {}.getType());
         }
@@ -2299,8 +2296,8 @@ public class NumbersApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<NumbersPageResponseCampaign> callback) {
-            RequestDefinition getCampaignsDefinition =
-                    getCampaignsDefinition(id, brandId, type, nameLike, referenceId, stage, number, page, size, sort);
+            RequestDefinition getCampaignsDefinition = getCampaignsDefinition(
+                    id, brandId, type, nameLike, referenceId, applicationId, entityId, stage, number, page, size, sort);
             return apiClient.executeAsync(
                     getCampaignsDefinition, new TypeReference<NumbersPageResponseCampaign>() {}.getType(), callback);
         }
@@ -3139,68 +3136,6 @@ public class NumbersApi {
         return new RemoveNumbersRequest(campaignId, numbersUpdateCampaignRegistrationRequest);
     }
 
-    private RequestDefinition removeRecordingConfigurationDefinition(String key) {
-        RequestDefinition.Builder builder = RequestDefinition.builder(
-                        "DELETE", "/voice/recording/1/configuration/numbers/{key}")
-                .requiresAuthentication(true)
-                .accept("application/json");
-
-        if (key != null) {
-            builder.addPathParameter(new Parameter("key", key));
-        }
-        return builder.build();
-    }
-
-    /**
-     * removeRecordingConfiguration request builder class.
-     */
-    public class RemoveRecordingConfigurationRequest {
-        private final String key;
-
-        private RemoveRecordingConfigurationRequest(String key) {
-            this.key = Objects.requireNonNull(key, "The required parameter 'key' is missing.");
-        }
-
-        /**
-         * Executes the removeRecordingConfiguration request.
-         *
-         * @return NumbersDownloadResponseModel The deserialized response.
-         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
-         */
-        public NumbersDownloadResponseModel execute() throws ApiException {
-            RequestDefinition removeRecordingConfigurationDefinition = removeRecordingConfigurationDefinition(key);
-            return apiClient.execute(
-                    removeRecordingConfigurationDefinition,
-                    new TypeReference<NumbersDownloadResponseModel>() {}.getType());
-        }
-
-        /**
-         * Executes the removeRecordingConfiguration request asynchronously.
-         *
-         * @param callback The {@link ApiCallback} to be invoked.
-         * @return The {@link okhttp3.Call} associated with the API request.
-         */
-        public okhttp3.Call executeAsync(ApiCallback<NumbersDownloadResponseModel> callback) {
-            RequestDefinition removeRecordingConfigurationDefinition = removeRecordingConfigurationDefinition(key);
-            return apiClient.executeAsync(
-                    removeRecordingConfigurationDefinition,
-                    new TypeReference<NumbersDownloadResponseModel>() {}.getType(),
-                    callback);
-        }
-    }
-
-    /**
-     * Delete voice recording configuration.
-     * <p>
-     * This method allows you to delete Voice number recording configuration setup.
-     *
-     * @param key Key. (required)
-     * @return RemoveRecordingConfigurationRequest
-     */
-    public RemoveRecordingConfigurationRequest removeRecordingConfiguration(String key) {
-        return new RemoveRecordingConfigurationRequest(key);
-    }
-
     private RequestDefinition resend2faMailBrandAuthDefinition(UUID brandId) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
                         "POST", "/number-registration/1/brands/{brandId}/resend2fa")
@@ -3254,68 +3189,6 @@ public class NumbersApi {
      */
     public Resend2faMailBrandAuthRequest resend2faMailBrandAuth(UUID brandId) {
         return new Resend2faMailBrandAuthRequest(brandId);
-    }
-
-    private RequestDefinition retrieveRecordingConfigurationDefinition(String key) {
-        RequestDefinition.Builder builder = RequestDefinition.builder(
-                        "GET", "/voice/recording/1/configuration/numbers/{key}")
-                .requiresAuthentication(true)
-                .accept("application/json");
-
-        if (key != null) {
-            builder.addPathParameter(new Parameter("key", key));
-        }
-        return builder.build();
-    }
-
-    /**
-     * retrieveRecordingConfiguration request builder class.
-     */
-    public class RetrieveRecordingConfigurationRequest {
-        private final String key;
-
-        private RetrieveRecordingConfigurationRequest(String key) {
-            this.key = Objects.requireNonNull(key, "The required parameter 'key' is missing.");
-        }
-
-        /**
-         * Executes the retrieveRecordingConfiguration request.
-         *
-         * @return NumbersNumberConfigurationModel The deserialized response.
-         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
-         */
-        public NumbersNumberConfigurationModel execute() throws ApiException {
-            RequestDefinition retrieveRecordingConfigurationDefinition = retrieveRecordingConfigurationDefinition(key);
-            return apiClient.execute(
-                    retrieveRecordingConfigurationDefinition,
-                    new TypeReference<NumbersNumberConfigurationModel>() {}.getType());
-        }
-
-        /**
-         * Executes the retrieveRecordingConfiguration request asynchronously.
-         *
-         * @param callback The {@link ApiCallback} to be invoked.
-         * @return The {@link okhttp3.Call} associated with the API request.
-         */
-        public okhttp3.Call executeAsync(ApiCallback<NumbersNumberConfigurationModel> callback) {
-            RequestDefinition retrieveRecordingConfigurationDefinition = retrieveRecordingConfigurationDefinition(key);
-            return apiClient.executeAsync(
-                    retrieveRecordingConfigurationDefinition,
-                    new TypeReference<NumbersNumberConfigurationModel>() {}.getType(),
-                    callback);
-        }
-    }
-
-    /**
-     * Get voice recording configuration.
-     * <p>
-     * This method allows you to read Voice number recording configuration setup.
-     *
-     * @param key Key. (required)
-     * @return RetrieveRecordingConfigurationRequest
-     */
-    public RetrieveRecordingConfigurationRequest retrieveRecordingConfiguration(String key) {
-        return new RetrieveRecordingConfigurationRequest(key);
     }
 
     private RequestDefinition submitCampaignInfoForAiReviewDefinition(NumbersTenDlcAiReviewRequest body) {
@@ -3374,6 +3247,7 @@ public class NumbersApi {
      * @param body  (required)
      * @return SubmitCampaignInfoForAiReviewRequest
      */
+    @Beta
     public SubmitCampaignInfoForAiReviewRequest submitCampaignInfoForAiReview(NumbersTenDlcAiReviewRequest body) {
         return new SubmitCampaignInfoForAiReviewRequest(body);
     }
@@ -3439,6 +3313,7 @@ public class NumbersApi {
      * @param campaignUuid The UUID assigned to the campaign when it was created or imported into the infobip platform. This identifier is returned during campaign creation. (required)
      * @return SubmitExistingCampaignForAiReviewRequest
      */
+    @Beta
     public SubmitExistingCampaignForAiReviewRequest submitExistingCampaignForAiReview(UUID campaignUuid) {
         return new SubmitExistingCampaignForAiReviewRequest(campaignUuid);
     }
@@ -3841,72 +3716,6 @@ public class NumbersApi {
     public UpdateOwnedNumberRequest updateOwnedNumber(
             String numberKey, NumbersUpdateOwnedNumberRequest numbersUpdateOwnedNumberRequest) {
         return new UpdateOwnedNumberRequest(numberKey, numbersUpdateOwnedNumberRequest);
-    }
-
-    private RequestDefinition updateRecordingConfigurationDefinition(
-            NumbersNumberConfigurationModel numbersNumberConfigurationModel) {
-        RequestDefinition.Builder builder = RequestDefinition.builder("PUT", "/voice/recording/1/configuration/numbers")
-                .body(numbersNumberConfigurationModel)
-                .requiresAuthentication(true)
-                .accept("application/json")
-                .contentType("application/json");
-
-        return builder.build();
-    }
-
-    /**
-     * updateRecordingConfiguration request builder class.
-     */
-    public class UpdateRecordingConfigurationRequest {
-        private final NumbersNumberConfigurationModel numbersNumberConfigurationModel;
-
-        private UpdateRecordingConfigurationRequest(NumbersNumberConfigurationModel numbersNumberConfigurationModel) {
-            this.numbersNumberConfigurationModel = Objects.requireNonNull(
-                    numbersNumberConfigurationModel,
-                    "The required parameter 'numbersNumberConfigurationModel' is missing.");
-        }
-
-        /**
-         * Executes the updateRecordingConfiguration request.
-         *
-         * @return NumbersNumberConfigurationModel The deserialized response.
-         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
-         */
-        public NumbersNumberConfigurationModel execute() throws ApiException {
-            RequestDefinition updateRecordingConfigurationDefinition =
-                    updateRecordingConfigurationDefinition(numbersNumberConfigurationModel);
-            return apiClient.execute(
-                    updateRecordingConfigurationDefinition,
-                    new TypeReference<NumbersNumberConfigurationModel>() {}.getType());
-        }
-
-        /**
-         * Executes the updateRecordingConfiguration request asynchronously.
-         *
-         * @param callback The {@link ApiCallback} to be invoked.
-         * @return The {@link okhttp3.Call} associated with the API request.
-         */
-        public okhttp3.Call executeAsync(ApiCallback<NumbersNumberConfigurationModel> callback) {
-            RequestDefinition updateRecordingConfigurationDefinition =
-                    updateRecordingConfigurationDefinition(numbersNumberConfigurationModel);
-            return apiClient.executeAsync(
-                    updateRecordingConfigurationDefinition,
-                    new TypeReference<NumbersNumberConfigurationModel>() {}.getType(),
-                    callback);
-        }
-    }
-
-    /**
-     * Update voice recording configuration.
-     * <p>
-     * This method allows you to update recording configuration on voice number.
-     *
-     * @param numbersNumberConfigurationModel  (required)
-     * @return UpdateRecordingConfigurationRequest
-     */
-    public UpdateRecordingConfigurationRequest updateRecordingConfiguration(
-            NumbersNumberConfigurationModel numbersNumberConfigurationModel) {
-        return new UpdateRecordingConfigurationRequest(numbersNumberConfigurationModel);
     }
 
     private RequestDefinition updateRegisteredCampaignDefinition(

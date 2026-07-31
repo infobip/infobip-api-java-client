@@ -37,6 +37,8 @@ public class CallRoutingSimulatorSipEndpoint extends CallRoutingSimulatorCallEnd
      * <p>
      * Field description:
      * Username sent to a selected SIP trunk.
+     * <p>
+     * The field is required.
      *
      * @param from
      * @return This {@link CallRoutingSimulatorSipEndpoint instance}.
@@ -51,6 +53,8 @@ public class CallRoutingSimulatorSipEndpoint extends CallRoutingSimulatorCallEnd
      * <p>
      * Field description:
      * Username sent to a selected SIP trunk.
+     * <p>
+     * The field is required.
      *
      * @return from
      */
@@ -64,6 +68,8 @@ public class CallRoutingSimulatorSipEndpoint extends CallRoutingSimulatorCallEnd
      * <p>
      * Field description:
      * Username sent to a selected SIP trunk.
+     * <p>
+     * The field is required.
      *
      * @param from
      */

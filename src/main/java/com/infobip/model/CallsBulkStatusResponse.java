@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Represents CallsBulkStatusResponse model.
+ * Bulk status response object.
  */
 public class CallsBulkStatusResponse {
 

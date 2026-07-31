@@ -23,6 +23,7 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = CallsAuthenticatedSipTrunkRequest.class, name = "AUTHENTICATED"),
     @JsonSubTypes.Type(value = CallsProviderSipTrunkRequest.class, name = "PROVIDER"),
     @JsonSubTypes.Type(value = CallsRegisteredSipTrunkRequest.class, name = "REGISTERED"),
     @JsonSubTypes.Type(value = CallsStaticSipTrunkRequest.class, name = "STATIC"),
@@ -41,8 +42,6 @@ public abstract class CallsSipTrunkRequest {
     private String name;
 
     private String location;
-
-    private Boolean tls;
 
     private Boolean internationalCallsAllowed;
 
@@ -144,46 +143,6 @@ public abstract class CallsSipTrunkRequest {
     @JsonProperty("location")
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    /**
-     * Sets tls.
-     * <p>
-     * Field description:
-     * Indicates whether communication is secured by the TLS protocol.
-     *
-     * @param tls
-     * @return This {@link CallsSipTrunkRequest instance}.
-     */
-    public CallsSipTrunkRequest tls(Boolean tls) {
-        this.tls = tls;
-        return this;
-    }
-
-    /**
-     * Returns tls.
-     * <p>
-     * Field description:
-     * Indicates whether communication is secured by the TLS protocol.
-     *
-     * @return tls
-     */
-    @JsonProperty("tls")
-    public Boolean getTls() {
-        return tls;
-    }
-
-    /**
-     * Sets tls.
-     * <p>
-     * Field description:
-     * Indicates whether communication is secured by the TLS protocol.
-     *
-     * @param tls
-     */
-    @JsonProperty("tls")
-    public void setTls(Boolean tls) {
-        this.tls = tls;
     }
 
     /**
@@ -321,7 +280,6 @@ public abstract class CallsSipTrunkRequest {
         return Objects.equals(this.type, callsSipTrunkRequest.type)
                 && Objects.equals(this.name, callsSipTrunkRequest.name)
                 && Objects.equals(this.location, callsSipTrunkRequest.location)
-                && Objects.equals(this.tls, callsSipTrunkRequest.tls)
                 && Objects.equals(this.internationalCallsAllowed, callsSipTrunkRequest.internationalCallsAllowed)
                 && Objects.equals(this.channelLimit, callsSipTrunkRequest.channelLimit)
                 && Objects.equals(this.billingPackage, callsSipTrunkRequest.billingPackage);
@@ -329,7 +287,7 @@ public abstract class CallsSipTrunkRequest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, name, location, tls, internationalCallsAllowed, channelLimit, billingPackage);
+        return Objects.hash(type, name, location, internationalCallsAllowed, channelLimit, billingPackage);
     }
 
     @Override
@@ -346,9 +304,6 @@ public abstract class CallsSipTrunkRequest {
                 .append(newLine)
                 .append("    location: ")
                 .append(toIndentedString(location))
-                .append(newLine)
-                .append("    tls: ")
-                .append(toIndentedString(tls))
                 .append(newLine)
                 .append("    internationalCallsAllowed: ")
                 .append(toIndentedString(internationalCallsAllowed))

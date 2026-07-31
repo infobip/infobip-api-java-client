@@ -17,6 +17,8 @@ import java.util.Objects;
  */
 public class CallsProviderSipTrunkRequest extends CallsSipTrunkRequest {
 
+    private Boolean tls;
+
     private CallsProvider provider;
 
     /**
@@ -24,6 +26,46 @@ public class CallsProviderSipTrunkRequest extends CallsSipTrunkRequest {
      */
     public CallsProviderSipTrunkRequest() {
         super("PROVIDER");
+    }
+
+    /**
+     * Sets tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @param tls
+     * @return This {@link CallsProviderSipTrunkRequest instance}.
+     */
+    public CallsProviderSipTrunkRequest tls(Boolean tls) {
+        this.tls = tls;
+        return this;
+    }
+
+    /**
+     * Returns tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @return tls
+     */
+    @JsonProperty("tls")
+    public Boolean getTls() {
+        return tls;
+    }
+
+    /**
+     * Sets tls.
+     * <p>
+     * Field description:
+     * Indicates whether communication is secured by the TLS protocol.
+     *
+     * @param tls
+     */
+    @JsonProperty("tls")
+    public void setTls(Boolean tls) {
+        this.tls = tls;
     }
 
     /**
@@ -72,12 +114,14 @@ public class CallsProviderSipTrunkRequest extends CallsSipTrunkRequest {
             return false;
         }
         CallsProviderSipTrunkRequest callsProviderSipTrunkRequest = (CallsProviderSipTrunkRequest) o;
-        return Objects.equals(this.provider, callsProviderSipTrunkRequest.provider) && super.equals(o);
+        return Objects.equals(this.tls, callsProviderSipTrunkRequest.tls)
+                && Objects.equals(this.provider, callsProviderSipTrunkRequest.provider)
+                && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(provider, super.hashCode());
+        return Objects.hash(tls, provider, super.hashCode());
     }
 
     @Override
@@ -88,6 +132,9 @@ public class CallsProviderSipTrunkRequest extends CallsSipTrunkRequest {
                 .append(newLine)
                 .append("    ")
                 .append(toIndentedString(super.toString()))
+                .append(newLine)
+                .append("    tls: ")
+                .append(toIndentedString(tls))
                 .append(newLine)
                 .append("    provider: ")
                 .append(toIndentedString(provider))

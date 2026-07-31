@@ -170,7 +170,7 @@ class NumberLookupApiTest extends ApiTest {
         String givenStatusDescription = "Message delivered to handset";
 
         Integer givenErrorGroupId = 0;
-        String givenErrorGroupName = "Ok";
+        String givenErrorGroupName = "OK";
         Integer givenErrorId = 0;
         String givenErrorName = "NO_ERROR";
         String givenErrorDescription = "No Error";
@@ -299,7 +299,7 @@ class NumberLookupApiTest extends ApiTest {
             MessageError error = result.getError();
             then(error).isNotNull();
             then(error.getGroupId()).isEqualTo(givenErrorGroupId);
-            then(error.getGroupName()).isEqualTo(givenErrorGroupName);
+            then(error.getGroupName()).isEqualTo("OK");
             then(error.getId()).isEqualTo(givenErrorId);
             then(error.getName()).isEqualTo(givenErrorName);
             then(error.getDescription()).isEqualTo(givenErrorDescription);
@@ -337,7 +337,7 @@ class NumberLookupApiTest extends ApiTest {
         String givenStatusAction = "none";
 
         Integer givenErrorGroupId = 0;
-        String givenErrorGroupName = "Ok";
+        String givenErrorGroupName = "OK";
         Integer givenErrorId = 0;
         String givenErrorName = "NO_ERROR";
         String givenErrorDescription = "No Error";
@@ -441,7 +441,7 @@ class NumberLookupApiTest extends ApiTest {
             MessageError error = log.getError();
             then(error).isNotNull();
             then(error.getGroupId()).isEqualTo(givenErrorGroupId);
-            then(error.getGroupName()).isEqualTo(givenErrorGroupName);
+            then(error.getGroupName()).isEqualTo("OK");
             then(error.getId()).isEqualTo(givenErrorId);
             then(error.getName()).isEqualTo(givenErrorName);
             then(error.getDescription()).isEqualTo(givenErrorDescription);

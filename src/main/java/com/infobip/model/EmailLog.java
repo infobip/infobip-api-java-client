@@ -14,23 +14,19 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * Array of email logs, one object per each email request.
+ * An array of message log results, one object per each message log entry.
  */
 public class EmailLog {
 
-    private String applicationId;
+    private String text;
 
-    private String entityId;
+    private String sender;
+
+    private String destination;
 
     private String bulkId;
 
     private String messageId;
-
-    private String to;
-
-    private String from;
-
-    private String text;
 
     private OffsetDateTime sentAt;
 
@@ -44,251 +40,15 @@ public class EmailLog {
 
     private MessageError error;
 
-    /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * The Application ID sent in the email request.
-     *
-     * @param applicationId
-     * @return This {@link EmailLog instance}.
-     */
-    public EmailLog applicationId(String applicationId) {
-        this.applicationId = applicationId;
-        return this;
-    }
+    private Platform platform;
 
-    /**
-     * Returns applicationId.
-     * <p>
-     * Field description:
-     * The Application ID sent in the email request.
-     *
-     * @return applicationId
-     */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * The Application ID sent in the email request.
-     *
-     * @param applicationId
-     */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
-    }
-
-    /**
-     * Sets entityId.
-     * <p>
-     * Field description:
-     * The Entity ID sent in the email request.
-     *
-     * @param entityId
-     * @return This {@link EmailLog instance}.
-     */
-    public EmailLog entityId(String entityId) {
-        this.entityId = entityId;
-        return this;
-    }
-
-    /**
-     * Returns entityId.
-     * <p>
-     * Field description:
-     * The Entity ID sent in the email request.
-     *
-     * @return entityId
-     */
-    @JsonProperty("entityId")
-    public String getEntityId() {
-        return entityId;
-    }
-
-    /**
-     * Sets entityId.
-     * <p>
-     * Field description:
-     * The Entity ID sent in the email request.
-     *
-     * @param entityId
-     */
-    @JsonProperty("entityId")
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
-    /**
-     * Sets bulkId.
-     * <p>
-     * Field description:
-     * The ID that uniquely identifies the request.
-     *
-     * @param bulkId
-     * @return This {@link EmailLog instance}.
-     */
-    public EmailLog bulkId(String bulkId) {
-        this.bulkId = bulkId;
-        return this;
-    }
-
-    /**
-     * Returns bulkId.
-     * <p>
-     * Field description:
-     * The ID that uniquely identifies the request.
-     *
-     * @return bulkId
-     */
-    @JsonProperty("bulkId")
-    public String getBulkId() {
-        return bulkId;
-    }
-
-    /**
-     * Sets bulkId.
-     * <p>
-     * Field description:
-     * The ID that uniquely identifies the request.
-     *
-     * @param bulkId
-     */
-    @JsonProperty("bulkId")
-    public void setBulkId(String bulkId) {
-        this.bulkId = bulkId;
-    }
-
-    /**
-     * Sets messageId.
-     * <p>
-     * Field description:
-     * The ID that uniquely identifies the sent email request.
-     *
-     * @param messageId
-     * @return This {@link EmailLog instance}.
-     */
-    public EmailLog messageId(String messageId) {
-        this.messageId = messageId;
-        return this;
-    }
-
-    /**
-     * Returns messageId.
-     * <p>
-     * Field description:
-     * The ID that uniquely identifies the sent email request.
-     *
-     * @return messageId
-     */
-    @JsonProperty("messageId")
-    public String getMessageId() {
-        return messageId;
-    }
-
-    /**
-     * Sets messageId.
-     * <p>
-     * Field description:
-     * The ID that uniquely identifies the sent email request.
-     *
-     * @param messageId
-     */
-    @JsonProperty("messageId")
-    public void setMessageId(String messageId) {
-        this.messageId = messageId;
-    }
-
-    /**
-     * Sets to.
-     * <p>
-     * Field description:
-     * The recipient email address.
-     *
-     * @param to
-     * @return This {@link EmailLog instance}.
-     */
-    public EmailLog to(String to) {
-        this.to = to;
-        return this;
-    }
-
-    /**
-     * Returns to.
-     * <p>
-     * Field description:
-     * The recipient email address.
-     *
-     * @return to
-     */
-    @JsonProperty("to")
-    public String getTo() {
-        return to;
-    }
-
-    /**
-     * Sets to.
-     * <p>
-     * Field description:
-     * The recipient email address.
-     *
-     * @param to
-     */
-    @JsonProperty("to")
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    /**
-     * Sets from.
-     * <p>
-     * Field description:
-     * From email address.
-     *
-     * @param from
-     * @return This {@link EmailLog instance}.
-     */
-    public EmailLog from(String from) {
-        this.from = from;
-        return this;
-    }
-
-    /**
-     * Returns from.
-     * <p>
-     * Field description:
-     * From email address.
-     *
-     * @return from
-     */
-    @JsonProperty("from")
-    public String getFrom() {
-        return from;
-    }
-
-    /**
-     * Sets from.
-     * <p>
-     * Field description:
-     * From email address.
-     *
-     * @param from
-     */
-    @JsonProperty("from")
-    public void setFrom(String from) {
-        this.from = from;
-    }
+    private String campaignReferenceId;
 
     /**
      * Sets text.
      * <p>
      * Field description:
-     * The text from email body.
+     * Message text.
      *
      * @param text
      * @return This {@link EmailLog instance}.
@@ -302,7 +62,7 @@ public class EmailLog {
      * Returns text.
      * <p>
      * Field description:
-     * The text from email body.
+     * Message text.
      *
      * @return text
      */
@@ -315,7 +75,7 @@ public class EmailLog {
      * Sets text.
      * <p>
      * Field description:
-     * The text from email body.
+     * Message text.
      *
      * @param text
      */
@@ -325,10 +85,170 @@ public class EmailLog {
     }
 
     /**
+     * Sets sender.
+     * <p>
+     * Field description:
+     * The sender ID which can be alphanumeric or numeric.
+     *
+     * @param sender
+     * @return This {@link EmailLog instance}.
+     */
+    public EmailLog sender(String sender) {
+        this.sender = sender;
+        return this;
+    }
+
+    /**
+     * Returns sender.
+     * <p>
+     * Field description:
+     * The sender ID which can be alphanumeric or numeric.
+     *
+     * @return sender
+     */
+    @JsonProperty("sender")
+    public String getSender() {
+        return sender;
+    }
+
+    /**
+     * Sets sender.
+     * <p>
+     * Field description:
+     * The sender ID which can be alphanumeric or numeric.
+     *
+     * @param sender
+     */
+    @JsonProperty("sender")
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    /**
+     * Sets destination.
+     * <p>
+     * Field description:
+     * Message destination address.
+     *
+     * @param destination
+     * @return This {@link EmailLog instance}.
+     */
+    public EmailLog destination(String destination) {
+        this.destination = destination;
+        return this;
+    }
+
+    /**
+     * Returns destination.
+     * <p>
+     * Field description:
+     * Message destination address.
+     *
+     * @return destination
+     */
+    @JsonProperty("destination")
+    public String getDestination() {
+        return destination;
+    }
+
+    /**
+     * Sets destination.
+     * <p>
+     * Field description:
+     * Message destination address.
+     *
+     * @param destination
+     */
+    @JsonProperty("destination")
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    /**
+     * Sets bulkId.
+     * <p>
+     * Field description:
+     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request.
+     *
+     * @param bulkId
+     * @return This {@link EmailLog instance}.
+     */
+    public EmailLog bulkId(String bulkId) {
+        this.bulkId = bulkId;
+        return this;
+    }
+
+    /**
+     * Returns bulkId.
+     * <p>
+     * Field description:
+     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request.
+     *
+     * @return bulkId
+     */
+    @JsonProperty("bulkId")
+    public String getBulkId() {
+        return bulkId;
+    }
+
+    /**
+     * Sets bulkId.
+     * <p>
+     * Field description:
+     * Unique ID assigned to the request if messaging multiple recipients or sending multiple messages via a single API request.
+     *
+     * @param bulkId
+     */
+    @JsonProperty("bulkId")
+    public void setBulkId(String bulkId) {
+        this.bulkId = bulkId;
+    }
+
+    /**
+     * Sets messageId.
+     * <p>
+     * Field description:
+     * Unique message ID for which a log is requested.
+     *
+     * @param messageId
+     * @return This {@link EmailLog instance}.
+     */
+    public EmailLog messageId(String messageId) {
+        this.messageId = messageId;
+        return this;
+    }
+
+    /**
+     * Returns messageId.
+     * <p>
+     * Field description:
+     * Unique message ID for which a log is requested.
+     *
+     * @return messageId
+     */
+    @JsonProperty("messageId")
+    public String getMessageId() {
+        return messageId;
+    }
+
+    /**
+     * Sets messageId.
+     * <p>
+     * Field description:
+     * Unique message ID for which a log is requested.
+     *
+     * @param messageId
+     */
+    @JsonProperty("messageId")
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
+    /**
      * Sets sentAt.
      * <p>
      * Field description:
-     * Tells when the email was initiated. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @param sentAt
      * @return This {@link EmailLog instance}.
@@ -342,7 +262,7 @@ public class EmailLog {
      * Returns sentAt.
      * <p>
      * Field description:
-     * Tells when the email was initiated. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @return sentAt
      */
@@ -355,7 +275,7 @@ public class EmailLog {
      * Sets sentAt.
      * <p>
      * Field description:
-     * Tells when the email was initiated. Has the following format: &#x60;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&#x60;.
+     * Date and time when the message was sent. Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @param sentAt
      */
@@ -368,7 +288,7 @@ public class EmailLog {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Date and time when the Infobip services finished processing the email (i.e. delivered to the destination, waiting for delivery, etc.).
+     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, network, etc.). Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @param doneAt
      * @return This {@link EmailLog instance}.
@@ -382,7 +302,7 @@ public class EmailLog {
      * Returns doneAt.
      * <p>
      * Field description:
-     * Date and time when the Infobip services finished processing the email (i.e. delivered to the destination, waiting for delivery, etc.).
+     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, network, etc.). Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @return doneAt
      */
@@ -395,7 +315,7 @@ public class EmailLog {
      * Sets doneAt.
      * <p>
      * Field description:
-     * Date and time when the Infobip services finished processing the email (i.e. delivered to the destination, waiting for delivery, etc.).
+     * Date and time when the Infobip services finished processing the message (i.e., delivered to the destination, network, etc.). Has the following format: yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ.
      *
      * @param doneAt
      */
@@ -408,7 +328,7 @@ public class EmailLog {
      * Sets messageCount.
      * <p>
      * Field description:
-     * Email request count.
+     * The number of messages content was split to.
      *
      * @param messageCount
      * @return This {@link EmailLog instance}.
@@ -422,7 +342,7 @@ public class EmailLog {
      * Returns messageCount.
      * <p>
      * Field description:
-     * Email request count.
+     * The number of messages content was split to.
      *
      * @return messageCount
      */
@@ -435,7 +355,7 @@ public class EmailLog {
      * Sets messageCount.
      * <p>
      * Field description:
-     * Email request count.
+     * The number of messages content was split to.
      *
      * @param messageCount
      */
@@ -537,6 +457,77 @@ public class EmailLog {
         this.error = error;
     }
 
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     * @return This {@link EmailLog instance}.
+     */
+    public EmailLog platform(Platform platform) {
+        this.platform = platform;
+        return this;
+    }
+
+    /**
+     * Returns platform.
+     *
+     * @return platform
+     */
+    @JsonProperty("platform")
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * Sets platform.
+     *
+     * @param platform
+     */
+    @JsonProperty("platform")
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     * @return This {@link EmailLog instance}.
+     */
+    public EmailLog campaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+        return this;
+    }
+
+    /**
+     * Returns campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @return campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public String getCampaignReferenceId() {
+        return campaignReferenceId;
+    }
+
+    /**
+     * Sets campaignReferenceId.
+     * <p>
+     * Field description:
+     * ID of a campaign that was sent in the message.
+     *
+     * @param campaignReferenceId
+     */
+    @JsonProperty("campaignReferenceId")
+    public void setCampaignReferenceId(String campaignReferenceId) {
+        this.campaignReferenceId = campaignReferenceId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -546,37 +537,37 @@ public class EmailLog {
             return false;
         }
         EmailLog emailLog = (EmailLog) o;
-        return Objects.equals(this.applicationId, emailLog.applicationId)
-                && Objects.equals(this.entityId, emailLog.entityId)
+        return Objects.equals(this.text, emailLog.text)
+                && Objects.equals(this.sender, emailLog.sender)
+                && Objects.equals(this.destination, emailLog.destination)
                 && Objects.equals(this.bulkId, emailLog.bulkId)
                 && Objects.equals(this.messageId, emailLog.messageId)
-                && Objects.equals(this.to, emailLog.to)
-                && Objects.equals(this.from, emailLog.from)
-                && Objects.equals(this.text, emailLog.text)
                 && Objects.equals(this.sentAt, emailLog.sentAt)
                 && Objects.equals(this.doneAt, emailLog.doneAt)
                 && Objects.equals(this.messageCount, emailLog.messageCount)
                 && Objects.equals(this.price, emailLog.price)
                 && Objects.equals(this.status, emailLog.status)
-                && Objects.equals(this.error, emailLog.error);
+                && Objects.equals(this.error, emailLog.error)
+                && Objects.equals(this.platform, emailLog.platform)
+                && Objects.equals(this.campaignReferenceId, emailLog.campaignReferenceId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                applicationId,
-                entityId,
+                text,
+                sender,
+                destination,
                 bulkId,
                 messageId,
-                to,
-                from,
-                text,
                 sentAt,
                 doneAt,
                 messageCount,
                 price,
                 status,
-                error);
+                error,
+                platform,
+                campaignReferenceId);
     }
 
     @Override
@@ -585,26 +576,20 @@ public class EmailLog {
         return new StringBuilder()
                 .append("class EmailLog {")
                 .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
+                .append("    text: ")
+                .append(toIndentedString(text))
                 .append(newLine)
-                .append("    entityId: ")
-                .append(toIndentedString(entityId))
+                .append("    sender: ")
+                .append(toIndentedString(sender))
+                .append(newLine)
+                .append("    destination: ")
+                .append(toIndentedString(destination))
                 .append(newLine)
                 .append("    bulkId: ")
                 .append(toIndentedString(bulkId))
                 .append(newLine)
                 .append("    messageId: ")
                 .append(toIndentedString(messageId))
-                .append(newLine)
-                .append("    to: ")
-                .append(toIndentedString(to))
-                .append(newLine)
-                .append("    from: ")
-                .append(toIndentedString(from))
-                .append(newLine)
-                .append("    text: ")
-                .append(toIndentedString(text))
                 .append(newLine)
                 .append("    sentAt: ")
                 .append(toIndentedString(sentAt))
@@ -623,6 +608,12 @@ public class EmailLog {
                 .append(newLine)
                 .append("    error: ")
                 .append(toIndentedString(error))
+                .append(newLine)
+                .append("    platform: ")
+                .append(toIndentedString(platform))
+                .append(newLine)
+                .append("    campaignReferenceId: ")
+                .append(toIndentedString(campaignReferenceId))
                 .append(newLine)
                 .append("}")
                 .toString();

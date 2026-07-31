@@ -22,7 +22,7 @@ public enum ViberOutboundContentType {
     FILE("FILE"),
     LIST("LIST"),
     CAROUSEL("CAROUSEL"),
-    OTP_TEMPLATE("OTP_TEMPLATE");
+    TEMPLATE("TEMPLATE");
 
     private final String value;
 

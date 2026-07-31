@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class EmailAllDomainsResponse {
 
-    private EmailPaging paging;
+    private PageInfo paging;
 
     private List<EmailDomainResponse> results = null;
 
@@ -29,7 +29,7 @@ public class EmailAllDomainsResponse {
      * @param paging
      * @return This {@link EmailAllDomainsResponse instance}.
      */
-    public EmailAllDomainsResponse paging(EmailPaging paging) {
+    public EmailAllDomainsResponse paging(PageInfo paging) {
         this.paging = paging;
         return this;
     }
@@ -40,7 +40,7 @@ public class EmailAllDomainsResponse {
      * @return paging
      */
     @JsonProperty("paging")
-    public EmailPaging getPaging() {
+    public PageInfo getPaging() {
         return paging;
     }
 
@@ -50,7 +50,7 @@ public class EmailAllDomainsResponse {
      * @param paging
      */
     @JsonProperty("paging")
-    public void setPaging(EmailPaging paging) {
+    public void setPaging(PageInfo paging) {
         this.paging = paging;
     }
 

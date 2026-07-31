@@ -18,7 +18,7 @@ import java.util.Objects;
  */
 public class WhatsAppTemplateUpdatePushEvent {
 
-    private Long messageTemplateId;
+    private String messageTemplateId;
 
     private String messageTemplateName;
 
@@ -43,7 +43,7 @@ public class WhatsAppTemplateUpdatePushEvent {
      * @param messageTemplateId
      * @return This {@link WhatsAppTemplateUpdatePushEvent instance}.
      */
-    public WhatsAppTemplateUpdatePushEvent messageTemplateId(Long messageTemplateId) {
+    public WhatsAppTemplateUpdatePushEvent messageTemplateId(String messageTemplateId) {
         this.messageTemplateId = messageTemplateId;
         return this;
     }
@@ -59,7 +59,7 @@ public class WhatsAppTemplateUpdatePushEvent {
      * @return messageTemplateId
      */
     @JsonProperty("messageTemplateId")
-    public Long getMessageTemplateId() {
+    public String getMessageTemplateId() {
         return messageTemplateId;
     }
 
@@ -74,7 +74,7 @@ public class WhatsAppTemplateUpdatePushEvent {
      * @param messageTemplateId
      */
     @JsonProperty("messageTemplateId")
-    public void setMessageTemplateId(Long messageTemplateId) {
+    public void setMessageTemplateId(String messageTemplateId) {
         this.messageTemplateId = messageTemplateId;
     }
 

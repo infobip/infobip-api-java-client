@@ -86,7 +86,7 @@ public class ViberInboundMessageViberInboundContent {
      * Sets applicationId.
      * <p>
      * Field description:
-     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @param applicationId
      * @return This {@link ViberInboundMessageViberInboundContent instance}.
@@ -100,7 +100,7 @@ public class ViberInboundMessageViberInboundContent {
      * Returns applicationId.
      * <p>
      * Field description:
-     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @return applicationId
      */
@@ -113,7 +113,7 @@ public class ViberInboundMessageViberInboundContent {
      * Sets applicationId.
      * <p>
      * Field description:
-     * Used when specifying an entity in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
+     * Used when specifying an application in outbound send requests. It is also returned in notification events. For detailed usage, refer to the [documentation](https://www.infobip.com/docs/cpaas-x/application-and-entity-management).
      *
      * @param applicationId
      */

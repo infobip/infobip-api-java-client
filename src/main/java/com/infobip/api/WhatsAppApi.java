@@ -16,6 +16,7 @@ import com.infobip.ApiClient;
 import com.infobip.ApiException;
 import com.infobip.Parameter;
 import com.infobip.RequestDefinition;
+import com.infobip.model.MessageResponse;
 import com.infobip.model.WhatsAppAudioMessage;
 import com.infobip.model.WhatsAppBulkMessage;
 import com.infobip.model.WhatsAppBulkMessageInfo;
@@ -44,7 +45,6 @@ import com.infobip.model.WhatsAppLocationMessage;
 import com.infobip.model.WhatsAppOtpRequest;
 import com.infobip.model.WhatsAppPayment;
 import com.infobip.model.WhatsAppPhoneNumberRequest;
-import com.infobip.model.WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails;
 import com.infobip.model.WhatsAppSenderPublicKeyResponse;
 import com.infobip.model.WhatsAppSenderQualityResponse;
 import com.infobip.model.WhatsAppSenderRegistrationResponse;
@@ -156,9 +156,9 @@ public class WhatsAppApi {
     }
 
     private RequestDefinition confirmWhatsAppIdentityDefinition(
-            String sender, String userNumber, WhatsAppIdentityConfirmation whatsAppIdentityConfirmation) {
+            String sender, String userIdentifier, WhatsAppIdentityConfirmation whatsAppIdentityConfirmation) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
-                        "PUT", "/whatsapp/1/{sender}/contacts/{userNumber}/identity")
+                        "PUT", "/whatsapp/1/{sender}/contacts/{userIdentifier}/identity")
                 .body(whatsAppIdentityConfirmation)
                 .requiresAuthentication(true)
                 .accept("application/json")
@@ -167,8 +167,8 @@ public class WhatsAppApi {
         if (sender != null) {
             builder.addPathParameter(new Parameter("sender", sender));
         }
-        if (userNumber != null) {
-            builder.addPathParameter(new Parameter("userNumber", userNumber));
+        if (userIdentifier != null) {
+            builder.addPathParameter(new Parameter("userIdentifier", userIdentifier));
         }
         return builder.build();
     }
@@ -178,13 +178,14 @@ public class WhatsAppApi {
      */
     public class ConfirmWhatsAppIdentityRequest {
         private final String sender;
-        private final String userNumber;
+        private final String userIdentifier;
         private final WhatsAppIdentityConfirmation whatsAppIdentityConfirmation;
 
         private ConfirmWhatsAppIdentityRequest(
-                String sender, String userNumber, WhatsAppIdentityConfirmation whatsAppIdentityConfirmation) {
+                String sender, String userIdentifier, WhatsAppIdentityConfirmation whatsAppIdentityConfirmation) {
             this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
-            this.userNumber = Objects.requireNonNull(userNumber, "The required parameter 'userNumber' is missing.");
+            this.userIdentifier =
+                    Objects.requireNonNull(userIdentifier, "The required parameter 'userIdentifier' is missing.");
             this.whatsAppIdentityConfirmation = Objects.requireNonNull(
                     whatsAppIdentityConfirmation, "The required parameter 'whatsAppIdentityConfirmation' is missing.");
         }
@@ -195,7 +196,7 @@ public class WhatsAppApi {
          */
         public void execute() throws ApiException {
             RequestDefinition confirmWhatsAppIdentityDefinition =
-                    confirmWhatsAppIdentityDefinition(sender, userNumber, whatsAppIdentityConfirmation);
+                    confirmWhatsAppIdentityDefinition(sender, userIdentifier, whatsAppIdentityConfirmation);
             apiClient.execute(confirmWhatsAppIdentityDefinition);
         }
 
@@ -207,7 +208,7 @@ public class WhatsAppApi {
          */
         public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
             RequestDefinition confirmWhatsAppIdentityDefinition =
-                    confirmWhatsAppIdentityDefinition(sender, userNumber, whatsAppIdentityConfirmation);
+                    confirmWhatsAppIdentityDefinition(sender, userIdentifier, whatsAppIdentityConfirmation);
             return apiClient.executeAsync(confirmWhatsAppIdentityDefinition, callback);
         }
     }
@@ -218,14 +219,14 @@ public class WhatsAppApi {
      * Confirm end user&#39;s identity. Feature is not enabled by default.
      *
      * @param sender Registered WhatsApp sender number. Must be in international format. (required)
-     * @param userNumber End user&#39;s number. Must be in international format. (required)
+     * @param userIdentifier End user&#39;s number in international format or BSUID. (required)
      * @param whatsAppIdentityConfirmation  (required)
      * @return ConfirmWhatsAppIdentityRequest
      * @see <a href="https://www.infobip.com/docs/whatsapp/manage-integration/additional-functionalities#detect-identity-changes">Learn more.</a>
      */
     public ConfirmWhatsAppIdentityRequest confirmWhatsAppIdentity(
-            String sender, String userNumber, WhatsAppIdentityConfirmation whatsAppIdentityConfirmation) {
-        return new ConfirmWhatsAppIdentityRequest(sender, userNumber, whatsAppIdentityConfirmation);
+            String sender, String userIdentifier, WhatsAppIdentityConfirmation whatsAppIdentityConfirmation) {
+        return new ConfirmWhatsAppIdentityRequest(sender, userIdentifier, whatsAppIdentityConfirmation);
     }
 
     private RequestDefinition createWhatsAppTemplateDefinition(
@@ -429,17 +430,17 @@ public class WhatsAppApi {
         return new DeleteWhatsAppTemplateRequest(sender, templateName);
     }
 
-    private RequestDefinition deleteWhatsappIdentityDefinition(String sender, String userNumber) {
+    private RequestDefinition deleteWhatsappIdentityDefinition(String sender, String userIdentifier) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
-                        "DELETE", "/whatsapp/1/{sender}/contacts/{userNumber}/identity")
+                        "DELETE", "/whatsapp/1/{sender}/contacts/{userIdentifier}/identity")
                 .requiresAuthentication(true)
                 .accept("application/json");
 
         if (sender != null) {
             builder.addPathParameter(new Parameter("sender", sender));
         }
-        if (userNumber != null) {
-            builder.addPathParameter(new Parameter("userNumber", userNumber));
+        if (userIdentifier != null) {
+            builder.addPathParameter(new Parameter("userIdentifier", userIdentifier));
         }
         return builder.build();
     }
@@ -449,11 +450,12 @@ public class WhatsAppApi {
      */
     public class DeleteWhatsappIdentityRequest {
         private final String sender;
-        private final String userNumber;
+        private final String userIdentifier;
 
-        private DeleteWhatsappIdentityRequest(String sender, String userNumber) {
+        private DeleteWhatsappIdentityRequest(String sender, String userIdentifier) {
             this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
-            this.userNumber = Objects.requireNonNull(userNumber, "The required parameter 'userNumber' is missing.");
+            this.userIdentifier =
+                    Objects.requireNonNull(userIdentifier, "The required parameter 'userIdentifier' is missing.");
         }
 
         /**
@@ -461,7 +463,8 @@ public class WhatsAppApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public void execute() throws ApiException {
-            RequestDefinition deleteWhatsappIdentityDefinition = deleteWhatsappIdentityDefinition(sender, userNumber);
+            RequestDefinition deleteWhatsappIdentityDefinition =
+                    deleteWhatsappIdentityDefinition(sender, userIdentifier);
             apiClient.execute(deleteWhatsappIdentityDefinition);
         }
 
@@ -472,7 +475,8 @@ public class WhatsAppApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
-            RequestDefinition deleteWhatsappIdentityDefinition = deleteWhatsappIdentityDefinition(sender, userNumber);
+            RequestDefinition deleteWhatsappIdentityDefinition =
+                    deleteWhatsappIdentityDefinition(sender, userIdentifier);
             return apiClient.executeAsync(deleteWhatsappIdentityDefinition, callback);
         }
     }
@@ -483,12 +487,12 @@ public class WhatsAppApi {
      * Delete stored identity data. After this operation, identity from next message exchange will be treated as confirmed.
      *
      * @param sender Registered WhatsApp sender number. Must be in international format. (required)
-     * @param userNumber End user&#39;s number. Must be in international format. (required)
+     * @param userIdentifier End user&#39;s number in international format or BSUID. (required)
      * @return DeleteWhatsappIdentityRequest
      * @see <a href="https://www.infobip.com/docs/whatsapp/manage-integration/additional-functionalities#detect-identity-changes">Learn more.</a>
      */
-    public DeleteWhatsappIdentityRequest deleteWhatsappIdentity(String sender, String userNumber) {
-        return new DeleteWhatsappIdentityRequest(sender, userNumber);
+    public DeleteWhatsappIdentityRequest deleteWhatsappIdentity(String sender, String userIdentifier) {
+        return new DeleteWhatsappIdentityRequest(sender, userIdentifier);
     }
 
     private RequestDefinition downloadWhatsAppInboundMediaDefinition(String sender, String mediaId) {
@@ -638,17 +642,17 @@ public class WhatsAppApi {
         return new EditWhatsappTemplateRequest(sender, id, whatsAppTemplateEditPublicApiRequest);
     }
 
-    private RequestDefinition getWhatsAppIdentityDefinition(String sender, String userNumber) {
+    private RequestDefinition getWhatsAppIdentityDefinition(String sender, String userIdentifier) {
         RequestDefinition.Builder builder = RequestDefinition.builder(
-                        "GET", "/whatsapp/1/{sender}/contacts/{userNumber}/identity")
+                        "GET", "/whatsapp/1/{sender}/contacts/{userIdentifier}/identity")
                 .requiresAuthentication(true)
                 .accept("application/json");
 
         if (sender != null) {
             builder.addPathParameter(new Parameter("sender", sender));
         }
-        if (userNumber != null) {
-            builder.addPathParameter(new Parameter("userNumber", userNumber));
+        if (userIdentifier != null) {
+            builder.addPathParameter(new Parameter("userIdentifier", userIdentifier));
         }
         return builder.build();
     }
@@ -658,11 +662,12 @@ public class WhatsAppApi {
      */
     public class GetWhatsAppIdentityRequest {
         private final String sender;
-        private final String userNumber;
+        private final String userIdentifier;
 
-        private GetWhatsAppIdentityRequest(String sender, String userNumber) {
+        private GetWhatsAppIdentityRequest(String sender, String userIdentifier) {
             this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
-            this.userNumber = Objects.requireNonNull(userNumber, "The required parameter 'userNumber' is missing.");
+            this.userIdentifier =
+                    Objects.requireNonNull(userIdentifier, "The required parameter 'userIdentifier' is missing.");
         }
 
         /**
@@ -672,7 +677,7 @@ public class WhatsAppApi {
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
         public WhatsAppIdentityInfo execute() throws ApiException {
-            RequestDefinition getWhatsAppIdentityDefinition = getWhatsAppIdentityDefinition(sender, userNumber);
+            RequestDefinition getWhatsAppIdentityDefinition = getWhatsAppIdentityDefinition(sender, userIdentifier);
             return apiClient.execute(
                     getWhatsAppIdentityDefinition, new TypeReference<WhatsAppIdentityInfo>() {}.getType());
         }
@@ -684,7 +689,7 @@ public class WhatsAppApi {
          * @return The {@link okhttp3.Call} associated with the API request.
          */
         public okhttp3.Call executeAsync(ApiCallback<WhatsAppIdentityInfo> callback) {
-            RequestDefinition getWhatsAppIdentityDefinition = getWhatsAppIdentityDefinition(sender, userNumber);
+            RequestDefinition getWhatsAppIdentityDefinition = getWhatsAppIdentityDefinition(sender, userIdentifier);
             return apiClient.executeAsync(
                     getWhatsAppIdentityDefinition, new TypeReference<WhatsAppIdentityInfo>() {}.getType(), callback);
         }
@@ -696,12 +701,12 @@ public class WhatsAppApi {
      * Get end user&#39;s identity info. Feature is not enabled by default.
      *
      * @param sender Registered WhatsApp sender number. Must be in international format. (required)
-     * @param userNumber End user&#39;s number. Must be in international format. (required)
+     * @param userIdentifier End user&#39;s number in international format or BSUID. (required)
      * @return GetWhatsAppIdentityRequest
      * @see <a href="https://www.infobip.com/docs/whatsapp/manage-integration/additional-functionalities#detect-identity-changes">Learn more.</a>
      */
-    public GetWhatsAppIdentityRequest getWhatsAppIdentity(String sender, String userNumber) {
-        return new GetWhatsAppIdentityRequest(sender, userNumber);
+    public GetWhatsAppIdentityRequest getWhatsAppIdentity(String sender, String userIdentifier) {
+        return new GetWhatsAppIdentityRequest(sender, userIdentifier);
     }
 
     private RequestDefinition getWhatsAppMediaMetadataDefinition(String sender, String mediaId) {
@@ -2419,14 +2424,12 @@ public class WhatsAppApi {
         /**
          * Executes the sendWhatsappEvents request.
          *
-         * @return WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails The deserialized response.
+         * @return MessageResponse The deserialized response.
          * @throws ApiException If the API call fails or an error occurs during the request or response processing.
          */
-        public WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails execute() throws ApiException {
+        public MessageResponse execute() throws ApiException {
             RequestDefinition sendWhatsappEventsDefinition = sendWhatsappEventsDefinition(whatsAppEventRequest);
-            return apiClient.execute(
-                    sendWhatsappEventsDefinition,
-                    new TypeReference<WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails>() {}.getType());
+            return apiClient.execute(sendWhatsappEventsDefinition, new TypeReference<MessageResponse>() {}.getType());
         }
 
         /**
@@ -2435,13 +2438,10 @@ public class WhatsAppApi {
          * @param callback The {@link ApiCallback} to be invoked.
          * @return The {@link okhttp3.Call} associated with the API request.
          */
-        public okhttp3.Call executeAsync(
-                ApiCallback<WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails> callback) {
+        public okhttp3.Call executeAsync(ApiCallback<MessageResponse> callback) {
             RequestDefinition sendWhatsappEventsDefinition = sendWhatsappEventsDefinition(whatsAppEventRequest);
             return apiClient.executeAsync(
-                    sendWhatsappEventsDefinition,
-                    new TypeReference<WhatsAppResponseEnvelopeMessageResponseMessageResponseDetails>() {}.getType(),
-                    callback);
+                    sendWhatsappEventsDefinition, new TypeReference<MessageResponse>() {}.getType(), callback);
         }
     }
 

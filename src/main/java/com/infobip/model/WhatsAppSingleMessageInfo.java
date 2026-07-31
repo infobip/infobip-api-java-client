@@ -23,7 +23,7 @@ public class WhatsAppSingleMessageInfo {
 
     private String messageId;
 
-    private WhatsAppSingleMessageStatus status;
+    private MessageStatus status;
 
     /**
      * Sets to.
@@ -151,7 +151,7 @@ public class WhatsAppSingleMessageInfo {
      * @param status
      * @return This {@link WhatsAppSingleMessageInfo instance}.
      */
-    public WhatsAppSingleMessageInfo status(WhatsAppSingleMessageStatus status) {
+    public WhatsAppSingleMessageInfo status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -162,7 +162,7 @@ public class WhatsAppSingleMessageInfo {
      * @return status
      */
     @JsonProperty("status")
-    public WhatsAppSingleMessageStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -172,7 +172,7 @@ public class WhatsAppSingleMessageInfo {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(WhatsAppSingleMessageStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 

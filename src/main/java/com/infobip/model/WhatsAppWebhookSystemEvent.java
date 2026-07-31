@@ -60,6 +60,8 @@ public class WhatsAppWebhookSystemEvent {
 
     private String userNumber;
 
+    private String userId;
+
     /**
      * Sets description.
      * <p>
@@ -220,6 +222,46 @@ public class WhatsAppWebhookSystemEvent {
         this.userNumber = userNumber;
     }
 
+    /**
+     * Sets userId.
+     * <p>
+     * Field description:
+     * Business-scoped user ID (BSUID) assigned by Meta. Stable identifier for the end user, scoped to the receiving business.
+     *
+     * @param userId
+     * @return This {@link WhatsAppWebhookSystemEvent instance}.
+     */
+    public WhatsAppWebhookSystemEvent userId(String userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    /**
+     * Returns userId.
+     * <p>
+     * Field description:
+     * Business-scoped user ID (BSUID) assigned by Meta. Stable identifier for the end user, scoped to the receiving business.
+     *
+     * @return userId
+     */
+    @JsonProperty("userId")
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * Sets userId.
+     * <p>
+     * Field description:
+     * Business-scoped user ID (BSUID) assigned by Meta. Stable identifier for the end user, scoped to the receiving business.
+     *
+     * @param userId
+     */
+    @JsonProperty("userId")
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -232,12 +274,13 @@ public class WhatsAppWebhookSystemEvent {
         return Objects.equals(this.description, whatsAppWebhookSystemEvent.description)
                 && Objects.equals(this.hash, whatsAppWebhookSystemEvent.hash)
                 && Objects.equals(this.type, whatsAppWebhookSystemEvent.type)
-                && Objects.equals(this.userNumber, whatsAppWebhookSystemEvent.userNumber);
+                && Objects.equals(this.userNumber, whatsAppWebhookSystemEvent.userNumber)
+                && Objects.equals(this.userId, whatsAppWebhookSystemEvent.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(description, hash, type, userNumber);
+        return Objects.hash(description, hash, type, userNumber, userId);
     }
 
     @Override
@@ -257,6 +300,9 @@ public class WhatsAppWebhookSystemEvent {
                 .append(newLine)
                 .append("    userNumber: ")
                 .append(toIndentedString(userNumber))
+                .append(newLine)
+                .append("    userId: ")
+                .append(toIndentedString(userId))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -34,8 +34,6 @@ public class RcsMessage {
      * <p>
      * Field description:
      * Identifier of an RCS sender that will be used to send message.
-     * <p>
-     * The field is required.
      *
      * @param sender
      * @return This {@link RcsMessage instance}.
@@ -50,8 +48,6 @@ public class RcsMessage {
      * <p>
      * Field description:
      * Identifier of an RCS sender that will be used to send message.
-     * <p>
-     * The field is required.
      *
      * @return sender
      */
@@ -65,8 +61,6 @@ public class RcsMessage {
      * <p>
      * Field description:
      * Identifier of an RCS sender that will be used to send message.
-     * <p>
-     * The field is required.
      *
      * @param sender
      */

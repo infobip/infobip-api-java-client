@@ -19,7 +19,7 @@ public class RcsConversationStartedEvent {
 
     private String messageId;
 
-    private RcsTrafficType trafficType;
+    private RcsConvStartedTrafficType trafficType;
 
     private RcsConversationStartedEventContent event;
 
@@ -79,7 +79,7 @@ public class RcsConversationStartedEvent {
      * @param trafficType
      * @return This {@link RcsConversationStartedEvent instance}.
      */
-    public RcsConversationStartedEvent trafficType(RcsTrafficType trafficType) {
+    public RcsConversationStartedEvent trafficType(RcsConvStartedTrafficType trafficType) {
         this.trafficType = trafficType;
         return this;
     }
@@ -90,7 +90,7 @@ public class RcsConversationStartedEvent {
      * @return trafficType
      */
     @JsonProperty("trafficType")
-    public RcsTrafficType getTrafficType() {
+    public RcsConvStartedTrafficType getTrafficType() {
         return trafficType;
     }
 
@@ -100,7 +100,7 @@ public class RcsConversationStartedEvent {
      * @param trafficType
      */
     @JsonProperty("trafficType")
-    public void setTrafficType(RcsTrafficType trafficType) {
+    public void setTrafficType(RcsConvStartedTrafficType trafficType) {
         this.trafficType = trafficType;
     }
 

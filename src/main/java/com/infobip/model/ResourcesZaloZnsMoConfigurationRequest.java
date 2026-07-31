@@ -23,6 +23,8 @@ public class ResourcesZaloZnsMoConfigurationRequest extends ResourcesMoConfigura
 
     private ResourcesZaloZnsMoActionDocs forwarding;
 
+    private ResourcesUseConversations conversations;
+
     private ResourcesPlatformDocs platform;
 
     /**
@@ -144,6 +146,37 @@ public class ResourcesZaloZnsMoConfigurationRequest extends ResourcesMoConfigura
     }
 
     /**
+     * Sets conversations.
+     *
+     * @param conversations
+     * @return This {@link ResourcesZaloZnsMoConfigurationRequest instance}.
+     */
+    public ResourcesZaloZnsMoConfigurationRequest conversations(ResourcesUseConversations conversations) {
+        this.conversations = conversations;
+        return this;
+    }
+
+    /**
+     * Returns conversations.
+     *
+     * @return conversations
+     */
+    @JsonProperty("conversations")
+    public ResourcesUseConversations getConversations() {
+        return conversations;
+    }
+
+    /**
+     * Sets conversations.
+     *
+     * @param conversations
+     */
+    @JsonProperty("conversations")
+    public void setConversations(ResourcesUseConversations conversations) {
+        this.conversations = conversations;
+    }
+
+    /**
      * Sets platform.
      *
      * @param platform
@@ -187,13 +220,14 @@ public class ResourcesZaloZnsMoConfigurationRequest extends ResourcesMoConfigura
         return Objects.equals(this.resourceKey, resourcesZaloZnsMoConfigurationRequest.resourceKey)
                 && Objects.equals(this.resource, resourcesZaloZnsMoConfigurationRequest.resource)
                 && Objects.equals(this.forwarding, resourcesZaloZnsMoConfigurationRequest.forwarding)
+                && Objects.equals(this.conversations, resourcesZaloZnsMoConfigurationRequest.conversations)
                 && Objects.equals(this.platform, resourcesZaloZnsMoConfigurationRequest.platform)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(resourceKey, resource, forwarding, platform, super.hashCode());
+        return Objects.hash(resourceKey, resource, forwarding, conversations, platform, super.hashCode());
     }
 
     @Override
@@ -213,6 +247,9 @@ public class ResourcesZaloZnsMoConfigurationRequest extends ResourcesMoConfigura
                 .append(newLine)
                 .append("    forwarding: ")
                 .append(toIndentedString(forwarding))
+                .append(newLine)
+                .append("    conversations: ")
+                .append(toIndentedString(conversations))
                 .append(newLine)
                 .append("    platform: ")
                 .append(toIndentedString(platform))

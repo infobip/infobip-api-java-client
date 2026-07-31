@@ -24,7 +24,7 @@ public class MmsReport {
 
     private MessageStatus status;
 
-    private MmsMessageError error;
+    private MessageError error;
 
     private String messageId;
 
@@ -154,7 +154,7 @@ public class MmsReport {
      * @param error
      * @return This {@link MmsReport instance}.
      */
-    public MmsReport error(MmsMessageError error) {
+    public MmsReport error(MessageError error) {
         this.error = error;
         return this;
     }
@@ -165,7 +165,7 @@ public class MmsReport {
      * @return error
      */
     @JsonProperty("error")
-    public MmsMessageError getError() {
+    public MessageError getError() {
         return error;
     }
 
@@ -175,7 +175,7 @@ public class MmsReport {
      * @param error
      */
     @JsonProperty("error")
-    public void setError(MmsMessageError error) {
+    public void setError(MessageError error) {
         this.error = error;
     }
 

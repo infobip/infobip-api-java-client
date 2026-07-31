@@ -17,151 +17,126 @@ import java.util.Objects;
  */
 public class CallsClickToCallMessage {
 
-    private Boolean anonymization;
+    private String from;
 
-    private String audioFileUrl;
-
-    private DeliveryTimeWindow deliveryTimeWindow;
+    private String fromB;
 
     private String destinationA;
 
     private String destinationB;
 
-    private String from;
+    private String messageId;
 
-    private String fromB;
+    private String audioFileUrl;
+
+    private String text;
 
     private String language;
 
-    private String machineDetection;
+    private CallsVoice voice;
 
-    private Integer maxDuration;
+    private Boolean anonymization;
 
-    private String messageId;
+    private String notifyUrl;
 
     private String notifyContentType;
 
     private Integer notifyContentVersion;
 
-    private String notifyUrl;
-
-    private CallsRetry retry;
-
-    private String text;
-
-    private CallsVoice voice;
+    private Integer maxDuration;
 
     private Integer warningTime;
 
+    private CallsRetry retry;
+
+    private String machineDetection;
+
+    private DeliveryTimeWindow deliveryTimeWindow;
+
     /**
-     * Sets anonymization.
+     * Sets from.
      * <p>
      * Field description:
-     * If set, same numeric sender (defined in _from_) is used for both calls (towards _destinationA_ and _destinationB_). If not set, _destinationA_ will be shown to _destinationB_. If _fromB_ is set up, _anonymization_ will not be applied; _from_ will be shown to _destinationA_ and _fromB_ will be shown to _destinationB_. Default value is &#x60;false&#x60;.
+     * Numeric sender ID. Will be shown to _destinationA_.
+     * <p>
+     * The field is required.
      *
-     * @param anonymization
+     * @param from
      * @return This {@link CallsClickToCallMessage instance}.
      */
-    public CallsClickToCallMessage anonymization(Boolean anonymization) {
-        this.anonymization = anonymization;
+    public CallsClickToCallMessage from(String from) {
+        this.from = from;
         return this;
     }
 
     /**
-     * Returns anonymization.
+     * Returns from.
      * <p>
      * Field description:
-     * If set, same numeric sender (defined in _from_) is used for both calls (towards _destinationA_ and _destinationB_). If not set, _destinationA_ will be shown to _destinationB_. If _fromB_ is set up, _anonymization_ will not be applied; _from_ will be shown to _destinationA_ and _fromB_ will be shown to _destinationB_. Default value is &#x60;false&#x60;.
+     * Numeric sender ID. Will be shown to _destinationA_.
+     * <p>
+     * The field is required.
      *
-     * @return anonymization
+     * @return from
      */
-    @JsonProperty("anonymization")
-    public Boolean getAnonymization() {
-        return anonymization;
+    @JsonProperty("from")
+    public String getFrom() {
+        return from;
     }
 
     /**
-     * Sets anonymization.
+     * Sets from.
      * <p>
      * Field description:
-     * If set, same numeric sender (defined in _from_) is used for both calls (towards _destinationA_ and _destinationB_). If not set, _destinationA_ will be shown to _destinationB_. If _fromB_ is set up, _anonymization_ will not be applied; _from_ will be shown to _destinationA_ and _fromB_ will be shown to _destinationB_. Default value is &#x60;false&#x60;.
+     * Numeric sender ID. Will be shown to _destinationA_.
+     * <p>
+     * The field is required.
      *
-     * @param anonymization
+     * @param from
      */
-    @JsonProperty("anonymization")
-    public void setAnonymization(Boolean anonymization) {
-        this.anonymization = anonymization;
+    @JsonProperty("from")
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     /**
-     * Sets audioFileUrl.
+     * Sets fromB.
      * <p>
      * Field description:
-     * An audio file can be delivered as a voice message to the recipients. An audio file must be uploaded online, so that the existing URL can be available for file download. Size of the audio file must be below 4 MB. Supported formats of the provided file are aac, aiff, m4a, mp2, mp3, mp4 (audio only), ogg, wav and wma. Our platform needs to have permission to make GET and HEAD HTTP requests on the provided URL. Standard http ports (like 80, 8080, etc.) are advised.
+     * Numeric sender ID in E.164 format. If set, it will be shown to _destinationB_. If not set, _from_ or _destinationA_ will be shown to _destinationB_, depending on the value of _anonymization_.
      *
-     * @param audioFileUrl
+     * @param fromB
      * @return This {@link CallsClickToCallMessage instance}.
      */
-    public CallsClickToCallMessage audioFileUrl(String audioFileUrl) {
-        this.audioFileUrl = audioFileUrl;
+    public CallsClickToCallMessage fromB(String fromB) {
+        this.fromB = fromB;
         return this;
     }
 
     /**
-     * Returns audioFileUrl.
+     * Returns fromB.
      * <p>
      * Field description:
-     * An audio file can be delivered as a voice message to the recipients. An audio file must be uploaded online, so that the existing URL can be available for file download. Size of the audio file must be below 4 MB. Supported formats of the provided file are aac, aiff, m4a, mp2, mp3, mp4 (audio only), ogg, wav and wma. Our platform needs to have permission to make GET and HEAD HTTP requests on the provided URL. Standard http ports (like 80, 8080, etc.) are advised.
+     * Numeric sender ID in E.164 format. If set, it will be shown to _destinationB_. If not set, _from_ or _destinationA_ will be shown to _destinationB_, depending on the value of _anonymization_.
      *
-     * @return audioFileUrl
+     * @return fromB
      */
-    @JsonProperty("audioFileUrl")
-    public String getAudioFileUrl() {
-        return audioFileUrl;
+    @JsonProperty("fromB")
+    public String getFromB() {
+        return fromB;
     }
 
     /**
-     * Sets audioFileUrl.
+     * Sets fromB.
      * <p>
      * Field description:
-     * An audio file can be delivered as a voice message to the recipients. An audio file must be uploaded online, so that the existing URL can be available for file download. Size of the audio file must be below 4 MB. Supported formats of the provided file are aac, aiff, m4a, mp2, mp3, mp4 (audio only), ogg, wav and wma. Our platform needs to have permission to make GET and HEAD HTTP requests on the provided URL. Standard http ports (like 80, 8080, etc.) are advised.
+     * Numeric sender ID in E.164 format. If set, it will be shown to _destinationB_. If not set, _from_ or _destinationA_ will be shown to _destinationB_, depending on the value of _anonymization_.
      *
-     * @param audioFileUrl
+     * @param fromB
      */
-    @JsonProperty("audioFileUrl")
-    public void setAudioFileUrl(String audioFileUrl) {
-        this.audioFileUrl = audioFileUrl;
-    }
-
-    /**
-     * Sets deliveryTimeWindow.
-     *
-     * @param deliveryTimeWindow
-     * @return This {@link CallsClickToCallMessage instance}.
-     */
-    public CallsClickToCallMessage deliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
-        this.deliveryTimeWindow = deliveryTimeWindow;
-        return this;
-    }
-
-    /**
-     * Returns deliveryTimeWindow.
-     *
-     * @return deliveryTimeWindow
-     */
-    @JsonProperty("deliveryTimeWindow")
-    public DeliveryTimeWindow getDeliveryTimeWindow() {
-        return deliveryTimeWindow;
-    }
-
-    /**
-     * Sets deliveryTimeWindow.
-     *
-     * @param deliveryTimeWindow
-     */
-    @JsonProperty("deliveryTimeWindow")
-    public void setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
-        this.deliveryTimeWindow = deliveryTimeWindow;
+    @JsonProperty("fromB")
+    public void setFromB(String fromB) {
+        this.fromB = fromB;
     }
 
     /**
@@ -257,89 +232,123 @@ public class CallsClickToCallMessage {
     }
 
     /**
-     * Sets from.
+     * Sets messageId.
      * <p>
      * Field description:
-     * Numeric sender ID in E.164 format. Will be shown to _destinationA_.
-     * <p>
-     * The field is required.
+     * The ID that uniquely identifies the message sent. It can be defined by you or Infobip will generate unique message ID for this specific call. The field is not mandatory.
      *
-     * @param from
+     * @param messageId
      * @return This {@link CallsClickToCallMessage instance}.
      */
-    public CallsClickToCallMessage from(String from) {
-        this.from = from;
+    public CallsClickToCallMessage messageId(String messageId) {
+        this.messageId = messageId;
         return this;
     }
 
     /**
-     * Returns from.
+     * Returns messageId.
      * <p>
      * Field description:
-     * Numeric sender ID in E.164 format. Will be shown to _destinationA_.
-     * <p>
-     * The field is required.
+     * The ID that uniquely identifies the message sent. It can be defined by you or Infobip will generate unique message ID for this specific call. The field is not mandatory.
      *
-     * @return from
+     * @return messageId
      */
-    @JsonProperty("from")
-    public String getFrom() {
-        return from;
+    @JsonProperty("messageId")
+    public String getMessageId() {
+        return messageId;
     }
 
     /**
-     * Sets from.
+     * Sets messageId.
      * <p>
      * Field description:
-     * Numeric sender ID in E.164 format. Will be shown to _destinationA_.
-     * <p>
-     * The field is required.
+     * The ID that uniquely identifies the message sent. It can be defined by you or Infobip will generate unique message ID for this specific call. The field is not mandatory.
      *
-     * @param from
+     * @param messageId
      */
-    @JsonProperty("from")
-    public void setFrom(String from) {
-        this.from = from;
+    @JsonProperty("messageId")
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
     }
 
     /**
-     * Sets fromB.
+     * Sets audioFileUrl.
      * <p>
      * Field description:
-     * Numeric sender ID in E.164 format. If set, it will be shown to _destinationB_. If not set, _from_ or _destinationA_ will be shown to _destinationB_, depending on the value of _anonymization_.
+     * An audio file can be delivered as a voice message to the recipients. An audio file must be uploaded online, so that the existing URL can be available for file download. Size of the audio file must be below 4 MB. Supported formats of the provided file are aac, aiff, m4a, mp2, mp3, mp4 (audio only), ogg, wav and wma. Our platform needs to have permission to make GET and HEAD HTTP requests on the provided URL. Standard http ports (like 80, 8080, etc.) are advised.
      *
-     * @param fromB
+     * @param audioFileUrl
      * @return This {@link CallsClickToCallMessage instance}.
      */
-    public CallsClickToCallMessage fromB(String fromB) {
-        this.fromB = fromB;
+    public CallsClickToCallMessage audioFileUrl(String audioFileUrl) {
+        this.audioFileUrl = audioFileUrl;
         return this;
     }
 
     /**
-     * Returns fromB.
+     * Returns audioFileUrl.
      * <p>
      * Field description:
-     * Numeric sender ID in E.164 format. If set, it will be shown to _destinationB_. If not set, _from_ or _destinationA_ will be shown to _destinationB_, depending on the value of _anonymization_.
+     * An audio file can be delivered as a voice message to the recipients. An audio file must be uploaded online, so that the existing URL can be available for file download. Size of the audio file must be below 4 MB. Supported formats of the provided file are aac, aiff, m4a, mp2, mp3, mp4 (audio only), ogg, wav and wma. Our platform needs to have permission to make GET and HEAD HTTP requests on the provided URL. Standard http ports (like 80, 8080, etc.) are advised.
      *
-     * @return fromB
+     * @return audioFileUrl
      */
-    @JsonProperty("fromB")
-    public String getFromB() {
-        return fromB;
+    @JsonProperty("audioFileUrl")
+    public String getAudioFileUrl() {
+        return audioFileUrl;
     }
 
     /**
-     * Sets fromB.
+     * Sets audioFileUrl.
      * <p>
      * Field description:
-     * Numeric sender ID in E.164 format. If set, it will be shown to _destinationB_. If not set, _from_ or _destinationA_ will be shown to _destinationB_, depending on the value of _anonymization_.
+     * An audio file can be delivered as a voice message to the recipients. An audio file must be uploaded online, so that the existing URL can be available for file download. Size of the audio file must be below 4 MB. Supported formats of the provided file are aac, aiff, m4a, mp2, mp3, mp4 (audio only), ogg, wav and wma. Our platform needs to have permission to make GET and HEAD HTTP requests on the provided URL. Standard http ports (like 80, 8080, etc.) are advised.
      *
-     * @param fromB
+     * @param audioFileUrl
      */
-    @JsonProperty("fromB")
-    public void setFromB(String fromB) {
-        this.fromB = fromB;
+    @JsonProperty("audioFileUrl")
+    public void setAudioFileUrl(String audioFileUrl) {
+        this.audioFileUrl = audioFileUrl;
+    }
+
+    /**
+     * Sets text.
+     * <p>
+     * Field description:
+     * Text of the message that will be played before call transfer. SSML (Speech Synthesis Markup Language) is supported and can be used to fully customize pronunciation of the provided text.
+     *
+     * @param text
+     * @return This {@link CallsClickToCallMessage instance}.
+     */
+    public CallsClickToCallMessage text(String text) {
+        this.text = text;
+        return this;
+    }
+
+    /**
+     * Returns text.
+     * <p>
+     * Field description:
+     * Text of the message that will be played before call transfer. SSML (Speech Synthesis Markup Language) is supported and can be used to fully customize pronunciation of the provided text.
+     *
+     * @return text
+     */
+    @JsonProperty("text")
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * Sets text.
+     * <p>
+     * Field description:
+     * Text of the message that will be played before call transfer. SSML (Speech Synthesis Markup Language) is supported and can be used to fully customize pronunciation of the provided text.
+     *
+     * @param text
+     */
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
     }
 
     /**
@@ -383,123 +392,114 @@ public class CallsClickToCallMessage {
     }
 
     /**
-     * Sets machineDetection.
-     * <p>
-     * Field description:
-     * Used for enabling detection of answering machine after the call has been answered on &#x60;destinationA&#x60;. It can be set to &#x60;hangup&#x60; which means if a machine is detected, the call is hung up. If &#x60;machineDetection&#x60; is used, there is a minimum of 4 seconds detection time, which can result in delay of playing the message. Answering machine detection is additionally charged. For more information please contact your account manager.
+     * Sets voice.
      *
-     * @param machineDetection
+     * @param voice
      * @return This {@link CallsClickToCallMessage instance}.
      */
-    public CallsClickToCallMessage machineDetection(String machineDetection) {
-        this.machineDetection = machineDetection;
+    public CallsClickToCallMessage voice(CallsVoice voice) {
+        this.voice = voice;
         return this;
     }
 
     /**
-     * Returns machineDetection.
-     * <p>
-     * Field description:
-     * Used for enabling detection of answering machine after the call has been answered on &#x60;destinationA&#x60;. It can be set to &#x60;hangup&#x60; which means if a machine is detected, the call is hung up. If &#x60;machineDetection&#x60; is used, there is a minimum of 4 seconds detection time, which can result in delay of playing the message. Answering machine detection is additionally charged. For more information please contact your account manager.
+     * Returns voice.
      *
-     * @return machineDetection
+     * @return voice
      */
-    @JsonProperty("machineDetection")
-    public String getMachineDetection() {
-        return machineDetection;
+    @JsonProperty("voice")
+    public CallsVoice getVoice() {
+        return voice;
     }
 
     /**
-     * Sets machineDetection.
-     * <p>
-     * Field description:
-     * Used for enabling detection of answering machine after the call has been answered on &#x60;destinationA&#x60;. It can be set to &#x60;hangup&#x60; which means if a machine is detected, the call is hung up. If &#x60;machineDetection&#x60; is used, there is a minimum of 4 seconds detection time, which can result in delay of playing the message. Answering machine detection is additionally charged. For more information please contact your account manager.
+     * Sets voice.
      *
-     * @param machineDetection
+     * @param voice
      */
-    @JsonProperty("machineDetection")
-    public void setMachineDetection(String machineDetection) {
-        this.machineDetection = machineDetection;
+    @JsonProperty("voice")
+    public void setVoice(CallsVoice voice) {
+        this.voice = voice;
     }
 
     /**
-     * Sets maxDuration.
+     * Sets anonymization.
      * <p>
      * Field description:
-     * Maximum duration of transferred call in seconds. If set, when _maxDuration_ is reached call will be terminated.
+     * If set, same numeric sender (defined in _from_) is used for both calls (towards _destinationA_ and _destinationB_). If not set, _destinationA_ will be shown to _destinationB_. If _fromB_ is set up, _anonymization_ will not be applied; _from_ will be shown to _destinationA_ and _fromB_ will be shown to _destinationB_. Default value is &#x60;false&#x60;.
      *
-     * @param maxDuration
+     * @param anonymization
      * @return This {@link CallsClickToCallMessage instance}.
      */
-    public CallsClickToCallMessage maxDuration(Integer maxDuration) {
-        this.maxDuration = maxDuration;
+    public CallsClickToCallMessage anonymization(Boolean anonymization) {
+        this.anonymization = anonymization;
         return this;
     }
 
     /**
-     * Returns maxDuration.
+     * Returns anonymization.
      * <p>
      * Field description:
-     * Maximum duration of transferred call in seconds. If set, when _maxDuration_ is reached call will be terminated.
+     * If set, same numeric sender (defined in _from_) is used for both calls (towards _destinationA_ and _destinationB_). If not set, _destinationA_ will be shown to _destinationB_. If _fromB_ is set up, _anonymization_ will not be applied; _from_ will be shown to _destinationA_ and _fromB_ will be shown to _destinationB_. Default value is &#x60;false&#x60;.
      *
-     * @return maxDuration
+     * @return anonymization
      */
-    @JsonProperty("maxDuration")
-    public Integer getMaxDuration() {
-        return maxDuration;
+    @JsonProperty("anonymization")
+    public Boolean getAnonymization() {
+        return anonymization;
     }
 
     /**
-     * Sets maxDuration.
+     * Sets anonymization.
      * <p>
      * Field description:
-     * Maximum duration of transferred call in seconds. If set, when _maxDuration_ is reached call will be terminated.
+     * If set, same numeric sender (defined in _from_) is used for both calls (towards _destinationA_ and _destinationB_). If not set, _destinationA_ will be shown to _destinationB_. If _fromB_ is set up, _anonymization_ will not be applied; _from_ will be shown to _destinationA_ and _fromB_ will be shown to _destinationB_. Default value is &#x60;false&#x60;.
      *
-     * @param maxDuration
+     * @param anonymization
      */
-    @JsonProperty("maxDuration")
-    public void setMaxDuration(Integer maxDuration) {
-        this.maxDuration = maxDuration;
+    @JsonProperty("anonymization")
+    public void setAnonymization(Boolean anonymization) {
+        this.anonymization = anonymization;
     }
 
     /**
-     * Sets messageId.
+     * Sets notifyUrl.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the message sent. It can be defined by you or Infobip will generate unique message ID for this specific call. The field is not mandatory.
+     * The URL on your callback server on which the Delivery report will be sent.
      *
-     * @param messageId
+     * @param notifyUrl
      * @return This {@link CallsClickToCallMessage instance}.
      */
-    public CallsClickToCallMessage messageId(String messageId) {
-        this.messageId = messageId;
+    public CallsClickToCallMessage notifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
         return this;
     }
 
     /**
-     * Returns messageId.
+     * Returns notifyUrl.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the message sent. It can be defined by you or Infobip will generate unique message ID for this specific call. The field is not mandatory.
+     * The URL on your callback server on which the Delivery report will be sent.
      *
-     * @return messageId
+     * @return notifyUrl
      */
-    @JsonProperty("messageId")
-    public String getMessageId() {
-        return messageId;
+    @JsonProperty("notifyUrl")
+    public String getNotifyUrl() {
+        return notifyUrl;
     }
 
     /**
-     * Sets messageId.
+     * Sets notifyUrl.
      * <p>
      * Field description:
-     * The ID that uniquely identifies the message sent. It can be defined by you or Infobip will generate unique message ID for this specific call. The field is not mandatory.
+     * The URL on your callback server on which the Delivery report will be sent.
      *
-     * @param messageId
+     * @param notifyUrl
      */
-    @JsonProperty("messageId")
-    public void setMessageId(String messageId) {
-        this.messageId = messageId;
+    @JsonProperty("notifyUrl")
+    public void setNotifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
     }
 
     /**
@@ -583,145 +583,43 @@ public class CallsClickToCallMessage {
     }
 
     /**
-     * Sets notifyUrl.
+     * Sets maxDuration.
      * <p>
      * Field description:
-     * The URL on your callback server on which the Delivery report will be sent.
+     * Maximum duration of transferred call in seconds. If set, when _maxDuration_ is reached call will be terminated.
      *
-     * @param notifyUrl
+     * @param maxDuration
      * @return This {@link CallsClickToCallMessage instance}.
      */
-    public CallsClickToCallMessage notifyUrl(String notifyUrl) {
-        this.notifyUrl = notifyUrl;
+    public CallsClickToCallMessage maxDuration(Integer maxDuration) {
+        this.maxDuration = maxDuration;
         return this;
     }
 
     /**
-     * Returns notifyUrl.
+     * Returns maxDuration.
      * <p>
      * Field description:
-     * The URL on your callback server on which the Delivery report will be sent.
+     * Maximum duration of transferred call in seconds. If set, when _maxDuration_ is reached call will be terminated.
      *
-     * @return notifyUrl
+     * @return maxDuration
      */
-    @JsonProperty("notifyUrl")
-    public String getNotifyUrl() {
-        return notifyUrl;
+    @JsonProperty("maxDuration")
+    public Integer getMaxDuration() {
+        return maxDuration;
     }
 
     /**
-     * Sets notifyUrl.
+     * Sets maxDuration.
      * <p>
      * Field description:
-     * The URL on your callback server on which the Delivery report will be sent.
+     * Maximum duration of transferred call in seconds. If set, when _maxDuration_ is reached call will be terminated.
      *
-     * @param notifyUrl
+     * @param maxDuration
      */
-    @JsonProperty("notifyUrl")
-    public void setNotifyUrl(String notifyUrl) {
-        this.notifyUrl = notifyUrl;
-    }
-
-    /**
-     * Sets retry.
-     *
-     * @param retry
-     * @return This {@link CallsClickToCallMessage instance}.
-     */
-    public CallsClickToCallMessage retry(CallsRetry retry) {
-        this.retry = retry;
-        return this;
-    }
-
-    /**
-     * Returns retry.
-     *
-     * @return retry
-     */
-    @JsonProperty("retry")
-    public CallsRetry getRetry() {
-        return retry;
-    }
-
-    /**
-     * Sets retry.
-     *
-     * @param retry
-     */
-    @JsonProperty("retry")
-    public void setRetry(CallsRetry retry) {
-        this.retry = retry;
-    }
-
-    /**
-     * Sets text.
-     * <p>
-     * Field description:
-     * Text of the message that will be played before call transfer. SSML (Speech Synthesis Markup Language) is supported and can be used to fully customize pronunciation of the provided text.
-     *
-     * @param text
-     * @return This {@link CallsClickToCallMessage instance}.
-     */
-    public CallsClickToCallMessage text(String text) {
-        this.text = text;
-        return this;
-    }
-
-    /**
-     * Returns text.
-     * <p>
-     * Field description:
-     * Text of the message that will be played before call transfer. SSML (Speech Synthesis Markup Language) is supported and can be used to fully customize pronunciation of the provided text.
-     *
-     * @return text
-     */
-    @JsonProperty("text")
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * Sets text.
-     * <p>
-     * Field description:
-     * Text of the message that will be played before call transfer. SSML (Speech Synthesis Markup Language) is supported and can be used to fully customize pronunciation of the provided text.
-     *
-     * @param text
-     */
-    @JsonProperty("text")
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    /**
-     * Sets voice.
-     *
-     * @param voice
-     * @return This {@link CallsClickToCallMessage instance}.
-     */
-    public CallsClickToCallMessage voice(CallsVoice voice) {
-        this.voice = voice;
-        return this;
-    }
-
-    /**
-     * Returns voice.
-     *
-     * @return voice
-     */
-    @JsonProperty("voice")
-    public CallsVoice getVoice() {
-        return voice;
-    }
-
-    /**
-     * Sets voice.
-     *
-     * @param voice
-     */
-    @JsonProperty("voice")
-    public void setVoice(CallsVoice voice) {
-        this.voice = voice;
+    @JsonProperty("maxDuration")
+    public void setMaxDuration(Integer maxDuration) {
+        this.maxDuration = maxDuration;
     }
 
     /**
@@ -764,6 +662,108 @@ public class CallsClickToCallMessage {
         this.warningTime = warningTime;
     }
 
+    /**
+     * Sets retry.
+     *
+     * @param retry
+     * @return This {@link CallsClickToCallMessage instance}.
+     */
+    public CallsClickToCallMessage retry(CallsRetry retry) {
+        this.retry = retry;
+        return this;
+    }
+
+    /**
+     * Returns retry.
+     *
+     * @return retry
+     */
+    @JsonProperty("retry")
+    public CallsRetry getRetry() {
+        return retry;
+    }
+
+    /**
+     * Sets retry.
+     *
+     * @param retry
+     */
+    @JsonProperty("retry")
+    public void setRetry(CallsRetry retry) {
+        this.retry = retry;
+    }
+
+    /**
+     * Sets machineDetection.
+     * <p>
+     * Field description:
+     * Used for enabling detection of answering machine after the call has been answered on &#x60;destinationA&#x60;. It can be set to &#x60;hangup&#x60; which means if a machine is detected, the call is hung up. If &#x60;machineDetection&#x60; is used, there is a minimum of 4 seconds detection time, which can result in delay of playing the message. Answering machine detection is additionally charged. For more information please contact your account manager.
+     *
+     * @param machineDetection
+     * @return This {@link CallsClickToCallMessage instance}.
+     */
+    public CallsClickToCallMessage machineDetection(String machineDetection) {
+        this.machineDetection = machineDetection;
+        return this;
+    }
+
+    /**
+     * Returns machineDetection.
+     * <p>
+     * Field description:
+     * Used for enabling detection of answering machine after the call has been answered on &#x60;destinationA&#x60;. It can be set to &#x60;hangup&#x60; which means if a machine is detected, the call is hung up. If &#x60;machineDetection&#x60; is used, there is a minimum of 4 seconds detection time, which can result in delay of playing the message. Answering machine detection is additionally charged. For more information please contact your account manager.
+     *
+     * @return machineDetection
+     */
+    @JsonProperty("machineDetection")
+    public String getMachineDetection() {
+        return machineDetection;
+    }
+
+    /**
+     * Sets machineDetection.
+     * <p>
+     * Field description:
+     * Used for enabling detection of answering machine after the call has been answered on &#x60;destinationA&#x60;. It can be set to &#x60;hangup&#x60; which means if a machine is detected, the call is hung up. If &#x60;machineDetection&#x60; is used, there is a minimum of 4 seconds detection time, which can result in delay of playing the message. Answering machine detection is additionally charged. For more information please contact your account manager.
+     *
+     * @param machineDetection
+     */
+    @JsonProperty("machineDetection")
+    public void setMachineDetection(String machineDetection) {
+        this.machineDetection = machineDetection;
+    }
+
+    /**
+     * Sets deliveryTimeWindow.
+     *
+     * @param deliveryTimeWindow
+     * @return This {@link CallsClickToCallMessage instance}.
+     */
+    public CallsClickToCallMessage deliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
+        this.deliveryTimeWindow = deliveryTimeWindow;
+        return this;
+    }
+
+    /**
+     * Returns deliveryTimeWindow.
+     *
+     * @return deliveryTimeWindow
+     */
+    @JsonProperty("deliveryTimeWindow")
+    public DeliveryTimeWindow getDeliveryTimeWindow() {
+        return deliveryTimeWindow;
+    }
+
+    /**
+     * Sets deliveryTimeWindow.
+     *
+     * @param deliveryTimeWindow
+     */
+    @JsonProperty("deliveryTimeWindow")
+    public void setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
+        this.deliveryTimeWindow = deliveryTimeWindow;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -773,47 +773,47 @@ public class CallsClickToCallMessage {
             return false;
         }
         CallsClickToCallMessage callsClickToCallMessage = (CallsClickToCallMessage) o;
-        return Objects.equals(this.anonymization, callsClickToCallMessage.anonymization)
-                && Objects.equals(this.audioFileUrl, callsClickToCallMessage.audioFileUrl)
-                && Objects.equals(this.deliveryTimeWindow, callsClickToCallMessage.deliveryTimeWindow)
+        return Objects.equals(this.from, callsClickToCallMessage.from)
+                && Objects.equals(this.fromB, callsClickToCallMessage.fromB)
                 && Objects.equals(this.destinationA, callsClickToCallMessage.destinationA)
                 && Objects.equals(this.destinationB, callsClickToCallMessage.destinationB)
-                && Objects.equals(this.from, callsClickToCallMessage.from)
-                && Objects.equals(this.fromB, callsClickToCallMessage.fromB)
-                && Objects.equals(this.language, callsClickToCallMessage.language)
-                && Objects.equals(this.machineDetection, callsClickToCallMessage.machineDetection)
-                && Objects.equals(this.maxDuration, callsClickToCallMessage.maxDuration)
                 && Objects.equals(this.messageId, callsClickToCallMessage.messageId)
+                && Objects.equals(this.audioFileUrl, callsClickToCallMessage.audioFileUrl)
+                && Objects.equals(this.text, callsClickToCallMessage.text)
+                && Objects.equals(this.language, callsClickToCallMessage.language)
+                && Objects.equals(this.voice, callsClickToCallMessage.voice)
+                && Objects.equals(this.anonymization, callsClickToCallMessage.anonymization)
+                && Objects.equals(this.notifyUrl, callsClickToCallMessage.notifyUrl)
                 && Objects.equals(this.notifyContentType, callsClickToCallMessage.notifyContentType)
                 && Objects.equals(this.notifyContentVersion, callsClickToCallMessage.notifyContentVersion)
-                && Objects.equals(this.notifyUrl, callsClickToCallMessage.notifyUrl)
+                && Objects.equals(this.maxDuration, callsClickToCallMessage.maxDuration)
+                && Objects.equals(this.warningTime, callsClickToCallMessage.warningTime)
                 && Objects.equals(this.retry, callsClickToCallMessage.retry)
-                && Objects.equals(this.text, callsClickToCallMessage.text)
-                && Objects.equals(this.voice, callsClickToCallMessage.voice)
-                && Objects.equals(this.warningTime, callsClickToCallMessage.warningTime);
+                && Objects.equals(this.machineDetection, callsClickToCallMessage.machineDetection)
+                && Objects.equals(this.deliveryTimeWindow, callsClickToCallMessage.deliveryTimeWindow);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                anonymization,
-                audioFileUrl,
-                deliveryTimeWindow,
-                destinationA,
-                destinationB,
                 from,
                 fromB,
-                language,
-                machineDetection,
-                maxDuration,
+                destinationA,
+                destinationB,
                 messageId,
+                audioFileUrl,
+                text,
+                language,
+                voice,
+                anonymization,
+                notifyUrl,
                 notifyContentType,
                 notifyContentVersion,
-                notifyUrl,
+                maxDuration,
+                warningTime,
                 retry,
-                text,
-                voice,
-                warningTime);
+                machineDetection,
+                deliveryTimeWindow);
     }
 
     @Override
@@ -822,14 +822,11 @@ public class CallsClickToCallMessage {
         return new StringBuilder()
                 .append("class CallsClickToCallMessage {")
                 .append(newLine)
-                .append("    anonymization: ")
-                .append(toIndentedString(anonymization))
+                .append("    from: ")
+                .append(toIndentedString(from))
                 .append(newLine)
-                .append("    audioFileUrl: ")
-                .append(toIndentedString(audioFileUrl))
-                .append(newLine)
-                .append("    deliveryTimeWindow: ")
-                .append(toIndentedString(deliveryTimeWindow))
+                .append("    fromB: ")
+                .append(toIndentedString(fromB))
                 .append(newLine)
                 .append("    destinationA: ")
                 .append(toIndentedString(destinationA))
@@ -837,23 +834,26 @@ public class CallsClickToCallMessage {
                 .append("    destinationB: ")
                 .append(toIndentedString(destinationB))
                 .append(newLine)
-                .append("    from: ")
-                .append(toIndentedString(from))
+                .append("    messageId: ")
+                .append(toIndentedString(messageId))
                 .append(newLine)
-                .append("    fromB: ")
-                .append(toIndentedString(fromB))
+                .append("    audioFileUrl: ")
+                .append(toIndentedString(audioFileUrl))
+                .append(newLine)
+                .append("    text: ")
+                .append(toIndentedString(text))
                 .append(newLine)
                 .append("    language: ")
                 .append(toIndentedString(language))
                 .append(newLine)
-                .append("    machineDetection: ")
-                .append(toIndentedString(machineDetection))
+                .append("    voice: ")
+                .append(toIndentedString(voice))
                 .append(newLine)
-                .append("    maxDuration: ")
-                .append(toIndentedString(maxDuration))
+                .append("    anonymization: ")
+                .append(toIndentedString(anonymization))
                 .append(newLine)
-                .append("    messageId: ")
-                .append(toIndentedString(messageId))
+                .append("    notifyUrl: ")
+                .append(toIndentedString(notifyUrl))
                 .append(newLine)
                 .append("    notifyContentType: ")
                 .append(toIndentedString(notifyContentType))
@@ -861,20 +861,20 @@ public class CallsClickToCallMessage {
                 .append("    notifyContentVersion: ")
                 .append(toIndentedString(notifyContentVersion))
                 .append(newLine)
-                .append("    notifyUrl: ")
-                .append(toIndentedString(notifyUrl))
+                .append("    maxDuration: ")
+                .append(toIndentedString(maxDuration))
+                .append(newLine)
+                .append("    warningTime: ")
+                .append(toIndentedString(warningTime))
                 .append(newLine)
                 .append("    retry: ")
                 .append(toIndentedString(retry))
                 .append(newLine)
-                .append("    text: ")
-                .append(toIndentedString(text))
+                .append("    machineDetection: ")
+                .append(toIndentedString(machineDetection))
                 .append(newLine)
-                .append("    voice: ")
-                .append(toIndentedString(voice))
-                .append(newLine)
-                .append("    warningTime: ")
-                .append(toIndentedString(warningTime))
+                .append("    deliveryTimeWindow: ")
+                .append(toIndentedString(deliveryTimeWindow))
                 .append(newLine)
                 .append("}")
                 .toString();

@@ -25,6 +25,7 @@ import java.util.Objects;
 @JsonSubTypes({
     @JsonSubTypes.Type(value = NumbersForwardToCallRoutingDetails.class, name = "FORWARD_TO_CALL_ROUTING"),
     @JsonSubTypes.Type(value = NumbersForwardToIvrActionDetails.class, name = "FORWARD_TO_IVR"),
+    @JsonSubTypes.Type(value = NumbersForwardToMarkupLanguageDetails.class, name = "FORWARD_TO_MARKUP_LANGUAGE"),
     @JsonSubTypes.Type(value = NumbersForwardToPstnActionDetails.class, name = "FORWARD_TO_PSTN"),
     @JsonSubTypes.Type(value = NumbersForwardToSubscriptionDetails.class, name = "FORWARD_TO_SUBSCRIPTION"),
     @JsonSubTypes.Type(value = NumbersVoiceForwardToAnswersDetails.class, name = "VOICE_FORWARD_TO_ANSWERS"),

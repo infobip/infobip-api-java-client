@@ -19,7 +19,8 @@ import java.util.Objects;
 /**
  * Represents ResourcesNumberResourceOrderRequestApiDoc model.
  */
-public class ResourcesNumberResourceOrderRequestApiDoc implements ResourcesSubmitResourceRequestBody {
+public class ResourcesNumberResourceOrderRequestApiDoc
+        implements ResourcesResourceOrderRequestApiDoc, ResourcesSubmitResourceRequestBody {
     /**
      * Type of resource.
      */
@@ -60,6 +61,8 @@ public class ResourcesNumberResourceOrderRequestApiDoc implements ResourcesSubmi
     private ResourcesResourceNumberType numberType;
 
     private List<ResourcesResourceNumberCapability> capabilities = new ArrayList<>();
+
+    private ResourcesNumberOfferClientType clientType;
 
     private List<String> additionalContactEmails = null;
 
@@ -257,6 +260,37 @@ public class ResourcesNumberResourceOrderRequestApiDoc implements ResourcesSubmi
     @JsonProperty("capabilities")
     public void setCapabilities(List<ResourcesResourceNumberCapability> capabilities) {
         this.capabilities = capabilities;
+    }
+
+    /**
+     * Sets clientType.
+     *
+     * @param clientType
+     * @return This {@link ResourcesNumberResourceOrderRequestApiDoc instance}.
+     */
+    public ResourcesNumberResourceOrderRequestApiDoc clientType(ResourcesNumberOfferClientType clientType) {
+        this.clientType = clientType;
+        return this;
+    }
+
+    /**
+     * Returns clientType.
+     *
+     * @return clientType
+     */
+    @JsonProperty("clientType")
+    public ResourcesNumberOfferClientType getClientType() {
+        return clientType;
+    }
+
+    /**
+     * Sets clientType.
+     *
+     * @param clientType
+     */
+    @JsonProperty("clientType")
+    public void setClientType(ResourcesNumberOfferClientType clientType) {
+        this.clientType = clientType;
     }
 
     /**
@@ -465,6 +499,7 @@ public class ResourcesNumberResourceOrderRequestApiDoc implements ResourcesSubmi
                 && Objects.equals(this.quantity, resourcesNumberResourceOrderRequestApiDoc.quantity)
                 && Objects.equals(this.numberType, resourcesNumberResourceOrderRequestApiDoc.numberType)
                 && Objects.equals(this.capabilities, resourcesNumberResourceOrderRequestApiDoc.capabilities)
+                && Objects.equals(this.clientType, resourcesNumberResourceOrderRequestApiDoc.clientType)
                 && Objects.equals(
                         this.additionalContactEmails, resourcesNumberResourceOrderRequestApiDoc.additionalContactEmails)
                 && Objects.equals(this.countryCode, resourcesNumberResourceOrderRequestApiDoc.countryCode)
@@ -475,7 +510,15 @@ public class ResourcesNumberResourceOrderRequestApiDoc implements ResourcesSubmi
     @Override
     public int hashCode() {
         return Objects.hash(
-                type, quantity, numberType, capabilities, additionalContactEmails, countryCode, requirements, platform);
+                type,
+                quantity,
+                numberType,
+                capabilities,
+                clientType,
+                additionalContactEmails,
+                countryCode,
+                requirements,
+                platform);
     }
 
     @Override
@@ -495,6 +538,9 @@ public class ResourcesNumberResourceOrderRequestApiDoc implements ResourcesSubmi
                 .append(newLine)
                 .append("    capabilities: ")
                 .append(toIndentedString(capabilities))
+                .append(newLine)
+                .append("    clientType: ")
+                .append(toIndentedString(clientType))
                 .append(newLine)
                 .append("    additionalContactEmails: ")
                 .append(toIndentedString(additionalContactEmails))

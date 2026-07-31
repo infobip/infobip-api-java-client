@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * WebRTC custom data. To meet the criteria, all of the provided custom data pairs must match.
+ * WhatsApp custom data. To meet the criteria, all of the provided custom data pairs must match.
  */
 public class CallRoutingCustomDataEntry {
 

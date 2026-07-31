@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * The use cases for this campaign.
+ * Campaign use case.
  */
 public enum NumbersTenDlcUseCase {
     ALERTS("ALERTS"),

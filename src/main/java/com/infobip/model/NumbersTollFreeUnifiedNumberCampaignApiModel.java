@@ -1627,9 +1627,7 @@ public class NumbersTollFreeUnifiedNumberCampaignApiModel {
      * Sets taxId.
      * <p>
      * Field description:
-     * The tax identifier for the brand.
-     * <p>
-     * The field is required.
+     * The tax identifier for the brand. Not required for sole proprietor brands.
      *
      * @param taxId
      * @return This {@link NumbersTollFreeUnifiedNumberCampaignApiModel instance}.
@@ -1643,9 +1641,7 @@ public class NumbersTollFreeUnifiedNumberCampaignApiModel {
      * Returns taxId.
      * <p>
      * Field description:
-     * The tax identifier for the brand.
-     * <p>
-     * The field is required.
+     * The tax identifier for the brand. Not required for sole proprietor brands.
      *
      * @return taxId
      */
@@ -1658,9 +1654,7 @@ public class NumbersTollFreeUnifiedNumberCampaignApiModel {
      * Sets taxId.
      * <p>
      * Field description:
-     * The tax identifier for the brand.
-     * <p>
-     * The field is required.
+     * The tax identifier for the brand. Not required for sole proprietor brands.
      *
      * @param taxId
      */
@@ -1757,8 +1751,6 @@ public class NumbersTollFreeUnifiedNumberCampaignApiModel {
 
     /**
      * Sets businessRegistrationType.
-     * <p>
-     * The field is required.
      *
      * @param businessRegistrationType
      * @return This {@link NumbersTollFreeUnifiedNumberCampaignApiModel instance}.
@@ -1771,8 +1763,6 @@ public class NumbersTollFreeUnifiedNumberCampaignApiModel {
 
     /**
      * Returns businessRegistrationType.
-     * <p>
-     * The field is required.
      *
      * @return businessRegistrationType
      */
@@ -1783,8 +1773,6 @@ public class NumbersTollFreeUnifiedNumberCampaignApiModel {
 
     /**
      * Sets businessRegistrationType.
-     * <p>
-     * The field is required.
      *
      * @param businessRegistrationType
      */

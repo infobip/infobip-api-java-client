@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Represents NumbersCampaignType enumeration.
+ * Campaign type.
  */
 public enum NumbersCampaignType {
     TEN_DIGIT_LONG_CODE("TEN_DIGIT_LONG_CODE"),

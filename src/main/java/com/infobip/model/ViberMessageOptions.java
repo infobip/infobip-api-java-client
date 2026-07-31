@@ -35,6 +35,8 @@ public class ViberMessageOptions {
 
     private Boolean toPrimaryDeviceOnly;
 
+    private Boolean activationCheck;
+
     /**
      * Sets platform.
      *
@@ -203,7 +205,7 @@ public class ViberMessageOptions {
      * Sets trackingData.
      * <p>
      * Field description:
-     * Custom client&#39;s data that will be passed back with user&#39;s reply. It is not supported for &#x60;OTP_TEMPLATE&#x60; or when &#x60;toPrimaryDeviceOnly&#x60; option is enabled for text only and image only content types.
+     * Custom client&#39;s data that will be passed back with user&#39;s reply. It is not supported for &#x60;TEMPLATE&#x60; or when &#x60;toPrimaryDeviceOnly&#x60; option is enabled for text only and image only content types or when &#x60;activationCheck&#x60; option is enabled for text only content type.
      *
      * @param trackingData
      * @return This {@link ViberMessageOptions instance}.
@@ -217,7 +219,7 @@ public class ViberMessageOptions {
      * Returns trackingData.
      * <p>
      * Field description:
-     * Custom client&#39;s data that will be passed back with user&#39;s reply. It is not supported for &#x60;OTP_TEMPLATE&#x60; or when &#x60;toPrimaryDeviceOnly&#x60; option is enabled for text only and image only content types.
+     * Custom client&#39;s data that will be passed back with user&#39;s reply. It is not supported for &#x60;TEMPLATE&#x60; or when &#x60;toPrimaryDeviceOnly&#x60; option is enabled for text only and image only content types or when &#x60;activationCheck&#x60; option is enabled for text only content type.
      *
      * @return trackingData
      */
@@ -230,7 +232,7 @@ public class ViberMessageOptions {
      * Sets trackingData.
      * <p>
      * Field description:
-     * Custom client&#39;s data that will be passed back with user&#39;s reply. It is not supported for &#x60;OTP_TEMPLATE&#x60; or when &#x60;toPrimaryDeviceOnly&#x60; option is enabled for text only and image only content types.
+     * Custom client&#39;s data that will be passed back with user&#39;s reply. It is not supported for &#x60;TEMPLATE&#x60; or when &#x60;toPrimaryDeviceOnly&#x60; option is enabled for text only and image only content types or when &#x60;activationCheck&#x60; option is enabled for text only content type.
      *
      * @param trackingData
      */
@@ -274,7 +276,7 @@ public class ViberMessageOptions {
      * Sets applySessionRate.
      * <p>
      * Field description:
-     * Defines if the message should be charged using Viber&#39;s session rate if applicable. The session rate is supported for text only, image only and &#x60;FILE&#x60; content types. For text only and image only content types &#x60;sessionRate&#x60; won&#39;t be applied if parameter &#x60;toPrimaryDeviceOnly&#x60; is set to &#x60;true&#x60;.
+     * Defines if the message should be charged using Viber&#39;s session rate if applicable. The session rate is supported for text only, image only and &#x60;FILE&#x60; content types. For text only content type &#x60;sessionRate&#x60; won&#39;t be applied when &#x60;toPrimaryDeviceOnly&#x60; or &#x60;activationCheck&#x60; option is enabled. For image only content type &#x60;sessionRate&#x60; won&#39;t be applied when &#x60;toPrimaryDeviceOnly&#x60; option is enabled.
      *
      * @param applySessionRate
      * @return This {@link ViberMessageOptions instance}.
@@ -288,7 +290,7 @@ public class ViberMessageOptions {
      * Returns applySessionRate.
      * <p>
      * Field description:
-     * Defines if the message should be charged using Viber&#39;s session rate if applicable. The session rate is supported for text only, image only and &#x60;FILE&#x60; content types. For text only and image only content types &#x60;sessionRate&#x60; won&#39;t be applied if parameter &#x60;toPrimaryDeviceOnly&#x60; is set to &#x60;true&#x60;.
+     * Defines if the message should be charged using Viber&#39;s session rate if applicable. The session rate is supported for text only, image only and &#x60;FILE&#x60; content types. For text only content type &#x60;sessionRate&#x60; won&#39;t be applied when &#x60;toPrimaryDeviceOnly&#x60; or &#x60;activationCheck&#x60; option is enabled. For image only content type &#x60;sessionRate&#x60; won&#39;t be applied when &#x60;toPrimaryDeviceOnly&#x60; option is enabled.
      *
      * @return applySessionRate
      */
@@ -301,7 +303,7 @@ public class ViberMessageOptions {
      * Sets applySessionRate.
      * <p>
      * Field description:
-     * Defines if the message should be charged using Viber&#39;s session rate if applicable. The session rate is supported for text only, image only and &#x60;FILE&#x60; content types. For text only and image only content types &#x60;sessionRate&#x60; won&#39;t be applied if parameter &#x60;toPrimaryDeviceOnly&#x60; is set to &#x60;true&#x60;.
+     * Defines if the message should be charged using Viber&#39;s session rate if applicable. The session rate is supported for text only, image only and &#x60;FILE&#x60; content types. For text only content type &#x60;sessionRate&#x60; won&#39;t be applied when &#x60;toPrimaryDeviceOnly&#x60; or &#x60;activationCheck&#x60; option is enabled. For image only content type &#x60;sessionRate&#x60; won&#39;t be applied when &#x60;toPrimaryDeviceOnly&#x60; option is enabled.
      *
      * @param applySessionRate
      */
@@ -314,7 +316,7 @@ public class ViberMessageOptions {
      * Sets toPrimaryDeviceOnly.
      * <p>
      * Field description:
-     * Defines if the message should be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Primary device concept is supported for text only, image only, &#x60;FILE&#x60; and &#x60;OTP_TEMPLATE&#x60; content type.
+     * Defines if the message should be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Primary device concept is supported for text only, image only, &#x60;FILE&#x60; content type. For text only &#x60;toPrimaryDeviceOnly&#x60; won&#39;t be applied when &#x60;activationCheck&#x60; option is enabled.
      *
      * @param toPrimaryDeviceOnly
      * @return This {@link ViberMessageOptions instance}.
@@ -328,7 +330,7 @@ public class ViberMessageOptions {
      * Returns toPrimaryDeviceOnly.
      * <p>
      * Field description:
-     * Defines if the message should be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Primary device concept is supported for text only, image only, &#x60;FILE&#x60; and &#x60;OTP_TEMPLATE&#x60; content type.
+     * Defines if the message should be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Primary device concept is supported for text only, image only, &#x60;FILE&#x60; content type. For text only &#x60;toPrimaryDeviceOnly&#x60; won&#39;t be applied when &#x60;activationCheck&#x60; option is enabled.
      *
      * @return toPrimaryDeviceOnly
      */
@@ -341,13 +343,53 @@ public class ViberMessageOptions {
      * Sets toPrimaryDeviceOnly.
      * <p>
      * Field description:
-     * Defines if the message should be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Primary device concept is supported for text only, image only, &#x60;FILE&#x60; and &#x60;OTP_TEMPLATE&#x60; content type.
+     * Defines if the message should be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Primary device concept is supported for text only, image only, &#x60;FILE&#x60; content type. For text only &#x60;toPrimaryDeviceOnly&#x60; won&#39;t be applied when &#x60;activationCheck&#x60; option is enabled.
      *
      * @param toPrimaryDeviceOnly
      */
     @JsonProperty("toPrimaryDeviceOnly")
     public void setToPrimaryDeviceOnly(Boolean toPrimaryDeviceOnly) {
         this.toPrimaryDeviceOnly = toPrimaryDeviceOnly;
+    }
+
+    /**
+     * Sets activationCheck.
+     * <p>
+     * Field description:
+     * Enables activation check for sensitive messages. When true, validates that the user has not recently activated Viber on any device. If validation passes message will be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Supported for text only content type. This feature must be enabled for the sender beforehand. Please contact support to arrange activation.
+     *
+     * @param activationCheck
+     * @return This {@link ViberMessageOptions instance}.
+     */
+    public ViberMessageOptions activationCheck(Boolean activationCheck) {
+        this.activationCheck = activationCheck;
+        return this;
+    }
+
+    /**
+     * Returns activationCheck.
+     * <p>
+     * Field description:
+     * Enables activation check for sensitive messages. When true, validates that the user has not recently activated Viber on any device. If validation passes message will be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Supported for text only content type. This feature must be enabled for the sender beforehand. Please contact support to arrange activation.
+     *
+     * @return activationCheck
+     */
+    @JsonProperty("activationCheck")
+    public Boolean getActivationCheck() {
+        return activationCheck;
+    }
+
+    /**
+     * Sets activationCheck.
+     * <p>
+     * Field description:
+     * Enables activation check for sensitive messages. When true, validates that the user has not recently activated Viber on any device. If validation passes message will be sent only to the end user&#39;s [primary device](https://www.infobip.com/docs/viber/business-messages/api) (phone or tablet). Supported for text only content type. This feature must be enabled for the sender beforehand. Please contact support to arrange activation.
+     *
+     * @param activationCheck
+     */
+    @JsonProperty("activationCheck")
+    public void setActivationCheck(Boolean activationCheck) {
+        this.activationCheck = activationCheck;
     }
 
     @Override
@@ -367,7 +409,8 @@ public class ViberMessageOptions {
                 && Objects.equals(this.trackingData, viberMessageOptions.trackingData)
                 && Objects.equals(this.label, viberMessageOptions.label)
                 && Objects.equals(this.applySessionRate, viberMessageOptions.applySessionRate)
-                && Objects.equals(this.toPrimaryDeviceOnly, viberMessageOptions.toPrimaryDeviceOnly);
+                && Objects.equals(this.toPrimaryDeviceOnly, viberMessageOptions.toPrimaryDeviceOnly)
+                && Objects.equals(this.activationCheck, viberMessageOptions.activationCheck);
     }
 
     @Override
@@ -381,7 +424,8 @@ public class ViberMessageOptions {
                 trackingData,
                 label,
                 applySessionRate,
-                toPrimaryDeviceOnly);
+                toPrimaryDeviceOnly,
+                activationCheck);
     }
 
     @Override
@@ -416,6 +460,9 @@ public class ViberMessageOptions {
                 .append(newLine)
                 .append("    toPrimaryDeviceOnly: ")
                 .append(toIndentedString(toPrimaryDeviceOnly))
+                .append(newLine)
+                .append("    activationCheck: ")
+                .append(toIndentedString(activationCheck))
                 .append(newLine)
                 .append("}")
                 .toString();

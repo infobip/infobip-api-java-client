@@ -27,6 +27,8 @@ public class CallsApplicationTransferRequest {
 
     private Map<String, String> customData = null;
 
+    private CallsApplicationTransferPropagationOptions propagationOptions;
+
     /**
      * Sets destinationCallsConfigurationId.
      * <p>
@@ -202,6 +204,38 @@ public class CallsApplicationTransferRequest {
         this.customData = customData;
     }
 
+    /**
+     * Sets propagationOptions.
+     *
+     * @param propagationOptions
+     * @return This {@link CallsApplicationTransferRequest instance}.
+     */
+    public CallsApplicationTransferRequest propagationOptions(
+            CallsApplicationTransferPropagationOptions propagationOptions) {
+        this.propagationOptions = propagationOptions;
+        return this;
+    }
+
+    /**
+     * Returns propagationOptions.
+     *
+     * @return propagationOptions
+     */
+    @JsonProperty("propagationOptions")
+    public CallsApplicationTransferPropagationOptions getPropagationOptions() {
+        return propagationOptions;
+    }
+
+    /**
+     * Sets propagationOptions.
+     *
+     * @param propagationOptions
+     */
+    @JsonProperty("propagationOptions")
+    public void setPropagationOptions(CallsApplicationTransferPropagationOptions propagationOptions) {
+        this.propagationOptions = propagationOptions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -216,12 +250,13 @@ public class CallsApplicationTransferRequest {
                         callsApplicationTransferRequest.destinationCallsConfigurationId)
                 && Objects.equals(this.platform, callsApplicationTransferRequest.platform)
                 && Objects.equals(this.timeout, callsApplicationTransferRequest.timeout)
-                && Objects.equals(this.customData, callsApplicationTransferRequest.customData);
+                && Objects.equals(this.customData, callsApplicationTransferRequest.customData)
+                && Objects.equals(this.propagationOptions, callsApplicationTransferRequest.propagationOptions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(destinationCallsConfigurationId, platform, timeout, customData);
+        return Objects.hash(destinationCallsConfigurationId, platform, timeout, customData, propagationOptions);
     }
 
     @Override
@@ -241,6 +276,9 @@ public class CallsApplicationTransferRequest {
                 .append(newLine)
                 .append("    customData: ")
                 .append(toIndentedString(customData))
+                .append(newLine)
+                .append("    propagationOptions: ")
+                .append(toIndentedString(propagationOptions))
                 .append(newLine)
                 .append("}")
                 .toString();

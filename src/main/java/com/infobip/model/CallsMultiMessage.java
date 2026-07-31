@@ -21,15 +21,15 @@ public class CallsMultiMessage {
 
     private String audioFileUrl;
 
-    private String from;
+    private String text;
 
     private String language;
 
-    private String text;
+    private CallsVoice voice;
+
+    private String from;
 
     private List<String> to = new ArrayList<>();
-
-    private CallsVoice voice;
 
     /**
      * Sets audioFileUrl.
@@ -72,43 +72,43 @@ public class CallsMultiMessage {
     }
 
     /**
-     * Sets from.
+     * Sets text.
      * <p>
      * Field description:
-     * Numeric sender ID in E.164 standard format (Example: 41793026727). This is caller ID that will be presented to the end user where applicable.
+     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
      *
-     * @param from
+     * @param text
      * @return This {@link CallsMultiMessage instance}.
      */
-    public CallsMultiMessage from(String from) {
-        this.from = from;
+    public CallsMultiMessage text(String text) {
+        this.text = text;
         return this;
     }
 
     /**
-     * Returns from.
+     * Returns text.
      * <p>
      * Field description:
-     * Numeric sender ID in E.164 standard format (Example: 41793026727). This is caller ID that will be presented to the end user where applicable.
+     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
      *
-     * @return from
+     * @return text
      */
-    @JsonProperty("from")
-    public String getFrom() {
-        return from;
+    @JsonProperty("text")
+    public String getText() {
+        return text;
     }
 
     /**
-     * Sets from.
+     * Sets text.
      * <p>
      * Field description:
-     * Numeric sender ID in E.164 standard format (Example: 41793026727). This is caller ID that will be presented to the end user where applicable.
+     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
      *
-     * @param from
+     * @param text
      */
-    @JsonProperty("from")
-    public void setFrom(String from) {
-        this.from = from;
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
     }
 
     /**
@@ -152,43 +152,74 @@ public class CallsMultiMessage {
     }
 
     /**
-     * Sets text.
-     * <p>
-     * Field description:
-     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
+     * Sets voice.
      *
-     * @param text
+     * @param voice
      * @return This {@link CallsMultiMessage instance}.
      */
-    public CallsMultiMessage text(String text) {
-        this.text = text;
+    public CallsMultiMessage voice(CallsVoice voice) {
+        this.voice = voice;
         return this;
     }
 
     /**
-     * Returns text.
-     * <p>
-     * Field description:
-     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
+     * Returns voice.
      *
-     * @return text
+     * @return voice
      */
-    @JsonProperty("text")
-    public String getText() {
-        return text;
+    @JsonProperty("voice")
+    public CallsVoice getVoice() {
+        return voice;
     }
 
     /**
-     * Sets text.
+     * Sets voice.
+     *
+     * @param voice
+     */
+    @JsonProperty("voice")
+    public void setVoice(CallsVoice voice) {
+        this.voice = voice;
+    }
+
+    /**
+     * Sets from.
      * <p>
      * Field description:
-     * Text of the message that will be sent. Message text can be up to 1400 characters long and cannot contain only punctuation. SSML (_Speech Synthesis Markup Language_) is supported and can be used to fully customize pronunciation of the provided text.
+     * Numeric sender ID in E.164 standard format (Example: 41793026727). This is caller ID that will be presented to the end user where applicable.
      *
-     * @param text
+     * @param from
+     * @return This {@link CallsMultiMessage instance}.
      */
-    @JsonProperty("text")
-    public void setText(String text) {
-        this.text = text;
+    public CallsMultiMessage from(String from) {
+        this.from = from;
+        return this;
+    }
+
+    /**
+     * Returns from.
+     * <p>
+     * Field description:
+     * Numeric sender ID in E.164 standard format (Example: 41793026727). This is caller ID that will be presented to the end user where applicable.
+     *
+     * @return from
+     */
+    @JsonProperty("from")
+    public String getFrom() {
+        return from;
+    }
+
+    /**
+     * Sets from.
+     * <p>
+     * Field description:
+     * Numeric sender ID in E.164 standard format (Example: 41793026727). This is caller ID that will be presented to the end user where applicable.
+     *
+     * @param from
+     */
+    @JsonProperty("from")
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     /**
@@ -256,37 +287,6 @@ public class CallsMultiMessage {
         this.to = to;
     }
 
-    /**
-     * Sets voice.
-     *
-     * @param voice
-     * @return This {@link CallsMultiMessage instance}.
-     */
-    public CallsMultiMessage voice(CallsVoice voice) {
-        this.voice = voice;
-        return this;
-    }
-
-    /**
-     * Returns voice.
-     *
-     * @return voice
-     */
-    @JsonProperty("voice")
-    public CallsVoice getVoice() {
-        return voice;
-    }
-
-    /**
-     * Sets voice.
-     *
-     * @param voice
-     */
-    @JsonProperty("voice")
-    public void setVoice(CallsVoice voice) {
-        this.voice = voice;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -297,16 +297,16 @@ public class CallsMultiMessage {
         }
         CallsMultiMessage callsMultiMessage = (CallsMultiMessage) o;
         return Objects.equals(this.audioFileUrl, callsMultiMessage.audioFileUrl)
-                && Objects.equals(this.from, callsMultiMessage.from)
-                && Objects.equals(this.language, callsMultiMessage.language)
                 && Objects.equals(this.text, callsMultiMessage.text)
-                && Objects.equals(this.to, callsMultiMessage.to)
-                && Objects.equals(this.voice, callsMultiMessage.voice);
+                && Objects.equals(this.language, callsMultiMessage.language)
+                && Objects.equals(this.voice, callsMultiMessage.voice)
+                && Objects.equals(this.from, callsMultiMessage.from)
+                && Objects.equals(this.to, callsMultiMessage.to);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(audioFileUrl, from, language, text, to, voice);
+        return Objects.hash(audioFileUrl, text, language, voice, from, to);
     }
 
     @Override
@@ -318,20 +318,20 @@ public class CallsMultiMessage {
                 .append("    audioFileUrl: ")
                 .append(toIndentedString(audioFileUrl))
                 .append(newLine)
-                .append("    from: ")
-                .append(toIndentedString(from))
+                .append("    text: ")
+                .append(toIndentedString(text))
                 .append(newLine)
                 .append("    language: ")
                 .append(toIndentedString(language))
                 .append(newLine)
-                .append("    text: ")
-                .append(toIndentedString(text))
+                .append("    voice: ")
+                .append(toIndentedString(voice))
+                .append(newLine)
+                .append("    from: ")
+                .append(toIndentedString(from))
                 .append(newLine)
                 .append("    to: ")
                 .append(toIndentedString(to))
-                .append(newLine)
-                .append("    voice: ")
-                .append(toIndentedString(voice))
                 .append(newLine)
                 .append("}")
                 .toString();

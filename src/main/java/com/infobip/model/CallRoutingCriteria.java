@@ -27,6 +27,7 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = CallRoutingPhoneCriteria.class, name = "PHONE"),
     @JsonSubTypes.Type(value = CallRoutingSipCriteria.class, name = "SIP"),
     @JsonSubTypes.Type(value = CallRoutingWebRTCCriteria.class, name = "WEBRTC"),
+    @JsonSubTypes.Type(value = CallRoutingWhatsAppCriteria.class, name = "WHATSAPP"),
 })
 public abstract class CallRoutingCriteria {
 

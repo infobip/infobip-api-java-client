@@ -3,6 +3,9 @@ package com.infobip.api;
 import static org.assertj.core.api.BDDAssertions.then;
 
 import com.infobip.model.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -50,7 +53,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(response.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = response.getStatus();
+            MessageStatus messageStatus = response.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -346,7 +349,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -494,7 +497,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(response.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = response.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = response.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -557,7 +560,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus).isNotNull();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
@@ -625,7 +628,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -687,7 +690,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -749,7 +752,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getTo()).isEqualTo("441134960001");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus messageStatus = response.getStatus();
+            MessageStatus messageStatus = response.getStatus();
             then(messageStatus).isNotNull();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
@@ -854,7 +857,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -957,7 +960,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsappSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
+            MessageStatus whatsappSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
             then(whatsappSingleMessageStatus).isNotNull();
             then(whatsappSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsappSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -1053,7 +1056,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus).isNotNull();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
@@ -1155,7 +1158,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -1259,7 +1262,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -1367,7 +1370,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageInfoStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageInfoStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageInfoStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageInfoStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageInfoStatus.getId()).isEqualTo(7);
@@ -1463,7 +1466,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -1602,7 +1605,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -1695,7 +1698,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(response.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = response.getStatus();
+            MessageStatus messageStatus = response.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -1758,7 +1761,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -1863,7 +1866,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -1961,7 +1964,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -2142,7 +2145,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -2299,7 +2302,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -2458,7 +2461,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -2643,7 +2646,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -2825,7 +2828,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getTo()).isEqualTo("441134960001");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus messageStatus = response.getStatus();
+            MessageStatus messageStatus = response.getStatus();
             then(messageStatus).isNotNull();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
@@ -2992,7 +2995,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -3159,7 +3162,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getTo()).isEqualTo("441134960001");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = response.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = response.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -3361,7 +3364,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -3451,7 +3454,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -3536,7 +3539,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsappSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
+            MessageStatus whatsappSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
             then(whatsappSingleMessageStatus).isNotNull();
             then(whatsappSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsappSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -3619,7 +3622,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getTo()).isEqualTo("441134960001");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus messageStatus = response.getStatus();
+            MessageStatus messageStatus = response.getStatus();
             then(messageStatus).isNotNull();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
@@ -3697,7 +3700,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsappSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsappSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsappSingleMessageStatus).isNotNull();
             then(whatsappSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsappSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -3777,7 +3780,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -3851,7 +3854,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus).isNotNull();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
@@ -3925,7 +3928,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsappSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -3992,7 +3995,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -4083,7 +4086,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -4161,7 +4164,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -4214,7 +4217,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(response.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = response.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = response.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -4271,7 +4274,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(response.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = response.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = response.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -4322,7 +4325,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -4425,7 +4428,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -4530,7 +4533,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -4625,7 +4628,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -4753,7 +4756,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -4847,7 +4850,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -4958,7 +4961,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -5086,7 +5089,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsappSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsappSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsappSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -5187,7 +5190,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -5289,7 +5292,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -5394,7 +5397,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsappSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsappSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
+            MessageStatus whatsappSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
             then(whatsappSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsappSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsappSingleMessageStatus.getId()).isEqualTo(7);
@@ -5495,7 +5498,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus).isNotNull();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
@@ -5599,7 +5602,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -5659,7 +5662,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -5769,7 +5772,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsappSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsappSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
+            MessageStatus whatsappSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
             then(whatsappSingleMessageStatus).isNotNull();
             then(whatsappSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsappSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -5866,7 +5869,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -5983,7 +5986,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -6081,7 +6084,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -6198,7 +6201,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -6314,7 +6317,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -6438,7 +6441,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -6662,7 +6665,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -6774,7 +6777,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -7001,7 +7004,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
             then(whatsAppSingleMessageStatus.getId()).isEqualTo(7);
@@ -7239,7 +7242,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -7356,7 +7359,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -7462,7 +7465,7 @@ class WhatsAppApiTest extends ApiTest {
             then(messageInfo.getMessageCount()).isEqualTo(1);
             then(messageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(messageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = messageInfo.getStatus();
+            MessageStatus messageStatus = messageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -7518,7 +7521,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -7617,7 +7620,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus).isNotNull();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
@@ -7716,7 +7719,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
             then(messageStatus.getId()).isEqualTo(7);
@@ -7814,7 +7817,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
             then(messageStatus).isNotNull();
             then(messageStatus.getGroupId()).isEqualTo(1);
             then(messageStatus.getGroupName()).isEqualTo("PENDING");
@@ -7878,7 +7881,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getTo()).isEqualTo("441134960001");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsappSingleMessageStatus = response.getStatus();
+            MessageStatus whatsappSingleMessageStatus = response.getStatus();
             then(whatsappSingleMessageStatus).isNotNull();
             then(whatsappSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsappSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -7942,7 +7945,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getTo()).isEqualTo("441134960001");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = response.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = response.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -8004,7 +8007,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
+            MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
             then(whatsAppSingleMessageStatus).isNotNull();
             then(whatsAppSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsAppSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -8068,7 +8071,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getTo()).isEqualTo("441134960001");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            WhatsAppSingleMessageStatus whatsappSingleMessageStatus = response.getStatus();
+            MessageStatus whatsappSingleMessageStatus = response.getStatus();
             then(whatsappSingleMessageStatus).isNotNull();
             then(whatsappSingleMessageStatus.getGroupId()).isEqualTo(1);
             then(whatsappSingleMessageStatus.getGroupName()).isEqualTo("PENDING");
@@ -10394,6 +10397,691 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppShareWabaRequest request = new WhatsAppShareWabaRequest().businessAccountId(givenBusinessAccountId);
 
         var call = whatsAppApi.shareWabaWhatsapp(request);
+        testSuccessfulCallWithNoBody(call::executeAsync, 202);
+    }
+
+    @Test
+    void shouldAddWhatsappSender() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        Long givenBusinessAccountId = 222L;
+        String givenRequest = "{\n" + "  \"countryCode\": \"44\",\n"
+                + "  \"phoneNumber\": \"7796344125\",\n"
+                + "  \"displayName\": \"Infobip\",\n"
+                + "  \"type\": \"EXTERNAL_SMS\",\n"
+                + "  \"locale\": \"en_US\"\n"
+                + "}";
+        String givenResponse = "{\n" + "  \"status\": \"SUBMITTED_FOR_REGISTRATION\"\n" + "}";
+
+        setUpPostRequest(
+                "/whatsapp/1/embedded-signup/registrations/business-account/222/senders",
+                givenRequest,
+                givenResponse,
+                202);
+
+        WhatsAppPhoneNumberRequest request = new WhatsAppPhoneNumberRequest()
+                .countryCode("44")
+                .phoneNumber("7796344125")
+                .displayName("Infobip")
+                .type(WhatsAppNumberType.SMS)
+                .locale("en_US");
+
+        Consumer<WhatsAppSenderRegistrationResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(WhatsAppSenderRegistrationStatus.SUBMITTED_FOR_REGISTRATION);
+        };
+
+        var call = whatsAppApi.addWhatsappSender(givenBusinessAccountId, request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldConfirmWhatsAppIdentity() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "441134960000";
+        String givenUserIdentifier = "441134960001";
+        String givenRequest = "{\n" + "  \"hash\": \"eU2Fdi4EMUw=\"\n" + "}";
+
+        setUpNoResponseBodyPutRequest(
+                "/whatsapp/1/441134960000/contacts/441134960001/identity", Map.of(), givenRequest, 204);
+
+        WhatsAppIdentityConfirmation request = new WhatsAppIdentityConfirmation().hash("eU2Fdi4EMUw=");
+
+        var call = whatsAppApi.confirmWhatsAppIdentity(givenSender, givenUserIdentifier, request);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldDeleteWhatsAppMedia() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "441134960000";
+        String givenRequest = "{\n" + "  \"url\": \"https://www.infobip.com/infobip-logo.png\"\n" + "}";
+
+        setUpNoResponseBodyDeleteRequest("/whatsapp/1/senders/441134960000/media", Map.of(), givenRequest, 204);
+
+        WhatsAppUrlDeletionRequest request =
+                new WhatsAppUrlDeletionRequest().url("https://www.infobip.com/infobip-logo.png");
+
+        var call = whatsAppApi.deleteWhatsAppMedia(givenSender, request);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldDeleteWhatsAppTemplate() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "441134960000";
+        String givenTemplateName = "media_template";
+
+        setUpNoResponseBodyDeleteRequest("/whatsapp/2/senders/441134960000/templates/media_template", Map.of(), 204);
+
+        var call = whatsAppApi.deleteWhatsAppTemplate(givenSender, givenTemplateName);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldDeleteWhatsappIdentity() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "441134960000";
+        String givenUserIdentifier = "441134960001";
+
+        setUpNoResponseBodyDeleteRequest("/whatsapp/1/441134960000/contacts/441134960001/identity", Map.of(), 204);
+
+        var call = whatsAppApi.deleteWhatsappIdentity(givenSender, givenUserIdentifier);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldDownloadWhatsAppInboundMedia() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "441134960000";
+        String givenMediaId = "media-id";
+        String givenFileContent = "Test media content";
+
+        setUpSuccessGetRequest("/whatsapp/1/senders/441134960000/media/media-id", Map.of(), givenFileContent);
+
+        var call = whatsAppApi.downloadWhatsAppInboundMedia(givenSender, givenMediaId);
+        testSuccessfulCallWithFileResult(call::execute);
+    }
+
+    @Test
+    void shouldGetWhatsAppIdentity() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "441134960000";
+        String givenUserIdentifier = "441134960001";
+        String givenResponse = "{\n" + "  \"acknowledged\": true,\n"
+                + "  \"hash\": \"eU2Fdi4EMUw=\",\n"
+                + "  \"createdAt\": \"2022-02-18T08:12:26.422+0000\"\n"
+                + "}";
+        OffsetDateTime expectedCreatedAt =
+                OffsetDateTime.of(LocalDateTime.of(2022, 2, 18, 8, 12, 26, 422000000), ZoneOffset.UTC);
+
+        setUpSuccessGetRequest("/whatsapp/1/441134960000/contacts/441134960001/identity", Map.of(), givenResponse);
+
+        Consumer<WhatsAppIdentityInfo> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getAcknowledged()).isTrue();
+            then(response.getHash()).isEqualTo("eU2Fdi4EMUw=");
+            then(response.getCreatedAt()).isEqualTo(expectedCreatedAt);
+        };
+
+        var call = whatsAppApi.getWhatsAppIdentity(givenSender, givenUserIdentifier);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetWhatsAppMediaMetadata() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "441134960000";
+        String givenMediaId = "media-id";
+
+        setUpSuccessHeadRequest("/whatsapp/1/senders/441134960000/media/media-id");
+
+        var call = whatsAppApi.getWhatsAppMediaMetadata(givenSender, givenMediaId);
+        testSuccessfulCallWithNoBody(call::executeAsync, 200);
+    }
+
+    @Test
+    void shouldGetWhatsappCallingPermission() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "441134960000";
+        String givenUserNumber = "441134960001";
+        String givenResponse = "{\n" + "  \"status\": \"TEMPORARY\",\n"
+                + "  \"actions\": [\n"
+                + "    {\n"
+                + "      \"name\": \"SEND_CALL_PERMISSION_REQUEST\",\n"
+                + "      \"canPerformAction\": true\n"
+                + "    },\n"
+                + "    {\n"
+                + "      \"name\": \"START_CALL\",\n"
+                + "      \"canPerformAction\": true\n"
+                + "    }\n"
+                + "  ],\n"
+                + "  \"expirationTime\": \"2025-10-07T10:09:08.007Z\"\n"
+                + "}";
+        OffsetDateTime expectedExpiration = OffsetDateTime.parse("2025-10-07T10:09:08.007Z");
+
+        setUpSuccessGetRequest(
+                "/whatsapp/1/senders/441134960000/calls/441134960001/permissions", Map.of(), givenResponse);
+
+        Consumer<WhatsAppCallingPermissionResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getStatus()).isEqualTo(WhatsAppCallingPermissionStatus.TEMPORARY);
+            then(response.getExpirationTime()).isEqualTo(expectedExpiration);
+            then(response.getActions()).hasSize(2);
+            then(response.getActions().get(0).getName())
+                    .isEqualTo(WhatsAppCallingPermissionActionName.SEND_CALL_PERMISSION_REQUEST);
+            then(response.getActions().get(0).getCanPerformAction()).isTrue();
+            then(response.getActions().get(1).getName()).isEqualTo(WhatsAppCallingPermissionActionName.START_CALL);
+            then(response.getActions().get(1).getCanPerformAction()).isTrue();
+        };
+
+        var call = whatsAppApi.getWhatsappCallingPermission(givenSender, givenUserNumber);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetWhatsappSenderBusinessLogo() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "441134960000";
+        String givenFileContent = "Test logo content";
+
+        setUpSuccessGetRequest("/whatsapp/1/senders/441134960000/business-info/logo", Map.of(), givenFileContent);
+
+        var call = whatsAppApi.getWhatsappSenderBusinessLogo(givenSender);
+        testSuccessfulCallWithFileResult(call::execute);
+    }
+
+    @Test
+    void shouldGetWhatsappSenderPublicKey() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "441134960000";
+        String givenPublicKey =
+                "-----BEGIN RSA PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn+fvhK\n-----END RSA PUBLIC KEY-----";
+        String givenResponse = "{\n" + "  \"publicKey\": \""
+                + givenPublicKey.replace("\n", "\\n") + "\",\n"
+                + "  \"publicKeySignatureStatus\": \"VALID\"\n"
+                + "}";
+
+        setUpSuccessGetRequest("/whatsapp/1/senders/441134960000/public-key", Map.of(), givenResponse);
+
+        Consumer<WhatsAppSenderPublicKeyResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getPublicKey()).isEqualTo(givenPublicKey);
+            then(response.getPublicKeySignatureStatus()).isEqualTo("VALID");
+        };
+
+        var call = whatsAppApi.getWhatsappSenderPublicKey(givenSender);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldGetWhatsappUpiPayuPaymentStatus() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "sender";
+        String givenPaymentId = "16085194825";
+        String givenResponse = "{\n" + "  \"referenceId\": \"72123248136\",\n"
+                + "  \"paymentId\": \"16085194825\",\n"
+                + "  \"paymentStatus\": \"CAPTURED\",\n"
+                + "  \"currency\": \"INR\",\n"
+                + "  \"totalAmountValue\": 21000,\n"
+                + "  \"totalAmountOffset\": 100,\n"
+                + "  \"transactions\": [\n"
+                + "    {\n"
+                + "      \"id\": \"27194245144\",\n"
+                + "      \"type\": \"UPI\",\n"
+                + "      \"status\": \"SUCCESS\",\n"
+                + "      \"createdTimestamp\": \"2023-01-01T00:00:00.000+0000\",\n"
+                + "      \"updatedTimestamp\": \"2023-01-01T01:00:00.000+0000\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+        OffsetDateTime expectedCreated = OffsetDateTime.of(LocalDateTime.of(2023, 1, 1, 0, 0), ZoneOffset.UTC);
+        OffsetDateTime expectedUpdated = OffsetDateTime.of(LocalDateTime.of(2023, 1, 1, 1, 0), ZoneOffset.UTC);
+
+        setUpSuccessGetRequest("/whatsapp/1/senders/sender/payments/upi/payu/16085194825", Map.of(), givenResponse);
+
+        Consumer<WhatsAppPayment> assertions = (whatsAppPayment) -> {
+            then(whatsAppPayment).isNotNull();
+            then(whatsAppPayment.getReferenceId()).isEqualTo("72123248136");
+            then(whatsAppPayment.getPaymentId()).isEqualTo("16085194825");
+            then(whatsAppPayment.getPaymentStatus()).isEqualTo(WhatsAppPaymentStatus.CAPTURED);
+            then(whatsAppPayment.getCurrency()).isEqualTo(WhatsAppPaymentCurrency.INR);
+            then(whatsAppPayment.getTotalAmountValue()).isEqualTo(21000);
+            then(whatsAppPayment.getTotalAmountOffset()).isEqualTo(100);
+            then(whatsAppPayment.getTransactions()).hasSize(1);
+            WhatsAppPaymentTransaction transaction =
+                    whatsAppPayment.getTransactions().get(0);
+            then(transaction.getId()).isEqualTo("27194245144");
+            then(transaction.getType()).isEqualTo(WhatsAppPaymentTransactionType.UPI);
+            then(transaction.getStatus()).isEqualTo(WhatsAppPaymentTransactionStatus.SUCCESS);
+            then(transaction.getCreatedTimestamp()).isEqualTo(expectedCreated);
+            then(transaction.getUpdatedTimestamp()).isEqualTo(expectedUpdated);
+        };
+
+        var call = whatsAppApi.getWhatsappUpiPayuPaymentStatus(givenSender, givenPaymentId);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldMarkWhatsAppMessageAsRead() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "441134960000";
+        String givenMessageId = "a28dd97c-1ffb-4fcf-99f1-0b557ed381da";
+
+        setUpNoContentPostRequest(
+                "/whatsapp/1/senders/441134960000/message/a28dd97c-1ffb-4fcf-99f1-0b557ed381da/read", 204);
+
+        var call = whatsAppApi.markWhatsAppMessageAsRead(givenSender, givenMessageId);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldRetryWhatsappSenderVerification() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "447796344125";
+        String givenRequest = "{\n" + "  \"type\": \"EXTERNAL_SMS\",\n" + "  \"locale\": \"en_US\"\n" + "}";
+
+        setUpNoResponseBodyPutRequest(
+                "/whatsapp/1/embedded-signup/registrations/senders/447796344125/verification",
+                Map.of(),
+                givenRequest,
+                202);
+
+        WhatsAppOtpRequest request =
+                new WhatsAppOtpRequest().type(WhatsAppNumberType.SMS).locale("en_US");
+
+        var call = whatsAppApi.retryWhatsappSenderVerification(givenSender, request);
+        testSuccessfulCallWithNoBody(call::executeAsync, 202);
+    }
+
+    @Test
+    void shouldSendWhatsappEvents() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenRequest = "{\n" + "  \"events\": [\n"
+                + "    {\n"
+                + "      \"sender\": \"441134960000\",\n"
+                + "      \"destinations\": [\n"
+                + "        {\n"
+                + "          \"to\": \"441134960001\"\n"
+                + "        }\n"
+                + "      ],\n"
+                + "      \"content\": {\n"
+                + "        \"type\": \"TYPING_INDICATOR\"\n"
+                + "      }\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+        String givenResponse = "{\n" + "  \"bulkId\": \"a28dd97c-2222-4fcf-99f1-0b557ed381da\",\n"
+                + "  \"messages\": [\n"
+                + "    {\n"
+                + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
+                + "      \"status\": {\n"
+                + "        \"groupId\": 1,\n"
+                + "        \"groupName\": \"PENDING\",\n"
+                + "        \"id\": 26,\n"
+                + "        \"name\": \"PENDING_ACCEPTED\",\n"
+                + "        \"description\": \"Message sent to next instance\"\n"
+                + "      },\n"
+                + "      \"destination\": \"441134960001\"\n"
+                + "    }\n"
+                + "  ]\n"
+                + "}";
+
+        WhatsAppEvent event = new WhatsAppEvent()
+                .sender("441134960000")
+                .addDestinationsItem(new WhatsAppToDestination().to("441134960001"))
+                .content(new WhatsAppOutboundEventContent("TYPING_INDICATOR"));
+        WhatsAppEventRequest request = new WhatsAppEventRequest().addEventsItem(event);
+
+        setUpSuccessPostRequest("/whatsapp/1/events", givenRequest, givenResponse);
+
+        Consumer<MessageResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo("a28dd97c-2222-4fcf-99f1-0b557ed381da");
+            then(response.getMessages()).hasSize(1);
+            MessageResponseDetails message = response.getMessages().get(0);
+            then(message.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
+            then(message.getDestination()).isEqualTo("441134960001");
+            then(message.getStatus()).isNotNull();
+            then(message.getStatus().getGroupId()).isEqualTo(1);
+            then(message.getStatus().getGroupName()).isEqualTo("PENDING");
+            then(message.getStatus().getId()).isEqualTo(26);
+            then(message.getStatus().getName()).isEqualTo("PENDING_ACCEPTED");
+            then(message.getStatus().getDescription()).isEqualTo("Message sent to next instance");
+        };
+
+        var call = whatsAppApi.sendWhatsappEvents(request);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendWhatsappInteractiveCallPermissionRequestMessage() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
+                + "  \"to\": \"441134960001\",\n"
+                + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
+                + "  \"callbackData\": \"Callback data\",\n"
+                + "  \"notifyUrl\": \"https://www.example.com/whatsapp\",\n"
+                + "  \"urlOptions\": {\n"
+                + "    \"shortenUrl\": true,\n"
+                + "    \"trackClicks\": true,\n"
+                + "    \"trackingUrl\": \"https://example.com/click-report\",\n"
+                + "    \"removeProtocol\": true\n"
+                + "  }\n"
+                + "}";
+        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+                + "  \"messageCount\": 1,\n"
+                + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
+                + "  \"status\": {\n"
+                + "    \"groupId\": 1,\n"
+                + "    \"groupName\": \"PENDING\",\n"
+                + "    \"id\": 7,\n"
+                + "    \"name\": \"PENDING_ENROUTE\",\n"
+                + "    \"description\": \"Message sent to next instance\"\n"
+                + "  }\n"
+                + "}";
+
+        UrlOptions urlOptions = new UrlOptions()
+                .shortenUrl(true)
+                .trackClicks(true)
+                .trackingUrl("https://example.com/click-report")
+                .removeProtocol(true);
+        WhatsAppInteractiveCallPermissionRequestMessage message = new WhatsAppInteractiveCallPermissionRequestMessage()
+                .from("441134960000")
+                .to("441134960001")
+                .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
+                .callbackData("Callback data")
+                .notifyUrl("https://www.example.com/whatsapp")
+                .urlOptions(urlOptions);
+
+        setUpSuccessPostRequest("/whatsapp/1/message/interactive/call-permission-request", givenRequest, givenResponse);
+
+        Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getMessageCount()).isEqualTo(1);
+            then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
+            then(response.getStatus()).isNotNull();
+            then(response.getStatus().getGroupId()).isEqualTo(1);
+            then(response.getStatus().getGroupName()).isEqualTo("PENDING");
+            then(response.getStatus().getId()).isEqualTo(7);
+            then(response.getStatus().getName()).isEqualTo("PENDING_ENROUTE");
+            then(response.getStatus().getDescription()).isEqualTo("Message sent to next instance");
+        };
+
+        var call = whatsAppApi.sendWhatsappInteractiveCallPermissionRequestMessage(message);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendWhatsappInteractiveMediaCarouselMessage() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
+                + "  \"to\": \"441134960001\",\n"
+                + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
+                + "  \"content\": {\n"
+                + "    \"body\": {\n"
+                + "      \"text\": \"Some text\"\n"
+                + "    },\n"
+                + "    \"action\": {\n"
+                + "      \"cards\": [\n"
+                + "        {\n"
+                + "          \"header\": {\n"
+                + "            \"url\": \"https://www.example.com/image.png\",\n"
+                + "            \"type\": \"IMAGE\"\n"
+                + "          },\n"
+                + "          \"body\": {\n"
+                + "            \"text\": \"Some text\"\n"
+                + "          },\n"
+                + "          \"button\": {\n"
+                + "            \"displayText\": \"some button text\",\n"
+                + "            \"url\": \"https://www.example.com\"\n"
+                + "          }\n"
+                + "        },\n"
+                + "        {\n"
+                + "          \"header\": {\n"
+                + "            \"url\": \"https://www.example.com/image.png\",\n"
+                + "            \"type\": \"IMAGE\"\n"
+                + "          },\n"
+                + "          \"body\": {\n"
+                + "            \"text\": \"Some text\"\n"
+                + "          },\n"
+                + "          \"button\": {\n"
+                + "            \"displayText\": \"some button text\",\n"
+                + "            \"url\": \"https://www.example.com\"\n"
+                + "          }\n"
+                + "        }\n"
+                + "      ],\n"
+                + "      \"type\": \"URL\"\n"
+                + "    }\n"
+                + "  },\n"
+                + "  \"callbackData\": \"Callback data\",\n"
+                + "  \"notifyUrl\": \"https://www.example.com/whatsapp\",\n"
+                + "  \"urlOptions\": {\n"
+                + "    \"shortenUrl\": true,\n"
+                + "    \"trackClicks\": true,\n"
+                + "    \"trackingUrl\": \"https://example.com/click-report\",\n"
+                + "    \"removeProtocol\": true\n"
+                + "  }\n"
+                + "}";
+        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+                + "  \"messageCount\": 1,\n"
+                + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
+                + "  \"status\": {\n"
+                + "    \"groupId\": 1,\n"
+                + "    \"groupName\": \"PENDING\",\n"
+                + "    \"id\": 7,\n"
+                + "    \"name\": \"PENDING_ENROUTE\",\n"
+                + "    \"description\": \"Message sent to next instance\"\n"
+                + "  }\n"
+                + "}";
+
+        UrlOptions urlOptions = new UrlOptions()
+                .shortenUrl(true)
+                .trackClicks(true)
+                .trackingUrl("https://example.com/click-report")
+                .removeProtocol(true);
+        WhatsAppUrlMediaCarouselCard card = new WhatsAppUrlMediaCarouselCard()
+                .header(new WhatsAppImageMediaCarouselCardHeader().url("https://www.example.com/image.png"))
+                .body(new WhatsAppMediaCarouselCardBody().text("Some text"))
+                .button(new WhatsAppUrlCardActionButton()
+                        .displayText("some button text")
+                        .url("https://www.example.com"));
+        WhatsAppInteractiveMediaCarouselContent content = new WhatsAppInteractiveMediaCarouselContent()
+                .body(new WhatsAppInteractiveBodyWhatsAppContent().text("Some text"))
+                .action(new WhatsAppUrlMediaCarouselAction().addCardsItem(card).addCardsItem(card));
+        WhatsAppInteractiveMediaCarouselMessage message = new WhatsAppInteractiveMediaCarouselMessage()
+                .from("441134960000")
+                .to("441134960001")
+                .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
+                .content(content)
+                .callbackData("Callback data")
+                .notifyUrl("https://www.example.com/whatsapp")
+                .urlOptions(urlOptions);
+
+        setUpSuccessPostRequest("/whatsapp/1/message/interactive/media-carousel", givenRequest, givenResponse);
+
+        Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getMessageCount()).isEqualTo(1);
+            then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
+            then(response.getStatus()).isNotNull();
+            then(response.getStatus().getName()).isEqualTo("PENDING_ENROUTE");
+        };
+
+        var call = whatsAppApi.sendWhatsappInteractiveMediaCarouselMessage(message);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSendWhatsappInteractiveVoiceButtonMessage() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
+                + "  \"to\": \"441134960001\",\n"
+                + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
+                + "  \"content\": {\n"
+                + "    \"body\": {\n"
+                + "      \"text\": \"Some text\"\n"
+                + "    }\n"
+                + "  },\n"
+                + "  \"callbackData\": \"Callback data\",\n"
+                + "  \"notifyUrl\": \"https://www.example.com/whatsapp\",\n"
+                + "  \"urlOptions\": {\n"
+                + "    \"shortenUrl\": true,\n"
+                + "    \"trackClicks\": true,\n"
+                + "    \"trackingUrl\": \"https://example.com/click-report\",\n"
+                + "    \"removeProtocol\": true\n"
+                + "  }\n"
+                + "}";
+        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+                + "  \"messageCount\": 1,\n"
+                + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
+                + "  \"status\": {\n"
+                + "    \"groupId\": 1,\n"
+                + "    \"groupName\": \"PENDING\",\n"
+                + "    \"id\": 7,\n"
+                + "    \"name\": \"PENDING_ENROUTE\",\n"
+                + "    \"description\": \"Message sent to next instance\"\n"
+                + "  }\n"
+                + "}";
+
+        UrlOptions urlOptions = new UrlOptions()
+                .shortenUrl(true)
+                .trackClicks(true)
+                .trackingUrl("https://example.com/click-report")
+                .removeProtocol(true);
+        WhatsAppInteractiveVoiceButtonMessage message = new WhatsAppInteractiveVoiceButtonMessage()
+                .from("441134960000")
+                .to("441134960001")
+                .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
+                .content(new WhatsAppInteractiveVoiceButtonContent()
+                        .body(new WhatsAppInteractiveBodyWhatsAppContent().text("Some text")))
+                .callbackData("Callback data")
+                .notifyUrl("https://www.example.com/whatsapp")
+                .urlOptions(urlOptions);
+
+        setUpSuccessPostRequest("/whatsapp/1/message/interactive/voice-button", givenRequest, givenResponse);
+
+        Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getMessageCount()).isEqualTo(1);
+            then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
+            then(response.getStatus()).isNotNull();
+            then(response.getStatus().getName()).isEqualTo("PENDING_ENROUTE");
+        };
+
+        var call = whatsAppApi.sendWhatsappInteractiveVoiceButtonMessage(message);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldSubmitWabaWhatsappConversions() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        OffsetDateTime conversionTime =
+                OffsetDateTime.of(LocalDateTime.of(2024, 5, 14, 10, 11, 45, 57000000), ZoneOffset.UTC);
+        String givenRequest = "{\n" + "  \"conversions\": [\n"
+                + "    {\n"
+                + "      \"conversionTime\": \"2024-05-14T10:11:45.057+0000\",\n"
+                + "      \"ctwaClickId\": \"ARAkLkA8rmlFeiCktEJQ-QT\",\n"
+                + "      \"details\": {\n"
+                + "        \"currency\": \"USD\",\n"
+                + "        \"value\": 100.0\n"
+                + "      },\n"
+                + "      \"type\": \"PURCHASE\"\n"
+                + "    }\n"
+                + "  ],\n"
+                + "  \"sourceId\": \"1234567890\"\n"
+                + "}";
+
+        setUpNoResponseBodyPostRequest("/whatsapp/1/conversions/waba", Map.of(), givenRequest, 204);
+
+        WhatsAppMetaConversionModel conversion = new WhatsAppMetaConversionModel()
+                .conversionTime(conversionTime)
+                .ctwaClickId("ARAkLkA8rmlFeiCktEJQ-QT")
+                .details(new WhatsAppConversionDetails().currency("USD").value(100.0))
+                .type(WhatsAppMetaConversionType.PURCHASE);
+        WhatsAppWABAConversionEventRequest request =
+                new WhatsAppWABAConversionEventRequest().sourceId("1234567890").addConversionsItem(conversion);
+
+        var call = whatsAppApi.submitWabaWhatsappConversions(request);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldUpdateWhatsappSenderBusinessInfo() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "447796344125";
+        String givenRequest = "{\n" + "  \"about\": \"Infobip Business Account\",\n"
+                + "  \"address\": \"35-38 New Bridge Street, London EC4V 6BW\",\n"
+                + "  \"description\": \"Infobip is a global cloud communications platform.\",\n"
+                + "  \"email\": \"info@example.com\",\n"
+                + "  \"vertical\": \"PROFESSIONAL_SERVICES\",\n"
+                + "  \"websites\": [\n"
+                + "    \"https://www.infobip.com\"\n"
+                + "  ],\n"
+                + "  \"logoUrl\": \"https://example.com/logo\"\n"
+                + "}";
+
+        setUpNoResponseBodyPatchRequest("/whatsapp/1/senders/447796344125/business-info", Map.of(), givenRequest, 204);
+
+        WhatsAppBusinessInfoRequest request = new WhatsAppBusinessInfoRequest()
+                .about("Infobip Business Account")
+                .address("35-38 New Bridge Street, London EC4V 6BW")
+                .description("Infobip is a global cloud communications platform.")
+                .email("info@example.com")
+                .vertical(WhatsAppBusinessVertical.PROFESSIONAL_SERVICES)
+                .websites(List.of("https://www.infobip.com"))
+                .logoUrl("https://example.com/logo");
+
+        var call = whatsAppApi.updateWhatsappSenderBusinessInfo(givenSender, request);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldUploadWhatsappSenderPublicKey() throws IOException {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "441134960000";
+        String givenFileContent =
+                "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA\n-----END PUBLIC KEY-----";
+
+        File tempFile = File.createTempFile("public-key", ".pem");
+        Files.writeString(tempFile.toPath(), givenFileContent);
+
+        setUpMultipartRequest(
+                "/whatsapp/1/senders/441134960000/public-key",
+                List.of(new Multipart("file", givenFileContent)),
+                "",
+                204);
+
+        var call = whatsAppApi.uploadWhatsappSenderPublicKey(givenSender, tempFile);
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
+
+    @Test
+    void shouldVerifyWhatsappSender() {
+        WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
+        String givenSender = "447796344125";
+        String givenRequest = "{\n" + "  \"code\": \"123456\"\n" + "}";
+
+        setUpNoResponseBodyPostRequest(
+                "/whatsapp/1/embedded-signup/registrations/senders/447796344125/verification",
+                Map.of(),
+                givenRequest,
+                202);
+
+        WhatsAppVerifyCodeRequest request = new WhatsAppVerifyCodeRequest().code("123456");
+
+        var call = whatsAppApi.verifyWhatsappSender(givenSender, request);
         testSuccessfulCallWithNoBody(call::executeAsync, 202);
     }
 }

@@ -19,7 +19,7 @@ public class SmsResponseDetails {
 
     private String messageId;
 
-    private SmsMessageStatus status;
+    private MessageStatus status;
 
     private String destination;
 
@@ -71,7 +71,7 @@ public class SmsResponseDetails {
      * @param status
      * @return This {@link SmsResponseDetails instance}.
      */
-    public SmsResponseDetails status(SmsMessageStatus status) {
+    public SmsResponseDetails status(MessageStatus status) {
         this.status = status;
         return this;
     }
@@ -82,7 +82,7 @@ public class SmsResponseDetails {
      * @return status
      */
     @JsonProperty("status")
-    public SmsMessageStatus getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
@@ -92,7 +92,7 @@ public class SmsResponseDetails {
      * @param status
      */
     @JsonProperty("status")
-    public void setStatus(SmsMessageStatus status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 

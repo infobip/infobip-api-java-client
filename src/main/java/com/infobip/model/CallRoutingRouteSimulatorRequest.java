@@ -28,6 +28,8 @@ public class CallRoutingRouteSimulatorRequest {
      * <p>
      * Field description:
      * Phone number or regular expression pattern representing the phone number. Applies to all simulator endpoint types except &#x60;WEBRTC&#x60;. Examples: &#x60;41793026727&#x60;, &#x60;41793(.+)&#x60;.
+     * <p>
+     * The field is required.
      *
      * @param to
      * @return This {@link CallRoutingRouteSimulatorRequest instance}.
@@ -42,6 +44,8 @@ public class CallRoutingRouteSimulatorRequest {
      * <p>
      * Field description:
      * Phone number or regular expression pattern representing the phone number. Applies to all simulator endpoint types except &#x60;WEBRTC&#x60;. Examples: &#x60;41793026727&#x60;, &#x60;41793(.+)&#x60;.
+     * <p>
+     * The field is required.
      *
      * @return to
      */
@@ -55,6 +59,8 @@ public class CallRoutingRouteSimulatorRequest {
      * <p>
      * Field description:
      * Phone number or regular expression pattern representing the phone number. Applies to all simulator endpoint types except &#x60;WEBRTC&#x60;. Examples: &#x60;41793026727&#x60;, &#x60;41793(.+)&#x60;.
+     * <p>
+     * The field is required.
      *
      * @param to
      */

@@ -233,7 +233,7 @@ public class SmsApi {
         /**
          * Sets limit.
          *
-         * @param limit Maximum number of delivery reports to be returned. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access reports for the last 48h (optional, default to 50)
+         * @param limit Maximum number of delivery reports to be returned. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access reports for the last 48h. (optional, default to 50)
          * @return GetOutboundSmsMessageDeliveryReportsRequest
          */
         public GetOutboundSmsMessageDeliveryReportsRequest limit(Integer limit) {
@@ -309,7 +309,7 @@ public class SmsApi {
     /**
      * Get outbound SMS message delivery reports.
      * <p>
-     * If you are unable to receive real-time message delivery reports towards your endpoint for various reasons, we offer you an API method to fetch batches of message reports to confirm whether specific messages have been delivered. Each request towards this endpoint will return batches of the latest message reports. Please note they will be returned only once.
+     * If you are unable to receive real-time message delivery reports towards your endpoint for various reasons, we offer you an API method to fetch batches of message reports to confirm whether specific messages have been delivered. Each request towards this endpoint returns batches of the latest message reports. The API returns each report only once. If the message status changes again after retrieval, the endpoint returns a new report for the updated status on the next request.
      *
      * @return GetOutboundSmsMessageDeliveryReportsRequest
      * @see <a href="https://www.infobip.com/docs/sms">Learn more about the SMS channel and its use cases</a>

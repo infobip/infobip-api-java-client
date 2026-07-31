@@ -32,6 +32,8 @@ public class WhatsAppWebhookSeenReport {
 
     private String entityId;
 
+    private WhatsAppWebhookDlrContact contact;
+
     /**
      * Sets messageId.
      * <p>
@@ -312,6 +314,37 @@ public class WhatsAppWebhookSeenReport {
         this.entityId = entityId;
     }
 
+    /**
+     * Sets contact.
+     *
+     * @param contact
+     * @return This {@link WhatsAppWebhookSeenReport instance}.
+     */
+    public WhatsAppWebhookSeenReport contact(WhatsAppWebhookDlrContact contact) {
+        this.contact = contact;
+        return this;
+    }
+
+    /**
+     * Returns contact.
+     *
+     * @return contact
+     */
+    @JsonProperty("contact")
+    public WhatsAppWebhookDlrContact getContact() {
+        return contact;
+    }
+
+    /**
+     * Sets contact.
+     *
+     * @param contact
+     */
+    @JsonProperty("contact")
+    public void setContact(WhatsAppWebhookDlrContact contact) {
+        this.contact = contact;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -327,12 +360,13 @@ public class WhatsAppWebhookSeenReport {
                 && Objects.equals(this.sentAt, whatsAppWebhookSeenReport.sentAt)
                 && Objects.equals(this.seenAt, whatsAppWebhookSeenReport.seenAt)
                 && Objects.equals(this.applicationId, whatsAppWebhookSeenReport.applicationId)
-                && Objects.equals(this.entityId, whatsAppWebhookSeenReport.entityId);
+                && Objects.equals(this.entityId, whatsAppWebhookSeenReport.entityId)
+                && Objects.equals(this.contact, whatsAppWebhookSeenReport.contact);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageId, from, to, sentAt, seenAt, applicationId, entityId);
+        return Objects.hash(messageId, from, to, sentAt, seenAt, applicationId, entityId, contact);
     }
 
     @Override
@@ -361,6 +395,9 @@ public class WhatsAppWebhookSeenReport {
                 .append(newLine)
                 .append("    entityId: ")
                 .append(toIndentedString(entityId))
+                .append(newLine)
+                .append("    contact: ")
+                .append(toIndentedString(contact))
                 .append(newLine)
                 .append("}")
                 .toString();

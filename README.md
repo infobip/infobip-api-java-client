@@ -53,7 +53,7 @@ Simply add the following in your project's POM file under `dependencies` tag:
 <dependency>
       <groupId>com.infobip</groupId>
       <artifactId>infobip-api-java-client</artifactId>
-      <version>6.5.0</version>
+      <version>7.0.0</version>
 </dependency>
 ```
 
@@ -210,6 +210,9 @@ For Email quick start guide, view [these examples](email.md).
 
 #### WhatsApp
 For WhatsApp quick start guide, view [these examples](whatsapp.md).
+
+#### Viber
+For Viber quick start guide, view [these examples](viber.md).
 
 #### Messages API
 For Messages API quick start guide, view [these examples](messages-api.md).

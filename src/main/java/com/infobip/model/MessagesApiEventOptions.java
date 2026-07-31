@@ -21,6 +21,8 @@ public class MessagesApiEventOptions {
 
     private ValidityPeriod validityPeriod;
 
+    private DeliveryTimeWindow deliveryTimeWindow;
+
     /**
      * Sets platform.
      *
@@ -83,6 +85,37 @@ public class MessagesApiEventOptions {
         this.validityPeriod = validityPeriod;
     }
 
+    /**
+     * Sets deliveryTimeWindow.
+     *
+     * @param deliveryTimeWindow
+     * @return This {@link MessagesApiEventOptions instance}.
+     */
+    public MessagesApiEventOptions deliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
+        this.deliveryTimeWindow = deliveryTimeWindow;
+        return this;
+    }
+
+    /**
+     * Returns deliveryTimeWindow.
+     *
+     * @return deliveryTimeWindow
+     */
+    @JsonProperty("deliveryTimeWindow")
+    public DeliveryTimeWindow getDeliveryTimeWindow() {
+        return deliveryTimeWindow;
+    }
+
+    /**
+     * Sets deliveryTimeWindow.
+     *
+     * @param deliveryTimeWindow
+     */
+    @JsonProperty("deliveryTimeWindow")
+    public void setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow) {
+        this.deliveryTimeWindow = deliveryTimeWindow;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -93,12 +126,13 @@ public class MessagesApiEventOptions {
         }
         MessagesApiEventOptions messagesApiEventOptions = (MessagesApiEventOptions) o;
         return Objects.equals(this.platform, messagesApiEventOptions.platform)
-                && Objects.equals(this.validityPeriod, messagesApiEventOptions.validityPeriod);
+                && Objects.equals(this.validityPeriod, messagesApiEventOptions.validityPeriod)
+                && Objects.equals(this.deliveryTimeWindow, messagesApiEventOptions.deliveryTimeWindow);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(platform, validityPeriod);
+        return Objects.hash(platform, validityPeriod, deliveryTimeWindow);
     }
 
     @Override
@@ -112,6 +146,9 @@ public class MessagesApiEventOptions {
                 .append(newLine)
                 .append("    validityPeriod: ")
                 .append(toIndentedString(validityPeriod))
+                .append(newLine)
+                .append("    deliveryTimeWindow: ")
+                .append(toIndentedString(deliveryTimeWindow))
                 .append(newLine)
                 .append("}")
                 .toString();

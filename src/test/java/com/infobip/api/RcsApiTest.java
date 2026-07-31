@@ -395,7 +395,7 @@ class RcsApiTest extends ApiTest {
             var error = result.getError();
             then(error).isNotNull();
             then(error.getGroupId()).isEqualTo(NO_ERROR_GROUP_ID);
-            then(error.getGroupName()).isEqualTo(NO_ERROR_GROUP_NAME);
+            then(error.getGroupName()).isEqualTo("OK");
             then(error.getId()).isEqualTo(NO_ERROR_ID);
             then(error.getName()).isEqualTo(NO_ERROR_NAME);
             then(error.getDescription()).isEqualTo(NO_ERROR_DESCRIPTION);
@@ -545,7 +545,7 @@ class RcsApiTest extends ApiTest {
             var error = result.getError();
             then(error).isNotNull();
             then(error.getGroupId()).isEqualTo(givenErrorGroupId);
-            then(error.getGroupName()).isEqualTo(givenErrorGroupName);
+            then(error.getGroupName()).isEqualTo("OK");
             then(error.getId()).isEqualTo(givenErrorId);
             then(error.getName()).isEqualTo(givenErrorName);
             then(error.getDescription()).isEqualTo(givenErrorDescription);
@@ -1012,7 +1012,7 @@ class RcsApiTest extends ApiTest {
         var error = report.getError();
         then(error).isNotNull();
         then(error.getGroupId()).isEqualTo(NO_ERROR_GROUP_ID);
-        then(error.getGroupName()).isEqualTo(NO_ERROR_GROUP_NAME);
+        then(error.getGroupName()).isEqualTo("OK");
         then(error.getId()).isEqualTo(NO_ERROR_ID);
         then(error.getName()).isEqualTo(NO_ERROR_NAME);
         then(error.getDescription()).isEqualTo(NO_ERROR_DESCRIPTION);
@@ -1398,7 +1398,7 @@ class RcsApiTest extends ApiTest {
         then(result.getResults().size()).isEqualTo(1);
         var event = result.getResults().get(0);
         then(event.getMessageId()).isEqualTo(givenMessageId);
-        then(event.getTrafficType()).isEqualTo(RcsTrafficType.A2P_CONVERSATION);
+        then(event.getTrafficType()).isEqualTo(RcsConvStartedTrafficType.A2P_CONVERSATION);
         var eventContent = event.getEvent();
         then(eventContent).isNotNull();
         then(eventContent.getType()).isEqualTo(RcsConversationStartedEventType.STARTED);

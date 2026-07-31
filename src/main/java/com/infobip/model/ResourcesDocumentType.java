@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum ResourcesDocumentType {
     TEMPLATE("TEMPLATE"),
-    SAMPLE("SAMPLE");
+    SAMPLE("SAMPLE"),
+    PREFILLED_DOCUMENT("PREFILLED_DOCUMENT");
 
     private final String value;
 

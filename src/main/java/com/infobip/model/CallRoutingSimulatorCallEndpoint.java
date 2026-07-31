@@ -26,6 +26,7 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = CallRoutingSimulatorPhoneEndpoint.class, name = "PHONE"),
     @JsonSubTypes.Type(value = CallRoutingSimulatorSipEndpoint.class, name = "SIP"),
     @JsonSubTypes.Type(value = CallRoutingSimulatorWebRTCEndpoint.class, name = "WEBRTC"),
+    @JsonSubTypes.Type(value = CallRoutingSimulatorWhatsAppEndpoint.class, name = "WHATSAPP"),
 })
 public abstract class CallRoutingSimulatorCallEndpoint {
 

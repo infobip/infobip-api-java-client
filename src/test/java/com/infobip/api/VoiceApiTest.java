@@ -3,6 +3,9 @@ package com.infobip.api;
 import static org.assertj.core.api.BDDAssertions.then;
 
 import com.infobip.model.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -22,6 +25,7 @@ class VoiceApiTest extends ApiTest {
     private static final String VOICE_REPORTS = "/voice/1/reports";
     private static final String VOICE_LOGS = "/tts/3/logs";
     private static final String IVR_FILES = "/voice/ivr/1/files";
+    private static final String IVR_FILE = "/voice/ivr/1/files/{id}";
     private static final String IVR_UPLOADS = "/voice/ivr/1/uploads";
     private static final String VOICE_SCENARIOS = "/voice/ivr/1/scenarios";
     private static final String VOICE_SCENARIO = "/voice/ivr/1/scenarios/{id}";
@@ -1228,6 +1232,164 @@ class VoiceApiTest extends ApiTest {
         };
 
         var call = api.ivrUploadGetFiles();
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldUploadIvrAudioFile() throws IOException {
+        String givenId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
+        String givenName = "Example file";
+        String givenFileFormat = "WAV";
+        Long givenSize = 292190L;
+        String givenCreationTime = "2022-05-01T14:25:45.143+0000";
+        OffsetDateTime givenCreationTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2022, 5, 1, 14, 25, 45, 143000000), ZoneOffset.ofHours(0));
+        String givenExpirationTime = "2022-06-01T14:25:45.143+0000";
+        OffsetDateTime givenExpirationTimeDateTime =
+                OffsetDateTime.of(LocalDateTime.of(2022, 6, 1, 14, 25, 45, 143000000), ZoneOffset.ofHours(0));
+        Long givenDuration = 3L;
+
+        String givenAttachmentText = "Test file text";
+        File tempFile = File.createTempFile("attachment", ".txt");
+        Files.writeString(tempFile.toPath(), givenAttachmentText);
+
+        String givenResponse = String.format(
+                "{\n" + "  \"id\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"fileFormat\": \"%s\",\n"
+                        + "  \"size\": %d,\n"
+                        + "  \"creationTime\": \"%s\",\n"
+                        + "  \"expirationTime\": \"%s\",\n"
+                        + "  \"duration\": %d\n"
+                        + "}\n",
+                givenId, givenName, givenFileFormat, givenSize, givenCreationTime, givenExpirationTime, givenDuration);
+
+        setUpMultipartRequest(IVR_UPLOADS, List.of(new Multipart("file", givenAttachmentText)), givenResponse, 200);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        Consumer<CallRoutingFile> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getId()).isEqualTo(givenId);
+            then(response.getName()).isEqualTo(givenName);
+            then(response.getFileFormat()).isEqualTo(givenFileFormat);
+            then(response.getSize()).isEqualTo(givenSize);
+            then(response.getCreationTime()).isEqualTo(givenCreationTimeDateTime);
+            then(response.getExpirationTime()).isEqualTo(givenExpirationTimeDateTime);
+            then(response.getDuration()).isEqualTo(givenDuration);
+        };
+
+        var call = api.ivrUploadAudioFile(tempFile);
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDownloadVoiceIvrRecordedFile() {
+        String givenId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
+        String givenResponse = "";
+
+        setUpGetRequestOctet(IVR_FILE.replace("{id}", givenId), Map.of(), givenResponse, 200);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        var call = api.downloadVoiceIvrRecordedFile(givenId);
+        testSuccessfulCallWithFileResult(call::execute);
+    }
+
+    @Test
+    void shouldSendAdvancedVoiceTts() {
+        String givenBulkId = "BULK-ID-123-xyz";
+        String givenFrom = "41793026700";
+        String givenTo1 = "41793026727";
+        String givenTo2 = "41793026731";
+        String givenText = "Test Voice message.";
+        String givenLanguage = "en";
+        String givenName = "Joanna";
+        String givenGender = "female";
+
+        String expectedBulkId = "5028e2d42f19-42f1-4656-351e-a42c191e5fd2";
+        String expectedMessageId1 = "4242f196ba50-a356-2f91-831c4aa55f351ed2";
+        String expectedMessageId2 = "5f35f896ba50-a356-43a4-91cd81b85f8c689";
+
+        String expectedRequest = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"from\": \"%s\",\n"
+                        + "      \"destinations\": [\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        },\n"
+                        + "        {\n"
+                        + "          \"to\": \"%s\"\n"
+                        + "        }\n"
+                        + "      ],\n"
+                        + "      \"text\": \"%s\",\n"
+                        + "      \"language\": \"%s\",\n"
+                        + "      \"voice\": {\n"
+                        + "        \"name\": \"%s\",\n"
+                        + "        \"gender\": \"%s\"\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                givenBulkId, givenFrom, givenTo1, givenTo2, givenText, givenLanguage, givenName, givenGender);
+
+        String givenResponse = String.format(
+                "{\n" + "  \"bulkId\": \"%s\",\n"
+                        + "  \"messages\": [\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 1,\n"
+                        + "        \"groupName\": \"PENDING\",\n"
+                        + "        \"id\": 26,\n"
+                        + "        \"name\": \"PENDING_ACCEPTED\",\n"
+                        + "        \"description\": \"Message accepted, pending for delivery.\"\n"
+                        + "      },\n"
+                        + "      \"messageId\": \"%s\"\n"
+                        + "    },\n"
+                        + "    {\n"
+                        + "      \"to\": \"%s\",\n"
+                        + "      \"status\": {\n"
+                        + "        \"groupId\": 1,\n"
+                        + "        \"groupName\": \"PENDING\",\n"
+                        + "        \"id\": 26,\n"
+                        + "        \"name\": \"PENDING_ACCEPTED\",\n"
+                        + "        \"description\": \"Message accepted, pending for delivery.\"\n"
+                        + "      },\n"
+                        + "      \"messageId\": \"%s\"\n"
+                        + "    }\n"
+                        + "  ]\n"
+                        + "}",
+                expectedBulkId, givenTo1, expectedMessageId1, givenTo2, expectedMessageId2);
+
+        setUpSuccessPostRequest(ADVANCED, expectedRequest, givenResponse);
+
+        VoiceApi api = new VoiceApi(getApiClient());
+
+        CallsAdvancedBody request = new CallsAdvancedBody()
+                .bulkId(givenBulkId)
+                .messages(List.of(new CallsAdvancedMessage()
+                        .from(givenFrom)
+                        .destinations(List.of(new CallsDestination().to(givenTo1), new CallsDestination().to(givenTo2)))
+                        .text(givenText)
+                        .language(givenLanguage)
+                        .voice(new CallsVoice().name(givenName).gender(givenGender))));
+
+        Consumer<CallsVoiceResponse> assertions = (response) -> {
+            then(response).isNotNull();
+            then(response.getBulkId()).isEqualTo(expectedBulkId);
+            then(response.getMessages()).hasSize(2);
+            then(response.getMessages().get(0).getTo()).isEqualTo(givenTo1);
+            then(response.getMessages().get(0).getMessageId()).isEqualTo(expectedMessageId1);
+            then(response.getMessages().get(1).getTo()).isEqualTo(givenTo2);
+            then(response.getMessages().get(1).getMessageId()).isEqualTo(expectedMessageId2);
+        };
+
+        var call = api.sendAdvancedVoiceTts(request);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }

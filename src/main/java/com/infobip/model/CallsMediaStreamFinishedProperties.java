@@ -19,6 +19,8 @@ public class CallsMediaStreamFinishedProperties {
 
     private String configId;
 
+    private String streamId;
+
     private String reason;
 
     /**
@@ -59,6 +61,46 @@ public class CallsMediaStreamFinishedProperties {
     @JsonProperty("configId")
     public void setConfigId(String configId) {
         this.configId = configId;
+    }
+
+    /**
+     * Sets streamId.
+     * <p>
+     * Field description:
+     * Unique stream identifier.
+     *
+     * @param streamId
+     * @return This {@link CallsMediaStreamFinishedProperties instance}.
+     */
+    public CallsMediaStreamFinishedProperties streamId(String streamId) {
+        this.streamId = streamId;
+        return this;
+    }
+
+    /**
+     * Returns streamId.
+     * <p>
+     * Field description:
+     * Unique stream identifier.
+     *
+     * @return streamId
+     */
+    @JsonProperty("streamId")
+    public String getStreamId() {
+        return streamId;
+    }
+
+    /**
+     * Sets streamId.
+     * <p>
+     * Field description:
+     * Unique stream identifier.
+     *
+     * @param streamId
+     */
+    @JsonProperty("streamId")
+    public void setStreamId(String streamId) {
+        this.streamId = streamId;
     }
 
     /**
@@ -111,12 +153,13 @@ public class CallsMediaStreamFinishedProperties {
         }
         CallsMediaStreamFinishedProperties callsMediaStreamFinishedProperties = (CallsMediaStreamFinishedProperties) o;
         return Objects.equals(this.configId, callsMediaStreamFinishedProperties.configId)
+                && Objects.equals(this.streamId, callsMediaStreamFinishedProperties.streamId)
                 && Objects.equals(this.reason, callsMediaStreamFinishedProperties.reason);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(configId, reason);
+        return Objects.hash(configId, streamId, reason);
     }
 
     @Override
@@ -127,6 +170,9 @@ public class CallsMediaStreamFinishedProperties {
                 .append(newLine)
                 .append("    configId: ")
                 .append(toIndentedString(configId))
+                .append(newLine)
+                .append("    streamId: ")
+                .append(toIndentedString(streamId))
                 .append(newLine)
                 .append("    reason: ")
                 .append(toIndentedString(reason))

@@ -342,4 +342,26 @@ class NumberMaskingApiTest extends ApiTest {
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
+
+    @Test
+    void shouldDeleteNumberMaskingConfiguration() {
+        String givenKey = "string";
+
+        setUpNoResponseBodyDeleteRequest(NUMBER_MASKING_CONFIGURATION.replace("{key}", givenKey), Map.of(), 200);
+
+        NumberMaskingApi api = new NumberMaskingApi(getApiClient());
+
+        var call = api.deleteNumberMaskingConfiguration(givenKey);
+        testSuccessfulCallWithNoBody(call::executeAsync, 200);
+    }
+
+    @Test
+    void shouldDeleteNumberMaskingCredentials() {
+        setUpNoResponseBodyDeleteRequest(NUMBER_MASKING_CREDENTIALS, Map.of(), 204);
+
+        NumberMaskingApi api = new NumberMaskingApi(getApiClient());
+
+        var call = api.deleteNumberMaskingCredentials();
+        testSuccessfulCallWithNoBody(call::executeAsync, 204);
+    }
 }

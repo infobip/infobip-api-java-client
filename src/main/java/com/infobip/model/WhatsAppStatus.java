@@ -26,7 +26,9 @@ public enum WhatsAppStatus {
     FLAGGED("FLAGGED"),
     FIRST_PAUSED("FIRST_PAUSED"),
     SECOND_PAUSED("SECOND_PAUSED"),
-    DISABLED("DISABLED");
+    DISABLED("DISABLED"),
+    ARCHIVED("ARCHIVED"),
+    UNKNOWN("UNKNOWN");
 
     private final String value;
 

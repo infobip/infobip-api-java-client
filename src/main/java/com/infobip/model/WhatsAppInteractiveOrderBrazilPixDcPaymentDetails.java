@@ -27,6 +27,8 @@ public class WhatsAppInteractiveOrderBrazilPixDcPaymentDetails extends WhatsAppI
 
     private String key;
 
+    private WhatsAppPixFlowType flowType;
+
     /**
      * Constructs a new {@link WhatsAppInteractiveOrderBrazilPixDcPaymentDetails} instance.
      */
@@ -255,6 +257,37 @@ public class WhatsAppInteractiveOrderBrazilPixDcPaymentDetails extends WhatsAppI
         this.key = key;
     }
 
+    /**
+     * Sets flowType.
+     *
+     * @param flowType
+     * @return This {@link WhatsAppInteractiveOrderBrazilPixDcPaymentDetails instance}.
+     */
+    public WhatsAppInteractiveOrderBrazilPixDcPaymentDetails flowType(WhatsAppPixFlowType flowType) {
+        this.flowType = flowType;
+        return this;
+    }
+
+    /**
+     * Returns flowType.
+     *
+     * @return flowType
+     */
+    @JsonProperty("flowType")
+    public WhatsAppPixFlowType getFlowType() {
+        return flowType;
+    }
+
+    /**
+     * Sets flowType.
+     *
+     * @param flowType
+     */
+    @JsonProperty("flowType")
+    public void setFlowType(WhatsAppPixFlowType flowType) {
+        this.flowType = flowType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -270,12 +303,13 @@ public class WhatsAppInteractiveOrderBrazilPixDcPaymentDetails extends WhatsAppI
                 && Objects.equals(this.merchantName, whatsAppInteractiveOrderBrazilPixDcPaymentDetails.merchantName)
                 && Objects.equals(this.keyType, whatsAppInteractiveOrderBrazilPixDcPaymentDetails.keyType)
                 && Objects.equals(this.key, whatsAppInteractiveOrderBrazilPixDcPaymentDetails.key)
+                && Objects.equals(this.flowType, whatsAppInteractiveOrderBrazilPixDcPaymentDetails.flowType)
                 && super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, code, merchantName, keyType, key, super.hashCode());
+        return Objects.hash(id, code, merchantName, keyType, key, flowType, super.hashCode());
     }
 
     @Override
@@ -301,6 +335,9 @@ public class WhatsAppInteractiveOrderBrazilPixDcPaymentDetails extends WhatsAppI
                 .append(newLine)
                 .append("    key: ")
                 .append(toIndentedString(key))
+                .append(newLine)
+                .append("    flowType: ")
+                .append(toIndentedString(flowType))
                 .append(newLine)
                 .append("}")
                 .toString();

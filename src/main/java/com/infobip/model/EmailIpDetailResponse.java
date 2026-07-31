@@ -122,6 +122,9 @@ public class EmailIpDetailResponse {
     /**
      * Sets ipAddresses.
      * <p>
+     * Field description:
+     * List of IP addresses that are paired together.
+     * <p>
      * The field is required.
      *
      * @param ipAddresses
@@ -134,6 +137,9 @@ public class EmailIpDetailResponse {
 
     /**
      * Adds and item into ipAddresses.
+     * <p>
+     * Field description:
+     * List of IP addresses that are paired together.
      * <p>
      * The field is required.
      *
@@ -151,6 +157,9 @@ public class EmailIpDetailResponse {
     /**
      * Returns ipAddresses.
      * <p>
+     * Field description:
+     * List of IP addresses that are paired together.
+     * <p>
      * The field is required.
      *
      * @return ipAddresses
@@ -162,6 +171,9 @@ public class EmailIpDetailResponse {
 
     /**
      * Sets ipAddresses.
+     * <p>
+     * Field description:
+     * List of IP addresses that are paired together.
      * <p>
      * The field is required.
      *
@@ -175,6 +187,9 @@ public class EmailIpDetailResponse {
     /**
      * Sets pools.
      * <p>
+     * Field description:
+     * IP pools which have assigned the provided dedicated IP.
+     * <p>
      * The field is required.
      *
      * @param pools
@@ -187,6 +202,9 @@ public class EmailIpDetailResponse {
 
     /**
      * Adds and item into pools.
+     * <p>
+     * Field description:
+     * IP pools which have assigned the provided dedicated IP.
      * <p>
      * The field is required.
      *
@@ -204,6 +222,9 @@ public class EmailIpDetailResponse {
     /**
      * Returns pools.
      * <p>
+     * Field description:
+     * IP pools which have assigned the provided dedicated IP.
+     * <p>
      * The field is required.
      *
      * @return pools
@@ -215,6 +236,9 @@ public class EmailIpDetailResponse {
 
     /**
      * Sets pools.
+     * <p>
+     * Field description:
+     * IP pools which have assigned the provided dedicated IP.
      * <p>
      * The field is required.
      *

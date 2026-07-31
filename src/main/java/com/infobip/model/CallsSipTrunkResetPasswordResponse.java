@@ -23,6 +23,7 @@ import java.util.Objects;
         property = "type",
         visible = true)
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = CallsSipTrunkAuthenticatedResetPasswordResponse.class, name = "AUTHENTICATED"),
     @JsonSubTypes.Type(value = CallsSipTrunkRegisteredResetPasswordResponse.class, name = "REGISTERED"),
 })
 public abstract class CallsSipTrunkResetPasswordResponse {

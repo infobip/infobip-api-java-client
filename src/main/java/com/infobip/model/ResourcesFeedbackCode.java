@@ -20,7 +20,8 @@ public enum ResourcesFeedbackCode {
     FORMAT("RES_REQ_FEED_FORMAT"),
     LENGTH_OOR("RES_REQ_FEED_LENGTH_OOR"),
     VALUE_OOR("RES_REQ_FEED_VALUE_OOR"),
-    OTHER("RES_REQ_FEED_OTHER");
+    OTHER("RES_REQ_FEED_OTHER"),
+    USER_ACTION_REQUIRED("RES_REQ_FEED_USER_ACTION_REQUIRED");
 
     private final String value;
 

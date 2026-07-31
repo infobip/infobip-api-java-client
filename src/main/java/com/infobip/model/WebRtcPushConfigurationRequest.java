@@ -17,59 +17,11 @@ import java.util.Objects;
  */
 public class WebRtcPushConfigurationRequest {
 
-    private String applicationId;
-
     private String name;
 
     private WebRtcIosPushNotificationConfig ios;
 
     private WebRtcAndroidPushNotificationConfig android;
-
-    /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Application id to associate the push configuration with.
-     * <p>
-     * The field is required.
-     *
-     * @param applicationId
-     * @return This {@link WebRtcPushConfigurationRequest instance}.
-     */
-    public WebRtcPushConfigurationRequest applicationId(String applicationId) {
-        this.applicationId = applicationId;
-        return this;
-    }
-
-    /**
-     * Returns applicationId.
-     * <p>
-     * Field description:
-     * Application id to associate the push configuration with.
-     * <p>
-     * The field is required.
-     *
-     * @return applicationId
-     */
-    @JsonProperty("applicationId")
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    /**
-     * Sets applicationId.
-     * <p>
-     * Field description:
-     * Application id to associate the push configuration with.
-     * <p>
-     * The field is required.
-     *
-     * @param applicationId
-     */
-    @JsonProperty("applicationId")
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
-    }
 
     /**
      * Sets name.
@@ -182,15 +134,14 @@ public class WebRtcPushConfigurationRequest {
             return false;
         }
         WebRtcPushConfigurationRequest webRtcPushConfigurationRequest = (WebRtcPushConfigurationRequest) o;
-        return Objects.equals(this.applicationId, webRtcPushConfigurationRequest.applicationId)
-                && Objects.equals(this.name, webRtcPushConfigurationRequest.name)
+        return Objects.equals(this.name, webRtcPushConfigurationRequest.name)
                 && Objects.equals(this.ios, webRtcPushConfigurationRequest.ios)
                 && Objects.equals(this.android, webRtcPushConfigurationRequest.android);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(applicationId, name, ios, android);
+        return Objects.hash(name, ios, android);
     }
 
     @Override
@@ -198,9 +149,6 @@ public class WebRtcPushConfigurationRequest {
         String newLine = System.lineSeparator();
         return new StringBuilder()
                 .append("class WebRtcPushConfigurationRequest {")
-                .append(newLine)
-                .append("    applicationId: ")
-                .append(toIndentedString(applicationId))
                 .append(newLine)
                 .append("    name: ")
                 .append(toIndentedString(name))

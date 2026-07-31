@@ -99,7 +99,7 @@ public class ResourcesApi {
     /**
      * Cancel resource request.
      * <p>
-     * **Available to selected accounts only. If you want to start using this request, reach out to support@infobip.com or your Infobip account team.**  Cancels an existing resource request with Infobip. Resource request may only be canceled when in UPDATE_REQUESTED and UPDATE_REQUESTED_BY_INTERNAL_REVIEWER status. Limited to ALPHANUMERIC_REGISTRATION, NUMBER_PURCHASE and RCS_SENDER_LAUNCH requests only.
+     * Cancels an existing resource request with Infobip. Resource request may only be canceled when in UPDATE_REQUESTED and UPDATE_REQUESTED_BY_INTERNAL_REVIEWER status. Limited to ALPHANUMERIC_REGISTRATION, NUMBER_PURCHASE and RCS_SENDER_LAUNCH requests only.
      *
      * @param id The ID of the resource request. (required)
      * @return CancelResourceRequestRequest
@@ -1098,7 +1098,7 @@ public class ResourcesApi {
     /**
      * Update resource request.
      * <p>
-     * **Available to selected accounts only. If you want to start using this request, reach out to support@infobip.com or your Infobip account team.**  Updates an existing resource request with Infobip. Resource request may only be updated when in UPDATE_REQUESTED and UPDATE_REQUESTED_BY_INTERNAL_REVIEWER status. Limited to ALPHANUMERIC_REGISTRATION, NUMBER_PURCHASE and RCS_SENDER_LAUNCH requests only. **All requirements data must be provided within the request, not just the incorrect or changed ones.**
+     * Updates an existing resource request with Infobip. Resource request may only be updated when in UPDATE_REQUESTED and UPDATE_REQUESTED_BY_INTERNAL_REVIEWER status. Limited to ALPHANUMERIC_REGISTRATION, NUMBER_PURCHASE and RCS_SENDER_LAUNCH requests only. **All requirements data must be provided within the request, not just the incorrect or changed ones.**
      *
      * @param id The ID of the resource request. (required)
      * @param resourcesUpdateResourceOrderRequest  (required)

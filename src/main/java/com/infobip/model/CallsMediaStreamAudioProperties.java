@@ -21,6 +21,8 @@ public class CallsMediaStreamAudioProperties {
 
     private Boolean replaceMedia;
 
+    private CallsMediaStreamMultiChannel multiChannel;
+
     /**
      * Sets mediaStreamConfigId.
      * <p>
@@ -107,6 +109,37 @@ public class CallsMediaStreamAudioProperties {
         this.replaceMedia = replaceMedia;
     }
 
+    /**
+     * Sets multiChannel.
+     *
+     * @param multiChannel
+     * @return This {@link CallsMediaStreamAudioProperties instance}.
+     */
+    public CallsMediaStreamAudioProperties multiChannel(CallsMediaStreamMultiChannel multiChannel) {
+        this.multiChannel = multiChannel;
+        return this;
+    }
+
+    /**
+     * Returns multiChannel.
+     *
+     * @return multiChannel
+     */
+    @JsonProperty("multiChannel")
+    public CallsMediaStreamMultiChannel getMultiChannel() {
+        return multiChannel;
+    }
+
+    /**
+     * Sets multiChannel.
+     *
+     * @param multiChannel
+     */
+    @JsonProperty("multiChannel")
+    public void setMultiChannel(CallsMediaStreamMultiChannel multiChannel) {
+        this.multiChannel = multiChannel;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -117,12 +150,13 @@ public class CallsMediaStreamAudioProperties {
         }
         CallsMediaStreamAudioProperties callsMediaStreamAudioProperties = (CallsMediaStreamAudioProperties) o;
         return Objects.equals(this.mediaStreamConfigId, callsMediaStreamAudioProperties.mediaStreamConfigId)
-                && Objects.equals(this.replaceMedia, callsMediaStreamAudioProperties.replaceMedia);
+                && Objects.equals(this.replaceMedia, callsMediaStreamAudioProperties.replaceMedia)
+                && Objects.equals(this.multiChannel, callsMediaStreamAudioProperties.multiChannel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mediaStreamConfigId, replaceMedia);
+        return Objects.hash(mediaStreamConfigId, replaceMedia, multiChannel);
     }
 
     @Override
@@ -136,6 +170,9 @@ public class CallsMediaStreamAudioProperties {
                 .append(newLine)
                 .append("    replaceMedia: ")
                 .append(toIndentedString(replaceMedia))
+                .append(newLine)
+                .append("    multiChannel: ")
+                .append(toIndentedString(multiChannel))
                 .append(newLine)
                 .append("}")
                 .toString();

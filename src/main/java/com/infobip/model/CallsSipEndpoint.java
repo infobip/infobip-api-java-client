@@ -128,7 +128,7 @@ public class CallsSipEndpoint extends CallEndpoint {
      * Sets customHeaders.
      * <p>
      * Field description:
-     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated.
+     * Custom headers. Only headers starting with &#x60;X-&#x60; prefix will be propagated.
      *
      * @param customHeaders
      * @return This {@link CallsSipEndpoint instance}.
@@ -142,7 +142,7 @@ public class CallsSipEndpoint extends CallEndpoint {
      * Puts and entry into customHeaders.
      * <p>
      * Field description:
-     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated.
+     * Custom headers. Only headers starting with &#x60;X-&#x60; prefix will be propagated.
      *
      * @param key The given key.
      * @param customHeadersItem The item to be associated with the given key.
@@ -160,7 +160,7 @@ public class CallsSipEndpoint extends CallEndpoint {
      * Returns customHeaders.
      * <p>
      * Field description:
-     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated.
+     * Custom headers. Only headers starting with &#x60;X-&#x60; prefix will be propagated.
      *
      * @return customHeaders
      */
@@ -173,7 +173,7 @@ public class CallsSipEndpoint extends CallEndpoint {
      * Sets customHeaders.
      * <p>
      * Field description:
-     * Custom headers. Only headers starting with &#x60;X-Client-&#x60; prefix will be propagated.
+     * Custom headers. Only headers starting with &#x60;X-&#x60; prefix will be propagated.
      *
      * @param customHeaders
      */

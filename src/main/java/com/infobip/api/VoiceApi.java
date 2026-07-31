@@ -338,7 +338,7 @@ public class VoiceApi {
     /**
      * Get sent bulks.
      * <p>
-     * This method will return information about the scheduled time for a unique bulk message. Canceling and rescheduling are supported only when the Fully featured voice message request contains at least one message and the message bulkId is unique.
+     * This method will return information about the scheduled time for a unique bulk message. Canceling and rescheduling are supported only when the voice message request contains at least one message and the message bulkId is unique.
      *
      * @param bulkId Unique ID of the bulk. (required)
      * @return GetSentBulksRequest

@@ -3,6 +3,9 @@ package com.infobip.api;
 import static org.assertj.core.api.BDDAssertions.then;
 
 import com.infobip.model.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -1457,6 +1460,46 @@ class CallLinkApiTest extends ApiTest {
 
         var call = callLinkApi.patchConfig(givenId, request);
 
+        testSuccessfulCall(call::execute, assertions);
+        testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldUploadCallLinkImage() throws IOException {
+        var givenType = WebRtcImageType.LOGO;
+        var givenId = "638f29f0ee8f0c1da369a722";
+        var givenName = "logo.png";
+        var givenSize = 512L;
+
+        String givenAttachmentText = "Test image content";
+        File tempFile = File.createTempFile("logo", ".png");
+        Files.writeString(tempFile.toPath(), givenAttachmentText);
+
+        String givenResponse = String.format(
+                "{\n" + "  \"id\": \"%s\",\n"
+                        + "  \"name\": \"%s\",\n"
+                        + "  \"type\": \"%s\",\n"
+                        + "  \"size\": %d\n"
+                        + "}\n",
+                givenId, givenName, givenType, givenSize);
+
+        setUpMultipartRequest(
+                UPLOAD_IMAGE.replace("{type}", givenType.toString()),
+                List.of(new Multipart("file", givenAttachmentText)),
+                givenResponse,
+                201);
+
+        CallLinkApi callLinkApi = new CallLinkApi(getApiClient());
+
+        var expectedResponse = new WebRtcImageResponse()
+                .id(givenId)
+                .name(givenName)
+                .type(givenType)
+                .size(givenSize);
+
+        Consumer<WebRtcImageResponse> assertions = response -> then(response).isEqualTo(expectedResponse);
+
+        var call = callLinkApi.uploadImage(givenType, tempFile);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }

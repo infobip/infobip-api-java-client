@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Template carousel.
+ * Template carousel. Applicable only for MARKETING category.
  */
 public class WhatsAppCarouselApiData {
 

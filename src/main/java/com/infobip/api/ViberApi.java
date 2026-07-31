@@ -10,6 +10,7 @@
 package com.infobip.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.annotations.Beta;
 import com.infobip.ApiCallback;
 import com.infobip.ApiClient;
 import com.infobip.ApiException;
@@ -19,6 +20,9 @@ import com.infobip.model.MessageGeneralStatus;
 import com.infobip.model.MessageResponse;
 import com.infobip.model.ViberLogsResponse;
 import com.infobip.model.ViberRequest;
+import com.infobip.model.ViberTemplateRequest;
+import com.infobip.model.ViberTemplateResponse;
+import com.infobip.model.ViberTemplatesResponse;
 import com.infobip.model.ViberWebhookReportsResponse;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -38,6 +42,135 @@ public class ViberApi {
      */
     public ViberApi(ApiClient apiClient) {
         this.apiClient = Objects.requireNonNull(apiClient, "ApiClient must not be null!");
+    }
+
+    private RequestDefinition createViberTemplateDefinition(String sender, ViberTemplateRequest viberTemplateRequest) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("POST", "/viber/1/senders/{sender}/templates")
+                .body(viberTemplateRequest)
+                .requiresAuthentication(true)
+                .accept("application/json")
+                .contentType("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        return builder.build();
+    }
+
+    /**
+     * createViberTemplate request builder class.
+     */
+    public class CreateViberTemplateRequest {
+        private final String sender;
+        private final ViberTemplateRequest viberTemplateRequest;
+
+        private CreateViberTemplateRequest(String sender, ViberTemplateRequest viberTemplateRequest) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this.viberTemplateRequest = Objects.requireNonNull(
+                    viberTemplateRequest, "The required parameter 'viberTemplateRequest' is missing.");
+        }
+
+        /**
+         * Executes the createViberTemplate request.
+         *
+         * @return ViberTemplateResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public ViberTemplateResponse execute() throws ApiException {
+            RequestDefinition createViberTemplateDefinition =
+                    createViberTemplateDefinition(sender, viberTemplateRequest);
+            return apiClient.execute(
+                    createViberTemplateDefinition, new TypeReference<ViberTemplateResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the createViberTemplate request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<ViberTemplateResponse> callback) {
+            RequestDefinition createViberTemplateDefinition =
+                    createViberTemplateDefinition(sender, viberTemplateRequest);
+            return apiClient.executeAsync(
+                    createViberTemplateDefinition, new TypeReference<ViberTemplateResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Create Viber template.
+     * <p>
+     * Create a new Viber template for a given sender. Templates must be approved by Viber before they can be used for sending messages.
+     *
+     * @param sender Sender id. (required)
+     * @param viberTemplateRequest  (required)
+     * @return CreateViberTemplateRequest
+     */
+    @Beta
+    public CreateViberTemplateRequest createViberTemplate(String sender, ViberTemplateRequest viberTemplateRequest) {
+        return new CreateViberTemplateRequest(sender, viberTemplateRequest);
+    }
+
+    private RequestDefinition deleteViberTemplateDefinition(String sender, String templateId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "DELETE", "/viber/1/senders/{sender}/templates/{templateId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        if (templateId != null) {
+            builder.addPathParameter(new Parameter("templateId", templateId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * deleteViberTemplate request builder class.
+     */
+    public class DeleteViberTemplateRequest {
+        private final String sender;
+        private final String templateId;
+
+        private DeleteViberTemplateRequest(String sender, String templateId) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this.templateId = Objects.requireNonNull(templateId, "The required parameter 'templateId' is missing.");
+        }
+
+        /**
+         * Executes the deleteViberTemplate request
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public void execute() throws ApiException {
+            RequestDefinition deleteViberTemplateDefinition = deleteViberTemplateDefinition(sender, templateId);
+            apiClient.execute(deleteViberTemplateDefinition);
+        }
+
+        /**
+         * Executes the deleteViberTemplate request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<Void> callback) {
+            RequestDefinition deleteViberTemplateDefinition = deleteViberTemplateDefinition(sender, templateId);
+            return apiClient.executeAsync(deleteViberTemplateDefinition, callback);
+        }
+    }
+
+    /**
+     * Delete Viber template.
+     * <p>
+     * Delete a specific Viber template. Deleted templates can no longer be used for sending messages.
+     *
+     * @param sender Sender id. (required)
+     * @param templateId Id of existing template. (required)
+     * @return DeleteViberTemplateRequest
+     */
+    @Beta
+    public DeleteViberTemplateRequest deleteViberTemplate(String sender, String templateId) {
+        return new DeleteViberTemplateRequest(sender, templateId);
     }
 
     private RequestDefinition getOutboundViberMessageDeliveryReportsDefinition(
@@ -110,7 +243,7 @@ public class ViberApi {
         /**
          * Sets limit.
          *
-         * @param limit Maximum number of delivery reports to be returned. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access reports for the last 48h (optional, default to 50)
+         * @param limit Maximum number of delivery reports to be returned. If not set, the latest 50 records are returned. Maximum limit value is 1000 and you can only access reports for the last 48h. (optional, default to 50)
          * @return GetOutboundViberMessageDeliveryReportsRequest
          */
         public GetOutboundViberMessageDeliveryReportsRequest limit(Integer limit) {
@@ -486,6 +619,176 @@ public class ViberApi {
      */
     public GetOutboundViberMessageLogsRequest getOutboundViberMessageLogs() {
         return new GetOutboundViberMessageLogsRequest();
+    }
+
+    private RequestDefinition getViberTemplateDefinition(String sender, String templateId) {
+        RequestDefinition.Builder builder = RequestDefinition.builder(
+                        "GET", "/viber/1/senders/{sender}/templates/{templateId}")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        if (templateId != null) {
+            builder.addPathParameter(new Parameter("templateId", templateId));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getViberTemplate request builder class.
+     */
+    public class GetViberTemplateRequest {
+        private final String sender;
+        private final String templateId;
+
+        private GetViberTemplateRequest(String sender, String templateId) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+            this.templateId = Objects.requireNonNull(templateId, "The required parameter 'templateId' is missing.");
+        }
+
+        /**
+         * Executes the getViberTemplate request.
+         *
+         * @return ViberTemplateResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public ViberTemplateResponse execute() throws ApiException {
+            RequestDefinition getViberTemplateDefinition = getViberTemplateDefinition(sender, templateId);
+            return apiClient.execute(
+                    getViberTemplateDefinition, new TypeReference<ViberTemplateResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getViberTemplate request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<ViberTemplateResponse> callback) {
+            RequestDefinition getViberTemplateDefinition = getViberTemplateDefinition(sender, templateId);
+            return apiClient.executeAsync(
+                    getViberTemplateDefinition, new TypeReference<ViberTemplateResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get Viber template.
+     * <p>
+     * Retrieve details of a specific Viber template by its ID and associated sender.
+     *
+     * @param sender Sender id. (required)
+     * @param templateId Id of existing template. (required)
+     * @return GetViberTemplateRequest
+     */
+    @Beta
+    public GetViberTemplateRequest getViberTemplate(String sender, String templateId) {
+        return new GetViberTemplateRequest(sender, templateId);
+    }
+
+    private RequestDefinition getViberTemplatesDefinition(String sender, Integer page, Integer size, String orderBy) {
+        RequestDefinition.Builder builder = RequestDefinition.builder("GET", "/viber/1/senders/{sender}/templates")
+                .requiresAuthentication(true)
+                .accept("application/json");
+
+        if (sender != null) {
+            builder.addPathParameter(new Parameter("sender", sender));
+        }
+        if (page != null) {
+            builder.addQueryParameter(new Parameter("page", page));
+        }
+        if (size != null) {
+            builder.addQueryParameter(new Parameter("size", size));
+        }
+        if (orderBy != null) {
+            builder.addQueryParameter(new Parameter("orderBy", orderBy));
+        }
+        return builder.build();
+    }
+
+    /**
+     * getViberTemplates request builder class.
+     */
+    public class GetViberTemplatesRequest {
+        private final String sender;
+        private Integer page;
+        private Integer size;
+        private String orderBy;
+
+        private GetViberTemplatesRequest(String sender) {
+            this.sender = Objects.requireNonNull(sender, "The required parameter 'sender' is missing.");
+        }
+
+        /**
+         * Sets page.
+         *
+         * @param page Current page number. (optional, default to 0)
+         * @return GetViberTemplatesRequest
+         */
+        public GetViberTemplatesRequest page(Integer page) {
+            this.page = page;
+            return this;
+        }
+
+        /**
+         * Sets size.
+         *
+         * @param size Number of items per page. (optional, default to 20)
+         * @return GetViberTemplatesRequest
+         */
+        public GetViberTemplatesRequest size(Integer size) {
+            this.size = size;
+            return this;
+        }
+
+        /**
+         * Sets orderBy.
+         *
+         * @param orderBy Sorting criteria in the format &#x60;property,direction&#x60;. Can be ascending (ASC) or descending (DESC). Available properties: id, sender, channel, templateId, name, createdAt. (optional, default to createdAt,ASC)
+         * @return GetViberTemplatesRequest
+         */
+        public GetViberTemplatesRequest orderBy(String orderBy) {
+            this.orderBy = orderBy;
+            return this;
+        }
+
+        /**
+         * Executes the getViberTemplates request.
+         *
+         * @return ViberTemplatesResponse The deserialized response.
+         * @throws ApiException If the API call fails or an error occurs during the request or response processing.
+         */
+        public ViberTemplatesResponse execute() throws ApiException {
+            RequestDefinition getViberTemplatesDefinition = getViberTemplatesDefinition(sender, page, size, orderBy);
+            return apiClient.execute(
+                    getViberTemplatesDefinition, new TypeReference<ViberTemplatesResponse>() {}.getType());
+        }
+
+        /**
+         * Executes the getViberTemplates request asynchronously.
+         *
+         * @param callback The {@link ApiCallback} to be invoked.
+         * @return The {@link okhttp3.Call} associated with the API request.
+         */
+        public okhttp3.Call executeAsync(ApiCallback<ViberTemplatesResponse> callback) {
+            RequestDefinition getViberTemplatesDefinition = getViberTemplatesDefinition(sender, page, size, orderBy);
+            return apiClient.executeAsync(
+                    getViberTemplatesDefinition, new TypeReference<ViberTemplatesResponse>() {}.getType(), callback);
+        }
+    }
+
+    /**
+     * Get Viber templates.
+     * <p>
+     * Retrieve Viber templates available for specific sender.
+     *
+     * @param sender Sender id. (required)
+     * @return GetViberTemplatesRequest
+     */
+    @Beta
+    public GetViberTemplatesRequest getViberTemplates(String sender) {
+        return new GetViberTemplatesRequest(sender);
     }
 
     private RequestDefinition sendViberMessagesDefinition(ViberRequest viberRequest) {

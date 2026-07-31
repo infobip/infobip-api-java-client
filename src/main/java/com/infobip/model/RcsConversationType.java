@@ -13,11 +13,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Conversation type (Application to Person/Person to Application).
+ * Conversation type (Application to Person/Person to Application/Interactive session).
  */
 public enum RcsConversationType {
     A2P("A2P"),
-    P2A("P2A");
+    P2A("P2A"),
+    INTERACTIVE_SESSION("INTERACTIVE_SESSION");
 
     private final String value;
 

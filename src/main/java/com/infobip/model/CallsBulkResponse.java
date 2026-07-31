@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
- * Represents CallsBulkResponse model.
+ * Bulk response object.
  */
 public class CallsBulkResponse {
 

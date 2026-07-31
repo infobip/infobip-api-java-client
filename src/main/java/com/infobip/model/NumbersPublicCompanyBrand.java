@@ -19,6 +19,10 @@ public class NumbersPublicCompanyBrand extends NumbersBrand {
 
     private String referenceId;
 
+    private String taxId;
+
+    private String taxIdIssuingCountry;
+
     private NumbersAddress address;
 
     private String countryCode;
@@ -38,10 +42,6 @@ public class NumbersPublicCompanyBrand extends NumbersBrand {
     private NumbersBusinessIdentifier alternateBusinessId;
 
     private NumbersVertical vertical;
-
-    private String taxId;
-
-    private String taxIdIssuingCountry;
 
     private NumbersStockExchange stockExchange;
 
@@ -94,6 +94,92 @@ public class NumbersPublicCompanyBrand extends NumbersBrand {
     @JsonProperty("referenceId")
     public void setReferenceId(String referenceId) {
         this.referenceId = referenceId;
+    }
+
+    /**
+     * Sets taxId.
+     * <p>
+     * Field description:
+     * The tax identifier for the brand. Not required for sole proprietor brands.
+     * <p>
+     * The field is required.
+     *
+     * @param taxId
+     * @return This {@link NumbersPublicCompanyBrand instance}.
+     */
+    public NumbersPublicCompanyBrand taxId(String taxId) {
+        this.taxId = taxId;
+        return this;
+    }
+
+    /**
+     * Returns taxId.
+     * <p>
+     * Field description:
+     * The tax identifier for the brand. Not required for sole proprietor brands.
+     * <p>
+     * The field is required.
+     *
+     * @return taxId
+     */
+    @JsonProperty("taxId")
+    public String getTaxId() {
+        return taxId;
+    }
+
+    /**
+     * Sets taxId.
+     * <p>
+     * Field description:
+     * The tax identifier for the brand. Not required for sole proprietor brands.
+     * <p>
+     * The field is required.
+     *
+     * @param taxId
+     */
+    @JsonProperty("taxId")
+    public void setTaxId(String taxId) {
+        this.taxId = taxId;
+    }
+
+    /**
+     * Sets taxIdIssuingCountry.
+     * <p>
+     * Field description:
+     * The country where tax identifier is issued. If not specified, the value from countryCode will be used.
+     *
+     * @param taxIdIssuingCountry
+     * @return This {@link NumbersPublicCompanyBrand instance}.
+     */
+    public NumbersPublicCompanyBrand taxIdIssuingCountry(String taxIdIssuingCountry) {
+        this.taxIdIssuingCountry = taxIdIssuingCountry;
+        return this;
+    }
+
+    /**
+     * Returns taxIdIssuingCountry.
+     * <p>
+     * Field description:
+     * The country where tax identifier is issued. If not specified, the value from countryCode will be used.
+     *
+     * @return taxIdIssuingCountry
+     */
+    @JsonProperty("taxIdIssuingCountry")
+    public String getTaxIdIssuingCountry() {
+        return taxIdIssuingCountry;
+    }
+
+    /**
+     * Sets taxIdIssuingCountry.
+     * <p>
+     * Field description:
+     * The country where tax identifier is issued. If not specified, the value from countryCode will be used.
+     *
+     * @param taxIdIssuingCountry
+     */
+    @JsonProperty("taxIdIssuingCountry")
+    public void setTaxIdIssuingCountry(String taxIdIssuingCountry) {
+        this.taxIdIssuingCountry = taxIdIssuingCountry;
     }
 
     /**
@@ -506,92 +592,6 @@ public class NumbersPublicCompanyBrand extends NumbersBrand {
     }
 
     /**
-     * Sets taxId.
-     * <p>
-     * Field description:
-     * The tax identifier for the brand.
-     * <p>
-     * The field is required.
-     *
-     * @param taxId
-     * @return This {@link NumbersPublicCompanyBrand instance}.
-     */
-    public NumbersPublicCompanyBrand taxId(String taxId) {
-        this.taxId = taxId;
-        return this;
-    }
-
-    /**
-     * Returns taxId.
-     * <p>
-     * Field description:
-     * The tax identifier for the brand.
-     * <p>
-     * The field is required.
-     *
-     * @return taxId
-     */
-    @JsonProperty("taxId")
-    public String getTaxId() {
-        return taxId;
-    }
-
-    /**
-     * Sets taxId.
-     * <p>
-     * Field description:
-     * The tax identifier for the brand.
-     * <p>
-     * The field is required.
-     *
-     * @param taxId
-     */
-    @JsonProperty("taxId")
-    public void setTaxId(String taxId) {
-        this.taxId = taxId;
-    }
-
-    /**
-     * Sets taxIdIssuingCountry.
-     * <p>
-     * Field description:
-     * The country where tax identifier is issued. If not specified, the value from countryCode will be used.
-     *
-     * @param taxIdIssuingCountry
-     * @return This {@link NumbersPublicCompanyBrand instance}.
-     */
-    public NumbersPublicCompanyBrand taxIdIssuingCountry(String taxIdIssuingCountry) {
-        this.taxIdIssuingCountry = taxIdIssuingCountry;
-        return this;
-    }
-
-    /**
-     * Returns taxIdIssuingCountry.
-     * <p>
-     * Field description:
-     * The country where tax identifier is issued. If not specified, the value from countryCode will be used.
-     *
-     * @return taxIdIssuingCountry
-     */
-    @JsonProperty("taxIdIssuingCountry")
-    public String getTaxIdIssuingCountry() {
-        return taxIdIssuingCountry;
-    }
-
-    /**
-     * Sets taxIdIssuingCountry.
-     * <p>
-     * Field description:
-     * The country where tax identifier is issued. If not specified, the value from countryCode will be used.
-     *
-     * @param taxIdIssuingCountry
-     */
-    @JsonProperty("taxIdIssuingCountry")
-    public void setTaxIdIssuingCountry(String taxIdIssuingCountry) {
-        this.taxIdIssuingCountry = taxIdIssuingCountry;
-    }
-
-    /**
      * Sets stockExchange.
      * <p>
      * The field is required.
@@ -730,6 +730,8 @@ public class NumbersPublicCompanyBrand extends NumbersBrand {
         }
         NumbersPublicCompanyBrand numbersPublicCompanyBrand = (NumbersPublicCompanyBrand) o;
         return Objects.equals(this.referenceId, numbersPublicCompanyBrand.referenceId)
+                && Objects.equals(this.taxId, numbersPublicCompanyBrand.taxId)
+                && Objects.equals(this.taxIdIssuingCountry, numbersPublicCompanyBrand.taxIdIssuingCountry)
                 && Objects.equals(this.address, numbersPublicCompanyBrand.address)
                 && Objects.equals(this.countryCode, numbersPublicCompanyBrand.countryCode)
                 && Objects.equals(this.supportPhone, numbersPublicCompanyBrand.supportPhone)
@@ -740,8 +742,6 @@ public class NumbersPublicCompanyBrand extends NumbersBrand {
                 && Objects.equals(this.legalName, numbersPublicCompanyBrand.legalName)
                 && Objects.equals(this.alternateBusinessId, numbersPublicCompanyBrand.alternateBusinessId)
                 && Objects.equals(this.vertical, numbersPublicCompanyBrand.vertical)
-                && Objects.equals(this.taxId, numbersPublicCompanyBrand.taxId)
-                && Objects.equals(this.taxIdIssuingCountry, numbersPublicCompanyBrand.taxIdIssuingCountry)
                 && Objects.equals(this.stockExchange, numbersPublicCompanyBrand.stockExchange)
                 && Objects.equals(this.stockSymbol, numbersPublicCompanyBrand.stockSymbol)
                 && Objects.equals(this.businessContactEmail, numbersPublicCompanyBrand.businessContactEmail)
@@ -752,6 +752,8 @@ public class NumbersPublicCompanyBrand extends NumbersBrand {
     public int hashCode() {
         return Objects.hash(
                 referenceId,
+                taxId,
+                taxIdIssuingCountry,
                 address,
                 countryCode,
                 supportPhone,
@@ -762,8 +764,6 @@ public class NumbersPublicCompanyBrand extends NumbersBrand {
                 legalName,
                 alternateBusinessId,
                 vertical,
-                taxId,
-                taxIdIssuingCountry,
                 stockExchange,
                 stockSymbol,
                 businessContactEmail,
@@ -781,6 +781,12 @@ public class NumbersPublicCompanyBrand extends NumbersBrand {
                 .append(newLine)
                 .append("    referenceId: ")
                 .append(toIndentedString(referenceId))
+                .append(newLine)
+                .append("    taxId: ")
+                .append(toIndentedString(taxId))
+                .append(newLine)
+                .append("    taxIdIssuingCountry: ")
+                .append(toIndentedString(taxIdIssuingCountry))
                 .append(newLine)
                 .append("    address: ")
                 .append(toIndentedString(address))
@@ -811,12 +817,6 @@ public class NumbersPublicCompanyBrand extends NumbersBrand {
                 .append(newLine)
                 .append("    vertical: ")
                 .append(toIndentedString(vertical))
-                .append(newLine)
-                .append("    taxId: ")
-                .append(toIndentedString(taxId))
-                .append(newLine)
-                .append("    taxIdIssuingCountry: ")
-                .append(toIndentedString(taxIdIssuingCountry))
                 .append(newLine)
                 .append("    stockExchange: ")
                 .append(toIndentedString(stockExchange))

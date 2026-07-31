@@ -40,7 +40,7 @@ public class RcsInboundMessageEventContent {
 
     private RcsInboundMessageContent message;
 
-    private RcsMessagePrice price;
+    private RcsMoEventMessagePrice price;
 
     private RcsConversationInfo conversation;
 
@@ -518,7 +518,7 @@ public class RcsInboundMessageEventContent {
      * @param price
      * @return This {@link RcsInboundMessageEventContent instance}.
      */
-    public RcsInboundMessageEventContent price(RcsMessagePrice price) {
+    public RcsInboundMessageEventContent price(RcsMoEventMessagePrice price) {
         this.price = price;
         return this;
     }
@@ -531,7 +531,7 @@ public class RcsInboundMessageEventContent {
      * @return price
      */
     @JsonProperty("price")
-    public RcsMessagePrice getPrice() {
+    public RcsMoEventMessagePrice getPrice() {
         return price;
     }
 
@@ -543,7 +543,7 @@ public class RcsInboundMessageEventContent {
      * @param price
      */
     @JsonProperty("price")
-    public void setPrice(RcsMessagePrice price) {
+    public void setPrice(RcsMoEventMessagePrice price) {
         this.price = price;
     }
 

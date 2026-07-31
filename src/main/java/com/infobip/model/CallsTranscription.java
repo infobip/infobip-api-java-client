@@ -27,6 +27,8 @@ public class CallsTranscription {
 
     private Boolean advancedFormatting;
 
+    private CallsTranscriptionProvider provider;
+
     /**
      * Sets language.
      * <p>
@@ -201,6 +203,37 @@ public class CallsTranscription {
         this.advancedFormatting = advancedFormatting;
     }
 
+    /**
+     * Sets provider.
+     *
+     * @param provider
+     * @return This {@link CallsTranscription instance}.
+     */
+    public CallsTranscription provider(CallsTranscriptionProvider provider) {
+        this.provider = provider;
+        return this;
+    }
+
+    /**
+     * Returns provider.
+     *
+     * @return provider
+     */
+    @JsonProperty("provider")
+    public CallsTranscriptionProvider getProvider() {
+        return provider;
+    }
+
+    /**
+     * Sets provider.
+     *
+     * @param provider
+     */
+    @JsonProperty("provider")
+    public void setProvider(CallsTranscriptionProvider provider) {
+        this.provider = provider;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -213,12 +246,13 @@ public class CallsTranscription {
         return Objects.equals(this.language, callsTranscription.language)
                 && Objects.equals(this.sendInterimResults, callsTranscription.sendInterimResults)
                 && Objects.equals(this.customDictionary, callsTranscription.customDictionary)
-                && Objects.equals(this.advancedFormatting, callsTranscription.advancedFormatting);
+                && Objects.equals(this.advancedFormatting, callsTranscription.advancedFormatting)
+                && Objects.equals(this.provider, callsTranscription.provider);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(language, sendInterimResults, customDictionary, advancedFormatting);
+        return Objects.hash(language, sendInterimResults, customDictionary, advancedFormatting, provider);
     }
 
     @Override
@@ -238,6 +272,9 @@ public class CallsTranscription {
                 .append(newLine)
                 .append("    advancedFormatting: ")
                 .append(toIndentedString(advancedFormatting))
+                .append(newLine)
+                .append("    provider: ")
+                .append(toIndentedString(provider))
                 .append(newLine)
                 .append("}")
                 .toString();

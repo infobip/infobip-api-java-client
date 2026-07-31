@@ -75,8 +75,6 @@ public class MessagesApiMessage implements MessagesApiRequestMessagesInner {
      * <p>
      * Field description:
      * The sender ID. It can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;). Make sure you don&#39;t exceed [character limit](https://www.infobip.com/docs/sms/get-started#sender-names).
-     * <p>
-     * The field is required.
      *
      * @param sender
      * @return This {@link MessagesApiMessage instance}.
@@ -91,8 +89,6 @@ public class MessagesApiMessage implements MessagesApiRequestMessagesInner {
      * <p>
      * Field description:
      * The sender ID. It can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;). Make sure you don&#39;t exceed [character limit](https://www.infobip.com/docs/sms/get-started#sender-names).
-     * <p>
-     * The field is required.
      *
      * @return sender
      */
@@ -106,8 +102,6 @@ public class MessagesApiMessage implements MessagesApiRequestMessagesInner {
      * <p>
      * Field description:
      * The sender ID. It can be alphanumeric or numeric (e.g., &#x60;CompanyName&#x60;). Make sure you don&#39;t exceed [character limit](https://www.infobip.com/docs/sms/get-started#sender-names).
-     * <p>
-     * The field is required.
      *
      * @param sender
      */

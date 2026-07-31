@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Used to define voice in which text would be synthesized. It has two parameters: _name_ and _gender_. When only _name_ is provided, then that exact voice with that name will be used to synthesize text. If only _gender_ is provided, then text is synthesized with first voice in given gender. If voice is not set, then default voice is used.
+ * Used to define voice in which text would be synthesized. It has two parameters: _name_ and _gender_. When only _name_ is provided, then that exact voice with that name will be used to synthesize text. If only _gender_ is provided, then text is synthesized with first voice in given gender. If voice is not set, then default voice for that specific language is used.
  */
 public class CallsVoice {
 

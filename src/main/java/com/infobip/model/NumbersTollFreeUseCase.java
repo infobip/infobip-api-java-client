@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Represents NumbersTollFreeUseCase enumeration.
+ * Campaign use case.
  */
 public enum NumbersTollFreeUseCase {
     TWO_FA("TWO_FA"),

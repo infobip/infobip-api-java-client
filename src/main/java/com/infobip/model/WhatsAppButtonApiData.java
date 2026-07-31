@@ -32,6 +32,7 @@ import java.util.Objects;
     @JsonSubTypes.Type(value = WhatsAppOrderDetailsButtonApiData.class, name = "ORDER_DETAILS"),
     @JsonSubTypes.Type(value = WhatsAppPhoneNumberButtonApiData.class, name = "PHONE_NUMBER"),
     @JsonSubTypes.Type(value = WhatsAppQuickReplyButtonApiData.class, name = "QUICK_REPLY"),
+    @JsonSubTypes.Type(value = WhatsAppRequestContactInfoButtonApiData.class, name = "REQUEST_CONTACT_INFO"),
     @JsonSubTypes.Type(value = WhatsAppUrlButtonApiData.class, name = "URL"),
     @JsonSubTypes.Type(value = WhatsAppVoiceCallButtonApiData.class, name = "VOICE_CALL"),
 })
@@ -48,7 +49,8 @@ public abstract class WhatsAppButtonApiData {
         CATALOG("CATALOG"),
         MULTI_PRODUCT("MULTI_PRODUCT"),
         ORDER_DETAILS("ORDER_DETAILS"),
-        VOICE_CALL("VOICE_CALL");
+        VOICE_CALL("VOICE_CALL"),
+        REQUEST_CONTACT_INFO("REQUEST_CONTACT_INFO");
 
         private String value;
 

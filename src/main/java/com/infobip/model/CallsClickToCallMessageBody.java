@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents CallsClickToCallMessageBody model.
+ * Click-to-call request object.
  */
 public class CallsClickToCallMessageBody {
 

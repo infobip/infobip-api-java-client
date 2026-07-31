@@ -15,6 +15,7 @@ class CallRoutingApiTest extends ApiTest {
     private static final String ROUTE_STATUS = "/callrouting/1/routes/{routeId}/status";
     private static final String ROUTE_SIMULATE = "/callrouting/1/routes/simulate";
     private static final String RECORDINGS = "/callrouting/1/recordings";
+    private static final String RECORDING_FILE = "/callrouting/1/recordings/files/{fileId}";
 
     @Test
     void shouldGetCallRoutes() {
@@ -881,5 +882,18 @@ class CallRoutingApiTest extends ApiTest {
 
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
+    }
+
+    @Test
+    void shouldDownloadCallRoutingRecordingFile() {
+        String givenFileId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
+        String givenResponse = "";
+
+        setUpGetRequestOctet(RECORDING_FILE.replace("{fileId}", givenFileId), Map.of(), givenResponse, 200);
+
+        CallRoutingApi callRoutingApi = new CallRoutingApi(getApiClient());
+
+        var call = callRoutingApi.recordingFileDownload(givenFileId);
+        testSuccessfulCallWithFileResult(call::execute);
     }
 }

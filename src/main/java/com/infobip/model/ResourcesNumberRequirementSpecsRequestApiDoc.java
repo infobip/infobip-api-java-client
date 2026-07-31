@@ -19,7 +19,8 @@ import java.util.Objects;
 /**
  * Represents ResourcesNumberRequirementSpecsRequestApiDoc model.
  */
-public class ResourcesNumberRequirementSpecsRequestApiDoc implements ResourcesRequirementsLookupBody {
+public class ResourcesNumberRequirementSpecsRequestApiDoc
+        implements ResourcesRequirementSpecsRequestApiDoc, ResourcesRequirementsLookupBody {
     /**
      * Type of resource.
      */
@@ -60,6 +61,8 @@ public class ResourcesNumberRequirementSpecsRequestApiDoc implements ResourcesRe
     private ResourcesResourceNumberType numberType;
 
     private List<ResourcesResourceNumberCapability> capabilities = new ArrayList<>();
+
+    private ResourcesNumberOfferClientType clientType;
 
     private String countryCode;
 
@@ -254,6 +257,37 @@ public class ResourcesNumberRequirementSpecsRequestApiDoc implements ResourcesRe
     }
 
     /**
+     * Sets clientType.
+     *
+     * @param clientType
+     * @return This {@link ResourcesNumberRequirementSpecsRequestApiDoc instance}.
+     */
+    public ResourcesNumberRequirementSpecsRequestApiDoc clientType(ResourcesNumberOfferClientType clientType) {
+        this.clientType = clientType;
+        return this;
+    }
+
+    /**
+     * Returns clientType.
+     *
+     * @return clientType
+     */
+    @JsonProperty("clientType")
+    public ResourcesNumberOfferClientType getClientType() {
+        return clientType;
+    }
+
+    /**
+     * Sets clientType.
+     *
+     * @param clientType
+     */
+    @JsonProperty("clientType")
+    public void setClientType(ResourcesNumberOfferClientType clientType) {
+        this.clientType = clientType;
+    }
+
+    /**
      * Sets countryCode.
      * <p>
      * Field description:
@@ -313,12 +347,13 @@ public class ResourcesNumberRequirementSpecsRequestApiDoc implements ResourcesRe
                 && Objects.equals(this.quantity, resourcesNumberRequirementSpecsRequestApiDoc.quantity)
                 && Objects.equals(this.numberType, resourcesNumberRequirementSpecsRequestApiDoc.numberType)
                 && Objects.equals(this.capabilities, resourcesNumberRequirementSpecsRequestApiDoc.capabilities)
+                && Objects.equals(this.clientType, resourcesNumberRequirementSpecsRequestApiDoc.clientType)
                 && Objects.equals(this.countryCode, resourcesNumberRequirementSpecsRequestApiDoc.countryCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, quantity, numberType, capabilities, countryCode);
+        return Objects.hash(type, quantity, numberType, capabilities, clientType, countryCode);
     }
 
     @Override
@@ -338,6 +373,9 @@ public class ResourcesNumberRequirementSpecsRequestApiDoc implements ResourcesRe
                 .append(newLine)
                 .append("    capabilities: ")
                 .append(toIndentedString(capabilities))
+                .append(newLine)
+                .append("    clientType: ")
+                .append(toIndentedString(clientType))
                 .append(newLine)
                 .append("    countryCode: ")
                 .append(toIndentedString(countryCode))
