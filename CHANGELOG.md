@@ -5,6 +5,11 @@ All notable changes to the library will be documented in this file.
 The format of the file is based on [Keep a Changelog](http://keepachangelog.com/)
 and this library adheres to [Semantic Versioning](http://semver.org/) as mentioned in [README.md][readme] file.
 
+## [ [7.0.1](https://github.com/infobip/infobip-api-java-client/releases/tag/7.0.1) ] - 2026-09-03
+
+### Fixed
+* Fixed `messageId` field type in `EmailWebhookTrackingPayload` from `Double` to `String` in order to properly deserialize requests received on the `Receive user events` webhook.
+
 ## [ [7.0.0](https://github.com/infobip/infobip-api-java-client/releases/tag/7.0.0) ] - 2026-07-31
 
 ⚠️ **IMPORTANT NOTE:** This release contains compile time breaking changes.
