@@ -1088,7 +1088,7 @@ class EmailApiTest extends ApiTest {
                 + "   \"domain\": \"example.com\",\n"
                 + "   \"recipient\": \"john.doe@example.com\",\n"
                 + "   \"sendDateTime\": 1599542877689,\n"
-                + "   \"messageId\": 1599542877689,\n"
+                + "   \"messageId\": \"14b734recsf69n8zkao5\",\n"
                 + "   \"bulkId\": \"ikzzmbhu6223bxkhmyrj\",\n"
                 + "   \"recipientInfo\": {\n"
                 + "     \"deviceType\": \"Phone\",\n"

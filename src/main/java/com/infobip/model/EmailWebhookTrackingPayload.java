@@ -31,7 +31,7 @@ public class EmailWebhookTrackingPayload {
 
     private Double sendDateTime;
 
-    private Double messageId;
+    private String messageId;
 
     private String bulkId;
 
@@ -336,7 +336,7 @@ public class EmailWebhookTrackingPayload {
      * @param messageId
      * @return This {@link EmailWebhookTrackingPayload instance}.
      */
-    public EmailWebhookTrackingPayload messageId(Double messageId) {
+    public EmailWebhookTrackingPayload messageId(String messageId) {
         this.messageId = messageId;
         return this;
     }
@@ -350,7 +350,7 @@ public class EmailWebhookTrackingPayload {
      * @return messageId
      */
     @JsonProperty("messageId")
-    public Double getMessageId() {
+    public String getMessageId() {
         return messageId;
     }
 
@@ -363,7 +363,7 @@ public class EmailWebhookTrackingPayload {
      * @param messageId
      */
     @JsonProperty("messageId")
-    public void setMessageId(Double messageId) {
+    public void setMessageId(String messageId) {
         this.messageId = messageId;
     }
 
