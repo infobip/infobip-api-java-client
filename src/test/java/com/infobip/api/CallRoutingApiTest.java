@@ -21,7 +21,7 @@ class CallRoutingApiTest extends ApiTest {
     void shouldGetCallRoutes() {
         var givenId = "f8fc8aca-786d-4943-9af2-e7ec01b5e80d";
         var givenName = "SIP endpoint route";
-        var givenDestinationsValueUsername = "41793026834";
+        var givenDestinationsValueUsername = "41xxxxxxx30";
         var givenDestinationsValueSipTrunkId = "string";
         var givenDestinationsValueCustomHeadersString = "string";
         var givenDestinationsValueType = "SIP";
@@ -34,7 +34,7 @@ class CallRoutingApiTest extends ApiTest {
 
         var givenSecondId = "f8fc8aca-786d-4943-9af2-e7ec01b5e80d";
         var givenSecondName = "Phone endpoint route";
-        var givenSecondDestinationsValuePhoneNumber = "41793026834";
+        var givenSecondDestinationsValuePhoneNumber = "41xxxxxxx30";
         var givenSecondDestinationsValueType = "PHONE";
         var givenSecondDestinationsConnectTimeout = 30;
         var givenSecondDestinationsRecordingRecordingType = CallRoutingRecordingType.AUDIO;
@@ -189,7 +189,7 @@ class CallRoutingApiTest extends ApiTest {
     void shouldPostCallRoute() {
         var givenId = "f8fc8aca-786d-4943-9af2-e7ec01b5e80d";
         var givenName = "SIP endpoint route";
-        var givenDestinationsValueUsername = "41793026834";
+        var givenDestinationsValueUsername = "41xxxxxxx30";
         var givenDestinationsValueSipTrunkId = "string";
         var givenDestinationsValueCustomHeadersString = "string";
         var givenDestinationsValueType = "SIP";
@@ -327,7 +327,7 @@ class CallRoutingApiTest extends ApiTest {
     void shouldGetCallRoute() {
         var givenId = "f8fc8aca-786d-4943-9af2-e7ec01b5e80d";
         var givenName = "SIP endpoint route";
-        var givenDestinationsValueUsername = "41793026834";
+        var givenDestinationsValueUsername = "41xxxxxxx30";
         var givenDestinationsValueSipTrunkId = "string";
         var givenDestinationsValueCustomHeadersString = "string";
         var givenDestinationsValueType = "SIP";
@@ -411,7 +411,7 @@ class CallRoutingApiTest extends ApiTest {
     void shouldPutCallRoute() {
         var givenId = "f8fc8aca-786d-4943-9af2-e7ec01b5e80d";
         var givenName = "SIP endpoint route";
-        var givenDestinationsValueUsername = "41793026834";
+        var givenDestinationsValueUsername = "41xxxxxxx30";
         var givenDestinationsValueSipTrunkId = "string";
         var givenDestinationsValueCustomHeadersString = "string";
         var givenDestinationsValueType = "SIP";
@@ -549,7 +549,7 @@ class CallRoutingApiTest extends ApiTest {
     void shouldDeleteCallRoute() {
         var givenId = "f8fc8aca-786d-4943-9af2-e7ec01b5e80d";
         var givenName = "SIP endpoint route";
-        var givenDestinationsValueUsername = "41793026834";
+        var givenDestinationsValueUsername = "41xxxxxxx30";
         var givenDestinationsValueSipTrunkId = "string";
         var givenDestinationsValueCustomHeadersString = "string";
         var givenDestinationsValueType = "SIP";
@@ -631,12 +631,12 @@ class CallRoutingApiTest extends ApiTest {
 
     @Test
     void shouldSimulateRouteSelection() {
-        var givenTo = "41793012345";
-        var givenFrom = "41793026234";
+        var givenTo = "41xxxxxxx20";
+        var givenFrom = "41xxxxxxx21";
         var givenUseDisabledRoutes = false;
         var givenId = "f8fc8aca-786d-4943-9af2-e7ec01b5e80d";
         var givenName = "Sample Route Name";
-        var givenDestinationsValuePhoneNumber = "41793026834";
+        var givenDestinationsValuePhoneNumber = "41xxxxxxx30";
         var givenDestinationsConnectTimeout = 30;
         var givenDestinationsRecordingRecordingType = CallRoutingRecordingType.AUDIO;
         var givenDestinationsRecordingRecordingCompositionEnabled = true;
@@ -705,7 +705,7 @@ class CallRoutingApiTest extends ApiTest {
     void shouldUpdateCallRouteStatus() {
         var givenRouteId = "56b3e3ea-e91f-44ed-9d57-c7f05cd358ba";
         var givenName = "SIP endpoint route";
-        var givenDestinationsValuePhoneNumber = "41793026834";
+        var givenDestinationsValuePhoneNumber = "41xxxxxxx30";
         var givenDestinationsConnectTimeout = 30;
 
         String expectedRequest = "{\n" + "  \"routeStatus\": \"ENABLED\"\n" + "}";
@@ -749,7 +749,7 @@ class CallRoutingApiTest extends ApiTest {
         var givenRouteId = "56b3e3ea-e91f-44ed-9d57-c7f05cd358ba";
         var givenOrder = 1;
         var givenName = "SIP endpoint route";
-        var givenDestinationsValuePhoneNumber = "41793026834";
+        var givenDestinationsValuePhoneNumber = "41xxxxxxx30";
         var givenDestinationsConnectTimeout = 30;
 
         String expectedRequest = String.format("{\n" + "  \"order\": %d\n" + "}", givenOrder);

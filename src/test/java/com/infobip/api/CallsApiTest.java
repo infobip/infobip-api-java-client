@@ -211,13 +211,13 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldGetCalls() {
         String givenCallId = "string";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         String givenEntityId = "entityId";
         String givenApplicationId = "61c060db2675060027d8c7a6";
         Platform givenPlatform = new Platform().entityId(givenEntityId).applicationId(givenApplicationId);
-        String givenFrom = "44790123456";
-        String givenTo = "44790987654";
+        String givenFrom = "44xxxxxxx32";
+        String givenTo = "44xxxxxxx33";
         CallDirection givenDirection = CallDirection.INBOUND;
         CallState givenCallState = CallState.CALLING;
         Boolean givenMuted = true;
@@ -369,9 +369,9 @@ class CallsApiTest extends ApiTest {
 
     @Test
     void shouldCreateCall() {
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
-        String givenFrom = "44790123456";
+        String givenFrom = "44xxxxxxx32";
         Integer givenConnectTimeout = 0;
         CallsRecordingType givenRecordingType = CallsRecordingType.AUDIO;
         Integer givenMaxDuration = 28800;
@@ -408,7 +408,7 @@ class CallsApiTest extends ApiTest {
                 givenParentCallId);
 
         String givenCallId = "string";
-        String givenTo = "44790987654";
+        String givenTo = "44xxxxxxx33";
         CallDirection givenDirection = CallDirection.INBOUND;
         CallState givenCallState = CallState.CALLING;
         Boolean givenMuted = true;
@@ -543,14 +543,14 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldGetCall() {
         String givenCallId = "string";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         String givenApplicationId = "61c060db2675060027d8c7a6";
         String givenEntityId = "entityId";
         Platform givenPlatform =
                 new Platform().applicationId(givenApplicationId).entityId(givenEntityId);
-        String givenFrom = "44790123456";
-        String givenTo = "44790987654";
+        String givenFrom = "44xxxxxxx32";
+        String givenTo = "44xxxxxxx33";
         CallDirection givenDirection = CallDirection.INBOUND;
         CallState givenCallState = CallState.CALLING;
         Boolean givenMuted = true;
@@ -677,11 +677,11 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldGetCallsHistory() {
         String givenCallId = "string";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         String givenApplicationId = "61c060db2675060027d8c7a6";
-        String givenFrom = "44790123456";
-        String givenTo = "44790987654";
+        String givenFrom = "44xxxxxxx32";
+        String givenTo = "44xxxxxxx33";
         CallDirection givenDirection = CallDirection.INBOUND;
         CallState givenCallState = CallState.CALLING;
         Boolean givenMuted = true;
@@ -854,11 +854,11 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldGetCallHistory() {
         String givenCallId = "string";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         String givenApplicationId = "61c060db2675060027d8c7a6";
-        String givenFrom = "44790123456";
-        String givenTo = "44790987654";
+        String givenFrom = "44xxxxxxx32";
+        String givenTo = "44xxxxxxx33";
         CallDirection givenDirection = CallDirection.INBOUND;
         CallState givenCallState = CallState.CALLING;
         Boolean givenMuted = true;
@@ -1015,7 +1015,7 @@ class CallsApiTest extends ApiTest {
         String givenName = "Example conference";
         String givenCallId1 = "d6d6058c-5077-49f9-a030-2fc40e8ca195";
         String givenCallId2 = "6539fcb4-4b2a-4ac9-a43a-d60807af29b0";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallsParticipantState givenState = CallsParticipantState.JOINING;
         String givenJoinTime = "2022-05-01T14:25:45.0Z";
@@ -1163,7 +1163,7 @@ class CallsApiTest extends ApiTest {
         String givenId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenName = "Example conference";
         String givenCallId = "string";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallsParticipantState givenState = CallsParticipantState.JOINING;
         String givenJoinTime = "2022-05-01T14:25:45.0Z";
@@ -1175,8 +1175,8 @@ class CallsApiTest extends ApiTest {
         boolean givenVideoCamera = true;
         boolean givenVideoScreenShare = true;
         String givenApplicationId = "61c060db2675060027d8c7a6";
-        String givenFrom = "44790123456";
-        String givenTo = "44790987654";
+        String givenFrom = "44xxxxxxx32";
+        String givenTo = "44xxxxxxx33";
         CallDirection givenDirection = CallDirection.INBOUND;
         CallState givenCallState = CallState.CALLING;
         Boolean givenMuted = true;
@@ -1473,10 +1473,10 @@ class CallsApiTest extends ApiTest {
         String givenErrorCode = "NORMAL_HANGUP";
 
         String givenCallId = "d8d84155-3831-43fb-91c9-bb897149a79d";
-        String givenPhoneNumber = "44790123456";
+        String givenPhoneNumber = "44xxxxxxx32";
         String givenType = "PHONE";
-        String givenFrom = "44790123456";
-        String givenTo = "44790123456";
+        String givenFrom = "44xxxxxxx32";
+        String givenTo = "44xxxxxxx32";
         CallDirection givenDirection = CallDirection.OUTBOUND;
         CallState givenState = CallState.CALLING;
         Boolean givenAudioMuted = false;
@@ -1942,7 +1942,7 @@ class CallsApiTest extends ApiTest {
         String givenId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenName = "Example conference";
         String givenCallId = "string";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallsParticipantState givenState = CallsParticipantState.JOINING;
         String givenJoinTime = "2022-05-01T14:25:45.134Z";
@@ -2073,7 +2073,7 @@ class CallsApiTest extends ApiTest {
         String givenId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenName = "Example conference";
         String givenCallId = "string";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallsParticipantState givenState = CallsParticipantState.JOINING;
         String givenJoinTime = "2022-05-01T14:25:45.134Z";
@@ -2215,7 +2215,7 @@ class CallsApiTest extends ApiTest {
         String givenId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenName = "Example conference";
         String givenCallId = "string";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallsParticipantState givenState = CallsParticipantState.JOINING;
         String givenJoinTime = "2022-05-01T14:25:45.134Z";
@@ -2321,7 +2321,7 @@ class CallsApiTest extends ApiTest {
         String givenJoinTime = "2022-12-07T14:01:29Z";
         String givenLeaveTime = "2022-12-07T14:01:29Z";
         String givenCallId = "d8d84155-3831-43fb-91c9-bb897149a79d";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallDirection givenDirection = CallDirection.INBOUND;
         String givenFileId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
@@ -2564,7 +2564,7 @@ class CallsApiTest extends ApiTest {
         String givenJoinTime = "2022-12-07T14:01:29Z";
         String givenLeaveTime = "2022-12-07T14:01:29Z";
         String givenCallId = "d8d84155-3831-43fb-91c9-bb897149a79d";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallDirection givenDirection = CallDirection.INBOUND;
         String givenFileId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
@@ -2774,7 +2774,7 @@ class CallsApiTest extends ApiTest {
         String givenId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenName = "Example conference";
         String givenCallId = "string";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallsParticipantState givenState = CallsParticipantState.JOINING;
         String givenTime = "2022-05-01T14:25:45+0000";
@@ -2783,8 +2783,8 @@ class CallsApiTest extends ApiTest {
         boolean givenVideoCamera = true;
         boolean givenVideoScreenShare = true;
         String givenApplicationId = "61c060db2675060027d8c7a6";
-        String givenFrom = "44790123456";
-        String givenTo = "44790987654";
+        String givenFrom = "44xxxxxxx32";
+        String givenTo = "44xxxxxxx33";
         CallDirection givenDirection = CallDirection.INBOUND;
         CallState givenCallState = CallState.CALLING;
         boolean givenMuted = true;
@@ -2997,7 +2997,7 @@ class CallsApiTest extends ApiTest {
         String givenId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenName = "Example conference";
         String givenCallId = "string";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallsParticipantState givenState = CallsParticipantState.JOINING;
         String givenJoinTime = "2022-05-01T14:25:45.134Z";
@@ -3136,7 +3136,7 @@ class CallsApiTest extends ApiTest {
         String givenId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenName = "Example conference";
         String givenCallId = "string";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallsParticipantState givenState = CallsParticipantState.JOINING;
         String givenJoinTime = "2022-05-01T14:25:45.134Z";
@@ -3894,7 +3894,7 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldGetCallsRecordings() {
         String givenId = "d8d84155-3831-43fb-91c9-bb897149a79d";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallDirection givenDirection = CallDirection.INBOUND;
         String givenFileId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
@@ -4019,7 +4019,7 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldGetCallRecordings() {
         String givenId = "d8d84155-3831-43fb-91c9-bb897149a79d";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallDirection givenDirection = CallDirection.INBOUND;
         String givenFileId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
@@ -4116,7 +4116,7 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldDeleteCallRecordings() {
         String givenId = "d8d84155-3831-43fb-91c9-bb897149a79d";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallDirection givenDirection = CallDirection.INBOUND;
         String givenFileId = "218eceba-c044-430d-9f26-8f1a7f0g2d03";
@@ -4229,7 +4229,7 @@ class CallsApiTest extends ApiTest {
         String givenEndTime = "2022-05-01T14:35:45.154Z";
         CallsRecordingFileLocation givenLocation = CallsRecordingFileLocation.SFTP;
         String givenId = "d8d84155-3831-43fb-91c9-bb897149a79d";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallDirection givenDirection = CallDirection.INBOUND;
         CallsRecordingStatus givenStatus = CallsRecordingStatus.SUCCESSFUL;
@@ -4420,7 +4420,7 @@ class CallsApiTest extends ApiTest {
         String givenEndTime = "2022-05-01T14:35:45.154Z";
         CallsRecordingFileLocation givenLocation = CallsRecordingFileLocation.SFTP;
         String givenId = "d8d84155-3831-43fb-91c9-bb897149a79d";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallDirection givenDirection = CallDirection.INBOUND;
         CallsRecordingStatus givenStatus = CallsRecordingStatus.SUCCESSFUL;
@@ -4586,7 +4586,7 @@ class CallsApiTest extends ApiTest {
         String givenEndTime = "2022-05-01T14:35:45.154Z";
         CallsRecordingFileLocation givenLocation = CallsRecordingFileLocation.SFTP;
         String givenId = "d8d84155-3831-43fb-91c9-bb897149a79d";
-        String givenPhoneNumber = "41792030000";
+        String givenPhoneNumber = "41xxxxxxx15";
         CallEndpointType givenType = CallEndpointType.PHONE;
         CallDirection givenDirection = CallDirection.INBOUND;
         CallsRecordingStatus givenStatus = CallsRecordingStatus.SUCCESSFUL;
@@ -4844,8 +4844,8 @@ class CallsApiTest extends ApiTest {
         String givenApplicationId1 = "61c060db2675060027d8c7a6";
         String givenCallId1 = "7672f60c-3418-40d9-8d6c-d2bac7e9a2b7";
         String givenExternalId1 = "7672f60c-3418-40d9-8d6c-d2bac7e9a2b7";
-        String givenFrom1 = "41793026834";
-        String givenPhoneNumber1 = "41792036727";
+        String givenFrom1 = "41xxxxxxx30";
+        String givenPhoneNumber1 = "41xxxxxxx17";
         CallEndpointType givenType1 = CallEndpointType.PHONE;
         CallsActionStatus givenStatus1 = CallsActionStatus.COMPLETED;
         String givenReason1 = "Created";
@@ -5192,7 +5192,7 @@ class CallsApiTest extends ApiTest {
 
         var givenSecondId = "d8d84155-3831-43fb-91c9-bb897149a79d";
         var givenType = CallEndpointType.PHONE;
-        var givenPhoneNumber = "44790123456";
+        var givenPhoneNumber = "44xxxxxxx32";
         var givenDirection = CallDirection.INBOUND;
         var givenSecondState = CallState.ESTABLISHED;
         var givenMuted = false;
@@ -5215,7 +5215,7 @@ class CallsApiTest extends ApiTest {
         var givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         var givenThirdId = "3ad8805e-d401-424e-9b03-e02a2016a5e2";
         var givenSecondType = "PHONE";
-        var givenSecondPhoneNumber = "44790987654";
+        var givenSecondPhoneNumber = "44xxxxxxx33";
         var givenSecondDirection = CallDirection.OUTBOUND;
         var givenThirdState = CallState.ESTABLISHED;
         var givenSecondMuted = false;
@@ -5348,8 +5348,8 @@ class CallsApiTest extends ApiTest {
 
         var givenParentCallId = "d8d84155-3831-43fb-91c9-bb897149a79d";
         var givenRequestType = CallEndpointType.PHONE;
-        var givenRequestPhoneNumber = "44790987654";
-        var givenFrom = "44790123456";
+        var givenRequestPhoneNumber = "44xxxxxxx33";
+        var givenFrom = "44xxxxxxx32";
         var givenConnectTimeout = 60;
         var givenEnabled = true;
         var givenKey2 = "value2";
@@ -5509,7 +5509,7 @@ class CallsApiTest extends ApiTest {
         OffsetDateTime givenEndTimeDate = OffsetDateTime.of(2022, 1, 1, 0, 1, 0, 100_000_000, ZoneOffset.ofHours(0));
         String givenParentId = "d8d84155-3831-43fb-91c9-bb897149a79d";
         CallEndpointType givenType = CallEndpointType.PHONE;
-        String givenParentPhoneNumber = "44790123456";
+        String givenParentPhoneNumber = "44xxxxxxx32";
         CallDirection givenDirection = CallDirection.INBOUND;
         CallState givenParentState = CallState.ESTABLISHED;
         Boolean givenMuted = false;
@@ -5529,7 +5529,7 @@ class CallsApiTest extends ApiTest {
         String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
         String givenChildId = "3ad8805e-d401-424e-9b03-e02a2016a5e2";
         String givenChildType = "PHONE";
-        String givenChildPhoneNumber = "44790987654";
+        String givenChildPhoneNumber = "44xxxxxxx33";
         CallDirection givenChildDirection = CallDirection.OUTBOUND;
         CallState givenChildState = CallState.ESTABLISHED;
         Boolean givenChildMuted = false;
@@ -7413,7 +7413,7 @@ class CallsApiTest extends ApiTest {
                         + "  \"timestamp\": \"%s\",\n"
                         + "  \"callsConfigurationId\": \"%s\",\n"
                         + "  \"properties\": {\n"
-                        + "    \"sender\": \"441134960000\"\n"
+                        + "    \"sender\": \"44xxxxxxxx46\"\n"
                         + "  }\n"
                         + "}",
                 givenCallId, givenTimestamp, givenCallsConfigurationId);
@@ -7427,7 +7427,7 @@ class CallsApiTest extends ApiTest {
         then(event.getCallsConfigurationId()).isEqualTo(givenCallsConfigurationId);
         var established = (CallEstablishedEvent) event;
         then(established.getProperties()).isNotNull();
-        then(established.getProperties().getSender()).isEqualTo("441134960000");
+        then(established.getProperties().getSender()).isEqualTo("44xxxxxxxx46");
     }
 
     @Test
@@ -7451,7 +7451,7 @@ class CallsApiTest extends ApiTest {
                         + "    \"id\": \"%s\",\n"
                         + "    \"endpoint\": {\n"
                         + "      \"type\": \"PHONE\",\n"
-                        + "      \"phoneNumber\": \"44790123456\"\n"
+                        + "      \"phoneNumber\": \"44xxxxxxx32\"\n"
                         + "    },\n"
                         + "    \"direction\": \"INBOUND\",\n"
                         + "    \"state\": \"ESTABLISHED\",\n"
@@ -7461,7 +7461,7 @@ class CallsApiTest extends ApiTest {
                         + "    \"id\": \"%s\",\n"
                         + "    \"endpoint\": {\n"
                         + "      \"type\": \"PHONE\",\n"
-                        + "      \"phoneNumber\": \"44790987654\"\n"
+                        + "      \"phoneNumber\": \"44xxxxxxx33\"\n"
                         + "    },\n"
                         + "    \"direction\": \"OUTBOUND\",\n"
                         + "    \"state\": \"ESTABLISHED\",\n"
@@ -7806,8 +7806,8 @@ class CallsApiTest extends ApiTest {
     @Test
     void shouldDialogTransferAccept() {
         String givenDialogId = "034e622a-cc7e-456d-8a10-0ba43b11aa5e";
-        String givenPhoneNumber = "41792036727";
-        String givenFrom = "41793026834";
+        String givenPhoneNumber = "41xxxxxxx17";
+        String givenFrom = "41xxxxxxx30";
         CallsDialogState givenState = CallsDialogState.ESTABLISHED;
 
         String givenResponse =

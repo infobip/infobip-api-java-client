@@ -22,17 +22,17 @@ class FlowApiTest extends ApiTest {
         String identifier1 = "370329180020364";
         String type1 = "FACEBOOK";
 
-        String identifier2 = "test@infobip.com";
+        String identifier2 = "test@example.com";
         String type2 = "EMAIL";
         int orderNumber2 = 1167873391;
 
-        String identifier3 = "test2@infobip.com";
+        String identifier3 = "test2@example.com";
         String type3 = "EMAIL";
         int orderNumber3 = 1595299041;
         String externalId3 = "optional_external_person_id";
         String contractExpiry3 = "2023-04-01";
         String company3 = "Infobip";
-        String email3 = "test@infobip.com";
+        String email3 = "test@example.com";
 
         FlowPersonUniqueFieldType personUniqueFieldType = FlowPersonUniqueFieldType.FACEBOOK;
         FlowParticipant givenParticipant = new FlowParticipant()
@@ -145,8 +145,8 @@ class FlowApiTest extends ApiTest {
         Long campaignId = 200000000000001L;
         String givenOperationId = "03f2d474-0508-46bf-9f3d-d8e2c28adaea";
         String givenCallbackData = "Callback Data";
-        String givenIdentifier1 = "test@infobip.com";
-        String givenIdentifier2 = "test2@infobip.com";
+        String givenIdentifier1 = "test@example.com";
+        String givenIdentifier2 = "test2@example.com";
         FlowPersonUniqueFieldType givenType = FlowPersonUniqueFieldType.EMAIL;
         FlowAddFlowParticipantStatus givenStatus1 = FlowAddFlowParticipantStatus.ACCEPTED;
         FlowAddFlowParticipantStatus givenStatus2 = FlowAddFlowParticipantStatus.REJECTED;

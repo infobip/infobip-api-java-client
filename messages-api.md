@@ -24,7 +24,7 @@ Before sending a message using Messages API, you need to activate your sender(s)
 
 Here you can find the example on how to activate and use **WhatsApp and SMS channels**.
 
-To activate the WhatsApp test sender, add the **447860099299** Infobip sender to your WhatsApp contacts and send a message containing your Infobip account username.
+To activate a WhatsApp test sender, follow the [WhatsApp sender setup guide](https://www.infobip.com/docs/api/channels/whatsapp) or scan the QR code provided there. Use the sender value from that setup wherever an example asks for `<YOUR_WHATSAPP_SENDER>`.
 
 To use the SMS test sender, simply send a message by using **InfoSMS** sender.
 
@@ -39,11 +39,11 @@ The easiest way to start with Messages API is to send a text message. First you 
 ````java
     MessagesApiMessage messagesApiMessage = new MessagesApiMessage()
                 .channel(MessagesApiOutboundMessageChannel.SMS)
-                .sender("48123234567")
+                .sender("48xxxxxxx35")
                 .destinations(
                         List.of(
                                 new MessagesApiToDestination()
-                                        .to("447491163443")
+                                        .to("44xxxxxxxx59")
                         )
                 )
                 .content(

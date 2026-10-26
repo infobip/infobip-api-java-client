@@ -134,7 +134,7 @@ class VoiceApiTest extends ApiTest {
     @Test
     void shouldSendSingleVoiceTts() {
         String givenBulkId = "4fda521a-c680-470d-b134-83d468f7ac80";
-        String givenTo = "41793026727";
+        String givenTo = "41xxxxxxx25";
         Integer givenStatusGroupId = 1;
         String givenStatusGroupName = "PENDING";
         Integer givenStatusId = 26;
@@ -146,7 +146,7 @@ class VoiceApiTest extends ApiTest {
         String givenLanguage = "en";
         String givenName = "Joanna";
         String givenGender = "female";
-        String givenFrom = "442032864231";
+        String givenFrom = "44xxxxxxxx58";
 
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
@@ -221,7 +221,7 @@ class VoiceApiTest extends ApiTest {
     @Test
     void shouldSendMultipleVoiceTts() {
         String givenBulkId = "4fda521a-c680-470d-b134-83d468f7ac80";
-        String givenTo = "41793026727";
+        String givenTo = "41xxxxxxx25";
         Integer givenStatusGroupId = 1;
         String givenStatusGroupName = "PENDING";
         Integer givenStatusId = 26;
@@ -230,14 +230,14 @@ class VoiceApiTest extends ApiTest {
         String givenMessageId = "2250be2d4219-3af1-78856-aabe-1362af1edfd2";
 
         String givenAudioFileUrl = "https://www.example.com/media.mp3";
-        String givenReqFrom = "41793026700";
-        String givenReqTo1 = "41793026727";
-        String givenReqTo2 = "41793026731";
+        String givenReqFrom = "41xxxxxxx22";
+        String givenReqTo1 = "41xxxxxxx25";
+        String givenReqTo2 = "41xxxxxxx26";
         String givenText = "Hello world!";
         String givenLanguage = "en";
         String givenName = "Joanna";
         String givenGender = "female";
-        String givenTo1 = "41793026785";
+        String givenTo1 = "41xxxxxxx28";
 
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
@@ -408,8 +408,8 @@ class VoiceApiTest extends ApiTest {
     void shouldGetVoiceDeliveryReports() {
         String givenBulkId = "8c20f086-d82b-48cc-b2b3-3ca5f7aca9fb";
         String givenMessageId = "ff4804ef-6ab6-4abd-984d-ab3b1387e852";
-        String givenFrom = "385333444";
-        String givenTo = "385981178";
+        String givenFrom = "44xxxxx04";
+        String givenTo = "44xxxxx05";
         String givenSentAt = "2018-06-25T13:38:14.730+0000";
         String givenMccMnc = "21901";
         String givenCallbackData = "DLR callback data";
@@ -567,8 +567,8 @@ class VoiceApiTest extends ApiTest {
     void shouldGetVoiceLogs() {
         String givenBulkId = "06479ba3-5977-47f6-9346-fee0369bc76b";
         String givenMessageId = "1f21d8d7-f306-4f53-9f6e-eddfce9849ea";
-        String givenTo = "41793026727";
-        String givenFrom = "41793026700";
+        String givenTo = "41xxxxxxx25";
+        String givenFrom = "41xxxxxxx22";
         String givenText = "Test voice message.";
         String givenSentAt = "2022-12-06T13:37:15Z";
         OffsetDateTime givenSentAtDateTime =
@@ -692,8 +692,8 @@ class VoiceApiTest extends ApiTest {
     @Test
     void shouldSearchVoiceIvrRecordedFiles() {
         String givenMessageId1 = "453e161a-fe4f-4f3c-80c0-ab520de9a969";
-        String givenFrom1 = "442032864231";
-        String givenTo1 = "38712345678";
+        String givenFrom1 = "44xxxxxxxx58";
+        String givenTo1 = "387xxxxxx12";
         String givenScenarioId1 = "C9CE33CF130511D8E333C1260BABA309";
         String givenGroupId1 = "#/script/1";
         String givenUrl1 =
@@ -704,8 +704,8 @@ class VoiceApiTest extends ApiTest {
                 OffsetDateTime.of(LocalDateTime.of(2022, 12, 6, 13, 37, 15), ZoneOffset.ofHours(0));
 
         String givenMessageId2 = "05b2859d-85c6-4068-9347-2e563b5c9cf4";
-        String givenFrom2 = "442032864231";
-        String givenTo2 = "38712345678";
+        String givenFrom2 = "44xxxxxxxx58";
+        String givenTo2 = "387xxxxxx12";
         String givenScenarioId2 = "4A6177C9B92039306F1F091708851A2E";
         String givenGroupId2 = "#/script/1";
         String givenUrl2 =
@@ -1031,9 +1031,9 @@ class VoiceApiTest extends ApiTest {
     void shouldLaunchIvrScenario() {
         String givenBulkId = "BULK-ID-123-xyz";
         String givenScenarioId = "6298AA7707903A4ED680B436929681AD";
-        String givenFrom = "41793026700";
-        String givenTo1 = "41793026727";
-        String givenTo2 = "41793026731";
+        String givenFrom = "41xxxxxxx22";
+        String givenTo1 = "41xxxxxxx25";
+        String givenTo2 = "41xxxxxxx26";
         String givenNotifyUrl = "https://www.example.com/voice/advanced";
         String givenNotifyContentType = "application/json";
         String givenCallbackData = "DLR callback data";
@@ -1301,9 +1301,9 @@ class VoiceApiTest extends ApiTest {
     @Test
     void shouldSendAdvancedVoiceTts() {
         String givenBulkId = "BULK-ID-123-xyz";
-        String givenFrom = "41793026700";
-        String givenTo1 = "41793026727";
-        String givenTo2 = "41793026731";
+        String givenFrom = "41xxxxxxx22";
+        String givenTo1 = "41xxxxxxx25";
+        String givenTo2 = "41xxxxxxx26";
         String givenText = "Test Voice message.";
         String givenLanguage = "en";
         String givenName = "Joanna";

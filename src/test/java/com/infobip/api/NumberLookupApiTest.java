@@ -21,10 +21,10 @@ class NumberLookupApiTest extends ApiTest {
     void shouldNumberContextLookupAsync() {
         String givenNotifyContentType = "application/json";
         String givenNotifyUrl = "https://www.example.com/number/lookup/report";
-        String givenTo1 = "41793026727";
-        String givenTo2 = "41793026834";
+        String givenTo1 = "41xxxxxxx25";
+        String givenTo2 = "41xxxxxxx30";
 
-        String givenResultTo1 = "3859851212";
+        String givenResultTo1 = "44xxxxxx08";
         Integer givenResultGroupId1 = 1;
         String givenResultGroupName1 = "PENDING";
         Integer givenResultStatusId1 = 3;
@@ -32,7 +32,7 @@ class NumberLookupApiTest extends ApiTest {
         String givenResultDescription1 = "Message sent, waiting for delivery report";
         String givenResultMessageId1 = "2b691c32-1233-4716-a763-4f70cc929eae";
 
-        String givenResultTo2 = "3816038923";
+        String givenResultTo2 = "381xxxxx07";
         Integer givenResultGroupId2 = 1;
         String givenResultGroupName2 = "PENDING";
         Integer givenResultStatusId2 = 3;
@@ -140,9 +140,9 @@ class NumberLookupApiTest extends ApiTest {
 
     @Test
     void shouldNumberContextLookup() {
-        String givenTo = "41793026727";
+        String givenTo = "41xxxxxxx25";
 
-        String givenResultTo = "41793026727";
+        String givenResultTo = "41xxxxxxx25";
         String givenMccMnc = "22801";
         String givenImsi = "228011234567890";
 
@@ -161,7 +161,7 @@ class NumberLookupApiTest extends ApiTest {
         Integer givenPortedNetworkId = 321;
 
         Boolean givenRoaming = false;
-        String givenServingMSC = "41002";
+        String givenServingMSC = "41x71";
 
         Integer givenStatusGroupId = 3;
         String givenStatusGroupName = "DELIVERED";
@@ -322,7 +322,7 @@ class NumberLookupApiTest extends ApiTest {
 
         String givenBulkId = "BULK-ID-123-xyz";
         String givenMessageId = "MESSAGE-ID-123-xyz";
-        String givenTo = "41793026727";
+        String givenTo = "41xxxxxxx25";
         String givenSentAt = "2019-08-24T14:15:22.000+0000";
         String givenDoneAt = "2019-08-24T14:15:22.000+0000";
         String givenMccMnc = "12345";

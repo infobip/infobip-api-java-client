@@ -29,7 +29,7 @@ class ViberApiTest extends ApiTest {
         Integer givenId = 7;
         String givenName = "PENDING_ENROUTE";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "441134960001";
+        String givenDestination = "44xxxxxxxx47";
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
                         + "  \"messages\": [\n"
@@ -55,13 +55,13 @@ class ViberApiTest extends ApiTest {
                 givenDescription,
                 givenDestination);
 
-        String expectedSender = "441134960000";
-        String expectedTo = "441134960001";
+        String expectedSender = "44xxxxxxxx46";
+        String expectedTo = "44xxxxxxxx47";
         String expectedText = "Some text";
         String expectedTitle = "Button title";
         String expectedAction = "https://www.example.com/action";
         String expectedType = "TEXT";
-        String expectedSmsFailoverSender = "441134960000";
+        String expectedSmsFailoverSender = "44xxxxxxxx46";
         String expectedSmsFailoverText = "Some failover text";
         String expectedLabel = "TRANSACTIONAL";
         Boolean expectedApplySessionRate = false;
@@ -156,7 +156,7 @@ class ViberApiTest extends ApiTest {
         Integer givenId = 7;
         String givenName = "PENDING_ENROUTE";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "441134960001";
+        String givenDestination = "44xxxxxxxx47";
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
                         + "  \"messages\": [\n"
@@ -182,8 +182,8 @@ class ViberApiTest extends ApiTest {
                 givenDescription,
                 givenDestination);
 
-        String expectedSender = "441134960000";
-        String expectedTo = "441134960001";
+        String expectedSender = "44xxxxxxxx46";
+        String expectedTo = "44xxxxxxxx47";
         String expectedText = "Some text";
         String expectedMediaUrl = "https://www.example.com/image.jpg";
         String expectedTitle = "Button title";
@@ -262,7 +262,7 @@ class ViberApiTest extends ApiTest {
         Integer givenId = 7;
         String givenName = "PENDING_ENROUTE";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "441134960001";
+        String givenDestination = "44xxxxxxxx47";
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
                         + "  \"messages\": [\n"
@@ -288,8 +288,8 @@ class ViberApiTest extends ApiTest {
                 givenDescription,
                 givenDestination);
 
-        String expectedSender = "441134960000";
-        String expectedTo = "441134960001";
+        String expectedSender = "44xxxxxxxx46";
+        String expectedTo = "44xxxxxxxx47";
         String expectedText = "Some text";
         String expectedMediaUrl = "https://www.example.com/video.mp4";
         String expectedMediaDuration = "PT5S";
@@ -371,7 +371,7 @@ class ViberApiTest extends ApiTest {
         Integer givenId = 7;
         String givenName = "PENDING_ENROUTE";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "441134960001";
+        String givenDestination = "44xxxxxxxx47";
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
                         + "  \"messages\": [\n"
@@ -397,8 +397,8 @@ class ViberApiTest extends ApiTest {
                 givenDescription,
                 givenDestination);
 
-        String expectedSender = "441134960000";
-        String expectedTo = "441134960001";
+        String expectedSender = "44xxxxxxxx46";
+        String expectedTo = "44xxxxxxxx47";
         String expectedFileName = "file.xlsx";
         String expectedMediaUrl = "https://www.example.com/file.xlsx";
         String expectedType = "FILE";
@@ -786,8 +786,8 @@ class ViberApiTest extends ApiTest {
         var givenErrorDescription = "No Error";
         var givenErrorPermanent = false;
         var givenMessageId = "2250be2d4219-3af1-78856-aabe-1362af1edfd2";
-        var givenTo = "441134960001";
-        var givenSender = "441134960000";
+        var givenTo = "44xxxxxxxx47";
+        var givenSender = "44xxxxxxxx46";
         var givenSentAt = "2019-04-09T16:00:58.000-0300";
         var givenDoneAt = "2019-04-09T16:01:56.000-0300";
         var givenMessageCount = 1;
@@ -887,7 +887,7 @@ class ViberApiTest extends ApiTest {
 
     @Test
     void shouldParseViberInboundTextMessage() {
-        String givenFrom = "385912345678";
+        String givenFrom = "44xxxxxxxx40";
         String givenTo = "givenClient";
         String givenIntegrationType = "VIBER";
         String givenReceivedAt = "2020-04-01T11:02:43.594+0000";
@@ -968,7 +968,7 @@ class ViberApiTest extends ApiTest {
 
     @Test
     void shouldParseViberInboundFileMessage() {
-        String givenFrom = "385912345678";
+        String givenFrom = "44xxxxxxxx40";
         String givenTo = "givenClient";
         String givenIntegrationType = "VIBER";
         String givenReceivedAt = "2020-04-01T11:02:43.594+0000";
@@ -1056,8 +1056,8 @@ class ViberApiTest extends ApiTest {
     @Test
     void shouldParseViberSeenReports() {
         String givenMessageId = "1215f543ab19-345f-adbd-12ad31451ed25f35";
-        String givenFrom = "385919998888";
-        String givenTo = "41793026731";
+        String givenFrom = "44xxxxxxxx42";
+        String givenTo = "41xxxxxxx26";
         String givenSentAt = "2023-04-05T11:21:57.793+0000";
         String givenSeenAt = "2023-04-05T11:22:10.251+0000";
         String givenApplicationId = "applicationId";

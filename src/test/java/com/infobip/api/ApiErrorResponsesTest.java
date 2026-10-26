@@ -22,7 +22,7 @@ class ApiErrorResponsesTest extends ApiTest {
     @MethodSource("errorResponsesSource")
     void shouldProcessErrorResponse(
             int givenHttpStatusCode, String givenResponse, ApiExceptionDetails expectedDetails) {
-        String givenTo = "41793026727";
+        String givenTo = "41xxxxxxx25";
         String givenFrom = "InfoSMS";
         String givenText = "This is a sample message";
 

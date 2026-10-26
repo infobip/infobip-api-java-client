@@ -21,13 +21,13 @@ WhatsAppApi whatsAppApi = new WhatsAppApi(apiClient);
 
 Before sending a WhatsApp message you need to activate your sender and connect to our test domain.
 
-Add the **447860099299** Infobip sender to your WhatsApp contacts and send a message containing your Infobip account username.
-
-Alternatively, you can go to our [documentation page][whatsapp-docs-page] for an easier way to do the same thing.
+Follow the [WhatsApp sender setup guide][whatsapp-docs-page] to activate a test sender, or scan the QR code provided there. Use the sender value from that setup in place of `<YOUR_WHATSAPP_SENDER>` in the examples below.
 
 You are now ready to send your first message.
 
 IMPORTANT NOTE: Keep in mind that for test purposes you can only send messages to a number you registered when you created your Infobip account.
+
+Before executing the examples, replace `<YOUR_WHATSAPP_SENDER>` with the sender value from setup and `<YOUR_WHATSAPP_NUMBER>` with a number registered to your account.
 
 ## Send your first message
 
@@ -44,8 +44,8 @@ the template.
 
 ```java
     WhatsAppMessage message = new WhatsAppMessage()
-        .from("447860099299")
-        .to("<PUT YOUR NUMBER>")
+        .from("<YOUR_WHATSAPP_SENDER>")
+        .to("<YOUR_WHATSAPP_NUMBER>")
         .content(new WhatsAppTemplateContent()
                 .language("en")
                 .templateName("welcome_multiple_languages")
@@ -105,8 +105,8 @@ The rest is the same as in the previous example. We are using the `whatsAppApi` 
 ```java
     WhatsAppBulkMessage bulkMessage = new WhatsAppBulkMessage()
         .addMessagesItem(new WhatsAppMessage()
-                .from("447860099299")
-                .to("<PUT YOUR NUMBER>")
+                .from("<YOUR_WHATSAPP_SENDER>")
+                .to("<YOUR_WHATSAPP_NUMBER>")
                 .content(content)
         );
 
@@ -125,8 +125,8 @@ So, for sending freestyle messages you have to initiate WhatsApp conversation fr
 
 ```java
     WhatsAppTextMessage textMessage = new WhatsAppTextMessage()
-            .from("447860099299")
-            .to("<PUT YOUR NUMBER>")
+            .from("<YOUR_WHATSAPP_SENDER>")
+            .to("<YOUR_WHATSAPP_NUMBER>")
             .content(new WhatsAppTextContent()
                     .text("This is my first WhatsApp message sent using Infobip API client library")
             );

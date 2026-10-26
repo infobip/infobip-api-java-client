@@ -25,7 +25,7 @@ class MmsApiTest extends ApiTest {
 
     @Test
     void shouldSendMmsMessages() {
-        String givenSender = "441134960000";
+        String givenSender = "44xxxxxxxx46";
         String givenTitle = "Some title";
         String givenText = "Some text";
         String givenBulkId = "a28dd97c-2222-4fcf-99f1-0b557ed381da";
@@ -48,7 +48,7 @@ class MmsApiTest extends ApiTest {
                         + "        \"name\": \"%s\",\n"
                         + "        \"description\": \"%s\"\n"
                         + "      },\n"
-                        + "      \"destination\": \"441134960001\"\n"
+                        + "      \"destination\": \"44xxxxxxxx47\"\n"
                         + "    }\n"
                         + "  ]\n"
                         + "}\n",
@@ -67,12 +67,12 @@ class MmsApiTest extends ApiTest {
                         + "      \"destinations\": [\n"
                         + "        {\n"
                         + "          \"group\": [\n"
-                        + "            {\"to\": \"441134960001\"},\n"
-                        + "            {\"to\": \"441134960002\"}\n"
+                        + "            {\"to\": \"44xxxxxxxx47\"},\n"
+                        + "            {\"to\": \"44xxxxxxxx48\"}\n"
                         + "          ]\n"
                         + "        },\n"
                         + "        {\n"
-                        + "          \"to\": \"441134960003\"\n"
+                        + "          \"to\": \"44xxxxxxxx49\"\n"
                         + "        }\n"
                         + "      ],\n"
                         + "      \"content\": {\n"
@@ -94,11 +94,11 @@ class MmsApiTest extends ApiTest {
                 .messages(List.of(new MmsMessage()
                         .sender(givenSender)
                         .destinations(List.of(
-                                new MmsDestinationSingle().to("441134960003"),
+                                new MmsDestinationSingle().to("44xxxxxxxx49"),
                                 new MmsDestinationGroup()
                                         .group(List.of(
-                                                new MmsDestinationSingle().to("441134960001"),
-                                                new MmsDestinationSingle().to("441134960002")))))
+                                                new MmsDestinationSingle().to("44xxxxxxxx47"),
+                                                new MmsDestinationSingle().to("44xxxxxxxx48")))))
                         .content(new MmsOutboundContent()
                                 .title(givenTitle)
                                 .messageSegments(List.of(new MmsOutboundTextSegment().text(givenText))))));
@@ -117,7 +117,7 @@ class MmsApiTest extends ApiTest {
             then(status.getId()).isEqualTo(givenStatusId);
             then(status.getName()).isEqualTo(givenStatusName);
             then(status.getDescription()).isEqualTo(givenStatusDescription);
-            then(message.getDestination()).isEqualTo("441134960001");
+            then(message.getDestination()).isEqualTo("44xxxxxxxx47");
         };
 
         var call = api.sendMmsMessages(request);
@@ -129,7 +129,7 @@ class MmsApiTest extends ApiTest {
     void shouldGetMmsDeliveryReports() {
         String givenBulkId = "3746923784";
         String givenMessageId = "43u2ih-6453jbh-897kfs90u2nj";
-        String givenSender = "441134960000";
+        String givenSender = "44xxxxxxxx46";
         String givenSentAt = "2025-01-20T13:06:33.968+0000";
         String givenDoneAt = "2025-01-20T13:06:33.968+0000";
         OffsetDateTime expectedSentAt = OffsetDateTime.of(2025, 1, 20, 13, 6, 33, 968_000_000, ZoneOffset.ofHours(0));
@@ -341,8 +341,8 @@ class MmsApiTest extends ApiTest {
     void shouldGetMmsDeliveryLogs() {
         String givenBulkId = "3746923784";
         String givenMessageId = "43u2ih-6453jbh-897kfs90u2nj";
-        String givenSender = "441134960000";
-        String givenDestination = "441134960001";
+        String givenSender = "44xxxxxxxx46";
+        String givenDestination = "44xxxxxxxx47";
         String givenSentAt = "2025-01-20T13:06:34.784+0000";
         String givenDoneAt = "2025-01-20T13:06:34.785+0000";
         OffsetDateTime expectedSentAt = OffsetDateTime.of(2025, 1, 20, 13, 6, 34, 784_000_000, ZoneOffset.ofHours(0));
@@ -482,7 +482,7 @@ class MmsApiTest extends ApiTest {
                 + "    {\n"
                 + "      \"bulkId\": \"BULK-ID-123-xyz\",\n"
                 + "      \"messageId\": \"MESSAGE-ID-123-xyz\",\n"
-                + "      \"to\": \"41793026727\",\n"
+                + "      \"to\": \"41xxxxxxx25\",\n"
                 + "      \"sentAt\": \"2019-11-09T16:00:00.000+0000\",\n"
                 + "      \"doneAt\": \"2019-11-09T16:00:00.000+0000\",\n"
                 + "      \"messageCount\": 1,\n"
@@ -515,7 +515,7 @@ class MmsApiTest extends ApiTest {
                 + "    {\n"
                 + "      \"bulkId\": \"BULK-ID-123-xyz\",\n"
                 + "      \"messageId\": \"12db39c3-7822-4e72-a3ec-c87442c0ffc5\",\n"
-                + "      \"to\": \"41793026834\",\n"
+                + "      \"to\": \"41xxxxxxx30\",\n"
                 + "      \"sentAt\": \"2019-11-09T17:00:00.000+0000\",\n"
                 + "      \"doneAt\": \"2019-11-09T17:00:00.000+0000\",\n"
                 + "      \"messageCount\": 1,\n"
@@ -571,8 +571,8 @@ class MmsApiTest extends ApiTest {
                 + "     {\n"
                 + "       \"entityId\": \"entityId\",\n"
                 + "       \"applicationId\": \"applicationId\",\n"
-                + "       \"from\": \"385916242493\",\n"
-                + "       \"to\": \"385921004026\",\n"
+                + "       \"from\": \"44xxxxxxxx41\",\n"
+                + "       \"to\": \"44xxxxxxxx43\",\n"
                 + "       \"receivedAt\": \"2016-10-06T09:28:39.220+0000\",\n"
                 + "       \"messageId\": \"817790313235066447\",\n"
                 + "       \"pairedMessageId\": null,\n"

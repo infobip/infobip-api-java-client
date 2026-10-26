@@ -14,10 +14,10 @@ class ClickToCallApiTest extends ApiTest {
     @Test
     void shouldSendClickToCallMessage() {
         String givenBulkId = "BULK-ID-123-xyz";
-        String givenFrom = "41793026700";
-        String givenFromB = "41793026701";
-        String givenDestinationA = "41793026727";
-        String givenDestinationB = "41793026731";
+        String givenFrom = "41xxxxxxx22";
+        String givenFromB = "41xxxxxxx23";
+        String givenDestinationA = "41xxxxxxx25";
+        String givenDestinationB = "41xxxxxxx26";
         String givenMessageId = "MESSAGE-ID-123-xyz";
         String givenText = "Test Voice message.";
         String givenLanguage = "en";
@@ -38,7 +38,7 @@ class ClickToCallApiTest extends ApiTest {
         int givenToMinute = 30;
 
         String expectedBulkId = "4fda521a-c680-470d-b134-83d468f7ac80";
-        String expectedTo = "41793026727";
+        String expectedTo = "41xxxxxxx25";
         int expectedGroupId = 1;
         String expectedGroupName = "PENDING";
         int expectedId = 26;

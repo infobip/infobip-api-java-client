@@ -39,10 +39,10 @@ Keep in mind the following restrictions while using a trial account:
 
     EmailRequest emailRequest = new EmailRequest()
         .addMessagesItem(new EmailMessage()
-            .sender("Jane Smith <jane.smith@somecompany.com>")
+            .sender("Jane Smith <jane.smith@example.com>")
             .addDestinationsItem(new EmailGroupDestination()
                 .addToItem(new EmailToDestination()
-                    .destination("john.smith@somedomain.com")))
+                    .destination("john.smith@example.org")))
             .content(new EmailMessageContent()
                 .subject("Mail subject text")
                 .text("Test message with a file")

@@ -56,7 +56,7 @@ you've purchased from Infobip).
         .applicationId(appId)
         .messageId(messageId)
         .from("InfoSMS")
-        .to("41793026727");
+        .to("41xxxxxxx25");
 
     TfaStartAuthenticationResponse sendCodeResponse = tfaApi
         .sendTfaPinCodeOverSms(startAuthenticationRequest)

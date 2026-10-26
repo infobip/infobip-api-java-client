@@ -25,7 +25,7 @@ class RcsApiTest extends ApiTest {
     @Test
     void shouldSendRcsTextMessage() {
         String givenBulkId = "a28dd97c-2222-4fcf-99f1-0b557ed381da";
-        String givenTo = "441134960001";
+        String givenTo = "44xxxxxxxx47";
         String givenMessageId = "a28dd97c-1ffb-4fcf-99f1-0b557ed381da";
         String givenSender = "DemoSender";
         String givenText = "Some text";
@@ -108,7 +108,7 @@ class RcsApiTest extends ApiTest {
     @Test
     void shouldSendRcsCardMessageWithUrlTracking() {
         String givenBulkId = "a28dd97c-2222-4fcf-99f1-0b557ed381da";
-        String givenTo = "441134960001";
+        String givenTo = "44xxxxxxxx47";
         String givenMessageId = "a28dd97c-1ffb-4fcf-99f1-0b557ed381da";
         String givenSender = "DemoSender";
         String givenOrientation = "HORIZONTAL";
@@ -302,7 +302,7 @@ class RcsApiTest extends ApiTest {
     void shouldGetRcsDeliveryReports() {
         String givenBulkId = "29ee2440-5461-4b04-bc81-3f6aa630ffa7";
         String givenMessageId = "c0ed295b-c39d-4f6d-b347-fa1837f18c00";
-        String givenTo = "441134960001";
+        String givenTo = "44xxxxxxxx47";
         String givenSender = "DemoSender";
         String givenSentAt = "2024-06-14T09:12:00.000+0000";
         String givenDoneAt = "2024-06-14T09:12:03.000+0000";
@@ -572,8 +572,8 @@ class RcsApiTest extends ApiTest {
     @Test
     void shouldCheckRcsCapabilitySync() {
         String givenSender = "DemoSender";
-        String givenPhoneNumber1 = "441134960001";
-        String givenPhoneNumber2 = "441134960002";
+        String givenPhoneNumber1 = "44xxxxxxxx47";
+        String givenPhoneNumber2 = "44xxxxxxxx48";
         String givenMessageId1 = "d5c3bdff-2d44-4f74-8a8e-3792fa57dfc8";
         String givenMessageId2 = "b5c3bdff-2d44-4f74-8a8e-3792fa57dfc3";
         String givenPlatformEntityId = "Example entity id";
@@ -661,8 +661,8 @@ class RcsApiTest extends ApiTest {
     @Test
     void shouldCheckRcsCapabilityAsync() {
         String givenSender = "DemoSender";
-        String givenPhoneNumber1 = "441134960001";
-        String givenPhoneNumber2 = "441134960002";
+        String givenPhoneNumber1 = "44xxxxxxxx47";
+        String givenPhoneNumber2 = "44xxxxxxxx48";
         String givenNotifyUrl = "http://example.com/notify";
         String givenBulkId = "d5c3bdff-2d44-4f74-8a8e-3792fa57dfc8";
         String givenMessageId1 = "d5c3bdff-2d44-4f74-8a8e-3792fa57dfc8";
@@ -730,7 +730,7 @@ class RcsApiTest extends ApiTest {
 
     @Test
     void shouldParseRcsInboundTextMessage() {
-        String givenSender = "385912345678";
+        String givenSender = "44xxxxxxxx40";
         String givenTo = "DemoSender";
         String givenIntegrationType = "RCS";
         String givenReceivedAt = "2024-06-14T09:12:00.000+0000";
@@ -806,8 +806,8 @@ class RcsApiTest extends ApiTest {
     @Test
     void shouldParseRcsUserActionEvent() {
         String givenCampaignReferenceId = "CAMP-2026-Q1";
-        String givenSender = "+385911234567";
-        String givenTo = "+385911111111";
+        String givenSender = "+44xxxxxxxx39";
+        String givenTo = "+44xxxxxxxx37";
         String givenIntegrationType = "RCS";
         String givenReceivedAt = "2026-03-03T14:22:30.000+0000";
         String givenInteractionType = "EVENT";
@@ -922,7 +922,7 @@ class RcsApiTest extends ApiTest {
     void shouldParseRcsDeliveryReport() {
         String givenBulkId = "29ee2440-5461-4b04-bc81-3f6aa630ffa7";
         String givenMessageId = "c0ed295b-c39d-4f6d-b347-fa1837f18c00";
-        String givenTo = "441134960001";
+        String givenTo = "44xxxxxxxx47";
         String givenSender = "DemoSender";
         String givenSentAt = "2024-06-14T09:12:00.000+0000";
         String givenDoneAt = "2024-06-14T09:12:03.000+0000";
@@ -1078,7 +1078,7 @@ class RcsApiTest extends ApiTest {
     void shouldParseRcsCapabilityCheckResult() {
         String givenBulkId = "d5c3bdff-2d44-4f74-8a8e-3792fa57dfc8";
         String givenMessageId = "b5c3bdff-2d44-4f74-8a8e-3792fa57dfc3";
-        String givenPhoneNumber = "441134960001";
+        String givenPhoneNumber = "44xxxxxxxx47";
         String givenCode = "ENABLED";
         String givenPlatformEntityId = "Example entity id";
         String givenPlatformApplicationId = "Example application id";
@@ -1125,7 +1125,7 @@ class RcsApiTest extends ApiTest {
     @Test
     void shouldSendRcsTypingIndicatorEvent() {
         String givenBulkId = "a28dd97c-2222-4fcf-99f1-0b557ed381da";
-        String givenTo = "441134960001";
+        String givenTo = "44xxxxxxxx47";
         String givenMessageId = "a28dd97c-1ffb-4fcf-99f1-0b557ed381da";
         String givenSender = "DemoSender";
 
@@ -1206,7 +1206,7 @@ class RcsApiTest extends ApiTest {
     @Test
     void shouldSendRcsSeenEvent() {
         String givenBulkId = "a28dd97c-2222-4fcf-99f1-0b557ed381da";
-        String givenTo = "441134960001";
+        String givenTo = "44xxxxxxxx47";
         String givenMessageId = "a28dd97c-1ffb-4fcf-99f1-0b557ed381da";
         String givenSeenMessageId = "b28dd97c-1ffb-4fcf-99f1-0b557ed381db";
         String givenSender = "DemoSender";
@@ -1288,7 +1288,7 @@ class RcsApiTest extends ApiTest {
 
     @Test
     void shouldParseRcsTypingIndicatorEvent() {
-        String givenSender = "441134960001";
+        String givenSender = "44xxxxxxxx47";
         String givenTo = "DemoSender";
         String givenReceivedAt = "2025-02-06T15:35:12.123+0000";
         String givenEventType = "TYPING_INDICATOR";

@@ -738,7 +738,7 @@ class TfaApiTest extends ApiTest {
     @Test
     void shouldSendTfaPinCodeViaSms() {
         String givenPinId = "9C817C6F8AF3D48F9FE553282AFA2B67";
-        String givenTo = "41793026727";
+        String givenTo = "41xxxxxxx25";
         String givenNcStatus = "NC_DESTINATION_REACHABLE";
         String givenSmsStatus = "MESSAGE_SENT";
 
@@ -792,7 +792,7 @@ class TfaApiTest extends ApiTest {
     @Test
     void shouldResendTfaPinCodeViaSms() {
         String givenPinId = "9C817C6F8AF3D48F9FE553282AFA2B67";
-        String givenTo = "41793026727";
+        String givenTo = "41xxxxxxx25";
         String givenNcStatus = "NC_DESTINATION_REACHABLE";
         String givenSmsStatus = "MESSAGE_SENT";
 
@@ -832,7 +832,7 @@ class TfaApiTest extends ApiTest {
     @Test
     void shouldSendTfaPinCodeViaVoice() {
         String givenPinId = "9C817C6F8AF3D48F9FE553282AFA2B67";
-        String givenTo = "41793026727";
+        String givenTo = "41xxxxxxx25";
         String givenCallStatus = "PENDING_ACCEPTED";
 
         String givenApplicationId = "1234567";
@@ -881,7 +881,7 @@ class TfaApiTest extends ApiTest {
     @Test
     void shouldResendTfaPinCodeViaVoice() {
         String givenPinId = "9C817C6F8AF3D48F9FE553282AFA2B68";
-        String givenTo = "41793026726";
+        String givenTo = "41xxxxxxx24";
         String givenNcStatus = "NC_DESTINATION_REACHABLE";
         String givenSmsStatus = "MESSAGE_SENT";
 
@@ -923,7 +923,7 @@ class TfaApiTest extends ApiTest {
         String givenPin = "1598";
 
         String givenPinId = "9C817C6F8AF3D48F9FE553282AFA2B68";
-        String givenMsisdn = "41793026726";
+        String givenMsisdn = "41xxxxxxx24";
         boolean givenVerified = true;
         int givenAttemptsRemaining = 0;
 
@@ -960,7 +960,7 @@ class TfaApiTest extends ApiTest {
     void shouldGetTfaVerificationStatus() {
         String givenApplicationId = "16A8B5FE2BCD6CA716A2D780CB3F3390";
 
-        String givenMsisdn = "41793026726";
+        String givenMsisdn = "41xxxxxxx24";
         boolean givenVerified1 = true;
         Long givenVerifiedAt1 = 1418364366L;
         Long givenSentAt1 = 1418364246L;

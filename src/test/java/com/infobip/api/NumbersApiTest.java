@@ -66,7 +66,7 @@ class NumbersApiTest extends ApiTest {
     @Test
     void shouldListOwnedNumbers() {
         String givenNumberKey = "6FED0BC540BFADD9B05ED7D89AAC22FA";
-        String givenNumber = "447860041117";
+        String givenNumber = "44xxxxxxxx63";
         String givenCountry = "GB";
         String givenCountryName = "United Kingdom";
         NumberType givenType = NumberType.VIRTUAL_LONG_NUMBER;
@@ -173,7 +173,7 @@ class NumbersApiTest extends ApiTest {
     @Test
     void shouldGetSingleOwnedNumber() {
         String givenNumberKey = "6FED0BC540BFADD9B05ED7D89AAC22FA";
-        String givenNumber = "447860041117";
+        String givenNumber = "44xxxxxxxx63";
         String givenCountry = "GB";
         NumberType givenType = NumberType.VIRTUAL_LONG_NUMBER;
         NumbersNumberCapabilityType givenCapability = NumbersNumberCapabilityType.SMS;
@@ -237,7 +237,7 @@ class NumbersApiTest extends ApiTest {
         String givenApplicationId = "appId";
         String givenEntityId = "entId";
 
-        String givenNumber = "447860041117";
+        String givenNumber = "44xxxxxxxx63";
         String givenCountry = "GB";
         NumberType givenType = NumberType.VIRTUAL_LONG_NUMBER;
         NumbersNumberCapabilityType givenCapability = NumbersNumberCapabilityType.SMS;
@@ -1164,7 +1164,7 @@ class NumbersApiTest extends ApiTest {
         String givenCountryCode = "US";
         String givenAlternateBusinessIdValue = "858020355";
         String givenSupportEmail = "help@example.com";
-        String givenSupportPhone = "41785473249";
+        String givenSupportPhone = "41xxxxxxx14";
         NumbersVertical givenVertical = NumbersVertical.RETAIL_AND_CONSUMER_PRODUCTS;
         String givenTaxId = "62-4161762";
         String givenTaxIdIssuingCountry = "US";
@@ -1337,7 +1337,7 @@ class NumbersApiTest extends ApiTest {
         String givenCountryCode = "US";
         String givenAlternateBusinessIdValue = "590900O3Z29E78HVXT56";
         String givenSupportEmail = "help@example.com";
-        String givenSupportPhone = "41785473249";
+        String givenSupportPhone = "41xxxxxxx14";
         NumbersVertical givenVertical = NumbersVertical.NON_PROFIT_ORGANIZATION;
         String givenTaxId = "62-4161762";
         String givenTaxIdIssuingCountry = "US";
@@ -1556,7 +1556,7 @@ class NumbersApiTest extends ApiTest {
         String givenCountryCode = "US";
         String givenAlternateBusinessIdValue = "590900O3Z29E78HVXT56";
         String givenSupportEmail = "help@example.com";
-        String givenSupportPhone = "41785473249";
+        String givenSupportPhone = "41xxxxxxx14";
         NumbersVertical givenVertical = NumbersVertical.NON_PROFIT_ORGANIZATION;
         String givenTaxId = "62-4161762";
         String givenTaxIdIssuingCountry = "US";
@@ -1697,7 +1697,7 @@ class NumbersApiTest extends ApiTest {
         String givenCountryCode = "US";
         String givenAlternateBusinessIdValue = "590900O3Z29E78HVXT56";
         String givenSupportEmail = "help@example.com";
-        String givenSupportPhone = "41785473249";
+        String givenSupportPhone = "41xxxxxxx14";
         NumbersVertical givenVertical = NumbersVertical.NON_PROFIT_ORGANIZATION;
         String givenTaxId = "62-4161762";
         String givenTaxIdIssuingCountry = "US";
@@ -2641,7 +2641,7 @@ class NumbersApiTest extends ApiTest {
                 "Example promotional-marketing. Msg&data rates may apply. Reply HELP for help, STOP to cancel.";
         String givenExampleMessage = "Come in today and get 10% OFF today!";
         String givenHelpMessage =
-                "Example promotional-marketing: Help at textsupport@example.com or 18889997777. Msg&data rates may apply. Reply STOP to cancel.";
+                "Example promotional-marketing: Help at textsupport@example.com or 1xxxxxxxx10. Msg&data rates may apply. Reply STOP to cancel.";
         String givenStopMessage =
                 "Example promotional-marketing: You have been unsubscribed, no more messages will be sent.";
         String givenTermsAndConditionsUrl = "https://www.example.com/terms-and-conditions";
@@ -2649,12 +2649,12 @@ class NumbersApiTest extends ApiTest {
         String givenOptInKeyword = "MESSAGE";
         String givenBrandPreviewBrandId = "a0c63335-f841-4d43-9ef8-e0765a233f29";
         String givenBrandPreviewBrandName = "Examples Warehouse";
-        String givenCustomerCarePhone = "41785473249";
+        String givenCustomerCarePhone = "41xxxxxxx14";
         Boolean givenLowVolume = false;
         NumbersTenDlcUseCase givenUseCase1 = NumbersTenDlcUseCase.PROMOTIONAL_MARKETING;
         NumbersTenDlcUseCase givenUseCase2 = NumbersTenDlcUseCase.EDUCATION;
         String givenNumberKey = "2C958BA98F9EBACA4F9357D81BFBF47B";
-        String givenNumber = "41793026727";
+        String givenNumber = "41xxxxxxx25";
         String givenCountryCode = "US";
         Boolean givenAgeGated = true;
         Boolean givenDirectLending = false;
@@ -2920,15 +2920,15 @@ class NumbersApiTest extends ApiTest {
         String givenApplicationId = "app-id";
         String givenEntityId = "entity-id";
         String givenName = "Example Promo";
-        String givenNumber = "41785473249";
+        String givenNumber = "41xxxxxxx14";
         UUID givenBrandId = UUID.fromString("a0c63335-f841-4d43-9ef8-e0765a233f29");
         String givenConfirmationMessage =
                 "Example promotional-marketing. Msg&data rates may apply. Reply HELP for help, STOP to cancel.";
-        String givenCustomerCarePhone = "41785473249";
+        String givenCustomerCarePhone = "41xxxxxxx14";
         String givenCustomerCareEmail = "examples@example.com";
         String givenExampleMessage = "Come in today and get 10% OFF today!";
         String givenHelpMessage =
-                "Example promotional-marketing: Help at textsupport@example.com or 18889997777. Msg&data rates may apply. Reply STOP to cancel.";
+                "Example promotional-marketing: Help at textsupport@example.com or 1xxxxxxxx10. Msg&data rates may apply. Reply STOP to cancel.";
         Boolean givenLowVolume = false;
         String givenProgramSummary = "A mix of promotional and informational messaging.";
         String givenStopMessage =
@@ -2954,7 +2954,7 @@ class NumbersApiTest extends ApiTest {
         String givenBrandPreviewBrandId = "a0c63335-f841-4d43-9ef8-e0765a233f29";
         String givenBrandPreviewBrandName = "Examples Warehouse";
         String givenNumberKey = "2C958BA98F9EBACA4F9357D81BFBF47B";
-        String givenNumberPreviewNumber = "41793026727";
+        String givenNumberPreviewNumber = "41xxxxxxx25";
         String givenCountryCode = "US";
         String givenRejectionReason1 =
                 "Campaign appears to be for an age-gated content type but age gate attribute is not selected.";
@@ -3324,7 +3324,7 @@ class NumbersApiTest extends ApiTest {
         String givenApplicationId = "app-id";
         String givenEntityId = "entity-id";
         String givenName = "Example Promo";
-        String givenNumber = "18007321000";
+        String givenNumber = "1xxxxxxxx09";
         String givenExampleMessage = "Come in today and get 10% OFF today!";
         String givenProgramSummary = "A mix of promotional and informational messaging.";
         String givenTermsAndConditionsUrl = "https://www.example.com/terms-and-conditions";
@@ -3341,7 +3341,7 @@ class NumbersApiTest extends ApiTest {
         String givenState = "WA";
         String givenStreet = "56486 915th Street";
         String givenZipCode = "98061";
-        String givenSupportPhone = "1234567890";
+        String givenSupportPhone = "1xxxxxxx06";
         String givenSupportEmail = "example@example.com";
         String givenBusinessContactFirstName = "First Name";
         String givenBusinessContactLastName = "Last Name";
@@ -3364,7 +3364,7 @@ class NumbersApiTest extends ApiTest {
         String givenPrioritySubmittedDateString = "2025-06-30T15:38:41Z";
         OffsetDateTime givenPrioritySubmittedDate = OffsetDateTime.parse(givenPrioritySubmittedDateString);
         String givenNumberKey = "8CE2738191F7F06F84E5417579D41D74";
-        String givenNumberPreviewNumber = "18007321000";
+        String givenNumberPreviewNumber = "1xxxxxxxx09";
         String givenNumberPreviewCountryCode = "UF";
         String givenResponseOptInImageUrl = "https://www.example.com";
         String givenResponseSupportEmail = "email@example.com";
@@ -3757,7 +3757,7 @@ class NumbersApiTest extends ApiTest {
                 "Example promotional-marketing. Msg&data rates may apply. Reply HELP for help, STOP to cancel.";
         String givenExampleMessage = "Come in today and get 10% OFF today!";
         String givenHelpMessage =
-                "Example promotional-marketing: Help at textsupport@example.com or 18889997777. Msg&data rates may apply. Reply STOP to cancel.";
+                "Example promotional-marketing: Help at textsupport@example.com or 1xxxxxxxx10. Msg&data rates may apply. Reply STOP to cancel.";
         String givenStopMessage =
                 "Example promotional-marketing: You have been unsubscribed, no more messages will be sent.";
         String givenTermsAndConditionsUrl = "https://www.example.com/terms-and-conditions";
@@ -3765,12 +3765,12 @@ class NumbersApiTest extends ApiTest {
         String givenOptInKeyword = "MESSAGE";
         String givenBrandPreviewBrandId = "a0c63335-f841-4d43-9ef8-e0765a233f29";
         String givenBrandPreviewBrandName = "Examples Warehouse";
-        String givenCustomerCarePhone = "41785473249";
+        String givenCustomerCarePhone = "41xxxxxxx14";
         Boolean givenLowVolume = false;
         NumbersTenDlcUseCase givenUseCase1 = NumbersTenDlcUseCase.PROMOTIONAL_MARKETING;
         NumbersTenDlcUseCase givenUseCase2 = NumbersTenDlcUseCase.EDUCATION;
         String givenNumberKey = "2C958BA98F9EBACA4F9357D81BFBF47B";
-        String givenNumber = "41793026727";
+        String givenNumber = "41xxxxxxx25";
         String givenCountryCode = "US";
         Boolean givenAgeGated = true;
         Boolean givenDirectLending = false;
@@ -4043,15 +4043,15 @@ class NumbersApiTest extends ApiTest {
         String givenApplicationId = "app-id";
         String givenEntityId = "entity-id";
         String givenName = "Example Promo";
-        String givenNumber = "41785473249";
+        String givenNumber = "41xxxxxxx14";
         UUID givenBrandId = UUID.fromString("a0c63335-f841-4d43-9ef8-e0765a233f29");
         String givenConfirmationMessage =
                 "Example promotional-marketing. Msg&data rates may apply. Reply HELP for help, STOP to cancel.";
-        String givenCustomerCarePhone = "41785473249";
+        String givenCustomerCarePhone = "41xxxxxxx14";
         String givenCustomerCareEmail = "examples@example.com";
         String givenExampleMessage = "Come in today and get 10% OFF today!";
         String givenHelpMessage =
-                "Example promotional-marketing: Help at textsupport@example.com or 18889997777. Msg&data rates may apply. Reply STOP to cancel.";
+                "Example promotional-marketing: Help at textsupport@example.com or 1xxxxxxxx10. Msg&data rates may apply. Reply STOP to cancel.";
         Boolean givenLowVolume = false;
         String givenProgramSummary = "A mix of promotional and informational messaging.";
         String givenStopMessage =
@@ -4078,7 +4078,7 @@ class NumbersApiTest extends ApiTest {
         String givenBrandPreviewBrandId = "a0c63335-f841-4d43-9ef8-e0765a233f29";
         String givenBrandPreviewBrandName = "Examples Warehouse";
         String givenNumberKey = "2C958BA98F9EBACA4F9357D81BFBF47B";
-        String givenNumberPreviewNumber = "41793026727";
+        String givenNumberPreviewNumber = "41xxxxxxx25";
         String givenCountryCode = "US";
         String givenRejectionReason1 =
                 "Campaign appears to be for an age-gated content type but age gate attribute is not selected.";
@@ -4610,10 +4610,10 @@ class NumbersApiTest extends ApiTest {
     void shouldGetCampaignNumbers() {
         UUID givenCampaignId = UUID.fromString("4d3601ed-c632-4979-ae22-43854ef4ffaf");
         String givenNumberKey1 = "2C958BA98F9EBACA4F9357D81BFBF47B";
-        String givenNumber1 = "41793026727";
+        String givenNumber1 = "41xxxxxxx25";
         String givenCountryCode1 = "US";
         String givenNumberKey2 = "D79C1785A82A2BC6FC0B867DCD055215";
-        String givenNumber2 = "42893024539";
+        String givenNumber2 = "xxxxxxxxx31";
         String givenCountryCode2 = "US";
 
         String givenResponse = String.format(
@@ -5013,10 +5013,10 @@ class NumbersApiTest extends ApiTest {
         String givenOptInMessage =
                 "Welcome to Example Corp alerts! Msg&data rates may apply. Reply HELP for help, STOP to cancel.";
         String givenHelpMessage =
-                "Example Corp Help: contact support@example.com or call 1-800-555-0100. Msg&data rates may apply.";
+                "Example Corp Help: contact support@example.com or call 1xxxxxxxx74. Msg&data rates may apply.";
         String givenOptOutMessage = "You have been unsubscribed from Example Corp alerts. Text START to resubscribe.";
         String givenCtaWebsite = "https://www.example.com/opt-in";
-        String givenCta1 = "Text JOIN to 12345 to subscribe";
+        String givenCta1 = "Text JOIN to xxx69 to subscribe";
         String givenCta2 = "Visit https://example.com/opt-in to sign up";
         NumbersTenDlcUseCase givenUseCase = NumbersTenDlcUseCase.PROMOTIONAL_MARKETING;
         Boolean givenAgeGated = false;

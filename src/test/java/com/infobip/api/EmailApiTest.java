@@ -402,7 +402,7 @@ class EmailApiTest extends ApiTest {
 
     @Test
     void shouldValidateEmail() {
-        String givenTo = "john.smith@abc.com";
+        String givenTo = "john.smith@example.com";
         Boolean givenValidSyntax = true;
         String givenDidYouMean = null;
 
@@ -554,9 +554,9 @@ class EmailApiTest extends ApiTest {
         // Fixtures adapted from OpenAPI POST /email/4/messages examples:
         // "Email with HTML and placeholders...", "Email with attachments",
         // and "Success response with multiple destinations".
-        String givenSender = "jenny.smith@company.com";
-        String givenTo = "john.smith@company.com";
-        String givenAnotherTo = "mike.smith@company.com";
+        String givenSender = "jenny.smith@example.com";
+        String givenTo = "john.smith@example.com";
+        String givenAnotherTo = "mike.smith@example.com";
         String givenToPlaceholders = "{\"customer_name\":\"John Smith\"}";
         String givenAnotherToPlaceholders = "{\"customer_name\":\"Mike Smith\"}";
         String givenSubject = "Test message";
@@ -750,7 +750,7 @@ class EmailApiTest extends ApiTest {
         String givenBulkId = "csdstgteet4fath2pclbq";
         String givenMessageId = "45653761-3a88-4060-869e-ae372adc7a51";
         String givenTo = "john.doe@example.com";
-        String givenSender = "jenny.smith@company.com";
+        String givenSender = "jenny.smith@example.com";
 
         String expectedResponse = String.format(
                 "{\n" + "  \"results\": [\n"
@@ -845,7 +845,7 @@ class EmailApiTest extends ApiTest {
         String givenBulkId = "csdstgteet4fath2pclbq";
         String givenMessageId = "45653761-3a88-4060-869e-ae372adc7a51";
         String givenDestination = "john.doe@example.com";
-        String givenSender = "jenny.smith@company.com";
+        String givenSender = "jenny.smith@example.com";
         String givenApplicationId = "applicationId";
         String givenEntityId = "entityId";
         String givenNextCursor = "next-cursor";
@@ -952,13 +952,13 @@ class EmailApiTest extends ApiTest {
         // Fixtures from OpenAPI POST /email/4/mime examples:
         // single-recipient request and "Example for single message" response.
         String givenMessageId = "requestMessageId";
-        String givenFrom = "jenny.smith@company.com";
+        String givenFrom = "jenny.smith@example.com";
         String givenDestination = "john.smith@company";
         String givenMimeMessage =
-                "RGF0ZTogV2VkLCAxOCBKdW4gMjAyNSAxMjo0ODoyMyArMDIwMCAoQ0VTVCkNCkZyb206IGplbm55LnNtaXRoQGNvbXBhbnkuY29tDQpUbzogam9obi5zbWl0aEBjb21wYW55LmNvbQ0KTWVzc2FnZS1JRDogPG1lc3NhZ2VAaWQ+DQpTdWJqZWN0OiBUaGlzIGlzIHN1YmplY3QNCk1JTUUtVmVyc2lvbjogMS4wDQpDb250ZW50LVR5cGU6IG11bHRpcGFydC9taXhlZDsgDQoJYm91bmRhcnk9Ii0tLS09X1BhcnRfMF8xNDkzMzcyMS4xNzUwMjQzNzAzMTY0Ig0KWC1JQi1idWxrLWlkOiBkZWZhdWx0QnVsa0lkDQoNCi0tLS0tLT1fUGFydF8wXzE0OTMzNzIxLjE3NTAyNDM3MDMxNjQNCkNvbnRlbnQtVHlwZTogdGV4dC9wbGFpbjsgY2hhcnNldD11cy1hc2NpaQ0KQ29udGVudC1UcmFuc2Zlci1FbmNvZGluZzogN2JpdA0KDQpIZWxsbyB3b3JsZA0KLS0tLS0tPV9QYXJ0XzBfMTQ5MzM3MjEuMTc1MDI0MzcwMzE2NA0KQ29udGVudC1UeXBlOiB0ZXh0L2h0bWw7IGNoYXJzZXQ9dXMtYXNjaWkNCkNvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IDdiaXQNCg0KPGRpdj5IZWxsbyB3b3JsZDwvZGl2Pg0KLS0tLS0tPV9QYXJ0XzBfMTQ5MzM3MjEuMTc1MDI0MzcwMzE2NC0tDQo=";
+                "RGF0ZTogV2VkLCAxOCBKdW4gMjAyNSAxMjo0ODoyMyArMDIwMCAoQ0VTVCkNCkZyb206IGplbm55LnNtaXRoQGV4YW1wbGUuY29tDQpUbzogam9obi5zbWl0aEBleGFtcGxlLmNvbQ0KTWVzc2FnZS1JRDogPG1lc3NhZ2VAaWQ+DQpTdWJqZWN0OiBUaGlzIGlzIHN1YmplY3QNCk1JTUUtVmVyc2lvbjogMS4wDQpDb250ZW50LVR5cGU6IG11bHRpcGFydC9taXhlZDsgDQoJYm91bmRhcnk9Ii0tLS09X1BhcnRfMF8xNDkzMzcyMS4xNzUwMjQzNzAzMTY0Ig0KWC1JQi1idWxrLWlkOiBkZWZhdWx0QnVsa0lkDQoNCi0tLS0tLT1fUGFydF8wXzE0OTMzNzIxLjE3NTAyNDM3MDMxNjQNCkNvbnRlbnQtVHlwZTogdGV4dC9wbGFpbjsgY2hhcnNldD11cy1hc2NpaQ0KQ29udGVudC1UcmFuc2Zlci1FbmNvZGluZzogN2JpdA0KDQpIZWxsbyB3b3JsZA0KLS0tLS0tPV9QYXJ0XzBfMTQ5MzM3MjEuMTc1MDI0MzcwMzE2NA0KQ29udGVudC1UeXBlOiB0ZXh0L2h0bWw7IGNoYXJzZXQ9dXMtYXNjaWkNCkNvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IDdiaXQNCg0KPGRpdj5IZWxsbyB3b3JsZDwvZGl2Pg0KLS0tLS0tPV9QYXJ0XzBfMTQ5MzM3MjEuMTc1MDI0MzcwMzE2NC0tDQo=";
 
         String givenBulkId = "snxemd8u52v7v84iiu69";
-        String givenResponseTo = "john.smith@somecompany.com";
+        String givenResponseTo = "john.smith@example.com";
         String givenResponseMessageId = "jgzra46v9zi1ztvd62t5";
         Integer givenGroupId = 1;
         String givenGroupName = "PENDING";
@@ -1065,7 +1065,7 @@ class EmailApiTest extends ApiTest {
                 + "      \"sentAt\": \"2020-09-08T05:27:57.628+0000\",\n"
                 + "      \"browserLink\": \"http://tracking.domain.com/render/content?id=9A31C6F61DBAE9664D74C7A5A5A01F92283F581D11EA80A28C12E83BC83D449BC4A9F32F1AE3C3E\",\n"
                 + "      \"callbackData\": \"something you want back\",\n"
-                + "      \"to\": \"john.doe@gmail.com\"\n"
+                + "      \"to\": \"john.doe@example.com\"\n"
                 + "    }\n"
                 + "  ]\n"
                 + "}\n";

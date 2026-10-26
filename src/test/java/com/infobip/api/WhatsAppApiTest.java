@@ -19,8 +19,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldAudioMessageSendWhatsAppAudioMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"mediaUrl\": \"http://example.com/audio\"\n"
@@ -28,7 +28,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "  \"callbackData\": \"Callback data\",\n"
                 + "  \"notifyUrl\": \"https://www.example.com/whatsapp\"\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -41,15 +41,15 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         WhatsAppAudioContent whatsAppAudioContent = new WhatsAppAudioContent().mediaUrl("http://example.com/audio");
         WhatsAppAudioMessage whatsAppAudioMessage = new WhatsAppAudioMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppAudioContent)
                 .callbackData("Callback data")
                 .notifyUrl("https://www.example.com/whatsapp");
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(response.getStatus()).isNotNull();
@@ -69,8 +69,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldMultipleContactsMessageSendWhatsAppContactMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"contacts\": [\n"
@@ -118,14 +118,14 @@ class WhatsAppApiTest extends ApiTest {
                 + "        },\n"
                 + "        \"phones\": [\n"
                 + "          {\n"
-                + "            \"phone\": \"+441134960019\",\n"
+                + "            \"phone\": \"+44xxxxxxxx57\",\n"
                 + "            \"type\": \"HOME\",\n"
-                + "            \"waId\": \"441134960019\"\n"
+                + "            \"waId\": \"44xxxxxxxx57\"\n"
                 + "          },\n"
                 + "          {\n"
-                + "            \"phone\": \"+441134960000\",\n"
+                + "            \"phone\": \"+44xxxxxxxx46\",\n"
                 + "            \"type\": \"WORK\",\n"
-                + "            \"waId\": \"441134960000\"\n"
+                + "            \"waId\": \"44xxxxxxxx46\"\n"
                 + "          }\n"
                 + "        ],\n"
                 + "        \"urls\": [\n"
@@ -183,14 +183,14 @@ class WhatsAppApiTest extends ApiTest {
                 + "        },\n"
                 + "        \"phones\": [\n"
                 + "          {\n"
-                + "            \"phone\": \"+441134960010\",\n"
+                + "            \"phone\": \"+44xxxxxxxx52\",\n"
                 + "            \"type\": \"HOME\",\n"
-                + "            \"waId\": \"441134960010\"\n"
+                + "            \"waId\": \"44xxxxxxxx52\"\n"
                 + "          },\n"
                 + "          {\n"
-                + "            \"phone\": \"+441134960011\",\n"
+                + "            \"phone\": \"+44xxxxxxxx53\",\n"
                 + "            \"type\": \"WORK\",\n"
-                + "            \"waId\": \"441134960011\"\n"
+                + "            \"waId\": \"44xxxxxxxx53\"\n"
                 + "          }\n"
                 + "        ],\n"
                 + "        \"urls\": [\n"
@@ -209,7 +209,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "  \"callbackData\": \"Callback data\",\n"
                 + "  \"notifyUrl\": \"https://www.example.com/whatsapp\"\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -252,13 +252,13 @@ class WhatsAppApiTest extends ApiTest {
                 .department("Department")
                 .title("Director");
         WhatsAppPhoneContent whatsappPhoneContent = new WhatsAppPhoneContent()
-                .phone("+441134960019")
+                .phone("+44xxxxxxxx57")
                 .type(WhatsAppPhoneType.HOME)
-                .waId("441134960019");
+                .waId("44xxxxxxxx57");
         WhatsAppPhoneContent whatsappPhoneContent2 = new WhatsAppPhoneContent()
-                .phone("+441134960000")
+                .phone("+44xxxxxxxx46")
                 .type(WhatsAppPhoneType.WORK)
-                .waId("441134960000");
+                .waId("44xxxxxxxx46");
         List<WhatsAppPhoneContent> whatsappPhoneContentList = List.of(whatsappPhoneContent, whatsappPhoneContent2);
         WhatsAppUrlContent whatsappUrlContent =
                 new WhatsAppUrlContent().url("http://example.com/John.Smith").type(WhatsAppUrlType.WORK);
@@ -308,13 +308,13 @@ class WhatsAppApiTest extends ApiTest {
                 .department("Department")
                 .title("Director");
         WhatsAppPhoneContent whatsappPhoneContent3 = new WhatsAppPhoneContent()
-                .phone("+441134960010")
+                .phone("+44xxxxxxxx52")
                 .type(WhatsAppPhoneType.HOME)
-                .waId("441134960010");
+                .waId("44xxxxxxxx52");
         WhatsAppPhoneContent whatsappPhoneContent4 = new WhatsAppPhoneContent()
-                .phone("+441134960011")
+                .phone("+44xxxxxxxx53")
                 .type(WhatsAppPhoneType.WORK)
-                .waId("441134960011");
+                .waId("44xxxxxxxx53");
         List<WhatsAppPhoneContent> whatsappPhoneContentList2 = List.of(whatsappPhoneContent3, whatsappPhoneContent4);
         WhatsAppUrlContent whatsappUrlContent3 = new WhatsAppUrlContent()
                 .url("http://example.com/Alexander.Abraham")
@@ -336,8 +336,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppContactsContent whatsappContactsContent =
                 new WhatsAppContactsContent().contacts(whatsappContactContentList);
         WhatsAppContactsMessage whatsappContactsMessage = new WhatsAppContactsMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsappContactsContent)
                 .callbackData("Callback data")
@@ -345,7 +345,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/contact", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -364,8 +364,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendSingleContactMessageSendWhatsAppContactMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"contacts\": [\n"
@@ -402,8 +402,8 @@ class WhatsAppApiTest extends ApiTest {
                 + "        },\n"
                 + "        \"org\": {\"company\": \"Company Name\", \"department\": \"Department\", \"title\": \"Director\"},\n"
                 + "        \"phones\": [\n"
-                + "          {\"phone\": \"+441134960019\", \"type\": \"HOME\", \"waId\": \"441134960019\"},\n"
-                + "          {\"phone\": \"+441134960000\", \"type\": \"WORK\", \"waId\": \"441134960000\"}\n"
+                + "          {\"phone\": \"+44xxxxxxxx57\", \"type\": \"HOME\", \"waId\": \"44xxxxxxxx57\"},\n"
+                + "          {\"phone\": \"+44xxxxxxxx46\", \"type\": \"WORK\", \"waId\": \"44xxxxxxxx46\"}\n"
                 + "        ],\n"
                 + "        \"urls\": [\n"
                 + "          {\"url\": \"http://example.com/John.Smith\", \"type\": \"WORK\"},\n"
@@ -415,7 +415,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "  \"callbackData\": \"Callback data\",\n"
                 + "  \"notifyUrl\": \"https://www.example.com/whatsapp\"\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -458,13 +458,13 @@ class WhatsAppApiTest extends ApiTest {
                 .department("Department")
                 .title("Director");
         WhatsAppPhoneContent whatsAppPhoneContent1 = new WhatsAppPhoneContent()
-                .phone("+441134960019")
+                .phone("+44xxxxxxxx57")
                 .type(WhatsAppPhoneType.HOME)
-                .waId("441134960019");
+                .waId("44xxxxxxxx57");
         WhatsAppPhoneContent whatsAppPhoneContent2 = new WhatsAppPhoneContent()
-                .phone("+441134960000")
+                .phone("+44xxxxxxxx46")
                 .type(WhatsAppPhoneType.WORK)
-                .waId("441134960000");
+                .waId("44xxxxxxxx46");
         List<WhatsAppPhoneContent> whatsAppPhoneContentList = List.of(whatsAppPhoneContent1, whatsAppPhoneContent2);
         WhatsAppUrlContent whatsAppUrlContent1 =
                 new WhatsAppUrlContent().url("http://example.com/John.Smith").type(WhatsAppUrlType.WORK);
@@ -484,8 +484,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppContactsContent whatsAppContactsContent =
                 new WhatsAppContactsContent().contacts(whatsAppContactContentList);
         WhatsAppContactsMessage whatsAppContactsMessage = new WhatsAppContactsMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppContactsContent)
                 .callbackData("Callback data")
@@ -493,7 +493,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/contact", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(response.getStatus()).isNotNull();
@@ -513,8 +513,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldDocumentMessageSendWhatsAppDocumentMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"mediaUrl\": \"http://example.com/document\"\n"
@@ -528,7 +528,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -547,8 +547,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppDocumentContent whatsAppDocumentContent =
                 new WhatsAppDocumentContent().mediaUrl("http://example.com/document");
         WhatsAppDocumentMessage whatsAppDocumentMessage = new WhatsAppDocumentMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppDocumentContent)
                 .callbackData("Callback data")
@@ -557,7 +557,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/document", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -576,8 +576,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldDocumentMessageWithAllFieldsSendWhatsAppDocumentMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"mediaUrl\": \"http://example.com/document\",\n"
@@ -593,7 +593,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -614,8 +614,8 @@ class WhatsAppApiTest extends ApiTest {
                 .caption("Some document caption")
                 .filename("filename.pdf");
         WhatsAppDocumentMessage whatsAppDocumentMessage = new WhatsAppDocumentMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppDocumentContent)
                 .callbackData("Callback data")
@@ -624,7 +624,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/document", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -643,8 +643,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendImageMessageSendWhatsAppImageMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"mediaUrl\": \"http://example.com/image\"\n"
@@ -658,7 +658,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -676,8 +676,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppImageMessage whatsAppImageMessage = new WhatsAppImageMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppImageContent)
                 .callbackData("Callback data")
@@ -686,7 +686,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/image", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -705,8 +705,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendImageMessageWithCaptionSendWhatsAppImageMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"mediaUrl\": \"http://example.com/image\",\n"
@@ -720,7 +720,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -739,8 +739,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppImageMessage whatsAppImageMessage = new WhatsAppImageMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppImageContent)
                 .callbackData("Callback data")
@@ -749,7 +749,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/image", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus messageStatus = response.getStatus();
@@ -768,8 +768,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendDocumentHeaderInteractiveReplyButtonsMessageSendWhatsAppInteractiveButtonsMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -806,7 +806,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"trackingUrl\": \"https://example.com/click-report\",\n            \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -844,8 +844,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppInteractiveButtonsMessage whatsAppInteractiveButtonsMessage = new WhatsAppInteractiveButtonsMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppInteractiveButtonsContent)
                 .callbackData("Callback data")
@@ -854,7 +854,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/buttons", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -873,8 +873,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendImageHeaderInteractiveReplyButtonsMessageSendWhatsAppInteractiveButtonsMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -911,7 +911,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -947,8 +947,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppInteractiveButtonsMessage whatsappInteractiveButtonsMessage = new WhatsAppInteractiveButtonsMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsappInteractiveButtonsContent)
                 .callbackData("Callback data")
@@ -957,7 +957,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/buttons", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsappSingleMessageInfo) -> {
             then(whatsappSingleMessageInfo).isNotNull();
-            then(whatsappSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsappSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsappSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
@@ -976,8 +976,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendInteractiveReplyButtonsMessageSendWhatsAppInteractiveButtonsMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -1010,7 +1010,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -1043,8 +1043,8 @@ class WhatsAppApiTest extends ApiTest {
                 .action(whatsAppInteractiveButtonsActionContent)
                 .footer(whatsAppInteractiveFooterContent);
         WhatsAppInteractiveButtonsMessage whatsAppInteractiveButtonsMessage = new WhatsAppInteractiveButtonsMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppInteractiveButtonsContent)
                 .callbackData("Callback data")
@@ -1053,7 +1053,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/buttons", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -1072,8 +1072,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldTextHeaderInteractiveReplyButtonsMessageSendWhatsAppInteractiveButtonsMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -1109,7 +1109,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"trackingUrl\": \"https://example.com/click-report\",\n            \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -1121,8 +1121,8 @@ class WhatsAppApiTest extends ApiTest {
                 + "  }\n"
                 + "}";
         WhatsAppInteractiveButtonsMessage whatsAppInteractiveButtonsMessage = new WhatsAppInteractiveButtonsMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .callbackData("Callback data")
                 .notifyUrl("https://www.example.com/whatsapp");
@@ -1155,7 +1155,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/buttons", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -1174,8 +1174,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendVideoHeaderInteractiveReplyButtonsMessageSendWhatsAppInteractiveButtonsMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -1212,7 +1212,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -1248,8 +1248,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppInteractiveButtonsMessage whatsAppInteractiveButtonsMessage = new WhatsAppInteractiveButtonsMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppInteractiveButtonsContent)
                 .callbackData("Callback data")
@@ -1258,7 +1258,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/buttons", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -1277,8 +1277,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldHeaderAndFooterInteractiveFlowMessageSendWhatsappInteractiveFlowMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -1316,7 +1316,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -1357,8 +1357,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppInteractiveFlowMessage whatsAppInteractiveFlowMessage = new WhatsAppInteractiveFlowMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppInteractiveFlowContent)
                 .callbackData("Callback data")
@@ -1366,7 +1366,7 @@ class WhatsAppApiTest extends ApiTest {
                 .urlOptions(urlOptions);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -1386,8 +1386,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldInteractiveFlowMessageSendWhatsappInteractiveFlowMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -1418,7 +1418,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -1454,8 +1454,8 @@ class WhatsAppApiTest extends ApiTest {
                 .body(whatsAppInteractiveBodyContent)
                 .action(whatsAppInteractiveFlowActionContent);
         WhatsAppInteractiveFlowMessage whatsAppInteractiveFlowMessage = new WhatsAppInteractiveFlowMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppInteractiveFlowContent)
                 .callbackData("Callback data")
@@ -1463,7 +1463,7 @@ class WhatsAppApiTest extends ApiTest {
                 .urlOptions(urlOptions);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -1527,15 +1527,15 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppInteractiveListMessage whatsappInteractiveListMessage = new WhatsAppInteractiveListMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsappInteractiveListContent)
                 .callbackData("Callback data")
                 .notifyUrl("https://www.example.com/whatsapp")
                 .urlOptions(urlOptions);
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -1587,7 +1587,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -1602,7 +1602,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/list", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsappSingleMessageInfo) -> {
             then(whatsappSingleMessageInfo).isNotNull();
-            then(whatsappSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsappSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
@@ -1620,8 +1620,8 @@ class WhatsAppApiTest extends ApiTest {
 
     @Test
     void shouldSendInteractiveListMessageSendWhatsAppInteractiveListMessage() {
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -1650,7 +1650,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -1684,8 +1684,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppInteractiveListMessage whatsAppInteractiveListMessage = new WhatsAppInteractiveListMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppInteractiveListContent)
                 .callbackData("Callback data")
@@ -1694,7 +1694,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/list", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(response.getStatus()).isNotNull();
@@ -1713,8 +1713,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldInteractiveLocationRequestMessageSendWhatsappInteractiveLocationRequestMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -1730,7 +1730,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -1743,8 +1743,8 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         WhatsAppInteractiveLocationRequestMessage whatsAppInteractiveLocationRequestMessage =
                 new WhatsAppInteractiveLocationRequestMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(new WhatsAppInteractiveLocationRequestContent()
                                 .body(new WhatsAppInteractiveBodyContent().text("Some text")))
@@ -1758,7 +1758,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/location-request", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -1777,8 +1777,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendFooterInteractiveMultiProductMessageSendWhatsAppInteractiveMultiProductMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"header\": {\n"
@@ -1813,7 +1813,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -1852,8 +1852,8 @@ class WhatsAppApiTest extends ApiTest {
                 .removeProtocol(true);
         WhatsAppInteractiveMultiProductMessage whatsAppInteractiveMultiProductMessage =
                 new WhatsAppInteractiveMultiProductMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsAppInteractiveMultiProductContent)
                         .callbackData("Callback data")
@@ -1862,7 +1862,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/multi-product", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -1881,8 +1881,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldInteractiveMultiProductMessageSendWhatsAppInteractiveMultiProductMessage() {
         WhatsAppApi whatsappApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"header\": {\n"
@@ -1913,7 +1913,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -1950,8 +1950,8 @@ class WhatsAppApiTest extends ApiTest {
                 .removeProtocol(true);
         WhatsAppInteractiveMultiProductMessage whatsappInteractiveMultiProductMessage =
                 new WhatsAppInteractiveMultiProductMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsappInteractiveMultiProductContent)
                         .callbackData("Callback data")
@@ -1960,7 +1960,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/multi-product", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -1979,8 +1979,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendHeaderInteractiveUpiPayuOrderDetailsMessageSendWhatsappInteractiveOrderDetailsMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -2046,7 +2046,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -2132,8 +2132,8 @@ class WhatsAppApiTest extends ApiTest {
                 .removeProtocol(true);
         WhatsAppInteractiveOrderDetailsMessage whatsAppInteractiveOrderDetailsMessage =
                 new WhatsAppInteractiveOrderDetailsMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsAppInteractiveOrderDetailsContent)
                         .callbackData("Callback data")
@@ -2142,7 +2142,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/order-details", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -2160,8 +2160,8 @@ class WhatsAppApiTest extends ApiTest {
 
     @Test
     void shouldSendInteractiveBrazilBoletoOrderDetailsMessageSendWhatsappInteractiveOrderDetailsMessage() {
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -2213,7 +2213,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -2288,8 +2288,8 @@ class WhatsAppApiTest extends ApiTest {
                         .footer(whatsappInteractiveFooterContent);
         WhatsAppInteractiveOrderDetailsMessage whatsappInteractiveOrderDetailsMessage =
                 new WhatsAppInteractiveOrderDetailsMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsappInteractiveOrderDetailsContent)
                         .callbackData("Callback data")
@@ -2298,7 +2298,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/order-details", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -2317,8 +2317,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendInteractiveBrazilLinkOrderDetailsMessageSendWhatsappInteractiveOrderDetailsMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -2370,7 +2370,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -2448,8 +2448,8 @@ class WhatsAppApiTest extends ApiTest {
                 .removeProtocol(true);
         WhatsAppInteractiveOrderDetailsMessage whatsappInteractiveOrderDetailsMessage =
                 new WhatsAppInteractiveOrderDetailsMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsappInteractiveOrderDetailsContent)
                         .callbackData("Callback data")
@@ -2458,7 +2458,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/order-details", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -2477,8 +2477,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendInteractiveBrazilPaymentsOrderDetailsMessageSendWhatsappInteractiveOrderDetailsMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -2543,7 +2543,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -2632,8 +2632,8 @@ class WhatsAppApiTest extends ApiTest {
                         .footer(whatsAppInteractiveFooterContent);
         WhatsAppInteractiveOrderDetailsMessage whatsAppInteractiveOrderDetailsMessage =
                 new WhatsAppInteractiveOrderDetailsMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsAppInteractiveOrderDetailsContent)
                         .callbackData("Callback data")
@@ -2642,7 +2642,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/order-details", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -2661,8 +2661,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendInteractiveBrazilPixDcOrderDetailsMessageSendWhatsappInteractiveOrderDetailsMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -2718,7 +2718,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -2815,8 +2815,8 @@ class WhatsAppApiTest extends ApiTest {
                 .removeProtocol(true);
         WhatsAppInteractiveOrderDetailsMessage whatsappInteractiveOrderDetailsMessage =
                 new WhatsAppInteractiveOrderDetailsMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsappInteractiveOrderDetailsContent)
                         .callbackData("Callback data")
@@ -2825,7 +2825,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/order-details", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus messageStatus = response.getStatus();
@@ -2845,8 +2845,8 @@ class WhatsAppApiTest extends ApiTest {
     void
             shouldSendInteractiveBrazilPixDcOrderDetailsMessageWithoutPaymentConfigurationSendWhatsappInteractiveOrderDetailsMessage() {
         WhatsAppApi whatsappApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -2895,7 +2895,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "  \"notifyUrl\": \"https://www.example.com/whatsapp\",\n"
                 + "  \"urlOptions\": {\"shortenUrl\": true, \"trackClicks\": true, \"trackingUrl\": \"https://example.com/click-report\", \"removeProtocol\": true}\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -2908,8 +2908,8 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         WhatsAppInteractiveOrderDetailsMessage whatsAppInteractiveOrderDetailsMessage =
                 new WhatsAppInteractiveOrderDetailsMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
         WhatsAppInteractiveBodyContent whatsAppInteractiveBodyContent =
                 new WhatsAppInteractiveBodyContent().text("Some text");
@@ -2991,7 +2991,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/order-details", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -3010,8 +3010,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendInteractiveBrazilOrderDetailsMessageSendWhatsappInteractiveOrderDetailsMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -3063,7 +3063,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -3149,8 +3149,8 @@ class WhatsAppApiTest extends ApiTest {
                 .removeProtocol(true);
         WhatsAppInteractiveOrderDetailsMessage whatsAppInteractiveOrderDetailsMessage =
                 new WhatsAppInteractiveOrderDetailsMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsAppInteractiveOrderDetailsContent)
                         .callbackData("Callback data")
@@ -3159,7 +3159,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/order-details", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = response.getStatus();
@@ -3178,8 +3178,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldInteractivePgRazorpayOrderDetailsMessageSendWhatsappInteractiveOrderDetailsMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -3239,7 +3239,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "  \"notifyUrl\": \"https://www.example.com/whatsapp\",\n"
                 + "  \"urlOptions\": { \"shortenUrl\": true, \"trackClicks\": true, \"trackingUrl\": \"https://example.com/click-report\", \"removeProtocol\": true }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -3350,8 +3350,8 @@ class WhatsAppApiTest extends ApiTest {
                 .removeProtocol(true);
         WhatsAppInteractiveOrderDetailsMessage whatsAppInteractiveOrderDetailsMessage =
                 new WhatsAppInteractiveOrderDetailsMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsAppInteractiveOrderDetailsContent)
                         .callbackData("Callback data")
@@ -3360,7 +3360,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/order-details", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -3379,8 +3379,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldBodyAndFooterInteractiveOrderStatusMessageSendWhatsappInteractiveOrderStatusMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"action\": {\n"
@@ -3407,7 +3407,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -3441,8 +3441,8 @@ class WhatsAppApiTest extends ApiTest {
                 .removeProtocol(true);
         WhatsAppInteractiveOrderStatusMessage whatsAppInteractiveOrderStatusMessage =
                 new WhatsAppInteractiveOrderStatusMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsappInteractiveOrderStatusContent)
                         .callbackData("Callback data")
@@ -3451,7 +3451,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/order-status", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsappSingleMessageInfo) -> {
             then(whatsappSingleMessageInfo).isNotNull();
-            then(whatsappSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsappSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
@@ -3470,8 +3470,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendBodyInteractiveOrderStatusMessageSendWhatsappInteractiveOrderStatusMessage() {
         WhatsAppApi whatsappApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"action\": {\n"
@@ -3495,7 +3495,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -3526,8 +3526,8 @@ class WhatsAppApiTest extends ApiTest {
                         .body(whatsappInteractiveBodyContent);
         WhatsAppInteractiveOrderStatusMessage whatsappInteractiveOrderStatusMessage =
                 new WhatsAppInteractiveOrderStatusMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsappInteractiveOrderStatusContent)
                         .callbackData("Callback data")
@@ -3536,7 +3536,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/order-status", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsappSingleMessageInfo) -> {
             then(whatsappSingleMessageInfo).isNotNull();
-            then(whatsappSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsappSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsappSingleMessageStatus = whatsappSingleMessageInfo.getStatus();
@@ -3555,8 +3555,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldFooterInteractiveOrderStatusMessageSendWhatsappInteractiveOrderStatusMessage() {
         WhatsAppApi whatsappApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"action\": {\n"
@@ -3579,7 +3579,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -3610,8 +3610,8 @@ class WhatsAppApiTest extends ApiTest {
                 .removeProtocol(true);
         WhatsAppInteractiveOrderStatusMessage whatsappInteractiveOrderStatusMessage =
                 new WhatsAppInteractiveOrderStatusMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsAppInteractiveOrderStatusContent)
                         .callbackData("Callback data")
@@ -3619,7 +3619,7 @@ class WhatsAppApiTest extends ApiTest {
                         .urlOptions(urlOptions);
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus messageStatus = response.getStatus();
@@ -3639,8 +3639,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendInteractiveOrderStatusMessageSendWhatsappInteractiveOrderStatusMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"action\": {\n"
@@ -3661,7 +3661,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -3688,8 +3688,8 @@ class WhatsAppApiTest extends ApiTest {
                 .removeProtocol(true);
         WhatsAppInteractiveOrderStatusMessage whatsappInteractiveOrderStatusMessage =
                 new WhatsAppInteractiveOrderStatusMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsappInteractiveOrderStatusContent)
                         .callbackData("Callback data")
@@ -3697,7 +3697,7 @@ class WhatsAppApiTest extends ApiTest {
                         .urlOptions(urlOptions);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsappSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -3717,8 +3717,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendBodyAndFooterInteractiveProductMessageSendWhatsAppInteractiveProductMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"action\": {\n"
@@ -3741,7 +3741,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -3764,8 +3764,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppInteractiveProductMessage whatsAppInteractiveProductMessage = new WhatsAppInteractiveProductMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(new WhatsAppInteractiveProductContent()
                         .action(whatsAppInteractiveProductActionContent)
@@ -3776,7 +3776,7 @@ class WhatsAppApiTest extends ApiTest {
                 .urlOptions(urlOptions);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -3796,8 +3796,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldBodyInteractiveProductMessageSendWhatsAppInteractiveProductMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"action\": {\n"
@@ -3817,7 +3817,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -3841,8 +3841,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppInteractiveProductMessage whatsAppInteractiveProductMessage = new WhatsAppInteractiveProductMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppInteractiveProductContent)
                 .callbackData("Callback data")
@@ -3851,7 +3851,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/product", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -3870,8 +3870,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldFooterInteractiveProductMessageSendWhatsAppInteractiveProductMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"action\": {\n"
@@ -3890,7 +3890,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -3914,8 +3914,8 @@ class WhatsAppApiTest extends ApiTest {
                 .action(whatsAppInteractiveProductActionContent)
                 .footer(whatsAppInteractiveFooterContent);
         WhatsAppInteractiveProductMessage whatsAppInteractiveProductMessage = new WhatsAppInteractiveProductMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppInteractiveProductContent)
                 .callbackData("Callback data")
@@ -3924,7 +3924,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/product", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsappSingleMessageInfo) -> {
             then(whatsappSingleMessageInfo).isNotNull();
-            then(whatsappSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsappSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsappSingleMessageInfo.getStatus()).isNotNull();
@@ -3943,8 +3943,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldInteractiveProductMessageSendWhatsAppInteractiveProductMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"action\": {\n"
@@ -3961,7 +3961,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -3982,8 +3982,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppInteractiveProductMessage whatsAppInteractiveProductMessage = new WhatsAppInteractiveProductMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppInteractiveProductContent)
                 .callbackData("Callback data")
@@ -3992,7 +3992,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/product", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> whatsAppSingleMessageInfoConsumer = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -4011,8 +4011,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendHeaderAndFooterInteractiveUrlButtonMessageSendWhatsappInteractiveUrlButtonMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -4039,7 +4039,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -4073,8 +4073,8 @@ class WhatsAppApiTest extends ApiTest {
                 .removeProtocol(true);
         WhatsAppInteractiveUrlButtonMessage whatsAppInteractiveUrlButtonMessage =
                 new WhatsAppInteractiveUrlButtonMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsAppInteractiveUrlButtonContent)
                         .callbackData("Callback data")
@@ -4083,7 +4083,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/url-button", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -4102,8 +4102,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendInteractiveUrlButtonMessageSendWhatsappInteractiveUrlButtonMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -4123,7 +4123,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -4151,8 +4151,8 @@ class WhatsAppApiTest extends ApiTest {
                 .removeProtocol(true);
         WhatsAppInteractiveUrlButtonMessage whatsAppInteractiveUrlButtonMessage =
                 new WhatsAppInteractiveUrlButtonMessage()
-                        .from("441134960000")
-                        .to("441134960001")
+                        .from("44xxxxxxxx46")
+                        .to("44xxxxxxxx47")
                         .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                         .content(whatsAppInteractiveUrlButtonContent)
                         .callbackData("Callback data")
@@ -4161,7 +4161,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/interactive/url-button", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -4180,8 +4180,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldLocationMessageSendWhatsAppLocationMessage() {
         WhatsAppApi whatsappApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"latitude\": 44.9526862,\n"
@@ -4190,7 +4190,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "  \"callbackData\": \"Callback data\",\n"
                 + "  \"notifyUrl\": \"https://www.example.com/whatsapp\"\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -4204,8 +4204,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppLocationContent whatsappLocationContent =
                 new WhatsAppLocationContent().latitude(44.9526862).longitude(13.8545217);
         WhatsAppLocationMessage whatsappLocationMessage = new WhatsAppLocationMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsappLocationContent)
                 .callbackData("Callback data")
@@ -4213,7 +4213,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/location", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(response.getStatus()).isNotNull();
@@ -4232,8 +4232,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldLocationMessageWithAllFieldsSendWhatsAppLocationMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"latitude\": 44.9526862,\n"
@@ -4244,7 +4244,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "  \"callbackData\": \"Callback data\",\n"
                 + "  \"notifyUrl\": \"https://www.example.com/whatsapp\"\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -4261,8 +4261,8 @@ class WhatsAppApiTest extends ApiTest {
                 .name("Infobip")
                 .address("Vodnjan, Croatia");
         WhatsAppLocationMessage whatsAppLocationMessage = new WhatsAppLocationMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppLocationContent)
                 .callbackData("Callback data")
@@ -4270,7 +4270,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/location", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(response.getStatus()).isNotNull();
@@ -4289,8 +4289,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendStickerMessageSendWhatsAppStickerMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"mediaUrl\": \"http://example.com/sticker\"\n"
@@ -4298,7 +4298,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "  \"callbackData\": \"Callback data\",\n"
                 + "  \"notifyUrl\": \"https://www.example.com/whatsapp\"\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -4312,8 +4312,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppStickerContent whatsAppStickerContent =
                 new WhatsAppStickerContent().mediaUrl("http://example.com/sticker");
         WhatsAppStickerMessage whatsAppStickerMessage = new WhatsAppStickerMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppStickerContent)
                 .callbackData("Callback data")
@@ -4321,7 +4321,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/sticker", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -4342,8 +4342,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -4374,7 +4374,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -4407,8 +4407,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -4424,7 +4424,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -4446,8 +4446,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -4479,7 +4479,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -4512,8 +4512,8 @@ class WhatsAppApiTest extends ApiTest {
                 .templateData(whatsAppTemplateDataContent)
                 .language("en_GB");
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -4529,7 +4529,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -4551,8 +4551,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -4579,7 +4579,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -4608,8 +4608,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -4625,7 +4625,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -4647,8 +4647,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -4671,8 +4671,8 @@ class WhatsAppApiTest extends ApiTest {
                 + "      }\n"
                 + "    },\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960002\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx48\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381db\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -4699,7 +4699,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -4727,16 +4727,16 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
                 .notifyUrl("https://www.example.com/whatsapp")
                 .urlOptions(urlOptions);
         WhatsAppMessage whatsAppMessage2 = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960002")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx48")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381db")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -4753,7 +4753,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -4775,8 +4775,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -4800,7 +4800,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -4829,8 +4829,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -4846,7 +4846,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -4868,8 +4868,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -4903,7 +4903,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -4940,8 +4940,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -4957,7 +4957,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -4979,8 +4979,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -5024,7 +5024,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -5068,8 +5068,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsappMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsappTemplateContent)
                 .callbackData("Callback data")
@@ -5085,7 +5085,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsappSingleMessageInfo = whatsappSingleMessageInfoList.get(0);
             then(whatsappSingleMessageInfo).isNotNull();
-            then(whatsappSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsappSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsappSingleMessageInfo.getStatus()).isNotNull();
@@ -5107,8 +5107,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -5136,7 +5136,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -5170,8 +5170,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -5186,7 +5186,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -5210,8 +5210,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -5240,7 +5240,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -5272,8 +5272,8 @@ class WhatsAppApiTest extends ApiTest {
                 .templateData(whatsAppTemplateDataContent)
                 .language("en_GB");
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -5289,7 +5289,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -5311,8 +5311,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsappApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -5341,7 +5341,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -5375,8 +5375,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsappMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsappTemplateContent)
                 .callbackData("Callback data")
@@ -5393,7 +5393,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsappSingleMessageInfo = whatsappSingleMessageInfoList.get(0);
             then(whatsappSingleMessageInfo).isNotNull();
-            then(whatsappSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsappSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsappSingleMessageInfo.getStatus()).isNotNull();
@@ -5414,8 +5414,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -5444,7 +5444,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -5477,8 +5477,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -5494,7 +5494,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -5517,8 +5517,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -5547,7 +5547,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -5581,8 +5581,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -5598,7 +5598,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -5619,9 +5619,9 @@ class WhatsAppApiTest extends ApiTest {
     void shouldFlowButtonTemplateMessageSendWhatsAppTemplateMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest =
-                "{\"messages\":[{\"from\":\"441134960000\",\"to\":\"441134960001\",\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"content\":{\"templateName\":\"template_name\",\"templateData\":{\"body\":{\"placeholders\":[]},\"buttons\":[{\"type\":\"FLOW\"}]},\"language\":\"en_GB\"},\"callbackData\":\"Callback data\",\"notifyUrl\":\"https://www.example.com/whatsapp\",\"urlOptions\":{\"shortenUrl\":true,\"trackClicks\":true,\"trackingUrl\":\"https://example.com/click-report\",\"removeProtocol\":true}}]}";
+                "{\"messages\":[{\"from\":\"44xxxxxxxx46\",\"to\":\"44xxxxxxxx47\",\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"content\":{\"templateName\":\"template_name\",\"templateData\":{\"body\":{\"placeholders\":[]},\"buttons\":[{\"type\":\"FLOW\"}]},\"language\":\"en_GB\"},\"callbackData\":\"Callback data\",\"notifyUrl\":\"https://www.example.com/whatsapp\",\"urlOptions\":{\"shortenUrl\":true,\"trackClicks\":true,\"trackingUrl\":\"https://example.com/click-report\",\"removeProtocol\":true}}]}";
         String givenResponse =
-                "{\"messages\":[{\"to\":\"441134960001\",\"messageCount\":1,\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"status\":{\"groupId\":1,\"groupName\":\"PENDING\",\"id\":7,\"name\":\"PENDING_ENROUTE\",\"description\":\"Message sent to next instance\"}}],\"bulkId\":\"2034072219640523073\"}";
+                "{\"messages\":[{\"to\":\"44xxxxxxxx47\",\"messageCount\":1,\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"status\":{\"groupId\":1,\"groupName\":\"PENDING\",\"id\":7,\"name\":\"PENDING_ENROUTE\",\"description\":\"Message sent to next instance\"}}],\"bulkId\":\"2034072219640523073\"}";
         List<String> stringList = List.of();
         WhatsAppTemplateBodyContent whatsAppTemplateBodyContent =
                 new WhatsAppTemplateBodyContent().placeholders(stringList);
@@ -5641,8 +5641,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -5658,7 +5658,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -5680,8 +5680,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -5715,7 +5715,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -5751,8 +5751,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsappMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsappTemplateContent)
                 .callbackData("Callback data")
@@ -5768,7 +5768,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsappSingleMessageInfo = whatsappSingleMessageInfoList.get(0);
             then(whatsappSingleMessageInfo).isNotNull();
-            then(whatsappSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsappSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsappSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsappSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsappSingleMessageInfo.getStatus()).isNotNull();
@@ -5791,8 +5791,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -5820,7 +5820,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -5848,8 +5848,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -5865,7 +5865,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -5887,8 +5887,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -5925,7 +5925,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -5965,8 +5965,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -5982,7 +5982,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -6004,8 +6004,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -6034,7 +6034,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -6064,8 +6064,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -6081,7 +6081,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -6103,8 +6103,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -6143,7 +6143,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -6180,8 +6180,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -6197,7 +6197,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -6219,8 +6219,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -6258,7 +6258,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -6297,8 +6297,8 @@ class WhatsAppApiTest extends ApiTest {
                 .templateData(whatsAppTemplateDataContent)
                 .language("en_GB");
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -6314,7 +6314,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -6335,9 +6335,9 @@ class WhatsAppApiTest extends ApiTest {
     void shouldSendOrderDetailsForBrazilBoletoButtonTemplateMessageSendWhatsAppTemplateMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest =
-                "{\"messages\":[{\"from\":\"441134960000\",\"to\":\"441134960001\",\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"content\":{\"templateName\":\"template_name\",\"templateData\":{\"body\":{\"placeholders\":[]},\"buttons\":[{\"type\":\"ORDER_DETAILS\",\"action\":{\"payment\":{\"type\":\"BRAZIL_BOLETO\",\"id\":\"fd3e847h2\",\"code\":\"03399026944140000002628346101018898510000008848\"},\"orderCurrency\":\"BRL\",\"orderType\":\"DIGITAL_GOODS\",\"totalAmount\":{\"value\":21000},\"order\":{\"catalogId\":\"1\",\"items\":[{\"retailerId\":\"1\",\"name\":\"discounted product\",\"amount\":{\"value\":10000},\"saleAmount\":{\"value\":5000},\"quantity\":2},{\"retailerId\":\"2\",\"name\":\"product\",\"amount\":{\"value\":10000},\"quantity\":1}],\"subtotal\":{\"value\":20000},\"tax\":{\"value\":1000,\"description\":\"tax included\"},\"shipping\":{\"value\":1000,\"description\":\"shipping cost\"},\"discount\":{\"amount\":{\"value\":1000,\"description\":\"discount\"},\"programName\":\"membership discount\"},\"orderExpiration\":{\"expirationSeconds\":500,\"description\":\"limited offer\"}}}}]},\"language\":\"en_GB\"},\"callbackData\":\"Callback data\",\"notifyUrl\":\"https://www.example.com/whatsapp\",\"urlOptions\":{\"shortenUrl\":true,\"trackClicks\":true,\"trackingUrl\":\"https://example.com/click-report\",\"removeProtocol\":true}}]}";
+                "{\"messages\":[{\"from\":\"44xxxxxxxx46\",\"to\":\"44xxxxxxxx47\",\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"content\":{\"templateName\":\"template_name\",\"templateData\":{\"body\":{\"placeholders\":[]},\"buttons\":[{\"type\":\"ORDER_DETAILS\",\"action\":{\"payment\":{\"type\":\"BRAZIL_BOLETO\",\"id\":\"fd3e847h2\",\"code\":\"03399026944140000002628346101018898510000008848\"},\"orderCurrency\":\"BRL\",\"orderType\":\"DIGITAL_GOODS\",\"totalAmount\":{\"value\":21000},\"order\":{\"catalogId\":\"1\",\"items\":[{\"retailerId\":\"1\",\"name\":\"discounted product\",\"amount\":{\"value\":10000},\"saleAmount\":{\"value\":5000},\"quantity\":2},{\"retailerId\":\"2\",\"name\":\"product\",\"amount\":{\"value\":10000},\"quantity\":1}],\"subtotal\":{\"value\":20000},\"tax\":{\"value\":1000,\"description\":\"tax included\"},\"shipping\":{\"value\":1000,\"description\":\"shipping cost\"},\"discount\":{\"amount\":{\"value\":1000,\"description\":\"discount\"},\"programName\":\"membership discount\"},\"orderExpiration\":{\"expirationSeconds\":500,\"description\":\"limited offer\"}}}}]},\"language\":\"en_GB\"},\"callbackData\":\"Callback data\",\"notifyUrl\":\"https://www.example.com/whatsapp\",\"urlOptions\":{\"shortenUrl\":true,\"trackClicks\":true,\"trackingUrl\":\"https://example.com/click-report\",\"removeProtocol\":true}}]}";
         String givenResponse =
-                "{\"messages\":[{\"to\":\"441134960001\",\"messageCount\":1,\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"status\":{\"groupId\":1,\"groupName\":\"PENDING\",\"id\":7,\"name\":\"PENDING_ENROUTE\",\"description\":\"Message sent to next instance\"}}],\"bulkId\":\"2034072219640523073\"}";
+                "{\"messages\":[{\"to\":\"44xxxxxxxx47\",\"messageCount\":1,\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"status\":{\"groupId\":1,\"groupName\":\"PENDING\",\"id\":7,\"name\":\"PENDING_ENROUTE\",\"description\":\"Message sent to next instance\"}}],\"bulkId\":\"2034072219640523073\"}";
         WhatsAppInteractiveOrderBrazilBoletoPaymentDetails whatsappInteractiveOrderBrazilBoletoPaymentDetails =
                 new WhatsAppInteractiveOrderBrazilBoletoPaymentDetails()
                         .id("fd3e847h2")
@@ -6420,8 +6420,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -6437,7 +6437,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -6459,8 +6459,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -6547,7 +6547,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -6644,8 +6644,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -6661,7 +6661,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -6683,9 +6683,9 @@ class WhatsAppApiTest extends ApiTest {
     void shouldOrderDetailsForBrazilPixDcButtonTemplateMessageSendWhatsAppTemplateMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest =
-                "{\"messages\":[{\"from\":\"441134960000\",\"to\":\"441134960001\",\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"content\":{\"templateName\":\"template_name\",\"templateData\":{\"body\":{\"placeholders\":[]},\"buttons\":[{\"type\":\"ORDER_DETAILS\",\"action\":{\"payment\":{\"type\":\"BRAZIL_PIX_DC\",\"id\":\"fd3e847h2\",\"code\":\"00020101021226900014br.gov.bcb.pix2568pix\",\"merchantName\":\"Company Name\",\"keyType\":\"CNPJ\",\"key\":\"01234567891234\"},\"orderCurrency\":\"BRL\",\"orderType\":\"DIGITAL_GOODS\",\"totalAmount\":{\"value\":21000},\"order\":{\"catalogId\":\"1\",\"items\":[{\"retailerId\":\"1\",\"name\":\"discounted product\",\"amount\":{\"value\":10000},\"saleAmount\":{\"value\":5000},\"quantity\":2},{\"retailerId\":\"2\",\"name\":\"product\",\"amount\":{\"value\":10000},\"quantity\":1}],\"subtotal\":{\"value\":20000},\"tax\":{\"value\":1000,\"description\":\"tax included\"},\"shipping\":{\"value\":1000,\"description\":\"shipping cost\"},\"discount\":{\"amount\":{\"value\":1000,\"description\":\"discount\"},\"programName\":\"membership discount\"},\"orderExpiration\":{\"expirationSeconds\":500,\"description\":\"limited offer\"}}}}]},\"language\":\"en_GB\"},\"callbackData\":\"Callback data\",\"notifyUrl\":\"https://www.example.com/whatsapp\",\"urlOptions\":{\"shortenUrl\":true,\"trackClicks\":true,\"trackingUrl\":\"https://example.com/click-report\",\"removeProtocol\":true}}]}";
+                "{\"messages\":[{\"from\":\"44xxxxxxxx46\",\"to\":\"44xxxxxxxx47\",\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"content\":{\"templateName\":\"template_name\",\"templateData\":{\"body\":{\"placeholders\":[]},\"buttons\":[{\"type\":\"ORDER_DETAILS\",\"action\":{\"payment\":{\"type\":\"BRAZIL_PIX_DC\",\"id\":\"fd3e847h2\",\"code\":\"00020101021226900014br.gov.bcb.pix2568pix\",\"merchantName\":\"Company Name\",\"keyType\":\"CNPJ\",\"key\":\"01234567891234\"},\"orderCurrency\":\"BRL\",\"orderType\":\"DIGITAL_GOODS\",\"totalAmount\":{\"value\":21000},\"order\":{\"catalogId\":\"1\",\"items\":[{\"retailerId\":\"1\",\"name\":\"discounted product\",\"amount\":{\"value\":10000},\"saleAmount\":{\"value\":5000},\"quantity\":2},{\"retailerId\":\"2\",\"name\":\"product\",\"amount\":{\"value\":10000},\"quantity\":1}],\"subtotal\":{\"value\":20000},\"tax\":{\"value\":1000,\"description\":\"tax included\"},\"shipping\":{\"value\":1000,\"description\":\"shipping cost\"},\"discount\":{\"amount\":{\"value\":1000,\"description\":\"discount\"},\"programName\":\"membership discount\"},\"orderExpiration\":{\"expirationSeconds\":500,\"description\":\"limited offer\"}}}}]},\"language\":\"en_GB\"},\"callbackData\":\"Callback data\",\"notifyUrl\":\"https://www.example.com/whatsapp\",\"urlOptions\":{\"shortenUrl\":true,\"trackClicks\":true,\"trackingUrl\":\"https://example.com/click-report\",\"removeProtocol\":true}}]}";
         String givenResponse =
-                "{\"messages\":[{\"to\":\"441134960001\",\"messageCount\":1,\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"status\":{\"groupId\":1,\"groupName\":\"PENDING\",\"id\":7,\"name\":\"PENDING_ENROUTE\",\"description\":\"Message sent to next instance\"}}],\"bulkId\":\"2034072219640523073\"}";
+                "{\"messages\":[{\"to\":\"44xxxxxxxx47\",\"messageCount\":1,\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"status\":{\"groupId\":1,\"groupName\":\"PENDING\",\"id\":7,\"name\":\"PENDING_ENROUTE\",\"description\":\"Message sent to next instance\"}}],\"bulkId\":\"2034072219640523073\"}";
         WhatsAppInteractiveOrderBrazilPixDcPaymentDetails whatsAppInteractiveOrderBrazilPixDcPaymentDetails =
                 new WhatsAppInteractiveOrderBrazilPixDcPaymentDetails()
                         .id("fd3e847h2")
@@ -6756,8 +6756,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -6773,7 +6773,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -6795,8 +6795,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -6877,7 +6877,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -6983,8 +6983,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -7000,7 +7000,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -7022,8 +7022,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -7107,7 +7107,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -7221,8 +7221,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -7238,7 +7238,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -7260,8 +7260,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -7298,7 +7298,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -7337,8 +7337,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -7355,7 +7355,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -7376,8 +7376,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -7411,7 +7411,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -7444,8 +7444,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage message = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -7461,7 +7461,7 @@ class WhatsAppApiTest extends ApiTest {
             then(messages).hasSize(1);
             WhatsAppSingleMessageInfo messageInfo = messages.get(0);
             then(messageInfo).isNotNull();
-            then(messageInfo.getTo()).isEqualTo("441134960001");
+            then(messageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(messageInfo.getMessageCount()).isEqualTo(1);
             then(messageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(messageInfo.getStatus()).isNotNull();
@@ -7482,9 +7482,9 @@ class WhatsAppApiTest extends ApiTest {
     void shouldStaticUrlButtonTemplateMessageSendWhatsAppTemplateMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest =
-                "{\"messages\":[{\"from\":\"441134960000\",\"to\":\"441134960001\",\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"content\":{\"templateName\":\"template_name\",\"templateData\":{\"body\":{\"placeholders\":[\"Placeholder Value 1\"]},\"buttons\":[]},\"language\":\"en_GB\"},\"callbackData\":\"Callback data\",\"notifyUrl\":\"https://www.example.com/whatsapp\",\"urlOptions\":{\"shortenUrl\":true,\"trackClicks\":true,\"trackingUrl\":\"https://example.com/click-report\",\"removeProtocol\":true}}]}";
+                "{\"messages\":[{\"from\":\"44xxxxxxxx46\",\"to\":\"44xxxxxxxx47\",\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"content\":{\"templateName\":\"template_name\",\"templateData\":{\"body\":{\"placeholders\":[\"Placeholder Value 1\"]},\"buttons\":[]},\"language\":\"en_GB\"},\"callbackData\":\"Callback data\",\"notifyUrl\":\"https://www.example.com/whatsapp\",\"urlOptions\":{\"shortenUrl\":true,\"trackClicks\":true,\"trackingUrl\":\"https://example.com/click-report\",\"removeProtocol\":true}}]}";
         String givenResponse =
-                "{\"messages\":[{\"to\":\"441134960001\",\"messageCount\":1,\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"status\":{\"groupId\":1,\"groupName\":\"PENDING\",\"id\":7,\"name\":\"PENDING_ENROUTE\",\"description\":\"Message sent to next instance\"}}],\"bulkId\":\"2034072219640523073\"}";
+                "{\"messages\":[{\"to\":\"44xxxxxxxx47\",\"messageCount\":1,\"messageId\":\"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\"status\":{\"groupId\":1,\"groupName\":\"PENDING\",\"id\":7,\"name\":\"PENDING_ENROUTE\",\"description\":\"Message sent to next instance\"}}],\"bulkId\":\"2034072219640523073\"}";
         WhatsAppTemplateBodyContent whatsAppTemplateBodyContent = new WhatsAppTemplateBodyContent();
         List<String> placeholdersList = List.of("Placeholder Value 1");
         whatsAppTemplateBodyContent.setPlaceholders(placeholdersList);
@@ -7501,8 +7501,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -7518,7 +7518,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -7540,8 +7540,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -7571,7 +7571,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -7598,8 +7598,8 @@ class WhatsAppApiTest extends ApiTest {
                 .from("InfoSMS")
                 .text("SMS message to be sent if WhatsApp template message could not be delivered.");
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -7616,7 +7616,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -7639,8 +7639,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -7668,7 +7668,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -7698,8 +7698,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -7715,7 +7715,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(whatsAppSingleMessageInfo.getStatus()).isNotNull();
@@ -7737,8 +7737,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"from\": \"441134960000\",\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"from\": \"44xxxxxxxx46\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"content\": {\n"
                 + "        \"templateName\": \"template_name\",\n"
@@ -7766,7 +7766,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "}";
         String givenResponse = "{\n" + "  \"messages\": [\n"
                 + "    {\n"
-                + "      \"to\": \"441134960001\",\n"
+                + "      \"to\": \"44xxxxxxxx47\",\n"
                 + "      \"messageCount\": 1,\n"
                 + "      \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "      \"status\": {\n"
@@ -7798,8 +7798,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppMessage whatsAppMessage = new WhatsAppMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTemplateContent)
                 .callbackData("Callback data")
@@ -7814,7 +7814,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppSingleMessageInfoList).hasSize(1);
             WhatsAppSingleMessageInfo whatsAppSingleMessageInfo = whatsAppSingleMessageInfoList.get(0);
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus messageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -7835,8 +7835,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendTextMessageSendWhatsAppTextMessage() {
         WhatsAppApi whatsappApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"text\": \"Some text\"\n"
@@ -7850,7 +7850,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -7868,8 +7868,8 @@ class WhatsAppApiTest extends ApiTest {
                 .removeProtocol(true);
         WhatsAppTextContent whatsappTextContent = new WhatsAppTextContent().text("Some text");
         WhatsAppTextMessage whatsappTextMessage = new WhatsAppTextMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsappTextContent)
                 .callbackData("Callback data")
@@ -7878,7 +7878,7 @@ class WhatsAppApiTest extends ApiTest {
         setUpSuccessPostRequest("/whatsapp/1/message/text", givenRequest, givenResponse);
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsappSingleMessageStatus = response.getStatus();
@@ -7896,8 +7896,8 @@ class WhatsAppApiTest extends ApiTest {
 
     @Test
     void shouldSendTextMessageWithPreviewableUrlSendWhatsAppTextMessage() {
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"text\": \"Some text with url: http://example.com\",\n"
@@ -7912,7 +7912,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": false\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -7933,8 +7933,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(false);
         WhatsAppTextMessage whatsAppTextMessage = new WhatsAppTextMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppTextContent)
                 .callbackData("Callback data")
@@ -7942,7 +7942,7 @@ class WhatsAppApiTest extends ApiTest {
                 .urlOptions(urlOptions);
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = response.getStatus();
@@ -7962,8 +7962,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendVideoMessageSendWhatsAppVideoMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"mediaUrl\": \"http://example.com/video\"\n"
@@ -7977,7 +7977,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -7995,8 +7995,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppVideoMessage whatsAppVideoMessage = new WhatsAppVideoMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsAppVideoContent)
                 .callbackData("Callback data")
@@ -8004,7 +8004,7 @@ class WhatsAppApiTest extends ApiTest {
                 .urlOptions(urlOptions);
         Consumer<WhatsAppSingleMessageInfo> assertions = (whatsAppSingleMessageInfo) -> {
             then(whatsAppSingleMessageInfo).isNotNull();
-            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("441134960001");
+            then(whatsAppSingleMessageInfo.getTo()).isEqualTo("44xxxxxxxx47");
             then(whatsAppSingleMessageInfo.getMessageCount()).isEqualTo(1);
             then(whatsAppSingleMessageInfo.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsAppSingleMessageStatus = whatsAppSingleMessageInfo.getStatus();
@@ -8024,8 +8024,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldVideoMessageWithCaptionSendWhatsAppVideoMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"mediaUrl\": \"http://example.com/video\",\n"
@@ -8040,7 +8040,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -8059,8 +8059,8 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppVideoContent whatsappVideoContent =
                 new WhatsAppVideoContent().mediaUrl("http://example.com/video").caption("Some video caption");
         WhatsAppVideoMessage whatsappVideoMessage = new WhatsAppVideoMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(whatsappVideoContent)
                 .callbackData("Callback data")
@@ -8068,7 +8068,7 @@ class WhatsAppApiTest extends ApiTest {
                 .urlOptions(urlOptions);
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             MessageStatus whatsappSingleMessageStatus = response.getStatus();
@@ -8089,7 +8089,7 @@ class WhatsAppApiTest extends ApiTest {
     void shouldGetSuccessfulResponseGetWhatsappSendersQuality() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenResponse =
-                "{\"results\":[{\"sender\":\"441134960000\",\"qualityRating\":\"MEDIUM\",\"status\":\"CONNECTED\",\"currentLimit\":\"LIMIT_100K\",\"lastUpdated\":\"2022-02-18T08:12:26.422Z\"},{\"sender\":\"441134960001\",\"qualityRating\":\"LOW\",\"status\":\"BANNED\",\"currentLimit\":\"UNLIMITED\",\"lastUpdated\":\"2022-02-18T08:12:26.420Z\"}]}";
+                "{\"results\":[{\"sender\":\"44xxxxxxxx46\",\"qualityRating\":\"MEDIUM\",\"status\":\"CONNECTED\",\"currentLimit\":\"LIMIT_100K\",\"lastUpdated\":\"2022-02-18T08:12:26.422Z\"},{\"sender\":\"44xxxxxxxx47\",\"qualityRating\":\"LOW\",\"status\":\"BANNED\",\"currentLimit\":\"UNLIMITED\",\"lastUpdated\":\"2022-02-18T08:12:26.420Z\"}]}";
         OffsetDateTime offsetDateTime1 =
                 OffsetDateTime.of(LocalDateTime.of(2022, 2, 18, 8, 12, 26, 422000000), ZoneOffset.UTC);
         OffsetDateTime offsetDateTime2 =
@@ -8103,7 +8103,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappSenderQualityList).hasSize(2);
             WhatsAppSenderQuality whatsappSenderQuality = whatsappSenderQualityList.get(0);
             then(whatsappSenderQuality).isNotNull();
-            then(whatsappSenderQuality.getSender()).isEqualTo("441134960000");
+            then(whatsappSenderQuality.getSender()).isEqualTo("44xxxxxxxx46");
             then(whatsappSenderQuality.getQualityRating()).isEqualTo(WhatsAppSenderQualityRating.MEDIUM);
             then(whatsappSenderQuality.getStatus()).isEqualTo(WhatsAppSenderStatus.CONNECTED);
             then(whatsappSenderQuality.getCurrentLimit()).isEqualTo(WhatsAppSenderLimit.LIMIT_100K);
@@ -8111,7 +8111,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappSenderQuality.getLastUpdated()).isEqualTo(offsetDateTime1);
             WhatsAppSenderQuality whatsappSenderQuality2 = whatsappSenderQualityList.get(1);
             then(whatsappSenderQuality2).isNotNull();
-            then(whatsappSenderQuality2.getSender()).isEqualTo("441134960001");
+            then(whatsappSenderQuality2.getSender()).isEqualTo("44xxxxxxxx47");
             then(whatsappSenderQuality2.getQualityRating()).isEqualTo(WhatsAppSenderQualityRating.LOW);
             then(whatsappSenderQuality2.getStatus()).isEqualTo(WhatsAppSenderStatus.BANNED);
             then(whatsappSenderQuality2.getCurrentLimit()).isEqualTo(WhatsAppSenderLimit.UNLIMITED);
@@ -8137,8 +8137,8 @@ class WhatsAppApiTest extends ApiTest {
                 + "  \"displayName\": \"Infobip\"\n"
                 + "}";
         Map<String, String> expectedParameters = Map.of();
-        String sender = "447796344125";
-        setUpSuccessGetRequest("/whatsapp/1/senders/447796344125/business-info", expectedParameters, givenResponse);
+        String sender = "44xxxxxxxx61";
+        setUpSuccessGetRequest("/whatsapp/1/senders/44xxxxxxxx61/business-info", expectedParameters, givenResponse);
         Consumer<WhatsAppBusinessInfoResponse> assertions = (whatsappBusinessInfoResponse) -> {
             then(whatsappBusinessInfoResponse).isNotNull();
             then(whatsappBusinessInfoResponse.getAbout()).isEqualTo("Infobip Business Account");
@@ -8500,7 +8500,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "      {\n"
                 + "        \"type\": \"PHONE_NUMBER\",\n"
                 + "        \"text\": \"call agent\",\n"
-                + "        \"phoneNumber\": \"007\"\n"
+                + "        \"phoneNumber\": \"x02\"\n"
                 + "      },\n"
                 + "      {\n"
                 + "        \"type\": \"URL\",\n"
@@ -8530,8 +8530,8 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"buttons\": [\n"
                 + "      {\n"
                 + "        \"type\": \"PHONE_NUMBER\",\n"
-                + "        \"text\": \"Dial 911\",\n"
-                + "        \"phoneNumber\": \"911\"\n"
+                + "        \"text\": \"Dial x68\",\n"
+                + "        \"phoneNumber\": \"x68\"\n"
                 + "      },\n"
                 + "      {\n"
                 + "        \"type\": \"URL\",\n"
@@ -8551,7 +8551,7 @@ class WhatsAppApiTest extends ApiTest {
                 new WhatsAppBodyApiData().text("body {{1}} content").addExamplesItem("example");
         WhatsAppFooterApiData whatsAppFooterApiData = new WhatsAppFooterApiData().text("footer content");
         WhatsAppPhoneNumberButtonApiData whatsAppPhoneNumberButtonApiData =
-                new WhatsAppPhoneNumberButtonApiData().text("call agent").phoneNumber("007");
+                new WhatsAppPhoneNumberButtonApiData().text("call agent").phoneNumber("x02");
         WhatsAppUrlButtonApiData whatsAppUrlButtonApiData = new WhatsAppUrlButtonApiData()
                 .text("visit website")
                 .url("https://www.infobip.com/{{1}}")
@@ -8603,8 +8603,8 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppPhoneNumberButtonApiDataResponse).isNotNull();
             then(whatsAppPhoneNumberButtonApiDataResponse.getType())
                     .isEqualTo(WhatsAppButtonApiData.TypeEnum.PHONE_NUMBER);
-            then(whatsAppPhoneNumberButtonApiDataResponse.getText()).isEqualTo("Dial 911");
-            then(whatsAppPhoneNumberButtonApiDataResponse.getPhoneNumber()).isEqualTo("911");
+            then(whatsAppPhoneNumberButtonApiDataResponse.getText()).isEqualTo("Dial x68");
+            then(whatsAppPhoneNumberButtonApiDataResponse.getPhoneNumber()).isEqualTo("x68");
             WhatsAppUrlButtonApiData whatsAppUrlButtonApiDataResponse =
                     (WhatsAppUrlButtonApiData) whatsAppButtonApiDataListResponse.get(1);
             then(whatsAppUrlButtonApiDataResponse).isNotNull();
@@ -8666,7 +8666,7 @@ class WhatsAppApiTest extends ApiTest {
                         .language(WhatsAppLanguage.EN)
                         .structure(whatsAppDefaultTemplateStructureApiData);
         OffsetDateTime expectedDateTime = OffsetDateTime.of(LocalDateTime.of(2024, 1, 1, 0, 0), ZoneOffset.UTC);
-        setUpSuccessPostRequest("/whatsapp/2/senders/447796344125/templates", givenRequest, givenResponse);
+        setUpSuccessPostRequest("/whatsapp/2/senders/44xxxxxxxx61/templates", givenRequest, givenResponse);
         Consumer<WhatsAppTemplateApiResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getId()).isEqualTo("111");
@@ -8696,7 +8696,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getCreatedAt()).isEqualTo(expectedDateTime);
             then(response.getLastUpdatedAt()).isEqualTo(expectedDateTime);
         };
-        var call = whatsAppApi.createWhatsAppTemplate("447796344125", whatsAppTemplatePublicApiRequest);
+        var call = whatsAppApi.createWhatsAppTemplate("44xxxxxxxx61", whatsAppTemplatePublicApiRequest);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -8718,7 +8718,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "      {\n"
                 + "        \"type\": \"PHONE_NUMBER\",\n"
                 + "        \"text\": \"call agent\",\n"
-                + "        \"phoneNumber\": \"007\"\n"
+                + "        \"phoneNumber\": \"x02\"\n"
                 + "      },\n"
                 + "      {\n"
                 + "        \"type\": \"URL\",\n            "
@@ -8748,8 +8748,8 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"buttons\": [\n"
                 + "      {\n"
                 + "        \"type\": \"PHONE_NUMBER\",\n"
-                + "        \"text\": \"Dial 911\",\n"
-                + "        \"phoneNumber\": \"911\"\n"
+                + "        \"text\": \"Dial x68\",\n"
+                + "        \"phoneNumber\": \"x68\"\n"
                 + "      },\n"
                 + "      {\n"
                 + "        \"type\": \"URL\",\n"
@@ -8763,9 +8763,9 @@ class WhatsAppApiTest extends ApiTest {
                 + "  \"createdAt\": \"2024-01-01T00:00:00.000+0000\",\n"
                 + "  \"lastUpdatedAt\": \"2024-01-01T00:00:00.000+0000\"\n"
                 + "}";
-        String sender = "0001";
+        String sender = "xx00";
         WhatsAppPhoneNumberButtonApiData whatsAppPhoneNumberButtonApiData =
-                new WhatsAppPhoneNumberButtonApiData().text("call agent").phoneNumber("007");
+                new WhatsAppPhoneNumberButtonApiData().text("call agent").phoneNumber("x02");
         WhatsAppUrlButtonApiData whatsAppUrlButtonApiData = new WhatsAppUrlButtonApiData()
                 .text("visit website")
                 .url("https://www.infobip.com/{{1}}")
@@ -8783,7 +8783,7 @@ class WhatsAppApiTest extends ApiTest {
                         .name("media_template_with_call_to_action_buttons")
                         .language(WhatsAppLanguage.EN)
                         .structure(whatsAppDefaultTemplateStructureApiData);
-        setUpSuccessPostRequest("/whatsapp/2/senders/0001/templates", givenRequest, givenResponse);
+        setUpSuccessPostRequest("/whatsapp/2/senders/xx00/templates", givenRequest, givenResponse);
         Consumer<WhatsAppTemplateApiResponse> assertions = (whatsAppTemplateApiResponse) -> {
             then(whatsAppTemplateApiResponse).isNotNull();
             then(whatsAppTemplateApiResponse.getId()).isEqualTo("111");
@@ -8812,9 +8812,9 @@ class WhatsAppApiTest extends ApiTest {
             WhatsAppButtonApiData whatsAppButtonApiDataResponse1 = whatsAppButtonApiDataListResponse.get(0);
             then(whatsAppButtonApiDataResponse1).isNotNull();
             then(((WhatsAppPhoneNumberButtonApiData) whatsAppButtonApiDataResponse1).getText())
-                    .isEqualTo("Dial 911");
+                    .isEqualTo("Dial x68");
             then(((WhatsAppPhoneNumberButtonApiData) whatsAppButtonApiDataResponse1).getPhoneNumber())
-                    .isEqualTo("911");
+                    .isEqualTo("x68");
             WhatsAppButtonApiData whatsAppButtonApiDataResponse2 = whatsAppButtonApiDataListResponse.get(1);
             then(whatsAppButtonApiDataResponse2).isNotNull();
             then(((WhatsAppUrlButtonApiData) whatsAppButtonApiDataResponse2).getText())
@@ -8865,7 +8865,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "            {\n"
                 + "              \"type\": \"PHONE_NUMBER\",\n"
                 + "              \"text\": \"call agent\",\n"
-                + "              \"phoneNumber\": \"007\"\n"
+                + "              \"phoneNumber\": \"x02\"\n"
                 + "            },\n"
                 + "            {\n"
                 + "              \"type\": \"URL\",\n"
@@ -8901,8 +8901,8 @@ class WhatsAppApiTest extends ApiTest {
                 + "          \"buttons\": [\n"
                 + "            {\n"
                 + "              \"type\": \"PHONE_NUMBER\",\n"
-                + "              \"text\": \"Dial 911\",\n"
-                + "              \"phoneNumber\": \"911\"\n"
+                + "              \"text\": \"Dial x68\",\n"
+                + "              \"phoneNumber\": \"x68\"\n"
                 + "            },\n"
                 + "            {\n"
                 + "              \"type\": \"URL\",\n"
@@ -8924,7 +8924,7 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppBodyApiData whatsAppBodyApiData =
                 new WhatsAppBodyApiData().text("body {{1}} content").examples(List.of("example"));
         WhatsAppPhoneNumberButtonApiData whatsAppPhoneNumberButtonApiData =
-                new WhatsAppPhoneNumberButtonApiData().text("call agent").phoneNumber("007");
+                new WhatsAppPhoneNumberButtonApiData().text("call agent").phoneNumber("x02");
         WhatsAppUrlButtonApiData whatsAppUrlButtonApiData = new WhatsAppUrlButtonApiData()
                 .text("visit website")
                 .url("https://www.infobip.com/{{1}}")
@@ -8946,7 +8946,7 @@ class WhatsAppApiTest extends ApiTest {
                 .structure(whatsAppDefaultTemplateStructureApiData);
         OffsetDateTime expectedCreatedAt = OffsetDateTime.of(LocalDateTime.of(2024, 1, 1, 0, 0), ZoneOffset.UTC);
         OffsetDateTime expectedLastUpdatedAt = OffsetDateTime.of(LocalDateTime.of(2024, 1, 1, 0, 0), ZoneOffset.UTC);
-        setUpSuccessPostRequest("/whatsapp/2/senders/447796344125/templates", givenRequest, givenResponse);
+        setUpSuccessPostRequest("/whatsapp/2/senders/44xxxxxxxx61/templates", givenRequest, givenResponse);
         Consumer<WhatsAppTemplateApiResponse> assertions = (whatsappTemplateApiResponse) -> {
             then(whatsappTemplateApiResponse).isNotNull();
             then(whatsappTemplateApiResponse.getId()).isEqualTo("111");
@@ -8982,8 +8982,8 @@ class WhatsAppApiTest extends ApiTest {
                     (WhatsAppPhoneNumberButtonApiData) whatsappTemplateButtonContentList1.get(0);
             then(whatsappTemplateButtonContent).isNotNull();
             then(whatsappTemplateButtonContent.getType()).isEqualTo(WhatsAppButtonApiData.TypeEnum.PHONE_NUMBER);
-            then(whatsappTemplateButtonContent.getText()).isEqualTo("Dial 911");
-            then(whatsappTemplateButtonContent.getPhoneNumber()).isEqualTo("911");
+            then(whatsappTemplateButtonContent.getText()).isEqualTo("Dial x68");
+            then(whatsappTemplateButtonContent.getPhoneNumber()).isEqualTo("x68");
             WhatsAppUrlButtonApiData whatsappTemplateButtonContent2 =
                     (WhatsAppUrlButtonApiData) whatsappTemplateButtonContentList1.get(1);
             then(whatsappTemplateButtonContent2).isNotNull();
@@ -8996,7 +8996,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsappTemplateApiResponse.getCreatedAt()).isEqualTo(expectedCreatedAt);
             then(whatsappTemplateApiResponse.getLastUpdatedAt()).isEqualTo(expectedLastUpdatedAt);
         };
-        var call = whatsAppApi.createWhatsAppTemplate("447796344125", request);
+        var call = whatsAppApi.createWhatsAppTemplate("44xxxxxxxx61", request);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -9074,7 +9074,7 @@ class WhatsAppApiTest extends ApiTest {
                         .language(WhatsAppLanguage.EN)
                         .structure(whatsAppDefaultTemplateStructureApiData);
         OffsetDateTime offsetDateTime = OffsetDateTime.of(LocalDateTime.of(2024, 1, 1, 0, 0), ZoneOffset.UTC);
-        setUpSuccessPostRequest("/whatsapp/2/senders/447796344125/templates", givenRequest, givenResponse);
+        setUpSuccessPostRequest("/whatsapp/2/senders/44xxxxxxxx61/templates", givenRequest, givenResponse);
         Consumer<WhatsAppTemplateApiResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getId()).isEqualTo("111");
@@ -9111,7 +9111,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getCreatedAt()).isEqualTo(offsetDateTime);
             then(response.getLastUpdatedAt()).isEqualTo(offsetDateTime);
         };
-        var call = whatsAppApi.createWhatsAppTemplate("447796344125", whatsAppDefaultMarketingTemplatePublicApiRequest);
+        var call = whatsAppApi.createWhatsAppTemplate("44xxxxxxxx61", whatsAppDefaultMarketingTemplatePublicApiRequest);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -9184,7 +9184,7 @@ class WhatsAppApiTest extends ApiTest {
                         .name("media_template_with_flow_button")
                         .language(WhatsAppLanguage.EN)
                         .structure(whatsAppDefaultTemplateStructureApiData);
-        setUpSuccessPostRequest("/whatsapp/2/senders/447796344125/templates", givenRequest, givenResponse);
+        setUpSuccessPostRequest("/whatsapp/2/senders/44xxxxxxxx61/templates", givenRequest, givenResponse);
         Consumer<WhatsAppTemplateApiResponse> assertions = (response) -> {
             then(response).isNotNull();
             then(response.getId()).isEqualTo("111");
@@ -9222,7 +9222,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getCreatedAt()).isEqualTo(expectedDateTime);
             then(response.getLastUpdatedAt()).isEqualTo(expectedDateTime);
         };
-        var call = whatsAppApi.createWhatsAppTemplate("447796344125", whatsAppDefaultMarketingTemplatePublicApiRequest);
+        var call = whatsAppApi.createWhatsAppTemplate("44xxxxxxxx61", whatsAppDefaultMarketingTemplatePublicApiRequest);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -9465,8 +9465,8 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"buttons\": [\n"
                 + "      {\n"
                 + "        \"type\": \"PHONE_NUMBER\",\n"
-                + "        \"text\": \"Dial 911\",\n"
-                + "        \"phoneNumber\": \"911\"\n"
+                + "        \"text\": \"Dial x68\",\n"
+                + "        \"phoneNumber\": \"x68\"\n"
                 + "      },\n"
                 + "      {\n"
                 + "        \"type\": \"URL\",\n"
@@ -9498,7 +9498,7 @@ class WhatsAppApiTest extends ApiTest {
                         .name("media_template_with_limited_time_offer")
                         .language(WhatsAppLanguage.EN)
                         .structure(whatsappDefaultTemplateStructureApiData);
-        setUpSuccessPostRequest("/whatsapp/2/senders/447796344125/templates", givenRequest, givenResponse);
+        setUpSuccessPostRequest("/whatsapp/2/senders/44xxxxxxxx61/templates", givenRequest, givenResponse);
         Consumer<WhatsAppTemplateApiResponse> assertions = (whatsAppTemplateApiResponse) -> {
             then(whatsAppTemplateApiResponse).isNotNull();
             then(whatsAppTemplateApiResponse.getId()).isEqualTo("111");
@@ -9527,11 +9527,11 @@ class WhatsAppApiTest extends ApiTest {
                     (WhatsAppPhoneNumberButtonApiData) whatsappButtonApiDataListResponse.get(0);
             then(whatsappButtonApiDataResponse1).isNotNull();
             then(whatsappButtonApiDataResponse1.getType()).isEqualTo(WhatsAppButtonApiData.TypeEnum.PHONE_NUMBER);
-            then(whatsappButtonApiDataResponse1.getText()).isEqualTo("Dial 911");
+            then(whatsappButtonApiDataResponse1.getText()).isEqualTo("Dial x68");
             WhatsAppPhoneNumberButtonApiData whatsappPhoneNumberButtonApiData =
                     (WhatsAppPhoneNumberButtonApiData) whatsappButtonApiDataResponse1;
             then(whatsappPhoneNumberButtonApiData).isNotNull();
-            then(whatsappPhoneNumberButtonApiData.getPhoneNumber()).isEqualTo("911");
+            then(whatsappPhoneNumberButtonApiData.getPhoneNumber()).isEqualTo("x68");
             WhatsAppUrlButtonApiData whatsappButtonApiDataResponse2 =
                     (WhatsAppUrlButtonApiData) whatsappButtonApiDataListResponse.get(1);
             then(whatsappButtonApiDataResponse2).isNotNull();
@@ -9550,7 +9550,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppTemplateApiResponse.getCreatedAt()).isEqualTo(expectedCreatedAt);
             then(whatsAppTemplateApiResponse.getLastUpdatedAt()).isEqualTo(expectedLastUpdatedAt);
         };
-        var call = whatsAppApi.createWhatsAppTemplate("447796344125", whatsappDefaultMarketingTemplatePublicApiRequest);
+        var call = whatsAppApi.createWhatsAppTemplate("44xxxxxxxx61", whatsappDefaultMarketingTemplatePublicApiRequest);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -9637,9 +9637,9 @@ class WhatsAppApiTest extends ApiTest {
                         .name("media_template_with_limited_time_offer")
                         .language(WhatsAppLanguage.EN)
                         .structure(whatsAppDefaultTemplateStructureApiData);
-        String sender = "123";
+        String sender = "x16";
         OffsetDateTime expectedDateTime = OffsetDateTime.of(LocalDateTime.of(2024, 1, 1, 0, 0), ZoneOffset.UTC);
-        setUpSuccessPostRequest("/whatsapp/2/senders/123/templates", givenRequest, givenResponse);
+        setUpSuccessPostRequest("/whatsapp/2/senders/x16/templates", givenRequest, givenResponse);
         Consumer<WhatsAppTemplateApiResponse> assertions = (whatsappTemplateApiResponse) -> {
             then(whatsappTemplateApiResponse).isNotNull();
             then(whatsappTemplateApiResponse.getId()).isEqualTo("111");
@@ -9843,8 +9843,8 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"buttons\": [\n"
                 + "      {\n"
                 + "        \"type\": \"PHONE_NUMBER\",\n"
-                + "        \"text\": \"Dial 911\",\n"
-                + "        \"phoneNumber\": \"911\"\n"
+                + "        \"text\": \"Dial x68\",\n"
+                + "        \"phoneNumber\": \"x68\"\n"
                 + "      },\n"
                 + "      {\n"
                 + "        \"type\": \"URL\",\n"
@@ -9912,8 +9912,8 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppPhoneNumberButtonApiDataResponse).isNotNull();
             then(whatsAppPhoneNumberButtonApiDataResponse.getType())
                     .isEqualTo(WhatsAppButtonApiData.TypeEnum.PHONE_NUMBER);
-            then(whatsAppPhoneNumberButtonApiDataResponse.getText()).isEqualTo("Dial 911");
-            then(whatsAppPhoneNumberButtonApiDataResponse.getPhoneNumber()).isEqualTo("911");
+            then(whatsAppPhoneNumberButtonApiDataResponse.getText()).isEqualTo("Dial x68");
+            then(whatsAppPhoneNumberButtonApiDataResponse.getPhoneNumber()).isEqualTo("x68");
             WhatsAppUrlButtonApiData whatsAppUrlButtonApiDataResponse =
                     (WhatsAppUrlButtonApiData) whatsAppButtonApiDataListResponse.get(1);
             then(whatsAppUrlButtonApiDataResponse).isNotNull();
@@ -10348,7 +10348,7 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppTemplateEditPublicApiRequest whatsAppTemplateEditPublicApiRequest =
                 new WhatsAppTemplateEditPublicApiRequest().platform(platform);
         OffsetDateTime offsetDateTime = OffsetDateTime.of(LocalDateTime.of(2024, 1, 1, 0, 0, 0, 0), ZoneOffset.UTC);
-        setUpPatchRequest("/whatsapp/2/senders/447796344125/templates/111", Map.of(), givenRequest, givenResponse, 200);
+        setUpPatchRequest("/whatsapp/2/senders/44xxxxxxxx61/templates/111", Map.of(), givenRequest, givenResponse, 200);
         Consumer<WhatsAppTemplateApiResponse> assertions = (whatsAppTemplateApiResponse) -> {
             then(whatsAppTemplateApiResponse).isNotNull();
             then(whatsAppTemplateApiResponse.getId()).isEqualTo("111");
@@ -10379,7 +10379,7 @@ class WhatsAppApiTest extends ApiTest {
             then(whatsAppTemplateApiResponse.getCreatedAt()).isEqualTo(offsetDateTime);
             then(whatsAppTemplateApiResponse.getLastUpdatedAt()).isEqualTo(offsetDateTime);
         };
-        var call = whatsAppApi.editWhatsappTemplate("447796344125", "111", whatsAppTemplateEditPublicApiRequest);
+        var call = whatsAppApi.editWhatsappTemplate("44xxxxxxxx61", "111", whatsAppTemplateEditPublicApiRequest);
         testSuccessfulCall(call::execute, assertions);
         testSuccessfulAsyncCall(call::executeAsync, assertions);
     }
@@ -10405,7 +10405,7 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         Long givenBusinessAccountId = 222L;
         String givenRequest = "{\n" + "  \"countryCode\": \"44\",\n"
-                + "  \"phoneNumber\": \"7796344125\",\n"
+                + "  \"phoneNumber\": \"xxxxxxxx73\",\n"
                 + "  \"displayName\": \"Infobip\",\n"
                 + "  \"type\": \"EXTERNAL_SMS\",\n"
                 + "  \"locale\": \"en_US\"\n"
@@ -10420,7 +10420,7 @@ class WhatsAppApiTest extends ApiTest {
 
         WhatsAppPhoneNumberRequest request = new WhatsAppPhoneNumberRequest()
                 .countryCode("44")
-                .phoneNumber("7796344125")
+                .phoneNumber("xxxxxxxx73")
                 .displayName("Infobip")
                 .type(WhatsAppNumberType.SMS)
                 .locale("en_US");
@@ -10438,12 +10438,12 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldConfirmWhatsAppIdentity() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "441134960000";
-        String givenUserIdentifier = "441134960001";
+        String givenSender = "44xxxxxxxx46";
+        String givenUserIdentifier = "44xxxxxxxx47";
         String givenRequest = "{\n" + "  \"hash\": \"eU2Fdi4EMUw=\"\n" + "}";
 
         setUpNoResponseBodyPutRequest(
-                "/whatsapp/1/441134960000/contacts/441134960001/identity", Map.of(), givenRequest, 204);
+                "/whatsapp/1/44xxxxxxxx46/contacts/44xxxxxxxx47/identity", Map.of(), givenRequest, 204);
 
         WhatsAppIdentityConfirmation request = new WhatsAppIdentityConfirmation().hash("eU2Fdi4EMUw=");
 
@@ -10454,10 +10454,10 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldDeleteWhatsAppMedia() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "441134960000";
+        String givenSender = "44xxxxxxxx46";
         String givenRequest = "{\n" + "  \"url\": \"https://www.infobip.com/infobip-logo.png\"\n" + "}";
 
-        setUpNoResponseBodyDeleteRequest("/whatsapp/1/senders/441134960000/media", Map.of(), givenRequest, 204);
+        setUpNoResponseBodyDeleteRequest("/whatsapp/1/senders/44xxxxxxxx46/media", Map.of(), givenRequest, 204);
 
         WhatsAppUrlDeletionRequest request =
                 new WhatsAppUrlDeletionRequest().url("https://www.infobip.com/infobip-logo.png");
@@ -10469,10 +10469,10 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldDeleteWhatsAppTemplate() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "441134960000";
+        String givenSender = "44xxxxxxxx46";
         String givenTemplateName = "media_template";
 
-        setUpNoResponseBodyDeleteRequest("/whatsapp/2/senders/441134960000/templates/media_template", Map.of(), 204);
+        setUpNoResponseBodyDeleteRequest("/whatsapp/2/senders/44xxxxxxxx46/templates/media_template", Map.of(), 204);
 
         var call = whatsAppApi.deleteWhatsAppTemplate(givenSender, givenTemplateName);
         testSuccessfulCallWithNoBody(call::executeAsync, 204);
@@ -10481,10 +10481,10 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldDeleteWhatsappIdentity() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "441134960000";
-        String givenUserIdentifier = "441134960001";
+        String givenSender = "44xxxxxxxx46";
+        String givenUserIdentifier = "44xxxxxxxx47";
 
-        setUpNoResponseBodyDeleteRequest("/whatsapp/1/441134960000/contacts/441134960001/identity", Map.of(), 204);
+        setUpNoResponseBodyDeleteRequest("/whatsapp/1/44xxxxxxxx46/contacts/44xxxxxxxx47/identity", Map.of(), 204);
 
         var call = whatsAppApi.deleteWhatsappIdentity(givenSender, givenUserIdentifier);
         testSuccessfulCallWithNoBody(call::executeAsync, 204);
@@ -10493,11 +10493,11 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldDownloadWhatsAppInboundMedia() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "441134960000";
+        String givenSender = "44xxxxxxxx46";
         String givenMediaId = "media-id";
         String givenFileContent = "Test media content";
 
-        setUpSuccessGetRequest("/whatsapp/1/senders/441134960000/media/media-id", Map.of(), givenFileContent);
+        setUpSuccessGetRequest("/whatsapp/1/senders/44xxxxxxxx46/media/media-id", Map.of(), givenFileContent);
 
         var call = whatsAppApi.downloadWhatsAppInboundMedia(givenSender, givenMediaId);
         testSuccessfulCallWithFileResult(call::execute);
@@ -10506,8 +10506,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldGetWhatsAppIdentity() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "441134960000";
-        String givenUserIdentifier = "441134960001";
+        String givenSender = "44xxxxxxxx46";
+        String givenUserIdentifier = "44xxxxxxxx47";
         String givenResponse = "{\n" + "  \"acknowledged\": true,\n"
                 + "  \"hash\": \"eU2Fdi4EMUw=\",\n"
                 + "  \"createdAt\": \"2022-02-18T08:12:26.422+0000\"\n"
@@ -10515,7 +10515,7 @@ class WhatsAppApiTest extends ApiTest {
         OffsetDateTime expectedCreatedAt =
                 OffsetDateTime.of(LocalDateTime.of(2022, 2, 18, 8, 12, 26, 422000000), ZoneOffset.UTC);
 
-        setUpSuccessGetRequest("/whatsapp/1/441134960000/contacts/441134960001/identity", Map.of(), givenResponse);
+        setUpSuccessGetRequest("/whatsapp/1/44xxxxxxxx46/contacts/44xxxxxxxx47/identity", Map.of(), givenResponse);
 
         Consumer<WhatsAppIdentityInfo> assertions = (response) -> {
             then(response).isNotNull();
@@ -10532,10 +10532,10 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldGetWhatsAppMediaMetadata() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "441134960000";
+        String givenSender = "44xxxxxxxx46";
         String givenMediaId = "media-id";
 
-        setUpSuccessHeadRequest("/whatsapp/1/senders/441134960000/media/media-id");
+        setUpSuccessHeadRequest("/whatsapp/1/senders/44xxxxxxxx46/media/media-id");
 
         var call = whatsAppApi.getWhatsAppMediaMetadata(givenSender, givenMediaId);
         testSuccessfulCallWithNoBody(call::executeAsync, 200);
@@ -10544,8 +10544,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldGetWhatsappCallingPermission() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "441134960000";
-        String givenUserNumber = "441134960001";
+        String givenSender = "44xxxxxxxx46";
+        String givenUserNumber = "44xxxxxxxx47";
         String givenResponse = "{\n" + "  \"status\": \"TEMPORARY\",\n"
                 + "  \"actions\": [\n"
                 + "    {\n"
@@ -10562,7 +10562,7 @@ class WhatsAppApiTest extends ApiTest {
         OffsetDateTime expectedExpiration = OffsetDateTime.parse("2025-10-07T10:09:08.007Z");
 
         setUpSuccessGetRequest(
-                "/whatsapp/1/senders/441134960000/calls/441134960001/permissions", Map.of(), givenResponse);
+                "/whatsapp/1/senders/44xxxxxxxx46/calls/44xxxxxxxx47/permissions", Map.of(), givenResponse);
 
         Consumer<WhatsAppCallingPermissionResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -10584,10 +10584,10 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldGetWhatsappSenderBusinessLogo() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "441134960000";
+        String givenSender = "44xxxxxxxx46";
         String givenFileContent = "Test logo content";
 
-        setUpSuccessGetRequest("/whatsapp/1/senders/441134960000/business-info/logo", Map.of(), givenFileContent);
+        setUpSuccessGetRequest("/whatsapp/1/senders/44xxxxxxxx46/business-info/logo", Map.of(), givenFileContent);
 
         var call = whatsAppApi.getWhatsappSenderBusinessLogo(givenSender);
         testSuccessfulCallWithFileResult(call::execute);
@@ -10596,7 +10596,7 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldGetWhatsappSenderPublicKey() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "441134960000";
+        String givenSender = "44xxxxxxxx46";
         String givenPublicKey =
                 "-----BEGIN RSA PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0Z3VS5JJcds3xfn+fvhK\n-----END RSA PUBLIC KEY-----";
         String givenResponse = "{\n" + "  \"publicKey\": \""
@@ -10604,7 +10604,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "  \"publicKeySignatureStatus\": \"VALID\"\n"
                 + "}";
 
-        setUpSuccessGetRequest("/whatsapp/1/senders/441134960000/public-key", Map.of(), givenResponse);
+        setUpSuccessGetRequest("/whatsapp/1/senders/44xxxxxxxx46/public-key", Map.of(), givenResponse);
 
         Consumer<WhatsAppSenderPublicKeyResponse> assertions = (response) -> {
             then(response).isNotNull();
@@ -10669,11 +10669,11 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldMarkWhatsAppMessageAsRead() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "441134960000";
+        String givenSender = "44xxxxxxxx46";
         String givenMessageId = "a28dd97c-1ffb-4fcf-99f1-0b557ed381da";
 
         setUpNoContentPostRequest(
-                "/whatsapp/1/senders/441134960000/message/a28dd97c-1ffb-4fcf-99f1-0b557ed381da/read", 204);
+                "/whatsapp/1/senders/44xxxxxxxx46/message/a28dd97c-1ffb-4fcf-99f1-0b557ed381da/read", 204);
 
         var call = whatsAppApi.markWhatsAppMessageAsRead(givenSender, givenMessageId);
         testSuccessfulCallWithNoBody(call::executeAsync, 204);
@@ -10682,11 +10682,11 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldRetryWhatsappSenderVerification() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "447796344125";
+        String givenSender = "44xxxxxxxx61";
         String givenRequest = "{\n" + "  \"type\": \"EXTERNAL_SMS\",\n" + "  \"locale\": \"en_US\"\n" + "}";
 
         setUpNoResponseBodyPutRequest(
-                "/whatsapp/1/embedded-signup/registrations/senders/447796344125/verification",
+                "/whatsapp/1/embedded-signup/registrations/senders/44xxxxxxxx61/verification",
                 Map.of(),
                 givenRequest,
                 202);
@@ -10703,10 +10703,10 @@ class WhatsAppApiTest extends ApiTest {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
         String givenRequest = "{\n" + "  \"events\": [\n"
                 + "    {\n"
-                + "      \"sender\": \"441134960000\",\n"
+                + "      \"sender\": \"44xxxxxxxx46\",\n"
                 + "      \"destinations\": [\n"
                 + "        {\n"
-                + "          \"to\": \"441134960001\"\n"
+                + "          \"to\": \"44xxxxxxxx47\"\n"
                 + "        }\n"
                 + "      ],\n"
                 + "      \"content\": {\n"
@@ -10726,14 +10726,14 @@ class WhatsAppApiTest extends ApiTest {
                 + "        \"name\": \"PENDING_ACCEPTED\",\n"
                 + "        \"description\": \"Message sent to next instance\"\n"
                 + "      },\n"
-                + "      \"destination\": \"441134960001\"\n"
+                + "      \"destination\": \"44xxxxxxxx47\"\n"
                 + "    }\n"
                 + "  ]\n"
                 + "}";
 
         WhatsAppEvent event = new WhatsAppEvent()
-                .sender("441134960000")
-                .addDestinationsItem(new WhatsAppToDestination().to("441134960001"))
+                .sender("44xxxxxxxx46")
+                .addDestinationsItem(new WhatsAppToDestination().to("44xxxxxxxx47"))
                 .content(new WhatsAppOutboundEventContent("TYPING_INDICATOR"));
         WhatsAppEventRequest request = new WhatsAppEventRequest().addEventsItem(event);
 
@@ -10745,7 +10745,7 @@ class WhatsAppApiTest extends ApiTest {
             then(response.getMessages()).hasSize(1);
             MessageResponseDetails message = response.getMessages().get(0);
             then(message.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
-            then(message.getDestination()).isEqualTo("441134960001");
+            then(message.getDestination()).isEqualTo("44xxxxxxxx47");
             then(message.getStatus()).isNotNull();
             then(message.getStatus().getGroupId()).isEqualTo(1);
             then(message.getStatus().getGroupName()).isEqualTo("PENDING");
@@ -10762,8 +10762,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendWhatsappInteractiveCallPermissionRequestMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"callbackData\": \"Callback data\",\n"
                 + "  \"notifyUrl\": \"https://www.example.com/whatsapp\",\n"
@@ -10774,7 +10774,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -10792,8 +10792,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppInteractiveCallPermissionRequestMessage message = new WhatsAppInteractiveCallPermissionRequestMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .callbackData("Callback data")
                 .notifyUrl("https://www.example.com/whatsapp")
@@ -10803,7 +10803,7 @@ class WhatsAppApiTest extends ApiTest {
 
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(response.getStatus()).isNotNull();
@@ -10822,8 +10822,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendWhatsappInteractiveMediaCarouselMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -10870,7 +10870,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -10897,8 +10897,8 @@ class WhatsAppApiTest extends ApiTest {
                 .body(new WhatsAppInteractiveBodyWhatsAppContent().text("Some text"))
                 .action(new WhatsAppUrlMediaCarouselAction().addCardsItem(card).addCardsItem(card));
         WhatsAppInteractiveMediaCarouselMessage message = new WhatsAppInteractiveMediaCarouselMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(content)
                 .callbackData("Callback data")
@@ -10909,7 +10909,7 @@ class WhatsAppApiTest extends ApiTest {
 
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(response.getStatus()).isNotNull();
@@ -10924,8 +10924,8 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldSendWhatsappInteractiveVoiceButtonMessage() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenRequest = "{\n" + "  \"from\": \"441134960000\",\n"
-                + "  \"to\": \"441134960001\",\n"
+        String givenRequest = "{\n" + "  \"from\": \"44xxxxxxxx46\",\n"
+                + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"content\": {\n"
                 + "    \"body\": {\n"
@@ -10941,7 +10941,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "    \"removeProtocol\": true\n"
                 + "  }\n"
                 + "}";
-        String givenResponse = "{\n" + "  \"to\": \"441134960001\",\n"
+        String givenResponse = "{\n" + "  \"to\": \"44xxxxxxxx47\",\n"
                 + "  \"messageCount\": 1,\n"
                 + "  \"messageId\": \"a28dd97c-1ffb-4fcf-99f1-0b557ed381da\",\n"
                 + "  \"status\": {\n"
@@ -10959,8 +10959,8 @@ class WhatsAppApiTest extends ApiTest {
                 .trackingUrl("https://example.com/click-report")
                 .removeProtocol(true);
         WhatsAppInteractiveVoiceButtonMessage message = new WhatsAppInteractiveVoiceButtonMessage()
-                .from("441134960000")
-                .to("441134960001")
+                .from("44xxxxxxxx46")
+                .to("44xxxxxxxx47")
                 .messageId("a28dd97c-1ffb-4fcf-99f1-0b557ed381da")
                 .content(new WhatsAppInteractiveVoiceButtonContent()
                         .body(new WhatsAppInteractiveBodyWhatsAppContent().text("Some text")))
@@ -10972,7 +10972,7 @@ class WhatsAppApiTest extends ApiTest {
 
         Consumer<WhatsAppSingleMessageInfo> assertions = (response) -> {
             then(response).isNotNull();
-            then(response.getTo()).isEqualTo("441134960001");
+            then(response.getTo()).isEqualTo("44xxxxxxxx47");
             then(response.getMessageCount()).isEqualTo(1);
             then(response.getMessageId()).isEqualTo("a28dd97c-1ffb-4fcf-99f1-0b557ed381da");
             then(response.getStatus()).isNotNull();
@@ -11020,7 +11020,7 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldUpdateWhatsappSenderBusinessInfo() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "447796344125";
+        String givenSender = "44xxxxxxxx61";
         String givenRequest = "{\n" + "  \"about\": \"Infobip Business Account\",\n"
                 + "  \"address\": \"35-38 New Bridge Street, London EC4V 6BW\",\n"
                 + "  \"description\": \"Infobip is a global cloud communications platform.\",\n"
@@ -11032,7 +11032,7 @@ class WhatsAppApiTest extends ApiTest {
                 + "  \"logoUrl\": \"https://example.com/logo\"\n"
                 + "}";
 
-        setUpNoResponseBodyPatchRequest("/whatsapp/1/senders/447796344125/business-info", Map.of(), givenRequest, 204);
+        setUpNoResponseBodyPatchRequest("/whatsapp/1/senders/44xxxxxxxx61/business-info", Map.of(), givenRequest, 204);
 
         WhatsAppBusinessInfoRequest request = new WhatsAppBusinessInfoRequest()
                 .about("Infobip Business Account")
@@ -11050,7 +11050,7 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldUploadWhatsappSenderPublicKey() throws IOException {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "441134960000";
+        String givenSender = "44xxxxxxxx46";
         String givenFileContent =
                 "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA\n-----END PUBLIC KEY-----";
 
@@ -11058,7 +11058,7 @@ class WhatsAppApiTest extends ApiTest {
         Files.writeString(tempFile.toPath(), givenFileContent);
 
         setUpMultipartRequest(
-                "/whatsapp/1/senders/441134960000/public-key",
+                "/whatsapp/1/senders/44xxxxxxxx46/public-key",
                 List.of(new Multipart("file", givenFileContent)),
                 "",
                 204);
@@ -11070,11 +11070,11 @@ class WhatsAppApiTest extends ApiTest {
     @Test
     void shouldVerifyWhatsappSender() {
         WhatsAppApi whatsAppApi = new WhatsAppApi(getApiClient());
-        String givenSender = "447796344125";
+        String givenSender = "44xxxxxxxx61";
         String givenRequest = "{\n" + "  \"code\": \"123456\"\n" + "}";
 
         setUpNoResponseBodyPostRequest(
-                "/whatsapp/1/embedded-signup/registrations/senders/447796344125/verification",
+                "/whatsapp/1/embedded-signup/registrations/senders/44xxxxxxxx61/verification",
                 Map.of(),
                 givenRequest,
                 202);

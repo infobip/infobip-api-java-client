@@ -25,9 +25,9 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
         MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
-        String givenSender = "447491163443";
+        String givenSender = "44xxxxxxxx59";
         String givenTo = "111111111";
         String givenText = "May the Force be with you.";
         String givenType = "TEXT";
@@ -122,9 +122,9 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
         MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
-        String givenSender = "447491163443";
+        String givenSender = "44xxxxxxxx59";
         String givenTo = "111111111";
         String givenText = "May the Force be with you.";
         String givenType = "TEXT";
@@ -228,9 +228,9 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
         MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
-        String givenSender = "447491163443";
+        String givenSender = "44xxxxxxxx59";
         String givenTo = "111111111";
         String givenText = "May the Force be with you.";
         String givenType = "TEXT";
@@ -345,15 +345,15 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
         MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
-        String givenSender = "447491163443";
+        String givenSender = "44xxxxxxxx59";
         String givenTo = "111111111";
         String givenText = "May the Force be with you.";
         String givenType = "TEXT";
         String givenButtonText = "Yes, I agree!";
         String givenButtonType = "DIAL_PHONE";
-        String givenPhoneNumber = "+1234567890";
+        String givenPhoneNumber = "+1xxxxxxx06";
 
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
@@ -462,9 +462,9 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
         MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
-        String givenSender = "447491163443";
+        String givenSender = "44xxxxxxxx59";
         String givenTo = "111111111";
         String givenText = "May the Force be with you.";
         String givenType = "TEXT";
@@ -583,9 +583,9 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
         MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
-        String givenSender = "447491163443";
+        String givenSender = "44xxxxxxxx59";
         String givenTo = "111111111";
         String givenText = "May the Force be with you.";
         String givenType = "TEXT";
@@ -690,9 +690,9 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
         MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
-        String givenSender = "447491163443";
+        String givenSender = "44xxxxxxxx59";
         String givenTo = "111111111";
         String givenText = "May the Force be with you.";
         String givenType = "TEXT";
@@ -821,9 +821,9 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
         MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
-        String givenSender = "447491163443";
+        String givenSender = "44xxxxxxxx59";
         String givenTo = "111111111";
         String givenType = "IMAGE";
         String givenImageUrl = "https://example.com/image.jpg";
@@ -912,7 +912,7 @@ class MessagesApiTest extends ApiTest {
     @Test
     void shouldSendValidateMessagesApiMessage() {
         MessagesApiOutboundMessageChannel givenChannel = MessagesApiOutboundMessageChannel.SMS;
-        String givenSender = "447491163443";
+        String givenSender = "44xxxxxxxx59";
         String givenTo = "111111111";
         String givenMessageText = "May the Force be with you.";
         String givenTextType = "TEXT";
@@ -993,7 +993,7 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
 
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
@@ -1021,7 +1021,7 @@ class MessagesApiTest extends ApiTest {
                 givenDestination);
 
         MessagesApiOutboundTemplateChannel expectedChannel = MessagesApiOutboundTemplateChannel.WHATSAPP;
-        String expectedSender = "447860099299";
+        String expectedSender = "44xxxxxxxx65";
         String expectedDestination = "111111111";
         String expectedTemplateName = "registration_success";
         String expectedLanguage = "en_GB";
@@ -1114,7 +1114,7 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
 
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
@@ -1142,7 +1142,7 @@ class MessagesApiTest extends ApiTest {
                 givenDestination);
 
         MessagesApiOutboundTemplateChannel expectedChannel = MessagesApiOutboundTemplateChannel.WHATSAPP;
-        String expectedSender = "447860099299";
+        String expectedSender = "44xxxxxxxx65";
         String expectedDestination = "111111111";
         String expectedTemplateName = "registration_success";
         String expectedLanguage = "en_GB";
@@ -1236,7 +1236,7 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
 
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
@@ -1264,7 +1264,7 @@ class MessagesApiTest extends ApiTest {
                 givenDestination);
 
         MessagesApiOutboundTemplateChannel expectedChannel = MessagesApiOutboundTemplateChannel.WHATSAPP;
-        String expectedSender = "447860099299";
+        String expectedSender = "44xxxxxxxx65";
         String expectedDestination = "111111111";
         String expectedTemplateName = "registration_success";
         String expectedLanguage = "en_GB";
@@ -1354,7 +1354,7 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
 
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
@@ -1382,7 +1382,7 @@ class MessagesApiTest extends ApiTest {
                 givenDestination);
 
         MessagesApiOutboundTemplateChannel expectedChannel = MessagesApiOutboundTemplateChannel.WHATSAPP;
-        String expectedSender = "447860099299";
+        String expectedSender = "44xxxxxxxx65";
         String expectedDestination = "111111111";
         String expectedTemplateName = "registration_success";
         String expectedLanguage = "en_GB";
@@ -1475,7 +1475,7 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
 
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
@@ -1503,7 +1503,7 @@ class MessagesApiTest extends ApiTest {
                 givenDestination);
 
         MessagesApiOutboundTemplateChannel expectedChannel = MessagesApiOutboundTemplateChannel.WHATSAPP;
-        String expectedSender = "447860099299";
+        String expectedSender = "44xxxxxxxx65";
         String expectedDestination = "111111111";
         String expectedTemplateName = "registration_success";
         String expectedLanguage = "en_GB";
@@ -1596,7 +1596,7 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
 
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
@@ -1624,7 +1624,7 @@ class MessagesApiTest extends ApiTest {
                 givenDestination);
 
         MessagesApiOutboundTemplateChannel expectedChannel = MessagesApiOutboundTemplateChannel.WHATSAPP;
-        String expectedSender = "447860099299";
+        String expectedSender = "44xxxxxxxx65";
         String expectedDestination = "111111111";
         String expectedTemplateName = "registration_success";
         String expectedLanguage = "en_GB";
@@ -1718,7 +1718,7 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
 
         String givenResponse = String.format(
                 "{\n" + "  \"bulkId\": \"%s\",\n"
@@ -1746,7 +1746,7 @@ class MessagesApiTest extends ApiTest {
                 givenDestination);
 
         MessagesApiOutboundTemplateChannel expectedChannel = MessagesApiOutboundTemplateChannel.WHATSAPP;
-        String expectedSender = "447860099299";
+        String expectedSender = "44xxxxxxxx65";
         String expectedDestination = "111111111";
         String expectedTemplateName = "registration_success";
         String expectedLanguage = "en_GB";
@@ -1851,10 +1851,10 @@ class MessagesApiTest extends ApiTest {
         Integer givenId = 26;
         String givenName = "MESSAGE_ACCEPTED";
         String givenDescription = "Message sent to next instance";
-        String givenDestination = "48600700800";
+        String givenDestination = "48xxxxxxx36";
         MessagesApiOutboundTypingStartedEventChannel givenChannel =
                 MessagesApiOutboundTypingStartedEventChannel.APPLE_MB;
-        String givenSender = "447491163443";
+        String givenSender = "44xxxxxxxx59";
         String givenTo = "111111111";
         String givenEvent = "TYPING_STARTED";
 
@@ -2058,8 +2058,8 @@ class MessagesApiTest extends ApiTest {
     @Test
     void shouldParseReceiveIncomingMessages() {
         MessagesApiInboundMoEventChannel expectedChannel = MessagesApiInboundMoEventChannel.SMS;
-        String expectedSender = "48123234567";
-        String expectedDestination = "48123098765";
+        String expectedSender = "48xxxxxxx35";
+        String expectedDestination = "48xxxxxxx34";
         String expectedText = "Text message 123";
         String expectedCleanText = "Text message";
         String expectedType = "TEXT";

@@ -32,9 +32,9 @@ class ResourcesApiTest extends ApiTest {
     @Test
     void shouldGetInboundConfigurations() {
         String givenConfigurationKey = "58BC6DB7966CB9F69A91EB956DF73239";
-        String givenNumber = "41793026727";
+        String givenNumber = "41xxxxxxx25";
         String givenNumberKey = "58BC6DB7966CB9F69A91EB956DF73239";
-        String givenResource = "41793026727";
+        String givenResource = "41xxxxxxx25";
         String givenResourceKey = "58BC6DB7966CB9F69A91EB956DF73239";
         String givenKeyword = "STARTKW";
         ResourcesConfigurationType givenChannel = ResourcesConfigurationType.SMS;
@@ -190,7 +190,7 @@ class ResourcesApiTest extends ApiTest {
         String givenNumberKey = "58BC6DB7966CB9F69A91EB956DF73239";
         String givenApplicationId = "myApplicationId";
         String givenEntityId = "myEntityId";
-        String givenNumber = "41793026727";
+        String givenNumber = "41xxxxxxx25";
         String givenCountryCode = "GB";
         MoActionType givenForwardingType = MoActionType.PULL;
         String givenAutoResponseMessage = "Thank you for your message.";
@@ -403,7 +403,7 @@ class ResourcesApiTest extends ApiTest {
 
     @Test
     void shouldSearchResources() {
-        String givenNumber = "447860041117";
+        String givenNumber = "44xxxxxxxx63";
         String givenCountryCode = "GB";
         ResourcesIbResourceType givenResourceType = ResourcesIbResourceType.NUMBER;
         ResourcesNumberResourceCapabilityChannelDocs givenRequestCapability =
@@ -1450,7 +1450,7 @@ class ResourcesApiTest extends ApiTest {
     void shouldReceiveResourceRequestStatusUpdate() {
         String givenId = "38a1c2c6-55f2-11ee-a061-325096b39f47";
         String givenReceivedAtString = "2019-08-24T14:15:22.000+0000";
-        String givenNumber = "385911234567";
+        String givenNumber = "44xxxxxxxx39";
         String givenNumberKey = "8F0792F86035A9F4290821F1EE6BC06A";
         String givenNote = "Please note that these numbers are for testing purposes only.";
         String givenApplicationId = "application-id";

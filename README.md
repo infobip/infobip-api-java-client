@@ -93,7 +93,7 @@ See below, a simple example of sending a single SMS message to a single recipien
 
     SmsMessage message = new SmsMessage()
         .sender("InfoSMS")
-        .addDestinationsItem(new SmsDestination().to("41793026727"))
+        .addDestinationsItem(new SmsDestination().to("41xxxxxxx25"))
         .content(new SmsTextContent().text("Hello World from infobip-api-java-client!"));
 
     SmsRequest smsMessageRequest = new SmsRequest()

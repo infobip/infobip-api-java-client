@@ -33,7 +33,7 @@ Keep in mind the following restrictions while using a trial account:
         .addMessagesItem(new ViberMessage()
             .sender("ExampleSender")
             .addDestinationsItem(new ViberToDestination()
-                .to("41793026727"))
+                .to("41xxxxxxx25"))
             .content(new ViberOutboundTextContent()
                 .text("Hello from Infobip Viber!")));
 
@@ -101,7 +101,7 @@ Once your template is approved, send it with `ViberOutboundTransactionalTemplate
         .addMessagesItem(new ViberMessage()
             .sender(sender)
             .addDestinationsItem(new ViberToDestination()
-                .to("41793026727"))
+                .to("41xxxxxxx25"))
             .content(content));
 
     MessageResponse response = viberApi

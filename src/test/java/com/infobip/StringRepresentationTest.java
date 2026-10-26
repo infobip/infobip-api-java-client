@@ -14,7 +14,7 @@ class StringRepresentationTest {
         SmsRequest request = new SmsRequest()
                 .messages(List.of(new SmsMessage()
                         .sender("InfoSMS")
-                        .destinations(List.of(new SmsDestination().to("385991112222")))
+                        .destinations(List.of(new SmsDestination().to("44xxxxxxxx45")))
                         .content(new SmsTextContent().text("This is a sample message"))));
         // when
         String representation = request.toString();
@@ -24,7 +24,7 @@ class StringRepresentationTest {
                 .isEqualToIgnoringNewLines("class SmsRequest {\n" + "    messages: [class SmsMessage {\n"
                         + "        sender: InfoSMS\n"
                         + "        destinations: [class SmsDestination {\n"
-                        + "            to: 385991112222\n"
+                        + "            to: 44xxxxxxxx45\n"
                         + "            messageId: null\n"
                         + "            networkId: null\n"
                         + "        }]\n"

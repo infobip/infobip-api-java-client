@@ -26,7 +26,7 @@ class SmsApiTest extends ApiTest {
     @Test
     void shouldSendSimpleSms() {
         String givenBulkId = "2034072219640523072";
-        String givenTo = "41793026727";
+        String givenTo = "41xxxxxxx25";
         String givenMessageId = "2250be2d4219-3af1-78856-aabe-1362af1edfd2";
 
         String givenResponse = givenPendingResponse(givenBulkId, givenTo, givenMessageId);
@@ -81,7 +81,7 @@ class SmsApiTest extends ApiTest {
     @Test
     void shouldSendFlashSms() {
         String givenBulkId = "2034072219640523072";
-        String givenTo = "41793026727";
+        String givenTo = "41xxxxxxx25";
         String givenMessageId = "2250be2d4219-3af1-78856-aabe-1362af1edfd2";
 
         String givenResponse = givenPendingResponse(givenBulkId, givenTo, givenMessageId);
@@ -149,10 +149,10 @@ class SmsApiTest extends ApiTest {
         int givenStatusId = 26;
         String givenStatusName = "PENDING_ACCEPTED";
         String givenStatusDescription = "Message sent to next instance";
-        String givenFirstDestination = "385991112222";
+        String givenFirstDestination = "44xxxxxxxx45";
         int givenDetailsMessageCount = 1;
         String givenSecondDestinationMessageId = "xyz100";
-        String givenSecondDestination = "385911231234";
+        String givenSecondDestination = "44xxxxxxxx38";
 
         String expectedMessage = String.format(
                 "    {\n" + "      \"bulkId\": \"%s\",\n"
@@ -435,9 +435,9 @@ class SmsApiTest extends ApiTest {
     @Test
     void shouldSendFullyFeaturedBinaryMessage() {
         String givenFromMessage1 = "InfoSMS";
-        String givenToMessage1 = "41793026727";
+        String givenToMessage1 = "41xxxxxxx25";
         String givenMessageIdMessage1 = "MESSAGE-ID-123-xyz";
-        String givenAnotherToMessage1 = "41793026834";
+        String givenAnotherToMessage1 = "41xxxxxxx30";
         String givenHexMessage1 = "54 65 73 74 20 6d 65 73 73 61 67 65 2e";
         int givenDataCodingMessage1 = 0;
         int givenEsmClassMessage1 = 0;
@@ -482,8 +482,8 @@ class SmsApiTest extends ApiTest {
                 givenValidityPeriodMessage1,
                 givenValidityPeriodTimeUnit);
 
-        String givenFromMessage2 = "41793026700";
-        String givenToMessage2 = "41793026700";
+        String givenFromMessage2 = "41xxxxxxx22";
+        String givenToMessage2 = "41xxxxxxx22";
         String givenHexMessage2 = "54 65 73 74 20 6d 65 73 73 61 67 65 2e";
         int givenDataCodingMessage2 = 0;
         int givenEsmClassMessage2 = 0;
@@ -631,7 +631,7 @@ class SmsApiTest extends ApiTest {
     @Test
     void shouldSendFlashBinarySms() {
         String givenBulkId = "2034072219640523072";
-        String givenTo = "41793026727";
+        String givenTo = "41xxxxxxx25";
         String givenMessageId = "2250be2d4219-3af1-78856-aabe-1362af1edfd2";
 
         String givenResponse = givenPendingResponse(givenBulkId, givenTo, givenMessageId);
@@ -745,7 +745,7 @@ class SmsApiTest extends ApiTest {
     void shouldGetDeliveryReports() {
         String givenBulkId = "BULK-ID-123-xyz";
         String givenMessageId = "MESSAGE-ID-123-xyz";
-        String givenTo = "41793026727";
+        String givenTo = "41xxxxxxx25";
         String givenSentAt = "2019-11-09T16:00:00.000+0000";
         OffsetDateTime givenSentAtDateTime =
                 OffsetDateTime.of(LocalDateTime.of(2019, 11, 9, 16, 0, 0), ZoneOffset.ofHours(0));
@@ -767,7 +767,7 @@ class SmsApiTest extends ApiTest {
         String givenErrorDescription = "No Error";
         Boolean givenErrorPermanent = false;
         String givenMessageId2 = "12db39c3-7822-4e72-a3ec-c87442c0ffc5";
-        String givenTo2 = "41793026834";
+        String givenTo2 = "41xxxxxxx30";
         String givenSender = "InfoSMS";
         String givenEntityId = "promotional-traffic-entity";
         String givenApplicationId = "marketing-automation-application";
@@ -958,7 +958,7 @@ class SmsApiTest extends ApiTest {
                 OffsetDateTime.of(LocalDateTime.of(2015, 2, 22, 17, 42, 5, 390000000), ZoneOffset.ofHours(1));
 
         String givenMessageIdMessage1 = "MESSAGE-ID-123-xyz";
-        String givenToMessage1 = "41793026727";
+        String givenToMessage1 = "41xxxxxxx25";
         String givenSendAtMessage1 = "2019-11-09T16:00:00.000+0000";
         String givenDoneAtMessage1 = "2019-11-09T16:00:00.000+0000";
         int givenSmsCountMessage1 = 1;
@@ -966,7 +966,7 @@ class SmsApiTest extends ApiTest {
         String givenCurrencyMessage1 = "EUR";
 
         String givenMessageIdMessage2 = "12db39c3-7822-4e72-a3ec-c87442c0ffc5";
-        String givenToMessage2 = "41793026834";
+        String givenToMessage2 = "41xxxxxxx30";
         String givenSendAtMessage2 = "2019-11-09T17:00:00.000+0000";
         String givenDoneAtMessage2 = "2019-11-09T17:00:00.000+0000";
         int givenSmsCountMessage2 = 5;
@@ -1256,8 +1256,8 @@ class SmsApiTest extends ApiTest {
     @Test
     void shouldGetReceivedSmsMessages() {
         String givenMessageId = "817790313235066447";
-        String givenFrom = "385916242493";
-        String givenTo = "385921004026";
+        String givenFrom = "44xxxxxxxx41";
+        String givenTo = "44xxxxxxxx43";
         String givenText = "QUIZ Correct answer is Paris";
         String givenCleanText = "Correct answer is Paris";
         String givenKeyword = "QUIZ";
@@ -1357,7 +1357,7 @@ class SmsApiTest extends ApiTest {
     void shouldSendSMSDeliveryReports() {
         String givenBulkId = "BULK-ID-123-xyz";
         String givenMessageIdMessage1 = "MESSAGE-ID-123-xyz";
-        String givenToMessage1 = "41793026727";
+        String givenToMessage1 = "41xxxxxxx25";
         String givenSentAtMessage1 = "2019-11-09T16:00:00.000+0000";
         String givenDoneAtMessage1 = "2019-11-09T16:00:00.000+0000";
         Integer givenSmsCountMessage1 = 1;
@@ -1379,7 +1379,7 @@ class SmsApiTest extends ApiTest {
         boolean givenErrorPermanentMessage1 = false;
 
         String givenMessageIdMessage2 = "12db39c3-7822-4e72-a3ec-c87442c0ffc5";
-        String givenToMessage2 = "41793026834";
+        String givenToMessage2 = "41xxxxxxx30";
         String givenSentAtMessage2 = "2019-11-09T17:00:00.000+0000";
         String givenDoneAtMessage2 = "2019-11-09T17:00:00.000+0000";
         Integer givenSmsCountMessage2 = 1;
@@ -1755,8 +1755,8 @@ class SmsApiTest extends ApiTest {
         var givenRequest = "{\n" + "  \"results\": [\n"
                 + "    {\n"
                 + "      \"messageId\": \"817790313235066447\",\n"
-                + "      \"from\": \"385916242493\",\n"
-                + "      \"to\": \"385921004026\",\n"
+                + "      \"from\": \"44xxxxxxxx41\",\n"
+                + "      \"to\": \"44xxxxxxxx43\",\n"
                 + "      \"text\": \"QUIZ Correct answer is Paris\",\n"
                 + "      \"cleanText\": \"Correct answer is Paris\",\n"
                 + "      \"keyword\": \"QUIZ\",\n"
@@ -1786,7 +1786,7 @@ class SmsApiTest extends ApiTest {
                 + "    {\n"
                 + "      \"bulkId\": \"BULK-ID-123-xyz\",\n"
                 + "      \"messageId\": \"MESSAGE-ID-123-xyz\",\n"
-                + "      \"to\": \"41793026727\",\n"
+                + "      \"to\": \"41xxxxxxx25\",\n"
                 + "      \"sentAt\": \"2019-11-09T16:00:00.000+0000\",\n"
                 + "      \"doneAt\": \"2019-11-09T16:00:00.000+0000\",\n"
                 + "      \"messageCount\": 1,\n"
@@ -1813,7 +1813,7 @@ class SmsApiTest extends ApiTest {
                 + "    {\n"
                 + "      \"bulkId\": \"BULK-ID-123-xyz\",\n"
                 + "      \"messageId\": \"12db39c3-7822-4e72-a3ec-c87442c0ffc5\",\n"
-                + "      \"to\": \"41793026834\",\n"
+                + "      \"to\": \"41xxxxxxx30\",\n"
                 + "      \"sentAt\": \"2019-11-09T17:00:00.000+0000\",\n"
                 + "      \"doneAt\": \"2019-11-09T17:00:00.000+0000\",\n"
                 + "      \"messageCount\": 1,\n"
